@@ -276,24 +276,24 @@ public class XrSpaceQueryResultsFB extends Struct<XrSpaceQueryResultsFB> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryResultsFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceQueryResultsFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceQueryResultsFB.NEXT); }
     /** Unsafe version of {@link #resultCapacityInput}. */
-    public static int nresultCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryResultsFB.RESULTCAPACITYINPUT); }
+    public static int nresultCapacityInput(long struct) { return memGetInt(struct + XrSpaceQueryResultsFB.RESULTCAPACITYINPUT); }
     /** Unsafe version of {@link #resultCountOutput}. */
-    public static int nresultCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryResultsFB.RESULTCOUNTOUTPUT); }
+    public static int nresultCountOutput(long struct) { return memGetInt(struct + XrSpaceQueryResultsFB.RESULTCOUNTOUTPUT); }
     /** Unsafe version of {@link #results}. */
     @Nullable public static XrSpaceQueryResultFB.Buffer nresults(long struct) { return XrSpaceQueryResultFB.createSafe(memGetAddress(struct + XrSpaceQueryResultsFB.RESULTS), nresultCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryResultsFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceQueryResultsFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceQueryResultsFB.NEXT, value); }
     /** Sets the specified value to the {@code resultCapacityInput} field of the specified {@code struct}. */
-    public static void nresultCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryResultsFB.RESULTCAPACITYINPUT, value); }
+    public static void nresultCapacityInput(long struct, int value) { memPutInt(struct + XrSpaceQueryResultsFB.RESULTCAPACITYINPUT, value); }
     /** Unsafe version of {@link #resultCountOutput(int) resultCountOutput}. */
-    public static void nresultCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryResultsFB.RESULTCOUNTOUTPUT, value); }
+    public static void nresultCountOutput(long struct, int value) { memPutInt(struct + XrSpaceQueryResultsFB.RESULTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #results(XrSpaceQueryResultFB.Buffer) results}. */
     public static void nresults(long struct, @Nullable XrSpaceQueryResultFB.Buffer value) { memPutAddress(struct + XrSpaceQueryResultsFB.RESULTS, memAddressSafe(value)); if (value != null) { nresultCapacityInput(struct, value.remaining()); } }
 

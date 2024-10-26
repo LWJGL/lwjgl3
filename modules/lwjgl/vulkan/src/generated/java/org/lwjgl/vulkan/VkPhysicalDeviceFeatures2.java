@@ -748,14 +748,14 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFeatures2.PNEXT); }
     /** Unsafe version of {@link #features}. */
     public static VkPhysicalDeviceFeatures nfeatures(long struct) { return VkPhysicalDeviceFeatures.create(struct + VkPhysicalDeviceFeatures2.FEATURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFeatures2.PNEXT, value); }
     /** Unsafe version of {@link #features(VkPhysicalDeviceFeatures) features}. */

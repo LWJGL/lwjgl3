@@ -217,9 +217,9 @@ public class XXH128Hash extends Struct<XXH128Hash> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #low64}. */
-    public static long nlow64(long struct) { return UNSAFE.getLong(null, struct + XXH128Hash.LOW64); }
+    public static long nlow64(long struct) { return memGetLong(struct + XXH128Hash.LOW64); }
     /** Unsafe version of {@link #high64}. */
-    public static long nhigh64(long struct) { return UNSAFE.getLong(null, struct + XXH128Hash.HIGH64); }
+    public static long nhigh64(long struct) { return memGetLong(struct + XXH128Hash.HIGH64); }
 
     // -----------------------------------
 

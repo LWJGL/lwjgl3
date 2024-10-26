@@ -121,7 +121,7 @@ public class CXIdxCXXClassDeclInfo extends Struct<CXIdxCXXClassDeclInfo> {
     /** Unsafe version of {@link #bases() bases}. */
     public static PointerBuffer nbases(long struct) { return memPointerBuffer(memGetAddress(struct + CXIdxCXXClassDeclInfo.BASES), nnumBases(struct)); }
     /** Unsafe version of {@link #numBases}. */
-    public static int nnumBases(long struct) { return UNSAFE.getInt(null, struct + CXIdxCXXClassDeclInfo.NUMBASES); }
+    public static int nnumBases(long struct) { return memGetInt(struct + CXIdxCXXClassDeclInfo.NUMBASES); }
 
     // -----------------------------------
 

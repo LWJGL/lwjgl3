@@ -146,9 +146,9 @@ public class OGGPacket extends Struct<OGGPacket> {
     /** Unsafe version of {@link #e_o_s}. */
     public static long ne_o_s(long struct) { return memGetCLong(struct + OGGPacket.E_O_S); }
     /** Unsafe version of {@link #granulepos}. */
-    public static long ngranulepos(long struct) { return UNSAFE.getLong(null, struct + OGGPacket.GRANULEPOS); }
+    public static long ngranulepos(long struct) { return memGetLong(struct + OGGPacket.GRANULEPOS); }
     /** Unsafe version of {@link #packetno}. */
-    public static long npacketno(long struct) { return UNSAFE.getLong(null, struct + OGGPacket.PACKETNO); }
+    public static long npacketno(long struct) { return memGetLong(struct + OGGPacket.PACKETNO); }
 
     // -----------------------------------
 

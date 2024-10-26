@@ -333,38 +333,38 @@ public class VkMicromapCreateInfoEXT extends Struct<VkMicromapCreateInfoEXT> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMicromapCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMicromapCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMicromapCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static int ncreateFlags(long struct) { return UNSAFE.getInt(null, struct + VkMicromapCreateInfoEXT.CREATEFLAGS); }
+    public static int ncreateFlags(long struct) { return memGetInt(struct + VkMicromapCreateInfoEXT.CREATEFLAGS); }
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkMicromapCreateInfoEXT.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkMicromapCreateInfoEXT.BUFFER); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkMicromapCreateInfoEXT.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkMicromapCreateInfoEXT.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMicromapCreateInfoEXT.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkMicromapCreateInfoEXT.SIZE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkMicromapCreateInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkMicromapCreateInfoEXT.TYPE); }
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkMicromapCreateInfoEXT.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkMicromapCreateInfoEXT.DEVICEADDRESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMicromapCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMicromapCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #createFlags(int) createFlags}. */
-    public static void ncreateFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapCreateInfoEXT.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, int value) { memPutInt(struct + VkMicromapCreateInfoEXT.CREATEFLAGS, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapCreateInfoEXT.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkMicromapCreateInfoEXT.BUFFER, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapCreateInfoEXT.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkMicromapCreateInfoEXT.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapCreateInfoEXT.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkMicromapCreateInfoEXT.SIZE, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapCreateInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkMicromapCreateInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapCreateInfoEXT.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkMicromapCreateInfoEXT.DEVICEADDRESS, value); }
 
     // -----------------------------------
 

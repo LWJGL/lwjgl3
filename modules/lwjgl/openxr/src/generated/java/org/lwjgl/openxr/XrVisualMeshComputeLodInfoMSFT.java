@@ -249,18 +249,18 @@ public class XrVisualMeshComputeLodInfoMSFT extends Struct<XrVisualMeshComputeLo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVisualMeshComputeLodInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVisualMeshComputeLodInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVisualMeshComputeLodInfoMSFT.NEXT); }
     /** Unsafe version of {@link #lod}. */
-    public static int nlod(long struct) { return UNSAFE.getInt(null, struct + XrVisualMeshComputeLodInfoMSFT.LOD); }
+    public static int nlod(long struct) { return memGetInt(struct + XrVisualMeshComputeLodInfoMSFT.LOD); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVisualMeshComputeLodInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVisualMeshComputeLodInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVisualMeshComputeLodInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #lod(int) lod}. */
-    public static void nlod(long struct, int value) { UNSAFE.putInt(null, struct + XrVisualMeshComputeLodInfoMSFT.LOD, value); }
+    public static void nlod(long struct, int value) { memPutInt(struct + XrVisualMeshComputeLodInfoMSFT.LOD, value); }
 
     // -----------------------------------
 

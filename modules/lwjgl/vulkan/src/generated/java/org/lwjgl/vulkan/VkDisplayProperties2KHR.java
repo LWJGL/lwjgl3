@@ -261,14 +261,14 @@ public class VkDisplayProperties2KHR extends Struct<VkDisplayProperties2KHR> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayProperties2KHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDisplayProperties2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayProperties2KHR.PNEXT); }
     /** Unsafe version of {@link #displayProperties}. */
     public static VkDisplayPropertiesKHR ndisplayProperties(long struct) { return VkDisplayPropertiesKHR.create(struct + VkDisplayProperties2KHR.DISPLAYPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayProperties2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayProperties2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayProperties2KHR.PNEXT, value); }
 

@@ -271,18 +271,18 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.PNEXT); }
     /** Unsafe version of {@link #conditionalRenderingEnable}. */
-    public static int nconditionalRenderingEnable(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE); }
+    public static int nconditionalRenderingEnable(long struct) { return memGetInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #conditionalRenderingEnable(boolean) conditionalRenderingEnable}. */
-    public static void nconditionalRenderingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE, value); }
+    public static void nconditionalRenderingEnable(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE, value); }
 
     // -----------------------------------
 

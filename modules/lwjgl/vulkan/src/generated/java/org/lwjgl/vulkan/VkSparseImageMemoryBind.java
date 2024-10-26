@@ -325,11 +325,11 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
     /** Unsafe version of {@link #extent}. */
     public static VkExtent3D nextent(long struct) { return VkExtent3D.create(struct + VkSparseImageMemoryBind.EXTENT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageMemoryBind.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkSparseImageMemoryBind.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageMemoryBind.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkSparseImageMemoryBind.MEMORYOFFSET); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageMemoryBind.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSparseImageMemoryBind.FLAGS); }
 
     /** Unsafe version of {@link #subresource(VkImageSubresource) subresource}. */
     public static void nsubresource(long struct, VkImageSubresource value) { memCopy(value.address(), struct + VkSparseImageMemoryBind.SUBRESOURCE, VkImageSubresource.SIZEOF); }
@@ -338,11 +338,11 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
     /** Unsafe version of {@link #extent(VkExtent3D) extent}. */
     public static void nextent(long struct, VkExtent3D value) { memCopy(value.address(), struct + VkSparseImageMemoryBind.EXTENT, VkExtent3D.SIZEOF); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseImageMemoryBind.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkSparseImageMemoryBind.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseImageMemoryBind.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkSparseImageMemoryBind.MEMORYOFFSET, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseImageMemoryBind.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkSparseImageMemoryBind.FLAGS, value); }
 
     // -----------------------------------
 

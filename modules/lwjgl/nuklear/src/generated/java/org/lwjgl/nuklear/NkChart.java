@@ -139,15 +139,15 @@ public class NkChart extends Struct<NkChart> {
     // -----------------------------------
 
     /** Unsafe version of {@link #slot}. */
-    public static int nslot(long struct) { return UNSAFE.getInt(null, struct + NkChart.SLOT); }
+    public static int nslot(long struct) { return memGetInt(struct + NkChart.SLOT); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NkChart.X); }
+    public static float nx(long struct) { return memGetFloat(struct + NkChart.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + NkChart.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + NkChart.Y); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + NkChart.W); }
+    public static float nw(long struct) { return memGetFloat(struct + NkChart.W); }
     /** Unsafe version of {@link #h}. */
-    public static float nh(long struct) { return UNSAFE.getFloat(null, struct + NkChart.H); }
+    public static float nh(long struct) { return memGetFloat(struct + NkChart.H); }
     /** Unsafe version of {@link #slots}. */
     public static NkChartSlot.Buffer nslots(long struct) { return NkChartSlot.create(struct + NkChart.SLOTS, NK_CHART_MAX_SLOT); }
     /** Unsafe version of {@link #slots(int) slots}. */

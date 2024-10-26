@@ -703,216 +703,216 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #opcode}. */
-    public static byte nopcode(long struct) { return UNSAFE.getByte(null, struct + IOURingSQE.OPCODE); }
+    public static byte nopcode(long struct) { return memGetByte(struct + IOURingSQE.OPCODE); }
     /** Unsafe version of {@link #flags}. */
-    public static byte nflags(long struct) { return UNSAFE.getByte(null, struct + IOURingSQE.FLAGS); }
+    public static byte nflags(long struct) { return memGetByte(struct + IOURingSQE.FLAGS); }
     /** Unsafe version of {@link #ioprio}. */
-    public static short nioprio(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.IOPRIO); }
+    public static short nioprio(long struct) { return memGetShort(struct + IOURingSQE.IOPRIO); }
     /** Unsafe version of {@link #fd}. */
-    public static int nfd(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.FD); }
+    public static int nfd(long struct) { return memGetInt(struct + IOURingSQE.FD); }
     /** Unsafe version of {@link #off}. */
-    public static long noff(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.OFF); }
+    public static long noff(long struct) { return memGetLong(struct + IOURingSQE.OFF); }
     /** Unsafe version of {@link #addr2}. */
-    public static long naddr2(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.ADDR2); }
+    public static long naddr2(long struct) { return memGetLong(struct + IOURingSQE.ADDR2); }
     /** Unsafe version of {@link #cmd_op}. */
-    public static int ncmd_op(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.CMD_OP); }
-    public static int n__pad1(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.__PAD1); }
+    public static int ncmd_op(long struct) { return memGetInt(struct + IOURingSQE.CMD_OP); }
+    public static int n__pad1(long struct) { return memGetInt(struct + IOURingSQE.__PAD1); }
     /** Unsafe version of {@link #addr}. */
-    public static long naddr(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.ADDR); }
+    public static long naddr(long struct) { return memGetLong(struct + IOURingSQE.ADDR); }
     /** Unsafe version of {@link #splice_off_in}. */
-    public static long nsplice_off_in(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.SPLICE_OFF_IN); }
+    public static long nsplice_off_in(long struct) { return memGetLong(struct + IOURingSQE.SPLICE_OFF_IN); }
     /** Unsafe version of {@link #level}. */
-    public static int nlevel(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.LEVEL); }
+    public static int nlevel(long struct) { return memGetInt(struct + IOURingSQE.LEVEL); }
     /** Unsafe version of {@link #optname}. */
-    public static int noptname(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.OPTNAME); }
+    public static int noptname(long struct) { return memGetInt(struct + IOURingSQE.OPTNAME); }
     /** Unsafe version of {@link #len}. */
-    public static int nlen(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.LEN); }
+    public static int nlen(long struct) { return memGetInt(struct + IOURingSQE.LEN); }
     /** Unsafe version of {@link #rw_flags}. */
-    public static int nrw_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.RW_FLAGS); }
+    public static int nrw_flags(long struct) { return memGetInt(struct + IOURingSQE.RW_FLAGS); }
     /** Unsafe version of {@link #fsync_flags}. */
-    public static int nfsync_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.FSYNC_FLAGS); }
+    public static int nfsync_flags(long struct) { return memGetInt(struct + IOURingSQE.FSYNC_FLAGS); }
     /** Unsafe version of {@link #poll_events}. */
-    public static short npoll_events(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.POLL_EVENTS); }
+    public static short npoll_events(long struct) { return memGetShort(struct + IOURingSQE.POLL_EVENTS); }
     /** Unsafe version of {@link #poll32_events}. */
-    public static int npoll32_events(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.POLL32_EVENTS); }
+    public static int npoll32_events(long struct) { return memGetInt(struct + IOURingSQE.POLL32_EVENTS); }
     /** Unsafe version of {@link #sync_range_flags}. */
-    public static int nsync_range_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.SYNC_RANGE_FLAGS); }
+    public static int nsync_range_flags(long struct) { return memGetInt(struct + IOURingSQE.SYNC_RANGE_FLAGS); }
     /** Unsafe version of {@link #msg_flags}. */
-    public static int nmsg_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.MSG_FLAGS); }
+    public static int nmsg_flags(long struct) { return memGetInt(struct + IOURingSQE.MSG_FLAGS); }
     /** Unsafe version of {@link #timeout_flags}. */
-    public static int ntimeout_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.TIMEOUT_FLAGS); }
+    public static int ntimeout_flags(long struct) { return memGetInt(struct + IOURingSQE.TIMEOUT_FLAGS); }
     /** Unsafe version of {@link #accept_flags}. */
-    public static int naccept_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.ACCEPT_FLAGS); }
+    public static int naccept_flags(long struct) { return memGetInt(struct + IOURingSQE.ACCEPT_FLAGS); }
     /** Unsafe version of {@link #cancel_flags}. */
-    public static int ncancel_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.CANCEL_FLAGS); }
+    public static int ncancel_flags(long struct) { return memGetInt(struct + IOURingSQE.CANCEL_FLAGS); }
     /** Unsafe version of {@link #open_flags}. */
-    public static int nopen_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.OPEN_FLAGS); }
+    public static int nopen_flags(long struct) { return memGetInt(struct + IOURingSQE.OPEN_FLAGS); }
     /** Unsafe version of {@link #statx_flags}. */
-    public static int nstatx_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.STATX_FLAGS); }
+    public static int nstatx_flags(long struct) { return memGetInt(struct + IOURingSQE.STATX_FLAGS); }
     /** Unsafe version of {@link #fadvise_advice}. */
-    public static int nfadvise_advice(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.FADVISE_ADVICE); }
+    public static int nfadvise_advice(long struct) { return memGetInt(struct + IOURingSQE.FADVISE_ADVICE); }
     /** Unsafe version of {@link #splice_flags}. */
-    public static int nsplice_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.SPLICE_FLAGS); }
+    public static int nsplice_flags(long struct) { return memGetInt(struct + IOURingSQE.SPLICE_FLAGS); }
     /** Unsafe version of {@link #rename_flags}. */
-    public static int nrename_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.RENAME_FLAGS); }
+    public static int nrename_flags(long struct) { return memGetInt(struct + IOURingSQE.RENAME_FLAGS); }
     /** Unsafe version of {@link #unlink_flags}. */
-    public static int nunlink_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.UNLINK_FLAGS); }
+    public static int nunlink_flags(long struct) { return memGetInt(struct + IOURingSQE.UNLINK_FLAGS); }
     /** Unsafe version of {@link #hardlink_flags}. */
-    public static int nhardlink_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.HARDLINK_FLAGS); }
+    public static int nhardlink_flags(long struct) { return memGetInt(struct + IOURingSQE.HARDLINK_FLAGS); }
     /** Unsafe version of {@link #xattr_flags}. */
-    public static int nxattr_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.XATTR_FLAGS); }
+    public static int nxattr_flags(long struct) { return memGetInt(struct + IOURingSQE.XATTR_FLAGS); }
     /** Unsafe version of {@link #msg_ring_flags}. */
-    public static int nmsg_ring_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.MSG_RING_FLAGS); }
+    public static int nmsg_ring_flags(long struct) { return memGetInt(struct + IOURingSQE.MSG_RING_FLAGS); }
     /** Unsafe version of {@link #uring_cmd_flags}. */
-    public static int nuring_cmd_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.URING_CMD_FLAGS); }
+    public static int nuring_cmd_flags(long struct) { return memGetInt(struct + IOURingSQE.URING_CMD_FLAGS); }
     /** Unsafe version of {@link #waitid_flags}. */
-    public static int nwaitid_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.WAITID_FLAGS); }
+    public static int nwaitid_flags(long struct) { return memGetInt(struct + IOURingSQE.WAITID_FLAGS); }
     /** Unsafe version of {@link #futex_flags}. */
-    public static int nfutex_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.FUTEX_FLAGS); }
+    public static int nfutex_flags(long struct) { return memGetInt(struct + IOURingSQE.FUTEX_FLAGS); }
     /** Unsafe version of {@link #install_fd_flags}. */
-    public static int ninstall_fd_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.INSTALL_FD_FLAGS); }
+    public static int ninstall_fd_flags(long struct) { return memGetInt(struct + IOURingSQE.INSTALL_FD_FLAGS); }
     /** Unsafe version of {@link #nop_flags}. */
-    public static int nnop_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.NOP_FLAGS); }
+    public static int nnop_flags(long struct) { return memGetInt(struct + IOURingSQE.NOP_FLAGS); }
     /** Unsafe version of {@link #user_data}. */
-    public static long nuser_data(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.USER_DATA); }
+    public static long nuser_data(long struct) { return memGetLong(struct + IOURingSQE.USER_DATA); }
     /** Unsafe version of {@link #buf_index}. */
-    public static short nbuf_index(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.BUF_INDEX); }
+    public static short nbuf_index(long struct) { return memGetShort(struct + IOURingSQE.BUF_INDEX); }
     /** Unsafe version of {@link #buf_group}. */
-    public static short nbuf_group(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.BUF_GROUP); }
+    public static short nbuf_group(long struct) { return memGetShort(struct + IOURingSQE.BUF_GROUP); }
     /** Unsafe version of {@link #personality}. */
-    public static short npersonality(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.PERSONALITY); }
+    public static short npersonality(long struct) { return memGetShort(struct + IOURingSQE.PERSONALITY); }
     /** Unsafe version of {@link #splice_fd_in}. */
-    public static int nsplice_fd_in(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.SPLICE_FD_IN); }
+    public static int nsplice_fd_in(long struct) { return memGetInt(struct + IOURingSQE.SPLICE_FD_IN); }
     /** Unsafe version of {@link #file_index}. */
-    public static int nfile_index(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.FILE_INDEX); }
+    public static int nfile_index(long struct) { return memGetInt(struct + IOURingSQE.FILE_INDEX); }
     /** Unsafe version of {@link #optlen}. */
-    public static int noptlen(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.OPTLEN); }
+    public static int noptlen(long struct) { return memGetInt(struct + IOURingSQE.OPTLEN); }
     /** Unsafe version of {@link #addr_len}. */
-    public static short naddr_len(long struct) { return UNSAFE.getShort(null, struct + IOURingSQE.ADDR_LEN); }
+    public static short naddr_len(long struct) { return memGetShort(struct + IOURingSQE.ADDR_LEN); }
     public static ShortBuffer n__pad3(long struct) { return memShortBuffer(struct + IOURingSQE.__PAD3, 1); }
     public static short n__pad3(long struct, int index) {
-        return UNSAFE.getShort(null, struct + IOURingSQE.__PAD3 + check(index, 1) * 2);
+        return memGetShort(struct + IOURingSQE.__PAD3 + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #addr3}. */
-    public static long naddr3(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.ADDR3); }
+    public static long naddr3(long struct) { return memGetLong(struct + IOURingSQE.ADDR3); }
     public static LongBuffer n__pad2(long struct) { return memLongBuffer(struct + IOURingSQE.__PAD2, 1); }
     public static long n__pad2(long struct, int index) {
-        return UNSAFE.getLong(null, struct + IOURingSQE.__PAD2 + check(index, 1) * 8);
+        return memGetLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8);
     }
     /** Unsafe version of {@link #optval}. */
-    public static long noptval(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.OPTVAL); }
+    public static long noptval(long struct) { return memGetLong(struct + IOURingSQE.OPTVAL); }
     /** Unsafe version of {@link #cmd}. */
     public static ByteBuffer ncmd(long struct) { return memByteBuffer(struct + IOURingSQE.CMD, 0); }
     /** Unsafe version of {@link #cmd(int) cmd}. */
     public static byte ncmd(long struct, int index) {
-        return UNSAFE.getByte(null, struct + IOURingSQE.CMD + check(index, 0) * 1);
+        return memGetByte(struct + IOURingSQE.CMD + check(index, 0) * 1);
     }
 
     /** Unsafe version of {@link #opcode(byte) opcode}. */
-    public static void nopcode(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingSQE.OPCODE, value); }
+    public static void nopcode(long struct, byte value) { memPutByte(struct + IOURingSQE.OPCODE, value); }
     /** Unsafe version of {@link #flags(byte) flags}. */
-    public static void nflags(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingSQE.FLAGS, value); }
+    public static void nflags(long struct, byte value) { memPutByte(struct + IOURingSQE.FLAGS, value); }
     /** Unsafe version of {@link #ioprio(short) ioprio}. */
-    public static void nioprio(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.IOPRIO, value); }
+    public static void nioprio(long struct, short value) { memPutShort(struct + IOURingSQE.IOPRIO, value); }
     /** Unsafe version of {@link #fd(int) fd}. */
-    public static void nfd(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.FD, value); }
+    public static void nfd(long struct, int value) { memPutInt(struct + IOURingSQE.FD, value); }
     /** Unsafe version of {@link #off(long) off}. */
-    public static void noff(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.OFF, value); }
+    public static void noff(long struct, long value) { memPutLong(struct + IOURingSQE.OFF, value); }
     /** Unsafe version of {@link #addr2(long) addr2}. */
-    public static void naddr2(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.ADDR2, value); }
+    public static void naddr2(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR2, value); }
     /** Unsafe version of {@link #cmd_op(int) cmd_op}. */
-    public static void ncmd_op(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.CMD_OP, value); }
-    public static void n__pad1(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.__PAD1, value); }
+    public static void ncmd_op(long struct, int value) { memPutInt(struct + IOURingSQE.CMD_OP, value); }
+    public static void n__pad1(long struct, int value) { memPutInt(struct + IOURingSQE.__PAD1, value); }
     /** Unsafe version of {@link #addr(long) addr}. */
-    public static void naddr(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.ADDR, value); }
+    public static void naddr(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR, value); }
     /** Unsafe version of {@link #splice_off_in(long) splice_off_in}. */
-    public static void nsplice_off_in(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.SPLICE_OFF_IN, value); }
+    public static void nsplice_off_in(long struct, long value) { memPutLong(struct + IOURingSQE.SPLICE_OFF_IN, value); }
     /** Unsafe version of {@link #level(int) level}. */
-    public static void nlevel(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.LEVEL, value); }
+    public static void nlevel(long struct, int value) { memPutInt(struct + IOURingSQE.LEVEL, value); }
     /** Unsafe version of {@link #optname(int) optname}. */
-    public static void noptname(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.OPTNAME, value); }
+    public static void noptname(long struct, int value) { memPutInt(struct + IOURingSQE.OPTNAME, value); }
     /** Unsafe version of {@link #len(int) len}. */
-    public static void nlen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.LEN, value); }
+    public static void nlen(long struct, int value) { memPutInt(struct + IOURingSQE.LEN, value); }
     /** Unsafe version of {@link #rw_flags(int) rw_flags}. */
-    public static void nrw_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.RW_FLAGS, value); }
+    public static void nrw_flags(long struct, int value) { memPutInt(struct + IOURingSQE.RW_FLAGS, value); }
     /** Unsafe version of {@link #fsync_flags(int) fsync_flags}. */
-    public static void nfsync_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.FSYNC_FLAGS, value); }
+    public static void nfsync_flags(long struct, int value) { memPutInt(struct + IOURingSQE.FSYNC_FLAGS, value); }
     /** Unsafe version of {@link #poll_events(short) poll_events}. */
-    public static void npoll_events(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.POLL_EVENTS, value); }
+    public static void npoll_events(long struct, short value) { memPutShort(struct + IOURingSQE.POLL_EVENTS, value); }
     /** Unsafe version of {@link #poll32_events(int) poll32_events}. */
-    public static void npoll32_events(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.POLL32_EVENTS, value); }
+    public static void npoll32_events(long struct, int value) { memPutInt(struct + IOURingSQE.POLL32_EVENTS, value); }
     /** Unsafe version of {@link #sync_range_flags(int) sync_range_flags}. */
-    public static void nsync_range_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.SYNC_RANGE_FLAGS, value); }
+    public static void nsync_range_flags(long struct, int value) { memPutInt(struct + IOURingSQE.SYNC_RANGE_FLAGS, value); }
     /** Unsafe version of {@link #msg_flags(int) msg_flags}. */
-    public static void nmsg_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.MSG_FLAGS, value); }
+    public static void nmsg_flags(long struct, int value) { memPutInt(struct + IOURingSQE.MSG_FLAGS, value); }
     /** Unsafe version of {@link #timeout_flags(int) timeout_flags}. */
-    public static void ntimeout_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.TIMEOUT_FLAGS, value); }
+    public static void ntimeout_flags(long struct, int value) { memPutInt(struct + IOURingSQE.TIMEOUT_FLAGS, value); }
     /** Unsafe version of {@link #accept_flags(int) accept_flags}. */
-    public static void naccept_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.ACCEPT_FLAGS, value); }
+    public static void naccept_flags(long struct, int value) { memPutInt(struct + IOURingSQE.ACCEPT_FLAGS, value); }
     /** Unsafe version of {@link #cancel_flags(int) cancel_flags}. */
-    public static void ncancel_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.CANCEL_FLAGS, value); }
+    public static void ncancel_flags(long struct, int value) { memPutInt(struct + IOURingSQE.CANCEL_FLAGS, value); }
     /** Unsafe version of {@link #open_flags(int) open_flags}. */
-    public static void nopen_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.OPEN_FLAGS, value); }
+    public static void nopen_flags(long struct, int value) { memPutInt(struct + IOURingSQE.OPEN_FLAGS, value); }
     /** Unsafe version of {@link #statx_flags(int) statx_flags}. */
-    public static void nstatx_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.STATX_FLAGS, value); }
+    public static void nstatx_flags(long struct, int value) { memPutInt(struct + IOURingSQE.STATX_FLAGS, value); }
     /** Unsafe version of {@link #fadvise_advice(int) fadvise_advice}. */
-    public static void nfadvise_advice(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.FADVISE_ADVICE, value); }
+    public static void nfadvise_advice(long struct, int value) { memPutInt(struct + IOURingSQE.FADVISE_ADVICE, value); }
     /** Unsafe version of {@link #splice_flags(int) splice_flags}. */
-    public static void nsplice_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.SPLICE_FLAGS, value); }
+    public static void nsplice_flags(long struct, int value) { memPutInt(struct + IOURingSQE.SPLICE_FLAGS, value); }
     /** Unsafe version of {@link #rename_flags(int) rename_flags}. */
-    public static void nrename_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.RENAME_FLAGS, value); }
+    public static void nrename_flags(long struct, int value) { memPutInt(struct + IOURingSQE.RENAME_FLAGS, value); }
     /** Unsafe version of {@link #unlink_flags(int) unlink_flags}. */
-    public static void nunlink_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.UNLINK_FLAGS, value); }
+    public static void nunlink_flags(long struct, int value) { memPutInt(struct + IOURingSQE.UNLINK_FLAGS, value); }
     /** Unsafe version of {@link #hardlink_flags(int) hardlink_flags}. */
-    public static void nhardlink_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.HARDLINK_FLAGS, value); }
+    public static void nhardlink_flags(long struct, int value) { memPutInt(struct + IOURingSQE.HARDLINK_FLAGS, value); }
     /** Unsafe version of {@link #xattr_flags(int) xattr_flags}. */
-    public static void nxattr_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.XATTR_FLAGS, value); }
+    public static void nxattr_flags(long struct, int value) { memPutInt(struct + IOURingSQE.XATTR_FLAGS, value); }
     /** Unsafe version of {@link #msg_ring_flags(int) msg_ring_flags}. */
-    public static void nmsg_ring_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.MSG_RING_FLAGS, value); }
+    public static void nmsg_ring_flags(long struct, int value) { memPutInt(struct + IOURingSQE.MSG_RING_FLAGS, value); }
     /** Unsafe version of {@link #uring_cmd_flags(int) uring_cmd_flags}. */
-    public static void nuring_cmd_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.URING_CMD_FLAGS, value); }
+    public static void nuring_cmd_flags(long struct, int value) { memPutInt(struct + IOURingSQE.URING_CMD_FLAGS, value); }
     /** Unsafe version of {@link #waitid_flags(int) waitid_flags}. */
-    public static void nwaitid_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.WAITID_FLAGS, value); }
+    public static void nwaitid_flags(long struct, int value) { memPutInt(struct + IOURingSQE.WAITID_FLAGS, value); }
     /** Unsafe version of {@link #futex_flags(int) futex_flags}. */
-    public static void nfutex_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.FUTEX_FLAGS, value); }
+    public static void nfutex_flags(long struct, int value) { memPutInt(struct + IOURingSQE.FUTEX_FLAGS, value); }
     /** Unsafe version of {@link #install_fd_flags(int) install_fd_flags}. */
-    public static void ninstall_fd_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.INSTALL_FD_FLAGS, value); }
+    public static void ninstall_fd_flags(long struct, int value) { memPutInt(struct + IOURingSQE.INSTALL_FD_FLAGS, value); }
     /** Unsafe version of {@link #nop_flags(int) nop_flags}. */
-    public static void nnop_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.NOP_FLAGS, value); }
+    public static void nnop_flags(long struct, int value) { memPutInt(struct + IOURingSQE.NOP_FLAGS, value); }
     /** Unsafe version of {@link #user_data(long) user_data}. */
-    public static void nuser_data(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.USER_DATA, value); }
+    public static void nuser_data(long struct, long value) { memPutLong(struct + IOURingSQE.USER_DATA, value); }
     /** Unsafe version of {@link #buf_index(short) buf_index}. */
-    public static void nbuf_index(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.BUF_INDEX, value); }
+    public static void nbuf_index(long struct, short value) { memPutShort(struct + IOURingSQE.BUF_INDEX, value); }
     /** Unsafe version of {@link #buf_group(short) buf_group}. */
-    public static void nbuf_group(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.BUF_GROUP, value); }
+    public static void nbuf_group(long struct, short value) { memPutShort(struct + IOURingSQE.BUF_GROUP, value); }
     /** Unsafe version of {@link #personality(short) personality}. */
-    public static void npersonality(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.PERSONALITY, value); }
+    public static void npersonality(long struct, short value) { memPutShort(struct + IOURingSQE.PERSONALITY, value); }
     /** Unsafe version of {@link #splice_fd_in(int) splice_fd_in}. */
-    public static void nsplice_fd_in(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.SPLICE_FD_IN, value); }
+    public static void nsplice_fd_in(long struct, int value) { memPutInt(struct + IOURingSQE.SPLICE_FD_IN, value); }
     /** Unsafe version of {@link #file_index(int) file_index}. */
-    public static void nfile_index(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.FILE_INDEX, value); }
+    public static void nfile_index(long struct, int value) { memPutInt(struct + IOURingSQE.FILE_INDEX, value); }
     /** Unsafe version of {@link #optlen(int) optlen}. */
-    public static void noptlen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.OPTLEN, value); }
+    public static void noptlen(long struct, int value) { memPutInt(struct + IOURingSQE.OPTLEN, value); }
     /** Unsafe version of {@link #addr_len(short) addr_len}. */
-    public static void naddr_len(long struct, short value) { UNSAFE.putShort(null, struct + IOURingSQE.ADDR_LEN, value); }
+    public static void naddr_len(long struct, short value) { memPutShort(struct + IOURingSQE.ADDR_LEN, value); }
     public static void n__pad3(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + IOURingSQE.__PAD3, value.remaining() * 2);
     }
     public static void n__pad3(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + IOURingSQE.__PAD3 + check(index, 1) * 2, value);
+        memPutShort(struct + IOURingSQE.__PAD3 + check(index, 1) * 2, value);
     }
     /** Unsafe version of {@link #addr3(long) addr3}. */
-    public static void naddr3(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.ADDR3, value); }
+    public static void naddr3(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR3, value); }
     public static void n__pad2(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + IOURingSQE.__PAD2, value.remaining() * 8);
     }
     public static void n__pad2(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + IOURingSQE.__PAD2 + check(index, 1) * 8, value);
+        memPutLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8, value);
     }
     /** Unsafe version of {@link #optval(long) optval}. */
-    public static void noptval(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.OPTVAL, value); }
+    public static void noptval(long struct, long value) { memPutLong(struct + IOURingSQE.OPTVAL, value); }
     /** Unsafe version of {@link #cmd(ByteBuffer) cmd}. */
     public static void ncmd(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 0); }
@@ -920,7 +920,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     }
     /** Unsafe version of {@link #cmd(int, byte) cmd}. */
     public static void ncmd(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + IOURingSQE.CMD + check(index, 0) * 1, value);
+        memPutByte(struct + IOURingSQE.CMD + check(index, 0) * 1, value);
     }
 
     // -----------------------------------

@@ -470,27 +470,27 @@ public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #combinedImageSamplerDescriptorSingleArray}. */
-    public static int ncombinedImageSamplerDescriptorSingleArray(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.COMBINEDIMAGESAMPLERDESCRIPTORSINGLEARRAY); }
+    public static int ncombinedImageSamplerDescriptorSingleArray(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.COMBINEDIMAGESAMPLERDESCRIPTORSINGLEARRAY); }
     /** Unsafe version of {@link #bufferlessPushDescriptors}. */
-    public static int nbufferlessPushDescriptors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.BUFFERLESSPUSHDESCRIPTORS); }
+    public static int nbufferlessPushDescriptors(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.BUFFERLESSPUSHDESCRIPTORS); }
     /** Unsafe version of {@link #allowSamplerImageViewPostSubmitCreation}. */
-    public static int nallowSamplerImageViewPostSubmitCreation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.ALLOWSAMPLERIMAGEVIEWPOSTSUBMITCREATION); }
+    public static int nallowSamplerImageViewPostSubmitCreation(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.ALLOWSAMPLERIMAGEVIEWPOSTSUBMITCREATION); }
     /** Unsafe version of {@link #descriptorBufferOffsetAlignment}. */
-    public static long ndescriptorBufferOffsetAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.DESCRIPTORBUFFEROFFSETALIGNMENT); }
+    public static long ndescriptorBufferOffsetAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.DESCRIPTORBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #maxDescriptorBufferBindings}. */
-    public static int nmaxDescriptorBufferBindings(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXDESCRIPTORBUFFERBINDINGS); }
+    public static int nmaxDescriptorBufferBindings(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXDESCRIPTORBUFFERBINDINGS); }
     /** Unsafe version of {@link #maxResourceDescriptorBufferBindings}. */
-    public static int nmaxResourceDescriptorBufferBindings(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXRESOURCEDESCRIPTORBUFFERBINDINGS); }
+    public static int nmaxResourceDescriptorBufferBindings(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXRESOURCEDESCRIPTORBUFFERBINDINGS); }
     /** Unsafe version of {@link #maxSamplerDescriptorBufferBindings}. */
-    public static int nmaxSamplerDescriptorBufferBindings(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXSAMPLERDESCRIPTORBUFFERBINDINGS); }
+    public static int nmaxSamplerDescriptorBufferBindings(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXSAMPLERDESCRIPTORBUFFERBINDINGS); }
     /** Unsafe version of {@link #maxEmbeddedImmutableSamplerBindings}. */
-    public static int nmaxEmbeddedImmutableSamplerBindings(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXEMBEDDEDIMMUTABLESAMPLERBINDINGS); }
+    public static int nmaxEmbeddedImmutableSamplerBindings(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXEMBEDDEDIMMUTABLESAMPLERBINDINGS); }
     /** Unsafe version of {@link #maxEmbeddedImmutableSamplers}. */
-    public static int nmaxEmbeddedImmutableSamplers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXEMBEDDEDIMMUTABLESAMPLERS); }
+    public static int nmaxEmbeddedImmutableSamplers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXEMBEDDEDIMMUTABLESAMPLERS); }
     /** Unsafe version of {@link #bufferCaptureReplayDescriptorDataSize}. */
     public static long nbufferCaptureReplayDescriptorDataSize(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.BUFFERCAPTUREREPLAYDESCRIPTORDATASIZE); }
     /** Unsafe version of {@link #imageCaptureReplayDescriptorDataSize}. */
@@ -530,18 +530,18 @@ public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhys
     /** Unsafe version of {@link #accelerationStructureDescriptorSize}. */
     public static long naccelerationStructureDescriptorSize(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.ACCELERATIONSTRUCTUREDESCRIPTORSIZE); }
     /** Unsafe version of {@link #maxSamplerDescriptorBufferRange}. */
-    public static long nmaxSamplerDescriptorBufferRange(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXSAMPLERDESCRIPTORBUFFERRANGE); }
+    public static long nmaxSamplerDescriptorBufferRange(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXSAMPLERDESCRIPTORBUFFERRANGE); }
     /** Unsafe version of {@link #maxResourceDescriptorBufferRange}. */
-    public static long nmaxResourceDescriptorBufferRange(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXRESOURCEDESCRIPTORBUFFERRANGE); }
+    public static long nmaxResourceDescriptorBufferRange(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.MAXRESOURCEDESCRIPTORBUFFERRANGE); }
     /** Unsafe version of {@link #samplerDescriptorBufferAddressSpaceSize}. */
-    public static long nsamplerDescriptorBufferAddressSpaceSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.SAMPLERDESCRIPTORBUFFERADDRESSSPACESIZE); }
+    public static long nsamplerDescriptorBufferAddressSpaceSize(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.SAMPLERDESCRIPTORBUFFERADDRESSSPACESIZE); }
     /** Unsafe version of {@link #resourceDescriptorBufferAddressSpaceSize}. */
-    public static long nresourceDescriptorBufferAddressSpaceSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.RESOURCEDESCRIPTORBUFFERADDRESSSPACESIZE); }
+    public static long nresourceDescriptorBufferAddressSpaceSize(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.RESOURCEDESCRIPTORBUFFERADDRESSSPACESIZE); }
     /** Unsafe version of {@link #descriptorBufferAddressSpaceSize}. */
-    public static long ndescriptorBufferAddressSpaceSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.DESCRIPTORBUFFERADDRESSSPACESIZE); }
+    public static long ndescriptorBufferAddressSpaceSize(long struct) { return memGetLong(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.DESCRIPTORBUFFERADDRESSSPACESIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDescriptorBufferPropertiesEXT.PNEXT, value); }
 

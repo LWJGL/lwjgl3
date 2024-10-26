@@ -386,19 +386,19 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMicromapBuildInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMicromapBuildInfoEXT.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkMicromapBuildInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMicromapBuildInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.FLAGS); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkMicromapBuildInfoEXT.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.MODE); }
     /** Unsafe version of {@link #dstMicromap}. */
-    public static long ndstMicromap(long struct) { return UNSAFE.getLong(null, struct + VkMicromapBuildInfoEXT.DSTMICROMAP); }
+    public static long ndstMicromap(long struct) { return memGetLong(struct + VkMicromapBuildInfoEXT.DSTMICROMAP); }
     /** Unsafe version of {@link #usageCountsCount}. */
-    public static int nusageCountsCount(long struct) { return UNSAFE.getInt(null, struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT); }
+    public static int nusageCountsCount(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT); }
     /** Unsafe version of {@link #pUsageCounts}. */
     @Nullable public static VkMicromapUsageEXT.Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #ppUsageCounts() ppUsageCounts}. */
@@ -410,22 +410,22 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     /** Unsafe version of {@link #triangleArray}. */
     public static VkDeviceOrHostAddressConstKHR ntriangleArray(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkMicromapBuildInfoEXT.TRIANGLEARRAY); }
     /** Unsafe version of {@link #triangleArrayStride}. */
-    public static long ntriangleArrayStride(long struct) { return UNSAFE.getLong(null, struct + VkMicromapBuildInfoEXT.TRIANGLEARRAYSTRIDE); }
+    public static long ntriangleArrayStride(long struct) { return memGetLong(struct + VkMicromapBuildInfoEXT.TRIANGLEARRAYSTRIDE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapBuildInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMicromapBuildInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapBuildInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapBuildInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapBuildInfoEXT.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.MODE, value); }
     /** Unsafe version of {@link #dstMicromap(long) dstMicromap}. */
-    public static void ndstMicromap(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapBuildInfoEXT.DSTMICROMAP, value); }
+    public static void ndstMicromap(long struct, long value) { memPutLong(struct + VkMicromapBuildInfoEXT.DSTMICROMAP, value); }
     /** Sets the specified value to the {@code usageCountsCount} field of the specified {@code struct}. */
-    public static void nusageCountsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT, value); }
+    public static void nusageCountsCount(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT, value); }
     /** Unsafe version of {@link #pUsageCounts(VkMicromapUsageEXT.Buffer) pUsageCounts}. */
     public static void npUsageCounts(long struct, @Nullable VkMicromapUsageEXT.Buffer value) { memPutAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppUsageCounts(PointerBuffer) ppUsageCounts}. */
@@ -437,7 +437,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     /** Unsafe version of {@link #triangleArray(VkDeviceOrHostAddressConstKHR) triangleArray}. */
     public static void ntriangleArray(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkMicromapBuildInfoEXT.TRIANGLEARRAY, VkDeviceOrHostAddressConstKHR.SIZEOF); }
     /** Unsafe version of {@link #triangleArrayStride(long) triangleArrayStride}. */
-    public static void ntriangleArrayStride(long struct, long value) { UNSAFE.putLong(null, struct + VkMicromapBuildInfoEXT.TRIANGLEARRAYSTRIDE, value); }
+    public static void ntriangleArrayStride(long struct, long value) { memPutLong(struct + VkMicromapBuildInfoEXT.TRIANGLEARRAYSTRIDE, value); }
 
     // -----------------------------------
 

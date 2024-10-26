@@ -281,24 +281,24 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionControlEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageCompressionControlEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageCompressionControlEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionControlEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkImageCompressionControlEXT.FLAGS); }
     /** Unsafe version of {@link #compressionControlPlaneCount}. */
-    public static int ncompressionControlPlaneCount(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionControlEXT.COMPRESSIONCONTROLPLANECOUNT); }
+    public static int ncompressionControlPlaneCount(long struct) { return memGetInt(struct + VkImageCompressionControlEXT.COMPRESSIONCONTROLPLANECOUNT); }
     /** Unsafe version of {@link #pFixedRateFlags() pFixedRateFlags}. */
     @Nullable public static IntBuffer npFixedRateFlags(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCompressionControlEXT.PFIXEDRATEFLAGS), ncompressionControlPlaneCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCompressionControlEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageCompressionControlEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageCompressionControlEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCompressionControlEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkImageCompressionControlEXT.FLAGS, value); }
     /** Sets the specified value to the {@code compressionControlPlaneCount} field of the specified {@code struct}. */
-    public static void ncompressionControlPlaneCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCompressionControlEXT.COMPRESSIONCONTROLPLANECOUNT, value); }
+    public static void ncompressionControlPlaneCount(long struct, int value) { memPutInt(struct + VkImageCompressionControlEXT.COMPRESSIONCONTROLPLANECOUNT, value); }
     /** Unsafe version of {@link #pFixedRateFlags(IntBuffer) pFixedRateFlags}. */
     public static void npFixedRateFlags(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageCompressionControlEXT.PFIXEDRATEFLAGS, memAddressSafe(value)); if (value != null) { ncompressionControlPlaneCount(struct, value.remaining()); } }
 

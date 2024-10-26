@@ -253,14 +253,14 @@ public class VkVideoDecodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pStdSequenceHeader}. */
     public static StdVideoAV1SequenceHeader npStdSequenceHeader(long struct) { return StdVideoAV1SequenceHeader.create(memGetAddress(struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.PSTDSEQUENCEHEADER)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeAV1SessionParametersCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pStdSequenceHeader(StdVideoAV1SequenceHeader) pStdSequenceHeader}. */

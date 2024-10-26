@@ -249,16 +249,16 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRobustness2PropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2PropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRobustness2PropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #robustStorageBufferAccessSizeAlignment}. */
-    public static long nrobustStorageBufferAccessSizeAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceRobustness2PropertiesEXT.ROBUSTSTORAGEBUFFERACCESSSIZEALIGNMENT); }
+    public static long nrobustStorageBufferAccessSizeAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceRobustness2PropertiesEXT.ROBUSTSTORAGEBUFFERACCESSSIZEALIGNMENT); }
     /** Unsafe version of {@link #robustUniformBufferAccessSizeAlignment}. */
-    public static long nrobustUniformBufferAccessSizeAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceRobustness2PropertiesEXT.ROBUSTUNIFORMBUFFERACCESSSIZEALIGNMENT); }
+    public static long nrobustUniformBufferAccessSizeAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceRobustness2PropertiesEXT.ROBUSTUNIFORMBUFFERACCESSSIZEALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRobustness2PropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2PropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRobustness2PropertiesEXT.PNEXT, value); }
 

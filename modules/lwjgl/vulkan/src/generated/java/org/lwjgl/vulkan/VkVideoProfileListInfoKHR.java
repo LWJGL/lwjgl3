@@ -271,20 +271,20 @@ public class VkVideoProfileListInfoKHR extends Struct<VkVideoProfileListInfoKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoProfileListInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoProfileListInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoProfileListInfoKHR.PNEXT); }
     /** Unsafe version of {@link #profileCount}. */
-    public static int nprofileCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoProfileListInfoKHR.PROFILECOUNT); }
+    public static int nprofileCount(long struct) { return memGetInt(struct + VkVideoProfileListInfoKHR.PROFILECOUNT); }
     /** Unsafe version of {@link #pProfiles}. */
     @Nullable public static VkVideoProfileInfoKHR.Buffer npProfiles(long struct) { return VkVideoProfileInfoKHR.createSafe(memGetAddress(struct + VkVideoProfileListInfoKHR.PPROFILES), nprofileCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoProfileListInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoProfileListInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoProfileListInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code profileCount} field of the specified {@code struct}. */
-    public static void nprofileCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoProfileListInfoKHR.PROFILECOUNT, value); }
+    public static void nprofileCount(long struct, int value) { memPutInt(struct + VkVideoProfileListInfoKHR.PROFILECOUNT, value); }
     /** Unsafe version of {@link #pProfiles(VkVideoProfileInfoKHR.Buffer) pProfiles}. */
     public static void npProfiles(long struct, @Nullable VkVideoProfileInfoKHR.Buffer value) { memPutAddress(struct + VkVideoProfileListInfoKHR.PPROFILES, memAddressSafe(value)); nprofileCount(struct, value == null ? 0 : value.remaining()); }
 

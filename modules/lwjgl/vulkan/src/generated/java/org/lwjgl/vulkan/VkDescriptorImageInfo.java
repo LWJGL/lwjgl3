@@ -283,18 +283,18 @@ public class VkDescriptorImageInfo extends Struct<VkDescriptorImageInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sampler}. */
-    public static long nsampler(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorImageInfo.SAMPLER); }
+    public static long nsampler(long struct) { return memGetLong(struct + VkDescriptorImageInfo.SAMPLER); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorImageInfo.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkDescriptorImageInfo.IMAGEVIEW); }
     /** Unsafe version of {@link #imageLayout}. */
-    public static int nimageLayout(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorImageInfo.IMAGELAYOUT); }
+    public static int nimageLayout(long struct) { return memGetInt(struct + VkDescriptorImageInfo.IMAGELAYOUT); }
 
     /** Unsafe version of {@link #sampler(long) sampler}. */
-    public static void nsampler(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorImageInfo.SAMPLER, value); }
+    public static void nsampler(long struct, long value) { memPutLong(struct + VkDescriptorImageInfo.SAMPLER, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorImageInfo.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkDescriptorImageInfo.IMAGEVIEW, value); }
     /** Unsafe version of {@link #imageLayout(int) imageLayout}. */
-    public static void nimageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorImageInfo.IMAGELAYOUT, value); }
+    public static void nimageLayout(long struct, int value) { memPutInt(struct + VkDescriptorImageInfo.IMAGELAYOUT, value); }
 
     // -----------------------------------
 

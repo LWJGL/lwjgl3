@@ -218,7 +218,7 @@ public class CXType extends Struct<CXType> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXType.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXType.KIND); }
     /** Unsafe version of {@link #data}. */
     public static PointerBuffer ndata(long struct) { return memPointerBuffer(struct + CXType.DATA, 2); }
     /** Unsafe version of {@link #data(int) data}. */

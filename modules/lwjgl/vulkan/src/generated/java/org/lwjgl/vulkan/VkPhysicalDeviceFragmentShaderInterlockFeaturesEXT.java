@@ -287,26 +287,26 @@ public class VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #fragmentShaderSampleInterlock}. */
-    public static int nfragmentShaderSampleInterlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSAMPLEINTERLOCK); }
+    public static int nfragmentShaderSampleInterlock(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSAMPLEINTERLOCK); }
     /** Unsafe version of {@link #fragmentShaderPixelInterlock}. */
-    public static int nfragmentShaderPixelInterlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERPIXELINTERLOCK); }
+    public static int nfragmentShaderPixelInterlock(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERPIXELINTERLOCK); }
     /** Unsafe version of {@link #fragmentShaderShadingRateInterlock}. */
-    public static int nfragmentShaderShadingRateInterlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSHADINGRATEINTERLOCK); }
+    public static int nfragmentShaderShadingRateInterlock(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSHADINGRATEINTERLOCK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #fragmentShaderSampleInterlock(boolean) fragmentShaderSampleInterlock}. */
-    public static void nfragmentShaderSampleInterlock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSAMPLEINTERLOCK, value); }
+    public static void nfragmentShaderSampleInterlock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSAMPLEINTERLOCK, value); }
     /** Unsafe version of {@link #fragmentShaderPixelInterlock(boolean) fragmentShaderPixelInterlock}. */
-    public static void nfragmentShaderPixelInterlock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERPIXELINTERLOCK, value); }
+    public static void nfragmentShaderPixelInterlock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERPIXELINTERLOCK, value); }
     /** Unsafe version of {@link #fragmentShaderShadingRateInterlock(boolean) fragmentShaderShadingRateInterlock}. */
-    public static void nfragmentShaderShadingRateInterlock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSHADINGRATEINTERLOCK, value); }
+    public static void nfragmentShaderShadingRateInterlock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.FRAGMENTSHADERSHADINGRATEINTERLOCK, value); }
 
     // -----------------------------------
 

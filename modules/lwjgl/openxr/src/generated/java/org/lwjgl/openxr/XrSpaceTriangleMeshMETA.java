@@ -287,24 +287,24 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceTriangleMeshMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceTriangleMeshMETA.NEXT); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceTriangleMeshMETA.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceTriangleMeshMETA.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
     @Nullable public static XrVector3f.Buffer nvertices(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.VERTICES), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #indexCapacityInput}. */
-    public static int nindexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceTriangleMeshMETA.INDEXCAPACITYINPUT); }
+    public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
-    public static int nindexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceTriangleMeshMETA.INDEXCOUNTOUTPUT); }
+    public static int nindexCountOutput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
     @Nullable public static IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceTriangleMeshMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceTriangleMeshMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceTriangleMeshMETA.NEXT, value); }
 

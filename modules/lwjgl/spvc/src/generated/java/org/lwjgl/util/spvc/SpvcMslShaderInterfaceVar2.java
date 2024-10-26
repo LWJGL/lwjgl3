@@ -255,26 +255,26 @@ public class SpvcMslShaderInterfaceVar2 extends Struct<SpvcMslShaderInterfaceVar
     // -----------------------------------
 
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar2.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar2.LOCATION); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar2.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar2.FORMAT); }
     /** Unsafe version of {@link #builtin}. */
-    public static int nbuiltin(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar2.BUILTIN); }
+    public static int nbuiltin(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar2.BUILTIN); }
     /** Unsafe version of {@link #vecsize}. */
-    public static int nvecsize(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar2.VECSIZE); }
+    public static int nvecsize(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar2.VECSIZE); }
     /** Unsafe version of {@link #rate}. */
-    public static int nrate(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar2.RATE); }
+    public static int nrate(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar2.RATE); }
 
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar2.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar2.LOCATION, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar2.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar2.FORMAT, value); }
     /** Unsafe version of {@link #builtin(int) builtin}. */
-    public static void nbuiltin(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar2.BUILTIN, value); }
+    public static void nbuiltin(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar2.BUILTIN, value); }
     /** Unsafe version of {@link #vecsize(int) vecsize}. */
-    public static void nvecsize(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar2.VECSIZE, value); }
+    public static void nvecsize(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar2.VECSIZE, value); }
     /** Unsafe version of {@link #rate(int) rate}. */
-    public static void nrate(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar2.RATE, value); }
+    public static void nrate(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar2.RATE, value); }
 
     // -----------------------------------
 

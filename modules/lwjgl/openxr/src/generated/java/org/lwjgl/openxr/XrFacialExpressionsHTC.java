@@ -303,28 +303,28 @@ public class XrFacialExpressionsHTC extends Struct<XrFacialExpressionsHTC> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFacialExpressionsHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFacialExpressionsHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFacialExpressionsHTC.NEXT); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrFacialExpressionsHTC.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrFacialExpressionsHTC.ISACTIVE); }
     /** Unsafe version of {@link #sampleTime}. */
-    public static long nsampleTime(long struct) { return UNSAFE.getLong(null, struct + XrFacialExpressionsHTC.SAMPLETIME); }
+    public static long nsampleTime(long struct) { return memGetLong(struct + XrFacialExpressionsHTC.SAMPLETIME); }
     /** Unsafe version of {@link #expressionCount}. */
-    public static int nexpressionCount(long struct) { return UNSAFE.getInt(null, struct + XrFacialExpressionsHTC.EXPRESSIONCOUNT); }
+    public static int nexpressionCount(long struct) { return memGetInt(struct + XrFacialExpressionsHTC.EXPRESSIONCOUNT); }
     /** Unsafe version of {@link #expressionWeightings(int) expressionWeightings}. */
     public static FloatBuffer nexpressionWeightings(long struct, int capacity) { return memFloatBuffer(memGetAddress(struct + XrFacialExpressionsHTC.EXPRESSIONWEIGHTINGS), capacity); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFacialExpressionsHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFacialExpressionsHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFacialExpressionsHTC.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrFacialExpressionsHTC.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrFacialExpressionsHTC.ISACTIVE, value); }
     /** Unsafe version of {@link #sampleTime(long) sampleTime}. */
-    public static void nsampleTime(long struct, long value) { UNSAFE.putLong(null, struct + XrFacialExpressionsHTC.SAMPLETIME, value); }
+    public static void nsampleTime(long struct, long value) { memPutLong(struct + XrFacialExpressionsHTC.SAMPLETIME, value); }
     /** Unsafe version of {@link #expressionCount(int) expressionCount}. */
-    public static void nexpressionCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFacialExpressionsHTC.EXPRESSIONCOUNT, value); }
+    public static void nexpressionCount(long struct, int value) { memPutInt(struct + XrFacialExpressionsHTC.EXPRESSIONCOUNT, value); }
     /** Unsafe version of {@link #expressionWeightings(FloatBuffer) expressionWeightings}. */
     public static void nexpressionWeightings(long struct, FloatBuffer value) { memPutAddress(struct + XrFacialExpressionsHTC.EXPRESSIONWEIGHTINGS, memAddress(value)); }
 

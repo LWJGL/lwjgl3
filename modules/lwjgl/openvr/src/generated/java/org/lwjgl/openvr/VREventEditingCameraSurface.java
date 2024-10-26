@@ -110,9 +110,9 @@ public class VREventEditingCameraSurface extends Struct<VREventEditingCameraSurf
     // -----------------------------------
 
     /** Unsafe version of {@link #overlayHandle}. */
-    public static long noverlayHandle(long struct) { return UNSAFE.getLong(null, struct + VREventEditingCameraSurface.OVERLAYHANDLE); }
+    public static long noverlayHandle(long struct) { return memGetLong(struct + VREventEditingCameraSurface.OVERLAYHANDLE); }
     /** Unsafe version of {@link #nVisualMode}. */
-    public static int nnVisualMode(long struct) { return UNSAFE.getInt(null, struct + VREventEditingCameraSurface.NVISUALMODE); }
+    public static int nnVisualMode(long struct) { return memGetInt(struct + VREventEditingCameraSurface.NVISUALMODE); }
 
     // -----------------------------------
 

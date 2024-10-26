@@ -280,26 +280,26 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct<XrSpatialGraph
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #nodeType}. */
-    public static int nnodeType(long struct) { return UNSAFE.getInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE); }
+    public static int nnodeType(long struct) { return memGetInt(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE); }
     /** Unsafe version of {@link #nodeId}. */
     public static ByteBuffer nnodeId(long struct) { return memByteBuffer(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID, XR_GUID_SIZE_MSFT); }
     /** Unsafe version of {@link #nodeId(int) nodeId}. */
     public static byte nnodeId(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1);
+        return memGetByte(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1);
     }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.POSE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #nodeType(int) nodeType}. */
-    public static void nnodeType(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE, value); }
+    public static void nnodeType(long struct, int value) { memPutInt(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE, value); }
     /** Unsafe version of {@link #nodeId(ByteBuffer) nodeId}. */
     public static void nnodeId(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, XR_GUID_SIZE_MSFT); }
@@ -307,7 +307,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct<XrSpatialGraph
     }
     /** Unsafe version of {@link #nodeId(int, byte) nodeId}. */
     public static void nnodeId(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1, value);
+        memPutByte(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1, value);
     }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.POSE, XrPosef.SIZEOF); }

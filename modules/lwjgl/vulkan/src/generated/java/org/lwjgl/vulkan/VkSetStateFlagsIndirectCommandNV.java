@@ -209,10 +209,10 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndi
     // -----------------------------------
 
     /** Unsafe version of {@link #data}. */
-    public static int ndata(long struct) { return UNSAFE.getInt(null, struct + VkSetStateFlagsIndirectCommandNV.DATA); }
+    public static int ndata(long struct) { return memGetInt(struct + VkSetStateFlagsIndirectCommandNV.DATA); }
 
     /** Unsafe version of {@link #data(int) data}. */
-    public static void ndata(long struct, int value) { UNSAFE.putInt(null, struct + VkSetStateFlagsIndirectCommandNV.DATA, value); }
+    public static void ndata(long struct, int value) { memPutInt(struct + VkSetStateFlagsIndirectCommandNV.DATA, value); }
 
     // -----------------------------------
 

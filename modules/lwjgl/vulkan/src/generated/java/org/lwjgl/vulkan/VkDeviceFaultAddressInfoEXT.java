@@ -257,18 +257,18 @@ public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #addressType}. */
-    public static int naddressType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE); }
+    public static int naddressType(long struct) { return memGetInt(struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE); }
     /** Unsafe version of {@link #reportedAddress}. */
-    public static long nreportedAddress(long struct) { return UNSAFE.getLong(null, struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS); }
+    public static long nreportedAddress(long struct) { return memGetLong(struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS); }
     /** Unsafe version of {@link #addressPrecision}. */
-    public static long naddressPrecision(long struct) { return UNSAFE.getLong(null, struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION); }
+    public static long naddressPrecision(long struct) { return memGetLong(struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION); }
 
     /** Unsafe version of {@link #addressType(int) addressType}. */
-    public static void naddressType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE, value); }
+    public static void naddressType(long struct, int value) { memPutInt(struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE, value); }
     /** Unsafe version of {@link #reportedAddress(long) reportedAddress}. */
-    public static void nreportedAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS, value); }
+    public static void nreportedAddress(long struct, long value) { memPutLong(struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS, value); }
     /** Unsafe version of {@link #addressPrecision(long) addressPrecision}. */
-    public static void naddressPrecision(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION, value); }
+    public static void naddressPrecision(long struct, long value) { memPutLong(struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION, value); }
 
     // -----------------------------------
 

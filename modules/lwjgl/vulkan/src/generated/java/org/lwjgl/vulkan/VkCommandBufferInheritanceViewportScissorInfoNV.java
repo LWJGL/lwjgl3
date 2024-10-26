@@ -322,24 +322,24 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct<VkCo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PNEXT); }
     /** Unsafe version of {@link #viewportScissor2D}. */
-    public static int nviewportScissor2D(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTSCISSOR2D); }
+    public static int nviewportScissor2D(long struct) { return memGetInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTSCISSOR2D); }
     /** Unsafe version of {@link #viewportDepthCount}. */
-    public static int nviewportDepthCount(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT); }
+    public static int nviewportDepthCount(long struct) { return memGetInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT); }
     /** Unsafe version of {@link #pViewportDepths}. */
     @Nullable public static VkViewport npViewportDepths(long struct) { return VkViewport.createSafe(memGetAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #viewportScissor2D(boolean) viewportScissor2D}. */
-    public static void nviewportScissor2D(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTSCISSOR2D, value); }
+    public static void nviewportScissor2D(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTSCISSOR2D, value); }
     /** Unsafe version of {@link #viewportDepthCount(int) viewportDepthCount}. */
-    public static void nviewportDepthCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT, value); }
+    public static void nviewportDepthCount(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT, value); }
     /** Unsafe version of {@link #pViewportDepths(VkViewport) pViewportDepths}. */
     public static void npViewportDepths(long struct, @Nullable VkViewport value) { memPutAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS, memAddressSafe(value)); }
 

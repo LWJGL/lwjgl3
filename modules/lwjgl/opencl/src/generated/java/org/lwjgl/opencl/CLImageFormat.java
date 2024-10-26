@@ -246,14 +246,14 @@ public class CLImageFormat extends Struct<CLImageFormat> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #image_channel_order}. */
-    public static int nimage_channel_order(long struct) { return UNSAFE.getInt(null, struct + CLImageFormat.IMAGE_CHANNEL_ORDER); }
+    public static int nimage_channel_order(long struct) { return memGetInt(struct + CLImageFormat.IMAGE_CHANNEL_ORDER); }
     /** Unsafe version of {@link #image_channel_data_type}. */
-    public static int nimage_channel_data_type(long struct) { return UNSAFE.getInt(null, struct + CLImageFormat.IMAGE_CHANNEL_DATA_TYPE); }
+    public static int nimage_channel_data_type(long struct) { return memGetInt(struct + CLImageFormat.IMAGE_CHANNEL_DATA_TYPE); }
 
     /** Unsafe version of {@link #image_channel_order(int) image_channel_order}. */
-    public static void nimage_channel_order(long struct, int value) { UNSAFE.putInt(null, struct + CLImageFormat.IMAGE_CHANNEL_ORDER, value); }
+    public static void nimage_channel_order(long struct, int value) { memPutInt(struct + CLImageFormat.IMAGE_CHANNEL_ORDER, value); }
     /** Unsafe version of {@link #image_channel_data_type(int) image_channel_data_type}. */
-    public static void nimage_channel_data_type(long struct, int value) { UNSAFE.putInt(null, struct + CLImageFormat.IMAGE_CHANNEL_DATA_TYPE, value); }
+    public static void nimage_channel_data_type(long struct, int value) { memPutInt(struct + CLImageFormat.IMAGE_CHANNEL_DATA_TYPE, value); }
 
     // -----------------------------------
 

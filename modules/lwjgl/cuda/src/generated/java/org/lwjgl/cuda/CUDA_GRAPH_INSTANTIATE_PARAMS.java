@@ -207,13 +207,13 @@ public class CUDA_GRAPH_INSTANTIATE_PARAMS extends Struct<CUDA_GRAPH_INSTANTIATE
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + CUDA_GRAPH_INSTANTIATE_PARAMS.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + CUDA_GRAPH_INSTANTIATE_PARAMS.FLAGS); }
     /** Unsafe version of {@link #hUploadStream}. */
     public static long nhUploadStream(long struct) { return memGetAddress(struct + CUDA_GRAPH_INSTANTIATE_PARAMS.HUPLOADSTREAM); }
     /** Unsafe version of {@link #hErrNode_out}. */
     public static long nhErrNode_out(long struct) { return memGetAddress(struct + CUDA_GRAPH_INSTANTIATE_PARAMS.HERRNODE_OUT); }
     /** Unsafe version of {@link #result_out}. */
-    public static int nresult_out(long struct) { return UNSAFE.getInt(null, struct + CUDA_GRAPH_INSTANTIATE_PARAMS.RESULT_OUT); }
+    public static int nresult_out(long struct) { return memGetInt(struct + CUDA_GRAPH_INSTANTIATE_PARAMS.RESULT_OUT); }
 
     // -----------------------------------
 

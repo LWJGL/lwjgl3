@@ -268,22 +268,22 @@ public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct<VkRen
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.PNEXT); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGEVIEW); }
     /** Unsafe version of {@link #imageLayout}. */
-    public static int nimageLayout(long struct) { return UNSAFE.getInt(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGELAYOUT); }
+    public static int nimageLayout(long struct) { return memGetInt(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGELAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGEVIEW, value); }
     /** Unsafe version of {@link #imageLayout(int) imageLayout}. */
-    public static void nimageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGELAYOUT, value); }
+    public static void nimageLayout(long struct, int value) { memPutInt(struct + VkRenderingFragmentDensityMapAttachmentInfoEXT.IMAGELAYOUT, value); }
 
     // -----------------------------------
 

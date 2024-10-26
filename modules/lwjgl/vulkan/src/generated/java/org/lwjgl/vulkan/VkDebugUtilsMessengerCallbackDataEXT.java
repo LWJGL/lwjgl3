@@ -392,62 +392,62 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.FLAGS); }
     /** Unsafe version of {@link #pMessageIdName}. */
     @Nullable public static ByteBuffer npMessageIdName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGEIDNAME)); }
     /** Unsafe version of {@link #pMessageIdNameString}. */
     @Nullable public static String npMessageIdNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGEIDNAME)); }
     /** Unsafe version of {@link #messageIdNumber}. */
-    public static int nmessageIdNumber(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER); }
+    public static int nmessageIdNumber(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER); }
     /** Unsafe version of {@link #pMessage}. */
     @Nullable public static ByteBuffer npMessage(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
     /** Unsafe version of {@link #pMessageString}. */
     @Nullable public static String npMessageString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE)); }
     /** Unsafe version of {@link #queueLabelCount}. */
-    public static int nqueueLabelCount(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT); }
+    public static int nqueueLabelCount(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT); }
     /** Unsafe version of {@link #pQueueLabels}. */
     @Nullable public static VkDebugUtilsLabelEXT.Buffer npQueueLabels(long struct) { return VkDebugUtilsLabelEXT.createSafe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PQUEUELABELS), nqueueLabelCount(struct)); }
     /** Unsafe version of {@link #cmdBufLabelCount}. */
-    public static int ncmdBufLabelCount(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.CMDBUFLABELCOUNT); }
+    public static int ncmdBufLabelCount(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.CMDBUFLABELCOUNT); }
     /** Unsafe version of {@link #pCmdBufLabels}. */
     @Nullable public static VkDebugUtilsLabelEXT.Buffer npCmdBufLabels(long struct) { return VkDebugUtilsLabelEXT.createSafe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PCMDBUFLABELS), ncmdBufLabelCount(struct)); }
     /** Unsafe version of {@link #objectCount}. */
-    public static int nobjectCount(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT); }
+    public static int nobjectCount(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT); }
     /** Unsafe version of {@link #pObjects}. */
     @Nullable public static VkDebugUtilsObjectNameInfoEXT.Buffer npObjects(long struct) { return VkDebugUtilsObjectNameInfoEXT.createSafe(memGetAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.POBJECTS), nobjectCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.FLAGS, value); }
     /** Unsafe version of {@link #pMessageIdName(ByteBuffer) pMessageIdName}. */
     public static void npMessageIdName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
         memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGEIDNAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #messageIdNumber(int) messageIdNumber}. */
-    public static void nmessageIdNumber(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER, value); }
+    public static void nmessageIdNumber(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.MESSAGEIDNUMBER, value); }
     /** Unsafe version of {@link #pMessage(ByteBuffer) pMessage}. */
     public static void npMessage(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
         memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PMESSAGE, memAddressSafe(value));
     }
     /** Sets the specified value to the {@code queueLabelCount} field of the specified {@code struct}. */
-    public static void nqueueLabelCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT, value); }
+    public static void nqueueLabelCount(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.QUEUELABELCOUNT, value); }
     /** Unsafe version of {@link #pQueueLabels(VkDebugUtilsLabelEXT.Buffer) pQueueLabels}. */
     public static void npQueueLabels(long struct, @Nullable VkDebugUtilsLabelEXT.Buffer value) { memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PQUEUELABELS, memAddressSafe(value)); nqueueLabelCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code cmdBufLabelCount} field of the specified {@code struct}. */
-    public static void ncmdBufLabelCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.CMDBUFLABELCOUNT, value); }
+    public static void ncmdBufLabelCount(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.CMDBUFLABELCOUNT, value); }
     /** Unsafe version of {@link #pCmdBufLabels(VkDebugUtilsLabelEXT.Buffer) pCmdBufLabels}. */
     public static void npCmdBufLabels(long struct, @Nullable VkDebugUtilsLabelEXT.Buffer value) { memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.PCMDBUFLABELS, memAddressSafe(value)); ncmdBufLabelCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code objectCount} field of the specified {@code struct}. */
-    public static void nobjectCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT, value); }
+    public static void nobjectCount(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT, value); }
     /** Unsafe version of {@link #pObjects(VkDebugUtilsObjectNameInfoEXT.Buffer) pObjects}. */
     public static void npObjects(long struct, @Nullable VkDebugUtilsObjectNameInfoEXT.Buffer value) { memPutAddress(struct + VkDebugUtilsMessengerCallbackDataEXT.POBJECTS, memAddressSafe(value)); nobjectCount(struct, value == null ? 0 : value.remaining()); }
 

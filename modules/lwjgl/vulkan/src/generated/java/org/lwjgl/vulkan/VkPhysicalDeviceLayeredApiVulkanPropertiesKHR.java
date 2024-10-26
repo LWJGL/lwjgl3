@@ -251,14 +251,14 @@ public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #properties}. */
     public static VkPhysicalDeviceProperties2 nproperties(long struct) { return VkPhysicalDeviceProperties2.create(struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.PROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.PNEXT, value); }
 

@@ -242,18 +242,18 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.PNEXT); }
     /** Unsafe version of {@link #amigoProfiling}. */
-    public static int namigoProfiling(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.AMIGOPROFILING); }
+    public static int namigoProfiling(long struct) { return memGetInt(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.AMIGOPROFILING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.PNEXT, value); }
     /** Unsafe version of {@link #amigoProfiling(boolean) amigoProfiling}. */
-    public static void namigoProfiling(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.AMIGOPROFILING, value); }
+    public static void namigoProfiling(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAmigoProfilingFeaturesSEC.AMIGOPROFILING, value); }
 
     // -----------------------------------
 

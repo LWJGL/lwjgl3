@@ -246,12 +246,12 @@ public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #mType}. */
-    public static int nmType(long struct) { return UNSAFE.getInt(null, struct + AIMetaDataEntry.MTYPE); }
+    public static int nmType(long struct) { return memGetInt(struct + AIMetaDataEntry.MTYPE); }
     /** Unsafe version of {@link #mData(int) mData}. */
     public static ByteBuffer nmData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIMetaDataEntry.MDATA), capacity); }
 
     /** Unsafe version of {@link #mType(int) mType}. */
-    public static void nmType(long struct, int value) { UNSAFE.putInt(null, struct + AIMetaDataEntry.MTYPE, value); }
+    public static void nmType(long struct, int value) { memPutInt(struct + AIMetaDataEntry.MTYPE, value); }
     /** Unsafe version of {@link #mData(ByteBuffer) mData}. */
     public static void nmData(long struct, ByteBuffer value) { memPutAddress(struct + AIMetaDataEntry.MDATA, memAddress(value)); }
 

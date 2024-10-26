@@ -292,11 +292,11 @@ public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + WINDOWPLACEMENT.LENGTH); }
+    public static int nlength(long struct) { return memGetInt(struct + WINDOWPLACEMENT.LENGTH); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + WINDOWPLACEMENT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + WINDOWPLACEMENT.FLAGS); }
     /** Unsafe version of {@link #showCmd}. */
-    public static int nshowCmd(long struct) { return UNSAFE.getInt(null, struct + WINDOWPLACEMENT.SHOWCMD); }
+    public static int nshowCmd(long struct) { return memGetInt(struct + WINDOWPLACEMENT.SHOWCMD); }
     /** Unsafe version of {@link #ptMinPosition}. */
     public static POINT nptMinPosition(long struct) { return POINT.create(struct + WINDOWPLACEMENT.PTMINPOSITION); }
     /** Unsafe version of {@link #ptMaxPosition}. */
@@ -305,11 +305,11 @@ public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeRe
     public static RECT nrcNormalPosition(long struct) { return RECT.create(struct + WINDOWPLACEMENT.RCNORMALPOSITION); }
 
     /** Unsafe version of {@link #length(int) length}. */
-    public static void nlength(long struct, int value) { UNSAFE.putInt(null, struct + WINDOWPLACEMENT.LENGTH, value); }
+    public static void nlength(long struct, int value) { memPutInt(struct + WINDOWPLACEMENT.LENGTH, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + WINDOWPLACEMENT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + WINDOWPLACEMENT.FLAGS, value); }
     /** Unsafe version of {@link #showCmd(int) showCmd}. */
-    public static void nshowCmd(long struct, int value) { UNSAFE.putInt(null, struct + WINDOWPLACEMENT.SHOWCMD, value); }
+    public static void nshowCmd(long struct, int value) { memPutInt(struct + WINDOWPLACEMENT.SHOWCMD, value); }
     /** Unsafe version of {@link #ptMinPosition(POINT) ptMinPosition}. */
     public static void nptMinPosition(long struct, POINT value) { memCopy(value.address(), struct + WINDOWPLACEMENT.PTMINPOSITION, POINT.SIZEOF); }
     /** Unsafe version of {@link #ptMaxPosition(POINT) ptMaxPosition}. */

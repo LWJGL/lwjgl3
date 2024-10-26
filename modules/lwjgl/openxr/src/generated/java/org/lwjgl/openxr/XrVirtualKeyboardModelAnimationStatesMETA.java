@@ -272,24 +272,24 @@ public class XrVirtualKeyboardModelAnimationStatesMETA extends Struct<XrVirtualK
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardModelAnimationStatesMETA.NEXT); }
     /** Unsafe version of {@link #stateCapacityInput}. */
-    public static int nstateCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECAPACITYINPUT); }
+    public static int nstateCapacityInput(long struct) { return memGetInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECAPACITYINPUT); }
     /** Unsafe version of {@link #stateCountOutput}. */
-    public static int nstateCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECOUNTOUTPUT); }
+    public static int nstateCountOutput(long struct) { return memGetInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECOUNTOUTPUT); }
     /** Unsafe version of {@link #states}. */
     @Nullable public static XrVirtualKeyboardAnimationStateMETA.Buffer nstates(long struct) { return XrVirtualKeyboardAnimationStateMETA.createSafe(memGetAddress(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATES), nstateCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardModelAnimationStatesMETA.NEXT, value); }
     /** Sets the specified value to the {@code stateCapacityInput} field of the specified {@code struct}. */
-    public static void nstateCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECAPACITYINPUT, value); }
+    public static void nstateCapacityInput(long struct, int value) { memPutInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECAPACITYINPUT, value); }
     /** Unsafe version of {@link #stateCountOutput(int) stateCountOutput}. */
-    public static void nstateCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECOUNTOUTPUT, value); }
+    public static void nstateCountOutput(long struct, int value) { memPutInt(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATECOUNTOUTPUT, value); }
     /** Unsafe version of {@link #states(XrVirtualKeyboardAnimationStateMETA.Buffer) states}. */
     public static void nstates(long struct, @Nullable XrVirtualKeyboardAnimationStateMETA.Buffer value) { memPutAddress(struct + XrVirtualKeyboardModelAnimationStatesMETA.STATES, memAddressSafe(value)); if (value != null) { nstateCapacityInput(struct, value.remaining()); } }
 

@@ -242,14 +242,14 @@ public class VkQueueFamilyVideoPropertiesKHR extends Struct<VkQueueFamilyVideoPr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyVideoPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueueFamilyVideoPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyVideoPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #videoCodecOperations}. */
-    public static int nvideoCodecOperations(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyVideoPropertiesKHR.VIDEOCODECOPERATIONS); }
+    public static int nvideoCodecOperations(long struct) { return memGetInt(struct + VkQueueFamilyVideoPropertiesKHR.VIDEOCODECOPERATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyVideoPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyVideoPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyVideoPropertiesKHR.PNEXT, value); }
 

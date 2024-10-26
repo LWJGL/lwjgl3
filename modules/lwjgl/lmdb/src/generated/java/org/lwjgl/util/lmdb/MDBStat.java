@@ -243,9 +243,9 @@ public class MDBStat extends Struct<MDBStat> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #ms_psize}. */
-    public static int nms_psize(long struct) { return UNSAFE.getInt(null, struct + MDBStat.MS_PSIZE); }
+    public static int nms_psize(long struct) { return memGetInt(struct + MDBStat.MS_PSIZE); }
     /** Unsafe version of {@link #ms_depth}. */
-    public static int nms_depth(long struct) { return UNSAFE.getInt(null, struct + MDBStat.MS_DEPTH); }
+    public static int nms_depth(long struct) { return memGetInt(struct + MDBStat.MS_DEPTH); }
     /** Unsafe version of {@link #ms_branch_pages}. */
     public static long nms_branch_pages(long struct) { return memGetAddress(struct + MDBStat.MS_BRANCH_PAGES); }
     /** Unsafe version of {@link #ms_leaf_pages}. */

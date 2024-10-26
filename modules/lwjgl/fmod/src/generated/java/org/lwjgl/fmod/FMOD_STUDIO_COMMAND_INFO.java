@@ -292,19 +292,19 @@ public class FMOD_STUDIO_COMMAND_INFO extends Struct<FMOD_STUDIO_COMMAND_INFO> i
     /** Unsafe version of {@link #commandnameString}. */
     public static String ncommandnameString(long struct) { return memUTF8(memGetAddress(struct + FMOD_STUDIO_COMMAND_INFO.COMMANDNAME)); }
     /** Unsafe version of {@link #parentcommandindex}. */
-    public static int nparentcommandindex(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.PARENTCOMMANDINDEX); }
+    public static int nparentcommandindex(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.PARENTCOMMANDINDEX); }
     /** Unsafe version of {@link #framenumber}. */
-    public static int nframenumber(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.FRAMENUMBER); }
+    public static int nframenumber(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.FRAMENUMBER); }
     /** Unsafe version of {@link #frametime}. */
-    public static float nframetime(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_COMMAND_INFO.FRAMETIME); }
+    public static float nframetime(long struct) { return memGetFloat(struct + FMOD_STUDIO_COMMAND_INFO.FRAMETIME); }
     /** Unsafe version of {@link #instancetype}. */
-    public static int ninstancetype(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.INSTANCETYPE); }
+    public static int ninstancetype(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.INSTANCETYPE); }
     /** Unsafe version of {@link #outputtype}. */
-    public static int noutputtype(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTTYPE); }
+    public static int noutputtype(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTTYPE); }
     /** Unsafe version of {@link #instancehandle}. */
-    public static int ninstancehandle(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.INSTANCEHANDLE); }
+    public static int ninstancehandle(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.INSTANCEHANDLE); }
     /** Unsafe version of {@link #outputhandle}. */
-    public static int noutputhandle(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTHANDLE); }
+    public static int noutputhandle(long struct) { return memGetInt(struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTHANDLE); }
 
     /** Unsafe version of {@link #commandname(ByteBuffer) commandname}. */
     public static void ncommandname(long struct, ByteBuffer value) {
@@ -312,19 +312,19 @@ public class FMOD_STUDIO_COMMAND_INFO extends Struct<FMOD_STUDIO_COMMAND_INFO> i
         memPutAddress(struct + FMOD_STUDIO_COMMAND_INFO.COMMANDNAME, memAddress(value));
     }
     /** Unsafe version of {@link #parentcommandindex(int) parentcommandindex}. */
-    public static void nparentcommandindex(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.PARENTCOMMANDINDEX, value); }
+    public static void nparentcommandindex(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.PARENTCOMMANDINDEX, value); }
     /** Unsafe version of {@link #framenumber(int) framenumber}. */
-    public static void nframenumber(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.FRAMENUMBER, value); }
+    public static void nframenumber(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.FRAMENUMBER, value); }
     /** Unsafe version of {@link #frametime(float) frametime}. */
-    public static void nframetime(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_COMMAND_INFO.FRAMETIME, value); }
+    public static void nframetime(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_COMMAND_INFO.FRAMETIME, value); }
     /** Unsafe version of {@link #instancetype(int) instancetype}. */
-    public static void ninstancetype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.INSTANCETYPE, value); }
+    public static void ninstancetype(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.INSTANCETYPE, value); }
     /** Unsafe version of {@link #outputtype(int) outputtype}. */
-    public static void noutputtype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTTYPE, value); }
+    public static void noutputtype(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTTYPE, value); }
     /** Unsafe version of {@link #instancehandle(int) instancehandle}. */
-    public static void ninstancehandle(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.INSTANCEHANDLE, value); }
+    public static void ninstancehandle(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.INSTANCEHANDLE, value); }
     /** Unsafe version of {@link #outputhandle(int) outputhandle}. */
-    public static void noutputhandle(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTHANDLE, value); }
+    public static void noutputhandle(long struct, int value) { memPutInt(struct + FMOD_STUDIO_COMMAND_INFO.OUTPUTHANDLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -276,24 +276,24 @@ public class XrSpaceContainerFB extends Struct<XrSpaceContainerFB> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceContainerFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceContainerFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceContainerFB.NEXT); }
     /** Unsafe version of {@link #uuidCapacityInput}. */
-    public static int nuuidCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceContainerFB.UUIDCAPACITYINPUT); }
+    public static int nuuidCapacityInput(long struct) { return memGetInt(struct + XrSpaceContainerFB.UUIDCAPACITYINPUT); }
     /** Unsafe version of {@link #uuidCountOutput}. */
-    public static int nuuidCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSpaceContainerFB.UUIDCOUNTOUTPUT); }
+    public static int nuuidCountOutput(long struct) { return memGetInt(struct + XrSpaceContainerFB.UUIDCOUNTOUTPUT); }
     /** Unsafe version of {@link #uuids}. */
     @Nullable public static XrUuidEXT.Buffer nuuids(long struct) { return XrUuidEXT.createSafe(memGetAddress(struct + XrSpaceContainerFB.UUIDS), nuuidCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceContainerFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceContainerFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceContainerFB.NEXT, value); }
     /** Sets the specified value to the {@code uuidCapacityInput} field of the specified {@code struct}. */
-    public static void nuuidCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceContainerFB.UUIDCAPACITYINPUT, value); }
+    public static void nuuidCapacityInput(long struct, int value) { memPutInt(struct + XrSpaceContainerFB.UUIDCAPACITYINPUT, value); }
     /** Unsafe version of {@link #uuidCountOutput(int) uuidCountOutput}. */
-    public static void nuuidCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceContainerFB.UUIDCOUNTOUTPUT, value); }
+    public static void nuuidCountOutput(long struct, int value) { memPutInt(struct + XrSpaceContainerFB.UUIDCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #uuids(XrUuidEXT.Buffer) uuids}. */
     public static void nuuids(long struct, @Nullable XrUuidEXT.Buffer value) { memPutAddress(struct + XrSpaceContainerFB.UUIDS, memAddressSafe(value)); if (value != null) { nuuidCapacityInput(struct, value.remaining()); } }
 

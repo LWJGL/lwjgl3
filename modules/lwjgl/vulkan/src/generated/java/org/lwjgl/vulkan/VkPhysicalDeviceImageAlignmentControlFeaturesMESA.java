@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageAlignmentControlFeaturesMESA extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.PNEXT); }
     /** Unsafe version of {@link #imageAlignmentControl}. */
-    public static int nimageAlignmentControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.IMAGEALIGNMENTCONTROL); }
+    public static int nimageAlignmentControl(long struct) { return memGetInt(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.IMAGEALIGNMENTCONTROL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.PNEXT, value); }
     /** Unsafe version of {@link #imageAlignmentControl(boolean) imageAlignmentControl}. */
-    public static void nimageAlignmentControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.IMAGEALIGNMENTCONTROL, value); }
+    public static void nimageAlignmentControl(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageAlignmentControlFeaturesMESA.IMAGEALIGNMENTCONTROL, value); }
 
     // -----------------------------------
 

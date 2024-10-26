@@ -241,20 +241,20 @@ public class FMOD_DSP_PARAMETER_DESC_FLOAT extends Struct<FMOD_DSP_PARAMETER_DES
     // -----------------------------------
 
     /** Unsafe version of {@link #min}. */
-    public static float nmin(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MIN); }
+    public static float nmin(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MIN); }
     /** Unsafe version of {@link #max}. */
-    public static float nmax(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAX); }
+    public static float nmax(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAX); }
     /** Unsafe version of {@link #defaultval}. */
-    public static float ndefaultval(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.DEFAULTVAL); }
+    public static float ndefaultval(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.DEFAULTVAL); }
     /** Unsafe version of {@link #mapping}. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING nmapping(long struct) { return FMOD_DSP_PARAMETER_FLOAT_MAPPING.create(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAPPING); }
 
     /** Unsafe version of {@link #min(float) min}. */
-    public static void nmin(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MIN, value); }
+    public static void nmin(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MIN, value); }
     /** Unsafe version of {@link #max(float) max}. */
-    public static void nmax(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAX, value); }
+    public static void nmax(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAX, value); }
     /** Unsafe version of {@link #defaultval(float) defaultval}. */
-    public static void ndefaultval(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_DESC_FLOAT.DEFAULTVAL, value); }
+    public static void ndefaultval(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_DESC_FLOAT.DEFAULTVAL, value); }
     /** Unsafe version of {@link #mapping(FMOD_DSP_PARAMETER_FLOAT_MAPPING) mapping}. */
     public static void nmapping(long struct, FMOD_DSP_PARAMETER_FLOAT_MAPPING value) { memCopy(value.address(), struct + FMOD_DSP_PARAMETER_DESC_FLOAT.MAPPING, FMOD_DSP_PARAMETER_FLOAT_MAPPING.SIZEOF); }
 

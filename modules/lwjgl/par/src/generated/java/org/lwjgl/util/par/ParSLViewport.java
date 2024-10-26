@@ -261,22 +261,22 @@ public class ParSLViewport extends Struct<ParSLViewport> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #left}. */
-    public static float nleft(long struct) { return UNSAFE.getFloat(null, struct + ParSLViewport.LEFT); }
+    public static float nleft(long struct) { return memGetFloat(struct + ParSLViewport.LEFT); }
     /** Unsafe version of {@link #top}. */
-    public static float ntop(long struct) { return UNSAFE.getFloat(null, struct + ParSLViewport.TOP); }
+    public static float ntop(long struct) { return memGetFloat(struct + ParSLViewport.TOP); }
     /** Unsafe version of {@link #right}. */
-    public static float nright(long struct) { return UNSAFE.getFloat(null, struct + ParSLViewport.RIGHT); }
+    public static float nright(long struct) { return memGetFloat(struct + ParSLViewport.RIGHT); }
     /** Unsafe version of {@link #bottom}. */
-    public static float nbottom(long struct) { return UNSAFE.getFloat(null, struct + ParSLViewport.BOTTOM); }
+    public static float nbottom(long struct) { return memGetFloat(struct + ParSLViewport.BOTTOM); }
 
     /** Unsafe version of {@link #left(float) left}. */
-    public static void nleft(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLViewport.LEFT, value); }
+    public static void nleft(long struct, float value) { memPutFloat(struct + ParSLViewport.LEFT, value); }
     /** Unsafe version of {@link #top(float) top}. */
-    public static void ntop(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLViewport.TOP, value); }
+    public static void ntop(long struct, float value) { memPutFloat(struct + ParSLViewport.TOP, value); }
     /** Unsafe version of {@link #right(float) right}. */
-    public static void nright(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLViewport.RIGHT, value); }
+    public static void nright(long struct, float value) { memPutFloat(struct + ParSLViewport.RIGHT, value); }
     /** Unsafe version of {@link #bottom(float) bottom}. */
-    public static void nbottom(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLViewport.BOTTOM, value); }
+    public static void nbottom(long struct, float value) { memPutFloat(struct + ParSLViewport.BOTTOM, value); }
 
     // -----------------------------------
 

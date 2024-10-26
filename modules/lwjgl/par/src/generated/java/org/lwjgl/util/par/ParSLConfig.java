@@ -295,34 +295,34 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #thickness}. */
-    public static float nthickness(long struct) { return UNSAFE.getFloat(null, struct + ParSLConfig.THICKNESS); }
+    public static float nthickness(long struct) { return memGetFloat(struct + ParSLConfig.THICKNESS); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + ParSLConfig.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + ParSLConfig.FLAGS); }
     /** Unsafe version of {@link #u_mode}. */
-    public static int nu_mode(long struct) { return UNSAFE.getInt(null, struct + ParSLConfig.U_MODE); }
+    public static int nu_mode(long struct) { return memGetInt(struct + ParSLConfig.U_MODE); }
     /** Unsafe version of {@link #curves_max_flatness}. */
-    public static float ncurves_max_flatness(long struct) { return UNSAFE.getFloat(null, struct + ParSLConfig.CURVES_MAX_FLATNESS); }
+    public static float ncurves_max_flatness(long struct) { return memGetFloat(struct + ParSLConfig.CURVES_MAX_FLATNESS); }
     /** Unsafe version of {@link #streamlines_seed_spacing}. */
-    public static float nstreamlines_seed_spacing(long struct) { return UNSAFE.getFloat(null, struct + ParSLConfig.STREAMLINES_SEED_SPACING); }
+    public static float nstreamlines_seed_spacing(long struct) { return memGetFloat(struct + ParSLConfig.STREAMLINES_SEED_SPACING); }
     /** Unsafe version of {@link #streamlines_seed_viewport}. */
     public static ParSLViewport nstreamlines_seed_viewport(long struct) { return ParSLViewport.create(struct + ParSLConfig.STREAMLINES_SEED_VIEWPORT); }
     /** Unsafe version of {@link #miter_limit}. */
-    public static float nmiter_limit(long struct) { return UNSAFE.getFloat(null, struct + ParSLConfig.MITER_LIMIT); }
+    public static float nmiter_limit(long struct) { return memGetFloat(struct + ParSLConfig.MITER_LIMIT); }
 
     /** Unsafe version of {@link #thickness(float) thickness}. */
-    public static void nthickness(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLConfig.THICKNESS, value); }
+    public static void nthickness(long struct, float value) { memPutFloat(struct + ParSLConfig.THICKNESS, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + ParSLConfig.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + ParSLConfig.FLAGS, value); }
     /** Unsafe version of {@link #u_mode(int) u_mode}. */
-    public static void nu_mode(long struct, int value) { UNSAFE.putInt(null, struct + ParSLConfig.U_MODE, value); }
+    public static void nu_mode(long struct, int value) { memPutInt(struct + ParSLConfig.U_MODE, value); }
     /** Unsafe version of {@link #curves_max_flatness(float) curves_max_flatness}. */
-    public static void ncurves_max_flatness(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLConfig.CURVES_MAX_FLATNESS, value); }
+    public static void ncurves_max_flatness(long struct, float value) { memPutFloat(struct + ParSLConfig.CURVES_MAX_FLATNESS, value); }
     /** Unsafe version of {@link #streamlines_seed_spacing(float) streamlines_seed_spacing}. */
-    public static void nstreamlines_seed_spacing(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLConfig.STREAMLINES_SEED_SPACING, value); }
+    public static void nstreamlines_seed_spacing(long struct, float value) { memPutFloat(struct + ParSLConfig.STREAMLINES_SEED_SPACING, value); }
     /** Unsafe version of {@link #streamlines_seed_viewport(ParSLViewport) streamlines_seed_viewport}. */
     public static void nstreamlines_seed_viewport(long struct, ParSLViewport value) { memCopy(value.address(), struct + ParSLConfig.STREAMLINES_SEED_VIEWPORT, ParSLViewport.SIZEOF); }
     /** Unsafe version of {@link #miter_limit(float) miter_limit}. */
-    public static void nmiter_limit(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLConfig.MITER_LIMIT, value); }
+    public static void nmiter_limit(long struct, float value) { memPutFloat(struct + ParSLConfig.MITER_LIMIT, value); }
 
     // -----------------------------------
 

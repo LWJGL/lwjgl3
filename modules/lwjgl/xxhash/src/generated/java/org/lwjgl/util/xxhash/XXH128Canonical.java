@@ -215,7 +215,7 @@ public class XXH128Canonical extends Struct<XXH128Canonical> implements NativeRe
     public static ByteBuffer ndigest(long struct) { return memByteBuffer(struct + XXH128Canonical.DIGEST, 16); }
     /** Unsafe version of {@link #digest(int) digest}. */
     public static byte ndigest(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XXH128Canonical.DIGEST + check(index, 16) * 1);
+        return memGetByte(struct + XXH128Canonical.DIGEST + check(index, 16) * 1);
     }
 
     // -----------------------------------

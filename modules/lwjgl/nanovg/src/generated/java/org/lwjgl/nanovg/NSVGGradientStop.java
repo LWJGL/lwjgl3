@@ -109,9 +109,9 @@ public class NSVGGradientStop extends Struct<NSVGGradientStop> {
     // -----------------------------------
 
     /** Unsafe version of {@link #color}. */
-    public static int ncolor(long struct) { return UNSAFE.getInt(null, struct + NSVGGradientStop.COLOR); }
+    public static int ncolor(long struct) { return memGetInt(struct + NSVGGradientStop.COLOR); }
     /** Unsafe version of {@link #offset}. */
-    public static float noffset(long struct) { return UNSAFE.getFloat(null, struct + NSVGGradientStop.OFFSET); }
+    public static float noffset(long struct) { return memGetFloat(struct + NSVGGradientStop.OFFSET); }
 
     // -----------------------------------
 

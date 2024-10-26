@@ -103,7 +103,7 @@ public class VREventSpatialAnchor extends Struct<VREventSpatialAnchor> {
     // -----------------------------------
 
     /** Unsafe version of {@link #unHandle}. */
-    public static int nunHandle(long struct) { return UNSAFE.getInt(null, struct + VREventSpatialAnchor.UNHANDLE); }
+    public static int nunHandle(long struct) { return memGetInt(struct + VREventSpatialAnchor.UNHANDLE); }
 
     // -----------------------------------
 

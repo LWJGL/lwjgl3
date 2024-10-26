@@ -256,22 +256,22 @@ public class VkVideoDecodeH264ProfileInfoKHR extends Struct<VkVideoDecodeH264Pro
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH264ProfileInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264ProfileInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stdProfileIdc}. */
-    public static int nstdProfileIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.STDPROFILEIDC); }
+    public static int nstdProfileIdc(long struct) { return memGetInt(struct + VkVideoDecodeH264ProfileInfoKHR.STDPROFILEIDC); }
     /** Unsafe version of {@link #pictureLayout}. */
-    public static int npictureLayout(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.PICTURELAYOUT); }
+    public static int npictureLayout(long struct) { return memGetInt(struct + VkVideoDecodeH264ProfileInfoKHR.PICTURELAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH264ProfileInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264ProfileInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #stdProfileIdc(int) stdProfileIdc}. */
-    public static void nstdProfileIdc(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.STDPROFILEIDC, value); }
+    public static void nstdProfileIdc(long struct, int value) { memPutInt(struct + VkVideoDecodeH264ProfileInfoKHR.STDPROFILEIDC, value); }
     /** Unsafe version of {@link #pictureLayout(int) pictureLayout}. */
-    public static void npictureLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264ProfileInfoKHR.PICTURELAYOUT, value); }
+    public static void npictureLayout(long struct, int value) { memPutInt(struct + VkVideoDecodeH264ProfileInfoKHR.PICTURELAYOUT, value); }
 
     // -----------------------------------
 

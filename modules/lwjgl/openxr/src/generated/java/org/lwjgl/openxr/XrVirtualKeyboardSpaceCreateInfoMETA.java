@@ -278,22 +278,22 @@ public class XrVirtualKeyboardSpaceCreateInfoMETA extends Struct<XrVirtualKeyboa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardSpaceCreateInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardSpaceCreateInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardSpaceCreateInfoMETA.NEXT); }
     /** Unsafe version of {@link #locationType}. */
-    public static int nlocationType(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardSpaceCreateInfoMETA.LOCATIONTYPE); }
+    public static int nlocationType(long struct) { return memGetInt(struct + XrVirtualKeyboardSpaceCreateInfoMETA.LOCATIONTYPE); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrVirtualKeyboardSpaceCreateInfoMETA.SPACE); }
     /** Unsafe version of {@link #poseInSpace}. */
     public static XrPosef nposeInSpace(long struct) { return XrPosef.create(struct + XrVirtualKeyboardSpaceCreateInfoMETA.POSEINSPACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardSpaceCreateInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardSpaceCreateInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardSpaceCreateInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #locationType(int) locationType}. */
-    public static void nlocationType(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardSpaceCreateInfoMETA.LOCATIONTYPE, value); }
+    public static void nlocationType(long struct, int value) { memPutInt(struct + XrVirtualKeyboardSpaceCreateInfoMETA.LOCATIONTYPE, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrVirtualKeyboardSpaceCreateInfoMETA.SPACE, value.address()); }
     /** Unsafe version of {@link #poseInSpace(XrPosef) poseInSpace}. */

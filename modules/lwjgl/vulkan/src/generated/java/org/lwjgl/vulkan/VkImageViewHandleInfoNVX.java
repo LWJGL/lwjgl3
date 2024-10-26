@@ -301,26 +301,26 @@ public class VkImageViewHandleInfoNVX extends Struct<VkImageViewHandleInfoNVX> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewHandleInfoNVX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewHandleInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewHandleInfoNVX.PNEXT); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkImageViewHandleInfoNVX.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkImageViewHandleInfoNVX.IMAGEVIEW); }
     /** Unsafe version of {@link #descriptorType}. */
-    public static int ndescriptorType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewHandleInfoNVX.DESCRIPTORTYPE); }
+    public static int ndescriptorType(long struct) { return memGetInt(struct + VkImageViewHandleInfoNVX.DESCRIPTORTYPE); }
     /** Unsafe version of {@link #sampler}. */
-    public static long nsampler(long struct) { return UNSAFE.getLong(null, struct + VkImageViewHandleInfoNVX.SAMPLER); }
+    public static long nsampler(long struct) { return memGetLong(struct + VkImageViewHandleInfoNVX.SAMPLER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewHandleInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewHandleInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewHandleInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkImageViewHandleInfoNVX.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkImageViewHandleInfoNVX.IMAGEVIEW, value); }
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
-    public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewHandleInfoNVX.DESCRIPTORTYPE, value); }
+    public static void ndescriptorType(long struct, int value) { memPutInt(struct + VkImageViewHandleInfoNVX.DESCRIPTORTYPE, value); }
     /** Unsafe version of {@link #sampler(long) sampler}. */
-    public static void nsampler(long struct, long value) { UNSAFE.putLong(null, struct + VkImageViewHandleInfoNVX.SAMPLER, value); }
+    public static void nsampler(long struct, long value) { memPutLong(struct + VkImageViewHandleInfoNVX.SAMPLER, value); }
 
     // -----------------------------------
 

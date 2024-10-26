@@ -266,20 +266,20 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #identifierSize}. */
-    public static int nidentifierSize(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.IDENTIFIERSIZE); }
+    public static int nidentifierSize(long struct) { return memGetInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.IDENTIFIERSIZE); }
     /** Unsafe version of {@link #pIdentifier() pIdentifier}. */
     @Nullable public static ByteBuffer npIdentifier(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PIDENTIFIER), nidentifierSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code identifierSize} field of the specified {@code struct}. */
-    public static void nidentifierSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.IDENTIFIERSIZE, value); }
+    public static void nidentifierSize(long struct, int value) { memPutInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.IDENTIFIERSIZE, value); }
     /** Unsafe version of {@link #pIdentifier(ByteBuffer) pIdentifier}. */
     public static void npIdentifier(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PIDENTIFIER, memAddressSafe(value)); nidentifierSize(struct, value == null ? 0 : value.remaining()); }
 

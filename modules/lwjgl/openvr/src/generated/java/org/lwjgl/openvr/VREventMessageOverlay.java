@@ -103,7 +103,7 @@ public class VREventMessageOverlay extends Struct<VREventMessageOverlay> {
     // -----------------------------------
 
     /** Unsafe version of {@link #unVRMessageOverlayResponse}. */
-    public static int nunVRMessageOverlayResponse(long struct) { return UNSAFE.getInt(null, struct + VREventMessageOverlay.UNVRMESSAGEOVERLAYRESPONSE); }
+    public static int nunVRMessageOverlayResponse(long struct) { return memGetInt(struct + VREventMessageOverlay.UNVRMESSAGEOVERLAYRESPONSE); }
 
     // -----------------------------------
 

@@ -294,9 +294,9 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     /** Unsafe version of {@link #pSettingNameString}. */
     public static String npSettingNameString(long struct) { return memUTF8(memGetAddress(struct + VkLayerSettingEXT.PSETTINGNAME)); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkLayerSettingEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkLayerSettingEXT.TYPE); }
     /** Unsafe version of {@link #valueCount}. */
-    public static int nvalueCount(long struct) { return UNSAFE.getInt(null, struct + VkLayerSettingEXT.VALUECOUNT); }
+    public static int nvalueCount(long struct) { return memGetInt(struct + VkLayerSettingEXT.VALUECOUNT); }
     /** Unsafe version of {@link #pValues() pValues}. */
     @Nullable public static ByteBuffer npValues(long struct) { return memByteBufferSafe(memGetAddress(struct + VkLayerSettingEXT.PVALUES), nvalueCount(struct)); }
 
@@ -311,9 +311,9 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
         memPutAddress(struct + VkLayerSettingEXT.PSETTINGNAME, memAddress(value));
     }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkLayerSettingEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkLayerSettingEXT.TYPE, value); }
     /** Sets the specified value to the {@code valueCount} field of the specified {@code struct}. */
-    public static void nvalueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkLayerSettingEXT.VALUECOUNT, value); }
+    public static void nvalueCount(long struct, int value) { memPutInt(struct + VkLayerSettingEXT.VALUECOUNT, value); }
     /** Unsafe version of {@link #pValues(ByteBuffer) pValues}. */
     public static void npValues(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkLayerSettingEXT.PVALUES, memAddressSafe(value)); if (value != null) { nvalueCount(struct, value.remaining()); } }
 

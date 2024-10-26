@@ -244,18 +244,18 @@ public class VkVideoDecodeH265ProfileInfoKHR extends Struct<VkVideoDecodeH265Pro
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265ProfileInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH265ProfileInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH265ProfileInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stdProfileIdc}. */
-    public static int nstdProfileIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265ProfileInfoKHR.STDPROFILEIDC); }
+    public static int nstdProfileIdc(long struct) { return memGetInt(struct + VkVideoDecodeH265ProfileInfoKHR.STDPROFILEIDC); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265ProfileInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH265ProfileInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH265ProfileInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #stdProfileIdc(int) stdProfileIdc}. */
-    public static void nstdProfileIdc(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265ProfileInfoKHR.STDPROFILEIDC, value); }
+    public static void nstdProfileIdc(long struct, int value) { memPutInt(struct + VkVideoDecodeH265ProfileInfoKHR.STDPROFILEIDC, value); }
 
     // -----------------------------------
 

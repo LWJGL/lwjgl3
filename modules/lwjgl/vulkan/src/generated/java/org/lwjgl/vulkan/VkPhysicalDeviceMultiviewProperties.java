@@ -268,16 +268,16 @@ public class VkPhysicalDeviceMultiviewProperties extends Struct<VkPhysicalDevice
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMultiviewProperties.PNEXT); }
     /** Unsafe version of {@link #maxMultiviewViewCount}. */
-    public static int nmaxMultiviewViewCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewProperties.MAXMULTIVIEWVIEWCOUNT); }
+    public static int nmaxMultiviewViewCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewProperties.MAXMULTIVIEWVIEWCOUNT); }
     /** Unsafe version of {@link #maxMultiviewInstanceIndex}. */
-    public static int nmaxMultiviewInstanceIndex(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewProperties.MAXMULTIVIEWINSTANCEINDEX); }
+    public static int nmaxMultiviewInstanceIndex(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewProperties.MAXMULTIVIEWINSTANCEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMultiviewProperties.PNEXT, value); }
 

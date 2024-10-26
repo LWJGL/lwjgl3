@@ -250,18 +250,18 @@ public class XrSessionBeginInfo extends Struct<XrSessionBeginInfo> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSessionBeginInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSessionBeginInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSessionBeginInfo.NEXT); }
     /** Unsafe version of {@link #primaryViewConfigurationType}. */
-    public static int nprimaryViewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrSessionBeginInfo.PRIMARYVIEWCONFIGURATIONTYPE); }
+    public static int nprimaryViewConfigurationType(long struct) { return memGetInt(struct + XrSessionBeginInfo.PRIMARYVIEWCONFIGURATIONTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionBeginInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSessionBeginInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionBeginInfo.NEXT, value); }
     /** Unsafe version of {@link #primaryViewConfigurationType(int) primaryViewConfigurationType}. */
-    public static void nprimaryViewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionBeginInfo.PRIMARYVIEWCONFIGURATIONTYPE, value); }
+    public static void nprimaryViewConfigurationType(long struct, int value) { memPutInt(struct + XrSessionBeginInfo.PRIMARYVIEWCONFIGURATIONTYPE, value); }
 
     // -----------------------------------
 

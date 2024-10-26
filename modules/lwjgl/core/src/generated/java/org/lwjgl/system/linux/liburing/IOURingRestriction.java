@@ -242,34 +242,34 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #opcode}. */
-    public static short nopcode(long struct) { return UNSAFE.getShort(null, struct + IOURingRestriction.OPCODE); }
+    public static short nopcode(long struct) { return memGetShort(struct + IOURingRestriction.OPCODE); }
     /** Unsafe version of {@link #register_op}. */
-    public static byte nregister_op(long struct) { return UNSAFE.getByte(null, struct + IOURingRestriction.REGISTER_OP); }
+    public static byte nregister_op(long struct) { return memGetByte(struct + IOURingRestriction.REGISTER_OP); }
     /** Unsafe version of {@link #sqe_op}. */
-    public static byte nsqe_op(long struct) { return UNSAFE.getByte(null, struct + IOURingRestriction.SQE_OP); }
+    public static byte nsqe_op(long struct) { return memGetByte(struct + IOURingRestriction.SQE_OP); }
     /** Unsafe version of {@link #sqe_flags}. */
-    public static byte nsqe_flags(long struct) { return UNSAFE.getByte(null, struct + IOURingRestriction.SQE_FLAGS); }
-    public static byte nresv(long struct) { return UNSAFE.getByte(null, struct + IOURingRestriction.RESV); }
+    public static byte nsqe_flags(long struct) { return memGetByte(struct + IOURingRestriction.SQE_FLAGS); }
+    public static byte nresv(long struct) { return memGetByte(struct + IOURingRestriction.RESV); }
     public static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingRestriction.RESV2, 3); }
     public static int nresv2(long struct, int index) {
-        return UNSAFE.getInt(null, struct + IOURingRestriction.RESV2 + check(index, 3) * 4);
+        return memGetInt(struct + IOURingRestriction.RESV2 + check(index, 3) * 4);
     }
 
     /** Unsafe version of {@link #opcode(short) opcode}. */
-    public static void nopcode(long struct, short value) { UNSAFE.putShort(null, struct + IOURingRestriction.OPCODE, value); }
+    public static void nopcode(long struct, short value) { memPutShort(struct + IOURingRestriction.OPCODE, value); }
     /** Unsafe version of {@link #register_op(byte) register_op}. */
-    public static void nregister_op(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingRestriction.REGISTER_OP, value); }
+    public static void nregister_op(long struct, byte value) { memPutByte(struct + IOURingRestriction.REGISTER_OP, value); }
     /** Unsafe version of {@link #sqe_op(byte) sqe_op}. */
-    public static void nsqe_op(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingRestriction.SQE_OP, value); }
+    public static void nsqe_op(long struct, byte value) { memPutByte(struct + IOURingRestriction.SQE_OP, value); }
     /** Unsafe version of {@link #sqe_flags(byte) sqe_flags}. */
-    public static void nsqe_flags(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingRestriction.SQE_FLAGS, value); }
-    public static void nresv(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingRestriction.RESV, value); }
+    public static void nsqe_flags(long struct, byte value) { memPutByte(struct + IOURingRestriction.SQE_FLAGS, value); }
+    public static void nresv(long struct, byte value) { memPutByte(struct + IOURingRestriction.RESV, value); }
     public static void nresv2(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingRestriction.RESV2, value.remaining() * 4);
     }
     public static void nresv2(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + IOURingRestriction.RESV2 + check(index, 3) * 4, value);
+        memPutInt(struct + IOURingRestriction.RESV2 + check(index, 3) * 4, value);
     }
 
     // -----------------------------------

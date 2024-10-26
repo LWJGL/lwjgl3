@@ -300,26 +300,26 @@ public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMappedMemoryRange.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMappedMemoryRange.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMappedMemoryRange.PNEXT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkMappedMemoryRange.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkMappedMemoryRange.MEMORY); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkMappedMemoryRange.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkMappedMemoryRange.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMappedMemoryRange.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkMappedMemoryRange.SIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMappedMemoryRange.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMappedMemoryRange.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMappedMemoryRange.PNEXT, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkMappedMemoryRange.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkMappedMemoryRange.MEMORY, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkMappedMemoryRange.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkMappedMemoryRange.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkMappedMemoryRange.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkMappedMemoryRange.SIZE, value); }
 
     // -----------------------------------
 

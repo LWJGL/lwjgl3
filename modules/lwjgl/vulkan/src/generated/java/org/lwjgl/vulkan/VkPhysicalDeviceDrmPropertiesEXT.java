@@ -279,24 +279,24 @@ public class VkPhysicalDeviceDrmPropertiesEXT extends Struct<VkPhysicalDeviceDrm
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDrmPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDrmPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDrmPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #hasPrimary}. */
-    public static int nhasPrimary(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDrmPropertiesEXT.HASPRIMARY); }
+    public static int nhasPrimary(long struct) { return memGetInt(struct + VkPhysicalDeviceDrmPropertiesEXT.HASPRIMARY); }
     /** Unsafe version of {@link #hasRender}. */
-    public static int nhasRender(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDrmPropertiesEXT.HASRENDER); }
+    public static int nhasRender(long struct) { return memGetInt(struct + VkPhysicalDeviceDrmPropertiesEXT.HASRENDER); }
     /** Unsafe version of {@link #primaryMajor}. */
-    public static long nprimaryMajor(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDrmPropertiesEXT.PRIMARYMAJOR); }
+    public static long nprimaryMajor(long struct) { return memGetLong(struct + VkPhysicalDeviceDrmPropertiesEXT.PRIMARYMAJOR); }
     /** Unsafe version of {@link #primaryMinor}. */
-    public static long nprimaryMinor(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDrmPropertiesEXT.PRIMARYMINOR); }
+    public static long nprimaryMinor(long struct) { return memGetLong(struct + VkPhysicalDeviceDrmPropertiesEXT.PRIMARYMINOR); }
     /** Unsafe version of {@link #renderMajor}. */
-    public static long nrenderMajor(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDrmPropertiesEXT.RENDERMAJOR); }
+    public static long nrenderMajor(long struct) { return memGetLong(struct + VkPhysicalDeviceDrmPropertiesEXT.RENDERMAJOR); }
     /** Unsafe version of {@link #renderMinor}. */
-    public static long nrenderMinor(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceDrmPropertiesEXT.RENDERMINOR); }
+    public static long nrenderMinor(long struct) { return memGetLong(struct + VkPhysicalDeviceDrmPropertiesEXT.RENDERMINOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDrmPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDrmPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDrmPropertiesEXT.PNEXT, value); }
 

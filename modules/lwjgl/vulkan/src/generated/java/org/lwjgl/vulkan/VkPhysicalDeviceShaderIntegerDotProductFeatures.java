@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeatures extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderIntegerDotProduct}. */
-    public static int nshaderIntegerDotProduct(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.SHADERINTEGERDOTPRODUCT); }
+    public static int nshaderIntegerDotProduct(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.SHADERINTEGERDOTPRODUCT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderIntegerDotProduct(boolean) shaderIntegerDotProduct}. */
-    public static void nshaderIntegerDotProduct(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.SHADERINTEGERDOTPRODUCT, value); }
+    public static void nshaderIntegerDotProduct(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderIntegerDotProductFeatures.SHADERINTEGERDOTPRODUCT, value); }
 
     // -----------------------------------
 

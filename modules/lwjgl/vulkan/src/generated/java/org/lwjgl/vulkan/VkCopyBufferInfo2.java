@@ -296,28 +296,28 @@ public class VkCopyBufferInfo2 extends Struct<VkCopyBufferInfo2> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCopyBufferInfo2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCopyBufferInfo2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCopyBufferInfo2.PNEXT); }
     /** Unsafe version of {@link #srcBuffer}. */
-    public static long nsrcBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCopyBufferInfo2.SRCBUFFER); }
+    public static long nsrcBuffer(long struct) { return memGetLong(struct + VkCopyBufferInfo2.SRCBUFFER); }
     /** Unsafe version of {@link #dstBuffer}. */
-    public static long ndstBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCopyBufferInfo2.DSTBUFFER); }
+    public static long ndstBuffer(long struct) { return memGetLong(struct + VkCopyBufferInfo2.DSTBUFFER); }
     /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkCopyBufferInfo2.REGIONCOUNT); }
+    public static int nregionCount(long struct) { return memGetInt(struct + VkCopyBufferInfo2.REGIONCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     public static VkBufferCopy2.Buffer npRegions(long struct) { return VkBufferCopy2.create(memGetAddress(struct + VkCopyBufferInfo2.PREGIONS), nregionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyBufferInfo2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCopyBufferInfo2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCopyBufferInfo2.PNEXT, value); }
     /** Unsafe version of {@link #srcBuffer(long) srcBuffer}. */
-    public static void nsrcBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyBufferInfo2.SRCBUFFER, value); }
+    public static void nsrcBuffer(long struct, long value) { memPutLong(struct + VkCopyBufferInfo2.SRCBUFFER, value); }
     /** Unsafe version of {@link #dstBuffer(long) dstBuffer}. */
-    public static void ndstBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyBufferInfo2.DSTBUFFER, value); }
+    public static void ndstBuffer(long struct, long value) { memPutLong(struct + VkCopyBufferInfo2.DSTBUFFER, value); }
     /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyBufferInfo2.REGIONCOUNT, value); }
+    public static void nregionCount(long struct, int value) { memPutInt(struct + VkCopyBufferInfo2.REGIONCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkBufferCopy2.Buffer) pRegions}. */
     public static void npRegions(long struct, VkBufferCopy2.Buffer value) { memPutAddress(struct + VkCopyBufferInfo2.PREGIONS, value.address()); nregionCount(struct, value.remaining()); }
 

@@ -253,14 +253,14 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
     /** Unsafe version of {@link #fov}. */
     public static XrFovf nfov(long struct) { return XrFovf.create(struct + XrSceneFrustumBoundMSFT.FOV); }
     /** Unsafe version of {@link #farDistance}. */
-    public static float nfarDistance(long struct) { return UNSAFE.getFloat(null, struct + XrSceneFrustumBoundMSFT.FARDISTANCE); }
+    public static float nfarDistance(long struct) { return memGetFloat(struct + XrSceneFrustumBoundMSFT.FARDISTANCE); }
 
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSceneFrustumBoundMSFT.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #fov(XrFovf) fov}. */
     public static void nfov(long struct, XrFovf value) { memCopy(value.address(), struct + XrSceneFrustumBoundMSFT.FOV, XrFovf.SIZEOF); }
     /** Unsafe version of {@link #farDistance(float) farDistance}. */
-    public static void nfarDistance(long struct, float value) { UNSAFE.putFloat(null, struct + XrSceneFrustumBoundMSFT.FARDISTANCE, value); }
+    public static void nfarDistance(long struct, float value) { memPutFloat(struct + XrSceneFrustumBoundMSFT.FARDISTANCE, value); }
 
     // -----------------------------------
 

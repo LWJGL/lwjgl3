@@ -350,22 +350,22 @@ public class VkVideoEncodeH265PictureInfoKHR extends Struct<VkVideoEncodeH265Pic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265PictureInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH265PictureInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265PictureInfoKHR.PNEXT); }
     /** Unsafe version of {@link #naluSliceSegmentEntryCount}. */
-    public static int nnaluSliceSegmentEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265PictureInfoKHR.NALUSLICESEGMENTENTRYCOUNT); }
+    public static int nnaluSliceSegmentEntryCount(long struct) { return memGetInt(struct + VkVideoEncodeH265PictureInfoKHR.NALUSLICESEGMENTENTRYCOUNT); }
     /** Unsafe version of {@link #pNaluSliceSegmentEntries}. */
     public static VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer npNaluSliceSegmentEntries(long struct) { return VkVideoEncodeH265NaluSliceSegmentInfoKHR.create(memGetAddress(struct + VkVideoEncodeH265PictureInfoKHR.PNALUSLICESEGMENTENTRIES), nnaluSliceSegmentEntryCount(struct)); }
     /** Unsafe version of {@link #pStdPictureInfo}. */
     public static StdVideoEncodeH265PictureInfo npStdPictureInfo(long struct) { return StdVideoEncodeH265PictureInfo.create(memGetAddress(struct + VkVideoEncodeH265PictureInfoKHR.PSTDPICTUREINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265PictureInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH265PictureInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265PictureInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code naluSliceSegmentEntryCount} field of the specified {@code struct}. */
-    public static void nnaluSliceSegmentEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265PictureInfoKHR.NALUSLICESEGMENTENTRYCOUNT, value); }
+    public static void nnaluSliceSegmentEntryCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH265PictureInfoKHR.NALUSLICESEGMENTENTRYCOUNT, value); }
     /** Unsafe version of {@link #pNaluSliceSegmentEntries(VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer) pNaluSliceSegmentEntries}. */
     public static void npNaluSliceSegmentEntries(long struct, VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeH265PictureInfoKHR.PNALUSLICESEGMENTENTRIES, value.address()); nnaluSliceSegmentEntryCount(struct, value.remaining()); }
     /** Unsafe version of {@link #pStdPictureInfo(StdVideoEncodeH265PictureInfo) pStdPictureInfo}. */

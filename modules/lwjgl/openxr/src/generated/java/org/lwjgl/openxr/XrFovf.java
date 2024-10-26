@@ -253,22 +253,22 @@ public class XrFovf extends Struct<XrFovf> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #angleLeft}. */
-    public static float nangleLeft(long struct) { return UNSAFE.getFloat(null, struct + XrFovf.ANGLELEFT); }
+    public static float nangleLeft(long struct) { return memGetFloat(struct + XrFovf.ANGLELEFT); }
     /** Unsafe version of {@link #angleRight}. */
-    public static float nangleRight(long struct) { return UNSAFE.getFloat(null, struct + XrFovf.ANGLERIGHT); }
+    public static float nangleRight(long struct) { return memGetFloat(struct + XrFovf.ANGLERIGHT); }
     /** Unsafe version of {@link #angleUp}. */
-    public static float nangleUp(long struct) { return UNSAFE.getFloat(null, struct + XrFovf.ANGLEUP); }
+    public static float nangleUp(long struct) { return memGetFloat(struct + XrFovf.ANGLEUP); }
     /** Unsafe version of {@link #angleDown}. */
-    public static float nangleDown(long struct) { return UNSAFE.getFloat(null, struct + XrFovf.ANGLEDOWN); }
+    public static float nangleDown(long struct) { return memGetFloat(struct + XrFovf.ANGLEDOWN); }
 
     /** Unsafe version of {@link #angleLeft(float) angleLeft}. */
-    public static void nangleLeft(long struct, float value) { UNSAFE.putFloat(null, struct + XrFovf.ANGLELEFT, value); }
+    public static void nangleLeft(long struct, float value) { memPutFloat(struct + XrFovf.ANGLELEFT, value); }
     /** Unsafe version of {@link #angleRight(float) angleRight}. */
-    public static void nangleRight(long struct, float value) { UNSAFE.putFloat(null, struct + XrFovf.ANGLERIGHT, value); }
+    public static void nangleRight(long struct, float value) { memPutFloat(struct + XrFovf.ANGLERIGHT, value); }
     /** Unsafe version of {@link #angleUp(float) angleUp}. */
-    public static void nangleUp(long struct, float value) { UNSAFE.putFloat(null, struct + XrFovf.ANGLEUP, value); }
+    public static void nangleUp(long struct, float value) { memPutFloat(struct + XrFovf.ANGLEUP, value); }
     /** Unsafe version of {@link #angleDown(float) angleDown}. */
-    public static void nangleDown(long struct, float value) { UNSAFE.putFloat(null, struct + XrFovf.ANGLEDOWN, value); }
+    public static void nangleDown(long struct, float value) { memPutFloat(struct + XrFovf.ANGLEDOWN, value); }
 
     // -----------------------------------
 

@@ -109,7 +109,7 @@ public class MLCoordinateFrameUID extends Struct<MLCoordinateFrameUID> {
     public static LongBuffer ndata(long struct) { return memLongBuffer(struct + MLCoordinateFrameUID.DATA, 2); }
     /** Unsafe version of {@link #data(int) data}. */
     public static long ndata(long struct, int index) {
-        return UNSAFE.getLong(null, struct + MLCoordinateFrameUID.DATA + check(index, 2) * 8);
+        return memGetLong(struct + MLCoordinateFrameUID.DATA + check(index, 2) * 8);
     }
 
     // -----------------------------------

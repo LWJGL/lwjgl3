@@ -353,46 +353,46 @@ public class VkFrameBoundaryEXT extends Struct<VkFrameBoundaryEXT> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFrameBoundaryEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFrameBoundaryEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFrameBoundaryEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkFrameBoundaryEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkFrameBoundaryEXT.FLAGS); }
     /** Unsafe version of {@link #frameID}. */
-    public static long nframeID(long struct) { return UNSAFE.getLong(null, struct + VkFrameBoundaryEXT.FRAMEID); }
+    public static long nframeID(long struct) { return memGetLong(struct + VkFrameBoundaryEXT.FRAMEID); }
     /** Unsafe version of {@link #imageCount}. */
-    public static int nimageCount(long struct) { return UNSAFE.getInt(null, struct + VkFrameBoundaryEXT.IMAGECOUNT); }
+    public static int nimageCount(long struct) { return memGetInt(struct + VkFrameBoundaryEXT.IMAGECOUNT); }
     /** Unsafe version of {@link #pImages() pImages}. */
     @Nullable public static LongBuffer npImages(long struct) { return memLongBufferSafe(memGetAddress(struct + VkFrameBoundaryEXT.PIMAGES), nimageCount(struct)); }
     /** Unsafe version of {@link #bufferCount}. */
-    public static int nbufferCount(long struct) { return UNSAFE.getInt(null, struct + VkFrameBoundaryEXT.BUFFERCOUNT); }
+    public static int nbufferCount(long struct) { return memGetInt(struct + VkFrameBoundaryEXT.BUFFERCOUNT); }
     /** Unsafe version of {@link #pBuffers() pBuffers}. */
     @Nullable public static LongBuffer npBuffers(long struct) { return memLongBufferSafe(memGetAddress(struct + VkFrameBoundaryEXT.PBUFFERS), nbufferCount(struct)); }
     /** Unsafe version of {@link #tagName}. */
-    public static long ntagName(long struct) { return UNSAFE.getLong(null, struct + VkFrameBoundaryEXT.TAGNAME); }
+    public static long ntagName(long struct) { return memGetLong(struct + VkFrameBoundaryEXT.TAGNAME); }
     /** Unsafe version of {@link #tagSize}. */
     public static long ntagSize(long struct) { return memGetAddress(struct + VkFrameBoundaryEXT.TAGSIZE); }
     /** Unsafe version of {@link #pTag() pTag}. */
     @Nullable public static ByteBuffer npTag(long struct) { return memByteBufferSafe(memGetAddress(struct + VkFrameBoundaryEXT.PTAG), (int)ntagSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFrameBoundaryEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFrameBoundaryEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFrameBoundaryEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkFrameBoundaryEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkFrameBoundaryEXT.FLAGS, value); }
     /** Unsafe version of {@link #frameID(long) frameID}. */
-    public static void nframeID(long struct, long value) { UNSAFE.putLong(null, struct + VkFrameBoundaryEXT.FRAMEID, value); }
+    public static void nframeID(long struct, long value) { memPutLong(struct + VkFrameBoundaryEXT.FRAMEID, value); }
     /** Sets the specified value to the {@code imageCount} field of the specified {@code struct}. */
-    public static void nimageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFrameBoundaryEXT.IMAGECOUNT, value); }
+    public static void nimageCount(long struct, int value) { memPutInt(struct + VkFrameBoundaryEXT.IMAGECOUNT, value); }
     /** Unsafe version of {@link #pImages(LongBuffer) pImages}. */
     public static void npImages(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFrameBoundaryEXT.PIMAGES, memAddressSafe(value)); if (value != null) { nimageCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code bufferCount} field of the specified {@code struct}. */
-    public static void nbufferCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFrameBoundaryEXT.BUFFERCOUNT, value); }
+    public static void nbufferCount(long struct, int value) { memPutInt(struct + VkFrameBoundaryEXT.BUFFERCOUNT, value); }
     /** Unsafe version of {@link #pBuffers(LongBuffer) pBuffers}. */
     public static void npBuffers(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFrameBoundaryEXT.PBUFFERS, memAddressSafe(value)); if (value != null) { nbufferCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #tagName(long) tagName}. */
-    public static void ntagName(long struct, long value) { UNSAFE.putLong(null, struct + VkFrameBoundaryEXT.TAGNAME, value); }
+    public static void ntagName(long struct, long value) { memPutLong(struct + VkFrameBoundaryEXT.TAGNAME, value); }
     /** Sets the specified value to the {@code tagSize} field of the specified {@code struct}. */
     public static void ntagSize(long struct, long value) { memPutAddress(struct + VkFrameBoundaryEXT.TAGSIZE, value); }
     /** Unsafe version of {@link #pTag(ByteBuffer) pTag}. */

@@ -242,7 +242,7 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct<StdVideoEncodeH26
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #IdrPicFlag}. */
     public static int nIdrPicFlag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #is_reference}. */
@@ -255,7 +255,7 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct<StdVideoEncodeH26
     public static int nadaptive_ref_pic_marking_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
     public static int nreserved(long struct) { return nbitfield0(struct) >>> 5; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #IdrPicFlag(boolean) IdrPicFlag}. */
     public static void nIdrPicFlag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #is_reference(boolean) is_reference}. */

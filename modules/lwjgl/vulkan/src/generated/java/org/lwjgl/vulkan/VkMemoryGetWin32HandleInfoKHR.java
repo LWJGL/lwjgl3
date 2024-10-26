@@ -291,22 +291,22 @@ public class VkMemoryGetWin32HandleInfoKHR extends Struct<VkMemoryGetWin32Handle
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryGetWin32HandleInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryGetWin32HandleInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryGetWin32HandleInfoKHR.PNEXT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkMemoryGetWin32HandleInfoKHR.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkMemoryGetWin32HandleInfoKHR.MEMORY); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryGetWin32HandleInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkMemoryGetWin32HandleInfoKHR.HANDLETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryGetWin32HandleInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryGetWin32HandleInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryGetWin32HandleInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryGetWin32HandleInfoKHR.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkMemoryGetWin32HandleInfoKHR.MEMORY, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryGetWin32HandleInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkMemoryGetWin32HandleInfoKHR.HANDLETYPE, value); }
 
     // -----------------------------------
 

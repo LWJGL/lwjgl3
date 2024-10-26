@@ -289,7 +289,7 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceFaultInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceFaultInfoEXT.PNEXT); }
     /** Unsafe version of {@link #description}. */
@@ -304,7 +304,7 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     public static long npVendorBinaryData(long struct) { return memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceFaultInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceFaultInfoEXT.PNEXT, value); }
 

@@ -295,28 +295,28 @@ public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct<VkGraphic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #groupCount}. */
-    public static int ngroupCount(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.GROUPCOUNT); }
+    public static int ngroupCount(long struct) { return memGetInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.GROUPCOUNT); }
     /** Unsafe version of {@link #pGroups}. */
     @Nullable public static VkGraphicsShaderGroupCreateInfoNV.Buffer npGroups(long struct) { return VkGraphicsShaderGroupCreateInfoNV.createSafe(memGetAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PGROUPS), ngroupCount(struct)); }
     /** Unsafe version of {@link #pipelineCount}. */
-    public static int npipelineCount(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PIPELINECOUNT); }
+    public static int npipelineCount(long struct) { return memGetInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PIPELINECOUNT); }
     /** Unsafe version of {@link #pPipelines() pPipelines}. */
     @Nullable public static LongBuffer npPipelines(long struct) { return memLongBufferSafe(memGetAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PPIPELINES), npipelineCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code groupCount} field of the specified {@code struct}. */
-    public static void ngroupCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.GROUPCOUNT, value); }
+    public static void ngroupCount(long struct, int value) { memPutInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.GROUPCOUNT, value); }
     /** Unsafe version of {@link #pGroups(VkGraphicsShaderGroupCreateInfoNV.Buffer) pGroups}. */
     public static void npGroups(long struct, @Nullable VkGraphicsShaderGroupCreateInfoNV.Buffer value) { memPutAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PGROUPS, memAddressSafe(value)); ngroupCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code pipelineCount} field of the specified {@code struct}. */
-    public static void npipelineCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PIPELINECOUNT, value); }
+    public static void npipelineCount(long struct, int value) { memPutInt(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PIPELINECOUNT, value); }
     /** Unsafe version of {@link #pPipelines(LongBuffer) pPipelines}. */
     public static void npPipelines(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PPIPELINES, memAddressSafe(value)); npipelineCount(struct, value == null ? 0 : value.remaining()); }
 

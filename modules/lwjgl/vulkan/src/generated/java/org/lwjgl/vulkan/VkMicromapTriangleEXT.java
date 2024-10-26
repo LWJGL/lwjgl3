@@ -246,18 +246,18 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #dataOffset}. */
-    public static int ndataOffset(long struct) { return UNSAFE.getInt(null, struct + VkMicromapTriangleEXT.DATAOFFSET); }
+    public static int ndataOffset(long struct) { return memGetInt(struct + VkMicromapTriangleEXT.DATAOFFSET); }
     /** Unsafe version of {@link #subdivisionLevel}. */
-    public static short nsubdivisionLevel(long struct) { return UNSAFE.getShort(null, struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL); }
+    public static short nsubdivisionLevel(long struct) { return memGetShort(struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL); }
     /** Unsafe version of {@link #format}. */
-    public static short nformat(long struct) { return UNSAFE.getShort(null, struct + VkMicromapTriangleEXT.FORMAT); }
+    public static short nformat(long struct) { return memGetShort(struct + VkMicromapTriangleEXT.FORMAT); }
 
     /** Unsafe version of {@link #dataOffset(int) dataOffset}. */
-    public static void ndataOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkMicromapTriangleEXT.DATAOFFSET, value); }
+    public static void ndataOffset(long struct, int value) { memPutInt(struct + VkMicromapTriangleEXT.DATAOFFSET, value); }
     /** Unsafe version of {@link #subdivisionLevel(short) subdivisionLevel}. */
-    public static void nsubdivisionLevel(long struct, short value) { UNSAFE.putShort(null, struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL, value); }
+    public static void nsubdivisionLevel(long struct, short value) { memPutShort(struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL, value); }
     /** Unsafe version of {@link #format(short) format}. */
-    public static void nformat(long struct, short value) { UNSAFE.putShort(null, struct + VkMicromapTriangleEXT.FORMAT, value); }
+    public static void nformat(long struct, short value) { memPutShort(struct + VkMicromapTriangleEXT.FORMAT, value); }
 
     // -----------------------------------
 

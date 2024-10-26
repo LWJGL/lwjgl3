@@ -271,20 +271,20 @@ public class XrEventDataPerfSettingsEXT extends Struct<XrEventDataPerfSettingsEX
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataPerfSettingsEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataPerfSettingsEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataPerfSettingsEXT.NEXT); }
     /** Unsafe version of {@link #domain}. */
-    public static int ndomain(long struct) { return UNSAFE.getInt(null, struct + XrEventDataPerfSettingsEXT.DOMAIN); }
+    public static int ndomain(long struct) { return memGetInt(struct + XrEventDataPerfSettingsEXT.DOMAIN); }
     /** Unsafe version of {@link #subDomain}. */
-    public static int nsubDomain(long struct) { return UNSAFE.getInt(null, struct + XrEventDataPerfSettingsEXT.SUBDOMAIN); }
+    public static int nsubDomain(long struct) { return memGetInt(struct + XrEventDataPerfSettingsEXT.SUBDOMAIN); }
     /** Unsafe version of {@link #fromLevel}. */
-    public static int nfromLevel(long struct) { return UNSAFE.getInt(null, struct + XrEventDataPerfSettingsEXT.FROMLEVEL); }
+    public static int nfromLevel(long struct) { return memGetInt(struct + XrEventDataPerfSettingsEXT.FROMLEVEL); }
     /** Unsafe version of {@link #toLevel}. */
-    public static int ntoLevel(long struct) { return UNSAFE.getInt(null, struct + XrEventDataPerfSettingsEXT.TOLEVEL); }
+    public static int ntoLevel(long struct) { return memGetInt(struct + XrEventDataPerfSettingsEXT.TOLEVEL); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataPerfSettingsEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataPerfSettingsEXT.NEXT, value); }
 

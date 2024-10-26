@@ -248,14 +248,14 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct<XrSystemFo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemFoveationEyeTrackedPropertiesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemFoveationEyeTrackedPropertiesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemFoveationEyeTrackedPropertiesMETA.NEXT); }
     /** Unsafe version of {@link #supportsFoveationEyeTracked}. */
-    public static int nsupportsFoveationEyeTracked(long struct) { return UNSAFE.getInt(null, struct + XrSystemFoveationEyeTrackedPropertiesMETA.SUPPORTSFOVEATIONEYETRACKED); }
+    public static int nsupportsFoveationEyeTracked(long struct) { return memGetInt(struct + XrSystemFoveationEyeTrackedPropertiesMETA.SUPPORTSFOVEATIONEYETRACKED); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveationEyeTrackedPropertiesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemFoveationEyeTrackedPropertiesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFoveationEyeTrackedPropertiesMETA.NEXT, value); }
 

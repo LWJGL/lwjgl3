@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRenderPassStripedFeaturesARM extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.PNEXT); }
     /** Unsafe version of {@link #renderPassStriped}. */
-    public static int nrenderPassStriped(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.RENDERPASSSTRIPED); }
+    public static int nrenderPassStriped(long struct) { return memGetInt(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.RENDERPASSSTRIPED); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.PNEXT, value); }
     /** Unsafe version of {@link #renderPassStriped(boolean) renderPassStriped}. */
-    public static void nrenderPassStriped(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.RENDERPASSSTRIPED, value); }
+    public static void nrenderPassStriped(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRenderPassStripedFeaturesARM.RENDERPASSSTRIPED, value); }
 
     // -----------------------------------
 

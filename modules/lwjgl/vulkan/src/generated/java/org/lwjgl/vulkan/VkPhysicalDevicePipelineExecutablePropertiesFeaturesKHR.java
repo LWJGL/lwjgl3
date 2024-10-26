@@ -265,18 +265,18 @@ public class VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR extends Str
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #pipelineExecutableInfo}. */
-    public static int npipelineExecutableInfo(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PIPELINEEXECUTABLEINFO); }
+    public static int npipelineExecutableInfo(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PIPELINEEXECUTABLEINFO); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #pipelineExecutableInfo(boolean) pipelineExecutableInfo}. */
-    public static void npipelineExecutableInfo(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PIPELINEEXECUTABLEINFO, value); }
+    public static void npipelineExecutableInfo(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.PIPELINEEXECUTABLEINFO, value); }
 
     // -----------------------------------
 

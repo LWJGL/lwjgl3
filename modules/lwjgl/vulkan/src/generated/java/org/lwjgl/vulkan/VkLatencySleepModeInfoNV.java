@@ -272,26 +272,26 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLatencySleepModeInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLatencySleepModeInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLatencySleepModeInfoNV.PNEXT); }
     /** Unsafe version of {@link #lowLatencyMode}. */
-    public static int nlowLatencyMode(long struct) { return UNSAFE.getInt(null, struct + VkLatencySleepModeInfoNV.LOWLATENCYMODE); }
+    public static int nlowLatencyMode(long struct) { return memGetInt(struct + VkLatencySleepModeInfoNV.LOWLATENCYMODE); }
     /** Unsafe version of {@link #lowLatencyBoost}. */
-    public static int nlowLatencyBoost(long struct) { return UNSAFE.getInt(null, struct + VkLatencySleepModeInfoNV.LOWLATENCYBOOST); }
+    public static int nlowLatencyBoost(long struct) { return memGetInt(struct + VkLatencySleepModeInfoNV.LOWLATENCYBOOST); }
     /** Unsafe version of {@link #minimumIntervalUs}. */
-    public static int nminimumIntervalUs(long struct) { return UNSAFE.getInt(null, struct + VkLatencySleepModeInfoNV.MINIMUMINTERVALUS); }
+    public static int nminimumIntervalUs(long struct) { return memGetInt(struct + VkLatencySleepModeInfoNV.MINIMUMINTERVALUS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySleepModeInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLatencySleepModeInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencySleepModeInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #lowLatencyMode(boolean) lowLatencyMode}. */
-    public static void nlowLatencyMode(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySleepModeInfoNV.LOWLATENCYMODE, value); }
+    public static void nlowLatencyMode(long struct, int value) { memPutInt(struct + VkLatencySleepModeInfoNV.LOWLATENCYMODE, value); }
     /** Unsafe version of {@link #lowLatencyBoost(boolean) lowLatencyBoost}. */
-    public static void nlowLatencyBoost(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySleepModeInfoNV.LOWLATENCYBOOST, value); }
+    public static void nlowLatencyBoost(long struct, int value) { memPutInt(struct + VkLatencySleepModeInfoNV.LOWLATENCYBOOST, value); }
     /** Unsafe version of {@link #minimumIntervalUs(int) minimumIntervalUs}. */
-    public static void nminimumIntervalUs(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySleepModeInfoNV.MINIMUMINTERVALUS, value); }
+    public static void nminimumIntervalUs(long struct, int value) { memPutInt(struct + VkLatencySleepModeInfoNV.MINIMUMINTERVALUS, value); }
 
     // -----------------------------------
 

@@ -223,9 +223,9 @@ public class InputOriginInfo extends Struct<InputOriginInfo> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #devicePath}. */
-    public static long ndevicePath(long struct) { return UNSAFE.getLong(null, struct + InputOriginInfo.DEVICEPATH); }
+    public static long ndevicePath(long struct) { return memGetLong(struct + InputOriginInfo.DEVICEPATH); }
     /** Unsafe version of {@link #trackedDeviceIndex}. */
-    public static int ntrackedDeviceIndex(long struct) { return UNSAFE.getInt(null, struct + InputOriginInfo.TRACKEDDEVICEINDEX); }
+    public static int ntrackedDeviceIndex(long struct) { return memGetInt(struct + InputOriginInfo.TRACKEDDEVICEINDEX); }
     /** Unsafe version of {@link #rchRenderModelComponentName}. */
     public static ByteBuffer nrchRenderModelComponentName(long struct) { return memByteBuffer(struct + InputOriginInfo.RCHRENDERMODELCOMPONENTNAME, 128); }
     /** Unsafe version of {@link #rchRenderModelComponentNameString}. */

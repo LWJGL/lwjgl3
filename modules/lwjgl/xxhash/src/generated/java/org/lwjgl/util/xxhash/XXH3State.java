@@ -310,36 +310,36 @@ public class XXH3State extends Struct<XXH3State> implements NativeResource {
     public static LongBuffer nacc(long struct) { return memLongBuffer(struct + XXH3State.ACC, 8); }
     /** Unsafe version of {@link #acc(int) acc}. */
     public static long nacc(long struct, int index) {
-        return UNSAFE.getLong(null, struct + XXH3State.ACC + check(index, 8) * 8);
+        return memGetLong(struct + XXH3State.ACC + check(index, 8) * 8);
     }
     /** Unsafe version of {@link #customSecret}. */
     public static ByteBuffer ncustomSecret(long struct) { return memByteBuffer(struct + XXH3State.CUSTOMSECRET, XXH3_SECRET_DEFAULT_SIZE); }
     /** Unsafe version of {@link #customSecret(int) customSecret}. */
     public static byte ncustomSecret(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XXH3State.CUSTOMSECRET + check(index, XXH3_SECRET_DEFAULT_SIZE) * 1);
+        return memGetByte(struct + XXH3State.CUSTOMSECRET + check(index, XXH3_SECRET_DEFAULT_SIZE) * 1);
     }
     /** Unsafe version of {@link #buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(struct + XXH3State.BUFFER, 256); }
     /** Unsafe version of {@link #buffer(int) buffer}. */
     public static byte nbuffer(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XXH3State.BUFFER + check(index, 256) * 1);
+        return memGetByte(struct + XXH3State.BUFFER + check(index, 256) * 1);
     }
     /** Unsafe version of {@link #bufferedSize}. */
-    public static int nbufferedSize(long struct) { return UNSAFE.getInt(null, struct + XXH3State.BUFFEREDSIZE); }
+    public static int nbufferedSize(long struct) { return memGetInt(struct + XXH3State.BUFFEREDSIZE); }
     /** Unsafe version of {@link #useSeed}. */
-    public static int nuseSeed(long struct) { return UNSAFE.getInt(null, struct + XXH3State.USESEED); }
+    public static int nuseSeed(long struct) { return memGetInt(struct + XXH3State.USESEED); }
     /** Unsafe version of {@link #nbStripesSoFar}. */
     public static long nnbStripesSoFar(long struct) { return memGetAddress(struct + XXH3State.NBSTRIPESSOFAR); }
     /** Unsafe version of {@link #totalLen}. */
-    public static long ntotalLen(long struct) { return UNSAFE.getLong(null, struct + XXH3State.TOTALLEN); }
+    public static long ntotalLen(long struct) { return memGetLong(struct + XXH3State.TOTALLEN); }
     /** Unsafe version of {@link #nbStripesPerBlock}. */
     public static long nnbStripesPerBlock(long struct) { return memGetAddress(struct + XXH3State.NBSTRIPESPERBLOCK); }
     /** Unsafe version of {@link #secretLimit}. */
     public static long nsecretLimit(long struct) { return memGetAddress(struct + XXH3State.SECRETLIMIT); }
     /** Unsafe version of {@link #seed}. */
-    public static long nseed(long struct) { return UNSAFE.getLong(null, struct + XXH3State.SEED); }
+    public static long nseed(long struct) { return memGetLong(struct + XXH3State.SEED); }
     /** Unsafe version of {@link #reserved64}. */
-    public static long nreserved64(long struct) { return UNSAFE.getLong(null, struct + XXH3State.RESERVED64); }
+    public static long nreserved64(long struct) { return memGetLong(struct + XXH3State.RESERVED64); }
     /** Unsafe version of {@link #extSecret(int) extSecret}. */
     public static ByteBuffer nextSecret(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + XXH3State.EXTSECRET), capacity); }
 

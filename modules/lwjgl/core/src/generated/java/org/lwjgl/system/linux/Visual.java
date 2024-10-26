@@ -309,7 +309,7 @@ public class Visual extends Struct<Visual> implements NativeResource {
     /** Unsafe version of {@link #visualid}. */
     public static long nvisualid(long struct) { return memGetCLong(struct + Visual.VISUALID); }
     /** Unsafe version of {@link #class$}. */
-    public static int nclass$(long struct) { return UNSAFE.getInt(null, struct + Visual.CLASS); }
+    public static int nclass$(long struct) { return memGetInt(struct + Visual.CLASS); }
     /** Unsafe version of {@link #red_mask}. */
     public static long nred_mask(long struct) { return memGetCLong(struct + Visual.RED_MASK); }
     /** Unsafe version of {@link #green_mask}. */
@@ -317,16 +317,16 @@ public class Visual extends Struct<Visual> implements NativeResource {
     /** Unsafe version of {@link #blue_mask}. */
     public static long nblue_mask(long struct) { return memGetCLong(struct + Visual.BLUE_MASK); }
     /** Unsafe version of {@link #bits_per_rgb}. */
-    public static int nbits_per_rgb(long struct) { return UNSAFE.getInt(null, struct + Visual.BITS_PER_RGB); }
+    public static int nbits_per_rgb(long struct) { return memGetInt(struct + Visual.BITS_PER_RGB); }
     /** Unsafe version of {@link #map_entries}. */
-    public static int nmap_entries(long struct) { return UNSAFE.getInt(null, struct + Visual.MAP_ENTRIES); }
+    public static int nmap_entries(long struct) { return memGetInt(struct + Visual.MAP_ENTRIES); }
 
     /** Unsafe version of {@link #ext_data(long) ext_data}. */
     public static void next_data(long struct, long value) { memPutAddress(struct + Visual.EXT_DATA, value); }
     /** Unsafe version of {@link #visualid(long) visualid}. */
     public static void nvisualid(long struct, long value) { memPutCLong(struct + Visual.VISUALID, value); }
     /** Unsafe version of {@link #class$(int) class$}. */
-    public static void nclass$(long struct, int value) { UNSAFE.putInt(null, struct + Visual.CLASS, value); }
+    public static void nclass$(long struct, int value) { memPutInt(struct + Visual.CLASS, value); }
     /** Unsafe version of {@link #red_mask(long) red_mask}. */
     public static void nred_mask(long struct, long value) { memPutCLong(struct + Visual.RED_MASK, value); }
     /** Unsafe version of {@link #green_mask(long) green_mask}. */
@@ -334,9 +334,9 @@ public class Visual extends Struct<Visual> implements NativeResource {
     /** Unsafe version of {@link #blue_mask(long) blue_mask}. */
     public static void nblue_mask(long struct, long value) { memPutCLong(struct + Visual.BLUE_MASK, value); }
     /** Unsafe version of {@link #bits_per_rgb(int) bits_per_rgb}. */
-    public static void nbits_per_rgb(long struct, int value) { UNSAFE.putInt(null, struct + Visual.BITS_PER_RGB, value); }
+    public static void nbits_per_rgb(long struct, int value) { memPutInt(struct + Visual.BITS_PER_RGB, value); }
     /** Unsafe version of {@link #map_entries(int) map_entries}. */
-    public static void nmap_entries(long struct, int value) { UNSAFE.putInt(null, struct + Visual.MAP_ENTRIES, value); }
+    public static void nmap_entries(long struct, int value) { memPutInt(struct + Visual.MAP_ENTRIES, value); }
 
     // -----------------------------------
 

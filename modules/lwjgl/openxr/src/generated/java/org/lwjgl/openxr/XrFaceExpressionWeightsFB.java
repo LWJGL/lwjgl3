@@ -314,38 +314,38 @@ public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeightsFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFaceExpressionWeightsFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFaceExpressionWeightsFB.NEXT); }
     /** Unsafe version of {@link #weightCount}. */
-    public static int nweightCount(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeightsFB.WEIGHTCOUNT); }
+    public static int nweightCount(long struct) { return memGetInt(struct + XrFaceExpressionWeightsFB.WEIGHTCOUNT); }
     /** Unsafe version of {@link #weights() weights}. */
     public static FloatBuffer nweights(long struct) { return memFloatBuffer(memGetAddress(struct + XrFaceExpressionWeightsFB.WEIGHTS), nweightCount(struct)); }
     /** Unsafe version of {@link #confidenceCount}. */
-    public static int nconfidenceCount(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeightsFB.CONFIDENCECOUNT); }
+    public static int nconfidenceCount(long struct) { return memGetInt(struct + XrFaceExpressionWeightsFB.CONFIDENCECOUNT); }
     /** Unsafe version of {@link #confidences() confidences}. */
     public static FloatBuffer nconfidences(long struct) { return memFloatBuffer(memGetAddress(struct + XrFaceExpressionWeightsFB.CONFIDENCES), nconfidenceCount(struct)); }
     /** Unsafe version of {@link #status}. */
     public static XrFaceExpressionStatusFB nstatus(long struct) { return XrFaceExpressionStatusFB.create(struct + XrFaceExpressionWeightsFB.STATUS); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrFaceExpressionWeightsFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrFaceExpressionWeightsFB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeightsFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFaceExpressionWeightsFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFaceExpressionWeightsFB.NEXT, value); }
     /** Sets the specified value to the {@code weightCount} field of the specified {@code struct}. */
-    public static void nweightCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeightsFB.WEIGHTCOUNT, value); }
+    public static void nweightCount(long struct, int value) { memPutInt(struct + XrFaceExpressionWeightsFB.WEIGHTCOUNT, value); }
     /** Unsafe version of {@link #weights(FloatBuffer) weights}. */
     public static void nweights(long struct, FloatBuffer value) { memPutAddress(struct + XrFaceExpressionWeightsFB.WEIGHTS, memAddress(value)); nweightCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code confidenceCount} field of the specified {@code struct}. */
-    public static void nconfidenceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeightsFB.CONFIDENCECOUNT, value); }
+    public static void nconfidenceCount(long struct, int value) { memPutInt(struct + XrFaceExpressionWeightsFB.CONFIDENCECOUNT, value); }
     /** Unsafe version of {@link #confidences(FloatBuffer) confidences}. */
     public static void nconfidences(long struct, FloatBuffer value) { memPutAddress(struct + XrFaceExpressionWeightsFB.CONFIDENCES, memAddress(value)); nconfidenceCount(struct, value.remaining()); }
     /** Unsafe version of {@link #status(XrFaceExpressionStatusFB) status}. */
     public static void nstatus(long struct, XrFaceExpressionStatusFB value) { memCopy(value.address(), struct + XrFaceExpressionWeightsFB.STATUS, XrFaceExpressionStatusFB.SIZEOF); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrFaceExpressionWeightsFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrFaceExpressionWeightsFB.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

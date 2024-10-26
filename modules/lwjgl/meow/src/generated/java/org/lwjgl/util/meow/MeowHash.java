@@ -232,13 +232,13 @@ public class MeowHash extends Struct<MeowHash> implements NativeResource {
     public static LongBuffer nu64(long struct) { return memLongBuffer(struct + MeowHash.U64, 2); }
     /** Unsafe version of {@link #u64(int) u64}. */
     public static long nu64(long struct, int index) {
-        return UNSAFE.getLong(null, struct + MeowHash.U64 + check(index, 2) * 8);
+        return memGetLong(struct + MeowHash.U64 + check(index, 2) * 8);
     }
     /** Unsafe version of {@link #u32}. */
     public static IntBuffer nu32(long struct) { return memIntBuffer(struct + MeowHash.U32, 4); }
     /** Unsafe version of {@link #u32(int) u32}. */
     public static int nu32(long struct, int index) {
-        return UNSAFE.getInt(null, struct + MeowHash.U32 + check(index, 4) * 4);
+        return memGetInt(struct + MeowHash.U32 + check(index, 4) * 4);
     }
 
     // -----------------------------------

@@ -264,22 +264,22 @@ public class VkPhysicalDeviceCustomBorderColorFeaturesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #customBorderColors}. */
-    public static int ncustomBorderColors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORS); }
+    public static int ncustomBorderColors(long struct) { return memGetInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORS); }
     /** Unsafe version of {@link #customBorderColorWithoutFormat}. */
-    public static int ncustomBorderColorWithoutFormat(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORWITHOUTFORMAT); }
+    public static int ncustomBorderColorWithoutFormat(long struct) { return memGetInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORWITHOUTFORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #customBorderColors(boolean) customBorderColors}. */
-    public static void ncustomBorderColors(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORS, value); }
+    public static void ncustomBorderColors(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORS, value); }
     /** Unsafe version of {@link #customBorderColorWithoutFormat(boolean) customBorderColorWithoutFormat}. */
-    public static void ncustomBorderColorWithoutFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORWITHOUTFORMAT, value); }
+    public static void ncustomBorderColorWithoutFormat(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCustomBorderColorFeaturesEXT.CUSTOMBORDERCOLORWITHOUTFORMAT, value); }
 
     // -----------------------------------
 

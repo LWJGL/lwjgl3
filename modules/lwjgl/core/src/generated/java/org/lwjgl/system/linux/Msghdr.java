@@ -267,7 +267,7 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     /** Unsafe version of {@link #msg_name() msg_name}. */
     public static ByteBuffer nmsg_name(long struct) { return memByteBuffer(memGetAddress(struct + Msghdr.MSG_NAME), nmsg_namelen(struct)); }
     /** Unsafe version of {@link #msg_namelen}. */
-    public static int nmsg_namelen(long struct) { return UNSAFE.getInt(null, struct + Msghdr.MSG_NAMELEN); }
+    public static int nmsg_namelen(long struct) { return memGetInt(struct + Msghdr.MSG_NAMELEN); }
     /** Unsafe version of {@link #msg_iov}. */
     public static IOVec.Buffer nmsg_iov(long struct) { return IOVec.create(memGetAddress(struct + Msghdr.MSG_IOV), (int)nmsg_iovlen(struct)); }
     /** Unsafe version of {@link #msg_iovlen}. */
@@ -277,12 +277,12 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     /** Unsafe version of {@link #msg_controllen}. */
     public static long nmsg_controllen(long struct) { return memGetAddress(struct + Msghdr.MSG_CONTROLLEN); }
     /** Unsafe version of {@link #msg_flags}. */
-    public static int nmsg_flags(long struct) { return UNSAFE.getInt(null, struct + Msghdr.MSG_FLAGS); }
+    public static int nmsg_flags(long struct) { return memGetInt(struct + Msghdr.MSG_FLAGS); }
 
     /** Unsafe version of {@link #msg_name(ByteBuffer) msg_name}. */
     public static void nmsg_name(long struct, ByteBuffer value) { memPutAddress(struct + Msghdr.MSG_NAME, memAddress(value)); nmsg_namelen(struct, value.remaining()); }
     /** Sets the specified value to the {@code msg_namelen} field of the specified {@code struct}. */
-    public static void nmsg_namelen(long struct, int value) { UNSAFE.putInt(null, struct + Msghdr.MSG_NAMELEN, value); }
+    public static void nmsg_namelen(long struct, int value) { memPutInt(struct + Msghdr.MSG_NAMELEN, value); }
     /** Unsafe version of {@link #msg_iov(IOVec.Buffer) msg_iov}. */
     public static void nmsg_iov(long struct, IOVec.Buffer value) { memPutAddress(struct + Msghdr.MSG_IOV, value.address()); nmsg_iovlen(struct, value.remaining()); }
     /** Sets the specified value to the {@code msg_iovlen} field of the specified {@code struct}. */
@@ -292,7 +292,7 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     /** Sets the specified value to the {@code msg_controllen} field of the specified {@code struct}. */
     public static void nmsg_controllen(long struct, long value) { memPutAddress(struct + Msghdr.MSG_CONTROLLEN, value); }
     /** Unsafe version of {@link #msg_flags(int) msg_flags}. */
-    public static void nmsg_flags(long struct, int value) { UNSAFE.putInt(null, struct + Msghdr.MSG_FLAGS, value); }
+    public static void nmsg_flags(long struct, int value) { memPutInt(struct + Msghdr.MSG_FLAGS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

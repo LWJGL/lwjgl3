@@ -248,24 +248,24 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #nr}. */
-    public static int nnr(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCRegister.NR); }
+    public static int nnr(long struct) { return memGetInt(struct + IOURingRSRCRegister.NR); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingRSRCRegister.FLAGS); }
-    public static long nresv2(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCRegister.RESV2); }
+    public static int nflags(long struct) { return memGetInt(struct + IOURingRSRCRegister.FLAGS); }
+    public static long nresv2(long struct) { return memGetLong(struct + IOURingRSRCRegister.RESV2); }
     /** Unsafe version of {@link #data}. */
-    public static long ndata(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCRegister.DATA); }
+    public static long ndata(long struct) { return memGetLong(struct + IOURingRSRCRegister.DATA); }
     /** Unsafe version of {@link #tags}. */
-    public static long ntags(long struct) { return UNSAFE.getLong(null, struct + IOURingRSRCRegister.TAGS); }
+    public static long ntags(long struct) { return memGetLong(struct + IOURingRSRCRegister.TAGS); }
 
     /** Unsafe version of {@link #nr(int) nr}. */
-    public static void nnr(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCRegister.NR, value); }
+    public static void nnr(long struct, int value) { memPutInt(struct + IOURingRSRCRegister.NR, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRSRCRegister.FLAGS, value); }
-    public static void nresv2(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCRegister.RESV2, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOURingRSRCRegister.FLAGS, value); }
+    public static void nresv2(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.RESV2, value); }
     /** Unsafe version of {@link #data(long) data}. */
-    public static void ndata(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCRegister.DATA, value); }
+    public static void ndata(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.DATA, value); }
     /** Unsafe version of {@link #tags(long) tags}. */
-    public static void ntags(long struct, long value) { UNSAFE.putLong(null, struct + IOURingRSRCRegister.TAGS, value); }
+    public static void ntags(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.TAGS, value); }
 
     // -----------------------------------
 

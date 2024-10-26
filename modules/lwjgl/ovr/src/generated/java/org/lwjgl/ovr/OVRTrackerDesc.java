@@ -226,13 +226,13 @@ public class OVRTrackerDesc extends Struct<OVRTrackerDesc> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #FrustumHFovInRadians}. */
-    public static float nFrustumHFovInRadians(long struct) { return UNSAFE.getFloat(null, struct + OVRTrackerDesc.FRUSTUMHFOVINRADIANS); }
+    public static float nFrustumHFovInRadians(long struct) { return memGetFloat(struct + OVRTrackerDesc.FRUSTUMHFOVINRADIANS); }
     /** Unsafe version of {@link #FrustumVFovInRadians}. */
-    public static float nFrustumVFovInRadians(long struct) { return UNSAFE.getFloat(null, struct + OVRTrackerDesc.FRUSTUMVFOVINRADIANS); }
+    public static float nFrustumVFovInRadians(long struct) { return memGetFloat(struct + OVRTrackerDesc.FRUSTUMVFOVINRADIANS); }
     /** Unsafe version of {@link #FrustumNearZInMeters}. */
-    public static float nFrustumNearZInMeters(long struct) { return UNSAFE.getFloat(null, struct + OVRTrackerDesc.FRUSTUMNEARZINMETERS); }
+    public static float nFrustumNearZInMeters(long struct) { return memGetFloat(struct + OVRTrackerDesc.FRUSTUMNEARZINMETERS); }
     /** Unsafe version of {@link #FrustumFarZInMeters}. */
-    public static float nFrustumFarZInMeters(long struct) { return UNSAFE.getFloat(null, struct + OVRTrackerDesc.FRUSTUMFARZINMETERS); }
+    public static float nFrustumFarZInMeters(long struct) { return memGetFloat(struct + OVRTrackerDesc.FRUSTUMFARZINMETERS); }
 
     // -----------------------------------
 

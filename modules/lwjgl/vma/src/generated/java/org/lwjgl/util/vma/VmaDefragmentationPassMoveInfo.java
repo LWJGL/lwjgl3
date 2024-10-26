@@ -254,12 +254,12 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
     // -----------------------------------
 
     /** Unsafe version of {@link #moveCount}. */
-    public static int nmoveCount(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationPassMoveInfo.MOVECOUNT); }
+    public static int nmoveCount(long struct) { return memGetInt(struct + VmaDefragmentationPassMoveInfo.MOVECOUNT); }
     /** Unsafe version of {@link #pMoves}. */
     @Nullable public static VmaDefragmentationMove.Buffer npMoves(long struct) { return VmaDefragmentationMove.createSafe(memGetAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES), nmoveCount(struct)); }
 
     /** Sets the specified value to the {@code moveCount} field of the specified {@code struct}. */
-    public static void nmoveCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationPassMoveInfo.MOVECOUNT, value); }
+    public static void nmoveCount(long struct, int value) { memPutInt(struct + VmaDefragmentationPassMoveInfo.MOVECOUNT, value); }
     /** Unsafe version of {@link #pMoves(VmaDefragmentationMove.Buffer) pMoves}. */
     public static void npMoves(long struct, @Nullable VmaDefragmentationMove.Buffer value) { memPutAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES, memAddressSafe(value)); nmoveCount(struct, value == null ? 0 : value.remaining()); }
 

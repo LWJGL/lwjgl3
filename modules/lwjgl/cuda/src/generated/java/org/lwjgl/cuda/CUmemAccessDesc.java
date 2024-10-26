@@ -224,12 +224,12 @@ public class CUmemAccessDesc extends Struct<CUmemAccessDesc> implements NativeRe
     /** Unsafe version of {@link #location}. */
     public static CUmemLocation nlocation(long struct) { return CUmemLocation.create(struct + CUmemAccessDesc.LOCATION); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUmemAccessDesc.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUmemAccessDesc.FLAGS); }
 
     /** Unsafe version of {@link #location(CUmemLocation) location}. */
     public static void nlocation(long struct, CUmemLocation value) { memCopy(value.address(), struct + CUmemAccessDesc.LOCATION, CUmemLocation.SIZEOF); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUmemAccessDesc.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUmemAccessDesc.FLAGS, value); }
 
     // -----------------------------------
 

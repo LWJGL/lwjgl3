@@ -285,20 +285,20 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct<VkMacOSSurfaceCreateInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMacOSSurfaceCreateInfoMVK.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMacOSSurfaceCreateInfoMVK.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMacOSSurfaceCreateInfoMVK.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMacOSSurfaceCreateInfoMVK.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMacOSSurfaceCreateInfoMVK.FLAGS); }
     /** Unsafe version of {@link #pView}. */
     public static long npView(long struct) { return memGetAddress(struct + VkMacOSSurfaceCreateInfoMVK.PVIEW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMacOSSurfaceCreateInfoMVK.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMacOSSurfaceCreateInfoMVK.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMacOSSurfaceCreateInfoMVK.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMacOSSurfaceCreateInfoMVK.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkMacOSSurfaceCreateInfoMVK.FLAGS, value); }
     /** Unsafe version of {@link #pView(long) pView}. */
     public static void npView(long struct, long value) { memPutAddress(struct + VkMacOSSurfaceCreateInfoMVK.PVIEW, value); }
 

@@ -269,26 +269,26 @@ public class VkDeviceFaultCountsEXT extends Struct<VkDeviceFaultCountsEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultCountsEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceFaultCountsEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceFaultCountsEXT.PNEXT); }
     /** Unsafe version of {@link #addressInfoCount}. */
-    public static int naddressInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultCountsEXT.ADDRESSINFOCOUNT); }
+    public static int naddressInfoCount(long struct) { return memGetInt(struct + VkDeviceFaultCountsEXT.ADDRESSINFOCOUNT); }
     /** Unsafe version of {@link #vendorInfoCount}. */
-    public static int nvendorInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultCountsEXT.VENDORINFOCOUNT); }
+    public static int nvendorInfoCount(long struct) { return memGetInt(struct + VkDeviceFaultCountsEXT.VENDORINFOCOUNT); }
     /** Unsafe version of {@link #vendorBinarySize}. */
-    public static long nvendorBinarySize(long struct) { return UNSAFE.getLong(null, struct + VkDeviceFaultCountsEXT.VENDORBINARYSIZE); }
+    public static long nvendorBinarySize(long struct) { return memGetLong(struct + VkDeviceFaultCountsEXT.VENDORBINARYSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultCountsEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceFaultCountsEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceFaultCountsEXT.PNEXT, value); }
     /** Unsafe version of {@link #addressInfoCount(int) addressInfoCount}. */
-    public static void naddressInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultCountsEXT.ADDRESSINFOCOUNT, value); }
+    public static void naddressInfoCount(long struct, int value) { memPutInt(struct + VkDeviceFaultCountsEXT.ADDRESSINFOCOUNT, value); }
     /** Unsafe version of {@link #vendorInfoCount(int) vendorInfoCount}. */
-    public static void nvendorInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultCountsEXT.VENDORINFOCOUNT, value); }
+    public static void nvendorInfoCount(long struct, int value) { memPutInt(struct + VkDeviceFaultCountsEXT.VENDORINFOCOUNT, value); }
     /** Unsafe version of {@link #vendorBinarySize(long) vendorBinarySize}. */
-    public static void nvendorBinarySize(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceFaultCountsEXT.VENDORBINARYSIZE, value); }
+    public static void nvendorBinarySize(long struct, long value) { memPutLong(struct + VkDeviceFaultCountsEXT.VENDORBINARYSIZE, value); }
 
     // -----------------------------------
 

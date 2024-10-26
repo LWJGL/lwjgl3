@@ -124,13 +124,13 @@ public class VREventInputActionManifestLoad extends Struct<VREventInputActionMan
     // -----------------------------------
 
     /** Unsafe version of {@link #pathAppKey}. */
-    public static long npathAppKey(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHAPPKEY); }
+    public static long npathAppKey(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHAPPKEY); }
     /** Unsafe version of {@link #pathMessage}. */
-    public static long npathMessage(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMESSAGE); }
+    public static long npathMessage(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMESSAGE); }
     /** Unsafe version of {@link #pathMessageParam}. */
-    public static long npathMessageParam(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMESSAGEPARAM); }
+    public static long npathMessageParam(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMESSAGEPARAM); }
     /** Unsafe version of {@link #pathManifestPath}. */
-    public static long npathManifestPath(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMANIFESTPATH); }
+    public static long npathManifestPath(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMANIFESTPATH); }
 
     // -----------------------------------
 

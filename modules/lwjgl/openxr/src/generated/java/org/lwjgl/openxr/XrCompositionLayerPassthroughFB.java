@@ -292,22 +292,22 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerPassthroughFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerPassthroughFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerPassthroughFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrCompositionLayerPassthroughFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrCompositionLayerPassthroughFB.FLAGS); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrCompositionLayerPassthroughFB.SPACE); }
     /** Unsafe version of {@link #layerHandle}. */
     public static long nlayerHandle(long struct) { return memGetAddress(struct + XrCompositionLayerPassthroughFB.LAYERHANDLE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerPassthroughFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerPassthroughFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerPassthroughFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerPassthroughFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrCompositionLayerPassthroughFB.FLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerPassthroughFB.SPACE, value.address()); }
     /** Unsafe version of {@link #layerHandle(XrPassthroughLayerFB) layerHandle}. */

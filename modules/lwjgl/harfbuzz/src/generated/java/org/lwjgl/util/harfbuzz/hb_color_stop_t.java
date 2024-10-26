@@ -231,18 +231,18 @@ public class hb_color_stop_t extends Struct<hb_color_stop_t> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static float noffset(long struct) { return UNSAFE.getFloat(null, struct + hb_color_stop_t.OFFSET); }
+    public static float noffset(long struct) { return memGetFloat(struct + hb_color_stop_t.OFFSET); }
     /** Unsafe version of {@link #is_foreground}. */
-    public static int nis_foreground(long struct) { return UNSAFE.getInt(null, struct + hb_color_stop_t.IS_FOREGROUND); }
+    public static int nis_foreground(long struct) { return memGetInt(struct + hb_color_stop_t.IS_FOREGROUND); }
     /** Unsafe version of {@link #color}. */
-    public static int ncolor(long struct) { return UNSAFE.getInt(null, struct + hb_color_stop_t.COLOR); }
+    public static int ncolor(long struct) { return memGetInt(struct + hb_color_stop_t.COLOR); }
 
     /** Unsafe version of {@link #offset(float) offset}. */
-    public static void noffset(long struct, float value) { UNSAFE.putFloat(null, struct + hb_color_stop_t.OFFSET, value); }
+    public static void noffset(long struct, float value) { memPutFloat(struct + hb_color_stop_t.OFFSET, value); }
     /** Unsafe version of {@link #is_foreground(boolean) is_foreground}. */
-    public static void nis_foreground(long struct, int value) { UNSAFE.putInt(null, struct + hb_color_stop_t.IS_FOREGROUND, value); }
+    public static void nis_foreground(long struct, int value) { memPutInt(struct + hb_color_stop_t.IS_FOREGROUND, value); }
     /** Unsafe version of {@link #color(int) color}. */
-    public static void ncolor(long struct, int value) { UNSAFE.putInt(null, struct + hb_color_stop_t.COLOR, value); }
+    public static void ncolor(long struct, int value) { memPutInt(struct + hb_color_stop_t.COLOR, value); }
 
     // -----------------------------------
 

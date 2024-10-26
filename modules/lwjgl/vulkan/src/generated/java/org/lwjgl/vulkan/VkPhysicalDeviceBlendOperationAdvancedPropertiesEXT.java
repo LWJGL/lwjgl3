@@ -296,24 +296,24 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #advancedBlendMaxColorAttachments}. */
-    public static int nadvancedBlendMaxColorAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDMAXCOLORATTACHMENTS); }
+    public static int nadvancedBlendMaxColorAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDMAXCOLORATTACHMENTS); }
     /** Unsafe version of {@link #advancedBlendIndependentBlend}. */
-    public static int nadvancedBlendIndependentBlend(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDINDEPENDENTBLEND); }
+    public static int nadvancedBlendIndependentBlend(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDINDEPENDENTBLEND); }
     /** Unsafe version of {@link #advancedBlendNonPremultipliedSrcColor}. */
-    public static int nadvancedBlendNonPremultipliedSrcColor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDSRCCOLOR); }
+    public static int nadvancedBlendNonPremultipliedSrcColor(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDSRCCOLOR); }
     /** Unsafe version of {@link #advancedBlendNonPremultipliedDstColor}. */
-    public static int nadvancedBlendNonPremultipliedDstColor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDDSTCOLOR); }
+    public static int nadvancedBlendNonPremultipliedDstColor(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDDSTCOLOR); }
     /** Unsafe version of {@link #advancedBlendCorrelatedOverlap}. */
-    public static int nadvancedBlendCorrelatedOverlap(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDCORRELATEDOVERLAP); }
+    public static int nadvancedBlendCorrelatedOverlap(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDCORRELATEDOVERLAP); }
     /** Unsafe version of {@link #advancedBlendAllOperations}. */
-    public static int nadvancedBlendAllOperations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDALLOPERATIONS); }
+    public static int nadvancedBlendAllOperations(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDALLOPERATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.PNEXT, value); }
 

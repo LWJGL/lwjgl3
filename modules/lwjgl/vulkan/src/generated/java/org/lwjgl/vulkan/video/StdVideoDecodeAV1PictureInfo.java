@@ -470,47 +470,47 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     /** Unsafe version of {@link #flags}. */
     public static StdVideoDecodeAV1PictureInfoFlags nflags(long struct) { return StdVideoDecodeAV1PictureInfoFlags.create(struct + StdVideoDecodeAV1PictureInfo.FLAGS); }
     /** Unsafe version of {@link #frame_type}. */
-    public static int nframe_type(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1PictureInfo.FRAME_TYPE); }
+    public static int nframe_type(long struct) { return memGetInt(struct + StdVideoDecodeAV1PictureInfo.FRAME_TYPE); }
     /** Unsafe version of {@link #current_frame_id}. */
-    public static int ncurrent_frame_id(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1PictureInfo.CURRENT_FRAME_ID); }
+    public static int ncurrent_frame_id(long struct) { return memGetInt(struct + StdVideoDecodeAV1PictureInfo.CURRENT_FRAME_ID); }
     /** Unsafe version of {@link #OrderHint}. */
-    public static byte nOrderHint(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.ORDERHINT); }
+    public static byte nOrderHint(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.ORDERHINT); }
     /** Unsafe version of {@link #primary_ref_frame}. */
-    public static byte nprimary_ref_frame(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME); }
+    public static byte nprimary_ref_frame(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME); }
     /** Unsafe version of {@link #refresh_frame_flags}. */
-    public static byte nrefresh_frame_flags(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS); }
-    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.RESERVED1); }
+    public static byte nrefresh_frame_flags(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS); }
+    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1); }
     /** Unsafe version of {@link #interpolation_filter}. */
-    public static int ninterpolation_filter(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER); }
+    public static int ninterpolation_filter(long struct) { return memGetInt(struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER); }
     /** Unsafe version of {@link #TxMode}. */
-    public static int nTxMode(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1PictureInfo.TXMODE); }
+    public static int nTxMode(long struct) { return memGetInt(struct + StdVideoDecodeAV1PictureInfo.TXMODE); }
     /** Unsafe version of {@link #delta_q_res}. */
-    public static byte ndelta_q_res(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.DELTA_Q_RES); }
+    public static byte ndelta_q_res(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.DELTA_Q_RES); }
     /** Unsafe version of {@link #delta_lf_res}. */
-    public static byte ndelta_lf_res(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.DELTA_LF_RES); }
+    public static byte ndelta_lf_res(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.DELTA_LF_RES); }
     /** Unsafe version of {@link #SkipModeFrame}. */
     public static ByteBuffer nSkipModeFrame(long struct) { return memByteBuffer(struct + StdVideoDecodeAV1PictureInfo.SKIPMODEFRAME, STD_VIDEO_AV1_SKIP_MODE_FRAMES); }
     /** Unsafe version of {@link #SkipModeFrame(int) SkipModeFrame}. */
     public static byte nSkipModeFrame(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.SKIPMODEFRAME + check(index, STD_VIDEO_AV1_SKIP_MODE_FRAMES) * 1);
+        return memGetByte(struct + StdVideoDecodeAV1PictureInfo.SKIPMODEFRAME + check(index, STD_VIDEO_AV1_SKIP_MODE_FRAMES) * 1);
     }
     /** Unsafe version of {@link #coded_denom}. */
-    public static byte ncoded_denom(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM); }
+    public static byte ncoded_denom(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM); }
     public static ByteBuffer nreserved2(long struct) { return memByteBuffer(struct + StdVideoDecodeAV1PictureInfo.RESERVED2, 3); }
     public static byte nreserved2(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1);
+        return memGetByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #OrderHints}. */
     public static ByteBuffer nOrderHints(long struct) { return memByteBuffer(struct + StdVideoDecodeAV1PictureInfo.ORDERHINTS, STD_VIDEO_AV1_NUM_REF_FRAMES); }
     /** Unsafe version of {@link #OrderHints(int) OrderHints}. */
     public static byte nOrderHints(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeAV1PictureInfo.ORDERHINTS + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1);
+        return memGetByte(struct + StdVideoDecodeAV1PictureInfo.ORDERHINTS + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1);
     }
     /** Unsafe version of {@link #expectedFrameId}. */
     public static IntBuffer nexpectedFrameId(long struct) { return memIntBuffer(struct + StdVideoDecodeAV1PictureInfo.EXPECTEDFRAMEID, STD_VIDEO_AV1_NUM_REF_FRAMES); }
     /** Unsafe version of {@link #expectedFrameId(int) expectedFrameId}. */
     public static int nexpectedFrameId(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoDecodeAV1PictureInfo.EXPECTEDFRAMEID + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 4);
+        return memGetInt(struct + StdVideoDecodeAV1PictureInfo.EXPECTEDFRAMEID + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 4);
     }
     /** Unsafe version of {@link #pTileInfo}. */
     public static StdVideoAV1TileInfo npTileInfo(long struct) { return StdVideoAV1TileInfo.create(memGetAddress(struct + StdVideoDecodeAV1PictureInfo.PTILEINFO)); }
@@ -532,24 +532,24 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     /** Unsafe version of {@link #flags(StdVideoDecodeAV1PictureInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoDecodeAV1PictureInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeAV1PictureInfo.FLAGS, StdVideoDecodeAV1PictureInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #frame_type(int) frame_type}. */
-    public static void nframe_type(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1PictureInfo.FRAME_TYPE, value); }
+    public static void nframe_type(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1PictureInfo.FRAME_TYPE, value); }
     /** Unsafe version of {@link #current_frame_id(int) current_frame_id}. */
-    public static void ncurrent_frame_id(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1PictureInfo.CURRENT_FRAME_ID, value); }
+    public static void ncurrent_frame_id(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1PictureInfo.CURRENT_FRAME_ID, value); }
     /** Unsafe version of {@link #OrderHint(byte) OrderHint}. */
-    public static void nOrderHint(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.ORDERHINT, value); }
+    public static void nOrderHint(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.ORDERHINT, value); }
     /** Unsafe version of {@link #primary_ref_frame(byte) primary_ref_frame}. */
-    public static void nprimary_ref_frame(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME, value); }
+    public static void nprimary_ref_frame(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME, value); }
     /** Unsafe version of {@link #refresh_frame_flags(byte) refresh_frame_flags}. */
-    public static void nrefresh_frame_flags(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS, value); }
-    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.RESERVED1, value); }
+    public static void nrefresh_frame_flags(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS, value); }
+    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1, value); }
     /** Unsafe version of {@link #interpolation_filter(int) interpolation_filter}. */
-    public static void ninterpolation_filter(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER, value); }
+    public static void ninterpolation_filter(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER, value); }
     /** Unsafe version of {@link #TxMode(int) TxMode}. */
-    public static void nTxMode(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1PictureInfo.TXMODE, value); }
+    public static void nTxMode(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1PictureInfo.TXMODE, value); }
     /** Unsafe version of {@link #delta_q_res(byte) delta_q_res}. */
-    public static void ndelta_q_res(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.DELTA_Q_RES, value); }
+    public static void ndelta_q_res(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.DELTA_Q_RES, value); }
     /** Unsafe version of {@link #delta_lf_res(byte) delta_lf_res}. */
-    public static void ndelta_lf_res(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.DELTA_LF_RES, value); }
+    public static void ndelta_lf_res(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.DELTA_LF_RES, value); }
     /** Unsafe version of {@link #SkipModeFrame(ByteBuffer) SkipModeFrame}. */
     public static void nSkipModeFrame(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_SKIP_MODE_FRAMES); }
@@ -557,16 +557,16 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     }
     /** Unsafe version of {@link #SkipModeFrame(int, byte) SkipModeFrame}. */
     public static void nSkipModeFrame(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.SKIPMODEFRAME + check(index, STD_VIDEO_AV1_SKIP_MODE_FRAMES) * 1, value);
+        memPutByte(struct + StdVideoDecodeAV1PictureInfo.SKIPMODEFRAME + check(index, STD_VIDEO_AV1_SKIP_MODE_FRAMES) * 1, value);
     }
     /** Unsafe version of {@link #coded_denom(byte) coded_denom}. */
-    public static void ncoded_denom(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM, value); }
+    public static void ncoded_denom(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM, value); }
     public static void nreserved2(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoDecodeAV1PictureInfo.RESERVED2, value.remaining() * 1);
     }
     public static void nreserved2(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1, value);
+        memPutByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #OrderHints(ByteBuffer) OrderHints}. */
     public static void nOrderHints(long struct, ByteBuffer value) {
@@ -575,7 +575,7 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     }
     /** Unsafe version of {@link #OrderHints(int, byte) OrderHints}. */
     public static void nOrderHints(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeAV1PictureInfo.ORDERHINTS + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1, value);
+        memPutByte(struct + StdVideoDecodeAV1PictureInfo.ORDERHINTS + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1, value);
     }
     /** Unsafe version of {@link #expectedFrameId(IntBuffer) expectedFrameId}. */
     public static void nexpectedFrameId(long struct, IntBuffer value) {
@@ -584,7 +584,7 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     }
     /** Unsafe version of {@link #expectedFrameId(int, int) expectedFrameId}. */
     public static void nexpectedFrameId(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoDecodeAV1PictureInfo.EXPECTEDFRAMEID + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 4, value);
+        memPutInt(struct + StdVideoDecodeAV1PictureInfo.EXPECTEDFRAMEID + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 4, value);
     }
     /** Unsafe version of {@link #pTileInfo(StdVideoAV1TileInfo) pTileInfo}. */
     public static void npTileInfo(long struct, StdVideoAV1TileInfo value) { memPutAddress(struct + StdVideoDecodeAV1PictureInfo.PTILEINFO, value.address()); }

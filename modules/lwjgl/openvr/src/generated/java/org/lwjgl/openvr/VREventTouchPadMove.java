@@ -136,17 +136,17 @@ public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
     // -----------------------------------
 
     /** Unsafe version of {@link #bFingerDown}. */
-    public static boolean nbFingerDown(long struct) { return UNSAFE.getByte(null, struct + VREventTouchPadMove.BFINGERDOWN) != 0; }
+    public static boolean nbFingerDown(long struct) { return memGetByte(struct + VREventTouchPadMove.BFINGERDOWN) != 0; }
     /** Unsafe version of {@link #flSecondsFingerDown}. */
-    public static float nflSecondsFingerDown(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FLSECONDSFINGERDOWN); }
+    public static float nflSecondsFingerDown(long struct) { return memGetFloat(struct + VREventTouchPadMove.FLSECONDSFINGERDOWN); }
     /** Unsafe version of {@link #fValueXFirst}. */
-    public static float nfValueXFirst(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEXFIRST); }
+    public static float nfValueXFirst(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEXFIRST); }
     /** Unsafe version of {@link #fValueYFirst}. */
-    public static float nfValueYFirst(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEYFIRST); }
+    public static float nfValueYFirst(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEYFIRST); }
     /** Unsafe version of {@link #fValueXRaw}. */
-    public static float nfValueXRaw(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEXRAW); }
+    public static float nfValueXRaw(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEXRAW); }
     /** Unsafe version of {@link #fValueYRaw}. */
-    public static float nfValueYRaw(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEYRAW); }
+    public static float nfValueYRaw(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEYRAW); }
 
     // -----------------------------------
 

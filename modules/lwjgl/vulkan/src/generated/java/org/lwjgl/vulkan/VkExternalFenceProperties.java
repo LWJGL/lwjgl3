@@ -280,18 +280,18 @@ public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalFenceProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExternalFenceProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalFenceProperties.PNEXT); }
     /** Unsafe version of {@link #exportFromImportedHandleTypes}. */
-    public static int nexportFromImportedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalFenceProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
+    public static int nexportFromImportedHandleTypes(long struct) { return memGetInt(struct + VkExternalFenceProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
     /** Unsafe version of {@link #compatibleHandleTypes}. */
-    public static int ncompatibleHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalFenceProperties.COMPATIBLEHANDLETYPES); }
+    public static int ncompatibleHandleTypes(long struct) { return memGetInt(struct + VkExternalFenceProperties.COMPATIBLEHANDLETYPES); }
     /** Unsafe version of {@link #externalFenceFeatures}. */
-    public static int nexternalFenceFeatures(long struct) { return UNSAFE.getInt(null, struct + VkExternalFenceProperties.EXTERNALFENCEFEATURES); }
+    public static int nexternalFenceFeatures(long struct) { return memGetInt(struct + VkExternalFenceProperties.EXTERNALFENCEFEATURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalFenceProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalFenceProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalFenceProperties.PNEXT, value); }
 

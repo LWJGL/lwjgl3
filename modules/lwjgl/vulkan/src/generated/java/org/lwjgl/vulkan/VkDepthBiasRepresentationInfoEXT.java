@@ -262,22 +262,22 @@ public class VkDepthBiasRepresentationInfoEXT extends Struct<VkDepthBiasRepresen
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDepthBiasRepresentationInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDepthBiasRepresentationInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDepthBiasRepresentationInfoEXT.PNEXT); }
     /** Unsafe version of {@link #depthBiasRepresentation}. */
-    public static int ndepthBiasRepresentation(long struct) { return UNSAFE.getInt(null, struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASREPRESENTATION); }
+    public static int ndepthBiasRepresentation(long struct) { return memGetInt(struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASREPRESENTATION); }
     /** Unsafe version of {@link #depthBiasExact}. */
-    public static int ndepthBiasExact(long struct) { return UNSAFE.getInt(null, struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASEXACT); }
+    public static int ndepthBiasExact(long struct) { return memGetInt(struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASEXACT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDepthBiasRepresentationInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDepthBiasRepresentationInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDepthBiasRepresentationInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #depthBiasRepresentation(int) depthBiasRepresentation}. */
-    public static void ndepthBiasRepresentation(long struct, int value) { UNSAFE.putInt(null, struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASREPRESENTATION, value); }
+    public static void ndepthBiasRepresentation(long struct, int value) { memPutInt(struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASREPRESENTATION, value); }
     /** Unsafe version of {@link #depthBiasExact(boolean) depthBiasExact}. */
-    public static void ndepthBiasExact(long struct, int value) { UNSAFE.putInt(null, struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASEXACT, value); }
+    public static void ndepthBiasExact(long struct, int value) { memPutInt(struct + VkDepthBiasRepresentationInfoEXT.DEPTHBIASEXACT, value); }
 
     // -----------------------------------
 

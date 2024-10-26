@@ -141,7 +141,7 @@ public class JAWTDrawingSurfaceInfo extends Struct<JAWTDrawingSurfaceInfo> {
     /** Unsafe version of {@link #bounds}. */
     public static JAWTRectangle nbounds(long struct) { return JAWTRectangle.create(struct + JAWTDrawingSurfaceInfo.BOUNDS); }
     /** Unsafe version of {@link #clipSize}. */
-    public static int nclipSize(long struct) { return UNSAFE.getInt(null, struct + JAWTDrawingSurfaceInfo.CLIPSIZE); }
+    public static int nclipSize(long struct) { return memGetInt(struct + JAWTDrawingSurfaceInfo.CLIPSIZE); }
     /** Unsafe version of {@link #clip}. */
     public static JAWTRectangle.Buffer nclip(long struct) { return JAWTRectangle.create(memGetAddress(struct + JAWTDrawingSurfaceInfo.CLIP), nclipSize(struct)); }
 

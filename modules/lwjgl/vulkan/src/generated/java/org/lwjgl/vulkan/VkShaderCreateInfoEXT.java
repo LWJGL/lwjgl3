@@ -458,17 +458,17 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkShaderCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #stage}. */
-    public static int nstage(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.STAGE); }
+    public static int nstage(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.STAGE); }
     /** Unsafe version of {@link #nextStage}. */
-    public static int nnextStage(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.NEXTSTAGE); }
+    public static int nnextStage(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.NEXTSTAGE); }
     /** Unsafe version of {@link #codeType}. */
-    public static int ncodeType(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.CODETYPE); }
+    public static int ncodeType(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.CODETYPE); }
     /** Unsafe version of {@link #codeSize}. */
     public static long ncodeSize(long struct) { return memGetAddress(struct + VkShaderCreateInfoEXT.CODESIZE); }
     /** Unsafe version of {@link #pCode() pCode}. */
@@ -478,28 +478,28 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     /** Unsafe version of {@link #pNameString}. */
     @Nullable public static String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkShaderCreateInfoEXT.PNAME)); }
     /** Unsafe version of {@link #setLayoutCount}. */
-    public static int nsetLayoutCount(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.SETLAYOUTCOUNT); }
+    public static int nsetLayoutCount(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.SETLAYOUTCOUNT); }
     /** Unsafe version of {@link #pSetLayouts() pSetLayouts}. */
     @Nullable public static LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkShaderCreateInfoEXT.PSETLAYOUTS), nsetLayoutCount(struct)); }
     /** Unsafe version of {@link #pushConstantRangeCount}. */
-    public static int npushConstantRangeCount(long struct) { return UNSAFE.getInt(null, struct + VkShaderCreateInfoEXT.PUSHCONSTANTRANGECOUNT); }
+    public static int npushConstantRangeCount(long struct) { return memGetInt(struct + VkShaderCreateInfoEXT.PUSHCONSTANTRANGECOUNT); }
     /** Unsafe version of {@link #pPushConstantRanges}. */
     @Nullable public static VkPushConstantRange.Buffer npPushConstantRanges(long struct) { return VkPushConstantRange.createSafe(memGetAddress(struct + VkShaderCreateInfoEXT.PPUSHCONSTANTRANGES), npushConstantRangeCount(struct)); }
     /** Unsafe version of {@link #pSpecializationInfo}. */
     @Nullable public static VkSpecializationInfo npSpecializationInfo(long struct) { return VkSpecializationInfo.createSafe(memGetAddress(struct + VkShaderCreateInfoEXT.PSPECIALIZATIONINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkShaderCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #stage(int) stage}. */
-    public static void nstage(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.STAGE, value); }
+    public static void nstage(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.STAGE, value); }
     /** Unsafe version of {@link #nextStage(int) nextStage}. */
-    public static void nnextStage(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.NEXTSTAGE, value); }
+    public static void nnextStage(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.NEXTSTAGE, value); }
     /** Unsafe version of {@link #codeType(int) codeType}. */
-    public static void ncodeType(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.CODETYPE, value); }
+    public static void ncodeType(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.CODETYPE, value); }
     /** Sets the specified value to the {@code codeSize} field of the specified {@code struct}. */
     public static void ncodeSize(long struct, long value) { memPutAddress(struct + VkShaderCreateInfoEXT.CODESIZE, value); }
     /** Unsafe version of {@link #pCode(ByteBuffer) pCode}. */
@@ -510,11 +510,11 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
         memPutAddress(struct + VkShaderCreateInfoEXT.PNAME, memAddressSafe(value));
     }
     /** Sets the specified value to the {@code setLayoutCount} field of the specified {@code struct}. */
-    public static void nsetLayoutCount(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.SETLAYOUTCOUNT, value); }
+    public static void nsetLayoutCount(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.SETLAYOUTCOUNT, value); }
     /** Unsafe version of {@link #pSetLayouts(LongBuffer) pSetLayouts}. */
     public static void npSetLayouts(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkShaderCreateInfoEXT.PSETLAYOUTS, memAddressSafe(value)); if (value != null) { nsetLayoutCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code pushConstantRangeCount} field of the specified {@code struct}. */
-    public static void npushConstantRangeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderCreateInfoEXT.PUSHCONSTANTRANGECOUNT, value); }
+    public static void npushConstantRangeCount(long struct, int value) { memPutInt(struct + VkShaderCreateInfoEXT.PUSHCONSTANTRANGECOUNT, value); }
     /** Unsafe version of {@link #pPushConstantRanges(VkPushConstantRange.Buffer) pPushConstantRanges}. */
     public static void npPushConstantRanges(long struct, @Nullable VkPushConstantRange.Buffer value) { memPutAddress(struct + VkShaderCreateInfoEXT.PPUSHCONSTANTRANGES, memAddressSafe(value)); if (value != null) { npushConstantRangeCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pSpecializationInfo(VkSpecializationInfo) pSpecializationInfo}. */

@@ -244,22 +244,22 @@ public class IOURingGeteventsArg extends Struct<IOURingGeteventsArg> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sigmask}. */
-    public static long nsigmask(long struct) { return UNSAFE.getLong(null, struct + IOURingGeteventsArg.SIGMASK); }
+    public static long nsigmask(long struct) { return memGetLong(struct + IOURingGeteventsArg.SIGMASK); }
     /** Unsafe version of {@link #sigmask_sz}. */
-    public static int nsigmask_sz(long struct) { return UNSAFE.getInt(null, struct + IOURingGeteventsArg.SIGMASK_SZ); }
+    public static int nsigmask_sz(long struct) { return memGetInt(struct + IOURingGeteventsArg.SIGMASK_SZ); }
     /** Unsafe version of {@link #pad}. */
-    public static int npad(long struct) { return UNSAFE.getInt(null, struct + IOURingGeteventsArg.PAD); }
+    public static int npad(long struct) { return memGetInt(struct + IOURingGeteventsArg.PAD); }
     /** Unsafe version of {@link #ts}. */
-    public static long nts(long struct) { return UNSAFE.getLong(null, struct + IOURingGeteventsArg.TS); }
+    public static long nts(long struct) { return memGetLong(struct + IOURingGeteventsArg.TS); }
 
     /** Unsafe version of {@link #sigmask(long) sigmask}. */
-    public static void nsigmask(long struct, long value) { UNSAFE.putLong(null, struct + IOURingGeteventsArg.SIGMASK, value); }
+    public static void nsigmask(long struct, long value) { memPutLong(struct + IOURingGeteventsArg.SIGMASK, value); }
     /** Unsafe version of {@link #sigmask_sz(int) sigmask_sz}. */
-    public static void nsigmask_sz(long struct, int value) { UNSAFE.putInt(null, struct + IOURingGeteventsArg.SIGMASK_SZ, value); }
+    public static void nsigmask_sz(long struct, int value) { memPutInt(struct + IOURingGeteventsArg.SIGMASK_SZ, value); }
     /** Unsafe version of {@link #pad(int) pad}. */
-    public static void npad(long struct, int value) { UNSAFE.putInt(null, struct + IOURingGeteventsArg.PAD, value); }
+    public static void npad(long struct, int value) { memPutInt(struct + IOURingGeteventsArg.PAD, value); }
     /** Unsafe version of {@link #ts(long) ts}. */
-    public static void nts(long struct, long value) { UNSAFE.putLong(null, struct + IOURingGeteventsArg.TS, value); }
+    public static void nts(long struct, long value) { memPutLong(struct + IOURingGeteventsArg.TS, value); }
 
     // -----------------------------------
 

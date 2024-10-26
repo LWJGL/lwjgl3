@@ -277,20 +277,20 @@ public class VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #perViewRenderAreaCount}. */
-    public static int nperViewRenderAreaCount(long struct) { return UNSAFE.getInt(null, struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PERVIEWRENDERAREACOUNT); }
+    public static int nperViewRenderAreaCount(long struct) { return memGetInt(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PERVIEWRENDERAREACOUNT); }
     /** Unsafe version of {@link #pPerViewRenderAreas}. */
     @Nullable public static VkRect2D.Buffer npPerViewRenderAreas(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PPERVIEWRENDERAREAS), nperViewRenderAreaCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PNEXT, value); }
     /** Sets the specified value to the {@code perViewRenderAreaCount} field of the specified {@code struct}. */
-    public static void nperViewRenderAreaCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PERVIEWRENDERAREACOUNT, value); }
+    public static void nperViewRenderAreaCount(long struct, int value) { memPutInt(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PERVIEWRENDERAREACOUNT, value); }
     /** Unsafe version of {@link #pPerViewRenderAreas(VkRect2D.Buffer) pPerViewRenderAreas}. */
     public static void npPerViewRenderAreas(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.PPERVIEWRENDERAREAS, memAddressSafe(value)); nperViewRenderAreaCount(struct, value == null ? 0 : value.remaining()); }
 

@@ -270,28 +270,28 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.PNEXT); }
     /** Unsafe version of {@link #maxWorkGroupCount}. */
     public static IntBuffer nmaxWorkGroupCount(long struct) { return memIntBuffer(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPCOUNT, 3); }
     /** Unsafe version of {@link #maxWorkGroupCount(int) maxWorkGroupCount}. */
     public static int nmaxWorkGroupCount(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPCOUNT + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPCOUNT + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxWorkGroupSize}. */
     public static IntBuffer nmaxWorkGroupSize(long struct) { return memIntBuffer(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPSIZE, 3); }
     /** Unsafe version of {@link #maxWorkGroupSize(int) maxWorkGroupSize}. */
     public static int nmaxWorkGroupSize(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPSIZE + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXWORKGROUPSIZE + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxOutputClusterCount}. */
-    public static int nmaxOutputClusterCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXOUTPUTCLUSTERCOUNT); }
+    public static int nmaxOutputClusterCount(long struct) { return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXOUTPUTCLUSTERCOUNT); }
     /** Unsafe version of {@link #indirectBufferOffsetAlignment}. */
-    public static long nindirectBufferOffsetAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.INDIRECTBUFFEROFFSETALIGNMENT); }
+    public static long nindirectBufferOffsetAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.INDIRECTBUFFEROFFSETALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.PNEXT, value); }
 

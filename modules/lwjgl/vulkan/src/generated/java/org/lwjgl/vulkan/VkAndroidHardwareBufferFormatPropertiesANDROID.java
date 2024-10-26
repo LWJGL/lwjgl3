@@ -312,28 +312,28 @@ public class VkAndroidHardwareBufferFormatPropertiesANDROID extends Struct<VkAnd
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.PNEXT); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.FORMAT); }
     /** Unsafe version of {@link #externalFormat}. */
-    public static long nexternalFormat(long struct) { return UNSAFE.getLong(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.EXTERNALFORMAT); }
+    public static long nexternalFormat(long struct) { return memGetLong(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.EXTERNALFORMAT); }
     /** Unsafe version of {@link #formatFeatures}. */
-    public static int nformatFeatures(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.FORMATFEATURES); }
+    public static int nformatFeatures(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.FORMATFEATURES); }
     /** Unsafe version of {@link #samplerYcbcrConversionComponents}. */
     public static VkComponentMapping nsamplerYcbcrConversionComponents(long struct) { return VkComponentMapping.create(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SAMPLERYCBCRCONVERSIONCOMPONENTS); }
     /** Unsafe version of {@link #suggestedYcbcrModel}. */
-    public static int nsuggestedYcbcrModel(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCBCRMODEL); }
+    public static int nsuggestedYcbcrModel(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCBCRMODEL); }
     /** Unsafe version of {@link #suggestedYcbcrRange}. */
-    public static int nsuggestedYcbcrRange(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCBCRRANGE); }
+    public static int nsuggestedYcbcrRange(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCBCRRANGE); }
     /** Unsafe version of {@link #suggestedXChromaOffset}. */
-    public static int nsuggestedXChromaOffset(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDXCHROMAOFFSET); }
+    public static int nsuggestedXChromaOffset(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDXCHROMAOFFSET); }
     /** Unsafe version of {@link #suggestedYChromaOffset}. */
-    public static int nsuggestedYChromaOffset(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCHROMAOFFSET); }
+    public static int nsuggestedYChromaOffset(long struct) { return memGetInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.SUGGESTEDYCHROMAOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAndroidHardwareBufferFormatPropertiesANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAndroidHardwareBufferFormatPropertiesANDROID.PNEXT, value); }
 

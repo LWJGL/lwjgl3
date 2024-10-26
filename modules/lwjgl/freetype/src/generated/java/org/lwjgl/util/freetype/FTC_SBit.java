@@ -172,23 +172,23 @@ public class FTC_SBit extends Struct<FTC_SBit> {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static byte nwidth(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.WIDTH); }
+    public static byte nwidth(long struct) { return memGetByte(struct + FTC_SBit.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static byte nheight(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.HEIGHT); }
+    public static byte nheight(long struct) { return memGetByte(struct + FTC_SBit.HEIGHT); }
     /** Unsafe version of {@link #left}. */
-    public static byte nleft(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.LEFT); }
+    public static byte nleft(long struct) { return memGetByte(struct + FTC_SBit.LEFT); }
     /** Unsafe version of {@link #top}. */
-    public static byte ntop(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.TOP); }
+    public static byte ntop(long struct) { return memGetByte(struct + FTC_SBit.TOP); }
     /** Unsafe version of {@link #format}. */
-    public static byte nformat(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.FORMAT); }
+    public static byte nformat(long struct) { return memGetByte(struct + FTC_SBit.FORMAT); }
     /** Unsafe version of {@link #max_grays}. */
-    public static byte nmax_grays(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.MAX_GRAYS); }
+    public static byte nmax_grays(long struct) { return memGetByte(struct + FTC_SBit.MAX_GRAYS); }
     /** Unsafe version of {@link #pitch}. */
-    public static short npitch(long struct) { return UNSAFE.getShort(null, struct + FTC_SBit.PITCH); }
+    public static short npitch(long struct) { return memGetShort(struct + FTC_SBit.PITCH); }
     /** Unsafe version of {@link #xadvance}. */
-    public static byte nxadvance(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.XADVANCE); }
+    public static byte nxadvance(long struct) { return memGetByte(struct + FTC_SBit.XADVANCE); }
     /** Unsafe version of {@link #yadvance}. */
-    public static byte nyadvance(long struct) { return UNSAFE.getByte(null, struct + FTC_SBit.YADVANCE); }
+    public static byte nyadvance(long struct) { return memGetByte(struct + FTC_SBit.YADVANCE); }
     /** Unsafe version of {@link #buffer(int) buffer}. */
     public static ByteBuffer nbuffer(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + FTC_SBit.BUFFER), capacity); }
 

@@ -287,34 +287,34 @@ public class FMOD_ASYNCREADINFO extends Struct<FMOD_ASYNCREADINFO> implements Na
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + FMOD_ASYNCREADINFO.HANDLE); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + FMOD_ASYNCREADINFO.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + FMOD_ASYNCREADINFO.OFFSET); }
     /** Unsafe version of {@link #sizebytes}. */
-    public static int nsizebytes(long struct) { return UNSAFE.getInt(null, struct + FMOD_ASYNCREADINFO.SIZEBYTES); }
+    public static int nsizebytes(long struct) { return memGetInt(struct + FMOD_ASYNCREADINFO.SIZEBYTES); }
     /** Unsafe version of {@link #priority}. */
-    public static int npriority(long struct) { return UNSAFE.getInt(null, struct + FMOD_ASYNCREADINFO.PRIORITY); }
+    public static int npriority(long struct) { return memGetInt(struct + FMOD_ASYNCREADINFO.PRIORITY); }
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + FMOD_ASYNCREADINFO.USERDATA); }
     /** Unsafe version of {@link #buffer() buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(memGetAddress(struct + FMOD_ASYNCREADINFO.BUFFER), nbytesread(struct)); }
     /** Unsafe version of {@link #bytesread}. */
-    public static int nbytesread(long struct) { return UNSAFE.getInt(null, struct + FMOD_ASYNCREADINFO.BYTESREAD); }
+    public static int nbytesread(long struct) { return memGetInt(struct + FMOD_ASYNCREADINFO.BYTESREAD); }
     /** Unsafe version of {@link #done}. */
     public static FMOD_FILE_ASYNCDONE_FUNC ndone(long struct) { return FMOD_FILE_ASYNCDONE_FUNC.create(memGetAddress(struct + FMOD_ASYNCREADINFO.DONE)); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + FMOD_ASYNCREADINFO.HANDLE, check(value)); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ASYNCREADINFO.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + FMOD_ASYNCREADINFO.OFFSET, value); }
     /** Unsafe version of {@link #sizebytes(int) sizebytes}. */
-    public static void nsizebytes(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ASYNCREADINFO.SIZEBYTES, value); }
+    public static void nsizebytes(long struct, int value) { memPutInt(struct + FMOD_ASYNCREADINFO.SIZEBYTES, value); }
     /** Unsafe version of {@link #priority(int) priority}. */
-    public static void npriority(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ASYNCREADINFO.PRIORITY, value); }
+    public static void npriority(long struct, int value) { memPutInt(struct + FMOD_ASYNCREADINFO.PRIORITY, value); }
     /** Unsafe version of {@link #userdata(long) userdata}. */
     public static void nuserdata(long struct, long value) { memPutAddress(struct + FMOD_ASYNCREADINFO.USERDATA, value); }
     /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
     public static void nbuffer(long struct, ByteBuffer value) { memPutAddress(struct + FMOD_ASYNCREADINFO.BUFFER, memAddress(value)); nbytesread(struct, value.remaining()); }
     /** Sets the specified value to the {@code bytesread} field of the specified {@code struct}. */
-    public static void nbytesread(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ASYNCREADINFO.BYTESREAD, value); }
+    public static void nbytesread(long struct, int value) { memPutInt(struct + FMOD_ASYNCREADINFO.BYTESREAD, value); }
     /** Unsafe version of {@link #done(FMOD_FILE_ASYNCDONE_FUNCI) done}. */
     public static void ndone(long struct, FMOD_FILE_ASYNCDONE_FUNCI value) { memPutAddress(struct + FMOD_ASYNCREADINFO.DONE, value.address()); }
 

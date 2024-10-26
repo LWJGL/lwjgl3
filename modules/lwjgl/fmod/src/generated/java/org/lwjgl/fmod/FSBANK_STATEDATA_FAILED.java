@@ -225,14 +225,14 @@ public class FSBANK_STATEDATA_FAILED extends Struct<FSBANK_STATEDATA_FAILED> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #errorCode}. */
-    public static int nerrorCode(long struct) { return UNSAFE.getInt(null, struct + FSBANK_STATEDATA_FAILED.ERRORCODE); }
+    public static int nerrorCode(long struct) { return memGetInt(struct + FSBANK_STATEDATA_FAILED.ERRORCODE); }
     /** Unsafe version of {@link #errorString}. */
     public static ByteBuffer nerrorString(long struct) { return memByteBuffer(struct + FSBANK_STATEDATA_FAILED.ERRORSTRING, 256); }
     /** Unsafe version of {@link #errorStringString}. */
     public static String nerrorStringString(long struct) { return memASCII(struct + FSBANK_STATEDATA_FAILED.ERRORSTRING); }
 
     /** Unsafe version of {@link #errorCode(int) errorCode}. */
-    public static void nerrorCode(long struct, int value) { UNSAFE.putInt(null, struct + FSBANK_STATEDATA_FAILED.ERRORCODE, value); }
+    public static void nerrorCode(long struct, int value) { memPutInt(struct + FSBANK_STATEDATA_FAILED.ERRORCODE, value); }
     /** Unsafe version of {@link #errorString(ByteBuffer) errorString}. */
     public static void nerrorString(long struct, ByteBuffer value) {
         if (CHECKS) {

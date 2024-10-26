@@ -285,34 +285,34 @@ public class SpvcMslResourceBinding2 extends Struct<SpvcMslResourceBinding2> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #stage}. */
-    public static int nstage(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.STAGE); }
+    public static int nstage(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.STAGE); }
     /** Unsafe version of {@link #desc_set}. */
-    public static int ndesc_set(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.DESC_SET); }
+    public static int ndesc_set(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.DESC_SET); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.BINDING); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.COUNT); }
     /** Unsafe version of {@link #msl_buffer}. */
-    public static int nmsl_buffer(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.MSL_BUFFER); }
+    public static int nmsl_buffer(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.MSL_BUFFER); }
     /** Unsafe version of {@link #msl_texture}. */
-    public static int nmsl_texture(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.MSL_TEXTURE); }
+    public static int nmsl_texture(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.MSL_TEXTURE); }
     /** Unsafe version of {@link #msl_sampler}. */
-    public static int nmsl_sampler(long struct) { return UNSAFE.getInt(null, struct + SpvcMslResourceBinding2.MSL_SAMPLER); }
+    public static int nmsl_sampler(long struct) { return memGetInt(struct + SpvcMslResourceBinding2.MSL_SAMPLER); }
 
     /** Unsafe version of {@link #stage(int) stage}. */
-    public static void nstage(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.STAGE, value); }
+    public static void nstage(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.STAGE, value); }
     /** Unsafe version of {@link #desc_set(int) desc_set}. */
-    public static void ndesc_set(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.DESC_SET, value); }
+    public static void ndesc_set(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.DESC_SET, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.BINDING, value); }
     /** Unsafe version of {@link #count(int) count}. */
-    public static void ncount(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.COUNT, value); }
+    public static void ncount(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.COUNT, value); }
     /** Unsafe version of {@link #msl_buffer(int) msl_buffer}. */
-    public static void nmsl_buffer(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.MSL_BUFFER, value); }
+    public static void nmsl_buffer(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.MSL_BUFFER, value); }
     /** Unsafe version of {@link #msl_texture(int) msl_texture}. */
-    public static void nmsl_texture(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.MSL_TEXTURE, value); }
+    public static void nmsl_texture(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.MSL_TEXTURE, value); }
     /** Unsafe version of {@link #msl_sampler(int) msl_sampler}. */
-    public static void nmsl_sampler(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslResourceBinding2.MSL_SAMPLER, value); }
+    public static void nmsl_sampler(long struct, int value) { memPutInt(struct + SpvcMslResourceBinding2.MSL_SAMPLER, value); }
 
     // -----------------------------------
 

@@ -112,7 +112,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct<CXIdxObjCProtocolRefLis
     /** Unsafe version of {@link #protocols() protocols}. */
     public static PointerBuffer nprotocols(long struct) { return memPointerBuffer(memGetAddress(struct + CXIdxObjCProtocolRefListInfo.PROTOCOLS), nnumProtocols(struct)); }
     /** Unsafe version of {@link #numProtocols}. */
-    public static int nnumProtocols(long struct) { return UNSAFE.getInt(null, struct + CXIdxObjCProtocolRefListInfo.NUMPROTOCOLS); }
+    public static int nnumProtocols(long struct) { return memGetInt(struct + CXIdxObjCProtocolRefListInfo.NUMPROTOCOLS); }
 
     // -----------------------------------
 

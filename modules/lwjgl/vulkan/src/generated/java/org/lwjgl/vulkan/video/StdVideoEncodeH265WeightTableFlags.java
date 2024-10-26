@@ -243,22 +243,22 @@ public class StdVideoEncodeH265WeightTableFlags extends Struct<StdVideoEncodeH26
     // -----------------------------------
 
     /** Unsafe version of {@link #luma_weight_l0_flag}. */
-    public static short nluma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L0_FLAG); }
+    public static short nluma_weight_l0_flag(long struct) { return memGetShort(struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L0_FLAG); }
     /** Unsafe version of {@link #chroma_weight_l0_flag}. */
-    public static short nchroma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L0_FLAG); }
+    public static short nchroma_weight_l0_flag(long struct) { return memGetShort(struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L0_FLAG); }
     /** Unsafe version of {@link #luma_weight_l1_flag}. */
-    public static short nluma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L1_FLAG); }
+    public static short nluma_weight_l1_flag(long struct) { return memGetShort(struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L1_FLAG); }
     /** Unsafe version of {@link #chroma_weight_l1_flag}. */
-    public static short nchroma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L1_FLAG); }
+    public static short nchroma_weight_l1_flag(long struct) { return memGetShort(struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L1_FLAG); }
 
     /** Unsafe version of {@link #luma_weight_l0_flag(short) luma_weight_l0_flag}. */
-    public static void nluma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L0_FLAG, value); }
+    public static void nluma_weight_l0_flag(long struct, short value) { memPutShort(struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L0_FLAG, value); }
     /** Unsafe version of {@link #chroma_weight_l0_flag(short) chroma_weight_l0_flag}. */
-    public static void nchroma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L0_FLAG, value); }
+    public static void nchroma_weight_l0_flag(long struct, short value) { memPutShort(struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L0_FLAG, value); }
     /** Unsafe version of {@link #luma_weight_l1_flag(short) luma_weight_l1_flag}. */
-    public static void nluma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L1_FLAG, value); }
+    public static void nluma_weight_l1_flag(long struct, short value) { memPutShort(struct + StdVideoEncodeH265WeightTableFlags.LUMA_WEIGHT_L1_FLAG, value); }
     /** Unsafe version of {@link #chroma_weight_l1_flag(short) chroma_weight_l1_flag}. */
-    public static void nchroma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L1_FLAG, value); }
+    public static void nchroma_weight_l1_flag(long struct, short value) { memPutShort(struct + StdVideoEncodeH265WeightTableFlags.CHROMA_WEIGHT_L1_FLAG, value); }
 
     // -----------------------------------
 

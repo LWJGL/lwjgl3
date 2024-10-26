@@ -278,18 +278,18 @@ public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkEventCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkEventCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkEventCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkEventCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkEventCreateInfo.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkEventCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkEventCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkEventCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkEventCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkEventCreateInfo.FLAGS, value); }
 
     // -----------------------------------
 

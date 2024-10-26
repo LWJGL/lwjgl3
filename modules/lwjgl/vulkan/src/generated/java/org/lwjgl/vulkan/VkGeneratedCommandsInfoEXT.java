@@ -386,54 +386,54 @@ public class VkGeneratedCommandsInfoEXT extends Struct<VkGeneratedCommandsInfoEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeneratedCommandsInfoEXT.PNEXT); }
     /** Unsafe version of {@link #shaderStages}. */
-    public static int nshaderStages(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoEXT.SHADERSTAGES); }
+    public static int nshaderStages(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoEXT.SHADERSTAGES); }
     /** Unsafe version of {@link #indirectExecutionSet}. */
-    public static long nindirectExecutionSet(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTEXECUTIONSET); }
+    public static long nindirectExecutionSet(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTEXECUTIONSET); }
     /** Unsafe version of {@link #indirectCommandsLayout}. */
-    public static long nindirectCommandsLayout(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTCOMMANDSLAYOUT); }
+    public static long nindirectCommandsLayout(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTCOMMANDSLAYOUT); }
     /** Unsafe version of {@link #indirectAddress}. */
-    public static long nindirectAddress(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESS); }
+    public static long nindirectAddress(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESS); }
     /** Unsafe version of {@link #indirectAddressSize}. */
-    public static long nindirectAddressSize(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESSSIZE); }
+    public static long nindirectAddressSize(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESSSIZE); }
     /** Unsafe version of {@link #preprocessAddress}. */
-    public static long npreprocessAddress(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.PREPROCESSADDRESS); }
+    public static long npreprocessAddress(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.PREPROCESSADDRESS); }
     /** Unsafe version of {@link #preprocessSize}. */
-    public static long npreprocessSize(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.PREPROCESSSIZE); }
+    public static long npreprocessSize(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.PREPROCESSSIZE); }
     /** Unsafe version of {@link #maxSequenceCount}. */
-    public static int nmaxSequenceCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoEXT.MAXSEQUENCECOUNT); }
+    public static int nmaxSequenceCount(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoEXT.MAXSEQUENCECOUNT); }
     /** Unsafe version of {@link #sequenceCountAddress}. */
-    public static long nsequenceCountAddress(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoEXT.SEQUENCECOUNTADDRESS); }
+    public static long nsequenceCountAddress(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoEXT.SEQUENCECOUNTADDRESS); }
     /** Unsafe version of {@link #maxDrawCount}. */
-    public static int nmaxDrawCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoEXT.MAXDRAWCOUNT); }
+    public static int nmaxDrawCount(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoEXT.MAXDRAWCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeneratedCommandsInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderStages(int) shaderStages}. */
-    public static void nshaderStages(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoEXT.SHADERSTAGES, value); }
+    public static void nshaderStages(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoEXT.SHADERSTAGES, value); }
     /** Unsafe version of {@link #indirectExecutionSet(long) indirectExecutionSet}. */
-    public static void nindirectExecutionSet(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTEXECUTIONSET, value); }
+    public static void nindirectExecutionSet(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTEXECUTIONSET, value); }
     /** Unsafe version of {@link #indirectCommandsLayout(long) indirectCommandsLayout}. */
-    public static void nindirectCommandsLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTCOMMANDSLAYOUT, value); }
+    public static void nindirectCommandsLayout(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTCOMMANDSLAYOUT, value); }
     /** Unsafe version of {@link #indirectAddress(long) indirectAddress}. */
-    public static void nindirectAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESS, value); }
+    public static void nindirectAddress(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESS, value); }
     /** Unsafe version of {@link #indirectAddressSize(long) indirectAddressSize}. */
-    public static void nindirectAddressSize(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESSSIZE, value); }
+    public static void nindirectAddressSize(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.INDIRECTADDRESSSIZE, value); }
     /** Unsafe version of {@link #preprocessAddress(long) preprocessAddress}. */
-    public static void npreprocessAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.PREPROCESSADDRESS, value); }
+    public static void npreprocessAddress(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.PREPROCESSADDRESS, value); }
     /** Unsafe version of {@link #preprocessSize(long) preprocessSize}. */
-    public static void npreprocessSize(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.PREPROCESSSIZE, value); }
+    public static void npreprocessSize(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.PREPROCESSSIZE, value); }
     /** Unsafe version of {@link #maxSequenceCount(int) maxSequenceCount}. */
-    public static void nmaxSequenceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoEXT.MAXSEQUENCECOUNT, value); }
+    public static void nmaxSequenceCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoEXT.MAXSEQUENCECOUNT, value); }
     /** Unsafe version of {@link #sequenceCountAddress(long) sequenceCountAddress}. */
-    public static void nsequenceCountAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoEXT.SEQUENCECOUNTADDRESS, value); }
+    public static void nsequenceCountAddress(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoEXT.SEQUENCECOUNTADDRESS, value); }
     /** Unsafe version of {@link #maxDrawCount(int) maxDrawCount}. */
-    public static void nmaxDrawCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoEXT.MAXDRAWCOUNT, value); }
+    public static void nmaxDrawCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoEXT.MAXDRAWCOUNT, value); }
 
     // -----------------------------------
 

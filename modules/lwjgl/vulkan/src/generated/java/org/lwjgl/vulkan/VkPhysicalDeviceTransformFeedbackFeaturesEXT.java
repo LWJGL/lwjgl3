@@ -276,22 +276,22 @@ public class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #transformFeedback}. */
-    public static int ntransformFeedback(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.TRANSFORMFEEDBACK); }
+    public static int ntransformFeedback(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.TRANSFORMFEEDBACK); }
     /** Unsafe version of {@link #geometryStreams}. */
-    public static int ngeometryStreams(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.GEOMETRYSTREAMS); }
+    public static int ngeometryStreams(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.GEOMETRYSTREAMS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #transformFeedback(boolean) transformFeedback}. */
-    public static void ntransformFeedback(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.TRANSFORMFEEDBACK, value); }
+    public static void ntransformFeedback(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.TRANSFORMFEEDBACK, value); }
     /** Unsafe version of {@link #geometryStreams(boolean) geometryStreams}. */
-    public static void ngeometryStreams(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.GEOMETRYSTREAMS, value); }
+    public static void ngeometryStreams(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTransformFeedbackFeaturesEXT.GEOMETRYSTREAMS, value); }
 
     // -----------------------------------
 

@@ -237,12 +237,12 @@ public class XrActiveActionSetPriorityEXT extends Struct<XrActiveActionSetPriori
     /** Unsafe version of {@link #actionSet}. */
     public static long nactionSet(long struct) { return memGetAddress(struct + XrActiveActionSetPriorityEXT.ACTIONSET); }
     /** Unsafe version of {@link #priorityOverride}. */
-    public static int npriorityOverride(long struct) { return UNSAFE.getInt(null, struct + XrActiveActionSetPriorityEXT.PRIORITYOVERRIDE); }
+    public static int npriorityOverride(long struct) { return memGetInt(struct + XrActiveActionSetPriorityEXT.PRIORITYOVERRIDE); }
 
     /** Unsafe version of {@link #actionSet(XrActionSet) actionSet}. */
     public static void nactionSet(long struct, XrActionSet value) { memPutAddress(struct + XrActiveActionSetPriorityEXT.ACTIONSET, value.address()); }
     /** Unsafe version of {@link #priorityOverride(int) priorityOverride}. */
-    public static void npriorityOverride(long struct, int value) { UNSAFE.putInt(null, struct + XrActiveActionSetPriorityEXT.PRIORITYOVERRIDE, value); }
+    public static void npriorityOverride(long struct, int value) { memPutInt(struct + XrActiveActionSetPriorityEXT.PRIORITYOVERRIDE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

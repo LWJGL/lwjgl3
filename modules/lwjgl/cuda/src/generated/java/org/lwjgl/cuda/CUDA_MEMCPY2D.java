@@ -408,7 +408,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #srcY}. */
     public static long nsrcY(long struct) { return memGetAddress(struct + CUDA_MEMCPY2D.SRCY); }
     /** Unsafe version of {@link #srcMemoryType}. */
-    public static int nsrcMemoryType(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY2D.SRCMEMORYTYPE); }
+    public static int nsrcMemoryType(long struct) { return memGetInt(struct + CUDA_MEMCPY2D.SRCMEMORYTYPE); }
     /** Unsafe version of {@link #srcHost(int) srcHost}. */
     @Nullable public static ByteBuffer nsrcHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.SRCHOST), capacity); }
     /** Unsafe version of {@link #srcDevice}. */
@@ -422,7 +422,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #dstY}. */
     public static long ndstY(long struct) { return memGetAddress(struct + CUDA_MEMCPY2D.DSTY); }
     /** Unsafe version of {@link #dstMemoryType}. */
-    public static int ndstMemoryType(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY2D.DSTMEMORYTYPE); }
+    public static int ndstMemoryType(long struct) { return memGetInt(struct + CUDA_MEMCPY2D.DSTMEMORYTYPE); }
     /** Unsafe version of {@link #dstHost(int) dstHost}. */
     @Nullable public static ByteBuffer ndstHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.DSTHOST), capacity); }
     /** Unsafe version of {@link #dstDevice}. */
@@ -441,7 +441,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #srcY(long) srcY}. */
     public static void nsrcY(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY2D.SRCY, value); }
     /** Unsafe version of {@link #srcMemoryType(int) srcMemoryType}. */
-    public static void nsrcMemoryType(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY2D.SRCMEMORYTYPE, value); }
+    public static void nsrcMemoryType(long struct, int value) { memPutInt(struct + CUDA_MEMCPY2D.SRCMEMORYTYPE, value); }
     /** Unsafe version of {@link #srcHost(ByteBuffer) srcHost}. */
     public static void nsrcHost(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY2D.SRCHOST, memAddressSafe(value)); }
     /** Unsafe version of {@link #srcDevice(long) srcDevice}. */
@@ -455,7 +455,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #dstY(long) dstY}. */
     public static void ndstY(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY2D.DSTY, value); }
     /** Unsafe version of {@link #dstMemoryType(int) dstMemoryType}. */
-    public static void ndstMemoryType(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY2D.DSTMEMORYTYPE, value); }
+    public static void ndstMemoryType(long struct, int value) { memPutInt(struct + CUDA_MEMCPY2D.DSTMEMORYTYPE, value); }
     /** Unsafe version of {@link #dstHost(ByteBuffer) dstHost}. */
     public static void ndstHost(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY2D.DSTHOST, memAddressSafe(value)); }
     /** Unsafe version of {@link #dstDevice(long) dstDevice}. */

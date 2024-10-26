@@ -267,20 +267,20 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PNEXT); }
     /** Unsafe version of {@link #layeredApiCount}. */
-    public static int nlayeredApiCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT); }
+    public static int nlayeredApiCount(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT); }
     /** Unsafe version of {@link #pLayeredApis}. */
     @Nullable public static VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer npLayeredApis(long struct) { return VkPhysicalDeviceLayeredApiPropertiesKHR.createSafe(memGetAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS), nlayeredApiCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PNEXT, value); }
     /** Sets the specified value to the {@code layeredApiCount} field of the specified {@code struct}. */
-    public static void nlayeredApiCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT, value); }
+    public static void nlayeredApiCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT, value); }
     /** Unsafe version of {@link #pLayeredApis(VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer) pLayeredApis}. */
     public static void npLayeredApis(long struct, @Nullable VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS, memAddressSafe(value)); if (value != null) { nlayeredApiCount(struct, value.remaining()); } }
 

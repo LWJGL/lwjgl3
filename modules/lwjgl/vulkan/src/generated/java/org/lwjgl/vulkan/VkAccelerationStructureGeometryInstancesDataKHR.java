@@ -259,20 +259,20 @@ public class VkAccelerationStructureGeometryInstancesDataKHR extends Struct<VkAc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryInstancesDataKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryInstancesDataKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureGeometryInstancesDataKHR.PNEXT); }
     /** Unsafe version of {@link #arrayOfPointers}. */
-    public static int narrayOfPointers(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryInstancesDataKHR.ARRAYOFPOINTERS); }
+    public static int narrayOfPointers(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryInstancesDataKHR.ARRAYOFPOINTERS); }
     /** Unsafe version of {@link #data}. */
     public static VkDeviceOrHostAddressConstKHR ndata(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureGeometryInstancesDataKHR.DATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryInstancesDataKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryInstancesDataKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureGeometryInstancesDataKHR.PNEXT, value); }
     /** Unsafe version of {@link #arrayOfPointers(boolean) arrayOfPointers}. */
-    public static void narrayOfPointers(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryInstancesDataKHR.ARRAYOFPOINTERS, value); }
+    public static void narrayOfPointers(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryInstancesDataKHR.ARRAYOFPOINTERS, value); }
     /** Unsafe version of {@link #data(VkDeviceOrHostAddressConstKHR) data}. */
     public static void ndata(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkAccelerationStructureGeometryInstancesDataKHR.DATA, VkDeviceOrHostAddressConstKHR.SIZEOF); }
 

@@ -404,50 +404,50 @@ public class VkRayTracingPipelineCreateInfoNV extends Struct<VkRayTracingPipelin
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRayTracingPipelineCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.STAGECOUNT); }
+    public static int nstageCount(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.create(memGetAddress(struct + VkRayTracingPipelineCreateInfoNV.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #groupCount}. */
-    public static int ngroupCount(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.GROUPCOUNT); }
+    public static int ngroupCount(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.GROUPCOUNT); }
     /** Unsafe version of {@link #pGroups}. */
     public static VkRayTracingShaderGroupCreateInfoNV.Buffer npGroups(long struct) { return VkRayTracingShaderGroupCreateInfoNV.create(memGetAddress(struct + VkRayTracingPipelineCreateInfoNV.PGROUPS), ngroupCount(struct)); }
     /** Unsafe version of {@link #maxRecursionDepth}. */
-    public static int nmaxRecursionDepth(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.MAXRECURSIONDEPTH); }
+    public static int nmaxRecursionDepth(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.MAXRECURSIONDEPTH); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkRayTracingPipelineCreateInfoNV.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkRayTracingPipelineCreateInfoNV.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.FLAGS, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoNV.PSTAGES, value.address()); nstageCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code groupCount} field of the specified {@code struct}. */
-    public static void ngroupCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.GROUPCOUNT, value); }
+    public static void ngroupCount(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.GROUPCOUNT, value); }
     /** Unsafe version of {@link #pGroups(VkRayTracingShaderGroupCreateInfoNV.Buffer) pGroups}. */
     public static void npGroups(long struct, VkRayTracingShaderGroupCreateInfoNV.Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoNV.PGROUPS, value.address()); ngroupCount(struct, value.remaining()); }
     /** Unsafe version of {@link #maxRecursionDepth(int) maxRecursionDepth}. */
-    public static void nmaxRecursionDepth(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.MAXRECURSIONDEPTH, value); }
+    public static void nmaxRecursionDepth(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.MAXRECURSIONDEPTH, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkRayTracingPipelineCreateInfoNV.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkRayTracingPipelineCreateInfoNV.LAYOUT, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoNV.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

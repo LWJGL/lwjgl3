@@ -303,26 +303,26 @@ public class VkSubresourceLayout extends Struct<VkSubresourceLayout> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkSubresourceLayout.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkSubresourceLayout.SIZE); }
     /** Unsafe version of {@link #rowPitch}. */
-    public static long nrowPitch(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.ROWPITCH); }
+    public static long nrowPitch(long struct) { return memGetLong(struct + VkSubresourceLayout.ROWPITCH); }
     /** Unsafe version of {@link #arrayPitch}. */
-    public static long narrayPitch(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.ARRAYPITCH); }
+    public static long narrayPitch(long struct) { return memGetLong(struct + VkSubresourceLayout.ARRAYPITCH); }
     /** Unsafe version of {@link #depthPitch}. */
-    public static long ndepthPitch(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.DEPTHPITCH); }
+    public static long ndepthPitch(long struct) { return memGetLong(struct + VkSubresourceLayout.DEPTHPITCH); }
 
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkSubresourceLayout.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkSubresourceLayout.SIZE, value); }
     /** Unsafe version of {@link #rowPitch(long) rowPitch}. */
-    public static void nrowPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.ROWPITCH, value); }
+    public static void nrowPitch(long struct, long value) { memPutLong(struct + VkSubresourceLayout.ROWPITCH, value); }
     /** Unsafe version of {@link #arrayPitch(long) arrayPitch}. */
-    public static void narrayPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.ARRAYPITCH, value); }
+    public static void narrayPitch(long struct, long value) { memPutLong(struct + VkSubresourceLayout.ARRAYPITCH, value); }
     /** Unsafe version of {@link #depthPitch(long) depthPitch}. */
-    public static void ndepthPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.DEPTHPITCH, value); }
+    public static void ndepthPitch(long struct, long value) { memPutLong(struct + VkSubresourceLayout.DEPTHPITCH, value); }
 
     // -----------------------------------
 

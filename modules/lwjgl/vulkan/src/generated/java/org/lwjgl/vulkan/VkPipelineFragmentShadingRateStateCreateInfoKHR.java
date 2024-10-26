@@ -270,7 +270,7 @@ public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct<VkPi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #fragmentSize}. */
@@ -279,11 +279,11 @@ public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct<VkPi
     public static IntBuffer ncombinerOps(long struct) { return memIntBuffer(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.COMBINEROPS, 2); }
     /** Unsafe version of {@link #combinerOps(int) combinerOps}. */
     public static int ncombinerOps(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.COMBINEROPS + check(index, 2) * 4);
+        return memGetInt(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.COMBINEROPS + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #fragmentSize(VkExtent2D) fragmentSize}. */
@@ -295,7 +295,7 @@ public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct<VkPi
     }
     /** Unsafe version of {@link #combinerOps(int, int) combinerOps}. */
     public static void ncombinerOps(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.COMBINEROPS + check(index, 2) * 4, value);
+        memPutInt(struct + VkPipelineFragmentShadingRateStateCreateInfoKHR.COMBINEROPS + check(index, 2) * 4, value);
     }
 
     // -----------------------------------

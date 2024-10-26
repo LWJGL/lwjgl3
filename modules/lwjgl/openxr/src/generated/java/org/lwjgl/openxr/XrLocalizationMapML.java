@@ -279,7 +279,7 @@ public class XrLocalizationMapML extends Struct<XrLocalizationMapML> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrLocalizationMapML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrLocalizationMapML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrLocalizationMapML.NEXT); }
     /** Unsafe version of {@link #name}. */
@@ -289,10 +289,10 @@ public class XrLocalizationMapML extends Struct<XrLocalizationMapML> implements 
     /** Unsafe version of {@link #mapUuid}. */
     public static XrUuidEXT nmapUuid(long struct) { return XrUuidEXT.create(struct + XrLocalizationMapML.MAPUUID); }
     /** Unsafe version of {@link #mapType}. */
-    public static int nmapType(long struct) { return UNSAFE.getInt(null, struct + XrLocalizationMapML.MAPTYPE); }
+    public static int nmapType(long struct) { return memGetInt(struct + XrLocalizationMapML.MAPTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrLocalizationMapML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrLocalizationMapML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrLocalizationMapML.NEXT, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
@@ -306,7 +306,7 @@ public class XrLocalizationMapML extends Struct<XrLocalizationMapML> implements 
     /** Unsafe version of {@link #mapUuid(XrUuidEXT) mapUuid}. */
     public static void nmapUuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrLocalizationMapML.MAPUUID, XrUuidEXT.SIZEOF); }
     /** Unsafe version of {@link #mapType(int) mapType}. */
-    public static void nmapType(long struct, int value) { UNSAFE.putInt(null, struct + XrLocalizationMapML.MAPTYPE, value); }
+    public static void nmapType(long struct, int value) { memPutInt(struct + XrLocalizationMapML.MAPTYPE, value); }
 
     // -----------------------------------
 

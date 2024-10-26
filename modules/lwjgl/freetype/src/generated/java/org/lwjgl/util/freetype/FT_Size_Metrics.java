@@ -153,9 +153,9 @@ public class FT_Size_Metrics extends Struct<FT_Size_Metrics> {
     // -----------------------------------
 
     /** Unsafe version of {@link #x_ppem}. */
-    public static short nx_ppem(long struct) { return UNSAFE.getShort(null, struct + FT_Size_Metrics.X_PPEM); }
+    public static short nx_ppem(long struct) { return memGetShort(struct + FT_Size_Metrics.X_PPEM); }
     /** Unsafe version of {@link #y_ppem}. */
-    public static short ny_ppem(long struct) { return UNSAFE.getShort(null, struct + FT_Size_Metrics.Y_PPEM); }
+    public static short ny_ppem(long struct) { return memGetShort(struct + FT_Size_Metrics.Y_PPEM); }
     /** Unsafe version of {@link #x_scale}. */
     public static long nx_scale(long struct) { return memGetCLong(struct + FT_Size_Metrics.X_SCALE); }
     /** Unsafe version of {@link #y_scale}. */

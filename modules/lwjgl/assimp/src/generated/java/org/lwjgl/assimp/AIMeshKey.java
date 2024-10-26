@@ -245,14 +245,14 @@ public class AIMeshKey extends Struct<AIMeshKey> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mTime}. */
-    public static double nmTime(long struct) { return UNSAFE.getDouble(null, struct + AIMeshKey.MTIME); }
+    public static double nmTime(long struct) { return memGetDouble(struct + AIMeshKey.MTIME); }
     /** Unsafe version of {@link #mValue}. */
-    public static int nmValue(long struct) { return UNSAFE.getInt(null, struct + AIMeshKey.MVALUE); }
+    public static int nmValue(long struct) { return memGetInt(struct + AIMeshKey.MVALUE); }
 
     /** Unsafe version of {@link #mTime(double) mTime}. */
-    public static void nmTime(long struct, double value) { UNSAFE.putDouble(null, struct + AIMeshKey.MTIME, value); }
+    public static void nmTime(long struct, double value) { memPutDouble(struct + AIMeshKey.MTIME, value); }
     /** Unsafe version of {@link #mValue(int) mValue}. */
-    public static void nmValue(long struct, int value) { UNSAFE.putInt(null, struct + AIMeshKey.MVALUE, value); }
+    public static void nmValue(long struct, int value) { memPutInt(struct + AIMeshKey.MVALUE, value); }
 
     // -----------------------------------
 

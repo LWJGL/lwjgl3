@@ -310,30 +310,30 @@ public class VkMemoryMapInfoKHR extends Struct<VkMemoryMapInfoKHR> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryMapInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryMapInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryMapInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMemoryMapInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMemoryMapInfoKHR.FLAGS); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkMemoryMapInfoKHR.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkMemoryMapInfoKHR.MEMORY); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkMemoryMapInfoKHR.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkMemoryMapInfoKHR.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryMapInfoKHR.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkMemoryMapInfoKHR.SIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryMapInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryMapInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryMapInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryMapInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkMemoryMapInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryMapInfoKHR.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkMemoryMapInfoKHR.MEMORY, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryMapInfoKHR.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkMemoryMapInfoKHR.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryMapInfoKHR.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkMemoryMapInfoKHR.SIZE, value); }
 
     // -----------------------------------
 

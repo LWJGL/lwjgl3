@@ -223,14 +223,14 @@ public class hb_ot_math_glyph_variant_t extends Struct<hb_ot_math_glyph_variant_
     // -----------------------------------
 
     /** Unsafe version of {@link #glyph}. */
-    public static int nglyph(long struct) { return UNSAFE.getInt(null, struct + hb_ot_math_glyph_variant_t.GLYPH); }
+    public static int nglyph(long struct) { return memGetInt(struct + hb_ot_math_glyph_variant_t.GLYPH); }
     /** Unsafe version of {@link #advance}. */
-    public static int nadvance(long struct) { return UNSAFE.getInt(null, struct + hb_ot_math_glyph_variant_t.ADVANCE); }
+    public static int nadvance(long struct) { return memGetInt(struct + hb_ot_math_glyph_variant_t.ADVANCE); }
 
     /** Unsafe version of {@link #glyph(int) glyph}. */
-    public static void nglyph(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_math_glyph_variant_t.GLYPH, value); }
+    public static void nglyph(long struct, int value) { memPutInt(struct + hb_ot_math_glyph_variant_t.GLYPH, value); }
     /** Unsafe version of {@link #advance(int) advance}. */
-    public static void nadvance(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_math_glyph_variant_t.ADVANCE, value); }
+    public static void nadvance(long struct, int value) { memPutInt(struct + hb_ot_math_glyph_variant_t.ADVANCE, value); }
 
     // -----------------------------------
 

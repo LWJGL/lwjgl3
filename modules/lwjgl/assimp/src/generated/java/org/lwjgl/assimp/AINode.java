@@ -338,11 +338,11 @@ public class AINode extends Struct<AINode> implements NativeResource {
     /** Unsafe version of {@link #mParent}. */
     @Nullable public static AINode nmParent(long struct) { return AINode.createSafe(memGetAddress(struct + AINode.MPARENT)); }
     /** Unsafe version of {@link #mNumChildren}. */
-    public static int nmNumChildren(long struct) { return UNSAFE.getInt(null, struct + AINode.MNUMCHILDREN); }
+    public static int nmNumChildren(long struct) { return memGetInt(struct + AINode.MNUMCHILDREN); }
     /** Unsafe version of {@link #mChildren() mChildren}. */
     @Nullable public static PointerBuffer nmChildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + AINode.MCHILDREN), nmNumChildren(struct)); }
     /** Unsafe version of {@link #mNumMeshes}. */
-    public static int nmNumMeshes(long struct) { return UNSAFE.getInt(null, struct + AINode.MNUMMESHES); }
+    public static int nmNumMeshes(long struct) { return memGetInt(struct + AINode.MNUMMESHES); }
     /** Unsafe version of {@link #mMeshes() mMeshes}. */
     @Nullable public static IntBuffer nmMeshes(long struct) { return memIntBufferSafe(memGetAddress(struct + AINode.MMESHES), nmNumMeshes(struct)); }
     /** Unsafe version of {@link #mMetadata}. */
@@ -355,11 +355,11 @@ public class AINode extends Struct<AINode> implements NativeResource {
     /** Unsafe version of {@link #mParent(AINode) mParent}. */
     public static void nmParent(long struct, @Nullable AINode value) { memPutAddress(struct + AINode.MPARENT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code mNumChildren} field of the specified {@code struct}. */
-    public static void nmNumChildren(long struct, int value) { UNSAFE.putInt(null, struct + AINode.MNUMCHILDREN, value); }
+    public static void nmNumChildren(long struct, int value) { memPutInt(struct + AINode.MNUMCHILDREN, value); }
     /** Unsafe version of {@link #mChildren(PointerBuffer) mChildren}. */
     public static void nmChildren(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AINode.MCHILDREN, memAddressSafe(value)); nmNumChildren(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumMeshes} field of the specified {@code struct}. */
-    public static void nmNumMeshes(long struct, int value) { UNSAFE.putInt(null, struct + AINode.MNUMMESHES, value); }
+    public static void nmNumMeshes(long struct, int value) { memPutInt(struct + AINode.MNUMMESHES, value); }
     /** Unsafe version of {@link #mMeshes(IntBuffer) mMeshes}. */
     public static void nmMeshes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + AINode.MMESHES, memAddressSafe(value)); nmNumMeshes(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMetadata(AIMetaData) mMetadata}. */

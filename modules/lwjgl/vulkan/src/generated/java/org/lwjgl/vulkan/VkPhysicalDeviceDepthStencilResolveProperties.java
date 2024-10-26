@@ -263,20 +263,20 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDepthStencilResolveProperties.PNEXT); }
     /** Unsafe version of {@link #supportedDepthResolveModes}. */
-    public static int nsupportedDepthResolveModes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.SUPPORTEDDEPTHRESOLVEMODES); }
+    public static int nsupportedDepthResolveModes(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.SUPPORTEDDEPTHRESOLVEMODES); }
     /** Unsafe version of {@link #supportedStencilResolveModes}. */
-    public static int nsupportedStencilResolveModes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.SUPPORTEDSTENCILRESOLVEMODES); }
+    public static int nsupportedStencilResolveModes(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.SUPPORTEDSTENCILRESOLVEMODES); }
     /** Unsafe version of {@link #independentResolveNone}. */
-    public static int nindependentResolveNone(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.INDEPENDENTRESOLVENONE); }
+    public static int nindependentResolveNone(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.INDEPENDENTRESOLVENONE); }
     /** Unsafe version of {@link #independentResolve}. */
-    public static int nindependentResolve(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.INDEPENDENTRESOLVE); }
+    public static int nindependentResolve(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.INDEPENDENTRESOLVE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDepthStencilResolveProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDepthStencilResolveProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDepthStencilResolveProperties.PNEXT, value); }
 

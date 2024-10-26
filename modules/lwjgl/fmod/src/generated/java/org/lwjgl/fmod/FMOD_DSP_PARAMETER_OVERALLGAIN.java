@@ -219,14 +219,14 @@ public class FMOD_DSP_PARAMETER_OVERALLGAIN extends Struct<FMOD_DSP_PARAMETER_OV
     // -----------------------------------
 
     /** Unsafe version of {@link #linear_gain}. */
-    public static float nlinear_gain(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN); }
+    public static float nlinear_gain(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN); }
     /** Unsafe version of {@link #linear_gain_additive}. */
-    public static float nlinear_gain_additive(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN_ADDITIVE); }
+    public static float nlinear_gain_additive(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN_ADDITIVE); }
 
     /** Unsafe version of {@link #linear_gain(float) linear_gain}. */
-    public static void nlinear_gain(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN, value); }
+    public static void nlinear_gain(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN, value); }
     /** Unsafe version of {@link #linear_gain_additive(float) linear_gain_additive}. */
-    public static void nlinear_gain_additive(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN_ADDITIVE, value); }
+    public static void nlinear_gain_additive(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_OVERALLGAIN.LINEAR_GAIN_ADDITIVE, value); }
 
     // -----------------------------------
 

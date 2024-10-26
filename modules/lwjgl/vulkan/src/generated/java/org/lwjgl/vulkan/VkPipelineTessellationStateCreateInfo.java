@@ -289,22 +289,22 @@ public class VkPipelineTessellationStateCreateInfo extends Struct<VkPipelineTess
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineTessellationStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineTessellationStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineTessellationStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #patchControlPoints}. */
-    public static int npatchControlPoints(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationStateCreateInfo.PATCHCONTROLPOINTS); }
+    public static int npatchControlPoints(long struct) { return memGetInt(struct + VkPipelineTessellationStateCreateInfo.PATCHCONTROLPOINTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineTessellationStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineTessellationStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineTessellationStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #patchControlPoints(int) patchControlPoints}. */
-    public static void npatchControlPoints(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationStateCreateInfo.PATCHCONTROLPOINTS, value); }
+    public static void npatchControlPoints(long struct, int value) { memPutInt(struct + VkPipelineTessellationStateCreateInfo.PATCHCONTROLPOINTS, value); }
 
     // -----------------------------------
 

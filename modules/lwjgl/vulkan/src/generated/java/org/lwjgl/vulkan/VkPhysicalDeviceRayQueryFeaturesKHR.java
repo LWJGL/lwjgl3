@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct<VkPhysicalDevice
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayQueryFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayQueryFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayQueryFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #rayQuery}. */
-    public static int nrayQuery(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayQueryFeaturesKHR.RAYQUERY); }
+    public static int nrayQuery(long struct) { return memGetInt(struct + VkPhysicalDeviceRayQueryFeaturesKHR.RAYQUERY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayQueryFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayQueryFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayQueryFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #rayQuery(boolean) rayQuery}. */
-    public static void nrayQuery(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayQueryFeaturesKHR.RAYQUERY, value); }
+    public static void nrayQuery(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayQueryFeaturesKHR.RAYQUERY, value); }
 
     // -----------------------------------
 

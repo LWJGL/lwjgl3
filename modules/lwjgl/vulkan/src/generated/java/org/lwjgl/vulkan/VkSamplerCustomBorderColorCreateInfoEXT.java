@@ -276,22 +276,22 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCus
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCustomBorderColorCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerCustomBorderColorCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerCustomBorderColorCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #customBorderColor}. */
     public static VkClearColorValue ncustomBorderColor(long struct) { return VkClearColorValue.create(struct + VkSamplerCustomBorderColorCreateInfoEXT.CUSTOMBORDERCOLOR); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCustomBorderColorCreateInfoEXT.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkSamplerCustomBorderColorCreateInfoEXT.FORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCustomBorderColorCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerCustomBorderColorCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerCustomBorderColorCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #customBorderColor(VkClearColorValue) customBorderColor}. */
     public static void ncustomBorderColor(long struct, VkClearColorValue value) { memCopy(value.address(), struct + VkSamplerCustomBorderColorCreateInfoEXT.CUSTOMBORDERCOLOR, VkClearColorValue.SIZEOF); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCustomBorderColorCreateInfoEXT.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkSamplerCustomBorderColorCreateInfoEXT.FORMAT, value); }
 
     // -----------------------------------
 

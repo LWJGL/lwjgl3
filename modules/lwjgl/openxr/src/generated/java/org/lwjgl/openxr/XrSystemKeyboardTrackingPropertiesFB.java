@@ -248,14 +248,14 @@ public class XrSystemKeyboardTrackingPropertiesFB extends Struct<XrSystemKeyboar
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemKeyboardTrackingPropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemKeyboardTrackingPropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemKeyboardTrackingPropertiesFB.NEXT); }
     /** Unsafe version of {@link #supportsKeyboardTracking}. */
-    public static int nsupportsKeyboardTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemKeyboardTrackingPropertiesFB.SUPPORTSKEYBOARDTRACKING); }
+    public static int nsupportsKeyboardTracking(long struct) { return memGetInt(struct + XrSystemKeyboardTrackingPropertiesFB.SUPPORTSKEYBOARDTRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemKeyboardTrackingPropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemKeyboardTrackingPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemKeyboardTrackingPropertiesFB.NEXT, value); }
 

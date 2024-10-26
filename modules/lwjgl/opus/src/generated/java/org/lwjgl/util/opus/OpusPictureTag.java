@@ -289,7 +289,7 @@ public class OpusPictureTag extends Struct<OpusPictureTag> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + OpusPictureTag.TYPE); }
     /** Unsafe version of {@link #mime_type(int) mime_type}. */
     public static ByteBuffer nmime_type(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + OpusPictureTag.MIME_TYPE), capacity); }
     /** Unsafe version of {@link #description}. */
@@ -297,19 +297,19 @@ public class OpusPictureTag extends Struct<OpusPictureTag> implements NativeReso
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(memGetAddress(struct + OpusPictureTag.DESCRIPTION)); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + OpusPictureTag.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + OpusPictureTag.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + OpusPictureTag.DEPTH); }
     /** Unsafe version of {@link #colors}. */
-    public static int ncolors(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.COLORS); }
+    public static int ncolors(long struct) { return memGetInt(struct + OpusPictureTag.COLORS); }
     /** Unsafe version of {@link #data_length}. */
-    public static int ndata_length(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.DATA_LENGTH); }
+    public static int ndata_length(long struct) { return memGetInt(struct + OpusPictureTag.DATA_LENGTH); }
     /** Unsafe version of {@link #data() data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + OpusPictureTag.DATA), ndata_length(struct)); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + OpusPictureTag.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + OpusPictureTag.FORMAT); }
 
     // -----------------------------------
 

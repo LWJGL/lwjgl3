@@ -379,52 +379,52 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindSparseInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindSparseInfo.PNEXT); }
     /** Unsafe version of {@link #waitSemaphoreCount}. */
-    public static int nwaitSemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.WAITSEMAPHORECOUNT); }
+    public static int nwaitSemaphoreCount(long struct) { return memGetInt(struct + VkBindSparseInfo.WAITSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphores() pWaitSemaphores}. */
     @Nullable public static LongBuffer npWaitSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PWAITSEMAPHORES), nwaitSemaphoreCount(struct)); }
     /** Unsafe version of {@link #bufferBindCount}. */
-    public static int nbufferBindCount(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.BUFFERBINDCOUNT); }
+    public static int nbufferBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.BUFFERBINDCOUNT); }
     /** Unsafe version of {@link #pBufferBinds}. */
     @Nullable public static VkSparseBufferMemoryBindInfo.Buffer npBufferBinds(long struct) { return VkSparseBufferMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PBUFFERBINDS), nbufferBindCount(struct)); }
     /** Unsafe version of {@link #imageOpaqueBindCount}. */
-    public static int nimageOpaqueBindCount(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT); }
+    public static int nimageOpaqueBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT); }
     /** Unsafe version of {@link #pImageOpaqueBinds}. */
     @Nullable public static VkSparseImageOpaqueMemoryBindInfo.Buffer npImageOpaqueBinds(long struct) { return VkSparseImageOpaqueMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS), nimageOpaqueBindCount(struct)); }
     /** Unsafe version of {@link #imageBindCount}. */
-    public static int nimageBindCount(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.IMAGEBINDCOUNT); }
+    public static int nimageBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.IMAGEBINDCOUNT); }
     /** Unsafe version of {@link #pImageBinds}. */
     @Nullable public static VkSparseImageMemoryBindInfo.Buffer npImageBinds(long struct) { return VkSparseImageMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEBINDS), nimageBindCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreCount}. */
-    public static int nsignalSemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT); }
+    public static int nsignalSemaphoreCount(long struct) { return memGetInt(struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pSignalSemaphores() pSignalSemaphores}. */
     @Nullable public static LongBuffer npSignalSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PSIGNALSEMAPHORES), nsignalSemaphoreCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindSparseInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindSparseInfo.PNEXT, value); }
     /** Sets the specified value to the {@code waitSemaphoreCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.WAITSEMAPHORECOUNT, value); }
+    public static void nwaitSemaphoreCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.WAITSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pWaitSemaphores(LongBuffer) pWaitSemaphores}. */
     public static void npWaitSemaphores(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkBindSparseInfo.PWAITSEMAPHORES, memAddressSafe(value)); nwaitSemaphoreCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code bufferBindCount} field of the specified {@code struct}. */
-    public static void nbufferBindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.BUFFERBINDCOUNT, value); }
+    public static void nbufferBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.BUFFERBINDCOUNT, value); }
     /** Unsafe version of {@link #pBufferBinds(VkSparseBufferMemoryBindInfo.Buffer) pBufferBinds}. */
     public static void npBufferBinds(long struct, @Nullable VkSparseBufferMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PBUFFERBINDS, memAddressSafe(value)); nbufferBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code imageOpaqueBindCount} field of the specified {@code struct}. */
-    public static void nimageOpaqueBindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT, value); }
+    public static void nimageOpaqueBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT, value); }
     /** Unsafe version of {@link #pImageOpaqueBinds(VkSparseImageOpaqueMemoryBindInfo.Buffer) pImageOpaqueBinds}. */
     public static void npImageOpaqueBinds(long struct, @Nullable VkSparseImageOpaqueMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS, memAddressSafe(value)); nimageOpaqueBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code imageBindCount} field of the specified {@code struct}. */
-    public static void nimageBindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.IMAGEBINDCOUNT, value); }
+    public static void nimageBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.IMAGEBINDCOUNT, value); }
     /** Unsafe version of {@link #pImageBinds(VkSparseImageMemoryBindInfo.Buffer) pImageBinds}. */
     public static void npImageBinds(long struct, @Nullable VkSparseImageMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEBINDS, memAddressSafe(value)); nimageBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code signalSemaphoreCount} field of the specified {@code struct}. */
-    public static void nsignalSemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT, value); }
+    public static void nsignalSemaphoreCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pSignalSemaphores(LongBuffer) pSignalSemaphores}. */
     public static void npSignalSemaphores(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkBindSparseInfo.PSIGNALSEMAPHORES, memAddressSafe(value)); nsignalSemaphoreCount(struct, value == null ? 0 : value.remaining()); }
 

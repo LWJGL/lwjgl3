@@ -307,26 +307,26 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupPresentInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupPresentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentInfoKHR.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkDeviceGroupPresentInfoKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pDeviceMasks() pDeviceMasks}. */
     @Nullable public static IntBuffer npDeviceMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDeviceGroupPresentInfoKHR.PDEVICEMASKS), nswapchainCount(struct)); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentInfoKHR.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkDeviceGroupPresentInfoKHR.MODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupPresentInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupPresentInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupPresentInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupPresentInfoKHR.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkDeviceGroupPresentInfoKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pDeviceMasks(IntBuffer) pDeviceMasks}. */
     public static void npDeviceMasks(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkDeviceGroupPresentInfoKHR.PDEVICEMASKS, memAddressSafe(value)); nswapchainCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupPresentInfoKHR.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkDeviceGroupPresentInfoKHR.MODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

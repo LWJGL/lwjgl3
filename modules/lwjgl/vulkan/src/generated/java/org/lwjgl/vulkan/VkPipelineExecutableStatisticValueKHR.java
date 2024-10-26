@@ -128,13 +128,13 @@ public class VkPipelineExecutableStatisticValueKHR extends Struct<VkPipelineExec
     // -----------------------------------
 
     /** Unsafe version of {@link #b32}. */
-    public static int nb32(long struct) { return UNSAFE.getInt(null, struct + VkPipelineExecutableStatisticValueKHR.B32); }
+    public static int nb32(long struct) { return memGetInt(struct + VkPipelineExecutableStatisticValueKHR.B32); }
     /** Unsafe version of {@link #i64}. */
-    public static long ni64(long struct) { return UNSAFE.getLong(null, struct + VkPipelineExecutableStatisticValueKHR.I64); }
+    public static long ni64(long struct) { return memGetLong(struct + VkPipelineExecutableStatisticValueKHR.I64); }
     /** Unsafe version of {@link #u64}. */
-    public static long nu64(long struct) { return UNSAFE.getLong(null, struct + VkPipelineExecutableStatisticValueKHR.U64); }
+    public static long nu64(long struct) { return memGetLong(struct + VkPipelineExecutableStatisticValueKHR.U64); }
     /** Unsafe version of {@link #f64}. */
-    public static double nf64(long struct) { return UNSAFE.getDouble(null, struct + VkPipelineExecutableStatisticValueKHR.F64); }
+    public static double nf64(long struct) { return memGetDouble(struct + VkPipelineExecutableStatisticValueKHR.F64); }
 
     // -----------------------------------
 

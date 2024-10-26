@@ -223,14 +223,14 @@ public class LLVMJITSymbolFlags extends Struct<LLVMJITSymbolFlags> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #GenericFlags}. */
-    public static byte nGenericFlags(long struct) { return UNSAFE.getByte(null, struct + LLVMJITSymbolFlags.GENERICFLAGS); }
+    public static byte nGenericFlags(long struct) { return memGetByte(struct + LLVMJITSymbolFlags.GENERICFLAGS); }
     /** Unsafe version of {@link #TargetFlags}. */
-    public static byte nTargetFlags(long struct) { return UNSAFE.getByte(null, struct + LLVMJITSymbolFlags.TARGETFLAGS); }
+    public static byte nTargetFlags(long struct) { return memGetByte(struct + LLVMJITSymbolFlags.TARGETFLAGS); }
 
     /** Unsafe version of {@link #GenericFlags(byte) GenericFlags}. */
-    public static void nGenericFlags(long struct, byte value) { UNSAFE.putByte(null, struct + LLVMJITSymbolFlags.GENERICFLAGS, value); }
+    public static void nGenericFlags(long struct, byte value) { memPutByte(struct + LLVMJITSymbolFlags.GENERICFLAGS, value); }
     /** Unsafe version of {@link #TargetFlags(byte) TargetFlags}. */
-    public static void nTargetFlags(long struct, byte value) { UNSAFE.putByte(null, struct + LLVMJITSymbolFlags.TARGETFLAGS, value); }
+    public static void nTargetFlags(long struct, byte value) { memPutByte(struct + LLVMJITSymbolFlags.TARGETFLAGS, value); }
 
     // -----------------------------------
 

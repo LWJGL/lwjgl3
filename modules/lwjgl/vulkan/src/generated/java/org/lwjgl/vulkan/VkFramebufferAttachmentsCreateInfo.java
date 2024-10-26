@@ -256,20 +256,20 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct<VkFramebufferAtta
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentsCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFramebufferAttachmentsCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFramebufferAttachmentsCreateInfo.PNEXT); }
     /** Unsafe version of {@link #attachmentImageInfoCount}. */
-    public static int nattachmentImageInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentsCreateInfo.ATTACHMENTIMAGEINFOCOUNT); }
+    public static int nattachmentImageInfoCount(long struct) { return memGetInt(struct + VkFramebufferAttachmentsCreateInfo.ATTACHMENTIMAGEINFOCOUNT); }
     /** Unsafe version of {@link #pAttachmentImageInfos}. */
     @Nullable public static VkFramebufferAttachmentImageInfo.Buffer npAttachmentImageInfos(long struct) { return VkFramebufferAttachmentImageInfo.createSafe(memGetAddress(struct + VkFramebufferAttachmentsCreateInfo.PATTACHMENTIMAGEINFOS), nattachmentImageInfoCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentsCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentsCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFramebufferAttachmentsCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code attachmentImageInfoCount} field of the specified {@code struct}. */
-    public static void nattachmentImageInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentsCreateInfo.ATTACHMENTIMAGEINFOCOUNT, value); }
+    public static void nattachmentImageInfoCount(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentsCreateInfo.ATTACHMENTIMAGEINFOCOUNT, value); }
     /** Unsafe version of {@link #pAttachmentImageInfos(VkFramebufferAttachmentImageInfo.Buffer) pAttachmentImageInfos}. */
     public static void npAttachmentImageInfos(long struct, @Nullable VkFramebufferAttachmentImageInfo.Buffer value) { memPutAddress(struct + VkFramebufferAttachmentsCreateInfo.PATTACHMENTIMAGEINFOS, memAddressSafe(value)); nattachmentImageInfoCount(struct, value == null ? 0 : value.remaining()); }
 

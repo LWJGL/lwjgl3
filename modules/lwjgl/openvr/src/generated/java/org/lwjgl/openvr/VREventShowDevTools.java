@@ -103,7 +103,7 @@ public class VREventShowDevTools extends Struct<VREventShowDevTools> {
     // -----------------------------------
 
     /** Unsafe version of {@link #nBrowserIdentifier}. */
-    public static int nnBrowserIdentifier(long struct) { return UNSAFE.getInt(null, struct + VREventShowDevTools.NBROWSERIDENTIFIER); }
+    public static int nnBrowserIdentifier(long struct) { return memGetInt(struct + VREventShowDevTools.NBROWSERIDENTIFIER); }
 
     // -----------------------------------
 

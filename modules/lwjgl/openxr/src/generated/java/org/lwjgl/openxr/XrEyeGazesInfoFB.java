@@ -265,22 +265,22 @@ public class XrEyeGazesInfoFB extends Struct<XrEyeGazesInfoFB> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEyeGazesInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEyeGazesInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEyeGazesInfoFB.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrEyeGazesInfoFB.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrEyeGazesInfoFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrEyeGazesInfoFB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEyeGazesInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEyeGazesInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEyeGazesInfoFB.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrEyeGazesInfoFB.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEyeGazesInfoFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrEyeGazesInfoFB.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

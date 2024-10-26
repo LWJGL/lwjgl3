@@ -246,18 +246,18 @@ public class VkPhysicalDeviceTilePropertiesFeaturesQCOM extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #tileProperties}. */
-    public static int ntileProperties(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.TILEPROPERTIES); }
+    public static int ntileProperties(long struct) { return memGetInt(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.TILEPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #tileProperties(boolean) tileProperties}. */
-    public static void ntileProperties(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.TILEPROPERTIES, value); }
+    public static void ntileProperties(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTilePropertiesFeaturesQCOM.TILEPROPERTIES, value); }
 
     // -----------------------------------
 

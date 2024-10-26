@@ -307,11 +307,11 @@ public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerP
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerPassthroughHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerPassthroughHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerPassthroughHTC.NEXT); }
     /** Unsafe version of {@link #layerFlags}. */
-    public static long nlayerFlags(long struct) { return UNSAFE.getLong(null, struct + XrCompositionLayerPassthroughHTC.LAYERFLAGS); }
+    public static long nlayerFlags(long struct) { return memGetLong(struct + XrCompositionLayerPassthroughHTC.LAYERFLAGS); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrCompositionLayerPassthroughHTC.SPACE); }
     /** Unsafe version of {@link #passthrough}. */
@@ -320,11 +320,11 @@ public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerP
     public static XrPassthroughColorHTC ncolor(long struct) { return XrPassthroughColorHTC.create(struct + XrCompositionLayerPassthroughHTC.COLOR); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerPassthroughHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerPassthroughHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerPassthroughHTC.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
-    public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerPassthroughHTC.LAYERFLAGS, value); }
+    public static void nlayerFlags(long struct, long value) { memPutLong(struct + XrCompositionLayerPassthroughHTC.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerPassthroughHTC.SPACE, value.address()); }
     /** Unsafe version of {@link #passthrough(XrPassthroughHTC) passthrough}. */

@@ -262,20 +262,20 @@ public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeIn
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveationCustomModeInfoHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveationCustomModeInfoHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveationCustomModeInfoHTC.NEXT); }
     /** Unsafe version of {@link #configCount}. */
-    public static int nconfigCount(long struct) { return UNSAFE.getInt(null, struct + XrFoveationCustomModeInfoHTC.CONFIGCOUNT); }
+    public static int nconfigCount(long struct) { return memGetInt(struct + XrFoveationCustomModeInfoHTC.CONFIGCOUNT); }
     /** Unsafe version of {@link #configs}. */
     public static XrFoveationConfigurationHTC.Buffer nconfigs(long struct) { return XrFoveationConfigurationHTC.create(memGetAddress(struct + XrFoveationCustomModeInfoHTC.CONFIGS), nconfigCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationCustomModeInfoHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveationCustomModeInfoHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationCustomModeInfoHTC.NEXT, value); }
     /** Sets the specified value to the {@code configCount} field of the specified {@code struct}. */
-    public static void nconfigCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationCustomModeInfoHTC.CONFIGCOUNT, value); }
+    public static void nconfigCount(long struct, int value) { memPutInt(struct + XrFoveationCustomModeInfoHTC.CONFIGCOUNT, value); }
     /** Unsafe version of {@link #configs(XrFoveationConfigurationHTC.Buffer) configs}. */
     public static void nconfigs(long struct, XrFoveationConfigurationHTC.Buffer value) { memPutAddress(struct + XrFoveationCustomModeInfoHTC.CONFIGS, value.address()); nconfigCount(struct, value.remaining()); }
 

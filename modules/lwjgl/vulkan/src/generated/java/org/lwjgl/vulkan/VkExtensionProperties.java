@@ -227,7 +227,7 @@ public class VkExtensionProperties extends Struct<VkExtensionProperties> impleme
     /** Unsafe version of {@link #extensionNameString}. */
     public static String nextensionNameString(long struct) { return memUTF8(struct + VkExtensionProperties.EXTENSIONNAME); }
     /** Unsafe version of {@link #specVersion}. */
-    public static int nspecVersion(long struct) { return UNSAFE.getInt(null, struct + VkExtensionProperties.SPECVERSION); }
+    public static int nspecVersion(long struct) { return memGetInt(struct + VkExtensionProperties.SPECVERSION); }
 
     // -----------------------------------
 

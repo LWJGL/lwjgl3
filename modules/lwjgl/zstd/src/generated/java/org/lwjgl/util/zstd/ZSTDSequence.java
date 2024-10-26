@@ -236,13 +236,13 @@ public class ZSTDSequence extends Struct<ZSTDSequence> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + ZSTDSequence.OFFSET); }
     /** Unsafe version of {@link #litLength}. */
-    public static int nlitLength(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.LITLENGTH); }
+    public static int nlitLength(long struct) { return memGetInt(struct + ZSTDSequence.LITLENGTH); }
     /** Unsafe version of {@link #matchLength}. */
-    public static int nmatchLength(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.MATCHLENGTH); }
+    public static int nmatchLength(long struct) { return memGetInt(struct + ZSTDSequence.MATCHLENGTH); }
     /** Unsafe version of {@link #rep}. */
-    public static int nrep(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.REP); }
+    public static int nrep(long struct) { return memGetInt(struct + ZSTDSequence.REP); }
 
     // -----------------------------------
 

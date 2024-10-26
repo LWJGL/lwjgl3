@@ -250,14 +250,14 @@ public class XrSystemSpatialEntityPropertiesFB extends Struct<XrSystemSpatialEnt
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemSpatialEntityPropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemSpatialEntityPropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemSpatialEntityPropertiesFB.NEXT); }
     /** Unsafe version of {@link #supportsSpatialEntity}. */
-    public static int nsupportsSpatialEntity(long struct) { return UNSAFE.getInt(null, struct + XrSystemSpatialEntityPropertiesFB.SUPPORTSSPATIALENTITY); }
+    public static int nsupportsSpatialEntity(long struct) { return memGetInt(struct + XrSystemSpatialEntityPropertiesFB.SUPPORTSSPATIALENTITY); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpatialEntityPropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemSpatialEntityPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemSpatialEntityPropertiesFB.NEXT, value); }
 

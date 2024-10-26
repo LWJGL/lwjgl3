@@ -254,14 +254,14 @@ public class XrEventDataSpaceQueryResultsAvailableFB extends Struct<XrEventDataS
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceQueryResultsAvailableFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataSpaceQueryResultsAvailableFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataSpaceQueryResultsAvailableFB.NEXT); }
     /** Unsafe version of {@link #requestId}. */
-    public static long nrequestId(long struct) { return UNSAFE.getLong(null, struct + XrEventDataSpaceQueryResultsAvailableFB.REQUESTID); }
+    public static long nrequestId(long struct) { return memGetLong(struct + XrEventDataSpaceQueryResultsAvailableFB.REQUESTID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSpaceQueryResultsAvailableFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataSpaceQueryResultsAvailableFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSpaceQueryResultsAvailableFB.NEXT, value); }
 

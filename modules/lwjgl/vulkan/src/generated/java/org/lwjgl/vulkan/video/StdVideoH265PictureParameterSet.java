@@ -600,84 +600,84 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** Unsafe version of {@link #flags}. */
     public static StdVideoH265PpsFlags nflags(long struct) { return StdVideoH265PpsFlags.create(struct + StdVideoH265PictureParameterSet.FLAGS); }
     /** Unsafe version of {@link #pps_pic_parameter_set_id}. */
-    public static byte npps_pic_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_PIC_PARAMETER_SET_ID); }
+    public static byte npps_pic_parameter_set_id(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_PIC_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #pps_seq_parameter_set_id}. */
-    public static byte npps_seq_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_SEQ_PARAMETER_SET_ID); }
+    public static byte npps_seq_parameter_set_id(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #sps_video_parameter_set_id}. */
-    public static byte nsps_video_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.SPS_VIDEO_PARAMETER_SET_ID); }
+    public static byte nsps_video_parameter_set_id(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.SPS_VIDEO_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #num_extra_slice_header_bits}. */
-    public static byte nnum_extra_slice_header_bits(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_EXTRA_SLICE_HEADER_BITS); }
+    public static byte nnum_extra_slice_header_bits(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_EXTRA_SLICE_HEADER_BITS); }
     /** Unsafe version of {@link #num_ref_idx_l0_default_active_minus1}. */
-    public static byte nnum_ref_idx_l0_default_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L0_DEFAULT_ACTIVE_MINUS1); }
+    public static byte nnum_ref_idx_l0_default_active_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L0_DEFAULT_ACTIVE_MINUS1); }
     /** Unsafe version of {@link #num_ref_idx_l1_default_active_minus1}. */
-    public static byte nnum_ref_idx_l1_default_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L1_DEFAULT_ACTIVE_MINUS1); }
+    public static byte nnum_ref_idx_l1_default_active_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L1_DEFAULT_ACTIVE_MINUS1); }
     /** Unsafe version of {@link #init_qp_minus26}. */
-    public static byte ninit_qp_minus26(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.INIT_QP_MINUS26); }
+    public static byte ninit_qp_minus26(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.INIT_QP_MINUS26); }
     /** Unsafe version of {@link #diff_cu_qp_delta_depth}. */
-    public static byte ndiff_cu_qp_delta_depth(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.DIFF_CU_QP_DELTA_DEPTH); }
+    public static byte ndiff_cu_qp_delta_depth(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.DIFF_CU_QP_DELTA_DEPTH); }
     /** Unsafe version of {@link #pps_cb_qp_offset}. */
-    public static byte npps_cb_qp_offset(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_CB_QP_OFFSET); }
+    public static byte npps_cb_qp_offset(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_CB_QP_OFFSET); }
     /** Unsafe version of {@link #pps_cr_qp_offset}. */
-    public static byte npps_cr_qp_offset(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_CR_QP_OFFSET); }
+    public static byte npps_cr_qp_offset(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_CR_QP_OFFSET); }
     /** Unsafe version of {@link #pps_beta_offset_div2}. */
-    public static byte npps_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2); }
+    public static byte npps_beta_offset_div2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2); }
     /** Unsafe version of {@link #pps_tc_offset_div2}. */
-    public static byte npps_tc_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_TC_OFFSET_DIV2); }
+    public static byte npps_tc_offset_div2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_TC_OFFSET_DIV2); }
     /** Unsafe version of {@link #log2_parallel_merge_level_minus2}. */
-    public static byte nlog2_parallel_merge_level_minus2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LOG2_PARALLEL_MERGE_LEVEL_MINUS2); }
+    public static byte nlog2_parallel_merge_level_minus2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.LOG2_PARALLEL_MERGE_LEVEL_MINUS2); }
     /** Unsafe version of {@link #log2_max_transform_skip_block_size_minus2}. */
-    public static byte nlog2_max_transform_skip_block_size_minus2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2); }
+    public static byte nlog2_max_transform_skip_block_size_minus2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2); }
     /** Unsafe version of {@link #diff_cu_chroma_qp_offset_depth}. */
-    public static byte ndiff_cu_chroma_qp_offset_depth(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.DIFF_CU_CHROMA_QP_OFFSET_DEPTH); }
+    public static byte ndiff_cu_chroma_qp_offset_depth(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.DIFF_CU_CHROMA_QP_OFFSET_DEPTH); }
     /** Unsafe version of {@link #chroma_qp_offset_list_len_minus1}. */
-    public static byte nchroma_qp_offset_list_len_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1); }
+    public static byte nchroma_qp_offset_list_len_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1); }
     /** Unsafe version of {@link #cb_qp_offset_list}. */
     public static ByteBuffer ncb_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
     /** Unsafe version of {@link #cb_qp_offset_list(int) cb_qp_offset_list}. */
     public static byte ncb_qp_offset_list(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #cr_qp_offset_list}. */
     public static ByteBuffer ncr_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
     /** Unsafe version of {@link #cr_qp_offset_list(int) cr_qp_offset_list}. */
     public static byte ncr_qp_offset_list(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #log2_sao_offset_scale_luma}. */
-    public static byte nlog2_sao_offset_scale_luma(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA); }
+    public static byte nlog2_sao_offset_scale_luma(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA); }
     /** Unsafe version of {@link #log2_sao_offset_scale_chroma}. */
-    public static byte nlog2_sao_offset_scale_chroma(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_CHROMA); }
+    public static byte nlog2_sao_offset_scale_chroma(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_CHROMA); }
     /** Unsafe version of {@link #pps_act_y_qp_offset_plus5}. */
-    public static byte npps_act_y_qp_offset_plus5(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_Y_QP_OFFSET_PLUS5); }
+    public static byte npps_act_y_qp_offset_plus5(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_Y_QP_OFFSET_PLUS5); }
     /** Unsafe version of {@link #pps_act_cb_qp_offset_plus5}. */
-    public static byte npps_act_cb_qp_offset_plus5(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_CB_QP_OFFSET_PLUS5); }
+    public static byte npps_act_cb_qp_offset_plus5(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_CB_QP_OFFSET_PLUS5); }
     /** Unsafe version of {@link #pps_act_cr_qp_offset_plus3}. */
-    public static byte npps_act_cr_qp_offset_plus3(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_CR_QP_OFFSET_PLUS3); }
+    public static byte npps_act_cr_qp_offset_plus3(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_CR_QP_OFFSET_PLUS3); }
     /** Unsafe version of {@link #pps_num_palette_predictor_initializers}. */
-    public static byte npps_num_palette_predictor_initializers(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_NUM_PALETTE_PREDICTOR_INITIALIZERS); }
+    public static byte npps_num_palette_predictor_initializers(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.PPS_NUM_PALETTE_PREDICTOR_INITIALIZERS); }
     /** Unsafe version of {@link #luma_bit_depth_entry_minus8}. */
-    public static byte nluma_bit_depth_entry_minus8(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LUMA_BIT_DEPTH_ENTRY_MINUS8); }
+    public static byte nluma_bit_depth_entry_minus8(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.LUMA_BIT_DEPTH_ENTRY_MINUS8); }
     /** Unsafe version of {@link #chroma_bit_depth_entry_minus8}. */
-    public static byte nchroma_bit_depth_entry_minus8(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_BIT_DEPTH_ENTRY_MINUS8); }
+    public static byte nchroma_bit_depth_entry_minus8(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.CHROMA_BIT_DEPTH_ENTRY_MINUS8); }
     /** Unsafe version of {@link #num_tile_columns_minus1}. */
-    public static byte nnum_tile_columns_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1); }
+    public static byte nnum_tile_columns_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1); }
     /** Unsafe version of {@link #num_tile_rows_minus1}. */
-    public static byte nnum_tile_rows_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1); }
-    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.RESERVED2); }
+    public static byte nnum_tile_rows_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1); }
+    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED1); }
+    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED2); }
     /** Unsafe version of {@link #column_width_minus1}. */
     public static ShortBuffer ncolumn_width_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
     /** Unsafe version of {@link #column_width_minus1(int) column_width_minus1}. */
     public static short ncolumn_width_minus1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2);
+        return memGetShort(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #row_height_minus1}. */
     public static ShortBuffer nrow_height_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE); }
     /** Unsafe version of {@link #row_height_minus1(int) row_height_minus1}. */
     public static short nrow_height_minus1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2);
+        return memGetShort(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2);
     }
-    public static int nreserved3(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265PictureParameterSet.RESERVED3); }
+    public static int nreserved3(long struct) { return memGetInt(struct + StdVideoH265PictureParameterSet.RESERVED3); }
     /** Unsafe version of {@link #pScalingLists}. */
     public static StdVideoH265ScalingLists npScalingLists(long struct) { return StdVideoH265ScalingLists.create(memGetAddress(struct + StdVideoH265PictureParameterSet.PSCALINGLISTS)); }
     /** Unsafe version of {@link #pPredictorPaletteEntries}. */
@@ -686,37 +686,37 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** Unsafe version of {@link #flags(StdVideoH265PpsFlags) flags}. */
     public static void nflags(long struct, StdVideoH265PpsFlags value) { memCopy(value.address(), struct + StdVideoH265PictureParameterSet.FLAGS, StdVideoH265PpsFlags.SIZEOF); }
     /** Unsafe version of {@link #pps_pic_parameter_set_id(byte) pps_pic_parameter_set_id}. */
-    public static void npps_pic_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_PIC_PARAMETER_SET_ID, value); }
+    public static void npps_pic_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_PIC_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #pps_seq_parameter_set_id(byte) pps_seq_parameter_set_id}. */
-    public static void npps_seq_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_SEQ_PARAMETER_SET_ID, value); }
+    public static void npps_seq_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #sps_video_parameter_set_id(byte) sps_video_parameter_set_id}. */
-    public static void nsps_video_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.SPS_VIDEO_PARAMETER_SET_ID, value); }
+    public static void nsps_video_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.SPS_VIDEO_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #num_extra_slice_header_bits(byte) num_extra_slice_header_bits}. */
-    public static void nnum_extra_slice_header_bits(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_EXTRA_SLICE_HEADER_BITS, value); }
+    public static void nnum_extra_slice_header_bits(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_EXTRA_SLICE_HEADER_BITS, value); }
     /** Unsafe version of {@link #num_ref_idx_l0_default_active_minus1(byte) num_ref_idx_l0_default_active_minus1}. */
-    public static void nnum_ref_idx_l0_default_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L0_DEFAULT_ACTIVE_MINUS1, value); }
+    public static void nnum_ref_idx_l0_default_active_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L0_DEFAULT_ACTIVE_MINUS1, value); }
     /** Unsafe version of {@link #num_ref_idx_l1_default_active_minus1(byte) num_ref_idx_l1_default_active_minus1}. */
-    public static void nnum_ref_idx_l1_default_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L1_DEFAULT_ACTIVE_MINUS1, value); }
+    public static void nnum_ref_idx_l1_default_active_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_REF_IDX_L1_DEFAULT_ACTIVE_MINUS1, value); }
     /** Unsafe version of {@link #init_qp_minus26(byte) init_qp_minus26}. */
-    public static void ninit_qp_minus26(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.INIT_QP_MINUS26, value); }
+    public static void ninit_qp_minus26(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.INIT_QP_MINUS26, value); }
     /** Unsafe version of {@link #diff_cu_qp_delta_depth(byte) diff_cu_qp_delta_depth}. */
-    public static void ndiff_cu_qp_delta_depth(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.DIFF_CU_QP_DELTA_DEPTH, value); }
+    public static void ndiff_cu_qp_delta_depth(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.DIFF_CU_QP_DELTA_DEPTH, value); }
     /** Unsafe version of {@link #pps_cb_qp_offset(byte) pps_cb_qp_offset}. */
-    public static void npps_cb_qp_offset(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_CB_QP_OFFSET, value); }
+    public static void npps_cb_qp_offset(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_CB_QP_OFFSET, value); }
     /** Unsafe version of {@link #pps_cr_qp_offset(byte) pps_cr_qp_offset}. */
-    public static void npps_cr_qp_offset(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_CR_QP_OFFSET, value); }
+    public static void npps_cr_qp_offset(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_CR_QP_OFFSET, value); }
     /** Unsafe version of {@link #pps_beta_offset_div2(byte) pps_beta_offset_div2}. */
-    public static void npps_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2, value); }
+    public static void npps_beta_offset_div2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #pps_tc_offset_div2(byte) pps_tc_offset_div2}. */
-    public static void npps_tc_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_TC_OFFSET_DIV2, value); }
+    public static void npps_tc_offset_div2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_TC_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #log2_parallel_merge_level_minus2(byte) log2_parallel_merge_level_minus2}. */
-    public static void nlog2_parallel_merge_level_minus2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LOG2_PARALLEL_MERGE_LEVEL_MINUS2, value); }
+    public static void nlog2_parallel_merge_level_minus2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.LOG2_PARALLEL_MERGE_LEVEL_MINUS2, value); }
     /** Unsafe version of {@link #log2_max_transform_skip_block_size_minus2(byte) log2_max_transform_skip_block_size_minus2}. */
-    public static void nlog2_max_transform_skip_block_size_minus2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2, value); }
+    public static void nlog2_max_transform_skip_block_size_minus2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2, value); }
     /** Unsafe version of {@link #diff_cu_chroma_qp_offset_depth(byte) diff_cu_chroma_qp_offset_depth}. */
-    public static void ndiff_cu_chroma_qp_offset_depth(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.DIFF_CU_CHROMA_QP_OFFSET_DEPTH, value); }
+    public static void ndiff_cu_chroma_qp_offset_depth(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.DIFF_CU_CHROMA_QP_OFFSET_DEPTH, value); }
     /** Unsafe version of {@link #chroma_qp_offset_list_len_minus1(byte) chroma_qp_offset_list_len_minus1}. */
-    public static void nchroma_qp_offset_list_len_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1, value); }
+    public static void nchroma_qp_offset_list_len_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1, value); }
     /** Unsafe version of {@link #cb_qp_offset_list(ByteBuffer) cb_qp_offset_list}. */
     public static void ncb_qp_offset_list(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
@@ -724,7 +724,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     }
     /** Unsafe version of {@link #cb_qp_offset_list(int, byte) cb_qp_offset_list}. */
     public static void ncb_qp_offset_list(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #cr_qp_offset_list(ByteBuffer) cr_qp_offset_list}. */
     public static void ncr_qp_offset_list(long struct, ByteBuffer value) {
@@ -733,30 +733,30 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     }
     /** Unsafe version of {@link #cr_qp_offset_list(int, byte) cr_qp_offset_list}. */
     public static void ncr_qp_offset_list(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #log2_sao_offset_scale_luma(byte) log2_sao_offset_scale_luma}. */
-    public static void nlog2_sao_offset_scale_luma(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA, value); }
+    public static void nlog2_sao_offset_scale_luma(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA, value); }
     /** Unsafe version of {@link #log2_sao_offset_scale_chroma(byte) log2_sao_offset_scale_chroma}. */
-    public static void nlog2_sao_offset_scale_chroma(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_CHROMA, value); }
+    public static void nlog2_sao_offset_scale_chroma(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_CHROMA, value); }
     /** Unsafe version of {@link #pps_act_y_qp_offset_plus5(byte) pps_act_y_qp_offset_plus5}. */
-    public static void npps_act_y_qp_offset_plus5(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_Y_QP_OFFSET_PLUS5, value); }
+    public static void npps_act_y_qp_offset_plus5(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_Y_QP_OFFSET_PLUS5, value); }
     /** Unsafe version of {@link #pps_act_cb_qp_offset_plus5(byte) pps_act_cb_qp_offset_plus5}. */
-    public static void npps_act_cb_qp_offset_plus5(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_CB_QP_OFFSET_PLUS5, value); }
+    public static void npps_act_cb_qp_offset_plus5(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_CB_QP_OFFSET_PLUS5, value); }
     /** Unsafe version of {@link #pps_act_cr_qp_offset_plus3(byte) pps_act_cr_qp_offset_plus3}. */
-    public static void npps_act_cr_qp_offset_plus3(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_ACT_CR_QP_OFFSET_PLUS3, value); }
+    public static void npps_act_cr_qp_offset_plus3(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_ACT_CR_QP_OFFSET_PLUS3, value); }
     /** Unsafe version of {@link #pps_num_palette_predictor_initializers(byte) pps_num_palette_predictor_initializers}. */
-    public static void npps_num_palette_predictor_initializers(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_NUM_PALETTE_PREDICTOR_INITIALIZERS, value); }
+    public static void npps_num_palette_predictor_initializers(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.PPS_NUM_PALETTE_PREDICTOR_INITIALIZERS, value); }
     /** Unsafe version of {@link #luma_bit_depth_entry_minus8(byte) luma_bit_depth_entry_minus8}. */
-    public static void nluma_bit_depth_entry_minus8(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LUMA_BIT_DEPTH_ENTRY_MINUS8, value); }
+    public static void nluma_bit_depth_entry_minus8(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.LUMA_BIT_DEPTH_ENTRY_MINUS8, value); }
     /** Unsafe version of {@link #chroma_bit_depth_entry_minus8(byte) chroma_bit_depth_entry_minus8}. */
-    public static void nchroma_bit_depth_entry_minus8(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_BIT_DEPTH_ENTRY_MINUS8, value); }
+    public static void nchroma_bit_depth_entry_minus8(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.CHROMA_BIT_DEPTH_ENTRY_MINUS8, value); }
     /** Unsafe version of {@link #num_tile_columns_minus1(byte) num_tile_columns_minus1}. */
-    public static void nnum_tile_columns_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1, value); }
+    public static void nnum_tile_columns_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1, value); }
     /** Unsafe version of {@link #num_tile_rows_minus1(byte) num_tile_rows_minus1}. */
-    public static void nnum_tile_rows_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1, value); }
-    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.RESERVED2, value); }
+    public static void nnum_tile_rows_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1, value); }
+    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED1, value); }
+    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #column_width_minus1(ShortBuffer) column_width_minus1}. */
     public static void ncolumn_width_minus1(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
@@ -764,7 +764,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     }
     /** Unsafe version of {@link #column_width_minus1(int, short) column_width_minus1}. */
     public static void ncolumn_width_minus1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2, value);
+        memPutShort(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #row_height_minus1(ShortBuffer) row_height_minus1}. */
     public static void nrow_height_minus1(long struct, ShortBuffer value) {
@@ -773,9 +773,9 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     }
     /** Unsafe version of {@link #row_height_minus1(int, short) row_height_minus1}. */
     public static void nrow_height_minus1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2, value);
+        memPutShort(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2, value);
     }
-    public static void nreserved3(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265PictureParameterSet.RESERVED3, value); }
+    public static void nreserved3(long struct, int value) { memPutInt(struct + StdVideoH265PictureParameterSet.RESERVED3, value); }
     /** Unsafe version of {@link #pScalingLists(StdVideoH265ScalingLists) pScalingLists}. */
     public static void npScalingLists(long struct, StdVideoH265ScalingLists value) { memPutAddress(struct + StdVideoH265PictureParameterSet.PSCALINGLISTS, value.address()); }
     /** Unsafe version of {@link #pPredictorPaletteEntries(StdVideoH265PredictorPaletteEntries) pPredictorPaletteEntries}. */

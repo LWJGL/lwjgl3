@@ -221,10 +221,10 @@ public class RenderModelControllerModeState extends Struct<RenderModelController
     // -----------------------------------
 
     /** Unsafe version of {@link #bScrollWheelVisible}. */
-    public static boolean nbScrollWheelVisible(long struct) { return UNSAFE.getByte(null, struct + RenderModelControllerModeState.BSCROLLWHEELVISIBLE) != 0; }
+    public static boolean nbScrollWheelVisible(long struct) { return memGetByte(struct + RenderModelControllerModeState.BSCROLLWHEELVISIBLE) != 0; }
 
     /** Unsafe version of {@link #bScrollWheelVisible(boolean) bScrollWheelVisible}. */
-    public static void nbScrollWheelVisible(long struct, boolean value) { UNSAFE.putByte(null, struct + RenderModelControllerModeState.BSCROLLWHEELVISIBLE, value ? (byte)1 : (byte)0); }
+    public static void nbScrollWheelVisible(long struct, boolean value) { memPutByte(struct + RenderModelControllerModeState.BSCROLLWHEELVISIBLE, value ? (byte)1 : (byte)0); }
 
     // -----------------------------------
 

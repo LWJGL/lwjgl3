@@ -291,28 +291,28 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFrameEndInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFrameEndInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFrameEndInfo.NEXT); }
     /** Unsafe version of {@link #displayTime}. */
-    public static long ndisplayTime(long struct) { return UNSAFE.getLong(null, struct + XrFrameEndInfo.DISPLAYTIME); }
+    public static long ndisplayTime(long struct) { return memGetLong(struct + XrFrameEndInfo.DISPLAYTIME); }
     /** Unsafe version of {@link #environmentBlendMode}. */
-    public static int nenvironmentBlendMode(long struct) { return UNSAFE.getInt(null, struct + XrFrameEndInfo.ENVIRONMENTBLENDMODE); }
+    public static int nenvironmentBlendMode(long struct) { return memGetInt(struct + XrFrameEndInfo.ENVIRONMENTBLENDMODE); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + XrFrameEndInfo.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + XrFrameEndInfo.LAYERCOUNT); }
     /** Unsafe version of {@link #layers() layers}. */
     @Nullable public static PointerBuffer nlayers(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrFrameEndInfo.LAYERS), nlayerCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFrameEndInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameEndInfo.NEXT, value); }
     /** Unsafe version of {@link #displayTime(long) displayTime}. */
-    public static void ndisplayTime(long struct, long value) { UNSAFE.putLong(null, struct + XrFrameEndInfo.DISPLAYTIME, value); }
+    public static void ndisplayTime(long struct, long value) { memPutLong(struct + XrFrameEndInfo.DISPLAYTIME, value); }
     /** Unsafe version of {@link #environmentBlendMode(int) environmentBlendMode}. */
-    public static void nenvironmentBlendMode(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfo.ENVIRONMENTBLENDMODE, value); }
+    public static void nenvironmentBlendMode(long struct, int value) { memPutInt(struct + XrFrameEndInfo.ENVIRONMENTBLENDMODE, value); }
     /** Sets the specified value to the {@code layerCount} field of the specified {@code struct}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfo.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + XrFrameEndInfo.LAYERCOUNT, value); }
     /** Unsafe version of {@link #layers(PointerBuffer) layers}. */
     public static void nlayers(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrFrameEndInfo.LAYERS, memAddressSafe(value)); if (value != null) { nlayerCount(struct, value.remaining()); } }
 

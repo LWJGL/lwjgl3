@@ -248,14 +248,14 @@ public class XrSystemVirtualKeyboardPropertiesMETA extends Struct<XrSystemVirtua
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemVirtualKeyboardPropertiesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemVirtualKeyboardPropertiesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemVirtualKeyboardPropertiesMETA.NEXT); }
     /** Unsafe version of {@link #supportsVirtualKeyboard}. */
-    public static int nsupportsVirtualKeyboard(long struct) { return UNSAFE.getInt(null, struct + XrSystemVirtualKeyboardPropertiesMETA.SUPPORTSVIRTUALKEYBOARD); }
+    public static int nsupportsVirtualKeyboard(long struct) { return memGetInt(struct + XrSystemVirtualKeyboardPropertiesMETA.SUPPORTSVIRTUALKEYBOARD); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemVirtualKeyboardPropertiesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemVirtualKeyboardPropertiesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemVirtualKeyboardPropertiesMETA.NEXT, value); }
 

@@ -264,20 +264,20 @@ public class VkQueueFamilyGlobalPriorityPropertiesKHR extends Struct<VkQueueFami
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #priorityCount}. */
-    public static int npriorityCount(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITYCOUNT); }
+    public static int npriorityCount(long struct) { return memGetInt(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITYCOUNT); }
     /** Unsafe version of {@link #priorities}. */
     public static IntBuffer npriorities(long struct) { return memIntBuffer(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES, npriorityCount(struct)); }
     /** Unsafe version of {@link #priorities(int) priorities}. */
     public static int npriorities(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES + check(index, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR) * 4);
+        return memGetInt(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PRIORITIES + check(index, VK_MAX_GLOBAL_PRIORITY_SIZE_KHR) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyGlobalPriorityPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyGlobalPriorityPropertiesKHR.PNEXT, value); }
 

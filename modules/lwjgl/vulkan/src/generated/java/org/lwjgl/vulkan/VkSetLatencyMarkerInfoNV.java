@@ -258,22 +258,22 @@ public class VkSetLatencyMarkerInfoNV extends Struct<VkSetLatencyMarkerInfoNV> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSetLatencyMarkerInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSetLatencyMarkerInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSetLatencyMarkerInfoNV.PNEXT); }
     /** Unsafe version of {@link #presentID}. */
-    public static long npresentID(long struct) { return UNSAFE.getLong(null, struct + VkSetLatencyMarkerInfoNV.PRESENTID); }
+    public static long npresentID(long struct) { return memGetLong(struct + VkSetLatencyMarkerInfoNV.PRESENTID); }
     /** Unsafe version of {@link #marker}. */
-    public static int nmarker(long struct) { return UNSAFE.getInt(null, struct + VkSetLatencyMarkerInfoNV.MARKER); }
+    public static int nmarker(long struct) { return memGetInt(struct + VkSetLatencyMarkerInfoNV.MARKER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSetLatencyMarkerInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSetLatencyMarkerInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSetLatencyMarkerInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #presentID(long) presentID}. */
-    public static void npresentID(long struct, long value) { UNSAFE.putLong(null, struct + VkSetLatencyMarkerInfoNV.PRESENTID, value); }
+    public static void npresentID(long struct, long value) { memPutLong(struct + VkSetLatencyMarkerInfoNV.PRESENTID, value); }
     /** Unsafe version of {@link #marker(int) marker}. */
-    public static void nmarker(long struct, int value) { UNSAFE.putInt(null, struct + VkSetLatencyMarkerInfoNV.MARKER, value); }
+    public static void nmarker(long struct, int value) { memPutInt(struct + VkSetLatencyMarkerInfoNV.MARKER, value); }
 
     // -----------------------------------
 

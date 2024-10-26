@@ -290,25 +290,25 @@ public class TOUCHINPUT extends Struct<TOUCHINPUT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.X); }
+    public static int nx(long struct) { return memGetInt(struct + TOUCHINPUT.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.Y); }
+    public static int ny(long struct) { return memGetInt(struct + TOUCHINPUT.Y); }
     /** Unsafe version of {@link #hSource}. */
     public static long nhSource(long struct) { return memGetAddress(struct + TOUCHINPUT.HSOURCE); }
     /** Unsafe version of {@link #dwID}. */
-    public static int ndwID(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWID); }
+    public static int ndwID(long struct) { return memGetInt(struct + TOUCHINPUT.DWID); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWFLAGS); }
+    public static int ndwFlags(long struct) { return memGetInt(struct + TOUCHINPUT.DWFLAGS); }
     /** Unsafe version of {@link #dwMask}. */
-    public static int ndwMask(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWMASK); }
+    public static int ndwMask(long struct) { return memGetInt(struct + TOUCHINPUT.DWMASK); }
     /** Unsafe version of {@link #dwTime}. */
-    public static int ndwTime(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWTIME); }
+    public static int ndwTime(long struct) { return memGetInt(struct + TOUCHINPUT.DWTIME); }
     /** Unsafe version of {@link #dwExtraInfo}. */
     public static long ndwExtraInfo(long struct) { return memGetAddress(struct + TOUCHINPUT.DWEXTRAINFO); }
     /** Unsafe version of {@link #cxContact}. */
-    public static int ncxContact(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.CXCONTACT); }
+    public static int ncxContact(long struct) { return memGetInt(struct + TOUCHINPUT.CXCONTACT); }
     /** Unsafe version of {@link #cyContact}. */
-    public static int ncyContact(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.CYCONTACT); }
+    public static int ncyContact(long struct) { return memGetInt(struct + TOUCHINPUT.CYCONTACT); }
 
     // -----------------------------------
 

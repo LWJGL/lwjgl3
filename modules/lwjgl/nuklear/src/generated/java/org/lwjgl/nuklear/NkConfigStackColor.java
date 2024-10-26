@@ -113,7 +113,7 @@ class NkConfigStackColor extends Struct<NkConfigStackColor> {
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackColor.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackColor.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackColorElement.Buffer nelements(long struct) { return NkConfigStackColorElement.create(struct + NkConfigStackColor.ELEMENTS, 32); }
     /** Unsafe version of {@link #elements(int) elements}. */

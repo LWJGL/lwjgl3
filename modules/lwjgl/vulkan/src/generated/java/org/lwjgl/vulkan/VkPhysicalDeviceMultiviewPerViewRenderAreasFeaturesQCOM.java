@@ -246,18 +246,18 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #multiviewPerViewRenderAreas}. */
-    public static int nmultiviewPerViewRenderAreas(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.MULTIVIEWPERVIEWRENDERAREAS); }
+    public static int nmultiviewPerViewRenderAreas(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.MULTIVIEWPERVIEWRENDERAREAS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #multiviewPerViewRenderAreas(boolean) multiviewPerViewRenderAreas}. */
-    public static void nmultiviewPerViewRenderAreas(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.MULTIVIEWPERVIEWRENDERAREAS, value); }
+    public static void nmultiviewPerViewRenderAreas(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.MULTIVIEWPERVIEWRENDERAREAS, value); }
 
     // -----------------------------------
 

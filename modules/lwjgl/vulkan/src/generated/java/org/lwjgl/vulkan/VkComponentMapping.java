@@ -277,22 +277,22 @@ public class VkComponentMapping extends Struct<VkComponentMapping> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static int nr(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.R); }
+    public static int nr(long struct) { return memGetInt(struct + VkComponentMapping.R); }
     /** Unsafe version of {@link #g}. */
-    public static int ng(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.G); }
+    public static int ng(long struct) { return memGetInt(struct + VkComponentMapping.G); }
     /** Unsafe version of {@link #b}. */
-    public static int nb(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.B); }
+    public static int nb(long struct) { return memGetInt(struct + VkComponentMapping.B); }
     /** Unsafe version of {@link #a}. */
-    public static int na(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.A); }
+    public static int na(long struct) { return memGetInt(struct + VkComponentMapping.A); }
 
     /** Unsafe version of {@link #r(int) r}. */
-    public static void nr(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.R, value); }
+    public static void nr(long struct, int value) { memPutInt(struct + VkComponentMapping.R, value); }
     /** Unsafe version of {@link #g(int) g}. */
-    public static void ng(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.G, value); }
+    public static void ng(long struct, int value) { memPutInt(struct + VkComponentMapping.G, value); }
     /** Unsafe version of {@link #b(int) b}. */
-    public static void nb(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.B, value); }
+    public static void nb(long struct, int value) { memPutInt(struct + VkComponentMapping.B, value); }
     /** Unsafe version of {@link #a(int) a}. */
-    public static void na(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.A, value); }
+    public static void na(long struct, int value) { memPutInt(struct + VkComponentMapping.A, value); }
 
     // -----------------------------------
 

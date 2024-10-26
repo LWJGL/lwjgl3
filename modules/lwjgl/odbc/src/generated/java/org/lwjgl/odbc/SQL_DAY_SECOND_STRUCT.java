@@ -273,26 +273,26 @@ public class SQL_DAY_SECOND_STRUCT extends Struct<SQL_DAY_SECOND_STRUCT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #day}. */
-    public static int nday(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.DAY); }
+    public static int nday(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.DAY); }
     /** Unsafe version of {@link #hour}. */
-    public static int nhour(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.HOUR); }
+    public static int nhour(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.HOUR); }
     /** Unsafe version of {@link #minute}. */
-    public static int nminute(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.MINUTE); }
+    public static int nminute(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.MINUTE); }
     /** Unsafe version of {@link #second}. */
-    public static int nsecond(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.SECOND); }
+    public static int nsecond(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.SECOND); }
     /** Unsafe version of {@link #fraction}. */
-    public static int nfraction(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.FRACTION); }
+    public static int nfraction(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.FRACTION); }
 
     /** Unsafe version of {@link #day(int) day}. */
-    public static void nday(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.DAY, value); }
+    public static void nday(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.DAY, value); }
     /** Unsafe version of {@link #hour(int) hour}. */
-    public static void nhour(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.HOUR, value); }
+    public static void nhour(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.HOUR, value); }
     /** Unsafe version of {@link #minute(int) minute}. */
-    public static void nminute(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.MINUTE, value); }
+    public static void nminute(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.MINUTE, value); }
     /** Unsafe version of {@link #second(int) second}. */
-    public static void nsecond(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.SECOND, value); }
+    public static void nsecond(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.SECOND, value); }
     /** Unsafe version of {@link #fraction(int) fraction}. */
-    public static void nfraction(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.FRACTION, value); }
+    public static void nfraction(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.FRACTION, value); }
 
     // -----------------------------------
 

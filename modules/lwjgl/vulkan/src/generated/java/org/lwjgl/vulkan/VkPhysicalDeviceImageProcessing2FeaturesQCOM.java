@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageProcessing2FeaturesQCOM extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #textureBlockMatch2}. */
-    public static int ntextureBlockMatch2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.TEXTUREBLOCKMATCH2); }
+    public static int ntextureBlockMatch2(long struct) { return memGetInt(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.TEXTUREBLOCKMATCH2); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #textureBlockMatch2(boolean) textureBlockMatch2}. */
-    public static void ntextureBlockMatch2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.TEXTUREBLOCKMATCH2, value); }
+    public static void ntextureBlockMatch2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageProcessing2FeaturesQCOM.TEXTUREBLOCKMATCH2, value); }
 
     // -----------------------------------
 

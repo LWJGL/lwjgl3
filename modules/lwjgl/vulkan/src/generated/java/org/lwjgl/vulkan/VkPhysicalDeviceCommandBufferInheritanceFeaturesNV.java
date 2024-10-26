@@ -246,18 +246,18 @@ public class VkPhysicalDeviceCommandBufferInheritanceFeaturesNV extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #commandBufferInheritance}. */
-    public static int ncommandBufferInheritance(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.COMMANDBUFFERINHERITANCE); }
+    public static int ncommandBufferInheritance(long struct) { return memGetInt(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.COMMANDBUFFERINHERITANCE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #commandBufferInheritance(boolean) commandBufferInheritance}. */
-    public static void ncommandBufferInheritance(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.COMMANDBUFFERINHERITANCE, value); }
+    public static void ncommandBufferInheritance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.COMMANDBUFFERINHERITANCE, value); }
 
     // -----------------------------------
 

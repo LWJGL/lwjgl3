@@ -255,16 +255,16 @@ public class XrViveTrackerPathsHTCX extends Struct<XrViveTrackerPathsHTCX> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrViveTrackerPathsHTCX.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrViveTrackerPathsHTCX.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrViveTrackerPathsHTCX.NEXT); }
     /** Unsafe version of {@link #persistentPath}. */
-    public static long npersistentPath(long struct) { return UNSAFE.getLong(null, struct + XrViveTrackerPathsHTCX.PERSISTENTPATH); }
+    public static long npersistentPath(long struct) { return memGetLong(struct + XrViveTrackerPathsHTCX.PERSISTENTPATH); }
     /** Unsafe version of {@link #rolePath}. */
-    public static long nrolePath(long struct) { return UNSAFE.getLong(null, struct + XrViveTrackerPathsHTCX.ROLEPATH); }
+    public static long nrolePath(long struct) { return memGetLong(struct + XrViveTrackerPathsHTCX.ROLEPATH); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViveTrackerPathsHTCX.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrViveTrackerPathsHTCX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrViveTrackerPathsHTCX.NEXT, value); }
 

@@ -256,14 +256,14 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct<VkDrawMeshTasksIndi
     // -----------------------------------
 
     /** Unsafe version of {@link #taskCount}. */
-    public static int ntaskCount(long struct) { return UNSAFE.getInt(null, struct + VkDrawMeshTasksIndirectCommandNV.TASKCOUNT); }
+    public static int ntaskCount(long struct) { return memGetInt(struct + VkDrawMeshTasksIndirectCommandNV.TASKCOUNT); }
     /** Unsafe version of {@link #firstTask}. */
-    public static int nfirstTask(long struct) { return UNSAFE.getInt(null, struct + VkDrawMeshTasksIndirectCommandNV.FIRSTTASK); }
+    public static int nfirstTask(long struct) { return memGetInt(struct + VkDrawMeshTasksIndirectCommandNV.FIRSTTASK); }
 
     /** Unsafe version of {@link #taskCount(int) taskCount}. */
-    public static void ntaskCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawMeshTasksIndirectCommandNV.TASKCOUNT, value); }
+    public static void ntaskCount(long struct, int value) { memPutInt(struct + VkDrawMeshTasksIndirectCommandNV.TASKCOUNT, value); }
     /** Unsafe version of {@link #firstTask(int) firstTask}. */
-    public static void nfirstTask(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawMeshTasksIndirectCommandNV.FIRSTTASK, value); }
+    public static void nfirstTask(long struct, int value) { memPutInt(struct + VkDrawMeshTasksIndirectCommandNV.FIRSTTASK, value); }
 
     // -----------------------------------
 

@@ -318,28 +318,28 @@ public class MOUSEINPUT extends Struct<MOUSEINPUT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #dx}. */
-    public static int ndx(long struct) { return UNSAFE.getInt(null, struct + MOUSEINPUT.DX); }
+    public static int ndx(long struct) { return memGetInt(struct + MOUSEINPUT.DX); }
     /** Unsafe version of {@link #dy}. */
-    public static int ndy(long struct) { return UNSAFE.getInt(null, struct + MOUSEINPUT.DY); }
+    public static int ndy(long struct) { return memGetInt(struct + MOUSEINPUT.DY); }
     /** Unsafe version of {@link #mouseData}. */
-    public static int nmouseData(long struct) { return UNSAFE.getInt(null, struct + MOUSEINPUT.MOUSEDATA); }
+    public static int nmouseData(long struct) { return memGetInt(struct + MOUSEINPUT.MOUSEDATA); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + MOUSEINPUT.DWFLAGS); }
+    public static int ndwFlags(long struct) { return memGetInt(struct + MOUSEINPUT.DWFLAGS); }
     /** Unsafe version of {@link #time}. */
-    public static int ntime(long struct) { return UNSAFE.getInt(null, struct + MOUSEINPUT.TIME); }
+    public static int ntime(long struct) { return memGetInt(struct + MOUSEINPUT.TIME); }
     /** Unsafe version of {@link #dwExtraInfo}. */
     public static long ndwExtraInfo(long struct) { return memGetAddress(struct + MOUSEINPUT.DWEXTRAINFO); }
 
     /** Unsafe version of {@link #dx(int) dx}. */
-    public static void ndx(long struct, int value) { UNSAFE.putInt(null, struct + MOUSEINPUT.DX, value); }
+    public static void ndx(long struct, int value) { memPutInt(struct + MOUSEINPUT.DX, value); }
     /** Unsafe version of {@link #dy(int) dy}. */
-    public static void ndy(long struct, int value) { UNSAFE.putInt(null, struct + MOUSEINPUT.DY, value); }
+    public static void ndy(long struct, int value) { memPutInt(struct + MOUSEINPUT.DY, value); }
     /** Unsafe version of {@link #mouseData(int) mouseData}. */
-    public static void nmouseData(long struct, int value) { UNSAFE.putInt(null, struct + MOUSEINPUT.MOUSEDATA, value); }
+    public static void nmouseData(long struct, int value) { memPutInt(struct + MOUSEINPUT.MOUSEDATA, value); }
     /** Unsafe version of {@link #dwFlags(int) dwFlags}. */
-    public static void ndwFlags(long struct, int value) { UNSAFE.putInt(null, struct + MOUSEINPUT.DWFLAGS, value); }
+    public static void ndwFlags(long struct, int value) { memPutInt(struct + MOUSEINPUT.DWFLAGS, value); }
     /** Unsafe version of {@link #time(int) time}. */
-    public static void ntime(long struct, int value) { UNSAFE.putInt(null, struct + MOUSEINPUT.TIME, value); }
+    public static void ntime(long struct, int value) { memPutInt(struct + MOUSEINPUT.TIME, value); }
     /** Unsafe version of {@link #dwExtraInfo(long) dwExtraInfo}. */
     public static void ndwExtraInfo(long struct, long value) { memPutAddress(struct + MOUSEINPUT.DWEXTRAINFO, value); }
 

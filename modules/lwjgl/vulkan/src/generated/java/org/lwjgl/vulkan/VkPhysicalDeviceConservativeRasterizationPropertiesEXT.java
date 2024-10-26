@@ -314,30 +314,30 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #primitiveOverestimationSize}. */
-    public static float nprimitiveOverestimationSize(long struct) { return UNSAFE.getFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEOVERESTIMATIONSIZE); }
+    public static float nprimitiveOverestimationSize(long struct) { return memGetFloat(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEOVERESTIMATIONSIZE); }
     /** Unsafe version of {@link #maxExtraPrimitiveOverestimationSize}. */
-    public static float nmaxExtraPrimitiveOverestimationSize(long struct) { return UNSAFE.getFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.MAXEXTRAPRIMITIVEOVERESTIMATIONSIZE); }
+    public static float nmaxExtraPrimitiveOverestimationSize(long struct) { return memGetFloat(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.MAXEXTRAPRIMITIVEOVERESTIMATIONSIZE); }
     /** Unsafe version of {@link #extraPrimitiveOverestimationSizeGranularity}. */
-    public static float nextraPrimitiveOverestimationSizeGranularity(long struct) { return UNSAFE.getFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZEGRANULARITY); }
+    public static float nextraPrimitiveOverestimationSizeGranularity(long struct) { return memGetFloat(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZEGRANULARITY); }
     /** Unsafe version of {@link #primitiveUnderestimation}. */
-    public static int nprimitiveUnderestimation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEUNDERESTIMATION); }
+    public static int nprimitiveUnderestimation(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEUNDERESTIMATION); }
     /** Unsafe version of {@link #conservativePointAndLineRasterization}. */
-    public static int nconservativePointAndLineRasterization(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVEPOINTANDLINERASTERIZATION); }
+    public static int nconservativePointAndLineRasterization(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVEPOINTANDLINERASTERIZATION); }
     /** Unsafe version of {@link #degenerateTrianglesRasterized}. */
-    public static int ndegenerateTrianglesRasterized(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATETRIANGLESRASTERIZED); }
+    public static int ndegenerateTrianglesRasterized(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATETRIANGLESRASTERIZED); }
     /** Unsafe version of {@link #degenerateLinesRasterized}. */
-    public static int ndegenerateLinesRasterized(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATELINESRASTERIZED); }
+    public static int ndegenerateLinesRasterized(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATELINESRASTERIZED); }
     /** Unsafe version of {@link #fullyCoveredFragmentShaderInputVariable}. */
-    public static int nfullyCoveredFragmentShaderInputVariable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.FULLYCOVEREDFRAGMENTSHADERINPUTVARIABLE); }
+    public static int nfullyCoveredFragmentShaderInputVariable(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.FULLYCOVEREDFRAGMENTSHADERINPUTVARIABLE); }
     /** Unsafe version of {@link #conservativeRasterizationPostDepthCoverage}. */
-    public static int nconservativeRasterizationPostDepthCoverage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVERASTERIZATIONPOSTDEPTHCOVERAGE); }
+    public static int nconservativeRasterizationPostDepthCoverage(long struct) { return memGetInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVERASTERIZATIONPOSTDEPTHCOVERAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PNEXT, value); }
 

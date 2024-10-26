@@ -250,25 +250,25 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #total_len_32}. */
-    public static int ntotal_len_32(long struct) { return UNSAFE.getInt(null, struct + XXH32State.TOTAL_LEN_32); }
+    public static int ntotal_len_32(long struct) { return memGetInt(struct + XXH32State.TOTAL_LEN_32); }
     /** Unsafe version of {@link #large_len}. */
-    public static int nlarge_len(long struct) { return UNSAFE.getInt(null, struct + XXH32State.LARGE_LEN); }
+    public static int nlarge_len(long struct) { return memGetInt(struct + XXH32State.LARGE_LEN); }
     /** Unsafe version of {@link #v}. */
     public static IntBuffer nv(long struct) { return memIntBuffer(struct + XXH32State.V, 4); }
     /** Unsafe version of {@link #v(int) v}. */
     public static int nv(long struct, int index) {
-        return UNSAFE.getInt(null, struct + XXH32State.V + check(index, 4) * 4);
+        return memGetInt(struct + XXH32State.V + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #mem32}. */
     public static IntBuffer nmem32(long struct) { return memIntBuffer(struct + XXH32State.MEM32, 4); }
     /** Unsafe version of {@link #mem32(int) mem32}. */
     public static int nmem32(long struct, int index) {
-        return UNSAFE.getInt(null, struct + XXH32State.MEM32 + check(index, 4) * 4);
+        return memGetInt(struct + XXH32State.MEM32 + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #memsize}. */
-    public static int nmemsize(long struct) { return UNSAFE.getInt(null, struct + XXH32State.MEMSIZE); }
+    public static int nmemsize(long struct) { return memGetInt(struct + XXH32State.MEMSIZE); }
     /** Unsafe version of {@link #reserved}. */
-    public static int nreserved(long struct) { return UNSAFE.getInt(null, struct + XXH32State.RESERVED); }
+    public static int nreserved(long struct) { return memGetInt(struct + XXH32State.RESERVED); }
 
     // -----------------------------------
 

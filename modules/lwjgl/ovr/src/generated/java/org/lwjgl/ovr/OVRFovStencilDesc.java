@@ -281,22 +281,22 @@ public class OVRFovStencilDesc extends Struct<OVRFovStencilDesc> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #StencilType}. */
-    public static int nStencilType(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilDesc.STENCILTYPE); }
+    public static int nStencilType(long struct) { return memGetInt(struct + OVRFovStencilDesc.STENCILTYPE); }
     /** Unsafe version of {@link #StencilFlags}. */
-    public static int nStencilFlags(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilDesc.STENCILFLAGS); }
+    public static int nStencilFlags(long struct) { return memGetInt(struct + OVRFovStencilDesc.STENCILFLAGS); }
     /** Unsafe version of {@link #Eye}. */
-    public static int nEye(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilDesc.EYE); }
+    public static int nEye(long struct) { return memGetInt(struct + OVRFovStencilDesc.EYE); }
     /** Unsafe version of {@link #FovPort}. */
     public static OVRFovPort nFovPort(long struct) { return OVRFovPort.create(struct + OVRFovStencilDesc.FOVPORT); }
     /** Unsafe version of {@link #HmdToEyeRotation}. */
     public static OVRQuatf nHmdToEyeRotation(long struct) { return OVRQuatf.create(struct + OVRFovStencilDesc.HMDTOEYEROTATION); }
 
     /** Unsafe version of {@link #StencilType(int) StencilType}. */
-    public static void nStencilType(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilDesc.STENCILTYPE, value); }
+    public static void nStencilType(long struct, int value) { memPutInt(struct + OVRFovStencilDesc.STENCILTYPE, value); }
     /** Unsafe version of {@link #StencilFlags(int) StencilFlags}. */
-    public static void nStencilFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilDesc.STENCILFLAGS, value); }
+    public static void nStencilFlags(long struct, int value) { memPutInt(struct + OVRFovStencilDesc.STENCILFLAGS, value); }
     /** Unsafe version of {@link #Eye(int) Eye}. */
-    public static void nEye(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilDesc.EYE, value); }
+    public static void nEye(long struct, int value) { memPutInt(struct + OVRFovStencilDesc.EYE, value); }
     /** Unsafe version of {@link #FovPort(OVRFovPort) FovPort}. */
     public static void nFovPort(long struct, OVRFovPort value) { memCopy(value.address(), struct + OVRFovStencilDesc.FOVPORT, OVRFovPort.SIZEOF); }
     /** Unsafe version of {@link #HmdToEyeRotation(OVRQuatf) HmdToEyeRotation}. */

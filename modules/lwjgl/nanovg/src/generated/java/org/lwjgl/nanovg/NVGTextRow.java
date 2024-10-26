@@ -246,11 +246,11 @@ public class NVGTextRow extends Struct<NVGTextRow> implements NativeResource {
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + NVGTextRow.NEXT); }
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + NVGTextRow.WIDTH); }
     /** Unsafe version of {@link #minx}. */
-    public static float nminx(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.MINX); }
+    public static float nminx(long struct) { return memGetFloat(struct + NVGTextRow.MINX); }
     /** Unsafe version of {@link #maxx}. */
-    public static float nmaxx(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.MAXX); }
+    public static float nmaxx(long struct) { return memGetFloat(struct + NVGTextRow.MAXX); }
 
     // -----------------------------------
 

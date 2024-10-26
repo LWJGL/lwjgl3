@@ -286,28 +286,28 @@ public class BGFXInstanceDataBuffer extends Struct<BGFXInstanceDataBuffer> imple
     /** Unsafe version of {@link #data() data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + BGFXInstanceDataBuffer.DATA), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + BGFXInstanceDataBuffer.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + BGFXInstanceDataBuffer.SIZE); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + BGFXInstanceDataBuffer.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + BGFXInstanceDataBuffer.OFFSET); }
     /** Unsafe version of {@link #num}. */
-    public static int nnum(long struct) { return UNSAFE.getInt(null, struct + BGFXInstanceDataBuffer.NUM); }
+    public static int nnum(long struct) { return memGetInt(struct + BGFXInstanceDataBuffer.NUM); }
     /** Unsafe version of {@link #stride}. */
-    public static short nstride(long struct) { return UNSAFE.getShort(null, struct + BGFXInstanceDataBuffer.STRIDE); }
+    public static short nstride(long struct) { return memGetShort(struct + BGFXInstanceDataBuffer.STRIDE); }
     /** Unsafe version of {@link #handle}. */
-    public static short nhandle(long struct) { return UNSAFE.getShort(null, struct + BGFXInstanceDataBuffer.HANDLE); }
+    public static short nhandle(long struct) { return memGetShort(struct + BGFXInstanceDataBuffer.HANDLE); }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) { memPutAddress(struct + BGFXInstanceDataBuffer.DATA, memAddress(value)); nsize(struct, value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInstanceDataBuffer.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + BGFXInstanceDataBuffer.SIZE, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInstanceDataBuffer.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + BGFXInstanceDataBuffer.OFFSET, value); }
     /** Unsafe version of {@link #num(int) num}. */
-    public static void nnum(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInstanceDataBuffer.NUM, value); }
+    public static void nnum(long struct, int value) { memPutInt(struct + BGFXInstanceDataBuffer.NUM, value); }
     /** Unsafe version of {@link #stride(short) stride}. */
-    public static void nstride(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInstanceDataBuffer.STRIDE, value); }
+    public static void nstride(long struct, short value) { memPutShort(struct + BGFXInstanceDataBuffer.STRIDE, value); }
     /** Unsafe version of {@link #handle(short) handle}. */
-    public static void nhandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInstanceDataBuffer.HANDLE, value); }
+    public static void nhandle(long struct, short value) { memPutShort(struct + BGFXInstanceDataBuffer.HANDLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

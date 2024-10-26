@@ -276,22 +276,22 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct<VkAccelerat
     // -----------------------------------
 
     /** Unsafe version of {@link #primitiveCount}. */
-    public static int nprimitiveCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVECOUNT); }
+    public static int nprimitiveCount(long struct) { return memGetInt(struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVECOUNT); }
     /** Unsafe version of {@link #primitiveOffset}. */
-    public static int nprimitiveOffset(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVEOFFSET); }
+    public static int nprimitiveOffset(long struct) { return memGetInt(struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVEOFFSET); }
     /** Unsafe version of {@link #firstVertex}. */
-    public static int nfirstVertex(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.FIRSTVERTEX); }
+    public static int nfirstVertex(long struct) { return memGetInt(struct + VkAccelerationStructureBuildRangeInfoKHR.FIRSTVERTEX); }
     /** Unsafe version of {@link #transformOffset}. */
-    public static int ntransformOffset(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.TRANSFORMOFFSET); }
+    public static int ntransformOffset(long struct) { return memGetInt(struct + VkAccelerationStructureBuildRangeInfoKHR.TRANSFORMOFFSET); }
 
     /** Unsafe version of {@link #primitiveCount(int) primitiveCount}. */
-    public static void nprimitiveCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVECOUNT, value); }
+    public static void nprimitiveCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVECOUNT, value); }
     /** Unsafe version of {@link #primitiveOffset(int) primitiveOffset}. */
-    public static void nprimitiveOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVEOFFSET, value); }
+    public static void nprimitiveOffset(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildRangeInfoKHR.PRIMITIVEOFFSET, value); }
     /** Unsafe version of {@link #firstVertex(int) firstVertex}. */
-    public static void nfirstVertex(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.FIRSTVERTEX, value); }
+    public static void nfirstVertex(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildRangeInfoKHR.FIRSTVERTEX, value); }
     /** Unsafe version of {@link #transformOffset(int) transformOffset}. */
-    public static void ntransformOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildRangeInfoKHR.TRANSFORMOFFSET, value); }
+    public static void ntransformOffset(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildRangeInfoKHR.TRANSFORMOFFSET, value); }
 
     // -----------------------------------
 

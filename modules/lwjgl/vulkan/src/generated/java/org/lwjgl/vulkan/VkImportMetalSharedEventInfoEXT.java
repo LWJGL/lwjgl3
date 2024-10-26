@@ -247,14 +247,14 @@ public class VkImportMetalSharedEventInfoEXT extends Struct<VkImportMetalSharedE
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportMetalSharedEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportMetalSharedEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportMetalSharedEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #mtlSharedEvent}. */
     public static long nmtlSharedEvent(long struct) { return memGetAddress(struct + VkImportMetalSharedEventInfoEXT.MTLSHAREDEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMetalSharedEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportMetalSharedEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportMetalSharedEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #mtlSharedEvent(long) mtlSharedEvent}. */

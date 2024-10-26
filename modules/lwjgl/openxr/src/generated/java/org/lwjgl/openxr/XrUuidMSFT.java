@@ -222,7 +222,7 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
     public static ByteBuffer nbytes(long struct) { return memByteBuffer(struct + XrUuidMSFT.BYTES, 16); }
     /** Unsafe version of {@link #bytes(int) bytes}. */
     public static byte nbytes(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrUuidMSFT.BYTES + check(index, 16) * 1);
+        return memGetByte(struct + XrUuidMSFT.BYTES + check(index, 16) * 1);
     }
 
     /** Unsafe version of {@link #bytes(ByteBuffer) bytes}. */
@@ -232,7 +232,7 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
     }
     /** Unsafe version of {@link #bytes(int, byte) bytes}. */
     public static void nbytes(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrUuidMSFT.BYTES + check(index, 16) * 1, value);
+        memPutByte(struct + XrUuidMSFT.BYTES + check(index, 16) * 1, value);
     }
 
     // -----------------------------------

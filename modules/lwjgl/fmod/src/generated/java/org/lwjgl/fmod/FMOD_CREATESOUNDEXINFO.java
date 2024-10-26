@@ -593,27 +593,27 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #cbsize}. */
-    public static int ncbsize(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.CBSIZE); }
+    public static int ncbsize(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.CBSIZE); }
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.LENGTH); }
+    public static int nlength(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.LENGTH); }
     /** Unsafe version of {@link #fileoffset}. */
-    public static int nfileoffset(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.FILEOFFSET); }
+    public static int nfileoffset(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.FILEOFFSET); }
     /** Unsafe version of {@link #numchannels}. */
-    public static int nnumchannels(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.NUMCHANNELS); }
+    public static int nnumchannels(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.NUMCHANNELS); }
     /** Unsafe version of {@link #defaultfrequency}. */
-    public static int ndefaultfrequency(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.DEFAULTFREQUENCY); }
+    public static int ndefaultfrequency(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.DEFAULTFREQUENCY); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.FORMAT); }
     /** Unsafe version of {@link #decodebuffersize}. */
-    public static int ndecodebuffersize(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.DECODEBUFFERSIZE); }
+    public static int ndecodebuffersize(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.DECODEBUFFERSIZE); }
     /** Unsafe version of {@link #initialsubsound}. */
-    public static int ninitialsubsound(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSUBSOUND); }
+    public static int ninitialsubsound(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSUBSOUND); }
     /** Unsafe version of {@link #numsubsounds}. */
-    public static int nnumsubsounds(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.NUMSUBSOUNDS); }
+    public static int nnumsubsounds(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.NUMSUBSOUNDS); }
     /** Unsafe version of {@link #inclusionlist() inclusionlist}. */
     public static IntBuffer ninclusionlist(long struct) { return memIntBuffer(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLIST), ninclusionlistnum(struct)); }
     /** Unsafe version of {@link #inclusionlistnum}. */
-    public static int ninclusionlistnum(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLISTNUM); }
+    public static int ninclusionlistnum(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLISTNUM); }
     /** Unsafe version of {@link #pcmreadcallback}. */
     @Nullable public static FMOD_SOUND_PCMREAD_CALLBACK npcmreadcallback(long struct) { return FMOD_SOUND_PCMREAD_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.PCMREADCALLBACK)); }
     /** Unsafe version of {@link #pcmsetposcallback}. */
@@ -629,11 +629,11 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #encryptionkeyString}. */
     @Nullable public static String nencryptionkeyString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY)); }
     /** Unsafe version of {@link #maxpolyphony}. */
-    public static int nmaxpolyphony(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.MAXPOLYPHONY); }
+    public static int nmaxpolyphony(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.MAXPOLYPHONY); }
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + FMOD_CREATESOUNDEXINFO.USERDATA); }
     /** Unsafe version of {@link #suggestedsoundtype}. */
-    public static int nsuggestedsoundtype(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.SUGGESTEDSOUNDTYPE); }
+    public static int nsuggestedsoundtype(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.SUGGESTEDSOUNDTYPE); }
     /** Unsafe version of {@link #fileuseropen}. */
     @Nullable public static FMOD_FILE_OPEN_CALLBACK nfileuseropen(long struct) { return FMOD_FILE_OPEN_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSEROPEN)); }
     /** Unsafe version of {@link #fileuserclose}. */
@@ -649,48 +649,48 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #fileuserdata}. */
     public static long nfileuserdata(long struct) { return memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERDATA); }
     /** Unsafe version of {@link #filebuffersize}. */
-    public static int nfilebuffersize(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.FILEBUFFERSIZE); }
+    public static int nfilebuffersize(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.FILEBUFFERSIZE); }
     /** Unsafe version of {@link #channelorder}. */
-    public static int nchannelorder(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.CHANNELORDER); }
+    public static int nchannelorder(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.CHANNELORDER); }
     /** Unsafe version of {@link #initialsoundgroup}. */
     public static long ninitialsoundgroup(long struct) { return memGetAddress(struct + FMOD_CREATESOUNDEXINFO.INITIALSOUNDGROUP); }
     /** Unsafe version of {@link #initialseekposition}. */
-    public static int ninitialseekposition(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSITION); }
+    public static int ninitialseekposition(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSITION); }
     /** Unsafe version of {@link #initialseekpostype}. */
-    public static int ninitialseekpostype(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSTYPE); }
+    public static int ninitialseekpostype(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSTYPE); }
     /** Unsafe version of {@link #ignoresetfilesystem}. */
-    public static int nignoresetfilesystem(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.IGNORESETFILESYSTEM); }
+    public static int nignoresetfilesystem(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.IGNORESETFILESYSTEM); }
     /** Unsafe version of {@link #audioqueuepolicy}. */
-    public static int naudioqueuepolicy(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.AUDIOQUEUEPOLICY); }
+    public static int naudioqueuepolicy(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.AUDIOQUEUEPOLICY); }
     /** Unsafe version of {@link #minmidigranularity}. */
-    public static int nminmidigranularity(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.MINMIDIGRANULARITY); }
+    public static int nminmidigranularity(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.MINMIDIGRANULARITY); }
     /** Unsafe version of {@link #nonblockthreadid}. */
-    public static int nnonblockthreadid(long struct) { return UNSAFE.getInt(null, struct + FMOD_CREATESOUNDEXINFO.NONBLOCKTHREADID); }
+    public static int nnonblockthreadid(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.NONBLOCKTHREADID); }
     /** Unsafe version of {@link #fsbguid}. */
     @Nullable public static FMOD_GUID nfsbguid(long struct) { return FMOD_GUID.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FSBGUID)); }
 
     /** Unsafe version of {@link #cbsize(int) cbsize}. */
-    public static void ncbsize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.CBSIZE, value); }
+    public static void ncbsize(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.CBSIZE, value); }
     /** Unsafe version of {@link #length(int) length}. */
-    public static void nlength(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.LENGTH, value); }
+    public static void nlength(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.LENGTH, value); }
     /** Unsafe version of {@link #fileoffset(int) fileoffset}. */
-    public static void nfileoffset(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.FILEOFFSET, value); }
+    public static void nfileoffset(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.FILEOFFSET, value); }
     /** Unsafe version of {@link #numchannels(int) numchannels}. */
-    public static void nnumchannels(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.NUMCHANNELS, value); }
+    public static void nnumchannels(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.NUMCHANNELS, value); }
     /** Unsafe version of {@link #defaultfrequency(int) defaultfrequency}. */
-    public static void ndefaultfrequency(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.DEFAULTFREQUENCY, value); }
+    public static void ndefaultfrequency(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.DEFAULTFREQUENCY, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.FORMAT, value); }
     /** Unsafe version of {@link #decodebuffersize(int) decodebuffersize}. */
-    public static void ndecodebuffersize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.DECODEBUFFERSIZE, value); }
+    public static void ndecodebuffersize(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.DECODEBUFFERSIZE, value); }
     /** Unsafe version of {@link #initialsubsound(int) initialsubsound}. */
-    public static void ninitialsubsound(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSUBSOUND, value); }
+    public static void ninitialsubsound(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSUBSOUND, value); }
     /** Unsafe version of {@link #numsubsounds(int) numsubsounds}. */
-    public static void nnumsubsounds(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.NUMSUBSOUNDS, value); }
+    public static void nnumsubsounds(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.NUMSUBSOUNDS, value); }
     /** Unsafe version of {@link #inclusionlist(IntBuffer) inclusionlist}. */
     public static void ninclusionlist(long struct, IntBuffer value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLIST, memAddress(value)); ninclusionlistnum(struct, value.remaining()); }
     /** Sets the specified value to the {@code inclusionlistnum} field of the specified {@code struct}. */
-    public static void ninclusionlistnum(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLISTNUM, value); }
+    public static void ninclusionlistnum(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLISTNUM, value); }
     /** Unsafe version of {@link #pcmreadcallback(FMOD_SOUND_PCMREAD_CALLBACKI) pcmreadcallback}. */
     public static void npcmreadcallback(long struct, @Nullable FMOD_SOUND_PCMREAD_CALLBACKI value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.PCMREADCALLBACK, memAddressSafe(value)); }
     /** Unsafe version of {@link #pcmsetposcallback(FMOD_SOUND_PCMSETPOS_CALLBACKI) pcmsetposcallback}. */
@@ -708,11 +708,11 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
         memPutAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY, memAddressSafe(value));
     }
     /** Unsafe version of {@link #maxpolyphony(int) maxpolyphony}. */
-    public static void nmaxpolyphony(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.MAXPOLYPHONY, value); }
+    public static void nmaxpolyphony(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.MAXPOLYPHONY, value); }
     /** Unsafe version of {@link #userdata(long) userdata}. */
     public static void nuserdata(long struct, long value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.USERDATA, value); }
     /** Unsafe version of {@link #suggestedsoundtype(int) suggestedsoundtype}. */
-    public static void nsuggestedsoundtype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.SUGGESTEDSOUNDTYPE, value); }
+    public static void nsuggestedsoundtype(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.SUGGESTEDSOUNDTYPE, value); }
     /** Unsafe version of {@link #fileuseropen(FMOD_FILE_OPEN_CALLBACKI) fileuseropen}. */
     public static void nfileuseropen(long struct, @Nullable FMOD_FILE_OPEN_CALLBACKI value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSEROPEN, memAddressSafe(value)); }
     /** Unsafe version of {@link #fileuserclose(FMOD_FILE_CLOSE_CALLBACKI) fileuserclose}. */
@@ -728,23 +728,23 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #fileuserdata(long) fileuserdata}. */
     public static void nfileuserdata(long struct, long value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERDATA, value); }
     /** Unsafe version of {@link #filebuffersize(int) filebuffersize}. */
-    public static void nfilebuffersize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.FILEBUFFERSIZE, value); }
+    public static void nfilebuffersize(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.FILEBUFFERSIZE, value); }
     /** Unsafe version of {@link #channelorder(int) channelorder}. */
-    public static void nchannelorder(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.CHANNELORDER, value); }
+    public static void nchannelorder(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.CHANNELORDER, value); }
     /** Unsafe version of {@link #initialsoundgroup(long) initialsoundgroup}. */
     public static void ninitialsoundgroup(long struct, long value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.INITIALSOUNDGROUP, value); }
     /** Unsafe version of {@link #initialseekposition(int) initialseekposition}. */
-    public static void ninitialseekposition(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSITION, value); }
+    public static void ninitialseekposition(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSITION, value); }
     /** Unsafe version of {@link #initialseekpostype(int) initialseekpostype}. */
-    public static void ninitialseekpostype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSTYPE, value); }
+    public static void ninitialseekpostype(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.INITIALSEEKPOSTYPE, value); }
     /** Unsafe version of {@link #ignoresetfilesystem(int) ignoresetfilesystem}. */
-    public static void nignoresetfilesystem(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.IGNORESETFILESYSTEM, value); }
+    public static void nignoresetfilesystem(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.IGNORESETFILESYSTEM, value); }
     /** Unsafe version of {@link #audioqueuepolicy(int) audioqueuepolicy}. */
-    public static void naudioqueuepolicy(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.AUDIOQUEUEPOLICY, value); }
+    public static void naudioqueuepolicy(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.AUDIOQUEUEPOLICY, value); }
     /** Unsafe version of {@link #minmidigranularity(int) minmidigranularity}. */
-    public static void nminmidigranularity(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.MINMIDIGRANULARITY, value); }
+    public static void nminmidigranularity(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.MINMIDIGRANULARITY, value); }
     /** Unsafe version of {@link #nonblockthreadid(int) nonblockthreadid}. */
-    public static void nnonblockthreadid(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_CREATESOUNDEXINFO.NONBLOCKTHREADID, value); }
+    public static void nnonblockthreadid(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.NONBLOCKTHREADID, value); }
     /** Unsafe version of {@link #fsbguid(FMOD_GUID) fsbguid}. */
     public static void nfsbguid(long struct, @Nullable FMOD_GUID value) { memPutAddress(struct + FMOD_CREATESOUNDEXINFO.FSBGUID, memAddressSafe(value)); }
 

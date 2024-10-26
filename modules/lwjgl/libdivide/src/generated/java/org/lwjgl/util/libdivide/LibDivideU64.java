@@ -241,14 +241,14 @@ public class LibDivideU64 extends Struct<LibDivideU64> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #magic}. */
-    public static long nmagic(long struct) { return UNSAFE.getLong(null, struct + LibDivideU64.MAGIC); }
+    public static long nmagic(long struct) { return memGetLong(struct + LibDivideU64.MAGIC); }
     /** Unsafe version of {@link #more}. */
-    public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideU64.MORE); }
+    public static byte nmore(long struct) { return memGetByte(struct + LibDivideU64.MORE); }
 
     /** Unsafe version of {@link #magic(long) magic}. */
-    public static void nmagic(long struct, long value) { UNSAFE.putLong(null, struct + LibDivideU64.MAGIC, value); }
+    public static void nmagic(long struct, long value) { memPutLong(struct + LibDivideU64.MAGIC, value); }
     /** Unsafe version of {@link #more(byte) more}. */
-    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideU64.MORE, value); }
+    public static void nmore(long struct, byte value) { memPutByte(struct + LibDivideU64.MORE, value); }
 
     // -----------------------------------
 

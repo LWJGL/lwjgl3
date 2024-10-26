@@ -285,28 +285,28 @@ public class XrSceneComponentsLocateInfoMSFT extends Struct<XrSceneComponentsLoc
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentsLocateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneComponentsLocateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneComponentsLocateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrSceneComponentsLocateInfoMSFT.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrSceneComponentsLocateInfoMSFT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrSceneComponentsLocateInfoMSFT.TIME); }
     /** Unsafe version of {@link #componentIdCount}. */
-    public static int ncomponentIdCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDCOUNT); }
+    public static int ncomponentIdCount(long struct) { return memGetInt(struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDCOUNT); }
     /** Unsafe version of {@link #componentIds}. */
     @Nullable public static XrUuidMSFT.Buffer ncomponentIds(long struct) { return XrUuidMSFT.createSafe(memGetAddress(struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDS), ncomponentIdCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsLocateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneComponentsLocateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentsLocateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrSceneComponentsLocateInfoMSFT.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrSceneComponentsLocateInfoMSFT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrSceneComponentsLocateInfoMSFT.TIME, value); }
     /** Sets the specified value to the {@code componentIdCount} field of the specified {@code struct}. */
-    public static void ncomponentIdCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDCOUNT, value); }
+    public static void ncomponentIdCount(long struct, int value) { memPutInt(struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDCOUNT, value); }
     /** Unsafe version of {@link #componentIds(XrUuidMSFT.Buffer) componentIds}. */
     public static void ncomponentIds(long struct, @Nullable XrUuidMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentsLocateInfoMSFT.COMPONENTIDS, memAddressSafe(value)); if (value != null) { ncomponentIdCount(struct, value.remaining()); } }
 

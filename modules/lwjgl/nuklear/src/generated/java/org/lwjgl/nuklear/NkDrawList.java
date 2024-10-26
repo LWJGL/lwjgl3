@@ -327,21 +327,21 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     /** Unsafe version of {@link #elements}. */
     @Nullable public static NkBuffer nelements(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.ELEMENTS)); }
     /** Unsafe version of {@link #element_count}. */
-    public static int nelement_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.ELEMENT_COUNT); }
+    public static int nelement_count(long struct) { return memGetInt(struct + NkDrawList.ELEMENT_COUNT); }
     /** Unsafe version of {@link #vertex_count}. */
-    public static int nvertex_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.VERTEX_COUNT); }
+    public static int nvertex_count(long struct) { return memGetInt(struct + NkDrawList.VERTEX_COUNT); }
     /** Unsafe version of {@link #cmd_count}. */
-    public static int ncmd_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.CMD_COUNT); }
+    public static int ncmd_count(long struct) { return memGetInt(struct + NkDrawList.CMD_COUNT); }
     /** Unsafe version of {@link #cmd_offset}. */
     public static long ncmd_offset(long struct) { return memGetAddress(struct + NkDrawList.CMD_OFFSET); }
     /** Unsafe version of {@link #path_count}. */
-    public static int npath_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.PATH_COUNT); }
+    public static int npath_count(long struct) { return memGetInt(struct + NkDrawList.PATH_COUNT); }
     /** Unsafe version of {@link #path_offset}. */
-    public static int npath_offset(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.PATH_OFFSET); }
+    public static int npath_offset(long struct) { return memGetInt(struct + NkDrawList.PATH_OFFSET); }
     /** Unsafe version of {@link #line_AA}. */
-    public static int nline_AA(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.LINE_AA); }
+    public static int nline_AA(long struct) { return memGetInt(struct + NkDrawList.LINE_AA); }
     /** Unsafe version of {@link #shape_AA}. */
-    public static int nshape_AA(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.SHAPE_AA); }
+    public static int nshape_AA(long struct) { return memGetInt(struct + NkDrawList.SHAPE_AA); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkDrawList.USERDATA); }
 

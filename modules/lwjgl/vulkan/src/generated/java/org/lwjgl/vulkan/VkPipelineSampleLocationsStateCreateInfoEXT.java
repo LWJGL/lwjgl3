@@ -278,20 +278,20 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct<VkPipeli
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineSampleLocationsStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #sampleLocationsEnable}. */
-    public static int nsampleLocationsEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE); }
+    public static int nsampleLocationsEnable(long struct) { return memGetInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE); }
     /** Unsafe version of {@link #sampleLocationsInfo}. */
     public static VkSampleLocationsInfoEXT nsampleLocationsInfo(long struct) { return VkSampleLocationsInfoEXT.create(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSINFO); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineSampleLocationsStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #sampleLocationsEnable(boolean) sampleLocationsEnable}. */
-    public static void nsampleLocationsEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE, value); }
+    public static void nsampleLocationsEnable(long struct, int value) { memPutInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE, value); }
     /** Unsafe version of {@link #sampleLocationsInfo(VkSampleLocationsInfoEXT) sampleLocationsInfo}. */
     public static void nsampleLocationsInfo(long struct, VkSampleLocationsInfoEXT value) { memCopy(value.address(), struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSINFO, VkSampleLocationsInfoEXT.SIZEOF); }
 

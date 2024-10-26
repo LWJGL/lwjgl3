@@ -313,38 +313,38 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBodyJointLocationsFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBodyJointLocationsFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBodyJointLocationsFB.NEXT); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrBodyJointLocationsFB.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrBodyJointLocationsFB.ISACTIVE); }
     /** Unsafe version of {@link #confidence}. */
-    public static float nconfidence(long struct) { return UNSAFE.getFloat(null, struct + XrBodyJointLocationsFB.CONFIDENCE); }
+    public static float nconfidence(long struct) { return memGetFloat(struct + XrBodyJointLocationsFB.CONFIDENCE); }
     /** Unsafe version of {@link #jointCount}. */
-    public static int njointCount(long struct) { return UNSAFE.getInt(null, struct + XrBodyJointLocationsFB.JOINTCOUNT); }
+    public static int njointCount(long struct) { return memGetInt(struct + XrBodyJointLocationsFB.JOINTCOUNT); }
     /** Unsafe version of {@link #jointLocations}. */
     public static XrBodyJointLocationFB.Buffer njointLocations(long struct) { return XrBodyJointLocationFB.create(memGetAddress(struct + XrBodyJointLocationsFB.JOINTLOCATIONS), njointCount(struct)); }
     /** Unsafe version of {@link #skeletonChangedCount}. */
-    public static int nskeletonChangedCount(long struct) { return UNSAFE.getInt(null, struct + XrBodyJointLocationsFB.SKELETONCHANGEDCOUNT); }
+    public static int nskeletonChangedCount(long struct) { return memGetInt(struct + XrBodyJointLocationsFB.SKELETONCHANGEDCOUNT); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrBodyJointLocationsFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrBodyJointLocationsFB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyJointLocationsFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBodyJointLocationsFB.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyJointLocationsFB.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.ISACTIVE, value); }
     /** Unsafe version of {@link #confidence(float) confidence}. */
-    public static void nconfidence(long struct, float value) { UNSAFE.putFloat(null, struct + XrBodyJointLocationsFB.CONFIDENCE, value); }
+    public static void nconfidence(long struct, float value) { memPutFloat(struct + XrBodyJointLocationsFB.CONFIDENCE, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
-    public static void njointCount(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyJointLocationsFB.JOINTCOUNT, value); }
+    public static void njointCount(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.JOINTCOUNT, value); }
     /** Unsafe version of {@link #jointLocations(XrBodyJointLocationFB.Buffer) jointLocations}. */
     public static void njointLocations(long struct, XrBodyJointLocationFB.Buffer value) { memPutAddress(struct + XrBodyJointLocationsFB.JOINTLOCATIONS, value.address()); njointCount(struct, value.remaining()); }
     /** Unsafe version of {@link #skeletonChangedCount(int) skeletonChangedCount}. */
-    public static void nskeletonChangedCount(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyJointLocationsFB.SKELETONCHANGEDCOUNT, value); }
+    public static void nskeletonChangedCount(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.SKELETONCHANGEDCOUNT, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrBodyJointLocationsFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrBodyJointLocationsFB.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

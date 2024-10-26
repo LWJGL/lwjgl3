@@ -940,13 +940,13 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGraphicsPipelineCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.FLAGS); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.STAGECOUNT); }
+    public static int nstageCount(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     @Nullable public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkGraphicsPipelineCreateInfo.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pVertexInputState}. */
@@ -968,24 +968,24 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
     /** Unsafe version of {@link #pDynamicState}. */
     @Nullable public static VkPipelineDynamicStateCreateInfo npDynamicState(long struct) { return VkPipelineDynamicStateCreateInfo.createSafe(memGetAddress(struct + VkGraphicsPipelineCreateInfo.PDYNAMICSTATE)); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.LAYOUT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.RENDERPASS); }
     /** Unsafe version of {@link #subpass}. */
-    public static int nsubpass(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.SUBPASS); }
+    public static int nsubpass(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.SUBPASS); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, @Nullable VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PSTAGES, memAddressSafe(value)); if (value != null) { nstageCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pVertexInputState(VkPipelineVertexInputStateCreateInfo) pVertexInputState}. */
@@ -1007,15 +1007,15 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
     /** Unsafe version of {@link #pDynamicState(VkPipelineDynamicStateCreateInfo) pDynamicState}. */
     public static void npDynamicState(long struct, @Nullable VkPipelineDynamicStateCreateInfo value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PDYNAMICSTATE, memAddressSafe(value)); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.LAYOUT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.RENDERPASS, value); }
     /** Unsafe version of {@link #subpass(int) subpass}. */
-    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.SUBPASS, value); }
+    public static void nsubpass(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.SUBPASS, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

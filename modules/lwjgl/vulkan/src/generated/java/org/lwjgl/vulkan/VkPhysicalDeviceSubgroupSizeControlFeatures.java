@@ -264,22 +264,22 @@ public class VkPhysicalDeviceSubgroupSizeControlFeatures extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.PNEXT); }
     /** Unsafe version of {@link #subgroupSizeControl}. */
-    public static int nsubgroupSizeControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.SUBGROUPSIZECONTROL); }
+    public static int nsubgroupSizeControl(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.SUBGROUPSIZECONTROL); }
     /** Unsafe version of {@link #computeFullSubgroups}. */
-    public static int ncomputeFullSubgroups(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.COMPUTEFULLSUBGROUPS); }
+    public static int ncomputeFullSubgroups(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.COMPUTEFULLSUBGROUPS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.PNEXT, value); }
     /** Unsafe version of {@link #subgroupSizeControl(boolean) subgroupSizeControl}. */
-    public static void nsubgroupSizeControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.SUBGROUPSIZECONTROL, value); }
+    public static void nsubgroupSizeControl(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.SUBGROUPSIZECONTROL, value); }
     /** Unsafe version of {@link #computeFullSubgroups(boolean) computeFullSubgroups}. */
-    public static void ncomputeFullSubgroups(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubgroupSizeControlFeatures.COMPUTEFULLSUBGROUPS, value); }
+    public static void ncomputeFullSubgroups(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubgroupSizeControlFeatures.COMPUTEFULLSUBGROUPS, value); }
 
     // -----------------------------------
 

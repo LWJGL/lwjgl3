@@ -246,18 +246,18 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory}. */
-    public static int nshaderZeroInitializeWorkgroupMemory(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.SHADERZEROINITIALIZEWORKGROUPMEMORY); }
+    public static int nshaderZeroInitializeWorkgroupMemory(long struct) { return memGetInt(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.SHADERZEROINITIALIZEWORKGROUPMEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory(boolean) shaderZeroInitializeWorkgroupMemory}. */
-    public static void nshaderZeroInitializeWorkgroupMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.SHADERZEROINITIALIZEWORKGROUPMEMORY, value); }
+    public static void nshaderZeroInitializeWorkgroupMemory(long struct, int value) { memPutInt(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.SHADERZEROINITIALIZEWORKGROUPMEMORY, value); }
 
     // -----------------------------------
 

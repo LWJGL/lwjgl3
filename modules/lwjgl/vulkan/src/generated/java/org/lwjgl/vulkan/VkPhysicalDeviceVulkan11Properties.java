@@ -361,54 +361,54 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct<VkPhysicalDeviceV
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVulkan11Properties.PNEXT); }
     /** Unsafe version of {@link #deviceUUID}. */
     public static ByteBuffer ndeviceUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceVulkan11Properties.DEVICEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #deviceUUID(int) deviceUUID}. */
     public static byte ndeviceUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceVulkan11Properties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #driverUUID}. */
     public static ByteBuffer ndriverUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceVulkan11Properties.DRIVERUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #driverUUID(int) driverUUID}. */
     public static byte ndriverUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceVulkan11Properties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceVulkan11Properties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceLUID}. */
     public static ByteBuffer ndeviceLUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceVulkan11Properties.DEVICELUID, VK_LUID_SIZE); }
     /** Unsafe version of {@link #deviceLUID(int) deviceLUID}. */
     public static byte ndeviceLUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceVulkan11Properties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceNodeMask}. */
-    public static int ndeviceNodeMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICENODEMASK); }
+    public static int ndeviceNodeMask(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.DEVICENODEMASK); }
     /** Unsafe version of {@link #deviceLUIDValid}. */
-    public static int ndeviceLUIDValid(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICELUIDVALID); }
+    public static int ndeviceLUIDValid(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.DEVICELUIDVALID); }
     /** Unsafe version of {@link #subgroupSize}. */
-    public static int nsubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSIZE); }
+    public static int nsubgroupSize(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSIZE); }
     /** Unsafe version of {@link #subgroupSupportedStages}. */
-    public static int nsubgroupSupportedStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDSTAGES); }
+    public static int nsubgroupSupportedStages(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDSTAGES); }
     /** Unsafe version of {@link #subgroupSupportedOperations}. */
-    public static int nsubgroupSupportedOperations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDOPERATIONS); }
+    public static int nsubgroupSupportedOperations(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDOPERATIONS); }
     /** Unsafe version of {@link #subgroupQuadOperationsInAllStages}. */
-    public static int nsubgroupQuadOperationsInAllStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPQUADOPERATIONSINALLSTAGES); }
+    public static int nsubgroupQuadOperationsInAllStages(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPQUADOPERATIONSINALLSTAGES); }
     /** Unsafe version of {@link #pointClippingBehavior}. */
-    public static int npointClippingBehavior(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.POINTCLIPPINGBEHAVIOR); }
+    public static int npointClippingBehavior(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.POINTCLIPPINGBEHAVIOR); }
     /** Unsafe version of {@link #maxMultiviewViewCount}. */
-    public static int nmaxMultiviewViewCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWVIEWCOUNT); }
+    public static int nmaxMultiviewViewCount(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWVIEWCOUNT); }
     /** Unsafe version of {@link #maxMultiviewInstanceIndex}. */
-    public static int nmaxMultiviewInstanceIndex(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWINSTANCEINDEX); }
+    public static int nmaxMultiviewInstanceIndex(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWINSTANCEINDEX); }
     /** Unsafe version of {@link #protectedNoFault}. */
-    public static int nprotectedNoFault(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.PROTECTEDNOFAULT); }
+    public static int nprotectedNoFault(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.PROTECTEDNOFAULT); }
     /** Unsafe version of {@link #maxPerSetDescriptors}. */
-    public static int nmaxPerSetDescriptors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXPERSETDESCRIPTORS); }
+    public static int nmaxPerSetDescriptors(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan11Properties.MAXPERSETDESCRIPTORS); }
     /** Unsafe version of {@link #maxMemoryAllocationSize}. */
-    public static long nmaxMemoryAllocationSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMEMORYALLOCATIONSIZE); }
+    public static long nmaxMemoryAllocationSize(long struct) { return memGetLong(struct + VkPhysicalDeviceVulkan11Properties.MAXMEMORYALLOCATIONSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan11Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkan11Properties.PNEXT, value); }
 

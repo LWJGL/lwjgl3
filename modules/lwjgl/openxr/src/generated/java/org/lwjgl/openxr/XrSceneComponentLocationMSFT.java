@@ -235,12 +235,12 @@ public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocatio
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrSceneComponentLocationMSFT.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrSceneComponentLocationMSFT.FLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrSceneComponentLocationMSFT.POSE); }
 
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrSceneComponentLocationMSFT.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrSceneComponentLocationMSFT.FLAGS, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSceneComponentLocationMSFT.POSE, XrPosef.SIZEOF); }
 

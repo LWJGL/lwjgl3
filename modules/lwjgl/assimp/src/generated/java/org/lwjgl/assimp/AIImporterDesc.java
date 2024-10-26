@@ -378,15 +378,15 @@ public class AIImporterDesc extends Struct<AIImporterDesc> implements NativeReso
     /** Unsafe version of {@link #mCommentsString}. */
     public static String nmCommentsString(long struct) { return memUTF8(memGetAddress(struct + AIImporterDesc.MCOMMENTS)); }
     /** Unsafe version of {@link #mFlags}. */
-    public static int nmFlags(long struct) { return UNSAFE.getInt(null, struct + AIImporterDesc.MFLAGS); }
+    public static int nmFlags(long struct) { return memGetInt(struct + AIImporterDesc.MFLAGS); }
     /** Unsafe version of {@link #mMinMajor}. */
-    public static int nmMinMajor(long struct) { return UNSAFE.getInt(null, struct + AIImporterDesc.MMINMAJOR); }
+    public static int nmMinMajor(long struct) { return memGetInt(struct + AIImporterDesc.MMINMAJOR); }
     /** Unsafe version of {@link #mMinMinor}. */
-    public static int nmMinMinor(long struct) { return UNSAFE.getInt(null, struct + AIImporterDesc.MMINMINOR); }
+    public static int nmMinMinor(long struct) { return memGetInt(struct + AIImporterDesc.MMINMINOR); }
     /** Unsafe version of {@link #mMaxMajor}. */
-    public static int nmMaxMajor(long struct) { return UNSAFE.getInt(null, struct + AIImporterDesc.MMAXMAJOR); }
+    public static int nmMaxMajor(long struct) { return memGetInt(struct + AIImporterDesc.MMAXMAJOR); }
     /** Unsafe version of {@link #mMaxMinor}. */
-    public static int nmMaxMinor(long struct) { return UNSAFE.getInt(null, struct + AIImporterDesc.MMAXMINOR); }
+    public static int nmMaxMinor(long struct) { return memGetInt(struct + AIImporterDesc.MMAXMINOR); }
     /** Unsafe version of {@link #mFileExtensions}. */
     public static ByteBuffer nmFileExtensions(long struct) { return memByteBufferNT1(memGetAddress(struct + AIImporterDesc.MFILEEXTENSIONS)); }
     /** Unsafe version of {@link #mFileExtensionsString}. */
@@ -413,15 +413,15 @@ public class AIImporterDesc extends Struct<AIImporterDesc> implements NativeReso
         memPutAddress(struct + AIImporterDesc.MCOMMENTS, memAddress(value));
     }
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
-    public static void nmFlags(long struct, int value) { UNSAFE.putInt(null, struct + AIImporterDesc.MFLAGS, value); }
+    public static void nmFlags(long struct, int value) { memPutInt(struct + AIImporterDesc.MFLAGS, value); }
     /** Unsafe version of {@link #mMinMajor(int) mMinMajor}. */
-    public static void nmMinMajor(long struct, int value) { UNSAFE.putInt(null, struct + AIImporterDesc.MMINMAJOR, value); }
+    public static void nmMinMajor(long struct, int value) { memPutInt(struct + AIImporterDesc.MMINMAJOR, value); }
     /** Unsafe version of {@link #mMinMinor(int) mMinMinor}. */
-    public static void nmMinMinor(long struct, int value) { UNSAFE.putInt(null, struct + AIImporterDesc.MMINMINOR, value); }
+    public static void nmMinMinor(long struct, int value) { memPutInt(struct + AIImporterDesc.MMINMINOR, value); }
     /** Unsafe version of {@link #mMaxMajor(int) mMaxMajor}. */
-    public static void nmMaxMajor(long struct, int value) { UNSAFE.putInt(null, struct + AIImporterDesc.MMAXMAJOR, value); }
+    public static void nmMaxMajor(long struct, int value) { memPutInt(struct + AIImporterDesc.MMAXMAJOR, value); }
     /** Unsafe version of {@link #mMaxMinor(int) mMaxMinor}. */
-    public static void nmMaxMinor(long struct, int value) { UNSAFE.putInt(null, struct + AIImporterDesc.MMAXMINOR, value); }
+    public static void nmMaxMinor(long struct, int value) { memPutInt(struct + AIImporterDesc.MMAXMINOR, value); }
     /** Unsafe version of {@link #mFileExtensions(ByteBuffer) mFileExtensions}. */
     public static void nmFileExtensions(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

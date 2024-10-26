@@ -338,34 +338,34 @@ public class VkPhysicalDeviceIDProperties extends Struct<VkPhysicalDeviceIDPrope
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceIDProperties.PNEXT); }
     /** Unsafe version of {@link #deviceUUID}. */
     public static ByteBuffer ndeviceUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DEVICEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #deviceUUID(int) deviceUUID}. */
     public static byte ndeviceUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceIDProperties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #driverUUID}. */
     public static ByteBuffer ndriverUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DRIVERUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #driverUUID(int) driverUUID}. */
     public static byte ndriverUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceIDProperties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceLUID}. */
     public static ByteBuffer ndeviceLUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DEVICELUID, VK_LUID_SIZE); }
     /** Unsafe version of {@link #deviceLUID(int) deviceLUID}. */
     public static byte ndeviceLUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceIDProperties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceNodeMask}. */
-    public static int ndeviceNodeMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.DEVICENODEMASK); }
+    public static int ndeviceNodeMask(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.DEVICENODEMASK); }
     /** Unsafe version of {@link #deviceLUIDValid}. */
-    public static int ndeviceLUIDValid(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.DEVICELUIDVALID); }
+    public static int ndeviceLUIDValid(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.DEVICELUIDVALID); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceIDProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceIDProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceIDProperties.PNEXT, value); }
 

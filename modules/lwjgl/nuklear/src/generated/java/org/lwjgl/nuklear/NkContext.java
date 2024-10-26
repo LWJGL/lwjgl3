@@ -247,26 +247,26 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     /** Unsafe version of {@link #clip}. */
     public static NkClipboard nclip(long struct) { return NkClipboard.create(struct + NkContext.CLIP); }
     /** Unsafe version of {@link #last_widget_state}. */
-    public static int nlast_widget_state(long struct) { return UNSAFE.getInt(null, struct + NkContext.LAST_WIDGET_STATE); }
+    public static int nlast_widget_state(long struct) { return memGetInt(struct + NkContext.LAST_WIDGET_STATE); }
     /** Unsafe version of {@link #button_behavior}. */
-    public static int nbutton_behavior(long struct) { return UNSAFE.getInt(null, struct + NkContext.BUTTON_BEHAVIOR); }
+    public static int nbutton_behavior(long struct) { return memGetInt(struct + NkContext.BUTTON_BEHAVIOR); }
     /** Unsafe version of {@link #stacks}. */
     public static NkConfigurationStacks nstacks(long struct) { return NkConfigurationStacks.create(struct + NkContext.STACKS); }
     /** Unsafe version of {@link #delta_time_seconds}. */
-    public static float ndelta_time_seconds(long struct) { return UNSAFE.getFloat(null, struct + NkContext.DELTA_TIME_SECONDS); }
+    public static float ndelta_time_seconds(long struct) { return memGetFloat(struct + NkContext.DELTA_TIME_SECONDS); }
     public static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
     public static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
     public static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
-    public static int nbuild(long struct) { return UNSAFE.getInt(null, struct + NkContext.BUILD); }
-    public static int nuse_pool(long struct) { return UNSAFE.getInt(null, struct + NkContext.USE_POOL); }
+    public static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
+    public static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
     public static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
     @Nullable public static NkWindow nbegin(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.BEGIN)); }
     @Nullable public static NkWindow nend(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.END)); }
     @Nullable public static NkWindow nactive(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.ACTIVE)); }
     @Nullable public static NkWindow ncurrent(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.CURRENT)); }
     public static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + NkContext.COUNT); }
-    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkContext.SEQ); }
+    public static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
+    public static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
 
 }

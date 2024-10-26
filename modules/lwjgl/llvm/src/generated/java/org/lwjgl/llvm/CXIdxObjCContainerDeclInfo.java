@@ -111,7 +111,7 @@ public class CXIdxObjCContainerDeclInfo extends Struct<CXIdxObjCContainerDeclInf
     /** Unsafe version of {@link #declInfo}. */
     public static CXIdxDeclInfo ndeclInfo(long struct) { return CXIdxDeclInfo.create(memGetAddress(struct + CXIdxObjCContainerDeclInfo.DECLINFO)); }
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXIdxObjCContainerDeclInfo.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXIdxObjCContainerDeclInfo.KIND); }
 
     // -----------------------------------
 

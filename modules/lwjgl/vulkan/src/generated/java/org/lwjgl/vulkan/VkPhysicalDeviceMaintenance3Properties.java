@@ -268,16 +268,16 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance3Properties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance3Properties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance3Properties.PNEXT); }
     /** Unsafe version of {@link #maxPerSetDescriptors}. */
-    public static int nmaxPerSetDescriptors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance3Properties.MAXPERSETDESCRIPTORS); }
+    public static int nmaxPerSetDescriptors(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance3Properties.MAXPERSETDESCRIPTORS); }
     /** Unsafe version of {@link #maxMemoryAllocationSize}. */
-    public static long nmaxMemoryAllocationSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceMaintenance3Properties.MAXMEMORYALLOCATIONSIZE); }
+    public static long nmaxMemoryAllocationSize(long struct) { return memGetLong(struct + VkPhysicalDeviceMaintenance3Properties.MAXMEMORYALLOCATIONSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance3Properties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance3Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance3Properties.PNEXT, value); }
 

@@ -103,7 +103,7 @@ public class hwloc_topology_misc_support extends Struct<hwloc_topology_misc_supp
     // -----------------------------------
 
     /** Unsafe version of {@link #imported_support}. */
-    public static boolean nimported_support(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_misc_support.IMPORTED_SUPPORT) != 0; }
+    public static boolean nimported_support(long struct) { return memGetByte(struct + hwloc_topology_misc_support.IMPORTED_SUPPORT) != 0; }
 
     // -----------------------------------
 

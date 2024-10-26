@@ -248,18 +248,18 @@ public class VkBindIndexBufferIndirectCommandEXT extends Struct<VkBindIndexBuffe
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferAddress}. */
-    public static long nbufferAddress(long struct) { return UNSAFE.getLong(null, struct + VkBindIndexBufferIndirectCommandEXT.BUFFERADDRESS); }
+    public static long nbufferAddress(long struct) { return memGetLong(struct + VkBindIndexBufferIndirectCommandEXT.BUFFERADDRESS); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkBindIndexBufferIndirectCommandEXT.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + VkBindIndexBufferIndirectCommandEXT.SIZE); }
     /** Unsafe version of {@link #indexType}. */
-    public static int nindexType(long struct) { return UNSAFE.getInt(null, struct + VkBindIndexBufferIndirectCommandEXT.INDEXTYPE); }
+    public static int nindexType(long struct) { return memGetInt(struct + VkBindIndexBufferIndirectCommandEXT.INDEXTYPE); }
 
     /** Unsafe version of {@link #bufferAddress(long) bufferAddress}. */
-    public static void nbufferAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBindIndexBufferIndirectCommandEXT.BUFFERADDRESS, value); }
+    public static void nbufferAddress(long struct, long value) { memPutLong(struct + VkBindIndexBufferIndirectCommandEXT.BUFFERADDRESS, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkBindIndexBufferIndirectCommandEXT.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + VkBindIndexBufferIndirectCommandEXT.SIZE, value); }
     /** Unsafe version of {@link #indexType(int) indexType}. */
-    public static void nindexType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindIndexBufferIndirectCommandEXT.INDEXTYPE, value); }
+    public static void nindexType(long struct, int value) { memPutInt(struct + VkBindIndexBufferIndirectCommandEXT.INDEXTYPE, value); }
 
     // -----------------------------------
 

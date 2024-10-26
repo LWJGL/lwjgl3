@@ -262,18 +262,18 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct<VkExternalMemoryIm
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryImageCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExternalMemoryImageCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalMemoryImageCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static int nhandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryImageCreateInfoNV.HANDLETYPES); }
+    public static int nhandleTypes(long struct) { return memGetInt(struct + VkExternalMemoryImageCreateInfoNV.HANDLETYPES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryImageCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalMemoryImageCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalMemoryImageCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #handleTypes(int) handleTypes}. */
-    public static void nhandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryImageCreateInfoNV.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, int value) { memPutInt(struct + VkExternalMemoryImageCreateInfoNV.HANDLETYPES, value); }
 
     // -----------------------------------
 

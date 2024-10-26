@@ -267,25 +267,25 @@ public class CGEventTapInformation extends Struct<CGEventTapInformation> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #eventTapID}. */
-    public static int neventTapID(long struct) { return UNSAFE.getInt(null, struct + CGEventTapInformation.EVENTTAPID); }
+    public static int neventTapID(long struct) { return memGetInt(struct + CGEventTapInformation.EVENTTAPID); }
     /** Unsafe version of {@link #tapPoint}. */
-    public static int ntapPoint(long struct) { return UNSAFE.getInt(null, struct + CGEventTapInformation.TAPPOINT); }
+    public static int ntapPoint(long struct) { return memGetInt(struct + CGEventTapInformation.TAPPOINT); }
     /** Unsafe version of {@link #options}. */
-    public static int noptions(long struct) { return UNSAFE.getInt(null, struct + CGEventTapInformation.OPTIONS); }
+    public static int noptions(long struct) { return memGetInt(struct + CGEventTapInformation.OPTIONS); }
     /** Unsafe version of {@link #eventsOfInterest}. */
-    public static long neventsOfInterest(long struct) { return UNSAFE.getLong(null, struct + CGEventTapInformation.EVENTSOFINTEREST); }
+    public static long neventsOfInterest(long struct) { return memGetLong(struct + CGEventTapInformation.EVENTSOFINTEREST); }
     /** Unsafe version of {@link #tappingProcess}. */
     public static long ntappingProcess(long struct) { return memGetAddress(struct + CGEventTapInformation.TAPPINGPROCESS); }
     /** Unsafe version of {@link #processBeingTapped}. */
     public static long nprocessBeingTapped(long struct) { return memGetAddress(struct + CGEventTapInformation.PROCESSBEINGTAPPED); }
     /** Unsafe version of {@link #enabled}. */
-    public static boolean nenabled(long struct) { return UNSAFE.getByte(null, struct + CGEventTapInformation.ENABLED) != 0; }
+    public static boolean nenabled(long struct) { return memGetByte(struct + CGEventTapInformation.ENABLED) != 0; }
     /** Unsafe version of {@link #minUsecLatency}. */
-    public static float nminUsecLatency(long struct) { return UNSAFE.getFloat(null, struct + CGEventTapInformation.MINUSECLATENCY); }
+    public static float nminUsecLatency(long struct) { return memGetFloat(struct + CGEventTapInformation.MINUSECLATENCY); }
     /** Unsafe version of {@link #avgUsecLatency}. */
-    public static float navgUsecLatency(long struct) { return UNSAFE.getFloat(null, struct + CGEventTapInformation.AVGUSECLATENCY); }
+    public static float navgUsecLatency(long struct) { return memGetFloat(struct + CGEventTapInformation.AVGUSECLATENCY); }
     /** Unsafe version of {@link #maxUsecLatency}. */
-    public static float nmaxUsecLatency(long struct) { return UNSAFE.getFloat(null, struct + CGEventTapInformation.MAXUSECLATENCY); }
+    public static float nmaxUsecLatency(long struct) { return memGetFloat(struct + CGEventTapInformation.MAXUSECLATENCY); }
 
     // -----------------------------------
 

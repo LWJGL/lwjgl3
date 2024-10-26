@@ -246,18 +246,18 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #graphicsPipelineLibrary}. */
-    public static int ngraphicsPipelineLibrary(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.GRAPHICSPIPELINELIBRARY); }
+    public static int ngraphicsPipelineLibrary(long struct) { return memGetInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.GRAPHICSPIPELINELIBRARY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #graphicsPipelineLibrary(boolean) graphicsPipelineLibrary}. */
-    public static void ngraphicsPipelineLibrary(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.GRAPHICSPIPELINELIBRARY, value); }
+    public static void ngraphicsPipelineLibrary(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.GRAPHICSPIPELINELIBRARY, value); }
 
     // -----------------------------------
 

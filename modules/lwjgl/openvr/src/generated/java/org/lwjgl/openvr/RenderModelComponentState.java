@@ -226,7 +226,7 @@ public class RenderModelComponentState extends Struct<RenderModelComponentState>
     /** Unsafe version of {@link #mTrackingToComponentLocal}. */
     public static HmdMatrix34 nmTrackingToComponentLocal(long struct) { return HmdMatrix34.create(struct + RenderModelComponentState.MTRACKINGTOCOMPONENTLOCAL); }
     /** Unsafe version of {@link #uProperties}. */
-    public static int nuProperties(long struct) { return UNSAFE.getInt(null, struct + RenderModelComponentState.UPROPERTIES); }
+    public static int nuProperties(long struct) { return memGetInt(struct + RenderModelComponentState.UPROPERTIES); }
 
     // -----------------------------------
 

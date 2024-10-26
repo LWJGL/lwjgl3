@@ -140,17 +140,17 @@ public class VREventReserved extends Struct<VREventReserved> {
     // -----------------------------------
 
     /** Unsafe version of {@link #reserved0}. */
-    public static long nreserved0(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED0); }
+    public static long nreserved0(long struct) { return memGetLong(struct + VREventReserved.RESERVED0); }
     /** Unsafe version of {@link #reserved1}. */
-    public static long nreserved1(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED1); }
+    public static long nreserved1(long struct) { return memGetLong(struct + VREventReserved.RESERVED1); }
     /** Unsafe version of {@link #reserved2}. */
-    public static long nreserved2(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED2); }
+    public static long nreserved2(long struct) { return memGetLong(struct + VREventReserved.RESERVED2); }
     /** Unsafe version of {@link #reserved3}. */
-    public static long nreserved3(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED3); }
+    public static long nreserved3(long struct) { return memGetLong(struct + VREventReserved.RESERVED3); }
     /** Unsafe version of {@link #reserved4}. */
-    public static long nreserved4(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED4); }
+    public static long nreserved4(long struct) { return memGetLong(struct + VREventReserved.RESERVED4); }
     /** Unsafe version of {@link #reserved5}. */
-    public static long nreserved5(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED5); }
+    public static long nreserved5(long struct) { return memGetLong(struct + VREventReserved.RESERVED5); }
 
     // -----------------------------------
 

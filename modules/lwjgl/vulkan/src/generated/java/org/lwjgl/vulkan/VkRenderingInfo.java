@@ -457,19 +457,19 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkRenderingInfo.FLAGS); }
     /** Unsafe version of {@link #renderArea}. */
     public static VkRect2D nrenderArea(long struct) { return VkRect2D.create(struct + VkRenderingInfo.RENDERAREA); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInfo.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + VkRenderingInfo.LAYERCOUNT); }
     /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInfo.VIEWMASK); }
+    public static int nviewMask(long struct) { return memGetInt(struct + VkRenderingInfo.VIEWMASK); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInfo.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingInfo.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachments}. */
     @Nullable public static VkRenderingAttachmentInfo.Buffer npColorAttachments(long struct) { return VkRenderingAttachmentInfo.createSafe(memGetAddress(struct + VkRenderingInfo.PCOLORATTACHMENTS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pDepthAttachment}. */
@@ -478,19 +478,19 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     @Nullable public static VkRenderingAttachmentInfo npStencilAttachment(long struct) { return VkRenderingAttachmentInfo.createSafe(memGetAddress(struct + VkRenderingInfo.PSTENCILATTACHMENT)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkRenderingInfo.FLAGS, value); }
     /** Unsafe version of {@link #renderArea(VkRect2D) renderArea}. */
     public static void nrenderArea(long struct, VkRect2D value) { memCopy(value.address(), struct + VkRenderingInfo.RENDERAREA, VkRect2D.SIZEOF); }
     /** Unsafe version of {@link #layerCount(int) layerCount}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInfo.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + VkRenderingInfo.LAYERCOUNT, value); }
     /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInfo.VIEWMASK, value); }
+    public static void nviewMask(long struct, int value) { memPutInt(struct + VkRenderingInfo.VIEWMASK, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInfo.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkRenderingInfo.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachments(VkRenderingAttachmentInfo.Buffer) pColorAttachments}. */
     public static void npColorAttachments(long struct, @Nullable VkRenderingAttachmentInfo.Buffer value) { memPutAddress(struct + VkRenderingInfo.PCOLORATTACHMENTS, memAddressSafe(value)); ncolorAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #pDepthAttachment(VkRenderingAttachmentInfo) pDepthAttachment}. */

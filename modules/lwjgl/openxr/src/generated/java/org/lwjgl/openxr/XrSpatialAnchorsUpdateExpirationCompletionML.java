@@ -281,18 +281,18 @@ public class XrSpatialAnchorsUpdateExpirationCompletionML extends Struct<XrSpati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsUpdateExpirationCompletionML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsUpdateExpirationCompletionML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsUpdateExpirationCompletionML.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
-    public static int nfutureResult(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsUpdateExpirationCompletionML.FUTURERESULT); }
+    public static int nfutureResult(long struct) { return memGetInt(struct + XrSpatialAnchorsUpdateExpirationCompletionML.FUTURERESULT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsUpdateExpirationCompletionML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsUpdateExpirationCompletionML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsUpdateExpirationCompletionML.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
-    public static void nfutureResult(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsUpdateExpirationCompletionML.FUTURERESULT, value); }
+    public static void nfutureResult(long struct, int value) { memPutInt(struct + XrSpatialAnchorsUpdateExpirationCompletionML.FUTURERESULT, value); }
 
     // -----------------------------------
 

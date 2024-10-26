@@ -246,18 +246,18 @@ public class VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #pageableDeviceLocalMemory}. */
-    public static int npageableDeviceLocalMemory(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PAGEABLEDEVICELOCALMEMORY); }
+    public static int npageableDeviceLocalMemory(long struct) { return memGetInt(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PAGEABLEDEVICELOCALMEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #pageableDeviceLocalMemory(boolean) pageableDeviceLocalMemory}. */
-    public static void npageableDeviceLocalMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PAGEABLEDEVICELOCALMEMORY, value); }
+    public static void npageableDeviceLocalMemory(long struct, int value) { memPutInt(struct + VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.PAGEABLEDEVICELOCALMEMORY, value); }
 
     // -----------------------------------
 

@@ -258,7 +258,7 @@ public class OVRHmdDesc extends Struct<OVRHmdDesc> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #Type}. */
-    public static int nType(long struct) { return UNSAFE.getInt(null, struct + OVRHmdDesc.TYPE); }
+    public static int nType(long struct) { return memGetInt(struct + OVRHmdDesc.TYPE); }
     /** Unsafe version of {@link #ProductName}. */
     public static ByteBuffer nProductName(long struct) { return memByteBuffer(struct + OVRHmdDesc.PRODUCTNAME, 64); }
     /** Unsafe version of {@link #ProductNameString}. */
@@ -268,25 +268,25 @@ public class OVRHmdDesc extends Struct<OVRHmdDesc> implements NativeResource {
     /** Unsafe version of {@link #ManufacturerString}. */
     public static String nManufacturerString(long struct) { return memUTF8(struct + OVRHmdDesc.MANUFACTURER); }
     /** Unsafe version of {@link #VendorId}. */
-    public static short nVendorId(long struct) { return UNSAFE.getShort(null, struct + OVRHmdDesc.VENDORID); }
+    public static short nVendorId(long struct) { return memGetShort(struct + OVRHmdDesc.VENDORID); }
     /** Unsafe version of {@link #ProductId}. */
-    public static short nProductId(long struct) { return UNSAFE.getShort(null, struct + OVRHmdDesc.PRODUCTID); }
+    public static short nProductId(long struct) { return memGetShort(struct + OVRHmdDesc.PRODUCTID); }
     /** Unsafe version of {@link #SerialNumber}. */
     public static ByteBuffer nSerialNumber(long struct) { return memByteBuffer(struct + OVRHmdDesc.SERIALNUMBER, 24); }
     /** Unsafe version of {@link #SerialNumberString}. */
     public static String nSerialNumberString(long struct) { return memASCII(struct + OVRHmdDesc.SERIALNUMBER); }
     /** Unsafe version of {@link #FirmwareMajor}. */
-    public static short nFirmwareMajor(long struct) { return UNSAFE.getShort(null, struct + OVRHmdDesc.FIRMWAREMAJOR); }
+    public static short nFirmwareMajor(long struct) { return memGetShort(struct + OVRHmdDesc.FIRMWAREMAJOR); }
     /** Unsafe version of {@link #FirmwareMinor}. */
-    public static short nFirmwareMinor(long struct) { return UNSAFE.getShort(null, struct + OVRHmdDesc.FIRMWAREMINOR); }
+    public static short nFirmwareMinor(long struct) { return memGetShort(struct + OVRHmdDesc.FIRMWAREMINOR); }
     /** Unsafe version of {@link #AvailableHmdCaps}. */
-    public static int nAvailableHmdCaps(long struct) { return UNSAFE.getInt(null, struct + OVRHmdDesc.AVAILABLEHMDCAPS); }
+    public static int nAvailableHmdCaps(long struct) { return memGetInt(struct + OVRHmdDesc.AVAILABLEHMDCAPS); }
     /** Unsafe version of {@link #DefaultHmdCaps}. */
-    public static int nDefaultHmdCaps(long struct) { return UNSAFE.getInt(null, struct + OVRHmdDesc.DEFAULTHMDCAPS); }
+    public static int nDefaultHmdCaps(long struct) { return memGetInt(struct + OVRHmdDesc.DEFAULTHMDCAPS); }
     /** Unsafe version of {@link #AvailableTrackingCaps}. */
-    public static int nAvailableTrackingCaps(long struct) { return UNSAFE.getInt(null, struct + OVRHmdDesc.AVAILABLETRACKINGCAPS); }
+    public static int nAvailableTrackingCaps(long struct) { return memGetInt(struct + OVRHmdDesc.AVAILABLETRACKINGCAPS); }
     /** Unsafe version of {@link #DefaultTrackingCaps}. */
-    public static int nDefaultTrackingCaps(long struct) { return UNSAFE.getInt(null, struct + OVRHmdDesc.DEFAULTTRACKINGCAPS); }
+    public static int nDefaultTrackingCaps(long struct) { return memGetInt(struct + OVRHmdDesc.DEFAULTTRACKINGCAPS); }
     /** Unsafe version of {@link #DefaultEyeFov}. */
     public static OVRFovPort.Buffer nDefaultEyeFov(long struct) { return OVRFovPort.create(struct + OVRHmdDesc.DEFAULTEYEFOV, ovrEye_Count); }
     /** Unsafe version of {@link #DefaultEyeFov(int) DefaultEyeFov}. */
@@ -302,6 +302,6 @@ public class OVRHmdDesc extends Struct<OVRHmdDesc> implements NativeResource {
     /** Unsafe version of {@link #Resolution}. */
     public static OVRSizei nResolution(long struct) { return OVRSizei.create(struct + OVRHmdDesc.RESOLUTION); }
     /** Unsafe version of {@link #DisplayRefreshRate}. */
-    public static float nDisplayRefreshRate(long struct) { return UNSAFE.getFloat(null, struct + OVRHmdDesc.DISPLAYREFRESHRATE); }
+    public static float nDisplayRefreshRate(long struct) { return memGetFloat(struct + OVRHmdDesc.DISPLAYREFRESHRATE); }
 
 }

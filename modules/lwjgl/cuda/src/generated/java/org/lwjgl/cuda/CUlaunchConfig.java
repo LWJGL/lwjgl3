@@ -310,46 +310,46 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #gridDimX}. */
-    public static int ngridDimX(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.GRIDDIMX); }
+    public static int ngridDimX(long struct) { return memGetInt(struct + CUlaunchConfig.GRIDDIMX); }
     /** Unsafe version of {@link #gridDimY}. */
-    public static int ngridDimY(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.GRIDDIMY); }
+    public static int ngridDimY(long struct) { return memGetInt(struct + CUlaunchConfig.GRIDDIMY); }
     /** Unsafe version of {@link #gridDimZ}. */
-    public static int ngridDimZ(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.GRIDDIMZ); }
+    public static int ngridDimZ(long struct) { return memGetInt(struct + CUlaunchConfig.GRIDDIMZ); }
     /** Unsafe version of {@link #blockDimX}. */
-    public static int nblockDimX(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.BLOCKDIMX); }
+    public static int nblockDimX(long struct) { return memGetInt(struct + CUlaunchConfig.BLOCKDIMX); }
     /** Unsafe version of {@link #blockDimY}. */
-    public static int nblockDimY(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.BLOCKDIMY); }
+    public static int nblockDimY(long struct) { return memGetInt(struct + CUlaunchConfig.BLOCKDIMY); }
     /** Unsafe version of {@link #blockDimZ}. */
-    public static int nblockDimZ(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.BLOCKDIMZ); }
+    public static int nblockDimZ(long struct) { return memGetInt(struct + CUlaunchConfig.BLOCKDIMZ); }
     /** Unsafe version of {@link #sharedMemBytes}. */
-    public static int nsharedMemBytes(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.SHAREDMEMBYTES); }
+    public static int nsharedMemBytes(long struct) { return memGetInt(struct + CUlaunchConfig.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #hStream}. */
     public static long nhStream(long struct) { return memGetAddress(struct + CUlaunchConfig.HSTREAM); }
     /** Unsafe version of {@link #attrs}. */
     @Nullable public static CUlaunchAttribute.Buffer nattrs(long struct) { return CUlaunchAttribute.createSafe(memGetAddress(struct + CUlaunchConfig.ATTRS), nnumAttrs(struct)); }
     /** Unsafe version of {@link #numAttrs}. */
-    public static int nnumAttrs(long struct) { return UNSAFE.getInt(null, struct + CUlaunchConfig.NUMATTRS); }
+    public static int nnumAttrs(long struct) { return memGetInt(struct + CUlaunchConfig.NUMATTRS); }
 
     /** Unsafe version of {@link #gridDimX(int) gridDimX}. */
-    public static void ngridDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.GRIDDIMX, value); }
+    public static void ngridDimX(long struct, int value) { memPutInt(struct + CUlaunchConfig.GRIDDIMX, value); }
     /** Unsafe version of {@link #gridDimY(int) gridDimY}. */
-    public static void ngridDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.GRIDDIMY, value); }
+    public static void ngridDimY(long struct, int value) { memPutInt(struct + CUlaunchConfig.GRIDDIMY, value); }
     /** Unsafe version of {@link #gridDimZ(int) gridDimZ}. */
-    public static void ngridDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.GRIDDIMZ, value); }
+    public static void ngridDimZ(long struct, int value) { memPutInt(struct + CUlaunchConfig.GRIDDIMZ, value); }
     /** Unsafe version of {@link #blockDimX(int) blockDimX}. */
-    public static void nblockDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.BLOCKDIMX, value); }
+    public static void nblockDimX(long struct, int value) { memPutInt(struct + CUlaunchConfig.BLOCKDIMX, value); }
     /** Unsafe version of {@link #blockDimY(int) blockDimY}. */
-    public static void nblockDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.BLOCKDIMY, value); }
+    public static void nblockDimY(long struct, int value) { memPutInt(struct + CUlaunchConfig.BLOCKDIMY, value); }
     /** Unsafe version of {@link #blockDimZ(int) blockDimZ}. */
-    public static void nblockDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.BLOCKDIMZ, value); }
+    public static void nblockDimZ(long struct, int value) { memPutInt(struct + CUlaunchConfig.BLOCKDIMZ, value); }
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
-    public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.SHAREDMEMBYTES, value); }
+    public static void nsharedMemBytes(long struct, int value) { memPutInt(struct + CUlaunchConfig.SHAREDMEMBYTES, value); }
     /** Unsafe version of {@link #hStream(long) hStream}. */
     public static void nhStream(long struct, long value) { memPutAddress(struct + CUlaunchConfig.HSTREAM, value); }
     /** Unsafe version of {@link #attrs(CUlaunchAttribute.Buffer) attrs}. */
     public static void nattrs(long struct, @Nullable CUlaunchAttribute.Buffer value) { memPutAddress(struct + CUlaunchConfig.ATTRS, memAddressSafe(value)); nnumAttrs(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code numAttrs} field of the specified {@code struct}. */
-    public static void nnumAttrs(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchConfig.NUMATTRS, value); }
+    public static void nnumAttrs(long struct, int value) { memPutInt(struct + CUlaunchConfig.NUMATTRS, value); }
 
     // -----------------------------------
 

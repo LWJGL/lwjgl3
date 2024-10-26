@@ -229,7 +229,7 @@ public class HmdVector4 extends Struct<HmdVector4> implements NativeResource {
     public static FloatBuffer nv(long struct) { return memFloatBuffer(struct + HmdVector4.V, 4); }
     /** Unsafe version of {@link #v(int) v}. */
     public static float nv(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + HmdVector4.V + check(index, 4) * 4);
+        return memGetFloat(struct + HmdVector4.V + check(index, 4) * 4);
     }
 
     /** Unsafe version of {@link #v(FloatBuffer) v}. */
@@ -239,7 +239,7 @@ public class HmdVector4 extends Struct<HmdVector4> implements NativeResource {
     }
     /** Unsafe version of {@link #v(int, float) v}. */
     public static void nv(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + HmdVector4.V + check(index, 4) * 4, value);
+        memPutFloat(struct + HmdVector4.V + check(index, 4) * 4, value);
     }
 
     // -----------------------------------

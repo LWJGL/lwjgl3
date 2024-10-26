@@ -306,13 +306,13 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct<XrGraphicsBindingOpen
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXlibKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXlibKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.NEXT); }
     /** Unsafe version of {@link #xDisplay}. */
     public static long nxDisplay(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.XDISPLAY); }
     /** Unsafe version of {@link #visualid}. */
-    public static int nvisualid(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXlibKHR.VISUALID); }
+    public static int nvisualid(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXlibKHR.VISUALID); }
     /** Unsafe version of {@link #glxFBConfig}. */
     public static long nglxFBConfig(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.GLXFBCONFIG); }
     /** Unsafe version of {@link #glxDrawable}. */
@@ -321,13 +321,13 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct<XrGraphicsBindingOpen
     public static long nglxContext(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.GLXCONTEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXlibKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXlibKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.NEXT, value); }
     /** Unsafe version of {@link #xDisplay(long) xDisplay}. */
     public static void nxDisplay(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.XDISPLAY, check(value)); }
     /** Unsafe version of {@link #visualid(int) visualid}. */
-    public static void nvisualid(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXlibKHR.VISUALID, value); }
+    public static void nvisualid(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXlibKHR.VISUALID, value); }
     /** Unsafe version of {@link #glxFBConfig(long) glxFBConfig}. */
     public static void nglxFBConfig(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.GLXFBCONFIG, check(value)); }
     /** Unsafe version of {@link #glxDrawable(long) glxDrawable}. */

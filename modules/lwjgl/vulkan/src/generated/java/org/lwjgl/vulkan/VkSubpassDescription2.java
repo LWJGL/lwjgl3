@@ -491,21 +491,21 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassDescription2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDescription2.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSubpassDescription2.FLAGS); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkSubpassDescription2.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.VIEWMASK); }
+    public static int nviewMask(long struct) { return memGetInt(struct + VkSubpassDescription2.VIEWMASK); }
     /** Unsafe version of {@link #inputAttachmentCount}. */
-    public static int ninputAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT); }
+    public static int ninputAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pInputAttachments}. */
     @Nullable public static VkAttachmentReference2.Buffer npInputAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS), ninputAttachmentCount(struct)); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachments}. */
     @Nullable public static VkAttachmentReference2.Buffer npColorAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pResolveAttachments}. */
@@ -513,26 +513,26 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     /** Unsafe version of {@link #pDepthStencilAttachment}. */
     @Nullable public static VkAttachmentReference2 npDepthStencilAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PDEPTHSTENCILATTACHMENT)); }
     /** Unsafe version of {@link #preserveAttachmentCount}. */
-    public static int npreserveAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2.PRESERVEATTACHMENTCOUNT); }
+    public static int npreserveAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.PRESERVEATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pPreserveAttachments() pPreserveAttachments}. */
     @Nullable public static IntBuffer npPreserveAttachments(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSubpassDescription2.PPRESERVEATTACHMENTS), npreserveAttachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassDescription2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDescription2.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkSubpassDescription2.FLAGS, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkSubpassDescription2.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.VIEWMASK, value); }
+    public static void nviewMask(long struct, int value) { memPutInt(struct + VkSubpassDescription2.VIEWMASK, value); }
     /** Sets the specified value to the {@code inputAttachmentCount} field of the specified {@code struct}. */
-    public static void ninputAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT, value); }
+    public static void ninputAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pInputAttachments(VkAttachmentReference2.Buffer) pInputAttachments}. */
     public static void npInputAttachments(long struct, @Nullable VkAttachmentReference2.Buffer value) { memPutAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS, memAddressSafe(value)); ninputAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachments(VkAttachmentReference2.Buffer) pColorAttachments}. */
     public static void npColorAttachments(long struct, @Nullable VkAttachmentReference2.Buffer value) { memPutAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pResolveAttachments(VkAttachmentReference2.Buffer) pResolveAttachments}. */
@@ -540,7 +540,7 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     /** Unsafe version of {@link #pDepthStencilAttachment(VkAttachmentReference2) pDepthStencilAttachment}. */
     public static void npDepthStencilAttachment(long struct, @Nullable VkAttachmentReference2 value) { memPutAddress(struct + VkSubpassDescription2.PDEPTHSTENCILATTACHMENT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code preserveAttachmentCount} field of the specified {@code struct}. */
-    public static void npreserveAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2.PRESERVEATTACHMENTCOUNT, value); }
+    public static void npreserveAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2.PRESERVEATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pPreserveAttachments(IntBuffer) pPreserveAttachments}. */
     public static void npPreserveAttachments(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSubpassDescription2.PPRESERVEATTACHMENTS, memAddressSafe(value)); npreserveAttachmentCount(struct, value == null ? 0 : value.remaining()); }
 

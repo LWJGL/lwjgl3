@@ -225,14 +225,14 @@ public class hb_variation_t extends Struct<hb_variation_t> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #tag}. */
-    public static int ntag(long struct) { return UNSAFE.getInt(null, struct + hb_variation_t.TAG); }
+    public static int ntag(long struct) { return memGetInt(struct + hb_variation_t.TAG); }
     /** Unsafe version of {@link #value}. */
-    public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + hb_variation_t.VALUE); }
+    public static float nvalue(long struct) { return memGetFloat(struct + hb_variation_t.VALUE); }
 
     /** Unsafe version of {@link #tag(int) tag}. */
-    public static void ntag(long struct, int value) { UNSAFE.putInt(null, struct + hb_variation_t.TAG, value); }
+    public static void ntag(long struct, int value) { memPutInt(struct + hb_variation_t.TAG, value); }
     /** Unsafe version of {@link #value(float) value}. */
-    public static void nvalue(long struct, float value) { UNSAFE.putFloat(null, struct + hb_variation_t.VALUE, value); }
+    public static void nvalue(long struct, float value) { memPutFloat(struct + hb_variation_t.VALUE, value); }
 
     // -----------------------------------
 

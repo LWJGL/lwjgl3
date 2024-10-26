@@ -117,9 +117,9 @@ public class NkMouseButton extends Struct<NkMouseButton> {
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static boolean ndown(long struct) { return UNSAFE.getByte(null, struct + NkMouseButton.DOWN) != 0; }
+    public static boolean ndown(long struct) { return memGetByte(struct + NkMouseButton.DOWN) != 0; }
     /** Unsafe version of {@link #clicked}. */
-    public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkMouseButton.CLICKED); }
+    public static int nclicked(long struct) { return memGetInt(struct + NkMouseButton.CLICKED); }
     /** Unsafe version of {@link #clicked_pos}. */
     public static NkVec2 nclicked_pos(long struct) { return NkVec2.create(struct + NkMouseButton.CLICKED_POS); }
 

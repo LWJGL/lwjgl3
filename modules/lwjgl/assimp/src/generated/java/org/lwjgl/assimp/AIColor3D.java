@@ -116,11 +116,11 @@ public class AIColor3D extends Struct<AIColor3D> {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + AIColor3D.R); }
+    public static float nr(long struct) { return memGetFloat(struct + AIColor3D.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + AIColor3D.G); }
+    public static float ng(long struct) { return memGetFloat(struct + AIColor3D.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + AIColor3D.B); }
+    public static float nb(long struct) { return memGetFloat(struct + AIColor3D.B); }
 
     // -----------------------------------
 

@@ -350,38 +350,38 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct<VkAccelerationS
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static int ncreateFlags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoKHR.CREATEFLAGS); }
+    public static int ncreateFlags(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoKHR.CREATEFLAGS); }
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureCreateInfoKHR.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkAccelerationStructureCreateInfoKHR.BUFFER); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureCreateInfoKHR.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkAccelerationStructureCreateInfoKHR.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureCreateInfoKHR.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkAccelerationStructureCreateInfoKHR.SIZE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoKHR.TYPE); }
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureCreateInfoKHR.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkAccelerationStructureCreateInfoKHR.DEVICEADDRESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #createFlags(int) createFlags}. */
-    public static void ncreateFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoKHR.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoKHR.CREATEFLAGS, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureCreateInfoKHR.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkAccelerationStructureCreateInfoKHR.BUFFER, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureCreateInfoKHR.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkAccelerationStructureCreateInfoKHR.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureCreateInfoKHR.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkAccelerationStructureCreateInfoKHR.SIZE, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureCreateInfoKHR.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkAccelerationStructureCreateInfoKHR.DEVICEADDRESS, value); }
 
     // -----------------------------------
 

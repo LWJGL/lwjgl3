@@ -239,18 +239,18 @@ public class CUlaunchAttribute extends Struct<CUlaunchAttribute> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttribute.ID); }
+    public static int nid(long struct) { return memGetInt(struct + CUlaunchAttribute.ID); }
     /** Unsafe version of {@link #pad}. */
     public static ByteBuffer npad(long struct) { return memByteBuffer(struct + CUlaunchAttribute.PAD, 4); }
     /** Unsafe version of {@link #pad(int) pad}. */
     public static byte npad(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUlaunchAttribute.PAD + check(index, 4) * 1);
+        return memGetByte(struct + CUlaunchAttribute.PAD + check(index, 4) * 1);
     }
     /** Unsafe version of {@link #value}. */
     public static CUlaunchAttributeValue nvalue(long struct) { return CUlaunchAttributeValue.create(struct + CUlaunchAttribute.VALUE); }
 
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttribute.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + CUlaunchAttribute.ID, value); }
     /** Unsafe version of {@link #pad(ByteBuffer) pad}. */
     public static void npad(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -258,7 +258,7 @@ public class CUlaunchAttribute extends Struct<CUlaunchAttribute> implements Nati
     }
     /** Unsafe version of {@link #pad(int, byte) pad}. */
     public static void npad(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUlaunchAttribute.PAD + check(index, 4) * 1, value);
+        memPutByte(struct + CUlaunchAttribute.PAD + check(index, 4) * 1, value);
     }
     /** Unsafe version of {@link #value(CUlaunchAttributeValue) value}. */
     public static void nvalue(long struct, CUlaunchAttributeValue value) { memCopy(value.address(), struct + CUlaunchAttribute.VALUE, CUlaunchAttributeValue.SIZEOF); }

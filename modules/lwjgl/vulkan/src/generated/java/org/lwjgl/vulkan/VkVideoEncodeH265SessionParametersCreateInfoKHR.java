@@ -281,28 +281,28 @@ public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #maxStdVPSCount}. */
-    public static int nmaxStdVPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDVPSCOUNT); }
+    public static int nmaxStdVPSCount(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDVPSCOUNT); }
     /** Unsafe version of {@link #maxStdSPSCount}. */
-    public static int nmaxStdSPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT); }
+    public static int nmaxStdSPSCount(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT); }
     /** Unsafe version of {@link #maxStdPPSCount}. */
-    public static int nmaxStdPPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT); }
+    public static int nmaxStdPPSCount(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT); }
     /** Unsafe version of {@link #pParametersAddInfo}. */
     @Nullable public static VkVideoEncodeH265SessionParametersAddInfoKHR npParametersAddInfo(long struct) { return VkVideoEncodeH265SessionParametersAddInfoKHR.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.PPARAMETERSADDINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #maxStdVPSCount(int) maxStdVPSCount}. */
-    public static void nmaxStdVPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDVPSCOUNT, value); }
+    public static void nmaxStdVPSCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDVPSCOUNT, value); }
     /** Unsafe version of {@link #maxStdSPSCount(int) maxStdSPSCount}. */
-    public static void nmaxStdSPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT, value); }
+    public static void nmaxStdSPSCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT, value); }
     /** Unsafe version of {@link #maxStdPPSCount(int) maxStdPPSCount}. */
-    public static void nmaxStdPPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT, value); }
+    public static void nmaxStdPPSCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT, value); }
     /** Unsafe version of {@link #pParametersAddInfo(VkVideoEncodeH265SessionParametersAddInfoKHR) pParametersAddInfo}. */
     public static void npParametersAddInfo(long struct, @Nullable VkVideoEncodeH265SessionParametersAddInfoKHR value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoKHR.PPARAMETERSADDINFO, memAddressSafe(value)); }
 

@@ -237,14 +237,14 @@ public class CUDA_EXT_SEM_SIGNAL_NODE_PARAMS extends Struct<CUDA_EXT_SEM_SIGNAL_
     /** Unsafe version of {@link #paramsArray}. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer nparamsArray(long struct) { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.create(memGetAddress(struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.PARAMSARRAY), nnumExtSems(struct)); }
     /** Unsafe version of {@link #numExtSems}. */
-    public static int nnumExtSems(long struct) { return UNSAFE.getInt(null, struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.NUMEXTSEMS); }
+    public static int nnumExtSems(long struct) { return memGetInt(struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.NUMEXTSEMS); }
 
     /** Unsafe version of {@link #extSemArray(PointerBuffer) extSemArray}. */
     public static void nextSemArray(long struct, PointerBuffer value) { memPutAddress(struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.EXTSEMARRAY, memAddress(value)); }
     /** Unsafe version of {@link #paramsArray(CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer) paramsArray}. */
     public static void nparamsArray(long struct, CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer value) { memPutAddress(struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.PARAMSARRAY, value.address()); }
     /** Sets the specified value to the {@code numExtSems} field of the specified {@code struct}. */
-    public static void nnumExtSems(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.NUMEXTSEMS, value); }
+    public static void nnumExtSems(long struct, int value) { memPutInt(struct + CUDA_EXT_SEM_SIGNAL_NODE_PARAMS.NUMEXTSEMS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

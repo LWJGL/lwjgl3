@@ -207,7 +207,7 @@ public class STBVorbisComment extends Struct<STBVorbisComment> implements Native
     /** Unsafe version of {@link #vendorString}. */
     public static String nvendorString(long struct) { return memASCII(memGetAddress(struct + STBVorbisComment.VENDOR)); }
     /** Unsafe version of {@link #comment_list_length}. */
-    public static int ncomment_list_length(long struct) { return UNSAFE.getInt(null, struct + STBVorbisComment.COMMENT_LIST_LENGTH); }
+    public static int ncomment_list_length(long struct) { return memGetInt(struct + STBVorbisComment.COMMENT_LIST_LENGTH); }
     /** Unsafe version of {@link #comment_list() comment_list}. */
     public static PointerBuffer ncomment_list(long struct) { return memPointerBuffer(memGetAddress(struct + STBVorbisComment.COMMENT_LIST), ncomment_list_length(struct)); }
 

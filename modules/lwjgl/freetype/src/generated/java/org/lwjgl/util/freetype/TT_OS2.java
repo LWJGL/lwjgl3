@@ -377,42 +377,42 @@ public class TT_OS2 extends Struct<TT_OS2> {
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static short nversion(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.VERSION); }
+    public static short nversion(long struct) { return memGetShort(struct + TT_OS2.VERSION); }
     /** Unsafe version of {@link #xAvgCharWidth}. */
-    public static short nxAvgCharWidth(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.XAVGCHARWIDTH); }
+    public static short nxAvgCharWidth(long struct) { return memGetShort(struct + TT_OS2.XAVGCHARWIDTH); }
     /** Unsafe version of {@link #usWeightClass}. */
-    public static short nusWeightClass(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USWEIGHTCLASS); }
+    public static short nusWeightClass(long struct) { return memGetShort(struct + TT_OS2.USWEIGHTCLASS); }
     /** Unsafe version of {@link #usWidthClass}. */
-    public static short nusWidthClass(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USWIDTHCLASS); }
+    public static short nusWidthClass(long struct) { return memGetShort(struct + TT_OS2.USWIDTHCLASS); }
     /** Unsafe version of {@link #fsType}. */
-    public static short nfsType(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.FSTYPE); }
+    public static short nfsType(long struct) { return memGetShort(struct + TT_OS2.FSTYPE); }
     /** Unsafe version of {@link #ySubscriptXSize}. */
-    public static short nySubscriptXSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUBSCRIPTXSIZE); }
+    public static short nySubscriptXSize(long struct) { return memGetShort(struct + TT_OS2.YSUBSCRIPTXSIZE); }
     /** Unsafe version of {@link #ySubscriptYSize}. */
-    public static short nySubscriptYSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUBSCRIPTYSIZE); }
+    public static short nySubscriptYSize(long struct) { return memGetShort(struct + TT_OS2.YSUBSCRIPTYSIZE); }
     /** Unsafe version of {@link #ySubscriptXOffset}. */
-    public static short nySubscriptXOffset(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUBSCRIPTXOFFSET); }
+    public static short nySubscriptXOffset(long struct) { return memGetShort(struct + TT_OS2.YSUBSCRIPTXOFFSET); }
     /** Unsafe version of {@link #ySubscriptYOffset}. */
-    public static short nySubscriptYOffset(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUBSCRIPTYOFFSET); }
+    public static short nySubscriptYOffset(long struct) { return memGetShort(struct + TT_OS2.YSUBSCRIPTYOFFSET); }
     /** Unsafe version of {@link #ySuperscriptXSize}. */
-    public static short nySuperscriptXSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUPERSCRIPTXSIZE); }
+    public static short nySuperscriptXSize(long struct) { return memGetShort(struct + TT_OS2.YSUPERSCRIPTXSIZE); }
     /** Unsafe version of {@link #ySuperscriptYSize}. */
-    public static short nySuperscriptYSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUPERSCRIPTYSIZE); }
+    public static short nySuperscriptYSize(long struct) { return memGetShort(struct + TT_OS2.YSUPERSCRIPTYSIZE); }
     /** Unsafe version of {@link #ySuperscriptXOffset}. */
-    public static short nySuperscriptXOffset(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUPERSCRIPTXOFFSET); }
+    public static short nySuperscriptXOffset(long struct) { return memGetShort(struct + TT_OS2.YSUPERSCRIPTXOFFSET); }
     /** Unsafe version of {@link #ySuperscriptYOffset}. */
-    public static short nySuperscriptYOffset(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSUPERSCRIPTYOFFSET); }
+    public static short nySuperscriptYOffset(long struct) { return memGetShort(struct + TT_OS2.YSUPERSCRIPTYOFFSET); }
     /** Unsafe version of {@link #yStrikeoutSize}. */
-    public static short nyStrikeoutSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSTRIKEOUTSIZE); }
+    public static short nyStrikeoutSize(long struct) { return memGetShort(struct + TT_OS2.YSTRIKEOUTSIZE); }
     /** Unsafe version of {@link #yStrikeoutPosition}. */
-    public static short nyStrikeoutPosition(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.YSTRIKEOUTPOSITION); }
+    public static short nyStrikeoutPosition(long struct) { return memGetShort(struct + TT_OS2.YSTRIKEOUTPOSITION); }
     /** Unsafe version of {@link #sFamilyClass}. */
-    public static short nsFamilyClass(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.SFAMILYCLASS); }
+    public static short nsFamilyClass(long struct) { return memGetShort(struct + TT_OS2.SFAMILYCLASS); }
     /** Unsafe version of {@link #panose}. */
     public static ByteBuffer npanose(long struct) { return memByteBuffer(struct + TT_OS2.PANOSE, 10); }
     /** Unsafe version of {@link #panose(int) panose}. */
     public static byte npanose(long struct, int index) {
-        return UNSAFE.getByte(null, struct + TT_OS2.PANOSE + check(index, 10) * 1);
+        return memGetByte(struct + TT_OS2.PANOSE + check(index, 10) * 1);
     }
     /** Unsafe version of {@link #ulUnicodeRange1}. */
     public static long nulUnicodeRange1(long struct) { return memGetCLong(struct + TT_OS2.ULUNICODERANGE1); }
@@ -426,42 +426,42 @@ public class TT_OS2 extends Struct<TT_OS2> {
     public static ByteBuffer nachVendID(long struct) { return memByteBuffer(struct + TT_OS2.ACHVENDID, 4); }
     /** Unsafe version of {@link #achVendID(int) achVendID}. */
     public static byte nachVendID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + TT_OS2.ACHVENDID + check(index, 4) * 1);
+        return memGetByte(struct + TT_OS2.ACHVENDID + check(index, 4) * 1);
     }
     /** Unsafe version of {@link #fsSelection}. */
-    public static short nfsSelection(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.FSSELECTION); }
+    public static short nfsSelection(long struct) { return memGetShort(struct + TT_OS2.FSSELECTION); }
     /** Unsafe version of {@link #usFirstCharIndex}. */
-    public static short nusFirstCharIndex(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USFIRSTCHARINDEX); }
+    public static short nusFirstCharIndex(long struct) { return memGetShort(struct + TT_OS2.USFIRSTCHARINDEX); }
     /** Unsafe version of {@link #usLastCharIndex}. */
-    public static short nusLastCharIndex(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USLASTCHARINDEX); }
+    public static short nusLastCharIndex(long struct) { return memGetShort(struct + TT_OS2.USLASTCHARINDEX); }
     /** Unsafe version of {@link #sTypoAscender}. */
-    public static short nsTypoAscender(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.STYPOASCENDER); }
+    public static short nsTypoAscender(long struct) { return memGetShort(struct + TT_OS2.STYPOASCENDER); }
     /** Unsafe version of {@link #sTypoDescender}. */
-    public static short nsTypoDescender(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.STYPODESCENDER); }
+    public static short nsTypoDescender(long struct) { return memGetShort(struct + TT_OS2.STYPODESCENDER); }
     /** Unsafe version of {@link #sTypoLineGap}. */
-    public static short nsTypoLineGap(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.STYPOLINEGAP); }
+    public static short nsTypoLineGap(long struct) { return memGetShort(struct + TT_OS2.STYPOLINEGAP); }
     /** Unsafe version of {@link #usWinAscent}. */
-    public static short nusWinAscent(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USWINASCENT); }
+    public static short nusWinAscent(long struct) { return memGetShort(struct + TT_OS2.USWINASCENT); }
     /** Unsafe version of {@link #usWinDescent}. */
-    public static short nusWinDescent(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USWINDESCENT); }
+    public static short nusWinDescent(long struct) { return memGetShort(struct + TT_OS2.USWINDESCENT); }
     /** Unsafe version of {@link #ulCodePageRange1}. */
     public static long nulCodePageRange1(long struct) { return memGetCLong(struct + TT_OS2.ULCODEPAGERANGE1); }
     /** Unsafe version of {@link #ulCodePageRange2}. */
     public static long nulCodePageRange2(long struct) { return memGetCLong(struct + TT_OS2.ULCODEPAGERANGE2); }
     /** Unsafe version of {@link #sxHeight}. */
-    public static short nsxHeight(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.SXHEIGHT); }
+    public static short nsxHeight(long struct) { return memGetShort(struct + TT_OS2.SXHEIGHT); }
     /** Unsafe version of {@link #sCapHeight}. */
-    public static short nsCapHeight(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.SCAPHEIGHT); }
+    public static short nsCapHeight(long struct) { return memGetShort(struct + TT_OS2.SCAPHEIGHT); }
     /** Unsafe version of {@link #usDefaultChar}. */
-    public static short nusDefaultChar(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USDEFAULTCHAR); }
+    public static short nusDefaultChar(long struct) { return memGetShort(struct + TT_OS2.USDEFAULTCHAR); }
     /** Unsafe version of {@link #usBreakChar}. */
-    public static short nusBreakChar(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USBREAKCHAR); }
+    public static short nusBreakChar(long struct) { return memGetShort(struct + TT_OS2.USBREAKCHAR); }
     /** Unsafe version of {@link #usMaxContext}. */
-    public static short nusMaxContext(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USMAXCONTEXT); }
+    public static short nusMaxContext(long struct) { return memGetShort(struct + TT_OS2.USMAXCONTEXT); }
     /** Unsafe version of {@link #usLowerOpticalPointSize}. */
-    public static short nusLowerOpticalPointSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USLOWEROPTICALPOINTSIZE); }
+    public static short nusLowerOpticalPointSize(long struct) { return memGetShort(struct + TT_OS2.USLOWEROPTICALPOINTSIZE); }
     /** Unsafe version of {@link #usUpperOpticalPointSize}. */
-    public static short nusUpperOpticalPointSize(long struct) { return UNSAFE.getShort(null, struct + TT_OS2.USUPPEROPTICALPOINTSIZE); }
+    public static short nusUpperOpticalPointSize(long struct) { return memGetShort(struct + TT_OS2.USUPPEROPTICALPOINTSIZE); }
 
     // -----------------------------------
 

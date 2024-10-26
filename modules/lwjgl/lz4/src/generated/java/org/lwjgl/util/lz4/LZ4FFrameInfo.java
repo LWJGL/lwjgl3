@@ -300,34 +300,34 @@ public class LZ4FFrameInfo extends Struct<LZ4FFrameInfo> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #blockSizeID}. */
-    public static int nblockSizeID(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKSIZEID); }
+    public static int nblockSizeID(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKSIZEID); }
     /** Unsafe version of {@link #blockMode}. */
-    public static int nblockMode(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKMODE); }
+    public static int nblockMode(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKMODE); }
     /** Unsafe version of {@link #contentChecksumFlag}. */
-    public static int ncontentChecksumFlag(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG); }
+    public static int ncontentChecksumFlag(long struct) { return memGetInt(struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG); }
     /** Unsafe version of {@link #frameType}. */
-    public static int nframeType(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.FRAMETYPE); }
+    public static int nframeType(long struct) { return memGetInt(struct + LZ4FFrameInfo.FRAMETYPE); }
     /** Unsafe version of {@link #contentSize}. */
-    public static long ncontentSize(long struct) { return UNSAFE.getLong(null, struct + LZ4FFrameInfo.CONTENTSIZE); }
+    public static long ncontentSize(long struct) { return memGetLong(struct + LZ4FFrameInfo.CONTENTSIZE); }
     /** Unsafe version of {@link #dictID}. */
-    public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.DICTID); }
+    public static int ndictID(long struct) { return memGetInt(struct + LZ4FFrameInfo.DICTID); }
     /** Unsafe version of {@link #blockChecksumFlag}. */
-    public static int nblockChecksumFlag(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG); }
+    public static int nblockChecksumFlag(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG); }
 
     /** Unsafe version of {@link #blockSizeID(int) blockSizeID}. */
-    public static void nblockSizeID(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKSIZEID, value); }
+    public static void nblockSizeID(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKSIZEID, value); }
     /** Unsafe version of {@link #blockMode(int) blockMode}. */
-    public static void nblockMode(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKMODE, value); }
+    public static void nblockMode(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKMODE, value); }
     /** Unsafe version of {@link #contentChecksumFlag(int) contentChecksumFlag}. */
-    public static void ncontentChecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG, value); }
+    public static void ncontentChecksumFlag(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG, value); }
     /** Unsafe version of {@link #frameType(int) frameType}. */
-    public static void nframeType(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.FRAMETYPE, value); }
+    public static void nframeType(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.FRAMETYPE, value); }
     /** Unsafe version of {@link #contentSize(long) contentSize}. */
-    public static void ncontentSize(long struct, long value) { UNSAFE.putLong(null, struct + LZ4FFrameInfo.CONTENTSIZE, value); }
+    public static void ncontentSize(long struct, long value) { memPutLong(struct + LZ4FFrameInfo.CONTENTSIZE, value); }
     /** Unsafe version of {@link #dictID(int) dictID}. */
-    public static void ndictID(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.DICTID, value); }
+    public static void ndictID(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.DICTID, value); }
     /** Unsafe version of {@link #blockChecksumFlag(int) blockChecksumFlag}. */
-    public static void nblockChecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG, value); }
+    public static void nblockChecksumFlag(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG, value); }
 
     // -----------------------------------
 

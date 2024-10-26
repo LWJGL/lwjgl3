@@ -105,7 +105,7 @@ public class VREventController extends Struct<VREventController> {
     // -----------------------------------
 
     /** Unsafe version of {@link #button}. */
-    public static int nbutton(long struct) { return UNSAFE.getInt(null, struct + VREventController.BUTTON); }
+    public static int nbutton(long struct) { return memGetInt(struct + VREventController.BUTTON); }
 
     // -----------------------------------
 

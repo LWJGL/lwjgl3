@@ -108,7 +108,7 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct<VkRenderPassCrea
     // -----------------------------------
 
     /** Unsafe version of {@link #postMergeSubpassCount}. */
-    public static int npostMergeSubpassCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreationFeedbackInfoEXT.POSTMERGESUBPASSCOUNT); }
+    public static int npostMergeSubpassCount(long struct) { return memGetInt(struct + VkRenderPassCreationFeedbackInfoEXT.POSTMERGESUBPASSCOUNT); }
 
     // -----------------------------------
 

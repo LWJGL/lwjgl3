@@ -262,22 +262,22 @@ public class SQL_SS_TIME2_STRUCT extends Struct<SQL_SS_TIME2_STRUCT> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #hour}. */
-    public static short nhour(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIME2_STRUCT.HOUR); }
+    public static short nhour(long struct) { return memGetShort(struct + SQL_SS_TIME2_STRUCT.HOUR); }
     /** Unsafe version of {@link #minute}. */
-    public static short nminute(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIME2_STRUCT.MINUTE); }
+    public static short nminute(long struct) { return memGetShort(struct + SQL_SS_TIME2_STRUCT.MINUTE); }
     /** Unsafe version of {@link #second}. */
-    public static short nsecond(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIME2_STRUCT.SECOND); }
+    public static short nsecond(long struct) { return memGetShort(struct + SQL_SS_TIME2_STRUCT.SECOND); }
     /** Unsafe version of {@link #fraction}. */
-    public static int nfraction(long struct) { return UNSAFE.getInt(null, struct + SQL_SS_TIME2_STRUCT.FRACTION); }
+    public static int nfraction(long struct) { return memGetInt(struct + SQL_SS_TIME2_STRUCT.FRACTION); }
 
     /** Unsafe version of {@link #hour(short) hour}. */
-    public static void nhour(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIME2_STRUCT.HOUR, value); }
+    public static void nhour(long struct, short value) { memPutShort(struct + SQL_SS_TIME2_STRUCT.HOUR, value); }
     /** Unsafe version of {@link #minute(short) minute}. */
-    public static void nminute(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIME2_STRUCT.MINUTE, value); }
+    public static void nminute(long struct, short value) { memPutShort(struct + SQL_SS_TIME2_STRUCT.MINUTE, value); }
     /** Unsafe version of {@link #second(short) second}. */
-    public static void nsecond(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIME2_STRUCT.SECOND, value); }
+    public static void nsecond(long struct, short value) { memPutShort(struct + SQL_SS_TIME2_STRUCT.SECOND, value); }
     /** Unsafe version of {@link #fraction(int) fraction}. */
-    public static void nfraction(long struct, int value) { UNSAFE.putInt(null, struct + SQL_SS_TIME2_STRUCT.FRACTION, value); }
+    public static void nfraction(long struct, int value) { memPutInt(struct + SQL_SS_TIME2_STRUCT.FRACTION, value); }
 
     // -----------------------------------
 

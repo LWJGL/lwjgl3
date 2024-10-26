@@ -200,7 +200,7 @@ public class VROverlayView_t extends Struct<VROverlayView_t> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #overlayHandle}. */
-    public static long noverlayHandle(long struct) { return UNSAFE.getLong(null, struct + VROverlayView_t.OVERLAYHANDLE); }
+    public static long noverlayHandle(long struct) { return memGetLong(struct + VROverlayView_t.OVERLAYHANDLE); }
     /** Unsafe version of {@link #texture}. */
     public static Texture ntexture(long struct) { return Texture.create(struct + VROverlayView_t.TEXTURE); }
     /** Unsafe version of {@link #textureBounds}. */

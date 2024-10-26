@@ -220,14 +220,14 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static double nx(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenVector2.X); }
+    public static double nx(long struct) { return memGetDouble(struct + MSDFGenVector2.X); }
     /** Unsafe version of {@link #y}. */
-    public static double ny(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenVector2.Y); }
+    public static double ny(long struct) { return memGetDouble(struct + MSDFGenVector2.Y); }
 
     /** Unsafe version of {@link #x(double) x}. */
-    public static void nx(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenVector2.X, value); }
+    public static void nx(long struct, double value) { memPutDouble(struct + MSDFGenVector2.X, value); }
     /** Unsafe version of {@link #y(double) y}. */
-    public static void ny(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenVector2.Y, value); }
+    public static void ny(long struct, double value) { memPutDouble(struct + MSDFGenVector2.Y, value); }
 
     // -----------------------------------
 

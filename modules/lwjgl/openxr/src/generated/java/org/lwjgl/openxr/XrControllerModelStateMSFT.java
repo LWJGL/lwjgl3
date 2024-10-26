@@ -272,24 +272,24 @@ public class XrControllerModelStateMSFT extends Struct<XrControllerModelStateMSF
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelStateMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrControllerModelStateMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrControllerModelStateMSFT.NEXT); }
     /** Unsafe version of {@link #nodeCapacityInput}. */
-    public static int nnodeCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelStateMSFT.NODECAPACITYINPUT); }
+    public static int nnodeCapacityInput(long struct) { return memGetInt(struct + XrControllerModelStateMSFT.NODECAPACITYINPUT); }
     /** Unsafe version of {@link #nodeCountOutput}. */
-    public static int nnodeCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelStateMSFT.NODECOUNTOUTPUT); }
+    public static int nnodeCountOutput(long struct) { return memGetInt(struct + XrControllerModelStateMSFT.NODECOUNTOUTPUT); }
     /** Unsafe version of {@link #nodeStates}. */
     @Nullable public static XrControllerModelNodeStateMSFT.Buffer nnodeStates(long struct) { return XrControllerModelNodeStateMSFT.createSafe(memGetAddress(struct + XrControllerModelStateMSFT.NODESTATES), nnodeCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelStateMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrControllerModelStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelStateMSFT.NEXT, value); }
     /** Sets the specified value to the {@code nodeCapacityInput} field of the specified {@code struct}. */
-    public static void nnodeCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelStateMSFT.NODECAPACITYINPUT, value); }
+    public static void nnodeCapacityInput(long struct, int value) { memPutInt(struct + XrControllerModelStateMSFT.NODECAPACITYINPUT, value); }
     /** Unsafe version of {@link #nodeCountOutput(int) nodeCountOutput}. */
-    public static void nnodeCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelStateMSFT.NODECOUNTOUTPUT, value); }
+    public static void nnodeCountOutput(long struct, int value) { memPutInt(struct + XrControllerModelStateMSFT.NODECOUNTOUTPUT, value); }
     /** Unsafe version of {@link #nodeStates(XrControllerModelNodeStateMSFT.Buffer) nodeStates}. */
     public static void nnodeStates(long struct, @Nullable XrControllerModelNodeStateMSFT.Buffer value) { memPutAddress(struct + XrControllerModelStateMSFT.NODESTATES, memAddressSafe(value)); if (value != null) { nnodeCapacityInput(struct, value.remaining()); } }
 

@@ -403,58 +403,58 @@ public class VkGeometryTrianglesNV extends Struct<VkGeometryTrianglesNV> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeometryTrianglesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeometryTrianglesNV.PNEXT); }
     /** Unsafe version of {@link #vertexData}. */
-    public static long nvertexData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.VERTEXDATA); }
+    public static long nvertexData(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.VERTEXDATA); }
     /** Unsafe version of {@link #vertexOffset}. */
-    public static long nvertexOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.VERTEXOFFSET); }
+    public static long nvertexOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.VERTEXOFFSET); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNV.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + VkGeometryTrianglesNV.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertexStride}. */
-    public static long nvertexStride(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.VERTEXSTRIDE); }
+    public static long nvertexStride(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.VERTEXSTRIDE); }
     /** Unsafe version of {@link #vertexFormat}. */
-    public static int nvertexFormat(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNV.VERTEXFORMAT); }
+    public static int nvertexFormat(long struct) { return memGetInt(struct + VkGeometryTrianglesNV.VERTEXFORMAT); }
     /** Unsafe version of {@link #indexData}. */
-    public static long nindexData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.INDEXDATA); }
+    public static long nindexData(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.INDEXDATA); }
     /** Unsafe version of {@link #indexOffset}. */
-    public static long nindexOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.INDEXOFFSET); }
+    public static long nindexOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.INDEXOFFSET); }
     /** Unsafe version of {@link #indexCount}. */
-    public static int nindexCount(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNV.INDEXCOUNT); }
+    public static int nindexCount(long struct) { return memGetInt(struct + VkGeometryTrianglesNV.INDEXCOUNT); }
     /** Unsafe version of {@link #indexType}. */
-    public static int nindexType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNV.INDEXTYPE); }
+    public static int nindexType(long struct) { return memGetInt(struct + VkGeometryTrianglesNV.INDEXTYPE); }
     /** Unsafe version of {@link #transformData}. */
-    public static long ntransformData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.TRANSFORMDATA); }
+    public static long ntransformData(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.TRANSFORMDATA); }
     /** Unsafe version of {@link #transformOffset}. */
-    public static long ntransformOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNV.TRANSFORMOFFSET); }
+    public static long ntransformOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNV.TRANSFORMOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeometryTrianglesNV.PNEXT, value); }
     /** Unsafe version of {@link #vertexData(long) vertexData}. */
-    public static void nvertexData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.VERTEXDATA, value); }
+    public static void nvertexData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.VERTEXDATA, value); }
     /** Unsafe version of {@link #vertexOffset(long) vertexOffset}. */
-    public static void nvertexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.VERTEXOFFSET, value); }
+    public static void nvertexOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.VERTEXOFFSET, value); }
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNV.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNV.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #vertexStride(long) vertexStride}. */
-    public static void nvertexStride(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.VERTEXSTRIDE, value); }
+    public static void nvertexStride(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.VERTEXSTRIDE, value); }
     /** Unsafe version of {@link #vertexFormat(int) vertexFormat}. */
-    public static void nvertexFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNV.VERTEXFORMAT, value); }
+    public static void nvertexFormat(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNV.VERTEXFORMAT, value); }
     /** Unsafe version of {@link #indexData(long) indexData}. */
-    public static void nindexData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.INDEXDATA, value); }
+    public static void nindexData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.INDEXDATA, value); }
     /** Unsafe version of {@link #indexOffset(long) indexOffset}. */
-    public static void nindexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.INDEXOFFSET, value); }
+    public static void nindexOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.INDEXOFFSET, value); }
     /** Unsafe version of {@link #indexCount(int) indexCount}. */
-    public static void nindexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNV.INDEXCOUNT, value); }
+    public static void nindexCount(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNV.INDEXCOUNT, value); }
     /** Unsafe version of {@link #indexType(int) indexType}. */
-    public static void nindexType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNV.INDEXTYPE, value); }
+    public static void nindexType(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNV.INDEXTYPE, value); }
     /** Unsafe version of {@link #transformData(long) transformData}. */
-    public static void ntransformData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.TRANSFORMDATA, value); }
+    public static void ntransformData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.TRANSFORMDATA, value); }
     /** Unsafe version of {@link #transformOffset(long) transformOffset}. */
-    public static void ntransformOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNV.TRANSFORMOFFSET, value); }
+    public static void ntransformOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNV.TRANSFORMOFFSET, value); }
 
     // -----------------------------------
 

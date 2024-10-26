@@ -272,18 +272,18 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct<VkPhysicalDevi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalSemaphoreInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalSemaphoreInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExternalSemaphoreInfo.PNEXT); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalSemaphoreInfo.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalSemaphoreInfo.HANDLETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalSemaphoreInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalSemaphoreInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalSemaphoreInfo.PNEXT, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalSemaphoreInfo.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalSemaphoreInfo.HANDLETYPE, value); }
 
     // -----------------------------------
 

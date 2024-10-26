@@ -399,62 +399,62 @@ public class VkTraceRaysIndirectCommand2KHR extends Struct<VkTraceRaysIndirectCo
     // -----------------------------------
 
     /** Unsafe version of {@link #raygenShaderRecordAddress}. */
-    public static long nraygenShaderRecordAddress(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDADDRESS); }
+    public static long nraygenShaderRecordAddress(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDADDRESS); }
     /** Unsafe version of {@link #raygenShaderRecordSize}. */
-    public static long nraygenShaderRecordSize(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDSIZE); }
+    public static long nraygenShaderRecordSize(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDSIZE); }
     /** Unsafe version of {@link #missShaderBindingTableAddress}. */
-    public static long nmissShaderBindingTableAddress(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLEADDRESS); }
+    public static long nmissShaderBindingTableAddress(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLEADDRESS); }
     /** Unsafe version of {@link #missShaderBindingTableSize}. */
-    public static long nmissShaderBindingTableSize(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESIZE); }
+    public static long nmissShaderBindingTableSize(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESIZE); }
     /** Unsafe version of {@link #missShaderBindingTableStride}. */
-    public static long nmissShaderBindingTableStride(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESTRIDE); }
+    public static long nmissShaderBindingTableStride(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESTRIDE); }
     /** Unsafe version of {@link #hitShaderBindingTableAddress}. */
-    public static long nhitShaderBindingTableAddress(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLEADDRESS); }
+    public static long nhitShaderBindingTableAddress(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLEADDRESS); }
     /** Unsafe version of {@link #hitShaderBindingTableSize}. */
-    public static long nhitShaderBindingTableSize(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESIZE); }
+    public static long nhitShaderBindingTableSize(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESIZE); }
     /** Unsafe version of {@link #hitShaderBindingTableStride}. */
-    public static long nhitShaderBindingTableStride(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESTRIDE); }
+    public static long nhitShaderBindingTableStride(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESTRIDE); }
     /** Unsafe version of {@link #callableShaderBindingTableAddress}. */
-    public static long ncallableShaderBindingTableAddress(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLEADDRESS); }
+    public static long ncallableShaderBindingTableAddress(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLEADDRESS); }
     /** Unsafe version of {@link #callableShaderBindingTableSize}. */
-    public static long ncallableShaderBindingTableSize(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESIZE); }
+    public static long ncallableShaderBindingTableSize(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESIZE); }
     /** Unsafe version of {@link #callableShaderBindingTableStride}. */
-    public static long ncallableShaderBindingTableStride(long struct) { return UNSAFE.getLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESTRIDE); }
+    public static long ncallableShaderBindingTableStride(long struct) { return memGetLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESTRIDE); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommand2KHR.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommand2KHR.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommand2KHR.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommand2KHR.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommand2KHR.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommand2KHR.DEPTH); }
 
     /** Unsafe version of {@link #raygenShaderRecordAddress(long) raygenShaderRecordAddress}. */
-    public static void nraygenShaderRecordAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDADDRESS, value); }
+    public static void nraygenShaderRecordAddress(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDADDRESS, value); }
     /** Unsafe version of {@link #raygenShaderRecordSize(long) raygenShaderRecordSize}. */
-    public static void nraygenShaderRecordSize(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDSIZE, value); }
+    public static void nraygenShaderRecordSize(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.RAYGENSHADERRECORDSIZE, value); }
     /** Unsafe version of {@link #missShaderBindingTableAddress(long) missShaderBindingTableAddress}. */
-    public static void nmissShaderBindingTableAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLEADDRESS, value); }
+    public static void nmissShaderBindingTableAddress(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLEADDRESS, value); }
     /** Unsafe version of {@link #missShaderBindingTableSize(long) missShaderBindingTableSize}. */
-    public static void nmissShaderBindingTableSize(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESIZE, value); }
+    public static void nmissShaderBindingTableSize(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESIZE, value); }
     /** Unsafe version of {@link #missShaderBindingTableStride(long) missShaderBindingTableStride}. */
-    public static void nmissShaderBindingTableStride(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESTRIDE, value); }
+    public static void nmissShaderBindingTableStride(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.MISSSHADERBINDINGTABLESTRIDE, value); }
     /** Unsafe version of {@link #hitShaderBindingTableAddress(long) hitShaderBindingTableAddress}. */
-    public static void nhitShaderBindingTableAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLEADDRESS, value); }
+    public static void nhitShaderBindingTableAddress(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLEADDRESS, value); }
     /** Unsafe version of {@link #hitShaderBindingTableSize(long) hitShaderBindingTableSize}. */
-    public static void nhitShaderBindingTableSize(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESIZE, value); }
+    public static void nhitShaderBindingTableSize(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESIZE, value); }
     /** Unsafe version of {@link #hitShaderBindingTableStride(long) hitShaderBindingTableStride}. */
-    public static void nhitShaderBindingTableStride(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESTRIDE, value); }
+    public static void nhitShaderBindingTableStride(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.HITSHADERBINDINGTABLESTRIDE, value); }
     /** Unsafe version of {@link #callableShaderBindingTableAddress(long) callableShaderBindingTableAddress}. */
-    public static void ncallableShaderBindingTableAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLEADDRESS, value); }
+    public static void ncallableShaderBindingTableAddress(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLEADDRESS, value); }
     /** Unsafe version of {@link #callableShaderBindingTableSize(long) callableShaderBindingTableSize}. */
-    public static void ncallableShaderBindingTableSize(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESIZE, value); }
+    public static void ncallableShaderBindingTableSize(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESIZE, value); }
     /** Unsafe version of {@link #callableShaderBindingTableStride(long) callableShaderBindingTableStride}. */
-    public static void ncallableShaderBindingTableStride(long struct, long value) { UNSAFE.putLong(null, struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESTRIDE, value); }
+    public static void ncallableShaderBindingTableStride(long struct, long value) { memPutLong(struct + VkTraceRaysIndirectCommand2KHR.CALLABLESHADERBINDINGTABLESTRIDE, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommand2KHR.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommand2KHR.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommand2KHR.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommand2KHR.HEIGHT, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
-    public static void ndepth(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommand2KHR.DEPTH, value); }
+    public static void ndepth(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommand2KHR.DEPTH, value); }
 
     // -----------------------------------
 

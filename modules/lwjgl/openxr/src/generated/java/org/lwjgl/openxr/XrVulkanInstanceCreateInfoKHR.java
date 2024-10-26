@@ -300,13 +300,13 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVulkanInstanceCreateInfoKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVulkanInstanceCreateInfoKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.NEXT); }
     /** Unsafe version of {@link #systemId}. */
-    public static long nsystemId(long struct) { return UNSAFE.getLong(null, struct + XrVulkanInstanceCreateInfoKHR.SYSTEMID); }
+    public static long nsystemId(long struct) { return memGetLong(struct + XrVulkanInstanceCreateInfoKHR.SYSTEMID); }
     /** Unsafe version of {@link #createFlags}. */
-    public static long ncreateFlags(long struct) { return UNSAFE.getLong(null, struct + XrVulkanInstanceCreateInfoKHR.CREATEFLAGS); }
+    public static long ncreateFlags(long struct) { return memGetLong(struct + XrVulkanInstanceCreateInfoKHR.CREATEFLAGS); }
     /** Unsafe version of {@link #pfnGetInstanceProcAddr}. */
     public static long npfnGetInstanceProcAddr(long struct) { return memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.PFNGETINSTANCEPROCADDR); }
     /** Unsafe version of {@link #vulkanCreateInfo}. */
@@ -315,13 +315,13 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     @Nullable public static VkAllocationCallbacks nvulkanAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.VULKANALLOCATOR)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanInstanceCreateInfoKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVulkanInstanceCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanInstanceCreateInfoKHR.NEXT, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
-    public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrVulkanInstanceCreateInfoKHR.SYSTEMID, value); }
+    public static void nsystemId(long struct, long value) { memPutLong(struct + XrVulkanInstanceCreateInfoKHR.SYSTEMID, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
-    public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrVulkanInstanceCreateInfoKHR.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, long value) { memPutLong(struct + XrVulkanInstanceCreateInfoKHR.CREATEFLAGS, value); }
     /** Unsafe version of {@link #pfnGetInstanceProcAddr(long) pfnGetInstanceProcAddr}. */
     public static void npfnGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + XrVulkanInstanceCreateInfoKHR.PFNGETINSTANCEPROCADDR, check(value)); }
     /** Unsafe version of {@link #vulkanCreateInfo(VkInstanceCreateInfo) vulkanCreateInfo}. */

@@ -248,14 +248,14 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #velocityFlags}. */
-    public static long nvelocityFlags(long struct) { return UNSAFE.getLong(null, struct + XrHandJointVelocityEXT.VELOCITYFLAGS); }
+    public static long nvelocityFlags(long struct) { return memGetLong(struct + XrHandJointVelocityEXT.VELOCITYFLAGS); }
     /** Unsafe version of {@link #linearVelocity}. */
     public static XrVector3f nlinearVelocity(long struct) { return XrVector3f.create(struct + XrHandJointVelocityEXT.LINEARVELOCITY); }
     /** Unsafe version of {@link #angularVelocity}. */
     public static XrVector3f nangularVelocity(long struct) { return XrVector3f.create(struct + XrHandJointVelocityEXT.ANGULARVELOCITY); }
 
     /** Unsafe version of {@link #velocityFlags(long) velocityFlags}. */
-    public static void nvelocityFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrHandJointVelocityEXT.VELOCITYFLAGS, value); }
+    public static void nvelocityFlags(long struct, long value) { memPutLong(struct + XrHandJointVelocityEXT.VELOCITYFLAGS, value); }
     /** Unsafe version of {@link #linearVelocity(XrVector3f) linearVelocity}. */
     public static void nlinearVelocity(long struct, XrVector3f value) { memCopy(value.address(), struct + XrHandJointVelocityEXT.LINEARVELOCITY, XrVector3f.SIZEOF); }
     /** Unsafe version of {@link #angularVelocity(XrVector3f) angularVelocity}. */

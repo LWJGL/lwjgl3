@@ -279,20 +279,20 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct<XrEventDataMark
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT); }
     /** Unsafe version of {@link #markerId}. */
-    public static long nmarkerId(long struct) { return UNSAFE.getLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.MARKERID); }
+    public static long nmarkerId(long struct) { return memGetLong(struct + XrEventDataMarkerTrackingUpdateVARJO.MARKERID); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrEventDataMarkerTrackingUpdateVARJO.ISACTIVE); }
     /** Unsafe version of {@link #isPredicted}. */
-    public static int nisPredicted(long struct) { return UNSAFE.getInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.ISPREDICTED); }
+    public static int nisPredicted(long struct) { return memGetInt(struct + XrEventDataMarkerTrackingUpdateVARJO.ISPREDICTED); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrEventDataMarkerTrackingUpdateVARJO.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT, value); }
 

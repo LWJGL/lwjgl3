@@ -242,20 +242,20 @@ public class MSDFGenBitmap extends Struct<MSDFGenBitmap> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + MSDFGenBitmap.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + MSDFGenBitmap.TYPE); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + MSDFGenBitmap.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + MSDFGenBitmap.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + MSDFGenBitmap.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + MSDFGenBitmap.HEIGHT); }
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + MSDFGenBitmap.HANDLE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenBitmap.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + MSDFGenBitmap.TYPE, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenBitmap.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + MSDFGenBitmap.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenBitmap.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + MSDFGenBitmap.HEIGHT, value); }
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + MSDFGenBitmap.HANDLE, check(value)); }
 

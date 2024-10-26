@@ -249,34 +249,34 @@ public class NSVGShape extends Struct<NSVGShape> {
     /** Unsafe version of {@link #stroke}. */
     public static NSVGPaint nstroke(long struct) { return NSVGPaint.create(struct + NSVGShape.STROKE); }
     /** Unsafe version of {@link #opacity}. */
-    public static float nopacity(long struct) { return UNSAFE.getFloat(null, struct + NSVGShape.OPACITY); }
+    public static float nopacity(long struct) { return memGetFloat(struct + NSVGShape.OPACITY); }
     /** Unsafe version of {@link #strokeWidth}. */
-    public static float nstrokeWidth(long struct) { return UNSAFE.getFloat(null, struct + NSVGShape.STROKEWIDTH); }
+    public static float nstrokeWidth(long struct) { return memGetFloat(struct + NSVGShape.STROKEWIDTH); }
     /** Unsafe version of {@link #strokeDashOffset}. */
-    public static float nstrokeDashOffset(long struct) { return UNSAFE.getFloat(null, struct + NSVGShape.STROKEDASHOFFSET); }
+    public static float nstrokeDashOffset(long struct) { return memGetFloat(struct + NSVGShape.STROKEDASHOFFSET); }
     /** Unsafe version of {@link #strokeDashArray}. */
     public static FloatBuffer nstrokeDashArray(long struct) { return memFloatBuffer(struct + NSVGShape.STROKEDASHARRAY, 8); }
     /** Unsafe version of {@link #strokeDashArray(int) strokeDashArray}. */
     public static float nstrokeDashArray(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NSVGShape.STROKEDASHARRAY + check(index, 8) * 4);
+        return memGetFloat(struct + NSVGShape.STROKEDASHARRAY + check(index, 8) * 4);
     }
     /** Unsafe version of {@link #strokeDashCount}. */
-    public static byte nstrokeDashCount(long struct) { return UNSAFE.getByte(null, struct + NSVGShape.STROKEDASHCOUNT); }
+    public static byte nstrokeDashCount(long struct) { return memGetByte(struct + NSVGShape.STROKEDASHCOUNT); }
     /** Unsafe version of {@link #strokeLineJoin}. */
-    public static byte nstrokeLineJoin(long struct) { return UNSAFE.getByte(null, struct + NSVGShape.STROKELINEJOIN); }
+    public static byte nstrokeLineJoin(long struct) { return memGetByte(struct + NSVGShape.STROKELINEJOIN); }
     /** Unsafe version of {@link #strokeLineCap}. */
-    public static byte nstrokeLineCap(long struct) { return UNSAFE.getByte(null, struct + NSVGShape.STROKELINECAP); }
+    public static byte nstrokeLineCap(long struct) { return memGetByte(struct + NSVGShape.STROKELINECAP); }
     /** Unsafe version of {@link #miterLimit}. */
-    public static float nmiterLimit(long struct) { return UNSAFE.getFloat(null, struct + NSVGShape.MITERLIMIT); }
+    public static float nmiterLimit(long struct) { return memGetFloat(struct + NSVGShape.MITERLIMIT); }
     /** Unsafe version of {@link #fillRule}. */
-    public static byte nfillRule(long struct) { return UNSAFE.getByte(null, struct + NSVGShape.FILLRULE); }
+    public static byte nfillRule(long struct) { return memGetByte(struct + NSVGShape.FILLRULE); }
     /** Unsafe version of {@link #flags}. */
-    public static byte nflags(long struct) { return UNSAFE.getByte(null, struct + NSVGShape.FLAGS); }
+    public static byte nflags(long struct) { return memGetByte(struct + NSVGShape.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
     public static FloatBuffer nbounds(long struct) { return memFloatBuffer(struct + NSVGShape.BOUNDS, 4); }
     /** Unsafe version of {@link #bounds(int) bounds}. */
     public static float nbounds(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NSVGShape.BOUNDS + check(index, 4) * 4);
+        return memGetFloat(struct + NSVGShape.BOUNDS + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #fillGradient}. */
     public static ByteBuffer nfillGradient(long struct) { return memByteBuffer(struct + NSVGShape.FILLGRADIENT, 64); }
@@ -290,7 +290,7 @@ public class NSVGShape extends Struct<NSVGShape> {
     public static FloatBuffer nxform(long struct) { return memFloatBuffer(struct + NSVGShape.XFORM, 6); }
     /** Unsafe version of {@link #xform(int) xform}. */
     public static float nxform(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NSVGShape.XFORM + check(index, 6) * 4);
+        return memGetFloat(struct + NSVGShape.XFORM + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #paths}. */
     public static NSVGPath npaths(long struct) { return NSVGPath.create(memGetAddress(struct + NSVGShape.PATHS)); }

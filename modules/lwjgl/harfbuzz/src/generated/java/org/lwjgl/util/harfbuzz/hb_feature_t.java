@@ -253,22 +253,22 @@ public class hb_feature_t extends Struct<hb_feature_t> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #tag}. */
-    public static int ntag(long struct) { return UNSAFE.getInt(null, struct + hb_feature_t.TAG); }
+    public static int ntag(long struct) { return memGetInt(struct + hb_feature_t.TAG); }
     /** Unsafe version of {@link #value}. */
-    public static int nvalue(long struct) { return UNSAFE.getInt(null, struct + hb_feature_t.VALUE); }
+    public static int nvalue(long struct) { return memGetInt(struct + hb_feature_t.VALUE); }
     /** Unsafe version of {@link #start}. */
-    public static int nstart(long struct) { return UNSAFE.getInt(null, struct + hb_feature_t.START); }
+    public static int nstart(long struct) { return memGetInt(struct + hb_feature_t.START); }
     /** Unsafe version of {@link #end}. */
-    public static int nend(long struct) { return UNSAFE.getInt(null, struct + hb_feature_t.END); }
+    public static int nend(long struct) { return memGetInt(struct + hb_feature_t.END); }
 
     /** Unsafe version of {@link #tag(int) tag}. */
-    public static void ntag(long struct, int value) { UNSAFE.putInt(null, struct + hb_feature_t.TAG, value); }
+    public static void ntag(long struct, int value) { memPutInt(struct + hb_feature_t.TAG, value); }
     /** Unsafe version of {@link #value(int) value}. */
-    public static void nvalue(long struct, int value) { UNSAFE.putInt(null, struct + hb_feature_t.VALUE, value); }
+    public static void nvalue(long struct, int value) { memPutInt(struct + hb_feature_t.VALUE, value); }
     /** Unsafe version of {@link #start(int) start}. */
-    public static void nstart(long struct, int value) { UNSAFE.putInt(null, struct + hb_feature_t.START, value); }
+    public static void nstart(long struct, int value) { memPutInt(struct + hb_feature_t.START, value); }
     /** Unsafe version of {@link #end(int) end}. */
-    public static void nend(long struct, int value) { UNSAFE.putInt(null, struct + hb_feature_t.END, value); }
+    public static void nend(long struct, int value) { memPutInt(struct + hb_feature_t.END, value); }
 
     // -----------------------------------
 

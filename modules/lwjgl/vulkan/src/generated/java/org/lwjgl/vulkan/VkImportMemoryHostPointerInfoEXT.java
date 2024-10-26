@@ -302,20 +302,20 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportMemoryHostPointerInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportMemoryHostPointerInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportMemoryHostPointerInfoEXT.PNEXT); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkImportMemoryHostPointerInfoEXT.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkImportMemoryHostPointerInfoEXT.HANDLETYPE); }
     /** Unsafe version of {@link #pHostPointer}. */
     public static long npHostPointer(long struct) { return memGetAddress(struct + VkImportMemoryHostPointerInfoEXT.PHOSTPOINTER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryHostPointerInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportMemoryHostPointerInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportMemoryHostPointerInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryHostPointerInfoEXT.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkImportMemoryHostPointerInfoEXT.HANDLETYPE, value); }
     /** Unsafe version of {@link #pHostPointer(long) pHostPointer}. */
     public static void npHostPointer(long struct, long value) { memPutAddress(struct + VkImportMemoryHostPointerInfoEXT.PHOSTPOINTER, check(value)); }
 

@@ -289,9 +289,9 @@ public class CUDA_MEMSET_NODE_PARAMS extends Struct<CUDA_MEMSET_NODE_PARAMS> imp
     /** Unsafe version of {@link #pitch}. */
     public static long npitch(long struct) { return memGetAddress(struct + CUDA_MEMSET_NODE_PARAMS.PITCH); }
     /** Unsafe version of {@link #value}. */
-    public static int nvalue(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMSET_NODE_PARAMS.VALUE); }
+    public static int nvalue(long struct) { return memGetInt(struct + CUDA_MEMSET_NODE_PARAMS.VALUE); }
     /** Unsafe version of {@link #elementSize}. */
-    public static int nelementSize(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMSET_NODE_PARAMS.ELEMENTSIZE); }
+    public static int nelementSize(long struct) { return memGetInt(struct + CUDA_MEMSET_NODE_PARAMS.ELEMENTSIZE); }
     /** Unsafe version of {@link #width}. */
     public static long nwidth(long struct) { return memGetAddress(struct + CUDA_MEMSET_NODE_PARAMS.WIDTH); }
     /** Unsafe version of {@link #height}. */
@@ -302,9 +302,9 @@ public class CUDA_MEMSET_NODE_PARAMS extends Struct<CUDA_MEMSET_NODE_PARAMS> imp
     /** Unsafe version of {@link #pitch(long) pitch}. */
     public static void npitch(long struct, long value) { memPutAddress(struct + CUDA_MEMSET_NODE_PARAMS.PITCH, value); }
     /** Unsafe version of {@link #value(int) value}. */
-    public static void nvalue(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMSET_NODE_PARAMS.VALUE, value); }
+    public static void nvalue(long struct, int value) { memPutInt(struct + CUDA_MEMSET_NODE_PARAMS.VALUE, value); }
     /** Unsafe version of {@link #elementSize(int) elementSize}. */
-    public static void nelementSize(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMSET_NODE_PARAMS.ELEMENTSIZE, value); }
+    public static void nelementSize(long struct, int value) { memPutInt(struct + CUDA_MEMSET_NODE_PARAMS.ELEMENTSIZE, value); }
     /** Unsafe version of {@link #width(long) width}. */
     public static void nwidth(long struct, long value) { memPutAddress(struct + CUDA_MEMSET_NODE_PARAMS.WIDTH, value); }
     /** Unsafe version of {@link #height(long) height}. */

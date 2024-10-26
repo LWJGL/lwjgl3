@@ -289,22 +289,22 @@ public class VkImportMemoryFdInfoKHR extends Struct<VkImportMemoryFdInfoKHR> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportMemoryFdInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportMemoryFdInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportMemoryFdInfoKHR.PNEXT); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkImportMemoryFdInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkImportMemoryFdInfoKHR.HANDLETYPE); }
     /** Unsafe version of {@link #fd}. */
-    public static int nfd(long struct) { return UNSAFE.getInt(null, struct + VkImportMemoryFdInfoKHR.FD); }
+    public static int nfd(long struct) { return memGetInt(struct + VkImportMemoryFdInfoKHR.FD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryFdInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportMemoryFdInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportMemoryFdInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryFdInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkImportMemoryFdInfoKHR.HANDLETYPE, value); }
     /** Unsafe version of {@link #fd(int) fd}. */
-    public static void nfd(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMemoryFdInfoKHR.FD, value); }
+    public static void nfd(long struct, int value) { memPutInt(struct + VkImportMemoryFdInfoKHR.FD, value); }
 
     // -----------------------------------
 

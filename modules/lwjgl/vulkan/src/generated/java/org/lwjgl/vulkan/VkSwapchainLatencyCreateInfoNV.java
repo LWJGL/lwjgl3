@@ -242,18 +242,18 @@ public class VkSwapchainLatencyCreateInfoNV extends Struct<VkSwapchainLatencyCre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainLatencyCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainLatencyCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainLatencyCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #latencyModeEnable}. */
-    public static int nlatencyModeEnable(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainLatencyCreateInfoNV.LATENCYMODEENABLE); }
+    public static int nlatencyModeEnable(long struct) { return memGetInt(struct + VkSwapchainLatencyCreateInfoNV.LATENCYMODEENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainLatencyCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainLatencyCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainLatencyCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #latencyModeEnable(boolean) latencyModeEnable}. */
-    public static void nlatencyModeEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainLatencyCreateInfoNV.LATENCYMODEENABLE, value); }
+    public static void nlatencyModeEnable(long struct, int value) { memPutInt(struct + VkSwapchainLatencyCreateInfoNV.LATENCYMODEENABLE, value); }
 
     // -----------------------------------
 

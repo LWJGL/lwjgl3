@@ -265,18 +265,18 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.PNEXT); }
     /** Unsafe version of {@link #samplerYcbcrConversion}. */
-    public static int nsamplerYcbcrConversion(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.SAMPLERYCBCRCONVERSION); }
+    public static int nsamplerYcbcrConversion(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.SAMPLERYCBCRCONVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.PNEXT, value); }
     /** Unsafe version of {@link #samplerYcbcrConversion(boolean) samplerYcbcrConversion}. */
-    public static void nsamplerYcbcrConversion(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.SAMPLERYCBCRCONVERSION, value); }
+    public static void nsamplerYcbcrConversion(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSamplerYcbcrConversionFeatures.SAMPLERYCBCRCONVERSION, value); }
 
     // -----------------------------------
 

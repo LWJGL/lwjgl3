@@ -263,22 +263,22 @@ public class NkColor extends Struct<NkColor> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static byte nr(long struct) { return UNSAFE.getByte(null, struct + NkColor.R); }
+    public static byte nr(long struct) { return memGetByte(struct + NkColor.R); }
     /** Unsafe version of {@link #g}. */
-    public static byte ng(long struct) { return UNSAFE.getByte(null, struct + NkColor.G); }
+    public static byte ng(long struct) { return memGetByte(struct + NkColor.G); }
     /** Unsafe version of {@link #b}. */
-    public static byte nb(long struct) { return UNSAFE.getByte(null, struct + NkColor.B); }
+    public static byte nb(long struct) { return memGetByte(struct + NkColor.B); }
     /** Unsafe version of {@link #a}. */
-    public static byte na(long struct) { return UNSAFE.getByte(null, struct + NkColor.A); }
+    public static byte na(long struct) { return memGetByte(struct + NkColor.A); }
 
     /** Unsafe version of {@link #r(byte) r}. */
-    public static void nr(long struct, byte value) { UNSAFE.putByte(null, struct + NkColor.R, value); }
+    public static void nr(long struct, byte value) { memPutByte(struct + NkColor.R, value); }
     /** Unsafe version of {@link #g(byte) g}. */
-    public static void ng(long struct, byte value) { UNSAFE.putByte(null, struct + NkColor.G, value); }
+    public static void ng(long struct, byte value) { memPutByte(struct + NkColor.G, value); }
     /** Unsafe version of {@link #b(byte) b}. */
-    public static void nb(long struct, byte value) { UNSAFE.putByte(null, struct + NkColor.B, value); }
+    public static void nb(long struct, byte value) { memPutByte(struct + NkColor.B, value); }
     /** Unsafe version of {@link #a(byte) a}. */
-    public static void na(long struct, byte value) { UNSAFE.putByte(null, struct + NkColor.A, value); }
+    public static void na(long struct, byte value) { memPutByte(struct + NkColor.A, value); }
 
     // -----------------------------------
 

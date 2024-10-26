@@ -406,58 +406,58 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct<VkPipelineRas
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #depthClampEnable}. */
-    public static int ndepthClampEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE); }
+    public static int ndepthClampEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE); }
     /** Unsafe version of {@link #rasterizerDiscardEnable}. */
-    public static int nrasterizerDiscardEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE); }
+    public static int nrasterizerDiscardEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE); }
     /** Unsafe version of {@link #polygonMode}. */
-    public static int npolygonMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE); }
+    public static int npolygonMode(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE); }
     /** Unsafe version of {@link #cullMode}. */
-    public static int ncullMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.CULLMODE); }
+    public static int ncullMode(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.CULLMODE); }
     /** Unsafe version of {@link #frontFace}. */
-    public static int nfrontFace(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE); }
+    public static int nfrontFace(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE); }
     /** Unsafe version of {@link #depthBiasEnable}. */
-    public static int ndepthBiasEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE); }
+    public static int ndepthBiasEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE); }
     /** Unsafe version of {@link #depthBiasConstantFactor}. */
-    public static float ndepthBiasConstantFactor(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR); }
+    public static float ndepthBiasConstantFactor(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR); }
     /** Unsafe version of {@link #depthBiasClamp}. */
-    public static float ndepthBiasClamp(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP); }
+    public static float ndepthBiasClamp(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP); }
     /** Unsafe version of {@link #depthBiasSlopeFactor}. */
-    public static float ndepthBiasSlopeFactor(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR); }
+    public static float ndepthBiasSlopeFactor(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR); }
     /** Unsafe version of {@link #lineWidth}. */
-    public static float nlineWidth(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH); }
+    public static float nlineWidth(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #depthClampEnable(boolean) depthClampEnable}. */
-    public static void ndepthClampEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE, value); }
+    public static void ndepthClampEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE, value); }
     /** Unsafe version of {@link #rasterizerDiscardEnable(boolean) rasterizerDiscardEnable}. */
-    public static void nrasterizerDiscardEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE, value); }
+    public static void nrasterizerDiscardEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE, value); }
     /** Unsafe version of {@link #polygonMode(int) polygonMode}. */
-    public static void npolygonMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE, value); }
+    public static void npolygonMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE, value); }
     /** Unsafe version of {@link #cullMode(int) cullMode}. */
-    public static void ncullMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.CULLMODE, value); }
+    public static void ncullMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.CULLMODE, value); }
     /** Unsafe version of {@link #frontFace(int) frontFace}. */
-    public static void nfrontFace(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE, value); }
+    public static void nfrontFace(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE, value); }
     /** Unsafe version of {@link #depthBiasEnable(boolean) depthBiasEnable}. */
-    public static void ndepthBiasEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE, value); }
+    public static void ndepthBiasEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE, value); }
     /** Unsafe version of {@link #depthBiasConstantFactor(float) depthBiasConstantFactor}. */
-    public static void ndepthBiasConstantFactor(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR, value); }
+    public static void ndepthBiasConstantFactor(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR, value); }
     /** Unsafe version of {@link #depthBiasClamp(float) depthBiasClamp}. */
-    public static void ndepthBiasClamp(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP, value); }
+    public static void ndepthBiasClamp(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP, value); }
     /** Unsafe version of {@link #depthBiasSlopeFactor(float) depthBiasSlopeFactor}. */
-    public static void ndepthBiasSlopeFactor(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR, value); }
+    public static void ndepthBiasSlopeFactor(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR, value); }
     /** Unsafe version of {@link #lineWidth(float) lineWidth}. */
-    public static void nlineWidth(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH, value); }
+    public static void nlineWidth(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH, value); }
 
     // -----------------------------------
 

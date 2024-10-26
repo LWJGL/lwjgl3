@@ -284,22 +284,22 @@ public class VkVertexInputAttributeDescription extends Struct<VkVertexInputAttri
     // -----------------------------------
 
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription.LOCATION); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription.BINDING); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription.FORMAT); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription.OFFSET); }
 
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription.LOCATION, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription.BINDING, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription.FORMAT, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription.OFFSET, value); }
 
     // -----------------------------------
 

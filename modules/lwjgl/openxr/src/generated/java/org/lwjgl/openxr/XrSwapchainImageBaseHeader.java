@@ -258,12 +258,12 @@ public class XrSwapchainImageBaseHeader extends Struct<XrSwapchainImageBaseHeade
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageBaseHeader.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainImageBaseHeader.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainImageBaseHeader.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageBaseHeader.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainImageBaseHeader.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageBaseHeader.NEXT, value); }
 

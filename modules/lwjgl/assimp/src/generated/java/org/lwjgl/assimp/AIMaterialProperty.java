@@ -159,13 +159,13 @@ public class AIMaterialProperty extends Struct<AIMaterialProperty> {
     /** Unsafe version of {@link #mKey}. */
     public static AIString nmKey(long struct) { return AIString.create(struct + AIMaterialProperty.MKEY); }
     /** Unsafe version of {@link #mSemantic}. */
-    public static int nmSemantic(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MSEMANTIC); }
+    public static int nmSemantic(long struct) { return memGetInt(struct + AIMaterialProperty.MSEMANTIC); }
     /** Unsafe version of {@link #mIndex}. */
-    public static int nmIndex(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MINDEX); }
+    public static int nmIndex(long struct) { return memGetInt(struct + AIMaterialProperty.MINDEX); }
     /** Unsafe version of {@link #mDataLength}. */
-    public static int nmDataLength(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MDATALENGTH); }
+    public static int nmDataLength(long struct) { return memGetInt(struct + AIMaterialProperty.MDATALENGTH); }
     /** Unsafe version of {@link #mType}. */
-    public static int nmType(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MTYPE); }
+    public static int nmType(long struct) { return memGetInt(struct + AIMaterialProperty.MTYPE); }
     /** Unsafe version of {@link #mData() mData}. */
     public static ByteBuffer nmData(long struct) { return memByteBuffer(memGetAddress(struct + AIMaterialProperty.MDATA), nmDataLength(struct)); }
 

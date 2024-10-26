@@ -216,12 +216,12 @@ public class VkDeviceOrHostAddressKHR extends Struct<VkDeviceOrHostAddressKHR> i
     // -----------------------------------
 
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkDeviceOrHostAddressKHR.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkDeviceOrHostAddressKHR.DEVICEADDRESS); }
     /** Unsafe version of {@link #hostAddress}. */
     public static long nhostAddress(long struct) { return memGetAddress(struct + VkDeviceOrHostAddressKHR.HOSTADDRESS); }
 
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceOrHostAddressKHR.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkDeviceOrHostAddressKHR.DEVICEADDRESS, value); }
     /** Unsafe version of {@link #hostAddress(long) hostAddress}. */
     public static void nhostAddress(long struct, long value) { memPutAddress(struct + VkDeviceOrHostAddressKHR.HOSTADDRESS, value); }
 

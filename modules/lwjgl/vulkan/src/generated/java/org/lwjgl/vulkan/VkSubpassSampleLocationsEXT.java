@@ -263,12 +263,12 @@ public class VkSubpassSampleLocationsEXT extends Struct<VkSubpassSampleLocations
     // -----------------------------------
 
     /** Unsafe version of {@link #subpassIndex}. */
-    public static int nsubpassIndex(long struct) { return UNSAFE.getInt(null, struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX); }
+    public static int nsubpassIndex(long struct) { return memGetInt(struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX); }
     /** Unsafe version of {@link #sampleLocationsInfo}. */
     public static VkSampleLocationsInfoEXT nsampleLocationsInfo(long struct) { return VkSampleLocationsInfoEXT.create(struct + VkSubpassSampleLocationsEXT.SAMPLELOCATIONSINFO); }
 
     /** Unsafe version of {@link #subpassIndex(int) subpassIndex}. */
-    public static void nsubpassIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX, value); }
+    public static void nsubpassIndex(long struct, int value) { memPutInt(struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX, value); }
     /** Unsafe version of {@link #sampleLocationsInfo(VkSampleLocationsInfoEXT) sampleLocationsInfo}. */
     public static void nsampleLocationsInfo(long struct, VkSampleLocationsInfoEXT value) { memCopy(value.address(), struct + VkSubpassSampleLocationsEXT.SAMPLELOCATIONSINFO, VkSampleLocationsInfoEXT.SIZEOF); }
 

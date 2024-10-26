@@ -256,16 +256,16 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMotionInstanceNV.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureMotionInstanceNV.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMotionInstanceNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAccelerationStructureMotionInstanceNV.FLAGS); }
     /** Unsafe version of {@link #data}. */
     public static VkAccelerationStructureMotionInstanceDataNV ndata(long struct) { return VkAccelerationStructureMotionInstanceDataNV.create(struct + VkAccelerationStructureMotionInstanceNV.DATA); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMotionInstanceNV.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureMotionInstanceNV.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMotionInstanceNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAccelerationStructureMotionInstanceNV.FLAGS, value); }
     /** Unsafe version of {@link #data(VkAccelerationStructureMotionInstanceDataNV) data}. */
     public static void ndata(long struct, VkAccelerationStructureMotionInstanceDataNV value) { memCopy(value.address(), struct + VkAccelerationStructureMotionInstanceNV.DATA, VkAccelerationStructureMotionInstanceDataNV.SIZEOF); }
 

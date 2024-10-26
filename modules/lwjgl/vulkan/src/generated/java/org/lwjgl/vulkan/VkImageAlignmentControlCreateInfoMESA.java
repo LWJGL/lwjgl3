@@ -256,18 +256,18 @@ public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageAlignmentControlCreateInfoMESA.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageAlignmentControlCreateInfoMESA.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageAlignmentControlCreateInfoMESA.PNEXT); }
     /** Unsafe version of {@link #maximumRequestedAlignment}. */
-    public static int nmaximumRequestedAlignment(long struct) { return UNSAFE.getInt(null, struct + VkImageAlignmentControlCreateInfoMESA.MAXIMUMREQUESTEDALIGNMENT); }
+    public static int nmaximumRequestedAlignment(long struct) { return memGetInt(struct + VkImageAlignmentControlCreateInfoMESA.MAXIMUMREQUESTEDALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageAlignmentControlCreateInfoMESA.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageAlignmentControlCreateInfoMESA.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageAlignmentControlCreateInfoMESA.PNEXT, value); }
     /** Unsafe version of {@link #maximumRequestedAlignment(int) maximumRequestedAlignment}. */
-    public static void nmaximumRequestedAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkImageAlignmentControlCreateInfoMESA.MAXIMUMREQUESTEDALIGNMENT, value); }
+    public static void nmaximumRequestedAlignment(long struct, int value) { memPutInt(struct + VkImageAlignmentControlCreateInfoMESA.MAXIMUMREQUESTEDALIGNMENT, value); }
 
     // -----------------------------------
 

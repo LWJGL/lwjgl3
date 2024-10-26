@@ -241,18 +241,18 @@ public class VkBindVertexBufferIndirectCommandNV extends Struct<VkBindVertexBuff
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferAddress}. */
-    public static long nbufferAddress(long struct) { return UNSAFE.getLong(null, struct + VkBindVertexBufferIndirectCommandNV.BUFFERADDRESS); }
+    public static long nbufferAddress(long struct) { return memGetLong(struct + VkBindVertexBufferIndirectCommandNV.BUFFERADDRESS); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkBindVertexBufferIndirectCommandNV.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + VkBindVertexBufferIndirectCommandNV.SIZE); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkBindVertexBufferIndirectCommandNV.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + VkBindVertexBufferIndirectCommandNV.STRIDE); }
 
     /** Unsafe version of {@link #bufferAddress(long) bufferAddress}. */
-    public static void nbufferAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBindVertexBufferIndirectCommandNV.BUFFERADDRESS, value); }
+    public static void nbufferAddress(long struct, long value) { memPutLong(struct + VkBindVertexBufferIndirectCommandNV.BUFFERADDRESS, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVertexBufferIndirectCommandNV.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + VkBindVertexBufferIndirectCommandNV.SIZE, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVertexBufferIndirectCommandNV.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + VkBindVertexBufferIndirectCommandNV.STRIDE, value); }
 
     // -----------------------------------
 

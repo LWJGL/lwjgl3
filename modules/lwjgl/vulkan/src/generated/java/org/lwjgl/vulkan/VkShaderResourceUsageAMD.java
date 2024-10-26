@@ -136,11 +136,11 @@ public class VkShaderResourceUsageAMD extends Struct<VkShaderResourceUsageAMD> {
     // -----------------------------------
 
     /** Unsafe version of {@link #numUsedVgprs}. */
-    public static int nnumUsedVgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderResourceUsageAMD.NUMUSEDVGPRS); }
+    public static int nnumUsedVgprs(long struct) { return memGetInt(struct + VkShaderResourceUsageAMD.NUMUSEDVGPRS); }
     /** Unsafe version of {@link #numUsedSgprs}. */
-    public static int nnumUsedSgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderResourceUsageAMD.NUMUSEDSGPRS); }
+    public static int nnumUsedSgprs(long struct) { return memGetInt(struct + VkShaderResourceUsageAMD.NUMUSEDSGPRS); }
     /** Unsafe version of {@link #ldsSizePerLocalWorkGroup}. */
-    public static int nldsSizePerLocalWorkGroup(long struct) { return UNSAFE.getInt(null, struct + VkShaderResourceUsageAMD.LDSSIZEPERLOCALWORKGROUP); }
+    public static int nldsSizePerLocalWorkGroup(long struct) { return memGetInt(struct + VkShaderResourceUsageAMD.LDSSIZEPERLOCALWORKGROUP); }
     /** Unsafe version of {@link #ldsUsageSizeInBytes}. */
     public static long nldsUsageSizeInBytes(long struct) { return memGetAddress(struct + VkShaderResourceUsageAMD.LDSUSAGESIZEINBYTES); }
     /** Unsafe version of {@link #scratchMemUsageInBytes}. */

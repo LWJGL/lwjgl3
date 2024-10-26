@@ -310,34 +310,34 @@ public class VkStencilOpState extends Struct<VkStencilOpState> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #failOp}. */
-    public static int nfailOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.FAILOP); }
+    public static int nfailOp(long struct) { return memGetInt(struct + VkStencilOpState.FAILOP); }
     /** Unsafe version of {@link #passOp}. */
-    public static int npassOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.PASSOP); }
+    public static int npassOp(long struct) { return memGetInt(struct + VkStencilOpState.PASSOP); }
     /** Unsafe version of {@link #depthFailOp}. */
-    public static int ndepthFailOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.DEPTHFAILOP); }
+    public static int ndepthFailOp(long struct) { return memGetInt(struct + VkStencilOpState.DEPTHFAILOP); }
     /** Unsafe version of {@link #compareOp}. */
-    public static int ncompareOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.COMPAREOP); }
+    public static int ncompareOp(long struct) { return memGetInt(struct + VkStencilOpState.COMPAREOP); }
     /** Unsafe version of {@link #compareMask}. */
-    public static int ncompareMask(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.COMPAREMASK); }
+    public static int ncompareMask(long struct) { return memGetInt(struct + VkStencilOpState.COMPAREMASK); }
     /** Unsafe version of {@link #writeMask}. */
-    public static int nwriteMask(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.WRITEMASK); }
+    public static int nwriteMask(long struct) { return memGetInt(struct + VkStencilOpState.WRITEMASK); }
     /** Unsafe version of {@link #reference}. */
-    public static int nreference(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.REFERENCE); }
+    public static int nreference(long struct) { return memGetInt(struct + VkStencilOpState.REFERENCE); }
 
     /** Unsafe version of {@link #failOp(int) failOp}. */
-    public static void nfailOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.FAILOP, value); }
+    public static void nfailOp(long struct, int value) { memPutInt(struct + VkStencilOpState.FAILOP, value); }
     /** Unsafe version of {@link #passOp(int) passOp}. */
-    public static void npassOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.PASSOP, value); }
+    public static void npassOp(long struct, int value) { memPutInt(struct + VkStencilOpState.PASSOP, value); }
     /** Unsafe version of {@link #depthFailOp(int) depthFailOp}. */
-    public static void ndepthFailOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.DEPTHFAILOP, value); }
+    public static void ndepthFailOp(long struct, int value) { memPutInt(struct + VkStencilOpState.DEPTHFAILOP, value); }
     /** Unsafe version of {@link #compareOp(int) compareOp}. */
-    public static void ncompareOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.COMPAREOP, value); }
+    public static void ncompareOp(long struct, int value) { memPutInt(struct + VkStencilOpState.COMPAREOP, value); }
     /** Unsafe version of {@link #compareMask(int) compareMask}. */
-    public static void ncompareMask(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.COMPAREMASK, value); }
+    public static void ncompareMask(long struct, int value) { memPutInt(struct + VkStencilOpState.COMPAREMASK, value); }
     /** Unsafe version of {@link #writeMask(int) writeMask}. */
-    public static void nwriteMask(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.WRITEMASK, value); }
+    public static void nwriteMask(long struct, int value) { memPutInt(struct + VkStencilOpState.WRITEMASK, value); }
     /** Unsafe version of {@link #reference(int) reference}. */
-    public static void nreference(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.REFERENCE, value); }
+    public static void nreference(long struct, int value) { memPutInt(struct + VkStencilOpState.REFERENCE, value); }
 
     // -----------------------------------
 

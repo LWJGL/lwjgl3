@@ -208,37 +208,37 @@ public class hwloc_topology_membind_support extends Struct<hwloc_topology_membin
     // -----------------------------------
 
     /** Unsafe version of {@link #set_thisproc_membind}. */
-    public static boolean nset_thisproc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_THISPROC_MEMBIND) != 0; }
+    public static boolean nset_thisproc_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.SET_THISPROC_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_thisproc_membind}. */
-    public static boolean nget_thisproc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_THISPROC_MEMBIND) != 0; }
+    public static boolean nget_thisproc_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.GET_THISPROC_MEMBIND) != 0; }
     /** Unsafe version of {@link #set_proc_membind}. */
-    public static boolean nset_proc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_PROC_MEMBIND) != 0; }
+    public static boolean nset_proc_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.SET_PROC_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_proc_membind}. */
-    public static boolean nget_proc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_PROC_MEMBIND) != 0; }
+    public static boolean nget_proc_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.GET_PROC_MEMBIND) != 0; }
     /** Unsafe version of {@link #set_thisthread_membind}. */
-    public static boolean nset_thisthread_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_THISTHREAD_MEMBIND) != 0; }
+    public static boolean nset_thisthread_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.SET_THISTHREAD_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_thisthread_membind}. */
-    public static boolean nget_thisthread_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_THISTHREAD_MEMBIND) != 0; }
+    public static boolean nget_thisthread_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.GET_THISTHREAD_MEMBIND) != 0; }
     /** Unsafe version of {@link #alloc_membind}. */
-    public static boolean nalloc_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.ALLOC_MEMBIND) != 0; }
+    public static boolean nalloc_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.ALLOC_MEMBIND) != 0; }
     /** Unsafe version of {@link #set_area_membind}. */
-    public static boolean nset_area_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.SET_AREA_MEMBIND) != 0; }
+    public static boolean nset_area_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.SET_AREA_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_area_membind}. */
-    public static boolean nget_area_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_AREA_MEMBIND) != 0; }
+    public static boolean nget_area_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.GET_AREA_MEMBIND) != 0; }
     /** Unsafe version of {@link #get_area_memlocation}. */
-    public static boolean nget_area_memlocation(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.GET_AREA_MEMLOCATION) != 0; }
+    public static boolean nget_area_memlocation(long struct) { return memGetByte(struct + hwloc_topology_membind_support.GET_AREA_MEMLOCATION) != 0; }
     /** Unsafe version of {@link #firsttouch_membind}. */
-    public static boolean nfirsttouch_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.FIRSTTOUCH_MEMBIND) != 0; }
+    public static boolean nfirsttouch_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.FIRSTTOUCH_MEMBIND) != 0; }
     /** Unsafe version of {@link #bind_membind}. */
-    public static boolean nbind_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.BIND_MEMBIND) != 0; }
+    public static boolean nbind_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.BIND_MEMBIND) != 0; }
     /** Unsafe version of {@link #interleave_membind}. */
-    public static boolean ninterleave_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.INTERLEAVE_MEMBIND) != 0; }
+    public static boolean ninterleave_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.INTERLEAVE_MEMBIND) != 0; }
     /** Unsafe version of {@link #weighted_interleave_membind}. */
-    public static boolean nweighted_interleave_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.WEIGHTED_INTERLEAVE_MEMBIND) != 0; }
+    public static boolean nweighted_interleave_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.WEIGHTED_INTERLEAVE_MEMBIND) != 0; }
     /** Unsafe version of {@link #nexttouch_membind}. */
-    public static boolean nnexttouch_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.NEXTTOUCH_MEMBIND) != 0; }
+    public static boolean nnexttouch_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.NEXTTOUCH_MEMBIND) != 0; }
     /** Unsafe version of {@link #migrate_membind}. */
-    public static boolean nmigrate_membind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_membind_support.MIGRATE_MEMBIND) != 0; }
+    public static boolean nmigrate_membind(long struct) { return memGetByte(struct + hwloc_topology_membind_support.MIGRATE_MEMBIND) != 0; }
 
     // -----------------------------------
 

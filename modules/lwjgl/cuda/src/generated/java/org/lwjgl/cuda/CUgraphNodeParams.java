@@ -360,14 +360,14 @@ public class CUgraphNodeParams extends Struct<CUgraphNodeParams> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUgraphNodeParams.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUgraphNodeParams.TYPE); }
     public static IntBuffer nreserved0(long struct) { return memIntBuffer(struct + CUgraphNodeParams.RESERVED0, 3); }
     public static int nreserved0(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUgraphNodeParams.RESERVED0 + check(index, 3) * 4);
+        return memGetInt(struct + CUgraphNodeParams.RESERVED0 + check(index, 3) * 4);
     }
     public static LongBuffer nparams_reserved1(long struct) { return memLongBuffer(struct + CUgraphNodeParams.PARAMS_RESERVED1, 29); }
     public static long nparams_reserved1(long struct, int index) {
-        return UNSAFE.getLong(null, struct + CUgraphNodeParams.PARAMS_RESERVED1 + check(index, 29) * 8);
+        return memGetLong(struct + CUgraphNodeParams.PARAMS_RESERVED1 + check(index, 29) * 8);
     }
     /** Unsafe version of {@link #params_kernel}. */
     public static CUDA_KERNEL_NODE_PARAMS_v3 nparams_kernel(long struct) { return CUDA_KERNEL_NODE_PARAMS_v3.create(struct + CUgraphNodeParams.PARAMS_KERNEL); }
@@ -395,23 +395,23 @@ public class CUgraphNodeParams extends Struct<CUgraphNodeParams> implements Nati
     public static CUDA_BATCH_MEM_OP_NODE_PARAMS nparams_memOp(long struct) { return CUDA_BATCH_MEM_OP_NODE_PARAMS.create(struct + CUgraphNodeParams.PARAMS_MEMOP); }
     /** Unsafe version of {@link #params_conditional}. */
     public static CUDA_CONDITIONAL_NODE_PARAMS nparams_conditional(long struct) { return CUDA_CONDITIONAL_NODE_PARAMS.create(struct + CUgraphNodeParams.PARAMS_CONDITIONAL); }
-    public static long nreserved2(long struct) { return UNSAFE.getLong(null, struct + CUgraphNodeParams.RESERVED2); }
+    public static long nreserved2(long struct) { return memGetLong(struct + CUgraphNodeParams.RESERVED2); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUgraphNodeParams.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUgraphNodeParams.TYPE, value); }
     public static void nreserved0(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + CUgraphNodeParams.RESERVED0, value.remaining() * 4);
     }
     public static void nreserved0(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUgraphNodeParams.RESERVED0 + check(index, 3) * 4, value);
+        memPutInt(struct + CUgraphNodeParams.RESERVED0 + check(index, 3) * 4, value);
     }
     public static void nparams_reserved1(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 29); }
         memCopy(memAddress(value), struct + CUgraphNodeParams.PARAMS_RESERVED1, value.remaining() * 8);
     }
     public static void nparams_reserved1(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + CUgraphNodeParams.PARAMS_RESERVED1 + check(index, 29) * 8, value);
+        memPutLong(struct + CUgraphNodeParams.PARAMS_RESERVED1 + check(index, 29) * 8, value);
     }
     /** Unsafe version of {@link #params_kernel(CUDA_KERNEL_NODE_PARAMS_v3) params_kernel}. */
     public static void nparams_kernel(long struct, CUDA_KERNEL_NODE_PARAMS_v3 value) { memCopy(value.address(), struct + CUgraphNodeParams.PARAMS_KERNEL, CUDA_KERNEL_NODE_PARAMS_v3.SIZEOF); }
@@ -439,7 +439,7 @@ public class CUgraphNodeParams extends Struct<CUgraphNodeParams> implements Nati
     public static void nparams_memOp(long struct, CUDA_BATCH_MEM_OP_NODE_PARAMS value) { memCopy(value.address(), struct + CUgraphNodeParams.PARAMS_MEMOP, CUDA_BATCH_MEM_OP_NODE_PARAMS.SIZEOF); }
     /** Unsafe version of {@link #params_conditional(CUDA_CONDITIONAL_NODE_PARAMS) params_conditional}. */
     public static void nparams_conditional(long struct, CUDA_CONDITIONAL_NODE_PARAMS value) { memCopy(value.address(), struct + CUgraphNodeParams.PARAMS_CONDITIONAL, CUDA_CONDITIONAL_NODE_PARAMS.SIZEOF); }
-    public static void nreserved2(long struct, long value) { UNSAFE.putLong(null, struct + CUgraphNodeParams.RESERVED2, value); }
+    public static void nreserved2(long struct, long value) { memPutLong(struct + CUgraphNodeParams.RESERVED2, value); }
 
     // -----------------------------------
 

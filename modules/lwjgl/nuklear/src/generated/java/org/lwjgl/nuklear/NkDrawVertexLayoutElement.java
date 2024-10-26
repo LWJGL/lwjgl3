@@ -252,16 +252,16 @@ public class NkDrawVertexLayoutElement extends Struct<NkDrawVertexLayoutElement>
     // -----------------------------------
 
     /** Unsafe version of {@link #attribute}. */
-    public static int nattribute(long struct) { return UNSAFE.getInt(null, struct + NkDrawVertexLayoutElement.ATTRIBUTE); }
+    public static int nattribute(long struct) { return memGetInt(struct + NkDrawVertexLayoutElement.ATTRIBUTE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + NkDrawVertexLayoutElement.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + NkDrawVertexLayoutElement.FORMAT); }
     /** Unsafe version of {@link #offset}. */
     public static long noffset(long struct) { return memGetAddress(struct + NkDrawVertexLayoutElement.OFFSET); }
 
     /** Unsafe version of {@link #attribute(int) attribute}. */
-    public static void nattribute(long struct, int value) { UNSAFE.putInt(null, struct + NkDrawVertexLayoutElement.ATTRIBUTE, value); }
+    public static void nattribute(long struct, int value) { memPutInt(struct + NkDrawVertexLayoutElement.ATTRIBUTE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + NkDrawVertexLayoutElement.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + NkDrawVertexLayoutElement.FORMAT, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
     public static void noffset(long struct, long value) { memPutAddress(struct + NkDrawVertexLayoutElement.OFFSET, value); }
 

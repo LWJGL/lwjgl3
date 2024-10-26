@@ -223,9 +223,9 @@ public class STBRPNode extends Struct<STBRPNode> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + STBRPNode.X); }
+    public static int nx(long struct) { return memGetInt(struct + STBRPNode.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + STBRPNode.Y); }
+    public static int ny(long struct) { return memGetInt(struct + STBRPNode.Y); }
     /** Unsafe version of {@link #next}. */
     @Nullable public static STBRPNode nnext(long struct) { return STBRPNode.createSafe(memGetAddress(struct + STBRPNode.NEXT)); }
 

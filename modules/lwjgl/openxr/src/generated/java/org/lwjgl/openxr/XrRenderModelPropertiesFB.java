@@ -309,28 +309,28 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelPropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRenderModelPropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRenderModelPropertiesFB.NEXT); }
     /** Unsafe version of {@link #vendorId}. */
-    public static int nvendorId(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelPropertiesFB.VENDORID); }
+    public static int nvendorId(long struct) { return memGetInt(struct + XrRenderModelPropertiesFB.VENDORID); }
     /** Unsafe version of {@link #modelName}. */
     public static ByteBuffer nmodelName(long struct) { return memByteBuffer(struct + XrRenderModelPropertiesFB.MODELNAME, XR_MAX_RENDER_MODEL_NAME_SIZE_FB); }
     /** Unsafe version of {@link #modelNameString}. */
     public static String nmodelNameString(long struct) { return memUTF8(struct + XrRenderModelPropertiesFB.MODELNAME); }
     /** Unsafe version of {@link #modelKey}. */
-    public static long nmodelKey(long struct) { return UNSAFE.getLong(null, struct + XrRenderModelPropertiesFB.MODELKEY); }
+    public static long nmodelKey(long struct) { return memGetLong(struct + XrRenderModelPropertiesFB.MODELKEY); }
     /** Unsafe version of {@link #modelVersion}. */
-    public static int nmodelVersion(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelPropertiesFB.MODELVERSION); }
+    public static int nmodelVersion(long struct) { return memGetInt(struct + XrRenderModelPropertiesFB.MODELVERSION); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrRenderModelPropertiesFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrRenderModelPropertiesFB.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelPropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRenderModelPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRenderModelPropertiesFB.NEXT, value); }
     /** Unsafe version of {@link #vendorId(int) vendorId}. */
-    public static void nvendorId(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelPropertiesFB.VENDORID, value); }
+    public static void nvendorId(long struct, int value) { memPutInt(struct + XrRenderModelPropertiesFB.VENDORID, value); }
     /** Unsafe version of {@link #modelName(ByteBuffer) modelName}. */
     public static void nmodelName(long struct, ByteBuffer value) {
         if (CHECKS) {
@@ -340,11 +340,11 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
         memCopy(memAddress(value), struct + XrRenderModelPropertiesFB.MODELNAME, value.remaining());
     }
     /** Unsafe version of {@link #modelKey(long) modelKey}. */
-    public static void nmodelKey(long struct, long value) { UNSAFE.putLong(null, struct + XrRenderModelPropertiesFB.MODELKEY, value); }
+    public static void nmodelKey(long struct, long value) { memPutLong(struct + XrRenderModelPropertiesFB.MODELKEY, value); }
     /** Unsafe version of {@link #modelVersion(int) modelVersion}. */
-    public static void nmodelVersion(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelPropertiesFB.MODELVERSION, value); }
+    public static void nmodelVersion(long struct, int value) { memPutInt(struct + XrRenderModelPropertiesFB.MODELVERSION, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrRenderModelPropertiesFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrRenderModelPropertiesFB.FLAGS, value); }
 
     // -----------------------------------
 

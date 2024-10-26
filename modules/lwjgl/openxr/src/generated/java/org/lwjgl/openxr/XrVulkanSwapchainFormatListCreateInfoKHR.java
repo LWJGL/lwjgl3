@@ -260,20 +260,20 @@ public class XrVulkanSwapchainFormatListCreateInfoKHR extends Struct<XrVulkanSwa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVulkanSwapchainFormatListCreateInfoKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.NEXT); }
     /** Unsafe version of {@link #viewFormatCount}. */
-    public static int nviewFormatCount(long struct) { return UNSAFE.getInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATCOUNT); }
+    public static int nviewFormatCount(long struct) { return memGetInt(struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATCOUNT); }
     /** Unsafe version of {@link #viewFormats() viewFormats}. */
     @Nullable public static IntBuffer nviewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATS), nviewFormatCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVulkanSwapchainFormatListCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.NEXT, value); }
     /** Sets the specified value to the {@code viewFormatCount} field of the specified {@code struct}. */
-    public static void nviewFormatCount(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATCOUNT, value); }
+    public static void nviewFormatCount(long struct, int value) { memPutInt(struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATCOUNT, value); }
     /** Unsafe version of {@link #viewFormats(IntBuffer) viewFormats}. */
     public static void nviewFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATS, memAddressSafe(value)); nviewFormatCount(struct, value == null ? 0 : value.remaining()); }
 

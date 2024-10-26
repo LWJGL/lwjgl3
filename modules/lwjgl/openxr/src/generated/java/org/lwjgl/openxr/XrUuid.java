@@ -218,7 +218,7 @@ public class XrUuid extends Struct<XrUuid> implements NativeResource {
     public static ByteBuffer ndata(long struct) { return memByteBuffer(struct + XrUuid.DATA, XR_UUID_SIZE); }
     /** Unsafe version of {@link #data(int) data}. */
     public static byte ndata(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrUuid.DATA + check(index, XR_UUID_SIZE) * 1);
+        return memGetByte(struct + XrUuid.DATA + check(index, XR_UUID_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
@@ -228,7 +228,7 @@ public class XrUuid extends Struct<XrUuid> implements NativeResource {
     }
     /** Unsafe version of {@link #data(int, byte) data}. */
     public static void ndata(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrUuid.DATA + check(index, XR_UUID_SIZE) * 1, value);
+        memPutByte(struct + XrUuid.DATA + check(index, XR_UUID_SIZE) * 1, value);
     }
 
     // -----------------------------------

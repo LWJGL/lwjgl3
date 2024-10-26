@@ -259,22 +259,22 @@ public class XrViewConfigurationProperties extends Struct<XrViewConfigurationPro
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrViewConfigurationProperties.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrViewConfigurationProperties.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrViewConfigurationProperties.NEXT); }
     /** Unsafe version of {@link #viewConfigurationType}. */
-    public static int nviewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrViewConfigurationProperties.VIEWCONFIGURATIONTYPE); }
+    public static int nviewConfigurationType(long struct) { return memGetInt(struct + XrViewConfigurationProperties.VIEWCONFIGURATIONTYPE); }
     /** Unsafe version of {@link #fovMutable}. */
-    public static int nfovMutable(long struct) { return UNSAFE.getInt(null, struct + XrViewConfigurationProperties.FOVMUTABLE); }
+    public static int nfovMutable(long struct) { return memGetInt(struct + XrViewConfigurationProperties.FOVMUTABLE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrViewConfigurationProperties.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationProperties.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
-    public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.VIEWCONFIGURATIONTYPE, value); }
+    public static void nviewConfigurationType(long struct, int value) { memPutInt(struct + XrViewConfigurationProperties.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #fovMutable(boolean) fovMutable}. */
-    public static void nfovMutable(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.FOVMUTABLE, value); }
+    public static void nfovMutable(long struct, int value) { memPutInt(struct + XrViewConfigurationProperties.FOVMUTABLE, value); }
 
     // -----------------------------------
 

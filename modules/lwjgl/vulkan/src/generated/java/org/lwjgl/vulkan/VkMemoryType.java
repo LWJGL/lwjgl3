@@ -115,9 +115,9 @@ public class VkMemoryType extends Struct<VkMemoryType> {
     // -----------------------------------
 
     /** Unsafe version of {@link #propertyFlags}. */
-    public static int npropertyFlags(long struct) { return UNSAFE.getInt(null, struct + VkMemoryType.PROPERTYFLAGS); }
+    public static int npropertyFlags(long struct) { return memGetInt(struct + VkMemoryType.PROPERTYFLAGS); }
     /** Unsafe version of {@link #heapIndex}. */
-    public static int nheapIndex(long struct) { return UNSAFE.getInt(null, struct + VkMemoryType.HEAPINDEX); }
+    public static int nheapIndex(long struct) { return memGetInt(struct + VkMemoryType.HEAPINDEX); }
 
     // -----------------------------------
 

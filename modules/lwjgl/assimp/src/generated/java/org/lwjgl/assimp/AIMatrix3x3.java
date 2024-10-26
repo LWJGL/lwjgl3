@@ -311,42 +311,42 @@ public class AIMatrix3x3 extends Struct<AIMatrix3x3> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #a1}. */
-    public static float na1(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.A1); }
+    public static float na1(long struct) { return memGetFloat(struct + AIMatrix3x3.A1); }
     /** Unsafe version of {@link #a2}. */
-    public static float na2(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.A2); }
+    public static float na2(long struct) { return memGetFloat(struct + AIMatrix3x3.A2); }
     /** Unsafe version of {@link #a3}. */
-    public static float na3(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.A3); }
+    public static float na3(long struct) { return memGetFloat(struct + AIMatrix3x3.A3); }
     /** Unsafe version of {@link #b1}. */
-    public static float nb1(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.B1); }
+    public static float nb1(long struct) { return memGetFloat(struct + AIMatrix3x3.B1); }
     /** Unsafe version of {@link #b2}. */
-    public static float nb2(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.B2); }
+    public static float nb2(long struct) { return memGetFloat(struct + AIMatrix3x3.B2); }
     /** Unsafe version of {@link #b3}. */
-    public static float nb3(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.B3); }
+    public static float nb3(long struct) { return memGetFloat(struct + AIMatrix3x3.B3); }
     /** Unsafe version of {@link #c1}. */
-    public static float nc1(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.C1); }
+    public static float nc1(long struct) { return memGetFloat(struct + AIMatrix3x3.C1); }
     /** Unsafe version of {@link #c2}. */
-    public static float nc2(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.C2); }
+    public static float nc2(long struct) { return memGetFloat(struct + AIMatrix3x3.C2); }
     /** Unsafe version of {@link #c3}. */
-    public static float nc3(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.C3); }
+    public static float nc3(long struct) { return memGetFloat(struct + AIMatrix3x3.C3); }
 
     /** Unsafe version of {@link #a1(float) a1}. */
-    public static void na1(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.A1, value); }
+    public static void na1(long struct, float value) { memPutFloat(struct + AIMatrix3x3.A1, value); }
     /** Unsafe version of {@link #a2(float) a2}. */
-    public static void na2(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.A2, value); }
+    public static void na2(long struct, float value) { memPutFloat(struct + AIMatrix3x3.A2, value); }
     /** Unsafe version of {@link #a3(float) a3}. */
-    public static void na3(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.A3, value); }
+    public static void na3(long struct, float value) { memPutFloat(struct + AIMatrix3x3.A3, value); }
     /** Unsafe version of {@link #b1(float) b1}. */
-    public static void nb1(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.B1, value); }
+    public static void nb1(long struct, float value) { memPutFloat(struct + AIMatrix3x3.B1, value); }
     /** Unsafe version of {@link #b2(float) b2}. */
-    public static void nb2(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.B2, value); }
+    public static void nb2(long struct, float value) { memPutFloat(struct + AIMatrix3x3.B2, value); }
     /** Unsafe version of {@link #b3(float) b3}. */
-    public static void nb3(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.B3, value); }
+    public static void nb3(long struct, float value) { memPutFloat(struct + AIMatrix3x3.B3, value); }
     /** Unsafe version of {@link #c1(float) c1}. */
-    public static void nc1(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.C1, value); }
+    public static void nc1(long struct, float value) { memPutFloat(struct + AIMatrix3x3.C1, value); }
     /** Unsafe version of {@link #c2(float) c2}. */
-    public static void nc2(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.C2, value); }
+    public static void nc2(long struct, float value) { memPutFloat(struct + AIMatrix3x3.C2, value); }
     /** Unsafe version of {@link #c3(float) c3}. */
-    public static void nc3(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.C3, value); }
+    public static void nc3(long struct, float value) { memPutFloat(struct + AIMatrix3x3.C3, value); }
 
     // -----------------------------------
 

@@ -286,30 +286,30 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardInputInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardInputInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardInputInfoMETA.NEXT); }
     /** Unsafe version of {@link #inputSource}. */
-    public static int ninputSource(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardInputInfoMETA.INPUTSOURCE); }
+    public static int ninputSource(long struct) { return memGetInt(struct + XrVirtualKeyboardInputInfoMETA.INPUTSOURCE); }
     /** Unsafe version of {@link #inputSpace}. */
     public static long ninputSpace(long struct) { return memGetAddress(struct + XrVirtualKeyboardInputInfoMETA.INPUTSPACE); }
     /** Unsafe version of {@link #inputPoseInSpace}. */
     public static XrPosef ninputPoseInSpace(long struct) { return XrPosef.create(struct + XrVirtualKeyboardInputInfoMETA.INPUTPOSEINSPACE); }
     /** Unsafe version of {@link #inputState}. */
-    public static long ninputState(long struct) { return UNSAFE.getLong(null, struct + XrVirtualKeyboardInputInfoMETA.INPUTSTATE); }
+    public static long ninputState(long struct) { return memGetLong(struct + XrVirtualKeyboardInputInfoMETA.INPUTSTATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardInputInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardInputInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardInputInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #inputSource(int) inputSource}. */
-    public static void ninputSource(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardInputInfoMETA.INPUTSOURCE, value); }
+    public static void ninputSource(long struct, int value) { memPutInt(struct + XrVirtualKeyboardInputInfoMETA.INPUTSOURCE, value); }
     /** Unsafe version of {@link #inputSpace(XrSpace) inputSpace}. */
     public static void ninputSpace(long struct, @Nullable XrSpace value) { memPutAddress(struct + XrVirtualKeyboardInputInfoMETA.INPUTSPACE, memAddressSafe(value)); }
     /** Unsafe version of {@link #inputPoseInSpace(XrPosef) inputPoseInSpace}. */
     public static void ninputPoseInSpace(long struct, XrPosef value) { memCopy(value.address(), struct + XrVirtualKeyboardInputInfoMETA.INPUTPOSEINSPACE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #inputState(long) inputState}. */
-    public static void ninputState(long struct, long value) { UNSAFE.putLong(null, struct + XrVirtualKeyboardInputInfoMETA.INPUTSTATE, value); }
+    public static void ninputState(long struct, long value) { memPutLong(struct + XrVirtualKeyboardInputInfoMETA.INPUTSTATE, value); }
 
     // -----------------------------------
 

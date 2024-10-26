@@ -339,30 +339,30 @@ public class VkImportSemaphoreFdInfoKHR extends Struct<VkImportSemaphoreFdInfoKH
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreFdInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportSemaphoreFdInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportSemaphoreFdInfoKHR.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkImportSemaphoreFdInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkImportSemaphoreFdInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreFdInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkImportSemaphoreFdInfoKHR.FLAGS); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreFdInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkImportSemaphoreFdInfoKHR.HANDLETYPE); }
     /** Unsafe version of {@link #fd}. */
-    public static int nfd(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreFdInfoKHR.FD); }
+    public static int nfd(long struct) { return memGetInt(struct + VkImportSemaphoreFdInfoKHR.FD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreFdInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportSemaphoreFdInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportSemaphoreFdInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkImportSemaphoreFdInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkImportSemaphoreFdInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreFdInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkImportSemaphoreFdInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreFdInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkImportSemaphoreFdInfoKHR.HANDLETYPE, value); }
     /** Unsafe version of {@link #fd(int) fd}. */
-    public static void nfd(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreFdInfoKHR.FD, value); }
+    public static void nfd(long struct, int value) { memPutInt(struct + VkImportSemaphoreFdInfoKHR.FD, value); }
 
     // -----------------------------------
 

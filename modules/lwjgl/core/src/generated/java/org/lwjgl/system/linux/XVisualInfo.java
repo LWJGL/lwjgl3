@@ -330,11 +330,11 @@ public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
     /** Unsafe version of {@link #visualid}. */
     public static long nvisualid(long struct) { return memGetCLong(struct + XVisualInfo.VISUALID); }
     /** Unsafe version of {@link #screen}. */
-    public static int nscreen(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.SCREEN); }
+    public static int nscreen(long struct) { return memGetInt(struct + XVisualInfo.SCREEN); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + XVisualInfo.DEPTH); }
     /** Unsafe version of {@link #class$}. */
-    public static int nclass$(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.CLASS); }
+    public static int nclass$(long struct) { return memGetInt(struct + XVisualInfo.CLASS); }
     /** Unsafe version of {@link #red_mask}. */
     public static long nred_mask(long struct) { return memGetCLong(struct + XVisualInfo.RED_MASK); }
     /** Unsafe version of {@link #green_mask}. */
@@ -342,20 +342,20 @@ public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
     /** Unsafe version of {@link #blue_mask}. */
     public static long nblue_mask(long struct) { return memGetCLong(struct + XVisualInfo.BLUE_MASK); }
     /** Unsafe version of {@link #colormap_size}. */
-    public static int ncolormap_size(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.COLORMAP_SIZE); }
+    public static int ncolormap_size(long struct) { return memGetInt(struct + XVisualInfo.COLORMAP_SIZE); }
     /** Unsafe version of {@link #bits_per_rgb}. */
-    public static int nbits_per_rgb(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.BITS_PER_RGB); }
+    public static int nbits_per_rgb(long struct) { return memGetInt(struct + XVisualInfo.BITS_PER_RGB); }
 
     /** Unsafe version of {@link #visual(Visual) visual}. */
     public static void nvisual(long struct, Visual value) { memPutAddress(struct + XVisualInfo.VISUAL, value.address()); }
     /** Unsafe version of {@link #visualid(long) visualid}. */
     public static void nvisualid(long struct, long value) { memPutCLong(struct + XVisualInfo.VISUALID, value); }
     /** Unsafe version of {@link #screen(int) screen}. */
-    public static void nscreen(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.SCREEN, value); }
+    public static void nscreen(long struct, int value) { memPutInt(struct + XVisualInfo.SCREEN, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
-    public static void ndepth(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.DEPTH, value); }
+    public static void ndepth(long struct, int value) { memPutInt(struct + XVisualInfo.DEPTH, value); }
     /** Unsafe version of {@link #class$(int) class$}. */
-    public static void nclass$(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.CLASS, value); }
+    public static void nclass$(long struct, int value) { memPutInt(struct + XVisualInfo.CLASS, value); }
     /** Unsafe version of {@link #red_mask(long) red_mask}. */
     public static void nred_mask(long struct, long value) { memPutCLong(struct + XVisualInfo.RED_MASK, value); }
     /** Unsafe version of {@link #green_mask(long) green_mask}. */
@@ -363,9 +363,9 @@ public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
     /** Unsafe version of {@link #blue_mask(long) blue_mask}. */
     public static void nblue_mask(long struct, long value) { memPutCLong(struct + XVisualInfo.BLUE_MASK, value); }
     /** Unsafe version of {@link #colormap_size(int) colormap_size}. */
-    public static void ncolormap_size(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.COLORMAP_SIZE, value); }
+    public static void ncolormap_size(long struct, int value) { memPutInt(struct + XVisualInfo.COLORMAP_SIZE, value); }
     /** Unsafe version of {@link #bits_per_rgb(int) bits_per_rgb}. */
-    public static void nbits_per_rgb(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.BITS_PER_RGB, value); }
+    public static void nbits_per_rgb(long struct, int value) { memPutInt(struct + XVisualInfo.BITS_PER_RGB, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -248,18 +248,18 @@ public class VkBufferUsageFlags2CreateInfoKHR extends Struct<VkBufferUsageFlags2
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferUsageFlags2CreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBufferUsageFlags2CreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBufferUsageFlags2CreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #usage}. */
-    public static long nusage(long struct) { return UNSAFE.getLong(null, struct + VkBufferUsageFlags2CreateInfoKHR.USAGE); }
+    public static long nusage(long struct) { return memGetLong(struct + VkBufferUsageFlags2CreateInfoKHR.USAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferUsageFlags2CreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBufferUsageFlags2CreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferUsageFlags2CreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #usage(long) usage}. */
-    public static void nusage(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferUsageFlags2CreateInfoKHR.USAGE, value); }
+    public static void nusage(long struct, long value) { memPutLong(struct + VkBufferUsageFlags2CreateInfoKHR.USAGE, value); }
 
     // -----------------------------------
 

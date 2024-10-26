@@ -246,14 +246,14 @@ public class VkPresentTimeGOOGLE extends Struct<VkPresentTimeGOOGLE> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #presentID}. */
-    public static int npresentID(long struct) { return UNSAFE.getInt(null, struct + VkPresentTimeGOOGLE.PRESENTID); }
+    public static int npresentID(long struct) { return memGetInt(struct + VkPresentTimeGOOGLE.PRESENTID); }
     /** Unsafe version of {@link #desiredPresentTime}. */
-    public static long ndesiredPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPresentTimeGOOGLE.DESIREDPRESENTTIME); }
+    public static long ndesiredPresentTime(long struct) { return memGetLong(struct + VkPresentTimeGOOGLE.DESIREDPRESENTTIME); }
 
     /** Unsafe version of {@link #presentID(int) presentID}. */
-    public static void npresentID(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentTimeGOOGLE.PRESENTID, value); }
+    public static void npresentID(long struct, int value) { memPutInt(struct + VkPresentTimeGOOGLE.PRESENTID, value); }
     /** Unsafe version of {@link #desiredPresentTime(long) desiredPresentTime}. */
-    public static void ndesiredPresentTime(long struct, long value) { UNSAFE.putLong(null, struct + VkPresentTimeGOOGLE.DESIREDPRESENTTIME, value); }
+    public static void ndesiredPresentTime(long struct, long value) { memPutLong(struct + VkPresentTimeGOOGLE.DESIREDPRESENTTIME, value); }
 
     // -----------------------------------
 

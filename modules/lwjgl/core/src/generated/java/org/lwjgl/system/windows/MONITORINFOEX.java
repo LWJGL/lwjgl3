@@ -264,20 +264,20 @@ public class MONITORINFOEX extends Struct<MONITORINFOEX> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #cbSize}. */
-    public static int ncbSize(long struct) { return UNSAFE.getInt(null, struct + MONITORINFOEX.CBSIZE); }
+    public static int ncbSize(long struct) { return memGetInt(struct + MONITORINFOEX.CBSIZE); }
     /** Unsafe version of {@link #rcMonitor}. */
     public static RECT nrcMonitor(long struct) { return RECT.create(struct + MONITORINFOEX.RCMONITOR); }
     /** Unsafe version of {@link #rcWork}. */
     public static RECT nrcWork(long struct) { return RECT.create(struct + MONITORINFOEX.RCWORK); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + MONITORINFOEX.DWFLAGS); }
+    public static int ndwFlags(long struct) { return memGetInt(struct + MONITORINFOEX.DWFLAGS); }
     /** Unsafe version of {@link #szDevice}. */
     public static ByteBuffer nszDevice(long struct) { return memByteBuffer(struct + MONITORINFOEX.SZDEVICE, 32 * 2); }
     /** Unsafe version of {@link #szDeviceString}. */
     public static String nszDeviceString(long struct) { return memUTF16(struct + MONITORINFOEX.SZDEVICE); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
-    public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + MONITORINFOEX.CBSIZE, value); }
+    public static void ncbSize(long struct, int value) { memPutInt(struct + MONITORINFOEX.CBSIZE, value); }
 
     // -----------------------------------
 

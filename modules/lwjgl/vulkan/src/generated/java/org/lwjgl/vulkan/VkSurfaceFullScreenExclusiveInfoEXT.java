@@ -266,18 +266,18 @@ public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct<VkSurfaceFullScr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFullScreenExclusiveInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceFullScreenExclusiveInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceFullScreenExclusiveInfoEXT.PNEXT); }
     /** Unsafe version of {@link #fullScreenExclusive}. */
-    public static int nfullScreenExclusive(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFullScreenExclusiveInfoEXT.FULLSCREENEXCLUSIVE); }
+    public static int nfullScreenExclusive(long struct) { return memGetInt(struct + VkSurfaceFullScreenExclusiveInfoEXT.FULLSCREENEXCLUSIVE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceFullScreenExclusiveInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceFullScreenExclusiveInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceFullScreenExclusiveInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #fullScreenExclusive(int) fullScreenExclusive}. */
-    public static void nfullScreenExclusive(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceFullScreenExclusiveInfoEXT.FULLSCREENEXCLUSIVE, value); }
+    public static void nfullScreenExclusive(long struct, int value) { memPutInt(struct + VkSurfaceFullScreenExclusiveInfoEXT.FULLSCREENEXCLUSIVE, value); }
 
     // -----------------------------------
 

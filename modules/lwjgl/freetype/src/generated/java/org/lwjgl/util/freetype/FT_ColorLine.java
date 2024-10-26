@@ -110,7 +110,7 @@ public class FT_ColorLine extends Struct<FT_ColorLine> {
     // -----------------------------------
 
     /** Unsafe version of {@link #extend}. */
-    public static int nextend(long struct) { return UNSAFE.getInt(null, struct + FT_ColorLine.EXTEND); }
+    public static int nextend(long struct) { return memGetInt(struct + FT_ColorLine.EXTEND); }
     /** Unsafe version of {@link #color_stop_iterator}. */
     public static FT_ColorStopIterator ncolor_stop_iterator(long struct) { return FT_ColorStopIterator.create(struct + FT_ColorLine.COLOR_STOP_ITERATOR); }
 

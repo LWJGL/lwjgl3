@@ -246,14 +246,14 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct<XrSystemFaceTrackin
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemFaceTrackingPropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemFaceTrackingPropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemFaceTrackingPropertiesFB.NEXT); }
     /** Unsafe version of {@link #supportsFaceTracking}. */
-    public static int nsupportsFaceTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemFaceTrackingPropertiesFB.SUPPORTSFACETRACKING); }
+    public static int nsupportsFaceTracking(long struct) { return memGetInt(struct + XrSystemFaceTrackingPropertiesFB.SUPPORTSFACETRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFaceTrackingPropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemFaceTrackingPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFaceTrackingPropertiesFB.NEXT, value); }
 

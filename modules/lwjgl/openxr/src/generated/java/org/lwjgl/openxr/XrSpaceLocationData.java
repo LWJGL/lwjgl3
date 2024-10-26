@@ -118,7 +118,7 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
     // -----------------------------------
 
     /** Unsafe version of {@link #locationFlags}. */
-    public static long nlocationFlags(long struct) { return UNSAFE.getLong(null, struct + XrSpaceLocationData.LOCATIONFLAGS); }
+    public static long nlocationFlags(long struct) { return memGetLong(struct + XrSpaceLocationData.LOCATIONFLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrSpaceLocationData.POSE); }
 

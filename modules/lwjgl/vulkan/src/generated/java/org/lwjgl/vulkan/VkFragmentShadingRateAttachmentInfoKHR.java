@@ -278,7 +278,7 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFragmentShadingRateAttachmentInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFragmentShadingRateAttachmentInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFragmentShadingRateAttachmentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pFragmentShadingRateAttachment}. */
@@ -287,7 +287,7 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     public static VkExtent2D nshadingRateAttachmentTexelSize(long struct) { return VkExtent2D.create(struct + VkFragmentShadingRateAttachmentInfoKHR.SHADINGRATEATTACHMENTTEXELSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFragmentShadingRateAttachmentInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFragmentShadingRateAttachmentInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFragmentShadingRateAttachmentInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pFragmentShadingRateAttachment(VkAttachmentReference2) pFragmentShadingRateAttachment}. */

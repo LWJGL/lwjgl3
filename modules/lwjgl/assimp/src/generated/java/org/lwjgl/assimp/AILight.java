@@ -239,7 +239,7 @@ public class AILight extends Struct<AILight> {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AILight.MNAME); }
     /** Unsafe version of {@link #mType}. */
-    public static int nmType(long struct) { return UNSAFE.getInt(null, struct + AILight.MTYPE); }
+    public static int nmType(long struct) { return memGetInt(struct + AILight.MTYPE); }
     /** Unsafe version of {@link #mPosition}. */
     public static AIVector3D nmPosition(long struct) { return AIVector3D.create(struct + AILight.MPOSITION); }
     /** Unsafe version of {@link #mDirection}. */
@@ -247,11 +247,11 @@ public class AILight extends Struct<AILight> {
     /** Unsafe version of {@link #mUp}. */
     public static AIVector3D nmUp(long struct) { return AIVector3D.create(struct + AILight.MUP); }
     /** Unsafe version of {@link #mAttenuationConstant}. */
-    public static float nmAttenuationConstant(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONCONSTANT); }
+    public static float nmAttenuationConstant(long struct) { return memGetFloat(struct + AILight.MATTENUATIONCONSTANT); }
     /** Unsafe version of {@link #mAttenuationLinear}. */
-    public static float nmAttenuationLinear(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONLINEAR); }
+    public static float nmAttenuationLinear(long struct) { return memGetFloat(struct + AILight.MATTENUATIONLINEAR); }
     /** Unsafe version of {@link #mAttenuationQuadratic}. */
-    public static float nmAttenuationQuadratic(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONQUADRATIC); }
+    public static float nmAttenuationQuadratic(long struct) { return memGetFloat(struct + AILight.MATTENUATIONQUADRATIC); }
     /** Unsafe version of {@link #mColorDiffuse}. */
     public static AIColor3D nmColorDiffuse(long struct) { return AIColor3D.create(struct + AILight.MCOLORDIFFUSE); }
     /** Unsafe version of {@link #mColorSpecular}. */
@@ -259,9 +259,9 @@ public class AILight extends Struct<AILight> {
     /** Unsafe version of {@link #mColorAmbient}. */
     public static AIColor3D nmColorAmbient(long struct) { return AIColor3D.create(struct + AILight.MCOLORAMBIENT); }
     /** Unsafe version of {@link #mAngleInnerCone}. */
-    public static float nmAngleInnerCone(long struct) { return UNSAFE.getFloat(null, struct + AILight.MANGLEINNERCONE); }
+    public static float nmAngleInnerCone(long struct) { return memGetFloat(struct + AILight.MANGLEINNERCONE); }
     /** Unsafe version of {@link #mAngleOuterCone}. */
-    public static float nmAngleOuterCone(long struct) { return UNSAFE.getFloat(null, struct + AILight.MANGLEOUTERCONE); }
+    public static float nmAngleOuterCone(long struct) { return memGetFloat(struct + AILight.MANGLEOUTERCONE); }
     /** Unsafe version of {@link #mSize}. */
     public static AIVector2D nmSize(long struct) { return AIVector2D.create(struct + AILight.MSIZE); }
 

@@ -236,12 +236,12 @@ public class XrBodyJointLocationFB extends Struct<XrBodyJointLocationFB> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #locationFlags}. */
-    public static long nlocationFlags(long struct) { return UNSAFE.getLong(null, struct + XrBodyJointLocationFB.LOCATIONFLAGS); }
+    public static long nlocationFlags(long struct) { return memGetLong(struct + XrBodyJointLocationFB.LOCATIONFLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrBodyJointLocationFB.POSE); }
 
     /** Unsafe version of {@link #locationFlags(long) locationFlags}. */
-    public static void nlocationFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrBodyJointLocationFB.LOCATIONFLAGS, value); }
+    public static void nlocationFlags(long struct, long value) { memPutLong(struct + XrBodyJointLocationFB.LOCATIONFLAGS, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrBodyJointLocationFB.POSE, XrPosef.SIZEOF); }
 

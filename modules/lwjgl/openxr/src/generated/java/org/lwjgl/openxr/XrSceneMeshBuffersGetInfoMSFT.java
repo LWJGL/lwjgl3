@@ -248,18 +248,18 @@ public class XrSceneMeshBuffersGetInfoMSFT extends Struct<XrSceneMeshBuffersGetI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshBuffersGetInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMeshBuffersGetInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMeshBuffersGetInfoMSFT.NEXT); }
     /** Unsafe version of {@link #meshBufferId}. */
-    public static long nmeshBufferId(long struct) { return UNSAFE.getLong(null, struct + XrSceneMeshBuffersGetInfoMSFT.MESHBUFFERID); }
+    public static long nmeshBufferId(long struct) { return memGetLong(struct + XrSceneMeshBuffersGetInfoMSFT.MESHBUFFERID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshBuffersGetInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMeshBuffersGetInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshBuffersGetInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #meshBufferId(long) meshBufferId}. */
-    public static void nmeshBufferId(long struct, long value) { UNSAFE.putLong(null, struct + XrSceneMeshBuffersGetInfoMSFT.MESHBUFFERID, value); }
+    public static void nmeshBufferId(long struct, long value) { memPutLong(struct + XrSceneMeshBuffersGetInfoMSFT.MESHBUFFERID, value); }
 
     // -----------------------------------
 

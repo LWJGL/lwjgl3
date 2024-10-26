@@ -339,11 +339,11 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct<VkWin32KeyedMu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PNEXT); }
     /** Unsafe version of {@link #acquireCount}. */
-    public static int nacquireCount(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT); }
+    public static int nacquireCount(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT); }
     /** Unsafe version of {@link #pAcquireSyncs() pAcquireSyncs}. */
     @Nullable public static LongBuffer npAcquireSyncs(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRESYNCS), nacquireCount(struct)); }
     /** Unsafe version of {@link #pAcquireKeys() pAcquireKeys}. */
@@ -351,18 +351,18 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct<VkWin32KeyedMu
     /** Unsafe version of {@link #pAcquireTimeoutMilliseconds() pAcquireTimeoutMilliseconds}. */
     @Nullable public static IntBuffer npAcquireTimeoutMilliseconds(long struct) { return memIntBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRETIMEOUTMILLISECONDS), nacquireCount(struct)); }
     /** Unsafe version of {@link #releaseCount}. */
-    public static int nreleaseCount(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT); }
+    public static int nreleaseCount(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT); }
     /** Unsafe version of {@link #pReleaseSyncs() pReleaseSyncs}. */
     @Nullable public static LongBuffer npReleaseSyncs(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASESYNCS), nreleaseCount(struct)); }
     /** Unsafe version of {@link #pReleaseKeys() pReleaseKeys}. */
     @Nullable public static LongBuffer npReleaseKeys(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASEKEYS), nreleaseCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code acquireCount} field of the specified {@code struct}. */
-    public static void nacquireCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT, value); }
+    public static void nacquireCount(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT, value); }
     /** Unsafe version of {@link #pAcquireSyncs(LongBuffer) pAcquireSyncs}. */
     public static void npAcquireSyncs(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRESYNCS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pAcquireKeys(LongBuffer) pAcquireKeys}. */
@@ -370,7 +370,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct<VkWin32KeyedMu
     /** Unsafe version of {@link #pAcquireTimeoutMilliseconds(IntBuffer) pAcquireTimeoutMilliseconds}. */
     public static void npAcquireTimeoutMilliseconds(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRETIMEOUTMILLISECONDS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code releaseCount} field of the specified {@code struct}. */
-    public static void nreleaseCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT, value); }
+    public static void nreleaseCount(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT, value); }
     /** Unsafe version of {@link #pReleaseSyncs(LongBuffer) pReleaseSyncs}. */
     public static void npReleaseSyncs(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASESYNCS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pReleaseKeys(LongBuffer) pReleaseKeys}. */

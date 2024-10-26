@@ -248,18 +248,18 @@ public class XrSystemNotificationsSetInfoML extends Struct<XrSystemNotifications
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemNotificationsSetInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemNotificationsSetInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemNotificationsSetInfoML.NEXT); }
     /** Unsafe version of {@link #suppressNotifications}. */
-    public static int nsuppressNotifications(long struct) { return UNSAFE.getInt(null, struct + XrSystemNotificationsSetInfoML.SUPPRESSNOTIFICATIONS); }
+    public static int nsuppressNotifications(long struct) { return memGetInt(struct + XrSystemNotificationsSetInfoML.SUPPRESSNOTIFICATIONS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemNotificationsSetInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemNotificationsSetInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemNotificationsSetInfoML.NEXT, value); }
     /** Unsafe version of {@link #suppressNotifications(boolean) suppressNotifications}. */
-    public static void nsuppressNotifications(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemNotificationsSetInfoML.SUPPRESSNOTIFICATIONS, value); }
+    public static void nsuppressNotifications(long struct, int value) { memPutInt(struct + XrSystemNotificationsSetInfoML.SUPPRESSNOTIFICATIONS, value); }
 
     // -----------------------------------
 

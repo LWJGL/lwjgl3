@@ -257,18 +257,18 @@ public class VkOffset3D extends Struct<VkOffset3D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkOffset3D.X); }
+    public static int nx(long struct) { return memGetInt(struct + VkOffset3D.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkOffset3D.Y); }
+    public static int ny(long struct) { return memGetInt(struct + VkOffset3D.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return UNSAFE.getInt(null, struct + VkOffset3D.Z); }
+    public static int nz(long struct) { return memGetInt(struct + VkOffset3D.Z); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset3D.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + VkOffset3D.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset3D.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + VkOffset3D.Y, value); }
     /** Unsafe version of {@link #z(int) z}. */
-    public static void nz(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset3D.Z, value); }
+    public static void nz(long struct, int value) { memPutInt(struct + VkOffset3D.Z, value); }
 
     // -----------------------------------
 

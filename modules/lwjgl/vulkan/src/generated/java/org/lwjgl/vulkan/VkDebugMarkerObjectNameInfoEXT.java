@@ -306,26 +306,26 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct<VkDebugMarkerObjectNa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectNameInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugMarkerObjectNameInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.PNEXT); }
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return memGetInt(struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE); }
     /** Unsafe version of {@link #object}. */
-    public static long nobject(long struct) { return UNSAFE.getLong(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECT); }
+    public static long nobject(long struct) { return memGetLong(struct + VkDebugMarkerObjectNameInfoEXT.OBJECT); }
     /** Unsafe version of {@link #pObjectName}. */
     public static ByteBuffer npObjectName(long struct) { return memByteBufferNT1(memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.POBJECTNAME)); }
     /** Unsafe version of {@link #pObjectNameString}. */
     public static String npObjectNameString(long struct) { return memUTF8(memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.POBJECTNAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectNameInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectNameInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugMarkerObjectNameInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE, value); }
     /** Unsafe version of {@link #object(long) object}. */
-    public static void nobject(long struct, long value) { UNSAFE.putLong(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECT, value); }
+    public static void nobject(long struct, long value) { memPutLong(struct + VkDebugMarkerObjectNameInfoEXT.OBJECT, value); }
     /** Unsafe version of {@link #pObjectName(ByteBuffer) pObjectName}. */
     public static void npObjectName(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

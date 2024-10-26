@@ -229,18 +229,18 @@ public class FMOD_STUDIO_MEMORY_USAGE extends Struct<FMOD_STUDIO_MEMORY_USAGE> i
     // -----------------------------------
 
     /** Unsafe version of {@link #exclusive}. */
-    public static int nexclusive(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.EXCLUSIVE); }
+    public static int nexclusive(long struct) { return memGetInt(struct + FMOD_STUDIO_MEMORY_USAGE.EXCLUSIVE); }
     /** Unsafe version of {@link #inclusive}. */
-    public static int ninclusive(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.INCLUSIVE); }
+    public static int ninclusive(long struct) { return memGetInt(struct + FMOD_STUDIO_MEMORY_USAGE.INCLUSIVE); }
     /** Unsafe version of {@link #sampledata}. */
-    public static int nsampledata(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.SAMPLEDATA); }
+    public static int nsampledata(long struct) { return memGetInt(struct + FMOD_STUDIO_MEMORY_USAGE.SAMPLEDATA); }
 
     /** Unsafe version of {@link #exclusive(int) exclusive}. */
-    public static void nexclusive(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.EXCLUSIVE, value); }
+    public static void nexclusive(long struct, int value) { memPutInt(struct + FMOD_STUDIO_MEMORY_USAGE.EXCLUSIVE, value); }
     /** Unsafe version of {@link #inclusive(int) inclusive}. */
-    public static void ninclusive(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.INCLUSIVE, value); }
+    public static void ninclusive(long struct, int value) { memPutInt(struct + FMOD_STUDIO_MEMORY_USAGE.INCLUSIVE, value); }
     /** Unsafe version of {@link #sampledata(int) sampledata}. */
-    public static void nsampledata(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_MEMORY_USAGE.SAMPLEDATA, value); }
+    public static void nsampledata(long struct, int value) { memPutInt(struct + FMOD_STUDIO_MEMORY_USAGE.SAMPLEDATA, value); }
 
     // -----------------------------------
 

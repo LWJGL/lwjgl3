@@ -233,9 +233,9 @@ public class CXSourceRange extends Struct<CXSourceRange> implements NativeResour
         return memGetAddress(struct + CXSourceRange.PTR_DATA + check(index, 2) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #begin_int_data}. */
-    public static int nbegin_int_data(long struct) { return UNSAFE.getInt(null, struct + CXSourceRange.BEGIN_INT_DATA); }
+    public static int nbegin_int_data(long struct) { return memGetInt(struct + CXSourceRange.BEGIN_INT_DATA); }
     /** Unsafe version of {@link #end_int_data}. */
-    public static int nend_int_data(long struct) { return UNSAFE.getInt(null, struct + CXSourceRange.END_INT_DATA); }
+    public static int nend_int_data(long struct) { return memGetInt(struct + CXSourceRange.END_INT_DATA); }
 
     // -----------------------------------
 

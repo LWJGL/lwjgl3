@@ -290,28 +290,28 @@ public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEn
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #preferredRateControlFlags}. */
-    public static int npreferredRateControlFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDRATECONTROLFLAGS); }
+    public static int npreferredRateControlFlags(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDRATECONTROLFLAGS); }
     /** Unsafe version of {@link #preferredGopFrameCount}. */
-    public static int npreferredGopFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDGOPFRAMECOUNT); }
+    public static int npreferredGopFrameCount(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDGOPFRAMECOUNT); }
     /** Unsafe version of {@link #preferredIdrPeriod}. */
-    public static int npreferredIdrPeriod(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDIDRPERIOD); }
+    public static int npreferredIdrPeriod(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDIDRPERIOD); }
     /** Unsafe version of {@link #preferredConsecutiveBFrameCount}. */
-    public static int npreferredConsecutiveBFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDCONSECUTIVEBFRAMECOUNT); }
+    public static int npreferredConsecutiveBFrameCount(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDCONSECUTIVEBFRAMECOUNT); }
     /** Unsafe version of {@link #preferredSubLayerCount}. */
-    public static int npreferredSubLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDSUBLAYERCOUNT); }
+    public static int npreferredSubLayerCount(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDSUBLAYERCOUNT); }
     /** Unsafe version of {@link #preferredConstantQp}. */
     public static VkVideoEncodeH265QpKHR npreferredConstantQp(long struct) { return VkVideoEncodeH265QpKHR.create(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDCONSTANTQP); }
     /** Unsafe version of {@link #preferredMaxL0ReferenceCount}. */
-    public static int npreferredMaxL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDMAXL0REFERENCECOUNT); }
+    public static int npreferredMaxL0ReferenceCount(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDMAXL0REFERENCECOUNT); }
     /** Unsafe version of {@link #preferredMaxL1ReferenceCount}. */
-    public static int npreferredMaxL1ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDMAXL1REFERENCECOUNT); }
+    public static int npreferredMaxL1ReferenceCount(long struct) { return memGetInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PREFERREDMAXL1REFERENCECOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265QualityLevelPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265QualityLevelPropertiesKHR.PNEXT, value); }
 

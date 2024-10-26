@@ -242,14 +242,14 @@ public class AIVertexWeight extends Struct<AIVertexWeight> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #mVertexId}. */
-    public static int nmVertexId(long struct) { return UNSAFE.getInt(null, struct + AIVertexWeight.MVERTEXID); }
+    public static int nmVertexId(long struct) { return memGetInt(struct + AIVertexWeight.MVERTEXID); }
     /** Unsafe version of {@link #mWeight}. */
-    public static float nmWeight(long struct) { return UNSAFE.getFloat(null, struct + AIVertexWeight.MWEIGHT); }
+    public static float nmWeight(long struct) { return memGetFloat(struct + AIVertexWeight.MWEIGHT); }
 
     /** Unsafe version of {@link #mVertexId(int) mVertexId}. */
-    public static void nmVertexId(long struct, int value) { UNSAFE.putInt(null, struct + AIVertexWeight.MVERTEXID, value); }
+    public static void nmVertexId(long struct, int value) { memPutInt(struct + AIVertexWeight.MVERTEXID, value); }
     /** Unsafe version of {@link #mWeight(float) mWeight}. */
-    public static void nmWeight(long struct, float value) { UNSAFE.putFloat(null, struct + AIVertexWeight.MWEIGHT, value); }
+    public static void nmWeight(long struct, float value) { memPutFloat(struct + AIVertexWeight.MWEIGHT, value); }
 
     // -----------------------------------
 

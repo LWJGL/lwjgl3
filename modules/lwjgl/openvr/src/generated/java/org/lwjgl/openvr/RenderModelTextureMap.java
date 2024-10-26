@@ -241,15 +241,15 @@ public class RenderModelTextureMap extends Struct<RenderModelTextureMap> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #unWidth}. */
-    public static short nunWidth(long struct) { return UNSAFE.getShort(null, struct + RenderModelTextureMap.UNWIDTH); }
+    public static short nunWidth(long struct) { return memGetShort(struct + RenderModelTextureMap.UNWIDTH); }
     /** Unsafe version of {@link #unHeight}. */
-    public static short nunHeight(long struct) { return UNSAFE.getShort(null, struct + RenderModelTextureMap.UNHEIGHT); }
+    public static short nunHeight(long struct) { return memGetShort(struct + RenderModelTextureMap.UNHEIGHT); }
     /** Unsafe version of {@link #rubTextureMapData(int) rubTextureMapData}. */
     public static ByteBuffer nrubTextureMapData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + RenderModelTextureMap.RUBTEXTUREMAPDATA), capacity); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + RenderModelTextureMap.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + RenderModelTextureMap.FORMAT); }
     /** Unsafe version of {@link #unMipLevels}. */
-    public static short nunMipLevels(long struct) { return UNSAFE.getShort(null, struct + RenderModelTextureMap.UNMIPLEVELS); }
+    public static short nunMipLevels(long struct) { return memGetShort(struct + RenderModelTextureMap.UNMIPLEVELS); }
 
     // -----------------------------------
 

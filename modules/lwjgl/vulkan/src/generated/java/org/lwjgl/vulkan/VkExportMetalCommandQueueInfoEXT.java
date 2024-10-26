@@ -255,7 +255,7 @@ public class VkExportMetalCommandQueueInfoEXT extends Struct<VkExportMetalComman
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalCommandQueueInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMetalCommandQueueInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMetalCommandQueueInfoEXT.PNEXT); }
     /** Unsafe version of {@link #queue}. */
@@ -264,7 +264,7 @@ public class VkExportMetalCommandQueueInfoEXT extends Struct<VkExportMetalComman
     public static long nmtlCommandQueue(long struct) { return memGetAddress(struct + VkExportMetalCommandQueueInfoEXT.MTLCOMMANDQUEUE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalCommandQueueInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMetalCommandQueueInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMetalCommandQueueInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #queue(VkQueue) queue}. */

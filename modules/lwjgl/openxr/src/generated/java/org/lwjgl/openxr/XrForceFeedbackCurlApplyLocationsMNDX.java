@@ -262,20 +262,20 @@ public class XrForceFeedbackCurlApplyLocationsMNDX extends Struct<XrForceFeedbac
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrForceFeedbackCurlApplyLocationsMNDX.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrForceFeedbackCurlApplyLocationsMNDX.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrForceFeedbackCurlApplyLocationsMNDX.NEXT); }
     /** Unsafe version of {@link #locationCount}. */
-    public static int nlocationCount(long struct) { return UNSAFE.getInt(null, struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONCOUNT); }
+    public static int nlocationCount(long struct) { return memGetInt(struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONCOUNT); }
     /** Unsafe version of {@link #locations}. */
     public static XrForceFeedbackCurlApplyLocationMNDX.Buffer nlocations(long struct) { return XrForceFeedbackCurlApplyLocationMNDX.create(memGetAddress(struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONS), nlocationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrForceFeedbackCurlApplyLocationsMNDX.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrForceFeedbackCurlApplyLocationsMNDX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrForceFeedbackCurlApplyLocationsMNDX.NEXT, value); }
     /** Sets the specified value to the {@code locationCount} field of the specified {@code struct}. */
-    public static void nlocationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONCOUNT, value); }
+    public static void nlocationCount(long struct, int value) { memPutInt(struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONCOUNT, value); }
     /** Unsafe version of {@link #locations(XrForceFeedbackCurlApplyLocationMNDX.Buffer) locations}. */
     public static void nlocations(long struct, XrForceFeedbackCurlApplyLocationMNDX.Buffer value) { memPutAddress(struct + XrForceFeedbackCurlApplyLocationsMNDX.LOCATIONS, value.address()); nlocationCount(struct, value.remaining()); }
 

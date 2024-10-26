@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR extends
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #shaderRelaxedExtendedInstruction}. */
-    public static int nshaderRelaxedExtendedInstruction(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.SHADERRELAXEDEXTENDEDINSTRUCTION); }
+    public static int nshaderRelaxedExtendedInstruction(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.SHADERRELAXEDEXTENDEDINSTRUCTION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #shaderRelaxedExtendedInstruction(boolean) shaderRelaxedExtendedInstruction}. */
-    public static void nshaderRelaxedExtendedInstruction(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.SHADERRELAXEDEXTENDEDINSTRUCTION, value); }
+    public static void nshaderRelaxedExtendedInstruction(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.SHADERRELAXEDEXTENDEDINSTRUCTION, value); }
 
     // -----------------------------------
 

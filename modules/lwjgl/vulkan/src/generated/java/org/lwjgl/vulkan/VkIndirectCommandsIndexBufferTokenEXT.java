@@ -224,10 +224,10 @@ public class VkIndirectCommandsIndexBufferTokenEXT extends Struct<VkIndirectComm
     // -----------------------------------
 
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsIndexBufferTokenEXT.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkIndirectCommandsIndexBufferTokenEXT.MODE); }
 
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsIndexBufferTokenEXT.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkIndirectCommandsIndexBufferTokenEXT.MODE, value); }
 
     // -----------------------------------
 

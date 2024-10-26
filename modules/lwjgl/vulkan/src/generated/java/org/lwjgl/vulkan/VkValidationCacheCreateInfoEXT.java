@@ -295,22 +295,22 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkValidationCacheCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkValidationCacheCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkValidationCacheCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkValidationCacheCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkValidationCacheCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #initialDataSize}. */
     public static long ninitialDataSize(long struct) { return memGetAddress(struct + VkValidationCacheCreateInfoEXT.INITIALDATASIZE); }
     /** Unsafe version of {@link #pInitialData() pInitialData}. */
     @Nullable public static ByteBuffer npInitialData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkValidationCacheCreateInfoEXT.PINITIALDATA), (int)ninitialDataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkValidationCacheCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkValidationCacheCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkValidationCacheCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkValidationCacheCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkValidationCacheCreateInfoEXT.FLAGS, value); }
     /** Sets the specified value to the {@code initialDataSize} field of the specified {@code struct}. */
     public static void ninitialDataSize(long struct, long value) { memPutAddress(struct + VkValidationCacheCreateInfoEXT.INITIALDATASIZE, value); }
     /** Unsafe version of {@link #pInitialData(ByteBuffer) pInitialData}. */

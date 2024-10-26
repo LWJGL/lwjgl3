@@ -264,22 +264,22 @@ public class RECT extends Struct<RECT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #left}. */
-    public static int nleft(long struct) { return UNSAFE.getInt(null, struct + RECT.LEFT); }
+    public static int nleft(long struct) { return memGetInt(struct + RECT.LEFT); }
     /** Unsafe version of {@link #top}. */
-    public static int ntop(long struct) { return UNSAFE.getInt(null, struct + RECT.TOP); }
+    public static int ntop(long struct) { return memGetInt(struct + RECT.TOP); }
     /** Unsafe version of {@link #right}. */
-    public static int nright(long struct) { return UNSAFE.getInt(null, struct + RECT.RIGHT); }
+    public static int nright(long struct) { return memGetInt(struct + RECT.RIGHT); }
     /** Unsafe version of {@link #bottom}. */
-    public static int nbottom(long struct) { return UNSAFE.getInt(null, struct + RECT.BOTTOM); }
+    public static int nbottom(long struct) { return memGetInt(struct + RECT.BOTTOM); }
 
     /** Unsafe version of {@link #left(int) left}. */
-    public static void nleft(long struct, int value) { UNSAFE.putInt(null, struct + RECT.LEFT, value); }
+    public static void nleft(long struct, int value) { memPutInt(struct + RECT.LEFT, value); }
     /** Unsafe version of {@link #top(int) top}. */
-    public static void ntop(long struct, int value) { UNSAFE.putInt(null, struct + RECT.TOP, value); }
+    public static void ntop(long struct, int value) { memPutInt(struct + RECT.TOP, value); }
     /** Unsafe version of {@link #right(int) right}. */
-    public static void nright(long struct, int value) { UNSAFE.putInt(null, struct + RECT.RIGHT, value); }
+    public static void nright(long struct, int value) { memPutInt(struct + RECT.RIGHT, value); }
     /** Unsafe version of {@link #bottom(int) bottom}. */
-    public static void nbottom(long struct, int value) { UNSAFE.putInt(null, struct + RECT.BOTTOM, value); }
+    public static void nbottom(long struct, int value) { memPutInt(struct + RECT.BOTTOM, value); }
 
     // -----------------------------------
 

@@ -203,7 +203,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
     /** Unsafe version of {@link #p(int) p}. */
     @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_OpaquePaint.P), capacity); }
     /** Unsafe version of {@link #insert_root_transform}. */
-    public static boolean ninsert_root_transform(long struct) { return UNSAFE.getByte(null, struct + FT_OpaquePaint.INSERT_ROOT_TRANSFORM) != 0; }
+    public static boolean ninsert_root_transform(long struct) { return memGetByte(struct + FT_OpaquePaint.INSERT_ROOT_TRANSFORM) != 0; }
 
     // -----------------------------------
 

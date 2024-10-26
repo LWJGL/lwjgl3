@@ -257,22 +257,22 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #image2DViewOf3D}. */
-    public static int nimage2DViewOf3D(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.IMAGE2DVIEWOF3D); }
+    public static int nimage2DViewOf3D(long struct) { return memGetInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.IMAGE2DVIEWOF3D); }
     /** Unsafe version of {@link #sampler2DViewOf3D}. */
-    public static int nsampler2DViewOf3D(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.SAMPLER2DVIEWOF3D); }
+    public static int nsampler2DViewOf3D(long struct) { return memGetInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.SAMPLER2DVIEWOF3D); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #image2DViewOf3D(boolean) image2DViewOf3D}. */
-    public static void nimage2DViewOf3D(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.IMAGE2DVIEWOF3D, value); }
+    public static void nimage2DViewOf3D(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.IMAGE2DVIEWOF3D, value); }
     /** Unsafe version of {@link #sampler2DViewOf3D(boolean) sampler2DViewOf3D}. */
-    public static void nsampler2DViewOf3D(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.SAMPLER2DVIEWOF3D, value); }
+    public static void nsampler2DViewOf3D(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.SAMPLER2DVIEWOF3D, value); }
 
     // -----------------------------------
 

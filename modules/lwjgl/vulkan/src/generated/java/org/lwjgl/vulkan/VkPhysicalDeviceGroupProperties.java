@@ -282,11 +282,11 @@ public class VkPhysicalDeviceGroupProperties extends Struct<VkPhysicalDeviceGrou
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGroupProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceGroupProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceGroupProperties.PNEXT); }
     /** Unsafe version of {@link #physicalDeviceCount}. */
-    public static int nphysicalDeviceCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGroupProperties.PHYSICALDEVICECOUNT); }
+    public static int nphysicalDeviceCount(long struct) { return memGetInt(struct + VkPhysicalDeviceGroupProperties.PHYSICALDEVICECOUNT); }
     /** Unsafe version of {@link #physicalDevices}. */
     public static PointerBuffer nphysicalDevices(long struct) { return memPointerBuffer(struct + VkPhysicalDeviceGroupProperties.PHYSICALDEVICES, nphysicalDeviceCount(struct)); }
     /** Unsafe version of {@link #physicalDevices(int) physicalDevices}. */
@@ -294,10 +294,10 @@ public class VkPhysicalDeviceGroupProperties extends Struct<VkPhysicalDeviceGrou
         return memGetAddress(struct + VkPhysicalDeviceGroupProperties.PHYSICALDEVICES + check(index, VK_MAX_DEVICE_GROUP_SIZE) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #subsetAllocation}. */
-    public static int nsubsetAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGroupProperties.SUBSETALLOCATION); }
+    public static int nsubsetAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceGroupProperties.SUBSETALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGroupProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGroupProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceGroupProperties.PNEXT, value); }
 

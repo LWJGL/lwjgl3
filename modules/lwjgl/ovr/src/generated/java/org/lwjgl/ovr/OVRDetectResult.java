@@ -227,9 +227,9 @@ public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #IsOculusServiceRunning}. */
-    public static boolean nIsOculusServiceRunning(long struct) { return UNSAFE.getByte(null, struct + OVRDetectResult.ISOCULUSSERVICERUNNING) != 0; }
+    public static boolean nIsOculusServiceRunning(long struct) { return memGetByte(struct + OVRDetectResult.ISOCULUSSERVICERUNNING) != 0; }
     /** Unsafe version of {@link #IsOculusHMDConnected}. */
-    public static boolean nIsOculusHMDConnected(long struct) { return UNSAFE.getByte(null, struct + OVRDetectResult.ISOCULUSHMDCONNECTED) != 0; }
+    public static boolean nIsOculusHMDConnected(long struct) { return memGetByte(struct + OVRDetectResult.ISOCULUSHMDCONNECTED) != 0; }
 
     // -----------------------------------
 

@@ -362,66 +362,66 @@ public class SpvcMslConstexprSampler extends Struct<SpvcMslConstexprSampler> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #coord}. */
-    public static int ncoord(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.COORD); }
+    public static int ncoord(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.COORD); }
     /** Unsafe version of {@link #min_filter}. */
-    public static int nmin_filter(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.MIN_FILTER); }
+    public static int nmin_filter(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.MIN_FILTER); }
     /** Unsafe version of {@link #mag_filter}. */
-    public static int nmag_filter(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.MAG_FILTER); }
+    public static int nmag_filter(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.MAG_FILTER); }
     /** Unsafe version of {@link #mip_filter}. */
-    public static int nmip_filter(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.MIP_FILTER); }
+    public static int nmip_filter(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.MIP_FILTER); }
     /** Unsafe version of {@link #s_address}. */
-    public static int ns_address(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.S_ADDRESS); }
+    public static int ns_address(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.S_ADDRESS); }
     /** Unsafe version of {@link #t_address}. */
-    public static int nt_address(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.T_ADDRESS); }
+    public static int nt_address(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.T_ADDRESS); }
     /** Unsafe version of {@link #r_address}. */
-    public static int nr_address(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.R_ADDRESS); }
+    public static int nr_address(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.R_ADDRESS); }
     /** Unsafe version of {@link #compare_func}. */
-    public static int ncompare_func(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.COMPARE_FUNC); }
+    public static int ncompare_func(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.COMPARE_FUNC); }
     /** Unsafe version of {@link #border_color}. */
-    public static int nborder_color(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.BORDER_COLOR); }
+    public static int nborder_color(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.BORDER_COLOR); }
     /** Unsafe version of {@link #lod_clamp_min}. */
-    public static float nlod_clamp_min(long struct) { return UNSAFE.getFloat(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_MIN); }
+    public static float nlod_clamp_min(long struct) { return memGetFloat(struct + SpvcMslConstexprSampler.LOD_CLAMP_MIN); }
     /** Unsafe version of {@link #lod_clamp_max}. */
-    public static float nlod_clamp_max(long struct) { return UNSAFE.getFloat(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_MAX); }
+    public static float nlod_clamp_max(long struct) { return memGetFloat(struct + SpvcMslConstexprSampler.LOD_CLAMP_MAX); }
     /** Unsafe version of {@link #max_anisotropy}. */
-    public static int nmax_anisotropy(long struct) { return UNSAFE.getInt(null, struct + SpvcMslConstexprSampler.MAX_ANISOTROPY); }
+    public static int nmax_anisotropy(long struct) { return memGetInt(struct + SpvcMslConstexprSampler.MAX_ANISOTROPY); }
     /** Unsafe version of {@link #compare_enable}. */
-    public static boolean ncompare_enable(long struct) { return UNSAFE.getByte(null, struct + SpvcMslConstexprSampler.COMPARE_ENABLE) != 0; }
+    public static boolean ncompare_enable(long struct) { return memGetByte(struct + SpvcMslConstexprSampler.COMPARE_ENABLE) != 0; }
     /** Unsafe version of {@link #lod_clamp_enable}. */
-    public static boolean nlod_clamp_enable(long struct) { return UNSAFE.getByte(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_ENABLE) != 0; }
+    public static boolean nlod_clamp_enable(long struct) { return memGetByte(struct + SpvcMslConstexprSampler.LOD_CLAMP_ENABLE) != 0; }
     /** Unsafe version of {@link #anisotropy_enable}. */
-    public static boolean nanisotropy_enable(long struct) { return UNSAFE.getByte(null, struct + SpvcMslConstexprSampler.ANISOTROPY_ENABLE) != 0; }
+    public static boolean nanisotropy_enable(long struct) { return memGetByte(struct + SpvcMslConstexprSampler.ANISOTROPY_ENABLE) != 0; }
 
     /** Unsafe version of {@link #coord(int) coord}. */
-    public static void ncoord(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.COORD, value); }
+    public static void ncoord(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.COORD, value); }
     /** Unsafe version of {@link #min_filter(int) min_filter}. */
-    public static void nmin_filter(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.MIN_FILTER, value); }
+    public static void nmin_filter(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.MIN_FILTER, value); }
     /** Unsafe version of {@link #mag_filter(int) mag_filter}. */
-    public static void nmag_filter(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.MAG_FILTER, value); }
+    public static void nmag_filter(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.MAG_FILTER, value); }
     /** Unsafe version of {@link #mip_filter(int) mip_filter}. */
-    public static void nmip_filter(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.MIP_FILTER, value); }
+    public static void nmip_filter(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.MIP_FILTER, value); }
     /** Unsafe version of {@link #s_address(int) s_address}. */
-    public static void ns_address(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.S_ADDRESS, value); }
+    public static void ns_address(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.S_ADDRESS, value); }
     /** Unsafe version of {@link #t_address(int) t_address}. */
-    public static void nt_address(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.T_ADDRESS, value); }
+    public static void nt_address(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.T_ADDRESS, value); }
     /** Unsafe version of {@link #r_address(int) r_address}. */
-    public static void nr_address(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.R_ADDRESS, value); }
+    public static void nr_address(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.R_ADDRESS, value); }
     /** Unsafe version of {@link #compare_func(int) compare_func}. */
-    public static void ncompare_func(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.COMPARE_FUNC, value); }
+    public static void ncompare_func(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.COMPARE_FUNC, value); }
     /** Unsafe version of {@link #border_color(int) border_color}. */
-    public static void nborder_color(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.BORDER_COLOR, value); }
+    public static void nborder_color(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.BORDER_COLOR, value); }
     /** Unsafe version of {@link #lod_clamp_min(float) lod_clamp_min}. */
-    public static void nlod_clamp_min(long struct, float value) { UNSAFE.putFloat(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_MIN, value); }
+    public static void nlod_clamp_min(long struct, float value) { memPutFloat(struct + SpvcMslConstexprSampler.LOD_CLAMP_MIN, value); }
     /** Unsafe version of {@link #lod_clamp_max(float) lod_clamp_max}. */
-    public static void nlod_clamp_max(long struct, float value) { UNSAFE.putFloat(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_MAX, value); }
+    public static void nlod_clamp_max(long struct, float value) { memPutFloat(struct + SpvcMslConstexprSampler.LOD_CLAMP_MAX, value); }
     /** Unsafe version of {@link #max_anisotropy(int) max_anisotropy}. */
-    public static void nmax_anisotropy(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslConstexprSampler.MAX_ANISOTROPY, value); }
+    public static void nmax_anisotropy(long struct, int value) { memPutInt(struct + SpvcMslConstexprSampler.MAX_ANISOTROPY, value); }
     /** Unsafe version of {@link #compare_enable(boolean) compare_enable}. */
-    public static void ncompare_enable(long struct, boolean value) { UNSAFE.putByte(null, struct + SpvcMslConstexprSampler.COMPARE_ENABLE, value ? (byte)1 : (byte)0); }
+    public static void ncompare_enable(long struct, boolean value) { memPutByte(struct + SpvcMslConstexprSampler.COMPARE_ENABLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #lod_clamp_enable(boolean) lod_clamp_enable}. */
-    public static void nlod_clamp_enable(long struct, boolean value) { UNSAFE.putByte(null, struct + SpvcMslConstexprSampler.LOD_CLAMP_ENABLE, value ? (byte)1 : (byte)0); }
+    public static void nlod_clamp_enable(long struct, boolean value) { memPutByte(struct + SpvcMslConstexprSampler.LOD_CLAMP_ENABLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #anisotropy_enable(boolean) anisotropy_enable}. */
-    public static void nanisotropy_enable(long struct, boolean value) { UNSAFE.putByte(null, struct + SpvcMslConstexprSampler.ANISOTROPY_ENABLE, value ? (byte)1 : (byte)0); }
+    public static void nanisotropy_enable(long struct, boolean value) { memPutByte(struct + SpvcMslConstexprSampler.ANISOTROPY_ENABLE, value ? (byte)1 : (byte)0); }
 
     // -----------------------------------
 

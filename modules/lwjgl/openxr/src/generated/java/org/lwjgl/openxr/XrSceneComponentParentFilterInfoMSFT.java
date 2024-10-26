@@ -253,14 +253,14 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponen
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentParentFilterInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneComponentParentFilterInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneComponentParentFilterInfoMSFT.NEXT); }
     /** Unsafe version of {@link #parentId}. */
     public static XrUuidMSFT nparentId(long struct) { return XrUuidMSFT.create(struct + XrSceneComponentParentFilterInfoMSFT.PARENTID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentParentFilterInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneComponentParentFilterInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentParentFilterInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #parentId(XrUuidMSFT) parentId}. */

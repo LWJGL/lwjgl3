@@ -243,14 +243,14 @@ public class CLBusAddressAMD extends Struct<CLBusAddressAMD> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #surfbusaddress}. */
-    public static long nsurfbusaddress(long struct) { return UNSAFE.getLong(null, struct + CLBusAddressAMD.SURFBUSADDRESS); }
+    public static long nsurfbusaddress(long struct) { return memGetLong(struct + CLBusAddressAMD.SURFBUSADDRESS); }
     /** Unsafe version of {@link #signalbusaddress}. */
-    public static long nsignalbusaddress(long struct) { return UNSAFE.getLong(null, struct + CLBusAddressAMD.SIGNALBUSADDRESS); }
+    public static long nsignalbusaddress(long struct) { return memGetLong(struct + CLBusAddressAMD.SIGNALBUSADDRESS); }
 
     /** Unsafe version of {@link #surfbusaddress(long) surfbusaddress}. */
-    public static void nsurfbusaddress(long struct, long value) { UNSAFE.putLong(null, struct + CLBusAddressAMD.SURFBUSADDRESS, value); }
+    public static void nsurfbusaddress(long struct, long value) { memPutLong(struct + CLBusAddressAMD.SURFBUSADDRESS, value); }
     /** Unsafe version of {@link #signalbusaddress(long) signalbusaddress}. */
-    public static void nsignalbusaddress(long struct, long value) { UNSAFE.putLong(null, struct + CLBusAddressAMD.SIGNALBUSADDRESS, value); }
+    public static void nsignalbusaddress(long struct, long value) { memPutLong(struct + CLBusAddressAMD.SIGNALBUSADDRESS, value); }
 
     // -----------------------------------
 

@@ -243,7 +243,7 @@ public class NkMemoryStatus extends Struct<NkMemoryStatus> implements NativeReso
     /** Unsafe version of {@link #memory() memory}. */
     public static ByteBuffer nmemory(long struct) { return memByteBuffer(memGetAddress(struct + NkMemoryStatus.MEMORY), (int)nsize(struct)); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkMemoryStatus.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkMemoryStatus.TYPE); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + NkMemoryStatus.SIZE); }
     /** Unsafe version of {@link #allocated}. */

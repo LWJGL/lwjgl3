@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.PNEXT); }
     /** Unsafe version of {@link #shaderCoreBuiltins}. */
-    public static int nshaderCoreBuiltins(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.SHADERCOREBUILTINS); }
+    public static int nshaderCoreBuiltins(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.SHADERCOREBUILTINS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.PNEXT, value); }
     /** Unsafe version of {@link #shaderCoreBuiltins(boolean) shaderCoreBuiltins}. */
-    public static void nshaderCoreBuiltins(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.SHADERCOREBUILTINS, value); }
+    public static void nshaderCoreBuiltins(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.SHADERCOREBUILTINS, value); }
 
     // -----------------------------------
 

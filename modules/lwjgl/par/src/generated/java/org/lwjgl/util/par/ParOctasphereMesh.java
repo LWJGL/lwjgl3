@@ -285,9 +285,9 @@ public class ParOctasphereMesh extends Struct<ParOctasphereMesh> implements Nati
     /** Unsafe version of {@link #indices(int) indices}. */
     public static ShortBuffer nindices(long struct, int capacity) { return memShortBuffer(memGetAddress(struct + ParOctasphereMesh.INDICES), capacity); }
     /** Unsafe version of {@link #num_indices}. */
-    public static int nnum_indices(long struct) { return UNSAFE.getInt(null, struct + ParOctasphereMesh.NUM_INDICES); }
+    public static int nnum_indices(long struct) { return memGetInt(struct + ParOctasphereMesh.NUM_INDICES); }
     /** Unsafe version of {@link #num_vertices}. */
-    public static int nnum_vertices(long struct) { return UNSAFE.getInt(null, struct + ParOctasphereMesh.NUM_VERTICES); }
+    public static int nnum_vertices(long struct) { return memGetInt(struct + ParOctasphereMesh.NUM_VERTICES); }
 
     /** Unsafe version of {@link #positions(FloatBuffer) positions}. */
     public static void npositions(long struct, FloatBuffer value) { memPutAddress(struct + ParOctasphereMesh.POSITIONS, memAddress(value)); }

@@ -348,36 +348,36 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct<VkIndirectComma
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNV.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #tokenCount}. */
-    public static int ntokenCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.TOKENCOUNT); }
+    public static int ntokenCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNV.TOKENCOUNT); }
     /** Unsafe version of {@link #pTokens}. */
     public static VkIndirectCommandsLayoutTokenNV.Buffer npTokens(long struct) { return VkIndirectCommandsLayoutTokenNV.create(memGetAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PTOKENS), ntokenCount(struct)); }
     /** Unsafe version of {@link #streamCount}. */
-    public static int nstreamCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.STREAMCOUNT); }
+    public static int nstreamCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNV.STREAMCOUNT); }
     /** Unsafe version of {@link #pStreamStrides() pStreamStrides}. */
     public static IntBuffer npStreamStrides(long struct) { return memIntBuffer(memGetAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PSTREAMSTRIDES), nstreamCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNV.FLAGS, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNV.PIPELINEBINDPOINT, value); }
     /** Sets the specified value to the {@code tokenCount} field of the specified {@code struct}. */
-    public static void ntokenCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.TOKENCOUNT, value); }
+    public static void ntokenCount(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNV.TOKENCOUNT, value); }
     /** Unsafe version of {@link #pTokens(VkIndirectCommandsLayoutTokenNV.Buffer) pTokens}. */
     public static void npTokens(long struct, VkIndirectCommandsLayoutTokenNV.Buffer value) { memPutAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PTOKENS, value.address()); ntokenCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code streamCount} field of the specified {@code struct}. */
-    public static void nstreamCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNV.STREAMCOUNT, value); }
+    public static void nstreamCount(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNV.STREAMCOUNT, value); }
     /** Unsafe version of {@link #pStreamStrides(IntBuffer) pStreamStrides}. */
     public static void npStreamStrides(long struct, IntBuffer value) { memPutAddress(struct + VkIndirectCommandsLayoutCreateInfoNV.PSTREAMSTRIDES, memAddress(value)); nstreamCount(struct, value.remaining()); }
 

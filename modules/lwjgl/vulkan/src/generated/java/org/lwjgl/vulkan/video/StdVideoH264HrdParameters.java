@@ -331,46 +331,46 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     // -----------------------------------
 
     /** Unsafe version of {@link #cpb_cnt_minus1}. */
-    public static byte ncpb_cnt_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CPB_CNT_MINUS1); }
+    public static byte ncpb_cnt_minus1(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.CPB_CNT_MINUS1); }
     /** Unsafe version of {@link #bit_rate_scale}. */
-    public static byte nbit_rate_scale(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.BIT_RATE_SCALE); }
+    public static byte nbit_rate_scale(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.BIT_RATE_SCALE); }
     /** Unsafe version of {@link #cpb_size_scale}. */
-    public static byte ncpb_size_scale(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE); }
-    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.RESERVED1); }
+    public static byte ncpb_size_scale(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE); }
+    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.RESERVED1); }
     /** Unsafe version of {@link #bit_rate_value_minus1}. */
     public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_value_minus1(int) bit_rate_value_minus1}. */
     public static int nbit_rate_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
+        return memGetInt(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1}. */
     public static IntBuffer ncpb_size_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cpb_size_value_minus1(int) cpb_size_value_minus1}. */
     public static int ncpb_size_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
+        return memGetInt(struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cbr_flag}. */
     public static ByteBuffer ncbr_flag(long struct) { return memByteBuffer(struct + StdVideoH264HrdParameters.CBR_FLAG, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cbr_flag(int) cbr_flag}. */
     public static byte ncbr_flag(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #initial_cpb_removal_delay_length_minus1}. */
-    public static int ninitial_cpb_removal_delay_length_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1); }
+    public static int ninitial_cpb_removal_delay_length_minus1(long struct) { return memGetInt(struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1); }
     /** Unsafe version of {@link #cpb_removal_delay_length_minus1}. */
-    public static int ncpb_removal_delay_length_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.CPB_REMOVAL_DELAY_LENGTH_MINUS1); }
+    public static int ncpb_removal_delay_length_minus1(long struct) { return memGetInt(struct + StdVideoH264HrdParameters.CPB_REMOVAL_DELAY_LENGTH_MINUS1); }
     /** Unsafe version of {@link #dpb_output_delay_length_minus1}. */
-    public static int ndpb_output_delay_length_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.DPB_OUTPUT_DELAY_LENGTH_MINUS1); }
+    public static int ndpb_output_delay_length_minus1(long struct) { return memGetInt(struct + StdVideoH264HrdParameters.DPB_OUTPUT_DELAY_LENGTH_MINUS1); }
     /** Unsafe version of {@link #time_offset_length}. */
-    public static int ntime_offset_length(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.TIME_OFFSET_LENGTH); }
+    public static int ntime_offset_length(long struct) { return memGetInt(struct + StdVideoH264HrdParameters.TIME_OFFSET_LENGTH); }
 
     /** Unsafe version of {@link #cpb_cnt_minus1(byte) cpb_cnt_minus1}. */
-    public static void ncpb_cnt_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CPB_CNT_MINUS1, value); }
+    public static void ncpb_cnt_minus1(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.CPB_CNT_MINUS1, value); }
     /** Unsafe version of {@link #bit_rate_scale(byte) bit_rate_scale}. */
-    public static void nbit_rate_scale(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.BIT_RATE_SCALE, value); }
+    public static void nbit_rate_scale(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.BIT_RATE_SCALE, value); }
     /** Unsafe version of {@link #cpb_size_scale(byte) cpb_size_scale}. */
-    public static void ncpb_size_scale(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE, value); }
-    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.RESERVED1, value); }
+    public static void ncpb_size_scale(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE, value); }
+    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.RESERVED1, value); }
     /** Unsafe version of {@link #bit_rate_value_minus1(IntBuffer) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
@@ -378,7 +378,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     }
     /** Unsafe version of {@link #bit_rate_value_minus1(int, int) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
+        memPutInt(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(IntBuffer) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, IntBuffer value) {
@@ -387,7 +387,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(int, int) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
+        memPutInt(struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cbr_flag(ByteBuffer) cbr_flag}. */
     public static void ncbr_flag(long struct, ByteBuffer value) {
@@ -396,16 +396,16 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     }
     /** Unsafe version of {@link #cbr_flag(int, byte) cbr_flag}. */
     public static void ncbr_flag(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #initial_cpb_removal_delay_length_minus1(int) initial_cpb_removal_delay_length_minus1}. */
-    public static void ninitial_cpb_removal_delay_length_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1, value); }
+    public static void ninitial_cpb_removal_delay_length_minus1(long struct, int value) { memPutInt(struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1, value); }
     /** Unsafe version of {@link #cpb_removal_delay_length_minus1(int) cpb_removal_delay_length_minus1}. */
-    public static void ncpb_removal_delay_length_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.CPB_REMOVAL_DELAY_LENGTH_MINUS1, value); }
+    public static void ncpb_removal_delay_length_minus1(long struct, int value) { memPutInt(struct + StdVideoH264HrdParameters.CPB_REMOVAL_DELAY_LENGTH_MINUS1, value); }
     /** Unsafe version of {@link #dpb_output_delay_length_minus1(int) dpb_output_delay_length_minus1}. */
-    public static void ndpb_output_delay_length_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.DPB_OUTPUT_DELAY_LENGTH_MINUS1, value); }
+    public static void ndpb_output_delay_length_minus1(long struct, int value) { memPutInt(struct + StdVideoH264HrdParameters.DPB_OUTPUT_DELAY_LENGTH_MINUS1, value); }
     /** Unsafe version of {@link #time_offset_length(int) time_offset_length}. */
-    public static void ntime_offset_length(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.TIME_OFFSET_LENGTH, value); }
+    public static void ntime_offset_length(long struct, int value) { memPutInt(struct + StdVideoH264HrdParameters.TIME_OFFSET_LENGTH, value); }
 
     // -----------------------------------
 

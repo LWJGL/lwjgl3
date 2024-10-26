@@ -253,18 +253,18 @@ public class XrPlaneDetectorCreateInfoEXT extends Struct<XrPlaneDetectorCreateIn
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorCreateInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPlaneDetectorCreateInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPlaneDetectorCreateInfoEXT.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrPlaneDetectorCreateInfoEXT.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrPlaneDetectorCreateInfoEXT.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorCreateInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPlaneDetectorCreateInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPlaneDetectorCreateInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrPlaneDetectorCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrPlaneDetectorCreateInfoEXT.FLAGS, value); }
 
     // -----------------------------------
 

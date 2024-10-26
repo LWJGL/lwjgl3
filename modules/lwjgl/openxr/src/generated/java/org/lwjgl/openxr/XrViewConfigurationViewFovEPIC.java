@@ -261,7 +261,7 @@ public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationVi
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrViewConfigurationViewFovEPIC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrViewConfigurationViewFovEPIC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrViewConfigurationViewFovEPIC.NEXT); }
     /** Unsafe version of {@link #recommendedFov}. */
@@ -270,7 +270,7 @@ public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationVi
     public static XrFovf nmaxMutableFov(long struct) { return XrFovf.create(struct + XrViewConfigurationViewFovEPIC.MAXMUTABLEFOV); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationViewFovEPIC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrViewConfigurationViewFovEPIC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationViewFovEPIC.NEXT, value); }
     /** Unsafe version of {@link #recommendedFov(XrFovf) recommendedFov}. */

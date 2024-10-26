@@ -267,18 +267,18 @@ public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #representativeFragmentTestEnable}. */
-    public static int nrepresentativeFragmentTestEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.REPRESENTATIVEFRAGMENTTESTENABLE); }
+    public static int nrepresentativeFragmentTestEnable(long struct) { return memGetInt(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.REPRESENTATIVEFRAGMENTTESTENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #representativeFragmentTestEnable(boolean) representativeFragmentTestEnable}. */
-    public static void nrepresentativeFragmentTestEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.REPRESENTATIVEFRAGMENTTESTENABLE, value); }
+    public static void nrepresentativeFragmentTestEnable(long struct, int value) { memPutInt(struct + VkPipelineRepresentativeFragmentTestStateCreateInfoNV.REPRESENTATIVEFRAGMENTTESTENABLE, value); }
 
     // -----------------------------------
 

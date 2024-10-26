@@ -346,46 +346,46 @@ public class VkAccelerationStructureTrianglesOpacityMicromapEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PNEXT); }
     /** Unsafe version of {@link #indexType}. */
-    public static int nindexType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXTYPE); }
+    public static int nindexType(long struct) { return memGetInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXTYPE); }
     /** Unsafe version of {@link #indexBuffer}. */
     public static VkDeviceOrHostAddressConstKHR nindexBuffer(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXBUFFER); }
     /** Unsafe version of {@link #indexStride}. */
-    public static long nindexStride(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXSTRIDE); }
+    public static long nindexStride(long struct) { return memGetLong(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXSTRIDE); }
     /** Unsafe version of {@link #baseTriangle}. */
-    public static int nbaseTriangle(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.BASETRIANGLE); }
+    public static int nbaseTriangle(long struct) { return memGetInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.BASETRIANGLE); }
     /** Unsafe version of {@link #usageCountsCount}. */
-    public static int nusageCountsCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.USAGECOUNTSCOUNT); }
+    public static int nusageCountsCount(long struct) { return memGetInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.USAGECOUNTSCOUNT); }
     /** Unsafe version of {@link #pUsageCounts}. */
     @Nullable public static VkMicromapUsageEXT.Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #ppUsageCounts() ppUsageCounts}. */
     @Nullable public static PointerBuffer nppUsageCounts(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PPUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #micromap}. */
-    public static long nmicromap(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.MICROMAP); }
+    public static long nmicromap(long struct) { return memGetLong(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.MICROMAP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PNEXT, value); }
     /** Unsafe version of {@link #indexType(int) indexType}. */
-    public static void nindexType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXTYPE, value); }
+    public static void nindexType(long struct, int value) { memPutInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXTYPE, value); }
     /** Unsafe version of {@link #indexBuffer(VkDeviceOrHostAddressConstKHR) indexBuffer}. */
     public static void nindexBuffer(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXBUFFER, VkDeviceOrHostAddressConstKHR.SIZEOF); }
     /** Unsafe version of {@link #indexStride(long) indexStride}. */
-    public static void nindexStride(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXSTRIDE, value); }
+    public static void nindexStride(long struct, long value) { memPutLong(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.INDEXSTRIDE, value); }
     /** Unsafe version of {@link #baseTriangle(int) baseTriangle}. */
-    public static void nbaseTriangle(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.BASETRIANGLE, value); }
+    public static void nbaseTriangle(long struct, int value) { memPutInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.BASETRIANGLE, value); }
     /** Sets the specified value to the {@code usageCountsCount} field of the specified {@code struct}. */
-    public static void nusageCountsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.USAGECOUNTSCOUNT, value); }
+    public static void nusageCountsCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.USAGECOUNTSCOUNT, value); }
     /** Unsafe version of {@link #pUsageCounts(VkMicromapUsageEXT.Buffer) pUsageCounts}. */
     public static void npUsageCounts(long struct, @Nullable VkMicromapUsageEXT.Buffer value) { memPutAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppUsageCounts(PointerBuffer) ppUsageCounts}. */
     public static void nppUsageCounts(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.PPUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #micromap(long) micromap}. */
-    public static void nmicromap(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.MICROMAP, value); }
+    public static void nmicromap(long struct, long value) { memPutLong(struct + VkAccelerationStructureTrianglesOpacityMicromapEXT.MICROMAP, value); }
 
     // -----------------------------------
 

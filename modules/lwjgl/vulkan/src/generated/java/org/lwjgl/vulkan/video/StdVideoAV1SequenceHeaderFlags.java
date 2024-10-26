@@ -357,7 +357,7 @@ public class StdVideoAV1SequenceHeaderFlags extends Struct<StdVideoAV1SequenceHe
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1SequenceHeaderFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoAV1SequenceHeaderFlags.BITFIELD0); }
     /** Unsafe version of {@link #still_picture}. */
     public static int nstill_picture(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #reduced_still_picture_header}. */
@@ -396,10 +396,10 @@ public class StdVideoAV1SequenceHeaderFlags extends Struct<StdVideoAV1SequenceHe
     public static int ntiming_info_present_flag(long struct) { return (nbitfield0(struct) & 0x00_02_00_00) >>> 17; }
     /** Unsafe version of {@link #initial_display_delay_present_flag}. */
     public static int ninitial_display_delay_present_flag(long struct) { return (nbitfield0(struct) & 0x00_04_00_00) >>> 18; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1SequenceHeaderFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoAV1SequenceHeaderFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x00_00_1F_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1SequenceHeaderFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoAV1SequenceHeaderFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #still_picture(boolean) still_picture}. */
     public static void nstill_picture(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #reduced_still_picture_header(boolean) reduced_still_picture_header}. */
@@ -438,7 +438,7 @@ public class StdVideoAV1SequenceHeaderFlags extends Struct<StdVideoAV1SequenceHe
     public static void ntiming_info_present_flag(long struct, int value) { nbitfield0(struct, ((value << 17) & 0x00_02_00_00) | (nbitfield0(struct) & 0xFF_FD_FF_FF)); }
     /** Unsafe version of {@link #initial_display_delay_present_flag(boolean) initial_display_delay_present_flag}. */
     public static void ninitial_display_delay_present_flag(long struct, int value) { nbitfield0(struct, ((value << 18) & 0x00_04_00_00) | (nbitfield0(struct) & 0xFF_FB_FF_FF)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1SequenceHeaderFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoAV1SequenceHeaderFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_FF_E0_00) | (value & 0x00_00_1F_FF)); }
 
     // -----------------------------------

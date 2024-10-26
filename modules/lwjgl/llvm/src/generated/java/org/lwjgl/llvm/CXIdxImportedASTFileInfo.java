@@ -130,7 +130,7 @@ public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
     /** Unsafe version of {@link #loc}. */
     public static CXIdxLoc nloc(long struct) { return CXIdxLoc.create(struct + CXIdxImportedASTFileInfo.LOC); }
     /** Unsafe version of {@link #isImplicit}. */
-    public static int nisImplicit(long struct) { return UNSAFE.getInt(null, struct + CXIdxImportedASTFileInfo.ISIMPLICIT); }
+    public static int nisImplicit(long struct) { return memGetInt(struct + CXIdxImportedASTFileInfo.ISIMPLICIT); }
 
     // -----------------------------------
 

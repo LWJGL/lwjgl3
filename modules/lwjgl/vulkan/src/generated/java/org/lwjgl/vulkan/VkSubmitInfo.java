@@ -393,40 +393,40 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubmitInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubmitInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubmitInfo.PNEXT); }
     /** Unsafe version of {@link #waitSemaphoreCount}. */
-    public static int nwaitSemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkSubmitInfo.WAITSEMAPHORECOUNT); }
+    public static int nwaitSemaphoreCount(long struct) { return memGetInt(struct + VkSubmitInfo.WAITSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphores() pWaitSemaphores}. */
     @Nullable public static LongBuffer npWaitSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkSubmitInfo.PWAITSEMAPHORES), nwaitSemaphoreCount(struct)); }
     /** Unsafe version of {@link #pWaitDstStageMask() pWaitDstStageMask}. */
     @Nullable public static IntBuffer npWaitDstStageMask(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSubmitInfo.PWAITDSTSTAGEMASK), nwaitSemaphoreCount(struct)); }
     /** Unsafe version of {@link #commandBufferCount}. */
-    public static int ncommandBufferCount(long struct) { return UNSAFE.getInt(null, struct + VkSubmitInfo.COMMANDBUFFERCOUNT); }
+    public static int ncommandBufferCount(long struct) { return memGetInt(struct + VkSubmitInfo.COMMANDBUFFERCOUNT); }
     /** Unsafe version of {@link #pCommandBuffers() pCommandBuffers}. */
     @Nullable public static PointerBuffer npCommandBuffers(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkSubmitInfo.PCOMMANDBUFFERS), ncommandBufferCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreCount}. */
-    public static int nsignalSemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkSubmitInfo.SIGNALSEMAPHORECOUNT); }
+    public static int nsignalSemaphoreCount(long struct) { return memGetInt(struct + VkSubmitInfo.SIGNALSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pSignalSemaphores() pSignalSemaphores}. */
     @Nullable public static LongBuffer npSignalSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkSubmitInfo.PSIGNALSEMAPHORES), nsignalSemaphoreCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubmitInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubmitInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubmitInfo.PNEXT, value); }
     /** Sets the specified value to the {@code waitSemaphoreCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubmitInfo.WAITSEMAPHORECOUNT, value); }
+    public static void nwaitSemaphoreCount(long struct, int value) { memPutInt(struct + VkSubmitInfo.WAITSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pWaitSemaphores(LongBuffer) pWaitSemaphores}. */
     public static void npWaitSemaphores(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkSubmitInfo.PWAITSEMAPHORES, memAddressSafe(value)); }
     /** Unsafe version of {@link #pWaitDstStageMask(IntBuffer) pWaitDstStageMask}. */
     public static void npWaitDstStageMask(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSubmitInfo.PWAITDSTSTAGEMASK, memAddressSafe(value)); }
     /** Sets the specified value to the {@code commandBufferCount} field of the specified {@code struct}. */
-    public static void ncommandBufferCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubmitInfo.COMMANDBUFFERCOUNT, value); }
+    public static void ncommandBufferCount(long struct, int value) { memPutInt(struct + VkSubmitInfo.COMMANDBUFFERCOUNT, value); }
     /** Unsafe version of {@link #pCommandBuffers(PointerBuffer) pCommandBuffers}. */
     public static void npCommandBuffers(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkSubmitInfo.PCOMMANDBUFFERS, memAddressSafe(value)); ncommandBufferCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code signalSemaphoreCount} field of the specified {@code struct}. */
-    public static void nsignalSemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubmitInfo.SIGNALSEMAPHORECOUNT, value); }
+    public static void nsignalSemaphoreCount(long struct, int value) { memPutInt(struct + VkSubmitInfo.SIGNALSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pSignalSemaphores(LongBuffer) pSignalSemaphores}. */
     public static void npSignalSemaphores(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkSubmitInfo.PSIGNALSEMAPHORES, memAddressSafe(value)); nsignalSemaphoreCount(struct, value == null ? 0 : value.remaining()); }
 

@@ -284,30 +284,30 @@ public class XGenericEvent extends Struct<XGenericEvent> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XGenericEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XGenericEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XGenericEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XGenericEvent.DISPLAY); }
     /** Unsafe version of {@link #extension}. */
-    public static int nextension(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.EXTENSION); }
+    public static int nextension(long struct) { return memGetInt(struct + XGenericEvent.EXTENSION); }
     /** Unsafe version of {@link #evtype}. */
-    public static int nevtype(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.EVTYPE); }
+    public static int nevtype(long struct) { return memGetInt(struct + XGenericEvent.EVTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XGenericEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XGenericEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XGenericEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XGenericEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #extension(int) extension}. */
-    public static void nextension(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.EXTENSION, value); }
+    public static void nextension(long struct, int value) { memPutInt(struct + XGenericEvent.EXTENSION, value); }
     /** Unsafe version of {@link #evtype(int) evtype}. */
-    public static void nevtype(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.EVTYPE, value); }
+    public static void nevtype(long struct, int value) { memPutInt(struct + XGenericEvent.EVTYPE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

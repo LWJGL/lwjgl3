@@ -230,7 +230,7 @@ public class AIUVTransform extends Struct<AIUVTransform> implements NativeResour
     /** Unsafe version of {@link #mScaling}. */
     public static AIVector2D nmScaling(long struct) { return AIVector2D.create(struct + AIUVTransform.MSCALING); }
     /** Unsafe version of {@link #mRotation}. */
-    public static float nmRotation(long struct) { return UNSAFE.getFloat(null, struct + AIUVTransform.MROTATION); }
+    public static float nmRotation(long struct) { return memGetFloat(struct + AIUVTransform.MROTATION); }
 
     // -----------------------------------
 

@@ -242,14 +242,14 @@ public class CGPoint extends Struct<CGPoint> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static double nx(long struct) { return UNSAFE.getDouble(null, struct + CGPoint.X); }
+    public static double nx(long struct) { return memGetDouble(struct + CGPoint.X); }
     /** Unsafe version of {@link #y}. */
-    public static double ny(long struct) { return UNSAFE.getDouble(null, struct + CGPoint.Y); }
+    public static double ny(long struct) { return memGetDouble(struct + CGPoint.Y); }
 
     /** Unsafe version of {@link #x(double) x}. */
-    public static void nx(long struct, double value) { UNSAFE.putDouble(null, struct + CGPoint.X, value); }
+    public static void nx(long struct, double value) { memPutDouble(struct + CGPoint.X, value); }
     /** Unsafe version of {@link #y(double) y}. */
-    public static void ny(long struct, double value) { UNSAFE.putDouble(null, struct + CGPoint.Y, value); }
+    public static void ny(long struct, double value) { memPutDouble(struct + CGPoint.Y, value); }
 
     // -----------------------------------
 

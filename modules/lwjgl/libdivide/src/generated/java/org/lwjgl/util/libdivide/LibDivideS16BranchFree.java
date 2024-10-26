@@ -222,14 +222,14 @@ public class LibDivideS16BranchFree extends Struct<LibDivideS16BranchFree> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #magic}. */
-    public static short nmagic(long struct) { return UNSAFE.getShort(null, struct + LibDivideS16BranchFree.MAGIC); }
+    public static short nmagic(long struct) { return memGetShort(struct + LibDivideS16BranchFree.MAGIC); }
     /** Unsafe version of {@link #more}. */
-    public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideS16BranchFree.MORE); }
+    public static byte nmore(long struct) { return memGetByte(struct + LibDivideS16BranchFree.MORE); }
 
     /** Unsafe version of {@link #magic(short) magic}. */
-    public static void nmagic(long struct, short value) { UNSAFE.putShort(null, struct + LibDivideS16BranchFree.MAGIC, value); }
+    public static void nmagic(long struct, short value) { memPutShort(struct + LibDivideS16BranchFree.MAGIC, value); }
     /** Unsafe version of {@link #more(byte) more}. */
-    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideS16BranchFree.MORE, value); }
+    public static void nmore(long struct, byte value) { memPutByte(struct + LibDivideS16BranchFree.MORE, value); }
 
     // -----------------------------------
 

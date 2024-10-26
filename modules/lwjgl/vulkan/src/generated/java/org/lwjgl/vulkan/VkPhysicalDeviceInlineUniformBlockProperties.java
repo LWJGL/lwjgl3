@@ -270,22 +270,22 @@ public class VkPhysicalDeviceInlineUniformBlockProperties extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceInlineUniformBlockProperties.PNEXT); }
     /** Unsafe version of {@link #maxInlineUniformBlockSize}. */
-    public static int nmaxInlineUniformBlockSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXINLINEUNIFORMBLOCKSIZE); }
+    public static int nmaxInlineUniformBlockSize(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXINLINEUNIFORMBLOCKSIZE); }
     /** Unsafe version of {@link #maxPerStageDescriptorInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS); }
+    public static int nmaxPerStageDescriptorInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxDescriptorSetInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXDESCRIPTORSETINLINEUNIFORMBLOCKS); }
+    public static int nmaxDescriptorSetInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXDESCRIPTORSETINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
+    public static int nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceInlineUniformBlockProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceInlineUniformBlockProperties.PNEXT, value); }
 

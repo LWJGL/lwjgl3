@@ -240,14 +240,14 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct<SQL_YEAR_MONTH_STRUCT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #year}. */
-    public static int nyear(long struct) { return UNSAFE.getInt(null, struct + SQL_YEAR_MONTH_STRUCT.YEAR); }
+    public static int nyear(long struct) { return memGetInt(struct + SQL_YEAR_MONTH_STRUCT.YEAR); }
     /** Unsafe version of {@link #month}. */
-    public static int nmonth(long struct) { return UNSAFE.getInt(null, struct + SQL_YEAR_MONTH_STRUCT.MONTH); }
+    public static int nmonth(long struct) { return memGetInt(struct + SQL_YEAR_MONTH_STRUCT.MONTH); }
 
     /** Unsafe version of {@link #year(int) year}. */
-    public static void nyear(long struct, int value) { UNSAFE.putInt(null, struct + SQL_YEAR_MONTH_STRUCT.YEAR, value); }
+    public static void nyear(long struct, int value) { memPutInt(struct + SQL_YEAR_MONTH_STRUCT.YEAR, value); }
     /** Unsafe version of {@link #month(int) month}. */
-    public static void nmonth(long struct, int value) { UNSAFE.putInt(null, struct + SQL_YEAR_MONTH_STRUCT.MONTH, value); }
+    public static void nmonth(long struct, int value) { memPutInt(struct + SQL_YEAR_MONTH_STRUCT.MONTH, value); }
 
     // -----------------------------------
 

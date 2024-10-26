@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV extends Stru
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #descriptorPoolOverallocation}. */
-    public static int ndescriptorPoolOverallocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.DESCRIPTORPOOLOVERALLOCATION); }
+    public static int ndescriptorPoolOverallocation(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.DESCRIPTORPOOLOVERALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #descriptorPoolOverallocation(boolean) descriptorPoolOverallocation}. */
-    public static void ndescriptorPoolOverallocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.DESCRIPTORPOOLOVERALLOCATION, value); }
+    public static void ndescriptorPoolOverallocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.DESCRIPTORPOOLOVERALLOCATION, value); }
 
     // -----------------------------------
 

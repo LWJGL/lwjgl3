@@ -381,11 +381,11 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XKeyEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XKeyEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XKeyEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XKeyEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -397,26 +397,26 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XKeyEvent.TIME); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XKeyEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XKeyEvent.Y); }
     /** Unsafe version of {@link #x_root}. */
-    public static int nx_root(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.X_ROOT); }
+    public static int nx_root(long struct) { return memGetInt(struct + XKeyEvent.X_ROOT); }
     /** Unsafe version of {@link #y_root}. */
-    public static int ny_root(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.Y_ROOT); }
+    public static int ny_root(long struct) { return memGetInt(struct + XKeyEvent.Y_ROOT); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XKeyEvent.STATE); }
     /** Unsafe version of {@link #keycode}. */
-    public static int nkeycode(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.KEYCODE); }
+    public static int nkeycode(long struct) { return memGetInt(struct + XKeyEvent.KEYCODE); }
     /** Unsafe version of {@link #same_screen}. */
-    public static int nsame_screen(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.SAME_SCREEN); }
+    public static int nsame_screen(long struct) { return memGetInt(struct + XKeyEvent.SAME_SCREEN); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XKeyEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XKeyEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XKeyEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XKeyEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -428,19 +428,19 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { memPutCLong(struct + XKeyEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XKeyEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XKeyEvent.Y, value); }
     /** Unsafe version of {@link #x_root(int) x_root}. */
-    public static void nx_root(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.X_ROOT, value); }
+    public static void nx_root(long struct, int value) { memPutInt(struct + XKeyEvent.X_ROOT, value); }
     /** Unsafe version of {@link #y_root(int) y_root}. */
-    public static void ny_root(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.Y_ROOT, value); }
+    public static void ny_root(long struct, int value) { memPutInt(struct + XKeyEvent.Y_ROOT, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XKeyEvent.STATE, value); }
     /** Unsafe version of {@link #keycode(int) keycode}. */
-    public static void nkeycode(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.KEYCODE, value); }
+    public static void nkeycode(long struct, int value) { memPutInt(struct + XKeyEvent.KEYCODE, value); }
     /** Unsafe version of {@link #same_screen(boolean) same_screen}. */
-    public static void nsame_screen(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.SAME_SCREEN, value); }
+    public static void nsame_screen(long struct, int value) { memPutInt(struct + XKeyEvent.SAME_SCREEN, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

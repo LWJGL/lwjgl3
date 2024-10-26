@@ -240,12 +240,12 @@ public class XrFrameWaitInfo extends Struct<XrFrameWaitInfo> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFrameWaitInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFrameWaitInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFrameWaitInfo.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameWaitInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFrameWaitInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameWaitInfo.NEXT, value); }
 

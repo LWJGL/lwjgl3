@@ -406,7 +406,7 @@ public class XEvent extends Struct<XEvent> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XEvent.TYPE); }
     /** Unsafe version of {@link #xany}. */
     public static XAnyEvent nxany(long struct) { return XAnyEvent.create(struct + XEvent.XANY); }
     /** Unsafe version of {@link #xkey}. */

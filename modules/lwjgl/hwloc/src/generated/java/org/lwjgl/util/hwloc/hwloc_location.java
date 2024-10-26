@@ -193,7 +193,7 @@ public class hwloc_location extends Struct<hwloc_location> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_location.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_location.TYPE); }
     /** Unsafe version of {@link #location}. */
     public static hwloc_location_u nlocation(long struct) { return hwloc_location_u.create(struct + hwloc_location.LOCATION); }
 

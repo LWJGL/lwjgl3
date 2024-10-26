@@ -257,14 +257,14 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct<VkSamp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerYcbcrConversionImageFormatProperties.PNEXT); }
     /** Unsafe version of {@link #combinedImageSamplerDescriptorCount}. */
-    public static int ncombinedImageSamplerDescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.COMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
+    public static int ncombinedImageSamplerDescriptorCount(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionImageFormatProperties.COMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerYcbcrConversionImageFormatProperties.PNEXT, value); }
 

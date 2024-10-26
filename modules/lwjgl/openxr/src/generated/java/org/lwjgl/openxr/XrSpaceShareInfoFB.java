@@ -282,28 +282,28 @@ public class XrSpaceShareInfoFB extends Struct<XrSpaceShareInfoFB> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceShareInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceShareInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceShareInfoFB.NEXT); }
     /** Unsafe version of {@link #spaceCount}. */
-    public static int nspaceCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceShareInfoFB.SPACECOUNT); }
+    public static int nspaceCount(long struct) { return memGetInt(struct + XrSpaceShareInfoFB.SPACECOUNT); }
     /** Unsafe version of {@link #spaces() spaces}. */
     public static PointerBuffer nspaces(long struct) { return memPointerBuffer(memGetAddress(struct + XrSpaceShareInfoFB.SPACES), nspaceCount(struct)); }
     /** Unsafe version of {@link #userCount}. */
-    public static int nuserCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceShareInfoFB.USERCOUNT); }
+    public static int nuserCount(long struct) { return memGetInt(struct + XrSpaceShareInfoFB.USERCOUNT); }
     /** Unsafe version of {@link #users() users}. */
     public static PointerBuffer nusers(long struct) { return memPointerBuffer(memGetAddress(struct + XrSpaceShareInfoFB.USERS), nuserCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceShareInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceShareInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceShareInfoFB.NEXT, value); }
     /** Sets the specified value to the {@code spaceCount} field of the specified {@code struct}. */
-    public static void nspaceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceShareInfoFB.SPACECOUNT, value); }
+    public static void nspaceCount(long struct, int value) { memPutInt(struct + XrSpaceShareInfoFB.SPACECOUNT, value); }
     /** Unsafe version of {@link #spaces(PointerBuffer) spaces}. */
     public static void nspaces(long struct, PointerBuffer value) { memPutAddress(struct + XrSpaceShareInfoFB.SPACES, memAddress(value)); nspaceCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code userCount} field of the specified {@code struct}. */
-    public static void nuserCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceShareInfoFB.USERCOUNT, value); }
+    public static void nuserCount(long struct, int value) { memPutInt(struct + XrSpaceShareInfoFB.USERCOUNT, value); }
     /** Unsafe version of {@link #users(PointerBuffer) users}. */
     public static void nusers(long struct, PointerBuffer value) { memPutAddress(struct + XrSpaceShareInfoFB.USERS, memAddress(value)); nuserCount(struct, value.remaining()); }
 

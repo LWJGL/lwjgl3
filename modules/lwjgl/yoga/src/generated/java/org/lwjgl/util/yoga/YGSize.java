@@ -238,14 +238,14 @@ public class YGSize extends Struct<YGSize> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + YGSize.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + YGSize.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + YGSize.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + YGSize.HEIGHT); }
 
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + YGSize.WIDTH, value); }
+    public static void nwidth(long struct, float value) { memPutFloat(struct + YGSize.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + YGSize.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + YGSize.HEIGHT, value); }
 
     // -----------------------------------
 

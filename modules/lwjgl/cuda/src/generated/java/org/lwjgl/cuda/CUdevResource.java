@@ -213,16 +213,16 @@ public class CUdevResource extends Struct<CUdevResource> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUdevResource.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUdevResource.TYPE); }
     public static ByteBuffer n_internal_padding(long struct) { return memByteBuffer(struct + CUdevResource._INTERNAL_PADDING, 92); }
     public static byte n_internal_padding(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUdevResource._INTERNAL_PADDING + check(index, 92) * 1);
+        return memGetByte(struct + CUdevResource._INTERNAL_PADDING + check(index, 92) * 1);
     }
     /** Unsafe version of {@link #resource_sm}. */
     public static CUdevSmResource nresource_sm(long struct) { return CUdevSmResource.create(struct + CUdevResource.RESOURCE_SM); }
     public static ByteBuffer nresource__oversize(long struct) { return memByteBuffer(struct + CUdevResource.RESOURCE__OVERSIZE, 48); }
     public static byte nresource__oversize(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUdevResource.RESOURCE__OVERSIZE + check(index, 48) * 1);
+        return memGetByte(struct + CUdevResource.RESOURCE__OVERSIZE + check(index, 48) * 1);
     }
 
     // -----------------------------------

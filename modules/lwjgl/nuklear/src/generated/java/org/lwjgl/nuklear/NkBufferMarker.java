@@ -110,7 +110,7 @@ public class NkBufferMarker extends Struct<NkBufferMarker> {
     // -----------------------------------
 
     /** Unsafe version of {@link #active}. */
-    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkBufferMarker.ACTIVE) != 0; }
+    public static boolean nactive(long struct) { return memGetByte(struct + NkBufferMarker.ACTIVE) != 0; }
     /** Unsafe version of {@link #offset}. */
     public static long noffset(long struct) { return memGetAddress(struct + NkBufferMarker.OFFSET); }
 

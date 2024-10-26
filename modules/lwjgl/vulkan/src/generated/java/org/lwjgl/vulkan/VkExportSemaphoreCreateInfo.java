@@ -268,18 +268,18 @@ public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateI
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportSemaphoreCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportSemaphoreCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportSemaphoreCreateInfo.PNEXT); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static int nhandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExportSemaphoreCreateInfo.HANDLETYPES); }
+    public static int nhandleTypes(long struct) { return memGetInt(struct + VkExportSemaphoreCreateInfo.HANDLETYPES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportSemaphoreCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportSemaphoreCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportSemaphoreCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #handleTypes(int) handleTypes}. */
-    public static void nhandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + VkExportSemaphoreCreateInfo.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, int value) { memPutInt(struct + VkExportSemaphoreCreateInfo.HANDLETYPES, value); }
 
     // -----------------------------------
 

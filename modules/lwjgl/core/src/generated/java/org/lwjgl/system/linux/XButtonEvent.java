@@ -381,11 +381,11 @@ public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XButtonEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XButtonEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XButtonEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XButtonEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -397,26 +397,26 @@ public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XButtonEvent.TIME); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XButtonEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XButtonEvent.Y); }
     /** Unsafe version of {@link #x_root}. */
-    public static int nx_root(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.X_ROOT); }
+    public static int nx_root(long struct) { return memGetInt(struct + XButtonEvent.X_ROOT); }
     /** Unsafe version of {@link #y_root}. */
-    public static int ny_root(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.Y_ROOT); }
+    public static int ny_root(long struct) { return memGetInt(struct + XButtonEvent.Y_ROOT); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XButtonEvent.STATE); }
     /** Unsafe version of {@link #button}. */
-    public static int nbutton(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.BUTTON); }
+    public static int nbutton(long struct) { return memGetInt(struct + XButtonEvent.BUTTON); }
     /** Unsafe version of {@link #same_screen}. */
-    public static int nsame_screen(long struct) { return UNSAFE.getInt(null, struct + XButtonEvent.SAME_SCREEN); }
+    public static int nsame_screen(long struct) { return memGetInt(struct + XButtonEvent.SAME_SCREEN); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XButtonEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XButtonEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XButtonEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XButtonEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -428,19 +428,19 @@ public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { memPutCLong(struct + XButtonEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XButtonEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XButtonEvent.Y, value); }
     /** Unsafe version of {@link #x_root(int) x_root}. */
-    public static void nx_root(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.X_ROOT, value); }
+    public static void nx_root(long struct, int value) { memPutInt(struct + XButtonEvent.X_ROOT, value); }
     /** Unsafe version of {@link #y_root(int) y_root}. */
-    public static void ny_root(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.Y_ROOT, value); }
+    public static void ny_root(long struct, int value) { memPutInt(struct + XButtonEvent.Y_ROOT, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XButtonEvent.STATE, value); }
     /** Unsafe version of {@link #button(int) button}. */
-    public static void nbutton(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.BUTTON, value); }
+    public static void nbutton(long struct, int value) { memPutInt(struct + XButtonEvent.BUTTON, value); }
     /** Unsafe version of {@link #same_screen(boolean) same_screen}. */
-    public static void nsame_screen(long struct, int value) { UNSAFE.putInt(null, struct + XButtonEvent.SAME_SCREEN, value); }
+    public static void nsame_screen(long struct, int value) { memPutInt(struct + XButtonEvent.SAME_SCREEN, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

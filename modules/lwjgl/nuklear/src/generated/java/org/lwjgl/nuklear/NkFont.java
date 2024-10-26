@@ -314,13 +314,13 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     /** Unsafe version of {@link #info}. */
     public static NkBakedFont ninfo(long struct) { return NkBakedFont.create(struct + NkFont.INFO); }
     /** Unsafe version of {@link #scale}. */
-    public static float nscale(long struct) { return UNSAFE.getFloat(null, struct + NkFont.SCALE); }
+    public static float nscale(long struct) { return memGetFloat(struct + NkFont.SCALE); }
     /** Unsafe version of {@link #glyphs}. */
     @Nullable public static NkFontGlyph nglyphs(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.GLYPHS)); }
     /** Unsafe version of {@link #fallback}. */
     @Nullable public static NkFontGlyph nfallback(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.FALLBACK)); }
     /** Unsafe version of {@link #fallback_codepoint}. */
-    public static int nfallback_codepoint(long struct) { return UNSAFE.getInt(null, struct + NkFont.FALLBACK_CODEPOINT); }
+    public static int nfallback_codepoint(long struct) { return memGetInt(struct + NkFont.FALLBACK_CODEPOINT); }
     /** Unsafe version of {@link #texture}. */
     public static NkHandle ntexture(long struct) { return NkHandle.create(struct + NkFont.TEXTURE); }
     /** Unsafe version of {@link #config}. */
@@ -333,13 +333,13 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     /** Unsafe version of {@link #info(NkBakedFont) info}. */
     public static void ninfo(long struct, NkBakedFont value) { memCopy(value.address(), struct + NkFont.INFO, NkBakedFont.SIZEOF); }
     /** Unsafe version of {@link #scale(float) scale}. */
-    public static void nscale(long struct, float value) { UNSAFE.putFloat(null, struct + NkFont.SCALE, value); }
+    public static void nscale(long struct, float value) { memPutFloat(struct + NkFont.SCALE, value); }
     /** Unsafe version of {@link #glyphs(NkFontGlyph) glyphs}. */
     public static void nglyphs(long struct, @Nullable NkFontGlyph value) { memPutAddress(struct + NkFont.GLYPHS, memAddressSafe(value)); }
     /** Unsafe version of {@link #fallback(NkFontGlyph) fallback}. */
     public static void nfallback(long struct, @Nullable NkFontGlyph value) { memPutAddress(struct + NkFont.FALLBACK, memAddressSafe(value)); }
     /** Unsafe version of {@link #fallback_codepoint(int) fallback_codepoint}. */
-    public static void nfallback_codepoint(long struct, int value) { UNSAFE.putInt(null, struct + NkFont.FALLBACK_CODEPOINT, value); }
+    public static void nfallback_codepoint(long struct, int value) { memPutInt(struct + NkFont.FALLBACK_CODEPOINT, value); }
     /** Unsafe version of {@link #texture(NkHandle) texture}. */
     public static void ntexture(long struct, NkHandle value) { memCopy(value.address(), struct + NkFont.TEXTURE, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #config(NkFontConfig) config}. */

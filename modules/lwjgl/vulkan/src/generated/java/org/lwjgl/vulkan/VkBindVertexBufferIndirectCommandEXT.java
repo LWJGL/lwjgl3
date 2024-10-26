@@ -241,18 +241,18 @@ public class VkBindVertexBufferIndirectCommandEXT extends Struct<VkBindVertexBuf
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferAddress}. */
-    public static long nbufferAddress(long struct) { return UNSAFE.getLong(null, struct + VkBindVertexBufferIndirectCommandEXT.BUFFERADDRESS); }
+    public static long nbufferAddress(long struct) { return memGetLong(struct + VkBindVertexBufferIndirectCommandEXT.BUFFERADDRESS); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkBindVertexBufferIndirectCommandEXT.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + VkBindVertexBufferIndirectCommandEXT.SIZE); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkBindVertexBufferIndirectCommandEXT.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + VkBindVertexBufferIndirectCommandEXT.STRIDE); }
 
     /** Unsafe version of {@link #bufferAddress(long) bufferAddress}. */
-    public static void nbufferAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBindVertexBufferIndirectCommandEXT.BUFFERADDRESS, value); }
+    public static void nbufferAddress(long struct, long value) { memPutLong(struct + VkBindVertexBufferIndirectCommandEXT.BUFFERADDRESS, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVertexBufferIndirectCommandEXT.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + VkBindVertexBufferIndirectCommandEXT.SIZE, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVertexBufferIndirectCommandEXT.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + VkBindVertexBufferIndirectCommandEXT.STRIDE, value); }
 
     // -----------------------------------
 

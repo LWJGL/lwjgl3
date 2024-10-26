@@ -275,24 +275,24 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAntiLagDataAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAntiLagDataAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAntiLagDataAMD.PNEXT); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkAntiLagDataAMD.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkAntiLagDataAMD.MODE); }
     /** Unsafe version of {@link #maxFPS}. */
-    public static int nmaxFPS(long struct) { return UNSAFE.getInt(null, struct + VkAntiLagDataAMD.MAXFPS); }
+    public static int nmaxFPS(long struct) { return memGetInt(struct + VkAntiLagDataAMD.MAXFPS); }
     /** Unsafe version of {@link #pPresentationInfo}. */
     @Nullable public static VkAntiLagPresentationInfoAMD npPresentationInfo(long struct) { return VkAntiLagPresentationInfoAMD.createSafe(memGetAddress(struct + VkAntiLagDataAMD.PPRESENTATIONINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAntiLagDataAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAntiLagDataAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAntiLagDataAMD.PNEXT, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkAntiLagDataAMD.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkAntiLagDataAMD.MODE, value); }
     /** Unsafe version of {@link #maxFPS(int) maxFPS}. */
-    public static void nmaxFPS(long struct, int value) { UNSAFE.putInt(null, struct + VkAntiLagDataAMD.MAXFPS, value); }
+    public static void nmaxFPS(long struct, int value) { memPutInt(struct + VkAntiLagDataAMD.MAXFPS, value); }
     /** Unsafe version of {@link #pPresentationInfo(VkAntiLagPresentationInfoAMD) pPresentationInfo}. */
     public static void npPresentationInfo(long struct, @Nullable VkAntiLagPresentationInfoAMD value) { memPutAddress(struct + VkAntiLagDataAMD.PPRESENTATIONINFO, memAddressSafe(value)); }
 

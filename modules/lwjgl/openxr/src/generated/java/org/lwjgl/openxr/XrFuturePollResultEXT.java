@@ -248,14 +248,14 @@ public class XrFuturePollResultEXT extends Struct<XrFuturePollResultEXT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFuturePollResultEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFuturePollResultEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFuturePollResultEXT.NEXT); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XrFuturePollResultEXT.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XrFuturePollResultEXT.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFuturePollResultEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFuturePollResultEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFuturePollResultEXT.NEXT, value); }
 

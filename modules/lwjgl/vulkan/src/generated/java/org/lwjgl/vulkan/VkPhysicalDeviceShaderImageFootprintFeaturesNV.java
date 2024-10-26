@@ -267,18 +267,18 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #imageFootprint}. */
-    public static int nimageFootprint(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.IMAGEFOOTPRINT); }
+    public static int nimageFootprint(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.IMAGEFOOTPRINT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #imageFootprint(boolean) imageFootprint}. */
-    public static void nimageFootprint(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.IMAGEFOOTPRINT, value); }
+    public static void nimageFootprint(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderImageFootprintFeaturesNV.IMAGEFOOTPRINT, value); }
 
     // -----------------------------------
 

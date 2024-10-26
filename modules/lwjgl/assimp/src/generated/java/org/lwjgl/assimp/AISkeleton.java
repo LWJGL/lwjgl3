@@ -252,14 +252,14 @@ public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AISkeleton.MNAME); }
     /** Unsafe version of {@link #mNumBones}. */
-    public static int nmNumBones(long struct) { return UNSAFE.getInt(null, struct + AISkeleton.MNUMBONES); }
+    public static int nmNumBones(long struct) { return memGetInt(struct + AISkeleton.MNUMBONES); }
     /** Unsafe version of {@link #mBones() mBones}. */
     public static PointerBuffer nmBones(long struct) { return memPointerBuffer(memGetAddress(struct + AISkeleton.MBONES), nmNumBones(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AISkeleton.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumBones} field of the specified {@code struct}. */
-    public static void nmNumBones(long struct, int value) { UNSAFE.putInt(null, struct + AISkeleton.MNUMBONES, value); }
+    public static void nmNumBones(long struct, int value) { memPutInt(struct + AISkeleton.MNUMBONES, value); }
     /** Unsafe version of {@link #mBones(PointerBuffer) mBones}. */
     public static void nmBones(long struct, PointerBuffer value) { memPutAddress(struct + AISkeleton.MBONES, memAddress(value)); nmNumBones(struct, value.remaining()); }
 

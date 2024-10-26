@@ -531,9 +531,9 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     /** Unsafe version of {@link #text_background}. */
     public static NkColor ntext_background(long struct) { return NkColor.create(struct + NkStyleSelectable.TEXT_BACKGROUND); }
     /** Unsafe version of {@link #text_alignment}. */
-    public static int ntext_alignment(long struct) { return UNSAFE.getInt(null, struct + NkStyleSelectable.TEXT_ALIGNMENT); }
+    public static int ntext_alignment(long struct) { return memGetInt(struct + NkStyleSelectable.TEXT_ALIGNMENT); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSelectable.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleSelectable.ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleSelectable.PADDING); }
     /** Unsafe version of {@link #touch_padding}. */
@@ -541,9 +541,9 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     /** Unsafe version of {@link #image_padding}. */
     public static NkVec2 nimage_padding(long struct) { return NkVec2.create(struct + NkStyleSelectable.IMAGE_PADDING); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSelectable.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleSelectable.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSelectable.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleSelectable.DISABLED_FACTOR); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleSelectable.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
@@ -578,9 +578,9 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     /** Unsafe version of {@link #text_background(NkColor) text_background}. */
     public static void ntext_background(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleSelectable.TEXT_BACKGROUND, NkColor.SIZEOF); }
     /** Unsafe version of {@link #text_alignment(int) text_alignment}. */
-    public static void ntext_alignment(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleSelectable.TEXT_ALIGNMENT, value); }
+    public static void ntext_alignment(long struct, int value) { memPutInt(struct + NkStyleSelectable.TEXT_ALIGNMENT, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSelectable.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleSelectable.ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSelectable.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #touch_padding(NkVec2) touch_padding}. */
@@ -588,9 +588,9 @@ public class NkStyleSelectable extends Struct<NkStyleSelectable> implements Nati
     /** Unsafe version of {@link #image_padding(NkVec2) image_padding}. */
     public static void nimage_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSelectable.IMAGE_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSelectable.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleSelectable.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSelectable.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleSelectable.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkStyleSelectable.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #draw_begin(NkDrawBeginCallbackI) draw_begin}. */

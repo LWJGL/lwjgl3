@@ -261,20 +261,20 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBindingModificationsKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBindingModificationsKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBindingModificationsKHR.NEXT); }
     /** Unsafe version of {@link #bindingModificationCount}. */
-    public static int nbindingModificationCount(long struct) { return UNSAFE.getInt(null, struct + XrBindingModificationsKHR.BINDINGMODIFICATIONCOUNT); }
+    public static int nbindingModificationCount(long struct) { return memGetInt(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONCOUNT); }
     /** Unsafe version of {@link #bindingModifications() bindingModifications}. */
     @Nullable public static PointerBuffer nbindingModifications(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONS), nbindingModificationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBindingModificationsKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBindingModificationsKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBindingModificationsKHR.NEXT, value); }
     /** Sets the specified value to the {@code bindingModificationCount} field of the specified {@code struct}. */
-    public static void nbindingModificationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrBindingModificationsKHR.BINDINGMODIFICATIONCOUNT, value); }
+    public static void nbindingModificationCount(long struct, int value) { memPutInt(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONCOUNT, value); }
     /** Unsafe version of {@link #bindingModifications(PointerBuffer) bindingModifications}. */
     public static void nbindingModifications(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONS, memAddressSafe(value)); if (value != null) { nbindingModificationCount(struct, value.remaining()); } }
 

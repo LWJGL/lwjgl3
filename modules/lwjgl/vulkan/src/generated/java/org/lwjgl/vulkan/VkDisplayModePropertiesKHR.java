@@ -217,7 +217,7 @@ public class VkDisplayModePropertiesKHR extends Struct<VkDisplayModePropertiesKH
     // -----------------------------------
 
     /** Unsafe version of {@link #displayMode}. */
-    public static long ndisplayMode(long struct) { return UNSAFE.getLong(null, struct + VkDisplayModePropertiesKHR.DISPLAYMODE); }
+    public static long ndisplayMode(long struct) { return memGetLong(struct + VkDisplayModePropertiesKHR.DISPLAYMODE); }
     /** Unsafe version of {@link #parameters}. */
     public static VkDisplayModeParametersKHR nparameters(long struct) { return VkDisplayModeParametersKHR.create(struct + VkDisplayModePropertiesKHR.PARAMETERS); }
 

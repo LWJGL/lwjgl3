@@ -260,16 +260,16 @@ public class OVRHapticsBuffer extends Struct<OVRHapticsBuffer> implements Native
     /** Unsafe version of {@link #Samples(int) Samples}. */
     public static ByteBuffer nSamples(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + OVRHapticsBuffer.SAMPLES), capacity); }
     /** Unsafe version of {@link #SamplesCount}. */
-    public static int nSamplesCount(long struct) { return UNSAFE.getInt(null, struct + OVRHapticsBuffer.SAMPLESCOUNT); }
+    public static int nSamplesCount(long struct) { return memGetInt(struct + OVRHapticsBuffer.SAMPLESCOUNT); }
     /** Unsafe version of {@link #SubmitMode}. */
-    public static int nSubmitMode(long struct) { return UNSAFE.getInt(null, struct + OVRHapticsBuffer.SUBMITMODE); }
+    public static int nSubmitMode(long struct) { return memGetInt(struct + OVRHapticsBuffer.SUBMITMODE); }
 
     /** Unsafe version of {@link #Samples(ByteBuffer) Samples}. */
     public static void nSamples(long struct, ByteBuffer value) { memPutAddress(struct + OVRHapticsBuffer.SAMPLES, memAddress(value)); }
     /** Unsafe version of {@link #SamplesCount(int) SamplesCount}. */
-    public static void nSamplesCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRHapticsBuffer.SAMPLESCOUNT, value); }
+    public static void nSamplesCount(long struct, int value) { memPutInt(struct + OVRHapticsBuffer.SAMPLESCOUNT, value); }
     /** Unsafe version of {@link #SubmitMode(int) SubmitMode}. */
-    public static void nSubmitMode(long struct, int value) { UNSAFE.putInt(null, struct + OVRHapticsBuffer.SUBMITMODE, value); }
+    public static void nSubmitMode(long struct, int value) { memPutInt(struct + OVRHapticsBuffer.SUBMITMODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

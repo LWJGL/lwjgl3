@@ -285,16 +285,16 @@ public class VkMemoryDedicatedRequirements extends Struct<VkMemoryDedicatedRequi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryDedicatedRequirements.PNEXT); }
     /** Unsafe version of {@link #prefersDedicatedAllocation}. */
-    public static int nprefersDedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.PREFERSDEDICATEDALLOCATION); }
+    public static int nprefersDedicatedAllocation(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.PREFERSDEDICATEDALLOCATION); }
     /** Unsafe version of {@link #requiresDedicatedAllocation}. */
-    public static int nrequiresDedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.REQUIRESDEDICATEDALLOCATION); }
+    public static int nrequiresDedicatedAllocation(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.REQUIRESDEDICATEDALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryDedicatedRequirements.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryDedicatedRequirements.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryDedicatedRequirements.PNEXT, value); }
 

@@ -264,23 +264,23 @@ public class BGFXTextureInfo extends Struct<BGFXTextureInfo> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + BGFXTextureInfo.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + BGFXTextureInfo.FORMAT); }
     /** Unsafe version of {@link #storageSize}. */
-    public static int nstorageSize(long struct) { return UNSAFE.getInt(null, struct + BGFXTextureInfo.STORAGESIZE); }
+    public static int nstorageSize(long struct) { return memGetInt(struct + BGFXTextureInfo.STORAGESIZE); }
     /** Unsafe version of {@link #width}. */
-    public static short nwidth(long struct) { return UNSAFE.getShort(null, struct + BGFXTextureInfo.WIDTH); }
+    public static short nwidth(long struct) { return memGetShort(struct + BGFXTextureInfo.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static short nheight(long struct) { return UNSAFE.getShort(null, struct + BGFXTextureInfo.HEIGHT); }
+    public static short nheight(long struct) { return memGetShort(struct + BGFXTextureInfo.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static short ndepth(long struct) { return UNSAFE.getShort(null, struct + BGFXTextureInfo.DEPTH); }
+    public static short ndepth(long struct) { return memGetShort(struct + BGFXTextureInfo.DEPTH); }
     /** Unsafe version of {@link #numLayers}. */
-    public static short nnumLayers(long struct) { return UNSAFE.getShort(null, struct + BGFXTextureInfo.NUMLAYERS); }
+    public static short nnumLayers(long struct) { return memGetShort(struct + BGFXTextureInfo.NUMLAYERS); }
     /** Unsafe version of {@link #numMips}. */
-    public static byte nnumMips(long struct) { return UNSAFE.getByte(null, struct + BGFXTextureInfo.NUMMIPS); }
+    public static byte nnumMips(long struct) { return memGetByte(struct + BGFXTextureInfo.NUMMIPS); }
     /** Unsafe version of {@link #bitsPerPixel}. */
-    public static byte nbitsPerPixel(long struct) { return UNSAFE.getByte(null, struct + BGFXTextureInfo.BITSPERPIXEL); }
+    public static byte nbitsPerPixel(long struct) { return memGetByte(struct + BGFXTextureInfo.BITSPERPIXEL); }
     /** Unsafe version of {@link #cubeMap}. */
-    public static boolean ncubeMap(long struct) { return UNSAFE.getByte(null, struct + BGFXTextureInfo.CUBEMAP) != 0; }
+    public static boolean ncubeMap(long struct) { return memGetByte(struct + BGFXTextureInfo.CUBEMAP) != 0; }
 
     // -----------------------------------
 

@@ -286,26 +286,26 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectCommandsLayoutTokenEXT.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenEXT.TYPE); }
     /** Unsafe version of {@link #data}. */
     public static VkIndirectCommandsTokenDataEXT ndata(long struct) { return VkIndirectCommandsTokenDataEXT.create(struct + VkIndirectCommandsLayoutTokenEXT.DATA); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenEXT.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenEXT.OFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectCommandsLayoutTokenEXT.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenEXT.TYPE, value); }
     /** Unsafe version of {@link #data(VkIndirectCommandsTokenDataEXT) data}. */
     public static void ndata(long struct, VkIndirectCommandsTokenDataEXT value) { memCopy(value.address(), struct + VkIndirectCommandsLayoutTokenEXT.DATA, VkIndirectCommandsTokenDataEXT.SIZEOF); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenEXT.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenEXT.OFFSET, value); }
 
     // -----------------------------------
 

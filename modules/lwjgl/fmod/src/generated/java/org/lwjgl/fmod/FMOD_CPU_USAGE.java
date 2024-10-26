@@ -259,30 +259,30 @@ public class FMOD_CPU_USAGE extends Struct<FMOD_CPU_USAGE> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #dsp}. */
-    public static float ndsp(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.DSP); }
+    public static float ndsp(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.DSP); }
     /** Unsafe version of {@link #stream$}. */
-    public static float nstream$(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.STREAM); }
+    public static float nstream$(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.STREAM); }
     /** Unsafe version of {@link #geometry}. */
-    public static float ngeometry(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.GEOMETRY); }
+    public static float ngeometry(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.GEOMETRY); }
     /** Unsafe version of {@link #update}. */
-    public static float nupdate(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.UPDATE); }
+    public static float nupdate(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.UPDATE); }
     /** Unsafe version of {@link #convolution1}. */
-    public static float nconvolution1(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.CONVOLUTION1); }
+    public static float nconvolution1(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.CONVOLUTION1); }
     /** Unsafe version of {@link #convolution2}. */
-    public static float nconvolution2(long struct) { return UNSAFE.getFloat(null, struct + FMOD_CPU_USAGE.CONVOLUTION2); }
+    public static float nconvolution2(long struct) { return memGetFloat(struct + FMOD_CPU_USAGE.CONVOLUTION2); }
 
     /** Unsafe version of {@link #dsp(float) dsp}. */
-    public static void ndsp(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.DSP, value); }
+    public static void ndsp(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.DSP, value); }
     /** Unsafe version of {@link #stream$(float) stream$}. */
-    public static void nstream$(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.STREAM, value); }
+    public static void nstream$(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.STREAM, value); }
     /** Unsafe version of {@link #geometry(float) geometry}. */
-    public static void ngeometry(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.GEOMETRY, value); }
+    public static void ngeometry(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.GEOMETRY, value); }
     /** Unsafe version of {@link #update(float) update}. */
-    public static void nupdate(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.UPDATE, value); }
+    public static void nupdate(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.UPDATE, value); }
     /** Unsafe version of {@link #convolution1(float) convolution1}. */
-    public static void nconvolution1(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.CONVOLUTION1, value); }
+    public static void nconvolution1(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.CONVOLUTION1, value); }
     /** Unsafe version of {@link #convolution2(float) convolution2}. */
-    public static void nconvolution2(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_CPU_USAGE.CONVOLUTION2, value); }
+    public static void nconvolution2(long struct, float value) { memPutFloat(struct + FMOD_CPU_USAGE.CONVOLUTION2, value); }
 
     // -----------------------------------
 

@@ -263,12 +263,12 @@ public class VkAttachmentSampleLocationsEXT extends Struct<VkAttachmentSampleLoc
     // -----------------------------------
 
     /** Unsafe version of {@link #attachmentIndex}. */
-    public static int nattachmentIndex(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentSampleLocationsEXT.ATTACHMENTINDEX); }
+    public static int nattachmentIndex(long struct) { return memGetInt(struct + VkAttachmentSampleLocationsEXT.ATTACHMENTINDEX); }
     /** Unsafe version of {@link #sampleLocationsInfo}. */
     public static VkSampleLocationsInfoEXT nsampleLocationsInfo(long struct) { return VkSampleLocationsInfoEXT.create(struct + VkAttachmentSampleLocationsEXT.SAMPLELOCATIONSINFO); }
 
     /** Unsafe version of {@link #attachmentIndex(int) attachmentIndex}. */
-    public static void nattachmentIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleLocationsEXT.ATTACHMENTINDEX, value); }
+    public static void nattachmentIndex(long struct, int value) { memPutInt(struct + VkAttachmentSampleLocationsEXT.ATTACHMENTINDEX, value); }
     /** Unsafe version of {@link #sampleLocationsInfo(VkSampleLocationsInfoEXT) sampleLocationsInfo}. */
     public static void nsampleLocationsInfo(long struct, VkSampleLocationsInfoEXT value) { memCopy(value.address(), struct + VkAttachmentSampleLocationsEXT.SAMPLELOCATIONSINFO, VkSampleLocationsInfoEXT.SIZEOF); }
 

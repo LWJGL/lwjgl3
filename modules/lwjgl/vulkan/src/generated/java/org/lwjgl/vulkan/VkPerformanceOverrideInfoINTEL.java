@@ -289,26 +289,26 @@ public class VkPerformanceOverrideInfoINTEL extends Struct<VkPerformanceOverride
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceOverrideInfoINTEL.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPerformanceOverrideInfoINTEL.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPerformanceOverrideInfoINTEL.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceOverrideInfoINTEL.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkPerformanceOverrideInfoINTEL.TYPE); }
     /** Unsafe version of {@link #enable}. */
-    public static int nenable(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceOverrideInfoINTEL.ENABLE); }
+    public static int nenable(long struct) { return memGetInt(struct + VkPerformanceOverrideInfoINTEL.ENABLE); }
     /** Unsafe version of {@link #parameter}. */
-    public static long nparameter(long struct) { return UNSAFE.getLong(null, struct + VkPerformanceOverrideInfoINTEL.PARAMETER); }
+    public static long nparameter(long struct) { return memGetLong(struct + VkPerformanceOverrideInfoINTEL.PARAMETER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceOverrideInfoINTEL.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPerformanceOverrideInfoINTEL.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPerformanceOverrideInfoINTEL.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceOverrideInfoINTEL.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkPerformanceOverrideInfoINTEL.TYPE, value); }
     /** Unsafe version of {@link #enable(boolean) enable}. */
-    public static void nenable(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceOverrideInfoINTEL.ENABLE, value); }
+    public static void nenable(long struct, int value) { memPutInt(struct + VkPerformanceOverrideInfoINTEL.ENABLE, value); }
     /** Unsafe version of {@link #parameter(long) parameter}. */
-    public static void nparameter(long struct, long value) { UNSAFE.putLong(null, struct + VkPerformanceOverrideInfoINTEL.PARAMETER, value); }
+    public static void nparameter(long struct, long value) { memPutLong(struct + VkPerformanceOverrideInfoINTEL.PARAMETER, value); }
 
     // -----------------------------------
 

@@ -325,11 +325,11 @@ public class XReparentEvent extends Struct<XReparentEvent> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XReparentEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XReparentEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XReparentEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XReparentEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
@@ -339,18 +339,18 @@ public class XReparentEvent extends Struct<XReparentEvent> implements NativeReso
     /** Unsafe version of {@link #parent}. */
     public static long nparent(long struct) { return memGetCLong(struct + XReparentEvent.PARENT); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XReparentEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XReparentEvent.Y); }
     /** Unsafe version of {@link #override_redirect}. */
-    public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.OVERRIDE_REDIRECT); }
+    public static int noverride_redirect(long struct) { return memGetInt(struct + XReparentEvent.OVERRIDE_REDIRECT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XReparentEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XReparentEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XReparentEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XReparentEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
@@ -360,11 +360,11 @@ public class XReparentEvent extends Struct<XReparentEvent> implements NativeReso
     /** Unsafe version of {@link #parent(long) parent}. */
     public static void nparent(long struct, long value) { memPutCLong(struct + XReparentEvent.PARENT, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XReparentEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XReparentEvent.Y, value); }
     /** Unsafe version of {@link #override_redirect(int) override_redirect}. */
-    public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.OVERRIDE_REDIRECT, value); }
+    public static void noverride_redirect(long struct, int value) { memPutInt(struct + XReparentEvent.OVERRIDE_REDIRECT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

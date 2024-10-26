@@ -300,24 +300,24 @@ public class XrWorldMeshRequestCompletionML extends Struct<XrWorldMeshRequestCom
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshRequestCompletionML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshRequestCompletionML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshRequestCompletionML.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
-    public static int nfutureResult(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshRequestCompletionML.FUTURERESULT); }
+    public static int nfutureResult(long struct) { return memGetInt(struct + XrWorldMeshRequestCompletionML.FUTURERESULT); }
     /** Unsafe version of {@link #blockCount}. */
-    public static int nblockCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshRequestCompletionML.BLOCKCOUNT); }
+    public static int nblockCount(long struct) { return memGetInt(struct + XrWorldMeshRequestCompletionML.BLOCKCOUNT); }
     /** Unsafe version of {@link #blocks}. */
     public static XrWorldMeshBlockML.Buffer nblocks(long struct) { return XrWorldMeshBlockML.create(memGetAddress(struct + XrWorldMeshRequestCompletionML.BLOCKS), nblockCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshRequestCompletionML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshRequestCompletionML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshRequestCompletionML.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
-    public static void nfutureResult(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshRequestCompletionML.FUTURERESULT, value); }
+    public static void nfutureResult(long struct, int value) { memPutInt(struct + XrWorldMeshRequestCompletionML.FUTURERESULT, value); }
     /** Sets the specified value to the {@code blockCount} field of the specified {@code struct}. */
-    public static void nblockCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshRequestCompletionML.BLOCKCOUNT, value); }
+    public static void nblockCount(long struct, int value) { memPutInt(struct + XrWorldMeshRequestCompletionML.BLOCKCOUNT, value); }
     /** Unsafe version of {@link #blocks(XrWorldMeshBlockML.Buffer) blocks}. */
     public static void nblocks(long struct, XrWorldMeshBlockML.Buffer value) { memPutAddress(struct + XrWorldMeshRequestCompletionML.BLOCKS, value.address()); nblockCount(struct, value.remaining()); }
 

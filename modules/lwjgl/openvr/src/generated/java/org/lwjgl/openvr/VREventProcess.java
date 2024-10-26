@@ -126,13 +126,13 @@ public class VREventProcess extends Struct<VREventProcess> {
     // -----------------------------------
 
     /** Unsafe version of {@link #pid}. */
-    public static int npid(long struct) { return UNSAFE.getInt(null, struct + VREventProcess.PID); }
+    public static int npid(long struct) { return memGetInt(struct + VREventProcess.PID); }
     /** Unsafe version of {@link #oldPid}. */
-    public static int noldPid(long struct) { return UNSAFE.getInt(null, struct + VREventProcess.OLDPID); }
+    public static int noldPid(long struct) { return memGetInt(struct + VREventProcess.OLDPID); }
     /** Unsafe version of {@link #bForced}. */
-    public static boolean nbForced(long struct) { return UNSAFE.getByte(null, struct + VREventProcess.BFORCED) != 0; }
+    public static boolean nbForced(long struct) { return memGetByte(struct + VREventProcess.BFORCED) != 0; }
     /** Unsafe version of {@link #bConnectionLost}. */
-    public static boolean nbConnectionLost(long struct) { return UNSAFE.getByte(null, struct + VREventProcess.BCONNECTIONLOST) != 0; }
+    public static boolean nbConnectionLost(long struct) { return memGetByte(struct + VREventProcess.BCONNECTIONLOST) != 0; }
 
     // -----------------------------------
 

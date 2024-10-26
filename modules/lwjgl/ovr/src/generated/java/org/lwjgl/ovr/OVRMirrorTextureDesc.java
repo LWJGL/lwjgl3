@@ -263,22 +263,22 @@ public class OVRMirrorTextureDesc extends Struct<OVRMirrorTextureDesc> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #Format}. */
-    public static int nFormat(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.FORMAT); }
+    public static int nFormat(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.FORMAT); }
     /** Unsafe version of {@link #Width}. */
-    public static int nWidth(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.WIDTH); }
+    public static int nWidth(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.WIDTH); }
     /** Unsafe version of {@link #Height}. */
-    public static int nHeight(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.HEIGHT); }
+    public static int nHeight(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.HEIGHT); }
     /** Unsafe version of {@link #MiscFlags}. */
-    public static int nMiscFlags(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.MISCFLAGS); }
+    public static int nMiscFlags(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.MISCFLAGS); }
 
     /** Unsafe version of {@link #Format(int) Format}. */
-    public static void nFormat(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.FORMAT, value); }
+    public static void nFormat(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.FORMAT, value); }
     /** Unsafe version of {@link #Width(int) Width}. */
-    public static void nWidth(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.WIDTH, value); }
+    public static void nWidth(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.WIDTH, value); }
     /** Unsafe version of {@link #Height(int) Height}. */
-    public static void nHeight(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.HEIGHT, value); }
+    public static void nHeight(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.HEIGHT, value); }
     /** Unsafe version of {@link #MiscFlags(int) MiscFlags}. */
-    public static void nMiscFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.MISCFLAGS, value); }
+    public static void nMiscFlags(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.MISCFLAGS, value); }
 
     // -----------------------------------
 

@@ -267,7 +267,7 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #glyph_format}. */
-    public static int nglyph_format(long struct) { return UNSAFE.getInt(null, struct + FT_Raster_Funcs.GLYPH_FORMAT); }
+    public static int nglyph_format(long struct) { return memGetInt(struct + FT_Raster_Funcs.GLYPH_FORMAT); }
     /** Unsafe version of {@link #raster_new}. */
     @Nullable public static FT_Raster_NewFunc nraster_new(long struct) { return FT_Raster_NewFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_NEW)); }
     /** Unsafe version of {@link #raster_reset}. */
@@ -280,7 +280,7 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     @Nullable public static FT_Raster_DoneFunc nraster_done(long struct) { return FT_Raster_DoneFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_DONE)); }
 
     /** Unsafe version of {@link #glyph_format(int) glyph_format}. */
-    public static void nglyph_format(long struct, int value) { UNSAFE.putInt(null, struct + FT_Raster_Funcs.GLYPH_FORMAT, value); }
+    public static void nglyph_format(long struct, int value) { memPutInt(struct + FT_Raster_Funcs.GLYPH_FORMAT, value); }
     /** Unsafe version of {@link #raster_new(FT_Raster_NewFuncI) raster_new}. */
     public static void nraster_new(long struct, @Nullable FT_Raster_NewFuncI value) { memPutAddress(struct + FT_Raster_Funcs.RASTER_NEW, memAddressSafe(value)); }
     /** Unsafe version of {@link #raster_reset(FT_Raster_ResetFuncI) raster_reset}. */

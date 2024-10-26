@@ -276,22 +276,22 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct<VkPhysicalDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMeshShaderFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #taskShader}. */
-    public static int ntaskShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.TASKSHADER); }
+    public static int ntaskShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.TASKSHADER); }
     /** Unsafe version of {@link #meshShader}. */
-    public static int nmeshShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.MESHSHADER); }
+    public static int nmeshShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.MESHSHADER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMeshShaderFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #taskShader(boolean) taskShader}. */
-    public static void ntaskShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.TASKSHADER, value); }
+    public static void ntaskShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.TASKSHADER, value); }
     /** Unsafe version of {@link #meshShader(boolean) meshShader}. */
-    public static void nmeshShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesNV.MESHSHADER, value); }
+    public static void nmeshShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesNV.MESHSHADER, value); }
 
     // -----------------------------------
 

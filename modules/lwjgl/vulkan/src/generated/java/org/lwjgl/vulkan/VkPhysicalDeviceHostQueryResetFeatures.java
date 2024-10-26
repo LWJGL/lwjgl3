@@ -246,18 +246,18 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostQueryResetFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceHostQueryResetFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceHostQueryResetFeatures.PNEXT); }
     /** Unsafe version of {@link #hostQueryReset}. */
-    public static int nhostQueryReset(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostQueryResetFeatures.HOSTQUERYRESET); }
+    public static int nhostQueryReset(long struct) { return memGetInt(struct + VkPhysicalDeviceHostQueryResetFeatures.HOSTQUERYRESET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostQueryResetFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostQueryResetFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceHostQueryResetFeatures.PNEXT, value); }
     /** Unsafe version of {@link #hostQueryReset(boolean) hostQueryReset}. */
-    public static void nhostQueryReset(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostQueryResetFeatures.HOSTQUERYRESET, value); }
+    public static void nhostQueryReset(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostQueryResetFeatures.HOSTQUERYRESET, value); }
 
     // -----------------------------------
 

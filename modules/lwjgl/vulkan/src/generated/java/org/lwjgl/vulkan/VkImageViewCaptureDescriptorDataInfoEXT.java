@@ -254,18 +254,18 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct<VkImageViewC
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCaptureDescriptorDataInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewCaptureDescriptorDataInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewCaptureDescriptorDataInfoEXT.PNEXT); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkImageViewCaptureDescriptorDataInfoEXT.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkImageViewCaptureDescriptorDataInfoEXT.IMAGEVIEW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCaptureDescriptorDataInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewCaptureDescriptorDataInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewCaptureDescriptorDataInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkImageViewCaptureDescriptorDataInfoEXT.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkImageViewCaptureDescriptorDataInfoEXT.IMAGEVIEW, value); }
 
     // -----------------------------------
 

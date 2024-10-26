@@ -246,18 +246,18 @@ public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.PNEXT); }
     /** Unsafe version of {@link #subpassShading}. */
-    public static int nsubpassShading(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.SUBPASSSHADING); }
+    public static int nsubpassShading(long struct) { return memGetInt(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.SUBPASSSHADING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.PNEXT, value); }
     /** Unsafe version of {@link #subpassShading(boolean) subpassShading}. */
-    public static void nsubpassShading(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.SUBPASSSHADING, value); }
+    public static void nsubpassShading(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.SUBPASSSHADING, value); }
 
     // -----------------------------------
 

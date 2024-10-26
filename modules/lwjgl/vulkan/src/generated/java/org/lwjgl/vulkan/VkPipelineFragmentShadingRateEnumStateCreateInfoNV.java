@@ -276,28 +276,28 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #shadingRateType}. */
-    public static int nshadingRateType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATETYPE); }
+    public static int nshadingRateType(long struct) { return memGetInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATETYPE); }
     /** Unsafe version of {@link #shadingRate}. */
-    public static int nshadingRate(long struct) { return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATE); }
+    public static int nshadingRate(long struct) { return memGetInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATE); }
     /** Unsafe version of {@link #combinerOps}. */
     public static IntBuffer ncombinerOps(long struct) { return memIntBuffer(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.COMBINEROPS, 2); }
     /** Unsafe version of {@link #combinerOps(int) combinerOps}. */
     public static int ncombinerOps(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.COMBINEROPS + check(index, 2) * 4);
+        return memGetInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.COMBINEROPS + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #shadingRateType(int) shadingRateType}. */
-    public static void nshadingRateType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATETYPE, value); }
+    public static void nshadingRateType(long struct, int value) { memPutInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATETYPE, value); }
     /** Unsafe version of {@link #shadingRate(int) shadingRate}. */
-    public static void nshadingRate(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATE, value); }
+    public static void nshadingRate(long struct, int value) { memPutInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.SHADINGRATE, value); }
     /** Unsafe version of {@link #combinerOps(IntBuffer) combinerOps}. */
     public static void ncombinerOps(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -305,7 +305,7 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct<V
     }
     /** Unsafe version of {@link #combinerOps(int, int) combinerOps}. */
     public static void ncombinerOps(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.COMBINEROPS + check(index, 2) * 4, value);
+        memPutInt(struct + VkPipelineFragmentShadingRateEnumStateCreateInfoNV.COMBINEROPS + check(index, 2) * 4, value);
     }
 
     // -----------------------------------

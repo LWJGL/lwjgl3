@@ -136,15 +136,15 @@ public class VkPhysicalDeviceSparseProperties extends Struct<VkPhysicalDeviceSpa
     // -----------------------------------
 
     /** Unsafe version of {@link #residencyStandard2DBlockShape}. */
-    public static int nresidencyStandard2DBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DBLOCKSHAPE); }
+    public static int nresidencyStandard2DBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyStandard2DMultisampleBlockShape}. */
-    public static int nresidencyStandard2DMultisampleBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DMULTISAMPLEBLOCKSHAPE); }
+    public static int nresidencyStandard2DMultisampleBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DMULTISAMPLEBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyStandard3DBlockShape}. */
-    public static int nresidencyStandard3DBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD3DBLOCKSHAPE); }
+    public static int nresidencyStandard3DBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD3DBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyAlignedMipSize}. */
-    public static int nresidencyAlignedMipSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYALIGNEDMIPSIZE); }
+    public static int nresidencyAlignedMipSize(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYALIGNEDMIPSIZE); }
     /** Unsafe version of {@link #residencyNonResidentStrict}. */
-    public static int nresidencyNonResidentStrict(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYNONRESIDENTSTRICT); }
+    public static int nresidencyNonResidentStrict(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYNONRESIDENTSTRICT); }
 
     // -----------------------------------
 

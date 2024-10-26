@@ -213,9 +213,9 @@ public class NkScroll extends Struct<NkScroll> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + NkScroll.X); }
+    public static int nx(long struct) { return memGetInt(struct + NkScroll.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + NkScroll.Y); }
+    public static int ny(long struct) { return memGetInt(struct + NkScroll.Y); }
 
     // -----------------------------------
 

@@ -276,24 +276,24 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBoundary2DFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBoundary2DFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBoundary2DFB.NEXT); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrBoundary2DFB.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrBoundary2DFB.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
     @Nullable public static XrVector2f.Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrBoundary2DFB.VERTICES), nvertexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBoundary2DFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBoundary2DFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBoundary2DFB.NEXT, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
-    public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrBoundary2DFB.VERTEXCAPACITYINPUT, value); }
+    public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrBoundary2DFB.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT, value); }
+    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrVector2f.Buffer) vertices}. */
     public static void nvertices(long struct, @Nullable XrVector2f.Buffer value) { memPutAddress(struct + XrBoundary2DFB.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 

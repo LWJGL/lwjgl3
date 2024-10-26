@@ -250,14 +250,14 @@ public class VkSampleLocationEXT extends Struct<VkSampleLocationEXT> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VkSampleLocationEXT.X); }
+    public static float nx(long struct) { return memGetFloat(struct + VkSampleLocationEXT.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VkSampleLocationEXT.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + VkSampleLocationEXT.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + VkSampleLocationEXT.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + VkSampleLocationEXT.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + VkSampleLocationEXT.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + VkSampleLocationEXT.Y, value); }
 
     // -----------------------------------
 

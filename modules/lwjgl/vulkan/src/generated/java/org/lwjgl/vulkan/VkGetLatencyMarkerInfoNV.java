@@ -263,20 +263,20 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGetLatencyMarkerInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGetLatencyMarkerInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGetLatencyMarkerInfoNV.PNEXT); }
     /** Unsafe version of {@link #timingCount}. */
-    public static int ntimingCount(long struct) { return UNSAFE.getInt(null, struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT); }
+    public static int ntimingCount(long struct) { return memGetInt(struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT); }
     /** Unsafe version of {@link #pTimings}. */
     @Nullable public static VkLatencyTimingsFrameReportNV.Buffer npTimings(long struct) { return VkLatencyTimingsFrameReportNV.createSafe(memGetAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS), ntimingCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGetLatencyMarkerInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGetLatencyMarkerInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGetLatencyMarkerInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code timingCount} field of the specified {@code struct}. */
-    public static void ntimingCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT, value); }
+    public static void ntimingCount(long struct, int value) { memPutInt(struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT, value); }
     /** Unsafe version of {@link #pTimings(VkLatencyTimingsFrameReportNV.Buffer) pTimings}. */
     public static void npTimings(long struct, @Nullable VkLatencyTimingsFrameReportNV.Buffer value) { memPutAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS, memAddressSafe(value)); if (value != null) { ntimingCount(struct, value.remaining()); } }
 

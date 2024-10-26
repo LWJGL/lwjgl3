@@ -311,7 +311,7 @@ public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCre
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGeometryInstanceCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGeometryInstanceCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGeometryInstanceCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #layer}. */
@@ -326,7 +326,7 @@ public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCre
     public static XrVector3f nscale(long struct) { return XrVector3f.create(struct + XrGeometryInstanceCreateInfoFB.SCALE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGeometryInstanceCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGeometryInstanceCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #layer(XrPassthroughLayerFB) layer}. */

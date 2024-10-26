@@ -272,22 +272,22 @@ public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePres
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentScalingCapabilitiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfacePresentScalingCapabilitiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfacePresentScalingCapabilitiesEXT.PNEXT); }
     /** Unsafe version of {@link #supportedPresentScaling}. */
-    public static int nsupportedPresentScaling(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTSCALING); }
+    public static int nsupportedPresentScaling(long struct) { return memGetInt(struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTSCALING); }
     /** Unsafe version of {@link #supportedPresentGravityX}. */
-    public static int nsupportedPresentGravityX(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTGRAVITYX); }
+    public static int nsupportedPresentGravityX(long struct) { return memGetInt(struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTGRAVITYX); }
     /** Unsafe version of {@link #supportedPresentGravityY}. */
-    public static int nsupportedPresentGravityY(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTGRAVITYY); }
+    public static int nsupportedPresentGravityY(long struct) { return memGetInt(struct + VkSurfacePresentScalingCapabilitiesEXT.SUPPORTEDPRESENTGRAVITYY); }
     /** Unsafe version of {@link #minScaledImageExtent}. */
     public static VkExtent2D nminScaledImageExtent(long struct) { return VkExtent2D.create(struct + VkSurfacePresentScalingCapabilitiesEXT.MINSCALEDIMAGEEXTENT); }
     /** Unsafe version of {@link #maxScaledImageExtent}. */
     public static VkExtent2D nmaxScaledImageExtent(long struct) { return VkExtent2D.create(struct + VkSurfacePresentScalingCapabilitiesEXT.MAXSCALEDIMAGEEXTENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfacePresentScalingCapabilitiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfacePresentScalingCapabilitiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfacePresentScalingCapabilitiesEXT.PNEXT, value); }
 

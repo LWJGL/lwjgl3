@@ -220,14 +220,14 @@ public class MSDFGenRange extends Struct<MSDFGenRange> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #lower}. */
-    public static double nlower(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenRange.LOWER); }
+    public static double nlower(long struct) { return memGetDouble(struct + MSDFGenRange.LOWER); }
     /** Unsafe version of {@link #upper}. */
-    public static double nupper(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenRange.UPPER); }
+    public static double nupper(long struct) { return memGetDouble(struct + MSDFGenRange.UPPER); }
 
     /** Unsafe version of {@link #lower(double) lower}. */
-    public static void nlower(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenRange.LOWER, value); }
+    public static void nlower(long struct, double value) { memPutDouble(struct + MSDFGenRange.LOWER, value); }
     /** Unsafe version of {@link #upper(double) upper}. */
-    public static void nupper(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenRange.UPPER, value); }
+    public static void nupper(long struct, double value) { memPutDouble(struct + MSDFGenRange.UPPER, value); }
 
     // -----------------------------------
 

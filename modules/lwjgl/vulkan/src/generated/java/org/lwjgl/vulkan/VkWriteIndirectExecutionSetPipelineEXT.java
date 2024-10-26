@@ -268,22 +268,22 @@ public class VkWriteIndirectExecutionSetPipelineEXT extends Struct<VkWriteIndire
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWriteIndirectExecutionSetPipelineEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWriteIndirectExecutionSetPipelineEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWriteIndirectExecutionSetPipelineEXT.PNEXT); }
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + VkWriteIndirectExecutionSetPipelineEXT.INDEX); }
+    public static int nindex(long struct) { return memGetInt(struct + VkWriteIndirectExecutionSetPipelineEXT.INDEX); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkWriteIndirectExecutionSetPipelineEXT.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkWriteIndirectExecutionSetPipelineEXT.PIPELINE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteIndirectExecutionSetPipelineEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWriteIndirectExecutionSetPipelineEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWriteIndirectExecutionSetPipelineEXT.PNEXT, value); }
     /** Unsafe version of {@link #index(int) index}. */
-    public static void nindex(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteIndirectExecutionSetPipelineEXT.INDEX, value); }
+    public static void nindex(long struct, int value) { memPutInt(struct + VkWriteIndirectExecutionSetPipelineEXT.INDEX, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkWriteIndirectExecutionSetPipelineEXT.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkWriteIndirectExecutionSetPipelineEXT.PIPELINE, value); }
 
     // -----------------------------------
 

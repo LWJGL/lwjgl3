@@ -319,11 +319,11 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XSelectionEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XSelectionEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XSelectionEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XSelectionEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XSelectionEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XSelectionEvent.DISPLAY); }
     /** Unsafe version of {@link #requestor}. */
@@ -338,11 +338,11 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     public static long ntime(long struct) { return memGetCLong(struct + XSelectionEvent.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XSelectionEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XSelectionEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XSelectionEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XSelectionEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #requestor(long) requestor}. */

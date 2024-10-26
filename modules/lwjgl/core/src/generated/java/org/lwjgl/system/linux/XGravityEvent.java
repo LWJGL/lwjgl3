@@ -304,11 +304,11 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XGravityEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XGravityEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XGravityEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XGravityEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
@@ -316,16 +316,16 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetCLong(struct + XGravityEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XGravityEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XGravityEvent.Y); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XGravityEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XGravityEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XGravityEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XGravityEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
@@ -333,9 +333,9 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
     /** Unsafe version of {@link #window(long) window}. */
     public static void nwindow(long struct, long value) { memPutCLong(struct + XGravityEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XGravityEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XGravityEvent.Y, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

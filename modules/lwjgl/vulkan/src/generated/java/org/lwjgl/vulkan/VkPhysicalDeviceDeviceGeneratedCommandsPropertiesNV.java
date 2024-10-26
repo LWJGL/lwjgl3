@@ -298,30 +298,30 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #maxGraphicsShaderGroupCount}. */
-    public static int nmaxGraphicsShaderGroupCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXGRAPHICSSHADERGROUPCOUNT); }
+    public static int nmaxGraphicsShaderGroupCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXGRAPHICSSHADERGROUPCOUNT); }
     /** Unsafe version of {@link #maxIndirectSequenceCount}. */
-    public static int nmaxIndirectSequenceCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTSEQUENCECOUNT); }
+    public static int nmaxIndirectSequenceCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTSEQUENCECOUNT); }
     /** Unsafe version of {@link #maxIndirectCommandsTokenCount}. */
-    public static int nmaxIndirectCommandsTokenCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSTOKENCOUNT); }
+    public static int nmaxIndirectCommandsTokenCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSTOKENCOUNT); }
     /** Unsafe version of {@link #maxIndirectCommandsStreamCount}. */
-    public static int nmaxIndirectCommandsStreamCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSSTREAMCOUNT); }
+    public static int nmaxIndirectCommandsStreamCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSSTREAMCOUNT); }
     /** Unsafe version of {@link #maxIndirectCommandsTokenOffset}. */
-    public static int nmaxIndirectCommandsTokenOffset(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSTOKENOFFSET); }
+    public static int nmaxIndirectCommandsTokenOffset(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSTOKENOFFSET); }
     /** Unsafe version of {@link #maxIndirectCommandsStreamStride}. */
-    public static int nmaxIndirectCommandsStreamStride(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSSTREAMSTRIDE); }
+    public static int nmaxIndirectCommandsStreamStride(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MAXINDIRECTCOMMANDSSTREAMSTRIDE); }
     /** Unsafe version of {@link #minSequencesCountBufferOffsetAlignment}. */
-    public static int nminSequencesCountBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MINSEQUENCESCOUNTBUFFEROFFSETALIGNMENT); }
+    public static int nminSequencesCountBufferOffsetAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MINSEQUENCESCOUNTBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #minSequencesIndexBufferOffsetAlignment}. */
-    public static int nminSequencesIndexBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MINSEQUENCESINDEXBUFFEROFFSETALIGNMENT); }
+    public static int nminSequencesIndexBufferOffsetAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MINSEQUENCESINDEXBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #minIndirectCommandsBufferOffsetAlignment}. */
-    public static int nminIndirectCommandsBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MININDIRECTCOMMANDSBUFFEROFFSETALIGNMENT); }
+    public static int nminIndirectCommandsBufferOffsetAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.MININDIRECTCOMMANDSBUFFEROFFSETALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.PNEXT, value); }
 

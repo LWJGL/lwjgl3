@@ -227,14 +227,14 @@ public class XrSystemTrackingProperties extends Struct<XrSystemTrackingPropertie
     // -----------------------------------
 
     /** Unsafe version of {@link #orientationTracking}. */
-    public static int norientationTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemTrackingProperties.ORIENTATIONTRACKING); }
+    public static int norientationTracking(long struct) { return memGetInt(struct + XrSystemTrackingProperties.ORIENTATIONTRACKING); }
     /** Unsafe version of {@link #positionTracking}. */
-    public static int npositionTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemTrackingProperties.POSITIONTRACKING); }
+    public static int npositionTracking(long struct) { return memGetInt(struct + XrSystemTrackingProperties.POSITIONTRACKING); }
 
     /** Unsafe version of {@link #orientationTracking(boolean) orientationTracking}. */
-    public static void norientationTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemTrackingProperties.ORIENTATIONTRACKING, value); }
+    public static void norientationTracking(long struct, int value) { memPutInt(struct + XrSystemTrackingProperties.ORIENTATIONTRACKING, value); }
     /** Unsafe version of {@link #positionTracking(boolean) positionTracking}. */
-    public static void npositionTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemTrackingProperties.POSITIONTRACKING, value); }
+    public static void npositionTracking(long struct, int value) { memPutInt(struct + XrSystemTrackingProperties.POSITIONTRACKING, value); }
 
     // -----------------------------------
 

@@ -255,18 +255,18 @@ public class AIVectorKey extends Struct<AIVectorKey> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mTime}. */
-    public static double nmTime(long struct) { return UNSAFE.getDouble(null, struct + AIVectorKey.MTIME); }
+    public static double nmTime(long struct) { return memGetDouble(struct + AIVectorKey.MTIME); }
     /** Unsafe version of {@link #mValue}. */
     public static AIVector3D nmValue(long struct) { return AIVector3D.create(struct + AIVectorKey.MVALUE); }
     /** Unsafe version of {@link #mInterpolation}. */
-    public static int nmInterpolation(long struct) { return UNSAFE.getInt(null, struct + AIVectorKey.MINTERPOLATION); }
+    public static int nmInterpolation(long struct) { return memGetInt(struct + AIVectorKey.MINTERPOLATION); }
 
     /** Unsafe version of {@link #mTime(double) mTime}. */
-    public static void nmTime(long struct, double value) { UNSAFE.putDouble(null, struct + AIVectorKey.MTIME, value); }
+    public static void nmTime(long struct, double value) { memPutDouble(struct + AIVectorKey.MTIME, value); }
     /** Unsafe version of {@link #mValue(AIVector3D) mValue}. */
     public static void nmValue(long struct, AIVector3D value) { memCopy(value.address(), struct + AIVectorKey.MVALUE, AIVector3D.SIZEOF); }
     /** Unsafe version of {@link #mInterpolation(int) mInterpolation}. */
-    public static void nmInterpolation(long struct, int value) { UNSAFE.putInt(null, struct + AIVectorKey.MINTERPOLATION, value); }
+    public static void nmInterpolation(long struct, int value) { memPutInt(struct + AIVectorKey.MINTERPOLATION, value); }
 
     // -----------------------------------
 

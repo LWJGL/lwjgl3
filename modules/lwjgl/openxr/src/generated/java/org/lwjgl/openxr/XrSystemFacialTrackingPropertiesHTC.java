@@ -253,16 +253,16 @@ public class XrSystemFacialTrackingPropertiesHTC extends Struct<XrSystemFacialTr
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemFacialTrackingPropertiesHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemFacialTrackingPropertiesHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemFacialTrackingPropertiesHTC.NEXT); }
     /** Unsafe version of {@link #supportEyeFacialTracking}. */
-    public static int nsupportEyeFacialTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTEYEFACIALTRACKING); }
+    public static int nsupportEyeFacialTracking(long struct) { return memGetInt(struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTEYEFACIALTRACKING); }
     /** Unsafe version of {@link #supportLipFacialTracking}. */
-    public static int nsupportLipFacialTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTLIPFACIALTRACKING); }
+    public static int nsupportLipFacialTracking(long struct) { return memGetInt(struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTLIPFACIALTRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFacialTrackingPropertiesHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemFacialTrackingPropertiesHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFacialTrackingPropertiesHTC.NEXT, value); }
 

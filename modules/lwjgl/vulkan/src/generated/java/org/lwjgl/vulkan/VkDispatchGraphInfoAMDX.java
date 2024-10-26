@@ -260,22 +260,22 @@ public class VkDispatchGraphInfoAMDX extends Struct<VkDispatchGraphInfoAMDX> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #nodeIndex}. */
-    public static int nnodeIndex(long struct) { return UNSAFE.getInt(null, struct + VkDispatchGraphInfoAMDX.NODEINDEX); }
+    public static int nnodeIndex(long struct) { return memGetInt(struct + VkDispatchGraphInfoAMDX.NODEINDEX); }
     /** Unsafe version of {@link #payloadCount}. */
-    public static int npayloadCount(long struct) { return UNSAFE.getInt(null, struct + VkDispatchGraphInfoAMDX.PAYLOADCOUNT); }
+    public static int npayloadCount(long struct) { return memGetInt(struct + VkDispatchGraphInfoAMDX.PAYLOADCOUNT); }
     /** Unsafe version of {@link #payloads}. */
     public static VkDeviceOrHostAddressConstAMDX npayloads(long struct) { return VkDeviceOrHostAddressConstAMDX.create(struct + VkDispatchGraphInfoAMDX.PAYLOADS); }
     /** Unsafe version of {@link #payloadStride}. */
-    public static long npayloadStride(long struct) { return UNSAFE.getLong(null, struct + VkDispatchGraphInfoAMDX.PAYLOADSTRIDE); }
+    public static long npayloadStride(long struct) { return memGetLong(struct + VkDispatchGraphInfoAMDX.PAYLOADSTRIDE); }
 
     /** Unsafe version of {@link #nodeIndex(int) nodeIndex}. */
-    public static void nnodeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchGraphInfoAMDX.NODEINDEX, value); }
+    public static void nnodeIndex(long struct, int value) { memPutInt(struct + VkDispatchGraphInfoAMDX.NODEINDEX, value); }
     /** Unsafe version of {@link #payloadCount(int) payloadCount}. */
-    public static void npayloadCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchGraphInfoAMDX.PAYLOADCOUNT, value); }
+    public static void npayloadCount(long struct, int value) { memPutInt(struct + VkDispatchGraphInfoAMDX.PAYLOADCOUNT, value); }
     /** Unsafe version of {@link #payloads(VkDeviceOrHostAddressConstAMDX) payloads}. */
     public static void npayloads(long struct, VkDeviceOrHostAddressConstAMDX value) { memCopy(value.address(), struct + VkDispatchGraphInfoAMDX.PAYLOADS, VkDeviceOrHostAddressConstAMDX.SIZEOF); }
     /** Unsafe version of {@link #payloadStride(long) payloadStride}. */
-    public static void npayloadStride(long struct, long value) { UNSAFE.putLong(null, struct + VkDispatchGraphInfoAMDX.PAYLOADSTRIDE, value); }
+    public static void npayloadStride(long struct, long value) { memPutLong(struct + VkDispatchGraphInfoAMDX.PAYLOADSTRIDE, value); }
 
     // -----------------------------------
 

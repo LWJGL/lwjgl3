@@ -371,40 +371,40 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.FLAGS); }
     /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT); }
+    public static int nattachmentCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments}. */
     @Nullable public static VkAttachmentDescription.Buffer npAttachments(long struct) { return VkAttachmentDescription.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
     /** Unsafe version of {@link #subpassCount}. */
-    public static int nsubpassCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreateInfo.SUBPASSCOUNT); }
+    public static int nsubpassCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.SUBPASSCOUNT); }
     /** Unsafe version of {@link #pSubpasses}. */
     public static VkSubpassDescription.Buffer npSubpasses(long struct) { return VkSubpassDescription.create(memGetAddress(struct + VkRenderPassCreateInfo.PSUBPASSES), nsubpassCount(struct)); }
     /** Unsafe version of {@link #dependencyCount}. */
-    public static int ndependencyCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT); }
+    public static int ndependencyCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT); }
     /** Unsafe version of {@link #pDependencies}. */
     @Nullable public static VkSubpassDependency.Buffer npDependencies(long struct) { return VkSubpassDependency.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES), ndependencyCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT, value); }
+    public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(VkAttachmentDescription.Buffer) pAttachments}. */
     public static void npAttachments(long struct, @Nullable VkAttachmentDescription.Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code subpassCount} field of the specified {@code struct}. */
-    public static void nsubpassCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreateInfo.SUBPASSCOUNT, value); }
+    public static void nsubpassCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.SUBPASSCOUNT, value); }
     /** Unsafe version of {@link #pSubpasses(VkSubpassDescription.Buffer) pSubpasses}. */
     public static void npSubpasses(long struct, VkSubpassDescription.Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PSUBPASSES, value.address()); nsubpassCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code dependencyCount} field of the specified {@code struct}. */
-    public static void ndependencyCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT, value); }
+    public static void ndependencyCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT, value); }
     /** Unsafe version of {@link #pDependencies(VkSubpassDependency.Buffer) pDependencies}. */
     public static void npDependencies(long struct, @Nullable VkSubpassDependency.Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES, memAddressSafe(value)); ndependencyCount(struct, value == null ? 0 : value.remaining()); }
 

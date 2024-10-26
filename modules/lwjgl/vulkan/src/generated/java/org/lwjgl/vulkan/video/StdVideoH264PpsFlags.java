@@ -265,7 +265,7 @@ public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implement
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264PpsFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH264PpsFlags.BITFIELD0); }
     /** Unsafe version of {@link #transform_8x8_mode_flag}. */
     public static int ntransform_8x8_mode_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #redundant_pic_cnt_present_flag}. */
@@ -283,7 +283,7 @@ public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implement
     /** Unsafe version of {@link #pic_scaling_matrix_present_flag}. */
     public static int npic_scaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264PpsFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH264PpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #transform_8x8_mode_flag(boolean) transform_8x8_mode_flag}. */
     public static void ntransform_8x8_mode_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #redundant_pic_cnt_present_flag(boolean) redundant_pic_cnt_present_flag}. */

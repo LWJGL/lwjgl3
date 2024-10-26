@@ -284,26 +284,26 @@ public class VkDescriptorAddressInfoEXT extends Struct<VkDescriptorAddressInfoEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorAddressInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorAddressInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorAddressInfoEXT.PNEXT); }
     /** Unsafe version of {@link #address$}. */
-    public static long naddress$(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorAddressInfoEXT.ADDRESS); }
+    public static long naddress$(long struct) { return memGetLong(struct + VkDescriptorAddressInfoEXT.ADDRESS); }
     /** Unsafe version of {@link #range}. */
-    public static long nrange(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorAddressInfoEXT.RANGE); }
+    public static long nrange(long struct) { return memGetLong(struct + VkDescriptorAddressInfoEXT.RANGE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorAddressInfoEXT.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkDescriptorAddressInfoEXT.FORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorAddressInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorAddressInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorAddressInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #address$(long) address$}. */
-    public static void naddress$(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorAddressInfoEXT.ADDRESS, value); }
+    public static void naddress$(long struct, long value) { memPutLong(struct + VkDescriptorAddressInfoEXT.ADDRESS, value); }
     /** Unsafe version of {@link #range(long) range}. */
-    public static void nrange(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorAddressInfoEXT.RANGE, value); }
+    public static void nrange(long struct, long value) { memPutLong(struct + VkDescriptorAddressInfoEXT.RANGE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorAddressInfoEXT.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkDescriptorAddressInfoEXT.FORMAT, value); }
 
     // -----------------------------------
 

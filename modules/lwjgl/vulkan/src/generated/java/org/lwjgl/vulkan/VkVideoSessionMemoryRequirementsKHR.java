@@ -249,16 +249,16 @@ public class VkVideoSessionMemoryRequirementsKHR extends Struct<VkVideoSessionMe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionMemoryRequirementsKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoSessionMemoryRequirementsKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoSessionMemoryRequirementsKHR.PNEXT); }
     /** Unsafe version of {@link #memoryBindIndex}. */
-    public static int nmemoryBindIndex(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionMemoryRequirementsKHR.MEMORYBINDINDEX); }
+    public static int nmemoryBindIndex(long struct) { return memGetInt(struct + VkVideoSessionMemoryRequirementsKHR.MEMORYBINDINDEX); }
     /** Unsafe version of {@link #memoryRequirements}. */
     public static VkMemoryRequirements nmemoryRequirements(long struct) { return VkMemoryRequirements.create(struct + VkVideoSessionMemoryRequirementsKHR.MEMORYREQUIREMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionMemoryRequirementsKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoSessionMemoryRequirementsKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoSessionMemoryRequirementsKHR.PNEXT, value); }
 

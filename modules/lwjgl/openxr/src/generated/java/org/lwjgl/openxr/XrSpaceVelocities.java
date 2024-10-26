@@ -261,20 +261,20 @@ public class XrSpaceVelocities extends Struct<XrSpaceVelocities> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceVelocities.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceVelocities.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceVelocities.NEXT); }
     /** Unsafe version of {@link #velocityCount}. */
-    public static int nvelocityCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceVelocities.VELOCITYCOUNT); }
+    public static int nvelocityCount(long struct) { return memGetInt(struct + XrSpaceVelocities.VELOCITYCOUNT); }
     /** Unsafe version of {@link #velocities}. */
     public static XrSpaceVelocityData.Buffer nvelocities(long struct) { return XrSpaceVelocityData.create(memGetAddress(struct + XrSpaceVelocities.VELOCITIES), nvelocityCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceVelocities.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceVelocities.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceVelocities.NEXT, value); }
     /** Sets the specified value to the {@code velocityCount} field of the specified {@code struct}. */
-    public static void nvelocityCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceVelocities.VELOCITYCOUNT, value); }
+    public static void nvelocityCount(long struct, int value) { memPutInt(struct + XrSpaceVelocities.VELOCITYCOUNT, value); }
     /** Unsafe version of {@link #velocities(XrSpaceVelocityData.Buffer) velocities}. */
     public static void nvelocities(long struct, XrSpaceVelocityData.Buffer value) { memPutAddress(struct + XrSpaceVelocities.VELOCITIES, value.address()); nvelocityCount(struct, value.remaining()); }
 

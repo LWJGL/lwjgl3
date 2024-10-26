@@ -111,7 +111,7 @@ public class CXSourceRangeList extends Struct<CXSourceRangeList> {
     // -----------------------------------
 
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + CXSourceRangeList.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + CXSourceRangeList.COUNT); }
     /** Unsafe version of {@link #ranges}. */
     public static CXSourceRange.Buffer nranges(long struct) { return CXSourceRange.create(memGetAddress(struct + CXSourceRangeList.RANGES), ncount(struct)); }
 

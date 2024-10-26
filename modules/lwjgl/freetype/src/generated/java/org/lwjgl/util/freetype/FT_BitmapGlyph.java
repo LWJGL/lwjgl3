@@ -127,9 +127,9 @@ public class FT_BitmapGlyph extends Struct<FT_BitmapGlyph> {
     /** Unsafe version of {@link #root}. */
     public static FT_Glyph nroot(long struct) { return FT_Glyph.create(struct + FT_BitmapGlyph.ROOT); }
     /** Unsafe version of {@link #left}. */
-    public static int nleft(long struct) { return UNSAFE.getInt(null, struct + FT_BitmapGlyph.LEFT); }
+    public static int nleft(long struct) { return memGetInt(struct + FT_BitmapGlyph.LEFT); }
     /** Unsafe version of {@link #top}. */
-    public static int ntop(long struct) { return UNSAFE.getInt(null, struct + FT_BitmapGlyph.TOP); }
+    public static int ntop(long struct) { return memGetInt(struct + FT_BitmapGlyph.TOP); }
     /** Unsafe version of {@link #bitmap}. */
     public static FT_Bitmap nbitmap(long struct) { return FT_Bitmap.create(struct + FT_BitmapGlyph.BITMAP); }
 

@@ -262,20 +262,20 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.PNEXT); }
     /** Unsafe version of {@link #descriptorSetCount}. */
-    public static int ndescriptorSetCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.DESCRIPTORSETCOUNT); }
+    public static int ndescriptorSetCount(long struct) { return memGetInt(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.DESCRIPTORSETCOUNT); }
     /** Unsafe version of {@link #pDescriptorCounts() pDescriptorCounts}. */
     @Nullable public static IntBuffer npDescriptorCounts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.PDESCRIPTORCOUNTS), ndescriptorSetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code descriptorSetCount} field of the specified {@code struct}. */
-    public static void ndescriptorSetCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.DESCRIPTORSETCOUNT, value); }
+    public static void ndescriptorSetCount(long struct, int value) { memPutInt(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.DESCRIPTORSETCOUNT, value); }
     /** Unsafe version of {@link #pDescriptorCounts(IntBuffer) pDescriptorCounts}. */
     public static void npDescriptorCounts(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkDescriptorSetVariableDescriptorCountAllocateInfo.PDESCRIPTORCOUNTS, memAddressSafe(value)); ndescriptorSetCount(struct, value == null ? 0 : value.remaining()); }
 

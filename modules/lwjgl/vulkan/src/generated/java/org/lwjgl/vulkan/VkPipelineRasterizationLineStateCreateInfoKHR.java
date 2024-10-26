@@ -292,30 +292,30 @@ public class VkPipelineRasterizationLineStateCreateInfoKHR extends Struct<VkPipe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationLineStateCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #lineRasterizationMode}. */
-    public static int nlineRasterizationMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINERASTERIZATIONMODE); }
+    public static int nlineRasterizationMode(long struct) { return memGetInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINERASTERIZATIONMODE); }
     /** Unsafe version of {@link #stippledLineEnable}. */
-    public static int nstippledLineEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.STIPPLEDLINEENABLE); }
+    public static int nstippledLineEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.STIPPLEDLINEENABLE); }
     /** Unsafe version of {@link #lineStippleFactor}. */
-    public static int nlineStippleFactor(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEFACTOR); }
+    public static int nlineStippleFactor(long struct) { return memGetInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEFACTOR); }
     /** Unsafe version of {@link #lineStipplePattern}. */
-    public static short nlineStipplePattern(long struct) { return UNSAFE.getShort(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEPATTERN); }
+    public static short nlineStipplePattern(long struct) { return memGetShort(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEPATTERN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationLineStateCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #lineRasterizationMode(int) lineRasterizationMode}. */
-    public static void nlineRasterizationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINERASTERIZATIONMODE, value); }
+    public static void nlineRasterizationMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINERASTERIZATIONMODE, value); }
     /** Unsafe version of {@link #stippledLineEnable(boolean) stippledLineEnable}. */
-    public static void nstippledLineEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.STIPPLEDLINEENABLE, value); }
+    public static void nstippledLineEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.STIPPLEDLINEENABLE, value); }
     /** Unsafe version of {@link #lineStippleFactor(int) lineStippleFactor}. */
-    public static void nlineStippleFactor(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEFACTOR, value); }
+    public static void nlineStippleFactor(long struct, int value) { memPutInt(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEFACTOR, value); }
     /** Unsafe version of {@link #lineStipplePattern(short) lineStipplePattern}. */
-    public static void nlineStipplePattern(long struct, short value) { UNSAFE.putShort(null, struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEPATTERN, value); }
+    public static void nlineStipplePattern(long struct, short value) { memPutShort(struct + VkPipelineRasterizationLineStateCreateInfoKHR.LINESTIPPLEPATTERN, value); }
 
     // -----------------------------------
 

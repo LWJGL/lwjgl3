@@ -216,25 +216,25 @@ public class OVRInitParams extends Struct<OVRInitParams> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #Flags}. */
-    public static int nFlags(long struct) { return UNSAFE.getInt(null, struct + OVRInitParams.FLAGS); }
+    public static int nFlags(long struct) { return memGetInt(struct + OVRInitParams.FLAGS); }
     /** Unsafe version of {@link #RequestedMinorVersion}. */
-    public static int nRequestedMinorVersion(long struct) { return UNSAFE.getInt(null, struct + OVRInitParams.REQUESTEDMINORVERSION); }
+    public static int nRequestedMinorVersion(long struct) { return memGetInt(struct + OVRInitParams.REQUESTEDMINORVERSION); }
     /** Unsafe version of {@link #LogCallback}. */
     @Nullable public static OVRLogCallback nLogCallback(long struct) { return OVRLogCallback.createSafe(memGetAddress(struct + OVRInitParams.LOGCALLBACK)); }
     /** Unsafe version of {@link #UserData}. */
     public static long nUserData(long struct) { return memGetAddress(struct + OVRInitParams.USERDATA); }
     /** Unsafe version of {@link #ConnectionTimeoutMS}. */
-    public static int nConnectionTimeoutMS(long struct) { return UNSAFE.getInt(null, struct + OVRInitParams.CONNECTIONTIMEOUTMS); }
+    public static int nConnectionTimeoutMS(long struct) { return memGetInt(struct + OVRInitParams.CONNECTIONTIMEOUTMS); }
 
     /** Unsafe version of {@link #Flags(int) Flags}. */
-    public static void nFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRInitParams.FLAGS, value); }
+    public static void nFlags(long struct, int value) { memPutInt(struct + OVRInitParams.FLAGS, value); }
     /** Unsafe version of {@link #RequestedMinorVersion(int) RequestedMinorVersion}. */
-    public static void nRequestedMinorVersion(long struct, int value) { UNSAFE.putInt(null, struct + OVRInitParams.REQUESTEDMINORVERSION, value); }
+    public static void nRequestedMinorVersion(long struct, int value) { memPutInt(struct + OVRInitParams.REQUESTEDMINORVERSION, value); }
     /** Unsafe version of {@link #LogCallback(OVRLogCallbackI) LogCallback}. */
     public static void nLogCallback(long struct, @Nullable OVRLogCallbackI value) { memPutAddress(struct + OVRInitParams.LOGCALLBACK, memAddressSafe(value)); }
     /** Unsafe version of {@link #UserData(long) UserData}. */
     public static void nUserData(long struct, long value) { memPutAddress(struct + OVRInitParams.USERDATA, value); }
     /** Unsafe version of {@link #ConnectionTimeoutMS(int) ConnectionTimeoutMS}. */
-    public static void nConnectionTimeoutMS(long struct, int value) { UNSAFE.putInt(null, struct + OVRInitParams.CONNECTIONTIMEOUTMS, value); }
+    public static void nConnectionTimeoutMS(long struct, int value) { memPutInt(struct + OVRInitParams.CONNECTIONTIMEOUTMS, value); }
 
 }

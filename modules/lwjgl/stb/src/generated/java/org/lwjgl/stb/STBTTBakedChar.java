@@ -247,19 +247,19 @@ public class STBTTBakedChar extends Struct<STBTTBakedChar> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #x0}. */
-    public static short nx0(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.X0); }
+    public static short nx0(long struct) { return memGetShort(struct + STBTTBakedChar.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static short ny0(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.Y0); }
+    public static short ny0(long struct) { return memGetShort(struct + STBTTBakedChar.Y0); }
     /** Unsafe version of {@link #x1}. */
-    public static short nx1(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.X1); }
+    public static short nx1(long struct) { return memGetShort(struct + STBTTBakedChar.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static short ny1(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.Y1); }
+    public static short ny1(long struct) { return memGetShort(struct + STBTTBakedChar.Y1); }
     /** Unsafe version of {@link #xoff}. */
-    public static float nxoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.XOFF); }
+    public static float nxoff(long struct) { return memGetFloat(struct + STBTTBakedChar.XOFF); }
     /** Unsafe version of {@link #yoff}. */
-    public static float nyoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.YOFF); }
+    public static float nyoff(long struct) { return memGetFloat(struct + STBTTBakedChar.YOFF); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.XADVANCE); }
+    public static float nxadvance(long struct) { return memGetFloat(struct + STBTTBakedChar.XADVANCE); }
 
     // -----------------------------------
 

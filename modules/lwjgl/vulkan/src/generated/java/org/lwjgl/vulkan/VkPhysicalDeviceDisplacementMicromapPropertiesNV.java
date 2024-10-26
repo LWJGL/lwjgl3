@@ -242,14 +242,14 @@ public class VkPhysicalDeviceDisplacementMicromapPropertiesNV extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #maxDisplacementMicromapSubdivisionLevel}. */
-    public static int nmaxDisplacementMicromapSubdivisionLevel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.MAXDISPLACEMENTMICROMAPSUBDIVISIONLEVEL); }
+    public static int nmaxDisplacementMicromapSubdivisionLevel(long struct) { return memGetInt(struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.MAXDISPLACEMENTMICROMAPSUBDIVISIONLEVEL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDisplacementMicromapPropertiesNV.PNEXT, value); }
 

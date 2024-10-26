@@ -273,20 +273,20 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughStyleFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughStyleFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughStyleFB.NEXT); }
     /** Unsafe version of {@link #textureOpacityFactor}. */
-    public static float ntextureOpacityFactor(long struct) { return UNSAFE.getFloat(null, struct + XrPassthroughStyleFB.TEXTUREOPACITYFACTOR); }
+    public static float ntextureOpacityFactor(long struct) { return memGetFloat(struct + XrPassthroughStyleFB.TEXTUREOPACITYFACTOR); }
     /** Unsafe version of {@link #edgeColor}. */
     public static XrColor4f nedgeColor(long struct) { return XrColor4f.create(struct + XrPassthroughStyleFB.EDGECOLOR); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughStyleFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughStyleFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughStyleFB.NEXT, value); }
     /** Unsafe version of {@link #textureOpacityFactor(float) textureOpacityFactor}. */
-    public static void ntextureOpacityFactor(long struct, float value) { UNSAFE.putFloat(null, struct + XrPassthroughStyleFB.TEXTUREOPACITYFACTOR, value); }
+    public static void ntextureOpacityFactor(long struct, float value) { memPutFloat(struct + XrPassthroughStyleFB.TEXTUREOPACITYFACTOR, value); }
     /** Unsafe version of {@link #edgeColor(XrColor4f) edgeColor}. */
     public static void nedgeColor(long struct, XrColor4f value) { memCopy(value.address(), struct + XrPassthroughStyleFB.EDGECOLOR, XrColor4f.SIZEOF); }
 

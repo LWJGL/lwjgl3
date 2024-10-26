@@ -240,14 +240,14 @@ public class DBMONEY extends Struct<DBMONEY> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mnyhigh}. */
-    public static int nmnyhigh(long struct) { return UNSAFE.getInt(null, struct + DBMONEY.MNYHIGH); }
+    public static int nmnyhigh(long struct) { return memGetInt(struct + DBMONEY.MNYHIGH); }
     /** Unsafe version of {@link #mnylow}. */
-    public static int nmnylow(long struct) { return UNSAFE.getInt(null, struct + DBMONEY.MNYLOW); }
+    public static int nmnylow(long struct) { return memGetInt(struct + DBMONEY.MNYLOW); }
 
     /** Unsafe version of {@link #mnyhigh(int) mnyhigh}. */
-    public static void nmnyhigh(long struct, int value) { UNSAFE.putInt(null, struct + DBMONEY.MNYHIGH, value); }
+    public static void nmnyhigh(long struct, int value) { memPutInt(struct + DBMONEY.MNYHIGH, value); }
     /** Unsafe version of {@link #mnylow(int) mnylow}. */
-    public static void nmnylow(long struct, int value) { UNSAFE.putInt(null, struct + DBMONEY.MNYLOW, value); }
+    public static void nmnylow(long struct, int value) { memPutInt(struct + DBMONEY.MNYLOW, value); }
 
     // -----------------------------------
 

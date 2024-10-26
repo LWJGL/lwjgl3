@@ -307,36 +307,36 @@ public class XrVisibilityMaskKHR extends Struct<XrVisibilityMaskKHR> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVisibilityMaskKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVisibilityMaskKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVisibilityMaskKHR.NEXT); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrVisibilityMaskKHR.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrVisibilityMaskKHR.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrVisibilityMaskKHR.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrVisibilityMaskKHR.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
     @Nullable public static XrVector2f.Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrVisibilityMaskKHR.VERTICES), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #indexCapacityInput}. */
-    public static int nindexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrVisibilityMaskKHR.INDEXCAPACITYINPUT); }
+    public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrVisibilityMaskKHR.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
-    public static int nindexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrVisibilityMaskKHR.INDEXCOUNTOUTPUT); }
+    public static int nindexCountOutput(long struct) { return memGetInt(struct + XrVisibilityMaskKHR.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
     @Nullable public static IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrVisibilityMaskKHR.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVisibilityMaskKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVisibilityMaskKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVisibilityMaskKHR.NEXT, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
-    public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrVisibilityMaskKHR.VERTEXCAPACITYINPUT, value); }
+    public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrVisibilityMaskKHR.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrVisibilityMaskKHR.VERTEXCOUNTOUTPUT, value); }
+    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrVisibilityMaskKHR.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrVector2f.Buffer) vertices}. */
     public static void nvertices(long struct, @Nullable XrVector2f.Buffer value) { memPutAddress(struct + XrVisibilityMaskKHR.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
-    public static void nindexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrVisibilityMaskKHR.INDEXCAPACITYINPUT, value); }
+    public static void nindexCapacityInput(long struct, int value) { memPutInt(struct + XrVisibilityMaskKHR.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
-    public static void nindexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrVisibilityMaskKHR.INDEXCOUNTOUTPUT, value); }
+    public static void nindexCountOutput(long struct, int value) { memPutInt(struct + XrVisibilityMaskKHR.INDEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #indices(IntBuffer) indices}. */
     public static void nindices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrVisibilityMaskKHR.INDICES, memAddressSafe(value)); if (value != null) { nindexCapacityInput(struct, value.remaining()); } }
 

@@ -250,14 +250,14 @@ public class XrSystemForceFeedbackCurlPropertiesMNDX extends Struct<XrSystemForc
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemForceFeedbackCurlPropertiesMNDX.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemForceFeedbackCurlPropertiesMNDX.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemForceFeedbackCurlPropertiesMNDX.NEXT); }
     /** Unsafe version of {@link #supportsForceFeedbackCurl}. */
-    public static int nsupportsForceFeedbackCurl(long struct) { return UNSAFE.getInt(null, struct + XrSystemForceFeedbackCurlPropertiesMNDX.SUPPORTSFORCEFEEDBACKCURL); }
+    public static int nsupportsForceFeedbackCurl(long struct) { return memGetInt(struct + XrSystemForceFeedbackCurlPropertiesMNDX.SUPPORTSFORCEFEEDBACKCURL); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemForceFeedbackCurlPropertiesMNDX.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemForceFeedbackCurlPropertiesMNDX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemForceFeedbackCurlPropertiesMNDX.NEXT, value); }
 

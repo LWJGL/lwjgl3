@@ -198,11 +198,11 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
     /** Unsafe version of {@link #italic_angle}. */
     public static long nitalic_angle(long struct) { return memGetCLong(struct + PS_FontInfo.ITALIC_ANGLE); }
     /** Unsafe version of {@link #is_fixed_pitch}. */
-    public static boolean nis_fixed_pitch(long struct) { return UNSAFE.getByte(null, struct + PS_FontInfo.IS_FIXED_PITCH) != 0; }
+    public static boolean nis_fixed_pitch(long struct) { return memGetByte(struct + PS_FontInfo.IS_FIXED_PITCH) != 0; }
     /** Unsafe version of {@link #underline_position}. */
-    public static short nunderline_position(long struct) { return UNSAFE.getShort(null, struct + PS_FontInfo.UNDERLINE_POSITION); }
+    public static short nunderline_position(long struct) { return memGetShort(struct + PS_FontInfo.UNDERLINE_POSITION); }
     /** Unsafe version of {@link #underline_thickness}. */
-    public static short nunderline_thickness(long struct) { return UNSAFE.getShort(null, struct + PS_FontInfo.UNDERLINE_THICKNESS); }
+    public static short nunderline_thickness(long struct) { return memGetShort(struct + PS_FontInfo.UNDERLINE_THICKNESS); }
 
     // -----------------------------------
 

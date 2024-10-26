@@ -366,38 +366,38 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceInfo.PNEXT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkCommandBufferInheritanceInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return memGetLong(struct + VkCommandBufferInheritanceInfo.RENDERPASS); }
     /** Unsafe version of {@link #subpass}. */
-    public static int nsubpass(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceInfo.SUBPASS); }
+    public static int nsubpass(long struct) { return memGetInt(struct + VkCommandBufferInheritanceInfo.SUBPASS); }
     /** Unsafe version of {@link #framebuffer}. */
-    public static long nframebuffer(long struct) { return UNSAFE.getLong(null, struct + VkCommandBufferInheritanceInfo.FRAMEBUFFER); }
+    public static long nframebuffer(long struct) { return memGetLong(struct + VkCommandBufferInheritanceInfo.FRAMEBUFFER); }
     /** Unsafe version of {@link #occlusionQueryEnable}. */
-    public static int nocclusionQueryEnable(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceInfo.OCCLUSIONQUERYENABLE); }
+    public static int nocclusionQueryEnable(long struct) { return memGetInt(struct + VkCommandBufferInheritanceInfo.OCCLUSIONQUERYENABLE); }
     /** Unsafe version of {@link #queryFlags}. */
-    public static int nqueryFlags(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceInfo.QUERYFLAGS); }
+    public static int nqueryFlags(long struct) { return memGetInt(struct + VkCommandBufferInheritanceInfo.QUERYFLAGS); }
     /** Unsafe version of {@link #pipelineStatistics}. */
-    public static int npipelineStatistics(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceInfo.PIPELINESTATISTICS); }
+    public static int npipelineStatistics(long struct) { return memGetInt(struct + VkCommandBufferInheritanceInfo.PIPELINESTATISTICS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceInfo.PNEXT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkCommandBufferInheritanceInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkCommandBufferInheritanceInfo.RENDERPASS, value); }
     /** Unsafe version of {@link #subpass(int) subpass}. */
-    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceInfo.SUBPASS, value); }
+    public static void nsubpass(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceInfo.SUBPASS, value); }
     /** Unsafe version of {@link #framebuffer(long) framebuffer}. */
-    public static void nframebuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCommandBufferInheritanceInfo.FRAMEBUFFER, value); }
+    public static void nframebuffer(long struct, long value) { memPutLong(struct + VkCommandBufferInheritanceInfo.FRAMEBUFFER, value); }
     /** Unsafe version of {@link #occlusionQueryEnable(boolean) occlusionQueryEnable}. */
-    public static void nocclusionQueryEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceInfo.OCCLUSIONQUERYENABLE, value); }
+    public static void nocclusionQueryEnable(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceInfo.OCCLUSIONQUERYENABLE, value); }
     /** Unsafe version of {@link #queryFlags(int) queryFlags}. */
-    public static void nqueryFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceInfo.QUERYFLAGS, value); }
+    public static void nqueryFlags(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceInfo.QUERYFLAGS, value); }
     /** Unsafe version of {@link #pipelineStatistics(int) pipelineStatistics}. */
-    public static void npipelineStatistics(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceInfo.PIPELINESTATISTICS, value); }
+    public static void npipelineStatistics(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceInfo.PIPELINESTATISTICS, value); }
 
     // -----------------------------------
 

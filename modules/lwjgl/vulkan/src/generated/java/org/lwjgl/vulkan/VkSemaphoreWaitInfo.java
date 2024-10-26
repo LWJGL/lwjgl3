@@ -291,26 +291,26 @@ public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreWaitInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSemaphoreWaitInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreWaitInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreWaitInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSemaphoreWaitInfo.FLAGS); }
     /** Unsafe version of {@link #semaphoreCount}. */
-    public static int nsemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreWaitInfo.SEMAPHORECOUNT); }
+    public static int nsemaphoreCount(long struct) { return memGetInt(struct + VkSemaphoreWaitInfo.SEMAPHORECOUNT); }
     /** Unsafe version of {@link #pSemaphores() pSemaphores}. */
     public static LongBuffer npSemaphores(long struct) { return memLongBuffer(memGetAddress(struct + VkSemaphoreWaitInfo.PSEMAPHORES), nsemaphoreCount(struct)); }
     /** Unsafe version of {@link #pValues() pValues}. */
     public static LongBuffer npValues(long struct) { return memLongBuffer(memGetAddress(struct + VkSemaphoreWaitInfo.PVALUES), nsemaphoreCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreWaitInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSemaphoreWaitInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreWaitInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreWaitInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkSemaphoreWaitInfo.FLAGS, value); }
     /** Sets the specified value to the {@code semaphoreCount} field of the specified {@code struct}. */
-    public static void nsemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreWaitInfo.SEMAPHORECOUNT, value); }
+    public static void nsemaphoreCount(long struct, int value) { memPutInt(struct + VkSemaphoreWaitInfo.SEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pSemaphores(LongBuffer) pSemaphores}. */
     public static void npSemaphores(long struct, LongBuffer value) { memPutAddress(struct + VkSemaphoreWaitInfo.PSEMAPHORES, memAddress(value)); }
     /** Unsafe version of {@link #pValues(LongBuffer) pValues}. */

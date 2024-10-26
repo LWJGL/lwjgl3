@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures extends Stru
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderDemoteToHelperInvocation}. */
-    public static int nshaderDemoteToHelperInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.SHADERDEMOTETOHELPERINVOCATION); }
+    public static int nshaderDemoteToHelperInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.SHADERDEMOTETOHELPERINVOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderDemoteToHelperInvocation(boolean) shaderDemoteToHelperInvocation}. */
-    public static void nshaderDemoteToHelperInvocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.SHADERDEMOTETOHELPERINVOCATION, value); }
+    public static void nshaderDemoteToHelperInvocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.SHADERDEMOTETOHELPERINVOCATION, value); }
 
     // -----------------------------------
 

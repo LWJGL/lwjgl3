@@ -110,9 +110,9 @@ public class VREventChaperone extends Struct<VREventChaperone> {
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nPreviousUniverse}. */
-    public static long nm_nPreviousUniverse(long struct) { return UNSAFE.getLong(null, struct + VREventChaperone.M_NPREVIOUSUNIVERSE); }
+    public static long nm_nPreviousUniverse(long struct) { return memGetLong(struct + VREventChaperone.M_NPREVIOUSUNIVERSE); }
     /** Unsafe version of {@link #m_nCurrentUniverse}. */
-    public static long nm_nCurrentUniverse(long struct) { return UNSAFE.getLong(null, struct + VREventChaperone.M_NCURRENTUNIVERSE); }
+    public static long nm_nCurrentUniverse(long struct) { return memGetLong(struct + VREventChaperone.M_NCURRENTUNIVERSE); }
 
     // -----------------------------------
 

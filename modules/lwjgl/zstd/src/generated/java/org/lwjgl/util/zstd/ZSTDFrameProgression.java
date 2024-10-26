@@ -241,17 +241,17 @@ public class ZSTDFrameProgression extends Struct<ZSTDFrameProgression> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #ingested}. */
-    public static long ningested(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.INGESTED); }
+    public static long ningested(long struct) { return memGetLong(struct + ZSTDFrameProgression.INGESTED); }
     /** Unsafe version of {@link #consumed}. */
-    public static long nconsumed(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.CONSUMED); }
+    public static long nconsumed(long struct) { return memGetLong(struct + ZSTDFrameProgression.CONSUMED); }
     /** Unsafe version of {@link #produced}. */
-    public static long nproduced(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.PRODUCED); }
+    public static long nproduced(long struct) { return memGetLong(struct + ZSTDFrameProgression.PRODUCED); }
     /** Unsafe version of {@link #flushed}. */
-    public static long nflushed(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.FLUSHED); }
+    public static long nflushed(long struct) { return memGetLong(struct + ZSTDFrameProgression.FLUSHED); }
     /** Unsafe version of {@link #currentJobID}. */
-    public static int ncurrentJobID(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameProgression.CURRENTJOBID); }
+    public static int ncurrentJobID(long struct) { return memGetInt(struct + ZSTDFrameProgression.CURRENTJOBID); }
     /** Unsafe version of {@link #nbActiveWorkers}. */
-    public static int nnbActiveWorkers(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameProgression.NBACTIVEWORKERS); }
+    public static int nnbActiveWorkers(long struct) { return memGetInt(struct + ZSTDFrameProgression.NBACTIVEWORKERS); }
 
     // -----------------------------------
 

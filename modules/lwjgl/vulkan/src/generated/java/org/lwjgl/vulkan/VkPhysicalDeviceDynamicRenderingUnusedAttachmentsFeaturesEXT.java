@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT extend
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #dynamicRenderingUnusedAttachments}. */
-    public static int ndynamicRenderingUnusedAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.DYNAMICRENDERINGUNUSEDATTACHMENTS); }
+    public static int ndynamicRenderingUnusedAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.DYNAMICRENDERINGUNUSEDATTACHMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #dynamicRenderingUnusedAttachments(boolean) dynamicRenderingUnusedAttachments}. */
-    public static void ndynamicRenderingUnusedAttachments(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.DYNAMICRENDERINGUNUSEDATTACHMENTS, value); }
+    public static void ndynamicRenderingUnusedAttachments(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.DYNAMICRENDERINGUNUSEDATTACHMENTS, value); }
 
     // -----------------------------------
 

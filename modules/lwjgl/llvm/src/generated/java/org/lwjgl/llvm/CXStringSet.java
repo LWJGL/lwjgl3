@@ -111,7 +111,7 @@ public class CXStringSet extends Struct<CXStringSet> {
     /** Unsafe version of {@link #Strings}. */
     public static CXString.Buffer nStrings(long struct) { return CXString.create(memGetAddress(struct + CXStringSet.STRINGS), nCount(struct)); }
     /** Unsafe version of {@link #Count}. */
-    public static int nCount(long struct) { return UNSAFE.getInt(null, struct + CXStringSet.COUNT); }
+    public static int nCount(long struct) { return memGetInt(struct + CXStringSet.COUNT); }
 
     // -----------------------------------
 

@@ -182,7 +182,7 @@ public class CID_FaceDict extends Struct<CID_FaceDict> {
     /** Unsafe version of {@link #private_dict}. */
     public static PS_Private nprivate_dict(long struct) { return PS_Private.create(struct + CID_FaceDict.PRIVATE_DICT); }
     /** Unsafe version of {@link #len_buildchar}. */
-    public static int nlen_buildchar(long struct) { return UNSAFE.getInt(null, struct + CID_FaceDict.LEN_BUILDCHAR); }
+    public static int nlen_buildchar(long struct) { return memGetInt(struct + CID_FaceDict.LEN_BUILDCHAR); }
     /** Unsafe version of {@link #forcebold_threshold}. */
     public static long nforcebold_threshold(long struct) { return memGetCLong(struct + CID_FaceDict.FORCEBOLD_THRESHOLD); }
     /** Unsafe version of {@link #stroke_width}. */
@@ -190,19 +190,19 @@ public class CID_FaceDict extends Struct<CID_FaceDict> {
     /** Unsafe version of {@link #expansion_factor}. */
     public static long nexpansion_factor(long struct) { return memGetCLong(struct + CID_FaceDict.EXPANSION_FACTOR); }
     /** Unsafe version of {@link #paint_type}. */
-    public static byte npaint_type(long struct) { return UNSAFE.getByte(null, struct + CID_FaceDict.PAINT_TYPE); }
+    public static byte npaint_type(long struct) { return memGetByte(struct + CID_FaceDict.PAINT_TYPE); }
     /** Unsafe version of {@link #font_type}. */
-    public static byte nfont_type(long struct) { return UNSAFE.getByte(null, struct + CID_FaceDict.FONT_TYPE); }
+    public static byte nfont_type(long struct) { return memGetByte(struct + CID_FaceDict.FONT_TYPE); }
     /** Unsafe version of {@link #font_matrix}. */
     public static FT_Matrix nfont_matrix(long struct) { return FT_Matrix.create(struct + CID_FaceDict.FONT_MATRIX); }
     /** Unsafe version of {@link #font_offset}. */
     public static FT_Vector nfont_offset(long struct) { return FT_Vector.create(struct + CID_FaceDict.FONT_OFFSET); }
     /** Unsafe version of {@link #num_subrs}. */
-    public static int nnum_subrs(long struct) { return UNSAFE.getInt(null, struct + CID_FaceDict.NUM_SUBRS); }
+    public static int nnum_subrs(long struct) { return memGetInt(struct + CID_FaceDict.NUM_SUBRS); }
     /** Unsafe version of {@link #subrmap_offset}. */
     public static long nsubrmap_offset(long struct) { return memGetCLong(struct + CID_FaceDict.SUBRMAP_OFFSET); }
     /** Unsafe version of {@link #sd_bytes}. */
-    public static int nsd_bytes(long struct) { return UNSAFE.getInt(null, struct + CID_FaceDict.SD_BYTES); }
+    public static int nsd_bytes(long struct) { return memGetInt(struct + CID_FaceDict.SD_BYTES); }
 
     // -----------------------------------
 

@@ -482,19 +482,19 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #pluginsdkversion}. */
-    public static int npluginsdkversion(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_DESCRIPTION.PLUGINSDKVERSION); }
+    public static int npluginsdkversion(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.PLUGINSDKVERSION); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + FMOD_DSP_DESCRIPTION.NAME, 32); }
     /** Unsafe version of {@link #name(int) name}. */
     public static byte nname(long struct, int index) {
-        return UNSAFE.getByte(null, struct + FMOD_DSP_DESCRIPTION.NAME + check(index, 32) * 1);
+        return memGetByte(struct + FMOD_DSP_DESCRIPTION.NAME + check(index, 32) * 1);
     }
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_DESCRIPTION.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.VERSION); }
     /** Unsafe version of {@link #numinputbuffers}. */
-    public static int nnuminputbuffers(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_DESCRIPTION.NUMINPUTBUFFERS); }
+    public static int nnuminputbuffers(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.NUMINPUTBUFFERS); }
     /** Unsafe version of {@link #numoutputbuffers}. */
-    public static int nnumoutputbuffers(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_DESCRIPTION.NUMOUTPUTBUFFERS); }
+    public static int nnumoutputbuffers(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.NUMOUTPUTBUFFERS); }
     /** Unsafe version of {@link #create$}. */
     @Nullable public static FMOD_DSP_CREATE_CALLBACK ncreate$(long struct) { return FMOD_DSP_CREATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.CREATE)); }
     /** Unsafe version of {@link #release}. */
@@ -508,7 +508,7 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     /** Unsafe version of {@link #setposition}. */
     @Nullable public static FMOD_DSP_SETPOSITION_CALLBACK nsetposition(long struct) { return FMOD_DSP_SETPOSITION_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPOSITION)); }
     /** Unsafe version of {@link #numparameters}. */
-    public static int nnumparameters(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_DESCRIPTION.NUMPARAMETERS); }
+    public static int nnumparameters(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.NUMPARAMETERS); }
     /** Unsafe version of {@link #paramdesc() paramdesc}. */
     public static PointerBuffer nparamdesc(long struct) { return memPointerBuffer(memGetAddress(struct + FMOD_DSP_DESCRIPTION.PARAMDESC), nnumparameters(struct)); }
     /** Unsafe version of {@link #setparameterfloat}. */
@@ -539,7 +539,7 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     @Nullable public static FMOD_DSP_SYSTEM_MIX_CALLBACK nsys_mix(long struct) { return FMOD_DSP_SYSTEM_MIX_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_MIX)); }
 
     /** Unsafe version of {@link #pluginsdkversion(int) pluginsdkversion}. */
-    public static void npluginsdkversion(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_DESCRIPTION.PLUGINSDKVERSION, value); }
+    public static void npluginsdkversion(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.PLUGINSDKVERSION, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 32); }
@@ -547,14 +547,14 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     }
     /** Unsafe version of {@link #name(int, byte) name}. */
     public static void nname(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + FMOD_DSP_DESCRIPTION.NAME + check(index, 32) * 1, value);
+        memPutByte(struct + FMOD_DSP_DESCRIPTION.NAME + check(index, 32) * 1, value);
     }
     /** Unsafe version of {@link #version(int) version}. */
-    public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_DESCRIPTION.VERSION, value); }
+    public static void nversion(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.VERSION, value); }
     /** Unsafe version of {@link #numinputbuffers(int) numinputbuffers}. */
-    public static void nnuminputbuffers(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_DESCRIPTION.NUMINPUTBUFFERS, value); }
+    public static void nnuminputbuffers(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.NUMINPUTBUFFERS, value); }
     /** Unsafe version of {@link #numoutputbuffers(int) numoutputbuffers}. */
-    public static void nnumoutputbuffers(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_DESCRIPTION.NUMOUTPUTBUFFERS, value); }
+    public static void nnumoutputbuffers(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.NUMOUTPUTBUFFERS, value); }
     /** Unsafe version of {@link #create$(FMOD_DSP_CREATE_CALLBACKI) create$}. */
     public static void ncreate$(long struct, @Nullable FMOD_DSP_CREATE_CALLBACKI value) { memPutAddress(struct + FMOD_DSP_DESCRIPTION.CREATE, memAddressSafe(value)); }
     /** Unsafe version of {@link #release(FMOD_DSP_RELEASE_CALLBACKI) release}. */
@@ -568,7 +568,7 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     /** Unsafe version of {@link #setposition(FMOD_DSP_SETPOSITION_CALLBACKI) setposition}. */
     public static void nsetposition(long struct, @Nullable FMOD_DSP_SETPOSITION_CALLBACKI value) { memPutAddress(struct + FMOD_DSP_DESCRIPTION.SETPOSITION, memAddressSafe(value)); }
     /** Sets the specified value to the {@code numparameters} field of the specified {@code struct}. */
-    public static void nnumparameters(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_DESCRIPTION.NUMPARAMETERS, value); }
+    public static void nnumparameters(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.NUMPARAMETERS, value); }
     /** Unsafe version of {@link #paramdesc(PointerBuffer) paramdesc}. */
     public static void nparamdesc(long struct, PointerBuffer value) { memPutAddress(struct + FMOD_DSP_DESCRIPTION.PARAMDESC, memAddress(value)); nnumparameters(struct, value.remaining()); }
     /** Unsafe version of {@link #setparameterfloat(FMOD_DSP_SETPARAM_FLOAT_CALLBACKI) setparameterfloat}. */

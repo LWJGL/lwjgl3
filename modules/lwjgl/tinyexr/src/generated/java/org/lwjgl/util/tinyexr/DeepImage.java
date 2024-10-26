@@ -294,11 +294,11 @@ public class DeepImage extends Struct<DeepImage> implements NativeResource {
     /** Unsafe version of {@link #offset_table(int) offset_table}. */
     public static PointerBuffer noffset_table(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + DeepImage.OFFSET_TABLE), capacity); }
     /** Unsafe version of {@link #num_channels}. */
-    public static int nnum_channels(long struct) { return UNSAFE.getInt(null, struct + DeepImage.NUM_CHANNELS); }
+    public static int nnum_channels(long struct) { return memGetInt(struct + DeepImage.NUM_CHANNELS); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + DeepImage.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + DeepImage.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + DeepImage.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + DeepImage.HEIGHT); }
 
     /** Unsafe version of {@link #channel_names(PointerBuffer) channel_names}. */
     public static void nchannel_names(long struct, PointerBuffer value) { memPutAddress(struct + DeepImage.CHANNEL_NAMES, memAddress(value)); }
@@ -307,11 +307,11 @@ public class DeepImage extends Struct<DeepImage> implements NativeResource {
     /** Unsafe version of {@link #offset_table(PointerBuffer) offset_table}. */
     public static void noffset_table(long struct, PointerBuffer value) { memPutAddress(struct + DeepImage.OFFSET_TABLE, memAddress(value)); }
     /** Sets the specified value to the {@code num_channels} field of the specified {@code struct}. */
-    public static void nnum_channels(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.NUM_CHANNELS, value); }
+    public static void nnum_channels(long struct, int value) { memPutInt(struct + DeepImage.NUM_CHANNELS, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + DeepImage.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + DeepImage.HEIGHT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

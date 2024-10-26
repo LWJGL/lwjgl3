@@ -257,22 +257,22 @@ public class VkPhysicalDevicePerStageDescriptorSetFeaturesNV extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #perStageDescriptorSet}. */
-    public static int nperStageDescriptorSet(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PERSTAGEDESCRIPTORSET); }
+    public static int nperStageDescriptorSet(long struct) { return memGetInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PERSTAGEDESCRIPTORSET); }
     /** Unsafe version of {@link #dynamicPipelineLayout}. */
-    public static int ndynamicPipelineLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.DYNAMICPIPELINELAYOUT); }
+    public static int ndynamicPipelineLayout(long struct) { return memGetInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.DYNAMICPIPELINELAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #perStageDescriptorSet(boolean) perStageDescriptorSet}. */
-    public static void nperStageDescriptorSet(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PERSTAGEDESCRIPTORSET, value); }
+    public static void nperStageDescriptorSet(long struct, int value) { memPutInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.PERSTAGEDESCRIPTORSET, value); }
     /** Unsafe version of {@link #dynamicPipelineLayout(boolean) dynamicPipelineLayout}. */
-    public static void ndynamicPipelineLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.DYNAMICPIPELINELAYOUT, value); }
+    public static void ndynamicPipelineLayout(long struct, int value) { memPutInt(struct + VkPhysicalDevicePerStageDescriptorSetFeaturesNV.DYNAMICPIPELINELAYOUT, value); }
 
     // -----------------------------------
 

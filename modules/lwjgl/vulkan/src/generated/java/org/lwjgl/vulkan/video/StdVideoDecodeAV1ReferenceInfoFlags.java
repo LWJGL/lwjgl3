@@ -221,20 +221,20 @@ public class StdVideoDecodeAV1ReferenceInfoFlags extends Struct<StdVideoDecodeAV
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #disable_frame_end_update_cdf}. */
     public static int ndisable_frame_end_update_cdf(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #segmentation_enabled}. */
     public static int nsegmentation_enabled(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x3F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #disable_frame_end_update_cdf(boolean) disable_frame_end_update_cdf}. */
     public static void ndisable_frame_end_update_cdf(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #segmentation_enabled(boolean) segmentation_enabled}. */
     public static void nsegmentation_enabled(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1ReferenceInfoFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xC0_00_00_00) | (value & 0x3F_FF_FF_FF)); }
 
     // -----------------------------------

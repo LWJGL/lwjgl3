@@ -268,22 +268,22 @@ public class VkPipelineIndirectDeviceAddressInfoNV extends Struct<VkPipelineIndi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineIndirectDeviceAddressInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineIndirectDeviceAddressInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineIndirectDeviceAddressInfoNV.PNEXT); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineIndirectDeviceAddressInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineIndirectDeviceAddressInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineIndirectDeviceAddressInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkPipelineIndirectDeviceAddressInfoNV.PIPELINE, value); }
 
     // -----------------------------------
 

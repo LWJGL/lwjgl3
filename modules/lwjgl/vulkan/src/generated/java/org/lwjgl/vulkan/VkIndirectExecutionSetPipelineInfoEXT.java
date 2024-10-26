@@ -275,22 +275,22 @@ public class VkIndirectExecutionSetPipelineInfoEXT extends Struct<VkIndirectExec
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetPipelineInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectExecutionSetPipelineInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectExecutionSetPipelineInfoEXT.PNEXT); }
     /** Unsafe version of {@link #initialPipeline}. */
-    public static long ninitialPipeline(long struct) { return UNSAFE.getLong(null, struct + VkIndirectExecutionSetPipelineInfoEXT.INITIALPIPELINE); }
+    public static long ninitialPipeline(long struct) { return memGetLong(struct + VkIndirectExecutionSetPipelineInfoEXT.INITIALPIPELINE); }
     /** Unsafe version of {@link #maxPipelineCount}. */
-    public static int nmaxPipelineCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetPipelineInfoEXT.MAXPIPELINECOUNT); }
+    public static int nmaxPipelineCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetPipelineInfoEXT.MAXPIPELINECOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetPipelineInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetPipelineInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectExecutionSetPipelineInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #initialPipeline(long) initialPipeline}. */
-    public static void ninitialPipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkIndirectExecutionSetPipelineInfoEXT.INITIALPIPELINE, value); }
+    public static void ninitialPipeline(long struct, long value) { memPutLong(struct + VkIndirectExecutionSetPipelineInfoEXT.INITIALPIPELINE, value); }
     /** Unsafe version of {@link #maxPipelineCount(int) maxPipelineCount}. */
-    public static void nmaxPipelineCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetPipelineInfoEXT.MAXPIPELINECOUNT, value); }
+    public static void nmaxPipelineCount(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetPipelineInfoEXT.MAXPIPELINECOUNT, value); }
 
     // -----------------------------------
 

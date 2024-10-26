@@ -261,14 +261,14 @@ public class VkMultisamplePropertiesEXT extends Struct<VkMultisamplePropertiesEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMultisamplePropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMultisamplePropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMultisamplePropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxSampleLocationGridSize}. */
     public static VkExtent2D nmaxSampleLocationGridSize(long struct) { return VkExtent2D.create(struct + VkMultisamplePropertiesEXT.MAXSAMPLELOCATIONGRIDSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMultisamplePropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMultisamplePropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMultisamplePropertiesEXT.PNEXT, value); }
 

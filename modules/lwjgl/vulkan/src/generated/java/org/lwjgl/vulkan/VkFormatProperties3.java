@@ -256,18 +256,18 @@ public class VkFormatProperties3 extends Struct<VkFormatProperties3> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties3.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFormatProperties3.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFormatProperties3.PNEXT); }
     /** Unsafe version of {@link #linearTilingFeatures}. */
-    public static long nlinearTilingFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3.LINEARTILINGFEATURES); }
+    public static long nlinearTilingFeatures(long struct) { return memGetLong(struct + VkFormatProperties3.LINEARTILINGFEATURES); }
     /** Unsafe version of {@link #optimalTilingFeatures}. */
-    public static long noptimalTilingFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3.OPTIMALTILINGFEATURES); }
+    public static long noptimalTilingFeatures(long struct) { return memGetLong(struct + VkFormatProperties3.OPTIMALTILINGFEATURES); }
     /** Unsafe version of {@link #bufferFeatures}. */
-    public static long nbufferFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3.BUFFERFEATURES); }
+    public static long nbufferFeatures(long struct) { return memGetLong(struct + VkFormatProperties3.BUFFERFEATURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFormatProperties3.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFormatProperties3.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFormatProperties3.PNEXT, value); }
 

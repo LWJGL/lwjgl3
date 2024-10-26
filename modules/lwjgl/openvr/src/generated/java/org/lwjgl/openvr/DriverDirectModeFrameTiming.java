@@ -133,15 +133,15 @@ public class DriverDirectModeFrameTiming extends Struct<DriverDirectModeFrameTim
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nSize}. */
-    public static int nm_nSize(long struct) { return UNSAFE.getInt(null, struct + DriverDirectModeFrameTiming.M_NSIZE); }
+    public static int nm_nSize(long struct) { return memGetInt(struct + DriverDirectModeFrameTiming.M_NSIZE); }
     /** Unsafe version of {@link #m_nNumFramePresents}. */
-    public static int nm_nNumFramePresents(long struct) { return UNSAFE.getInt(null, struct + DriverDirectModeFrameTiming.M_NNUMFRAMEPRESENTS); }
+    public static int nm_nNumFramePresents(long struct) { return memGetInt(struct + DriverDirectModeFrameTiming.M_NNUMFRAMEPRESENTS); }
     /** Unsafe version of {@link #m_nNumMisPresented}. */
-    public static int nm_nNumMisPresented(long struct) { return UNSAFE.getInt(null, struct + DriverDirectModeFrameTiming.M_NNUMMISPRESENTED); }
+    public static int nm_nNumMisPresented(long struct) { return memGetInt(struct + DriverDirectModeFrameTiming.M_NNUMMISPRESENTED); }
     /** Unsafe version of {@link #m_nNumDroppedFrames}. */
-    public static int nm_nNumDroppedFrames(long struct) { return UNSAFE.getInt(null, struct + DriverDirectModeFrameTiming.M_NNUMDROPPEDFRAMES); }
+    public static int nm_nNumDroppedFrames(long struct) { return memGetInt(struct + DriverDirectModeFrameTiming.M_NNUMDROPPEDFRAMES); }
     /** Unsafe version of {@link #m_nReprojectionFlags}. */
-    public static int nm_nReprojectionFlags(long struct) { return UNSAFE.getInt(null, struct + DriverDirectModeFrameTiming.M_NREPROJECTIONFLAGS); }
+    public static int nm_nReprojectionFlags(long struct) { return memGetInt(struct + DriverDirectModeFrameTiming.M_NREPROJECTIONFLAGS); }
 
     // -----------------------------------
 

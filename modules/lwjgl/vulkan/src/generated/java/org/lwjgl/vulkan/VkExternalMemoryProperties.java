@@ -126,11 +126,11 @@ public class VkExternalMemoryProperties extends Struct<VkExternalMemoryPropertie
     // -----------------------------------
 
     /** Unsafe version of {@link #externalMemoryFeatures}. */
-    public static int nexternalMemoryFeatures(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryProperties.EXTERNALMEMORYFEATURES); }
+    public static int nexternalMemoryFeatures(long struct) { return memGetInt(struct + VkExternalMemoryProperties.EXTERNALMEMORYFEATURES); }
     /** Unsafe version of {@link #exportFromImportedHandleTypes}. */
-    public static int nexportFromImportedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
+    public static int nexportFromImportedHandleTypes(long struct) { return memGetInt(struct + VkExternalMemoryProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
     /** Unsafe version of {@link #compatibleHandleTypes}. */
-    public static int ncompatibleHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryProperties.COMPATIBLEHANDLETYPES); }
+    public static int ncompatibleHandleTypes(long struct) { return memGetInt(struct + VkExternalMemoryProperties.COMPATIBLEHANDLETYPES); }
 
     // -----------------------------------
 

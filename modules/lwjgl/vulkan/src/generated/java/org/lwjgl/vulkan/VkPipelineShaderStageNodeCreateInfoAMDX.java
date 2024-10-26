@@ -270,7 +270,7 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageNodeCreateInfoAMDX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineShaderStageNodeCreateInfoAMDX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNEXT); }
     /** Unsafe version of {@link #pName}. */
@@ -278,10 +278,10 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     /** Unsafe version of {@link #pNameString}. */
     @Nullable public static String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME)); }
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageNodeCreateInfoAMDX.INDEX); }
+    public static int nindex(long struct) { return memGetInt(struct + VkPipelineShaderStageNodeCreateInfoAMDX.INDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageNodeCreateInfoAMDX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageNodeCreateInfoAMDX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNEXT, value); }
     /** Unsafe version of {@link #pName(ByteBuffer) pName}. */
@@ -290,7 +290,7 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
         memPutAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #index(int) index}. */
-    public static void nindex(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageNodeCreateInfoAMDX.INDEX, value); }
+    public static void nindex(long struct, int value) { memPutInt(struct + VkPipelineShaderStageNodeCreateInfoAMDX.INDEX, value); }
 
     // -----------------------------------
 

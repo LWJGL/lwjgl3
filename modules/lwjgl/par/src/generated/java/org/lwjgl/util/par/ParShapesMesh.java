@@ -160,11 +160,11 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
     /** Unsafe version of {@link #points(int) points}. */
     public static FloatBuffer npoints(long struct, int capacity) { return memFloatBuffer(memGetAddress(struct + ParShapesMesh.POINTS), capacity); }
     /** Unsafe version of {@link #npoints}. */
-    public static int nnpoints(long struct) { return UNSAFE.getInt(null, struct + ParShapesMesh.NPOINTS); }
+    public static int nnpoints(long struct) { return memGetInt(struct + ParShapesMesh.NPOINTS); }
     /** Unsafe version of {@link #triangles(int) triangles}. */
     public static IntBuffer ntriangles(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + ParShapesMesh.TRIANGLES), capacity); }
     /** Unsafe version of {@link #ntriangles}. */
-    public static int nntriangles(long struct) { return UNSAFE.getInt(null, struct + ParShapesMesh.NTRIANGLES); }
+    public static int nntriangles(long struct) { return memGetInt(struct + ParShapesMesh.NTRIANGLES); }
     /** Unsafe version of {@link #normals(int) normals}. */
     @Nullable public static FloatBuffer nnormals(long struct, int capacity) { return memFloatBufferSafe(memGetAddress(struct + ParShapesMesh.NORMALS), capacity); }
     /** Unsafe version of {@link #tcoords(int) tcoords}. */

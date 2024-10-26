@@ -305,24 +305,24 @@ public class XrSpatialAnchorsPublishCompletionML extends Struct<XrSpatialAnchors
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsPublishCompletionML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsPublishCompletionML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsPublishCompletionML.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
-    public static int nfutureResult(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsPublishCompletionML.FUTURERESULT); }
+    public static int nfutureResult(long struct) { return memGetInt(struct + XrSpatialAnchorsPublishCompletionML.FUTURERESULT); }
     /** Unsafe version of {@link #uuidCount}. */
-    public static int nuuidCount(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsPublishCompletionML.UUIDCOUNT); }
+    public static int nuuidCount(long struct) { return memGetInt(struct + XrSpatialAnchorsPublishCompletionML.UUIDCOUNT); }
     /** Unsafe version of {@link #uuids}. */
     public static XrUuidEXT.Buffer nuuids(long struct) { return XrUuidEXT.create(memGetAddress(struct + XrSpatialAnchorsPublishCompletionML.UUIDS), nuuidCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsPublishCompletionML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsPublishCompletionML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsPublishCompletionML.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
-    public static void nfutureResult(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsPublishCompletionML.FUTURERESULT, value); }
+    public static void nfutureResult(long struct, int value) { memPutInt(struct + XrSpatialAnchorsPublishCompletionML.FUTURERESULT, value); }
     /** Sets the specified value to the {@code uuidCount} field of the specified {@code struct}. */
-    public static void nuuidCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsPublishCompletionML.UUIDCOUNT, value); }
+    public static void nuuidCount(long struct, int value) { memPutInt(struct + XrSpatialAnchorsPublishCompletionML.UUIDCOUNT, value); }
     /** Unsafe version of {@link #uuids(XrUuidEXT.Buffer) uuids}. */
     public static void nuuids(long struct, XrUuidEXT.Buffer value) { memPutAddress(struct + XrSpatialAnchorsPublishCompletionML.UUIDS, value.address()); nuuidCount(struct, value.remaining()); }
 

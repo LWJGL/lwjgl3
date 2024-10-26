@@ -253,7 +253,7 @@ public class XrDebugUtilsLabelEXT extends Struct<XrDebugUtilsLabelEXT> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsLabelEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrDebugUtilsLabelEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrDebugUtilsLabelEXT.NEXT); }
     /** Unsafe version of {@link #labelName}. */
@@ -262,7 +262,7 @@ public class XrDebugUtilsLabelEXT extends Struct<XrDebugUtilsLabelEXT> implement
     public static String nlabelNameString(long struct) { return memUTF8(memGetAddress(struct + XrDebugUtilsLabelEXT.LABELNAME)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsLabelEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrDebugUtilsLabelEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsLabelEXT.NEXT, value); }
     /** Unsafe version of {@link #labelName(ByteBuffer) labelName}. */

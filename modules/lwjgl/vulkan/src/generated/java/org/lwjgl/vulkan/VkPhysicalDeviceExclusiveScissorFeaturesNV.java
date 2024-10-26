@@ -267,18 +267,18 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #exclusiveScissor}. */
-    public static int nexclusiveScissor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.EXCLUSIVESCISSOR); }
+    public static int nexclusiveScissor(long struct) { return memGetInt(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.EXCLUSIVESCISSOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #exclusiveScissor(boolean) exclusiveScissor}. */
-    public static void nexclusiveScissor(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.EXCLUSIVESCISSOR, value); }
+    public static void nexclusiveScissor(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExclusiveScissorFeaturesNV.EXCLUSIVESCISSOR, value); }
 
     // -----------------------------------
 

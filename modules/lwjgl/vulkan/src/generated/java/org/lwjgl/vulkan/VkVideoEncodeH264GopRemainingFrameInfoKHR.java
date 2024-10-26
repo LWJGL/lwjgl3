@@ -283,30 +283,30 @@ public class VkVideoEncodeH264GopRemainingFrameInfoKHR extends Struct<VkVideoEnc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.PNEXT); }
     /** Unsafe version of {@link #useGopRemainingFrames}. */
-    public static int nuseGopRemainingFrames(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.USEGOPREMAININGFRAMES); }
+    public static int nuseGopRemainingFrames(long struct) { return memGetInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.USEGOPREMAININGFRAMES); }
     /** Unsafe version of {@link #gopRemainingI}. */
-    public static int ngopRemainingI(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGI); }
+    public static int ngopRemainingI(long struct) { return memGetInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGI); }
     /** Unsafe version of {@link #gopRemainingP}. */
-    public static int ngopRemainingP(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGP); }
+    public static int ngopRemainingP(long struct) { return memGetInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGP); }
     /** Unsafe version of {@link #gopRemainingB}. */
-    public static int ngopRemainingB(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGB); }
+    public static int ngopRemainingB(long struct) { return memGetInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGB); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #useGopRemainingFrames(boolean) useGopRemainingFrames}. */
-    public static void nuseGopRemainingFrames(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.USEGOPREMAININGFRAMES, value); }
+    public static void nuseGopRemainingFrames(long struct, int value) { memPutInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.USEGOPREMAININGFRAMES, value); }
     /** Unsafe version of {@link #gopRemainingI(int) gopRemainingI}. */
-    public static void ngopRemainingI(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGI, value); }
+    public static void ngopRemainingI(long struct, int value) { memPutInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGI, value); }
     /** Unsafe version of {@link #gopRemainingP(int) gopRemainingP}. */
-    public static void ngopRemainingP(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGP, value); }
+    public static void ngopRemainingP(long struct, int value) { memPutInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGP, value); }
     /** Unsafe version of {@link #gopRemainingB(int) gopRemainingB}. */
-    public static void ngopRemainingB(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGB, value); }
+    public static void ngopRemainingB(long struct, int value) { memPutInt(struct + VkVideoEncodeH264GopRemainingFrameInfoKHR.GOPREMAININGB, value); }
 
     // -----------------------------------
 

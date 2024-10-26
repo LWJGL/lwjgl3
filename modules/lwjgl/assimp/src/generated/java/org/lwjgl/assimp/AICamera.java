@@ -363,15 +363,15 @@ public class AICamera extends Struct<AICamera> implements NativeResource {
     /** Unsafe version of {@link #mLookAt}. */
     public static AIVector3D nmLookAt(long struct) { return AIVector3D.create(struct + AICamera.MLOOKAT); }
     /** Unsafe version of {@link #mHorizontalFOV}. */
-    public static float nmHorizontalFOV(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MHORIZONTALFOV); }
+    public static float nmHorizontalFOV(long struct) { return memGetFloat(struct + AICamera.MHORIZONTALFOV); }
     /** Unsafe version of {@link #mClipPlaneNear}. */
-    public static float nmClipPlaneNear(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MCLIPPLANENEAR); }
+    public static float nmClipPlaneNear(long struct) { return memGetFloat(struct + AICamera.MCLIPPLANENEAR); }
     /** Unsafe version of {@link #mClipPlaneFar}. */
-    public static float nmClipPlaneFar(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MCLIPPLANEFAR); }
+    public static float nmClipPlaneFar(long struct) { return memGetFloat(struct + AICamera.MCLIPPLANEFAR); }
     /** Unsafe version of {@link #mAspect}. */
-    public static float nmAspect(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MASPECT); }
+    public static float nmAspect(long struct) { return memGetFloat(struct + AICamera.MASPECT); }
     /** Unsafe version of {@link #mOrthographicWidth}. */
-    public static float nmOrthographicWidth(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MORTHOGRAPHICWIDTH); }
+    public static float nmOrthographicWidth(long struct) { return memGetFloat(struct + AICamera.MORTHOGRAPHICWIDTH); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AICamera.MNAME, AIString.SIZEOF); }
@@ -382,15 +382,15 @@ public class AICamera extends Struct<AICamera> implements NativeResource {
     /** Unsafe version of {@link #mLookAt(AIVector3D) mLookAt}. */
     public static void nmLookAt(long struct, AIVector3D value) { memCopy(value.address(), struct + AICamera.MLOOKAT, AIVector3D.SIZEOF); }
     /** Unsafe version of {@link #mHorizontalFOV(float) mHorizontalFOV}. */
-    public static void nmHorizontalFOV(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MHORIZONTALFOV, value); }
+    public static void nmHorizontalFOV(long struct, float value) { memPutFloat(struct + AICamera.MHORIZONTALFOV, value); }
     /** Unsafe version of {@link #mClipPlaneNear(float) mClipPlaneNear}. */
-    public static void nmClipPlaneNear(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MCLIPPLANENEAR, value); }
+    public static void nmClipPlaneNear(long struct, float value) { memPutFloat(struct + AICamera.MCLIPPLANENEAR, value); }
     /** Unsafe version of {@link #mClipPlaneFar(float) mClipPlaneFar}. */
-    public static void nmClipPlaneFar(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MCLIPPLANEFAR, value); }
+    public static void nmClipPlaneFar(long struct, float value) { memPutFloat(struct + AICamera.MCLIPPLANEFAR, value); }
     /** Unsafe version of {@link #mAspect(float) mAspect}. */
-    public static void nmAspect(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MASPECT, value); }
+    public static void nmAspect(long struct, float value) { memPutFloat(struct + AICamera.MASPECT, value); }
     /** Unsafe version of {@link #mOrthographicWidth(float) mOrthographicWidth}. */
-    public static void nmOrthographicWidth(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MORTHOGRAPHICWIDTH, value); }
+    public static void nmOrthographicWidth(long struct, float value) { memPutFloat(struct + AICamera.MORTHOGRAPHICWIDTH, value); }
 
     // -----------------------------------
 

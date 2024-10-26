@@ -272,24 +272,24 @@ public class XrSceneMeshIndicesUint32MSFT extends Struct<XrSceneMeshIndicesUint3
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshIndicesUint32MSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMeshIndicesUint32MSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMeshIndicesUint32MSFT.NEXT); }
     /** Unsafe version of {@link #indexCapacityInput}. */
-    public static int nindexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshIndicesUint32MSFT.INDEXCAPACITYINPUT); }
+    public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrSceneMeshIndicesUint32MSFT.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
-    public static int nindexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshIndicesUint32MSFT.INDEXCOUNTOUTPUT); }
+    public static int nindexCountOutput(long struct) { return memGetInt(struct + XrSceneMeshIndicesUint32MSFT.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
     @Nullable public static IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSceneMeshIndicesUint32MSFT.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint32MSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMeshIndicesUint32MSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshIndicesUint32MSFT.NEXT, value); }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
-    public static void nindexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint32MSFT.INDEXCAPACITYINPUT, value); }
+    public static void nindexCapacityInput(long struct, int value) { memPutInt(struct + XrSceneMeshIndicesUint32MSFT.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
-    public static void nindexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint32MSFT.INDEXCOUNTOUTPUT, value); }
+    public static void nindexCountOutput(long struct, int value) { memPutInt(struct + XrSceneMeshIndicesUint32MSFT.INDEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #indices(IntBuffer) indices}. */
     public static void nindices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrSceneMeshIndicesUint32MSFT.INDICES, memAddressSafe(value)); if (value != null) { nindexCapacityInput(struct, value.remaining()); } }
 

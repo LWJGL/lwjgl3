@@ -267,26 +267,26 @@ public class VkVideoEncodeUsageInfoKHR extends Struct<VkVideoEncodeUsageInfoKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeUsageInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeUsageInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeUsageInfoKHR.PNEXT); }
     /** Unsafe version of {@link #videoUsageHints}. */
-    public static int nvideoUsageHints(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeUsageInfoKHR.VIDEOUSAGEHINTS); }
+    public static int nvideoUsageHints(long struct) { return memGetInt(struct + VkVideoEncodeUsageInfoKHR.VIDEOUSAGEHINTS); }
     /** Unsafe version of {@link #videoContentHints}. */
-    public static int nvideoContentHints(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeUsageInfoKHR.VIDEOCONTENTHINTS); }
+    public static int nvideoContentHints(long struct) { return memGetInt(struct + VkVideoEncodeUsageInfoKHR.VIDEOCONTENTHINTS); }
     /** Unsafe version of {@link #tuningMode}. */
-    public static int ntuningMode(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeUsageInfoKHR.TUNINGMODE); }
+    public static int ntuningMode(long struct) { return memGetInt(struct + VkVideoEncodeUsageInfoKHR.TUNINGMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeUsageInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeUsageInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeUsageInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #videoUsageHints(int) videoUsageHints}. */
-    public static void nvideoUsageHints(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeUsageInfoKHR.VIDEOUSAGEHINTS, value); }
+    public static void nvideoUsageHints(long struct, int value) { memPutInt(struct + VkVideoEncodeUsageInfoKHR.VIDEOUSAGEHINTS, value); }
     /** Unsafe version of {@link #videoContentHints(int) videoContentHints}. */
-    public static void nvideoContentHints(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeUsageInfoKHR.VIDEOCONTENTHINTS, value); }
+    public static void nvideoContentHints(long struct, int value) { memPutInt(struct + VkVideoEncodeUsageInfoKHR.VIDEOCONTENTHINTS, value); }
     /** Unsafe version of {@link #tuningMode(int) tuningMode}. */
-    public static void ntuningMode(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeUsageInfoKHR.TUNINGMODE, value); }
+    public static void ntuningMode(long struct, int value) { memPutInt(struct + VkVideoEncodeUsageInfoKHR.TUNINGMODE, value); }
 
     // -----------------------------------
 

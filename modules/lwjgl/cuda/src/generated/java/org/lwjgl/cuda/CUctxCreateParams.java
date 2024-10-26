@@ -236,14 +236,14 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
     /** Unsafe version of {@link #execAffinityParams}. */
     @Nullable public static CUexecAffinityParam.Buffer nexecAffinityParams(long struct) { return CUexecAffinityParam.createSafe(memGetAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS), nnumExecAffinityParams(struct)); }
     /** Unsafe version of {@link #numExecAffinityParams}. */
-    public static int nnumExecAffinityParams(long struct) { return UNSAFE.getInt(null, struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS); }
+    public static int nnumExecAffinityParams(long struct) { return memGetInt(struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS); }
     /** Unsafe version of {@link #cigParams}. */
     @Nullable public static CUctxCigParam ncigParams(long struct) { return CUctxCigParam.createSafe(memGetAddress(struct + CUctxCreateParams.CIGPARAMS)); }
 
     /** Unsafe version of {@link #execAffinityParams(CUexecAffinityParam.Buffer) execAffinityParams}. */
     public static void nexecAffinityParams(long struct, @Nullable CUexecAffinityParam.Buffer value) { memPutAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS, memAddressSafe(value)); nnumExecAffinityParams(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code numExecAffinityParams} field of the specified {@code struct}. */
-    public static void nnumExecAffinityParams(long struct, int value) { UNSAFE.putInt(null, struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS, value); }
+    public static void nnumExecAffinityParams(long struct, int value) { memPutInt(struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS, value); }
     /** Unsafe version of {@link #cigParams(CUctxCigParam) cigParams}. */
     public static void ncigParams(long struct, @Nullable CUctxCigParam value) { memPutAddress(struct + CUctxCreateParams.CIGPARAMS, memAddressSafe(value)); }
 

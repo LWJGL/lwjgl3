@@ -291,15 +291,15 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
     /** Unsafe version of {@link #applicationNameString}. */
     public static String napplicationNameString(long struct) { return memUTF8(struct + XrApplicationInfo.APPLICATIONNAME); }
     /** Unsafe version of {@link #applicationVersion}. */
-    public static int napplicationVersion(long struct) { return UNSAFE.getInt(null, struct + XrApplicationInfo.APPLICATIONVERSION); }
+    public static int napplicationVersion(long struct) { return memGetInt(struct + XrApplicationInfo.APPLICATIONVERSION); }
     /** Unsafe version of {@link #engineName}. */
     public static ByteBuffer nengineName(long struct) { return memByteBuffer(struct + XrApplicationInfo.ENGINENAME, XR_MAX_ENGINE_NAME_SIZE); }
     /** Unsafe version of {@link #engineNameString}. */
     public static String nengineNameString(long struct) { return memUTF8(struct + XrApplicationInfo.ENGINENAME); }
     /** Unsafe version of {@link #engineVersion}. */
-    public static int nengineVersion(long struct) { return UNSAFE.getInt(null, struct + XrApplicationInfo.ENGINEVERSION); }
+    public static int nengineVersion(long struct) { return memGetInt(struct + XrApplicationInfo.ENGINEVERSION); }
     /** Unsafe version of {@link #apiVersion}. */
-    public static long napiVersion(long struct) { return UNSAFE.getLong(null, struct + XrApplicationInfo.APIVERSION); }
+    public static long napiVersion(long struct) { return memGetLong(struct + XrApplicationInfo.APIVERSION); }
 
     /** Unsafe version of {@link #applicationName(ByteBuffer) applicationName}. */
     public static void napplicationName(long struct, ByteBuffer value) {
@@ -310,7 +310,7 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
         memCopy(memAddress(value), struct + XrApplicationInfo.APPLICATIONNAME, value.remaining());
     }
     /** Unsafe version of {@link #applicationVersion(int) applicationVersion}. */
-    public static void napplicationVersion(long struct, int value) { UNSAFE.putInt(null, struct + XrApplicationInfo.APPLICATIONVERSION, value); }
+    public static void napplicationVersion(long struct, int value) { memPutInt(struct + XrApplicationInfo.APPLICATIONVERSION, value); }
     /** Unsafe version of {@link #engineName(ByteBuffer) engineName}. */
     public static void nengineName(long struct, ByteBuffer value) {
         if (CHECKS) {
@@ -320,9 +320,9 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
         memCopy(memAddress(value), struct + XrApplicationInfo.ENGINENAME, value.remaining());
     }
     /** Unsafe version of {@link #engineVersion(int) engineVersion}. */
-    public static void nengineVersion(long struct, int value) { UNSAFE.putInt(null, struct + XrApplicationInfo.ENGINEVERSION, value); }
+    public static void nengineVersion(long struct, int value) { memPutInt(struct + XrApplicationInfo.ENGINEVERSION, value); }
     /** Unsafe version of {@link #apiVersion(long) apiVersion}. */
-    public static void napiVersion(long struct, long value) { UNSAFE.putLong(null, struct + XrApplicationInfo.APIVERSION, value); }
+    public static void napiVersion(long struct, long value) { memPutLong(struct + XrApplicationInfo.APIVERSION, value); }
 
     // -----------------------------------
 

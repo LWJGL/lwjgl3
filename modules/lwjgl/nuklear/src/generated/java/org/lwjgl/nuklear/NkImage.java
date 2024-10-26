@@ -273,22 +273,22 @@ public class NkImage extends Struct<NkImage> implements NativeResource {
     /** Unsafe version of {@link #handle}. */
     public static NkHandle nhandle(long struct) { return NkHandle.create(struct + NkImage.HANDLE); }
     /** Unsafe version of {@link #w}. */
-    public static short nw(long struct) { return UNSAFE.getShort(null, struct + NkImage.W); }
+    public static short nw(long struct) { return memGetShort(struct + NkImage.W); }
     /** Unsafe version of {@link #h}. */
-    public static short nh(long struct) { return UNSAFE.getShort(null, struct + NkImage.H); }
+    public static short nh(long struct) { return memGetShort(struct + NkImage.H); }
     /** Unsafe version of {@link #region}. */
     public static ShortBuffer nregion(long struct) { return memShortBuffer(struct + NkImage.REGION, 4); }
     /** Unsafe version of {@link #region(int) region}. */
     public static short nregion(long struct, int index) {
-        return UNSAFE.getShort(null, struct + NkImage.REGION + check(index, 4) * 2);
+        return memGetShort(struct + NkImage.REGION + check(index, 4) * 2);
     }
 
     /** Unsafe version of {@link #handle(NkHandle) handle}. */
     public static void nhandle(long struct, NkHandle value) { memCopy(value.address(), struct + NkImage.HANDLE, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #w(short) w}. */
-    public static void nw(long struct, short value) { UNSAFE.putShort(null, struct + NkImage.W, value); }
+    public static void nw(long struct, short value) { memPutShort(struct + NkImage.W, value); }
     /** Unsafe version of {@link #h(short) h}. */
-    public static void nh(long struct, short value) { UNSAFE.putShort(null, struct + NkImage.H, value); }
+    public static void nh(long struct, short value) { memPutShort(struct + NkImage.H, value); }
     /** Unsafe version of {@link #region(ShortBuffer) region}. */
     public static void nregion(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -296,7 +296,7 @@ public class NkImage extends Struct<NkImage> implements NativeResource {
     }
     /** Unsafe version of {@link #region(int, short) region}. */
     public static void nregion(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + NkImage.REGION + check(index, 4) * 2, value);
+        memPutShort(struct + NkImage.REGION + check(index, 4) * 2, value);
     }
 
     // -----------------------------------

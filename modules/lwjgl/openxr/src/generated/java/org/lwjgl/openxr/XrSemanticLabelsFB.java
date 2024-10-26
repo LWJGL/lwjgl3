@@ -276,24 +276,24 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSemanticLabelsFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSemanticLabelsFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSemanticLabelsFB.NEXT); }
     /** Unsafe version of {@link #bufferCapacityInput}. */
-    public static int nbufferCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSemanticLabelsFB.BUFFERCAPACITYINPUT); }
+    public static int nbufferCapacityInput(long struct) { return memGetInt(struct + XrSemanticLabelsFB.BUFFERCAPACITYINPUT); }
     /** Unsafe version of {@link #bufferCountOutput}. */
-    public static int nbufferCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSemanticLabelsFB.BUFFERCOUNTOUTPUT); }
+    public static int nbufferCountOutput(long struct) { return memGetInt(struct + XrSemanticLabelsFB.BUFFERCOUNTOUTPUT); }
     /** Unsafe version of {@link #buffer() buffer}. */
     @Nullable public static ByteBuffer nbuffer(long struct) { return memByteBufferSafe(memGetAddress(struct + XrSemanticLabelsFB.BUFFER), nbufferCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSemanticLabelsFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSemanticLabelsFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSemanticLabelsFB.NEXT, value); }
     /** Sets the specified value to the {@code bufferCapacityInput} field of the specified {@code struct}. */
-    public static void nbufferCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSemanticLabelsFB.BUFFERCAPACITYINPUT, value); }
+    public static void nbufferCapacityInput(long struct, int value) { memPutInt(struct + XrSemanticLabelsFB.BUFFERCAPACITYINPUT, value); }
     /** Unsafe version of {@link #bufferCountOutput(int) bufferCountOutput}. */
-    public static void nbufferCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSemanticLabelsFB.BUFFERCOUNTOUTPUT, value); }
+    public static void nbufferCountOutput(long struct, int value) { memPutInt(struct + XrSemanticLabelsFB.BUFFERCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
     public static void nbuffer(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + XrSemanticLabelsFB.BUFFER, memAddressSafe(value)); if (value != null) { nbufferCapacityInput(struct, value.remaining()); } }
 

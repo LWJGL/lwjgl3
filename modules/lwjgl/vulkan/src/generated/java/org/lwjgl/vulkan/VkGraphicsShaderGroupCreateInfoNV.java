@@ -290,11 +290,11 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct<VkGraphicsShaderGr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsShaderGroupCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGraphicsShaderGroupCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGraphicsShaderGroupCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsShaderGroupCreateInfoNV.STAGECOUNT); }
+    public static int nstageCount(long struct) { return memGetInt(struct + VkGraphicsShaderGroupCreateInfoNV.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.create(memGetAddress(struct + VkGraphicsShaderGroupCreateInfoNV.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pVertexInputState}. */
@@ -303,11 +303,11 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct<VkGraphicsShaderGr
     @Nullable public static VkPipelineTessellationStateCreateInfo npTessellationState(long struct) { return VkPipelineTessellationStateCreateInfo.createSafe(memGetAddress(struct + VkGraphicsShaderGroupCreateInfoNV.PTESSELLATIONSTATE)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsShaderGroupCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGraphicsShaderGroupCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGraphicsShaderGroupCreateInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsShaderGroupCreateInfoNV.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { memPutInt(struct + VkGraphicsShaderGroupCreateInfoNV.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkGraphicsShaderGroupCreateInfoNV.PSTAGES, value.address()); nstageCount(struct, value.remaining()); }
     /** Unsafe version of {@link #pVertexInputState(VkPipelineVertexInputStateCreateInfo) pVertexInputState}. */

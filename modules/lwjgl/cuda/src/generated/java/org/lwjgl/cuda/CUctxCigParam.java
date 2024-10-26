@@ -221,12 +221,12 @@ public class CUctxCigParam extends Struct<CUctxCigParam> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #sharedDataType}. */
-    public static int nsharedDataType(long struct) { return UNSAFE.getInt(null, struct + CUctxCigParam.SHAREDDATATYPE); }
+    public static int nsharedDataType(long struct) { return memGetInt(struct + CUctxCigParam.SHAREDDATATYPE); }
     /** Unsafe version of {@link #sharedData}. */
     public static long nsharedData(long struct) { return memGetAddress(struct + CUctxCigParam.SHAREDDATA); }
 
     /** Unsafe version of {@link #sharedDataType(int) sharedDataType}. */
-    public static void nsharedDataType(long struct, int value) { UNSAFE.putInt(null, struct + CUctxCigParam.SHAREDDATATYPE, value); }
+    public static void nsharedDataType(long struct, int value) { memPutInt(struct + CUctxCigParam.SHAREDDATATYPE, value); }
     /** Unsafe version of {@link #sharedData(long) sharedData}. */
     public static void nsharedData(long struct, long value) { memPutAddress(struct + CUctxCigParam.SHAREDDATA, value); }
 

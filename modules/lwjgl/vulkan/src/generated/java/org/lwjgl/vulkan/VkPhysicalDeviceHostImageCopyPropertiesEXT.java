@@ -319,36 +319,36 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #copySrcLayoutCount}. */
-    public static int ncopySrcLayoutCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYSRCLAYOUTCOUNT); }
+    public static int ncopySrcLayoutCount(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYSRCLAYOUTCOUNT); }
     /** Unsafe version of {@link #pCopySrcLayouts() pCopySrcLayouts}. */
     @Nullable public static IntBuffer npCopySrcLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYSRCLAYOUTS), ncopySrcLayoutCount(struct)); }
     /** Unsafe version of {@link #copyDstLayoutCount}. */
-    public static int ncopyDstLayoutCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYDSTLAYOUTCOUNT); }
+    public static int ncopyDstLayoutCount(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYDSTLAYOUTCOUNT); }
     /** Unsafe version of {@link #pCopyDstLayouts() pCopyDstLayouts}. */
     @Nullable public static IntBuffer npCopyDstLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYDSTLAYOUTS), ncopyDstLayoutCount(struct)); }
     /** Unsafe version of {@link #optimalTilingLayoutUUID}. */
     public static ByteBuffer noptimalTilingLayoutUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #optimalTilingLayoutUUID(int) optimalTilingLayoutUUID}. */
     public static byte noptimalTilingLayoutUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #identicalMemoryTypeRequirements}. */
-    public static int nidenticalMemoryTypeRequirements(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.IDENTICALMEMORYTYPEREQUIREMENTS); }
+    public static int nidenticalMemoryTypeRequirements(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.IDENTICALMEMORYTYPEREQUIREMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PNEXT, value); }
     /** Sets the specified value to the {@code copySrcLayoutCount} field of the specified {@code struct}. */
-    public static void ncopySrcLayoutCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYSRCLAYOUTCOUNT, value); }
+    public static void ncopySrcLayoutCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYSRCLAYOUTCOUNT, value); }
     /** Unsafe version of {@link #pCopySrcLayouts(IntBuffer) pCopySrcLayouts}. */
     public static void npCopySrcLayouts(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYSRCLAYOUTS, memAddressSafe(value)); if (value != null) { ncopySrcLayoutCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code copyDstLayoutCount} field of the specified {@code struct}. */
-    public static void ncopyDstLayoutCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYDSTLAYOUTCOUNT, value); }
+    public static void ncopyDstLayoutCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYDSTLAYOUTCOUNT, value); }
     /** Unsafe version of {@link #pCopyDstLayouts(IntBuffer) pCopyDstLayouts}. */
     public static void npCopyDstLayouts(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYDSTLAYOUTS, memAddressSafe(value)); if (value != null) { ncopyDstLayoutCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #optimalTilingLayoutUUID(ByteBuffer) optimalTilingLayoutUUID}. */
@@ -358,10 +358,10 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     }
     /** Unsafe version of {@link #optimalTilingLayoutUUID(int, byte) optimalTilingLayoutUUID}. */
     public static void noptimalTilingLayoutUUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID + check(index, VK_UUID_SIZE) * 1, value);
+        memPutByte(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID + check(index, VK_UUID_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #identicalMemoryTypeRequirements(boolean) identicalMemoryTypeRequirements}. */
-    public static void nidenticalMemoryTypeRequirements(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.IDENTICALMEMORYTYPEREQUIREMENTS, value); }
+    public static void nidenticalMemoryTypeRequirements(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.IDENTICALMEMORYTYPEREQUIREMENTS, value); }
 
     // -----------------------------------
 

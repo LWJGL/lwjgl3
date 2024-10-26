@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #formatRgba10x6WithoutYCbCrSampler}. */
-    public static int nformatRgba10x6WithoutYCbCrSampler(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.FORMATRGBA10X6WITHOUTYCBCRSAMPLER); }
+    public static int nformatRgba10x6WithoutYCbCrSampler(long struct) { return memGetInt(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.FORMATRGBA10X6WITHOUTYCBCRSAMPLER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #formatRgba10x6WithoutYCbCrSampler(boolean) formatRgba10x6WithoutYCbCrSampler}. */
-    public static void nformatRgba10x6WithoutYCbCrSampler(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.FORMATRGBA10X6WITHOUTYCBCRSAMPLER, value); }
+    public static void nformatRgba10x6WithoutYCbCrSampler(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.FORMATRGBA10X6WITHOUTYCBCRSAMPLER, value); }
 
     // -----------------------------------
 

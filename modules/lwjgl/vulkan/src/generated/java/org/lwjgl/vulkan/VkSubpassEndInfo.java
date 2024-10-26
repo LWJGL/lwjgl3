@@ -239,12 +239,12 @@ public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassEndInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassEndInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassEndInfo.PNEXT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassEndInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassEndInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassEndInfo.PNEXT, value); }
 

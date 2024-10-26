@@ -266,22 +266,22 @@ public class XrScenePlaneMSFT extends Struct<XrScenePlaneMSFT> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #alignment}. */
-    public static int nalignment(long struct) { return UNSAFE.getInt(null, struct + XrScenePlaneMSFT.ALIGNMENT); }
+    public static int nalignment(long struct) { return memGetInt(struct + XrScenePlaneMSFT.ALIGNMENT); }
     /** Unsafe version of {@link #size}. */
     public static XrExtent2Df nsize(long struct) { return XrExtent2Df.create(struct + XrScenePlaneMSFT.SIZE); }
     /** Unsafe version of {@link #meshBufferId}. */
-    public static long nmeshBufferId(long struct) { return UNSAFE.getLong(null, struct + XrScenePlaneMSFT.MESHBUFFERID); }
+    public static long nmeshBufferId(long struct) { return memGetLong(struct + XrScenePlaneMSFT.MESHBUFFERID); }
     /** Unsafe version of {@link #supportsIndicesUint16}. */
-    public static int nsupportsIndicesUint16(long struct) { return UNSAFE.getInt(null, struct + XrScenePlaneMSFT.SUPPORTSINDICESUINT16); }
+    public static int nsupportsIndicesUint16(long struct) { return memGetInt(struct + XrScenePlaneMSFT.SUPPORTSINDICESUINT16); }
 
     /** Unsafe version of {@link #alignment(int) alignment}. */
-    public static void nalignment(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlaneMSFT.ALIGNMENT, value); }
+    public static void nalignment(long struct, int value) { memPutInt(struct + XrScenePlaneMSFT.ALIGNMENT, value); }
     /** Unsafe version of {@link #size(XrExtent2Df) size}. */
     public static void nsize(long struct, XrExtent2Df value) { memCopy(value.address(), struct + XrScenePlaneMSFT.SIZE, XrExtent2Df.SIZEOF); }
     /** Unsafe version of {@link #meshBufferId(long) meshBufferId}. */
-    public static void nmeshBufferId(long struct, long value) { UNSAFE.putLong(null, struct + XrScenePlaneMSFT.MESHBUFFERID, value); }
+    public static void nmeshBufferId(long struct, long value) { memPutLong(struct + XrScenePlaneMSFT.MESHBUFFERID, value); }
     /** Unsafe version of {@link #supportsIndicesUint16(boolean) supportsIndicesUint16}. */
-    public static void nsupportsIndicesUint16(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlaneMSFT.SUPPORTSINDICESUINT16, value); }
+    public static void nsupportsIndicesUint16(long struct, int value) { memPutInt(struct + XrScenePlaneMSFT.SUPPORTSINDICESUINT16, value); }
 
     // -----------------------------------
 

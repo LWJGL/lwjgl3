@@ -278,11 +278,11 @@ public class VkPhysicalDeviceDriverProperties extends Struct<VkPhysicalDeviceDri
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDriverProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDriverProperties.PNEXT); }
     /** Unsafe version of {@link #driverID}. */
-    public static int ndriverID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverProperties.DRIVERID); }
+    public static int ndriverID(long struct) { return memGetInt(struct + VkPhysicalDeviceDriverProperties.DRIVERID); }
     /** Unsafe version of {@link #driverName}. */
     public static ByteBuffer ndriverName(long struct) { return memByteBuffer(struct + VkPhysicalDeviceDriverProperties.DRIVERNAME, VK_MAX_DRIVER_NAME_SIZE); }
     /** Unsafe version of {@link #driverNameString}. */
@@ -295,7 +295,7 @@ public class VkPhysicalDeviceDriverProperties extends Struct<VkPhysicalDeviceDri
     public static VkConformanceVersion nconformanceVersion(long struct) { return VkConformanceVersion.create(struct + VkPhysicalDeviceDriverProperties.CONFORMANCEVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDriverProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDriverProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDriverProperties.PNEXT, value); }
 

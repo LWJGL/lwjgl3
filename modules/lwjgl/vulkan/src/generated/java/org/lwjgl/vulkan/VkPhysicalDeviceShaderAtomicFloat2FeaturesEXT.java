@@ -367,62 +367,62 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderBufferFloat16Atomics}. */
-    public static int nshaderBufferFloat16Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICS); }
+    public static int nshaderBufferFloat16Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICS); }
     /** Unsafe version of {@link #shaderBufferFloat16AtomicAdd}. */
-    public static int nshaderBufferFloat16AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICADD); }
+    public static int nshaderBufferFloat16AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICADD); }
     /** Unsafe version of {@link #shaderBufferFloat16AtomicMinMax}. */
-    public static int nshaderBufferFloat16AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICMINMAX); }
+    public static int nshaderBufferFloat16AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderBufferFloat32AtomicMinMax}. */
-    public static int nshaderBufferFloat32AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT32ATOMICMINMAX); }
+    public static int nshaderBufferFloat32AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT32ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderBufferFloat64AtomicMinMax}. */
-    public static int nshaderBufferFloat64AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT64ATOMICMINMAX); }
+    public static int nshaderBufferFloat64AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT64ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderSharedFloat16Atomics}. */
-    public static int nshaderSharedFloat16Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICS); }
+    public static int nshaderSharedFloat16Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICS); }
     /** Unsafe version of {@link #shaderSharedFloat16AtomicAdd}. */
-    public static int nshaderSharedFloat16AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICADD); }
+    public static int nshaderSharedFloat16AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICADD); }
     /** Unsafe version of {@link #shaderSharedFloat16AtomicMinMax}. */
-    public static int nshaderSharedFloat16AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICMINMAX); }
+    public static int nshaderSharedFloat16AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderSharedFloat32AtomicMinMax}. */
-    public static int nshaderSharedFloat32AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT32ATOMICMINMAX); }
+    public static int nshaderSharedFloat32AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT32ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderSharedFloat64AtomicMinMax}. */
-    public static int nshaderSharedFloat64AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT64ATOMICMINMAX); }
+    public static int nshaderSharedFloat64AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT64ATOMICMINMAX); }
     /** Unsafe version of {@link #shaderImageFloat32AtomicMinMax}. */
-    public static int nshaderImageFloat32AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERIMAGEFLOAT32ATOMICMINMAX); }
+    public static int nshaderImageFloat32AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERIMAGEFLOAT32ATOMICMINMAX); }
     /** Unsafe version of {@link #sparseImageFloat32AtomicMinMax}. */
-    public static int nsparseImageFloat32AtomicMinMax(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SPARSEIMAGEFLOAT32ATOMICMINMAX); }
+    public static int nsparseImageFloat32AtomicMinMax(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SPARSEIMAGEFLOAT32ATOMICMINMAX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderBufferFloat16Atomics(boolean) shaderBufferFloat16Atomics}. */
-    public static void nshaderBufferFloat16Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICS, value); }
+    public static void nshaderBufferFloat16Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICS, value); }
     /** Unsafe version of {@link #shaderBufferFloat16AtomicAdd(boolean) shaderBufferFloat16AtomicAdd}. */
-    public static void nshaderBufferFloat16AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICADD, value); }
+    public static void nshaderBufferFloat16AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICADD, value); }
     /** Unsafe version of {@link #shaderBufferFloat16AtomicMinMax(boolean) shaderBufferFloat16AtomicMinMax}. */
-    public static void nshaderBufferFloat16AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICMINMAX, value); }
+    public static void nshaderBufferFloat16AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT16ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderBufferFloat32AtomicMinMax(boolean) shaderBufferFloat32AtomicMinMax}. */
-    public static void nshaderBufferFloat32AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT32ATOMICMINMAX, value); }
+    public static void nshaderBufferFloat32AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT32ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderBufferFloat64AtomicMinMax(boolean) shaderBufferFloat64AtomicMinMax}. */
-    public static void nshaderBufferFloat64AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT64ATOMICMINMAX, value); }
+    public static void nshaderBufferFloat64AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERBUFFERFLOAT64ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderSharedFloat16Atomics(boolean) shaderSharedFloat16Atomics}. */
-    public static void nshaderSharedFloat16Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICS, value); }
+    public static void nshaderSharedFloat16Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICS, value); }
     /** Unsafe version of {@link #shaderSharedFloat16AtomicAdd(boolean) shaderSharedFloat16AtomicAdd}. */
-    public static void nshaderSharedFloat16AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICADD, value); }
+    public static void nshaderSharedFloat16AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICADD, value); }
     /** Unsafe version of {@link #shaderSharedFloat16AtomicMinMax(boolean) shaderSharedFloat16AtomicMinMax}. */
-    public static void nshaderSharedFloat16AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICMINMAX, value); }
+    public static void nshaderSharedFloat16AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT16ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderSharedFloat32AtomicMinMax(boolean) shaderSharedFloat32AtomicMinMax}. */
-    public static void nshaderSharedFloat32AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT32ATOMICMINMAX, value); }
+    public static void nshaderSharedFloat32AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT32ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderSharedFloat64AtomicMinMax(boolean) shaderSharedFloat64AtomicMinMax}. */
-    public static void nshaderSharedFloat64AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT64ATOMICMINMAX, value); }
+    public static void nshaderSharedFloat64AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERSHAREDFLOAT64ATOMICMINMAX, value); }
     /** Unsafe version of {@link #shaderImageFloat32AtomicMinMax(boolean) shaderImageFloat32AtomicMinMax}. */
-    public static void nshaderImageFloat32AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERIMAGEFLOAT32ATOMICMINMAX, value); }
+    public static void nshaderImageFloat32AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SHADERIMAGEFLOAT32ATOMICMINMAX, value); }
     /** Unsafe version of {@link #sparseImageFloat32AtomicMinMax(boolean) sparseImageFloat32AtomicMinMax}. */
-    public static void nsparseImageFloat32AtomicMinMax(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SPARSEIMAGEFLOAT32ATOMICMINMAX, value); }
+    public static void nsparseImageFloat32AtomicMinMax(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.SPARSEIMAGEFLOAT32ATOMICMINMAX, value); }
 
     // -----------------------------------
 

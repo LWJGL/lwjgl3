@@ -262,7 +262,7 @@ public class XrSpatialAnchorSpaceCreateInfoMSFT extends Struct<XrSpatialAnchorSp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorSpaceCreateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorSpaceCreateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorSpaceCreateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #anchor}. */
@@ -271,7 +271,7 @@ public class XrSpatialAnchorSpaceCreateInfoMSFT extends Struct<XrSpatialAnchorSp
     public static XrPosef nposeInAnchorSpace(long struct) { return XrPosef.create(struct + XrSpatialAnchorSpaceCreateInfoMSFT.POSEINANCHORSPACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorSpaceCreateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorSpaceCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorSpaceCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #anchor(XrSpatialAnchorMSFT) anchor}. */

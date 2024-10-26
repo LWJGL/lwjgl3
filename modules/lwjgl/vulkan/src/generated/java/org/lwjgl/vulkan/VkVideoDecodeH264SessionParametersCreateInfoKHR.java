@@ -270,24 +270,24 @@ public class VkVideoDecodeH264SessionParametersCreateInfoKHR extends Struct<VkVi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #maxStdSPSCount}. */
-    public static int nmaxStdSPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT); }
+    public static int nmaxStdSPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT); }
     /** Unsafe version of {@link #maxStdPPSCount}. */
-    public static int nmaxStdPPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT); }
+    public static int nmaxStdPPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT); }
     /** Unsafe version of {@link #pParametersAddInfo}. */
     @Nullable public static VkVideoDecodeH264SessionParametersAddInfoKHR npParametersAddInfo(long struct) { return VkVideoDecodeH264SessionParametersAddInfoKHR.createSafe(memGetAddress(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.PPARAMETERSADDINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #maxStdSPSCount(int) maxStdSPSCount}. */
-    public static void nmaxStdSPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT, value); }
+    public static void nmaxStdSPSCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDSPSCOUNT, value); }
     /** Unsafe version of {@link #maxStdPPSCount(int) maxStdPPSCount}. */
-    public static void nmaxStdPPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT, value); }
+    public static void nmaxStdPPSCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT, value); }
     /** Unsafe version of {@link #pParametersAddInfo(VkVideoDecodeH264SessionParametersAddInfoKHR) pParametersAddInfo}. */
     public static void npParametersAddInfo(long struct, @Nullable VkVideoDecodeH264SessionParametersAddInfoKHR value) { memPutAddress(struct + VkVideoDecodeH264SessionParametersCreateInfoKHR.PPARAMETERSADDINFO, memAddressSafe(value)); }
 

@@ -199,7 +199,7 @@ public class CLNameVersionKHR extends Struct<CLNameVersionKHR> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + CLNameVersionKHR.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + CLNameVersionKHR.VERSION); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + CLNameVersionKHR.NAME, 64); }
     /** Unsafe version of {@link #nameString}. */

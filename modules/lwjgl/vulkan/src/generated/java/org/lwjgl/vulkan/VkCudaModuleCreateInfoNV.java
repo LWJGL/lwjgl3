@@ -263,7 +263,7 @@ public class VkCudaModuleCreateInfoNV extends Struct<VkCudaModuleCreateInfoNV> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCudaModuleCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCudaModuleCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCudaModuleCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #dataSize}. */
@@ -272,7 +272,7 @@ public class VkCudaModuleCreateInfoNV extends Struct<VkCudaModuleCreateInfoNV> i
     public static ByteBuffer npData(long struct) { return memByteBuffer(memGetAddress(struct + VkCudaModuleCreateInfoNV.PDATA), (int)ndataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaModuleCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCudaModuleCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCudaModuleCreateInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */

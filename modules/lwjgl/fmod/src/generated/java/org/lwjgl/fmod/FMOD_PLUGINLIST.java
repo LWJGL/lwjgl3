@@ -222,12 +222,12 @@ public class FMOD_PLUGINLIST extends Struct<FMOD_PLUGINLIST> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + FMOD_PLUGINLIST.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + FMOD_PLUGINLIST.TYPE); }
     /** Unsafe version of {@link #description}. */
     public static long ndescription(long struct) { return memGetAddress(struct + FMOD_PLUGINLIST.DESCRIPTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_PLUGINLIST.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + FMOD_PLUGINLIST.TYPE, value); }
     /** Unsafe version of {@link #description(long) description}. */
     public static void ndescription(long struct, long value) { memPutAddress(struct + FMOD_PLUGINLIST.DESCRIPTION, check(value)); }
 

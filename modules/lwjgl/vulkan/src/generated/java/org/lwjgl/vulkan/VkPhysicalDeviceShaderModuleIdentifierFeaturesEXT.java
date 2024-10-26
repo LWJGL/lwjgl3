@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderModuleIdentifier}. */
-    public static int nshaderModuleIdentifier(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.SHADERMODULEIDENTIFIER); }
+    public static int nshaderModuleIdentifier(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.SHADERMODULEIDENTIFIER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderModuleIdentifier(boolean) shaderModuleIdentifier}. */
-    public static void nshaderModuleIdentifier(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.SHADERMODULEIDENTIFIER, value); }
+    public static void nshaderModuleIdentifier(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.SHADERMODULEIDENTIFIER, value); }
 
     // -----------------------------------
 

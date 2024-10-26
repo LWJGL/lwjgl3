@@ -410,25 +410,25 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     /** Unsafe version of {@link #ttf_size}. */
     public static long nttf_size(long struct) { return memGetAddress(struct + NkFontConfig.TTF_SIZE); }
     /** Unsafe version of {@link #ttf_data_owned_by_atlas}. */
-    public static boolean nttf_data_owned_by_atlas(long struct) { return UNSAFE.getByte(null, struct + NkFontConfig.TTF_DATA_OWNED_BY_ATLAS) != 0; }
+    public static boolean nttf_data_owned_by_atlas(long struct) { return memGetByte(struct + NkFontConfig.TTF_DATA_OWNED_BY_ATLAS) != 0; }
     /** Unsafe version of {@link #merge_mode}. */
-    public static boolean nmerge_mode(long struct) { return UNSAFE.getByte(null, struct + NkFontConfig.MERGE_MODE) != 0; }
+    public static boolean nmerge_mode(long struct) { return memGetByte(struct + NkFontConfig.MERGE_MODE) != 0; }
     /** Unsafe version of {@link #pixel_snap}. */
-    public static boolean npixel_snap(long struct) { return UNSAFE.getByte(null, struct + NkFontConfig.PIXEL_SNAP) != 0; }
+    public static boolean npixel_snap(long struct) { return memGetByte(struct + NkFontConfig.PIXEL_SNAP) != 0; }
     /** Unsafe version of {@link #oversample_v}. */
-    public static boolean noversample_v(long struct) { return UNSAFE.getByte(null, struct + NkFontConfig.OVERSAMPLE_V) != 0; }
+    public static boolean noversample_v(long struct) { return memGetByte(struct + NkFontConfig.OVERSAMPLE_V) != 0; }
     /** Unsafe version of {@link #oversample_h}. */
-    public static boolean noversample_h(long struct) { return UNSAFE.getByte(null, struct + NkFontConfig.OVERSAMPLE_H) != 0; }
+    public static boolean noversample_h(long struct) { return memGetByte(struct + NkFontConfig.OVERSAMPLE_H) != 0; }
     /** Unsafe version of {@link #padding}. */
     public static ByteBuffer npadding(long struct) { return memByteBuffer(struct + NkFontConfig.PADDING, 3); }
     /** Unsafe version of {@link #padding(int) padding}. */
     public static byte npadding(long struct, int index) {
-        return UNSAFE.getByte(null, struct + NkFontConfig.PADDING + check(index, 3) * 1);
+        return memGetByte(struct + NkFontConfig.PADDING + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #size}. */
-    public static float nsize(long struct) { return UNSAFE.getFloat(null, struct + NkFontConfig.SIZE); }
+    public static float nsize(long struct) { return memGetFloat(struct + NkFontConfig.SIZE); }
     /** Unsafe version of {@link #coord_type}. */
-    public static int ncoord_type(long struct) { return UNSAFE.getInt(null, struct + NkFontConfig.COORD_TYPE); }
+    public static int ncoord_type(long struct) { return memGetInt(struct + NkFontConfig.COORD_TYPE); }
     /** Unsafe version of {@link #spacing}. */
     public static NkVec2 nspacing(long struct) { return NkVec2.create(struct + NkFontConfig.SPACING); }
     /** Unsafe version of {@link #range(int) range}. */
@@ -436,7 +436,7 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     /** Unsafe version of {@link #font}. */
     @Nullable public static NkBakedFont nfont(long struct) { return NkBakedFont.createSafe(memGetAddress(struct + NkFontConfig.FONT)); }
     /** Unsafe version of {@link #fallback_glyph}. */
-    public static int nfallback_glyph(long struct) { return UNSAFE.getInt(null, struct + NkFontConfig.FALLBACK_GLYPH); }
+    public static int nfallback_glyph(long struct) { return memGetInt(struct + NkFontConfig.FALLBACK_GLYPH); }
     /** Unsafe version of {@link #n}. */
     @Nullable public static NkFontConfig nn(long struct) { return NkFontConfig.createSafe(memGetAddress(struct + NkFontConfig.N)); }
     /** Unsafe version of {@link #p}. */
@@ -449,15 +449,15 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     /** Sets the specified value to the {@code ttf_size} field of the specified {@code struct}. */
     public static void nttf_size(long struct, long value) { memPutAddress(struct + NkFontConfig.TTF_SIZE, value); }
     /** Unsafe version of {@link #ttf_data_owned_by_atlas(boolean) ttf_data_owned_by_atlas}. */
-    public static void nttf_data_owned_by_atlas(long struct, boolean value) { UNSAFE.putByte(null, struct + NkFontConfig.TTF_DATA_OWNED_BY_ATLAS, value ? (byte)1 : (byte)0); }
+    public static void nttf_data_owned_by_atlas(long struct, boolean value) { memPutByte(struct + NkFontConfig.TTF_DATA_OWNED_BY_ATLAS, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #merge_mode(boolean) merge_mode}. */
-    public static void nmerge_mode(long struct, boolean value) { UNSAFE.putByte(null, struct + NkFontConfig.MERGE_MODE, value ? (byte)1 : (byte)0); }
+    public static void nmerge_mode(long struct, boolean value) { memPutByte(struct + NkFontConfig.MERGE_MODE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #pixel_snap(boolean) pixel_snap}. */
-    public static void npixel_snap(long struct, boolean value) { UNSAFE.putByte(null, struct + NkFontConfig.PIXEL_SNAP, value ? (byte)1 : (byte)0); }
+    public static void npixel_snap(long struct, boolean value) { memPutByte(struct + NkFontConfig.PIXEL_SNAP, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #oversample_v(boolean) oversample_v}. */
-    public static void noversample_v(long struct, boolean value) { UNSAFE.putByte(null, struct + NkFontConfig.OVERSAMPLE_V, value ? (byte)1 : (byte)0); }
+    public static void noversample_v(long struct, boolean value) { memPutByte(struct + NkFontConfig.OVERSAMPLE_V, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #oversample_h(boolean) oversample_h}. */
-    public static void noversample_h(long struct, boolean value) { UNSAFE.putByte(null, struct + NkFontConfig.OVERSAMPLE_H, value ? (byte)1 : (byte)0); }
+    public static void noversample_h(long struct, boolean value) { memPutByte(struct + NkFontConfig.OVERSAMPLE_H, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #padding(ByteBuffer) padding}. */
     public static void npadding(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
@@ -465,12 +465,12 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     }
     /** Unsafe version of {@link #padding(int, byte) padding}. */
     public static void npadding(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + NkFontConfig.PADDING + check(index, 3) * 1, value);
+        memPutByte(struct + NkFontConfig.PADDING + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #size(float) size}. */
-    public static void nsize(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontConfig.SIZE, value); }
+    public static void nsize(long struct, float value) { memPutFloat(struct + NkFontConfig.SIZE, value); }
     /** Unsafe version of {@link #coord_type(int) coord_type}. */
-    public static void ncoord_type(long struct, int value) { UNSAFE.putInt(null, struct + NkFontConfig.COORD_TYPE, value); }
+    public static void ncoord_type(long struct, int value) { memPutInt(struct + NkFontConfig.COORD_TYPE, value); }
     /** Unsafe version of {@link #spacing(NkVec2) spacing}. */
     public static void nspacing(long struct, NkVec2 value) { memCopy(value.address(), struct + NkFontConfig.SPACING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #range(IntBuffer) range}. */
@@ -478,7 +478,7 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     /** Unsafe version of {@link #font(NkBakedFont) font}. */
     public static void nfont(long struct, @Nullable NkBakedFont value) { memPutAddress(struct + NkFontConfig.FONT, memAddressSafe(value)); }
     /** Unsafe version of {@link #fallback_glyph(int) fallback_glyph}. */
-    public static void nfallback_glyph(long struct, int value) { UNSAFE.putInt(null, struct + NkFontConfig.FALLBACK_GLYPH, value); }
+    public static void nfallback_glyph(long struct, int value) { memPutInt(struct + NkFontConfig.FALLBACK_GLYPH, value); }
     /** Unsafe version of {@link #n(NkFontConfig) n}. */
     public static void nn(long struct, @Nullable NkFontConfig value) { memPutAddress(struct + NkFontConfig.N, memAddressSafe(value)); }
     /** Unsafe version of {@link #p(NkFontConfig) p}. */

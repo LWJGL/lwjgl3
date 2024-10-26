@@ -264,20 +264,20 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActiveActionSetPrioritiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActiveActionSetPrioritiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActiveActionSetPrioritiesEXT.NEXT); }
     /** Unsafe version of {@link #actionSetPriorityCount}. */
-    public static int nactionSetPriorityCount(long struct) { return UNSAFE.getInt(null, struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITYCOUNT); }
+    public static int nactionSetPriorityCount(long struct) { return memGetInt(struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITYCOUNT); }
     /** Unsafe version of {@link #actionSetPriorities}. */
     public static XrActiveActionSetPriorityEXT.Buffer nactionSetPriorities(long struct) { return XrActiveActionSetPriorityEXT.create(memGetAddress(struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITIES), nactionSetPriorityCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActiveActionSetPrioritiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActiveActionSetPrioritiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActiveActionSetPrioritiesEXT.NEXT, value); }
     /** Sets the specified value to the {@code actionSetPriorityCount} field of the specified {@code struct}. */
-    public static void nactionSetPriorityCount(long struct, int value) { UNSAFE.putInt(null, struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITYCOUNT, value); }
+    public static void nactionSetPriorityCount(long struct, int value) { memPutInt(struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITYCOUNT, value); }
     /** Unsafe version of {@link #actionSetPriorities(XrActiveActionSetPriorityEXT.Buffer) actionSetPriorities}. */
     public static void nactionSetPriorities(long struct, XrActiveActionSetPriorityEXT.Buffer value) { memPutAddress(struct + XrActiveActionSetPrioritiesEXT.ACTIONSETPRIORITIES, value.address()); nactionSetPriorityCount(struct, value.remaining()); }
 

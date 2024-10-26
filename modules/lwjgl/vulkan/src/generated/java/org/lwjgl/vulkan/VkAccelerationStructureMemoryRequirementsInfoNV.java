@@ -279,22 +279,22 @@ public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct<VkAc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureMemoryRequirementsInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureMemoryRequirementsInfoNV.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureMemoryRequirementsInfoNV.TYPE); }
     /** Unsafe version of {@link #accelerationStructure}. */
-    public static long naccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.ACCELERATIONSTRUCTURE); }
+    public static long naccelerationStructure(long struct) { return memGetLong(struct + VkAccelerationStructureMemoryRequirementsInfoNV.ACCELERATIONSTRUCTURE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureMemoryRequirementsInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureMemoryRequirementsInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureMemoryRequirementsInfoNV.TYPE, value); }
     /** Unsafe version of {@link #accelerationStructure(long) accelerationStructure}. */
-    public static void naccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureMemoryRequirementsInfoNV.ACCELERATIONSTRUCTURE, value); }
+    public static void naccelerationStructure(long struct, long value) { memPutLong(struct + VkAccelerationStructureMemoryRequirementsInfoNV.ACCELERATIONSTRUCTURE, value); }
 
     // -----------------------------------
 

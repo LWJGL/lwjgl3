@@ -286,28 +286,28 @@ public class BGFXTransientVertexBuffer extends Struct<BGFXTransientVertexBuffer>
     /** Unsafe version of {@link #data() data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + BGFXTransientVertexBuffer.DATA), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + BGFXTransientVertexBuffer.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + BGFXTransientVertexBuffer.SIZE); }
     /** Unsafe version of {@link #startVertex}. */
-    public static int nstartVertex(long struct) { return UNSAFE.getInt(null, struct + BGFXTransientVertexBuffer.STARTVERTEX); }
+    public static int nstartVertex(long struct) { return memGetInt(struct + BGFXTransientVertexBuffer.STARTVERTEX); }
     /** Unsafe version of {@link #stride}. */
-    public static short nstride(long struct) { return UNSAFE.getShort(null, struct + BGFXTransientVertexBuffer.STRIDE); }
+    public static short nstride(long struct) { return memGetShort(struct + BGFXTransientVertexBuffer.STRIDE); }
     /** Unsafe version of {@link #handle}. */
-    public static short nhandle(long struct) { return UNSAFE.getShort(null, struct + BGFXTransientVertexBuffer.HANDLE); }
+    public static short nhandle(long struct) { return memGetShort(struct + BGFXTransientVertexBuffer.HANDLE); }
     /** Unsafe version of {@link #layoutHandle}. */
-    public static short nlayoutHandle(long struct) { return UNSAFE.getShort(null, struct + BGFXTransientVertexBuffer.LAYOUTHANDLE); }
+    public static short nlayoutHandle(long struct) { return memGetShort(struct + BGFXTransientVertexBuffer.LAYOUTHANDLE); }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) { memPutAddress(struct + BGFXTransientVertexBuffer.DATA, memAddress(value)); nsize(struct, value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXTransientVertexBuffer.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + BGFXTransientVertexBuffer.SIZE, value); }
     /** Unsafe version of {@link #startVertex(int) startVertex}. */
-    public static void nstartVertex(long struct, int value) { UNSAFE.putInt(null, struct + BGFXTransientVertexBuffer.STARTVERTEX, value); }
+    public static void nstartVertex(long struct, int value) { memPutInt(struct + BGFXTransientVertexBuffer.STARTVERTEX, value); }
     /** Unsafe version of {@link #stride(short) stride}. */
-    public static void nstride(long struct, short value) { UNSAFE.putShort(null, struct + BGFXTransientVertexBuffer.STRIDE, value); }
+    public static void nstride(long struct, short value) { memPutShort(struct + BGFXTransientVertexBuffer.STRIDE, value); }
     /** Unsafe version of {@link #handle(short) handle}. */
-    public static void nhandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXTransientVertexBuffer.HANDLE, value); }
+    public static void nhandle(long struct, short value) { memPutShort(struct + BGFXTransientVertexBuffer.HANDLE, value); }
     /** Unsafe version of {@link #layoutHandle(short) layoutHandle}. */
-    public static void nlayoutHandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXTransientVertexBuffer.LAYOUTHANDLE, value); }
+    public static void nlayoutHandle(long struct, short value) { memPutShort(struct + BGFXTransientVertexBuffer.LAYOUTHANDLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

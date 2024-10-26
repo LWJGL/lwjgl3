@@ -311,30 +311,30 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceQueryInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceQueryInfoFB.NEXT); }
     /** Unsafe version of {@link #queryAction}. */
-    public static int nqueryAction(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryInfoFB.QUERYACTION); }
+    public static int nqueryAction(long struct) { return memGetInt(struct + XrSpaceQueryInfoFB.QUERYACTION); }
     /** Unsafe version of {@link #maxResultCount}. */
-    public static int nmaxResultCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryInfoFB.MAXRESULTCOUNT); }
+    public static int nmaxResultCount(long struct) { return memGetInt(struct + XrSpaceQueryInfoFB.MAXRESULTCOUNT); }
     /** Unsafe version of {@link #timeout}. */
-    public static long ntimeout(long struct) { return UNSAFE.getLong(null, struct + XrSpaceQueryInfoFB.TIMEOUT); }
+    public static long ntimeout(long struct) { return memGetLong(struct + XrSpaceQueryInfoFB.TIMEOUT); }
     /** Unsafe version of {@link #filter}. */
     @Nullable public static XrSpaceFilterInfoBaseHeaderFB nfilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.FILTER)); }
     /** Unsafe version of {@link #excludeFilter}. */
     @Nullable public static XrSpaceFilterInfoBaseHeaderFB nexcludeFilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.EXCLUDEFILTER)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceQueryInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceQueryInfoFB.NEXT, value); }
     /** Unsafe version of {@link #queryAction(int) queryAction}. */
-    public static void nqueryAction(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryInfoFB.QUERYACTION, value); }
+    public static void nqueryAction(long struct, int value) { memPutInt(struct + XrSpaceQueryInfoFB.QUERYACTION, value); }
     /** Unsafe version of {@link #maxResultCount(int) maxResultCount}. */
-    public static void nmaxResultCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryInfoFB.MAXRESULTCOUNT, value); }
+    public static void nmaxResultCount(long struct, int value) { memPutInt(struct + XrSpaceQueryInfoFB.MAXRESULTCOUNT, value); }
     /** Unsafe version of {@link #timeout(long) timeout}. */
-    public static void ntimeout(long struct, long value) { UNSAFE.putLong(null, struct + XrSpaceQueryInfoFB.TIMEOUT, value); }
+    public static void ntimeout(long struct, long value) { memPutLong(struct + XrSpaceQueryInfoFB.TIMEOUT, value); }
     /** Unsafe version of {@link #filter(XrSpaceFilterInfoBaseHeaderFB) filter}. */
     public static void nfilter(long struct, @Nullable XrSpaceFilterInfoBaseHeaderFB value) { memPutAddress(struct + XrSpaceQueryInfoFB.FILTER, memAddressSafe(value)); }
     /** Unsafe version of {@link #excludeFilter(XrSpaceFilterInfoBaseHeaderFB) excludeFilter}. */

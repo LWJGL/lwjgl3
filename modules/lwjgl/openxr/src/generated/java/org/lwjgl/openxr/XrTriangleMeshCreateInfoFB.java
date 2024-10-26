@@ -317,36 +317,36 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrTriangleMeshCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrTriangleMeshCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrTriangleMeshCreateInfoFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrTriangleMeshCreateInfoFB.FLAGS); }
     /** Unsafe version of {@link #windingOrder}. */
-    public static int nwindingOrder(long struct) { return UNSAFE.getInt(null, struct + XrTriangleMeshCreateInfoFB.WINDINGORDER); }
+    public static int nwindingOrder(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.WINDINGORDER); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + XrTriangleMeshCreateInfoFB.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertexBuffer}. */
     @Nullable public static XrVector3f nvertexBuffer(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.VERTEXBUFFER)); }
     /** Unsafe version of {@link #triangleCount}. */
-    public static int ntriangleCount(long struct) { return UNSAFE.getInt(null, struct + XrTriangleMeshCreateInfoFB.TRIANGLECOUNT); }
+    public static int ntriangleCount(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.TRIANGLECOUNT); }
     /** Unsafe version of {@link #indexBuffer(int) indexBuffer}. */
     @Nullable public static IntBuffer nindexBuffer(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.INDEXBUFFER), capacity); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrTriangleMeshCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrTriangleMeshCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrTriangleMeshCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrTriangleMeshCreateInfoFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrTriangleMeshCreateInfoFB.FLAGS, value); }
     /** Unsafe version of {@link #windingOrder(int) windingOrder}. */
-    public static void nwindingOrder(long struct, int value) { UNSAFE.putInt(null, struct + XrTriangleMeshCreateInfoFB.WINDINGORDER, value); }
+    public static void nwindingOrder(long struct, int value) { memPutInt(struct + XrTriangleMeshCreateInfoFB.WINDINGORDER, value); }
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrTriangleMeshCreateInfoFB.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + XrTriangleMeshCreateInfoFB.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #vertexBuffer(XrVector3f) vertexBuffer}. */
     public static void nvertexBuffer(long struct, @Nullable XrVector3f value) { memPutAddress(struct + XrTriangleMeshCreateInfoFB.VERTEXBUFFER, memAddressSafe(value)); }
     /** Unsafe version of {@link #triangleCount(int) triangleCount}. */
-    public static void ntriangleCount(long struct, int value) { UNSAFE.putInt(null, struct + XrTriangleMeshCreateInfoFB.TRIANGLECOUNT, value); }
+    public static void ntriangleCount(long struct, int value) { memPutInt(struct + XrTriangleMeshCreateInfoFB.TRIANGLECOUNT, value); }
     /** Unsafe version of {@link #indexBuffer(IntBuffer) indexBuffer}. */
     public static void nindexBuffer(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrTriangleMeshCreateInfoFB.INDEXBUFFER, memAddressSafe(value)); }
 

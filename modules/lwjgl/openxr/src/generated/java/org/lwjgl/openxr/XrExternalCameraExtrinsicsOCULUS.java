@@ -258,20 +258,20 @@ public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExt
     // -----------------------------------
 
     /** Unsafe version of {@link #lastChangeTime}. */
-    public static long nlastChangeTime(long struct) { return UNSAFE.getLong(null, struct + XrExternalCameraExtrinsicsOCULUS.LASTCHANGETIME); }
+    public static long nlastChangeTime(long struct) { return memGetLong(struct + XrExternalCameraExtrinsicsOCULUS.LASTCHANGETIME); }
     /** Unsafe version of {@link #cameraStatusFlags}. */
-    public static long ncameraStatusFlags(long struct) { return UNSAFE.getLong(null, struct + XrExternalCameraExtrinsicsOCULUS.CAMERASTATUSFLAGS); }
+    public static long ncameraStatusFlags(long struct) { return memGetLong(struct + XrExternalCameraExtrinsicsOCULUS.CAMERASTATUSFLAGS); }
     /** Unsafe version of {@link #attachedToDevice}. */
-    public static int nattachedToDevice(long struct) { return UNSAFE.getInt(null, struct + XrExternalCameraExtrinsicsOCULUS.ATTACHEDTODEVICE); }
+    public static int nattachedToDevice(long struct) { return memGetInt(struct + XrExternalCameraExtrinsicsOCULUS.ATTACHEDTODEVICE); }
     /** Unsafe version of {@link #relativePose}. */
     public static XrPosef nrelativePose(long struct) { return XrPosef.create(struct + XrExternalCameraExtrinsicsOCULUS.RELATIVEPOSE); }
 
     /** Unsafe version of {@link #lastChangeTime(long) lastChangeTime}. */
-    public static void nlastChangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrExternalCameraExtrinsicsOCULUS.LASTCHANGETIME, value); }
+    public static void nlastChangeTime(long struct, long value) { memPutLong(struct + XrExternalCameraExtrinsicsOCULUS.LASTCHANGETIME, value); }
     /** Unsafe version of {@link #cameraStatusFlags(long) cameraStatusFlags}. */
-    public static void ncameraStatusFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrExternalCameraExtrinsicsOCULUS.CAMERASTATUSFLAGS, value); }
+    public static void ncameraStatusFlags(long struct, long value) { memPutLong(struct + XrExternalCameraExtrinsicsOCULUS.CAMERASTATUSFLAGS, value); }
     /** Unsafe version of {@link #attachedToDevice(int) attachedToDevice}. */
-    public static void nattachedToDevice(long struct, int value) { UNSAFE.putInt(null, struct + XrExternalCameraExtrinsicsOCULUS.ATTACHEDTODEVICE, value); }
+    public static void nattachedToDevice(long struct, int value) { memPutInt(struct + XrExternalCameraExtrinsicsOCULUS.ATTACHEDTODEVICE, value); }
     /** Unsafe version of {@link #relativePose(XrPosef) relativePose}. */
     public static void nrelativePose(long struct, XrPosef value) { memCopy(value.address(), struct + XrExternalCameraExtrinsicsOCULUS.RELATIVEPOSE, XrPosef.SIZEOF); }
 

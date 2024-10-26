@@ -260,18 +260,18 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #ycbcr2plane444Formats}. */
-    public static int nycbcr2plane444Formats(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.YCBCR2PLANE444FORMATS); }
+    public static int nycbcr2plane444Formats(long struct) { return memGetInt(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.YCBCR2PLANE444FORMATS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #ycbcr2plane444Formats(boolean) ycbcr2plane444Formats}. */
-    public static void nycbcr2plane444Formats(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.YCBCR2PLANE444FORMATS, value); }
+    public static void nycbcr2plane444Formats(long struct, int value) { memPutInt(struct + VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.YCBCR2PLANE444FORMATS, value); }
 
     // -----------------------------------
 

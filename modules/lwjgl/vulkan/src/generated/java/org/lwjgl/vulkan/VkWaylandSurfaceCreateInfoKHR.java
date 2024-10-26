@@ -298,22 +298,22 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct<VkWaylandSurfaceCreate
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWaylandSurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWaylandSurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkWaylandSurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkWaylandSurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY); }
     /** Unsafe version of {@link #surface}. */
     public static long nsurface(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.SURFACE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWaylandSurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWaylandSurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkWaylandSurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkWaylandSurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY, value); }
     /** Unsafe version of {@link #surface(long) surface}. */

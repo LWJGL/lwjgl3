@@ -349,42 +349,42 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #headerSize}. */
-    public static int nheaderSize(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE); }
+    public static int nheaderSize(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE); }
     /** Unsafe version of {@link #headerVersion}. */
-    public static int nheaderVersion(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION); }
+    public static int nheaderVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION); }
     /** Unsafe version of {@link #vendorID}. */
-    public static int nvendorID(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID); }
+    public static int nvendorID(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID); }
     /** Unsafe version of {@link #deviceID}. */
-    public static int ndeviceID(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID); }
+    public static int ndeviceID(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID); }
     /** Unsafe version of {@link #driverVersion}. */
-    public static int ndriverVersion(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION); }
+    public static int ndriverVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION); }
     /** Unsafe version of {@link #pipelineCacheUUID}. */
     public static ByteBuffer npipelineCacheUUID(long struct) { return memByteBuffer(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #pipelineCacheUUID(int) pipelineCacheUUID}. */
     public static byte npipelineCacheUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #applicationNameOffset}. */
-    public static int napplicationNameOffset(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET); }
+    public static int napplicationNameOffset(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET); }
     /** Unsafe version of {@link #applicationVersion}. */
-    public static int napplicationVersion(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION); }
+    public static int napplicationVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION); }
     /** Unsafe version of {@link #engineNameOffset}. */
-    public static int nengineNameOffset(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET); }
+    public static int nengineNameOffset(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET); }
     /** Unsafe version of {@link #engineVersion}. */
-    public static int nengineVersion(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION); }
+    public static int nengineVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION); }
     /** Unsafe version of {@link #apiVersion}. */
-    public static int napiVersion(long struct) { return UNSAFE.getInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION); }
+    public static int napiVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION); }
 
     /** Unsafe version of {@link #headerSize(int) headerSize}. */
-    public static void nheaderSize(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE, value); }
+    public static void nheaderSize(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE, value); }
     /** Unsafe version of {@link #headerVersion(int) headerVersion}. */
-    public static void nheaderVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION, value); }
+    public static void nheaderVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION, value); }
     /** Unsafe version of {@link #vendorID(int) vendorID}. */
-    public static void nvendorID(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID, value); }
+    public static void nvendorID(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID, value); }
     /** Unsafe version of {@link #deviceID(int) deviceID}. */
-    public static void ndeviceID(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID, value); }
+    public static void ndeviceID(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID, value); }
     /** Unsafe version of {@link #driverVersion(int) driverVersion}. */
-    public static void ndriverVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION, value); }
+    public static void ndriverVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION, value); }
     /** Unsafe version of {@link #pipelineCacheUUID(ByteBuffer) pipelineCacheUUID}. */
     public static void npipelineCacheUUID(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, VK_UUID_SIZE); }
@@ -392,18 +392,18 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
     }
     /** Unsafe version of {@link #pipelineCacheUUID(int, byte) pipelineCacheUUID}. */
     public static void npipelineCacheUUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1, value);
+        memPutByte(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #applicationNameOffset(int) applicationNameOffset}. */
-    public static void napplicationNameOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET, value); }
+    public static void napplicationNameOffset(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET, value); }
     /** Unsafe version of {@link #applicationVersion(int) applicationVersion}. */
-    public static void napplicationVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION, value); }
+    public static void napplicationVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION, value); }
     /** Unsafe version of {@link #engineNameOffset(int) engineNameOffset}. */
-    public static void nengineNameOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET, value); }
+    public static void nengineNameOffset(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET, value); }
     /** Unsafe version of {@link #engineVersion(int) engineVersion}. */
-    public static void nengineVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION, value); }
+    public static void nengineVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION, value); }
     /** Unsafe version of {@link #apiVersion(int) apiVersion}. */
-    public static void napiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION, value); }
+    public static void napiVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION, value); }
 
     // -----------------------------------
 

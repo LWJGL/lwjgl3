@@ -449,19 +449,19 @@ public class NkStyleProgress extends Struct<NkStyleProgress> implements NativeRe
     /** Unsafe version of {@link #cursor_border_color}. */
     public static NkColor ncursor_border_color(long struct) { return NkColor.create(struct + NkStyleProgress.CURSOR_BORDER_COLOR); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleProgress.ROUNDING); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleProgress.BORDER); }
     /** Unsafe version of {@link #cursor_border}. */
-    public static float ncursor_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.CURSOR_BORDER); }
+    public static float ncursor_border(long struct) { return memGetFloat(struct + NkStyleProgress.CURSOR_BORDER); }
     /** Unsafe version of {@link #cursor_rounding}. */
-    public static float ncursor_rounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.CURSOR_ROUNDING); }
+    public static float ncursor_rounding(long struct) { return memGetFloat(struct + NkStyleProgress.CURSOR_ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleProgress.PADDING); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleProgress.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleProgress.DISABLED_FACTOR); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleProgress.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
@@ -486,19 +486,19 @@ public class NkStyleProgress extends Struct<NkStyleProgress> implements NativeRe
     /** Unsafe version of {@link #cursor_border_color(NkColor) cursor_border_color}. */
     public static void ncursor_border_color(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleProgress.CURSOR_BORDER_COLOR, NkColor.SIZEOF); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleProgress.ROUNDING, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleProgress.BORDER, value); }
     /** Unsafe version of {@link #cursor_border(float) cursor_border}. */
-    public static void ncursor_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.CURSOR_BORDER, value); }
+    public static void ncursor_border(long struct, float value) { memPutFloat(struct + NkStyleProgress.CURSOR_BORDER, value); }
     /** Unsafe version of {@link #cursor_rounding(float) cursor_rounding}. */
-    public static void ncursor_rounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.CURSOR_ROUNDING, value); }
+    public static void ncursor_rounding(long struct, float value) { memPutFloat(struct + NkStyleProgress.CURSOR_ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleProgress.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleProgress.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleProgress.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkStyleProgress.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #draw_begin(NkDrawBeginCallbackI) draw_begin}. */

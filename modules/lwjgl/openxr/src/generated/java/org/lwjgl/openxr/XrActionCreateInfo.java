@@ -342,7 +342,7 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionCreateInfo.NEXT); }
     /** Unsafe version of {@link #actionName}. */
@@ -350,9 +350,9 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
     /** Unsafe version of {@link #actionNameString}. */
     public static String nactionNameString(long struct) { return memUTF8(struct + XrActionCreateInfo.ACTIONNAME); }
     /** Unsafe version of {@link #actionType}. */
-    public static int nactionType(long struct) { return UNSAFE.getInt(null, struct + XrActionCreateInfo.ACTIONTYPE); }
+    public static int nactionType(long struct) { return memGetInt(struct + XrActionCreateInfo.ACTIONTYPE); }
     /** Unsafe version of {@link #countSubactionPaths}. */
-    public static int ncountSubactionPaths(long struct) { return UNSAFE.getInt(null, struct + XrActionCreateInfo.COUNTSUBACTIONPATHS); }
+    public static int ncountSubactionPaths(long struct) { return memGetInt(struct + XrActionCreateInfo.COUNTSUBACTIONPATHS); }
     /** Unsafe version of {@link #subactionPaths() subactionPaths}. */
     @Nullable public static LongBuffer nsubactionPaths(long struct) { return memLongBufferSafe(memGetAddress(struct + XrActionCreateInfo.SUBACTIONPATHS), ncountSubactionPaths(struct)); }
     /** Unsafe version of {@link #localizedActionName}. */
@@ -361,7 +361,7 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
     public static String nlocalizedActionNameString(long struct) { return memUTF8(struct + XrActionCreateInfo.LOCALIZEDACTIONNAME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #actionName(ByteBuffer) actionName}. */
@@ -373,9 +373,9 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
         memCopy(memAddress(value), struct + XrActionCreateInfo.ACTIONNAME, value.remaining());
     }
     /** Unsafe version of {@link #actionType(int) actionType}. */
-    public static void nactionType(long struct, int value) { UNSAFE.putInt(null, struct + XrActionCreateInfo.ACTIONTYPE, value); }
+    public static void nactionType(long struct, int value) { memPutInt(struct + XrActionCreateInfo.ACTIONTYPE, value); }
     /** Sets the specified value to the {@code countSubactionPaths} field of the specified {@code struct}. */
-    public static void ncountSubactionPaths(long struct, int value) { UNSAFE.putInt(null, struct + XrActionCreateInfo.COUNTSUBACTIONPATHS, value); }
+    public static void ncountSubactionPaths(long struct, int value) { memPutInt(struct + XrActionCreateInfo.COUNTSUBACTIONPATHS, value); }
     /** Unsafe version of {@link #subactionPaths(LongBuffer) subactionPaths}. */
     public static void nsubactionPaths(long struct, @Nullable LongBuffer value) { memPutAddress(struct + XrActionCreateInfo.SUBACTIONPATHS, memAddressSafe(value)); if (value != null) { ncountSubactionPaths(struct, value.remaining()); } }
     /** Unsafe version of {@link #localizedActionName(ByteBuffer) localizedActionName}. */

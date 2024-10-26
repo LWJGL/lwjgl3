@@ -265,20 +265,20 @@ public class VkPhysicalDeviceSubgroupSizeControlProperties extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSubgroupSizeControlProperties.PNEXT); }
     /** Unsafe version of {@link #minSubgroupSize}. */
-    public static int nminSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.MINSUBGROUPSIZE); }
+    public static int nminSubgroupSize(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.MINSUBGROUPSIZE); }
     /** Unsafe version of {@link #maxSubgroupSize}. */
-    public static int nmaxSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.MAXSUBGROUPSIZE); }
+    public static int nmaxSubgroupSize(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.MAXSUBGROUPSIZE); }
     /** Unsafe version of {@link #maxComputeWorkgroupSubgroups}. */
-    public static int nmaxComputeWorkgroupSubgroups(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.MAXCOMPUTEWORKGROUPSUBGROUPS); }
+    public static int nmaxComputeWorkgroupSubgroups(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.MAXCOMPUTEWORKGROUPSUBGROUPS); }
     /** Unsafe version of {@link #requiredSubgroupSizeStages}. */
-    public static int nrequiredSubgroupSizeStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.REQUIREDSUBGROUPSIZESTAGES); }
+    public static int nrequiredSubgroupSizeStages(long struct) { return memGetInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.REQUIREDSUBGROUPSIZESTAGES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubgroupSizeControlProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSubgroupSizeControlProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSubgroupSizeControlProperties.PNEXT, value); }
 

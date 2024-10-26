@@ -245,15 +245,15 @@ public class VkPastPresentationTimingGOOGLE extends Struct<VkPastPresentationTim
     // -----------------------------------
 
     /** Unsafe version of {@link #presentID}. */
-    public static int npresentID(long struct) { return UNSAFE.getInt(null, struct + VkPastPresentationTimingGOOGLE.PRESENTID); }
+    public static int npresentID(long struct) { return memGetInt(struct + VkPastPresentationTimingGOOGLE.PRESENTID); }
     /** Unsafe version of {@link #desiredPresentTime}. */
-    public static long ndesiredPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.DESIREDPRESENTTIME); }
+    public static long ndesiredPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.DESIREDPRESENTTIME); }
     /** Unsafe version of {@link #actualPresentTime}. */
-    public static long nactualPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.ACTUALPRESENTTIME); }
+    public static long nactualPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.ACTUALPRESENTTIME); }
     /** Unsafe version of {@link #earliestPresentTime}. */
-    public static long nearliestPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.EARLIESTPRESENTTIME); }
+    public static long nearliestPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.EARLIESTPRESENTTIME); }
     /** Unsafe version of {@link #presentMargin}. */
-    public static long npresentMargin(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN); }
+    public static long npresentMargin(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN); }
 
     // -----------------------------------
 

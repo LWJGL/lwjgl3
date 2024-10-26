@@ -247,14 +247,14 @@ public class VkAndroidHardwareBufferUsageANDROID extends Struct<VkAndroidHardwar
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferUsageANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAndroidHardwareBufferUsageANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAndroidHardwareBufferUsageANDROID.PNEXT); }
     /** Unsafe version of {@link #androidHardwareBufferUsage}. */
-    public static long nandroidHardwareBufferUsage(long struct) { return UNSAFE.getLong(null, struct + VkAndroidHardwareBufferUsageANDROID.ANDROIDHARDWAREBUFFERUSAGE); }
+    public static long nandroidHardwareBufferUsage(long struct) { return memGetLong(struct + VkAndroidHardwareBufferUsageANDROID.ANDROIDHARDWAREBUFFERUSAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAndroidHardwareBufferUsageANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAndroidHardwareBufferUsageANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAndroidHardwareBufferUsageANDROID.PNEXT, value); }
 

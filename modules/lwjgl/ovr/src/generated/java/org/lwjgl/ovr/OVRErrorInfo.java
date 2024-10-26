@@ -218,7 +218,7 @@ public class OVRErrorInfo extends Struct<OVRErrorInfo> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #Result}. */
-    public static int nResult(long struct) { return UNSAFE.getInt(null, struct + OVRErrorInfo.RESULT); }
+    public static int nResult(long struct) { return memGetInt(struct + OVRErrorInfo.RESULT); }
     /** Unsafe version of {@link #ErrorString}. */
     public static ByteBuffer nErrorString(long struct) { return memByteBuffer(struct + OVRErrorInfo.ERRORSTRING, 512); }
     /** Unsafe version of {@link #ErrorStringString}. */

@@ -268,20 +268,20 @@ public class XrSwapchainStateFoveationFB extends Struct<XrSwapchainStateFoveatio
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainStateFoveationFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainStateFoveationFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainStateFoveationFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainStateFoveationFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrSwapchainStateFoveationFB.FLAGS); }
     /** Unsafe version of {@link #profile}. */
     public static long nprofile(long struct) { return memGetAddress(struct + XrSwapchainStateFoveationFB.PROFILE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainStateFoveationFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainStateFoveationFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainStateFoveationFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainStateFoveationFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrSwapchainStateFoveationFB.FLAGS, value); }
     /** Unsafe version of {@link #profile(XrFoveationProfileFB) profile}. */
     public static void nprofile(long struct, XrFoveationProfileFB value) { memPutAddress(struct + XrSwapchainStateFoveationFB.PROFILE, value.address()); }
 

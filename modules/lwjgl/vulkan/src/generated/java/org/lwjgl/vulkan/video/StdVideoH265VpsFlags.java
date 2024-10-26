@@ -233,7 +233,7 @@ public class StdVideoH265VpsFlags extends Struct<StdVideoH265VpsFlags> implement
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265VpsFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH265VpsFlags.BITFIELD0); }
     /** Unsafe version of {@link #vps_temporal_id_nesting_flag}. */
     public static int nvps_temporal_id_nesting_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #vps_sub_layer_ordering_info_present_flag}. */
@@ -243,7 +243,7 @@ public class StdVideoH265VpsFlags extends Struct<StdVideoH265VpsFlags> implement
     /** Unsafe version of {@link #vps_poc_proportional_to_timing_flag}. */
     public static int nvps_poc_proportional_to_timing_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265VpsFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH265VpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #vps_temporal_id_nesting_flag(boolean) vps_temporal_id_nesting_flag}. */
     public static void nvps_temporal_id_nesting_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #vps_sub_layer_ordering_info_present_flag(boolean) vps_sub_layer_ordering_info_present_flag}. */

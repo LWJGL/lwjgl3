@@ -283,22 +283,22 @@ public class VkDrawIndirectCommand extends Struct<VkDrawIndirectCommand> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCommand.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + VkDrawIndirectCommand.VERTEXCOUNT); }
     /** Unsafe version of {@link #instanceCount}. */
-    public static int ninstanceCount(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCommand.INSTANCECOUNT); }
+    public static int ninstanceCount(long struct) { return memGetInt(struct + VkDrawIndirectCommand.INSTANCECOUNT); }
     /** Unsafe version of {@link #firstVertex}. */
-    public static int nfirstVertex(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCommand.FIRSTVERTEX); }
+    public static int nfirstVertex(long struct) { return memGetInt(struct + VkDrawIndirectCommand.FIRSTVERTEX); }
     /** Unsafe version of {@link #firstInstance}. */
-    public static int nfirstInstance(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCommand.FIRSTINSTANCE); }
+    public static int nfirstInstance(long struct) { return memGetInt(struct + VkDrawIndirectCommand.FIRSTINSTANCE); }
 
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCommand.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + VkDrawIndirectCommand.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #instanceCount(int) instanceCount}. */
-    public static void ninstanceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCommand.INSTANCECOUNT, value); }
+    public static void ninstanceCount(long struct, int value) { memPutInt(struct + VkDrawIndirectCommand.INSTANCECOUNT, value); }
     /** Unsafe version of {@link #firstVertex(int) firstVertex}. */
-    public static void nfirstVertex(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCommand.FIRSTVERTEX, value); }
+    public static void nfirstVertex(long struct, int value) { memPutInt(struct + VkDrawIndirectCommand.FIRSTVERTEX, value); }
     /** Unsafe version of {@link #firstInstance(int) firstInstance}. */
-    public static void nfirstInstance(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCommand.FIRSTINSTANCE, value); }
+    public static void nfirstInstance(long struct, int value) { memPutInt(struct + VkDrawIndirectCommand.FIRSTINSTANCE, value); }
 
     // -----------------------------------
 

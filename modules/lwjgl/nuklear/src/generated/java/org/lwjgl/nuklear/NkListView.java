@@ -233,15 +233,15 @@ public class NkListView extends Struct<NkListView> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #begin}. */
-    public static int nbegin(long struct) { return UNSAFE.getInt(null, struct + NkListView.BEGIN); }
+    public static int nbegin(long struct) { return memGetInt(struct + NkListView.BEGIN); }
     /** Unsafe version of {@link #end}. */
-    public static int nend(long struct) { return UNSAFE.getInt(null, struct + NkListView.END); }
+    public static int nend(long struct) { return memGetInt(struct + NkListView.END); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + NkListView.COUNT); }
-    public static int ntotal_height(long struct) { return UNSAFE.getInt(null, struct + NkListView.TOTAL_HEIGHT); }
+    public static int ncount(long struct) { return memGetInt(struct + NkListView.COUNT); }
+    public static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
     public static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
     public static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
-    public static int nscroll_value(long struct) { return UNSAFE.getInt(null, struct + NkListView.SCROLL_VALUE); }
+    public static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
 
     // -----------------------------------
 

@@ -307,11 +307,11 @@ public class XPropertyEvent extends Struct<XPropertyEvent> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XPropertyEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XPropertyEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XPropertyEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XPropertyEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -321,14 +321,14 @@ public class XPropertyEvent extends Struct<XPropertyEvent> implements NativeReso
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XPropertyEvent.TIME); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XPropertyEvent.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XPropertyEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XPropertyEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XPropertyEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XPropertyEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -338,7 +338,7 @@ public class XPropertyEvent extends Struct<XPropertyEvent> implements NativeReso
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { memPutCLong(struct + XPropertyEvent.TIME, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XPropertyEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

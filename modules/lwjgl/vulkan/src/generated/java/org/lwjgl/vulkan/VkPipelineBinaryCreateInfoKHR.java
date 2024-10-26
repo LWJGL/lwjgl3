@@ -296,24 +296,24 @@ public class VkPipelineBinaryCreateInfoKHR extends Struct<VkPipelineBinaryCreate
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineBinaryCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineBinaryCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineBinaryCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pKeysAndDataInfo}. */
     @Nullable public static VkPipelineBinaryKeysAndDataKHR npKeysAndDataInfo(long struct) { return VkPipelineBinaryKeysAndDataKHR.createSafe(memGetAddress(struct + VkPipelineBinaryCreateInfoKHR.PKEYSANDDATAINFO)); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkPipelineBinaryCreateInfoKHR.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkPipelineBinaryCreateInfoKHR.PIPELINE); }
     /** Unsafe version of {@link #pPipelineCreateInfo}. */
     @Nullable public static VkPipelineCreateInfoKHR npPipelineCreateInfo(long struct) { return VkPipelineCreateInfoKHR.createSafe(memGetAddress(struct + VkPipelineBinaryCreateInfoKHR.PPIPELINECREATEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineBinaryCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineBinaryCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineBinaryCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pKeysAndDataInfo(VkPipelineBinaryKeysAndDataKHR) pKeysAndDataInfo}. */
     public static void npKeysAndDataInfo(long struct, @Nullable VkPipelineBinaryKeysAndDataKHR value) { memPutAddress(struct + VkPipelineBinaryCreateInfoKHR.PKEYSANDDATAINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkPipelineBinaryCreateInfoKHR.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkPipelineBinaryCreateInfoKHR.PIPELINE, value); }
     /** Unsafe version of {@link #pPipelineCreateInfo(VkPipelineCreateInfoKHR) pPipelineCreateInfo}. */
     public static void npPipelineCreateInfo(long struct, @Nullable VkPipelineCreateInfoKHR value) { memPutAddress(struct + VkPipelineBinaryCreateInfoKHR.PPIPELINECREATEINFO, memAddressSafe(value)); }
 

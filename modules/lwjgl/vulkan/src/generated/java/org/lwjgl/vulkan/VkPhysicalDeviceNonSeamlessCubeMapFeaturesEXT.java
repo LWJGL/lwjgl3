@@ -246,18 +246,18 @@ public class VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #nonSeamlessCubeMap}. */
-    public static int nnonSeamlessCubeMap(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.NONSEAMLESSCUBEMAP); }
+    public static int nnonSeamlessCubeMap(long struct) { return memGetInt(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.NONSEAMLESSCUBEMAP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #nonSeamlessCubeMap(boolean) nonSeamlessCubeMap}. */
-    public static void nnonSeamlessCubeMap(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.NONSEAMLESSCUBEMAP, value); }
+    public static void nnonSeamlessCubeMap(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.NONSEAMLESSCUBEMAP, value); }
 
     // -----------------------------------
 

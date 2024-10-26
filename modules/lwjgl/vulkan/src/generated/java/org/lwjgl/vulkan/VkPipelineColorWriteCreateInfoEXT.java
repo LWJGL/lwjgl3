@@ -273,20 +273,20 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorWriteCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineColorWriteCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineColorWriteCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorWriteCreateInfoEXT.ATTACHMENTCOUNT); }
+    public static int nattachmentCount(long struct) { return memGetInt(struct + VkPipelineColorWriteCreateInfoEXT.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorWriteEnables() pColorWriteEnables}. */
     @Nullable public static IntBuffer npColorWriteEnables(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineColorWriteCreateInfoEXT.PCOLORWRITEENABLES), nattachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorWriteCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineColorWriteCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineColorWriteCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorWriteCreateInfoEXT.ATTACHMENTCOUNT, value); }
+    public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkPipelineColorWriteCreateInfoEXT.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorWriteEnables(IntBuffer) pColorWriteEnables}. */
     public static void npColorWriteEnables(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineColorWriteCreateInfoEXT.PCOLORWRITEENABLES, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
 

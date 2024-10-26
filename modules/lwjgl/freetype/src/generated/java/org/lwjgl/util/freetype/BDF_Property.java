@@ -221,15 +221,15 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + BDF_Property.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + BDF_Property.TYPE); }
     /** Unsafe version of {@link #u_atom}. */
     @Nullable public static ByteBuffer nu_atom(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + BDF_Property.U_ATOM)); }
     /** Unsafe version of {@link #u_atomString}. */
     @Nullable public static String nu_atomString(long struct) { return memASCIISafe(memGetAddress(struct + BDF_Property.U_ATOM)); }
     /** Unsafe version of {@link #u_integer}. */
-    public static int nu_integer(long struct) { return UNSAFE.getInt(null, struct + BDF_Property.U_INTEGER); }
+    public static int nu_integer(long struct) { return memGetInt(struct + BDF_Property.U_INTEGER); }
     /** Unsafe version of {@link #u_cardinal}. */
-    public static int nu_cardinal(long struct) { return UNSAFE.getInt(null, struct + BDF_Property.U_CARDINAL); }
+    public static int nu_cardinal(long struct) { return memGetInt(struct + BDF_Property.U_CARDINAL); }
 
     // -----------------------------------
 

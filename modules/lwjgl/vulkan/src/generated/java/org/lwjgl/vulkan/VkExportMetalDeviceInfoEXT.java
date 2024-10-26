@@ -243,14 +243,14 @@ public class VkExportMetalDeviceInfoEXT extends Struct<VkExportMetalDeviceInfoEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalDeviceInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMetalDeviceInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMetalDeviceInfoEXT.PNEXT); }
     /** Unsafe version of {@link #mtlDevice}. */
     public static long nmtlDevice(long struct) { return memGetAddress(struct + VkExportMetalDeviceInfoEXT.MTLDEVICE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalDeviceInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMetalDeviceInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMetalDeviceInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #mtlDevice(long) mtlDevice}. */

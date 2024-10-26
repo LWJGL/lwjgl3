@@ -272,34 +272,34 @@ public class ParOctasphereConfig extends Struct<ParOctasphereConfig> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #corner_radius}. */
-    public static float ncorner_radius(long struct) { return UNSAFE.getFloat(null, struct + ParOctasphereConfig.CORNER_RADIUS); }
+    public static float ncorner_radius(long struct) { return memGetFloat(struct + ParOctasphereConfig.CORNER_RADIUS); }
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + ParOctasphereConfig.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + ParOctasphereConfig.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + ParOctasphereConfig.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + ParOctasphereConfig.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static float ndepth(long struct) { return UNSAFE.getFloat(null, struct + ParOctasphereConfig.DEPTH); }
+    public static float ndepth(long struct) { return memGetFloat(struct + ParOctasphereConfig.DEPTH); }
     /** Unsafe version of {@link #num_subdivisions}. */
-    public static int nnum_subdivisions(long struct) { return UNSAFE.getInt(null, struct + ParOctasphereConfig.NUM_SUBDIVISIONS); }
+    public static int nnum_subdivisions(long struct) { return memGetInt(struct + ParOctasphereConfig.NUM_SUBDIVISIONS); }
     /** Unsafe version of {@link #uv_mode}. */
-    public static int nuv_mode(long struct) { return UNSAFE.getInt(null, struct + ParOctasphereConfig.UV_MODE); }
+    public static int nuv_mode(long struct) { return memGetInt(struct + ParOctasphereConfig.UV_MODE); }
     /** Unsafe version of {@link #normals_mode}. */
-    public static int nnormals_mode(long struct) { return UNSAFE.getInt(null, struct + ParOctasphereConfig.NORMALS_MODE); }
+    public static int nnormals_mode(long struct) { return memGetInt(struct + ParOctasphereConfig.NORMALS_MODE); }
 
     /** Unsafe version of {@link #corner_radius(float) corner_radius}. */
-    public static void ncorner_radius(long struct, float value) { UNSAFE.putFloat(null, struct + ParOctasphereConfig.CORNER_RADIUS, value); }
+    public static void ncorner_radius(long struct, float value) { memPutFloat(struct + ParOctasphereConfig.CORNER_RADIUS, value); }
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + ParOctasphereConfig.WIDTH, value); }
+    public static void nwidth(long struct, float value) { memPutFloat(struct + ParOctasphereConfig.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + ParOctasphereConfig.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + ParOctasphereConfig.HEIGHT, value); }
     /** Unsafe version of {@link #depth(float) depth}. */
-    public static void ndepth(long struct, float value) { UNSAFE.putFloat(null, struct + ParOctasphereConfig.DEPTH, value); }
+    public static void ndepth(long struct, float value) { memPutFloat(struct + ParOctasphereConfig.DEPTH, value); }
     /** Unsafe version of {@link #num_subdivisions(int) num_subdivisions}. */
-    public static void nnum_subdivisions(long struct, int value) { UNSAFE.putInt(null, struct + ParOctasphereConfig.NUM_SUBDIVISIONS, value); }
+    public static void nnum_subdivisions(long struct, int value) { memPutInt(struct + ParOctasphereConfig.NUM_SUBDIVISIONS, value); }
     /** Unsafe version of {@link #uv_mode(int) uv_mode}. */
-    public static void nuv_mode(long struct, int value) { UNSAFE.putInt(null, struct + ParOctasphereConfig.UV_MODE, value); }
+    public static void nuv_mode(long struct, int value) { memPutInt(struct + ParOctasphereConfig.UV_MODE, value); }
     /** Unsafe version of {@link #normals_mode(int) normals_mode}. */
-    public static void nnormals_mode(long struct, int value) { UNSAFE.putInt(null, struct + ParOctasphereConfig.NORMALS_MODE, value); }
+    public static void nnormals_mode(long struct, int value) { memPutInt(struct + ParOctasphereConfig.NORMALS_MODE, value); }
 
     // -----------------------------------
 

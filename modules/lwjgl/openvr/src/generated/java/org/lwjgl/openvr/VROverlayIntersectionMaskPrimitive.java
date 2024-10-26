@@ -243,12 +243,12 @@ public class VROverlayIntersectionMaskPrimitive extends Struct<VROverlayIntersec
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nPrimitiveType}. */
-    public static int nm_nPrimitiveType(long struct) { return UNSAFE.getInt(null, struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE); }
+    public static int nm_nPrimitiveType(long struct) { return memGetInt(struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE); }
     /** Unsafe version of {@link #m_Primitive}. */
     public static VROverlayIntersectionMaskPrimitiveData nm_Primitive(long struct) { return VROverlayIntersectionMaskPrimitiveData.create(struct + VROverlayIntersectionMaskPrimitive.M_PRIMITIVE); }
 
     /** Unsafe version of {@link #m_nPrimitiveType(int) m_nPrimitiveType}. */
-    public static void nm_nPrimitiveType(long struct, int value) { UNSAFE.putInt(null, struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE, value); }
+    public static void nm_nPrimitiveType(long struct, int value) { memPutInt(struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE, value); }
     /** Unsafe version of {@link #m_Primitive(VROverlayIntersectionMaskPrimitiveData) m_Primitive}. */
     public static void nm_Primitive(long struct, VROverlayIntersectionMaskPrimitiveData value) { memCopy(value.address(), struct + VROverlayIntersectionMaskPrimitive.M_PRIMITIVE, VROverlayIntersectionMaskPrimitiveData.SIZEOF); }
 

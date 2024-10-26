@@ -257,7 +257,7 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
     /** Unsafe version of {@link #LinearAcceleration}. */
     public static OVRVector3f nLinearAcceleration(long struct) { return OVRVector3f.create(struct + OVRPoseStatef.LINEARACCELERATION); }
     /** Unsafe version of {@link #TimeInSeconds}. */
-    public static double nTimeInSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRPoseStatef.TIMEINSECONDS); }
+    public static double nTimeInSeconds(long struct) { return memGetDouble(struct + OVRPoseStatef.TIMEINSECONDS); }
 
     // -----------------------------------
 

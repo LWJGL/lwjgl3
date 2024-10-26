@@ -217,7 +217,7 @@ public class BGFXTransform extends Struct<BGFXTransform> implements NativeResour
     /** Unsafe version of {@link #data() data}. */
     public static FloatBuffer ndata(long struct) { return memFloatBuffer(memGetAddress(struct + BGFXTransform.DATA), (Short.toUnsignedInt(nnum(struct)) << 4)); }
     /** Unsafe version of {@link #num}. */
-    public static short nnum(long struct) { return UNSAFE.getShort(null, struct + BGFXTransform.NUM); }
+    public static short nnum(long struct) { return memGetShort(struct + BGFXTransform.NUM); }
 
     // -----------------------------------
 

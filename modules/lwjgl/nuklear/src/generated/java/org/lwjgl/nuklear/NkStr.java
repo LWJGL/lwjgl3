@@ -219,7 +219,7 @@ public class NkStr extends Struct<NkStr> implements NativeResource {
     /** Unsafe version of {@link #buffer}. */
     public static NkBuffer nbuffer(long struct) { return NkBuffer.create(struct + NkStr.BUFFER); }
     /** Unsafe version of {@link #len}. */
-    public static int nlen(long struct) { return UNSAFE.getInt(null, struct + NkStr.LEN); }
+    public static int nlen(long struct) { return memGetInt(struct + NkStr.LEN); }
 
     // -----------------------------------
 

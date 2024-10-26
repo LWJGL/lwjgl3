@@ -252,18 +252,18 @@ public class VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #vertexInputDynamicState}. */
-    public static int nvertexInputDynamicState(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.VERTEXINPUTDYNAMICSTATE); }
+    public static int nvertexInputDynamicState(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.VERTEXINPUTDYNAMICSTATE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #vertexInputDynamicState(boolean) vertexInputDynamicState}. */
-    public static void nvertexInputDynamicState(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.VERTEXINPUTDYNAMICSTATE, value); }
+    public static void nvertexInputDynamicState(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.VERTEXINPUTDYNAMICSTATE, value); }
 
     // -----------------------------------
 

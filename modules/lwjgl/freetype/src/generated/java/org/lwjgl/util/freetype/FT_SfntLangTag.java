@@ -195,7 +195,7 @@ public class FT_SfntLangTag extends Struct<FT_SfntLangTag> implements NativeReso
     /** Unsafe version of {@link #string() string}. */
     public static ByteBuffer nstring(long struct) { return memByteBuffer(memGetAddress(struct + FT_SfntLangTag.STRING), nstring_len(struct)); }
     /** Unsafe version of {@link #string_len}. */
-    public static int nstring_len(long struct) { return UNSAFE.getInt(null, struct + FT_SfntLangTag.STRING_LEN); }
+    public static int nstring_len(long struct) { return memGetInt(struct + FT_SfntLangTag.STRING_LEN); }
 
     // -----------------------------------
 

@@ -244,22 +244,22 @@ public class IOURingRecvmsgOut extends Struct<IOURingRecvmsgOut> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #namelen}. */
-    public static int nnamelen(long struct) { return UNSAFE.getInt(null, struct + IOURingRecvmsgOut.NAMELEN); }
+    public static int nnamelen(long struct) { return memGetInt(struct + IOURingRecvmsgOut.NAMELEN); }
     /** Unsafe version of {@link #controllen}. */
-    public static int ncontrollen(long struct) { return UNSAFE.getInt(null, struct + IOURingRecvmsgOut.CONTROLLEN); }
+    public static int ncontrollen(long struct) { return memGetInt(struct + IOURingRecvmsgOut.CONTROLLEN); }
     /** Unsafe version of {@link #payloadlen}. */
-    public static int npayloadlen(long struct) { return UNSAFE.getInt(null, struct + IOURingRecvmsgOut.PAYLOADLEN); }
+    public static int npayloadlen(long struct) { return memGetInt(struct + IOURingRecvmsgOut.PAYLOADLEN); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingRecvmsgOut.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + IOURingRecvmsgOut.FLAGS); }
 
     /** Unsafe version of {@link #namelen(int) namelen}. */
-    public static void nnamelen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRecvmsgOut.NAMELEN, value); }
+    public static void nnamelen(long struct, int value) { memPutInt(struct + IOURingRecvmsgOut.NAMELEN, value); }
     /** Unsafe version of {@link #controllen(int) controllen}. */
-    public static void ncontrollen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRecvmsgOut.CONTROLLEN, value); }
+    public static void ncontrollen(long struct, int value) { memPutInt(struct + IOURingRecvmsgOut.CONTROLLEN, value); }
     /** Unsafe version of {@link #payloadlen(int) payloadlen}. */
-    public static void npayloadlen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRecvmsgOut.PAYLOADLEN, value); }
+    public static void npayloadlen(long struct, int value) { memPutInt(struct + IOURingRecvmsgOut.PAYLOADLEN, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingRecvmsgOut.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOURingRecvmsgOut.FLAGS, value); }
 
     // -----------------------------------
 

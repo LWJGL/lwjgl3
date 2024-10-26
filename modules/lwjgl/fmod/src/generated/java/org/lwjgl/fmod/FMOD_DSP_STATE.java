@@ -287,34 +287,34 @@ public class FMOD_DSP_STATE extends Struct<FMOD_DSP_STATE> implements NativeReso
     /** Unsafe version of {@link #plugindata}. */
     public static long nplugindata(long struct) { return memGetAddress(struct + FMOD_DSP_STATE.PLUGINDATA); }
     /** Unsafe version of {@link #channelmask}. */
-    public static int nchannelmask(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_STATE.CHANNELMASK); }
+    public static int nchannelmask(long struct) { return memGetInt(struct + FMOD_DSP_STATE.CHANNELMASK); }
     /** Unsafe version of {@link #source_speakermode}. */
-    public static int nsource_speakermode(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_STATE.SOURCE_SPEAKERMODE); }
+    public static int nsource_speakermode(long struct) { return memGetInt(struct + FMOD_DSP_STATE.SOURCE_SPEAKERMODE); }
     /** Unsafe version of {@link #sidechaindata() sidechaindata}. */
     public static FloatBuffer nsidechaindata(long struct) { return memFloatBuffer(memGetAddress(struct + FMOD_DSP_STATE.SIDECHAINDATA), nsidechainchannels(struct)); }
     /** Unsafe version of {@link #sidechainchannels}. */
-    public static int nsidechainchannels(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_STATE.SIDECHAINCHANNELS); }
+    public static int nsidechainchannels(long struct) { return memGetInt(struct + FMOD_DSP_STATE.SIDECHAINCHANNELS); }
     /** Unsafe version of {@link #functions}. */
     public static FMOD_DSP_STATE_FUNCTIONS nfunctions(long struct) { return FMOD_DSP_STATE_FUNCTIONS.create(memGetAddress(struct + FMOD_DSP_STATE.FUNCTIONS)); }
     /** Unsafe version of {@link #systemobject}. */
-    public static int nsystemobject(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_STATE.SYSTEMOBJECT); }
+    public static int nsystemobject(long struct) { return memGetInt(struct + FMOD_DSP_STATE.SYSTEMOBJECT); }
 
     /** Unsafe version of {@link #instance(long) instance}. */
     public static void ninstance(long struct, long value) { memPutAddress(struct + FMOD_DSP_STATE.INSTANCE, check(value)); }
     /** Unsafe version of {@link #plugindata(long) plugindata}. */
     public static void nplugindata(long struct, long value) { memPutAddress(struct + FMOD_DSP_STATE.PLUGINDATA, check(value)); }
     /** Unsafe version of {@link #channelmask(int) channelmask}. */
-    public static void nchannelmask(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_STATE.CHANNELMASK, value); }
+    public static void nchannelmask(long struct, int value) { memPutInt(struct + FMOD_DSP_STATE.CHANNELMASK, value); }
     /** Unsafe version of {@link #source_speakermode(int) source_speakermode}. */
-    public static void nsource_speakermode(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_STATE.SOURCE_SPEAKERMODE, value); }
+    public static void nsource_speakermode(long struct, int value) { memPutInt(struct + FMOD_DSP_STATE.SOURCE_SPEAKERMODE, value); }
     /** Unsafe version of {@link #sidechaindata(FloatBuffer) sidechaindata}. */
     public static void nsidechaindata(long struct, FloatBuffer value) { memPutAddress(struct + FMOD_DSP_STATE.SIDECHAINDATA, memAddress(value)); nsidechainchannels(struct, value.remaining()); }
     /** Sets the specified value to the {@code sidechainchannels} field of the specified {@code struct}. */
-    public static void nsidechainchannels(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_STATE.SIDECHAINCHANNELS, value); }
+    public static void nsidechainchannels(long struct, int value) { memPutInt(struct + FMOD_DSP_STATE.SIDECHAINCHANNELS, value); }
     /** Unsafe version of {@link #functions(FMOD_DSP_STATE_FUNCTIONS) functions}. */
     public static void nfunctions(long struct, FMOD_DSP_STATE_FUNCTIONS value) { memPutAddress(struct + FMOD_DSP_STATE.FUNCTIONS, value.address()); }
     /** Unsafe version of {@link #systemobject(int) systemobject}. */
-    public static void nsystemobject(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_STATE.SYSTEMOBJECT, value); }
+    public static void nsystemobject(long struct, int value) { memPutInt(struct + FMOD_DSP_STATE.SYSTEMOBJECT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

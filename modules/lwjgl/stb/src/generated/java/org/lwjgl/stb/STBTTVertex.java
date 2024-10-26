@@ -250,19 +250,19 @@ public class STBTTVertex extends Struct<STBTTVertex> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.X); }
+    public static short nx(long struct) { return memGetShort(struct + STBTTVertex.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.Y); }
+    public static short ny(long struct) { return memGetShort(struct + STBTTVertex.Y); }
     /** Unsafe version of {@link #cx}. */
-    public static short ncx(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CX); }
+    public static short ncx(long struct) { return memGetShort(struct + STBTTVertex.CX); }
     /** Unsafe version of {@link #cy}. */
-    public static short ncy(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CY); }
+    public static short ncy(long struct) { return memGetShort(struct + STBTTVertex.CY); }
     /** Unsafe version of {@link #cx1}. */
-    public static short ncx1(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CX1); }
+    public static short ncx1(long struct) { return memGetShort(struct + STBTTVertex.CX1); }
     /** Unsafe version of {@link #cy1}. */
-    public static short ncy1(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CY1); }
+    public static short ncy1(long struct) { return memGetShort(struct + STBTTVertex.CY1); }
     /** Unsafe version of {@link #type}. */
-    public static byte ntype(long struct) { return UNSAFE.getByte(null, struct + STBTTVertex.TYPE); }
+    public static byte ntype(long struct) { return memGetByte(struct + STBTTVertex.TYPE); }
 
     // -----------------------------------
 

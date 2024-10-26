@@ -213,12 +213,12 @@ public class FT_Data extends Struct<FT_Data> implements NativeResource {
     /** Unsafe version of {@link #pointer() pointer}. */
     public static ByteBuffer npointer(long struct) { return memByteBuffer(memGetAddress(struct + FT_Data.POINTER), nlength(struct)); }
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + FT_Data.LENGTH); }
+    public static int nlength(long struct) { return memGetInt(struct + FT_Data.LENGTH); }
 
     /** Unsafe version of {@link #pointer(ByteBuffer) pointer}. */
     public static void npointer(long struct, ByteBuffer value) { memPutAddress(struct + FT_Data.POINTER, memAddress(value)); nlength(struct, value.remaining()); }
     /** Sets the specified value to the {@code length} field of the specified {@code struct}. */
-    public static void nlength(long struct, int value) { UNSAFE.putInt(null, struct + FT_Data.LENGTH, value); }
+    public static void nlength(long struct, int value) { memPutInt(struct + FT_Data.LENGTH, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

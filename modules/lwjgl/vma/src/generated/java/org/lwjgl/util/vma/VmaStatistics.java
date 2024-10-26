@@ -229,13 +229,13 @@ public class VmaStatistics extends Struct<VmaStatistics> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #blockCount}. */
-    public static int nblockCount(long struct) { return UNSAFE.getInt(null, struct + VmaStatistics.BLOCKCOUNT); }
+    public static int nblockCount(long struct) { return memGetInt(struct + VmaStatistics.BLOCKCOUNT); }
     /** Unsafe version of {@link #allocationCount}. */
-    public static int nallocationCount(long struct) { return UNSAFE.getInt(null, struct + VmaStatistics.ALLOCATIONCOUNT); }
+    public static int nallocationCount(long struct) { return memGetInt(struct + VmaStatistics.ALLOCATIONCOUNT); }
     /** Unsafe version of {@link #blockBytes}. */
-    public static long nblockBytes(long struct) { return UNSAFE.getLong(null, struct + VmaStatistics.BLOCKBYTES); }
+    public static long nblockBytes(long struct) { return memGetLong(struct + VmaStatistics.BLOCKBYTES); }
     /** Unsafe version of {@link #allocationBytes}. */
-    public static long nallocationBytes(long struct) { return UNSAFE.getLong(null, struct + VmaStatistics.ALLOCATIONBYTES); }
+    public static long nallocationBytes(long struct) { return memGetLong(struct + VmaStatistics.ALLOCATIONBYTES); }
 
     // -----------------------------------
 

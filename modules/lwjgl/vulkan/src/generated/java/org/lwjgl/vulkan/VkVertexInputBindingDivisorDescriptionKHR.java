@@ -241,14 +241,14 @@ public class VkVertexInputBindingDivisorDescriptionKHR extends Struct<VkVertexIn
     // -----------------------------------
 
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDivisorDescriptionKHR.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkVertexInputBindingDivisorDescriptionKHR.BINDING); }
     /** Unsafe version of {@link #divisor}. */
-    public static int ndivisor(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDivisorDescriptionKHR.DIVISOR); }
+    public static int ndivisor(long struct) { return memGetInt(struct + VkVertexInputBindingDivisorDescriptionKHR.DIVISOR); }
 
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDivisorDescriptionKHR.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkVertexInputBindingDivisorDescriptionKHR.BINDING, value); }
     /** Unsafe version of {@link #divisor(int) divisor}. */
-    public static void ndivisor(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDivisorDescriptionKHR.DIVISOR, value); }
+    public static void ndivisor(long struct, int value) { memPutInt(struct + VkVertexInputBindingDivisorDescriptionKHR.DIVISOR, value); }
 
     // -----------------------------------
 

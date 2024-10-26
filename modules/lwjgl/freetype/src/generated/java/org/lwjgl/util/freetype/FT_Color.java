@@ -245,22 +245,22 @@ public class FT_Color extends Struct<FT_Color> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #blue}. */
-    public static byte nblue(long struct) { return UNSAFE.getByte(null, struct + FT_Color.BLUE); }
+    public static byte nblue(long struct) { return memGetByte(struct + FT_Color.BLUE); }
     /** Unsafe version of {@link #green}. */
-    public static byte ngreen(long struct) { return UNSAFE.getByte(null, struct + FT_Color.GREEN); }
+    public static byte ngreen(long struct) { return memGetByte(struct + FT_Color.GREEN); }
     /** Unsafe version of {@link #red}. */
-    public static byte nred(long struct) { return UNSAFE.getByte(null, struct + FT_Color.RED); }
+    public static byte nred(long struct) { return memGetByte(struct + FT_Color.RED); }
     /** Unsafe version of {@link #alpha}. */
-    public static byte nalpha(long struct) { return UNSAFE.getByte(null, struct + FT_Color.ALPHA); }
+    public static byte nalpha(long struct) { return memGetByte(struct + FT_Color.ALPHA); }
 
     /** Unsafe version of {@link #blue(byte) blue}. */
-    public static void nblue(long struct, byte value) { UNSAFE.putByte(null, struct + FT_Color.BLUE, value); }
+    public static void nblue(long struct, byte value) { memPutByte(struct + FT_Color.BLUE, value); }
     /** Unsafe version of {@link #green(byte) green}. */
-    public static void ngreen(long struct, byte value) { UNSAFE.putByte(null, struct + FT_Color.GREEN, value); }
+    public static void ngreen(long struct, byte value) { memPutByte(struct + FT_Color.GREEN, value); }
     /** Unsafe version of {@link #red(byte) red}. */
-    public static void nred(long struct, byte value) { UNSAFE.putByte(null, struct + FT_Color.RED, value); }
+    public static void nred(long struct, byte value) { memPutByte(struct + FT_Color.RED, value); }
     /** Unsafe version of {@link #alpha(byte) alpha}. */
-    public static void nalpha(long struct, byte value) { UNSAFE.putByte(null, struct + FT_Color.ALPHA, value); }
+    public static void nalpha(long struct, byte value) { memPutByte(struct + FT_Color.ALPHA, value); }
 
     // -----------------------------------
 

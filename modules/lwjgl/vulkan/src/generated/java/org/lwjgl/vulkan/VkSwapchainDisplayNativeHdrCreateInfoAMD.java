@@ -271,18 +271,18 @@ public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct<VkSwapchain
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.PNEXT); }
     /** Unsafe version of {@link #localDimmingEnable}. */
-    public static int nlocalDimmingEnable(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.LOCALDIMMINGENABLE); }
+    public static int nlocalDimmingEnable(long struct) { return memGetInt(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.LOCALDIMMINGENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.PNEXT, value); }
     /** Unsafe version of {@link #localDimmingEnable(boolean) localDimmingEnable}. */
-    public static void nlocalDimmingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.LOCALDIMMINGENABLE, value); }
+    public static void nlocalDimmingEnable(long struct, int value) { memPutInt(struct + VkSwapchainDisplayNativeHdrCreateInfoAMD.LOCALDIMMINGENABLE, value); }
 
     // -----------------------------------
 

@@ -260,14 +260,14 @@ public class VkExternalImageFormatProperties extends Struct<VkExternalImageForma
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExternalImageFormatProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalImageFormatProperties.PNEXT); }
     /** Unsafe version of {@link #externalMemoryProperties}. */
     public static VkExternalMemoryProperties nexternalMemoryProperties(long struct) { return VkExternalMemoryProperties.create(struct + VkExternalImageFormatProperties.EXTERNALMEMORYPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalImageFormatProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalImageFormatProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalImageFormatProperties.PNEXT, value); }
 

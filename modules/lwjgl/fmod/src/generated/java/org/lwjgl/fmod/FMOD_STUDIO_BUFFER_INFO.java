@@ -249,26 +249,26 @@ public class FMOD_STUDIO_BUFFER_INFO extends Struct<FMOD_STUDIO_BUFFER_INFO> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #currentusage}. */
-    public static int ncurrentusage(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BUFFER_INFO.CURRENTUSAGE); }
+    public static int ncurrentusage(long struct) { return memGetInt(struct + FMOD_STUDIO_BUFFER_INFO.CURRENTUSAGE); }
     /** Unsafe version of {@link #peakusage}. */
-    public static int npeakusage(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BUFFER_INFO.PEAKUSAGE); }
+    public static int npeakusage(long struct) { return memGetInt(struct + FMOD_STUDIO_BUFFER_INFO.PEAKUSAGE); }
     /** Unsafe version of {@link #capacity$}. */
-    public static int ncapacity$(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BUFFER_INFO.CAPACITY); }
+    public static int ncapacity$(long struct) { return memGetInt(struct + FMOD_STUDIO_BUFFER_INFO.CAPACITY); }
     /** Unsafe version of {@link #stallcount}. */
-    public static int nstallcount(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BUFFER_INFO.STALLCOUNT); }
+    public static int nstallcount(long struct) { return memGetInt(struct + FMOD_STUDIO_BUFFER_INFO.STALLCOUNT); }
     /** Unsafe version of {@link #stalltime}. */
-    public static float nstalltime(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_BUFFER_INFO.STALLTIME); }
+    public static float nstalltime(long struct) { return memGetFloat(struct + FMOD_STUDIO_BUFFER_INFO.STALLTIME); }
 
     /** Unsafe version of {@link #currentusage(int) currentusage}. */
-    public static void ncurrentusage(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BUFFER_INFO.CURRENTUSAGE, value); }
+    public static void ncurrentusage(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BUFFER_INFO.CURRENTUSAGE, value); }
     /** Unsafe version of {@link #peakusage(int) peakusage}. */
-    public static void npeakusage(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BUFFER_INFO.PEAKUSAGE, value); }
+    public static void npeakusage(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BUFFER_INFO.PEAKUSAGE, value); }
     /** Unsafe version of {@link #capacity$(int) capacity$}. */
-    public static void ncapacity$(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BUFFER_INFO.CAPACITY, value); }
+    public static void ncapacity$(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BUFFER_INFO.CAPACITY, value); }
     /** Unsafe version of {@link #stallcount(int) stallcount}. */
-    public static void nstallcount(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BUFFER_INFO.STALLCOUNT, value); }
+    public static void nstallcount(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BUFFER_INFO.STALLCOUNT, value); }
     /** Unsafe version of {@link #stalltime(float) stalltime}. */
-    public static void nstalltime(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_BUFFER_INFO.STALLTIME, value); }
+    public static void nstalltime(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_BUFFER_INFO.STALLTIME, value); }
 
     // -----------------------------------
 

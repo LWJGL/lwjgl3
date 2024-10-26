@@ -261,22 +261,22 @@ public class XrEnvironmentDepthImageAcquireInfoMETA extends Struct<XrEnvironment
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthImageAcquireInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEnvironmentDepthImageAcquireInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEnvironmentDepthImageAcquireInfoMETA.NEXT); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrEnvironmentDepthImageAcquireInfoMETA.SPACE); }
     /** Unsafe version of {@link #displayTime}. */
-    public static long ndisplayTime(long struct) { return UNSAFE.getLong(null, struct + XrEnvironmentDepthImageAcquireInfoMETA.DISPLAYTIME); }
+    public static long ndisplayTime(long struct) { return memGetLong(struct + XrEnvironmentDepthImageAcquireInfoMETA.DISPLAYTIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthImageAcquireInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEnvironmentDepthImageAcquireInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEnvironmentDepthImageAcquireInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrEnvironmentDepthImageAcquireInfoMETA.SPACE, value.address()); }
     /** Unsafe version of {@link #displayTime(long) displayTime}. */
-    public static void ndisplayTime(long struct, long value) { UNSAFE.putLong(null, struct + XrEnvironmentDepthImageAcquireInfoMETA.DISPLAYTIME, value); }
+    public static void ndisplayTime(long struct, long value) { memPutLong(struct + XrEnvironmentDepthImageAcquireInfoMETA.DISPLAYTIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

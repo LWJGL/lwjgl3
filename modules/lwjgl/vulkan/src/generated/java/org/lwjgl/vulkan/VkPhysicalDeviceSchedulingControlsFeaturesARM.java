@@ -246,18 +246,18 @@ public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.PNEXT); }
     /** Unsafe version of {@link #schedulingControls}. */
-    public static int nschedulingControls(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.SCHEDULINGCONTROLS); }
+    public static int nschedulingControls(long struct) { return memGetInt(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.SCHEDULINGCONTROLS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.PNEXT, value); }
     /** Unsafe version of {@link #schedulingControls(boolean) schedulingControls}. */
-    public static void nschedulingControls(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.SCHEDULINGCONTROLS, value); }
+    public static void nschedulingControls(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSchedulingControlsFeaturesARM.SCHEDULINGCONTROLS, value); }
 
     // -----------------------------------
 

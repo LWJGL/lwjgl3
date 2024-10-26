@@ -345,40 +345,40 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorSetsInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindDescriptorSetsInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorSetsInfoKHR.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.STAGEFLAGS); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkBindDescriptorSetsInfoKHR.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkBindDescriptorSetsInfoKHR.LAYOUT); }
     /** Unsafe version of {@link #firstSet}. */
-    public static int nfirstSet(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorSetsInfoKHR.FIRSTSET); }
+    public static int nfirstSet(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.FIRSTSET); }
     /** Unsafe version of {@link #descriptorSetCount}. */
-    public static int ndescriptorSetCount(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorSetsInfoKHR.DESCRIPTORSETCOUNT); }
+    public static int ndescriptorSetCount(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.DESCRIPTORSETCOUNT); }
     /** Unsafe version of {@link #pDescriptorSets() pDescriptorSets}. */
     public static LongBuffer npDescriptorSets(long struct) { return memLongBuffer(memGetAddress(struct + VkBindDescriptorSetsInfoKHR.PDESCRIPTORSETS), ndescriptorSetCount(struct)); }
     /** Unsafe version of {@link #dynamicOffsetCount}. */
-    public static int ndynamicOffsetCount(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorSetsInfoKHR.DYNAMICOFFSETCOUNT); }
+    public static int ndynamicOffsetCount(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.DYNAMICOFFSETCOUNT); }
     /** Unsafe version of {@link #pDynamicOffsets() pDynamicOffsets}. */
     @Nullable public static IntBuffer npDynamicOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindDescriptorSetsInfoKHR.PDYNAMICOFFSETS), ndynamicOffsetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorSetsInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindDescriptorSetsInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorSetsInfoKHR.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.STAGEFLAGS, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkBindDescriptorSetsInfoKHR.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkBindDescriptorSetsInfoKHR.LAYOUT, value); }
     /** Unsafe version of {@link #firstSet(int) firstSet}. */
-    public static void nfirstSet(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorSetsInfoKHR.FIRSTSET, value); }
+    public static void nfirstSet(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.FIRSTSET, value); }
     /** Sets the specified value to the {@code descriptorSetCount} field of the specified {@code struct}. */
-    public static void ndescriptorSetCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorSetsInfoKHR.DESCRIPTORSETCOUNT, value); }
+    public static void ndescriptorSetCount(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.DESCRIPTORSETCOUNT, value); }
     /** Unsafe version of {@link #pDescriptorSets(LongBuffer) pDescriptorSets}. */
     public static void npDescriptorSets(long struct, LongBuffer value) { memPutAddress(struct + VkBindDescriptorSetsInfoKHR.PDESCRIPTORSETS, memAddress(value)); ndescriptorSetCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code dynamicOffsetCount} field of the specified {@code struct}. */
-    public static void ndynamicOffsetCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorSetsInfoKHR.DYNAMICOFFSETCOUNT, value); }
+    public static void ndynamicOffsetCount(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.DYNAMICOFFSETCOUNT, value); }
     /** Unsafe version of {@link #pDynamicOffsets(IntBuffer) pDynamicOffsets}. */
     public static void npDynamicOffsets(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBindDescriptorSetsInfoKHR.PDYNAMICOFFSETS, memAddressSafe(value)); if (value != null) { ndynamicOffsetCount(struct, value.remaining()); } }
 

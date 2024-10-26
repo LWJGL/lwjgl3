@@ -255,14 +255,14 @@ public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNode
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelNodeStateMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrControllerModelNodeStateMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrControllerModelNodeStateMSFT.NEXT); }
     /** Unsafe version of {@link #nodePose}. */
     public static XrPosef nnodePose(long struct) { return XrPosef.create(struct + XrControllerModelNodeStateMSFT.NODEPOSE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelNodeStateMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrControllerModelNodeStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelNodeStateMSFT.NEXT, value); }
     /** Unsafe version of {@link #nodePose(XrPosef) nodePose}. */

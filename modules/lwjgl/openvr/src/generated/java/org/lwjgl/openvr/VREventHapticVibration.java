@@ -128,15 +128,15 @@ public class VREventHapticVibration extends Struct<VREventHapticVibration> {
     // -----------------------------------
 
     /** Unsafe version of {@link #containerHandle}. */
-    public static long ncontainerHandle(long struct) { return UNSAFE.getLong(null, struct + VREventHapticVibration.CONTAINERHANDLE); }
+    public static long ncontainerHandle(long struct) { return memGetLong(struct + VREventHapticVibration.CONTAINERHANDLE); }
     /** Unsafe version of {@link #componentHandle}. */
-    public static long ncomponentHandle(long struct) { return UNSAFE.getLong(null, struct + VREventHapticVibration.COMPONENTHANDLE); }
+    public static long ncomponentHandle(long struct) { return memGetLong(struct + VREventHapticVibration.COMPONENTHANDLE); }
     /** Unsafe version of {@link #fDurationSeconds}. */
-    public static float nfDurationSeconds(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FDURATIONSECONDS); }
+    public static float nfDurationSeconds(long struct) { return memGetFloat(struct + VREventHapticVibration.FDURATIONSECONDS); }
     /** Unsafe version of {@link #fFrequency}. */
-    public static float nfFrequency(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FFREQUENCY); }
+    public static float nfFrequency(long struct) { return memGetFloat(struct + VREventHapticVibration.FFREQUENCY); }
     /** Unsafe version of {@link #fAmplitude}. */
-    public static float nfAmplitude(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FAMPLITUDE); }
+    public static float nfAmplitude(long struct) { return memGetFloat(struct + VREventHapticVibration.FAMPLITUDE); }
 
     // -----------------------------------
 

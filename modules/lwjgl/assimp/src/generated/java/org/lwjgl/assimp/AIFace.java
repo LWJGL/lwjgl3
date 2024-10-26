@@ -238,12 +238,12 @@ public class AIFace extends Struct<AIFace> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mNumIndices}. */
-    public static int nmNumIndices(long struct) { return UNSAFE.getInt(null, struct + AIFace.MNUMINDICES); }
+    public static int nmNumIndices(long struct) { return memGetInt(struct + AIFace.MNUMINDICES); }
     /** Unsafe version of {@link #mIndices() mIndices}. */
     public static IntBuffer nmIndices(long struct) { return memIntBuffer(memGetAddress(struct + AIFace.MINDICES), nmNumIndices(struct)); }
 
     /** Sets the specified value to the {@code mNumIndices} field of the specified {@code struct}. */
-    public static void nmNumIndices(long struct, int value) { UNSAFE.putInt(null, struct + AIFace.MNUMINDICES, value); }
+    public static void nmNumIndices(long struct, int value) { memPutInt(struct + AIFace.MNUMINDICES, value); }
     /** Unsafe version of {@link #mIndices(IntBuffer) mIndices}. */
     public static void nmIndices(long struct, IntBuffer value) { memPutAddress(struct + AIFace.MINDICES, memAddress(value)); nmNumIndices(struct, value.remaining()); }
 

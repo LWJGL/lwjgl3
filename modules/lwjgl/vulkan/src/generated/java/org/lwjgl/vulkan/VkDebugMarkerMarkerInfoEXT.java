@@ -286,7 +286,7 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerMarkerInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugMarkerMarkerInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugMarkerMarkerInfoEXT.PNEXT); }
     /** Unsafe version of {@link #pMarkerName}. */
@@ -297,11 +297,11 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEX
     public static FloatBuffer ncolor(long struct) { return memFloatBuffer(struct + VkDebugMarkerMarkerInfoEXT.COLOR, 4); }
     /** Unsafe version of {@link #color(int) color}. */
     public static float ncolor(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VkDebugMarkerMarkerInfoEXT.COLOR + check(index, 4) * 4);
+        return memGetFloat(struct + VkDebugMarkerMarkerInfoEXT.COLOR + check(index, 4) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerMarkerInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugMarkerMarkerInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugMarkerMarkerInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #pMarkerName(ByteBuffer) pMarkerName}. */
@@ -316,7 +316,7 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEX
     }
     /** Unsafe version of {@link #color(int, float) color}. */
     public static void ncolor(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + VkDebugMarkerMarkerInfoEXT.COLOR + check(index, 4) * 4, value);
+        memPutFloat(struct + VkDebugMarkerMarkerInfoEXT.COLOR + check(index, 4) * 4, value);
     }
 
     /**

@@ -117,7 +117,7 @@ public class FT_Size_Internal extends Struct<FT_Size_Internal> {
     /** Unsafe version of {@link #module_data}. */
     public static long nmodule_data(long struct) { return memGetAddress(struct + FT_Size_Internal.MODULE_DATA); }
     /** Unsafe version of {@link #autohint_mode}. */
-    public static int nautohint_mode(long struct) { return UNSAFE.getInt(null, struct + FT_Size_Internal.AUTOHINT_MODE); }
+    public static int nautohint_mode(long struct) { return memGetInt(struct + FT_Size_Internal.AUTOHINT_MODE); }
     /** Unsafe version of {@link #autohint_metrics}. */
     public static FT_Size_Metrics nautohint_metrics(long struct) { return FT_Size_Metrics.create(struct + FT_Size_Internal.AUTOHINT_METRICS); }
 

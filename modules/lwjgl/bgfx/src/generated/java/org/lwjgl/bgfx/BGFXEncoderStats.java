@@ -112,9 +112,9 @@ public class BGFXEncoderStats extends Struct<BGFXEncoderStats> {
     // -----------------------------------
 
     /** Unsafe version of {@link #cpuTimeBegin}. */
-    public static long ncpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXEncoderStats.CPUTIMEBEGIN); }
+    public static long ncpuTimeBegin(long struct) { return memGetLong(struct + BGFXEncoderStats.CPUTIMEBEGIN); }
     /** Unsafe version of {@link #cpuTimeEnd}. */
-    public static long ncpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXEncoderStats.CPUTIMEEND); }
+    public static long ncpuTimeEnd(long struct) { return memGetLong(struct + BGFXEncoderStats.CPUTIMEEND); }
 
     // -----------------------------------
 

@@ -255,20 +255,20 @@ public class VkExportMetalIOSurfaceInfoEXT extends Struct<VkExportMetalIOSurface
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalIOSurfaceInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMetalIOSurfaceInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMetalIOSurfaceInfoEXT.PNEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalIOSurfaceInfoEXT.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + VkExportMetalIOSurfaceInfoEXT.IMAGE); }
     /** Unsafe version of {@link #ioSurface}. */
     public static long nioSurface(long struct) { return memGetAddress(struct + VkExportMetalIOSurfaceInfoEXT.IOSURFACE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalIOSurfaceInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMetalIOSurfaceInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMetalIOSurfaceInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalIOSurfaceInfoEXT.IMAGE, value); }
+    public static void nimage(long struct, long value) { memPutLong(struct + VkExportMetalIOSurfaceInfoEXT.IMAGE, value); }
     /** Unsafe version of {@link #ioSurface(long) ioSurface}. */
     public static void nioSurface(long struct, long value) { memPutAddress(struct + VkExportMetalIOSurfaceInfoEXT.IOSURFACE, check(value)); }
 

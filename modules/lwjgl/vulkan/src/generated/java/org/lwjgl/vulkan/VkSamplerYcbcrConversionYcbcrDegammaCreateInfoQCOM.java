@@ -253,22 +253,22 @@ public class VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #enableYDegamma}. */
-    public static int nenableYDegamma(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLEYDEGAMMA); }
+    public static int nenableYDegamma(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLEYDEGAMMA); }
     /** Unsafe version of {@link #enableCbCrDegamma}. */
-    public static int nenableCbCrDegamma(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLECBCRDEGAMMA); }
+    public static int nenableCbCrDegamma(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLECBCRDEGAMMA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #enableYDegamma(boolean) enableYDegamma}. */
-    public static void nenableYDegamma(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLEYDEGAMMA, value); }
+    public static void nenableYDegamma(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLEYDEGAMMA, value); }
     /** Unsafe version of {@link #enableCbCrDegamma(boolean) enableCbCrDegamma}. */
-    public static void nenableCbCrDegamma(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLECBCRDEGAMMA, value); }
+    public static void nenableCbCrDegamma(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.ENABLECBCRDEGAMMA, value); }
 
     // -----------------------------------
 

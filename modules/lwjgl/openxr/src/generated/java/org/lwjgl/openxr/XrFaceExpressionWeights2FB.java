@@ -355,46 +355,46 @@ public class XrFaceExpressionWeights2FB extends Struct<XrFaceExpressionWeights2F
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFaceExpressionWeights2FB.NEXT); }
     /** Unsafe version of {@link #weightCount}. */
-    public static int nweightCount(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.WEIGHTCOUNT); }
+    public static int nweightCount(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.WEIGHTCOUNT); }
     /** Unsafe version of {@link #weights() weights}. */
     public static FloatBuffer nweights(long struct) { return memFloatBuffer(memGetAddress(struct + XrFaceExpressionWeights2FB.WEIGHTS), nweightCount(struct)); }
     /** Unsafe version of {@link #confidenceCount}. */
-    public static int nconfidenceCount(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.CONFIDENCECOUNT); }
+    public static int nconfidenceCount(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.CONFIDENCECOUNT); }
     /** Unsafe version of {@link #confidences() confidences}. */
     public static FloatBuffer nconfidences(long struct) { return memFloatBuffer(memGetAddress(struct + XrFaceExpressionWeights2FB.CONFIDENCES), nconfidenceCount(struct)); }
     /** Unsafe version of {@link #isValid}. */
-    public static int nisValid(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.ISVALID); }
+    public static int nisValid(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.ISVALID); }
     /** Unsafe version of {@link #isEyeFollowingBlendshapesValid}. */
-    public static int nisEyeFollowingBlendshapesValid(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.ISEYEFOLLOWINGBLENDSHAPESVALID); }
+    public static int nisEyeFollowingBlendshapesValid(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.ISEYEFOLLOWINGBLENDSHAPESVALID); }
     /** Unsafe version of {@link #dataSource}. */
-    public static int ndataSource(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionWeights2FB.DATASOURCE); }
+    public static int ndataSource(long struct) { return memGetInt(struct + XrFaceExpressionWeights2FB.DATASOURCE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrFaceExpressionWeights2FB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrFaceExpressionWeights2FB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFaceExpressionWeights2FB.NEXT, value); }
     /** Sets the specified value to the {@code weightCount} field of the specified {@code struct}. */
-    public static void nweightCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.WEIGHTCOUNT, value); }
+    public static void nweightCount(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.WEIGHTCOUNT, value); }
     /** Unsafe version of {@link #weights(FloatBuffer) weights}. */
     public static void nweights(long struct, FloatBuffer value) { memPutAddress(struct + XrFaceExpressionWeights2FB.WEIGHTS, memAddress(value)); nweightCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code confidenceCount} field of the specified {@code struct}. */
-    public static void nconfidenceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.CONFIDENCECOUNT, value); }
+    public static void nconfidenceCount(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.CONFIDENCECOUNT, value); }
     /** Unsafe version of {@link #confidences(FloatBuffer) confidences}. */
     public static void nconfidences(long struct, FloatBuffer value) { memPutAddress(struct + XrFaceExpressionWeights2FB.CONFIDENCES, memAddress(value)); nconfidenceCount(struct, value.remaining()); }
     /** Unsafe version of {@link #isValid(boolean) isValid}. */
-    public static void nisValid(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.ISVALID, value); }
+    public static void nisValid(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.ISVALID, value); }
     /** Unsafe version of {@link #isEyeFollowingBlendshapesValid(boolean) isEyeFollowingBlendshapesValid}. */
-    public static void nisEyeFollowingBlendshapesValid(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.ISEYEFOLLOWINGBLENDSHAPESVALID, value); }
+    public static void nisEyeFollowingBlendshapesValid(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.ISEYEFOLLOWINGBLENDSHAPESVALID, value); }
     /** Unsafe version of {@link #dataSource(int) dataSource}. */
-    public static void ndataSource(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionWeights2FB.DATASOURCE, value); }
+    public static void ndataSource(long struct, int value) { memPutInt(struct + XrFaceExpressionWeights2FB.DATASOURCE, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrFaceExpressionWeights2FB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrFaceExpressionWeights2FB.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

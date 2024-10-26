@@ -218,9 +218,9 @@ public class VkDisplayPlanePropertiesKHR extends Struct<VkDisplayPlaneProperties
     // -----------------------------------
 
     /** Unsafe version of {@link #currentDisplay}. */
-    public static long ncurrentDisplay(long struct) { return UNSAFE.getLong(null, struct + VkDisplayPlanePropertiesKHR.CURRENTDISPLAY); }
+    public static long ncurrentDisplay(long struct) { return memGetLong(struct + VkDisplayPlanePropertiesKHR.CURRENTDISPLAY); }
     /** Unsafe version of {@link #currentStackIndex}. */
-    public static int ncurrentStackIndex(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPlanePropertiesKHR.CURRENTSTACKINDEX); }
+    public static int ncurrentStackIndex(long struct) { return memGetInt(struct + VkDisplayPlanePropertiesKHR.CURRENTSTACKINDEX); }
 
     // -----------------------------------
 

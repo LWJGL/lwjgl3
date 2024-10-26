@@ -250,14 +250,14 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
     /** Unsafe version of {@link #imageRect}. */
     public static XrRect2Di nimageRect(long struct) { return XrRect2Di.create(struct + XrSwapchainSubImage.IMAGERECT); }
     /** Unsafe version of {@link #imageArrayIndex}. */
-    public static int nimageArrayIndex(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainSubImage.IMAGEARRAYINDEX); }
+    public static int nimageArrayIndex(long struct) { return memGetInt(struct + XrSwapchainSubImage.IMAGEARRAYINDEX); }
 
     /** Unsafe version of {@link #swapchain(XrSwapchain) swapchain}. */
     public static void nswapchain(long struct, XrSwapchain value) { memPutAddress(struct + XrSwapchainSubImage.SWAPCHAIN, value.address()); }
     /** Unsafe version of {@link #imageRect(XrRect2Di) imageRect}. */
     public static void nimageRect(long struct, XrRect2Di value) { memCopy(value.address(), struct + XrSwapchainSubImage.IMAGERECT, XrRect2Di.SIZEOF); }
     /** Unsafe version of {@link #imageArrayIndex(int) imageArrayIndex}. */
-    public static void nimageArrayIndex(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainSubImage.IMAGEARRAYINDEX, value); }
+    public static void nimageArrayIndex(long struct, int value) { memPutInt(struct + XrSwapchainSubImage.IMAGEARRAYINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

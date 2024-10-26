@@ -271,20 +271,20 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoReferenceSlotInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoReferenceSlotInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoReferenceSlotInfoKHR.PNEXT); }
     /** Unsafe version of {@link #slotIndex}. */
-    public static int nslotIndex(long struct) { return UNSAFE.getInt(null, struct + VkVideoReferenceSlotInfoKHR.SLOTINDEX); }
+    public static int nslotIndex(long struct) { return memGetInt(struct + VkVideoReferenceSlotInfoKHR.SLOTINDEX); }
     /** Unsafe version of {@link #pPictureResource}. */
     @Nullable public static VkVideoPictureResourceInfoKHR npPictureResource(long struct) { return VkVideoPictureResourceInfoKHR.createSafe(memGetAddress(struct + VkVideoReferenceSlotInfoKHR.PPICTURERESOURCE)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoReferenceSlotInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoReferenceSlotInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoReferenceSlotInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #slotIndex(int) slotIndex}. */
-    public static void nslotIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoReferenceSlotInfoKHR.SLOTINDEX, value); }
+    public static void nslotIndex(long struct, int value) { memPutInt(struct + VkVideoReferenceSlotInfoKHR.SLOTINDEX, value); }
     /** Unsafe version of {@link #pPictureResource(VkVideoPictureResourceInfoKHR) pPictureResource}. */
     public static void npPictureResource(long struct, @Nullable VkVideoPictureResourceInfoKHR value) { memPutAddress(struct + VkVideoReferenceSlotInfoKHR.PPICTURERESOURCE, memAddressSafe(value)); }
 

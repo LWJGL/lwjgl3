@@ -288,14 +288,14 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2KHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceCapabilities2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceCapabilities2KHR.PNEXT); }
     /** Unsafe version of {@link #surfaceCapabilities}. */
     public static VkSurfaceCapabilitiesKHR nsurfaceCapabilities(long struct) { return VkSurfaceCapabilitiesKHR.create(struct + VkSurfaceCapabilities2KHR.SURFACECAPABILITIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilities2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceCapabilities2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceCapabilities2KHR.PNEXT, value); }
 

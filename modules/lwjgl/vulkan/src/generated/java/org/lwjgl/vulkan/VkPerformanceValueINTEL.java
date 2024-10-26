@@ -217,7 +217,7 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceValueINTEL.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkPerformanceValueINTEL.TYPE); }
     /** Unsafe version of {@link #data}. */
     public static VkPerformanceValueDataINTEL ndata(long struct) { return VkPerformanceValueDataINTEL.create(struct + VkPerformanceValueINTEL.DATA); }
 

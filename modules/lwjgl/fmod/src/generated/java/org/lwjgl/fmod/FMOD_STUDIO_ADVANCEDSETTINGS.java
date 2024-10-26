@@ -277,34 +277,34 @@ public class FMOD_STUDIO_ADVANCEDSETTINGS extends Struct<FMOD_STUDIO_ADVANCEDSET
     // -----------------------------------
 
     /** Unsafe version of {@link #cbsize}. */
-    public static int ncbsize(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.CBSIZE); }
+    public static int ncbsize(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.CBSIZE); }
     /** Unsafe version of {@link #commandqueuesize}. */
-    public static int ncommandqueuesize(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.COMMANDQUEUESIZE); }
+    public static int ncommandqueuesize(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.COMMANDQUEUESIZE); }
     /** Unsafe version of {@link #handleinitialsize}. */
-    public static int nhandleinitialsize(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.HANDLEINITIALSIZE); }
+    public static int nhandleinitialsize(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.HANDLEINITIALSIZE); }
     /** Unsafe version of {@link #studioupdateperiod}. */
-    public static int nstudioupdateperiod(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.STUDIOUPDATEPERIOD); }
+    public static int nstudioupdateperiod(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.STUDIOUPDATEPERIOD); }
     /** Unsafe version of {@link #idlesampledatapoolsize}. */
-    public static int nidlesampledatapoolsize(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.IDLESAMPLEDATAPOOLSIZE); }
+    public static int nidlesampledatapoolsize(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.IDLESAMPLEDATAPOOLSIZE); }
     /** Unsafe version of {@link #streamingscheduledelay}. */
-    public static int nstreamingscheduledelay(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.STREAMINGSCHEDULEDELAY); }
+    public static int nstreamingscheduledelay(long struct) { return memGetInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.STREAMINGSCHEDULEDELAY); }
     /** Unsafe version of {@link #encryptionkey}. */
     public static ByteBuffer nencryptionkey(long struct) { return memByteBufferNT1(memGetAddress(struct + FMOD_STUDIO_ADVANCEDSETTINGS.ENCRYPTIONKEY)); }
     /** Unsafe version of {@link #encryptionkeyString}. */
     public static String nencryptionkeyString(long struct) { return memUTF8(memGetAddress(struct + FMOD_STUDIO_ADVANCEDSETTINGS.ENCRYPTIONKEY)); }
 
     /** Unsafe version of {@link #cbsize(int) cbsize}. */
-    public static void ncbsize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.CBSIZE, value); }
+    public static void ncbsize(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.CBSIZE, value); }
     /** Unsafe version of {@link #commandqueuesize(int) commandqueuesize}. */
-    public static void ncommandqueuesize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.COMMANDQUEUESIZE, value); }
+    public static void ncommandqueuesize(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.COMMANDQUEUESIZE, value); }
     /** Unsafe version of {@link #handleinitialsize(int) handleinitialsize}. */
-    public static void nhandleinitialsize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.HANDLEINITIALSIZE, value); }
+    public static void nhandleinitialsize(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.HANDLEINITIALSIZE, value); }
     /** Unsafe version of {@link #studioupdateperiod(int) studioupdateperiod}. */
-    public static void nstudioupdateperiod(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.STUDIOUPDATEPERIOD, value); }
+    public static void nstudioupdateperiod(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.STUDIOUPDATEPERIOD, value); }
     /** Unsafe version of {@link #idlesampledatapoolsize(int) idlesampledatapoolsize}. */
-    public static void nidlesampledatapoolsize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.IDLESAMPLEDATAPOOLSIZE, value); }
+    public static void nidlesampledatapoolsize(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.IDLESAMPLEDATAPOOLSIZE, value); }
     /** Unsafe version of {@link #streamingscheduledelay(int) streamingscheduledelay}. */
-    public static void nstreamingscheduledelay(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_ADVANCEDSETTINGS.STREAMINGSCHEDULEDELAY, value); }
+    public static void nstreamingscheduledelay(long struct, int value) { memPutInt(struct + FMOD_STUDIO_ADVANCEDSETTINGS.STREAMINGSCHEDULEDELAY, value); }
     /** Unsafe version of {@link #encryptionkey(ByteBuffer) encryptionkey}. */
     public static void nencryptionkey(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

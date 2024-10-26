@@ -251,18 +251,18 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInteractionProfileState.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInteractionProfileState.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInteractionProfileState.NEXT); }
     /** Unsafe version of {@link #interactionProfile}. */
-    public static long ninteractionProfile(long struct) { return UNSAFE.getLong(null, struct + XrInteractionProfileState.INTERACTIONPROFILE); }
+    public static long ninteractionProfile(long struct) { return memGetLong(struct + XrInteractionProfileState.INTERACTIONPROFILE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInteractionProfileState.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInteractionProfileState.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInteractionProfileState.NEXT, value); }
     /** Unsafe version of {@link #interactionProfile(long) interactionProfile}. */
-    public static void ninteractionProfile(long struct, long value) { UNSAFE.putLong(null, struct + XrInteractionProfileState.INTERACTIONPROFILE, value); }
+    public static void ninteractionProfile(long struct, long value) { memPutLong(struct + XrInteractionProfileState.INTERACTIONPROFILE, value); }
 
     // -----------------------------------
 

@@ -280,26 +280,26 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
     // -----------------------------------
 
     /** Unsafe version of {@link #srcAddress}. */
-    public static long nsrcAddress(long struct) { return UNSAFE.getLong(null, struct + VkDecompressMemoryRegionNV.SRCADDRESS); }
+    public static long nsrcAddress(long struct) { return memGetLong(struct + VkDecompressMemoryRegionNV.SRCADDRESS); }
     /** Unsafe version of {@link #dstAddress}. */
-    public static long ndstAddress(long struct) { return UNSAFE.getLong(null, struct + VkDecompressMemoryRegionNV.DSTADDRESS); }
+    public static long ndstAddress(long struct) { return memGetLong(struct + VkDecompressMemoryRegionNV.DSTADDRESS); }
     /** Unsafe version of {@link #compressedSize}. */
-    public static long ncompressedSize(long struct) { return UNSAFE.getLong(null, struct + VkDecompressMemoryRegionNV.COMPRESSEDSIZE); }
+    public static long ncompressedSize(long struct) { return memGetLong(struct + VkDecompressMemoryRegionNV.COMPRESSEDSIZE); }
     /** Unsafe version of {@link #decompressedSize}. */
-    public static long ndecompressedSize(long struct) { return UNSAFE.getLong(null, struct + VkDecompressMemoryRegionNV.DECOMPRESSEDSIZE); }
+    public static long ndecompressedSize(long struct) { return memGetLong(struct + VkDecompressMemoryRegionNV.DECOMPRESSEDSIZE); }
     /** Unsafe version of {@link #decompressionMethod}. */
-    public static long ndecompressionMethod(long struct) { return UNSAFE.getLong(null, struct + VkDecompressMemoryRegionNV.DECOMPRESSIONMETHOD); }
+    public static long ndecompressionMethod(long struct) { return memGetLong(struct + VkDecompressMemoryRegionNV.DECOMPRESSIONMETHOD); }
 
     /** Unsafe version of {@link #srcAddress(long) srcAddress}. */
-    public static void nsrcAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDecompressMemoryRegionNV.SRCADDRESS, value); }
+    public static void nsrcAddress(long struct, long value) { memPutLong(struct + VkDecompressMemoryRegionNV.SRCADDRESS, value); }
     /** Unsafe version of {@link #dstAddress(long) dstAddress}. */
-    public static void ndstAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDecompressMemoryRegionNV.DSTADDRESS, value); }
+    public static void ndstAddress(long struct, long value) { memPutLong(struct + VkDecompressMemoryRegionNV.DSTADDRESS, value); }
     /** Unsafe version of {@link #compressedSize(long) compressedSize}. */
-    public static void ncompressedSize(long struct, long value) { UNSAFE.putLong(null, struct + VkDecompressMemoryRegionNV.COMPRESSEDSIZE, value); }
+    public static void ncompressedSize(long struct, long value) { memPutLong(struct + VkDecompressMemoryRegionNV.COMPRESSEDSIZE, value); }
     /** Unsafe version of {@link #decompressedSize(long) decompressedSize}. */
-    public static void ndecompressedSize(long struct, long value) { UNSAFE.putLong(null, struct + VkDecompressMemoryRegionNV.DECOMPRESSEDSIZE, value); }
+    public static void ndecompressedSize(long struct, long value) { memPutLong(struct + VkDecompressMemoryRegionNV.DECOMPRESSEDSIZE, value); }
     /** Unsafe version of {@link #decompressionMethod(long) decompressionMethod}. */
-    public static void ndecompressionMethod(long struct, long value) { UNSAFE.putLong(null, struct + VkDecompressMemoryRegionNV.DECOMPRESSIONMETHOD, value); }
+    public static void ndecompressionMethod(long struct, long value) { memPutLong(struct + VkDecompressMemoryRegionNV.DECOMPRESSIONMETHOD, value); }
 
     // -----------------------------------
 

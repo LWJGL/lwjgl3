@@ -267,18 +267,18 @@ public class VkPerformanceConfigurationAcquireInfoINTEL extends Struct<VkPerform
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceConfigurationAcquireInfoINTEL.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPerformanceConfigurationAcquireInfoINTEL.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPerformanceConfigurationAcquireInfoINTEL.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceConfigurationAcquireInfoINTEL.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkPerformanceConfigurationAcquireInfoINTEL.TYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceConfigurationAcquireInfoINTEL.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPerformanceConfigurationAcquireInfoINTEL.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPerformanceConfigurationAcquireInfoINTEL.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceConfigurationAcquireInfoINTEL.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkPerformanceConfigurationAcquireInfoINTEL.TYPE, value); }
 
     // -----------------------------------
 

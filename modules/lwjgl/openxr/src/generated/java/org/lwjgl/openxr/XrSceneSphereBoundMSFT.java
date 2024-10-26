@@ -239,12 +239,12 @@ public class XrSceneSphereBoundMSFT extends Struct<XrSceneSphereBoundMSFT> imple
     /** Unsafe version of {@link #center}. */
     public static XrVector3f ncenter(long struct) { return XrVector3f.create(struct + XrSceneSphereBoundMSFT.CENTER); }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + XrSceneSphereBoundMSFT.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + XrSceneSphereBoundMSFT.RADIUS); }
 
     /** Unsafe version of {@link #center(XrVector3f) center}. */
     public static void ncenter(long struct, XrVector3f value) { memCopy(value.address(), struct + XrSceneSphereBoundMSFT.CENTER, XrVector3f.SIZEOF); }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + XrSceneSphereBoundMSFT.RADIUS, value); }
+    public static void nradius(long struct, float value) { memPutFloat(struct + XrSceneSphereBoundMSFT.RADIUS, value); }
 
     // -----------------------------------
 

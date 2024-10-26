@@ -261,22 +261,22 @@ public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.W); }
+    public static float nw(long struct) { return memGetFloat(struct + AIQuaternion.W); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.X); }
+    public static float nx(long struct) { return memGetFloat(struct + AIQuaternion.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + AIQuaternion.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + AIQuaternion.Z); }
 
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.W, value); }
+    public static void nw(long struct, float value) { memPutFloat(struct + AIQuaternion.W, value); }
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + AIQuaternion.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + AIQuaternion.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.Z, value); }
+    public static void nz(long struct, float value) { memPutFloat(struct + AIQuaternion.Z, value); }
 
     // -----------------------------------
 

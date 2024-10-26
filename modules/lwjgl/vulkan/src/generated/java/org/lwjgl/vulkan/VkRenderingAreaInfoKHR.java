@@ -292,34 +292,34 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAreaInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingAreaInfoKHR.PNEXT); }
     /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAreaInfoKHR.VIEWMASK); }
+    public static int nviewMask(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.VIEWMASK); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
     @Nullable public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthAttachmentFormat}. */
-    public static int ndepthAttachmentFormat(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT); }
+    public static int ndepthAttachmentFormat(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT); }
     /** Unsafe version of {@link #stencilAttachmentFormat}. */
-    public static int nstencilAttachmentFormat(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT); }
+    public static int nstencilAttachmentFormat(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAreaInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingAreaInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAreaInfoKHR.VIEWMASK, value); }
+    public static void nviewMask(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.VIEWMASK, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentFormats(IntBuffer) pColorAttachmentFormats}. */
     public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #depthAttachmentFormat(int) depthAttachmentFormat}. */
-    public static void ndepthAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT, value); }
+    public static void ndepthAttachmentFormat(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT, value); }
     /** Unsafe version of {@link #stencilAttachmentFormat(int) stencilAttachmentFormat}. */
-    public static void nstencilAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT, value); }
+    public static void nstencilAttachmentFormat(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT, value); }
 
     // -----------------------------------
 

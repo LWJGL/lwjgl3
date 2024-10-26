@@ -267,22 +267,22 @@ public class VkSemaphoreTypeCreateInfo extends Struct<VkSemaphoreTypeCreateInfo>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreTypeCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSemaphoreTypeCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreTypeCreateInfo.PNEXT); }
     /** Unsafe version of {@link #semaphoreType}. */
-    public static int nsemaphoreType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreTypeCreateInfo.SEMAPHORETYPE); }
+    public static int nsemaphoreType(long struct) { return memGetInt(struct + VkSemaphoreTypeCreateInfo.SEMAPHORETYPE); }
     /** Unsafe version of {@link #initialValue}. */
-    public static long ninitialValue(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreTypeCreateInfo.INITIALVALUE); }
+    public static long ninitialValue(long struct) { return memGetLong(struct + VkSemaphoreTypeCreateInfo.INITIALVALUE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreTypeCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSemaphoreTypeCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreTypeCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #semaphoreType(int) semaphoreType}. */
-    public static void nsemaphoreType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreTypeCreateInfo.SEMAPHORETYPE, value); }
+    public static void nsemaphoreType(long struct, int value) { memPutInt(struct + VkSemaphoreTypeCreateInfo.SEMAPHORETYPE, value); }
     /** Unsafe version of {@link #initialValue(long) initialValue}. */
-    public static void ninitialValue(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreTypeCreateInfo.INITIALVALUE, value); }
+    public static void ninitialValue(long struct, long value) { memPutLong(struct + VkSemaphoreTypeCreateInfo.INITIALVALUE, value); }
 
     // -----------------------------------
 

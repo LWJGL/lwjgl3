@@ -434,19 +434,19 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWriteDescriptorSet.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWriteDescriptorSet.PNEXT); }
     /** Unsafe version of {@link #dstSet}. */
-    public static long ndstSet(long struct) { return UNSAFE.getLong(null, struct + VkWriteDescriptorSet.DSTSET); }
+    public static long ndstSet(long struct) { return memGetLong(struct + VkWriteDescriptorSet.DSTSET); }
     /** Unsafe version of {@link #dstBinding}. */
-    public static int ndstBinding(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DSTBINDING); }
+    public static int ndstBinding(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DSTBINDING); }
     /** Unsafe version of {@link #dstArrayElement}. */
-    public static int ndstArrayElement(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DSTARRAYELEMENT); }
+    public static int ndstArrayElement(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DSTARRAYELEMENT); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DESCRIPTORCOUNT); }
     /** Unsafe version of {@link #descriptorType}. */
-    public static int ndescriptorType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DESCRIPTORTYPE); }
+    public static int ndescriptorType(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DESCRIPTORTYPE); }
     /** Unsafe version of {@link #pImageInfo}. */
     @Nullable public static VkDescriptorImageInfo.Buffer npImageInfo(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkWriteDescriptorSet.PIMAGEINFO), ndescriptorCount(struct)); }
     /** Unsafe version of {@link #pBufferInfo}. */
@@ -455,19 +455,19 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
     @Nullable public static LongBuffer npTexelBufferView(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSet.PTEXELBUFFERVIEW), ndescriptorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWriteDescriptorSet.PNEXT, value); }
     /** Unsafe version of {@link #dstSet(long) dstSet}. */
-    public static void ndstSet(long struct, long value) { UNSAFE.putLong(null, struct + VkWriteDescriptorSet.DSTSET, value); }
+    public static void ndstSet(long struct, long value) { memPutLong(struct + VkWriteDescriptorSet.DSTSET, value); }
     /** Unsafe version of {@link #dstBinding(int) dstBinding}. */
-    public static void ndstBinding(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DSTBINDING, value); }
+    public static void ndstBinding(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DSTBINDING, value); }
     /** Unsafe version of {@link #dstArrayElement(int) dstArrayElement}. */
-    public static void ndstArrayElement(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DSTARRAYELEMENT, value); }
+    public static void ndstArrayElement(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DSTARRAYELEMENT, value); }
     /** Sets the specified value to the {@code descriptorCount} field of the specified {@code struct}. */
-    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DESCRIPTORCOUNT, value); }
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
-    public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DESCRIPTORTYPE, value); }
+    public static void ndescriptorType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DESCRIPTORTYPE, value); }
     /** Unsafe version of {@link #pImageInfo(VkDescriptorImageInfo.Buffer) pImageInfo}. */
     public static void npImageInfo(long struct, @Nullable VkDescriptorImageInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PIMAGEINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #pBufferInfo(VkDescriptorBufferInfo.Buffer) pBufferInfo}. */

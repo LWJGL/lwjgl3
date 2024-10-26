@@ -241,14 +241,14 @@ public class LibDivideU32BranchFree extends Struct<LibDivideU32BranchFree> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #magic}. */
-    public static int nmagic(long struct) { return UNSAFE.getInt(null, struct + LibDivideU32BranchFree.MAGIC); }
+    public static int nmagic(long struct) { return memGetInt(struct + LibDivideU32BranchFree.MAGIC); }
     /** Unsafe version of {@link #more}. */
-    public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideU32BranchFree.MORE); }
+    public static byte nmore(long struct) { return memGetByte(struct + LibDivideU32BranchFree.MORE); }
 
     /** Unsafe version of {@link #magic(int) magic}. */
-    public static void nmagic(long struct, int value) { UNSAFE.putInt(null, struct + LibDivideU32BranchFree.MAGIC, value); }
+    public static void nmagic(long struct, int value) { memPutInt(struct + LibDivideU32BranchFree.MAGIC, value); }
     /** Unsafe version of {@link #more(byte) more}. */
-    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideU32BranchFree.MORE, value); }
+    public static void nmore(long struct, byte value) { memPutByte(struct + LibDivideU32BranchFree.MORE, value); }
 
     // -----------------------------------
 

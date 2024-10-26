@@ -246,18 +246,18 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #dynamicPrimitiveTopologyUnrestricted}. */
-    public static int ndynamicPrimitiveTopologyUnrestricted(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.DYNAMICPRIMITIVETOPOLOGYUNRESTRICTED); }
+    public static int ndynamicPrimitiveTopologyUnrestricted(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.DYNAMICPRIMITIVETOPOLOGYUNRESTRICTED); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.PNEXT, value); }
     /** Unsafe version of {@link #dynamicPrimitiveTopologyUnrestricted(boolean) dynamicPrimitiveTopologyUnrestricted}. */
-    public static void ndynamicPrimitiveTopologyUnrestricted(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.DYNAMICPRIMITIVETOPOLOGYUNRESTRICTED, value); }
+    public static void ndynamicPrimitiveTopologyUnrestricted(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.DYNAMICPRIMITIVETOPOLOGYUNRESTRICTED, value); }
 
     // -----------------------------------
 

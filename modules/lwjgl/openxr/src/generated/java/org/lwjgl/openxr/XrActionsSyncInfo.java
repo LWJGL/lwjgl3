@@ -262,20 +262,20 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionsSyncInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionsSyncInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionsSyncInfo.NEXT); }
     /** Unsafe version of {@link #countActiveActionSets}. */
-    public static int ncountActiveActionSets(long struct) { return UNSAFE.getInt(null, struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS); }
+    public static int ncountActiveActionSets(long struct) { return memGetInt(struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS); }
     /** Unsafe version of {@link #activeActionSets}. */
     @Nullable public static XrActiveActionSet.Buffer nactiveActionSets(long struct) { return XrActiveActionSet.createSafe(memGetAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS), ncountActiveActionSets(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionsSyncInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionsSyncInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionsSyncInfo.NEXT, value); }
     /** Sets the specified value to the {@code countActiveActionSets} field of the specified {@code struct}. */
-    public static void ncountActiveActionSets(long struct, int value) { UNSAFE.putInt(null, struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS, value); }
+    public static void ncountActiveActionSets(long struct, int value) { memPutInt(struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS, value); }
     /** Unsafe version of {@link #activeActionSets(XrActiveActionSet.Buffer) activeActionSets}. */
     public static void nactiveActionSets(long struct, @Nullable XrActiveActionSet.Buffer value) { memPutAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS, memAddressSafe(value)); if (value != null) { ncountActiveActionSets(struct, value.remaining()); } }
 

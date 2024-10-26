@@ -273,18 +273,18 @@ public class VkImageViewASTCDecodeModeEXT extends Struct<VkImageViewASTCDecodeMo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewASTCDecodeModeEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewASTCDecodeModeEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewASTCDecodeModeEXT.PNEXT); }
     /** Unsafe version of {@link #decodeMode}. */
-    public static int ndecodeMode(long struct) { return UNSAFE.getInt(null, struct + VkImageViewASTCDecodeModeEXT.DECODEMODE); }
+    public static int ndecodeMode(long struct) { return memGetInt(struct + VkImageViewASTCDecodeModeEXT.DECODEMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewASTCDecodeModeEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewASTCDecodeModeEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewASTCDecodeModeEXT.PNEXT, value); }
     /** Unsafe version of {@link #decodeMode(int) decodeMode}. */
-    public static void ndecodeMode(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewASTCDecodeModeEXT.DECODEMODE, value); }
+    public static void ndecodeMode(long struct, int value) { memPutInt(struct + VkImageViewASTCDecodeModeEXT.DECODEMODE, value); }
 
     // -----------------------------------
 

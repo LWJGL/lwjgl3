@@ -251,18 +251,18 @@ public class XrActionStatePose extends Struct<XrActionStatePose> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionStatePose.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionStatePose.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionStatePose.NEXT); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrActionStatePose.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrActionStatePose.ISACTIVE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStatePose.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionStatePose.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStatePose.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStatePose.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrActionStatePose.ISACTIVE, value); }
 
     // -----------------------------------
 

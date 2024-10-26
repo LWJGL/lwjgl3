@@ -275,11 +275,11 @@ public class VRControllerState extends Struct<VRControllerState> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #unPacketNum}. */
-    public static int nunPacketNum(long struct) { return UNSAFE.getInt(null, struct + VRControllerState.UNPACKETNUM); }
+    public static int nunPacketNum(long struct) { return memGetInt(struct + VRControllerState.UNPACKETNUM); }
     /** Unsafe version of {@link #ulButtonPressed}. */
-    public static long nulButtonPressed(long struct) { return UNSAFE.getLong(null, struct + VRControllerState.ULBUTTONPRESSED); }
+    public static long nulButtonPressed(long struct) { return memGetLong(struct + VRControllerState.ULBUTTONPRESSED); }
     /** Unsafe version of {@link #ulButtonTouched}. */
-    public static long nulButtonTouched(long struct) { return UNSAFE.getLong(null, struct + VRControllerState.ULBUTTONTOUCHED); }
+    public static long nulButtonTouched(long struct) { return memGetLong(struct + VRControllerState.ULBUTTONTOUCHED); }
     /** Unsafe version of {@link #rAxis}. */
     public static VRControllerAxis.Buffer nrAxis(long struct) { return VRControllerAxis.create(struct + VRControllerState.RAXIS, 5); }
     /** Unsafe version of {@link #rAxis(int) rAxis}. */
@@ -288,11 +288,11 @@ public class VRControllerState extends Struct<VRControllerState> implements Nati
     }
 
     /** Unsafe version of {@link #unPacketNum(int) unPacketNum}. */
-    public static void nunPacketNum(long struct, int value) { UNSAFE.putInt(null, struct + VRControllerState.UNPACKETNUM, value); }
+    public static void nunPacketNum(long struct, int value) { memPutInt(struct + VRControllerState.UNPACKETNUM, value); }
     /** Unsafe version of {@link #ulButtonPressed(long) ulButtonPressed}. */
-    public static void nulButtonPressed(long struct, long value) { UNSAFE.putLong(null, struct + VRControllerState.ULBUTTONPRESSED, value); }
+    public static void nulButtonPressed(long struct, long value) { memPutLong(struct + VRControllerState.ULBUTTONPRESSED, value); }
     /** Unsafe version of {@link #ulButtonTouched(long) ulButtonTouched}. */
-    public static void nulButtonTouched(long struct, long value) { UNSAFE.putLong(null, struct + VRControllerState.ULBUTTONTOUCHED, value); }
+    public static void nulButtonTouched(long struct, long value) { memPutLong(struct + VRControllerState.ULBUTTONTOUCHED, value); }
     /** Unsafe version of {@link #rAxis(VRControllerAxis.Buffer) rAxis}. */
     public static void nrAxis(long struct, VRControllerAxis.Buffer value) {
         if (CHECKS) { checkGT(value, 5); }

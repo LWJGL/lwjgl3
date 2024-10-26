@@ -274,14 +274,14 @@ public class VkRectLayerKHR extends Struct<VkRectLayerKHR> implements NativeReso
     /** Unsafe version of {@link #extent}. */
     public static VkExtent2D nextent(long struct) { return VkExtent2D.create(struct + VkRectLayerKHR.EXTENT); }
     /** Unsafe version of {@link #layer}. */
-    public static int nlayer(long struct) { return UNSAFE.getInt(null, struct + VkRectLayerKHR.LAYER); }
+    public static int nlayer(long struct) { return memGetInt(struct + VkRectLayerKHR.LAYER); }
 
     /** Unsafe version of {@link #offset(VkOffset2D) offset}. */
     public static void noffset(long struct, VkOffset2D value) { memCopy(value.address(), struct + VkRectLayerKHR.OFFSET, VkOffset2D.SIZEOF); }
     /** Unsafe version of {@link #extent(VkExtent2D) extent}. */
     public static void nextent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkRectLayerKHR.EXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #layer(int) layer}. */
-    public static void nlayer(long struct, int value) { UNSAFE.putInt(null, struct + VkRectLayerKHR.LAYER, value); }
+    public static void nlayer(long struct, int value) { memPutInt(struct + VkRectLayerKHR.LAYER, value); }
 
     // -----------------------------------
 

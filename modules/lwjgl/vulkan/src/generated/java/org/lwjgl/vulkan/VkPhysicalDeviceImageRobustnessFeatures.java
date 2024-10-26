@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageRobustnessFeatures extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageRobustnessFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageRobustnessFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageRobustnessFeatures.PNEXT); }
     /** Unsafe version of {@link #robustImageAccess}. */
-    public static int nrobustImageAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageRobustnessFeatures.ROBUSTIMAGEACCESS); }
+    public static int nrobustImageAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceImageRobustnessFeatures.ROBUSTIMAGEACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageRobustnessFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageRobustnessFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageRobustnessFeatures.PNEXT, value); }
     /** Unsafe version of {@link #robustImageAccess(boolean) robustImageAccess}. */
-    public static void nrobustImageAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageRobustnessFeatures.ROBUSTIMAGEACCESS, value); }
+    public static void nrobustImageAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageRobustnessFeatures.ROBUSTIMAGEACCESS, value); }
 
     // -----------------------------------
 

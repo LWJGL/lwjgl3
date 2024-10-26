@@ -283,30 +283,30 @@ public class XrActionStateFloat extends Struct<XrActionStateFloat> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionStateFloat.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionStateFloat.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionStateFloat.NEXT); }
     /** Unsafe version of {@link #currentState}. */
-    public static float ncurrentState(long struct) { return UNSAFE.getFloat(null, struct + XrActionStateFloat.CURRENTSTATE); }
+    public static float ncurrentState(long struct) { return memGetFloat(struct + XrActionStateFloat.CURRENTSTATE); }
     /** Unsafe version of {@link #changedSinceLastSync}. */
-    public static int nchangedSinceLastSync(long struct) { return UNSAFE.getInt(null, struct + XrActionStateFloat.CHANGEDSINCELASTSYNC); }
+    public static int nchangedSinceLastSync(long struct) { return memGetInt(struct + XrActionStateFloat.CHANGEDSINCELASTSYNC); }
     /** Unsafe version of {@link #lastChangeTime}. */
-    public static long nlastChangeTime(long struct) { return UNSAFE.getLong(null, struct + XrActionStateFloat.LASTCHANGETIME); }
+    public static long nlastChangeTime(long struct) { return memGetLong(struct + XrActionStateFloat.LASTCHANGETIME); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrActionStateFloat.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrActionStateFloat.ISACTIVE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateFloat.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionStateFloat.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateFloat.NEXT, value); }
     /** Unsafe version of {@link #currentState(float) currentState}. */
-    public static void ncurrentState(long struct, float value) { UNSAFE.putFloat(null, struct + XrActionStateFloat.CURRENTSTATE, value); }
+    public static void ncurrentState(long struct, float value) { memPutFloat(struct + XrActionStateFloat.CURRENTSTATE, value); }
     /** Unsafe version of {@link #changedSinceLastSync(boolean) changedSinceLastSync}. */
-    public static void nchangedSinceLastSync(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateFloat.CHANGEDSINCELASTSYNC, value); }
+    public static void nchangedSinceLastSync(long struct, int value) { memPutInt(struct + XrActionStateFloat.CHANGEDSINCELASTSYNC, value); }
     /** Unsafe version of {@link #lastChangeTime(long) lastChangeTime}. */
-    public static void nlastChangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrActionStateFloat.LASTCHANGETIME, value); }
+    public static void nlastChangeTime(long struct, long value) { memPutLong(struct + XrActionStateFloat.LASTCHANGETIME, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateFloat.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrActionStateFloat.ISACTIVE, value); }
 
     // -----------------------------------
 

@@ -193,9 +193,9 @@ public class Compositor_BenchmarkResults extends Struct<Compositor_BenchmarkResu
     // -----------------------------------
 
     /** Unsafe version of {@link #m_flMegaPixelsPerSecond}. */
-    public static float nm_flMegaPixelsPerSecond(long struct) { return UNSAFE.getFloat(null, struct + Compositor_BenchmarkResults.M_FLMEGAPIXELSPERSECOND); }
+    public static float nm_flMegaPixelsPerSecond(long struct) { return memGetFloat(struct + Compositor_BenchmarkResults.M_FLMEGAPIXELSPERSECOND); }
     /** Unsafe version of {@link #m_flHmdRecommendedMegaPixelsPerSecond}. */
-    public static float nm_flHmdRecommendedMegaPixelsPerSecond(long struct) { return UNSAFE.getFloat(null, struct + Compositor_BenchmarkResults.M_FLHMDRECOMMENDEDMEGAPIXELSPERSECOND); }
+    public static float nm_flHmdRecommendedMegaPixelsPerSecond(long struct) { return memGetFloat(struct + Compositor_BenchmarkResults.M_FLHMDRECOMMENDEDMEGAPIXELSPERSECOND); }
 
     // -----------------------------------
 

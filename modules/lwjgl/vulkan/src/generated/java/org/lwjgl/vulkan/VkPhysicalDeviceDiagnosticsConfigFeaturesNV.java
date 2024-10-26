@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #diagnosticsConfig}. */
-    public static int ndiagnosticsConfig(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.DIAGNOSTICSCONFIG); }
+    public static int ndiagnosticsConfig(long struct) { return memGetInt(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.DIAGNOSTICSCONFIG); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #diagnosticsConfig(boolean) diagnosticsConfig}. */
-    public static void ndiagnosticsConfig(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.DIAGNOSTICSCONFIG, value); }
+    public static void ndiagnosticsConfig(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDiagnosticsConfigFeaturesNV.DIAGNOSTICSCONFIG, value); }
 
     // -----------------------------------
 

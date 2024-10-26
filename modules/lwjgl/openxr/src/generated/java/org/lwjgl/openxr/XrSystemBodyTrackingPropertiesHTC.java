@@ -250,14 +250,14 @@ public class XrSystemBodyTrackingPropertiesHTC extends Struct<XrSystemBodyTracki
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemBodyTrackingPropertiesHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemBodyTrackingPropertiesHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemBodyTrackingPropertiesHTC.NEXT); }
     /** Unsafe version of {@link #supportsBodyTracking}. */
-    public static int nsupportsBodyTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemBodyTrackingPropertiesHTC.SUPPORTSBODYTRACKING); }
+    public static int nsupportsBodyTracking(long struct) { return memGetInt(struct + XrSystemBodyTrackingPropertiesHTC.SUPPORTSBODYTRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemBodyTrackingPropertiesHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemBodyTrackingPropertiesHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemBodyTrackingPropertiesHTC.NEXT, value); }
 

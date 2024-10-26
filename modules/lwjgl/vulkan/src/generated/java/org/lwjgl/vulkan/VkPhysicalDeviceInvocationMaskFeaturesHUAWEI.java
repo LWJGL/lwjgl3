@@ -246,18 +246,18 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.PNEXT); }
     /** Unsafe version of {@link #invocationMask}. */
-    public static int ninvocationMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.INVOCATIONMASK); }
+    public static int ninvocationMask(long struct) { return memGetInt(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.INVOCATIONMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.PNEXT, value); }
     /** Unsafe version of {@link #invocationMask(boolean) invocationMask}. */
-    public static void ninvocationMask(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.INVOCATIONMASK, value); }
+    public static void ninvocationMask(long struct, int value) { memPutInt(struct + VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.INVOCATIONMASK, value); }
 
     // -----------------------------------
 

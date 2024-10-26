@@ -258,22 +258,22 @@ public class XrVirtualKeyboardAnimationStateMETA extends Struct<XrVirtualKeyboar
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardAnimationStateMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardAnimationStateMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardAnimationStateMETA.NEXT); }
     /** Unsafe version of {@link #animationIndex}. */
-    public static int nanimationIndex(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardAnimationStateMETA.ANIMATIONINDEX); }
+    public static int nanimationIndex(long struct) { return memGetInt(struct + XrVirtualKeyboardAnimationStateMETA.ANIMATIONINDEX); }
     /** Unsafe version of {@link #fraction}. */
-    public static float nfraction(long struct) { return UNSAFE.getFloat(null, struct + XrVirtualKeyboardAnimationStateMETA.FRACTION); }
+    public static float nfraction(long struct) { return memGetFloat(struct + XrVirtualKeyboardAnimationStateMETA.FRACTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardAnimationStateMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardAnimationStateMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardAnimationStateMETA.NEXT, value); }
     /** Unsafe version of {@link #animationIndex(int) animationIndex}. */
-    public static void nanimationIndex(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardAnimationStateMETA.ANIMATIONINDEX, value); }
+    public static void nanimationIndex(long struct, int value) { memPutInt(struct + XrVirtualKeyboardAnimationStateMETA.ANIMATIONINDEX, value); }
     /** Unsafe version of {@link #fraction(float) fraction}. */
-    public static void nfraction(long struct, float value) { UNSAFE.putFloat(null, struct + XrVirtualKeyboardAnimationStateMETA.FRACTION, value); }
+    public static void nfraction(long struct, float value) { memPutFloat(struct + XrVirtualKeyboardAnimationStateMETA.FRACTION, value); }
 
     // -----------------------------------
 

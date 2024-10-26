@@ -283,20 +283,20 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct<VkDeviceGroupPre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupPresentCapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #presentMask}. */
     public static IntBuffer npresentMask(long struct) { return memIntBuffer(struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK, VK_MAX_DEVICE_GROUP_SIZE); }
     /** Unsafe version of {@link #presentMask(int) presentMask}. */
     public static int npresentMask(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK + check(index, VK_MAX_DEVICE_GROUP_SIZE) * 4);
+        return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK + check(index, VK_MAX_DEVICE_GROUP_SIZE) * 4);
     }
     /** Unsafe version of {@link #modes}. */
-    public static int nmodes(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.MODES); }
+    public static int nmodes(long struct) { return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.MODES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupPresentCapabilitiesKHR.PNEXT, value); }
 

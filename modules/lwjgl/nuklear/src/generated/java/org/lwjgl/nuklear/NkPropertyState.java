@@ -172,31 +172,31 @@ public class NkPropertyState extends Struct<NkPropertyState> {
     // -----------------------------------
 
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.ACTIVE); }
+    public static int nactive(long struct) { return memGetInt(struct + NkPropertyState.ACTIVE); }
     /** Unsafe version of {@link #prev}. */
-    public static int nprev(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.PREV); }
+    public static int nprev(long struct) { return memGetInt(struct + NkPropertyState.PREV); }
     /** Unsafe version of {@link #buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(struct + NkPropertyState.BUFFER, NK_MAX_NUMBER_BUFFER); }
     /** Unsafe version of {@link #buffer(int) buffer}. */
     public static byte nbuffer(long struct, int index) {
-        return UNSAFE.getByte(null, struct + NkPropertyState.BUFFER + check(index, NK_MAX_NUMBER_BUFFER) * 1);
+        return memGetByte(struct + NkPropertyState.BUFFER + check(index, NK_MAX_NUMBER_BUFFER) * 1);
     }
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.LENGTH); }
+    public static int nlength(long struct) { return memGetInt(struct + NkPropertyState.LENGTH); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.CURSOR); }
+    public static int ncursor(long struct) { return memGetInt(struct + NkPropertyState.CURSOR); }
     /** Unsafe version of {@link #select_start}. */
-    public static int nselect_start(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SELECT_START); }
+    public static int nselect_start(long struct) { return memGetInt(struct + NkPropertyState.SELECT_START); }
     /** Unsafe version of {@link #select_end}. */
-    public static int nselect_end(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SELECT_END); }
+    public static int nselect_end(long struct) { return memGetInt(struct + NkPropertyState.SELECT_END); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.NAME); }
+    public static int nname(long struct) { return memGetInt(struct + NkPropertyState.NAME); }
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SEQ); }
+    public static int nseq(long struct) { return memGetInt(struct + NkPropertyState.SEQ); }
     /** Unsafe version of {@link #old}. */
-    public static int nold(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.OLD); }
+    public static int nold(long struct) { return memGetInt(struct + NkPropertyState.OLD); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + NkPropertyState.STATE); }
 
     // -----------------------------------
 

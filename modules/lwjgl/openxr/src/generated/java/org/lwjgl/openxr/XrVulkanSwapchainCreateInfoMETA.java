@@ -263,22 +263,22 @@ public class XrVulkanSwapchainCreateInfoMETA extends Struct<XrVulkanSwapchainCre
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVulkanSwapchainCreateInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVulkanSwapchainCreateInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVulkanSwapchainCreateInfoMETA.NEXT); }
     /** Unsafe version of {@link #additionalCreateFlags}. */
-    public static int nadditionalCreateFlags(long struct) { return UNSAFE.getInt(null, struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALCREATEFLAGS); }
+    public static int nadditionalCreateFlags(long struct) { return memGetInt(struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALCREATEFLAGS); }
     /** Unsafe version of {@link #additionalUsageFlags}. */
-    public static int nadditionalUsageFlags(long struct) { return UNSAFE.getInt(null, struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALUSAGEFLAGS); }
+    public static int nadditionalUsageFlags(long struct) { return memGetInt(struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALUSAGEFLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainCreateInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVulkanSwapchainCreateInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanSwapchainCreateInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #additionalCreateFlags(int) additionalCreateFlags}. */
-    public static void nadditionalCreateFlags(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALCREATEFLAGS, value); }
+    public static void nadditionalCreateFlags(long struct, int value) { memPutInt(struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALCREATEFLAGS, value); }
     /** Unsafe version of {@link #additionalUsageFlags(int) additionalUsageFlags}. */
-    public static void nadditionalUsageFlags(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALUSAGEFLAGS, value); }
+    public static void nadditionalUsageFlags(long struct, int value) { memPutInt(struct + XrVulkanSwapchainCreateInfoMETA.ADDITIONALUSAGEFLAGS, value); }
 
     // -----------------------------------
 

@@ -125,13 +125,13 @@ public class NVGLUFramebuffer extends Struct<NVGLUFramebuffer> {
     // -----------------------------------
 
     /** Unsafe version of {@link #fbo}. */
-    public static int nfbo(long struct) { return UNSAFE.getInt(null, struct + NVGLUFramebuffer.FBO); }
+    public static int nfbo(long struct) { return memGetInt(struct + NVGLUFramebuffer.FBO); }
     /** Unsafe version of {@link #rbo}. */
-    public static int nrbo(long struct) { return UNSAFE.getInt(null, struct + NVGLUFramebuffer.RBO); }
+    public static int nrbo(long struct) { return memGetInt(struct + NVGLUFramebuffer.RBO); }
     /** Unsafe version of {@link #texture}. */
-    public static int ntexture(long struct) { return UNSAFE.getInt(null, struct + NVGLUFramebuffer.TEXTURE); }
+    public static int ntexture(long struct) { return memGetInt(struct + NVGLUFramebuffer.TEXTURE); }
     /** Unsafe version of {@link #image}. */
-    public static int nimage(long struct) { return UNSAFE.getInt(null, struct + NVGLUFramebuffer.IMAGE); }
+    public static int nimage(long struct) { return memGetInt(struct + NVGLUFramebuffer.IMAGE); }
 
     // -----------------------------------
 

@@ -249,14 +249,14 @@ public class XrSerializedSceneFragmentDataGetInfoMSFT extends Struct<XrSerialize
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSerializedSceneFragmentDataGetInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSerializedSceneFragmentDataGetInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSerializedSceneFragmentDataGetInfoMSFT.NEXT); }
     /** Unsafe version of {@link #sceneFragmentId}. */
     public static XrUuidMSFT nsceneFragmentId(long struct) { return XrUuidMSFT.create(struct + XrSerializedSceneFragmentDataGetInfoMSFT.SCENEFRAGMENTID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSerializedSceneFragmentDataGetInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSerializedSceneFragmentDataGetInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSerializedSceneFragmentDataGetInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #sceneFragmentId(XrUuidMSFT) sceneFragmentId}. */

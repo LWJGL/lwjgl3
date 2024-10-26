@@ -272,24 +272,24 @@ public class XrPlaneDetectorPolygonBufferEXT extends Struct<XrPlaneDetectorPolyg
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorPolygonBufferEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPlaneDetectorPolygonBufferEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPlaneDetectorPolygonBufferEXT.NEXT); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
     @Nullable public static XrVector2f.Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrPlaneDetectorPolygonBufferEXT.VERTICES), nvertexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorPolygonBufferEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPlaneDetectorPolygonBufferEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPlaneDetectorPolygonBufferEXT.NEXT, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
-    public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCAPACITYINPUT, value); }
+    public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCOUNTOUTPUT, value); }
+    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrPlaneDetectorPolygonBufferEXT.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrVector2f.Buffer) vertices}. */
     public static void nvertices(long struct, @Nullable XrVector2f.Buffer value) { memPutAddress(struct + XrPlaneDetectorPolygonBufferEXT.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 

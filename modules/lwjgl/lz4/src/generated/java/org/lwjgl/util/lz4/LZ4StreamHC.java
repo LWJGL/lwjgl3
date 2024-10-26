@@ -119,7 +119,7 @@ public class LZ4StreamHC extends Struct<LZ4StreamHC> {
     public static ByteBuffer nminStateSize(long struct) { return memByteBuffer(struct + LZ4StreamHC.MINSTATESIZE, LZ4_STREAMHC_MINSIZE); }
     /** Unsafe version of {@link #minStateSize(int) minStateSize}. */
     public static byte nminStateSize(long struct, int index) {
-        return UNSAFE.getByte(null, struct + LZ4StreamHC.MINSTATESIZE + check(index, LZ4_STREAMHC_MINSIZE) * 1);
+        return memGetByte(struct + LZ4StreamHC.MINSTATESIZE + check(index, LZ4_STREAMHC_MINSIZE) * 1);
     }
     /** Unsafe version of {@link #internal_donotuse}. */
     public static LZ4HCCCtxInternal ninternal_donotuse(long struct) { return LZ4HCCCtxInternal.create(struct + LZ4StreamHC.INTERNAL_DONOTUSE); }

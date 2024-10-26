@@ -283,24 +283,24 @@ public class KEYBDINPUT extends Struct<KEYBDINPUT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #wVk}. */
-    public static short nwVk(long struct) { return UNSAFE.getShort(null, struct + KEYBDINPUT.WVK); }
+    public static short nwVk(long struct) { return memGetShort(struct + KEYBDINPUT.WVK); }
     /** Unsafe version of {@link #wScan}. */
-    public static short nwScan(long struct) { return UNSAFE.getShort(null, struct + KEYBDINPUT.WSCAN); }
+    public static short nwScan(long struct) { return memGetShort(struct + KEYBDINPUT.WSCAN); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + KEYBDINPUT.DWFLAGS); }
+    public static int ndwFlags(long struct) { return memGetInt(struct + KEYBDINPUT.DWFLAGS); }
     /** Unsafe version of {@link #time}. */
-    public static int ntime(long struct) { return UNSAFE.getInt(null, struct + KEYBDINPUT.TIME); }
+    public static int ntime(long struct) { return memGetInt(struct + KEYBDINPUT.TIME); }
     /** Unsafe version of {@link #dwExtraInfo}. */
     public static long ndwExtraInfo(long struct) { return memGetAddress(struct + KEYBDINPUT.DWEXTRAINFO); }
 
     /** Unsafe version of {@link #wVk(short) wVk}. */
-    public static void nwVk(long struct, short value) { UNSAFE.putShort(null, struct + KEYBDINPUT.WVK, value); }
+    public static void nwVk(long struct, short value) { memPutShort(struct + KEYBDINPUT.WVK, value); }
     /** Unsafe version of {@link #wScan(short) wScan}. */
-    public static void nwScan(long struct, short value) { UNSAFE.putShort(null, struct + KEYBDINPUT.WSCAN, value); }
+    public static void nwScan(long struct, short value) { memPutShort(struct + KEYBDINPUT.WSCAN, value); }
     /** Unsafe version of {@link #dwFlags(int) dwFlags}. */
-    public static void ndwFlags(long struct, int value) { UNSAFE.putInt(null, struct + KEYBDINPUT.DWFLAGS, value); }
+    public static void ndwFlags(long struct, int value) { memPutInt(struct + KEYBDINPUT.DWFLAGS, value); }
     /** Unsafe version of {@link #time(int) time}. */
-    public static void ntime(long struct, int value) { UNSAFE.putInt(null, struct + KEYBDINPUT.TIME, value); }
+    public static void ntime(long struct, int value) { memPutInt(struct + KEYBDINPUT.TIME, value); }
     /** Unsafe version of {@link #dwExtraInfo(long) dwExtraInfo}. */
     public static void ndwExtraInfo(long struct, long value) { memPutAddress(struct + KEYBDINPUT.DWEXTRAINFO, value); }
 

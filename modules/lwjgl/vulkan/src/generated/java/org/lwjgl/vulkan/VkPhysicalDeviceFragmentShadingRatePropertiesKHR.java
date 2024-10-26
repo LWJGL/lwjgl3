@@ -362,7 +362,7 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #minFragmentShadingRateAttachmentTexelSize}. */
@@ -370,38 +370,38 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct<VkP
     /** Unsafe version of {@link #maxFragmentShadingRateAttachmentTexelSize}. */
     public static VkExtent2D nmaxFragmentShadingRateAttachmentTexelSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATEATTACHMENTTEXELSIZE); }
     /** Unsafe version of {@link #maxFragmentShadingRateAttachmentTexelSizeAspectRatio}. */
-    public static int nmaxFragmentShadingRateAttachmentTexelSizeAspectRatio(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATEATTACHMENTTEXELSIZEASPECTRATIO); }
+    public static int nmaxFragmentShadingRateAttachmentTexelSizeAspectRatio(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATEATTACHMENTTEXELSIZEASPECTRATIO); }
     /** Unsafe version of {@link #primitiveFragmentShadingRateWithMultipleViewports}. */
-    public static int nprimitiveFragmentShadingRateWithMultipleViewports(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.PRIMITIVEFRAGMENTSHADINGRATEWITHMULTIPLEVIEWPORTS); }
+    public static int nprimitiveFragmentShadingRateWithMultipleViewports(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.PRIMITIVEFRAGMENTSHADINGRATEWITHMULTIPLEVIEWPORTS); }
     /** Unsafe version of {@link #layeredShadingRateAttachments}. */
-    public static int nlayeredShadingRateAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.LAYEREDSHADINGRATEATTACHMENTS); }
+    public static int nlayeredShadingRateAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.LAYEREDSHADINGRATEATTACHMENTS); }
     /** Unsafe version of {@link #fragmentShadingRateNonTrivialCombinerOps}. */
-    public static int nfragmentShadingRateNonTrivialCombinerOps(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATENONTRIVIALCOMBINEROPS); }
+    public static int nfragmentShadingRateNonTrivialCombinerOps(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATENONTRIVIALCOMBINEROPS); }
     /** Unsafe version of {@link #maxFragmentSize}. */
     public static VkExtent2D nmaxFragmentSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSIZE); }
     /** Unsafe version of {@link #maxFragmentSizeAspectRatio}. */
-    public static int nmaxFragmentSizeAspectRatio(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSIZEASPECTRATIO); }
+    public static int nmaxFragmentSizeAspectRatio(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSIZEASPECTRATIO); }
     /** Unsafe version of {@link #maxFragmentShadingRateCoverageSamples}. */
-    public static int nmaxFragmentShadingRateCoverageSamples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATECOVERAGESAMPLES); }
+    public static int nmaxFragmentShadingRateCoverageSamples(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATECOVERAGESAMPLES); }
     /** Unsafe version of {@link #maxFragmentShadingRateRasterizationSamples}. */
-    public static int nmaxFragmentShadingRateRasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATERASTERIZATIONSAMPLES); }
+    public static int nmaxFragmentShadingRateRasterizationSamples(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.MAXFRAGMENTSHADINGRATERASTERIZATIONSAMPLES); }
     /** Unsafe version of {@link #fragmentShadingRateWithShaderDepthStencilWrites}. */
-    public static int nfragmentShadingRateWithShaderDepthStencilWrites(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSHADERDEPTHSTENCILWRITES); }
+    public static int nfragmentShadingRateWithShaderDepthStencilWrites(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSHADERDEPTHSTENCILWRITES); }
     /** Unsafe version of {@link #fragmentShadingRateWithSampleMask}. */
-    public static int nfragmentShadingRateWithSampleMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSAMPLEMASK); }
+    public static int nfragmentShadingRateWithSampleMask(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSAMPLEMASK); }
     /** Unsafe version of {@link #fragmentShadingRateWithShaderSampleMask}. */
-    public static int nfragmentShadingRateWithShaderSampleMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSHADERSAMPLEMASK); }
+    public static int nfragmentShadingRateWithShaderSampleMask(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHSHADERSAMPLEMASK); }
     /** Unsafe version of {@link #fragmentShadingRateWithConservativeRasterization}. */
-    public static int nfragmentShadingRateWithConservativeRasterization(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHCONSERVATIVERASTERIZATION); }
+    public static int nfragmentShadingRateWithConservativeRasterization(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHCONSERVATIVERASTERIZATION); }
     /** Unsafe version of {@link #fragmentShadingRateWithFragmentShaderInterlock}. */
-    public static int nfragmentShadingRateWithFragmentShaderInterlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHFRAGMENTSHADERINTERLOCK); }
+    public static int nfragmentShadingRateWithFragmentShaderInterlock(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHFRAGMENTSHADERINTERLOCK); }
     /** Unsafe version of {@link #fragmentShadingRateWithCustomSampleLocations}. */
-    public static int nfragmentShadingRateWithCustomSampleLocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHCUSTOMSAMPLELOCATIONS); }
+    public static int nfragmentShadingRateWithCustomSampleLocations(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATEWITHCUSTOMSAMPLELOCATIONS); }
     /** Unsafe version of {@link #fragmentShadingRateStrictMultiplyCombiner}. */
-    public static int nfragmentShadingRateStrictMultiplyCombiner(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATESTRICTMULTIPLYCOMBINER); }
+    public static int nfragmentShadingRateStrictMultiplyCombiner(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.FRAGMENTSHADINGRATESTRICTMULTIPLYCOMBINER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShadingRatePropertiesKHR.PNEXT, value); }
 

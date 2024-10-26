@@ -310,11 +310,11 @@ public class VkBufferImageCopy extends Struct<VkBufferImageCopy> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferOffset}. */
-    public static long nbufferOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferImageCopy.BUFFEROFFSET); }
+    public static long nbufferOffset(long struct) { return memGetLong(struct + VkBufferImageCopy.BUFFEROFFSET); }
     /** Unsafe version of {@link #bufferRowLength}. */
-    public static int nbufferRowLength(long struct) { return UNSAFE.getInt(null, struct + VkBufferImageCopy.BUFFERROWLENGTH); }
+    public static int nbufferRowLength(long struct) { return memGetInt(struct + VkBufferImageCopy.BUFFERROWLENGTH); }
     /** Unsafe version of {@link #bufferImageHeight}. */
-    public static int nbufferImageHeight(long struct) { return UNSAFE.getInt(null, struct + VkBufferImageCopy.BUFFERIMAGEHEIGHT); }
+    public static int nbufferImageHeight(long struct) { return memGetInt(struct + VkBufferImageCopy.BUFFERIMAGEHEIGHT); }
     /** Unsafe version of {@link #imageSubresource}. */
     public static VkImageSubresourceLayers nimageSubresource(long struct) { return VkImageSubresourceLayers.create(struct + VkBufferImageCopy.IMAGESUBRESOURCE); }
     /** Unsafe version of {@link #imageOffset}. */
@@ -323,11 +323,11 @@ public class VkBufferImageCopy extends Struct<VkBufferImageCopy> implements Nati
     public static VkExtent3D nimageExtent(long struct) { return VkExtent3D.create(struct + VkBufferImageCopy.IMAGEEXTENT); }
 
     /** Unsafe version of {@link #bufferOffset(long) bufferOffset}. */
-    public static void nbufferOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferImageCopy.BUFFEROFFSET, value); }
+    public static void nbufferOffset(long struct, long value) { memPutLong(struct + VkBufferImageCopy.BUFFEROFFSET, value); }
     /** Unsafe version of {@link #bufferRowLength(int) bufferRowLength}. */
-    public static void nbufferRowLength(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferImageCopy.BUFFERROWLENGTH, value); }
+    public static void nbufferRowLength(long struct, int value) { memPutInt(struct + VkBufferImageCopy.BUFFERROWLENGTH, value); }
     /** Unsafe version of {@link #bufferImageHeight(int) bufferImageHeight}. */
-    public static void nbufferImageHeight(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferImageCopy.BUFFERIMAGEHEIGHT, value); }
+    public static void nbufferImageHeight(long struct, int value) { memPutInt(struct + VkBufferImageCopy.BUFFERIMAGEHEIGHT, value); }
     /** Unsafe version of {@link #imageSubresource(VkImageSubresourceLayers) imageSubresource}. */
     public static void nimageSubresource(long struct, VkImageSubresourceLayers value) { memCopy(value.address(), struct + VkBufferImageCopy.IMAGESUBRESOURCE, VkImageSubresourceLayers.SIZEOF); }
     /** Unsafe version of {@link #imageOffset(VkOffset3D) imageOffset}. */

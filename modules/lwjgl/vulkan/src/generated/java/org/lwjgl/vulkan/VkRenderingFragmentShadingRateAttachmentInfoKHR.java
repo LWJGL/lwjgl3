@@ -290,24 +290,24 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGEVIEW); }
     /** Unsafe version of {@link #imageLayout}. */
-    public static int nimageLayout(long struct) { return UNSAFE.getInt(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGELAYOUT); }
+    public static int nimageLayout(long struct) { return memGetInt(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGELAYOUT); }
     /** Unsafe version of {@link #shadingRateAttachmentTexelSize}. */
     public static VkExtent2D nshadingRateAttachmentTexelSize(long struct) { return VkExtent2D.create(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.SHADINGRATEATTACHMENTTEXELSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGEVIEW, value); }
     /** Unsafe version of {@link #imageLayout(int) imageLayout}. */
-    public static void nimageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGELAYOUT, value); }
+    public static void nimageLayout(long struct, int value) { memPutInt(struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.IMAGELAYOUT, value); }
     /** Unsafe version of {@link #shadingRateAttachmentTexelSize(VkExtent2D) shadingRateAttachmentTexelSize}. */
     public static void nshadingRateAttachmentTexelSize(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkRenderingFragmentShadingRateAttachmentInfoKHR.SHADINGRATEATTACHMENTTEXELSIZE, VkExtent2D.SIZEOF); }
 

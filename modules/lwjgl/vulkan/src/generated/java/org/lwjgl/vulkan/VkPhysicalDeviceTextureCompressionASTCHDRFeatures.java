@@ -267,18 +267,18 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.PNEXT); }
     /** Unsafe version of {@link #textureCompressionASTC_HDR}. */
-    public static int ntextureCompressionASTC_HDR(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.TEXTURECOMPRESSIONASTC_HDR); }
+    public static int ntextureCompressionASTC_HDR(long struct) { return memGetInt(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.TEXTURECOMPRESSIONASTC_HDR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.PNEXT, value); }
     /** Unsafe version of {@link #textureCompressionASTC_HDR(boolean) textureCompressionASTC_HDR}. */
-    public static void ntextureCompressionASTC_HDR(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.TEXTURECOMPRESSIONASTC_HDR, value); }
+    public static void ntextureCompressionASTC_HDR(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTextureCompressionASTCHDRFeatures.TEXTURECOMPRESSIONASTC_HDR, value); }
 
     // -----------------------------------
 

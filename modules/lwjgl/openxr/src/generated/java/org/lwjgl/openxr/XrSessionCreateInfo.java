@@ -284,22 +284,22 @@ public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSessionCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSessionCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSessionCreateInfo.NEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static long ncreateFlags(long struct) { return UNSAFE.getLong(null, struct + XrSessionCreateInfo.CREATEFLAGS); }
+    public static long ncreateFlags(long struct) { return memGetLong(struct + XrSessionCreateInfo.CREATEFLAGS); }
     /** Unsafe version of {@link #systemId}. */
-    public static long nsystemId(long struct) { return UNSAFE.getLong(null, struct + XrSessionCreateInfo.SYSTEMID); }
+    public static long nsystemId(long struct) { return memGetLong(struct + XrSessionCreateInfo.SYSTEMID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSessionCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
-    public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSessionCreateInfo.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, long value) { memPutLong(struct + XrSessionCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
-    public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrSessionCreateInfo.SYSTEMID, value); }
+    public static void nsystemId(long struct, long value) { memPutLong(struct + XrSessionCreateInfo.SYSTEMID, value); }
 
     // -----------------------------------
 

@@ -264,18 +264,18 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct<XrEventDataVisib
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataVisibilityMaskChangedKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataVisibilityMaskChangedKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT); }
     /** Unsafe version of {@link #session}. */
     public static long nsession(long struct) { return memGetAddress(struct + XrEventDataVisibilityMaskChangedKHR.SESSION); }
     /** Unsafe version of {@link #viewConfigurationType}. */
-    public static int nviewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrEventDataVisibilityMaskChangedKHR.VIEWCONFIGURATIONTYPE); }
+    public static int nviewConfigurationType(long struct) { return memGetInt(struct + XrEventDataVisibilityMaskChangedKHR.VIEWCONFIGURATIONTYPE); }
     /** Unsafe version of {@link #viewIndex}. */
-    public static int nviewIndex(long struct) { return UNSAFE.getInt(null, struct + XrEventDataVisibilityMaskChangedKHR.VIEWINDEX); }
+    public static int nviewIndex(long struct) { return memGetInt(struct + XrEventDataVisibilityMaskChangedKHR.VIEWINDEX); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVisibilityMaskChangedKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataVisibilityMaskChangedKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT, value); }
 

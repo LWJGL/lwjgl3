@@ -140,7 +140,7 @@ public class JAWTX11DrawingSurfaceInfo extends Struct<JAWTX11DrawingSurfaceInfo>
     /** Unsafe version of {@link #colormapID}. */
     public static long ncolormapID(long struct) { return memGetCLong(struct + JAWTX11DrawingSurfaceInfo.COLORMAPID); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + JAWTX11DrawingSurfaceInfo.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + JAWTX11DrawingSurfaceInfo.DEPTH); }
 
     // -----------------------------------
 

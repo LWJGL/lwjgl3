@@ -288,26 +288,26 @@ public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentScalingCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #scalingBehavior}. */
-    public static int nscalingBehavior(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR); }
+    public static int nscalingBehavior(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR); }
     /** Unsafe version of {@link #presentGravityX}. */
-    public static int npresentGravityX(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX); }
+    public static int npresentGravityX(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX); }
     /** Unsafe version of {@link #presentGravityY}. */
-    public static int npresentGravityY(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY); }
+    public static int npresentGravityY(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentScalingCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #scalingBehavior(int) scalingBehavior}. */
-    public static void nscalingBehavior(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR, value); }
+    public static void nscalingBehavior(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR, value); }
     /** Unsafe version of {@link #presentGravityX(int) presentGravityX}. */
-    public static void npresentGravityX(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX, value); }
+    public static void npresentGravityX(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX, value); }
     /** Unsafe version of {@link #presentGravityY(int) presentGravityY}. */
-    public static void npresentGravityY(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY, value); }
+    public static void npresentGravityY(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY, value); }
 
     // -----------------------------------
 

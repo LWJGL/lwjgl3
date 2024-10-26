@@ -115,9 +115,9 @@ public class NSVGImage extends Struct<NSVGImage> {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + NSVGImage.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + NSVGImage.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NSVGImage.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + NSVGImage.HEIGHT); }
     /** Unsafe version of {@link #shapes}. */
     public static NSVGShape nshapes(long struct) { return NSVGShape.create(memGetAddress(struct + NSVGImage.SHAPES)); }
 

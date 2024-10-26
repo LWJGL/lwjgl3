@@ -233,15 +233,15 @@ public class NkWindow extends Struct<NkWindow> {
     // -----------------------------------
 
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkWindow.SEQ); }
+    public static int nseq(long struct) { return memGetInt(struct + NkWindow.SEQ); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkWindow.NAME); }
+    public static int nname(long struct) { return memGetInt(struct + NkWindow.NAME); }
     /** Unsafe version of {@link #name_string}. */
     public static ByteBuffer nname_string(long struct) { return memByteBuffer(struct + NkWindow.NAME_STRING, NK_WINDOW_MAX_NAME); }
     /** Unsafe version of {@link #name_stringString}. */
     public static String nname_stringString(long struct) { return memUTF8(struct + NkWindow.NAME_STRING); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + NkWindow.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + NkWindow.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
     public static NkRect nbounds(long struct) { return NkRect.create(struct + NkWindow.BOUNDS); }
     /** Unsafe version of {@link #scrollbar}. */
@@ -251,7 +251,7 @@ public class NkWindow extends Struct<NkWindow> {
     /** Unsafe version of {@link #layout}. */
     public static NkPanel nlayout(long struct) { return NkPanel.create(memGetAddress(struct + NkWindow.LAYOUT)); }
     /** Unsafe version of {@link #scrollbar_hiding_timer}. */
-    public static float nscrollbar_hiding_timer(long struct) { return UNSAFE.getFloat(null, struct + NkWindow.SCROLLBAR_HIDING_TIMER); }
+    public static float nscrollbar_hiding_timer(long struct) { return memGetFloat(struct + NkWindow.SCROLLBAR_HIDING_TIMER); }
     /** Unsafe version of {@link #property}. */
     public static NkPropertyState nproperty(long struct) { return NkPropertyState.create(struct + NkWindow.PROPERTY); }
     /** Unsafe version of {@link #popup}. */
@@ -259,13 +259,13 @@ public class NkWindow extends Struct<NkWindow> {
     /** Unsafe version of {@link #edit}. */
     public static NkEditState nedit(long struct) { return NkEditState.create(struct + NkWindow.EDIT); }
     /** Unsafe version of {@link #scrolled}. */
-    public static int nscrolled(long struct) { return UNSAFE.getInt(null, struct + NkWindow.SCROLLED); }
+    public static int nscrolled(long struct) { return memGetInt(struct + NkWindow.SCROLLED); }
     /** Unsafe version of {@link #widgets_disabled}. */
-    public static boolean nwidgets_disabled(long struct) { return UNSAFE.getByte(null, struct + NkWindow.WIDGETS_DISABLED) != 0; }
+    public static boolean nwidgets_disabled(long struct) { return memGetByte(struct + NkWindow.WIDGETS_DISABLED) != 0; }
     /** Unsafe version of {@link #tables}. */
     public static long ntables(long struct) { return memGetAddress(struct + NkWindow.TABLES); }
     /** Unsafe version of {@link #table_count}. */
-    public static int ntable_count(long struct) { return UNSAFE.getInt(null, struct + NkWindow.TABLE_COUNT); }
+    public static int ntable_count(long struct) { return memGetInt(struct + NkWindow.TABLE_COUNT); }
     /** Unsafe version of {@link #next}. */
     public static NkWindow nnext(long struct) { return NkWindow.create(memGetAddress(struct + NkWindow.NEXT)); }
     /** Unsafe version of {@link #prev}. */

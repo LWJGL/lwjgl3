@@ -102,7 +102,7 @@ public class VREventScreenshotProgress extends Struct<VREventScreenshotProgress>
     // -----------------------------------
 
     /** Unsafe version of {@link #progress}. */
-    public static float nprogress(long struct) { return UNSAFE.getFloat(null, struct + VREventScreenshotProgress.PROGRESS); }
+    public static float nprogress(long struct) { return memGetFloat(struct + VREventScreenshotProgress.PROGRESS); }
 
     // -----------------------------------
 

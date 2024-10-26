@@ -279,17 +279,17 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + BGFXInit.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + BGFXInit.TYPE); }
     /** Unsafe version of {@link #vendorId}. */
-    public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXInit.VENDORID); }
+    public static short nvendorId(long struct) { return memGetShort(struct + BGFXInit.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
-    public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXInit.DEVICEID); }
+    public static short ndeviceId(long struct) { return memGetShort(struct + BGFXInit.DEVICEID); }
     /** Unsafe version of {@link #capabilities}. */
-    public static long ncapabilities(long struct) { return UNSAFE.getLong(null, struct + BGFXInit.CAPABILITIES); }
+    public static long ncapabilities(long struct) { return memGetLong(struct + BGFXInit.CAPABILITIES); }
     /** Unsafe version of {@link #debug}. */
-    public static boolean ndebug(long struct) { return UNSAFE.getByte(null, struct + BGFXInit.DEBUG) != 0; }
+    public static boolean ndebug(long struct) { return memGetByte(struct + BGFXInit.DEBUG) != 0; }
     /** Unsafe version of {@link #profile}. */
-    public static boolean nprofile(long struct) { return UNSAFE.getByte(null, struct + BGFXInit.PROFILE) != 0; }
+    public static boolean nprofile(long struct) { return memGetByte(struct + BGFXInit.PROFILE) != 0; }
     /** Unsafe version of {@link #platformData}. */
     public static BGFXPlatformData nplatformData(long struct) { return BGFXPlatformData.create(struct + BGFXInit.PLATFORMDATA); }
     /** Unsafe version of {@link #resolution}. */
@@ -302,17 +302,17 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     @Nullable public static BGFXAllocatorInterface nallocator(long struct) { return BGFXAllocatorInterface.createSafe(memGetAddress(struct + BGFXInit.ALLOCATOR)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInit.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + BGFXInit.TYPE, value); }
     /** Unsafe version of {@link #vendorId(short) vendorId}. */
-    public static void nvendorId(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInit.VENDORID, value); }
+    public static void nvendorId(long struct, short value) { memPutShort(struct + BGFXInit.VENDORID, value); }
     /** Unsafe version of {@link #deviceId(short) deviceId}. */
-    public static void ndeviceId(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInit.DEVICEID, value); }
+    public static void ndeviceId(long struct, short value) { memPutShort(struct + BGFXInit.DEVICEID, value); }
     /** Unsafe version of {@link #capabilities(long) capabilities}. */
-    public static void ncapabilities(long struct, long value) { UNSAFE.putLong(null, struct + BGFXInit.CAPABILITIES, value); }
+    public static void ncapabilities(long struct, long value) { memPutLong(struct + BGFXInit.CAPABILITIES, value); }
     /** Unsafe version of {@link #debug(boolean) debug}. */
-    public static void ndebug(long struct, boolean value) { UNSAFE.putByte(null, struct + BGFXInit.DEBUG, value ? (byte)1 : (byte)0); }
+    public static void ndebug(long struct, boolean value) { memPutByte(struct + BGFXInit.DEBUG, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #profile(boolean) profile}. */
-    public static void nprofile(long struct, boolean value) { UNSAFE.putByte(null, struct + BGFXInit.PROFILE, value ? (byte)1 : (byte)0); }
+    public static void nprofile(long struct, boolean value) { memPutByte(struct + BGFXInit.PROFILE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #platformData(BGFXPlatformData) platformData}. */
     public static void nplatformData(long struct, BGFXPlatformData value) { memCopy(value.address(), struct + BGFXInit.PLATFORMDATA, BGFXPlatformData.SIZEOF); }
     /** Unsafe version of {@link #resolution(BGFXResolution) resolution}. */

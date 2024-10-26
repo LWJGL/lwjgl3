@@ -342,7 +342,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT); }
     /** Unsafe version of {@link #messageId}. */
@@ -358,16 +358,16 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** Unsafe version of {@link #messageString}. */
     public static String nmessageString(long struct) { return memUTF8(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGE)); }
     /** Unsafe version of {@link #objectCount}. */
-    public static int nobjectCount(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT); }
+    public static int nobjectCount(long struct) { return memGetInt(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT); }
     /** Unsafe version of {@link #objects}. */
     @Nullable public static XrDebugUtilsObjectNameInfoEXT.Buffer nobjects(long struct) { return XrDebugUtilsObjectNameInfoEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS), nobjectCount(struct)); }
     /** Unsafe version of {@link #sessionLabelCount}. */
-    public static int nsessionLabelCount(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT); }
+    public static int nsessionLabelCount(long struct) { return memGetInt(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT); }
     /** Unsafe version of {@link #sessionLabels}. */
     @Nullable public static XrDebugUtilsLabelEXT.Buffer nsessionLabels(long struct) { return XrDebugUtilsLabelEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS), nsessionLabelCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT, value); }
     /** Unsafe version of {@link #messageId(ByteBuffer) messageId}. */
@@ -386,11 +386,11 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
         memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGE, memAddress(value));
     }
     /** Sets the specified value to the {@code objectCount} field of the specified {@code struct}. */
-    public static void nobjectCount(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT, value); }
+    public static void nobjectCount(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT, value); }
     /** Unsafe version of {@link #objects(XrDebugUtilsObjectNameInfoEXT.Buffer) objects}. */
     public static void nobjects(long struct, @Nullable XrDebugUtilsObjectNameInfoEXT.Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS, memAddressSafe(value)); if (value != null) { nobjectCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code sessionLabelCount} field of the specified {@code struct}. */
-    public static void nsessionLabelCount(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT, value); }
+    public static void nsessionLabelCount(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT, value); }
     /** Unsafe version of {@link #sessionLabels(XrDebugUtilsLabelEXT.Buffer) sessionLabels}. */
     public static void nsessionLabels(long struct, @Nullable XrDebugUtilsLabelEXT.Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS, memAddressSafe(value)); if (value != null) { nsessionLabelCount(struct, value.remaining()); } }
 

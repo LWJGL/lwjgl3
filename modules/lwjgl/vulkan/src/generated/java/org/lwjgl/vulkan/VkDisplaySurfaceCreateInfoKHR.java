@@ -365,44 +365,44 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreate
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplaySurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #displayMode}. */
-    public static long ndisplayMode(long struct) { return UNSAFE.getLong(null, struct + VkDisplaySurfaceCreateInfoKHR.DISPLAYMODE); }
+    public static long ndisplayMode(long struct) { return memGetLong(struct + VkDisplaySurfaceCreateInfoKHR.DISPLAYMODE); }
     /** Unsafe version of {@link #planeIndex}. */
-    public static int nplaneIndex(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.PLANEINDEX); }
+    public static int nplaneIndex(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.PLANEINDEX); }
     /** Unsafe version of {@link #planeStackIndex}. */
-    public static int nplaneStackIndex(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.PLANESTACKINDEX); }
+    public static int nplaneStackIndex(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.PLANESTACKINDEX); }
     /** Unsafe version of {@link #transform}. */
-    public static int ntransform(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.TRANSFORM); }
+    public static int ntransform(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.TRANSFORM); }
     /** Unsafe version of {@link #globalAlpha}. */
-    public static float nglobalAlpha(long struct) { return UNSAFE.getFloat(null, struct + VkDisplaySurfaceCreateInfoKHR.GLOBALALPHA); }
+    public static float nglobalAlpha(long struct) { return memGetFloat(struct + VkDisplaySurfaceCreateInfoKHR.GLOBALALPHA); }
     /** Unsafe version of {@link #alphaMode}. */
-    public static int nalphaMode(long struct) { return UNSAFE.getInt(null, struct + VkDisplaySurfaceCreateInfoKHR.ALPHAMODE); }
+    public static int nalphaMode(long struct) { return memGetInt(struct + VkDisplaySurfaceCreateInfoKHR.ALPHAMODE); }
     /** Unsafe version of {@link #imageExtent}. */
     public static VkExtent2D nimageExtent(long struct) { return VkExtent2D.create(struct + VkDisplaySurfaceCreateInfoKHR.IMAGEEXTENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplaySurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #displayMode(long) displayMode}. */
-    public static void ndisplayMode(long struct, long value) { UNSAFE.putLong(null, struct + VkDisplaySurfaceCreateInfoKHR.DISPLAYMODE, value); }
+    public static void ndisplayMode(long struct, long value) { memPutLong(struct + VkDisplaySurfaceCreateInfoKHR.DISPLAYMODE, value); }
     /** Unsafe version of {@link #planeIndex(int) planeIndex}. */
-    public static void nplaneIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.PLANEINDEX, value); }
+    public static void nplaneIndex(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.PLANEINDEX, value); }
     /** Unsafe version of {@link #planeStackIndex(int) planeStackIndex}. */
-    public static void nplaneStackIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.PLANESTACKINDEX, value); }
+    public static void nplaneStackIndex(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.PLANESTACKINDEX, value); }
     /** Unsafe version of {@link #transform(int) transform}. */
-    public static void ntransform(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.TRANSFORM, value); }
+    public static void ntransform(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.TRANSFORM, value); }
     /** Unsafe version of {@link #globalAlpha(float) globalAlpha}. */
-    public static void nglobalAlpha(long struct, float value) { UNSAFE.putFloat(null, struct + VkDisplaySurfaceCreateInfoKHR.GLOBALALPHA, value); }
+    public static void nglobalAlpha(long struct, float value) { memPutFloat(struct + VkDisplaySurfaceCreateInfoKHR.GLOBALALPHA, value); }
     /** Unsafe version of {@link #alphaMode(int) alphaMode}. */
-    public static void nalphaMode(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplaySurfaceCreateInfoKHR.ALPHAMODE, value); }
+    public static void nalphaMode(long struct, int value) { memPutInt(struct + VkDisplaySurfaceCreateInfoKHR.ALPHAMODE, value); }
     /** Unsafe version of {@link #imageExtent(VkExtent2D) imageExtent}. */
     public static void nimageExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkDisplaySurfaceCreateInfoKHR.IMAGEEXTENT, VkExtent2D.SIZEOF); }
 

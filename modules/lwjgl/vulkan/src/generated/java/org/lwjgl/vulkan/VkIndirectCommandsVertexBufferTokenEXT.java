@@ -213,10 +213,10 @@ public class VkIndirectCommandsVertexBufferTokenEXT extends Struct<VkIndirectCom
     // -----------------------------------
 
     /** Unsafe version of {@link #vertexBindingUnit}. */
-    public static int nvertexBindingUnit(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsVertexBufferTokenEXT.VERTEXBINDINGUNIT); }
+    public static int nvertexBindingUnit(long struct) { return memGetInt(struct + VkIndirectCommandsVertexBufferTokenEXT.VERTEXBINDINGUNIT); }
 
     /** Unsafe version of {@link #vertexBindingUnit(int) vertexBindingUnit}. */
-    public static void nvertexBindingUnit(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsVertexBufferTokenEXT.VERTEXBINDINGUNIT, value); }
+    public static void nvertexBindingUnit(long struct, int value) { memPutInt(struct + VkIndirectCommandsVertexBufferTokenEXT.VERTEXBINDINGUNIT, value); }
 
     // -----------------------------------
 

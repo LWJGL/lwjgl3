@@ -460,12 +460,12 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataBaseHeader.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataBaseHeader.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataBaseHeader.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataBaseHeader.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataBaseHeader.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataBaseHeader.NEXT, value); }
 

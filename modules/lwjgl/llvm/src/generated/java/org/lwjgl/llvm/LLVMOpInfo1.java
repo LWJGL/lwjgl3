@@ -271,18 +271,18 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
     /** Unsafe version of {@link #SubtractSymbol}. */
     public static LLVMOpInfoSymbol1 nSubtractSymbol(long struct) { return LLVMOpInfoSymbol1.create(struct + LLVMOpInfo1.SUBTRACTSYMBOL); }
     /** Unsafe version of {@link #Value}. */
-    public static long nValue(long struct) { return UNSAFE.getLong(null, struct + LLVMOpInfo1.VALUE); }
+    public static long nValue(long struct) { return memGetLong(struct + LLVMOpInfo1.VALUE); }
     /** Unsafe version of {@link #VariantKind}. */
-    public static long nVariantKind(long struct) { return UNSAFE.getLong(null, struct + LLVMOpInfo1.VARIANTKIND); }
+    public static long nVariantKind(long struct) { return memGetLong(struct + LLVMOpInfo1.VARIANTKIND); }
 
     /** Unsafe version of {@link #AddSymbol(LLVMOpInfoSymbol1) AddSymbol}. */
     public static void nAddSymbol(long struct, LLVMOpInfoSymbol1 value) { memCopy(value.address(), struct + LLVMOpInfo1.ADDSYMBOL, LLVMOpInfoSymbol1.SIZEOF); }
     /** Unsafe version of {@link #SubtractSymbol(LLVMOpInfoSymbol1) SubtractSymbol}. */
     public static void nSubtractSymbol(long struct, LLVMOpInfoSymbol1 value) { memCopy(value.address(), struct + LLVMOpInfo1.SUBTRACTSYMBOL, LLVMOpInfoSymbol1.SIZEOF); }
     /** Unsafe version of {@link #Value(long) Value}. */
-    public static void nValue(long struct, long value) { UNSAFE.putLong(null, struct + LLVMOpInfo1.VALUE, value); }
+    public static void nValue(long struct, long value) { memPutLong(struct + LLVMOpInfo1.VALUE, value); }
     /** Unsafe version of {@link #VariantKind(long) VariantKind}. */
-    public static void nVariantKind(long struct, long value) { UNSAFE.putLong(null, struct + LLVMOpInfo1.VARIANTKIND, value); }
+    public static void nVariantKind(long struct, long value) { memPutLong(struct + LLVMOpInfo1.VARIANTKIND, value); }
 
     // -----------------------------------
 

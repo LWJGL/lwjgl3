@@ -115,7 +115,7 @@ class NkConfigStackFloatElement extends Struct<NkConfigStackFloatElement> {
     /** Unsafe version of {@link #pValues(int) pValues}. */
     public static FloatBuffer npValues(long struct, int capacity) { return memFloatBuffer(memGetAddress(struct + NkConfigStackFloatElement.PVALUES), capacity); }
     /** Unsafe version of {@link #old_value}. */
-    public static float nold_value(long struct) { return UNSAFE.getFloat(null, struct + NkConfigStackFloatElement.OLD_VALUE); }
+    public static float nold_value(long struct) { return memGetFloat(struct + NkConfigStackFloatElement.OLD_VALUE); }
 
     // -----------------------------------
 

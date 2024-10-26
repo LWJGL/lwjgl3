@@ -288,20 +288,20 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorGetInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorGetInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorGetInfoEXT.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorGetInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkDescriptorGetInfoEXT.TYPE); }
     /** Unsafe version of {@link #data}. */
     public static VkDescriptorDataEXT ndata(long struct) { return VkDescriptorDataEXT.create(struct + VkDescriptorGetInfoEXT.DATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorGetInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorGetInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorGetInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorGetInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkDescriptorGetInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #data(VkDescriptorDataEXT) data}. */
     public static void ndata(long struct, VkDescriptorDataEXT value) { memCopy(value.address(), struct + VkDescriptorGetInfoEXT.DATA, VkDescriptorDataEXT.SIZEOF); }
 

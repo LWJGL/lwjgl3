@@ -256,13 +256,13 @@ public class IOURingBufRing extends Struct<IOURingBufRing> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #resv1}. */
-    public static long nresv1(long struct) { return UNSAFE.getLong(null, struct + IOURingBufRing.RESV1); }
+    public static long nresv1(long struct) { return memGetLong(struct + IOURingBufRing.RESV1); }
     /** Unsafe version of {@link #resv2}. */
-    public static int nresv2(long struct) { return UNSAFE.getInt(null, struct + IOURingBufRing.RESV2); }
+    public static int nresv2(long struct) { return memGetInt(struct + IOURingBufRing.RESV2); }
     /** Unsafe version of {@link #resv3}. */
-    public static short nresv3(long struct) { return UNSAFE.getShort(null, struct + IOURingBufRing.RESV3); }
+    public static short nresv3(long struct) { return memGetShort(struct + IOURingBufRing.RESV3); }
     /** Unsafe version of {@link #tail}. */
-    public static short ntail(long struct) { return UNSAFE.getShort(null, struct + IOURingBufRing.TAIL); }
+    public static short ntail(long struct) { return memGetShort(struct + IOURingBufRing.TAIL); }
     /** Unsafe version of {@link #bufs}. */
     public static IOURingBuf.Buffer nbufs(long struct) { return IOURingBuf.create(struct + IOURingBufRing.BUFS, 0); }
     /** Unsafe version of {@link #bufs(int) bufs}. */
@@ -271,13 +271,13 @@ public class IOURingBufRing extends Struct<IOURingBufRing> implements NativeReso
     }
 
     /** Unsafe version of {@link #resv1(long) resv1}. */
-    public static void nresv1(long struct, long value) { UNSAFE.putLong(null, struct + IOURingBufRing.RESV1, value); }
+    public static void nresv1(long struct, long value) { memPutLong(struct + IOURingBufRing.RESV1, value); }
     /** Unsafe version of {@link #resv2(int) resv2}. */
-    public static void nresv2(long struct, int value) { UNSAFE.putInt(null, struct + IOURingBufRing.RESV2, value); }
+    public static void nresv2(long struct, int value) { memPutInt(struct + IOURingBufRing.RESV2, value); }
     /** Unsafe version of {@link #resv3(short) resv3}. */
-    public static void nresv3(long struct, short value) { UNSAFE.putShort(null, struct + IOURingBufRing.RESV3, value); }
+    public static void nresv3(long struct, short value) { memPutShort(struct + IOURingBufRing.RESV3, value); }
     /** Unsafe version of {@link #tail(short) tail}. */
-    public static void ntail(long struct, short value) { UNSAFE.putShort(null, struct + IOURingBufRing.TAIL, value); }
+    public static void ntail(long struct, short value) { memPutShort(struct + IOURingBufRing.TAIL, value); }
     /** Unsafe version of {@link #bufs(IOURingBuf.Buffer) bufs}. */
     public static void nbufs(long struct, IOURingBuf.Buffer value) {
         if (CHECKS) { checkGT(value, 0); }

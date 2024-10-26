@@ -270,18 +270,18 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + VRTextureWithPose.HANDLE); }
     /** Unsafe version of {@link #eType}. */
-    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPose.ETYPE); }
+    public static int neType(long struct) { return memGetInt(struct + VRTextureWithPose.ETYPE); }
     /** Unsafe version of {@link #eColorSpace}. */
-    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPose.ECOLORSPACE); }
+    public static int neColorSpace(long struct) { return memGetInt(struct + VRTextureWithPose.ECOLORSPACE); }
     /** Unsafe version of {@link #mDeviceToAbsoluteTracking}. */
     public static HmdMatrix34 nmDeviceToAbsoluteTracking(long struct) { return HmdMatrix34.create(struct + VRTextureWithPose.MDEVICETOABSOLUTETRACKING); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + VRTextureWithPose.HANDLE, check(value)); }
     /** Unsafe version of {@link #eType(int) eType}. */
-    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPose.ETYPE, value); }
+    public static void neType(long struct, int value) { memPutInt(struct + VRTextureWithPose.ETYPE, value); }
     /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
-    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPose.ECOLORSPACE, value); }
+    public static void neColorSpace(long struct, int value) { memPutInt(struct + VRTextureWithPose.ECOLORSPACE, value); }
     /** Unsafe version of {@link #mDeviceToAbsoluteTracking(HmdMatrix34) mDeviceToAbsoluteTracking}. */
     public static void nmDeviceToAbsoluteTracking(long struct, HmdMatrix34 value) { memCopy(value.address(), struct + VRTextureWithPose.MDEVICETOABSOLUTETRACKING, HmdMatrix34.SIZEOF); }
 

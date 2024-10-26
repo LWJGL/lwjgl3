@@ -252,18 +252,18 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct<VkPhysicalDeviceV
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoFormatInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVideoFormatInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVideoFormatInfoKHR.PNEXT); }
     /** Unsafe version of {@link #imageUsage}. */
-    public static int nimageUsage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoFormatInfoKHR.IMAGEUSAGE); }
+    public static int nimageUsage(long struct) { return memGetInt(struct + VkPhysicalDeviceVideoFormatInfoKHR.IMAGEUSAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoFormatInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVideoFormatInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVideoFormatInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #imageUsage(int) imageUsage}. */
-    public static void nimageUsage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoFormatInfoKHR.IMAGEUSAGE, value); }
+    public static void nimageUsage(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVideoFormatInfoKHR.IMAGEUSAGE, value); }
 
     // -----------------------------------
 

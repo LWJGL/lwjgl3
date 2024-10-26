@@ -354,46 +354,46 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFloatControlsProperties.PNEXT); }
     /** Unsafe version of {@link #denormBehaviorIndependence}. */
-    public static int ndenormBehaviorIndependence(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.DENORMBEHAVIORINDEPENDENCE); }
+    public static int ndenormBehaviorIndependence(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.DENORMBEHAVIORINDEPENDENCE); }
     /** Unsafe version of {@link #roundingModeIndependence}. */
-    public static int nroundingModeIndependence(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.ROUNDINGMODEINDEPENDENCE); }
+    public static int nroundingModeIndependence(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.ROUNDINGMODEINDEPENDENCE); }
     /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat16}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT16); }
+    public static int nshaderSignedZeroInfNanPreserveFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT16); }
     /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat32}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT32); }
+    public static int nshaderSignedZeroInfNanPreserveFloat32(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT32); }
     /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat64}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT64); }
+    public static int nshaderSignedZeroInfNanPreserveFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT64); }
     /** Unsafe version of {@link #shaderDenormPreserveFloat16}. */
-    public static int nshaderDenormPreserveFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT16); }
+    public static int nshaderDenormPreserveFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT16); }
     /** Unsafe version of {@link #shaderDenormPreserveFloat32}. */
-    public static int nshaderDenormPreserveFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT32); }
+    public static int nshaderDenormPreserveFloat32(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT32); }
     /** Unsafe version of {@link #shaderDenormPreserveFloat64}. */
-    public static int nshaderDenormPreserveFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT64); }
+    public static int nshaderDenormPreserveFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMPRESERVEFLOAT64); }
     /** Unsafe version of {@link #shaderDenormFlushToZeroFloat16}. */
-    public static int nshaderDenormFlushToZeroFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT16); }
+    public static int nshaderDenormFlushToZeroFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT16); }
     /** Unsafe version of {@link #shaderDenormFlushToZeroFloat32}. */
-    public static int nshaderDenormFlushToZeroFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT32); }
+    public static int nshaderDenormFlushToZeroFloat32(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT32); }
     /** Unsafe version of {@link #shaderDenormFlushToZeroFloat64}. */
-    public static int nshaderDenormFlushToZeroFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT64); }
+    public static int nshaderDenormFlushToZeroFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERDENORMFLUSHTOZEROFLOAT64); }
     /** Unsafe version of {@link #shaderRoundingModeRTEFloat16}. */
-    public static int nshaderRoundingModeRTEFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT16); }
+    public static int nshaderRoundingModeRTEFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT16); }
     /** Unsafe version of {@link #shaderRoundingModeRTEFloat32}. */
-    public static int nshaderRoundingModeRTEFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT32); }
+    public static int nshaderRoundingModeRTEFloat32(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT32); }
     /** Unsafe version of {@link #shaderRoundingModeRTEFloat64}. */
-    public static int nshaderRoundingModeRTEFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT64); }
+    public static int nshaderRoundingModeRTEFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTEFLOAT64); }
     /** Unsafe version of {@link #shaderRoundingModeRTZFloat16}. */
-    public static int nshaderRoundingModeRTZFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT16); }
+    public static int nshaderRoundingModeRTZFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT16); }
     /** Unsafe version of {@link #shaderRoundingModeRTZFloat32}. */
-    public static int nshaderRoundingModeRTZFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT32); }
+    public static int nshaderRoundingModeRTZFloat32(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT32); }
     /** Unsafe version of {@link #shaderRoundingModeRTZFloat64}. */
-    public static int nshaderRoundingModeRTZFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT64); }
+    public static int nshaderRoundingModeRTZFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFloatControlsProperties.SHADERROUNDINGMODERTZFLOAT64); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFloatControlsProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFloatControlsProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFloatControlsProperties.PNEXT, value); }
 

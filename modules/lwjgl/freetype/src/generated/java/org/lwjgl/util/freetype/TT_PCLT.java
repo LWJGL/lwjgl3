@@ -216,43 +216,43 @@ public class TT_PCLT extends Struct<TT_PCLT> {
     /** Unsafe version of {@link #FontNumber}. */
     public static long nFontNumber(long struct) { return memGetCLong(struct + TT_PCLT.FONTNUMBER); }
     /** Unsafe version of {@link #Pitch}. */
-    public static short nPitch(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.PITCH); }
+    public static short nPitch(long struct) { return memGetShort(struct + TT_PCLT.PITCH); }
     /** Unsafe version of {@link #xHeight}. */
-    public static short nxHeight(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.XHEIGHT); }
+    public static short nxHeight(long struct) { return memGetShort(struct + TT_PCLT.XHEIGHT); }
     /** Unsafe version of {@link #Style}. */
-    public static short nStyle(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.STYLE); }
+    public static short nStyle(long struct) { return memGetShort(struct + TT_PCLT.STYLE); }
     /** Unsafe version of {@link #TypeFamily}. */
-    public static short nTypeFamily(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.TYPEFAMILY); }
+    public static short nTypeFamily(long struct) { return memGetShort(struct + TT_PCLT.TYPEFAMILY); }
     /** Unsafe version of {@link #CapHeight}. */
-    public static short nCapHeight(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.CAPHEIGHT); }
+    public static short nCapHeight(long struct) { return memGetShort(struct + TT_PCLT.CAPHEIGHT); }
     /** Unsafe version of {@link #SymbolSet}. */
-    public static short nSymbolSet(long struct) { return UNSAFE.getShort(null, struct + TT_PCLT.SYMBOLSET); }
+    public static short nSymbolSet(long struct) { return memGetShort(struct + TT_PCLT.SYMBOLSET); }
     /** Unsafe version of {@link #TypeFace}. */
     public static ByteBuffer nTypeFace(long struct) { return memByteBuffer(struct + TT_PCLT.TYPEFACE, 16); }
     /** Unsafe version of {@link #TypeFace(int) TypeFace}. */
     public static byte nTypeFace(long struct, int index) {
-        return UNSAFE.getByte(null, struct + TT_PCLT.TYPEFACE + check(index, 16) * 1);
+        return memGetByte(struct + TT_PCLT.TYPEFACE + check(index, 16) * 1);
     }
     /** Unsafe version of {@link #CharacterComplement}. */
     public static ByteBuffer nCharacterComplement(long struct) { return memByteBuffer(struct + TT_PCLT.CHARACTERCOMPLEMENT, 8); }
     /** Unsafe version of {@link #CharacterComplement(int) CharacterComplement}. */
     public static byte nCharacterComplement(long struct, int index) {
-        return UNSAFE.getByte(null, struct + TT_PCLT.CHARACTERCOMPLEMENT + check(index, 8) * 1);
+        return memGetByte(struct + TT_PCLT.CHARACTERCOMPLEMENT + check(index, 8) * 1);
     }
     /** Unsafe version of {@link #FileName}. */
     public static ByteBuffer nFileName(long struct) { return memByteBuffer(struct + TT_PCLT.FILENAME, 6); }
     /** Unsafe version of {@link #FileName(int) FileName}. */
     public static byte nFileName(long struct, int index) {
-        return UNSAFE.getByte(null, struct + TT_PCLT.FILENAME + check(index, 6) * 1);
+        return memGetByte(struct + TT_PCLT.FILENAME + check(index, 6) * 1);
     }
     /** Unsafe version of {@link #StrokeWeight}. */
-    public static byte nStrokeWeight(long struct) { return UNSAFE.getByte(null, struct + TT_PCLT.STROKEWEIGHT); }
+    public static byte nStrokeWeight(long struct) { return memGetByte(struct + TT_PCLT.STROKEWEIGHT); }
     /** Unsafe version of {@link #WidthType}. */
-    public static byte nWidthType(long struct) { return UNSAFE.getByte(null, struct + TT_PCLT.WIDTHTYPE); }
+    public static byte nWidthType(long struct) { return memGetByte(struct + TT_PCLT.WIDTHTYPE); }
     /** Unsafe version of {@link #SerifStyle}. */
-    public static byte nSerifStyle(long struct) { return UNSAFE.getByte(null, struct + TT_PCLT.SERIFSTYLE); }
+    public static byte nSerifStyle(long struct) { return memGetByte(struct + TT_PCLT.SERIFSTYLE); }
     /** Unsafe version of {@link #Reserved}. */
-    public static byte nReserved(long struct) { return UNSAFE.getByte(null, struct + TT_PCLT.RESERVED); }
+    public static byte nReserved(long struct) { return memGetByte(struct + TT_PCLT.RESERVED); }
 
     // -----------------------------------
 

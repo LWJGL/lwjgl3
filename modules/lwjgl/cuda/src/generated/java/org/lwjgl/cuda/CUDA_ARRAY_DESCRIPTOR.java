@@ -266,18 +266,18 @@ public class CUDA_ARRAY_DESCRIPTOR extends Struct<CUDA_ARRAY_DESCRIPTOR> impleme
     /** Unsafe version of {@link #Height}. */
     public static long nHeight(long struct) { return memGetAddress(struct + CUDA_ARRAY_DESCRIPTOR.HEIGHT); }
     /** Unsafe version of {@link #Format}. */
-    public static int nFormat(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_DESCRIPTOR.FORMAT); }
+    public static int nFormat(long struct) { return memGetInt(struct + CUDA_ARRAY_DESCRIPTOR.FORMAT); }
     /** Unsafe version of {@link #NumChannels}. */
-    public static int nNumChannels(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_DESCRIPTOR.NUMCHANNELS); }
+    public static int nNumChannels(long struct) { return memGetInt(struct + CUDA_ARRAY_DESCRIPTOR.NUMCHANNELS); }
 
     /** Unsafe version of {@link #Width(long) Width}. */
     public static void nWidth(long struct, long value) { memPutAddress(struct + CUDA_ARRAY_DESCRIPTOR.WIDTH, value); }
     /** Unsafe version of {@link #Height(long) Height}. */
     public static void nHeight(long struct, long value) { memPutAddress(struct + CUDA_ARRAY_DESCRIPTOR.HEIGHT, value); }
     /** Unsafe version of {@link #Format(int) Format}. */
-    public static void nFormat(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_DESCRIPTOR.FORMAT, value); }
+    public static void nFormat(long struct, int value) { memPutInt(struct + CUDA_ARRAY_DESCRIPTOR.FORMAT, value); }
     /** Unsafe version of {@link #NumChannels(int) NumChannels}. */
-    public static void nNumChannels(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_DESCRIPTOR.NUMCHANNELS, value); }
+    public static void nNumChannels(long struct, int value) { memPutInt(struct + CUDA_ARRAY_DESCRIPTOR.NUMCHANNELS, value); }
 
     // -----------------------------------
 

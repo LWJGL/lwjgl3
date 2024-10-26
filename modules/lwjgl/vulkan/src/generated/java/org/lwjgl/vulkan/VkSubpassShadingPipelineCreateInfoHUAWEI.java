@@ -260,22 +260,22 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.PNEXT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.RENDERPASS); }
+    public static long nrenderPass(long struct) { return memGetLong(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.RENDERPASS); }
     /** Unsafe version of {@link #subpass}. */
-    public static int nsubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.SUBPASS); }
+    public static int nsubpass(long struct) { return memGetInt(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.SUBPASS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.PNEXT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.RENDERPASS, value); }
     /** Unsafe version of {@link #subpass(int) subpass}. */
-    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassShadingPipelineCreateInfoHUAWEI.SUBPASS, value); }
+    public static void nsubpass(long struct, int value) { memPutInt(struct + VkSubpassShadingPipelineCreateInfoHUAWEI.SUBPASS, value); }
 
     // -----------------------------------
 

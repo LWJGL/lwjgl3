@@ -117,9 +117,9 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     // -----------------------------------
 
     /** Unsafe version of {@link #local_memory}. */
-    public static long nlocal_memory(long struct) { return UNSAFE.getLong(null, struct + hwloc_numanode_attr_s.LOCAL_MEMORY); }
+    public static long nlocal_memory(long struct) { return memGetLong(struct + hwloc_numanode_attr_s.LOCAL_MEMORY); }
     /** Unsafe version of {@link #page_types_len}. */
-    public static int npage_types_len(long struct) { return UNSAFE.getInt(null, struct + hwloc_numanode_attr_s.PAGE_TYPES_LEN); }
+    public static int npage_types_len(long struct) { return memGetInt(struct + hwloc_numanode_attr_s.PAGE_TYPES_LEN); }
     /** Unsafe version of {@link #page_types}. */
     @Nullable public static hwloc_memory_page_type_s.Buffer npage_types(long struct) { return hwloc_memory_page_type_s.createSafe(memGetAddress(struct + hwloc_numanode_attr_s.PAGE_TYPES), npage_types_len(struct)); }
 

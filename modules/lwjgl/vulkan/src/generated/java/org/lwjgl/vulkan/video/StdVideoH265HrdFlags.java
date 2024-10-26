@@ -260,7 +260,7 @@ public class StdVideoH265HrdFlags extends Struct<StdVideoH265HrdFlags> implement
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265HrdFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH265HrdFlags.BITFIELD0); }
     /** Unsafe version of {@link #nal_hrd_parameters_present_flag}. */
     public static int nnal_hrd_parameters_present_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #vcl_hrd_parameters_present_flag}. */
@@ -269,7 +269,7 @@ public class StdVideoH265HrdFlags extends Struct<StdVideoH265HrdFlags> implement
     public static int nsub_pic_hrd_params_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #sub_pic_cpb_params_in_pic_timing_sei_flag}. */
     public static int nsub_pic_cpb_params_in_pic_timing_sei_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265HrdFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoH265HrdFlags.BITFIELD1); }
     /** Unsafe version of {@link #fixed_pic_rate_general_flag}. */
     public static int nfixed_pic_rate_general_flag(long struct) { return nbitfield1(struct) & 0x00_00_00_FF; }
     /** Unsafe version of {@link #fixed_pic_rate_within_cvs_flag}. */
@@ -277,7 +277,7 @@ public class StdVideoH265HrdFlags extends Struct<StdVideoH265HrdFlags> implement
     /** Unsafe version of {@link #low_delay_hrd_flag}. */
     public static int nlow_delay_hrd_flag(long struct) { return (nbitfield1(struct) & 0x00_FF_00_00) >>> 16; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265HrdFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH265HrdFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #nal_hrd_parameters_present_flag(boolean) nal_hrd_parameters_present_flag}. */
     public static void nnal_hrd_parameters_present_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #vcl_hrd_parameters_present_flag(boolean) vcl_hrd_parameters_present_flag}. */
@@ -286,7 +286,7 @@ public class StdVideoH265HrdFlags extends Struct<StdVideoH265HrdFlags> implement
     public static void nsub_pic_hrd_params_present_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #sub_pic_cpb_params_in_pic_timing_sei_flag(boolean) sub_pic_cpb_params_in_pic_timing_sei_flag}. */
     public static void nsub_pic_cpb_params_in_pic_timing_sei_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265HrdFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoH265HrdFlags.BITFIELD1, value); }
     /** Unsafe version of {@link #fixed_pic_rate_general_flag(int) fixed_pic_rate_general_flag}. */
     public static void nfixed_pic_rate_general_flag(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_FF_FF_00) | (value & 0x00_00_00_FF)); }
     /** Unsafe version of {@link #fixed_pic_rate_within_cvs_flag(int) fixed_pic_rate_within_cvs_flag}. */

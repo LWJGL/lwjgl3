@@ -308,38 +308,38 @@ public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #LastChangedTime}. */
-    public static double nLastChangedTime(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraIntrinsics.LASTCHANGEDTIME); }
+    public static double nLastChangedTime(long struct) { return memGetDouble(struct + OVRCameraIntrinsics.LASTCHANGEDTIME); }
     /** Unsafe version of {@link #FOVPort}. */
     public static OVRFovPort nFOVPort(long struct) { return OVRFovPort.create(struct + OVRCameraIntrinsics.FOVPORT); }
     /** Unsafe version of {@link #VirtualNearPlaneDistanceMeters}. */
-    public static float nVirtualNearPlaneDistanceMeters(long struct) { return UNSAFE.getFloat(null, struct + OVRCameraIntrinsics.VIRTUALNEARPLANEDISTANCEMETERS); }
+    public static float nVirtualNearPlaneDistanceMeters(long struct) { return memGetFloat(struct + OVRCameraIntrinsics.VIRTUALNEARPLANEDISTANCEMETERS); }
     /** Unsafe version of {@link #VirtualFarPlaneDistanceMeters}. */
-    public static float nVirtualFarPlaneDistanceMeters(long struct) { return UNSAFE.getFloat(null, struct + OVRCameraIntrinsics.VIRTUALFARPLANEDISTANCEMETERS); }
+    public static float nVirtualFarPlaneDistanceMeters(long struct) { return memGetFloat(struct + OVRCameraIntrinsics.VIRTUALFARPLANEDISTANCEMETERS); }
     /** Unsafe version of {@link #ImageSensorPixelResolution}. */
     public static OVRSizei nImageSensorPixelResolution(long struct) { return OVRSizei.create(struct + OVRCameraIntrinsics.IMAGESENSORPIXELRESOLUTION); }
     /** Unsafe version of {@link #LensDistortionMatrix}. */
     public static OVRMatrix4f nLensDistortionMatrix(long struct) { return OVRMatrix4f.create(struct + OVRCameraIntrinsics.LENSDISTORTIONMATRIX); }
     /** Unsafe version of {@link #ExposurePeriodSeconds}. */
-    public static double nExposurePeriodSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraIntrinsics.EXPOSUREPERIODSECONDS); }
+    public static double nExposurePeriodSeconds(long struct) { return memGetDouble(struct + OVRCameraIntrinsics.EXPOSUREPERIODSECONDS); }
     /** Unsafe version of {@link #ExposureDurationSeconds}. */
-    public static double nExposureDurationSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraIntrinsics.EXPOSUREDURATIONSECONDS); }
+    public static double nExposureDurationSeconds(long struct) { return memGetDouble(struct + OVRCameraIntrinsics.EXPOSUREDURATIONSECONDS); }
 
     /** Unsafe version of {@link #LastChangedTime(double) LastChangedTime}. */
-    public static void nLastChangedTime(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraIntrinsics.LASTCHANGEDTIME, value); }
+    public static void nLastChangedTime(long struct, double value) { memPutDouble(struct + OVRCameraIntrinsics.LASTCHANGEDTIME, value); }
     /** Unsafe version of {@link #FOVPort(OVRFovPort) FOVPort}. */
     public static void nFOVPort(long struct, OVRFovPort value) { memCopy(value.address(), struct + OVRCameraIntrinsics.FOVPORT, OVRFovPort.SIZEOF); }
     /** Unsafe version of {@link #VirtualNearPlaneDistanceMeters(float) VirtualNearPlaneDistanceMeters}. */
-    public static void nVirtualNearPlaneDistanceMeters(long struct, float value) { UNSAFE.putFloat(null, struct + OVRCameraIntrinsics.VIRTUALNEARPLANEDISTANCEMETERS, value); }
+    public static void nVirtualNearPlaneDistanceMeters(long struct, float value) { memPutFloat(struct + OVRCameraIntrinsics.VIRTUALNEARPLANEDISTANCEMETERS, value); }
     /** Unsafe version of {@link #VirtualFarPlaneDistanceMeters(float) VirtualFarPlaneDistanceMeters}. */
-    public static void nVirtualFarPlaneDistanceMeters(long struct, float value) { UNSAFE.putFloat(null, struct + OVRCameraIntrinsics.VIRTUALFARPLANEDISTANCEMETERS, value); }
+    public static void nVirtualFarPlaneDistanceMeters(long struct, float value) { memPutFloat(struct + OVRCameraIntrinsics.VIRTUALFARPLANEDISTANCEMETERS, value); }
     /** Unsafe version of {@link #ImageSensorPixelResolution(OVRSizei) ImageSensorPixelResolution}. */
     public static void nImageSensorPixelResolution(long struct, OVRSizei value) { memCopy(value.address(), struct + OVRCameraIntrinsics.IMAGESENSORPIXELRESOLUTION, OVRSizei.SIZEOF); }
     /** Unsafe version of {@link #LensDistortionMatrix(OVRMatrix4f) LensDistortionMatrix}. */
     public static void nLensDistortionMatrix(long struct, OVRMatrix4f value) { memCopy(value.address(), struct + OVRCameraIntrinsics.LENSDISTORTIONMATRIX, OVRMatrix4f.SIZEOF); }
     /** Unsafe version of {@link #ExposurePeriodSeconds(double) ExposurePeriodSeconds}. */
-    public static void nExposurePeriodSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraIntrinsics.EXPOSUREPERIODSECONDS, value); }
+    public static void nExposurePeriodSeconds(long struct, double value) { memPutDouble(struct + OVRCameraIntrinsics.EXPOSUREPERIODSECONDS, value); }
     /** Unsafe version of {@link #ExposureDurationSeconds(double) ExposureDurationSeconds}. */
-    public static void nExposureDurationSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraIntrinsics.EXPOSUREDURATIONSECONDS, value); }
+    public static void nExposureDurationSeconds(long struct, double value) { memPutDouble(struct + OVRCameraIntrinsics.EXPOSUREDURATIONSECONDS, value); }
 
     // -----------------------------------
 

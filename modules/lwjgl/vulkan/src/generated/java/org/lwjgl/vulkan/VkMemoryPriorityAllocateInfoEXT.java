@@ -272,18 +272,18 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct<VkMemoryPriorityAllo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryPriorityAllocateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryPriorityAllocateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryPriorityAllocateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #priority}. */
-    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VkMemoryPriorityAllocateInfoEXT.PRIORITY); }
+    public static float npriority(long struct) { return memGetFloat(struct + VkMemoryPriorityAllocateInfoEXT.PRIORITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryPriorityAllocateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryPriorityAllocateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryPriorityAllocateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
-    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VkMemoryPriorityAllocateInfoEXT.PRIORITY, value); }
+    public static void npriority(long struct, float value) { memPutFloat(struct + VkMemoryPriorityAllocateInfoEXT.PRIORITY, value); }
 
     // -----------------------------------
 

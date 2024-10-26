@@ -272,24 +272,24 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingListLUNARG.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDirectDriverLoadingListLUNARG.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDirectDriverLoadingListLUNARG.PNEXT); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingListLUNARG.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkDirectDriverLoadingListLUNARG.MODE); }
     /** Unsafe version of {@link #driverCount}. */
-    public static int ndriverCount(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingListLUNARG.DRIVERCOUNT); }
+    public static int ndriverCount(long struct) { return memGetInt(struct + VkDirectDriverLoadingListLUNARG.DRIVERCOUNT); }
     /** Unsafe version of {@link #pDrivers}. */
     public static VkDirectDriverLoadingInfoLUNARG.Buffer npDrivers(long struct) { return VkDirectDriverLoadingInfoLUNARG.create(memGetAddress(struct + VkDirectDriverLoadingListLUNARG.PDRIVERS), ndriverCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingListLUNARG.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDirectDriverLoadingListLUNARG.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDirectDriverLoadingListLUNARG.PNEXT, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingListLUNARG.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkDirectDriverLoadingListLUNARG.MODE, value); }
     /** Sets the specified value to the {@code driverCount} field of the specified {@code struct}. */
-    public static void ndriverCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingListLUNARG.DRIVERCOUNT, value); }
+    public static void ndriverCount(long struct, int value) { memPutInt(struct + VkDirectDriverLoadingListLUNARG.DRIVERCOUNT, value); }
     /** Unsafe version of {@link #pDrivers(VkDirectDriverLoadingInfoLUNARG.Buffer) pDrivers}. */
     public static void npDrivers(long struct, VkDirectDriverLoadingInfoLUNARG.Buffer value) { memPutAddress(struct + VkDirectDriverLoadingListLUNARG.PDRIVERS, value.address()); ndriverCount(struct, value.remaining()); }
 

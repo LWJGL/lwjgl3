@@ -296,15 +296,15 @@ public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAME
     /** Unsafe version of {@link #id}. */
     public static FMOD_STUDIO_PARAMETER_ID nid(long struct) { return FMOD_STUDIO_PARAMETER_ID.create(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.ID); }
     /** Unsafe version of {@link #minimum}. */
-    public static float nminimum(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MINIMUM); }
+    public static float nminimum(long struct) { return memGetFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MINIMUM); }
     /** Unsafe version of {@link #maximum}. */
-    public static float nmaximum(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MAXIMUM); }
+    public static float nmaximum(long struct) { return memGetFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MAXIMUM); }
     /** Unsafe version of {@link #defaultvalue}. */
-    public static float ndefaultvalue(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.DEFAULTVALUE); }
+    public static float ndefaultvalue(long struct) { return memGetFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.DEFAULTVALUE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.FLAGS); }
     /** Unsafe version of {@link #guid}. */
     public static FMOD_GUID nguid(long struct) { return FMOD_GUID.create(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.GUID); }
 
@@ -316,15 +316,15 @@ public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAME
     /** Unsafe version of {@link #id(FMOD_STUDIO_PARAMETER_ID) id}. */
     public static void nid(long struct, FMOD_STUDIO_PARAMETER_ID value) { memCopy(value.address(), struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.ID, FMOD_STUDIO_PARAMETER_ID.SIZEOF); }
     /** Unsafe version of {@link #minimum(float) minimum}. */
-    public static void nminimum(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MINIMUM, value); }
+    public static void nminimum(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MINIMUM, value); }
     /** Unsafe version of {@link #maximum(float) maximum}. */
-    public static void nmaximum(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MAXIMUM, value); }
+    public static void nmaximum(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.MAXIMUM, value); }
     /** Unsafe version of {@link #defaultvalue(float) defaultvalue}. */
-    public static void ndefaultvalue(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.DEFAULTVALUE, value); }
+    public static void ndefaultvalue(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.DEFAULTVALUE, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.FLAGS, value); }
     /** Unsafe version of {@link #guid(FMOD_GUID) guid}. */
     public static void nguid(long struct, FMOD_GUID value) { memCopy(value.address(), struct + FMOD_STUDIO_PARAMETER_DESCRIPTION.GUID, FMOD_GUID.SIZEOF); }
 

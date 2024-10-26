@@ -292,15 +292,15 @@ public class FSBANK_SUBSOUND extends Struct<FSBANK_SUBSOUND> implements NativeRe
     /** Unsafe version of {@link #fileDataLengths() fileDataLengths}. */
     public static IntBuffer nfileDataLengths(long struct) { return memIntBuffer(memGetAddress(struct + FSBANK_SUBSOUND.FILEDATALENGTHS), nnumFiles(struct)); }
     /** Unsafe version of {@link #numFiles}. */
-    public static int nnumFiles(long struct) { return UNSAFE.getInt(null, struct + FSBANK_SUBSOUND.NUMFILES); }
+    public static int nnumFiles(long struct) { return memGetInt(struct + FSBANK_SUBSOUND.NUMFILES); }
     /** Unsafe version of {@link #overrideFlags}. */
-    public static int noverrideFlags(long struct) { return UNSAFE.getInt(null, struct + FSBANK_SUBSOUND.OVERRIDEFLAGS); }
+    public static int noverrideFlags(long struct) { return memGetInt(struct + FSBANK_SUBSOUND.OVERRIDEFLAGS); }
     /** Unsafe version of {@link #overrideQuality}. */
-    public static int noverrideQuality(long struct) { return UNSAFE.getInt(null, struct + FSBANK_SUBSOUND.OVERRIDEQUALITY); }
+    public static int noverrideQuality(long struct) { return memGetInt(struct + FSBANK_SUBSOUND.OVERRIDEQUALITY); }
     /** Unsafe version of {@link #desiredSampleRate}. */
-    public static float ndesiredSampleRate(long struct) { return UNSAFE.getFloat(null, struct + FSBANK_SUBSOUND.DESIREDSAMPLERATE); }
+    public static float ndesiredSampleRate(long struct) { return memGetFloat(struct + FSBANK_SUBSOUND.DESIREDSAMPLERATE); }
     /** Unsafe version of {@link #percentOptimizedRate}. */
-    public static float npercentOptimizedRate(long struct) { return UNSAFE.getFloat(null, struct + FSBANK_SUBSOUND.PERCENTOPTIMIZEDRATE); }
+    public static float npercentOptimizedRate(long struct) { return memGetFloat(struct + FSBANK_SUBSOUND.PERCENTOPTIMIZEDRATE); }
 
     /** Unsafe version of {@link #fileNames(PointerBuffer) fileNames}. */
     public static void nfileNames(long struct, PointerBuffer value) { memPutAddress(struct + FSBANK_SUBSOUND.FILENAMES, memAddress(value)); }
@@ -309,15 +309,15 @@ public class FSBANK_SUBSOUND extends Struct<FSBANK_SUBSOUND> implements NativeRe
     /** Unsafe version of {@link #fileDataLengths(IntBuffer) fileDataLengths}. */
     public static void nfileDataLengths(long struct, IntBuffer value) { memPutAddress(struct + FSBANK_SUBSOUND.FILEDATALENGTHS, memAddress(value)); }
     /** Sets the specified value to the {@code numFiles} field of the specified {@code struct}. */
-    public static void nnumFiles(long struct, int value) { UNSAFE.putInt(null, struct + FSBANK_SUBSOUND.NUMFILES, value); }
+    public static void nnumFiles(long struct, int value) { memPutInt(struct + FSBANK_SUBSOUND.NUMFILES, value); }
     /** Unsafe version of {@link #overrideFlags(int) overrideFlags}. */
-    public static void noverrideFlags(long struct, int value) { UNSAFE.putInt(null, struct + FSBANK_SUBSOUND.OVERRIDEFLAGS, value); }
+    public static void noverrideFlags(long struct, int value) { memPutInt(struct + FSBANK_SUBSOUND.OVERRIDEFLAGS, value); }
     /** Unsafe version of {@link #overrideQuality(int) overrideQuality}. */
-    public static void noverrideQuality(long struct, int value) { UNSAFE.putInt(null, struct + FSBANK_SUBSOUND.OVERRIDEQUALITY, value); }
+    public static void noverrideQuality(long struct, int value) { memPutInt(struct + FSBANK_SUBSOUND.OVERRIDEQUALITY, value); }
     /** Unsafe version of {@link #desiredSampleRate(float) desiredSampleRate}. */
-    public static void ndesiredSampleRate(long struct, float value) { UNSAFE.putFloat(null, struct + FSBANK_SUBSOUND.DESIREDSAMPLERATE, value); }
+    public static void ndesiredSampleRate(long struct, float value) { memPutFloat(struct + FSBANK_SUBSOUND.DESIREDSAMPLERATE, value); }
     /** Unsafe version of {@link #percentOptimizedRate(float) percentOptimizedRate}. */
-    public static void npercentOptimizedRate(long struct, float value) { UNSAFE.putFloat(null, struct + FSBANK_SUBSOUND.PERCENTOPTIMIZEDRATE, value); }
+    public static void npercentOptimizedRate(long struct, float value) { memPutFloat(struct + FSBANK_SUBSOUND.PERCENTOPTIMIZEDRATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -275,20 +275,20 @@ public class XrSceneObjectsMSFT extends Struct<XrSceneObjectsMSFT> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneObjectsMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneObjectsMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneObjectsMSFT.NEXT); }
     /** Unsafe version of {@link #sceneObjectCount}. */
-    public static int nsceneObjectCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneObjectsMSFT.SCENEOBJECTCOUNT); }
+    public static int nsceneObjectCount(long struct) { return memGetInt(struct + XrSceneObjectsMSFT.SCENEOBJECTCOUNT); }
     /** Unsafe version of {@link #sceneObjects}. */
     @Nullable public static XrSceneObjectMSFT.Buffer nsceneObjects(long struct) { return XrSceneObjectMSFT.createSafe(memGetAddress(struct + XrSceneObjectsMSFT.SCENEOBJECTS), nsceneObjectCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneObjectsMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneObjectsMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneObjectsMSFT.NEXT, value); }
     /** Sets the specified value to the {@code sceneObjectCount} field of the specified {@code struct}. */
-    public static void nsceneObjectCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneObjectsMSFT.SCENEOBJECTCOUNT, value); }
+    public static void nsceneObjectCount(long struct, int value) { memPutInt(struct + XrSceneObjectsMSFT.SCENEOBJECTCOUNT, value); }
     /** Unsafe version of {@link #sceneObjects(XrSceneObjectMSFT.Buffer) sceneObjects}. */
     public static void nsceneObjects(long struct, @Nullable XrSceneObjectMSFT.Buffer value) { memPutAddress(struct + XrSceneObjectsMSFT.SCENEOBJECTS, memAddressSafe(value)); if (value != null) { nsceneObjectCount(struct, value.remaining()); } }
 

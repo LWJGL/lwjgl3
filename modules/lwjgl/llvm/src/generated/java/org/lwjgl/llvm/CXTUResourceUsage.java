@@ -223,7 +223,7 @@ public class CXTUResourceUsage extends Struct<CXTUResourceUsage> implements Nati
     /** Unsafe version of {@link #data}. */
     public static long ndata(long struct) { return memGetAddress(struct + CXTUResourceUsage.DATA); }
     /** Unsafe version of {@link #numEntries}. */
-    public static int nnumEntries(long struct) { return UNSAFE.getInt(null, struct + CXTUResourceUsage.NUMENTRIES); }
+    public static int nnumEntries(long struct) { return memGetInt(struct + CXTUResourceUsage.NUMENTRIES); }
     /** Unsafe version of {@link #entries}. */
     public static CXTUResourceUsageEntry.Buffer nentries(long struct) { return CXTUResourceUsageEntry.create(memGetAddress(struct + CXTUResourceUsage.ENTRIES), nnumEntries(struct)); }
 

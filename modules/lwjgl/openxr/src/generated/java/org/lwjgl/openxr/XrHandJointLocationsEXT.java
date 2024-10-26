@@ -293,24 +293,24 @@ public class XrHandJointLocationsEXT extends Struct<XrHandJointLocationsEXT> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandJointLocationsEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandJointLocationsEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandJointLocationsEXT.NEXT); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrHandJointLocationsEXT.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrHandJointLocationsEXT.ISACTIVE); }
     /** Unsafe version of {@link #jointCount}. */
-    public static int njointCount(long struct) { return UNSAFE.getInt(null, struct + XrHandJointLocationsEXT.JOINTCOUNT); }
+    public static int njointCount(long struct) { return memGetInt(struct + XrHandJointLocationsEXT.JOINTCOUNT); }
     /** Unsafe version of {@link #jointLocations}. */
     public static XrHandJointLocationEXT.Buffer njointLocations(long struct) { return XrHandJointLocationEXT.create(memGetAddress(struct + XrHandJointLocationsEXT.JOINTLOCATIONS), njointCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointLocationsEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandJointLocationsEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointLocationsEXT.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointLocationsEXT.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrHandJointLocationsEXT.ISACTIVE, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
-    public static void njointCount(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointLocationsEXT.JOINTCOUNT, value); }
+    public static void njointCount(long struct, int value) { memPutInt(struct + XrHandJointLocationsEXT.JOINTCOUNT, value); }
     /** Unsafe version of {@link #jointLocations(XrHandJointLocationEXT.Buffer) jointLocations}. */
     public static void njointLocations(long struct, XrHandJointLocationEXT.Buffer value) { memPutAddress(struct + XrHandJointLocationsEXT.JOINTLOCATIONS, value.address()); njointCount(struct, value.remaining()); }
 

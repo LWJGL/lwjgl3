@@ -264,14 +264,14 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct<VkPhysicalDeviceMe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryProperties2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryProperties2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMemoryProperties2.PNEXT); }
     /** Unsafe version of {@link #memoryProperties}. */
     public static VkPhysicalDeviceMemoryProperties nmemoryProperties(long struct) { return VkPhysicalDeviceMemoryProperties.create(struct + VkPhysicalDeviceMemoryProperties2.MEMORYPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMemoryProperties2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryProperties2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMemoryProperties2.PNEXT, value); }
 

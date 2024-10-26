@@ -241,14 +241,14 @@ public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCom
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsExecutionSetTokenEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkIndirectCommandsExecutionSetTokenEXT.TYPE); }
     /** Unsafe version of {@link #shaderStages}. */
-    public static int nshaderStages(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsExecutionSetTokenEXT.SHADERSTAGES); }
+    public static int nshaderStages(long struct) { return memGetInt(struct + VkIndirectCommandsExecutionSetTokenEXT.SHADERSTAGES); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsExecutionSetTokenEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkIndirectCommandsExecutionSetTokenEXT.TYPE, value); }
     /** Unsafe version of {@link #shaderStages(int) shaderStages}. */
-    public static void nshaderStages(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsExecutionSetTokenEXT.SHADERSTAGES, value); }
+    public static void nshaderStages(long struct, int value) { memPutInt(struct + VkIndirectCommandsExecutionSetTokenEXT.SHADERSTAGES, value); }
 
     // -----------------------------------
 

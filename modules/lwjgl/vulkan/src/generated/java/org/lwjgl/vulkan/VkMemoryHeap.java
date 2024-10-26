@@ -115,9 +115,9 @@ public class VkMemoryHeap extends Struct<VkMemoryHeap> {
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryHeap.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkMemoryHeap.SIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMemoryHeap.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMemoryHeap.FLAGS); }
 
     // -----------------------------------
 

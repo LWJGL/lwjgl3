@@ -307,30 +307,30 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeRateControlLayerInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeRateControlLayerInfoKHR.PNEXT); }
     /** Unsafe version of {@link #averageBitrate}. */
-    public static long naverageBitrate(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeRateControlLayerInfoKHR.AVERAGEBITRATE); }
+    public static long naverageBitrate(long struct) { return memGetLong(struct + VkVideoEncodeRateControlLayerInfoKHR.AVERAGEBITRATE); }
     /** Unsafe version of {@link #maxBitrate}. */
-    public static long nmaxBitrate(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeRateControlLayerInfoKHR.MAXBITRATE); }
+    public static long nmaxBitrate(long struct) { return memGetLong(struct + VkVideoEncodeRateControlLayerInfoKHR.MAXBITRATE); }
     /** Unsafe version of {@link #frameRateNumerator}. */
-    public static int nframeRateNumerator(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR); }
+    public static int nframeRateNumerator(long struct) { return memGetInt(struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR); }
     /** Unsafe version of {@link #frameRateDenominator}. */
-    public static int nframeRateDenominator(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR); }
+    public static int nframeRateDenominator(long struct) { return memGetInt(struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlLayerInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeRateControlLayerInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #averageBitrate(long) averageBitrate}. */
-    public static void naverageBitrate(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeRateControlLayerInfoKHR.AVERAGEBITRATE, value); }
+    public static void naverageBitrate(long struct, long value) { memPutLong(struct + VkVideoEncodeRateControlLayerInfoKHR.AVERAGEBITRATE, value); }
     /** Unsafe version of {@link #maxBitrate(long) maxBitrate}. */
-    public static void nmaxBitrate(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeRateControlLayerInfoKHR.MAXBITRATE, value); }
+    public static void nmaxBitrate(long struct, long value) { memPutLong(struct + VkVideoEncodeRateControlLayerInfoKHR.MAXBITRATE, value); }
     /** Unsafe version of {@link #frameRateNumerator(int) frameRateNumerator}. */
-    public static void nframeRateNumerator(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR, value); }
+    public static void nframeRateNumerator(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATENUMERATOR, value); }
     /** Unsafe version of {@link #frameRateDenominator(int) frameRateDenominator}. */
-    public static void nframeRateDenominator(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR, value); }
+    public static void nframeRateDenominator(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlLayerInfoKHR.FRAMERATEDENOMINATOR, value); }
 
     // -----------------------------------
 

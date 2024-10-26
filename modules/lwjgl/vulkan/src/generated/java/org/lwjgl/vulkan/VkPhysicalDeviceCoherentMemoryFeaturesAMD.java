@@ -265,18 +265,18 @@ public class VkPhysicalDeviceCoherentMemoryFeaturesAMD extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.PNEXT); }
     /** Unsafe version of {@link #deviceCoherentMemory}. */
-    public static int ndeviceCoherentMemory(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.DEVICECOHERENTMEMORY); }
+    public static int ndeviceCoherentMemory(long struct) { return memGetInt(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.DEVICECOHERENTMEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.PNEXT, value); }
     /** Unsafe version of {@link #deviceCoherentMemory(boolean) deviceCoherentMemory}. */
-    public static void ndeviceCoherentMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.DEVICECOHERENTMEMORY, value); }
+    public static void ndeviceCoherentMemory(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCoherentMemoryFeaturesAMD.DEVICECOHERENTMEMORY, value); }
 
     // -----------------------------------
 

@@ -354,11 +354,11 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XClientMessageEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XClientMessageEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XClientMessageEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XClientMessageEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -366,18 +366,18 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     /** Unsafe version of {@link #message_type}. */
     public static long nmessage_type(long struct) { return memGetCLong(struct + XClientMessageEvent.MESSAGE_TYPE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + XClientMessageEvent.FORMAT); }
     /** Unsafe version of {@link #data_b}. */
     public static ByteBuffer ndata_b(long struct) { return memByteBuffer(struct + XClientMessageEvent.DATA_B, 20); }
     /** Unsafe version of {@link #data_b(int) data_b}. */
     public static byte ndata_b(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20) * 1);
+        return memGetByte(struct + XClientMessageEvent.DATA_B + check(index, 20) * 1);
     }
     /** Unsafe version of {@link #data_s}. */
     public static ShortBuffer ndata_s(long struct) { return memShortBuffer(struct + XClientMessageEvent.DATA_S, 10); }
     /** Unsafe version of {@link #data_s(int) data_s}. */
     public static short ndata_s(long struct, int index) {
-        return UNSAFE.getShort(null, struct + XClientMessageEvent.DATA_S + check(index, 10) * 2);
+        return memGetShort(struct + XClientMessageEvent.DATA_S + check(index, 10) * 2);
     }
     /** Unsafe version of {@link #data_l}. */
     public static CLongBuffer ndata_l(long struct) { return memCLongBuffer(struct + XClientMessageEvent.DATA_L, 5); }
@@ -387,11 +387,11 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XClientMessageEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XClientMessageEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XClientMessageEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XClientMessageEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -399,7 +399,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     /** Unsafe version of {@link #message_type(long) message_type}. */
     public static void nmessage_type(long struct, long value) { memPutCLong(struct + XClientMessageEvent.MESSAGE_TYPE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + XClientMessageEvent.FORMAT, value); }
     /** Unsafe version of {@link #data_b(ByteBuffer) data_b}. */
     public static void ndata_b(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 20); }
@@ -407,7 +407,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     }
     /** Unsafe version of {@link #data_b(int, byte) data_b}. */
     public static void ndata_b(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20) * 1, value);
+        memPutByte(struct + XClientMessageEvent.DATA_B + check(index, 20) * 1, value);
     }
     /** Unsafe version of {@link #data_s(ShortBuffer) data_s}. */
     public static void ndata_s(long struct, ShortBuffer value) {
@@ -416,7 +416,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     }
     /** Unsafe version of {@link #data_s(int, short) data_s}. */
     public static void ndata_s(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + XClientMessageEvent.DATA_S + check(index, 10) * 2, value);
+        memPutShort(struct + XClientMessageEvent.DATA_S + check(index, 10) * 2, value);
     }
     /** Unsafe version of {@link #data_l(CLongBuffer) data_l}. */
     public static void ndata_l(long struct, CLongBuffer value) {

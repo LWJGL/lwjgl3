@@ -109,7 +109,7 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> {
     // -----------------------------------
 
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXTUResourceUsageEntry.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXTUResourceUsageEntry.KIND); }
     /** Unsafe version of {@link #amount}. */
     public static long namount(long struct) { return memGetCLong(struct + CXTUResourceUsageEntry.AMOUNT); }
 

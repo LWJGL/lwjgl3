@@ -291,24 +291,24 @@ public class XrFoveationApplyInfoHTC extends Struct<XrFoveationApplyInfoHTC> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveationApplyInfoHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveationApplyInfoHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveationApplyInfoHTC.NEXT); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + XrFoveationApplyInfoHTC.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + XrFoveationApplyInfoHTC.MODE); }
     /** Unsafe version of {@link #subImageCount}. */
-    public static int nsubImageCount(long struct) { return UNSAFE.getInt(null, struct + XrFoveationApplyInfoHTC.SUBIMAGECOUNT); }
+    public static int nsubImageCount(long struct) { return memGetInt(struct + XrFoveationApplyInfoHTC.SUBIMAGECOUNT); }
     /** Unsafe version of {@link #subImages}. */
     public static XrSwapchainSubImage.Buffer nsubImages(long struct) { return XrSwapchainSubImage.create(memGetAddress(struct + XrFoveationApplyInfoHTC.SUBIMAGES), nsubImageCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationApplyInfoHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveationApplyInfoHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationApplyInfoHTC.NEXT, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationApplyInfoHTC.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + XrFoveationApplyInfoHTC.MODE, value); }
     /** Sets the specified value to the {@code subImageCount} field of the specified {@code struct}. */
-    public static void nsubImageCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationApplyInfoHTC.SUBIMAGECOUNT, value); }
+    public static void nsubImageCount(long struct, int value) { memPutInt(struct + XrFoveationApplyInfoHTC.SUBIMAGECOUNT, value); }
     /** Unsafe version of {@link #subImages(XrSwapchainSubImage.Buffer) subImages}. */
     public static void nsubImages(long struct, XrSwapchainSubImage.Buffer value) { memPutAddress(struct + XrFoveationApplyInfoHTC.SUBIMAGES, value.address()); nsubImageCount(struct, value.remaining()); }
 

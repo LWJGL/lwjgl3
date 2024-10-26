@@ -254,14 +254,14 @@ public class XrEventDataVirtualKeyboardEnterMETA extends Struct<XrEventDataVirtu
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataVirtualKeyboardEnterMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataVirtualKeyboardEnterMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataVirtualKeyboardEnterMETA.NEXT); }
     /** Unsafe version of {@link #keyboard}. */
     public static long nkeyboard(long struct) { return memGetAddress(struct + XrEventDataVirtualKeyboardEnterMETA.KEYBOARD); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVirtualKeyboardEnterMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataVirtualKeyboardEnterMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVirtualKeyboardEnterMETA.NEXT, value); }
     /** Unsafe version of {@link #keyboard(XrVirtualKeyboardMETA) keyboard}. */

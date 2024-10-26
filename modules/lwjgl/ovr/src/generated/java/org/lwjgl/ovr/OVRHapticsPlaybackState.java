@@ -213,9 +213,9 @@ public class OVRHapticsPlaybackState extends Struct<OVRHapticsPlaybackState> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #RemainingQueueSpace}. */
-    public static int nRemainingQueueSpace(long struct) { return UNSAFE.getInt(null, struct + OVRHapticsPlaybackState.REMAININGQUEUESPACE); }
+    public static int nRemainingQueueSpace(long struct) { return memGetInt(struct + OVRHapticsPlaybackState.REMAININGQUEUESPACE); }
     /** Unsafe version of {@link #SamplesQueued}. */
-    public static int nSamplesQueued(long struct) { return UNSAFE.getInt(null, struct + OVRHapticsPlaybackState.SAMPLESQUEUED); }
+    public static int nSamplesQueued(long struct) { return memGetInt(struct + OVRHapticsPlaybackState.SAMPLESQUEUED); }
 
     // -----------------------------------
 

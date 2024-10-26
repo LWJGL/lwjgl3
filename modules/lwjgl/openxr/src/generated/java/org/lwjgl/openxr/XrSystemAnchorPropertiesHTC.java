@@ -248,14 +248,14 @@ public class XrSystemAnchorPropertiesHTC extends Struct<XrSystemAnchorProperties
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemAnchorPropertiesHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemAnchorPropertiesHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemAnchorPropertiesHTC.NEXT); }
     /** Unsafe version of {@link #supportsAnchor}. */
-    public static int nsupportsAnchor(long struct) { return UNSAFE.getInt(null, struct + XrSystemAnchorPropertiesHTC.SUPPORTSANCHOR); }
+    public static int nsupportsAnchor(long struct) { return memGetInt(struct + XrSystemAnchorPropertiesHTC.SUPPORTSANCHOR); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemAnchorPropertiesHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemAnchorPropertiesHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemAnchorPropertiesHTC.NEXT, value); }
 

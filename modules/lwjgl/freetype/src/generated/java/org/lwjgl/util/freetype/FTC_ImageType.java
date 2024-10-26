@@ -128,11 +128,11 @@ public class FTC_ImageType extends Struct<FTC_ImageType> {
     /** Unsafe version of {@link #face_id}. */
     public static long nface_id(long struct) { return memGetAddress(struct + FTC_ImageType.FACE_ID); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + FTC_ImageType.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + FTC_ImageType.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + FTC_ImageType.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + FTC_ImageType.HEIGHT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FTC_ImageType.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FTC_ImageType.FLAGS); }
 
     // -----------------------------------
 

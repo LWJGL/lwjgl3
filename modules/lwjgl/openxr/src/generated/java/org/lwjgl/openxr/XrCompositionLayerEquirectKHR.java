@@ -347,42 +347,42 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerEquirectKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerEquirectKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerEquirectKHR.NEXT); }
     /** Unsafe version of {@link #layerFlags}. */
-    public static long nlayerFlags(long struct) { return UNSAFE.getLong(null, struct + XrCompositionLayerEquirectKHR.LAYERFLAGS); }
+    public static long nlayerFlags(long struct) { return memGetLong(struct + XrCompositionLayerEquirectKHR.LAYERFLAGS); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrCompositionLayerEquirectKHR.SPACE); }
     /** Unsafe version of {@link #eyeVisibility}. */
-    public static int neyeVisibility(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerEquirectKHR.EYEVISIBILITY); }
+    public static int neyeVisibility(long struct) { return memGetInt(struct + XrCompositionLayerEquirectKHR.EYEVISIBILITY); }
     /** Unsafe version of {@link #subImage}. */
     public static XrSwapchainSubImage nsubImage(long struct) { return XrSwapchainSubImage.create(struct + XrCompositionLayerEquirectKHR.SUBIMAGE); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrCompositionLayerEquirectKHR.POSE); }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + XrCompositionLayerEquirectKHR.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + XrCompositionLayerEquirectKHR.RADIUS); }
     /** Unsafe version of {@link #scale}. */
     public static XrVector2f nscale(long struct) { return XrVector2f.create(struct + XrCompositionLayerEquirectKHR.SCALE); }
     /** Unsafe version of {@link #bias}. */
     public static XrVector2f nbias(long struct) { return XrVector2f.create(struct + XrCompositionLayerEquirectKHR.BIAS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerEquirectKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerEquirectKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerEquirectKHR.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
-    public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerEquirectKHR.LAYERFLAGS, value); }
+    public static void nlayerFlags(long struct, long value) { memPutLong(struct + XrCompositionLayerEquirectKHR.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerEquirectKHR.SPACE, value.address()); }
     /** Unsafe version of {@link #eyeVisibility(int) eyeVisibility}. */
-    public static void neyeVisibility(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerEquirectKHR.EYEVISIBILITY, value); }
+    public static void neyeVisibility(long struct, int value) { memPutInt(struct + XrCompositionLayerEquirectKHR.EYEVISIBILITY, value); }
     /** Unsafe version of {@link #subImage(XrSwapchainSubImage) subImage}. */
     public static void nsubImage(long struct, XrSwapchainSubImage value) { memCopy(value.address(), struct + XrCompositionLayerEquirectKHR.SUBIMAGE, XrSwapchainSubImage.SIZEOF); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrCompositionLayerEquirectKHR.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + XrCompositionLayerEquirectKHR.RADIUS, value); }
+    public static void nradius(long struct, float value) { memPutFloat(struct + XrCompositionLayerEquirectKHR.RADIUS, value); }
     /** Unsafe version of {@link #scale(XrVector2f) scale}. */
     public static void nscale(long struct, XrVector2f value) { memCopy(value.address(), struct + XrCompositionLayerEquirectKHR.SCALE, XrVector2f.SIZEOF); }
     /** Unsafe version of {@link #bias(XrVector2f) bias}. */

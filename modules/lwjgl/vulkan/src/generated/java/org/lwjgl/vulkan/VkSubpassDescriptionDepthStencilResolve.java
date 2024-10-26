@@ -295,24 +295,24 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct<VkSubpassDes
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolve.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassDescriptionDepthStencilResolve.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDescriptionDepthStencilResolve.PNEXT); }
     /** Unsafe version of {@link #depthResolveMode}. */
-    public static int ndepthResolveMode(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolve.DEPTHRESOLVEMODE); }
+    public static int ndepthResolveMode(long struct) { return memGetInt(struct + VkSubpassDescriptionDepthStencilResolve.DEPTHRESOLVEMODE); }
     /** Unsafe version of {@link #stencilResolveMode}. */
-    public static int nstencilResolveMode(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolve.STENCILRESOLVEMODE); }
+    public static int nstencilResolveMode(long struct) { return memGetInt(struct + VkSubpassDescriptionDepthStencilResolve.STENCILRESOLVEMODE); }
     /** Unsafe version of {@link #pDepthStencilResolveAttachment}. */
     @Nullable public static VkAttachmentReference2 npDepthStencilResolveAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescriptionDepthStencilResolve.PDEPTHSTENCILRESOLVEATTACHMENT)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolve.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassDescriptionDepthStencilResolve.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDescriptionDepthStencilResolve.PNEXT, value); }
     /** Unsafe version of {@link #depthResolveMode(int) depthResolveMode}. */
-    public static void ndepthResolveMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolve.DEPTHRESOLVEMODE, value); }
+    public static void ndepthResolveMode(long struct, int value) { memPutInt(struct + VkSubpassDescriptionDepthStencilResolve.DEPTHRESOLVEMODE, value); }
     /** Unsafe version of {@link #stencilResolveMode(int) stencilResolveMode}. */
-    public static void nstencilResolveMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolve.STENCILRESOLVEMODE, value); }
+    public static void nstencilResolveMode(long struct, int value) { memPutInt(struct + VkSubpassDescriptionDepthStencilResolve.STENCILRESOLVEMODE, value); }
     /** Unsafe version of {@link #pDepthStencilResolveAttachment(VkAttachmentReference2) pDepthStencilResolveAttachment}. */
     public static void npDepthStencilResolveAttachment(long struct, @Nullable VkAttachmentReference2 value) { memPutAddress(struct + VkSubpassDescriptionDepthStencilResolve.PDEPTHSTENCILRESOLVEATTACHMENT, memAddressSafe(value)); }
 

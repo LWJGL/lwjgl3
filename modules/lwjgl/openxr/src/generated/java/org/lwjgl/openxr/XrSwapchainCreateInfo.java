@@ -343,50 +343,50 @@ public class XrSwapchainCreateInfo extends Struct<XrSwapchainCreateInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainCreateInfo.NEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static long ncreateFlags(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainCreateInfo.CREATEFLAGS); }
+    public static long ncreateFlags(long struct) { return memGetLong(struct + XrSwapchainCreateInfo.CREATEFLAGS); }
     /** Unsafe version of {@link #usageFlags}. */
-    public static long nusageFlags(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainCreateInfo.USAGEFLAGS); }
+    public static long nusageFlags(long struct) { return memGetLong(struct + XrSwapchainCreateInfo.USAGEFLAGS); }
     /** Unsafe version of {@link #format}. */
-    public static long nformat(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainCreateInfo.FORMAT); }
+    public static long nformat(long struct) { return memGetLong(struct + XrSwapchainCreateInfo.FORMAT); }
     /** Unsafe version of {@link #sampleCount}. */
-    public static int nsampleCount(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.SAMPLECOUNT); }
+    public static int nsampleCount(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.SAMPLECOUNT); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.HEIGHT); }
     /** Unsafe version of {@link #faceCount}. */
-    public static int nfaceCount(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.FACECOUNT); }
+    public static int nfaceCount(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.FACECOUNT); }
     /** Unsafe version of {@link #arraySize}. */
-    public static int narraySize(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.ARRAYSIZE); }
+    public static int narraySize(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.ARRAYSIZE); }
     /** Unsafe version of {@link #mipCount}. */
-    public static int nmipCount(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfo.MIPCOUNT); }
+    public static int nmipCount(long struct) { return memGetInt(struct + XrSwapchainCreateInfo.MIPCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
-    public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainCreateInfo.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, long value) { memPutLong(struct + XrSwapchainCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #usageFlags(long) usageFlags}. */
-    public static void nusageFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainCreateInfo.USAGEFLAGS, value); }
+    public static void nusageFlags(long struct, long value) { memPutLong(struct + XrSwapchainCreateInfo.USAGEFLAGS, value); }
     /** Unsafe version of {@link #format(long) format}. */
-    public static void nformat(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainCreateInfo.FORMAT, value); }
+    public static void nformat(long struct, long value) { memPutLong(struct + XrSwapchainCreateInfo.FORMAT, value); }
     /** Unsafe version of {@link #sampleCount(int) sampleCount}. */
-    public static void nsampleCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.SAMPLECOUNT, value); }
+    public static void nsampleCount(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.SAMPLECOUNT, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.HEIGHT, value); }
     /** Unsafe version of {@link #faceCount(int) faceCount}. */
-    public static void nfaceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.FACECOUNT, value); }
+    public static void nfaceCount(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.FACECOUNT, value); }
     /** Unsafe version of {@link #arraySize(int) arraySize}. */
-    public static void narraySize(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.ARRAYSIZE, value); }
+    public static void narraySize(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.ARRAYSIZE, value); }
     /** Unsafe version of {@link #mipCount(int) mipCount}. */
-    public static void nmipCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.MIPCOUNT, value); }
+    public static void nmipCount(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfo.MIPCOUNT, value); }
 
     // -----------------------------------
 

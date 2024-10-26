@@ -252,24 +252,24 @@ public class FMOD_DSP_PARAMETER_DESC_INT extends Struct<FMOD_DSP_PARAMETER_DESC_
     // -----------------------------------
 
     /** Unsafe version of {@link #min}. */
-    public static int nmin(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.MIN); }
+    public static int nmin(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_INT.MIN); }
     /** Unsafe version of {@link #max}. */
-    public static int nmax(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.MAX); }
+    public static int nmax(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_INT.MAX); }
     /** Unsafe version of {@link #defaultval}. */
-    public static int ndefaultval(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.DEFAULTVAL); }
+    public static int ndefaultval(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_INT.DEFAULTVAL); }
     /** Unsafe version of {@link #goestoinf}. */
-    public static int ngoestoinf(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.GOESTOINF); }
+    public static int ngoestoinf(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_INT.GOESTOINF); }
     /** Unsafe version of {@link #valuenames() valuenames}. */
     @Nullable public static PointerBuffer nvaluenames(long struct) { return memPointerBufferSafe(memGetAddress(struct + FMOD_DSP_PARAMETER_DESC_INT.VALUENAMES), nmax(struct) - nmin(struct) + 1); }
 
     /** Unsafe version of {@link #min(int) min}. */
-    public static void nmin(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.MIN, value); }
+    public static void nmin(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_INT.MIN, value); }
     /** Unsafe version of {@link #max(int) max}. */
-    public static void nmax(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.MAX, value); }
+    public static void nmax(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_INT.MAX, value); }
     /** Unsafe version of {@link #defaultval(int) defaultval}. */
-    public static void ndefaultval(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.DEFAULTVAL, value); }
+    public static void ndefaultval(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_INT.DEFAULTVAL, value); }
     /** Unsafe version of {@link #goestoinf(int) goestoinf}. */
-    public static void ngoestoinf(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_INT.GOESTOINF, value); }
+    public static void ngoestoinf(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_INT.GOESTOINF, value); }
     /** Unsafe version of {@link #valuenames(PointerBuffer) valuenames}. */
     public static void nvaluenames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + FMOD_DSP_PARAMETER_DESC_INT.VALUENAMES, memAddressSafe(value)); }
 

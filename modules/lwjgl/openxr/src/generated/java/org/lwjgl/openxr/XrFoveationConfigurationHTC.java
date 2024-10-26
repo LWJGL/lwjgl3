@@ -245,16 +245,16 @@ public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfiguration
     // -----------------------------------
 
     /** Unsafe version of {@link #level}. */
-    public static int nlevel(long struct) { return UNSAFE.getInt(null, struct + XrFoveationConfigurationHTC.LEVEL); }
+    public static int nlevel(long struct) { return memGetInt(struct + XrFoveationConfigurationHTC.LEVEL); }
     /** Unsafe version of {@link #clearFovDegree}. */
-    public static float nclearFovDegree(long struct) { return UNSAFE.getFloat(null, struct + XrFoveationConfigurationHTC.CLEARFOVDEGREE); }
+    public static float nclearFovDegree(long struct) { return memGetFloat(struct + XrFoveationConfigurationHTC.CLEARFOVDEGREE); }
     /** Unsafe version of {@link #focalCenterOffset}. */
     public static XrVector2f nfocalCenterOffset(long struct) { return XrVector2f.create(struct + XrFoveationConfigurationHTC.FOCALCENTEROFFSET); }
 
     /** Unsafe version of {@link #level(int) level}. */
-    public static void nlevel(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationConfigurationHTC.LEVEL, value); }
+    public static void nlevel(long struct, int value) { memPutInt(struct + XrFoveationConfigurationHTC.LEVEL, value); }
     /** Unsafe version of {@link #clearFovDegree(float) clearFovDegree}. */
-    public static void nclearFovDegree(long struct, float value) { UNSAFE.putFloat(null, struct + XrFoveationConfigurationHTC.CLEARFOVDEGREE, value); }
+    public static void nclearFovDegree(long struct, float value) { memPutFloat(struct + XrFoveationConfigurationHTC.CLEARFOVDEGREE, value); }
     /** Unsafe version of {@link #focalCenterOffset(XrVector2f) focalCenterOffset}. */
     public static void nfocalCenterOffset(long struct, XrVector2f value) { memCopy(value.address(), struct + XrFoveationConfigurationHTC.FOCALCENTEROFFSET, XrVector2f.SIZEOF); }
 

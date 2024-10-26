@@ -258,22 +258,22 @@ public class VkDescriptorSetLayoutHostMappingInfoVALVE extends Struct<VkDescript
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutHostMappingInfoVALVE.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.PNEXT); }
     /** Unsafe version of {@link #descriptorOffset}. */
     public static long ndescriptorOffset(long struct) { return memGetAddress(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTOROFFSET); }
     /** Unsafe version of {@link #descriptorSize}. */
-    public static int ndescriptorSize(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTORSIZE); }
+    public static int ndescriptorSize(long struct) { return memGetInt(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTORSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutHostMappingInfoVALVE.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.PNEXT, value); }
     /** Unsafe version of {@link #descriptorOffset(long) descriptorOffset}. */
     public static void ndescriptorOffset(long struct, long value) { memPutAddress(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTOROFFSET, value); }
     /** Unsafe version of {@link #descriptorSize(int) descriptorSize}. */
-    public static void ndescriptorSize(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTORSIZE, value); }
+    public static void ndescriptorSize(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutHostMappingInfoVALVE.DESCRIPTORSIZE, value); }
 
     // -----------------------------------
 

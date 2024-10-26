@@ -261,20 +261,20 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassAttachmentBeginInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassAttachmentBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassAttachmentBeginInfo.PNEXT); }
     /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassAttachmentBeginInfo.ATTACHMENTCOUNT); }
+    public static int nattachmentCount(long struct) { return memGetInt(struct + VkRenderPassAttachmentBeginInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments() pAttachments}. */
     @Nullable public static LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkRenderPassAttachmentBeginInfo.PATTACHMENTS), nattachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassAttachmentBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassAttachmentBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassAttachmentBeginInfo.PNEXT, value); }
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassAttachmentBeginInfo.ATTACHMENTCOUNT, value); }
+    public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkRenderPassAttachmentBeginInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(LongBuffer) pAttachments}. */
     public static void npAttachments(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkRenderPassAttachmentBeginInfo.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
 

@@ -154,17 +154,17 @@ public class BGFXViewStats extends Struct<BGFXViewStats> {
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memASCII(struct + BGFXViewStats.NAME); }
     /** Unsafe version of {@link #view}. */
-    public static short nview(long struct) { return UNSAFE.getShort(null, struct + BGFXViewStats.VIEW); }
+    public static short nview(long struct) { return memGetShort(struct + BGFXViewStats.VIEW); }
     /** Unsafe version of {@link #cpuTimeBegin}. */
-    public static long ncpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.CPUTIMEBEGIN); }
+    public static long ncpuTimeBegin(long struct) { return memGetLong(struct + BGFXViewStats.CPUTIMEBEGIN); }
     /** Unsafe version of {@link #cpuTimeEnd}. */
-    public static long ncpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.CPUTIMEEND); }
+    public static long ncpuTimeEnd(long struct) { return memGetLong(struct + BGFXViewStats.CPUTIMEEND); }
     /** Unsafe version of {@link #gpuTimeBegin}. */
-    public static long ngpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.GPUTIMEBEGIN); }
+    public static long ngpuTimeBegin(long struct) { return memGetLong(struct + BGFXViewStats.GPUTIMEBEGIN); }
     /** Unsafe version of {@link #gpuTimeEnd}. */
-    public static long ngpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.GPUTIMEEND); }
+    public static long ngpuTimeEnd(long struct) { return memGetLong(struct + BGFXViewStats.GPUTIMEEND); }
     /** Unsafe version of {@link #gpuFrameNum}. */
-    public static int ngpuFrameNum(long struct) { return UNSAFE.getInt(null, struct + BGFXViewStats.GPUFRAMENUM); }
+    public static int ngpuFrameNum(long struct) { return memGetInt(struct + BGFXViewStats.GPUFRAMENUM); }
 
     // -----------------------------------
 

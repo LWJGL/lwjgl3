@@ -246,18 +246,18 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExecutionGraphPipelineScratchSizeAMDX.PNEXT); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExecutionGraphPipelineScratchSizeAMDX.PNEXT, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE, value); }
 
     // -----------------------------------
 

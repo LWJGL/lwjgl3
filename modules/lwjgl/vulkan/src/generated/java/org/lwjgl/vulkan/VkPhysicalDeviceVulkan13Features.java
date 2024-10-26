@@ -450,74 +450,74 @@ public class VkPhysicalDeviceVulkan13Features extends Struct<VkPhysicalDeviceVul
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVulkan13Features.PNEXT); }
     /** Unsafe version of {@link #robustImageAccess}. */
-    public static int nrobustImageAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.ROBUSTIMAGEACCESS); }
+    public static int nrobustImageAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.ROBUSTIMAGEACCESS); }
     /** Unsafe version of {@link #inlineUniformBlock}. */
-    public static int ninlineUniformBlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.INLINEUNIFORMBLOCK); }
+    public static int ninlineUniformBlock(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.INLINEUNIFORMBLOCK); }
     /** Unsafe version of {@link #descriptorBindingInlineUniformBlockUpdateAfterBind}. */
-    public static int ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND); }
+    public static int ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND); }
     /** Unsafe version of {@link #pipelineCreationCacheControl}. */
-    public static int npipelineCreationCacheControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.PIPELINECREATIONCACHECONTROL); }
+    public static int npipelineCreationCacheControl(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.PIPELINECREATIONCACHECONTROL); }
     /** Unsafe version of {@link #privateData}. */
-    public static int nprivateData(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.PRIVATEDATA); }
+    public static int nprivateData(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.PRIVATEDATA); }
     /** Unsafe version of {@link #shaderDemoteToHelperInvocation}. */
-    public static int nshaderDemoteToHelperInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERDEMOTETOHELPERINVOCATION); }
+    public static int nshaderDemoteToHelperInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SHADERDEMOTETOHELPERINVOCATION); }
     /** Unsafe version of {@link #shaderTerminateInvocation}. */
-    public static int nshaderTerminateInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERTERMINATEINVOCATION); }
+    public static int nshaderTerminateInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SHADERTERMINATEINVOCATION); }
     /** Unsafe version of {@link #subgroupSizeControl}. */
-    public static int nsubgroupSizeControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SUBGROUPSIZECONTROL); }
+    public static int nsubgroupSizeControl(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SUBGROUPSIZECONTROL); }
     /** Unsafe version of {@link #computeFullSubgroups}. */
-    public static int ncomputeFullSubgroups(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.COMPUTEFULLSUBGROUPS); }
+    public static int ncomputeFullSubgroups(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.COMPUTEFULLSUBGROUPS); }
     /** Unsafe version of {@link #synchronization2}. */
-    public static int nsynchronization2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SYNCHRONIZATION2); }
+    public static int nsynchronization2(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SYNCHRONIZATION2); }
     /** Unsafe version of {@link #textureCompressionASTC_HDR}. */
-    public static int ntextureCompressionASTC_HDR(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.TEXTURECOMPRESSIONASTC_HDR); }
+    public static int ntextureCompressionASTC_HDR(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.TEXTURECOMPRESSIONASTC_HDR); }
     /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory}. */
-    public static int nshaderZeroInitializeWorkgroupMemory(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERZEROINITIALIZEWORKGROUPMEMORY); }
+    public static int nshaderZeroInitializeWorkgroupMemory(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SHADERZEROINITIALIZEWORKGROUPMEMORY); }
     /** Unsafe version of {@link #dynamicRendering}. */
-    public static int ndynamicRendering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.DYNAMICRENDERING); }
+    public static int ndynamicRendering(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.DYNAMICRENDERING); }
     /** Unsafe version of {@link #shaderIntegerDotProduct}. */
-    public static int nshaderIntegerDotProduct(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERINTEGERDOTPRODUCT); }
+    public static int nshaderIntegerDotProduct(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.SHADERINTEGERDOTPRODUCT); }
     /** Unsafe version of {@link #maintenance4}. */
-    public static int nmaintenance4(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Features.MAINTENANCE4); }
+    public static int nmaintenance4(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Features.MAINTENANCE4); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkan13Features.PNEXT, value); }
     /** Unsafe version of {@link #robustImageAccess(boolean) robustImageAccess}. */
-    public static void nrobustImageAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.ROBUSTIMAGEACCESS, value); }
+    public static void nrobustImageAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.ROBUSTIMAGEACCESS, value); }
     /** Unsafe version of {@link #inlineUniformBlock(boolean) inlineUniformBlock}. */
-    public static void ninlineUniformBlock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.INLINEUNIFORMBLOCK, value); }
+    public static void ninlineUniformBlock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.INLINEUNIFORMBLOCK, value); }
     /** Unsafe version of {@link #descriptorBindingInlineUniformBlockUpdateAfterBind(boolean) descriptorBindingInlineUniformBlockUpdateAfterBind}. */
-    public static void ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND, value); }
+    public static void ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND, value); }
     /** Unsafe version of {@link #pipelineCreationCacheControl(boolean) pipelineCreationCacheControl}. */
-    public static void npipelineCreationCacheControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.PIPELINECREATIONCACHECONTROL, value); }
+    public static void npipelineCreationCacheControl(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.PIPELINECREATIONCACHECONTROL, value); }
     /** Unsafe version of {@link #privateData(boolean) privateData}. */
-    public static void nprivateData(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.PRIVATEDATA, value); }
+    public static void nprivateData(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.PRIVATEDATA, value); }
     /** Unsafe version of {@link #shaderDemoteToHelperInvocation(boolean) shaderDemoteToHelperInvocation}. */
-    public static void nshaderDemoteToHelperInvocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERDEMOTETOHELPERINVOCATION, value); }
+    public static void nshaderDemoteToHelperInvocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SHADERDEMOTETOHELPERINVOCATION, value); }
     /** Unsafe version of {@link #shaderTerminateInvocation(boolean) shaderTerminateInvocation}. */
-    public static void nshaderTerminateInvocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERTERMINATEINVOCATION, value); }
+    public static void nshaderTerminateInvocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SHADERTERMINATEINVOCATION, value); }
     /** Unsafe version of {@link #subgroupSizeControl(boolean) subgroupSizeControl}. */
-    public static void nsubgroupSizeControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SUBGROUPSIZECONTROL, value); }
+    public static void nsubgroupSizeControl(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SUBGROUPSIZECONTROL, value); }
     /** Unsafe version of {@link #computeFullSubgroups(boolean) computeFullSubgroups}. */
-    public static void ncomputeFullSubgroups(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.COMPUTEFULLSUBGROUPS, value); }
+    public static void ncomputeFullSubgroups(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.COMPUTEFULLSUBGROUPS, value); }
     /** Unsafe version of {@link #synchronization2(boolean) synchronization2}. */
-    public static void nsynchronization2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SYNCHRONIZATION2, value); }
+    public static void nsynchronization2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SYNCHRONIZATION2, value); }
     /** Unsafe version of {@link #textureCompressionASTC_HDR(boolean) textureCompressionASTC_HDR}. */
-    public static void ntextureCompressionASTC_HDR(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.TEXTURECOMPRESSIONASTC_HDR, value); }
+    public static void ntextureCompressionASTC_HDR(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.TEXTURECOMPRESSIONASTC_HDR, value); }
     /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory(boolean) shaderZeroInitializeWorkgroupMemory}. */
-    public static void nshaderZeroInitializeWorkgroupMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERZEROINITIALIZEWORKGROUPMEMORY, value); }
+    public static void nshaderZeroInitializeWorkgroupMemory(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SHADERZEROINITIALIZEWORKGROUPMEMORY, value); }
     /** Unsafe version of {@link #dynamicRendering(boolean) dynamicRendering}. */
-    public static void ndynamicRendering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.DYNAMICRENDERING, value); }
+    public static void ndynamicRendering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.DYNAMICRENDERING, value); }
     /** Unsafe version of {@link #shaderIntegerDotProduct(boolean) shaderIntegerDotProduct}. */
-    public static void nshaderIntegerDotProduct(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.SHADERINTEGERDOTPRODUCT, value); }
+    public static void nshaderIntegerDotProduct(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.SHADERINTEGERDOTPRODUCT, value); }
     /** Unsafe version of {@link #maintenance4(boolean) maintenance4}. */
-    public static void nmaintenance4(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Features.MAINTENANCE4, value); }
+    public static void nmaintenance4(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Features.MAINTENANCE4, value); }
 
     // -----------------------------------
 

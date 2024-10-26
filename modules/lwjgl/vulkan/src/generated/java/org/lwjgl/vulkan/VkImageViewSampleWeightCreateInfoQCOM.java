@@ -285,7 +285,7 @@ public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSam
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewSampleWeightCreateInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewSampleWeightCreateInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewSampleWeightCreateInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #filterCenter}. */
@@ -293,10 +293,10 @@ public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSam
     /** Unsafe version of {@link #filterSize}. */
     public static VkExtent2D nfilterSize(long struct) { return VkExtent2D.create(struct + VkImageViewSampleWeightCreateInfoQCOM.FILTERSIZE); }
     /** Unsafe version of {@link #numPhases}. */
-    public static int nnumPhases(long struct) { return UNSAFE.getInt(null, struct + VkImageViewSampleWeightCreateInfoQCOM.NUMPHASES); }
+    public static int nnumPhases(long struct) { return memGetInt(struct + VkImageViewSampleWeightCreateInfoQCOM.NUMPHASES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewSampleWeightCreateInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewSampleWeightCreateInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewSampleWeightCreateInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #filterCenter(VkOffset2D) filterCenter}. */
@@ -304,7 +304,7 @@ public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSam
     /** Unsafe version of {@link #filterSize(VkExtent2D) filterSize}. */
     public static void nfilterSize(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkImageViewSampleWeightCreateInfoQCOM.FILTERSIZE, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #numPhases(int) numPhases}. */
-    public static void nnumPhases(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewSampleWeightCreateInfoQCOM.NUMPHASES, value); }
+    public static void nnumPhases(long struct, int value) { memPutInt(struct + VkImageViewSampleWeightCreateInfoQCOM.NUMPHASES, value); }
 
     // -----------------------------------
 

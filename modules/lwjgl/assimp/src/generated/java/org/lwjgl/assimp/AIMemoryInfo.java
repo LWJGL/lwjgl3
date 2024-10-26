@@ -257,21 +257,21 @@ public class AIMemoryInfo extends Struct<AIMemoryInfo> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #textures}. */
-    public static int ntextures(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.TEXTURES); }
+    public static int ntextures(long struct) { return memGetInt(struct + AIMemoryInfo.TEXTURES); }
     /** Unsafe version of {@link #materials}. */
-    public static int nmaterials(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.MATERIALS); }
+    public static int nmaterials(long struct) { return memGetInt(struct + AIMemoryInfo.MATERIALS); }
     /** Unsafe version of {@link #meshes}. */
-    public static int nmeshes(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.MESHES); }
+    public static int nmeshes(long struct) { return memGetInt(struct + AIMemoryInfo.MESHES); }
     /** Unsafe version of {@link #nodes}. */
-    public static int nnodes(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.NODES); }
+    public static int nnodes(long struct) { return memGetInt(struct + AIMemoryInfo.NODES); }
     /** Unsafe version of {@link #animations}. */
-    public static int nanimations(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.ANIMATIONS); }
+    public static int nanimations(long struct) { return memGetInt(struct + AIMemoryInfo.ANIMATIONS); }
     /** Unsafe version of {@link #cameras}. */
-    public static int ncameras(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.CAMERAS); }
+    public static int ncameras(long struct) { return memGetInt(struct + AIMemoryInfo.CAMERAS); }
     /** Unsafe version of {@link #lights}. */
-    public static int nlights(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.LIGHTS); }
+    public static int nlights(long struct) { return memGetInt(struct + AIMemoryInfo.LIGHTS); }
     /** Unsafe version of {@link #total}. */
-    public static int ntotal(long struct) { return UNSAFE.getInt(null, struct + AIMemoryInfo.TOTAL); }
+    public static int ntotal(long struct) { return memGetInt(struct + AIMemoryInfo.TOTAL); }
 
     // -----------------------------------
 

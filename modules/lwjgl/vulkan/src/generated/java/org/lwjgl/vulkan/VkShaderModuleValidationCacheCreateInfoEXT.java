@@ -262,18 +262,18 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct<VkShaderM
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkShaderModuleValidationCacheCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #validationCache}. */
-    public static long nvalidationCache(long struct) { return UNSAFE.getLong(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE); }
+    public static long nvalidationCache(long struct) { return memGetLong(struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkShaderModuleValidationCacheCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #validationCache(long) validationCache}. */
-    public static void nvalidationCache(long struct, long value) { UNSAFE.putLong(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE, value); }
+    public static void nvalidationCache(long struct, long value) { memPutLong(struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE, value); }
 
     // -----------------------------------
 

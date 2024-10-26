@@ -259,22 +259,22 @@ public class HmdColor extends Struct<HmdColor> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + HmdColor.R); }
+    public static float nr(long struct) { return memGetFloat(struct + HmdColor.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + HmdColor.G); }
+    public static float ng(long struct) { return memGetFloat(struct + HmdColor.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + HmdColor.B); }
+    public static float nb(long struct) { return memGetFloat(struct + HmdColor.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + HmdColor.A); }
+    public static float na(long struct) { return memGetFloat(struct + HmdColor.A); }
 
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + HmdColor.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + HmdColor.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + HmdColor.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + HmdColor.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + HmdColor.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + HmdColor.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + HmdColor.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + HmdColor.A, value); }
 
     // -----------------------------------
 

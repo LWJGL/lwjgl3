@@ -317,28 +317,28 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDeviceQueueCreateInfo.FLAGS); }
     /** Unsafe version of {@link #queueFamilyIndex}. */
-    public static int nqueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueCreateInfo.QUEUEFAMILYINDEX); }
+    public static int nqueueFamilyIndex(long struct) { return memGetInt(struct + VkDeviceQueueCreateInfo.QUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #queueCount}. */
-    public static int nqueueCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueCreateInfo.QUEUECOUNT); }
+    public static int nqueueCount(long struct) { return memGetInt(struct + VkDeviceQueueCreateInfo.QUEUECOUNT); }
     /** Unsafe version of {@link #pQueuePriorities() pQueuePriorities}. */
     public static FloatBuffer npQueuePriorities(long struct) { return memFloatBuffer(memGetAddress(struct + VkDeviceQueueCreateInfo.PQUEUEPRIORITIES), nqueueCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDeviceQueueCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #queueFamilyIndex(int) queueFamilyIndex}. */
-    public static void nqueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueCreateInfo.QUEUEFAMILYINDEX, value); }
+    public static void nqueueFamilyIndex(long struct, int value) { memPutInt(struct + VkDeviceQueueCreateInfo.QUEUEFAMILYINDEX, value); }
     /** Sets the specified value to the {@code queueCount} field of the specified {@code struct}. */
-    public static void nqueueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueCreateInfo.QUEUECOUNT, value); }
+    public static void nqueueCount(long struct, int value) { memPutInt(struct + VkDeviceQueueCreateInfo.QUEUECOUNT, value); }
     /** Unsafe version of {@link #pQueuePriorities(FloatBuffer) pQueuePriorities}. */
     public static void npQueuePriorities(long struct, FloatBuffer value) { memPutAddress(struct + VkDeviceQueueCreateInfo.PQUEUEPRIORITIES, memAddress(value)); nqueueCount(struct, value.remaining()); }
 

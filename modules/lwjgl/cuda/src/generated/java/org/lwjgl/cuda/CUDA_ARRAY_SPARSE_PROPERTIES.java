@@ -288,36 +288,36 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPE
     // -----------------------------------
 
     /** Unsafe version of {@link #tileExtent_width}. */
-    public static int ntileExtent_width(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_WIDTH); }
+    public static int ntileExtent_width(long struct) { return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_WIDTH); }
     /** Unsafe version of {@link #tileExtent_height}. */
-    public static int ntileExtent_height(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_HEIGHT); }
+    public static int ntileExtent_height(long struct) { return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_HEIGHT); }
     /** Unsafe version of {@link #tileExtent_depth}. */
-    public static int ntileExtent_depth(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_DEPTH); }
+    public static int ntileExtent_depth(long struct) { return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_DEPTH); }
     /** Unsafe version of {@link #miptailFirstLevel}. */
-    public static int nmiptailFirstLevel(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILFIRSTLEVEL); }
+    public static int nmiptailFirstLevel(long struct) { return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILFIRSTLEVEL); }
     /** Unsafe version of {@link #miptailSize}. */
-    public static long nmiptailSize(long struct) { return UNSAFE.getLong(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILSIZE); }
+    public static long nmiptailSize(long struct) { return memGetLong(struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILSIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.FLAGS); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + CUDA_ARRAY_SPARSE_PROPERTIES.RESERVED, 4); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.RESERVED + check(index, 4) * 4);
+        return memGetInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.RESERVED + check(index, 4) * 4);
     }
 
     /** Unsafe version of {@link #tileExtent_width(int) tileExtent_width}. */
-    public static void ntileExtent_width(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_WIDTH, value); }
+    public static void ntileExtent_width(long struct, int value) { memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_WIDTH, value); }
     /** Unsafe version of {@link #tileExtent_height(int) tileExtent_height}. */
-    public static void ntileExtent_height(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_HEIGHT, value); }
+    public static void ntileExtent_height(long struct, int value) { memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_HEIGHT, value); }
     /** Unsafe version of {@link #tileExtent_depth(int) tileExtent_depth}. */
-    public static void ntileExtent_depth(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_DEPTH, value); }
+    public static void ntileExtent_depth(long struct, int value) { memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.TILEEXTENT_DEPTH, value); }
     /** Unsafe version of {@link #miptailFirstLevel(int) miptailFirstLevel}. */
-    public static void nmiptailFirstLevel(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILFIRSTLEVEL, value); }
+    public static void nmiptailFirstLevel(long struct, int value) { memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILFIRSTLEVEL, value); }
     /** Unsafe version of {@link #miptailSize(long) miptailSize}. */
-    public static void nmiptailSize(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILSIZE, value); }
+    public static void nmiptailSize(long struct, long value) { memPutLong(struct + CUDA_ARRAY_SPARSE_PROPERTIES.MIPTAILSIZE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.FLAGS, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -325,7 +325,7 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPE
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUDA_ARRAY_SPARSE_PROPERTIES.RESERVED + check(index, 4) * 4, value);
+        memPutInt(struct + CUDA_ARRAY_SPARSE_PROPERTIES.RESERVED + check(index, 4) * 4, value);
     }
 
     // -----------------------------------

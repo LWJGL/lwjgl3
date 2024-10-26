@@ -255,16 +255,16 @@ public class VkVideoEncodeQualityLevelPropertiesKHR extends Struct<VkVideoEncode
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeQualityLevelPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeQualityLevelPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeQualityLevelPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #preferredRateControlMode}. */
-    public static int npreferredRateControlMode(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeQualityLevelPropertiesKHR.PREFERREDRATECONTROLMODE); }
+    public static int npreferredRateControlMode(long struct) { return memGetInt(struct + VkVideoEncodeQualityLevelPropertiesKHR.PREFERREDRATECONTROLMODE); }
     /** Unsafe version of {@link #preferredRateControlLayerCount}. */
-    public static int npreferredRateControlLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeQualityLevelPropertiesKHR.PREFERREDRATECONTROLLAYERCOUNT); }
+    public static int npreferredRateControlLayerCount(long struct) { return memGetInt(struct + VkVideoEncodeQualityLevelPropertiesKHR.PREFERREDRATECONTROLLAYERCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeQualityLevelPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeQualityLevelPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeQualityLevelPropertiesKHR.PNEXT, value); }
 

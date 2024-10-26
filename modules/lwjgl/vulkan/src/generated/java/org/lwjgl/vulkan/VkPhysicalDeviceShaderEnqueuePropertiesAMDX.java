@@ -290,34 +290,34 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.PNEXT); }
     /** Unsafe version of {@link #maxExecutionGraphDepth}. */
-    public static int nmaxExecutionGraphDepth(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHDEPTH); }
+    public static int nmaxExecutionGraphDepth(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHDEPTH); }
     /** Unsafe version of {@link #maxExecutionGraphShaderOutputNodes}. */
-    public static int nmaxExecutionGraphShaderOutputNodes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADEROUTPUTNODES); }
+    public static int nmaxExecutionGraphShaderOutputNodes(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADEROUTPUTNODES); }
     /** Unsafe version of {@link #maxExecutionGraphShaderPayloadSize}. */
-    public static int nmaxExecutionGraphShaderPayloadSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADSIZE); }
+    public static int nmaxExecutionGraphShaderPayloadSize(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADSIZE); }
     /** Unsafe version of {@link #maxExecutionGraphShaderPayloadCount}. */
-    public static int nmaxExecutionGraphShaderPayloadCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT); }
+    public static int nmaxExecutionGraphShaderPayloadCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT); }
     /** Unsafe version of {@link #executionGraphDispatchAddressAlignment}. */
-    public static int nexecutionGraphDispatchAddressAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT); }
+    public static int nexecutionGraphDispatchAddressAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.PNEXT, value); }
     /** Unsafe version of {@link #maxExecutionGraphDepth(int) maxExecutionGraphDepth}. */
-    public static void nmaxExecutionGraphDepth(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHDEPTH, value); }
+    public static void nmaxExecutionGraphDepth(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHDEPTH, value); }
     /** Unsafe version of {@link #maxExecutionGraphShaderOutputNodes(int) maxExecutionGraphShaderOutputNodes}. */
-    public static void nmaxExecutionGraphShaderOutputNodes(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADEROUTPUTNODES, value); }
+    public static void nmaxExecutionGraphShaderOutputNodes(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADEROUTPUTNODES, value); }
     /** Unsafe version of {@link #maxExecutionGraphShaderPayloadSize(int) maxExecutionGraphShaderPayloadSize}. */
-    public static void nmaxExecutionGraphShaderPayloadSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADSIZE, value); }
+    public static void nmaxExecutionGraphShaderPayloadSize(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADSIZE, value); }
     /** Unsafe version of {@link #maxExecutionGraphShaderPayloadCount(int) maxExecutionGraphShaderPayloadCount}. */
-    public static void nmaxExecutionGraphShaderPayloadCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT, value); }
+    public static void nmaxExecutionGraphShaderPayloadCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT, value); }
     /** Unsafe version of {@link #executionGraphDispatchAddressAlignment(int) executionGraphDispatchAddressAlignment}. */
-    public static void nexecutionGraphDispatchAddressAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT, value); }
+    public static void nexecutionGraphDispatchAddressAlignment(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT, value); }
 
     // -----------------------------------
 

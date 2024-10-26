@@ -357,36 +357,36 @@ public class VkInstanceCreateInfo extends Struct<VkInstanceCreateInfo> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkInstanceCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkInstanceCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkInstanceCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkInstanceCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkInstanceCreateInfo.FLAGS); }
     /** Unsafe version of {@link #pApplicationInfo}. */
     @Nullable public static VkApplicationInfo npApplicationInfo(long struct) { return VkApplicationInfo.createSafe(memGetAddress(struct + VkInstanceCreateInfo.PAPPLICATIONINFO)); }
     /** Unsafe version of {@link #enabledLayerCount}. */
-    public static int nenabledLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkInstanceCreateInfo.ENABLEDLAYERCOUNT); }
+    public static int nenabledLayerCount(long struct) { return memGetInt(struct + VkInstanceCreateInfo.ENABLEDLAYERCOUNT); }
     /** Unsafe version of {@link #ppEnabledLayerNames() ppEnabledLayerNames}. */
     @Nullable public static PointerBuffer nppEnabledLayerNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkInstanceCreateInfo.PPENABLEDLAYERNAMES), nenabledLayerCount(struct)); }
     /** Unsafe version of {@link #enabledExtensionCount}. */
-    public static int nenabledExtensionCount(long struct) { return UNSAFE.getInt(null, struct + VkInstanceCreateInfo.ENABLEDEXTENSIONCOUNT); }
+    public static int nenabledExtensionCount(long struct) { return memGetInt(struct + VkInstanceCreateInfo.ENABLEDEXTENSIONCOUNT); }
     /** Unsafe version of {@link #ppEnabledExtensionNames() ppEnabledExtensionNames}. */
     @Nullable public static PointerBuffer nppEnabledExtensionNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkInstanceCreateInfo.PPENABLEDEXTENSIONNAMES), nenabledExtensionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkInstanceCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkInstanceCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkInstanceCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkInstanceCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkInstanceCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #pApplicationInfo(VkApplicationInfo) pApplicationInfo}. */
     public static void npApplicationInfo(long struct, @Nullable VkApplicationInfo value) { memPutAddress(struct + VkInstanceCreateInfo.PAPPLICATIONINFO, memAddressSafe(value)); }
     /** Sets the specified value to the {@code enabledLayerCount} field of the specified {@code struct}. */
-    public static void nenabledLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkInstanceCreateInfo.ENABLEDLAYERCOUNT, value); }
+    public static void nenabledLayerCount(long struct, int value) { memPutInt(struct + VkInstanceCreateInfo.ENABLEDLAYERCOUNT, value); }
     /** Unsafe version of {@link #ppEnabledLayerNames(PointerBuffer) ppEnabledLayerNames}. */
     public static void nppEnabledLayerNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkInstanceCreateInfo.PPENABLEDLAYERNAMES, memAddressSafe(value)); nenabledLayerCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code enabledExtensionCount} field of the specified {@code struct}. */
-    public static void nenabledExtensionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkInstanceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
+    public static void nenabledExtensionCount(long struct, int value) { memPutInt(struct + VkInstanceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
     /** Unsafe version of {@link #ppEnabledExtensionNames(PointerBuffer) ppEnabledExtensionNames}. */
     public static void nppEnabledExtensionNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkInstanceCreateInfo.PPENABLEDEXTENSIONNAMES, memAddressSafe(value)); nenabledExtensionCount(struct, value == null ? 0 : value.remaining()); }
 

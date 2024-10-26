@@ -360,22 +360,22 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #sq_entries}. */
-    public static int nsq_entries(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.SQ_ENTRIES); }
+    public static int nsq_entries(long struct) { return memGetInt(struct + IOURingParams.SQ_ENTRIES); }
     /** Unsafe version of {@link #cq_entries}. */
-    public static int ncq_entries(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.CQ_ENTRIES); }
+    public static int ncq_entries(long struct) { return memGetInt(struct + IOURingParams.CQ_ENTRIES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + IOURingParams.FLAGS); }
     /** Unsafe version of {@link #sq_thread_cpu}. */
-    public static int nsq_thread_cpu(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.SQ_THREAD_CPU); }
+    public static int nsq_thread_cpu(long struct) { return memGetInt(struct + IOURingParams.SQ_THREAD_CPU); }
     /** Unsafe version of {@link #sq_thread_idle}. */
-    public static int nsq_thread_idle(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.SQ_THREAD_IDLE); }
+    public static int nsq_thread_idle(long struct) { return memGetInt(struct + IOURingParams.SQ_THREAD_IDLE); }
     /** Unsafe version of {@link #features}. */
-    public static int nfeatures(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.FEATURES); }
+    public static int nfeatures(long struct) { return memGetInt(struct + IOURingParams.FEATURES); }
     /** Unsafe version of {@link #wq_fd}. */
-    public static int nwq_fd(long struct) { return UNSAFE.getInt(null, struct + IOURingParams.WQ_FD); }
+    public static int nwq_fd(long struct) { return memGetInt(struct + IOURingParams.WQ_FD); }
     public static IntBuffer nresv(long struct) { return memIntBuffer(struct + IOURingParams.RESV, 3); }
     public static int nresv(long struct, int index) {
-        return UNSAFE.getInt(null, struct + IOURingParams.RESV + check(index, 3) * 4);
+        return memGetInt(struct + IOURingParams.RESV + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #sq_off}. */
     public static IOSQRingOffsets nsq_off(long struct) { return IOSQRingOffsets.create(struct + IOURingParams.SQ_OFF); }
@@ -383,25 +383,25 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public static IOCQRingOffsets ncq_off(long struct) { return IOCQRingOffsets.create(struct + IOURingParams.CQ_OFF); }
 
     /** Unsafe version of {@link #sq_entries(int) sq_entries}. */
-    public static void nsq_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.SQ_ENTRIES, value); }
+    public static void nsq_entries(long struct, int value) { memPutInt(struct + IOURingParams.SQ_ENTRIES, value); }
     /** Unsafe version of {@link #cq_entries(int) cq_entries}. */
-    public static void ncq_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.CQ_ENTRIES, value); }
+    public static void ncq_entries(long struct, int value) { memPutInt(struct + IOURingParams.CQ_ENTRIES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOURingParams.FLAGS, value); }
     /** Unsafe version of {@link #sq_thread_cpu(int) sq_thread_cpu}. */
-    public static void nsq_thread_cpu(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.SQ_THREAD_CPU, value); }
+    public static void nsq_thread_cpu(long struct, int value) { memPutInt(struct + IOURingParams.SQ_THREAD_CPU, value); }
     /** Unsafe version of {@link #sq_thread_idle(int) sq_thread_idle}. */
-    public static void nsq_thread_idle(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.SQ_THREAD_IDLE, value); }
+    public static void nsq_thread_idle(long struct, int value) { memPutInt(struct + IOURingParams.SQ_THREAD_IDLE, value); }
     /** Unsafe version of {@link #features(int) features}. */
-    public static void nfeatures(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.FEATURES, value); }
+    public static void nfeatures(long struct, int value) { memPutInt(struct + IOURingParams.FEATURES, value); }
     /** Unsafe version of {@link #wq_fd(int) wq_fd}. */
-    public static void nwq_fd(long struct, int value) { UNSAFE.putInt(null, struct + IOURingParams.WQ_FD, value); }
+    public static void nwq_fd(long struct, int value) { memPutInt(struct + IOURingParams.WQ_FD, value); }
     public static void nresv(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingParams.RESV, value.remaining() * 4);
     }
     public static void nresv(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + IOURingParams.RESV + check(index, 3) * 4, value);
+        memPutInt(struct + IOURingParams.RESV + check(index, 3) * 4, value);
     }
     /** Unsafe version of {@link #sq_off(IOSQRingOffsets) sq_off}. */
     public static void nsq_off(long struct, IOSQRingOffsets value) { memCopy(value.address(), struct + IOURingParams.SQ_OFF, IOSQRingOffsets.SIZEOF); }

@@ -259,20 +259,20 @@ public class VkImportMetalTextureInfoEXT extends Struct<VkImportMetalTextureInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportMetalTextureInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportMetalTextureInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportMetalTextureInfoEXT.PNEXT); }
     /** Unsafe version of {@link #plane}. */
-    public static int nplane(long struct) { return UNSAFE.getInt(null, struct + VkImportMetalTextureInfoEXT.PLANE); }
+    public static int nplane(long struct) { return memGetInt(struct + VkImportMetalTextureInfoEXT.PLANE); }
     /** Unsafe version of {@link #mtlTexture}. */
     public static long nmtlTexture(long struct) { return memGetAddress(struct + VkImportMetalTextureInfoEXT.MTLTEXTURE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMetalTextureInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportMetalTextureInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportMetalTextureInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #plane(int) plane}. */
-    public static void nplane(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMetalTextureInfoEXT.PLANE, value); }
+    public static void nplane(long struct, int value) { memPutInt(struct + VkImportMetalTextureInfoEXT.PLANE, value); }
     /** Unsafe version of {@link #mtlTexture(long) mtlTexture}. */
     public static void nmtlTexture(long struct, long value) { memPutAddress(struct + VkImportMetalTextureInfoEXT.MTLTEXTURE, check(value)); }
 

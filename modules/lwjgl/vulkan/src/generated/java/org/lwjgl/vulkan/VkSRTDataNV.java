@@ -411,70 +411,70 @@ public class VkSRTDataNV extends Struct<VkSRTDataNV> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #sx}. */
-    public static float nsx(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.SX); }
+    public static float nsx(long struct) { return memGetFloat(struct + VkSRTDataNV.SX); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.A); }
+    public static float na(long struct) { return memGetFloat(struct + VkSRTDataNV.A); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.B); }
+    public static float nb(long struct) { return memGetFloat(struct + VkSRTDataNV.B); }
     /** Unsafe version of {@link #pvx}. */
-    public static float npvx(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.PVX); }
+    public static float npvx(long struct) { return memGetFloat(struct + VkSRTDataNV.PVX); }
     /** Unsafe version of {@link #sy}. */
-    public static float nsy(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.SY); }
+    public static float nsy(long struct) { return memGetFloat(struct + VkSRTDataNV.SY); }
     /** Unsafe version of {@link #c}. */
-    public static float nc(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.C); }
+    public static float nc(long struct) { return memGetFloat(struct + VkSRTDataNV.C); }
     /** Unsafe version of {@link #pvy}. */
-    public static float npvy(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.PVY); }
+    public static float npvy(long struct) { return memGetFloat(struct + VkSRTDataNV.PVY); }
     /** Unsafe version of {@link #sz}. */
-    public static float nsz(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.SZ); }
+    public static float nsz(long struct) { return memGetFloat(struct + VkSRTDataNV.SZ); }
     /** Unsafe version of {@link #pvz}. */
-    public static float npvz(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.PVZ); }
+    public static float npvz(long struct) { return memGetFloat(struct + VkSRTDataNV.PVZ); }
     /** Unsafe version of {@link #qx}. */
-    public static float nqx(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.QX); }
+    public static float nqx(long struct) { return memGetFloat(struct + VkSRTDataNV.QX); }
     /** Unsafe version of {@link #qy}. */
-    public static float nqy(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.QY); }
+    public static float nqy(long struct) { return memGetFloat(struct + VkSRTDataNV.QY); }
     /** Unsafe version of {@link #qz}. */
-    public static float nqz(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.QZ); }
+    public static float nqz(long struct) { return memGetFloat(struct + VkSRTDataNV.QZ); }
     /** Unsafe version of {@link #qw}. */
-    public static float nqw(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.QW); }
+    public static float nqw(long struct) { return memGetFloat(struct + VkSRTDataNV.QW); }
     /** Unsafe version of {@link #tx}. */
-    public static float ntx(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.TX); }
+    public static float ntx(long struct) { return memGetFloat(struct + VkSRTDataNV.TX); }
     /** Unsafe version of {@link #ty}. */
-    public static float nty(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.TY); }
+    public static float nty(long struct) { return memGetFloat(struct + VkSRTDataNV.TY); }
     /** Unsafe version of {@link #tz}. */
-    public static float ntz(long struct) { return UNSAFE.getFloat(null, struct + VkSRTDataNV.TZ); }
+    public static float ntz(long struct) { return memGetFloat(struct + VkSRTDataNV.TZ); }
 
     /** Unsafe version of {@link #sx(float) sx}. */
-    public static void nsx(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.SX, value); }
+    public static void nsx(long struct, float value) { memPutFloat(struct + VkSRTDataNV.SX, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + VkSRTDataNV.A, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + VkSRTDataNV.B, value); }
     /** Unsafe version of {@link #pvx(float) pvx}. */
-    public static void npvx(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.PVX, value); }
+    public static void npvx(long struct, float value) { memPutFloat(struct + VkSRTDataNV.PVX, value); }
     /** Unsafe version of {@link #sy(float) sy}. */
-    public static void nsy(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.SY, value); }
+    public static void nsy(long struct, float value) { memPutFloat(struct + VkSRTDataNV.SY, value); }
     /** Unsafe version of {@link #c(float) c}. */
-    public static void nc(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.C, value); }
+    public static void nc(long struct, float value) { memPutFloat(struct + VkSRTDataNV.C, value); }
     /** Unsafe version of {@link #pvy(float) pvy}. */
-    public static void npvy(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.PVY, value); }
+    public static void npvy(long struct, float value) { memPutFloat(struct + VkSRTDataNV.PVY, value); }
     /** Unsafe version of {@link #sz(float) sz}. */
-    public static void nsz(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.SZ, value); }
+    public static void nsz(long struct, float value) { memPutFloat(struct + VkSRTDataNV.SZ, value); }
     /** Unsafe version of {@link #pvz(float) pvz}. */
-    public static void npvz(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.PVZ, value); }
+    public static void npvz(long struct, float value) { memPutFloat(struct + VkSRTDataNV.PVZ, value); }
     /** Unsafe version of {@link #qx(float) qx}. */
-    public static void nqx(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.QX, value); }
+    public static void nqx(long struct, float value) { memPutFloat(struct + VkSRTDataNV.QX, value); }
     /** Unsafe version of {@link #qy(float) qy}. */
-    public static void nqy(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.QY, value); }
+    public static void nqy(long struct, float value) { memPutFloat(struct + VkSRTDataNV.QY, value); }
     /** Unsafe version of {@link #qz(float) qz}. */
-    public static void nqz(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.QZ, value); }
+    public static void nqz(long struct, float value) { memPutFloat(struct + VkSRTDataNV.QZ, value); }
     /** Unsafe version of {@link #qw(float) qw}. */
-    public static void nqw(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.QW, value); }
+    public static void nqw(long struct, float value) { memPutFloat(struct + VkSRTDataNV.QW, value); }
     /** Unsafe version of {@link #tx(float) tx}. */
-    public static void ntx(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.TX, value); }
+    public static void ntx(long struct, float value) { memPutFloat(struct + VkSRTDataNV.TX, value); }
     /** Unsafe version of {@link #ty(float) ty}. */
-    public static void nty(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.TY, value); }
+    public static void nty(long struct, float value) { memPutFloat(struct + VkSRTDataNV.TY, value); }
     /** Unsafe version of {@link #tz(float) tz}. */
-    public static void ntz(long struct, float value) { UNSAFE.putFloat(null, struct + VkSRTDataNV.TZ, value); }
+    public static void ntz(long struct, float value) { memPutFloat(struct + VkSRTDataNV.TZ, value); }
 
     // -----------------------------------
 

@@ -117,7 +117,7 @@ public class NkCommand extends Struct<NkCommand> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkCommand.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkCommand.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + NkCommand.NEXT); }
     /** Unsafe version of {@link #userdata}. */

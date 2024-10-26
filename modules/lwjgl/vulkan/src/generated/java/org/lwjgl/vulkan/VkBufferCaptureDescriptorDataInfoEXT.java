@@ -254,18 +254,18 @@ public class VkBufferCaptureDescriptorDataInfoEXT extends Struct<VkBufferCapture
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferCaptureDescriptorDataInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBufferCaptureDescriptorDataInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBufferCaptureDescriptorDataInfoEXT.PNEXT); }
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkBufferCaptureDescriptorDataInfoEXT.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkBufferCaptureDescriptorDataInfoEXT.BUFFER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferCaptureDescriptorDataInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBufferCaptureDescriptorDataInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferCaptureDescriptorDataInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCaptureDescriptorDataInfoEXT.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkBufferCaptureDescriptorDataInfoEXT.BUFFER, value); }
 
     // -----------------------------------
 

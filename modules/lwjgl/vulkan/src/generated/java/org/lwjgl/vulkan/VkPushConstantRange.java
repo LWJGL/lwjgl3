@@ -274,18 +274,18 @@ public class VkPushConstantRange extends Struct<VkPushConstantRange> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkPushConstantRange.STAGEFLAGS); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkPushConstantRange.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + VkPushConstantRange.SIZE); }
 
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkPushConstantRange.STAGEFLAGS, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkPushConstantRange.OFFSET, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + VkPushConstantRange.SIZE, value); }
 
     // -----------------------------------
 

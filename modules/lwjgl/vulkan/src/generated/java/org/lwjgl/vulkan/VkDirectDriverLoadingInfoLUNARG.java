@@ -259,20 +259,20 @@ public class VkDirectDriverLoadingInfoLUNARG extends Struct<VkDirectDriverLoadin
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingInfoLUNARG.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDirectDriverLoadingInfoLUNARG.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDirectDriverLoadingInfoLUNARG.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDirectDriverLoadingInfoLUNARG.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDirectDriverLoadingInfoLUNARG.FLAGS); }
     /** Unsafe version of {@link #pfnGetInstanceProcAddr}. */
     public static long npfnGetInstanceProcAddr(long struct) { return memGetAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingInfoLUNARG.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDirectDriverLoadingInfoLUNARG.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDirectDriverLoadingInfoLUNARG.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDirectDriverLoadingInfoLUNARG.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDirectDriverLoadingInfoLUNARG.FLAGS, value); }
     /** Unsafe version of {@link #pfnGetInstanceProcAddr(long) pfnGetInstanceProcAddr}. */
     public static void npfnGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + VkDirectDriverLoadingInfoLUNARG.PFNGETINSTANCEPROCADDR, check(value)); }
 

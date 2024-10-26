@@ -264,17 +264,17 @@ public class STBRPContext extends Struct<STBRPContext> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + STBRPContext.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + STBRPContext.HEIGHT); }
     /** Unsafe version of {@link #align}. */
-    public static int nalign(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.ALIGN); }
+    public static int nalign(long struct) { return memGetInt(struct + STBRPContext.ALIGN); }
     /** Unsafe version of {@link #init_mode}. */
-    public static int ninit_mode(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.INIT_MODE); }
+    public static int ninit_mode(long struct) { return memGetInt(struct + STBRPContext.INIT_MODE); }
     /** Unsafe version of {@link #heuristic}. */
-    public static int nheuristic(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.HEURISTIC); }
+    public static int nheuristic(long struct) { return memGetInt(struct + STBRPContext.HEURISTIC); }
     /** Unsafe version of {@link #num_nodes}. */
-    public static int nnum_nodes(long struct) { return UNSAFE.getInt(null, struct + STBRPContext.NUM_NODES); }
+    public static int nnum_nodes(long struct) { return memGetInt(struct + STBRPContext.NUM_NODES); }
     /** Unsafe version of {@link #active_head}. */
     @Nullable public static STBRPNode nactive_head(long struct) { return STBRPNode.createSafe(memGetAddress(struct + STBRPContext.ACTIVE_HEAD)); }
     /** Unsafe version of {@link #free_head}. */

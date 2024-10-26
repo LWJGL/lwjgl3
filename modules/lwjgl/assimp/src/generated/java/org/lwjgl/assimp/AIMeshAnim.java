@@ -260,14 +260,14 @@ public class AIMeshAnim extends Struct<AIMeshAnim> implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIMeshAnim.MNAME); }
     /** Unsafe version of {@link #mNumKeys}. */
-    public static int nmNumKeys(long struct) { return UNSAFE.getInt(null, struct + AIMeshAnim.MNUMKEYS); }
+    public static int nmNumKeys(long struct) { return memGetInt(struct + AIMeshAnim.MNUMKEYS); }
     /** Unsafe version of {@link #mKeys}. */
     public static AIMeshKey.Buffer nmKeys(long struct) { return AIMeshKey.create(memGetAddress(struct + AIMeshAnim.MKEYS), nmNumKeys(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIMeshAnim.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumKeys} field of the specified {@code struct}. */
-    public static void nmNumKeys(long struct, int value) { UNSAFE.putInt(null, struct + AIMeshAnim.MNUMKEYS, value); }
+    public static void nmNumKeys(long struct, int value) { memPutInt(struct + AIMeshAnim.MNUMKEYS, value); }
     /** Unsafe version of {@link #mKeys(AIMeshKey.Buffer) mKeys}. */
     public static void nmKeys(long struct, AIMeshKey.Buffer value) { memPutAddress(struct + AIMeshAnim.MKEYS, value.address()); nmNumKeys(struct, value.remaining()); }
 

@@ -217,13 +217,13 @@ public class StdVideoDecodeH265ReferenceInfoFlags extends Struct<StdVideoDecodeH
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH265ReferenceInfoFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeH265ReferenceInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #used_for_long_term_reference}. */
     public static int nused_for_long_term_reference(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #unused_for_reference}. */
     public static int nunused_for_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265ReferenceInfoFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeH265ReferenceInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #used_for_long_term_reference(boolean) used_for_long_term_reference}. */
     public static void nused_for_long_term_reference(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #unused_for_reference(boolean) unused_for_reference}. */

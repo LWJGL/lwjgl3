@@ -249,18 +249,18 @@ public class XrHandJointsMotionRangeInfoEXT extends Struct<XrHandJointsMotionRan
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandJointsMotionRangeInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandJointsMotionRangeInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandJointsMotionRangeInfoEXT.NEXT); }
     /** Unsafe version of {@link #handJointsMotionRange}. */
-    public static int nhandJointsMotionRange(long struct) { return UNSAFE.getInt(null, struct + XrHandJointsMotionRangeInfoEXT.HANDJOINTSMOTIONRANGE); }
+    public static int nhandJointsMotionRange(long struct) { return memGetInt(struct + XrHandJointsMotionRangeInfoEXT.HANDJOINTSMOTIONRANGE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointsMotionRangeInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandJointsMotionRangeInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointsMotionRangeInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #handJointsMotionRange(int) handJointsMotionRange}. */
-    public static void nhandJointsMotionRange(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointsMotionRangeInfoEXT.HANDJOINTSMOTIONRANGE, value); }
+    public static void nhandJointsMotionRange(long struct, int value) { memPutInt(struct + XrHandJointsMotionRangeInfoEXT.HANDJOINTSMOTIONRANGE, value); }
 
     // -----------------------------------
 

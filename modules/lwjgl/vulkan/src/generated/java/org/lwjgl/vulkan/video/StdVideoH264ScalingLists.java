@@ -262,26 +262,26 @@ public class StdVideoH264ScalingLists extends Struct<StdVideoH264ScalingLists> i
     // -----------------------------------
 
     /** Unsafe version of {@link #scaling_list_present_mask}. */
-    public static short nscaling_list_present_mask(long struct) { return UNSAFE.getShort(null, struct + StdVideoH264ScalingLists.SCALING_LIST_PRESENT_MASK); }
+    public static short nscaling_list_present_mask(long struct) { return memGetShort(struct + StdVideoH264ScalingLists.SCALING_LIST_PRESENT_MASK); }
     /** Unsafe version of {@link #use_default_scaling_matrix_mask}. */
-    public static short nuse_default_scaling_matrix_mask(long struct) { return UNSAFE.getShort(null, struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK); }
+    public static short nuse_default_scaling_matrix_mask(long struct) { return memGetShort(struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK); }
     /** Unsafe version of {@link #ScalingList4x4}. */
     public static ByteBuffer nScalingList4x4(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST4X4, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList4x4(int) ScalingList4x4}. */
     public static byte nScalingList4x4(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingList8x8}. */
     public static ByteBuffer nScalingList8x8(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST8X8, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList8x8(int) ScalingList8x8}. */
     public static byte nScalingList8x8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1);
     }
 
     /** Unsafe version of {@link #scaling_list_present_mask(short) scaling_list_present_mask}. */
-    public static void nscaling_list_present_mask(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoH264ScalingLists.SCALING_LIST_PRESENT_MASK, value); }
+    public static void nscaling_list_present_mask(long struct, short value) { memPutShort(struct + StdVideoH264ScalingLists.SCALING_LIST_PRESENT_MASK, value); }
     /** Unsafe version of {@link #use_default_scaling_matrix_mask(short) use_default_scaling_matrix_mask}. */
-    public static void nuse_default_scaling_matrix_mask(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK, value); }
+    public static void nuse_default_scaling_matrix_mask(long struct, short value) { memPutShort(struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK, value); }
     /** Unsafe version of {@link #ScalingList4x4(ByteBuffer) ScalingList4x4}. */
     public static void nScalingList4x4(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS); }
@@ -289,7 +289,7 @@ public class StdVideoH264ScalingLists extends Struct<StdVideoH264ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList4x4(int, byte) ScalingList4x4}. */
     public static void nScalingList4x4(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingList8x8(ByteBuffer) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, ByteBuffer value) {
@@ -298,7 +298,7 @@ public class StdVideoH264ScalingLists extends Struct<StdVideoH264ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList8x8(int, byte) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1, value);
     }
 
     // -----------------------------------

@@ -103,7 +103,7 @@ public class VREventSeatedZeroPoseReset extends Struct<VREventSeatedZeroPoseRese
     // -----------------------------------
 
     /** Unsafe version of {@link #bResetBySystemMenu}. */
-    public static boolean nbResetBySystemMenu(long struct) { return UNSAFE.getByte(null, struct + VREventSeatedZeroPoseReset.BRESETBYSYSTEMMENU) != 0; }
+    public static boolean nbResetBySystemMenu(long struct) { return memGetByte(struct + VREventSeatedZeroPoseReset.BRESETBYSYSTEMMENU) != 0; }
 
     // -----------------------------------
 

@@ -251,9 +251,9 @@ public class MDBEnvInfo extends Struct<MDBEnvInfo> implements NativeResource {
     /** Unsafe version of {@link #me_last_txnid}. */
     public static long nme_last_txnid(long struct) { return memGetAddress(struct + MDBEnvInfo.ME_LAST_TXNID); }
     /** Unsafe version of {@link #me_maxreaders}. */
-    public static int nme_maxreaders(long struct) { return UNSAFE.getInt(null, struct + MDBEnvInfo.ME_MAXREADERS); }
+    public static int nme_maxreaders(long struct) { return memGetInt(struct + MDBEnvInfo.ME_MAXREADERS); }
     /** Unsafe version of {@link #me_numreaders}. */
-    public static int nme_numreaders(long struct) { return UNSAFE.getInt(null, struct + MDBEnvInfo.ME_NUMREADERS); }
+    public static int nme_numreaders(long struct) { return memGetInt(struct + MDBEnvInfo.ME_NUMREADERS); }
 
     // -----------------------------------
 

@@ -252,18 +252,18 @@ public class XrKeyboardSpaceCreateInfoFB extends Struct<XrKeyboardSpaceCreateInf
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrKeyboardSpaceCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrKeyboardSpaceCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrKeyboardSpaceCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #trackedKeyboardId}. */
-    public static long ntrackedKeyboardId(long struct) { return UNSAFE.getLong(null, struct + XrKeyboardSpaceCreateInfoFB.TRACKEDKEYBOARDID); }
+    public static long ntrackedKeyboardId(long struct) { return memGetLong(struct + XrKeyboardSpaceCreateInfoFB.TRACKEDKEYBOARDID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrKeyboardSpaceCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrKeyboardSpaceCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrKeyboardSpaceCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #trackedKeyboardId(long) trackedKeyboardId}. */
-    public static void ntrackedKeyboardId(long struct, long value) { UNSAFE.putLong(null, struct + XrKeyboardSpaceCreateInfoFB.TRACKEDKEYBOARDID, value); }
+    public static void ntrackedKeyboardId(long struct, long value) { memPutLong(struct + XrKeyboardSpaceCreateInfoFB.TRACKEDKEYBOARDID, value); }
 
     // -----------------------------------
 

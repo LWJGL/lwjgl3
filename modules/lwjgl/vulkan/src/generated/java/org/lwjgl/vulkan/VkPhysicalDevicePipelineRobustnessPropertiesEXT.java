@@ -267,20 +267,20 @@ public class VkPhysicalDevicePipelineRobustnessPropertiesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #defaultRobustnessStorageBuffers}. */
-    public static int ndefaultRobustnessStorageBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSSTORAGEBUFFERS); }
+    public static int ndefaultRobustnessStorageBuffers(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSSTORAGEBUFFERS); }
     /** Unsafe version of {@link #defaultRobustnessUniformBuffers}. */
-    public static int ndefaultRobustnessUniformBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSUNIFORMBUFFERS); }
+    public static int ndefaultRobustnessUniformBuffers(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSUNIFORMBUFFERS); }
     /** Unsafe version of {@link #defaultRobustnessVertexInputs}. */
-    public static int ndefaultRobustnessVertexInputs(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSVERTEXINPUTS); }
+    public static int ndefaultRobustnessVertexInputs(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSVERTEXINPUTS); }
     /** Unsafe version of {@link #defaultRobustnessImages}. */
-    public static int ndefaultRobustnessImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSIMAGES); }
+    public static int ndefaultRobustnessImages(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.DEFAULTROBUSTNESSIMAGES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineRobustnessPropertiesEXT.PNEXT, value); }
 

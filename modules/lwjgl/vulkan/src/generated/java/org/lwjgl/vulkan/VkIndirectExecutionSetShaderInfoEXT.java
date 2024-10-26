@@ -321,36 +321,36 @@ public class VkIndirectExecutionSetShaderInfoEXT extends Struct<VkIndirectExecut
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PNEXT); }
     /** Unsafe version of {@link #shaderCount}. */
-    public static int nshaderCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.SHADERCOUNT); }
+    public static int nshaderCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderInfoEXT.SHADERCOUNT); }
     /** Unsafe version of {@link #pInitialShaders() pInitialShaders}. */
     public static LongBuffer npInitialShaders(long struct) { return memLongBuffer(memGetAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PINITIALSHADERS), nshaderCount(struct)); }
     /** Unsafe version of {@link #pSetLayoutInfos}. */
     @Nullable public static VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer npSetLayoutInfos(long struct) { return VkIndirectExecutionSetShaderLayoutInfoEXT.createSafe(memGetAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PSETLAYOUTINFOS), nshaderCount(struct)); }
     /** Unsafe version of {@link #maxShaderCount}. */
-    public static int nmaxShaderCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.MAXSHADERCOUNT); }
+    public static int nmaxShaderCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderInfoEXT.MAXSHADERCOUNT); }
     /** Unsafe version of {@link #pushConstantRangeCount}. */
-    public static int npushConstantRangeCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.PUSHCONSTANTRANGECOUNT); }
+    public static int npushConstantRangeCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderInfoEXT.PUSHCONSTANTRANGECOUNT); }
     /** Unsafe version of {@link #pPushConstantRanges}. */
     @Nullable public static VkPushConstantRange.Buffer npPushConstantRanges(long struct) { return VkPushConstantRange.createSafe(memGetAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PPUSHCONSTANTRANGES), npushConstantRangeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code shaderCount} field of the specified {@code struct}. */
-    public static void nshaderCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.SHADERCOUNT, value); }
+    public static void nshaderCount(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderInfoEXT.SHADERCOUNT, value); }
     /** Unsafe version of {@link #pInitialShaders(LongBuffer) pInitialShaders}. */
     public static void npInitialShaders(long struct, LongBuffer value) { memPutAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PINITIALSHADERS, memAddress(value)); }
     /** Unsafe version of {@link #pSetLayoutInfos(VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer) pSetLayoutInfos}. */
     public static void npSetLayoutInfos(long struct, @Nullable VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer value) { memPutAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PSETLAYOUTINFOS, memAddressSafe(value)); }
     /** Unsafe version of {@link #maxShaderCount(int) maxShaderCount}. */
-    public static void nmaxShaderCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.MAXSHADERCOUNT, value); }
+    public static void nmaxShaderCount(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderInfoEXT.MAXSHADERCOUNT, value); }
     /** Sets the specified value to the {@code pushConstantRangeCount} field of the specified {@code struct}. */
-    public static void npushConstantRangeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderInfoEXT.PUSHCONSTANTRANGECOUNT, value); }
+    public static void npushConstantRangeCount(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderInfoEXT.PUSHCONSTANTRANGECOUNT, value); }
     /** Unsafe version of {@link #pPushConstantRanges(VkPushConstantRange.Buffer) pPushConstantRanges}. */
     public static void npPushConstantRanges(long struct, @Nullable VkPushConstantRange.Buffer value) { memPutAddress(struct + VkIndirectExecutionSetShaderInfoEXT.PPUSHCONSTANTRANGES, memAddressSafe(value)); npushConstantRangeCount(struct, value == null ? 0 : value.remaining()); }
 

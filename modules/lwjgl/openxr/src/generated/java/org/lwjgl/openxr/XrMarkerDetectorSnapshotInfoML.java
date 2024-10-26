@@ -237,12 +237,12 @@ public class XrMarkerDetectorSnapshotInfoML extends Struct<XrMarkerDetectorSnaps
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorSnapshotInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMarkerDetectorSnapshotInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMarkerDetectorSnapshotInfoML.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorSnapshotInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMarkerDetectorSnapshotInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerDetectorSnapshotInfoML.NEXT, value); }
 

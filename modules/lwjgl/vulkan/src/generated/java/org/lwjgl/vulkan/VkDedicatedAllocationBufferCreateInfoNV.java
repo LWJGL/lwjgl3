@@ -261,18 +261,18 @@ public class VkDedicatedAllocationBufferCreateInfoNV extends Struct<VkDedicatedA
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDedicatedAllocationBufferCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDedicatedAllocationBufferCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDedicatedAllocationBufferCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #dedicatedAllocation}. */
-    public static int ndedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkDedicatedAllocationBufferCreateInfoNV.DEDICATEDALLOCATION); }
+    public static int ndedicatedAllocation(long struct) { return memGetInt(struct + VkDedicatedAllocationBufferCreateInfoNV.DEDICATEDALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDedicatedAllocationBufferCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDedicatedAllocationBufferCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDedicatedAllocationBufferCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #dedicatedAllocation(boolean) dedicatedAllocation}. */
-    public static void ndedicatedAllocation(long struct, int value) { UNSAFE.putInt(null, struct + VkDedicatedAllocationBufferCreateInfoNV.DEDICATEDALLOCATION, value); }
+    public static void ndedicatedAllocation(long struct, int value) { memPutInt(struct + VkDedicatedAllocationBufferCreateInfoNV.DEDICATEDALLOCATION, value); }
 
     // -----------------------------------
 

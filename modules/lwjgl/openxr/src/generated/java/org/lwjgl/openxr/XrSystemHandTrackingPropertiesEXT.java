@@ -242,14 +242,14 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct<XrSystemHandTracki
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingPropertiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemHandTrackingPropertiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemHandTrackingPropertiesEXT.NEXT); }
     /** Unsafe version of {@link #supportsHandTracking}. */
-    public static int nsupportsHandTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingPropertiesEXT.SUPPORTSHANDTRACKING); }
+    public static int nsupportsHandTracking(long struct) { return memGetInt(struct + XrSystemHandTrackingPropertiesEXT.SUPPORTSHANDTRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingPropertiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemHandTrackingPropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemHandTrackingPropertiesEXT.NEXT, value); }
 

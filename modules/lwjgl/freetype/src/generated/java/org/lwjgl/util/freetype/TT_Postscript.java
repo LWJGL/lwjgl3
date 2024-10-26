@@ -164,9 +164,9 @@ public class TT_Postscript extends Struct<TT_Postscript> {
     /** Unsafe version of {@link #italicAngle}. */
     public static long nitalicAngle(long struct) { return memGetCLong(struct + TT_Postscript.ITALICANGLE); }
     /** Unsafe version of {@link #underlinePosition}. */
-    public static short nunderlinePosition(long struct) { return UNSAFE.getShort(null, struct + TT_Postscript.UNDERLINEPOSITION); }
+    public static short nunderlinePosition(long struct) { return memGetShort(struct + TT_Postscript.UNDERLINEPOSITION); }
     /** Unsafe version of {@link #underlineThickness}. */
-    public static short nunderlineThickness(long struct) { return UNSAFE.getShort(null, struct + TT_Postscript.UNDERLINETHICKNESS); }
+    public static short nunderlineThickness(long struct) { return memGetShort(struct + TT_Postscript.UNDERLINETHICKNESS); }
     /** Unsafe version of {@link #isFixedPitch}. */
     public static long nisFixedPitch(long struct) { return memGetCLong(struct + TT_Postscript.ISFIXEDPITCH); }
     /** Unsafe version of {@link #minMemType42}. */

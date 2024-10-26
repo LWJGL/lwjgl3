@@ -221,11 +221,11 @@ public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc>
     // -----------------------------------
 
     /** Unsafe version of {@link #Projection22}. */
-    public static float nProjection22(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION22); }
+    public static float nProjection22(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION22); }
     /** Unsafe version of {@link #Projection23}. */
-    public static float nProjection23(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION23); }
+    public static float nProjection23(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION23); }
     /** Unsafe version of {@link #Projection32}. */
-    public static float nProjection32(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION32); }
+    public static float nProjection32(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION32); }
 
     // -----------------------------------
 

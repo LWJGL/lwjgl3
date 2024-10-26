@@ -270,22 +270,22 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingDataSourceStateEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandTrackingDataSourceStateEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandTrackingDataSourceStateEXT.NEXT); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingDataSourceStateEXT.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrHandTrackingDataSourceStateEXT.ISACTIVE); }
     /** Unsafe version of {@link #dataSource}. */
-    public static int ndataSource(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingDataSourceStateEXT.DATASOURCE); }
+    public static int ndataSource(long struct) { return memGetInt(struct + XrHandTrackingDataSourceStateEXT.DATASOURCE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingDataSourceStateEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingDataSourceStateEXT.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingDataSourceStateEXT.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.ISACTIVE, value); }
     /** Unsafe version of {@link #dataSource(int) dataSource}. */
-    public static void ndataSource(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingDataSourceStateEXT.DATASOURCE, value); }
+    public static void ndataSource(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.DATASOURCE, value); }
 
     // -----------------------------------
 

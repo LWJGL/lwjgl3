@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderSubgroupExtendedTypes}. */
-    public static int nshaderSubgroupExtendedTypes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.SHADERSUBGROUPEXTENDEDTYPES); }
+    public static int nshaderSubgroupExtendedTypes(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.SHADERSUBGROUPEXTENDEDTYPES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderSubgroupExtendedTypes(boolean) shaderSubgroupExtendedTypes}. */
-    public static void nshaderSubgroupExtendedTypes(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.SHADERSUBGROUPEXTENDEDTYPES, value); }
+    public static void nshaderSubgroupExtendedTypes(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.SHADERSUBGROUPEXTENDEDTYPES, value); }
 
     // -----------------------------------
 

@@ -373,60 +373,60 @@ public class XrWorldMeshBlockML extends Struct<XrWorldMeshBlockML> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshBlockML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshBlockML.NEXT); }
     /** Unsafe version of {@link #uuid}. */
     public static XrUuidEXT nuuid(long struct) { return XrUuidEXT.create(struct + XrWorldMeshBlockML.UUID); }
     /** Unsafe version of {@link #blockResult}. */
-    public static int nblockResult(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.BLOCKRESULT); }
+    public static int nblockResult(long struct) { return memGetInt(struct + XrWorldMeshBlockML.BLOCKRESULT); }
     /** Unsafe version of {@link #lod}. */
-    public static int nlod(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.LOD); }
+    public static int nlod(long struct) { return memGetInt(struct + XrWorldMeshBlockML.LOD); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshBlockML.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrWorldMeshBlockML.FLAGS); }
     /** Unsafe version of {@link #indexCount}. */
-    public static int nindexCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.INDEXCOUNT); }
+    public static int nindexCount(long struct) { return memGetInt(struct + XrWorldMeshBlockML.INDEXCOUNT); }
     /** Unsafe version of {@link #indexBuffer() indexBuffer}. */
     public static ShortBuffer nindexBuffer(long struct) { return memShortBuffer(memGetAddress(struct + XrWorldMeshBlockML.INDEXBUFFER), nindexCount(struct)); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + XrWorldMeshBlockML.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertexBuffer}. */
     public static XrVector3f.Buffer nvertexBuffer(long struct) { return XrVector3f.create(memGetAddress(struct + XrWorldMeshBlockML.VERTEXBUFFER), nvertexCount(struct)); }
     /** Unsafe version of {@link #normalCount}. */
-    public static int nnormalCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.NORMALCOUNT); }
+    public static int nnormalCount(long struct) { return memGetInt(struct + XrWorldMeshBlockML.NORMALCOUNT); }
     /** Unsafe version of {@link #normalBuffer}. */
     public static XrVector3f.Buffer nnormalBuffer(long struct) { return XrVector3f.create(memGetAddress(struct + XrWorldMeshBlockML.NORMALBUFFER), nnormalCount(struct)); }
     /** Unsafe version of {@link #confidenceCount}. */
-    public static int nconfidenceCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockML.CONFIDENCECOUNT); }
+    public static int nconfidenceCount(long struct) { return memGetInt(struct + XrWorldMeshBlockML.CONFIDENCECOUNT); }
     /** Unsafe version of {@link #confidenceBuffer() confidenceBuffer}. */
     public static FloatBuffer nconfidenceBuffer(long struct) { return memFloatBuffer(memGetAddress(struct + XrWorldMeshBlockML.CONFIDENCEBUFFER), nconfidenceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshBlockML.NEXT, value); }
     /** Unsafe version of {@link #uuid(XrUuidEXT) uuid}. */
     public static void nuuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrWorldMeshBlockML.UUID, XrUuidEXT.SIZEOF); }
     /** Unsafe version of {@link #blockResult(int) blockResult}. */
-    public static void nblockResult(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.BLOCKRESULT, value); }
+    public static void nblockResult(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.BLOCKRESULT, value); }
     /** Unsafe version of {@link #lod(int) lod}. */
-    public static void nlod(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.LOD, value); }
+    public static void nlod(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.LOD, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshBlockML.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrWorldMeshBlockML.FLAGS, value); }
     /** Sets the specified value to the {@code indexCount} field of the specified {@code struct}. */
-    public static void nindexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.INDEXCOUNT, value); }
+    public static void nindexCount(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.INDEXCOUNT, value); }
     /** Unsafe version of {@link #indexBuffer(ShortBuffer) indexBuffer}. */
     public static void nindexBuffer(long struct, ShortBuffer value) { memPutAddress(struct + XrWorldMeshBlockML.INDEXBUFFER, memAddress(value)); nindexCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code vertexCount} field of the specified {@code struct}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #vertexBuffer(XrVector3f.Buffer) vertexBuffer}. */
     public static void nvertexBuffer(long struct, XrVector3f.Buffer value) { memPutAddress(struct + XrWorldMeshBlockML.VERTEXBUFFER, value.address()); nvertexCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code normalCount} field of the specified {@code struct}. */
-    public static void nnormalCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.NORMALCOUNT, value); }
+    public static void nnormalCount(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.NORMALCOUNT, value); }
     /** Unsafe version of {@link #normalBuffer(XrVector3f.Buffer) normalBuffer}. */
     public static void nnormalBuffer(long struct, XrVector3f.Buffer value) { memPutAddress(struct + XrWorldMeshBlockML.NORMALBUFFER, value.address()); nnormalCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code confidenceCount} field of the specified {@code struct}. */
-    public static void nconfidenceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockML.CONFIDENCECOUNT, value); }
+    public static void nconfidenceCount(long struct, int value) { memPutInt(struct + XrWorldMeshBlockML.CONFIDENCECOUNT, value); }
     /** Unsafe version of {@link #confidenceBuffer(FloatBuffer) confidenceBuffer}. */
     public static void nconfidenceBuffer(long struct, FloatBuffer value) { memPutAddress(struct + XrWorldMeshBlockML.CONFIDENCEBUFFER, memAddress(value)); nconfidenceCount(struct, value.remaining()); }
 

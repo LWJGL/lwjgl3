@@ -257,22 +257,22 @@ public class VkPhysicalDeviceBorderColorSwizzleFeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #borderColorSwizzle}. */
-    public static int nborderColorSwizzle(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLE); }
+    public static int nborderColorSwizzle(long struct) { return memGetInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLE); }
     /** Unsafe version of {@link #borderColorSwizzleFromImage}. */
-    public static int nborderColorSwizzleFromImage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLEFROMIMAGE); }
+    public static int nborderColorSwizzleFromImage(long struct) { return memGetInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLEFROMIMAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #borderColorSwizzle(boolean) borderColorSwizzle}. */
-    public static void nborderColorSwizzle(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLE, value); }
+    public static void nborderColorSwizzle(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLE, value); }
     /** Unsafe version of {@link #borderColorSwizzleFromImage(boolean) borderColorSwizzleFromImage}. */
-    public static void nborderColorSwizzleFromImage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLEFROMIMAGE, value); }
+    public static void nborderColorSwizzleFromImage(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.BORDERCOLORSWIZZLEFROMIMAGE, value); }
 
     // -----------------------------------
 

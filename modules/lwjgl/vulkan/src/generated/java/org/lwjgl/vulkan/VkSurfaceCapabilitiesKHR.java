@@ -283,9 +283,9 @@ public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> i
     // -----------------------------------
 
     /** Unsafe version of {@link #minImageCount}. */
-    public static int nminImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.MINIMAGECOUNT); }
+    public static int nminImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.MINIMAGECOUNT); }
     /** Unsafe version of {@link #maxImageCount}. */
-    public static int nmaxImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.MAXIMAGECOUNT); }
+    public static int nmaxImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.MAXIMAGECOUNT); }
     /** Unsafe version of {@link #currentExtent}. */
     public static VkExtent2D ncurrentExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilitiesKHR.CURRENTEXTENT); }
     /** Unsafe version of {@link #minImageExtent}. */
@@ -293,15 +293,15 @@ public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> i
     /** Unsafe version of {@link #maxImageExtent}. */
     public static VkExtent2D nmaxImageExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilitiesKHR.MAXIMAGEEXTENT); }
     /** Unsafe version of {@link #maxImageArrayLayers}. */
-    public static int nmaxImageArrayLayers(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.MAXIMAGEARRAYLAYERS); }
+    public static int nmaxImageArrayLayers(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.MAXIMAGEARRAYLAYERS); }
     /** Unsafe version of {@link #supportedTransforms}. */
-    public static int nsupportedTransforms(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.SUPPORTEDTRANSFORMS); }
+    public static int nsupportedTransforms(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.SUPPORTEDTRANSFORMS); }
     /** Unsafe version of {@link #currentTransform}. */
-    public static int ncurrentTransform(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.CURRENTTRANSFORM); }
+    public static int ncurrentTransform(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.CURRENTTRANSFORM); }
     /** Unsafe version of {@link #supportedCompositeAlpha}. */
-    public static int nsupportedCompositeAlpha(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.SUPPORTEDCOMPOSITEALPHA); }
+    public static int nsupportedCompositeAlpha(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.SUPPORTEDCOMPOSITEALPHA); }
     /** Unsafe version of {@link #supportedUsageFlags}. */
-    public static int nsupportedUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesKHR.SUPPORTEDUSAGEFLAGS); }
+    public static int nsupportedUsageFlags(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesKHR.SUPPORTEDUSAGEFLAGS); }
 
     // -----------------------------------
 

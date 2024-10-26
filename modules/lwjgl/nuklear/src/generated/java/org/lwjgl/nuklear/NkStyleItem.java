@@ -243,12 +243,12 @@ public class NkStyleItem extends Struct<NkStyleItem> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkStyleItem.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkStyleItem.TYPE); }
     /** Unsafe version of {@link #data}. */
     public static NkStyleItemData ndata(long struct) { return NkStyleItemData.create(struct + NkStyleItem.DATA); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleItem.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + NkStyleItem.TYPE, value); }
     /** Unsafe version of {@link #data(NkStyleItemData) data}. */
     public static void ndata(long struct, NkStyleItemData value) { memCopy(value.address(), struct + NkStyleItem.DATA, NkStyleItemData.SIZEOF); }
 

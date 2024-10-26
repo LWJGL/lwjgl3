@@ -263,24 +263,24 @@ public class IOURingCQE extends Struct<IOURingCQE> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #user_data}. */
-    public static long nuser_data(long struct) { return UNSAFE.getLong(null, struct + IOURingCQE.USER_DATA); }
+    public static long nuser_data(long struct) { return memGetLong(struct + IOURingCQE.USER_DATA); }
     /** Unsafe version of {@link #res}. */
-    public static int nres(long struct) { return UNSAFE.getInt(null, struct + IOURingCQE.RES); }
+    public static int nres(long struct) { return memGetInt(struct + IOURingCQE.RES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingCQE.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + IOURingCQE.FLAGS); }
     /** Unsafe version of {@link #big_cqe}. */
     public static LongBuffer nbig_cqe(long struct) { return memLongBuffer(struct + IOURingCQE.BIG_CQE, 0); }
     /** Unsafe version of {@link #big_cqe(int) big_cqe}. */
     public static long nbig_cqe(long struct, int index) {
-        return UNSAFE.getLong(null, struct + IOURingCQE.BIG_CQE + check(index, 0) * 8);
+        return memGetLong(struct + IOURingCQE.BIG_CQE + check(index, 0) * 8);
     }
 
     /** Unsafe version of {@link #user_data(long) user_data}. */
-    public static void nuser_data(long struct, long value) { UNSAFE.putLong(null, struct + IOURingCQE.USER_DATA, value); }
+    public static void nuser_data(long struct, long value) { memPutLong(struct + IOURingCQE.USER_DATA, value); }
     /** Unsafe version of {@link #res(int) res}. */
-    public static void nres(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQE.RES, value); }
+    public static void nres(long struct, int value) { memPutInt(struct + IOURingCQE.RES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQE.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOURingCQE.FLAGS, value); }
     /** Unsafe version of {@link #big_cqe(LongBuffer) big_cqe}. */
     public static void nbig_cqe(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 0); }
@@ -288,7 +288,7 @@ public class IOURingCQE extends Struct<IOURingCQE> implements NativeResource {
     }
     /** Unsafe version of {@link #big_cqe(int, long) big_cqe}. */
     public static void nbig_cqe(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + IOURingCQE.BIG_CQE + check(index, 0) * 8, value);
+        memPutLong(struct + IOURingCQE.BIG_CQE + check(index, 0) * 8, value);
     }
 
     // -----------------------------------

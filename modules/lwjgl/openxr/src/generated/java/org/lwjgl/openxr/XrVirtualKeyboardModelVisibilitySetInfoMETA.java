@@ -248,18 +248,18 @@ public class XrVirtualKeyboardModelVisibilitySetInfoMETA extends Struct<XrVirtua
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.NEXT); }
     /** Unsafe version of {@link #visible}. */
-    public static int nvisible(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.VISIBLE); }
+    public static int nvisible(long struct) { return memGetInt(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.VISIBLE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #visible(boolean) visible}. */
-    public static void nvisible(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.VISIBLE, value); }
+    public static void nvisible(long struct, int value) { memPutInt(struct + XrVirtualKeyboardModelVisibilitySetInfoMETA.VISIBLE, value); }
 
     // -----------------------------------
 

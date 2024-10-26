@@ -268,24 +268,24 @@ public class CUDA_EXTERNAL_MEMORY_BUFFER_DESC extends Struct<CUDA_EXTERNAL_MEMOR
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.SIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.FLAGS); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.RESERVED, 16); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.RESERVED + check(index, 16) * 4);
+        return memGetInt(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.RESERVED + check(index, 16) * 4);
     }
 
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.SIZE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.FLAGS, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 16); }
@@ -293,7 +293,7 @@ public class CUDA_EXTERNAL_MEMORY_BUFFER_DESC extends Struct<CUDA_EXTERNAL_MEMOR
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.RESERVED + check(index, 16) * 4, value);
+        memPutInt(struct + CUDA_EXTERNAL_MEMORY_BUFFER_DESC.RESERVED + check(index, 16) * 4, value);
     }
 
     // -----------------------------------

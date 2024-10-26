@@ -221,7 +221,7 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
     /** Unsafe version of {@link #pVertexData}. */
     @Nullable public static HmdVector2.Buffer npVertexData(long struct) { return HmdVector2.createSafe(memGetAddress(struct + HiddenAreaMesh.PVERTEXDATA), nunTriangleCount(struct)); }
     /** Unsafe version of {@link #unTriangleCount}. */
-    public static int nunTriangleCount(long struct) { return UNSAFE.getInt(null, struct + HiddenAreaMesh.UNTRIANGLECOUNT); }
+    public static int nunTriangleCount(long struct) { return memGetInt(struct + HiddenAreaMesh.UNTRIANGLECOUNT); }
 
     // -----------------------------------
 

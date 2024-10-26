@@ -285,22 +285,22 @@ public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEras
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceEraseCompleteFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataSpaceEraseCompleteFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataSpaceEraseCompleteFB.NEXT); }
     /** Unsafe version of {@link #requestId}. */
-    public static long nrequestId(long struct) { return UNSAFE.getLong(null, struct + XrEventDataSpaceEraseCompleteFB.REQUESTID); }
+    public static long nrequestId(long struct) { return memGetLong(struct + XrEventDataSpaceEraseCompleteFB.REQUESTID); }
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceEraseCompleteFB.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + XrEventDataSpaceEraseCompleteFB.RESULT); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrEventDataSpaceEraseCompleteFB.SPACE); }
     /** Unsafe version of {@link #uuid}. */
     public static XrUuidEXT nuuid(long struct) { return XrUuidEXT.create(struct + XrEventDataSpaceEraseCompleteFB.UUID); }
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceEraseCompleteFB.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + XrEventDataSpaceEraseCompleteFB.LOCATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSpaceEraseCompleteFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataSpaceEraseCompleteFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSpaceEraseCompleteFB.NEXT, value); }
 

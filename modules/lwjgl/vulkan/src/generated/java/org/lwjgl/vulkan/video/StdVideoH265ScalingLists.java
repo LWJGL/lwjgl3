@@ -301,37 +301,37 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     public static ByteBuffer nScalingList4x4(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLIST4X4, STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList4x4(int) ScalingList4x4}. */
     public static byte nScalingList4x4(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingList8x8}. */
     public static ByteBuffer nScalingList8x8(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLIST8X8, STD_VIDEO_H265_SCALING_LIST_8X8_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList8x8(int) ScalingList8x8}. */
     public static byte nScalingList8x8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H265_SCALING_LIST_8X8_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H265_SCALING_LIST_8X8_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingList16x16}. */
     public static ByteBuffer nScalingList16x16(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLIST16X16, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList16x16(int) ScalingList16x16}. */
     public static byte nScalingList16x16(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLIST16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingList32x32}. */
     public static ByteBuffer nScalingList32x32(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLIST32X32, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList32x32(int) ScalingList32x32}. */
     public static byte nScalingList32x32(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLIST32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingListDCCoef16x16}. */
     public static ByteBuffer nScalingListDCCoef16x16(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF16X16, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_LISTS); }
     /** Unsafe version of {@link #ScalingListDCCoef16x16(int) ScalingListDCCoef16x16}. */
     public static byte nScalingListDCCoef16x16(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_LISTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_LISTS) * 1);
     }
     /** Unsafe version of {@link #ScalingListDCCoef32x32}. */
     public static ByteBuffer nScalingListDCCoef32x32(long struct) { return memByteBuffer(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF32X32, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS); }
     /** Unsafe version of {@link #ScalingListDCCoef32x32(int) ScalingListDCCoef32x32}. */
     public static byte nScalingListDCCoef32x32(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS) * 1);
+        return memGetByte(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS) * 1);
     }
 
     /** Unsafe version of {@link #ScalingList4x4(ByteBuffer) ScalingList4x4}. */
@@ -341,7 +341,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList4x4(int, byte) ScalingList4x4}. */
     public static void nScalingList4x4(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingList8x8(ByteBuffer) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, ByteBuffer value) {
@@ -350,7 +350,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList8x8(int, byte) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H265_SCALING_LIST_8X8_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H265_SCALING_LIST_8X8_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingList16x16(ByteBuffer) ScalingList16x16}. */
     public static void nScalingList16x16(long struct, ByteBuffer value) {
@@ -359,7 +359,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList16x16(int, byte) ScalingList16x16}. */
     public static void nScalingList16x16(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLIST16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingList32x32(ByteBuffer) ScalingList32x32}. */
     public static void nScalingList32x32(long struct, ByteBuffer value) {
@@ -368,7 +368,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingList32x32(int, byte) ScalingList32x32}. */
     public static void nScalingList32x32(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLIST32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLIST32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingListDCCoef16x16(ByteBuffer) ScalingListDCCoef16x16}. */
     public static void nScalingListDCCoef16x16(long struct, ByteBuffer value) {
@@ -377,7 +377,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingListDCCoef16x16(int, byte) ScalingListDCCoef16x16}. */
     public static void nScalingListDCCoef16x16(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_LISTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF16X16 + check(index, STD_VIDEO_H265_SCALING_LIST_16X16_NUM_LISTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingListDCCoef32x32(ByteBuffer) ScalingListDCCoef32x32}. */
     public static void nScalingListDCCoef32x32(long struct, ByteBuffer value) {
@@ -386,7 +386,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
     /** Unsafe version of {@link #ScalingListDCCoef32x32(int, byte) ScalingListDCCoef32x32}. */
     public static void nScalingListDCCoef32x32(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS) * 1, value);
+        memPutByte(struct + StdVideoH265ScalingLists.SCALINGLISTDCCOEF32X32 + check(index, STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS) * 1, value);
     }
 
     // -----------------------------------

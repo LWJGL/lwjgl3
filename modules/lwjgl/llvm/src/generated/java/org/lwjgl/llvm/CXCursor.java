@@ -232,9 +232,9 @@ public class CXCursor extends Struct<CXCursor> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXCursor.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXCursor.KIND); }
     /** Unsafe version of {@link #xdata}. */
-    public static int nxdata(long struct) { return UNSAFE.getInt(null, struct + CXCursor.XDATA); }
+    public static int nxdata(long struct) { return memGetInt(struct + CXCursor.XDATA); }
     /** Unsafe version of {@link #data}. */
     public static PointerBuffer ndata(long struct) { return memPointerBuffer(struct + CXCursor.DATA, 3); }
     /** Unsafe version of {@link #data(int) data}. */

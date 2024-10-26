@@ -214,13 +214,13 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #num_color_stops}. */
-    public static int nnum_color_stops(long struct) { return UNSAFE.getInt(null, struct + FT_ColorStopIterator.NUM_COLOR_STOPS); }
+    public static int nnum_color_stops(long struct) { return memGetInt(struct + FT_ColorStopIterator.NUM_COLOR_STOPS); }
     /** Unsafe version of {@link #current_color_stop}. */
-    public static int ncurrent_color_stop(long struct) { return UNSAFE.getInt(null, struct + FT_ColorStopIterator.CURRENT_COLOR_STOP); }
+    public static int ncurrent_color_stop(long struct) { return memGetInt(struct + FT_ColorStopIterator.CURRENT_COLOR_STOP); }
     /** Unsafe version of {@link #p(int) p}. */
     @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_ColorStopIterator.P), capacity); }
     /** Unsafe version of {@link #read_variable}. */
-    public static boolean nread_variable(long struct) { return UNSAFE.getByte(null, struct + FT_ColorStopIterator.READ_VARIABLE) != 0; }
+    public static boolean nread_variable(long struct) { return memGetByte(struct + FT_ColorStopIterator.READ_VARIABLE) != 0; }
 
     // -----------------------------------
 

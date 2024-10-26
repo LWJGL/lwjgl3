@@ -246,18 +246,18 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #globalPriorityQuery}. */
-    public static int nglobalPriorityQuery(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.GLOBALPRIORITYQUERY); }
+    public static int nglobalPriorityQuery(long struct) { return memGetInt(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.GLOBALPRIORITYQUERY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #globalPriorityQuery(boolean) globalPriorityQuery}. */
-    public static void nglobalPriorityQuery(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.GLOBALPRIORITYQUERY, value); }
+    public static void nglobalPriorityQuery(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.GLOBALPRIORITYQUERY, value); }
 
     // -----------------------------------
 

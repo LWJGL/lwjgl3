@@ -238,12 +238,12 @@ public class XrLocalizationMapQueryInfoBaseHeaderML extends Struct<XrLocalizatio
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrLocalizationMapQueryInfoBaseHeaderML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrLocalizationMapQueryInfoBaseHeaderML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrLocalizationMapQueryInfoBaseHeaderML.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrLocalizationMapQueryInfoBaseHeaderML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrLocalizationMapQueryInfoBaseHeaderML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrLocalizationMapQueryInfoBaseHeaderML.NEXT, value); }
 

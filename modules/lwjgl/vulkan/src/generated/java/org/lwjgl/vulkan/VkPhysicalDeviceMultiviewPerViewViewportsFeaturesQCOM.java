@@ -246,18 +246,18 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #multiviewPerViewViewports}. */
-    public static int nmultiviewPerViewViewports(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.MULTIVIEWPERVIEWVIEWPORTS); }
+    public static int nmultiviewPerViewViewports(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.MULTIVIEWPERVIEWVIEWPORTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #multiviewPerViewViewports(boolean) multiviewPerViewViewports}. */
-    public static void nmultiviewPerViewViewports(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.MULTIVIEWPERVIEWVIEWPORTS, value); }
+    public static void nmultiviewPerViewViewports(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.MULTIVIEWPERVIEWVIEWPORTS, value); }
 
     // -----------------------------------
 

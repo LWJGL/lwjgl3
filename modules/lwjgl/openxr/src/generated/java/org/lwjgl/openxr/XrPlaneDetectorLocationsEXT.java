@@ -272,24 +272,24 @@ public class XrPlaneDetectorLocationsEXT extends Struct<XrPlaneDetectorLocations
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationsEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPlaneDetectorLocationsEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPlaneDetectorLocationsEXT.NEXT); }
     /** Unsafe version of {@link #planeLocationCapacityInput}. */
-    public static int nplaneLocationCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCAPACITYINPUT); }
+    public static int nplaneLocationCapacityInput(long struct) { return memGetInt(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCAPACITYINPUT); }
     /** Unsafe version of {@link #planeLocationCountOutput}. */
-    public static int nplaneLocationCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCOUNTOUTPUT); }
+    public static int nplaneLocationCountOutput(long struct) { return memGetInt(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCOUNTOUTPUT); }
     /** Unsafe version of {@link #planeLocations}. */
     @Nullable public static XrPlaneDetectorLocationEXT.Buffer nplaneLocations(long struct) { return XrPlaneDetectorLocationEXT.createSafe(memGetAddress(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONS), nplaneLocationCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationsEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationsEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPlaneDetectorLocationsEXT.NEXT, value); }
     /** Sets the specified value to the {@code planeLocationCapacityInput} field of the specified {@code struct}. */
-    public static void nplaneLocationCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCAPACITYINPUT, value); }
+    public static void nplaneLocationCapacityInput(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCAPACITYINPUT, value); }
     /** Unsafe version of {@link #planeLocationCountOutput(int) planeLocationCountOutput}. */
-    public static void nplaneLocationCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCOUNTOUTPUT, value); }
+    public static void nplaneLocationCountOutput(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #planeLocations(XrPlaneDetectorLocationEXT.Buffer) planeLocations}. */
     public static void nplaneLocations(long struct, @Nullable XrPlaneDetectorLocationEXT.Buffer value) { memPutAddress(struct + XrPlaneDetectorLocationsEXT.PLANELOCATIONS, memAddressSafe(value)); if (value != null) { nplaneLocationCapacityInput(struct, value.remaining()); } }
 

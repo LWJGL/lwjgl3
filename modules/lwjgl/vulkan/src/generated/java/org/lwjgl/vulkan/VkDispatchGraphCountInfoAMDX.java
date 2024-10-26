@@ -243,18 +243,18 @@ public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInf
     // -----------------------------------
 
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + VkDispatchGraphCountInfoAMDX.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + VkDispatchGraphCountInfoAMDX.COUNT); }
     /** Unsafe version of {@link #infos}. */
     public static VkDeviceOrHostAddressConstAMDX ninfos(long struct) { return VkDeviceOrHostAddressConstAMDX.create(struct + VkDispatchGraphCountInfoAMDX.INFOS); }
     /** Unsafe version of {@link #stride}. */
-    public static long nstride(long struct) { return UNSAFE.getLong(null, struct + VkDispatchGraphCountInfoAMDX.STRIDE); }
+    public static long nstride(long struct) { return memGetLong(struct + VkDispatchGraphCountInfoAMDX.STRIDE); }
 
     /** Unsafe version of {@link #count(int) count}. */
-    public static void ncount(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchGraphCountInfoAMDX.COUNT, value); }
+    public static void ncount(long struct, int value) { memPutInt(struct + VkDispatchGraphCountInfoAMDX.COUNT, value); }
     /** Unsafe version of {@link #infos(VkDeviceOrHostAddressConstAMDX) infos}. */
     public static void ninfos(long struct, VkDeviceOrHostAddressConstAMDX value) { memCopy(value.address(), struct + VkDispatchGraphCountInfoAMDX.INFOS, VkDeviceOrHostAddressConstAMDX.SIZEOF); }
     /** Unsafe version of {@link #stride(long) stride}. */
-    public static void nstride(long struct, long value) { UNSAFE.putLong(null, struct + VkDispatchGraphCountInfoAMDX.STRIDE, value); }
+    public static void nstride(long struct, long value) { memPutLong(struct + VkDispatchGraphCountInfoAMDX.STRIDE, value); }
 
     // -----------------------------------
 

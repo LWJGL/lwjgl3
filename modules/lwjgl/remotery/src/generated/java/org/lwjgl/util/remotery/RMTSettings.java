@@ -374,19 +374,19 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #port}. */
-    public static short nport(long struct) { return UNSAFE.getShort(null, struct + RMTSettings.PORT); }
+    public static short nport(long struct) { return memGetShort(struct + RMTSettings.PORT); }
     /** Unsafe version of {@link #reuse_open_port}. */
-    public static int nreuse_open_port(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.REUSE_OPEN_PORT); }
+    public static int nreuse_open_port(long struct) { return memGetInt(struct + RMTSettings.REUSE_OPEN_PORT); }
     /** Unsafe version of {@link #limit_connections_to_localhost}. */
-    public static int nlimit_connections_to_localhost(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST); }
+    public static int nlimit_connections_to_localhost(long struct) { return memGetInt(struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST); }
     /** Unsafe version of {@link #enableThreadSampler}. */
-    public static int nenableThreadSampler(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.ENABLETHREADSAMPLER); }
+    public static int nenableThreadSampler(long struct) { return memGetInt(struct + RMTSettings.ENABLETHREADSAMPLER); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates}. */
-    public static int nmsSleepBetweenServerUpdates(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES); }
+    public static int nmsSleepBetweenServerUpdates(long struct) { return memGetInt(struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES); }
     /** Unsafe version of {@link #messageQueueSizeInBytes}. */
-    public static int nmessageQueueSizeInBytes(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MESSAGEQUEUESIZEINBYTES); }
+    public static int nmessageQueueSizeInBytes(long struct) { return memGetInt(struct + RMTSettings.MESSAGEQUEUESIZEINBYTES); }
     /** Unsafe version of {@link #maxNbMessagesPerUpdate}. */
-    public static int nmaxNbMessagesPerUpdate(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MAXNBMESSAGESPERUPDATE); }
+    public static int nmaxNbMessagesPerUpdate(long struct) { return memGetInt(struct + RMTSettings.MAXNBMESSAGESPERUPDATE); }
     /** Unsafe version of {@link #_malloc}. */
     public static RMTMalloc n_malloc(long struct) { return RMTMalloc.create(memGetAddress(struct + RMTSettings._MALLOC)); }
     /** Unsafe version of {@link #realloc}. */
@@ -413,19 +413,19 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     @Nullable public static String nlogPathString(long struct) { return memUTF8Safe(memGetAddress(struct + RMTSettings.LOGPATH)); }
 
     /** Unsafe version of {@link #port(short) port}. */
-    public static void nport(long struct, short value) { UNSAFE.putShort(null, struct + RMTSettings.PORT, value); }
+    public static void nport(long struct, short value) { memPutShort(struct + RMTSettings.PORT, value); }
     /** Unsafe version of {@link #reuse_open_port(boolean) reuse_open_port}. */
-    public static void nreuse_open_port(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.REUSE_OPEN_PORT, value); }
+    public static void nreuse_open_port(long struct, int value) { memPutInt(struct + RMTSettings.REUSE_OPEN_PORT, value); }
     /** Unsafe version of {@link #limit_connections_to_localhost(boolean) limit_connections_to_localhost}. */
-    public static void nlimit_connections_to_localhost(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST, value); }
+    public static void nlimit_connections_to_localhost(long struct, int value) { memPutInt(struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST, value); }
     /** Unsafe version of {@link #enableThreadSampler(boolean) enableThreadSampler}. */
-    public static void nenableThreadSampler(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.ENABLETHREADSAMPLER, value); }
+    public static void nenableThreadSampler(long struct, int value) { memPutInt(struct + RMTSettings.ENABLETHREADSAMPLER, value); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates(int) msSleepBetweenServerUpdates}. */
-    public static void nmsSleepBetweenServerUpdates(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES, value); }
+    public static void nmsSleepBetweenServerUpdates(long struct, int value) { memPutInt(struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES, value); }
     /** Unsafe version of {@link #messageQueueSizeInBytes(int) messageQueueSizeInBytes}. */
-    public static void nmessageQueueSizeInBytes(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MESSAGEQUEUESIZEINBYTES, value); }
+    public static void nmessageQueueSizeInBytes(long struct, int value) { memPutInt(struct + RMTSettings.MESSAGEQUEUESIZEINBYTES, value); }
     /** Unsafe version of {@link #maxNbMessagesPerUpdate(int) maxNbMessagesPerUpdate}. */
-    public static void nmaxNbMessagesPerUpdate(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MAXNBMESSAGESPERUPDATE, value); }
+    public static void nmaxNbMessagesPerUpdate(long struct, int value) { memPutInt(struct + RMTSettings.MAXNBMESSAGESPERUPDATE, value); }
     /** Unsafe version of {@link #_malloc(RMTMallocI) _malloc}. */
     public static void n_malloc(long struct, RMTMallocI value) { memPutAddress(struct + RMTSettings._MALLOC, value.address()); }
     /** Unsafe version of {@link #realloc(RMTReallocI) realloc}. */

@@ -249,14 +249,14 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresource2KHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageSubresource2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageSubresource2KHR.PNEXT); }
     /** Unsafe version of {@link #imageSubresource}. */
     public static VkImageSubresource nimageSubresource(long struct) { return VkImageSubresource.create(struct + VkImageSubresource2KHR.IMAGESUBRESOURCE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresource2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageSubresource2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageSubresource2KHR.PNEXT, value); }
     /** Unsafe version of {@link #imageSubresource(VkImageSubresource) imageSubresource}. */

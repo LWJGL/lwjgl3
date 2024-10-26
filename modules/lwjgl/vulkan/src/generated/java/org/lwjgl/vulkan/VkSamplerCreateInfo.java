@@ -539,78 +539,78 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSamplerCreateInfo.FLAGS); }
     /** Unsafe version of {@link #magFilter}. */
-    public static int nmagFilter(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.MAGFILTER); }
+    public static int nmagFilter(long struct) { return memGetInt(struct + VkSamplerCreateInfo.MAGFILTER); }
     /** Unsafe version of {@link #minFilter}. */
-    public static int nminFilter(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.MINFILTER); }
+    public static int nminFilter(long struct) { return memGetInt(struct + VkSamplerCreateInfo.MINFILTER); }
     /** Unsafe version of {@link #mipmapMode}. */
-    public static int nmipmapMode(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.MIPMAPMODE); }
+    public static int nmipmapMode(long struct) { return memGetInt(struct + VkSamplerCreateInfo.MIPMAPMODE); }
     /** Unsafe version of {@link #addressModeU}. */
-    public static int naddressModeU(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEU); }
+    public static int naddressModeU(long struct) { return memGetInt(struct + VkSamplerCreateInfo.ADDRESSMODEU); }
     /** Unsafe version of {@link #addressModeV}. */
-    public static int naddressModeV(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEV); }
+    public static int naddressModeV(long struct) { return memGetInt(struct + VkSamplerCreateInfo.ADDRESSMODEV); }
     /** Unsafe version of {@link #addressModeW}. */
-    public static int naddressModeW(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEW); }
+    public static int naddressModeW(long struct) { return memGetInt(struct + VkSamplerCreateInfo.ADDRESSMODEW); }
     /** Unsafe version of {@link #mipLodBias}. */
-    public static float nmipLodBias(long struct) { return UNSAFE.getFloat(null, struct + VkSamplerCreateInfo.MIPLODBIAS); }
+    public static float nmipLodBias(long struct) { return memGetFloat(struct + VkSamplerCreateInfo.MIPLODBIAS); }
     /** Unsafe version of {@link #anisotropyEnable}. */
-    public static int nanisotropyEnable(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.ANISOTROPYENABLE); }
+    public static int nanisotropyEnable(long struct) { return memGetInt(struct + VkSamplerCreateInfo.ANISOTROPYENABLE); }
     /** Unsafe version of {@link #maxAnisotropy}. */
-    public static float nmaxAnisotropy(long struct) { return UNSAFE.getFloat(null, struct + VkSamplerCreateInfo.MAXANISOTROPY); }
+    public static float nmaxAnisotropy(long struct) { return memGetFloat(struct + VkSamplerCreateInfo.MAXANISOTROPY); }
     /** Unsafe version of {@link #compareEnable}. */
-    public static int ncompareEnable(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.COMPAREENABLE); }
+    public static int ncompareEnable(long struct) { return memGetInt(struct + VkSamplerCreateInfo.COMPAREENABLE); }
     /** Unsafe version of {@link #compareOp}. */
-    public static int ncompareOp(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.COMPAREOP); }
+    public static int ncompareOp(long struct) { return memGetInt(struct + VkSamplerCreateInfo.COMPAREOP); }
     /** Unsafe version of {@link #minLod}. */
-    public static float nminLod(long struct) { return UNSAFE.getFloat(null, struct + VkSamplerCreateInfo.MINLOD); }
+    public static float nminLod(long struct) { return memGetFloat(struct + VkSamplerCreateInfo.MINLOD); }
     /** Unsafe version of {@link #maxLod}. */
-    public static float nmaxLod(long struct) { return UNSAFE.getFloat(null, struct + VkSamplerCreateInfo.MAXLOD); }
+    public static float nmaxLod(long struct) { return memGetFloat(struct + VkSamplerCreateInfo.MAXLOD); }
     /** Unsafe version of {@link #borderColor}. */
-    public static int nborderColor(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.BORDERCOLOR); }
+    public static int nborderColor(long struct) { return memGetInt(struct + VkSamplerCreateInfo.BORDERCOLOR); }
     /** Unsafe version of {@link #unnormalizedCoordinates}. */
-    public static int nunnormalizedCoordinates(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCreateInfo.UNNORMALIZEDCOORDINATES); }
+    public static int nunnormalizedCoordinates(long struct) { return memGetInt(struct + VkSamplerCreateInfo.UNNORMALIZEDCOORDINATES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #magFilter(int) magFilter}. */
-    public static void nmagFilter(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.MAGFILTER, value); }
+    public static void nmagFilter(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.MAGFILTER, value); }
     /** Unsafe version of {@link #minFilter(int) minFilter}. */
-    public static void nminFilter(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.MINFILTER, value); }
+    public static void nminFilter(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.MINFILTER, value); }
     /** Unsafe version of {@link #mipmapMode(int) mipmapMode}. */
-    public static void nmipmapMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.MIPMAPMODE, value); }
+    public static void nmipmapMode(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.MIPMAPMODE, value); }
     /** Unsafe version of {@link #addressModeU(int) addressModeU}. */
-    public static void naddressModeU(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEU, value); }
+    public static void naddressModeU(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.ADDRESSMODEU, value); }
     /** Unsafe version of {@link #addressModeV(int) addressModeV}. */
-    public static void naddressModeV(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEV, value); }
+    public static void naddressModeV(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.ADDRESSMODEV, value); }
     /** Unsafe version of {@link #addressModeW(int) addressModeW}. */
-    public static void naddressModeW(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.ADDRESSMODEW, value); }
+    public static void naddressModeW(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.ADDRESSMODEW, value); }
     /** Unsafe version of {@link #mipLodBias(float) mipLodBias}. */
-    public static void nmipLodBias(long struct, float value) { UNSAFE.putFloat(null, struct + VkSamplerCreateInfo.MIPLODBIAS, value); }
+    public static void nmipLodBias(long struct, float value) { memPutFloat(struct + VkSamplerCreateInfo.MIPLODBIAS, value); }
     /** Unsafe version of {@link #anisotropyEnable(boolean) anisotropyEnable}. */
-    public static void nanisotropyEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.ANISOTROPYENABLE, value); }
+    public static void nanisotropyEnable(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.ANISOTROPYENABLE, value); }
     /** Unsafe version of {@link #maxAnisotropy(float) maxAnisotropy}. */
-    public static void nmaxAnisotropy(long struct, float value) { UNSAFE.putFloat(null, struct + VkSamplerCreateInfo.MAXANISOTROPY, value); }
+    public static void nmaxAnisotropy(long struct, float value) { memPutFloat(struct + VkSamplerCreateInfo.MAXANISOTROPY, value); }
     /** Unsafe version of {@link #compareEnable(boolean) compareEnable}. */
-    public static void ncompareEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.COMPAREENABLE, value); }
+    public static void ncompareEnable(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.COMPAREENABLE, value); }
     /** Unsafe version of {@link #compareOp(int) compareOp}. */
-    public static void ncompareOp(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.COMPAREOP, value); }
+    public static void ncompareOp(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.COMPAREOP, value); }
     /** Unsafe version of {@link #minLod(float) minLod}. */
-    public static void nminLod(long struct, float value) { UNSAFE.putFloat(null, struct + VkSamplerCreateInfo.MINLOD, value); }
+    public static void nminLod(long struct, float value) { memPutFloat(struct + VkSamplerCreateInfo.MINLOD, value); }
     /** Unsafe version of {@link #maxLod(float) maxLod}. */
-    public static void nmaxLod(long struct, float value) { UNSAFE.putFloat(null, struct + VkSamplerCreateInfo.MAXLOD, value); }
+    public static void nmaxLod(long struct, float value) { memPutFloat(struct + VkSamplerCreateInfo.MAXLOD, value); }
     /** Unsafe version of {@link #borderColor(int) borderColor}. */
-    public static void nborderColor(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.BORDERCOLOR, value); }
+    public static void nborderColor(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.BORDERCOLOR, value); }
     /** Unsafe version of {@link #unnormalizedCoordinates(boolean) unnormalizedCoordinates}. */
-    public static void nunnormalizedCoordinates(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCreateInfo.UNNORMALIZEDCOORDINATES, value); }
+    public static void nunnormalizedCoordinates(long struct, int value) { memPutInt(struct + VkSamplerCreateInfo.UNNORMALIZEDCOORDINATES, value); }
 
     // -----------------------------------
 

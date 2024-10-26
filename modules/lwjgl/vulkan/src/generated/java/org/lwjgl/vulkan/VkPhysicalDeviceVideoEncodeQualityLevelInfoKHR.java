@@ -268,22 +268,22 @@ public class VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pVideoProfile}. */
     public static VkVideoProfileInfoKHR npVideoProfile(long struct) { return VkVideoProfileInfoKHR.create(memGetAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PVIDEOPROFILE)); }
     /** Unsafe version of {@link #qualityLevel}. */
-    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL); }
+    public static int nqualityLevel(long struct) { return memGetInt(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pVideoProfile(VkVideoProfileInfoKHR) pVideoProfile}. */
     public static void npVideoProfile(long struct, VkVideoProfileInfoKHR value) { memPutAddress(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.PVIDEOPROFILE, value.address()); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
-    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL, value); }
+    public static void nqualityLevel(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

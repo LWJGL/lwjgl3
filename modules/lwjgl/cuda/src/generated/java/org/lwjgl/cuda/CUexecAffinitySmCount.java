@@ -201,10 +201,10 @@ public class CUexecAffinitySmCount extends Struct<CUexecAffinitySmCount> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #val}. */
-    public static int nval(long struct) { return UNSAFE.getInt(null, struct + CUexecAffinitySmCount.VAL); }
+    public static int nval(long struct) { return memGetInt(struct + CUexecAffinitySmCount.VAL); }
 
     /** Unsafe version of {@link #val(int) val}. */
-    public static void nval(long struct, int value) { UNSAFE.putInt(null, struct + CUexecAffinitySmCount.VAL, value); }
+    public static void nval(long struct, int value) { memPutInt(struct + CUexecAffinitySmCount.VAL, value); }
 
     // -----------------------------------
 

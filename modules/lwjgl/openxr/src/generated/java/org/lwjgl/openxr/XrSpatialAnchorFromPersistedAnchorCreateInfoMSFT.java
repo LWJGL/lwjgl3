@@ -267,7 +267,7 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct<XrS
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #spatialAnchorStore}. */
@@ -276,7 +276,7 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct<XrS
     public static XrSpatialAnchorPersistenceNameMSFT nspatialAnchorPersistenceName(long struct) { return XrSpatialAnchorPersistenceNameMSFT.create(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.SPATIALANCHORPERSISTENCENAME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #spatialAnchorStore(XrSpatialAnchorStoreConnectionMSFT) spatialAnchorStore}. */

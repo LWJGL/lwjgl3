@@ -249,16 +249,16 @@ public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRateKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRateKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShadingRateKHR.PNEXT); }
     /** Unsafe version of {@link #sampleCounts}. */
-    public static int nsampleCounts(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRateKHR.SAMPLECOUNTS); }
+    public static int nsampleCounts(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRateKHR.SAMPLECOUNTS); }
     /** Unsafe version of {@link #fragmentSize}. */
     public static VkExtent2D nfragmentSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceFragmentShadingRateKHR.FRAGMENTSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShadingRateKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShadingRateKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShadingRateKHR.PNEXT, value); }
 

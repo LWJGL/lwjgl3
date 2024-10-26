@@ -878,42 +878,42 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDeviceCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDeviceCreateInfo.FLAGS); }
     /** Unsafe version of {@link #queueCreateInfoCount}. */
-    public static int nqueueCreateInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceCreateInfo.QUEUECREATEINFOCOUNT); }
+    public static int nqueueCreateInfoCount(long struct) { return memGetInt(struct + VkDeviceCreateInfo.QUEUECREATEINFOCOUNT); }
     /** Unsafe version of {@link #pQueueCreateInfos}. */
     public static VkDeviceQueueCreateInfo.Buffer npQueueCreateInfos(long struct) { return VkDeviceQueueCreateInfo.create(memGetAddress(struct + VkDeviceCreateInfo.PQUEUECREATEINFOS), nqueueCreateInfoCount(struct)); }
     /** Unsafe version of {@link #enabledLayerCount}. */
-    public static int nenabledLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceCreateInfo.ENABLEDLAYERCOUNT); }
+    public static int nenabledLayerCount(long struct) { return memGetInt(struct + VkDeviceCreateInfo.ENABLEDLAYERCOUNT); }
     /** Unsafe version of {@link #ppEnabledLayerNames() ppEnabledLayerNames}. */
     @Nullable public static PointerBuffer nppEnabledLayerNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceCreateInfo.PPENABLEDLAYERNAMES), nenabledLayerCount(struct)); }
     /** Unsafe version of {@link #enabledExtensionCount}. */
-    public static int nenabledExtensionCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceCreateInfo.ENABLEDEXTENSIONCOUNT); }
+    public static int nenabledExtensionCount(long struct) { return memGetInt(struct + VkDeviceCreateInfo.ENABLEDEXTENSIONCOUNT); }
     /** Unsafe version of {@link #ppEnabledExtensionNames() ppEnabledExtensionNames}. */
     @Nullable public static PointerBuffer nppEnabledExtensionNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceCreateInfo.PPENABLEDEXTENSIONNAMES), nenabledExtensionCount(struct)); }
     /** Unsafe version of {@link #pEnabledFeatures}. */
     @Nullable public static VkPhysicalDeviceFeatures npEnabledFeatures(long struct) { return VkPhysicalDeviceFeatures.createSafe(memGetAddress(struct + VkDeviceCreateInfo.PENABLEDFEATURES)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDeviceCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code queueCreateInfoCount} field of the specified {@code struct}. */
-    public static void nqueueCreateInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceCreateInfo.QUEUECREATEINFOCOUNT, value); }
+    public static void nqueueCreateInfoCount(long struct, int value) { memPutInt(struct + VkDeviceCreateInfo.QUEUECREATEINFOCOUNT, value); }
     /** Unsafe version of {@link #pQueueCreateInfos(VkDeviceQueueCreateInfo.Buffer) pQueueCreateInfos}. */
     public static void npQueueCreateInfos(long struct, VkDeviceQueueCreateInfo.Buffer value) { memPutAddress(struct + VkDeviceCreateInfo.PQUEUECREATEINFOS, value.address()); nqueueCreateInfoCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code enabledLayerCount} field of the specified {@code struct}. */
-    public static void nenabledLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceCreateInfo.ENABLEDLAYERCOUNT, value); }
+    public static void nenabledLayerCount(long struct, int value) { memPutInt(struct + VkDeviceCreateInfo.ENABLEDLAYERCOUNT, value); }
     /** Unsafe version of {@link #ppEnabledLayerNames(PointerBuffer) ppEnabledLayerNames}. */
     public static void nppEnabledLayerNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkDeviceCreateInfo.PPENABLEDLAYERNAMES, memAddressSafe(value)); nenabledLayerCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code enabledExtensionCount} field of the specified {@code struct}. */
-    public static void nenabledExtensionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
+    public static void nenabledExtensionCount(long struct, int value) { memPutInt(struct + VkDeviceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
     /** Unsafe version of {@link #ppEnabledExtensionNames(PointerBuffer) ppEnabledExtensionNames}. */
     public static void nppEnabledExtensionNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkDeviceCreateInfo.PPENABLEDEXTENSIONNAMES, memAddressSafe(value)); nenabledExtensionCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #pEnabledFeatures(VkPhysicalDeviceFeatures) pEnabledFeatures}. */

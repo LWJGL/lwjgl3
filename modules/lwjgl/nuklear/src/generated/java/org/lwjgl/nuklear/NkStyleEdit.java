@@ -545,21 +545,21 @@ public class NkStyleEdit extends Struct<NkStyleEdit> implements NativeResource {
     /** Unsafe version of {@link #selected_text_hover}. */
     public static NkColor nselected_text_hover(long struct) { return NkColor.create(struct + NkStyleEdit.SELECTED_TEXT_HOVER); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleEdit.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleEdit.ROUNDING); }
     /** Unsafe version of {@link #cursor_size}. */
-    public static float ncursor_size(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.CURSOR_SIZE); }
+    public static float ncursor_size(long struct) { return memGetFloat(struct + NkStyleEdit.CURSOR_SIZE); }
     /** Unsafe version of {@link #scrollbar_size}. */
     public static NkVec2 nscrollbar_size(long struct) { return NkVec2.create(struct + NkStyleEdit.SCROLLBAR_SIZE); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleEdit.PADDING); }
     /** Unsafe version of {@link #row_padding}. */
-    public static float nrow_padding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.ROW_PADDING); }
+    public static float nrow_padding(long struct) { return memGetFloat(struct + NkStyleEdit.ROW_PADDING); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleEdit.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleEdit.DISABLED_FACTOR); }
 
     /** Unsafe version of {@link #normal(NkStyleItem) normal}. */
     public static void nnormal(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleEdit.NORMAL, NkStyleItem.SIZEOF); }
@@ -594,21 +594,21 @@ public class NkStyleEdit extends Struct<NkStyleEdit> implements NativeResource {
     /** Unsafe version of {@link #selected_text_hover(NkColor) selected_text_hover}. */
     public static void nselected_text_hover(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleEdit.SELECTED_TEXT_HOVER, NkColor.SIZEOF); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleEdit.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleEdit.ROUNDING, value); }
     /** Unsafe version of {@link #cursor_size(float) cursor_size}. */
-    public static void ncursor_size(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.CURSOR_SIZE, value); }
+    public static void ncursor_size(long struct, float value) { memPutFloat(struct + NkStyleEdit.CURSOR_SIZE, value); }
     /** Unsafe version of {@link #scrollbar_size(NkVec2) scrollbar_size}. */
     public static void nscrollbar_size(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleEdit.SCROLLBAR_SIZE, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleEdit.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #row_padding(float) row_padding}. */
-    public static void nrow_padding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.ROW_PADDING, value); }
+    public static void nrow_padding(long struct, float value) { memPutFloat(struct + NkStyleEdit.ROW_PADDING, value); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleEdit.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleEdit.DISABLED_FACTOR, value); }
 
     // -----------------------------------
 

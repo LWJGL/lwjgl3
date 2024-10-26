@@ -282,26 +282,26 @@ public class VkComputePipelineIndirectBufferInfoNV extends Struct<VkComputePipel
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkComputePipelineIndirectBufferInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkComputePipelineIndirectBufferInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkComputePipelineIndirectBufferInfoNV.PNEXT); }
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkComputePipelineIndirectBufferInfoNV.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkComputePipelineIndirectBufferInfoNV.DEVICEADDRESS); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkComputePipelineIndirectBufferInfoNV.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkComputePipelineIndirectBufferInfoNV.SIZE); }
     /** Unsafe version of {@link #pipelineDeviceAddressCaptureReplay}. */
-    public static long npipelineDeviceAddressCaptureReplay(long struct) { return UNSAFE.getLong(null, struct + VkComputePipelineIndirectBufferInfoNV.PIPELINEDEVICEADDRESSCAPTUREREPLAY); }
+    public static long npipelineDeviceAddressCaptureReplay(long struct) { return memGetLong(struct + VkComputePipelineIndirectBufferInfoNV.PIPELINEDEVICEADDRESSCAPTUREREPLAY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkComputePipelineIndirectBufferInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkComputePipelineIndirectBufferInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkComputePipelineIndirectBufferInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkComputePipelineIndirectBufferInfoNV.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkComputePipelineIndirectBufferInfoNV.DEVICEADDRESS, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkComputePipelineIndirectBufferInfoNV.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkComputePipelineIndirectBufferInfoNV.SIZE, value); }
     /** Unsafe version of {@link #pipelineDeviceAddressCaptureReplay(long) pipelineDeviceAddressCaptureReplay}. */
-    public static void npipelineDeviceAddressCaptureReplay(long struct, long value) { UNSAFE.putLong(null, struct + VkComputePipelineIndirectBufferInfoNV.PIPELINEDEVICEADDRESSCAPTUREREPLAY, value); }
+    public static void npipelineDeviceAddressCaptureReplay(long struct, long value) { memPutLong(struct + VkComputePipelineIndirectBufferInfoNV.PIPELINEDEVICEADDRESSCAPTUREREPLAY, value); }
 
     // -----------------------------------
 

@@ -269,23 +269,23 @@ public class LLVMOpInfoSymbol1 extends Struct<LLVMOpInfoSymbol1> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #Present}. */
-    public static long nPresent(long struct) { return UNSAFE.getLong(null, struct + LLVMOpInfoSymbol1.PRESENT); }
+    public static long nPresent(long struct) { return memGetLong(struct + LLVMOpInfoSymbol1.PRESENT); }
     /** Unsafe version of {@link #Name}. */
     @Nullable public static ByteBuffer nName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + LLVMOpInfoSymbol1.NAME)); }
     /** Unsafe version of {@link #NameString}. */
     @Nullable public static String nNameString(long struct) { return memUTF8Safe(memGetAddress(struct + LLVMOpInfoSymbol1.NAME)); }
     /** Unsafe version of {@link #Value}. */
-    public static long nValue(long struct) { return UNSAFE.getLong(null, struct + LLVMOpInfoSymbol1.VALUE); }
+    public static long nValue(long struct) { return memGetLong(struct + LLVMOpInfoSymbol1.VALUE); }
 
     /** Unsafe version of {@link #Present(long) Present}. */
-    public static void nPresent(long struct, long value) { UNSAFE.putLong(null, struct + LLVMOpInfoSymbol1.PRESENT, value); }
+    public static void nPresent(long struct, long value) { memPutLong(struct + LLVMOpInfoSymbol1.PRESENT, value); }
     /** Unsafe version of {@link #Name(ByteBuffer) Name}. */
     public static void nName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
         memPutAddress(struct + LLVMOpInfoSymbol1.NAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #Value(long) Value}. */
-    public static void nValue(long struct, long value) { UNSAFE.putLong(null, struct + LLVMOpInfoSymbol1.VALUE, value); }
+    public static void nValue(long struct, long value) { memPutLong(struct + LLVMOpInfoSymbol1.VALUE, value); }
 
     // -----------------------------------
 

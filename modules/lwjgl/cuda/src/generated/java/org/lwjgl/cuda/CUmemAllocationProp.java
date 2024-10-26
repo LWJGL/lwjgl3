@@ -300,40 +300,40 @@ public class CUmemAllocationProp extends Struct<CUmemAllocationProp> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUmemAllocationProp.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUmemAllocationProp.TYPE); }
     /** Unsafe version of {@link #requestedHandleTypes}. */
-    public static int nrequestedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + CUmemAllocationProp.REQUESTEDHANDLETYPES); }
+    public static int nrequestedHandleTypes(long struct) { return memGetInt(struct + CUmemAllocationProp.REQUESTEDHANDLETYPES); }
     /** Unsafe version of {@link #location}. */
     public static CUmemLocation nlocation(long struct) { return CUmemLocation.create(struct + CUmemAllocationProp.LOCATION); }
     /** Unsafe version of {@link #win32HandleMetaData}. */
     public static long nwin32HandleMetaData(long struct) { return memGetAddress(struct + CUmemAllocationProp.WIN32HANDLEMETADATA); }
     /** Unsafe version of {@link #allocFlags_compressionType}. */
-    public static byte nallocFlags_compressionType(long struct) { return UNSAFE.getByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_COMPRESSIONTYPE); }
+    public static byte nallocFlags_compressionType(long struct) { return memGetByte(struct + CUmemAllocationProp.ALLOCFLAGS_COMPRESSIONTYPE); }
     /** Unsafe version of {@link #allocFlags_gpuDirectRDMACapable}. */
-    public static byte nallocFlags_gpuDirectRDMACapable(long struct) { return UNSAFE.getByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_GPUDIRECTRDMACAPABLE); }
+    public static byte nallocFlags_gpuDirectRDMACapable(long struct) { return memGetByte(struct + CUmemAllocationProp.ALLOCFLAGS_GPUDIRECTRDMACAPABLE); }
     /** Unsafe version of {@link #allocFlags_usage}. */
-    public static short nallocFlags_usage(long struct) { return UNSAFE.getShort(null, struct + CUmemAllocationProp.ALLOCFLAGS_USAGE); }
+    public static short nallocFlags_usage(long struct) { return memGetShort(struct + CUmemAllocationProp.ALLOCFLAGS_USAGE); }
     /** Unsafe version of {@link #allocFlags_reserved}. */
     public static ByteBuffer nallocFlags_reserved(long struct) { return memByteBuffer(struct + CUmemAllocationProp.ALLOCFLAGS_RESERVED, 4); }
     /** Unsafe version of {@link #allocFlags_reserved(int) allocFlags_reserved}. */
     public static byte nallocFlags_reserved(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_RESERVED + check(index, 4) * 1);
+        return memGetByte(struct + CUmemAllocationProp.ALLOCFLAGS_RESERVED + check(index, 4) * 1);
     }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUmemAllocationProp.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUmemAllocationProp.TYPE, value); }
     /** Unsafe version of {@link #requestedHandleTypes(int) requestedHandleTypes}. */
-    public static void nrequestedHandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + CUmemAllocationProp.REQUESTEDHANDLETYPES, value); }
+    public static void nrequestedHandleTypes(long struct, int value) { memPutInt(struct + CUmemAllocationProp.REQUESTEDHANDLETYPES, value); }
     /** Unsafe version of {@link #location(CUmemLocation) location}. */
     public static void nlocation(long struct, CUmemLocation value) { memCopy(value.address(), struct + CUmemAllocationProp.LOCATION, CUmemLocation.SIZEOF); }
     /** Unsafe version of {@link #win32HandleMetaData(long) win32HandleMetaData}. */
     public static void nwin32HandleMetaData(long struct, long value) { memPutAddress(struct + CUmemAllocationProp.WIN32HANDLEMETADATA, value); }
     /** Unsafe version of {@link #allocFlags_compressionType(byte) allocFlags_compressionType}. */
-    public static void nallocFlags_compressionType(long struct, byte value) { UNSAFE.putByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_COMPRESSIONTYPE, value); }
+    public static void nallocFlags_compressionType(long struct, byte value) { memPutByte(struct + CUmemAllocationProp.ALLOCFLAGS_COMPRESSIONTYPE, value); }
     /** Unsafe version of {@link #allocFlags_gpuDirectRDMACapable(byte) allocFlags_gpuDirectRDMACapable}. */
-    public static void nallocFlags_gpuDirectRDMACapable(long struct, byte value) { UNSAFE.putByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_GPUDIRECTRDMACAPABLE, value); }
+    public static void nallocFlags_gpuDirectRDMACapable(long struct, byte value) { memPutByte(struct + CUmemAllocationProp.ALLOCFLAGS_GPUDIRECTRDMACAPABLE, value); }
     /** Unsafe version of {@link #allocFlags_usage(short) allocFlags_usage}. */
-    public static void nallocFlags_usage(long struct, short value) { UNSAFE.putShort(null, struct + CUmemAllocationProp.ALLOCFLAGS_USAGE, value); }
+    public static void nallocFlags_usage(long struct, short value) { memPutShort(struct + CUmemAllocationProp.ALLOCFLAGS_USAGE, value); }
     /** Unsafe version of {@link #allocFlags_reserved(ByteBuffer) allocFlags_reserved}. */
     public static void nallocFlags_reserved(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -341,7 +341,7 @@ public class CUmemAllocationProp extends Struct<CUmemAllocationProp> implements 
     }
     /** Unsafe version of {@link #allocFlags_reserved(int, byte) allocFlags_reserved}. */
     public static void nallocFlags_reserved(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUmemAllocationProp.ALLOCFLAGS_RESERVED + check(index, 4) * 1, value);
+        memPutByte(struct + CUmemAllocationProp.ALLOCFLAGS_RESERVED + check(index, 4) * 1, value);
     }
 
     // -----------------------------------

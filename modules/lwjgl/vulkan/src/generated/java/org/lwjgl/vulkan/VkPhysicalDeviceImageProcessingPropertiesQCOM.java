@@ -266,11 +266,11 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.PNEXT); }
     /** Unsafe version of {@link #maxWeightFilterPhases}. */
-    public static int nmaxWeightFilterPhases(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.MAXWEIGHTFILTERPHASES); }
+    public static int nmaxWeightFilterPhases(long struct) { return memGetInt(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.MAXWEIGHTFILTERPHASES); }
     /** Unsafe version of {@link #maxWeightFilterDimension}. */
     public static VkExtent2D nmaxWeightFilterDimension(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.MAXWEIGHTFILTERDIMENSION); }
     /** Unsafe version of {@link #maxBlockMatchRegion}. */
@@ -279,7 +279,7 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
     public static VkExtent2D nmaxBoxFilterBlockSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.MAXBOXFILTERBLOCKSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageProcessingPropertiesQCOM.PNEXT, value); }
 

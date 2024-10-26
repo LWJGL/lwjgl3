@@ -238,18 +238,18 @@ public class VkVideoEncodeH264QpKHR extends Struct<VkVideoEncodeH264QpKHR> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #qpI}. */
-    public static int nqpI(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264QpKHR.QPI); }
+    public static int nqpI(long struct) { return memGetInt(struct + VkVideoEncodeH264QpKHR.QPI); }
     /** Unsafe version of {@link #qpP}. */
-    public static int nqpP(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264QpKHR.QPP); }
+    public static int nqpP(long struct) { return memGetInt(struct + VkVideoEncodeH264QpKHR.QPP); }
     /** Unsafe version of {@link #qpB}. */
-    public static int nqpB(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264QpKHR.QPB); }
+    public static int nqpB(long struct) { return memGetInt(struct + VkVideoEncodeH264QpKHR.QPB); }
 
     /** Unsafe version of {@link #qpI(int) qpI}. */
-    public static void nqpI(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264QpKHR.QPI, value); }
+    public static void nqpI(long struct, int value) { memPutInt(struct + VkVideoEncodeH264QpKHR.QPI, value); }
     /** Unsafe version of {@link #qpP(int) qpP}. */
-    public static void nqpP(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264QpKHR.QPP, value); }
+    public static void nqpP(long struct, int value) { memPutInt(struct + VkVideoEncodeH264QpKHR.QPP, value); }
     /** Unsafe version of {@link #qpB(int) qpB}. */
-    public static void nqpB(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264QpKHR.QPB, value); }
+    public static void nqpB(long struct, int value) { memPutInt(struct + VkVideoEncodeH264QpKHR.QPB, value); }
 
     // -----------------------------------
 

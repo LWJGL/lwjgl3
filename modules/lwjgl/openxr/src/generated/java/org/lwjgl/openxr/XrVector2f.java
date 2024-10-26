@@ -229,14 +229,14 @@ public class XrVector2f extends Struct<XrVector2f> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + XrVector2f.X); }
+    public static float nx(long struct) { return memGetFloat(struct + XrVector2f.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + XrVector2f.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + XrVector2f.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + XrVector2f.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + XrVector2f.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + XrVector2f.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + XrVector2f.Y, value); }
 
     // -----------------------------------
 

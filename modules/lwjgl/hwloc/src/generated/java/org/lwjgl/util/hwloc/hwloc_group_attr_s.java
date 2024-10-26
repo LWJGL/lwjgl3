@@ -123,13 +123,13 @@ public class hwloc_group_attr_s extends Struct<hwloc_group_attr_s> {
     // -----------------------------------
 
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + hwloc_group_attr_s.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + hwloc_group_attr_s.DEPTH); }
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + hwloc_group_attr_s.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + hwloc_group_attr_s.KIND); }
     /** Unsafe version of {@link #subkind}. */
-    public static int nsubkind(long struct) { return UNSAFE.getInt(null, struct + hwloc_group_attr_s.SUBKIND); }
+    public static int nsubkind(long struct) { return memGetInt(struct + hwloc_group_attr_s.SUBKIND); }
     /** Unsafe version of {@link #dont_merge}. */
-    public static boolean ndont_merge(long struct) { return UNSAFE.getByte(null, struct + hwloc_group_attr_s.DONT_MERGE) != 0; }
+    public static boolean ndont_merge(long struct) { return memGetByte(struct + hwloc_group_attr_s.DONT_MERGE) != 0; }
 
     // -----------------------------------
 

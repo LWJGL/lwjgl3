@@ -285,7 +285,7 @@ public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceToolProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceToolProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceToolProperties.PNEXT); }
     /** Unsafe version of {@link #name}. */
@@ -297,7 +297,7 @@ public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolP
     /** Unsafe version of {@link #versionString}. */
     public static String nversionString(long struct) { return memUTF8(struct + VkPhysicalDeviceToolProperties.VERSION); }
     /** Unsafe version of {@link #purposes}. */
-    public static int npurposes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceToolProperties.PURPOSES); }
+    public static int npurposes(long struct) { return memGetInt(struct + VkPhysicalDeviceToolProperties.PURPOSES); }
     /** Unsafe version of {@link #description}. */
     public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + VkPhysicalDeviceToolProperties.DESCRIPTION, VK_MAX_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #descriptionString}. */
@@ -308,7 +308,7 @@ public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolP
     public static String nlayerString(long struct) { return memUTF8(struct + VkPhysicalDeviceToolProperties.LAYER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceToolProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceToolProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceToolProperties.PNEXT, value); }
 

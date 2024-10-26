@@ -264,18 +264,18 @@ public class VkImageSubresource extends Struct<VkImageSubresource> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresource.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkImageSubresource.ASPECTMASK); }
     /** Unsafe version of {@link #mipLevel}. */
-    public static int nmipLevel(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresource.MIPLEVEL); }
+    public static int nmipLevel(long struct) { return memGetInt(struct + VkImageSubresource.MIPLEVEL); }
     /** Unsafe version of {@link #arrayLayer}. */
-    public static int narrayLayer(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresource.ARRAYLAYER); }
+    public static int narrayLayer(long struct) { return memGetInt(struct + VkImageSubresource.ARRAYLAYER); }
 
     /** Unsafe version of {@link #aspectMask(int) aspectMask}. */
-    public static void naspectMask(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresource.ASPECTMASK, value); }
+    public static void naspectMask(long struct, int value) { memPutInt(struct + VkImageSubresource.ASPECTMASK, value); }
     /** Unsafe version of {@link #mipLevel(int) mipLevel}. */
-    public static void nmipLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresource.MIPLEVEL, value); }
+    public static void nmipLevel(long struct, int value) { memPutInt(struct + VkImageSubresource.MIPLEVEL, value); }
     /** Unsafe version of {@link #arrayLayer(int) arrayLayer}. */
-    public static void narrayLayer(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresource.ARRAYLAYER, value); }
+    public static void narrayLayer(long struct, int value) { memPutInt(struct + VkImageSubresource.ARRAYLAYER, value); }
 
     // -----------------------------------
 

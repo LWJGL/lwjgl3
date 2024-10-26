@@ -139,7 +139,7 @@ public class NkPopupBuffer extends Struct<NkPopupBuffer> {
     /** Unsafe version of {@link #end}. */
     public static long nend(long struct) { return memGetAddress(struct + NkPopupBuffer.END); }
     /** Unsafe version of {@link #active}. */
-    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkPopupBuffer.ACTIVE) != 0; }
+    public static boolean nactive(long struct) { return memGetByte(struct + NkPopupBuffer.ACTIVE) != 0; }
 
     // -----------------------------------
 

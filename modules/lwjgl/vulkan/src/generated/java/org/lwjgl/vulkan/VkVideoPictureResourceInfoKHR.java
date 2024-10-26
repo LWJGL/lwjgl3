@@ -301,7 +301,7 @@ public class VkVideoPictureResourceInfoKHR extends Struct<VkVideoPictureResource
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoPictureResourceInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoPictureResourceInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoPictureResourceInfoKHR.PNEXT); }
     /** Unsafe version of {@link #codedOffset}. */
@@ -309,12 +309,12 @@ public class VkVideoPictureResourceInfoKHR extends Struct<VkVideoPictureResource
     /** Unsafe version of {@link #codedExtent}. */
     public static VkExtent2D ncodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoPictureResourceInfoKHR.CODEDEXTENT); }
     /** Unsafe version of {@link #baseArrayLayer}. */
-    public static int nbaseArrayLayer(long struct) { return UNSAFE.getInt(null, struct + VkVideoPictureResourceInfoKHR.BASEARRAYLAYER); }
+    public static int nbaseArrayLayer(long struct) { return memGetInt(struct + VkVideoPictureResourceInfoKHR.BASEARRAYLAYER); }
     /** Unsafe version of {@link #imageViewBinding}. */
-    public static long nimageViewBinding(long struct) { return UNSAFE.getLong(null, struct + VkVideoPictureResourceInfoKHR.IMAGEVIEWBINDING); }
+    public static long nimageViewBinding(long struct) { return memGetLong(struct + VkVideoPictureResourceInfoKHR.IMAGEVIEWBINDING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoPictureResourceInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoPictureResourceInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoPictureResourceInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #codedOffset(VkOffset2D) codedOffset}. */
@@ -322,9 +322,9 @@ public class VkVideoPictureResourceInfoKHR extends Struct<VkVideoPictureResource
     /** Unsafe version of {@link #codedExtent(VkExtent2D) codedExtent}. */
     public static void ncodedExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoPictureResourceInfoKHR.CODEDEXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #baseArrayLayer(int) baseArrayLayer}. */
-    public static void nbaseArrayLayer(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoPictureResourceInfoKHR.BASEARRAYLAYER, value); }
+    public static void nbaseArrayLayer(long struct, int value) { memPutInt(struct + VkVideoPictureResourceInfoKHR.BASEARRAYLAYER, value); }
     /** Unsafe version of {@link #imageViewBinding(long) imageViewBinding}. */
-    public static void nimageViewBinding(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoPictureResourceInfoKHR.IMAGEVIEWBINDING, value); }
+    public static void nimageViewBinding(long struct, long value) { memPutLong(struct + VkVideoPictureResourceInfoKHR.IMAGEVIEWBINDING, value); }
 
     // -----------------------------------
 

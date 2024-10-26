@@ -307,38 +307,38 @@ public class SpvcMslSamplerYcbcrConversion extends Struct<SpvcMslSamplerYcbcrCon
     // -----------------------------------
 
     /** Unsafe version of {@link #planes}. */
-    public static int nplanes(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.PLANES); }
+    public static int nplanes(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.PLANES); }
     /** Unsafe version of {@link #resolution}. */
-    public static int nresolution(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.RESOLUTION); }
+    public static int nresolution(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.RESOLUTION); }
     /** Unsafe version of {@link #chroma_filter}. */
-    public static int nchroma_filter(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.CHROMA_FILTER); }
+    public static int nchroma_filter(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.CHROMA_FILTER); }
     /** Unsafe version of {@link #x_chroma_offset}. */
-    public static int nx_chroma_offset(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.X_CHROMA_OFFSET); }
+    public static int nx_chroma_offset(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.X_CHROMA_OFFSET); }
     /** Unsafe version of {@link #y_chroma_offset}. */
-    public static int ny_chroma_offset(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.Y_CHROMA_OFFSET); }
+    public static int ny_chroma_offset(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.Y_CHROMA_OFFSET); }
     /** Unsafe version of {@link #swizzle}. */
     public static IntBuffer nswizzle(long struct) { return memIntBuffer(struct + SpvcMslSamplerYcbcrConversion.SWIZZLE, 4); }
     /** Unsafe version of {@link #swizzle(int) swizzle}. */
     public static int nswizzle(long struct, int index) {
-        return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.SWIZZLE + check(index, 4) * 4);
+        return memGetInt(struct + SpvcMslSamplerYcbcrConversion.SWIZZLE + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #ycbcr_model}. */
-    public static int nycbcr_model(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.YCBCR_MODEL); }
+    public static int nycbcr_model(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.YCBCR_MODEL); }
     /** Unsafe version of {@link #ycbcr_range}. */
-    public static int nycbcr_range(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.YCBCR_RANGE); }
+    public static int nycbcr_range(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.YCBCR_RANGE); }
     /** Unsafe version of {@link #bpc}. */
-    public static int nbpc(long struct) { return UNSAFE.getInt(null, struct + SpvcMslSamplerYcbcrConversion.BPC); }
+    public static int nbpc(long struct) { return memGetInt(struct + SpvcMslSamplerYcbcrConversion.BPC); }
 
     /** Unsafe version of {@link #planes(int) planes}. */
-    public static void nplanes(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.PLANES, value); }
+    public static void nplanes(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.PLANES, value); }
     /** Unsafe version of {@link #resolution(int) resolution}. */
-    public static void nresolution(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.RESOLUTION, value); }
+    public static void nresolution(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.RESOLUTION, value); }
     /** Unsafe version of {@link #chroma_filter(int) chroma_filter}. */
-    public static void nchroma_filter(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.CHROMA_FILTER, value); }
+    public static void nchroma_filter(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.CHROMA_FILTER, value); }
     /** Unsafe version of {@link #x_chroma_offset(int) x_chroma_offset}. */
-    public static void nx_chroma_offset(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.X_CHROMA_OFFSET, value); }
+    public static void nx_chroma_offset(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.X_CHROMA_OFFSET, value); }
     /** Unsafe version of {@link #y_chroma_offset(int) y_chroma_offset}. */
-    public static void ny_chroma_offset(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.Y_CHROMA_OFFSET, value); }
+    public static void ny_chroma_offset(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.Y_CHROMA_OFFSET, value); }
     /** Unsafe version of {@link #swizzle(IntBuffer) swizzle}. */
     public static void nswizzle(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -346,14 +346,14 @@ public class SpvcMslSamplerYcbcrConversion extends Struct<SpvcMslSamplerYcbcrCon
     }
     /** Unsafe version of {@link #swizzle(int, int) swizzle}. */
     public static void nswizzle(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.SWIZZLE + check(index, 4) * 4, value);
+        memPutInt(struct + SpvcMslSamplerYcbcrConversion.SWIZZLE + check(index, 4) * 4, value);
     }
     /** Unsafe version of {@link #ycbcr_model(int) ycbcr_model}. */
-    public static void nycbcr_model(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.YCBCR_MODEL, value); }
+    public static void nycbcr_model(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.YCBCR_MODEL, value); }
     /** Unsafe version of {@link #ycbcr_range(int) ycbcr_range}. */
-    public static void nycbcr_range(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.YCBCR_RANGE, value); }
+    public static void nycbcr_range(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.YCBCR_RANGE, value); }
     /** Unsafe version of {@link #bpc(int) bpc}. */
-    public static void nbpc(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslSamplerYcbcrConversion.BPC, value); }
+    public static void nbpc(long struct, int value) { memPutInt(struct + SpvcMslSamplerYcbcrConversion.BPC, value); }
 
     // -----------------------------------
 

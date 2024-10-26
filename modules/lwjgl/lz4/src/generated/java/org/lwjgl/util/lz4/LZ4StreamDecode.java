@@ -119,7 +119,7 @@ public class LZ4StreamDecode extends Struct<LZ4StreamDecode> {
     public static ByteBuffer nminStateSize(long struct) { return memByteBuffer(struct + LZ4StreamDecode.MINSTATESIZE, LZ4_STREAMDECODE_MINSIZE); }
     /** Unsafe version of {@link #minStateSize(int) minStateSize}. */
     public static byte nminStateSize(long struct, int index) {
-        return UNSAFE.getByte(null, struct + LZ4StreamDecode.MINSTATESIZE + check(index, LZ4_STREAMDECODE_MINSIZE) * 1);
+        return memGetByte(struct + LZ4StreamDecode.MINSTATESIZE + check(index, LZ4_STREAMDECODE_MINSIZE) * 1);
     }
     /** Unsafe version of {@link #internal_donotuse}. */
     public static LZ4StreamDecodeInternal ninternal_donotuse(long struct) { return LZ4StreamDecodeInternal.create(struct + LZ4StreamDecode.INTERNAL_DONOTUSE); }

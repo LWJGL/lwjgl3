@@ -399,50 +399,50 @@ public class VkAttachmentDescription2 extends Struct<VkAttachmentDescription2> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAttachmentDescription2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentDescription2.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAttachmentDescription2.FLAGS); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkAttachmentDescription2.FORMAT); }
     /** Unsafe version of {@link #samples}. */
-    public static int nsamples(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.SAMPLES); }
+    public static int nsamples(long struct) { return memGetInt(struct + VkAttachmentDescription2.SAMPLES); }
     /** Unsafe version of {@link #loadOp}. */
-    public static int nloadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.LOADOP); }
+    public static int nloadOp(long struct) { return memGetInt(struct + VkAttachmentDescription2.LOADOP); }
     /** Unsafe version of {@link #storeOp}. */
-    public static int nstoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.STOREOP); }
+    public static int nstoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription2.STOREOP); }
     /** Unsafe version of {@link #stencilLoadOp}. */
-    public static int nstencilLoadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.STENCILLOADOP); }
+    public static int nstencilLoadOp(long struct) { return memGetInt(struct + VkAttachmentDescription2.STENCILLOADOP); }
     /** Unsafe version of {@link #stencilStoreOp}. */
-    public static int nstencilStoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.STENCILSTOREOP); }
+    public static int nstencilStoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription2.STENCILSTOREOP); }
     /** Unsafe version of {@link #initialLayout}. */
-    public static int ninitialLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.INITIALLAYOUT); }
+    public static int ninitialLayout(long struct) { return memGetInt(struct + VkAttachmentDescription2.INITIALLAYOUT); }
     /** Unsafe version of {@link #finalLayout}. */
-    public static int nfinalLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2.FINALLAYOUT); }
+    public static int nfinalLayout(long struct) { return memGetInt(struct + VkAttachmentDescription2.FINALLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentDescription2.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.FLAGS, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.FORMAT, value); }
     /** Unsafe version of {@link #samples(int) samples}. */
-    public static void nsamples(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.SAMPLES, value); }
+    public static void nsamples(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.SAMPLES, value); }
     /** Unsafe version of {@link #loadOp(int) loadOp}. */
-    public static void nloadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.LOADOP, value); }
+    public static void nloadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.LOADOP, value); }
     /** Unsafe version of {@link #storeOp(int) storeOp}. */
-    public static void nstoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.STOREOP, value); }
+    public static void nstoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.STOREOP, value); }
     /** Unsafe version of {@link #stencilLoadOp(int) stencilLoadOp}. */
-    public static void nstencilLoadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.STENCILLOADOP, value); }
+    public static void nstencilLoadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.STENCILLOADOP, value); }
     /** Unsafe version of {@link #stencilStoreOp(int) stencilStoreOp}. */
-    public static void nstencilStoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.STENCILSTOREOP, value); }
+    public static void nstencilStoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.STENCILSTOREOP, value); }
     /** Unsafe version of {@link #initialLayout(int) initialLayout}. */
-    public static void ninitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.INITIALLAYOUT, value); }
+    public static void ninitialLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.INITIALLAYOUT, value); }
     /** Unsafe version of {@link #finalLayout(int) finalLayout}. */
-    public static void nfinalLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2.FINALLAYOUT, value); }
+    public static void nfinalLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription2.FINALLAYOUT, value); }
 
     // -----------------------------------
 

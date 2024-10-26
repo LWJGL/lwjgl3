@@ -263,18 +263,18 @@ public class VkBufferCopy extends Struct<VkBufferCopy> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #srcOffset}. */
-    public static long nsrcOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.SRCOFFSET); }
+    public static long nsrcOffset(long struct) { return memGetLong(struct + VkBufferCopy.SRCOFFSET); }
     /** Unsafe version of {@link #dstOffset}. */
-    public static long ndstOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.DSTOFFSET); }
+    public static long ndstOffset(long struct) { return memGetLong(struct + VkBufferCopy.DSTOFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkBufferCopy.SIZE); }
 
     /** Unsafe version of {@link #srcOffset(long) srcOffset}. */
-    public static void nsrcOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.SRCOFFSET, value); }
+    public static void nsrcOffset(long struct, long value) { memPutLong(struct + VkBufferCopy.SRCOFFSET, value); }
     /** Unsafe version of {@link #dstOffset(long) dstOffset}. */
-    public static void ndstOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.DSTOFFSET, value); }
+    public static void ndstOffset(long struct, long value) { memPutLong(struct + VkBufferCopy.DSTOFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkBufferCopy.SIZE, value); }
 
     // -----------------------------------
 

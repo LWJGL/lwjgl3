@@ -264,22 +264,22 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct<XrInputSourceLocal
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInputSourceLocalizedNameGetInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInputSourceLocalizedNameGetInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInputSourceLocalizedNameGetInfo.NEXT); }
     /** Unsafe version of {@link #sourcePath}. */
-    public static long nsourcePath(long struct) { return UNSAFE.getLong(null, struct + XrInputSourceLocalizedNameGetInfo.SOURCEPATH); }
+    public static long nsourcePath(long struct) { return memGetLong(struct + XrInputSourceLocalizedNameGetInfo.SOURCEPATH); }
     /** Unsafe version of {@link #whichComponents}. */
-    public static long nwhichComponents(long struct) { return UNSAFE.getLong(null, struct + XrInputSourceLocalizedNameGetInfo.WHICHCOMPONENTS); }
+    public static long nwhichComponents(long struct) { return memGetLong(struct + XrInputSourceLocalizedNameGetInfo.WHICHCOMPONENTS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInputSourceLocalizedNameGetInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInputSourceLocalizedNameGetInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInputSourceLocalizedNameGetInfo.NEXT, value); }
     /** Unsafe version of {@link #sourcePath(long) sourcePath}. */
-    public static void nsourcePath(long struct, long value) { UNSAFE.putLong(null, struct + XrInputSourceLocalizedNameGetInfo.SOURCEPATH, value); }
+    public static void nsourcePath(long struct, long value) { memPutLong(struct + XrInputSourceLocalizedNameGetInfo.SOURCEPATH, value); }
     /** Unsafe version of {@link #whichComponents(long) whichComponents}. */
-    public static void nwhichComponents(long struct, long value) { UNSAFE.putLong(null, struct + XrInputSourceLocalizedNameGetInfo.WHICHCOMPONENTS, value); }
+    public static void nwhichComponents(long struct, long value) { memPutLong(struct + XrInputSourceLocalizedNameGetInfo.WHICHCOMPONENTS, value); }
 
     // -----------------------------------
 

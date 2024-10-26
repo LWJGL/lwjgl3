@@ -329,36 +329,36 @@ public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #maxThreadsPerBlock}. */
-    public static int nmaxThreadsPerBlock(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.MAXTHREADSPERBLOCK); }
+    public static int nmaxThreadsPerBlock(long struct) { return memGetInt(struct + CUdevprop.MAXTHREADSPERBLOCK); }
     /** Unsafe version of {@link #maxThreadsDim}. */
     public static IntBuffer nmaxThreadsDim(long struct) { return memIntBuffer(struct + CUdevprop.MAXTHREADSDIM, 3); }
     /** Unsafe version of {@link #maxThreadsDim(int) maxThreadsDim}. */
     public static int nmaxThreadsDim(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUdevprop.MAXTHREADSDIM + check(index, 3) * 4);
+        return memGetInt(struct + CUdevprop.MAXTHREADSDIM + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxGridSize}. */
     public static IntBuffer nmaxGridSize(long struct) { return memIntBuffer(struct + CUdevprop.MAXGRIDSIZE, 3); }
     /** Unsafe version of {@link #maxGridSize(int) maxGridSize}. */
     public static int nmaxGridSize(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUdevprop.MAXGRIDSIZE + check(index, 3) * 4);
+        return memGetInt(struct + CUdevprop.MAXGRIDSIZE + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #sharedMemPerBlock}. */
-    public static int nsharedMemPerBlock(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.SHAREDMEMPERBLOCK); }
+    public static int nsharedMemPerBlock(long struct) { return memGetInt(struct + CUdevprop.SHAREDMEMPERBLOCK); }
     /** Unsafe version of {@link #totalConstantMemory}. */
-    public static int ntotalConstantMemory(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.TOTALCONSTANTMEMORY); }
+    public static int ntotalConstantMemory(long struct) { return memGetInt(struct + CUdevprop.TOTALCONSTANTMEMORY); }
     /** Unsafe version of {@link #SIMDWidth}. */
-    public static int nSIMDWidth(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.SIMDWIDTH); }
+    public static int nSIMDWidth(long struct) { return memGetInt(struct + CUdevprop.SIMDWIDTH); }
     /** Unsafe version of {@link #memPitch}. */
-    public static int nmemPitch(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.MEMPITCH); }
+    public static int nmemPitch(long struct) { return memGetInt(struct + CUdevprop.MEMPITCH); }
     /** Unsafe version of {@link #regsPerBlock}. */
-    public static int nregsPerBlock(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.REGSPERBLOCK); }
+    public static int nregsPerBlock(long struct) { return memGetInt(struct + CUdevprop.REGSPERBLOCK); }
     /** Unsafe version of {@link #clockRate}. */
-    public static int nclockRate(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.CLOCKRATE); }
+    public static int nclockRate(long struct) { return memGetInt(struct + CUdevprop.CLOCKRATE); }
     /** Unsafe version of {@link #textureAlign}. */
-    public static int ntextureAlign(long struct) { return UNSAFE.getInt(null, struct + CUdevprop.TEXTUREALIGN); }
+    public static int ntextureAlign(long struct) { return memGetInt(struct + CUdevprop.TEXTUREALIGN); }
 
     /** Unsafe version of {@link #maxThreadsPerBlock(int) maxThreadsPerBlock}. */
-    public static void nmaxThreadsPerBlock(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.MAXTHREADSPERBLOCK, value); }
+    public static void nmaxThreadsPerBlock(long struct, int value) { memPutInt(struct + CUdevprop.MAXTHREADSPERBLOCK, value); }
     /** Unsafe version of {@link #maxThreadsDim(IntBuffer) maxThreadsDim}. */
     public static void nmaxThreadsDim(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
@@ -366,7 +366,7 @@ public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
     }
     /** Unsafe version of {@link #maxThreadsDim(int, int) maxThreadsDim}. */
     public static void nmaxThreadsDim(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUdevprop.MAXTHREADSDIM + check(index, 3) * 4, value);
+        memPutInt(struct + CUdevprop.MAXTHREADSDIM + check(index, 3) * 4, value);
     }
     /** Unsafe version of {@link #maxGridSize(IntBuffer) maxGridSize}. */
     public static void nmaxGridSize(long struct, IntBuffer value) {
@@ -375,22 +375,22 @@ public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
     }
     /** Unsafe version of {@link #maxGridSize(int, int) maxGridSize}. */
     public static void nmaxGridSize(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUdevprop.MAXGRIDSIZE + check(index, 3) * 4, value);
+        memPutInt(struct + CUdevprop.MAXGRIDSIZE + check(index, 3) * 4, value);
     }
     /** Unsafe version of {@link #sharedMemPerBlock(int) sharedMemPerBlock}. */
-    public static void nsharedMemPerBlock(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.SHAREDMEMPERBLOCK, value); }
+    public static void nsharedMemPerBlock(long struct, int value) { memPutInt(struct + CUdevprop.SHAREDMEMPERBLOCK, value); }
     /** Unsafe version of {@link #totalConstantMemory(int) totalConstantMemory}. */
-    public static void ntotalConstantMemory(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.TOTALCONSTANTMEMORY, value); }
+    public static void ntotalConstantMemory(long struct, int value) { memPutInt(struct + CUdevprop.TOTALCONSTANTMEMORY, value); }
     /** Unsafe version of {@link #SIMDWidth(int) SIMDWidth}. */
-    public static void nSIMDWidth(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.SIMDWIDTH, value); }
+    public static void nSIMDWidth(long struct, int value) { memPutInt(struct + CUdevprop.SIMDWIDTH, value); }
     /** Unsafe version of {@link #memPitch(int) memPitch}. */
-    public static void nmemPitch(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.MEMPITCH, value); }
+    public static void nmemPitch(long struct, int value) { memPutInt(struct + CUdevprop.MEMPITCH, value); }
     /** Unsafe version of {@link #regsPerBlock(int) regsPerBlock}. */
-    public static void nregsPerBlock(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.REGSPERBLOCK, value); }
+    public static void nregsPerBlock(long struct, int value) { memPutInt(struct + CUdevprop.REGSPERBLOCK, value); }
     /** Unsafe version of {@link #clockRate(int) clockRate}. */
-    public static void nclockRate(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.CLOCKRATE, value); }
+    public static void nclockRate(long struct, int value) { memPutInt(struct + CUdevprop.CLOCKRATE, value); }
     /** Unsafe version of {@link #textureAlign(int) textureAlign}. */
-    public static void ntextureAlign(long struct, int value) { UNSAFE.putInt(null, struct + CUdevprop.TEXTUREALIGN, value); }
+    public static void ntextureAlign(long struct, int value) { memPutInt(struct + CUdevprop.TEXTUREALIGN, value); }
 
     // -----------------------------------
 

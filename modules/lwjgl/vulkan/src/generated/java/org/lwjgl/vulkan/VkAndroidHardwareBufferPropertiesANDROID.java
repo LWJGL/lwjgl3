@@ -257,16 +257,16 @@ public class VkAndroidHardwareBufferPropertiesANDROID extends Struct<VkAndroidHa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferPropertiesANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAndroidHardwareBufferPropertiesANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAndroidHardwareBufferPropertiesANDROID.PNEXT); }
     /** Unsafe version of {@link #allocationSize}. */
-    public static long nallocationSize(long struct) { return UNSAFE.getLong(null, struct + VkAndroidHardwareBufferPropertiesANDROID.ALLOCATIONSIZE); }
+    public static long nallocationSize(long struct) { return memGetLong(struct + VkAndroidHardwareBufferPropertiesANDROID.ALLOCATIONSIZE); }
     /** Unsafe version of {@link #memoryTypeBits}. */
-    public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VkAndroidHardwareBufferPropertiesANDROID.MEMORYTYPEBITS); }
+    public static int nmemoryTypeBits(long struct) { return memGetInt(struct + VkAndroidHardwareBufferPropertiesANDROID.MEMORYTYPEBITS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAndroidHardwareBufferPropertiesANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAndroidHardwareBufferPropertiesANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAndroidHardwareBufferPropertiesANDROID.PNEXT, value); }
 

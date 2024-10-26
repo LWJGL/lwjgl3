@@ -255,18 +255,18 @@ public class XrInstanceProperties extends Struct<XrInstanceProperties> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInstanceProperties.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInstanceProperties.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInstanceProperties.NEXT); }
     /** Unsafe version of {@link #runtimeVersion}. */
-    public static long nruntimeVersion(long struct) { return UNSAFE.getLong(null, struct + XrInstanceProperties.RUNTIMEVERSION); }
+    public static long nruntimeVersion(long struct) { return memGetLong(struct + XrInstanceProperties.RUNTIMEVERSION); }
     /** Unsafe version of {@link #runtimeName}. */
     public static ByteBuffer nruntimeName(long struct) { return memByteBuffer(struct + XrInstanceProperties.RUNTIMENAME, XR_MAX_RUNTIME_NAME_SIZE); }
     /** Unsafe version of {@link #runtimeNameString}. */
     public static String nruntimeNameString(long struct) { return memUTF8(struct + XrInstanceProperties.RUNTIMENAME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceProperties.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInstanceProperties.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceProperties.NEXT, value); }
 

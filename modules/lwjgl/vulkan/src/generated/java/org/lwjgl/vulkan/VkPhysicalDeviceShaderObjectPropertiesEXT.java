@@ -257,20 +257,20 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderObjectPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderBinaryUUID}. */
     public static ByteBuffer nshaderBinaryUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.SHADERBINARYUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #shaderBinaryUUID(int) shaderBinaryUUID}. */
     public static byte nshaderBinaryUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceShaderObjectPropertiesEXT.SHADERBINARYUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.SHADERBINARYUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #shaderBinaryVersion}. */
-    public static int nshaderBinaryVersion(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderObjectPropertiesEXT.SHADERBINARYVERSION); }
+    public static int nshaderBinaryVersion(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.SHADERBINARYVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderObjectPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderObjectPropertiesEXT.PNEXT, value); }
 

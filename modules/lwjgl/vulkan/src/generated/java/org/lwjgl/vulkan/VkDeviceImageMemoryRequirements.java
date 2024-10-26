@@ -272,22 +272,22 @@ public class VkDeviceImageMemoryRequirements extends Struct<VkDeviceImageMemoryR
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceImageMemoryRequirements.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceImageMemoryRequirements.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceImageMemoryRequirements.PNEXT); }
     /** Unsafe version of {@link #pCreateInfo}. */
     public static VkImageCreateInfo npCreateInfo(long struct) { return VkImageCreateInfo.create(memGetAddress(struct + VkDeviceImageMemoryRequirements.PCREATEINFO)); }
     /** Unsafe version of {@link #planeAspect}. */
-    public static int nplaneAspect(long struct) { return UNSAFE.getInt(null, struct + VkDeviceImageMemoryRequirements.PLANEASPECT); }
+    public static int nplaneAspect(long struct) { return memGetInt(struct + VkDeviceImageMemoryRequirements.PLANEASPECT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceImageMemoryRequirements.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceImageMemoryRequirements.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceImageMemoryRequirements.PNEXT, value); }
     /** Unsafe version of {@link #pCreateInfo(VkImageCreateInfo) pCreateInfo}. */
     public static void npCreateInfo(long struct, VkImageCreateInfo value) { memPutAddress(struct + VkDeviceImageMemoryRequirements.PCREATEINFO, value.address()); }
     /** Unsafe version of {@link #planeAspect(int) planeAspect}. */
-    public static void nplaneAspect(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceImageMemoryRequirements.PLANEASPECT, value); }
+    public static void nplaneAspect(long struct, int value) { memPutInt(struct + VkDeviceImageMemoryRequirements.PLANEASPECT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

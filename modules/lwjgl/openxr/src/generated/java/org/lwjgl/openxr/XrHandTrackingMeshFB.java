@@ -426,13 +426,13 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandTrackingMeshFB.NEXT); }
     /** Unsafe version of {@link #jointCapacityInput}. */
-    public static int njointCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.JOINTCAPACITYINPUT); }
+    public static int njointCapacityInput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.JOINTCAPACITYINPUT); }
     /** Unsafe version of {@link #jointCountOutput}. */
-    public static int njointCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT); }
+    public static int njointCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT); }
     /** Unsafe version of {@link #jointBindPoses}. */
     @Nullable public static XrPosef.Buffer njointBindPoses(long struct) { return XrPosef.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES), njointCapacityInput(struct)); }
     /** Unsafe version of {@link #jointRadii() jointRadii}. */
@@ -440,9 +440,9 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #jointParents() jointParents}. */
     @Nullable public static IntBuffer njointParents(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTPARENTS), njointCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertexPositions}. */
     @Nullable public static XrVector3f.Buffer nvertexPositions(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexNormals}. */
@@ -454,20 +454,20 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #vertexBlendWeights}. */
     @Nullable public static XrVector4f.Buffer nvertexBlendWeights(long struct) { return XrVector4f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #indexCapacityInput}. */
-    public static int nindexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT); }
+    public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
-    public static int nindexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingMeshFB.INDEXCOUNTOUTPUT); }
+    public static int nindexCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
     @Nullable public static ShortBuffer nindices(long struct) { return memShortBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingMeshFB.NEXT, value); }
     /** Sets the specified value to the {@code jointCapacityInput} field of the specified {@code struct}. */
-    public static void njointCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.JOINTCAPACITYINPUT, value); }
+    public static void njointCapacityInput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.JOINTCAPACITYINPUT, value); }
     /** Unsafe version of {@link #jointCountOutput(int) jointCountOutput}. */
-    public static void njointCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT, value); }
+    public static void njointCountOutput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #jointBindPoses(XrPosef.Buffer) jointBindPoses}. */
     public static void njointBindPoses(long struct, @Nullable XrPosef.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES, memAddressSafe(value)); }
     /** Unsafe version of {@link #jointRadii(FloatBuffer) jointRadii}. */
@@ -475,9 +475,9 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #jointParents(IntBuffer) jointParents}. */
     public static void njointParents(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrHandTrackingMeshFB.JOINTPARENTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
-    public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.VERTEXCAPACITYINPUT, value); }
+    public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT, value); }
+    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertexPositions(XrVector3f.Buffer) vertexPositions}. */
     public static void nvertexPositions(long struct, @Nullable XrVector3f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertexNormals(XrVector3f.Buffer) vertexNormals}. */
@@ -489,9 +489,9 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #vertexBlendWeights(XrVector4f.Buffer) vertexBlendWeights}. */
     public static void nvertexBlendWeights(long struct, @Nullable XrVector4f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
-    public static void nindexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT, value); }
+    public static void nindexCapacityInput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
-    public static void nindexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.INDEXCOUNTOUTPUT, value); }
+    public static void nindexCountOutput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.INDEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #indices(ShortBuffer) indices}. */
     public static void nindices(long struct, @Nullable ShortBuffer value) { memPutAddress(struct + XrHandTrackingMeshFB.INDICES, memAddressSafe(value)); if (value != null) { nindexCapacityInput(struct, value.remaining()); } }
 

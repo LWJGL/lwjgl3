@@ -282,14 +282,14 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.PNEXT); }
     /** Unsafe version of {@link #hmonitor}. */
     public static long nhmonitor(long struct) { return memGetAddress(struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.HMONITOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceFullScreenExclusiveWin32InfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #hmonitor(long) hmonitor}. */

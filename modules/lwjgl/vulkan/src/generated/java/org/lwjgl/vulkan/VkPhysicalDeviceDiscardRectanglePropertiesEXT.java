@@ -261,14 +261,14 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxDiscardRectangles}. */
-    public static int nmaxDiscardRectangles(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.MAXDISCARDRECTANGLES); }
+    public static int nmaxDiscardRectangles(long struct) { return memGetInt(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.MAXDISCARDRECTANGLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.PNEXT, value); }
 

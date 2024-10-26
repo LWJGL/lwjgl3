@@ -208,10 +208,10 @@ public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #ColorSpace}. */
-    public static int nColorSpace(long struct) { return UNSAFE.getInt(null, struct + ovrHmdColorDesc.COLORSPACE); }
+    public static int nColorSpace(long struct) { return memGetInt(struct + ovrHmdColorDesc.COLORSPACE); }
 
     /** Unsafe version of {@link #ColorSpace(int) ColorSpace}. */
-    public static void nColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + ovrHmdColorDesc.COLORSPACE, value); }
+    public static void nColorSpace(long struct, int value) { memPutInt(struct + ovrHmdColorDesc.COLORSPACE, value); }
 
     // -----------------------------------
 

@@ -261,18 +261,18 @@ public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataBuffer.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataBuffer.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataBuffer.NEXT); }
     /** Unsafe version of {@link #varying}. */
     public static ByteBuffer nvarying(long struct) { return memByteBuffer(struct + XrEventDataBuffer.VARYING, 4000); }
     /** Unsafe version of {@link #varying(int) varying}. */
     public static byte nvarying(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrEventDataBuffer.VARYING + check(index, 4000) * 1);
+        return memGetByte(struct + XrEventDataBuffer.VARYING + check(index, 4000) * 1);
     }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataBuffer.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataBuffer.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataBuffer.NEXT, value); }
     /** Unsafe version of {@link #varying(ByteBuffer) varying}. */
@@ -282,7 +282,7 @@ public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements Nati
     }
     /** Unsafe version of {@link #varying(int, byte) varying}. */
     public static void nvarying(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrEventDataBuffer.VARYING + check(index, 4000) * 1, value);
+        memPutByte(struct + XrEventDataBuffer.VARYING + check(index, 4000) * 1, value);
     }
 
     // -----------------------------------

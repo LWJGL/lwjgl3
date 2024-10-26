@@ -130,13 +130,13 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_topology_diff_obj_attr_s.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_s.TYPE); }
     /** Unsafe version of {@link #next}. */
     @Nullable public static hwloc_topology_diff_u nnext(long struct) { return hwloc_topology_diff_u.createSafe(memGetAddress(struct + hwloc_topology_diff_obj_attr_s.NEXT)); }
     /** Unsafe version of {@link #obj_depth}. */
-    public static int nobj_depth(long struct) { return UNSAFE.getInt(null, struct + hwloc_topology_diff_obj_attr_s.OBJ_DEPTH); }
+    public static int nobj_depth(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_s.OBJ_DEPTH); }
     /** Unsafe version of {@link #obj_index}. */
-    public static int nobj_index(long struct) { return UNSAFE.getInt(null, struct + hwloc_topology_diff_obj_attr_s.OBJ_INDEX); }
+    public static int nobj_index(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_s.OBJ_INDEX); }
     /** Unsafe version of {@link #diff}. */
     public static hwloc_topology_diff_obj_attr_u ndiff(long struct) { return hwloc_topology_diff_obj_attr_u.create(struct + hwloc_topology_diff_obj_attr_s.DIFF); }
 

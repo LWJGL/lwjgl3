@@ -228,16 +228,16 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #tv_sec}. */
-    public static long ntv_sec(long struct) { return UNSAFE.getLong(null, struct + StatxTimestamp.TV_SEC); }
+    public static long ntv_sec(long struct) { return memGetLong(struct + StatxTimestamp.TV_SEC); }
     /** Unsafe version of {@link #tv_nsec}. */
-    public static int ntv_nsec(long struct) { return UNSAFE.getInt(null, struct + StatxTimestamp.TV_NSEC); }
-    public static int n__reserved(long struct) { return UNSAFE.getInt(null, struct + StatxTimestamp.__RESERVED); }
+    public static int ntv_nsec(long struct) { return memGetInt(struct + StatxTimestamp.TV_NSEC); }
+    public static int n__reserved(long struct) { return memGetInt(struct + StatxTimestamp.__RESERVED); }
 
     /** Unsafe version of {@link #tv_sec(long) tv_sec}. */
-    public static void ntv_sec(long struct, long value) { UNSAFE.putLong(null, struct + StatxTimestamp.TV_SEC, value); }
+    public static void ntv_sec(long struct, long value) { memPutLong(struct + StatxTimestamp.TV_SEC, value); }
     /** Unsafe version of {@link #tv_nsec(int) tv_nsec}. */
-    public static void ntv_nsec(long struct, int value) { UNSAFE.putInt(null, struct + StatxTimestamp.TV_NSEC, value); }
-    public static void n__reserved(long struct, int value) { UNSAFE.putInt(null, struct + StatxTimestamp.__RESERVED, value); }
+    public static void ntv_nsec(long struct, int value) { memPutInt(struct + StatxTimestamp.TV_NSEC, value); }
+    public static void n__reserved(long struct, int value) { memPutInt(struct + StatxTimestamp.__RESERVED, value); }
 
     // -----------------------------------
 

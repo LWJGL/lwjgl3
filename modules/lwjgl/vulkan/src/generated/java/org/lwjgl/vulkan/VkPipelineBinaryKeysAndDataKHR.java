@@ -247,14 +247,14 @@ public class VkPipelineBinaryKeysAndDataKHR extends Struct<VkPipelineBinaryKeysA
     // -----------------------------------
 
     /** Unsafe version of {@link #binaryCount}. */
-    public static int nbinaryCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineBinaryKeysAndDataKHR.BINARYCOUNT); }
+    public static int nbinaryCount(long struct) { return memGetInt(struct + VkPipelineBinaryKeysAndDataKHR.BINARYCOUNT); }
     /** Unsafe version of {@link #pPipelineBinaryKeys}. */
     public static VkPipelineBinaryKeyKHR.Buffer npPipelineBinaryKeys(long struct) { return VkPipelineBinaryKeyKHR.create(memGetAddress(struct + VkPipelineBinaryKeysAndDataKHR.PPIPELINEBINARYKEYS), nbinaryCount(struct)); }
     /** Unsafe version of {@link #pPipelineBinaryData}. */
     public static VkPipelineBinaryDataKHR.Buffer npPipelineBinaryData(long struct) { return VkPipelineBinaryDataKHR.create(memGetAddress(struct + VkPipelineBinaryKeysAndDataKHR.PPIPELINEBINARYDATA), nbinaryCount(struct)); }
 
     /** Sets the specified value to the {@code binaryCount} field of the specified {@code struct}. */
-    public static void nbinaryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineBinaryKeysAndDataKHR.BINARYCOUNT, value); }
+    public static void nbinaryCount(long struct, int value) { memPutInt(struct + VkPipelineBinaryKeysAndDataKHR.BINARYCOUNT, value); }
     /** Unsafe version of {@link #pPipelineBinaryKeys(VkPipelineBinaryKeyKHR.Buffer) pPipelineBinaryKeys}. */
     public static void npPipelineBinaryKeys(long struct, VkPipelineBinaryKeyKHR.Buffer value) { memPutAddress(struct + VkPipelineBinaryKeysAndDataKHR.PPIPELINEBINARYKEYS, value.address()); }
     /** Unsafe version of {@link #pPipelineBinaryData(VkPipelineBinaryDataKHR.Buffer) pPipelineBinaryData}. */

@@ -264,12 +264,12 @@ public class VkDisplayModeParametersKHR extends Struct<VkDisplayModeParametersKH
     /** Unsafe version of {@link #visibleRegion}. */
     public static VkExtent2D nvisibleRegion(long struct) { return VkExtent2D.create(struct + VkDisplayModeParametersKHR.VISIBLEREGION); }
     /** Unsafe version of {@link #refreshRate}. */
-    public static int nrefreshRate(long struct) { return UNSAFE.getInt(null, struct + VkDisplayModeParametersKHR.REFRESHRATE); }
+    public static int nrefreshRate(long struct) { return memGetInt(struct + VkDisplayModeParametersKHR.REFRESHRATE); }
 
     /** Unsafe version of {@link #visibleRegion(VkExtent2D) visibleRegion}. */
     public static void nvisibleRegion(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkDisplayModeParametersKHR.VISIBLEREGION, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #refreshRate(int) refreshRate}. */
-    public static void nrefreshRate(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayModeParametersKHR.REFRESHRATE, value); }
+    public static void nrefreshRate(long struct, int value) { memPutInt(struct + VkDisplayModeParametersKHR.REFRESHRATE, value); }
 
     // -----------------------------------
 

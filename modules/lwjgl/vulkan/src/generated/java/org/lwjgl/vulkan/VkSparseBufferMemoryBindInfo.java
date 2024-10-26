@@ -262,16 +262,16 @@ public class VkSparseBufferMemoryBindInfo extends Struct<VkSparseBufferMemoryBin
     // -----------------------------------
 
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkSparseBufferMemoryBindInfo.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkSparseBufferMemoryBindInfo.BUFFER); }
     /** Unsafe version of {@link #bindCount}. */
-    public static int nbindCount(long struct) { return UNSAFE.getInt(null, struct + VkSparseBufferMemoryBindInfo.BINDCOUNT); }
+    public static int nbindCount(long struct) { return memGetInt(struct + VkSparseBufferMemoryBindInfo.BINDCOUNT); }
     /** Unsafe version of {@link #pBinds}. */
     public static VkSparseMemoryBind.Buffer npBinds(long struct) { return VkSparseMemoryBind.create(memGetAddress(struct + VkSparseBufferMemoryBindInfo.PBINDS), nbindCount(struct)); }
 
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseBufferMemoryBindInfo.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkSparseBufferMemoryBindInfo.BUFFER, value); }
     /** Sets the specified value to the {@code bindCount} field of the specified {@code struct}. */
-    public static void nbindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseBufferMemoryBindInfo.BINDCOUNT, value); }
+    public static void nbindCount(long struct, int value) { memPutInt(struct + VkSparseBufferMemoryBindInfo.BINDCOUNT, value); }
     /** Unsafe version of {@link #pBinds(VkSparseMemoryBind.Buffer) pBinds}. */
     public static void npBinds(long struct, VkSparseMemoryBind.Buffer value) { memPutAddress(struct + VkSparseBufferMemoryBindInfo.PBINDS, value.address()); nbindCount(struct, value.remaining()); }
 

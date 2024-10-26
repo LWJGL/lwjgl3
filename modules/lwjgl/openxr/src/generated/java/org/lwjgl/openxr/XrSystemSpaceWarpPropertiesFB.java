@@ -251,16 +251,16 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct<XrSystemSpaceWarpPrope
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemSpaceWarpPropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemSpaceWarpPropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT); }
     /** Unsafe version of {@link #recommendedMotionVectorImageRectWidth}. */
-    public static int nrecommendedMotionVectorImageRectWidth(long struct) { return UNSAFE.getInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTWIDTH); }
+    public static int nrecommendedMotionVectorImageRectWidth(long struct) { return memGetInt(struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTWIDTH); }
     /** Unsafe version of {@link #recommendedMotionVectorImageRectHeight}. */
-    public static int nrecommendedMotionVectorImageRectHeight(long struct) { return UNSAFE.getInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTHEIGHT); }
+    public static int nrecommendedMotionVectorImageRectHeight(long struct) { return memGetInt(struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTHEIGHT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemSpaceWarpPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT, value); }
 

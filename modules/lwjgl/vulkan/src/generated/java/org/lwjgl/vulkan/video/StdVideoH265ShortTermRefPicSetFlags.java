@@ -217,13 +217,13 @@ public class StdVideoH265ShortTermRefPicSetFlags extends Struct<StdVideoH265Shor
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265ShortTermRefPicSetFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH265ShortTermRefPicSetFlags.BITFIELD0); }
     /** Unsafe version of {@link #inter_ref_pic_set_prediction_flag}. */
     public static int ninter_ref_pic_set_prediction_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #delta_rps_sign}. */
     public static int ndelta_rps_sign(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265ShortTermRefPicSetFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH265ShortTermRefPicSetFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #inter_ref_pic_set_prediction_flag(boolean) inter_ref_pic_set_prediction_flag}. */
     public static void ninter_ref_pic_set_prediction_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #delta_rps_sign(boolean) delta_rps_sign}. */

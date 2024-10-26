@@ -289,26 +289,26 @@ public class MSG extends Struct<MSG> implements NativeResource {
     /** Unsafe version of {@link #hwnd}. */
     public static long nhwnd(long struct) { return memGetAddress(struct + MSG.HWND); }
     /** Unsafe version of {@link #message}. */
-    public static int nmessage(long struct) { return UNSAFE.getInt(null, struct + MSG.MESSAGE); }
+    public static int nmessage(long struct) { return memGetInt(struct + MSG.MESSAGE); }
     /** Unsafe version of {@link #wParam}. */
     public static long nwParam(long struct) { return memGetAddress(struct + MSG.WPARAM); }
     /** Unsafe version of {@link #lParam}. */
     public static long nlParam(long struct) { return memGetAddress(struct + MSG.LPARAM); }
     /** Unsafe version of {@link #time}. */
-    public static int ntime(long struct) { return UNSAFE.getInt(null, struct + MSG.TIME); }
+    public static int ntime(long struct) { return memGetInt(struct + MSG.TIME); }
     /** Unsafe version of {@link #pt}. */
     public static POINT npt(long struct) { return POINT.create(struct + MSG.PT); }
 
     /** Unsafe version of {@link #hwnd(long) hwnd}. */
     public static void nhwnd(long struct, long value) { memPutAddress(struct + MSG.HWND, value); }
     /** Unsafe version of {@link #message(int) message}. */
-    public static void nmessage(long struct, int value) { UNSAFE.putInt(null, struct + MSG.MESSAGE, value); }
+    public static void nmessage(long struct, int value) { memPutInt(struct + MSG.MESSAGE, value); }
     /** Unsafe version of {@link #wParam(long) wParam}. */
     public static void nwParam(long struct, long value) { memPutAddress(struct + MSG.WPARAM, value); }
     /** Unsafe version of {@link #lParam(long) lParam}. */
     public static void nlParam(long struct, long value) { memPutAddress(struct + MSG.LPARAM, value); }
     /** Unsafe version of {@link #time(int) time}. */
-    public static void ntime(long struct, int value) { UNSAFE.putInt(null, struct + MSG.TIME, value); }
+    public static void ntime(long struct, int value) { memPutInt(struct + MSG.TIME, value); }
     /** Unsafe version of {@link #pt(POINT) pt}. */
     public static void npt(long struct, POINT value) { memCopy(value.address(), struct + MSG.PT, POINT.SIZEOF); }
 

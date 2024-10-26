@@ -308,13 +308,13 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #memoryType}. */
-    public static int nmemoryType(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationInfo.MEMORYTYPE); }
+    public static int nmemoryType(long struct) { return memGetInt(struct + VmaAllocationInfo.MEMORYTYPE); }
     /** Unsafe version of {@link #deviceMemory}. */
-    public static long ndeviceMemory(long struct) { return UNSAFE.getLong(null, struct + VmaAllocationInfo.DEVICEMEMORY); }
+    public static long ndeviceMemory(long struct) { return memGetLong(struct + VmaAllocationInfo.DEVICEMEMORY); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VmaAllocationInfo.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VmaAllocationInfo.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VmaAllocationInfo.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VmaAllocationInfo.SIZE); }
     /** Unsafe version of {@link #pMappedData}. */
     public static long npMappedData(long struct) { return memGetAddress(struct + VmaAllocationInfo.PMAPPEDDATA); }
     /** Unsafe version of {@link #pUserData}. */

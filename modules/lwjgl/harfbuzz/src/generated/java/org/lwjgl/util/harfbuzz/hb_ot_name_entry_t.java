@@ -228,13 +228,13 @@ public class hb_ot_name_entry_t extends Struct<hb_ot_name_entry_t> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #name_id}. */
-    public static int nname_id(long struct) { return UNSAFE.getInt(null, struct + hb_ot_name_entry_t.NAME_ID); }
+    public static int nname_id(long struct) { return memGetInt(struct + hb_ot_name_entry_t.NAME_ID); }
     public static hb_var_int_t nvar(long struct) { return hb_var_int_t.create(struct + hb_ot_name_entry_t.VAR); }
     /** Unsafe version of {@link #language}. */
     public static long nlanguage(long struct) { return memGetAddress(struct + hb_ot_name_entry_t.LANGUAGE); }
 
     /** Unsafe version of {@link #name_id(int) name_id}. */
-    public static void nname_id(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_name_entry_t.NAME_ID, value); }
+    public static void nname_id(long struct, int value) { memPutInt(struct + hb_ot_name_entry_t.NAME_ID, value); }
     public static void nvar(long struct, hb_var_int_t value) { memCopy(value.address(), struct + hb_ot_name_entry_t.VAR, hb_var_int_t.SIZEOF); }
     /** Unsafe version of {@link #language(long) language}. */
     public static void nlanguage(long struct, long value) { memPutAddress(struct + hb_ot_name_entry_t.LANGUAGE, check(value)); }

@@ -252,16 +252,16 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCheckpointData2NV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCheckpointData2NV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCheckpointData2NV.PNEXT); }
     /** Unsafe version of {@link #stage}. */
-    public static long nstage(long struct) { return UNSAFE.getLong(null, struct + VkCheckpointData2NV.STAGE); }
+    public static long nstage(long struct) { return memGetLong(struct + VkCheckpointData2NV.STAGE); }
     /** Unsafe version of {@link #pCheckpointMarker}. */
     public static long npCheckpointMarker(long struct) { return memGetAddress(struct + VkCheckpointData2NV.PCHECKPOINTMARKER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCheckpointData2NV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCheckpointData2NV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCheckpointData2NV.PNEXT, value); }
 

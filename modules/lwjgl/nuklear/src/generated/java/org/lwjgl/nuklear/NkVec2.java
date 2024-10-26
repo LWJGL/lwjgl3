@@ -239,14 +239,14 @@ public class NkVec2 extends Struct<NkVec2> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NkVec2.X); }
+    public static float nx(long struct) { return memGetFloat(struct + NkVec2.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + NkVec2.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + NkVec2.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + NkVec2.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + NkVec2.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + NkVec2.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + NkVec2.Y, value); }
 
     // -----------------------------------
 

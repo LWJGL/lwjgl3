@@ -312,26 +312,26 @@ public class VkDeviceQueueInfo2 extends Struct<VkDeviceQueueInfo2> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueInfo2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueInfo2.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueInfo2.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.FLAGS); }
     /** Unsafe version of {@link #queueFamilyIndex}. */
-    public static int nqueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX); }
+    public static int nqueueFamilyIndex(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #queueIndex}. */
-    public static int nqueueIndex(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueInfo2.QUEUEINDEX); }
+    public static int nqueueIndex(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.QUEUEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueInfo2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueInfo2.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueInfo2.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.FLAGS, value); }
     /** Unsafe version of {@link #queueFamilyIndex(int) queueFamilyIndex}. */
-    public static void nqueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX, value); }
+    public static void nqueueFamilyIndex(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #queueIndex(int) queueIndex}. */
-    public static void nqueueIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueInfo2.QUEUEINDEX, value); }
+    public static void nqueueIndex(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.QUEUEINDEX, value); }
 
     // -----------------------------------
 

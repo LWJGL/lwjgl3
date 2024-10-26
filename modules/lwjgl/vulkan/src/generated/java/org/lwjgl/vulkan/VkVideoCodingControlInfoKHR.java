@@ -265,18 +265,18 @@ public class VkVideoCodingControlInfoKHR extends Struct<VkVideoCodingControlInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoCodingControlInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoCodingControlInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoCodingControlInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoCodingControlInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoCodingControlInfoKHR.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoCodingControlInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoCodingControlInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoCodingControlInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoCodingControlInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkVideoCodingControlInfoKHR.FLAGS, value); }
 
     // -----------------------------------
 

@@ -300,25 +300,25 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
     public static ByteBuffer nloop_filter_level(long struct) { return memByteBuffer(struct + StdVideoAV1LoopFilter.LOOP_FILTER_LEVEL, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS); }
     /** Unsafe version of {@link #loop_filter_level(int) loop_filter_level}. */
     public static byte nloop_filter_level(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_LEVEL + check(index, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS) * 1);
+        return memGetByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_LEVEL + check(index, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS) * 1);
     }
     /** Unsafe version of {@link #loop_filter_sharpness}. */
-    public static byte nloop_filter_sharpness(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_SHARPNESS); }
+    public static byte nloop_filter_sharpness(long struct) { return memGetByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_SHARPNESS); }
     /** Unsafe version of {@link #update_ref_delta}. */
-    public static byte nupdate_ref_delta(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.UPDATE_REF_DELTA); }
+    public static byte nupdate_ref_delta(long struct) { return memGetByte(struct + StdVideoAV1LoopFilter.UPDATE_REF_DELTA); }
     /** Unsafe version of {@link #loop_filter_ref_deltas}. */
     public static ByteBuffer nloop_filter_ref_deltas(long struct) { return memByteBuffer(struct + StdVideoAV1LoopFilter.LOOP_FILTER_REF_DELTAS, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME); }
     /** Unsafe version of {@link #loop_filter_ref_deltas(int) loop_filter_ref_deltas}. */
     public static byte nloop_filter_ref_deltas(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_REF_DELTAS + check(index, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME) * 1);
+        return memGetByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_REF_DELTAS + check(index, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME) * 1);
     }
     /** Unsafe version of {@link #update_mode_delta}. */
-    public static byte nupdate_mode_delta(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.UPDATE_MODE_DELTA); }
+    public static byte nupdate_mode_delta(long struct) { return memGetByte(struct + StdVideoAV1LoopFilter.UPDATE_MODE_DELTA); }
     /** Unsafe version of {@link #loop_filter_mode_deltas}. */
     public static ByteBuffer nloop_filter_mode_deltas(long struct) { return memByteBuffer(struct + StdVideoAV1LoopFilter.LOOP_FILTER_MODE_DELTAS, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS); }
     /** Unsafe version of {@link #loop_filter_mode_deltas(int) loop_filter_mode_deltas}. */
     public static byte nloop_filter_mode_deltas(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_MODE_DELTAS + check(index, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS) * 1);
+        return memGetByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_MODE_DELTAS + check(index, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS) * 1);
     }
 
     /** Unsafe version of {@link #flags(StdVideoAV1LoopFilterFlags) flags}. */
@@ -330,12 +330,12 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
     }
     /** Unsafe version of {@link #loop_filter_level(int, byte) loop_filter_level}. */
     public static void nloop_filter_level(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_LEVEL + check(index, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS) * 1, value);
+        memPutByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_LEVEL + check(index, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS) * 1, value);
     }
     /** Unsafe version of {@link #loop_filter_sharpness(byte) loop_filter_sharpness}. */
-    public static void nloop_filter_sharpness(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_SHARPNESS, value); }
+    public static void nloop_filter_sharpness(long struct, byte value) { memPutByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_SHARPNESS, value); }
     /** Unsafe version of {@link #update_ref_delta(byte) update_ref_delta}. */
-    public static void nupdate_ref_delta(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.UPDATE_REF_DELTA, value); }
+    public static void nupdate_ref_delta(long struct, byte value) { memPutByte(struct + StdVideoAV1LoopFilter.UPDATE_REF_DELTA, value); }
     /** Unsafe version of {@link #loop_filter_ref_deltas(ByteBuffer) loop_filter_ref_deltas}. */
     public static void nloop_filter_ref_deltas(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME); }
@@ -343,10 +343,10 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
     }
     /** Unsafe version of {@link #loop_filter_ref_deltas(int, byte) loop_filter_ref_deltas}. */
     public static void nloop_filter_ref_deltas(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_REF_DELTAS + check(index, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME) * 1, value);
+        memPutByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_REF_DELTAS + check(index, STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME) * 1, value);
     }
     /** Unsafe version of {@link #update_mode_delta(byte) update_mode_delta}. */
-    public static void nupdate_mode_delta(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.UPDATE_MODE_DELTA, value); }
+    public static void nupdate_mode_delta(long struct, byte value) { memPutByte(struct + StdVideoAV1LoopFilter.UPDATE_MODE_DELTA, value); }
     /** Unsafe version of {@link #loop_filter_mode_deltas(ByteBuffer) loop_filter_mode_deltas}. */
     public static void nloop_filter_mode_deltas(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS); }
@@ -354,7 +354,7 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
     }
     /** Unsafe version of {@link #loop_filter_mode_deltas(int, byte) loop_filter_mode_deltas}. */
     public static void nloop_filter_mode_deltas(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1LoopFilter.LOOP_FILTER_MODE_DELTAS + check(index, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS) * 1, value);
+        memPutByte(struct + StdVideoAV1LoopFilter.LOOP_FILTER_MODE_DELTAS + check(index, STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS) * 1, value);
     }
 
     // -----------------------------------

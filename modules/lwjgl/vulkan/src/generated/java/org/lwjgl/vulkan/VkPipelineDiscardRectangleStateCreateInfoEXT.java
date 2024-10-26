@@ -313,28 +313,28 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #discardRectangleMode}. */
-    public static int ndiscardRectangleMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLEMODE); }
+    public static int ndiscardRectangleMode(long struct) { return memGetInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLEMODE); }
     /** Unsafe version of {@link #discardRectangleCount}. */
-    public static int ndiscardRectangleCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT); }
+    public static int ndiscardRectangleCount(long struct) { return memGetInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT); }
     /** Unsafe version of {@link #pDiscardRectangles}. */
     @Nullable public static VkRect2D.Buffer npDiscardRectangles(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES), ndiscardRectangleCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #discardRectangleMode(int) discardRectangleMode}. */
-    public static void ndiscardRectangleMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLEMODE, value); }
+    public static void ndiscardRectangleMode(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLEMODE, value); }
     /** Sets the specified value to the {@code discardRectangleCount} field of the specified {@code struct}. */
-    public static void ndiscardRectangleCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT, value); }
+    public static void ndiscardRectangleCount(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT, value); }
     /** Unsafe version of {@link #pDiscardRectangles(VkRect2D.Buffer) pDiscardRectangles}. */
     public static void npDiscardRectangles(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES, memAddressSafe(value)); if (value != null) { ndiscardRectangleCount(struct, value.remaining()); } }
 

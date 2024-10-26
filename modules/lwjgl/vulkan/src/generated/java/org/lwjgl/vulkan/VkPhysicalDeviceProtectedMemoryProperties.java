@@ -261,14 +261,14 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceProtectedMemoryProperties.PNEXT); }
     /** Unsafe version of {@link #protectedNoFault}. */
-    public static int nprotectedNoFault(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT); }
+    public static int nprotectedNoFault(long struct) { return memGetInt(struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceProtectedMemoryProperties.PNEXT, value); }
 

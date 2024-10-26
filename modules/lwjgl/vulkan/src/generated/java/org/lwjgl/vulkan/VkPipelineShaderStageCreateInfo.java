@@ -398,15 +398,15 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineShaderStageCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineShaderStageCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineShaderStageCreateInfo.FLAGS); }
     /** Unsafe version of {@link #stage}. */
-    public static int nstage(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageCreateInfo.STAGE); }
+    public static int nstage(long struct) { return memGetInt(struct + VkPipelineShaderStageCreateInfo.STAGE); }
     /** Unsafe version of {@link #module}. */
-    public static long nmodule(long struct) { return UNSAFE.getLong(null, struct + VkPipelineShaderStageCreateInfo.MODULE); }
+    public static long nmodule(long struct) { return memGetLong(struct + VkPipelineShaderStageCreateInfo.MODULE); }
     /** Unsafe version of {@link #pName}. */
     public static ByteBuffer npName(long struct) { return memByteBufferNT1(memGetAddress(struct + VkPipelineShaderStageCreateInfo.PNAME)); }
     /** Unsafe version of {@link #pNameString}. */
@@ -415,15 +415,15 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     @Nullable public static VkSpecializationInfo npSpecializationInfo(long struct) { return VkSpecializationInfo.createSafe(memGetAddress(struct + VkPipelineShaderStageCreateInfo.PSPECIALIZATIONINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineShaderStageCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineShaderStageCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #stage(int) stage}. */
-    public static void nstage(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageCreateInfo.STAGE, value); }
+    public static void nstage(long struct, int value) { memPutInt(struct + VkPipelineShaderStageCreateInfo.STAGE, value); }
     /** Unsafe version of {@link #module(long) module}. */
-    public static void nmodule(long struct, long value) { UNSAFE.putLong(null, struct + VkPipelineShaderStageCreateInfo.MODULE, value); }
+    public static void nmodule(long struct, long value) { memPutLong(struct + VkPipelineShaderStageCreateInfo.MODULE, value); }
     /** Unsafe version of {@link #pName(ByteBuffer) pName}. */
     public static void npName(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

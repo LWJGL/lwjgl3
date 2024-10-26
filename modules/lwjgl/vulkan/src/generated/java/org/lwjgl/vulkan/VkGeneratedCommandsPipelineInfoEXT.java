@@ -243,18 +243,18 @@ public class VkGeneratedCommandsPipelineInfoEXT extends Struct<VkGeneratedComman
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsPipelineInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeneratedCommandsPipelineInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeneratedCommandsPipelineInfoEXT.PNEXT); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsPipelineInfoEXT.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkGeneratedCommandsPipelineInfoEXT.PIPELINE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsPipelineInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeneratedCommandsPipelineInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeneratedCommandsPipelineInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsPipelineInfoEXT.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkGeneratedCommandsPipelineInfoEXT.PIPELINE, value); }
 
     // -----------------------------------
 

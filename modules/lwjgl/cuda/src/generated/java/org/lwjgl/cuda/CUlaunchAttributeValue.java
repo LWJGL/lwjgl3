@@ -345,36 +345,36 @@ public class CUlaunchAttributeValue extends Struct<CUlaunchAttributeValue> imple
     public static ByteBuffer npad(long struct) { return memByteBuffer(struct + CUlaunchAttributeValue.PAD, 64); }
     /** Unsafe version of {@link #pad(int) pad}. */
     public static byte npad(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUlaunchAttributeValue.PAD + check(index, 64) * 1);
+        return memGetByte(struct + CUlaunchAttributeValue.PAD + check(index, 64) * 1);
     }
     /** Unsafe version of {@link #accessPolicyWindow}. */
     public static CUaccessPolicyWindow naccessPolicyWindow(long struct) { return CUaccessPolicyWindow.create(struct + CUlaunchAttributeValue.ACCESSPOLICYWINDOW); }
     /** Unsafe version of {@link #cooperative}. */
-    public static int ncooperative(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.COOPERATIVE); }
+    public static int ncooperative(long struct) { return memGetInt(struct + CUlaunchAttributeValue.COOPERATIVE); }
     /** Unsafe version of {@link #syncPolicy}. */
-    public static int nsyncPolicy(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.SYNCPOLICY); }
+    public static int nsyncPolicy(long struct) { return memGetInt(struct + CUlaunchAttributeValue.SYNCPOLICY); }
     /** Unsafe version of {@link #clusterDim_x}. */
-    public static int nclusterDim_x(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_X); }
+    public static int nclusterDim_x(long struct) { return memGetInt(struct + CUlaunchAttributeValue.CLUSTERDIM_X); }
     /** Unsafe version of {@link #clusterDim_y}. */
-    public static int nclusterDim_y(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_Y); }
+    public static int nclusterDim_y(long struct) { return memGetInt(struct + CUlaunchAttributeValue.CLUSTERDIM_Y); }
     /** Unsafe version of {@link #clusterDim_z}. */
-    public static int nclusterDim_z(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_Z); }
+    public static int nclusterDim_z(long struct) { return memGetInt(struct + CUlaunchAttributeValue.CLUSTERDIM_Z); }
     /** Unsafe version of {@link #clusterSchedulingPolicyPreference}. */
-    public static int nclusterSchedulingPolicyPreference(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.CLUSTERSCHEDULINGPOLICYPREFERENCE); }
+    public static int nclusterSchedulingPolicyPreference(long struct) { return memGetInt(struct + CUlaunchAttributeValue.CLUSTERSCHEDULINGPOLICYPREFERENCE); }
     /** Unsafe version of {@link #programmaticStreamSerializationAllowed}. */
-    public static int nprogrammaticStreamSerializationAllowed(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICSTREAMSERIALIZATIONALLOWED); }
+    public static int nprogrammaticStreamSerializationAllowed(long struct) { return memGetInt(struct + CUlaunchAttributeValue.PROGRAMMATICSTREAMSERIALIZATIONALLOWED); }
     /** Unsafe version of {@link #programmaticEvent_event}. */
     public static long nprogrammaticEvent_event(long struct) { return memGetAddress(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_EVENT); }
     /** Unsafe version of {@link #programmaticEvent_flags}. */
-    public static int nprogrammaticEvent_flags(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_FLAGS); }
+    public static int nprogrammaticEvent_flags(long struct) { return memGetInt(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_FLAGS); }
     /** Unsafe version of {@link #programmaticEvent_triggerAtBlockStart}. */
-    public static int nprogrammaticEvent_triggerAtBlockStart(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_TRIGGERATBLOCKSTART); }
+    public static int nprogrammaticEvent_triggerAtBlockStart(long struct) { return memGetInt(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_TRIGGERATBLOCKSTART); }
     /** Unsafe version of {@link #priority}. */
-    public static int npriority(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.PRIORITY); }
+    public static int npriority(long struct) { return memGetInt(struct + CUlaunchAttributeValue.PRIORITY); }
     /** Unsafe version of {@link #memSyncDomainMap}. */
     public static CUlaunchMemSyncDomainMap nmemSyncDomainMap(long struct) { return CUlaunchMemSyncDomainMap.create(struct + CUlaunchAttributeValue.MEMSYNCDOMAINMAP); }
     /** Unsafe version of {@link #memSyncDomain}. */
-    public static int nmemSyncDomain(long struct) { return UNSAFE.getInt(null, struct + CUlaunchAttributeValue.MEMSYNCDOMAIN); }
+    public static int nmemSyncDomain(long struct) { return memGetInt(struct + CUlaunchAttributeValue.MEMSYNCDOMAIN); }
 
     /** Unsafe version of {@link #pad(ByteBuffer) pad}. */
     public static void npad(long struct, ByteBuffer value) {
@@ -383,36 +383,36 @@ public class CUlaunchAttributeValue extends Struct<CUlaunchAttributeValue> imple
     }
     /** Unsafe version of {@link #pad(int, byte) pad}. */
     public static void npad(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUlaunchAttributeValue.PAD + check(index, 64) * 1, value);
+        memPutByte(struct + CUlaunchAttributeValue.PAD + check(index, 64) * 1, value);
     }
     /** Unsafe version of {@link #accessPolicyWindow(CUaccessPolicyWindow) accessPolicyWindow}. */
     public static void naccessPolicyWindow(long struct, CUaccessPolicyWindow value) { memCopy(value.address(), struct + CUlaunchAttributeValue.ACCESSPOLICYWINDOW, CUaccessPolicyWindow.SIZEOF); }
     /** Unsafe version of {@link #cooperative(int) cooperative}. */
-    public static void ncooperative(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.COOPERATIVE, value); }
+    public static void ncooperative(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.COOPERATIVE, value); }
     /** Unsafe version of {@link #syncPolicy(int) syncPolicy}. */
-    public static void nsyncPolicy(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.SYNCPOLICY, value); }
+    public static void nsyncPolicy(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.SYNCPOLICY, value); }
     /** Unsafe version of {@link #clusterDim_x(int) clusterDim_x}. */
-    public static void nclusterDim_x(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_X, value); }
+    public static void nclusterDim_x(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.CLUSTERDIM_X, value); }
     /** Unsafe version of {@link #clusterDim_y(int) clusterDim_y}. */
-    public static void nclusterDim_y(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_Y, value); }
+    public static void nclusterDim_y(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.CLUSTERDIM_Y, value); }
     /** Unsafe version of {@link #clusterDim_z(int) clusterDim_z}. */
-    public static void nclusterDim_z(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.CLUSTERDIM_Z, value); }
+    public static void nclusterDim_z(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.CLUSTERDIM_Z, value); }
     /** Unsafe version of {@link #clusterSchedulingPolicyPreference(int) clusterSchedulingPolicyPreference}. */
-    public static void nclusterSchedulingPolicyPreference(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.CLUSTERSCHEDULINGPOLICYPREFERENCE, value); }
+    public static void nclusterSchedulingPolicyPreference(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.CLUSTERSCHEDULINGPOLICYPREFERENCE, value); }
     /** Unsafe version of {@link #programmaticStreamSerializationAllowed(int) programmaticStreamSerializationAllowed}. */
-    public static void nprogrammaticStreamSerializationAllowed(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICSTREAMSERIALIZATIONALLOWED, value); }
+    public static void nprogrammaticStreamSerializationAllowed(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.PROGRAMMATICSTREAMSERIALIZATIONALLOWED, value); }
     /** Unsafe version of {@link #programmaticEvent_event(long) programmaticEvent_event}. */
     public static void nprogrammaticEvent_event(long struct, long value) { memPutAddress(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_EVENT, check(value)); }
     /** Unsafe version of {@link #programmaticEvent_flags(int) programmaticEvent_flags}. */
-    public static void nprogrammaticEvent_flags(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_FLAGS, value); }
+    public static void nprogrammaticEvent_flags(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_FLAGS, value); }
     /** Unsafe version of {@link #programmaticEvent_triggerAtBlockStart(int) programmaticEvent_triggerAtBlockStart}. */
-    public static void nprogrammaticEvent_triggerAtBlockStart(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_TRIGGERATBLOCKSTART, value); }
+    public static void nprogrammaticEvent_triggerAtBlockStart(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.PROGRAMMATICEVENT_TRIGGERATBLOCKSTART, value); }
     /** Unsafe version of {@link #priority(int) priority}. */
-    public static void npriority(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.PRIORITY, value); }
+    public static void npriority(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.PRIORITY, value); }
     /** Unsafe version of {@link #memSyncDomainMap(CUlaunchMemSyncDomainMap) memSyncDomainMap}. */
     public static void nmemSyncDomainMap(long struct, CUlaunchMemSyncDomainMap value) { memCopy(value.address(), struct + CUlaunchAttributeValue.MEMSYNCDOMAINMAP, CUlaunchMemSyncDomainMap.SIZEOF); }
     /** Unsafe version of {@link #memSyncDomain(int) memSyncDomain}. */
-    public static void nmemSyncDomain(long struct, int value) { UNSAFE.putInt(null, struct + CUlaunchAttributeValue.MEMSYNCDOMAIN, value); }
+    public static void nmemSyncDomain(long struct, int value) { memPutInt(struct + CUlaunchAttributeValue.MEMSYNCDOMAIN, value); }
 
     // -----------------------------------
 

@@ -116,7 +116,7 @@ class NkConfigStackFlagsElement extends Struct<NkConfigStackFlagsElement> {
     /** Unsafe version of {@link #pValues(int) pValues}. */
     public static IntBuffer npValues(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkConfigStackFlagsElement.PVALUES), capacity); }
     /** Unsafe version of {@link #old_value}. */
-    public static int nold_value(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackFlagsElement.OLD_VALUE); }
+    public static int nold_value(long struct) { return memGetInt(struct + NkConfigStackFlagsElement.OLD_VALUE); }
 
     // -----------------------------------
 

@@ -246,18 +246,18 @@ public class VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #legacyVertexAttributes}. */
-    public static int nlegacyVertexAttributes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.LEGACYVERTEXATTRIBUTES); }
+    public static int nlegacyVertexAttributes(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.LEGACYVERTEXATTRIBUTES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #legacyVertexAttributes(boolean) legacyVertexAttributes}. */
-    public static void nlegacyVertexAttributes(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.LEGACYVERTEXATTRIBUTES, value); }
+    public static void nlegacyVertexAttributes(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.LEGACYVERTEXATTRIBUTES, value); }
 
     // -----------------------------------
 

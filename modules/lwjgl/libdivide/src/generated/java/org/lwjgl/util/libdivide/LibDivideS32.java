@@ -241,14 +241,14 @@ public class LibDivideS32 extends Struct<LibDivideS32> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #magic}. */
-    public static int nmagic(long struct) { return UNSAFE.getInt(null, struct + LibDivideS32.MAGIC); }
+    public static int nmagic(long struct) { return memGetInt(struct + LibDivideS32.MAGIC); }
     /** Unsafe version of {@link #more}. */
-    public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideS32.MORE); }
+    public static byte nmore(long struct) { return memGetByte(struct + LibDivideS32.MORE); }
 
     /** Unsafe version of {@link #magic(int) magic}. */
-    public static void nmagic(long struct, int value) { UNSAFE.putInt(null, struct + LibDivideS32.MAGIC, value); }
+    public static void nmagic(long struct, int value) { memPutInt(struct + LibDivideS32.MAGIC, value); }
     /** Unsafe version of {@link #more(byte) more}. */
-    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideS32.MORE, value); }
+    public static void nmore(long struct, byte value) { memPutByte(struct + LibDivideS32.MORE, value); }
 
     // -----------------------------------
 

@@ -264,22 +264,22 @@ public class XrActionStateGetInfo extends Struct<XrActionStateGetInfo> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionStateGetInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionStateGetInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionStateGetInfo.NEXT); }
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrActionStateGetInfo.ACTION); }
     /** Unsafe version of {@link #subactionPath}. */
-    public static long nsubactionPath(long struct) { return UNSAFE.getLong(null, struct + XrActionStateGetInfo.SUBACTIONPATH); }
+    public static long nsubactionPath(long struct) { return memGetLong(struct + XrActionStateGetInfo.SUBACTIONPATH); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateGetInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionStateGetInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateGetInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrActionStateGetInfo.ACTION, value.address()); }
     /** Unsafe version of {@link #subactionPath(long) subactionPath}. */
-    public static void nsubactionPath(long struct, long value) { UNSAFE.putLong(null, struct + XrActionStateGetInfo.SUBACTIONPATH, value); }
+    public static void nsubactionPath(long struct, long value) { memPutLong(struct + XrActionStateGetInfo.SUBACTIONPATH, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

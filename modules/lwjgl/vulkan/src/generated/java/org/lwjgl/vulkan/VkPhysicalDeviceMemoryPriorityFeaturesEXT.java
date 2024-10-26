@@ -265,18 +265,18 @@ public class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #memoryPriority}. */
-    public static int nmemoryPriority(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.MEMORYPRIORITY); }
+    public static int nmemoryPriority(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.MEMORYPRIORITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #memoryPriority(boolean) memoryPriority}. */
-    public static void nmemoryPriority(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.MEMORYPRIORITY, value); }
+    public static void nmemoryPriority(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryPriorityFeaturesEXT.MEMORYPRIORITY, value); }
 
     // -----------------------------------
 

@@ -374,15 +374,15 @@ public class WNDCLASSEX extends Struct<WNDCLASSEX> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #cbSize}. */
-    public static int ncbSize(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBSIZE); }
+    public static int ncbSize(long struct) { return memGetInt(struct + WNDCLASSEX.CBSIZE); }
     /** Unsafe version of {@link #style}. */
-    public static int nstyle(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.STYLE); }
+    public static int nstyle(long struct) { return memGetInt(struct + WNDCLASSEX.STYLE); }
     /** Unsafe version of {@link #lpfnWndProc}. */
     public static WindowProc nlpfnWndProc(long struct) { return WindowProc.create(memGetAddress(struct + WNDCLASSEX.LPFNWNDPROC)); }
     /** Unsafe version of {@link #cbClsExtra}. */
-    public static int ncbClsExtra(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBCLSEXTRA); }
+    public static int ncbClsExtra(long struct) { return memGetInt(struct + WNDCLASSEX.CBCLSEXTRA); }
     /** Unsafe version of {@link #cbWndExtra}. */
-    public static int ncbWndExtra(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBWNDEXTRA); }
+    public static int ncbWndExtra(long struct) { return memGetInt(struct + WNDCLASSEX.CBWNDEXTRA); }
     /** Unsafe version of {@link #hInstance}. */
     public static long nhInstance(long struct) { return memGetAddress(struct + WNDCLASSEX.HINSTANCE); }
     /** Unsafe version of {@link #hIcon}. */
@@ -403,15 +403,15 @@ public class WNDCLASSEX extends Struct<WNDCLASSEX> implements NativeResource {
     public static long nhIconSm(long struct) { return memGetAddress(struct + WNDCLASSEX.HICONSM); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
-    public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBSIZE, value); }
+    public static void ncbSize(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBSIZE, value); }
     /** Unsafe version of {@link #style(int) style}. */
-    public static void nstyle(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.STYLE, value); }
+    public static void nstyle(long struct, int value) { memPutInt(struct + WNDCLASSEX.STYLE, value); }
     /** Unsafe version of {@link #lpfnWndProc(WindowProcI) lpfnWndProc}. */
     public static void nlpfnWndProc(long struct, WindowProcI value) { memPutAddress(struct + WNDCLASSEX.LPFNWNDPROC, value.address()); }
     /** Unsafe version of {@link #cbClsExtra(int) cbClsExtra}. */
-    public static void ncbClsExtra(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBCLSEXTRA, value); }
+    public static void ncbClsExtra(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBCLSEXTRA, value); }
     /** Unsafe version of {@link #cbWndExtra(int) cbWndExtra}. */
-    public static void ncbWndExtra(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBWNDEXTRA, value); }
+    public static void ncbWndExtra(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBWNDEXTRA, value); }
     /** Unsafe version of {@link #hInstance(long) hInstance}. */
     public static void nhInstance(long struct, long value) { memPutAddress(struct + WNDCLASSEX.HINSTANCE, value); }
     /** Unsafe version of {@link #hIcon(long) hIcon}. */

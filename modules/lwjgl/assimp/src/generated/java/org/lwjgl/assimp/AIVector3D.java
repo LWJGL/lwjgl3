@@ -249,18 +249,18 @@ public class AIVector3D extends Struct<AIVector3D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIVector3D.X); }
+    public static float nx(long struct) { return memGetFloat(struct + AIVector3D.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + AIVector3D.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + AIVector3D.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + AIVector3D.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + AIVector3D.Z); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + AIVector3D.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + AIVector3D.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + AIVector3D.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + AIVector3D.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + AIVector3D.Z, value); }
+    public static void nz(long struct, float value) { memPutFloat(struct + AIVector3D.Z, value); }
 
     // -----------------------------------
 

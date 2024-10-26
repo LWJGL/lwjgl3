@@ -302,24 +302,24 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #sampleOrderType}. */
-    public static int nsampleOrderType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.SAMPLEORDERTYPE); }
+    public static int nsampleOrderType(long struct) { return memGetInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.SAMPLEORDERTYPE); }
     /** Unsafe version of {@link #customSampleOrderCount}. */
-    public static int ncustomSampleOrderCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT); }
+    public static int ncustomSampleOrderCount(long struct) { return memGetInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT); }
     /** Unsafe version of {@link #pCustomSampleOrders}. */
     @Nullable public static VkCoarseSampleOrderCustomNV.Buffer npCustomSampleOrders(long struct) { return VkCoarseSampleOrderCustomNV.createSafe(memGetAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS), ncustomSampleOrderCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #sampleOrderType(int) sampleOrderType}. */
-    public static void nsampleOrderType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.SAMPLEORDERTYPE, value); }
+    public static void nsampleOrderType(long struct, int value) { memPutInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.SAMPLEORDERTYPE, value); }
     /** Sets the specified value to the {@code customSampleOrderCount} field of the specified {@code struct}. */
-    public static void ncustomSampleOrderCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT, value); }
+    public static void ncustomSampleOrderCount(long struct, int value) { memPutInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT, value); }
     /** Unsafe version of {@link #pCustomSampleOrders(VkCoarseSampleOrderCustomNV.Buffer) pCustomSampleOrders}. */
     public static void npCustomSampleOrders(long struct, @Nullable VkCoarseSampleOrderCustomNV.Buffer value) { memPutAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS, memAddressSafe(value)); ncustomSampleOrderCount(struct, value == null ? 0 : value.remaining()); }
 

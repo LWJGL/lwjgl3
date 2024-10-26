@@ -227,12 +227,12 @@ public class XrPassthroughColorLutDataMETA extends Struct<XrPassthroughColorLutD
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferSize}. */
-    public static int nbufferSize(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughColorLutDataMETA.BUFFERSIZE); }
+    public static int nbufferSize(long struct) { return memGetInt(struct + XrPassthroughColorLutDataMETA.BUFFERSIZE); }
     /** Unsafe version of {@link #buffer() buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(memGetAddress(struct + XrPassthroughColorLutDataMETA.BUFFER), nbufferSize(struct)); }
 
     /** Sets the specified value to the {@code bufferSize} field of the specified {@code struct}. */
-    public static void nbufferSize(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughColorLutDataMETA.BUFFERSIZE, value); }
+    public static void nbufferSize(long struct, int value) { memPutInt(struct + XrPassthroughColorLutDataMETA.BUFFERSIZE, value); }
     /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
     public static void nbuffer(long struct, ByteBuffer value) { memPutAddress(struct + XrPassthroughColorLutDataMETA.BUFFER, memAddress(value)); nbufferSize(struct, value.remaining()); }
 

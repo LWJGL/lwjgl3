@@ -154,7 +154,7 @@ public class FT_Var_Axis extends Struct<FT_Var_Axis> {
     /** Unsafe version of {@link #tag}. */
     public static long ntag(long struct) { return memGetCLong(struct + FT_Var_Axis.TAG); }
     /** Unsafe version of {@link #strid}. */
-    public static int nstrid(long struct) { return UNSAFE.getInt(null, struct + FT_Var_Axis.STRID); }
+    public static int nstrid(long struct) { return memGetInt(struct + FT_Var_Axis.STRID); }
 
     // -----------------------------------
 

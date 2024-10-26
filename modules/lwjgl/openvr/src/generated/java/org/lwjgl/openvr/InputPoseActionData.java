@@ -220,9 +220,9 @@ public class InputPoseActionData extends Struct<InputPoseActionData> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #bActive}. */
-    public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputPoseActionData.BACTIVE) != 0; }
+    public static boolean nbActive(long struct) { return memGetByte(struct + InputPoseActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
-    public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputPoseActionData.ACTIVEORIGIN); }
+    public static long nactiveOrigin(long struct) { return memGetLong(struct + InputPoseActionData.ACTIVEORIGIN); }
     /** Unsafe version of {@link #pose}. */
     public static TrackedDevicePose npose(long struct) { return TrackedDevicePose.create(struct + InputPoseActionData.POSE); }
 

@@ -281,7 +281,7 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerProjectionView.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerProjectionView.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerProjectionView.NEXT); }
     /** Unsafe version of {@link #pose}. */
@@ -292,7 +292,7 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     public static XrSwapchainSubImage nsubImage(long struct) { return XrSwapchainSubImage.create(struct + XrCompositionLayerProjectionView.SUBIMAGE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerProjectionView.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerProjectionView.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerProjectionView.NEXT, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */

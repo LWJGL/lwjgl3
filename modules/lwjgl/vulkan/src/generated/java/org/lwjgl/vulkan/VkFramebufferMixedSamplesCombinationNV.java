@@ -283,20 +283,20 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct<VkFramebuffer
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferMixedSamplesCombinationNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFramebufferMixedSamplesCombinationNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFramebufferMixedSamplesCombinationNV.PNEXT); }
     /** Unsafe version of {@link #coverageReductionMode}. */
-    public static int ncoverageReductionMode(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferMixedSamplesCombinationNV.COVERAGEREDUCTIONMODE); }
+    public static int ncoverageReductionMode(long struct) { return memGetInt(struct + VkFramebufferMixedSamplesCombinationNV.COVERAGEREDUCTIONMODE); }
     /** Unsafe version of {@link #rasterizationSamples}. */
-    public static int nrasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferMixedSamplesCombinationNV.RASTERIZATIONSAMPLES); }
+    public static int nrasterizationSamples(long struct) { return memGetInt(struct + VkFramebufferMixedSamplesCombinationNV.RASTERIZATIONSAMPLES); }
     /** Unsafe version of {@link #depthStencilSamples}. */
-    public static int ndepthStencilSamples(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferMixedSamplesCombinationNV.DEPTHSTENCILSAMPLES); }
+    public static int ndepthStencilSamples(long struct) { return memGetInt(struct + VkFramebufferMixedSamplesCombinationNV.DEPTHSTENCILSAMPLES); }
     /** Unsafe version of {@link #colorSamples}. */
-    public static int ncolorSamples(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferMixedSamplesCombinationNV.COLORSAMPLES); }
+    public static int ncolorSamples(long struct) { return memGetInt(struct + VkFramebufferMixedSamplesCombinationNV.COLORSAMPLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferMixedSamplesCombinationNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFramebufferMixedSamplesCombinationNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFramebufferMixedSamplesCombinationNV.PNEXT, value); }
 

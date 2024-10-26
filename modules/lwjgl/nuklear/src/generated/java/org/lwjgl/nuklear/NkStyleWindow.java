@@ -604,23 +604,23 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     /** Unsafe version of {@link #scaler}. */
     public static NkStyleItem nscaler(long struct) { return NkStyleItem.create(struct + NkStyleWindow.SCALER); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleWindow.BORDER); }
     /** Unsafe version of {@link #combo_border}. */
-    public static float ncombo_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.COMBO_BORDER); }
+    public static float ncombo_border(long struct) { return memGetFloat(struct + NkStyleWindow.COMBO_BORDER); }
     /** Unsafe version of {@link #contextual_border}. */
-    public static float ncontextual_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.CONTEXTUAL_BORDER); }
+    public static float ncontextual_border(long struct) { return memGetFloat(struct + NkStyleWindow.CONTEXTUAL_BORDER); }
     /** Unsafe version of {@link #menu_border}. */
-    public static float nmenu_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.MENU_BORDER); }
+    public static float nmenu_border(long struct) { return memGetFloat(struct + NkStyleWindow.MENU_BORDER); }
     /** Unsafe version of {@link #group_border}. */
-    public static float ngroup_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.GROUP_BORDER); }
+    public static float ngroup_border(long struct) { return memGetFloat(struct + NkStyleWindow.GROUP_BORDER); }
     /** Unsafe version of {@link #tooltip_border}. */
-    public static float ntooltip_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.TOOLTIP_BORDER); }
+    public static float ntooltip_border(long struct) { return memGetFloat(struct + NkStyleWindow.TOOLTIP_BORDER); }
     /** Unsafe version of {@link #popup_border}. */
-    public static float npopup_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.POPUP_BORDER); }
+    public static float npopup_border(long struct) { return memGetFloat(struct + NkStyleWindow.POPUP_BORDER); }
     /** Unsafe version of {@link #min_row_height_padding}. */
-    public static float nmin_row_height_padding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.MIN_ROW_HEIGHT_PADDING); }
+    public static float nmin_row_height_padding(long struct) { return memGetFloat(struct + NkStyleWindow.MIN_ROW_HEIGHT_PADDING); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleWindow.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleWindow.ROUNDING); }
     /** Unsafe version of {@link #spacing}. */
     public static NkVec2 nspacing(long struct) { return NkVec2.create(struct + NkStyleWindow.SPACING); }
     /** Unsafe version of {@link #scrollbar_size}. */
@@ -665,23 +665,23 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     /** Unsafe version of {@link #scaler(NkStyleItem) scaler}. */
     public static void nscaler(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleWindow.SCALER, NkStyleItem.SIZEOF); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleWindow.BORDER, value); }
     /** Unsafe version of {@link #combo_border(float) combo_border}. */
-    public static void ncombo_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.COMBO_BORDER, value); }
+    public static void ncombo_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.COMBO_BORDER, value); }
     /** Unsafe version of {@link #contextual_border(float) contextual_border}. */
-    public static void ncontextual_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.CONTEXTUAL_BORDER, value); }
+    public static void ncontextual_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.CONTEXTUAL_BORDER, value); }
     /** Unsafe version of {@link #menu_border(float) menu_border}. */
-    public static void nmenu_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.MENU_BORDER, value); }
+    public static void nmenu_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.MENU_BORDER, value); }
     /** Unsafe version of {@link #group_border(float) group_border}. */
-    public static void ngroup_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.GROUP_BORDER, value); }
+    public static void ngroup_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.GROUP_BORDER, value); }
     /** Unsafe version of {@link #tooltip_border(float) tooltip_border}. */
-    public static void ntooltip_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.TOOLTIP_BORDER, value); }
+    public static void ntooltip_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.TOOLTIP_BORDER, value); }
     /** Unsafe version of {@link #popup_border(float) popup_border}. */
-    public static void npopup_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.POPUP_BORDER, value); }
+    public static void npopup_border(long struct, float value) { memPutFloat(struct + NkStyleWindow.POPUP_BORDER, value); }
     /** Unsafe version of {@link #min_row_height_padding(float) min_row_height_padding}. */
-    public static void nmin_row_height_padding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.MIN_ROW_HEIGHT_PADDING, value); }
+    public static void nmin_row_height_padding(long struct, float value) { memPutFloat(struct + NkStyleWindow.MIN_ROW_HEIGHT_PADDING, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleWindow.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleWindow.ROUNDING, value); }
     /** Unsafe version of {@link #spacing(NkVec2) spacing}. */
     public static void nspacing(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleWindow.SPACING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #scrollbar_size(NkVec2) scrollbar_size}. */

@@ -119,11 +119,11 @@ public class ktxOrientation extends Struct<ktxOrientation> {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + ktxOrientation.X); }
+    public static int nx(long struct) { return memGetInt(struct + ktxOrientation.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + ktxOrientation.Y); }
+    public static int ny(long struct) { return memGetInt(struct + ktxOrientation.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return UNSAFE.getInt(null, struct + ktxOrientation.Z); }
+    public static int nz(long struct) { return memGetInt(struct + ktxOrientation.Z); }
 
     // -----------------------------------
 

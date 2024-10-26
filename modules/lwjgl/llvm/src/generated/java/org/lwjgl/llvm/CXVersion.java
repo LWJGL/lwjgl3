@@ -118,11 +118,11 @@ public class CXVersion extends Struct<CXVersion> {
     // -----------------------------------
 
     /** Unsafe version of {@link #Major}. */
-    public static int nMajor(long struct) { return UNSAFE.getInt(null, struct + CXVersion.MAJOR); }
+    public static int nMajor(long struct) { return memGetInt(struct + CXVersion.MAJOR); }
     /** Unsafe version of {@link #Minor}. */
-    public static int nMinor(long struct) { return UNSAFE.getInt(null, struct + CXVersion.MINOR); }
+    public static int nMinor(long struct) { return memGetInt(struct + CXVersion.MINOR); }
     /** Unsafe version of {@link #Subminor}. */
-    public static int nSubminor(long struct) { return UNSAFE.getInt(null, struct + CXVersion.SUBMINOR); }
+    public static int nSubminor(long struct) { return memGetInt(struct + CXVersion.SUBMINOR); }
 
     // -----------------------------------
 

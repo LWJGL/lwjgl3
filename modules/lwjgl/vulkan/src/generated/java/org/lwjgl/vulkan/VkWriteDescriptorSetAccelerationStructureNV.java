@@ -283,20 +283,20 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct<VkWriteD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSetAccelerationStructureNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWriteDescriptorSetAccelerationStructureNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWriteDescriptorSetAccelerationStructureNV.PNEXT); }
     /** Unsafe version of {@link #accelerationStructureCount}. */
-    public static int naccelerationStructureCount(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSetAccelerationStructureNV.ACCELERATIONSTRUCTURECOUNT); }
+    public static int naccelerationStructureCount(long struct) { return memGetInt(struct + VkWriteDescriptorSetAccelerationStructureNV.ACCELERATIONSTRUCTURECOUNT); }
     /** Unsafe version of {@link #pAccelerationStructures() pAccelerationStructures}. */
     @Nullable public static LongBuffer npAccelerationStructures(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSetAccelerationStructureNV.PACCELERATIONSTRUCTURES), naccelerationStructureCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSetAccelerationStructureNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSetAccelerationStructureNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWriteDescriptorSetAccelerationStructureNV.PNEXT, value); }
     /** Sets the specified value to the {@code accelerationStructureCount} field of the specified {@code struct}. */
-    public static void naccelerationStructureCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSetAccelerationStructureNV.ACCELERATIONSTRUCTURECOUNT, value); }
+    public static void naccelerationStructureCount(long struct, int value) { memPutInt(struct + VkWriteDescriptorSetAccelerationStructureNV.ACCELERATIONSTRUCTURECOUNT, value); }
     /** Unsafe version of {@link #pAccelerationStructures(LongBuffer) pAccelerationStructures}. */
     public static void npAccelerationStructures(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWriteDescriptorSetAccelerationStructureNV.PACCELERATIONSTRUCTURES, memAddressSafe(value)); if (value != null) { naccelerationStructureCount(struct, value.remaining()); } }
 

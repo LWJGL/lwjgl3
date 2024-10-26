@@ -273,20 +273,20 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPresentIdKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPresentIdKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPresentIdKHR.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentIdKHR.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentIdKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pPresentIds() pPresentIds}. */
     @Nullable public static LongBuffer npPresentIds(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPresentIdKHR.PPRESENTIDS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentIdKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPresentIdKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentIdKHR.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentIdKHR.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentIdKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pPresentIds(LongBuffer) pPresentIds}. */
     public static void npPresentIds(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkPresentIdKHR.PPRESENTIDS, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
 

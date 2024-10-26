@@ -270,22 +270,22 @@ public class SpvcReflectedResource extends Struct<SpvcReflectedResource> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + SpvcReflectedResource.ID); }
+    public static int nid(long struct) { return memGetInt(struct + SpvcReflectedResource.ID); }
     /** Unsafe version of {@link #base_type_id}. */
-    public static int nbase_type_id(long struct) { return UNSAFE.getInt(null, struct + SpvcReflectedResource.BASE_TYPE_ID); }
+    public static int nbase_type_id(long struct) { return memGetInt(struct + SpvcReflectedResource.BASE_TYPE_ID); }
     /** Unsafe version of {@link #type_id}. */
-    public static int ntype_id(long struct) { return UNSAFE.getInt(null, struct + SpvcReflectedResource.TYPE_ID); }
+    public static int ntype_id(long struct) { return memGetInt(struct + SpvcReflectedResource.TYPE_ID); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBufferNT1(memGetAddress(struct + SpvcReflectedResource.NAME)); }
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memUTF8(memGetAddress(struct + SpvcReflectedResource.NAME)); }
 
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + SpvcReflectedResource.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + SpvcReflectedResource.ID, value); }
     /** Unsafe version of {@link #base_type_id(int) base_type_id}. */
-    public static void nbase_type_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcReflectedResource.BASE_TYPE_ID, value); }
+    public static void nbase_type_id(long struct, int value) { memPutInt(struct + SpvcReflectedResource.BASE_TYPE_ID, value); }
     /** Unsafe version of {@link #type_id(int) type_id}. */
-    public static void ntype_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcReflectedResource.TYPE_ID, value); }
+    public static void ntype_id(long struct, int value) { memPutInt(struct + SpvcReflectedResource.TYPE_ID, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

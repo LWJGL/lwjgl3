@@ -281,26 +281,26 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCopyMemoryToAccelerationStructureInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCopyMemoryToAccelerationStructureInfoKHR.PNEXT); }
     /** Unsafe version of {@link #src}. */
     public static VkDeviceOrHostAddressConstKHR nsrc(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkCopyMemoryToAccelerationStructureInfoKHR.SRC); }
     /** Unsafe version of {@link #dst}. */
-    public static long ndst(long struct) { return UNSAFE.getLong(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.DST); }
+    public static long ndst(long struct) { return memGetLong(struct + VkCopyMemoryToAccelerationStructureInfoKHR.DST); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkCopyMemoryToAccelerationStructureInfoKHR.MODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCopyMemoryToAccelerationStructureInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCopyMemoryToAccelerationStructureInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #src(VkDeviceOrHostAddressConstKHR) src}. */
     public static void nsrc(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkCopyMemoryToAccelerationStructureInfoKHR.SRC, VkDeviceOrHostAddressConstKHR.SIZEOF); }
     /** Unsafe version of {@link #dst(long) dst}. */
-    public static void ndst(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.DST, value); }
+    public static void ndst(long struct, long value) { memPutLong(struct + VkCopyMemoryToAccelerationStructureInfoKHR.DST, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToAccelerationStructureInfoKHR.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkCopyMemoryToAccelerationStructureInfoKHR.MODE, value); }
 
     // -----------------------------------
 

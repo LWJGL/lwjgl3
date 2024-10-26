@@ -242,14 +242,14 @@ public class VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #meshAndTaskShaderDerivatives}. */
-    public static int nmeshAndTaskShaderDerivatives(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.MESHANDTASKSHADERDERIVATIVES); }
+    public static int nmeshAndTaskShaderDerivatives(long struct) { return memGetInt(struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.MESHANDTASKSHADERDERIVATIVES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.PNEXT, value); }
 

@@ -248,18 +248,18 @@ public class VkAccelerationStructureDeviceAddressInfoKHR extends Struct<VkAccele
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureDeviceAddressInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureDeviceAddressInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureDeviceAddressInfoKHR.PNEXT); }
     /** Unsafe version of {@link #accelerationStructure}. */
-    public static long naccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureDeviceAddressInfoKHR.ACCELERATIONSTRUCTURE); }
+    public static long naccelerationStructure(long struct) { return memGetLong(struct + VkAccelerationStructureDeviceAddressInfoKHR.ACCELERATIONSTRUCTURE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureDeviceAddressInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureDeviceAddressInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureDeviceAddressInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #accelerationStructure(long) accelerationStructure}. */
-    public static void naccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureDeviceAddressInfoKHR.ACCELERATIONSTRUCTURE, value); }
+    public static void naccelerationStructure(long struct, long value) { memPutLong(struct + VkAccelerationStructureDeviceAddressInfoKHR.ACCELERATIONSTRUCTURE, value); }
 
     // -----------------------------------
 

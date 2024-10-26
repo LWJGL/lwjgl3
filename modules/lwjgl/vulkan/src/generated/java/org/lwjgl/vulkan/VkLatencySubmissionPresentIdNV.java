@@ -246,18 +246,18 @@ public class VkLatencySubmissionPresentIdNV extends Struct<VkLatencySubmissionPr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLatencySubmissionPresentIdNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLatencySubmissionPresentIdNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLatencySubmissionPresentIdNV.PNEXT); }
     /** Unsafe version of {@link #presentID}. */
-    public static long npresentID(long struct) { return UNSAFE.getLong(null, struct + VkLatencySubmissionPresentIdNV.PRESENTID); }
+    public static long npresentID(long struct) { return memGetLong(struct + VkLatencySubmissionPresentIdNV.PRESENTID); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySubmissionPresentIdNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLatencySubmissionPresentIdNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencySubmissionPresentIdNV.PNEXT, value); }
     /** Unsafe version of {@link #presentID(long) presentID}. */
-    public static void npresentID(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencySubmissionPresentIdNV.PRESENTID, value); }
+    public static void npresentID(long struct, long value) { memPutLong(struct + VkLatencySubmissionPresentIdNV.PRESENTID, value); }
 
     // -----------------------------------
 

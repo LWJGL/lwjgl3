@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.PNEXT); }
     /** Unsafe version of {@link #supportedImageAlignmentMask}. */
-    public static int nsupportedImageAlignmentMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.SUPPORTEDIMAGEALIGNMENTMASK); }
+    public static int nsupportedImageAlignmentMask(long struct) { return memGetInt(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.SUPPORTEDIMAGEALIGNMENTMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.PNEXT, value); }
     /** Unsafe version of {@link #supportedImageAlignmentMask(int) supportedImageAlignmentMask}. */
-    public static void nsupportedImageAlignmentMask(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.SUPPORTEDIMAGEALIGNMENTMASK, value); }
+    public static void nsupportedImageAlignmentMask(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageAlignmentControlPropertiesMESA.SUPPORTEDIMAGEALIGNMENTMASK, value); }
 
     // -----------------------------------
 

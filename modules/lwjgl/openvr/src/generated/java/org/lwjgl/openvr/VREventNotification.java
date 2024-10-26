@@ -112,9 +112,9 @@ public class VREventNotification extends Struct<VREventNotification> {
     // -----------------------------------
 
     /** Unsafe version of {@link #ulUserValue}. */
-    public static long nulUserValue(long struct) { return UNSAFE.getLong(null, struct + VREventNotification.ULUSERVALUE); }
+    public static long nulUserValue(long struct) { return memGetLong(struct + VREventNotification.ULUSERVALUE); }
     /** Unsafe version of {@link #notificationId}. */
-    public static int nnotificationId(long struct) { return UNSAFE.getInt(null, struct + VREventNotification.NOTIFICATIONID); }
+    public static int nnotificationId(long struct) { return memGetInt(struct + VREventNotification.NOTIFICATIONID); }
 
     // -----------------------------------
 

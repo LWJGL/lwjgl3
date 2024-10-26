@@ -252,14 +252,14 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfo extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.PNEXT); }
     /** Unsafe version of {@link #requiredSubgroupSize}. */
-    public static int nrequiredSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.REQUIREDSUBGROUPSIZE); }
+    public static int nrequiredSubgroupSize(long struct) { return memGetInt(struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.REQUIREDSUBGROUPSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.PNEXT, value); }
 

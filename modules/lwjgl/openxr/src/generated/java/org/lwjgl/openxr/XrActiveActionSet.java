@@ -240,12 +240,12 @@ public class XrActiveActionSet extends Struct<XrActiveActionSet> implements Nati
     /** Unsafe version of {@link #actionSet}. */
     public static long nactionSet(long struct) { return memGetAddress(struct + XrActiveActionSet.ACTIONSET); }
     /** Unsafe version of {@link #subactionPath}. */
-    public static long nsubactionPath(long struct) { return UNSAFE.getLong(null, struct + XrActiveActionSet.SUBACTIONPATH); }
+    public static long nsubactionPath(long struct) { return memGetLong(struct + XrActiveActionSet.SUBACTIONPATH); }
 
     /** Unsafe version of {@link #actionSet(XrActionSet) actionSet}. */
     public static void nactionSet(long struct, XrActionSet value) { memPutAddress(struct + XrActiveActionSet.ACTIONSET, value.address()); }
     /** Unsafe version of {@link #subactionPath(long) subactionPath}. */
-    public static void nsubactionPath(long struct, long value) { UNSAFE.putLong(null, struct + XrActiveActionSet.SUBACTIONPATH, value); }
+    public static void nsubactionPath(long struct, long value) { memPutLong(struct + XrActiveActionSet.SUBACTIONPATH, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

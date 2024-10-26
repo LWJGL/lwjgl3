@@ -260,18 +260,18 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentModeEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfacePresentModeEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfacePresentModeEXT.PNEXT); }
     /** Unsafe version of {@link #presentMode}. */
-    public static int npresentMode(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentModeEXT.PRESENTMODE); }
+    public static int npresentMode(long struct) { return memGetInt(struct + VkSurfacePresentModeEXT.PRESENTMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfacePresentModeEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfacePresentModeEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfacePresentModeEXT.PNEXT, value); }
     /** Unsafe version of {@link #presentMode(int) presentMode}. */
-    public static void npresentMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfacePresentModeEXT.PRESENTMODE, value); }
+    public static void npresentMode(long struct, int value) { memPutInt(struct + VkSurfacePresentModeEXT.PRESENTMODE, value); }
 
     // -----------------------------------
 

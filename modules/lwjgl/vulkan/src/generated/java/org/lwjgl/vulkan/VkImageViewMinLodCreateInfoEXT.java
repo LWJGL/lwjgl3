@@ -264,18 +264,18 @@ public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCrea
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewMinLodCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewMinLodCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewMinLodCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #minLod}. */
-    public static float nminLod(long struct) { return UNSAFE.getFloat(null, struct + VkImageViewMinLodCreateInfoEXT.MINLOD); }
+    public static float nminLod(long struct) { return memGetFloat(struct + VkImageViewMinLodCreateInfoEXT.MINLOD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewMinLodCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewMinLodCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewMinLodCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #minLod(float) minLod}. */
-    public static void nminLod(long struct, float value) { UNSAFE.putFloat(null, struct + VkImageViewMinLodCreateInfoEXT.MINLOD, value); }
+    public static void nminLod(long struct, float value) { memPutFloat(struct + VkImageViewMinLodCreateInfoEXT.MINLOD, value); }
 
     // -----------------------------------
 

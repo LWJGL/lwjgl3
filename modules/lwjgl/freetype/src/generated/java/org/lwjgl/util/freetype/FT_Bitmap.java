@@ -241,19 +241,19 @@ public class FT_Bitmap extends Struct<FT_Bitmap> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #rows}. */
-    public static int nrows(long struct) { return UNSAFE.getInt(null, struct + FT_Bitmap.ROWS); }
+    public static int nrows(long struct) { return memGetInt(struct + FT_Bitmap.ROWS); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + FT_Bitmap.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + FT_Bitmap.WIDTH); }
     /** Unsafe version of {@link #pitch}. */
-    public static int npitch(long struct) { return UNSAFE.getInt(null, struct + FT_Bitmap.PITCH); }
+    public static int npitch(long struct) { return memGetInt(struct + FT_Bitmap.PITCH); }
     /** Unsafe version of {@link #buffer(int) buffer}. */
     @Nullable public static ByteBuffer nbuffer(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Bitmap.BUFFER), capacity); }
     /** Unsafe version of {@link #num_grays}. */
-    public static short nnum_grays(long struct) { return UNSAFE.getShort(null, struct + FT_Bitmap.NUM_GRAYS); }
+    public static short nnum_grays(long struct) { return memGetShort(struct + FT_Bitmap.NUM_GRAYS); }
     /** Unsafe version of {@link #pixel_mode}. */
-    public static byte npixel_mode(long struct) { return UNSAFE.getByte(null, struct + FT_Bitmap.PIXEL_MODE); }
+    public static byte npixel_mode(long struct) { return memGetByte(struct + FT_Bitmap.PIXEL_MODE); }
     /** Unsafe version of {@link #palette_mode}. */
-    public static byte npalette_mode(long struct) { return UNSAFE.getByte(null, struct + FT_Bitmap.PALETTE_MODE); }
+    public static byte npalette_mode(long struct) { return memGetByte(struct + FT_Bitmap.PALETTE_MODE); }
     /** Unsafe version of {@link #palette}. */
     public static long npalette(long struct) { return memGetAddress(struct + FT_Bitmap.PALETTE); }
 

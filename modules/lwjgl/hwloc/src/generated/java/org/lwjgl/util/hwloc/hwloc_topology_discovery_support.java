@@ -138,17 +138,17 @@ public class hwloc_topology_discovery_support extends Struct<hwloc_topology_disc
     // -----------------------------------
 
     /** Unsafe version of {@link #pu}. */
-    public static boolean npu(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.PU) != 0; }
+    public static boolean npu(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.PU) != 0; }
     /** Unsafe version of {@link #numa}. */
-    public static boolean nnuma(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.NUMA) != 0; }
+    public static boolean nnuma(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.NUMA) != 0; }
     /** Unsafe version of {@link #numa_memory}. */
-    public static boolean nnuma_memory(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.NUMA_MEMORY) != 0; }
+    public static boolean nnuma_memory(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.NUMA_MEMORY) != 0; }
     /** Unsafe version of {@link #disallowed_pu}. */
-    public static boolean ndisallowed_pu(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.DISALLOWED_PU) != 0; }
+    public static boolean ndisallowed_pu(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.DISALLOWED_PU) != 0; }
     /** Unsafe version of {@link #disallowed_numa}. */
-    public static boolean ndisallowed_numa(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.DISALLOWED_NUMA) != 0; }
+    public static boolean ndisallowed_numa(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.DISALLOWED_NUMA) != 0; }
     /** Unsafe version of {@link #cpukind_efficiency}. */
-    public static boolean ncpukind_efficiency(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_discovery_support.CPUKIND_EFFICIENCY) != 0; }
+    public static boolean ncpukind_efficiency(long struct) { return memGetByte(struct + hwloc_topology_discovery_support.CPUKIND_EFFICIENCY) != 0; }
 
     // -----------------------------------
 

@@ -250,18 +250,18 @@ public class VkRenderPassCreationControlEXT extends Struct<VkRenderPassCreationC
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreationControlEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassCreationControlEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassCreationControlEXT.PNEXT); }
     /** Unsafe version of {@link #disallowMerging}. */
-    public static int ndisallowMerging(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreationControlEXT.DISALLOWMERGING); }
+    public static int ndisallowMerging(long struct) { return memGetInt(struct + VkRenderPassCreationControlEXT.DISALLOWMERGING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreationControlEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassCreationControlEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassCreationControlEXT.PNEXT, value); }
     /** Unsafe version of {@link #disallowMerging(boolean) disallowMerging}. */
-    public static void ndisallowMerging(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreationControlEXT.DISALLOWMERGING, value); }
+    public static void ndisallowMerging(long struct, int value) { memPutInt(struct + VkRenderPassCreationControlEXT.DISALLOWMERGING, value); }
 
     // -----------------------------------
 

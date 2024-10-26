@@ -124,7 +124,7 @@ public class XrBodyJointLocationHTC extends Struct<XrBodyJointLocationHTC> {
     // -----------------------------------
 
     /** Unsafe version of {@link #locationFlags}. */
-    public static long nlocationFlags(long struct) { return UNSAFE.getLong(null, struct + XrBodyJointLocationHTC.LOCATIONFLAGS); }
+    public static long nlocationFlags(long struct) { return memGetLong(struct + XrBodyJointLocationHTC.LOCATIONFLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrBodyJointLocationHTC.POSE); }
 

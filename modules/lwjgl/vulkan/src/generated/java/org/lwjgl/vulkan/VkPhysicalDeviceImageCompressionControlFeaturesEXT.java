@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageCompressionControlFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #imageCompressionControl}. */
-    public static int nimageCompressionControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.IMAGECOMPRESSIONCONTROL); }
+    public static int nimageCompressionControl(long struct) { return memGetInt(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.IMAGECOMPRESSIONCONTROL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #imageCompressionControl(boolean) imageCompressionControl}. */
-    public static void nimageCompressionControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.IMAGECOMPRESSIONCONTROL, value); }
+    public static void nimageCompressionControl(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageCompressionControlFeaturesEXT.IMAGECOMPRESSIONCONTROL, value); }
 
     // -----------------------------------
 

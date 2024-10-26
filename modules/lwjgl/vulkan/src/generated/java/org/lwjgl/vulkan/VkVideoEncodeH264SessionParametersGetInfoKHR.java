@@ -290,30 +290,30 @@ public class VkVideoEncodeH264SessionParametersGetInfoKHR extends Struct<VkVideo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.PNEXT); }
     /** Unsafe version of {@link #writeStdSPS}. */
-    public static int nwriteStdSPS(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDSPS); }
+    public static int nwriteStdSPS(long struct) { return memGetInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDSPS); }
     /** Unsafe version of {@link #writeStdPPS}. */
-    public static int nwriteStdPPS(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDPPS); }
+    public static int nwriteStdPPS(long struct) { return memGetInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDPPS); }
     /** Unsafe version of {@link #stdSPSId}. */
-    public static int nstdSPSId(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDSPSID); }
+    public static int nstdSPSId(long struct) { return memGetInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDSPSID); }
     /** Unsafe version of {@link #stdPPSId}. */
-    public static int nstdPPSId(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDPPSID); }
+    public static int nstdPPSId(long struct) { return memGetInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDPPSID); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #writeStdSPS(boolean) writeStdSPS}. */
-    public static void nwriteStdSPS(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDSPS, value); }
+    public static void nwriteStdSPS(long struct, int value) { memPutInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDSPS, value); }
     /** Unsafe version of {@link #writeStdPPS(boolean) writeStdPPS}. */
-    public static void nwriteStdPPS(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDPPS, value); }
+    public static void nwriteStdPPS(long struct, int value) { memPutInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.WRITESTDPPS, value); }
     /** Unsafe version of {@link #stdSPSId(int) stdSPSId}. */
-    public static void nstdSPSId(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDSPSID, value); }
+    public static void nstdSPSId(long struct, int value) { memPutInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDSPSID, value); }
     /** Unsafe version of {@link #stdPPSId(int) stdPPSId}. */
-    public static void nstdPPSId(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDPPSID, value); }
+    public static void nstdPPSId(long struct, int value) { memPutInt(struct + VkVideoEncodeH264SessionParametersGetInfoKHR.STDPPSID, value); }
 
     // -----------------------------------
 

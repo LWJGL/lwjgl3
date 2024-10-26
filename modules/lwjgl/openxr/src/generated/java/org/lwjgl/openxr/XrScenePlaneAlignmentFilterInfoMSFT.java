@@ -265,20 +265,20 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrScenePlaneAlignmentFilterInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.NEXT); }
     /** Unsafe version of {@link #alignmentCount}. */
-    public static int nalignmentCount(long struct) { return UNSAFE.getInt(null, struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTCOUNT); }
+    public static int nalignmentCount(long struct) { return memGetInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTCOUNT); }
     /** Unsafe version of {@link #alignments() alignments}. */
     @Nullable public static IntBuffer nalignments(long struct) { return memIntBufferSafe(memGetAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTS), nalignmentCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlaneAlignmentFilterInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code alignmentCount} field of the specified {@code struct}. */
-    public static void nalignmentCount(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTCOUNT, value); }
+    public static void nalignmentCount(long struct, int value) { memPutInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTCOUNT, value); }
     /** Unsafe version of {@link #alignments(IntBuffer) alignments}. */
     public static void nalignments(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTS, memAddressSafe(value)); if (value != null) { nalignmentCount(struct, value.remaining()); } }
 

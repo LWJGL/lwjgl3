@@ -320,7 +320,7 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
     /** Unsafe version of {@link #nodeBackdropColor}. */
     public static NVGColor nnodeBackdropColor(long struct) { return NVGColor.create(struct + BNDnodeTheme.NODEBACKDROPCOLOR); }
     /** Unsafe version of {@link #noodleCurving}. */
-    public static int nnoodleCurving(long struct) { return UNSAFE.getInt(null, struct + BNDnodeTheme.NOODLECURVING); }
+    public static int nnoodleCurving(long struct) { return memGetInt(struct + BNDnodeTheme.NOODLECURVING); }
 
     /** Unsafe version of {@link #nodeSelectedColor(NVGColor) nodeSelectedColor}. */
     public static void nnodeSelectedColor(long struct, NVGColor value) { memCopy(value.address(), struct + BNDnodeTheme.NODESELECTEDCOLOR, NVGColor.SIZEOF); }
@@ -335,7 +335,7 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
     /** Unsafe version of {@link #nodeBackdropColor(NVGColor) nodeBackdropColor}. */
     public static void nnodeBackdropColor(long struct, NVGColor value) { memCopy(value.address(), struct + BNDnodeTheme.NODEBACKDROPCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #noodleCurving(int) noodleCurving}. */
-    public static void nnoodleCurving(long struct, int value) { UNSAFE.putInt(null, struct + BNDnodeTheme.NOODLECURVING, value); }
+    public static void nnoodleCurving(long struct, int value) { memPutInt(struct + BNDnodeTheme.NOODLECURVING, value); }
 
     // -----------------------------------
 

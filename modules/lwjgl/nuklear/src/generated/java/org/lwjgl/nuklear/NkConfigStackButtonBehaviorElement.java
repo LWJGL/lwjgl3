@@ -116,7 +116,7 @@ class NkConfigStackButtonBehaviorElement extends Struct<NkConfigStackButtonBehav
     /** Unsafe version of {@link #pValues(int) pValues}. */
     public static IntBuffer npValues(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkConfigStackButtonBehaviorElement.PVALUES), capacity); }
     /** Unsafe version of {@link #old_value}. */
-    public static int nold_value(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackButtonBehaviorElement.OLD_VALUE); }
+    public static int nold_value(long struct) { return memGetInt(struct + NkConfigStackButtonBehaviorElement.OLD_VALUE); }
 
     // -----------------------------------
 

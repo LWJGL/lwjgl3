@@ -201,8 +201,8 @@ public class hwloc_infos_s extends Struct<hwloc_infos_s> implements NativeResour
     /** Unsafe version of {@link #array}. */
     @Nullable public static hwloc_info_s.Buffer narray(long struct) { return hwloc_info_s.createSafe(memGetAddress(struct + hwloc_infos_s.ARRAY), ncount(struct)); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + hwloc_infos_s.COUNT); }
-    public static int nallocated(long struct) { return UNSAFE.getInt(null, struct + hwloc_infos_s.ALLOCATED); }
+    public static int ncount(long struct) { return memGetInt(struct + hwloc_infos_s.COUNT); }
+    public static int nallocated(long struct) { return memGetInt(struct + hwloc_infos_s.ALLOCATED); }
 
     // -----------------------------------
 

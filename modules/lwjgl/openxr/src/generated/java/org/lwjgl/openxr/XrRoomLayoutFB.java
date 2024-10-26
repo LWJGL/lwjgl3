@@ -300,7 +300,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRoomLayoutFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRoomLayoutFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRoomLayoutFB.NEXT); }
     /** Unsafe version of {@link #floorUuid}. */
@@ -308,14 +308,14 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     /** Unsafe version of {@link #ceilingUuid}. */
     public static XrUuidEXT nceilingUuid(long struct) { return XrUuidEXT.create(struct + XrRoomLayoutFB.CEILINGUUID); }
     /** Unsafe version of {@link #wallUuidCapacityInput}. */
-    public static int nwallUuidCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrRoomLayoutFB.WALLUUIDCAPACITYINPUT); }
+    public static int nwallUuidCapacityInput(long struct) { return memGetInt(struct + XrRoomLayoutFB.WALLUUIDCAPACITYINPUT); }
     /** Unsafe version of {@link #wallUuidCountOutput}. */
-    public static int nwallUuidCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT); }
+    public static int nwallUuidCountOutput(long struct) { return memGetInt(struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT); }
     /** Unsafe version of {@link #wallUuids}. */
     @Nullable public static XrUuidEXT.Buffer nwallUuids(long struct) { return XrUuidEXT.createSafe(memGetAddress(struct + XrRoomLayoutFB.WALLUUIDS), nwallUuidCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRoomLayoutFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRoomLayoutFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRoomLayoutFB.NEXT, value); }
     /** Unsafe version of {@link #floorUuid(XrUuidEXT) floorUuid}. */
@@ -323,9 +323,9 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     /** Unsafe version of {@link #ceilingUuid(XrUuidEXT) ceilingUuid}. */
     public static void nceilingUuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrRoomLayoutFB.CEILINGUUID, XrUuidEXT.SIZEOF); }
     /** Sets the specified value to the {@code wallUuidCapacityInput} field of the specified {@code struct}. */
-    public static void nwallUuidCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrRoomLayoutFB.WALLUUIDCAPACITYINPUT, value); }
+    public static void nwallUuidCapacityInput(long struct, int value) { memPutInt(struct + XrRoomLayoutFB.WALLUUIDCAPACITYINPUT, value); }
     /** Unsafe version of {@link #wallUuidCountOutput(int) wallUuidCountOutput}. */
-    public static void nwallUuidCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT, value); }
+    public static void nwallUuidCountOutput(long struct, int value) { memPutInt(struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #wallUuids(XrUuidEXT.Buffer) wallUuids}. */
     public static void nwallUuids(long struct, @Nullable XrUuidEXT.Buffer value) { memPutAddress(struct + XrRoomLayoutFB.WALLUUIDS, memAddressSafe(value)); if (value != null) { nwallUuidCapacityInput(struct, value.remaining()); } }
 

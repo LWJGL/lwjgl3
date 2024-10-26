@@ -273,7 +273,7 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorCreateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorCreateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorCreateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #space}. */
@@ -281,10 +281,10 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateI
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrSpatialAnchorCreateInfoMSFT.POSE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrSpatialAnchorCreateInfoMSFT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrSpatialAnchorCreateInfoMSFT.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorCreateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -292,7 +292,7 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateI
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSpatialAnchorCreateInfoMSFT.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrSpatialAnchorCreateInfoMSFT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrSpatialAnchorCreateInfoMSFT.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

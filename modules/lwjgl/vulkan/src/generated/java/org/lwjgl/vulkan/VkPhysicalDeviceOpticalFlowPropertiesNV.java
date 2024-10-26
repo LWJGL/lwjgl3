@@ -312,34 +312,34 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #supportedOutputGridSizes}. */
-    public static int nsupportedOutputGridSizes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.SUPPORTEDOUTPUTGRIDSIZES); }
+    public static int nsupportedOutputGridSizes(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.SUPPORTEDOUTPUTGRIDSIZES); }
     /** Unsafe version of {@link #supportedHintGridSizes}. */
-    public static int nsupportedHintGridSizes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.SUPPORTEDHINTGRIDSIZES); }
+    public static int nsupportedHintGridSizes(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.SUPPORTEDHINTGRIDSIZES); }
     /** Unsafe version of {@link #hintSupported}. */
-    public static int nhintSupported(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.HINTSUPPORTED); }
+    public static int nhintSupported(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.HINTSUPPORTED); }
     /** Unsafe version of {@link #costSupported}. */
-    public static int ncostSupported(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.COSTSUPPORTED); }
+    public static int ncostSupported(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.COSTSUPPORTED); }
     /** Unsafe version of {@link #bidirectionalFlowSupported}. */
-    public static int nbidirectionalFlowSupported(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.BIDIRECTIONALFLOWSUPPORTED); }
+    public static int nbidirectionalFlowSupported(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.BIDIRECTIONALFLOWSUPPORTED); }
     /** Unsafe version of {@link #globalFlowSupported}. */
-    public static int nglobalFlowSupported(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.GLOBALFLOWSUPPORTED); }
+    public static int nglobalFlowSupported(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.GLOBALFLOWSUPPORTED); }
     /** Unsafe version of {@link #minWidth}. */
-    public static int nminWidth(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MINWIDTH); }
+    public static int nminWidth(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MINWIDTH); }
     /** Unsafe version of {@link #minHeight}. */
-    public static int nminHeight(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MINHEIGHT); }
+    public static int nminHeight(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MINHEIGHT); }
     /** Unsafe version of {@link #maxWidth}. */
-    public static int nmaxWidth(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXWIDTH); }
+    public static int nmaxWidth(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXWIDTH); }
     /** Unsafe version of {@link #maxHeight}. */
-    public static int nmaxHeight(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXHEIGHT); }
+    public static int nmaxHeight(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXHEIGHT); }
     /** Unsafe version of {@link #maxNumRegionsOfInterest}. */
-    public static int nmaxNumRegionsOfInterest(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXNUMREGIONSOFINTEREST); }
+    public static int nmaxNumRegionsOfInterest(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.MAXNUMREGIONSOFINTEREST); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceOpticalFlowPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceOpticalFlowPropertiesNV.PNEXT, value); }
 

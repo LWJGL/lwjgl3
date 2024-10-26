@@ -326,44 +326,44 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #structSize}. */
-    public static int nstructSize(long struct) { return UNSAFE.getInt(null, struct + ktxAstcParams.STRUCTSIZE); }
+    public static int nstructSize(long struct) { return memGetInt(struct + ktxAstcParams.STRUCTSIZE); }
     /** Unsafe version of {@link #verbose}. */
-    public static boolean nverbose(long struct) { return UNSAFE.getByte(null, struct + ktxAstcParams.VERBOSE) != 0; }
+    public static boolean nverbose(long struct) { return memGetByte(struct + ktxAstcParams.VERBOSE) != 0; }
     /** Unsafe version of {@link #threadCount}. */
-    public static int nthreadCount(long struct) { return UNSAFE.getInt(null, struct + ktxAstcParams.THREADCOUNT); }
+    public static int nthreadCount(long struct) { return memGetInt(struct + ktxAstcParams.THREADCOUNT); }
     /** Unsafe version of {@link #blockDimension}. */
-    public static int nblockDimension(long struct) { return UNSAFE.getInt(null, struct + ktxAstcParams.BLOCKDIMENSION); }
+    public static int nblockDimension(long struct) { return memGetInt(struct + ktxAstcParams.BLOCKDIMENSION); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + ktxAstcParams.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + ktxAstcParams.MODE); }
     /** Unsafe version of {@link #qualityLevel}. */
-    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + ktxAstcParams.QUALITYLEVEL); }
+    public static int nqualityLevel(long struct) { return memGetInt(struct + ktxAstcParams.QUALITYLEVEL); }
     /** Unsafe version of {@link #normalMap}. */
-    public static boolean nnormalMap(long struct) { return UNSAFE.getByte(null, struct + ktxAstcParams.NORMALMAP) != 0; }
+    public static boolean nnormalMap(long struct) { return memGetByte(struct + ktxAstcParams.NORMALMAP) != 0; }
     /** Unsafe version of {@link #perceptual}. */
-    public static boolean nperceptual(long struct) { return UNSAFE.getByte(null, struct + ktxAstcParams.PERCEPTUAL) != 0; }
+    public static boolean nperceptual(long struct) { return memGetByte(struct + ktxAstcParams.PERCEPTUAL) != 0; }
     /** Unsafe version of {@link #inputSwizzle}. */
     public static ByteBuffer ninputSwizzle(long struct) { return memByteBuffer(struct + ktxAstcParams.INPUTSWIZZLE, 4); }
     /** Unsafe version of {@link #inputSwizzle(int) inputSwizzle}. */
     public static byte ninputSwizzle(long struct, int index) {
-        return UNSAFE.getByte(null, struct + ktxAstcParams.INPUTSWIZZLE + check(index, 4) * 1);
+        return memGetByte(struct + ktxAstcParams.INPUTSWIZZLE + check(index, 4) * 1);
     }
 
     /** Unsafe version of {@link #structSize(int) structSize}. */
-    public static void nstructSize(long struct, int value) { UNSAFE.putInt(null, struct + ktxAstcParams.STRUCTSIZE, value); }
+    public static void nstructSize(long struct, int value) { memPutInt(struct + ktxAstcParams.STRUCTSIZE, value); }
     /** Unsafe version of {@link #verbose(boolean) verbose}. */
-    public static void nverbose(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxAstcParams.VERBOSE, value ? (byte)1 : (byte)0); }
+    public static void nverbose(long struct, boolean value) { memPutByte(struct + ktxAstcParams.VERBOSE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #threadCount(int) threadCount}. */
-    public static void nthreadCount(long struct, int value) { UNSAFE.putInt(null, struct + ktxAstcParams.THREADCOUNT, value); }
+    public static void nthreadCount(long struct, int value) { memPutInt(struct + ktxAstcParams.THREADCOUNT, value); }
     /** Unsafe version of {@link #blockDimension(int) blockDimension}. */
-    public static void nblockDimension(long struct, int value) { UNSAFE.putInt(null, struct + ktxAstcParams.BLOCKDIMENSION, value); }
+    public static void nblockDimension(long struct, int value) { memPutInt(struct + ktxAstcParams.BLOCKDIMENSION, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + ktxAstcParams.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + ktxAstcParams.MODE, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
-    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + ktxAstcParams.QUALITYLEVEL, value); }
+    public static void nqualityLevel(long struct, int value) { memPutInt(struct + ktxAstcParams.QUALITYLEVEL, value); }
     /** Unsafe version of {@link #normalMap(boolean) normalMap}. */
-    public static void nnormalMap(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxAstcParams.NORMALMAP, value ? (byte)1 : (byte)0); }
+    public static void nnormalMap(long struct, boolean value) { memPutByte(struct + ktxAstcParams.NORMALMAP, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #perceptual(boolean) perceptual}. */
-    public static void nperceptual(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxAstcParams.PERCEPTUAL, value ? (byte)1 : (byte)0); }
+    public static void nperceptual(long struct, boolean value) { memPutByte(struct + ktxAstcParams.PERCEPTUAL, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #inputSwizzle(ByteBuffer) inputSwizzle}. */
     public static void ninputSwizzle(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -371,7 +371,7 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
     }
     /** Unsafe version of {@link #inputSwizzle(int, byte) inputSwizzle}. */
     public static void ninputSwizzle(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + ktxAstcParams.INPUTSWIZZLE + check(index, 4) * 1, value);
+        memPutByte(struct + ktxAstcParams.INPUTSWIZZLE + check(index, 4) * 1, value);
     }
 
     // -----------------------------------

@@ -257,18 +257,18 @@ public class VkMemoryRequirements extends Struct<VkMemoryRequirements> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryRequirements.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkMemoryRequirements.SIZE); }
     /** Unsafe version of {@link #alignment}. */
-    public static long nalignment(long struct) { return UNSAFE.getLong(null, struct + VkMemoryRequirements.ALIGNMENT); }
+    public static long nalignment(long struct) { return memGetLong(struct + VkMemoryRequirements.ALIGNMENT); }
     /** Unsafe version of {@link #memoryTypeBits}. */
-    public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VkMemoryRequirements.MEMORYTYPEBITS); }
+    public static int nmemoryTypeBits(long struct) { return memGetInt(struct + VkMemoryRequirements.MEMORYTYPEBITS); }
 
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryRequirements.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkMemoryRequirements.SIZE, value); }
     /** Unsafe version of {@link #alignment(long) alignment}. */
-    public static void nalignment(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryRequirements.ALIGNMENT, value); }
+    public static void nalignment(long struct, long value) { memPutLong(struct + VkMemoryRequirements.ALIGNMENT, value); }
     /** Unsafe version of {@link #memoryTypeBits(int) memoryTypeBits}. */
-    public static void nmemoryTypeBits(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryRequirements.MEMORYTYPEBITS, value); }
+    public static void nmemoryTypeBits(long struct, int value) { memPutInt(struct + VkMemoryRequirements.MEMORYTYPEBITS, value); }
 
     // -----------------------------------
 

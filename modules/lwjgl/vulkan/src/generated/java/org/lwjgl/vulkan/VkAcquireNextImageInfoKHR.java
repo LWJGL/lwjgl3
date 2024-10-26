@@ -345,34 +345,34 @@ public class VkAcquireNextImageInfoKHR extends Struct<VkAcquireNextImageInfoKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAcquireNextImageInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAcquireNextImageInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAcquireNextImageInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.SWAPCHAIN); }
+    public static long nswapchain(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.SWAPCHAIN); }
     /** Unsafe version of {@link #timeout}. */
-    public static long ntimeout(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.TIMEOUT); }
+    public static long ntimeout(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.TIMEOUT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #fence}. */
-    public static long nfence(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.FENCE); }
+    public static long nfence(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.FENCE); }
     /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkAcquireNextImageInfoKHR.DEVICEMASK); }
+    public static int ndeviceMask(long struct) { return memGetInt(struct + VkAcquireNextImageInfoKHR.DEVICEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireNextImageInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAcquireNextImageInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAcquireNextImageInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.SWAPCHAIN, value); }
+    public static void nswapchain(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.SWAPCHAIN, value); }
     /** Unsafe version of {@link #timeout(long) timeout}. */
-    public static void ntimeout(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.TIMEOUT, value); }
+    public static void ntimeout(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.TIMEOUT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #fence(long) fence}. */
-    public static void nfence(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.FENCE, value); }
+    public static void nfence(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.FENCE, value); }
     /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireNextImageInfoKHR.DEVICEMASK, value); }
+    public static void ndeviceMask(long struct, int value) { memPutInt(struct + VkAcquireNextImageInfoKHR.DEVICEMASK, value); }
 
     // -----------------------------------
 

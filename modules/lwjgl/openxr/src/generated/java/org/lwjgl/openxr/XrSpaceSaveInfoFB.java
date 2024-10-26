@@ -278,26 +278,26 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceSaveInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceSaveInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceSaveInfoFB.NEXT); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrSpaceSaveInfoFB.SPACE); }
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + XrSpaceSaveInfoFB.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + XrSpaceSaveInfoFB.LOCATION); }
     /** Unsafe version of {@link #persistenceMode}. */
-    public static int npersistenceMode(long struct) { return UNSAFE.getInt(null, struct + XrSpaceSaveInfoFB.PERSISTENCEMODE); }
+    public static int npersistenceMode(long struct) { return memGetInt(struct + XrSpaceSaveInfoFB.PERSISTENCEMODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceSaveInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceSaveInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceSaveInfoFB.NEXT, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrSpaceSaveInfoFB.SPACE, value.address()); }
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceSaveInfoFB.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + XrSpaceSaveInfoFB.LOCATION, value); }
     /** Unsafe version of {@link #persistenceMode(int) persistenceMode}. */
-    public static void npersistenceMode(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceSaveInfoFB.PERSISTENCEMODE, value); }
+    public static void npersistenceMode(long struct, int value) { memPutInt(struct + XrSpaceSaveInfoFB.PERSISTENCEMODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

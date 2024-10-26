@@ -317,26 +317,26 @@ public class VkSparseMemoryBind extends Struct<VkSparseMemoryBind> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #resourceOffset}. */
-    public static long nresourceOffset(long struct) { return UNSAFE.getLong(null, struct + VkSparseMemoryBind.RESOURCEOFFSET); }
+    public static long nresourceOffset(long struct) { return memGetLong(struct + VkSparseMemoryBind.RESOURCEOFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkSparseMemoryBind.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkSparseMemoryBind.SIZE); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkSparseMemoryBind.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkSparseMemoryBind.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkSparseMemoryBind.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkSparseMemoryBind.MEMORYOFFSET); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSparseMemoryBind.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSparseMemoryBind.FLAGS); }
 
     /** Unsafe version of {@link #resourceOffset(long) resourceOffset}. */
-    public static void nresourceOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseMemoryBind.RESOURCEOFFSET, value); }
+    public static void nresourceOffset(long struct, long value) { memPutLong(struct + VkSparseMemoryBind.RESOURCEOFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseMemoryBind.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkSparseMemoryBind.SIZE, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseMemoryBind.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkSparseMemoryBind.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseMemoryBind.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkSparseMemoryBind.MEMORYOFFSET, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseMemoryBind.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkSparseMemoryBind.FLAGS, value); }
 
     // -----------------------------------
 

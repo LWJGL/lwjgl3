@@ -496,15 +496,15 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     /** Unsafe version of {@link #button}. */
     public static NkStyleButton nbutton(long struct) { return NkStyleButton.create(struct + NkStyleCombo.BUTTON); }
     /** Unsafe version of {@link #sym_normal}. */
-    public static int nsym_normal(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_NORMAL); }
+    public static int nsym_normal(long struct) { return memGetInt(struct + NkStyleCombo.SYM_NORMAL); }
     /** Unsafe version of {@link #sym_hover}. */
-    public static int nsym_hover(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_HOVER); }
+    public static int nsym_hover(long struct) { return memGetInt(struct + NkStyleCombo.SYM_HOVER); }
     /** Unsafe version of {@link #sym_active}. */
-    public static int nsym_active(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_ACTIVE); }
+    public static int nsym_active(long struct) { return memGetInt(struct + NkStyleCombo.SYM_ACTIVE); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleCombo.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleCombo.ROUNDING); }
     /** Unsafe version of {@link #content_padding}. */
     public static NkVec2 ncontent_padding(long struct) { return NkVec2.create(struct + NkStyleCombo.CONTENT_PADDING); }
     /** Unsafe version of {@link #button_padding}. */
@@ -512,9 +512,9 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     /** Unsafe version of {@link #spacing}. */
     public static NkVec2 nspacing(long struct) { return NkVec2.create(struct + NkStyleCombo.SPACING); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleCombo.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleCombo.DISABLED_FACTOR); }
 
     /** Unsafe version of {@link #normal(NkStyleItem) normal}. */
     public static void nnormal(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleCombo.NORMAL, NkStyleItem.SIZEOF); }
@@ -539,15 +539,15 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     /** Unsafe version of {@link #button(NkStyleButton) button}. */
     public static void nbutton(long struct, NkStyleButton value) { memCopy(value.address(), struct + NkStyleCombo.BUTTON, NkStyleButton.SIZEOF); }
     /** Unsafe version of {@link #sym_normal(int) sym_normal}. */
-    public static void nsym_normal(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_NORMAL, value); }
+    public static void nsym_normal(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_NORMAL, value); }
     /** Unsafe version of {@link #sym_hover(int) sym_hover}. */
-    public static void nsym_hover(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_HOVER, value); }
+    public static void nsym_hover(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_HOVER, value); }
     /** Unsafe version of {@link #sym_active(int) sym_active}. */
-    public static void nsym_active(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_ACTIVE, value); }
+    public static void nsym_active(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_ACTIVE, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleCombo.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleCombo.ROUNDING, value); }
     /** Unsafe version of {@link #content_padding(NkVec2) content_padding}. */
     public static void ncontent_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleCombo.CONTENT_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #button_padding(NkVec2) button_padding}. */
@@ -555,9 +555,9 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     /** Unsafe version of {@link #spacing(NkVec2) spacing}. */
     public static void nspacing(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleCombo.SPACING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleCombo.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleCombo.DISABLED_FACTOR, value); }
 
     // -----------------------------------
 

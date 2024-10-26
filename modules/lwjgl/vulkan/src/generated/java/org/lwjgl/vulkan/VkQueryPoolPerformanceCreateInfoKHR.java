@@ -275,24 +275,24 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct<VkQueryPoolPerfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueryPoolPerformanceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueryPoolPerformanceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #queueFamilyIndex}. */
-    public static int nqueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.QUEUEFAMILYINDEX); }
+    public static int nqueueFamilyIndex(long struct) { return memGetInt(struct + VkQueryPoolPerformanceCreateInfoKHR.QUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #counterIndexCount}. */
-    public static int ncounterIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.COUNTERINDEXCOUNT); }
+    public static int ncounterIndexCount(long struct) { return memGetInt(struct + VkQueryPoolPerformanceCreateInfoKHR.COUNTERINDEXCOUNT); }
     /** Unsafe version of {@link #pCounterIndices() pCounterIndices}. */
     public static IntBuffer npCounterIndices(long struct) { return memIntBuffer(memGetAddress(struct + VkQueryPoolPerformanceCreateInfoKHR.PCOUNTERINDICES), ncounterIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueryPoolPerformanceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueryPoolPerformanceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #queueFamilyIndex(int) queueFamilyIndex}. */
-    public static void nqueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.QUEUEFAMILYINDEX, value); }
+    public static void nqueueFamilyIndex(long struct, int value) { memPutInt(struct + VkQueryPoolPerformanceCreateInfoKHR.QUEUEFAMILYINDEX, value); }
     /** Sets the specified value to the {@code counterIndexCount} field of the specified {@code struct}. */
-    public static void ncounterIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolPerformanceCreateInfoKHR.COUNTERINDEXCOUNT, value); }
+    public static void ncounterIndexCount(long struct, int value) { memPutInt(struct + VkQueryPoolPerformanceCreateInfoKHR.COUNTERINDEXCOUNT, value); }
     /** Unsafe version of {@link #pCounterIndices(IntBuffer) pCounterIndices}. */
     public static void npCounterIndices(long struct, IntBuffer value) { memPutAddress(struct + VkQueryPoolPerformanceCreateInfoKHR.PCOUNTERINDICES, memAddress(value)); ncounterIndexCount(struct, value.remaining()); }
 

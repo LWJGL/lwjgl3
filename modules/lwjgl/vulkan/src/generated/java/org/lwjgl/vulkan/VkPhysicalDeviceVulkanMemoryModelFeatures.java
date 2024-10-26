@@ -268,26 +268,26 @@ public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.PNEXT); }
     /** Unsafe version of {@link #vulkanMemoryModel}. */
-    public static int nvulkanMemoryModel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODEL); }
+    public static int nvulkanMemoryModel(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODEL); }
     /** Unsafe version of {@link #vulkanMemoryModelDeviceScope}. */
-    public static int nvulkanMemoryModelDeviceScope(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELDEVICESCOPE); }
+    public static int nvulkanMemoryModelDeviceScope(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELDEVICESCOPE); }
     /** Unsafe version of {@link #vulkanMemoryModelAvailabilityVisibilityChains}. */
-    public static int nvulkanMemoryModelAvailabilityVisibilityChains(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS); }
+    public static int nvulkanMemoryModelAvailabilityVisibilityChains(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.PNEXT, value); }
     /** Unsafe version of {@link #vulkanMemoryModel(boolean) vulkanMemoryModel}. */
-    public static void nvulkanMemoryModel(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODEL, value); }
+    public static void nvulkanMemoryModel(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODEL, value); }
     /** Unsafe version of {@link #vulkanMemoryModelDeviceScope(boolean) vulkanMemoryModelDeviceScope}. */
-    public static void nvulkanMemoryModelDeviceScope(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELDEVICESCOPE, value); }
+    public static void nvulkanMemoryModelDeviceScope(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELDEVICESCOPE, value); }
     /** Unsafe version of {@link #vulkanMemoryModelAvailabilityVisibilityChains(boolean) vulkanMemoryModelAvailabilityVisibilityChains}. */
-    public static void nvulkanMemoryModelAvailabilityVisibilityChains(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS, value); }
+    public static void nvulkanMemoryModelAvailabilityVisibilityChains(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkanMemoryModelFeatures.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS, value); }
 
     // -----------------------------------
 

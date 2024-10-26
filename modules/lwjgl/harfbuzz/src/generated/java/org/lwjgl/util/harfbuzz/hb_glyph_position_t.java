@@ -251,23 +251,23 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #x_advance}. */
-    public static int nx_advance(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_position_t.X_ADVANCE); }
+    public static int nx_advance(long struct) { return memGetInt(struct + hb_glyph_position_t.X_ADVANCE); }
     /** Unsafe version of {@link #y_advance}. */
-    public static int ny_advance(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_position_t.Y_ADVANCE); }
+    public static int ny_advance(long struct) { return memGetInt(struct + hb_glyph_position_t.Y_ADVANCE); }
     /** Unsafe version of {@link #x_offset}. */
-    public static int nx_offset(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_position_t.X_OFFSET); }
+    public static int nx_offset(long struct) { return memGetInt(struct + hb_glyph_position_t.X_OFFSET); }
     /** Unsafe version of {@link #y_offset}. */
-    public static int ny_offset(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_position_t.Y_OFFSET); }
+    public static int ny_offset(long struct) { return memGetInt(struct + hb_glyph_position_t.Y_OFFSET); }
     public static hb_var_int_t nvar(long struct) { return hb_var_int_t.create(struct + hb_glyph_position_t.VAR); }
 
     /** Unsafe version of {@link #x_advance(int) x_advance}. */
-    public static void nx_advance(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_position_t.X_ADVANCE, value); }
+    public static void nx_advance(long struct, int value) { memPutInt(struct + hb_glyph_position_t.X_ADVANCE, value); }
     /** Unsafe version of {@link #y_advance(int) y_advance}. */
-    public static void ny_advance(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_position_t.Y_ADVANCE, value); }
+    public static void ny_advance(long struct, int value) { memPutInt(struct + hb_glyph_position_t.Y_ADVANCE, value); }
     /** Unsafe version of {@link #x_offset(int) x_offset}. */
-    public static void nx_offset(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_position_t.X_OFFSET, value); }
+    public static void nx_offset(long struct, int value) { memPutInt(struct + hb_glyph_position_t.X_OFFSET, value); }
     /** Unsafe version of {@link #y_offset(int) y_offset}. */
-    public static void ny_offset(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_position_t.Y_OFFSET, value); }
+    public static void ny_offset(long struct, int value) { memPutInt(struct + hb_glyph_position_t.Y_OFFSET, value); }
     public static void nvar(long struct, hb_var_int_t value) { memCopy(value.address(), struct + hb_glyph_position_t.VAR, hb_var_int_t.SIZEOF); }
 
     // -----------------------------------

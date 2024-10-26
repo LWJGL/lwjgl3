@@ -295,26 +295,26 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #sampleLocationSampleCounts}. */
-    public static int nsampleLocationSampleCounts(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONSAMPLECOUNTS); }
+    public static int nsampleLocationSampleCounts(long struct) { return memGetInt(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONSAMPLECOUNTS); }
     /** Unsafe version of {@link #maxSampleLocationGridSize}. */
     public static VkExtent2D nmaxSampleLocationGridSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.MAXSAMPLELOCATIONGRIDSIZE); }
     /** Unsafe version of {@link #sampleLocationCoordinateRange}. */
     public static FloatBuffer nsampleLocationCoordinateRange(long struct) { return memFloatBuffer(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONCOORDINATERANGE, 2); }
     /** Unsafe version of {@link #sampleLocationCoordinateRange(int) sampleLocationCoordinateRange}. */
     public static float nsampleLocationCoordinateRange(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONCOORDINATERANGE + check(index, 2) * 4);
+        return memGetFloat(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONCOORDINATERANGE + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #sampleLocationSubPixelBits}. */
-    public static int nsampleLocationSubPixelBits(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONSUBPIXELBITS); }
+    public static int nsampleLocationSubPixelBits(long struct) { return memGetInt(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.SAMPLELOCATIONSUBPIXELBITS); }
     /** Unsafe version of {@link #variableSampleLocations}. */
-    public static int nvariableSampleLocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.VARIABLESAMPLELOCATIONS); }
+    public static int nvariableSampleLocations(long struct) { return memGetInt(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.VARIABLESAMPLELOCATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSampleLocationsPropertiesEXT.PNEXT, value); }
 

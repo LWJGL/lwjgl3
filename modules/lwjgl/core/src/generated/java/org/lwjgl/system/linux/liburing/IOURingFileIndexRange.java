@@ -230,16 +230,16 @@ public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #off}. */
-    public static int noff(long struct) { return UNSAFE.getInt(null, struct + IOURingFileIndexRange.OFF); }
+    public static int noff(long struct) { return memGetInt(struct + IOURingFileIndexRange.OFF); }
     /** Unsafe version of {@link #len}. */
-    public static int nlen(long struct) { return UNSAFE.getInt(null, struct + IOURingFileIndexRange.LEN); }
-    public static long nresv(long struct) { return UNSAFE.getLong(null, struct + IOURingFileIndexRange.RESV); }
+    public static int nlen(long struct) { return memGetInt(struct + IOURingFileIndexRange.LEN); }
+    public static long nresv(long struct) { return memGetLong(struct + IOURingFileIndexRange.RESV); }
 
     /** Unsafe version of {@link #off(int) off}. */
-    public static void noff(long struct, int value) { UNSAFE.putInt(null, struct + IOURingFileIndexRange.OFF, value); }
+    public static void noff(long struct, int value) { memPutInt(struct + IOURingFileIndexRange.OFF, value); }
     /** Unsafe version of {@link #len(int) len}. */
-    public static void nlen(long struct, int value) { UNSAFE.putInt(null, struct + IOURingFileIndexRange.LEN, value); }
-    public static void nresv(long struct, long value) { UNSAFE.putLong(null, struct + IOURingFileIndexRange.RESV, value); }
+    public static void nlen(long struct, int value) { memPutInt(struct + IOURingFileIndexRange.LEN, value); }
+    public static void nresv(long struct, long value) { memPutLong(struct + IOURingFileIndexRange.RESV, value); }
 
     // -----------------------------------
 

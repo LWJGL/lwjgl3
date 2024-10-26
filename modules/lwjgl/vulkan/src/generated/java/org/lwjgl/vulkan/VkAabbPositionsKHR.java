@@ -269,30 +269,30 @@ public class VkAabbPositionsKHR extends Struct<VkAabbPositionsKHR> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #minX}. */
-    public static float nminX(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MINX); }
+    public static float nminX(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MINX); }
     /** Unsafe version of {@link #minY}. */
-    public static float nminY(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MINY); }
+    public static float nminY(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MINY); }
     /** Unsafe version of {@link #minZ}. */
-    public static float nminZ(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MINZ); }
+    public static float nminZ(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MINZ); }
     /** Unsafe version of {@link #maxX}. */
-    public static float nmaxX(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MAXX); }
+    public static float nmaxX(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MAXX); }
     /** Unsafe version of {@link #maxY}. */
-    public static float nmaxY(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MAXY); }
+    public static float nmaxY(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MAXY); }
     /** Unsafe version of {@link #maxZ}. */
-    public static float nmaxZ(long struct) { return UNSAFE.getFloat(null, struct + VkAabbPositionsKHR.MAXZ); }
+    public static float nmaxZ(long struct) { return memGetFloat(struct + VkAabbPositionsKHR.MAXZ); }
 
     /** Unsafe version of {@link #minX(float) minX}. */
-    public static void nminX(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MINX, value); }
+    public static void nminX(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MINX, value); }
     /** Unsafe version of {@link #minY(float) minY}. */
-    public static void nminY(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MINY, value); }
+    public static void nminY(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MINY, value); }
     /** Unsafe version of {@link #minZ(float) minZ}. */
-    public static void nminZ(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MINZ, value); }
+    public static void nminZ(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MINZ, value); }
     /** Unsafe version of {@link #maxX(float) maxX}. */
-    public static void nmaxX(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MAXX, value); }
+    public static void nmaxX(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MAXX, value); }
     /** Unsafe version of {@link #maxY(float) maxY}. */
-    public static void nmaxY(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MAXY, value); }
+    public static void nmaxY(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MAXY, value); }
     /** Unsafe version of {@link #maxZ(float) maxZ}. */
-    public static void nmaxZ(long struct, float value) { UNSAFE.putFloat(null, struct + VkAabbPositionsKHR.MAXZ, value); }
+    public static void nmaxZ(long struct, float value) { memPutFloat(struct + VkAabbPositionsKHR.MAXZ, value); }
 
     // -----------------------------------
 

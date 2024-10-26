@@ -262,14 +262,14 @@ public class VkAttachmentReference extends Struct<VkAttachmentReference> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #attachment}. */
-    public static int nattachment(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference.ATTACHMENT); }
+    public static int nattachment(long struct) { return memGetInt(struct + VkAttachmentReference.ATTACHMENT); }
     /** Unsafe version of {@link #layout}. */
-    public static int nlayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference.LAYOUT); }
+    public static int nlayout(long struct) { return memGetInt(struct + VkAttachmentReference.LAYOUT); }
 
     /** Unsafe version of {@link #attachment(int) attachment}. */
-    public static void nattachment(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference.ATTACHMENT, value); }
+    public static void nattachment(long struct, int value) { memPutInt(struct + VkAttachmentReference.ATTACHMENT, value); }
     /** Unsafe version of {@link #layout(int) layout}. */
-    public static void nlayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference.LAYOUT, value); }
+    public static void nlayout(long struct, int value) { memPutInt(struct + VkAttachmentReference.LAYOUT, value); }
 
     // -----------------------------------
 

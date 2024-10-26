@@ -250,14 +250,14 @@ public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemPassthroughColorLutPropertiesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemPassthroughColorLutPropertiesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemPassthroughColorLutPropertiesMETA.NEXT); }
     /** Unsafe version of {@link #maxColorLutResolution}. */
-    public static int nmaxColorLutResolution(long struct) { return UNSAFE.getInt(null, struct + XrSystemPassthroughColorLutPropertiesMETA.MAXCOLORLUTRESOLUTION); }
+    public static int nmaxColorLutResolution(long struct) { return memGetInt(struct + XrSystemPassthroughColorLutPropertiesMETA.MAXCOLORLUTRESOLUTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemPassthroughColorLutPropertiesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemPassthroughColorLutPropertiesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemPassthroughColorLutPropertiesMETA.NEXT, value); }
 

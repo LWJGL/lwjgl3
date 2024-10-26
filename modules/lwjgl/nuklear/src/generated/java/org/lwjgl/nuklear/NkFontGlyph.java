@@ -321,54 +321,54 @@ public class NkFontGlyph extends Struct<NkFontGlyph> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #codepoint}. */
-    public static int ncodepoint(long struct) { return UNSAFE.getInt(null, struct + NkFontGlyph.CODEPOINT); }
+    public static int ncodepoint(long struct) { return memGetInt(struct + NkFontGlyph.CODEPOINT); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.XADVANCE); }
+    public static float nxadvance(long struct) { return memGetFloat(struct + NkFontGlyph.XADVANCE); }
     /** Unsafe version of {@link #x0}. */
-    public static float nx0(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.X0); }
+    public static float nx0(long struct) { return memGetFloat(struct + NkFontGlyph.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static float ny0(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.Y0); }
+    public static float ny0(long struct) { return memGetFloat(struct + NkFontGlyph.Y0); }
     /** Unsafe version of {@link #x1}. */
-    public static float nx1(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.X1); }
+    public static float nx1(long struct) { return memGetFloat(struct + NkFontGlyph.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static float ny1(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.Y1); }
+    public static float ny1(long struct) { return memGetFloat(struct + NkFontGlyph.Y1); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.W); }
+    public static float nw(long struct) { return memGetFloat(struct + NkFontGlyph.W); }
     /** Unsafe version of {@link #h}. */
-    public static float nh(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.H); }
+    public static float nh(long struct) { return memGetFloat(struct + NkFontGlyph.H); }
     /** Unsafe version of {@link #u0}. */
-    public static float nu0(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.U0); }
+    public static float nu0(long struct) { return memGetFloat(struct + NkFontGlyph.U0); }
     /** Unsafe version of {@link #v0}. */
-    public static float nv0(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.V0); }
+    public static float nv0(long struct) { return memGetFloat(struct + NkFontGlyph.V0); }
     /** Unsafe version of {@link #u1}. */
-    public static float nu1(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.U1); }
+    public static float nu1(long struct) { return memGetFloat(struct + NkFontGlyph.U1); }
     /** Unsafe version of {@link #v1}. */
-    public static float nv1(long struct) { return UNSAFE.getFloat(null, struct + NkFontGlyph.V1); }
+    public static float nv1(long struct) { return memGetFloat(struct + NkFontGlyph.V1); }
 
     /** Unsafe version of {@link #codepoint(int) codepoint}. */
-    public static void ncodepoint(long struct, int value) { UNSAFE.putInt(null, struct + NkFontGlyph.CODEPOINT, value); }
+    public static void ncodepoint(long struct, int value) { memPutInt(struct + NkFontGlyph.CODEPOINT, value); }
     /** Unsafe version of {@link #xadvance(float) xadvance}. */
-    public static void nxadvance(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.XADVANCE, value); }
+    public static void nxadvance(long struct, float value) { memPutFloat(struct + NkFontGlyph.XADVANCE, value); }
     /** Unsafe version of {@link #x0(float) x0}. */
-    public static void nx0(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.X0, value); }
+    public static void nx0(long struct, float value) { memPutFloat(struct + NkFontGlyph.X0, value); }
     /** Unsafe version of {@link #y0(float) y0}. */
-    public static void ny0(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.Y0, value); }
+    public static void ny0(long struct, float value) { memPutFloat(struct + NkFontGlyph.Y0, value); }
     /** Unsafe version of {@link #x1(float) x1}. */
-    public static void nx1(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.X1, value); }
+    public static void nx1(long struct, float value) { memPutFloat(struct + NkFontGlyph.X1, value); }
     /** Unsafe version of {@link #y1(float) y1}. */
-    public static void ny1(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.Y1, value); }
+    public static void ny1(long struct, float value) { memPutFloat(struct + NkFontGlyph.Y1, value); }
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.W, value); }
+    public static void nw(long struct, float value) { memPutFloat(struct + NkFontGlyph.W, value); }
     /** Unsafe version of {@link #h(float) h}. */
-    public static void nh(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.H, value); }
+    public static void nh(long struct, float value) { memPutFloat(struct + NkFontGlyph.H, value); }
     /** Unsafe version of {@link #u0(float) u0}. */
-    public static void nu0(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.U0, value); }
+    public static void nu0(long struct, float value) { memPutFloat(struct + NkFontGlyph.U0, value); }
     /** Unsafe version of {@link #v0(float) v0}. */
-    public static void nv0(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.V0, value); }
+    public static void nv0(long struct, float value) { memPutFloat(struct + NkFontGlyph.V0, value); }
     /** Unsafe version of {@link #u1(float) u1}. */
-    public static void nu1(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.U1, value); }
+    public static void nu1(long struct, float value) { memPutFloat(struct + NkFontGlyph.U1, value); }
     /** Unsafe version of {@link #v1(float) v1}. */
-    public static void nv1(long struct, float value) { UNSAFE.putFloat(null, struct + NkFontGlyph.V1, value); }
+    public static void nv1(long struct, float value) { memPutFloat(struct + NkFontGlyph.V1, value); }
 
     // -----------------------------------
 

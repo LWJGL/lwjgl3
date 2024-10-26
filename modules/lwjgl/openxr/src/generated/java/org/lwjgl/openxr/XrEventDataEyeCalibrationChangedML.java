@@ -254,14 +254,14 @@ public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCal
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataEyeCalibrationChangedML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataEyeCalibrationChangedML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataEyeCalibrationChangedML.NEXT); }
     /** Unsafe version of {@link #status}. */
-    public static int nstatus(long struct) { return UNSAFE.getInt(null, struct + XrEventDataEyeCalibrationChangedML.STATUS); }
+    public static int nstatus(long struct) { return memGetInt(struct + XrEventDataEyeCalibrationChangedML.STATUS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataEyeCalibrationChangedML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataEyeCalibrationChangedML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataEyeCalibrationChangedML.NEXT, value); }
 

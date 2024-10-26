@@ -352,40 +352,40 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderCorePropertiesAMD.PNEXT); }
     /** Unsafe version of {@link #shaderEngineCount}. */
-    public static int nshaderEngineCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERENGINECOUNT); }
+    public static int nshaderEngineCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERENGINECOUNT); }
     /** Unsafe version of {@link #shaderArraysPerEngineCount}. */
-    public static int nshaderArraysPerEngineCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERARRAYSPERENGINECOUNT); }
+    public static int nshaderArraysPerEngineCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERARRAYSPERENGINECOUNT); }
     /** Unsafe version of {@link #computeUnitsPerShaderArray}. */
-    public static int ncomputeUnitsPerShaderArray(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.COMPUTEUNITSPERSHADERARRAY); }
+    public static int ncomputeUnitsPerShaderArray(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.COMPUTEUNITSPERSHADERARRAY); }
     /** Unsafe version of {@link #simdPerComputeUnit}. */
-    public static int nsimdPerComputeUnit(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SIMDPERCOMPUTEUNIT); }
+    public static int nsimdPerComputeUnit(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SIMDPERCOMPUTEUNIT); }
     /** Unsafe version of {@link #wavefrontsPerSimd}. */
-    public static int nwavefrontsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSPERSIMD); }
+    public static int nwavefrontsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSPERSIMD); }
     /** Unsafe version of {@link #wavefrontSize}. */
-    public static int nwavefrontSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSIZE); }
+    public static int nwavefrontSize(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSIZE); }
     /** Unsafe version of {@link #sgprsPerSimd}. */
-    public static int nsgprsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRSPERSIMD); }
+    public static int nsgprsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRSPERSIMD); }
     /** Unsafe version of {@link #minSgprAllocation}. */
-    public static int nminSgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINSGPRALLOCATION); }
+    public static int nminSgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINSGPRALLOCATION); }
     /** Unsafe version of {@link #maxSgprAllocation}. */
-    public static int nmaxSgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXSGPRALLOCATION); }
+    public static int nmaxSgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXSGPRALLOCATION); }
     /** Unsafe version of {@link #sgprAllocationGranularity}. */
-    public static int nsgprAllocationGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRALLOCATIONGRANULARITY); }
+    public static int nsgprAllocationGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRALLOCATIONGRANULARITY); }
     /** Unsafe version of {@link #vgprsPerSimd}. */
-    public static int nvgprsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRSPERSIMD); }
+    public static int nvgprsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRSPERSIMD); }
     /** Unsafe version of {@link #minVgprAllocation}. */
-    public static int nminVgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINVGPRALLOCATION); }
+    public static int nminVgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINVGPRALLOCATION); }
     /** Unsafe version of {@link #maxVgprAllocation}. */
-    public static int nmaxVgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXVGPRALLOCATION); }
+    public static int nmaxVgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXVGPRALLOCATION); }
     /** Unsafe version of {@link #vgprAllocationGranularity}. */
-    public static int nvgprAllocationGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRALLOCATIONGRANULARITY); }
+    public static int nvgprAllocationGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRALLOCATIONGRANULARITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderCorePropertiesAMD.PNEXT, value); }
 

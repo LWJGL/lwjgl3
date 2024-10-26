@@ -1762,7 +1762,7 @@ ${validations.joinToString("\n")}
                         } else if (it.bits != -1) {
                             println("${t}public static native void n$setter(long $STRUCT, $javaType value);")
                         } else {
-                            print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("put", it, javaType)}$STRUCT + $field, ")
+                            print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("Put", it, javaType)}$STRUCT + $field, ")
                             print(
                                 when {
                                     javaType == "boolean"
@@ -1849,7 +1849,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, ${it.nativeType.javaMethodType}) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        println("$t$t${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
+                        println("$t$t${getBufferMethod("Put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
@@ -2117,7 +2117,7 @@ ${validations.joinToString("\n")}
                     } else {
                         val javaType = it.nativeType.nativeMethodType
 
-                        print("${t}public static $javaType n$getter(long $STRUCT) { return ${getBufferMethod("get", it, javaType)}$STRUCT + $field)")
+                        print("${t}public static $javaType n$getter(long $STRUCT) { return ${getBufferMethod("Get", it, javaType)}$STRUCT + $field)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println("; }")
@@ -2177,7 +2177,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
-                        print("$t${t}return ${getBufferMethod("get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression})")
+                        print("$t${t}return ${getBufferMethod("Get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression})")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println(";\n$t}")
@@ -2354,13 +2354,13 @@ ${validations.joinToString("\n")}
     }
 
     private fun getBufferMethod(type: String, member: StructMember, javaType: String) = if (member.nativeType.isPointer)
-        "mem${type.upperCaseFirst}Address("
+        "mem${type}Address("
     else if (member.nativeType.mapping === PrimitiveMapping.CLONG)
-        "mem${type.upperCaseFirst}CLong("
+        "mem${type}CLong("
     else
-        "UNSAFE.$type${
+        "mem$type${
         bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
-        }(null, "
+        }("
 
     override val skipNative get() = !nativeLayout && members.isNotEmpty() && members.none { it.bits != -1 && it.getter == null }
 

@@ -113,7 +113,7 @@ class NkConfigStackUserFont extends Struct<NkConfigStackUserFont> {
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackUserFont.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackUserFont.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackUserFontElement.Buffer nelements(long struct) { return NkConfigStackUserFontElement.create(struct + NkConfigStackUserFont.ELEMENTS, 8); }
     /** Unsafe version of {@link #elements(int) elements}. */

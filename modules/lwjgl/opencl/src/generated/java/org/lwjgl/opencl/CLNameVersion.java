@@ -197,7 +197,7 @@ public class CLNameVersion extends Struct<CLNameVersion> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + CLNameVersion.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + CLNameVersion.VERSION); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + CLNameVersion.NAME, 64); }
     /** Unsafe version of {@link #nameString}. */

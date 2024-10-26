@@ -246,18 +246,18 @@ public class VkPhysicalDevicePipelinePropertiesFeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #pipelinePropertiesIdentifier}. */
-    public static int npipelinePropertiesIdentifier(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PIPELINEPROPERTIESIDENTIFIER); }
+    public static int npipelinePropertiesIdentifier(long struct) { return memGetInt(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PIPELINEPROPERTIESIDENTIFIER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #pipelinePropertiesIdentifier(boolean) pipelinePropertiesIdentifier}. */
-    public static void npipelinePropertiesIdentifier(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PIPELINEPROPERTIESIDENTIFIER, value); }
+    public static void npipelinePropertiesIdentifier(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelinePropertiesFeaturesEXT.PIPELINEPROPERTIESIDENTIFIER, value); }
 
     // -----------------------------------
 

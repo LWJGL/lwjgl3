@@ -222,14 +222,14 @@ public class CUasyncNotificationInfo extends Struct<CUasyncNotificationInfo> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUasyncNotificationInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUasyncNotificationInfo.TYPE); }
     /** Unsafe version of {@link #info_overBudget_bytesOverBudget}. */
-    public static long ninfo_overBudget_bytesOverBudget(long struct) { return UNSAFE.getLong(null, struct + CUasyncNotificationInfo.INFO_OVERBUDGET_BYTESOVERBUDGET); }
+    public static long ninfo_overBudget_bytesOverBudget(long struct) { return memGetLong(struct + CUasyncNotificationInfo.INFO_OVERBUDGET_BYTESOVERBUDGET); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUasyncNotificationInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUasyncNotificationInfo.TYPE, value); }
     /** Unsafe version of {@link #info_overBudget_bytesOverBudget(long) info_overBudget_bytesOverBudget}. */
-    public static void ninfo_overBudget_bytesOverBudget(long struct, long value) { UNSAFE.putLong(null, struct + CUasyncNotificationInfo.INFO_OVERBUDGET_BYTESOVERBUDGET, value); }
+    public static void ninfo_overBudget_bytesOverBudget(long struct, long value) { memPutLong(struct + CUasyncNotificationInfo.INFO_OVERBUDGET_BYTESOVERBUDGET, value); }
 
     // -----------------------------------
 

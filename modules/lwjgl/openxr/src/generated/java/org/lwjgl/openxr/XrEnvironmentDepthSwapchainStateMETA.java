@@ -259,22 +259,22 @@ public class XrEnvironmentDepthSwapchainStateMETA extends Struct<XrEnvironmentDe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEnvironmentDepthSwapchainStateMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEnvironmentDepthSwapchainStateMETA.NEXT); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XrEnvironmentDepthSwapchainStateMETA.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XrEnvironmentDepthSwapchainStateMETA.HEIGHT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEnvironmentDepthSwapchainStateMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEnvironmentDepthSwapchainStateMETA.NEXT, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + XrEnvironmentDepthSwapchainStateMETA.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthSwapchainStateMETA.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + XrEnvironmentDepthSwapchainStateMETA.HEIGHT, value); }
 
     // -----------------------------------
 

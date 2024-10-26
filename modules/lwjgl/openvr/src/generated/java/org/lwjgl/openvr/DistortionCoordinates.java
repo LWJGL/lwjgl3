@@ -234,19 +234,19 @@ public class DistortionCoordinates extends Struct<DistortionCoordinates> impleme
     public static FloatBuffer nrfRed(long struct) { return memFloatBuffer(struct + DistortionCoordinates.RFRED, 2); }
     /** Unsafe version of {@link #rfRed(int) rfRed}. */
     public static float nrfRed(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + DistortionCoordinates.RFRED + check(index, 2) * 4);
+        return memGetFloat(struct + DistortionCoordinates.RFRED + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #rfGreen}. */
     public static FloatBuffer nrfGreen(long struct) { return memFloatBuffer(struct + DistortionCoordinates.RFGREEN, 2); }
     /** Unsafe version of {@link #rfGreen(int) rfGreen}. */
     public static float nrfGreen(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + DistortionCoordinates.RFGREEN + check(index, 2) * 4);
+        return memGetFloat(struct + DistortionCoordinates.RFGREEN + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #rfBlue}. */
     public static FloatBuffer nrfBlue(long struct) { return memFloatBuffer(struct + DistortionCoordinates.RFBLUE, 2); }
     /** Unsafe version of {@link #rfBlue(int) rfBlue}. */
     public static float nrfBlue(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + DistortionCoordinates.RFBLUE + check(index, 2) * 4);
+        return memGetFloat(struct + DistortionCoordinates.RFBLUE + check(index, 2) * 4);
     }
 
     // -----------------------------------

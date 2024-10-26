@@ -290,32 +290,32 @@ public class XrWorldMeshGetInfoML extends Struct<XrWorldMeshGetInfoML> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshGetInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshGetInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshGetInfoML.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshGetInfoML.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrWorldMeshGetInfoML.FLAGS); }
     /** Unsafe version of {@link #fillHoleLength}. */
-    public static float nfillHoleLength(long struct) { return UNSAFE.getFloat(null, struct + XrWorldMeshGetInfoML.FILLHOLELENGTH); }
+    public static float nfillHoleLength(long struct) { return memGetFloat(struct + XrWorldMeshGetInfoML.FILLHOLELENGTH); }
     /** Unsafe version of {@link #disconnectedComponentArea}. */
-    public static float ndisconnectedComponentArea(long struct) { return UNSAFE.getFloat(null, struct + XrWorldMeshGetInfoML.DISCONNECTEDCOMPONENTAREA); }
+    public static float ndisconnectedComponentArea(long struct) { return memGetFloat(struct + XrWorldMeshGetInfoML.DISCONNECTEDCOMPONENTAREA); }
     /** Unsafe version of {@link #blockCount}. */
-    public static int nblockCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshGetInfoML.BLOCKCOUNT); }
+    public static int nblockCount(long struct) { return memGetInt(struct + XrWorldMeshGetInfoML.BLOCKCOUNT); }
     /** Unsafe version of {@link #blocks}. */
     public static XrWorldMeshBlockRequestML.Buffer nblocks(long struct) { return XrWorldMeshBlockRequestML.create(memGetAddress(struct + XrWorldMeshGetInfoML.BLOCKS), nblockCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshGetInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshGetInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshGetInfoML.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshGetInfoML.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrWorldMeshGetInfoML.FLAGS, value); }
     /** Unsafe version of {@link #fillHoleLength(float) fillHoleLength}. */
-    public static void nfillHoleLength(long struct, float value) { UNSAFE.putFloat(null, struct + XrWorldMeshGetInfoML.FILLHOLELENGTH, value); }
+    public static void nfillHoleLength(long struct, float value) { memPutFloat(struct + XrWorldMeshGetInfoML.FILLHOLELENGTH, value); }
     /** Unsafe version of {@link #disconnectedComponentArea(float) disconnectedComponentArea}. */
-    public static void ndisconnectedComponentArea(long struct, float value) { UNSAFE.putFloat(null, struct + XrWorldMeshGetInfoML.DISCONNECTEDCOMPONENTAREA, value); }
+    public static void ndisconnectedComponentArea(long struct, float value) { memPutFloat(struct + XrWorldMeshGetInfoML.DISCONNECTEDCOMPONENTAREA, value); }
     /** Sets the specified value to the {@code blockCount} field of the specified {@code struct}. */
-    public static void nblockCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshGetInfoML.BLOCKCOUNT, value); }
+    public static void nblockCount(long struct, int value) { memPutInt(struct + XrWorldMeshGetInfoML.BLOCKCOUNT, value); }
     /** Unsafe version of {@link #blocks(XrWorldMeshBlockRequestML.Buffer) blocks}. */
     public static void nblocks(long struct, XrWorldMeshBlockRequestML.Buffer value) { memPutAddress(struct + XrWorldMeshGetInfoML.BLOCKS, value.address()); nblockCount(struct, value.remaining()); }
 

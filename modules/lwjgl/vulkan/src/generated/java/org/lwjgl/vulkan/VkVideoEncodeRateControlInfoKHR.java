@@ -349,38 +349,38 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct<VkVideoEncodeRateCon
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.FLAGS); }
     /** Unsafe version of {@link #rateControlMode}. */
-    public static int nrateControlMode(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE); }
+    public static int nrateControlMode(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT); }
     /** Unsafe version of {@link #pLayers}. */
     @Nullable public static VkVideoEncodeRateControlLayerInfoKHR.Buffer npLayers(long struct) { return VkVideoEncodeRateControlLayerInfoKHR.createSafe(memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERS), nlayerCount(struct)); }
     /** Unsafe version of {@link #virtualBufferSizeInMs}. */
-    public static int nvirtualBufferSizeInMs(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.VIRTUALBUFFERSIZEINMS); }
+    public static int nvirtualBufferSizeInMs(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.VIRTUALBUFFERSIZEINMS); }
     /** Unsafe version of {@link #initialVirtualBufferSizeInMs}. */
-    public static int ninitialVirtualBufferSizeInMs(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.INITIALVIRTUALBUFFERSIZEINMS); }
+    public static int ninitialVirtualBufferSizeInMs(long struct) { return memGetInt(struct + VkVideoEncodeRateControlInfoKHR.INITIALVIRTUALBUFFERSIZEINMS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeRateControlInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #rateControlMode(int) rateControlMode}. */
-    public static void nrateControlMode(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE, value); }
+    public static void nrateControlMode(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE, value); }
     /** Sets the specified value to the {@code layerCount} field of the specified {@code struct}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT, value); }
     /** Unsafe version of {@link #pLayers(VkVideoEncodeRateControlLayerInfoKHR.Buffer) pLayers}. */
     public static void npLayers(long struct, @Nullable VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERS, memAddressSafe(value)); nlayerCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #virtualBufferSizeInMs(int) virtualBufferSizeInMs}. */
-    public static void nvirtualBufferSizeInMs(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.VIRTUALBUFFERSIZEINMS, value); }
+    public static void nvirtualBufferSizeInMs(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.VIRTUALBUFFERSIZEINMS, value); }
     /** Unsafe version of {@link #initialVirtualBufferSizeInMs(int) initialVirtualBufferSizeInMs}. */
-    public static void ninitialVirtualBufferSizeInMs(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.INITIALVIRTUALBUFFERSIZEINMS, value); }
+    public static void ninitialVirtualBufferSizeInMs(long struct, int value) { memPutInt(struct + VkVideoEncodeRateControlInfoKHR.INITIALVIRTUALBUFFERSIZEINMS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

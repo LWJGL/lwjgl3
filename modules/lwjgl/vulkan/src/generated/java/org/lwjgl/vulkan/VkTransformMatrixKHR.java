@@ -221,7 +221,7 @@ public class VkTransformMatrixKHR extends Struct<VkTransformMatrixKHR> implement
     public static FloatBuffer nmatrix(long struct) { return memFloatBuffer(struct + VkTransformMatrixKHR.MATRIX, 3 * 4); }
     /** Unsafe version of {@link #matrix(int) matrix}. */
     public static float nmatrix(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VkTransformMatrixKHR.MATRIX + check(index, 3 * 4) * 4);
+        return memGetFloat(struct + VkTransformMatrixKHR.MATRIX + check(index, 3 * 4) * 4);
     }
 
     /** Unsafe version of {@link #matrix(FloatBuffer) matrix}. */
@@ -231,7 +231,7 @@ public class VkTransformMatrixKHR extends Struct<VkTransformMatrixKHR> implement
     }
     /** Unsafe version of {@link #matrix(int, float) matrix}. */
     public static void nmatrix(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + VkTransformMatrixKHR.MATRIX + check(index, 3 * 4) * 4, value);
+        memPutFloat(struct + VkTransformMatrixKHR.MATRIX + check(index, 3 * 4) * 4, value);
     }
 
     // -----------------------------------

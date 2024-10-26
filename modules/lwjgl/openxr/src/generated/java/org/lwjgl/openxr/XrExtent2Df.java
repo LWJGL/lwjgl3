@@ -233,14 +233,14 @@ public class XrExtent2Df extends Struct<XrExtent2Df> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + XrExtent2Df.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + XrExtent2Df.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + XrExtent2Df.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + XrExtent2Df.HEIGHT); }
 
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + XrExtent2Df.WIDTH, value); }
+    public static void nwidth(long struct, float value) { memPutFloat(struct + XrExtent2Df.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + XrExtent2Df.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + XrExtent2Df.HEIGHT, value); }
 
     // -----------------------------------
 

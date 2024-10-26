@@ -252,18 +252,18 @@ public class XrViewState extends Struct<XrViewState> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrViewState.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrViewState.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrViewState.NEXT); }
     /** Unsafe version of {@link #viewStateFlags}. */
-    public static long nviewStateFlags(long struct) { return UNSAFE.getLong(null, struct + XrViewState.VIEWSTATEFLAGS); }
+    public static long nviewStateFlags(long struct) { return memGetLong(struct + XrViewState.VIEWSTATEFLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewState.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrViewState.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrViewState.NEXT, value); }
     /** Unsafe version of {@link #viewStateFlags(long) viewStateFlags}. */
-    public static void nviewStateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrViewState.VIEWSTATEFLAGS, value); }
+    public static void nviewStateFlags(long struct, long value) { memPutLong(struct + XrViewState.VIEWSTATEFLAGS, value); }
 
     // -----------------------------------
 

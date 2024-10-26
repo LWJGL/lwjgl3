@@ -228,13 +228,13 @@ public class VmaDefragmentationStats extends Struct<VmaDefragmentationStats> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #bytesMoved}. */
-    public static long nbytesMoved(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationStats.BYTESMOVED); }
+    public static long nbytesMoved(long struct) { return memGetLong(struct + VmaDefragmentationStats.BYTESMOVED); }
     /** Unsafe version of {@link #bytesFreed}. */
-    public static long nbytesFreed(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationStats.BYTESFREED); }
+    public static long nbytesFreed(long struct) { return memGetLong(struct + VmaDefragmentationStats.BYTESFREED); }
     /** Unsafe version of {@link #allocationsMoved}. */
-    public static int nallocationsMoved(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationStats.ALLOCATIONSMOVED); }
+    public static int nallocationsMoved(long struct) { return memGetInt(struct + VmaDefragmentationStats.ALLOCATIONSMOVED); }
     /** Unsafe version of {@link #deviceMemoryBlocksFreed}. */
-    public static int ndeviceMemoryBlocksFreed(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationStats.DEVICEMEMORYBLOCKSFREED); }
+    public static int ndeviceMemoryBlocksFreed(long struct) { return memGetInt(struct + VmaDefragmentationStats.DEVICEMEMORYBLOCKSFREED); }
 
     // -----------------------------------
 

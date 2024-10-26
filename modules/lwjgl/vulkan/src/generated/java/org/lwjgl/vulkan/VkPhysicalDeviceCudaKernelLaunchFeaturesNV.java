@@ -246,18 +246,18 @@ public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #cudaKernelLaunchFeatures}. */
-    public static int ncudaKernelLaunchFeatures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.CUDAKERNELLAUNCHFEATURES); }
+    public static int ncudaKernelLaunchFeatures(long struct) { return memGetInt(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.CUDAKERNELLAUNCHFEATURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #cudaKernelLaunchFeatures(boolean) cudaKernelLaunchFeatures}. */
-    public static void ncudaKernelLaunchFeatures(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.CUDAKERNELLAUNCHFEATURES, value); }
+    public static void ncudaKernelLaunchFeatures(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCudaKernelLaunchFeaturesNV.CUDAKERNELLAUNCHFEATURES, value); }
 
     // -----------------------------------
 

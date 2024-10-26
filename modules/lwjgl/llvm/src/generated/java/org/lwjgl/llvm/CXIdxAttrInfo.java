@@ -217,7 +217,7 @@ public class CXIdxAttrInfo extends Struct<CXIdxAttrInfo> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXIdxAttrInfo.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXIdxAttrInfo.KIND); }
     /** Unsafe version of {@link #cursor}. */
     public static CXCursor ncursor(long struct) { return CXCursor.create(struct + CXIdxAttrInfo.CURSOR); }
     /** Unsafe version of {@link #loc}. */

@@ -285,20 +285,20 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPresentRegionsKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPresentRegionsKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPresentRegionsKHR.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentRegionsKHR.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     @Nullable public static VkPresentRegionKHR.Buffer npRegions(long struct) { return VkPresentRegionKHR.createSafe(memGetAddress(struct + VkPresentRegionsKHR.PREGIONS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentRegionsKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentRegionsKHR.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentRegionsKHR.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkPresentRegionKHR.Buffer) pRegions}. */
     public static void npRegions(long struct, @Nullable VkPresentRegionKHR.Buffer value) { memPutAddress(struct + VkPresentRegionsKHR.PREGIONS, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
 

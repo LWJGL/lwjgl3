@@ -251,12 +251,12 @@ public class VkBaseOutStructure extends Struct<VkBaseOutStructure> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBaseOutStructure.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBaseOutStructure.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     @Nullable public static VkBaseOutStructure npNext(long struct) { return VkBaseOutStructure.createSafe(memGetAddress(struct + VkBaseOutStructure.PNEXT)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBaseOutStructure.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBaseOutStructure.STYPE, value); }
     /** Unsafe version of {@link #pNext(VkBaseOutStructure) pNext}. */
     public static void npNext(long struct, @Nullable VkBaseOutStructure value) { memPutAddress(struct + VkBaseOutStructure.PNEXT, memAddressSafe(value)); }
 

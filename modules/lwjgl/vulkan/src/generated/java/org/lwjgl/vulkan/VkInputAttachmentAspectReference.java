@@ -280,18 +280,18 @@ public class VkInputAttachmentAspectReference extends Struct<VkInputAttachmentAs
     // -----------------------------------
 
     /** Unsafe version of {@link #subpass}. */
-    public static int nsubpass(long struct) { return UNSAFE.getInt(null, struct + VkInputAttachmentAspectReference.SUBPASS); }
+    public static int nsubpass(long struct) { return memGetInt(struct + VkInputAttachmentAspectReference.SUBPASS); }
     /** Unsafe version of {@link #inputAttachmentIndex}. */
-    public static int ninputAttachmentIndex(long struct) { return UNSAFE.getInt(null, struct + VkInputAttachmentAspectReference.INPUTATTACHMENTINDEX); }
+    public static int ninputAttachmentIndex(long struct) { return memGetInt(struct + VkInputAttachmentAspectReference.INPUTATTACHMENTINDEX); }
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkInputAttachmentAspectReference.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkInputAttachmentAspectReference.ASPECTMASK); }
 
     /** Unsafe version of {@link #subpass(int) subpass}. */
-    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkInputAttachmentAspectReference.SUBPASS, value); }
+    public static void nsubpass(long struct, int value) { memPutInt(struct + VkInputAttachmentAspectReference.SUBPASS, value); }
     /** Unsafe version of {@link #inputAttachmentIndex(int) inputAttachmentIndex}. */
-    public static void ninputAttachmentIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkInputAttachmentAspectReference.INPUTATTACHMENTINDEX, value); }
+    public static void ninputAttachmentIndex(long struct, int value) { memPutInt(struct + VkInputAttachmentAspectReference.INPUTATTACHMENTINDEX, value); }
     /** Unsafe version of {@link #aspectMask(int) aspectMask}. */
-    public static void naspectMask(long struct, int value) { UNSAFE.putInt(null, struct + VkInputAttachmentAspectReference.ASPECTMASK, value); }
+    public static void naspectMask(long struct, int value) { memPutInt(struct + VkInputAttachmentAspectReference.ASPECTMASK, value); }
 
     // -----------------------------------
 

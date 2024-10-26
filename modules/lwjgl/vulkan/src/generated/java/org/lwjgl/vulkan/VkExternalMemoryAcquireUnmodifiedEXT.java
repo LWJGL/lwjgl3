@@ -265,18 +265,18 @@ public class VkExternalMemoryAcquireUnmodifiedEXT extends Struct<VkExternalMemor
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryAcquireUnmodifiedEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExternalMemoryAcquireUnmodifiedEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalMemoryAcquireUnmodifiedEXT.PNEXT); }
     /** Unsafe version of {@link #acquireUnmodifiedMemory}. */
-    public static int nacquireUnmodifiedMemory(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryAcquireUnmodifiedEXT.ACQUIREUNMODIFIEDMEMORY); }
+    public static int nacquireUnmodifiedMemory(long struct) { return memGetInt(struct + VkExternalMemoryAcquireUnmodifiedEXT.ACQUIREUNMODIFIEDMEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryAcquireUnmodifiedEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalMemoryAcquireUnmodifiedEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalMemoryAcquireUnmodifiedEXT.PNEXT, value); }
     /** Unsafe version of {@link #acquireUnmodifiedMemory(boolean) acquireUnmodifiedMemory}. */
-    public static void nacquireUnmodifiedMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryAcquireUnmodifiedEXT.ACQUIREUNMODIFIEDMEMORY, value); }
+    public static void nacquireUnmodifiedMemory(long struct, int value) { memPutInt(struct + VkExternalMemoryAcquireUnmodifiedEXT.ACQUIREUNMODIFIEDMEMORY, value); }
 
     // -----------------------------------
 

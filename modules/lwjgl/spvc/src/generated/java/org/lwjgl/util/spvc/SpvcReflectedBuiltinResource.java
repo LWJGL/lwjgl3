@@ -251,16 +251,16 @@ public class SpvcReflectedBuiltinResource extends Struct<SpvcReflectedBuiltinRes
     // -----------------------------------
 
     /** Unsafe version of {@link #builtin}. */
-    public static int nbuiltin(long struct) { return UNSAFE.getInt(null, struct + SpvcReflectedBuiltinResource.BUILTIN); }
+    public static int nbuiltin(long struct) { return memGetInt(struct + SpvcReflectedBuiltinResource.BUILTIN); }
     /** Unsafe version of {@link #value_type_id}. */
-    public static int nvalue_type_id(long struct) { return UNSAFE.getInt(null, struct + SpvcReflectedBuiltinResource.VALUE_TYPE_ID); }
+    public static int nvalue_type_id(long struct) { return memGetInt(struct + SpvcReflectedBuiltinResource.VALUE_TYPE_ID); }
     /** Unsafe version of {@link #resource}. */
     public static SpvcReflectedResource nresource(long struct) { return SpvcReflectedResource.create(struct + SpvcReflectedBuiltinResource.RESOURCE); }
 
     /** Unsafe version of {@link #builtin(int) builtin}. */
-    public static void nbuiltin(long struct, int value) { UNSAFE.putInt(null, struct + SpvcReflectedBuiltinResource.BUILTIN, value); }
+    public static void nbuiltin(long struct, int value) { memPutInt(struct + SpvcReflectedBuiltinResource.BUILTIN, value); }
     /** Unsafe version of {@link #value_type_id(int) value_type_id}. */
-    public static void nvalue_type_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcReflectedBuiltinResource.VALUE_TYPE_ID, value); }
+    public static void nvalue_type_id(long struct, int value) { memPutInt(struct + SpvcReflectedBuiltinResource.VALUE_TYPE_ID, value); }
     /** Unsafe version of {@link #resource(SpvcReflectedResource) resource}. */
     public static void nresource(long struct, SpvcReflectedResource value) { memCopy(value.address(), struct + SpvcReflectedBuiltinResource.RESOURCE, SpvcReflectedResource.SIZEOF); }
 

@@ -444,84 +444,84 @@ public class VkPhysicalDeviceMeshShaderPropertiesEXT extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxTaskWorkGroupTotalCount}. */
-    public static int nmaxTaskWorkGroupTotalCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPTOTALCOUNT); }
+    public static int nmaxTaskWorkGroupTotalCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPTOTALCOUNT); }
     /** Unsafe version of {@link #maxTaskWorkGroupCount}. */
     public static IntBuffer nmaxTaskWorkGroupCount(long struct) { return memIntBuffer(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPCOUNT, 3); }
     /** Unsafe version of {@link #maxTaskWorkGroupCount(int) maxTaskWorkGroupCount}. */
     public static int nmaxTaskWorkGroupCount(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPCOUNT + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPCOUNT + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxTaskWorkGroupInvocations}. */
-    public static int nmaxTaskWorkGroupInvocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPINVOCATIONS); }
+    public static int nmaxTaskWorkGroupInvocations(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPINVOCATIONS); }
     /** Unsafe version of {@link #maxTaskWorkGroupSize}. */
     public static IntBuffer nmaxTaskWorkGroupSize(long struct) { return memIntBuffer(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPSIZE, 3); }
     /** Unsafe version of {@link #maxTaskWorkGroupSize(int) maxTaskWorkGroupSize}. */
     public static int nmaxTaskWorkGroupSize(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPSIZE + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKWORKGROUPSIZE + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxTaskPayloadSize}. */
-    public static int nmaxTaskPayloadSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKPAYLOADSIZE); }
+    public static int nmaxTaskPayloadSize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKPAYLOADSIZE); }
     /** Unsafe version of {@link #maxTaskSharedMemorySize}. */
-    public static int nmaxTaskSharedMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKSHAREDMEMORYSIZE); }
+    public static int nmaxTaskSharedMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKSHAREDMEMORYSIZE); }
     /** Unsafe version of {@link #maxTaskPayloadAndSharedMemorySize}. */
-    public static int nmaxTaskPayloadAndSharedMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKPAYLOADANDSHAREDMEMORYSIZE); }
+    public static int nmaxTaskPayloadAndSharedMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXTASKPAYLOADANDSHAREDMEMORYSIZE); }
     /** Unsafe version of {@link #maxMeshWorkGroupTotalCount}. */
-    public static int nmaxMeshWorkGroupTotalCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPTOTALCOUNT); }
+    public static int nmaxMeshWorkGroupTotalCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPTOTALCOUNT); }
     /** Unsafe version of {@link #maxMeshWorkGroupCount}. */
     public static IntBuffer nmaxMeshWorkGroupCount(long struct) { return memIntBuffer(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPCOUNT, 3); }
     /** Unsafe version of {@link #maxMeshWorkGroupCount(int) maxMeshWorkGroupCount}. */
     public static int nmaxMeshWorkGroupCount(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPCOUNT + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPCOUNT + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxMeshWorkGroupInvocations}. */
-    public static int nmaxMeshWorkGroupInvocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPINVOCATIONS); }
+    public static int nmaxMeshWorkGroupInvocations(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPINVOCATIONS); }
     /** Unsafe version of {@link #maxMeshWorkGroupSize}. */
     public static IntBuffer nmaxMeshWorkGroupSize(long struct) { return memIntBuffer(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPSIZE, 3); }
     /** Unsafe version of {@link #maxMeshWorkGroupSize(int) maxMeshWorkGroupSize}. */
     public static int nmaxMeshWorkGroupSize(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPSIZE + check(index, 3) * 4);
+        return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHWORKGROUPSIZE + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #maxMeshSharedMemorySize}. */
-    public static int nmaxMeshSharedMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHSHAREDMEMORYSIZE); }
+    public static int nmaxMeshSharedMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHSHAREDMEMORYSIZE); }
     /** Unsafe version of {@link #maxMeshPayloadAndSharedMemorySize}. */
-    public static int nmaxMeshPayloadAndSharedMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHPAYLOADANDSHAREDMEMORYSIZE); }
+    public static int nmaxMeshPayloadAndSharedMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHPAYLOADANDSHAREDMEMORYSIZE); }
     /** Unsafe version of {@link #maxMeshOutputMemorySize}. */
-    public static int nmaxMeshOutputMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTMEMORYSIZE); }
+    public static int nmaxMeshOutputMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTMEMORYSIZE); }
     /** Unsafe version of {@link #maxMeshPayloadAndOutputMemorySize}. */
-    public static int nmaxMeshPayloadAndOutputMemorySize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHPAYLOADANDOUTPUTMEMORYSIZE); }
+    public static int nmaxMeshPayloadAndOutputMemorySize(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHPAYLOADANDOUTPUTMEMORYSIZE); }
     /** Unsafe version of {@link #maxMeshOutputComponents}. */
-    public static int nmaxMeshOutputComponents(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTCOMPONENTS); }
+    public static int nmaxMeshOutputComponents(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTCOMPONENTS); }
     /** Unsafe version of {@link #maxMeshOutputVertices}. */
-    public static int nmaxMeshOutputVertices(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTVERTICES); }
+    public static int nmaxMeshOutputVertices(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTVERTICES); }
     /** Unsafe version of {@link #maxMeshOutputPrimitives}. */
-    public static int nmaxMeshOutputPrimitives(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTPRIMITIVES); }
+    public static int nmaxMeshOutputPrimitives(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTPRIMITIVES); }
     /** Unsafe version of {@link #maxMeshOutputLayers}. */
-    public static int nmaxMeshOutputLayers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTLAYERS); }
+    public static int nmaxMeshOutputLayers(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHOUTPUTLAYERS); }
     /** Unsafe version of {@link #maxMeshMultiviewViewCount}. */
-    public static int nmaxMeshMultiviewViewCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHMULTIVIEWVIEWCOUNT); }
+    public static int nmaxMeshMultiviewViewCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXMESHMULTIVIEWVIEWCOUNT); }
     /** Unsafe version of {@link #meshOutputPerVertexGranularity}. */
-    public static int nmeshOutputPerVertexGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MESHOUTPUTPERVERTEXGRANULARITY); }
+    public static int nmeshOutputPerVertexGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MESHOUTPUTPERVERTEXGRANULARITY); }
     /** Unsafe version of {@link #meshOutputPerPrimitiveGranularity}. */
-    public static int nmeshOutputPerPrimitiveGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MESHOUTPUTPERPRIMITIVEGRANULARITY); }
+    public static int nmeshOutputPerPrimitiveGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MESHOUTPUTPERPRIMITIVEGRANULARITY); }
     /** Unsafe version of {@link #maxPreferredTaskWorkGroupInvocations}. */
-    public static int nmaxPreferredTaskWorkGroupInvocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXPREFERREDTASKWORKGROUPINVOCATIONS); }
+    public static int nmaxPreferredTaskWorkGroupInvocations(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXPREFERREDTASKWORKGROUPINVOCATIONS); }
     /** Unsafe version of {@link #maxPreferredMeshWorkGroupInvocations}. */
-    public static int nmaxPreferredMeshWorkGroupInvocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXPREFERREDMESHWORKGROUPINVOCATIONS); }
+    public static int nmaxPreferredMeshWorkGroupInvocations(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.MAXPREFERREDMESHWORKGROUPINVOCATIONS); }
     /** Unsafe version of {@link #prefersLocalInvocationVertexOutput}. */
-    public static int nprefersLocalInvocationVertexOutput(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSLOCALINVOCATIONVERTEXOUTPUT); }
+    public static int nprefersLocalInvocationVertexOutput(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSLOCALINVOCATIONVERTEXOUTPUT); }
     /** Unsafe version of {@link #prefersLocalInvocationPrimitiveOutput}. */
-    public static int nprefersLocalInvocationPrimitiveOutput(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSLOCALINVOCATIONPRIMITIVEOUTPUT); }
+    public static int nprefersLocalInvocationPrimitiveOutput(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSLOCALINVOCATIONPRIMITIVEOUTPUT); }
     /** Unsafe version of {@link #prefersCompactVertexOutput}. */
-    public static int nprefersCompactVertexOutput(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSCOMPACTVERTEXOUTPUT); }
+    public static int nprefersCompactVertexOutput(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSCOMPACTVERTEXOUTPUT); }
     /** Unsafe version of {@link #prefersCompactPrimitiveOutput}. */
-    public static int nprefersCompactPrimitiveOutput(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSCOMPACTPRIMITIVEOUTPUT); }
+    public static int nprefersCompactPrimitiveOutput(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PREFERSCOMPACTPRIMITIVEOUTPUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMeshShaderPropertiesEXT.PNEXT, value); }
 

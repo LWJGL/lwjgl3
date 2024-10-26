@@ -261,14 +261,14 @@ public class VkSparseImageMemoryRequirements2 extends Struct<VkSparseImageMemory
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageMemoryRequirements2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSparseImageMemoryRequirements2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSparseImageMemoryRequirements2.PNEXT); }
     /** Unsafe version of {@link #memoryRequirements}. */
     public static VkSparseImageMemoryRequirements nmemoryRequirements(long struct) { return VkSparseImageMemoryRequirements.create(struct + VkSparseImageMemoryRequirements2.MEMORYREQUIREMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseImageMemoryRequirements2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSparseImageMemoryRequirements2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSparseImageMemoryRequirements2.PNEXT, value); }
 

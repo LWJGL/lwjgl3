@@ -261,9 +261,9 @@ public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #allocType}. */
-    public static int nallocType(long struct) { return UNSAFE.getInt(null, struct + CUmemPoolProps.ALLOCTYPE); }
+    public static int nallocType(long struct) { return memGetInt(struct + CUmemPoolProps.ALLOCTYPE); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static int nhandleTypes(long struct) { return UNSAFE.getInt(null, struct + CUmemPoolProps.HANDLETYPES); }
+    public static int nhandleTypes(long struct) { return memGetInt(struct + CUmemPoolProps.HANDLETYPES); }
     /** Unsafe version of {@link #location}. */
     public static CUmemLocation nlocation(long struct) { return CUmemLocation.create(struct + CUmemPoolProps.LOCATION); }
     /** Unsafe version of {@link #win32SecurityAttributes}. */
@@ -272,13 +272,13 @@ public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeReso
     public static ByteBuffer nreserved(long struct) { return memByteBuffer(struct + CUmemPoolProps.RESERVED, 64); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static byte nreserved(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUmemPoolProps.RESERVED + check(index, 64) * 1);
+        return memGetByte(struct + CUmemPoolProps.RESERVED + check(index, 64) * 1);
     }
 
     /** Unsafe version of {@link #allocType(int) allocType}. */
-    public static void nallocType(long struct, int value) { UNSAFE.putInt(null, struct + CUmemPoolProps.ALLOCTYPE, value); }
+    public static void nallocType(long struct, int value) { memPutInt(struct + CUmemPoolProps.ALLOCTYPE, value); }
     /** Unsafe version of {@link #handleTypes(int) handleTypes}. */
-    public static void nhandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + CUmemPoolProps.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, int value) { memPutInt(struct + CUmemPoolProps.HANDLETYPES, value); }
     /** Unsafe version of {@link #location(CUmemLocation) location}. */
     public static void nlocation(long struct, CUmemLocation value) { memCopy(value.address(), struct + CUmemPoolProps.LOCATION, CUmemLocation.SIZEOF); }
     /** Unsafe version of {@link #win32SecurityAttributes(long) win32SecurityAttributes}. */
@@ -290,7 +290,7 @@ public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeReso
     }
     /** Unsafe version of {@link #reserved(int, byte) reserved}. */
     public static void nreserved(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUmemPoolProps.RESERVED + check(index, 64) * 1, value);
+        memPutByte(struct + CUmemPoolProps.RESERVED + check(index, 64) * 1, value);
     }
 
     // -----------------------------------

@@ -272,20 +272,20 @@ public class NotificationBitmap extends Struct<NotificationBitmap> implements Na
     /** Unsafe version of {@link #m_pImageData(int) m_pImageData}. */
     public static ByteBuffer nm_pImageData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + NotificationBitmap.M_PIMAGEDATA), capacity); }
     /** Unsafe version of {@link #m_nWidth}. */
-    public static int nm_nWidth(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NWIDTH); }
+    public static int nm_nWidth(long struct) { return memGetInt(struct + NotificationBitmap.M_NWIDTH); }
     /** Unsafe version of {@link #m_nHeight}. */
-    public static int nm_nHeight(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NHEIGHT); }
+    public static int nm_nHeight(long struct) { return memGetInt(struct + NotificationBitmap.M_NHEIGHT); }
     /** Unsafe version of {@link #m_nBytesPerPixel}. */
-    public static int nm_nBytesPerPixel(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NBYTESPERPIXEL); }
+    public static int nm_nBytesPerPixel(long struct) { return memGetInt(struct + NotificationBitmap.M_NBYTESPERPIXEL); }
 
     /** Unsafe version of {@link #m_pImageData(ByteBuffer) m_pImageData}. */
     public static void nm_pImageData(long struct, ByteBuffer value) { memPutAddress(struct + NotificationBitmap.M_PIMAGEDATA, memAddress(value)); }
     /** Unsafe version of {@link #m_nWidth(int) m_nWidth}. */
-    public static void nm_nWidth(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NWIDTH, value); }
+    public static void nm_nWidth(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NWIDTH, value); }
     /** Unsafe version of {@link #m_nHeight(int) m_nHeight}. */
-    public static void nm_nHeight(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NHEIGHT, value); }
+    public static void nm_nHeight(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NHEIGHT, value); }
     /** Unsafe version of {@link #m_nBytesPerPixel(int) m_nBytesPerPixel}. */
-    public static void nm_nBytesPerPixel(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NBYTESPERPIXEL, value); }
+    public static void nm_nBytesPerPixel(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NBYTESPERPIXEL, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

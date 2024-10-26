@@ -236,15 +236,15 @@ public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> impleme
     /** Unsafe version of {@link #statistics}. */
     public static VmaStatistics nstatistics(long struct) { return VmaStatistics.create(struct + VmaDetailedStatistics.STATISTICS); }
     /** Unsafe version of {@link #unusedRangeCount}. */
-    public static int nunusedRangeCount(long struct) { return UNSAFE.getInt(null, struct + VmaDetailedStatistics.UNUSEDRANGECOUNT); }
+    public static int nunusedRangeCount(long struct) { return memGetInt(struct + VmaDetailedStatistics.UNUSEDRANGECOUNT); }
     /** Unsafe version of {@link #allocationSizeMin}. */
-    public static long nallocationSizeMin(long struct) { return UNSAFE.getLong(null, struct + VmaDetailedStatistics.ALLOCATIONSIZEMIN); }
+    public static long nallocationSizeMin(long struct) { return memGetLong(struct + VmaDetailedStatistics.ALLOCATIONSIZEMIN); }
     /** Unsafe version of {@link #allocationSizeMax}. */
-    public static long nallocationSizeMax(long struct) { return UNSAFE.getLong(null, struct + VmaDetailedStatistics.ALLOCATIONSIZEMAX); }
+    public static long nallocationSizeMax(long struct) { return memGetLong(struct + VmaDetailedStatistics.ALLOCATIONSIZEMAX); }
     /** Unsafe version of {@link #unusedRangeSizeMin}. */
-    public static long nunusedRangeSizeMin(long struct) { return UNSAFE.getLong(null, struct + VmaDetailedStatistics.UNUSEDRANGESIZEMIN); }
+    public static long nunusedRangeSizeMin(long struct) { return memGetLong(struct + VmaDetailedStatistics.UNUSEDRANGESIZEMIN); }
     /** Unsafe version of {@link #unusedRangeSizeMax}. */
-    public static long nunusedRangeSizeMax(long struct) { return UNSAFE.getLong(null, struct + VmaDetailedStatistics.UNUSEDRANGESIZEMAX); }
+    public static long nunusedRangeSizeMax(long struct) { return memGetLong(struct + VmaDetailedStatistics.UNUSEDRANGESIZEMAX); }
 
     // -----------------------------------
 

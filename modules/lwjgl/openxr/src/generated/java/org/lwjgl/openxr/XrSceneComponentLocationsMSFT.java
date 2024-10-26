@@ -261,20 +261,20 @@ public class XrSceneComponentLocationsMSFT extends Struct<XrSceneComponentLocati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentLocationsMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneComponentLocationsMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneComponentLocationsMSFT.NEXT); }
     /** Unsafe version of {@link #locationCount}. */
-    public static int nlocationCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentLocationsMSFT.LOCATIONCOUNT); }
+    public static int nlocationCount(long struct) { return memGetInt(struct + XrSceneComponentLocationsMSFT.LOCATIONCOUNT); }
     /** Unsafe version of {@link #locations}. */
     @Nullable public static XrSceneComponentLocationMSFT.Buffer nlocations(long struct) { return XrSceneComponentLocationMSFT.createSafe(memGetAddress(struct + XrSceneComponentLocationsMSFT.LOCATIONS), nlocationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentLocationsMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneComponentLocationsMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentLocationsMSFT.NEXT, value); }
     /** Sets the specified value to the {@code locationCount} field of the specified {@code struct}. */
-    public static void nlocationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentLocationsMSFT.LOCATIONCOUNT, value); }
+    public static void nlocationCount(long struct, int value) { memPutInt(struct + XrSceneComponentLocationsMSFT.LOCATIONCOUNT, value); }
     /** Unsafe version of {@link #locations(XrSceneComponentLocationMSFT.Buffer) locations}. */
     public static void nlocations(long struct, @Nullable XrSceneComponentLocationMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentLocationsMSFT.LOCATIONS, memAddressSafe(value)); if (value != null) { nlocationCount(struct, value.remaining()); } }
 

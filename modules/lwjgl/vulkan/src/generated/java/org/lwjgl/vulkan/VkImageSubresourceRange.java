@@ -311,26 +311,26 @@ public class VkImageSubresourceRange extends Struct<VkImageSubresourceRange> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresourceRange.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkImageSubresourceRange.ASPECTMASK); }
     /** Unsafe version of {@link #baseMipLevel}. */
-    public static int nbaseMipLevel(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresourceRange.BASEMIPLEVEL); }
+    public static int nbaseMipLevel(long struct) { return memGetInt(struct + VkImageSubresourceRange.BASEMIPLEVEL); }
     /** Unsafe version of {@link #levelCount}. */
-    public static int nlevelCount(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresourceRange.LEVELCOUNT); }
+    public static int nlevelCount(long struct) { return memGetInt(struct + VkImageSubresourceRange.LEVELCOUNT); }
     /** Unsafe version of {@link #baseArrayLayer}. */
-    public static int nbaseArrayLayer(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresourceRange.BASEARRAYLAYER); }
+    public static int nbaseArrayLayer(long struct) { return memGetInt(struct + VkImageSubresourceRange.BASEARRAYLAYER); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkImageSubresourceRange.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + VkImageSubresourceRange.LAYERCOUNT); }
 
     /** Unsafe version of {@link #aspectMask(int) aspectMask}. */
-    public static void naspectMask(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresourceRange.ASPECTMASK, value); }
+    public static void naspectMask(long struct, int value) { memPutInt(struct + VkImageSubresourceRange.ASPECTMASK, value); }
     /** Unsafe version of {@link #baseMipLevel(int) baseMipLevel}. */
-    public static void nbaseMipLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresourceRange.BASEMIPLEVEL, value); }
+    public static void nbaseMipLevel(long struct, int value) { memPutInt(struct + VkImageSubresourceRange.BASEMIPLEVEL, value); }
     /** Unsafe version of {@link #levelCount(int) levelCount}. */
-    public static void nlevelCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresourceRange.LEVELCOUNT, value); }
+    public static void nlevelCount(long struct, int value) { memPutInt(struct + VkImageSubresourceRange.LEVELCOUNT, value); }
     /** Unsafe version of {@link #baseArrayLayer(int) baseArrayLayer}. */
-    public static void nbaseArrayLayer(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresourceRange.BASEARRAYLAYER, value); }
+    public static void nbaseArrayLayer(long struct, int value) { memPutInt(struct + VkImageSubresourceRange.BASEARRAYLAYER, value); }
     /** Unsafe version of {@link #layerCount(int) layerCount}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSubresourceRange.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + VkImageSubresourceRange.LAYERCOUNT, value); }
 
     // -----------------------------------
 

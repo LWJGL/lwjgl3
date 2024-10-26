@@ -207,9 +207,9 @@ public class FT_Multi_Master extends Struct<FT_Multi_Master> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #num_axis}. */
-    public static int nnum_axis(long struct) { return UNSAFE.getInt(null, struct + FT_Multi_Master.NUM_AXIS); }
+    public static int nnum_axis(long struct) { return memGetInt(struct + FT_Multi_Master.NUM_AXIS); }
     /** Unsafe version of {@link #num_designs}. */
-    public static int nnum_designs(long struct) { return UNSAFE.getInt(null, struct + FT_Multi_Master.NUM_DESIGNS); }
+    public static int nnum_designs(long struct) { return memGetInt(struct + FT_Multi_Master.NUM_DESIGNS); }
     /** Unsafe version of {@link #axis}. */
     public static FT_MM_Axis.Buffer naxis(long struct) { return FT_MM_Axis.create(struct + FT_Multi_Master.AXIS, T1_MAX_MM_AXIS); }
     /** Unsafe version of {@link #axis(int) axis}. */

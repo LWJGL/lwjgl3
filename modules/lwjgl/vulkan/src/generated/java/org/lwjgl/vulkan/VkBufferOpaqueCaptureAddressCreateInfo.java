@@ -259,18 +259,18 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct<VkBufferOpaqu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferOpaqueCaptureAddressCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBufferOpaqueCaptureAddressCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBufferOpaqueCaptureAddressCreateInfo.PNEXT); }
     /** Unsafe version of {@link #opaqueCaptureAddress}. */
-    public static long nopaqueCaptureAddress(long struct) { return UNSAFE.getLong(null, struct + VkBufferOpaqueCaptureAddressCreateInfo.OPAQUECAPTUREADDRESS); }
+    public static long nopaqueCaptureAddress(long struct) { return memGetLong(struct + VkBufferOpaqueCaptureAddressCreateInfo.OPAQUECAPTUREADDRESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferOpaqueCaptureAddressCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBufferOpaqueCaptureAddressCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferOpaqueCaptureAddressCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #opaqueCaptureAddress(long) opaqueCaptureAddress}. */
-    public static void nopaqueCaptureAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferOpaqueCaptureAddressCreateInfo.OPAQUECAPTUREADDRESS, value); }
+    public static void nopaqueCaptureAddress(long struct, long value) { memPutLong(struct + VkBufferOpaqueCaptureAddressCreateInfo.OPAQUECAPTUREADDRESS, value); }
 
     // -----------------------------------
 

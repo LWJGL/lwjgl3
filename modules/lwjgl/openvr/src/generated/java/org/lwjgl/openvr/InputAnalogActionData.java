@@ -255,23 +255,23 @@ public class InputAnalogActionData extends Struct<InputAnalogActionData> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #bActive}. */
-    public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputAnalogActionData.BACTIVE) != 0; }
+    public static boolean nbActive(long struct) { return memGetByte(struct + InputAnalogActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
-    public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputAnalogActionData.ACTIVEORIGIN); }
+    public static long nactiveOrigin(long struct) { return memGetLong(struct + InputAnalogActionData.ACTIVEORIGIN); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.X); }
+    public static float nx(long struct) { return memGetFloat(struct + InputAnalogActionData.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + InputAnalogActionData.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + InputAnalogActionData.Z); }
     /** Unsafe version of {@link #deltaX}. */
-    public static float ndeltaX(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAX); }
+    public static float ndeltaX(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAX); }
     /** Unsafe version of {@link #deltaY}. */
-    public static float ndeltaY(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAY); }
+    public static float ndeltaY(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAY); }
     /** Unsafe version of {@link #deltaZ}. */
-    public static float ndeltaZ(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAZ); }
+    public static float ndeltaZ(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAZ); }
     /** Unsafe version of {@link #fUpdateTime}. */
-    public static float nfUpdateTime(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.FUPDATETIME); }
+    public static float nfUpdateTime(long struct) { return memGetFloat(struct + InputAnalogActionData.FUPDATETIME); }
 
     // -----------------------------------
 

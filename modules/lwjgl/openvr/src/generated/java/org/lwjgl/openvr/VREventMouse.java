@@ -124,13 +124,13 @@ public class VREventMouse extends Struct<VREventMouse> {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VREventMouse.X); }
+    public static float nx(long struct) { return memGetFloat(struct + VREventMouse.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VREventMouse.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + VREventMouse.Y); }
     /** Unsafe version of {@link #button}. */
-    public static int nbutton(long struct) { return UNSAFE.getInt(null, struct + VREventMouse.BUTTON); }
+    public static int nbutton(long struct) { return memGetInt(struct + VREventMouse.BUTTON); }
     /** Unsafe version of {@link #cursorIndex}. */
-    public static int ncursorIndex(long struct) { return UNSAFE.getInt(null, struct + VREventMouse.CURSORINDEX); }
+    public static int ncursorIndex(long struct) { return memGetInt(struct + VREventMouse.CURSORINDEX); }
 
     // -----------------------------------
 

@@ -312,30 +312,30 @@ public class VkGeometryAABBNV extends Struct<VkGeometryAABBNV> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryAABBNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeometryAABBNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeometryAABBNV.PNEXT); }
     /** Unsafe version of {@link #aabbData}. */
-    public static long naabbData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryAABBNV.AABBDATA); }
+    public static long naabbData(long struct) { return memGetLong(struct + VkGeometryAABBNV.AABBDATA); }
     /** Unsafe version of {@link #numAABBs}. */
-    public static int nnumAABBs(long struct) { return UNSAFE.getInt(null, struct + VkGeometryAABBNV.NUMAABBS); }
+    public static int nnumAABBs(long struct) { return memGetInt(struct + VkGeometryAABBNV.NUMAABBS); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkGeometryAABBNV.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + VkGeometryAABBNV.STRIDE); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryAABBNV.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkGeometryAABBNV.OFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryAABBNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeometryAABBNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeometryAABBNV.PNEXT, value); }
     /** Unsafe version of {@link #aabbData(long) aabbData}. */
-    public static void naabbData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryAABBNV.AABBDATA, value); }
+    public static void naabbData(long struct, long value) { memPutLong(struct + VkGeometryAABBNV.AABBDATA, value); }
     /** Unsafe version of {@link #numAABBs(int) numAABBs}. */
-    public static void nnumAABBs(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryAABBNV.NUMAABBS, value); }
+    public static void nnumAABBs(long struct, int value) { memPutInt(struct + VkGeometryAABBNV.NUMAABBS, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryAABBNV.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + VkGeometryAABBNV.STRIDE, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryAABBNV.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkGeometryAABBNV.OFFSET, value); }
 
     // -----------------------------------
 

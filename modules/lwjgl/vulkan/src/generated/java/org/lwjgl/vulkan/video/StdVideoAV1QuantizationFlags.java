@@ -221,20 +221,20 @@ public class StdVideoAV1QuantizationFlags extends Struct<StdVideoAV1Quantization
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1QuantizationFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoAV1QuantizationFlags.BITFIELD0); }
     /** Unsafe version of {@link #using_qmatrix}. */
     public static int nusing_qmatrix(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #diff_uv_delta}. */
     public static int ndiff_uv_delta(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1QuantizationFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoAV1QuantizationFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x3F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1QuantizationFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoAV1QuantizationFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #using_qmatrix(boolean) using_qmatrix}. */
     public static void nusing_qmatrix(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #diff_uv_delta(boolean) diff_uv_delta}. */
     public static void ndiff_uv_delta(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1QuantizationFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoAV1QuantizationFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xC0_00_00_00) | (value & 0x3F_FF_FF_FF)); }
 
     // -----------------------------------

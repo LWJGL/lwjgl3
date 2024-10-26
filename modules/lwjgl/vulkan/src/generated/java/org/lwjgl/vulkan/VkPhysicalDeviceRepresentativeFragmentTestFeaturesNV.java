@@ -265,18 +265,18 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #representativeFragmentTest}. */
-    public static int nrepresentativeFragmentTest(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.REPRESENTATIVEFRAGMENTTEST); }
+    public static int nrepresentativeFragmentTest(long struct) { return memGetInt(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.REPRESENTATIVEFRAGMENTTEST); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #representativeFragmentTest(boolean) representativeFragmentTest}. */
-    public static void nrepresentativeFragmentTest(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.REPRESENTATIVEFRAGMENTTEST, value); }
+    public static void nrepresentativeFragmentTest(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.REPRESENTATIVEFRAGMENTTEST, value); }
 
     // -----------------------------------
 

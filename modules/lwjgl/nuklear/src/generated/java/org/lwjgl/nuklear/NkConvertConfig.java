@@ -335,17 +335,17 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #global_alpha}. */
-    public static float nglobal_alpha(long struct) { return UNSAFE.getFloat(null, struct + NkConvertConfig.GLOBAL_ALPHA); }
+    public static float nglobal_alpha(long struct) { return memGetFloat(struct + NkConvertConfig.GLOBAL_ALPHA); }
     /** Unsafe version of {@link #line_AA}. */
-    public static int nline_AA(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.LINE_AA); }
+    public static int nline_AA(long struct) { return memGetInt(struct + NkConvertConfig.LINE_AA); }
     /** Unsafe version of {@link #shape_AA}. */
-    public static int nshape_AA(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.SHAPE_AA); }
+    public static int nshape_AA(long struct) { return memGetInt(struct + NkConvertConfig.SHAPE_AA); }
     /** Unsafe version of {@link #circle_segment_count}. */
-    public static int ncircle_segment_count(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.CIRCLE_SEGMENT_COUNT); }
+    public static int ncircle_segment_count(long struct) { return memGetInt(struct + NkConvertConfig.CIRCLE_SEGMENT_COUNT); }
     /** Unsafe version of {@link #arc_segment_count}. */
-    public static int narc_segment_count(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.ARC_SEGMENT_COUNT); }
+    public static int narc_segment_count(long struct) { return memGetInt(struct + NkConvertConfig.ARC_SEGMENT_COUNT); }
     /** Unsafe version of {@link #curve_segment_count}. */
-    public static int ncurve_segment_count(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.CURVE_SEGMENT_COUNT); }
+    public static int ncurve_segment_count(long struct) { return memGetInt(struct + NkConvertConfig.CURVE_SEGMENT_COUNT); }
     /** Unsafe version of {@link #tex_null}. */
     public static NkDrawNullTexture ntex_null(long struct) { return NkDrawNullTexture.create(struct + NkConvertConfig.TEX_NULL); }
     /** Unsafe version of {@link #vertex_layout}. */
@@ -356,17 +356,17 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
     public static long nvertex_alignment(long struct) { return memGetAddress(struct + NkConvertConfig.VERTEX_ALIGNMENT); }
 
     /** Unsafe version of {@link #global_alpha(float) global_alpha}. */
-    public static void nglobal_alpha(long struct, float value) { UNSAFE.putFloat(null, struct + NkConvertConfig.GLOBAL_ALPHA, value); }
+    public static void nglobal_alpha(long struct, float value) { memPutFloat(struct + NkConvertConfig.GLOBAL_ALPHA, value); }
     /** Unsafe version of {@link #line_AA(int) line_AA}. */
-    public static void nline_AA(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.LINE_AA, value); }
+    public static void nline_AA(long struct, int value) { memPutInt(struct + NkConvertConfig.LINE_AA, value); }
     /** Unsafe version of {@link #shape_AA(int) shape_AA}. */
-    public static void nshape_AA(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.SHAPE_AA, value); }
+    public static void nshape_AA(long struct, int value) { memPutInt(struct + NkConvertConfig.SHAPE_AA, value); }
     /** Unsafe version of {@link #circle_segment_count(int) circle_segment_count}. */
-    public static void ncircle_segment_count(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.CIRCLE_SEGMENT_COUNT, value); }
+    public static void ncircle_segment_count(long struct, int value) { memPutInt(struct + NkConvertConfig.CIRCLE_SEGMENT_COUNT, value); }
     /** Unsafe version of {@link #arc_segment_count(int) arc_segment_count}. */
-    public static void narc_segment_count(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.ARC_SEGMENT_COUNT, value); }
+    public static void narc_segment_count(long struct, int value) { memPutInt(struct + NkConvertConfig.ARC_SEGMENT_COUNT, value); }
     /** Unsafe version of {@link #curve_segment_count(int) curve_segment_count}. */
-    public static void ncurve_segment_count(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.CURVE_SEGMENT_COUNT, value); }
+    public static void ncurve_segment_count(long struct, int value) { memPutInt(struct + NkConvertConfig.CURVE_SEGMENT_COUNT, value); }
     /** Unsafe version of {@link #tex_null(NkDrawNullTexture) tex_null}. */
     public static void ntex_null(long struct, NkDrawNullTexture value) { memCopy(value.address(), struct + NkConvertConfig.TEX_NULL, NkDrawNullTexture.SIZEOF); }
     /** Unsafe version of {@link #vertex_layout(NkDrawVertexLayoutElement.Buffer) vertex_layout}. */

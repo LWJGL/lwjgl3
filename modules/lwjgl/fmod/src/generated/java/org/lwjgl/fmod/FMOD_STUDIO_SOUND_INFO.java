@@ -250,20 +250,20 @@ public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> imple
     /** Unsafe version of {@link #name_or_data(int) name_or_data}. */
     public static ByteBuffer nname_or_data(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + FMOD_STUDIO_SOUND_INFO.NAME_OR_DATA), capacity); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_SOUND_INFO.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + FMOD_STUDIO_SOUND_INFO.MODE); }
     /** Unsafe version of {@link #exinfo}. */
     public static FMOD_CREATESOUNDEXINFO nexinfo(long struct) { return FMOD_CREATESOUNDEXINFO.create(struct + FMOD_STUDIO_SOUND_INFO.EXINFO); }
     /** Unsafe version of {@link #subsoundindex}. */
-    public static int nsubsoundindex(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_SOUND_INFO.SUBSOUNDINDEX); }
+    public static int nsubsoundindex(long struct) { return memGetInt(struct + FMOD_STUDIO_SOUND_INFO.SUBSOUNDINDEX); }
 
     /** Unsafe version of {@link #name_or_data(ByteBuffer) name_or_data}. */
     public static void nname_or_data(long struct, ByteBuffer value) { memPutAddress(struct + FMOD_STUDIO_SOUND_INFO.NAME_OR_DATA, memAddress(value)); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_SOUND_INFO.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + FMOD_STUDIO_SOUND_INFO.MODE, value); }
     /** Unsafe version of {@link #exinfo(FMOD_CREATESOUNDEXINFO) exinfo}. */
     public static void nexinfo(long struct, FMOD_CREATESOUNDEXINFO value) { memCopy(value.address(), struct + FMOD_STUDIO_SOUND_INFO.EXINFO, FMOD_CREATESOUNDEXINFO.SIZEOF); }
     /** Unsafe version of {@link #subsoundindex(int) subsoundindex}. */
-    public static void nsubsoundindex(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_SOUND_INFO.SUBSOUNDINDEX, value); }
+    public static void nsubsoundindex(long struct, int value) { memPutInt(struct + FMOD_STUDIO_SOUND_INFO.SUBSOUNDINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

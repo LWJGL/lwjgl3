@@ -210,10 +210,10 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct<VkBindShaderGroup
     // -----------------------------------
 
     /** Unsafe version of {@link #groupIndex}. */
-    public static int ngroupIndex(long struct) { return UNSAFE.getInt(null, struct + VkBindShaderGroupIndirectCommandNV.GROUPINDEX); }
+    public static int ngroupIndex(long struct) { return memGetInt(struct + VkBindShaderGroupIndirectCommandNV.GROUPINDEX); }
 
     /** Unsafe version of {@link #groupIndex(int) groupIndex}. */
-    public static void ngroupIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBindShaderGroupIndirectCommandNV.GROUPINDEX, value); }
+    public static void ngroupIndex(long struct, int value) { memPutInt(struct + VkBindShaderGroupIndirectCommandNV.GROUPINDEX, value); }
 
     // -----------------------------------
 

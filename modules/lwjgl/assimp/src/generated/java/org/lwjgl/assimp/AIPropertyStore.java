@@ -223,10 +223,10 @@ public class AIPropertyStore extends Struct<AIPropertyStore> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #sentinel}. */
-    public static byte nsentinel(long struct) { return UNSAFE.getByte(null, struct + AIPropertyStore.SENTINEL); }
+    public static byte nsentinel(long struct) { return memGetByte(struct + AIPropertyStore.SENTINEL); }
 
     /** Unsafe version of {@link #sentinel(byte) sentinel}. */
-    public static void nsentinel(long struct, byte value) { UNSAFE.putByte(null, struct + AIPropertyStore.SENTINEL, value); }
+    public static void nsentinel(long struct, byte value) { memPutByte(struct + AIPropertyStore.SENTINEL, value); }
 
     // -----------------------------------
 

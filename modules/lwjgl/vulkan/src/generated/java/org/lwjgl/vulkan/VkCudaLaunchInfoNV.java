@@ -391,25 +391,25 @@ public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCudaLaunchInfoNV.PNEXT); }
     /** Unsafe version of {@link #function}. */
-    public static long nfunction(long struct) { return UNSAFE.getLong(null, struct + VkCudaLaunchInfoNV.FUNCTION); }
+    public static long nfunction(long struct) { return memGetLong(struct + VkCudaLaunchInfoNV.FUNCTION); }
     /** Unsafe version of {@link #gridDimX}. */
-    public static int ngridDimX(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMX); }
+    public static int ngridDimX(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.GRIDDIMX); }
     /** Unsafe version of {@link #gridDimY}. */
-    public static int ngridDimY(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMY); }
+    public static int ngridDimY(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.GRIDDIMY); }
     /** Unsafe version of {@link #gridDimZ}. */
-    public static int ngridDimZ(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMZ); }
+    public static int ngridDimZ(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.GRIDDIMZ); }
     /** Unsafe version of {@link #blockDimX}. */
-    public static int nblockDimX(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMX); }
+    public static int nblockDimX(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.BLOCKDIMX); }
     /** Unsafe version of {@link #blockDimY}. */
-    public static int nblockDimY(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMY); }
+    public static int nblockDimY(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.BLOCKDIMY); }
     /** Unsafe version of {@link #blockDimZ}. */
-    public static int nblockDimZ(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMZ); }
+    public static int nblockDimZ(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.BLOCKDIMZ); }
     /** Unsafe version of {@link #sharedMemBytes}. */
-    public static int nsharedMemBytes(long struct) { return UNSAFE.getInt(null, struct + VkCudaLaunchInfoNV.SHAREDMEMBYTES); }
+    public static int nsharedMemBytes(long struct) { return memGetInt(struct + VkCudaLaunchInfoNV.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #paramCount}. */
     public static long nparamCount(long struct) { return memGetAddress(struct + VkCudaLaunchInfoNV.PARAMCOUNT); }
     /** Unsafe version of {@link #pParams() pParams}. */
@@ -420,25 +420,25 @@ public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements Na
     @Nullable public static PointerBuffer npExtras(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkCudaLaunchInfoNV.PEXTRAS), (int)nextraCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCudaLaunchInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #function(long) function}. */
-    public static void nfunction(long struct, long value) { UNSAFE.putLong(null, struct + VkCudaLaunchInfoNV.FUNCTION, value); }
+    public static void nfunction(long struct, long value) { memPutLong(struct + VkCudaLaunchInfoNV.FUNCTION, value); }
     /** Unsafe version of {@link #gridDimX(int) gridDimX}. */
-    public static void ngridDimX(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMX, value); }
+    public static void ngridDimX(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.GRIDDIMX, value); }
     /** Unsafe version of {@link #gridDimY(int) gridDimY}. */
-    public static void ngridDimY(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMY, value); }
+    public static void ngridDimY(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.GRIDDIMY, value); }
     /** Unsafe version of {@link #gridDimZ(int) gridDimZ}. */
-    public static void ngridDimZ(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.GRIDDIMZ, value); }
+    public static void ngridDimZ(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.GRIDDIMZ, value); }
     /** Unsafe version of {@link #blockDimX(int) blockDimX}. */
-    public static void nblockDimX(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMX, value); }
+    public static void nblockDimX(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.BLOCKDIMX, value); }
     /** Unsafe version of {@link #blockDimY(int) blockDimY}. */
-    public static void nblockDimY(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMY, value); }
+    public static void nblockDimY(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.BLOCKDIMY, value); }
     /** Unsafe version of {@link #blockDimZ(int) blockDimZ}. */
-    public static void nblockDimZ(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.BLOCKDIMZ, value); }
+    public static void nblockDimZ(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.BLOCKDIMZ, value); }
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
-    public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + VkCudaLaunchInfoNV.SHAREDMEMBYTES, value); }
+    public static void nsharedMemBytes(long struct, int value) { memPutInt(struct + VkCudaLaunchInfoNV.SHAREDMEMBYTES, value); }
     /** Sets the specified value to the {@code paramCount} field of the specified {@code struct}. */
     public static void nparamCount(long struct, long value) { memPutAddress(struct + VkCudaLaunchInfoNV.PARAMCOUNT, value); }
     /** Unsafe version of {@link #pParams(PointerBuffer) pParams}. */

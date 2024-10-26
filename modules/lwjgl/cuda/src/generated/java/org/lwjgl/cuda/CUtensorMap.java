@@ -213,7 +213,7 @@ public class CUtensorMap extends Struct<CUtensorMap> implements NativeResource {
     public static LongBuffer nopaque(long struct) { return memLongBuffer(struct + CUtensorMap.OPAQUE, CU_TENSOR_MAP_NUM_QWORDS); }
     /** Unsafe version of {@link #opaque(int) opaque}. */
     public static long nopaque(long struct, int index) {
-        return UNSAFE.getLong(null, struct + CUtensorMap.OPAQUE + check(index, CU_TENSOR_MAP_NUM_QWORDS) * 8);
+        return memGetLong(struct + CUtensorMap.OPAQUE + check(index, CU_TENSOR_MAP_NUM_QWORDS) * 8);
     }
 
     /** Unsafe version of {@link #opaque(LongBuffer) opaque}. */
@@ -223,7 +223,7 @@ public class CUtensorMap extends Struct<CUtensorMap> implements NativeResource {
     }
     /** Unsafe version of {@link #opaque(int, long) opaque}. */
     public static void nopaque(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + CUtensorMap.OPAQUE + check(index, CU_TENSOR_MAP_NUM_QWORDS) * 8, value);
+        memPutLong(struct + CUtensorMap.OPAQUE + check(index, CU_TENSOR_MAP_NUM_QWORDS) * 8, value);
     }
 
     // -----------------------------------

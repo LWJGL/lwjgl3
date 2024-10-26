@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDynamicRenderingFeatures extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDynamicRenderingFeatures.PNEXT); }
     /** Unsafe version of {@link #dynamicRendering}. */
-    public static int ndynamicRendering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingFeatures.DYNAMICRENDERING); }
+    public static int ndynamicRendering(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingFeatures.DYNAMICRENDERING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDynamicRenderingFeatures.PNEXT, value); }
     /** Unsafe version of {@link #dynamicRendering(boolean) dynamicRendering}. */
-    public static void ndynamicRendering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingFeatures.DYNAMICRENDERING, value); }
+    public static void ndynamicRendering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingFeatures.DYNAMICRENDERING, value); }
 
     // -----------------------------------
 

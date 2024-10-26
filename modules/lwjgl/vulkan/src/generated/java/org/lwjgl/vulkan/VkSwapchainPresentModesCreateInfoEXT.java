@@ -260,20 +260,20 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct<VkSwapchainPres
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentModesCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentModesCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentModesCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #presentModeCount}. */
-    public static int npresentModeCount(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentModesCreateInfoEXT.PRESENTMODECOUNT); }
+    public static int npresentModeCount(long struct) { return memGetInt(struct + VkSwapchainPresentModesCreateInfoEXT.PRESENTMODECOUNT); }
     /** Unsafe version of {@link #pPresentModes() pPresentModes}. */
     public static IntBuffer npPresentModes(long struct) { return memIntBuffer(memGetAddress(struct + VkSwapchainPresentModesCreateInfoEXT.PPRESENTMODES), npresentModeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentModesCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentModesCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentModesCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code presentModeCount} field of the specified {@code struct}. */
-    public static void npresentModeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentModesCreateInfoEXT.PRESENTMODECOUNT, value); }
+    public static void npresentModeCount(long struct, int value) { memPutInt(struct + VkSwapchainPresentModesCreateInfoEXT.PRESENTMODECOUNT, value); }
     /** Unsafe version of {@link #pPresentModes(IntBuffer) pPresentModes}. */
     public static void npPresentModes(long struct, IntBuffer value) { memPutAddress(struct + VkSwapchainPresentModesCreateInfoEXT.PPRESENTMODES, memAddress(value)); npresentModeCount(struct, value.remaining()); }
 

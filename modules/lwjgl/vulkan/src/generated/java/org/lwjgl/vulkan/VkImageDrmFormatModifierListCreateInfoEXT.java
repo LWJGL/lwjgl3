@@ -277,20 +277,20 @@ public class VkImageDrmFormatModifierListCreateInfoEXT extends Struct<VkImageDrm
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageDrmFormatModifierListCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageDrmFormatModifierListCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageDrmFormatModifierListCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #drmFormatModifierCount}. */
-    public static int ndrmFormatModifierCount(long struct) { return UNSAFE.getInt(null, struct + VkImageDrmFormatModifierListCreateInfoEXT.DRMFORMATMODIFIERCOUNT); }
+    public static int ndrmFormatModifierCount(long struct) { return memGetInt(struct + VkImageDrmFormatModifierListCreateInfoEXT.DRMFORMATMODIFIERCOUNT); }
     /** Unsafe version of {@link #pDrmFormatModifiers() pDrmFormatModifiers}. */
     public static LongBuffer npDrmFormatModifiers(long struct) { return memLongBuffer(memGetAddress(struct + VkImageDrmFormatModifierListCreateInfoEXT.PDRMFORMATMODIFIERS), ndrmFormatModifierCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierListCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageDrmFormatModifierListCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageDrmFormatModifierListCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code drmFormatModifierCount} field of the specified {@code struct}. */
-    public static void ndrmFormatModifierCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierListCreateInfoEXT.DRMFORMATMODIFIERCOUNT, value); }
+    public static void ndrmFormatModifierCount(long struct, int value) { memPutInt(struct + VkImageDrmFormatModifierListCreateInfoEXT.DRMFORMATMODIFIERCOUNT, value); }
     /** Unsafe version of {@link #pDrmFormatModifiers(LongBuffer) pDrmFormatModifiers}. */
     public static void npDrmFormatModifiers(long struct, LongBuffer value) { memPutAddress(struct + VkImageDrmFormatModifierListCreateInfoEXT.PDRMFORMATMODIFIERS, memAddress(value)); ndrmFormatModifierCount(struct, value.remaining()); }
 

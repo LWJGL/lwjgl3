@@ -190,9 +190,9 @@ public class AITexture extends Struct<AITexture> {
     // -----------------------------------
 
     /** Unsafe version of {@link #mWidth}. */
-    public static int nmWidth(long struct) { return UNSAFE.getInt(null, struct + AITexture.MWIDTH); }
+    public static int nmWidth(long struct) { return memGetInt(struct + AITexture.MWIDTH); }
     /** Unsafe version of {@link #mHeight}. */
-    public static int nmHeight(long struct) { return UNSAFE.getInt(null, struct + AITexture.MHEIGHT); }
+    public static int nmHeight(long struct) { return memGetInt(struct + AITexture.MHEIGHT); }
     /** Unsafe version of {@link #achFormatHint}. */
     public static ByteBuffer nachFormatHint(long struct) { return memByteBuffer(struct + AITexture.ACHFORMATHINT, 9); }
     /** Unsafe version of {@link #achFormatHintString}. */

@@ -290,26 +290,26 @@ public class VkCommandBufferAllocateInfo extends Struct<VkCommandBufferAllocateI
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferAllocateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferAllocateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferAllocateInfo.PNEXT); }
     /** Unsafe version of {@link #commandPool}. */
-    public static long ncommandPool(long struct) { return UNSAFE.getLong(null, struct + VkCommandBufferAllocateInfo.COMMANDPOOL); }
+    public static long ncommandPool(long struct) { return memGetLong(struct + VkCommandBufferAllocateInfo.COMMANDPOOL); }
     /** Unsafe version of {@link #level}. */
-    public static int nlevel(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferAllocateInfo.LEVEL); }
+    public static int nlevel(long struct) { return memGetInt(struct + VkCommandBufferAllocateInfo.LEVEL); }
     /** Unsafe version of {@link #commandBufferCount}. */
-    public static int ncommandBufferCount(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferAllocateInfo.COMMANDBUFFERCOUNT); }
+    public static int ncommandBufferCount(long struct) { return memGetInt(struct + VkCommandBufferAllocateInfo.COMMANDBUFFERCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferAllocateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferAllocateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferAllocateInfo.PNEXT, value); }
     /** Unsafe version of {@link #commandPool(long) commandPool}. */
-    public static void ncommandPool(long struct, long value) { UNSAFE.putLong(null, struct + VkCommandBufferAllocateInfo.COMMANDPOOL, value); }
+    public static void ncommandPool(long struct, long value) { memPutLong(struct + VkCommandBufferAllocateInfo.COMMANDPOOL, value); }
     /** Unsafe version of {@link #level(int) level}. */
-    public static void nlevel(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferAllocateInfo.LEVEL, value); }
+    public static void nlevel(long struct, int value) { memPutInt(struct + VkCommandBufferAllocateInfo.LEVEL, value); }
     /** Unsafe version of {@link #commandBufferCount(int) commandBufferCount}. */
-    public static void ncommandBufferCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferAllocateInfo.COMMANDBUFFERCOUNT, value); }
+    public static void ncommandBufferCount(long struct, int value) { memPutInt(struct + VkCommandBufferAllocateInfo.COMMANDBUFFERCOUNT, value); }
 
     // -----------------------------------
 

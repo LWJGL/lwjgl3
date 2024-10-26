@@ -244,14 +244,14 @@ public class VkViewportWScalingNV extends Struct<VkViewportWScalingNV> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #xcoeff}. */
-    public static float nxcoeff(long struct) { return UNSAFE.getFloat(null, struct + VkViewportWScalingNV.XCOEFF); }
+    public static float nxcoeff(long struct) { return memGetFloat(struct + VkViewportWScalingNV.XCOEFF); }
     /** Unsafe version of {@link #ycoeff}. */
-    public static float nycoeff(long struct) { return UNSAFE.getFloat(null, struct + VkViewportWScalingNV.YCOEFF); }
+    public static float nycoeff(long struct) { return memGetFloat(struct + VkViewportWScalingNV.YCOEFF); }
 
     /** Unsafe version of {@link #xcoeff(float) xcoeff}. */
-    public static void nxcoeff(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewportWScalingNV.XCOEFF, value); }
+    public static void nxcoeff(long struct, float value) { memPutFloat(struct + VkViewportWScalingNV.XCOEFF, value); }
     /** Unsafe version of {@link #ycoeff(float) ycoeff}. */
-    public static void nycoeff(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewportWScalingNV.YCOEFF, value); }
+    public static void nycoeff(long struct, float value) { memPutFloat(struct + VkViewportWScalingNV.YCOEFF, value); }
 
     // -----------------------------------
 

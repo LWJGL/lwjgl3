@@ -250,18 +250,18 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineLibraryCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGraphicsPipelineLibraryCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGraphicsPipelineLibraryCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineLibraryCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkGraphicsPipelineLibraryCreateInfoEXT.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineLibraryCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGraphicsPipelineLibraryCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGraphicsPipelineLibraryCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineLibraryCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkGraphicsPipelineLibraryCreateInfoEXT.FLAGS, value); }
 
     // -----------------------------------
 

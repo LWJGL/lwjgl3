@@ -374,32 +374,32 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLayoutCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineLayoutCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLayoutCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.FLAGS); }
     /** Unsafe version of {@link #setLayoutCount}. */
-    public static int nsetLayoutCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLayoutCreateInfo.SETLAYOUTCOUNT); }
+    public static int nsetLayoutCount(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.SETLAYOUTCOUNT); }
     /** Unsafe version of {@link #pSetLayouts() pSetLayouts}. */
     @Nullable public static LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PSETLAYOUTS), nsetLayoutCount(struct)); }
     /** Unsafe version of {@link #pushConstantRangeCount}. */
-    public static int npushConstantRangeCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT); }
+    public static int npushConstantRangeCount(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT); }
     /** Unsafe version of {@link #pPushConstantRanges}. */
     @Nullable public static VkPushConstantRange.Buffer npPushConstantRanges(long struct) { return VkPushConstantRange.createSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES), npushConstantRangeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLayoutCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineLayoutCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLayoutCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code setLayoutCount} field of the specified {@code struct}. */
-    public static void nsetLayoutCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLayoutCreateInfo.SETLAYOUTCOUNT, value); }
+    public static void nsetLayoutCount(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.SETLAYOUTCOUNT, value); }
     /** Unsafe version of {@link #pSetLayouts(LongBuffer) pSetLayouts}. */
     public static void npSetLayouts(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkPipelineLayoutCreateInfo.PSETLAYOUTS, memAddressSafe(value)); if (value != null) { nsetLayoutCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code pushConstantRangeCount} field of the specified {@code struct}. */
-    public static void npushConstantRangeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT, value); }
+    public static void npushConstantRangeCount(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT, value); }
     /** Unsafe version of {@link #pPushConstantRanges(VkPushConstantRange.Buffer) pPushConstantRanges}. */
     public static void npPushConstantRanges(long struct, @Nullable VkPushConstantRange.Buffer value) { memPutAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES, memAddressSafe(value)); npushConstantRangeCount(struct, value == null ? 0 : value.remaining()); }
 

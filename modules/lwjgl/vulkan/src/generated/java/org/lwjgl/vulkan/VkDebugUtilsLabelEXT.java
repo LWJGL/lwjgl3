@@ -286,7 +286,7 @@ public class VkDebugUtilsLabelEXT extends Struct<VkDebugUtilsLabelEXT> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsLabelEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugUtilsLabelEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugUtilsLabelEXT.PNEXT); }
     /** Unsafe version of {@link #pLabelName}. */
@@ -297,11 +297,11 @@ public class VkDebugUtilsLabelEXT extends Struct<VkDebugUtilsLabelEXT> implement
     public static FloatBuffer ncolor(long struct) { return memFloatBuffer(struct + VkDebugUtilsLabelEXT.COLOR, 4); }
     /** Unsafe version of {@link #color(int) color}. */
     public static float ncolor(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VkDebugUtilsLabelEXT.COLOR + check(index, 4) * 4);
+        return memGetFloat(struct + VkDebugUtilsLabelEXT.COLOR + check(index, 4) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsLabelEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugUtilsLabelEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugUtilsLabelEXT.PNEXT, value); }
     /** Unsafe version of {@link #pLabelName(ByteBuffer) pLabelName}. */
@@ -316,7 +316,7 @@ public class VkDebugUtilsLabelEXT extends Struct<VkDebugUtilsLabelEXT> implement
     }
     /** Unsafe version of {@link #color(int, float) color}. */
     public static void ncolor(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + VkDebugUtilsLabelEXT.COLOR + check(index, 4) * 4, value);
+        memPutFloat(struct + VkDebugUtilsLabelEXT.COLOR + check(index, 4) * 4, value);
     }
 
     /**

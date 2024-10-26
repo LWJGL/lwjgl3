@@ -380,46 +380,46 @@ public class VkSubpassDependency2 extends Struct<VkSubpassDependency2> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassDependency2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDependency2.PNEXT); }
     /** Unsafe version of {@link #srcSubpass}. */
-    public static int nsrcSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.SRCSUBPASS); }
+    public static int nsrcSubpass(long struct) { return memGetInt(struct + VkSubpassDependency2.SRCSUBPASS); }
     /** Unsafe version of {@link #dstSubpass}. */
-    public static int ndstSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.DSTSUBPASS); }
+    public static int ndstSubpass(long struct) { return memGetInt(struct + VkSubpassDependency2.DSTSUBPASS); }
     /** Unsafe version of {@link #srcStageMask}. */
-    public static int nsrcStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.SRCSTAGEMASK); }
+    public static int nsrcStageMask(long struct) { return memGetInt(struct + VkSubpassDependency2.SRCSTAGEMASK); }
     /** Unsafe version of {@link #dstStageMask}. */
-    public static int ndstStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.DSTSTAGEMASK); }
+    public static int ndstStageMask(long struct) { return memGetInt(struct + VkSubpassDependency2.DSTSTAGEMASK); }
     /** Unsafe version of {@link #srcAccessMask}. */
-    public static int nsrcAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.SRCACCESSMASK); }
+    public static int nsrcAccessMask(long struct) { return memGetInt(struct + VkSubpassDependency2.SRCACCESSMASK); }
     /** Unsafe version of {@link #dstAccessMask}. */
-    public static int ndstAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.DSTACCESSMASK); }
+    public static int ndstAccessMask(long struct) { return memGetInt(struct + VkSubpassDependency2.DSTACCESSMASK); }
     /** Unsafe version of {@link #dependencyFlags}. */
-    public static int ndependencyFlags(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.DEPENDENCYFLAGS); }
+    public static int ndependencyFlags(long struct) { return memGetInt(struct + VkSubpassDependency2.DEPENDENCYFLAGS); }
     /** Unsafe version of {@link #viewOffset}. */
-    public static int nviewOffset(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2.VIEWOFFSET); }
+    public static int nviewOffset(long struct) { return memGetInt(struct + VkSubpassDependency2.VIEWOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassDependency2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDependency2.PNEXT, value); }
     /** Unsafe version of {@link #srcSubpass(int) srcSubpass}. */
-    public static void nsrcSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.SRCSUBPASS, value); }
+    public static void nsrcSubpass(long struct, int value) { memPutInt(struct + VkSubpassDependency2.SRCSUBPASS, value); }
     /** Unsafe version of {@link #dstSubpass(int) dstSubpass}. */
-    public static void ndstSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.DSTSUBPASS, value); }
+    public static void ndstSubpass(long struct, int value) { memPutInt(struct + VkSubpassDependency2.DSTSUBPASS, value); }
     /** Unsafe version of {@link #srcStageMask(int) srcStageMask}. */
-    public static void nsrcStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.SRCSTAGEMASK, value); }
+    public static void nsrcStageMask(long struct, int value) { memPutInt(struct + VkSubpassDependency2.SRCSTAGEMASK, value); }
     /** Unsafe version of {@link #dstStageMask(int) dstStageMask}. */
-    public static void ndstStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.DSTSTAGEMASK, value); }
+    public static void ndstStageMask(long struct, int value) { memPutInt(struct + VkSubpassDependency2.DSTSTAGEMASK, value); }
     /** Unsafe version of {@link #srcAccessMask(int) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.SRCACCESSMASK, value); }
+    public static void nsrcAccessMask(long struct, int value) { memPutInt(struct + VkSubpassDependency2.SRCACCESSMASK, value); }
     /** Unsafe version of {@link #dstAccessMask(int) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.DSTACCESSMASK, value); }
+    public static void ndstAccessMask(long struct, int value) { memPutInt(struct + VkSubpassDependency2.DSTACCESSMASK, value); }
     /** Unsafe version of {@link #dependencyFlags(int) dependencyFlags}. */
-    public static void ndependencyFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.DEPENDENCYFLAGS, value); }
+    public static void ndependencyFlags(long struct, int value) { memPutInt(struct + VkSubpassDependency2.DEPENDENCYFLAGS, value); }
     /** Unsafe version of {@link #viewOffset(int) viewOffset}. */
-    public static void nviewOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2.VIEWOFFSET, value); }
+    public static void nviewOffset(long struct, int value) { memPutInt(struct + VkSubpassDependency2.VIEWOFFSET, value); }
 
     // -----------------------------------
 

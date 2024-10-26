@@ -264,20 +264,20 @@ public class VkPipelineBinaryHandlesInfoKHR extends Struct<VkPipelineBinaryHandl
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineBinaryHandlesInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineBinaryHandlesInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineBinaryHandlesInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pipelineBinaryCount}. */
-    public static int npipelineBinaryCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineBinaryHandlesInfoKHR.PIPELINEBINARYCOUNT); }
+    public static int npipelineBinaryCount(long struct) { return memGetInt(struct + VkPipelineBinaryHandlesInfoKHR.PIPELINEBINARYCOUNT); }
     /** Unsafe version of {@link #pPipelineBinaries() pPipelineBinaries}. */
     @Nullable public static LongBuffer npPipelineBinaries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineBinaryHandlesInfoKHR.PPIPELINEBINARIES), npipelineBinaryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineBinaryHandlesInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineBinaryHandlesInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineBinaryHandlesInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code pipelineBinaryCount} field of the specified {@code struct}. */
-    public static void npipelineBinaryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineBinaryHandlesInfoKHR.PIPELINEBINARYCOUNT, value); }
+    public static void npipelineBinaryCount(long struct, int value) { memPutInt(struct + VkPipelineBinaryHandlesInfoKHR.PIPELINEBINARYCOUNT, value); }
     /** Unsafe version of {@link #pPipelineBinaries(LongBuffer) pPipelineBinaries}. */
     public static void npPipelineBinaries(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkPipelineBinaryHandlesInfoKHR.PPIPELINEBINARIES, memAddressSafe(value)); if (value != null) { npipelineBinaryCount(struct, value.remaining()); } }
 

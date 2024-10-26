@@ -267,20 +267,20 @@ public class VkPhysicalDeviceTexelBufferAlignmentProperties extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.PNEXT); }
     /** Unsafe version of {@link #storageTexelBufferOffsetAlignmentBytes}. */
-    public static long nstorageTexelBufferOffsetAlignmentBytes(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STORAGETEXELBUFFEROFFSETALIGNMENTBYTES); }
+    public static long nstorageTexelBufferOffsetAlignmentBytes(long struct) { return memGetLong(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STORAGETEXELBUFFEROFFSETALIGNMENTBYTES); }
     /** Unsafe version of {@link #storageTexelBufferOffsetSingleTexelAlignment}. */
-    public static int nstorageTexelBufferOffsetSingleTexelAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
+    public static int nstorageTexelBufferOffsetSingleTexelAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
     /** Unsafe version of {@link #uniformTexelBufferOffsetAlignmentBytes}. */
-    public static long nuniformTexelBufferOffsetAlignmentBytes(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES); }
+    public static long nuniformTexelBufferOffsetAlignmentBytes(long struct) { return memGetLong(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES); }
     /** Unsafe version of {@link #uniformTexelBufferOffsetSingleTexelAlignment}. */
-    public static int nuniformTexelBufferOffsetSingleTexelAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
+    public static int nuniformTexelBufferOffsetSingleTexelAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTexelBufferAlignmentProperties.PNEXT, value); }
 

@@ -324,32 +324,32 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxTransformFeedbackStreams}. */
-    public static int nmaxTransformFeedbackStreams(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKSTREAMS); }
+    public static int nmaxTransformFeedbackStreams(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKSTREAMS); }
     /** Unsafe version of {@link #maxTransformFeedbackBuffers}. */
-    public static int nmaxTransformFeedbackBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERS); }
+    public static int nmaxTransformFeedbackBuffers(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERS); }
     /** Unsafe version of {@link #maxTransformFeedbackBufferSize}. */
-    public static long nmaxTransformFeedbackBufferSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERSIZE); }
+    public static long nmaxTransformFeedbackBufferSize(long struct) { return memGetLong(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERSIZE); }
     /** Unsafe version of {@link #maxTransformFeedbackStreamDataSize}. */
-    public static int nmaxTransformFeedbackStreamDataSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKSTREAMDATASIZE); }
+    public static int nmaxTransformFeedbackStreamDataSize(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKSTREAMDATASIZE); }
     /** Unsafe version of {@link #maxTransformFeedbackBufferDataSize}. */
-    public static int nmaxTransformFeedbackBufferDataSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERDATASIZE); }
+    public static int nmaxTransformFeedbackBufferDataSize(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERDATASIZE); }
     /** Unsafe version of {@link #maxTransformFeedbackBufferDataStride}. */
-    public static int nmaxTransformFeedbackBufferDataStride(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERDATASTRIDE); }
+    public static int nmaxTransformFeedbackBufferDataStride(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.MAXTRANSFORMFEEDBACKBUFFERDATASTRIDE); }
     /** Unsafe version of {@link #transformFeedbackQueries}. */
-    public static int ntransformFeedbackQueries(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKQUERIES); }
+    public static int ntransformFeedbackQueries(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKQUERIES); }
     /** Unsafe version of {@link #transformFeedbackStreamsLinesTriangles}. */
-    public static int ntransformFeedbackStreamsLinesTriangles(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKSTREAMSLINESTRIANGLES); }
+    public static int ntransformFeedbackStreamsLinesTriangles(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKSTREAMSLINESTRIANGLES); }
     /** Unsafe version of {@link #transformFeedbackRasterizationStreamSelect}. */
-    public static int ntransformFeedbackRasterizationStreamSelect(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKRASTERIZATIONSTREAMSELECT); }
+    public static int ntransformFeedbackRasterizationStreamSelect(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKRASTERIZATIONSTREAMSELECT); }
     /** Unsafe version of {@link #transformFeedbackDraw}. */
-    public static int ntransformFeedbackDraw(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKDRAW); }
+    public static int ntransformFeedbackDraw(long struct) { return memGetInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.TRANSFORMFEEDBACKDRAW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTransformFeedbackPropertiesEXT.PNEXT, value); }
 

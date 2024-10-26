@@ -214,7 +214,7 @@ public class CXFileUniqueID extends Struct<CXFileUniqueID> implements NativeReso
     public static LongBuffer ndata(long struct) { return memLongBuffer(struct + CXFileUniqueID.DATA, 3); }
     /** Unsafe version of {@link #data(int) data}. */
     public static long ndata(long struct, int index) {
-        return UNSAFE.getLong(null, struct + CXFileUniqueID.DATA + check(index, 3) * 8);
+        return memGetLong(struct + CXFileUniqueID.DATA + check(index, 3) * 8);
     }
 
     // -----------------------------------

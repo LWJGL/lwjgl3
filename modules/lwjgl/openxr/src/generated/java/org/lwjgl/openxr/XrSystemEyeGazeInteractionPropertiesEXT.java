@@ -240,14 +240,14 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct<XrSystemEyeG
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemEyeGazeInteractionPropertiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemEyeGazeInteractionPropertiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemEyeGazeInteractionPropertiesEXT.NEXT); }
     /** Unsafe version of {@link #supportsEyeGazeInteraction}. */
-    public static int nsupportsEyeGazeInteraction(long struct) { return UNSAFE.getInt(null, struct + XrSystemEyeGazeInteractionPropertiesEXT.SUPPORTSEYEGAZEINTERACTION); }
+    public static int nsupportsEyeGazeInteraction(long struct) { return memGetInt(struct + XrSystemEyeGazeInteractionPropertiesEXT.SUPPORTSEYEGAZEINTERACTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemEyeGazeInteractionPropertiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemEyeGazeInteractionPropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemEyeGazeInteractionPropertiesEXT.NEXT, value); }
 

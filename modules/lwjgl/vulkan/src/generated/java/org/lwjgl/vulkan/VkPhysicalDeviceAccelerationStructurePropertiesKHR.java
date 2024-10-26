@@ -295,28 +295,28 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #maxGeometryCount}. */
-    public static long nmaxGeometryCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXGEOMETRYCOUNT); }
+    public static long nmaxGeometryCount(long struct) { return memGetLong(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXGEOMETRYCOUNT); }
     /** Unsafe version of {@link #maxInstanceCount}. */
-    public static long nmaxInstanceCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXINSTANCECOUNT); }
+    public static long nmaxInstanceCount(long struct) { return memGetLong(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXINSTANCECOUNT); }
     /** Unsafe version of {@link #maxPrimitiveCount}. */
-    public static long nmaxPrimitiveCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPRIMITIVECOUNT); }
+    public static long nmaxPrimitiveCount(long struct) { return memGetLong(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPRIMITIVECOUNT); }
     /** Unsafe version of {@link #maxPerStageDescriptorAccelerationStructures}. */
-    public static int nmaxPerStageDescriptorAccelerationStructures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPERSTAGEDESCRIPTORACCELERATIONSTRUCTURES); }
+    public static int nmaxPerStageDescriptorAccelerationStructures(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPERSTAGEDESCRIPTORACCELERATIONSTRUCTURES); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindAccelerationStructures}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindAccelerationStructures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDACCELERATIONSTRUCTURES); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindAccelerationStructures(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDACCELERATIONSTRUCTURES); }
     /** Unsafe version of {@link #maxDescriptorSetAccelerationStructures}. */
-    public static int nmaxDescriptorSetAccelerationStructures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXDESCRIPTORSETACCELERATIONSTRUCTURES); }
+    public static int nmaxDescriptorSetAccelerationStructures(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXDESCRIPTORSETACCELERATIONSTRUCTURES); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindAccelerationStructures}. */
-    public static int nmaxDescriptorSetUpdateAfterBindAccelerationStructures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXDESCRIPTORSETUPDATEAFTERBINDACCELERATIONSTRUCTURES); }
+    public static int nmaxDescriptorSetUpdateAfterBindAccelerationStructures(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MAXDESCRIPTORSETUPDATEAFTERBINDACCELERATIONSTRUCTURES); }
     /** Unsafe version of {@link #minAccelerationStructureScratchOffsetAlignment}. */
-    public static int nminAccelerationStructureScratchOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MINACCELERATIONSTRUCTURESCRATCHOFFSETALIGNMENT); }
+    public static int nminAccelerationStructureScratchOffsetAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.MINACCELERATIONSTRUCTURESCRATCHOFFSETALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceAccelerationStructurePropertiesKHR.PNEXT, value); }
 

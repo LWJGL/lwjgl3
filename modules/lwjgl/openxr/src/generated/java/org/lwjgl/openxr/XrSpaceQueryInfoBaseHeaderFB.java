@@ -245,12 +245,12 @@ public class XrSpaceQueryInfoBaseHeaderFB extends Struct<XrSpaceQueryInfoBaseHea
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceQueryInfoBaseHeaderFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceQueryInfoBaseHeaderFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceQueryInfoBaseHeaderFB.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceQueryInfoBaseHeaderFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceQueryInfoBaseHeaderFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceQueryInfoBaseHeaderFB.NEXT, value); }
 

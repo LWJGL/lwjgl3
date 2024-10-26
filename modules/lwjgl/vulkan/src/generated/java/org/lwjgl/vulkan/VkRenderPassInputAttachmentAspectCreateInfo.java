@@ -281,20 +281,20 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct<VkRender
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassInputAttachmentAspectCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassInputAttachmentAspectCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassInputAttachmentAspectCreateInfo.PNEXT); }
     /** Unsafe version of {@link #aspectReferenceCount}. */
-    public static int naspectReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassInputAttachmentAspectCreateInfo.ASPECTREFERENCECOUNT); }
+    public static int naspectReferenceCount(long struct) { return memGetInt(struct + VkRenderPassInputAttachmentAspectCreateInfo.ASPECTREFERENCECOUNT); }
     /** Unsafe version of {@link #pAspectReferences}. */
     public static VkInputAttachmentAspectReference.Buffer npAspectReferences(long struct) { return VkInputAttachmentAspectReference.create(memGetAddress(struct + VkRenderPassInputAttachmentAspectCreateInfo.PASPECTREFERENCES), naspectReferenceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassInputAttachmentAspectCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassInputAttachmentAspectCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassInputAttachmentAspectCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code aspectReferenceCount} field of the specified {@code struct}. */
-    public static void naspectReferenceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassInputAttachmentAspectCreateInfo.ASPECTREFERENCECOUNT, value); }
+    public static void naspectReferenceCount(long struct, int value) { memPutInt(struct + VkRenderPassInputAttachmentAspectCreateInfo.ASPECTREFERENCECOUNT, value); }
     /** Unsafe version of {@link #pAspectReferences(VkInputAttachmentAspectReference.Buffer) pAspectReferences}. */
     public static void npAspectReferences(long struct, VkInputAttachmentAspectReference.Buffer value) { memPutAddress(struct + VkRenderPassInputAttachmentAspectCreateInfo.PASPECTREFERENCES, value.address()); naspectReferenceCount(struct, value.remaining()); }
 

@@ -249,18 +249,18 @@ public class ZSTDFrameParameters extends Struct<ZSTDFrameParameters> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #contentSizeFlag}. */
-    public static int ncontentSizeFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameParameters.CONTENTSIZEFLAG); }
+    public static int ncontentSizeFlag(long struct) { return memGetInt(struct + ZSTDFrameParameters.CONTENTSIZEFLAG); }
     /** Unsafe version of {@link #checksumFlag}. */
-    public static int nchecksumFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameParameters.CHECKSUMFLAG); }
+    public static int nchecksumFlag(long struct) { return memGetInt(struct + ZSTDFrameParameters.CHECKSUMFLAG); }
     /** Unsafe version of {@link #noDictIDFlag}. */
-    public static int nnoDictIDFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameParameters.NODICTIDFLAG); }
+    public static int nnoDictIDFlag(long struct) { return memGetInt(struct + ZSTDFrameParameters.NODICTIDFLAG); }
 
     /** Unsafe version of {@link #contentSizeFlag(int) contentSizeFlag}. */
-    public static void ncontentSizeFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.CONTENTSIZEFLAG, value); }
+    public static void ncontentSizeFlag(long struct, int value) { memPutInt(struct + ZSTDFrameParameters.CONTENTSIZEFLAG, value); }
     /** Unsafe version of {@link #checksumFlag(int) checksumFlag}. */
-    public static void nchecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.CHECKSUMFLAG, value); }
+    public static void nchecksumFlag(long struct, int value) { memPutInt(struct + ZSTDFrameParameters.CHECKSUMFLAG, value); }
     /** Unsafe version of {@link #noDictIDFlag(int) noDictIDFlag}. */
-    public static void nnoDictIDFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.NODICTIDFLAG, value); }
+    public static void nnoDictIDFlag(long struct, int value) { memPutInt(struct + ZSTDFrameParameters.NODICTIDFLAG, value); }
 
     // -----------------------------------
 

@@ -328,15 +328,15 @@ public class VkMemoryToImageCopyEXT extends Struct<VkMemoryToImageCopyEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryToImageCopyEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryToImageCopyEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryToImageCopyEXT.PNEXT); }
     /** Unsafe version of {@link #pHostPointer}. */
     public static long npHostPointer(long struct) { return memGetAddress(struct + VkMemoryToImageCopyEXT.PHOSTPOINTER); }
     /** Unsafe version of {@link #memoryRowLength}. */
-    public static int nmemoryRowLength(long struct) { return UNSAFE.getInt(null, struct + VkMemoryToImageCopyEXT.MEMORYROWLENGTH); }
+    public static int nmemoryRowLength(long struct) { return memGetInt(struct + VkMemoryToImageCopyEXT.MEMORYROWLENGTH); }
     /** Unsafe version of {@link #memoryImageHeight}. */
-    public static int nmemoryImageHeight(long struct) { return UNSAFE.getInt(null, struct + VkMemoryToImageCopyEXT.MEMORYIMAGEHEIGHT); }
+    public static int nmemoryImageHeight(long struct) { return memGetInt(struct + VkMemoryToImageCopyEXT.MEMORYIMAGEHEIGHT); }
     /** Unsafe version of {@link #imageSubresource}. */
     public static VkImageSubresourceLayers nimageSubresource(long struct) { return VkImageSubresourceLayers.create(struct + VkMemoryToImageCopyEXT.IMAGESUBRESOURCE); }
     /** Unsafe version of {@link #imageOffset}. */
@@ -345,15 +345,15 @@ public class VkMemoryToImageCopyEXT extends Struct<VkMemoryToImageCopyEXT> imple
     public static VkExtent3D nimageExtent(long struct) { return VkExtent3D.create(struct + VkMemoryToImageCopyEXT.IMAGEEXTENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryToImageCopyEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryToImageCopyEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryToImageCopyEXT.PNEXT, value); }
     /** Unsafe version of {@link #pHostPointer(long) pHostPointer}. */
     public static void npHostPointer(long struct, long value) { memPutAddress(struct + VkMemoryToImageCopyEXT.PHOSTPOINTER, check(value)); }
     /** Unsafe version of {@link #memoryRowLength(int) memoryRowLength}. */
-    public static void nmemoryRowLength(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryToImageCopyEXT.MEMORYROWLENGTH, value); }
+    public static void nmemoryRowLength(long struct, int value) { memPutInt(struct + VkMemoryToImageCopyEXT.MEMORYROWLENGTH, value); }
     /** Unsafe version of {@link #memoryImageHeight(int) memoryImageHeight}. */
-    public static void nmemoryImageHeight(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryToImageCopyEXT.MEMORYIMAGEHEIGHT, value); }
+    public static void nmemoryImageHeight(long struct, int value) { memPutInt(struct + VkMemoryToImageCopyEXT.MEMORYIMAGEHEIGHT, value); }
     /** Unsafe version of {@link #imageSubresource(VkImageSubresourceLayers) imageSubresource}. */
     public static void nimageSubresource(long struct, VkImageSubresourceLayers value) { memCopy(value.address(), struct + VkMemoryToImageCopyEXT.IMAGESUBRESOURCE, VkImageSubresourceLayers.SIZEOF); }
     /** Unsafe version of {@link #imageOffset(VkOffset3D) imageOffset}. */

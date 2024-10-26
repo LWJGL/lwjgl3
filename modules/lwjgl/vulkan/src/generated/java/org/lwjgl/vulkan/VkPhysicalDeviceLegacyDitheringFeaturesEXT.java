@@ -246,18 +246,18 @@ public class VkPhysicalDeviceLegacyDitheringFeaturesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #legacyDithering}. */
-    public static int nlegacyDithering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.LEGACYDITHERING); }
+    public static int nlegacyDithering(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.LEGACYDITHERING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #legacyDithering(boolean) legacyDithering}. */
-    public static void nlegacyDithering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.LEGACYDITHERING, value); }
+    public static void nlegacyDithering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyDitheringFeaturesEXT.LEGACYDITHERING, value); }
 
     // -----------------------------------
 

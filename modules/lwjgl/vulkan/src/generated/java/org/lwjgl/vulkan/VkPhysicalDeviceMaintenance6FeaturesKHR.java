@@ -256,18 +256,18 @@ public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #maintenance6}. */
-    public static int nmaintenance6(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6); }
+    public static int nmaintenance6(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #maintenance6(boolean) maintenance6}. */
-    public static void nmaintenance6(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6, value); }
+    public static void nmaintenance6(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6, value); }
 
     // -----------------------------------
 

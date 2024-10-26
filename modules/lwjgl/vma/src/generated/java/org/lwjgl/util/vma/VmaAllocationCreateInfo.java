@@ -343,38 +343,38 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VmaAllocationCreateInfo.FLAGS); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationCreateInfo.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VmaAllocationCreateInfo.USAGE); }
     /** Unsafe version of {@link #requiredFlags}. */
-    public static int nrequiredFlags(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationCreateInfo.REQUIREDFLAGS); }
+    public static int nrequiredFlags(long struct) { return memGetInt(struct + VmaAllocationCreateInfo.REQUIREDFLAGS); }
     /** Unsafe version of {@link #preferredFlags}. */
-    public static int npreferredFlags(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationCreateInfo.PREFERREDFLAGS); }
+    public static int npreferredFlags(long struct) { return memGetInt(struct + VmaAllocationCreateInfo.PREFERREDFLAGS); }
     /** Unsafe version of {@link #memoryTypeBits}. */
-    public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationCreateInfo.MEMORYTYPEBITS); }
+    public static int nmemoryTypeBits(long struct) { return memGetInt(struct + VmaAllocationCreateInfo.MEMORYTYPEBITS); }
     /** Unsafe version of {@link #pool}. */
     public static long npool(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.POOL); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.PUSERDATA); }
     /** Unsafe version of {@link #priority}. */
-    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaAllocationCreateInfo.PRIORITY); }
+    public static float npriority(long struct) { return memGetFloat(struct + VmaAllocationCreateInfo.PRIORITY); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.USAGE, value); }
     /** Unsafe version of {@link #requiredFlags(int) requiredFlags}. */
-    public static void nrequiredFlags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.REQUIREDFLAGS, value); }
+    public static void nrequiredFlags(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.REQUIREDFLAGS, value); }
     /** Unsafe version of {@link #preferredFlags(int) preferredFlags}. */
-    public static void npreferredFlags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.PREFERREDFLAGS, value); }
+    public static void npreferredFlags(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.PREFERREDFLAGS, value); }
     /** Unsafe version of {@link #memoryTypeBits(int) memoryTypeBits}. */
-    public static void nmemoryTypeBits(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.MEMORYTYPEBITS, value); }
+    public static void nmemoryTypeBits(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.MEMORYTYPEBITS, value); }
     /** Unsafe version of {@link #pool(long) pool}. */
     public static void npool(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.POOL, value); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
-    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaAllocationCreateInfo.PRIORITY, value); }
+    public static void npriority(long struct, float value) { memPutFloat(struct + VmaAllocationCreateInfo.PRIORITY, value); }
 
     // -----------------------------------
 

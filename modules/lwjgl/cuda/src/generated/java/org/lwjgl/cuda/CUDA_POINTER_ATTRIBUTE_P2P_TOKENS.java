@@ -221,14 +221,14 @@ public class CUDA_POINTER_ATTRIBUTE_P2P_TOKENS extends Struct<CUDA_POINTER_ATTRI
     // -----------------------------------
 
     /** Unsafe version of {@link #p2pToken}. */
-    public static long np2pToken(long struct) { return UNSAFE.getLong(null, struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.P2PTOKEN); }
+    public static long np2pToken(long struct) { return memGetLong(struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.P2PTOKEN); }
     /** Unsafe version of {@link #vaSpaceToken}. */
-    public static int nvaSpaceToken(long struct) { return UNSAFE.getInt(null, struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.VASPACETOKEN); }
+    public static int nvaSpaceToken(long struct) { return memGetInt(struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.VASPACETOKEN); }
 
     /** Unsafe version of {@link #p2pToken(long) p2pToken}. */
-    public static void np2pToken(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.P2PTOKEN, value); }
+    public static void np2pToken(long struct, long value) { memPutLong(struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.P2PTOKEN, value); }
     /** Unsafe version of {@link #vaSpaceToken(int) vaSpaceToken}. */
-    public static void nvaSpaceToken(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.VASPACETOKEN, value); }
+    public static void nvaSpaceToken(long struct, int value) { memPutInt(struct + CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.VASPACETOKEN, value); }
 
     // -----------------------------------
 

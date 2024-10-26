@@ -284,28 +284,28 @@ public class VkPipelineCacheHeaderVersionOne extends Struct<VkPipelineCacheHeade
     // -----------------------------------
 
     /** Unsafe version of {@link #headerSize}. */
-    public static int nheaderSize(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCacheHeaderVersionOne.HEADERSIZE); }
+    public static int nheaderSize(long struct) { return memGetInt(struct + VkPipelineCacheHeaderVersionOne.HEADERSIZE); }
     /** Unsafe version of {@link #headerVersion}. */
-    public static int nheaderVersion(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCacheHeaderVersionOne.HEADERVERSION); }
+    public static int nheaderVersion(long struct) { return memGetInt(struct + VkPipelineCacheHeaderVersionOne.HEADERVERSION); }
     /** Unsafe version of {@link #vendorID}. */
-    public static int nvendorID(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCacheHeaderVersionOne.VENDORID); }
+    public static int nvendorID(long struct) { return memGetInt(struct + VkPipelineCacheHeaderVersionOne.VENDORID); }
     /** Unsafe version of {@link #deviceID}. */
-    public static int ndeviceID(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCacheHeaderVersionOne.DEVICEID); }
+    public static int ndeviceID(long struct) { return memGetInt(struct + VkPipelineCacheHeaderVersionOne.DEVICEID); }
     /** Unsafe version of {@link #pipelineCacheUUID}. */
     public static ByteBuffer npipelineCacheUUID(long struct) { return memByteBuffer(struct + VkPipelineCacheHeaderVersionOne.PIPELINECACHEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #pipelineCacheUUID(int) pipelineCacheUUID}. */
     public static byte npipelineCacheUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPipelineCacheHeaderVersionOne.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPipelineCacheHeaderVersionOne.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #headerSize(int) headerSize}. */
-    public static void nheaderSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCacheHeaderVersionOne.HEADERSIZE, value); }
+    public static void nheaderSize(long struct, int value) { memPutInt(struct + VkPipelineCacheHeaderVersionOne.HEADERSIZE, value); }
     /** Unsafe version of {@link #headerVersion(int) headerVersion}. */
-    public static void nheaderVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCacheHeaderVersionOne.HEADERVERSION, value); }
+    public static void nheaderVersion(long struct, int value) { memPutInt(struct + VkPipelineCacheHeaderVersionOne.HEADERVERSION, value); }
     /** Unsafe version of {@link #vendorID(int) vendorID}. */
-    public static void nvendorID(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCacheHeaderVersionOne.VENDORID, value); }
+    public static void nvendorID(long struct, int value) { memPutInt(struct + VkPipelineCacheHeaderVersionOne.VENDORID, value); }
     /** Unsafe version of {@link #deviceID(int) deviceID}. */
-    public static void ndeviceID(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCacheHeaderVersionOne.DEVICEID, value); }
+    public static void ndeviceID(long struct, int value) { memPutInt(struct + VkPipelineCacheHeaderVersionOne.DEVICEID, value); }
     /** Unsafe version of {@link #pipelineCacheUUID(ByteBuffer) pipelineCacheUUID}. */
     public static void npipelineCacheUUID(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, VK_UUID_SIZE); }
@@ -313,7 +313,7 @@ public class VkPipelineCacheHeaderVersionOne extends Struct<VkPipelineCacheHeade
     }
     /** Unsafe version of {@link #pipelineCacheUUID(int, byte) pipelineCacheUUID}. */
     public static void npipelineCacheUUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkPipelineCacheHeaderVersionOne.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1, value);
+        memPutByte(struct + VkPipelineCacheHeaderVersionOne.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1, value);
     }
 
     // -----------------------------------

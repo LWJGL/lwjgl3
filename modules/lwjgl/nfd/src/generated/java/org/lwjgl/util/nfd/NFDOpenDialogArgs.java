@@ -251,7 +251,7 @@ public class NFDOpenDialogArgs extends Struct<NFDOpenDialogArgs> implements Nati
     /** Unsafe version of {@link #filterList}. */
     @Nullable public static NFDFilterItem.Buffer nfilterList(long struct) { return NFDFilterItem.createSafe(memGetAddress(struct + NFDOpenDialogArgs.FILTERLIST), nfilterCount(struct)); }
     /** Unsafe version of {@link #filterCount}. */
-    public static int nfilterCount(long struct) { return UNSAFE.getInt(null, struct + NFDOpenDialogArgs.FILTERCOUNT); }
+    public static int nfilterCount(long struct) { return memGetInt(struct + NFDOpenDialogArgs.FILTERCOUNT); }
     /** Unsafe version of {@link #defaultPath}. */
     @Nullable public static ByteBuffer ndefaultPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDOpenDialogArgs.DEFAULTPATH)); }
     /** Unsafe version of {@link #defaultPathString}. */
@@ -262,7 +262,7 @@ public class NFDOpenDialogArgs extends Struct<NFDOpenDialogArgs> implements Nati
     /** Unsafe version of {@link #filterList(NFDFilterItem.Buffer) filterList}. */
     public static void nfilterList(long struct, @Nullable NFDFilterItem.Buffer value) { memPutAddress(struct + NFDOpenDialogArgs.FILTERLIST, memAddressSafe(value)); nfilterCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code filterCount} field of the specified {@code struct}. */
-    public static void nfilterCount(long struct, int value) { UNSAFE.putInt(null, struct + NFDOpenDialogArgs.FILTERCOUNT, value); }
+    public static void nfilterCount(long struct, int value) { memPutInt(struct + NFDOpenDialogArgs.FILTERCOUNT, value); }
     /** Unsafe version of {@link #defaultPath(ByteBuffer) defaultPath}. */
     public static void ndefaultPath(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }

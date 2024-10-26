@@ -269,26 +269,26 @@ public class XrSpatialAnchorsUpdateExpirationInfoML extends Struct<XrSpatialAnch
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsUpdateExpirationInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsUpdateExpirationInfoML.NEXT); }
     /** Unsafe version of {@link #uuidCount}. */
-    public static int nuuidCount(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDCOUNT); }
+    public static int nuuidCount(long struct) { return memGetInt(struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDCOUNT); }
     /** Unsafe version of {@link #uuids}. */
     public static XrUuidEXT.Buffer nuuids(long struct) { return XrUuidEXT.create(memGetAddress(struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDS), nuuidCount(struct)); }
     /** Unsafe version of {@link #expiration}. */
-    public static long nexpiration(long struct) { return UNSAFE.getLong(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.EXPIRATION); }
+    public static long nexpiration(long struct) { return memGetLong(struct + XrSpatialAnchorsUpdateExpirationInfoML.EXPIRATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsUpdateExpirationInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsUpdateExpirationInfoML.NEXT, value); }
     /** Sets the specified value to the {@code uuidCount} field of the specified {@code struct}. */
-    public static void nuuidCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDCOUNT, value); }
+    public static void nuuidCount(long struct, int value) { memPutInt(struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDCOUNT, value); }
     /** Unsafe version of {@link #uuids(XrUuidEXT.Buffer) uuids}. */
     public static void nuuids(long struct, XrUuidEXT.Buffer value) { memPutAddress(struct + XrSpatialAnchorsUpdateExpirationInfoML.UUIDS, value.address()); nuuidCount(struct, value.remaining()); }
     /** Unsafe version of {@link #expiration(long) expiration}. */
-    public static void nexpiration(long struct, long value) { UNSAFE.putLong(null, struct + XrSpatialAnchorsUpdateExpirationInfoML.EXPIRATION, value); }
+    public static void nexpiration(long struct, long value) { memPutLong(struct + XrSpatialAnchorsUpdateExpirationInfoML.EXPIRATION, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

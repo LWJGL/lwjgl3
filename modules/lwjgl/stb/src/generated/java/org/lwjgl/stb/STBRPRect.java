@@ -286,30 +286,30 @@ public class STBRPRect extends Struct<STBRPRect> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.ID); }
+    public static int nid(long struct) { return memGetInt(struct + STBRPRect.ID); }
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.W); }
+    public static int nw(long struct) { return memGetInt(struct + STBRPRect.W); }
     /** Unsafe version of {@link #h}. */
-    public static int nh(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.H); }
+    public static int nh(long struct) { return memGetInt(struct + STBRPRect.H); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.X); }
+    public static int nx(long struct) { return memGetInt(struct + STBRPRect.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.Y); }
+    public static int ny(long struct) { return memGetInt(struct + STBRPRect.Y); }
     /** Unsafe version of {@link #was_packed}. */
-    public static int nwas_packed(long struct) { return UNSAFE.getInt(null, struct + STBRPRect.WAS_PACKED); }
+    public static int nwas_packed(long struct) { return memGetInt(struct + STBRPRect.WAS_PACKED); }
 
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + STBRPRect.ID, value); }
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.W, value); }
+    public static void nw(long struct, int value) { memPutInt(struct + STBRPRect.W, value); }
     /** Unsafe version of {@link #h(int) h}. */
-    public static void nh(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.H, value); }
+    public static void nh(long struct, int value) { memPutInt(struct + STBRPRect.H, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + STBRPRect.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + STBRPRect.Y, value); }
     /** Unsafe version of {@link #was_packed(boolean) was_packed}. */
-    public static void nwas_packed(long struct, int value) { UNSAFE.putInt(null, struct + STBRPRect.WAS_PACKED, value); }
+    public static void nwas_packed(long struct, int value) { memPutInt(struct + STBRPRect.WAS_PACKED, value); }
 
     // -----------------------------------
 

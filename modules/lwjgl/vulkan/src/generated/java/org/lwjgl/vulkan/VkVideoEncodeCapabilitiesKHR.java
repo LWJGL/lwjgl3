@@ -301,26 +301,26 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeCapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.FLAGS); }
     /** Unsafe version of {@link #rateControlModes}. */
-    public static int nrateControlModes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.RATECONTROLMODES); }
+    public static int nrateControlModes(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.RATECONTROLMODES); }
     /** Unsafe version of {@link #maxRateControlLayers}. */
-    public static int nmaxRateControlLayers(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.MAXRATECONTROLLAYERS); }
+    public static int nmaxRateControlLayers(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.MAXRATECONTROLLAYERS); }
     /** Unsafe version of {@link #maxBitrate}. */
-    public static long nmaxBitrate(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeCapabilitiesKHR.MAXBITRATE); }
+    public static long nmaxBitrate(long struct) { return memGetLong(struct + VkVideoEncodeCapabilitiesKHR.MAXBITRATE); }
     /** Unsafe version of {@link #maxQualityLevels}. */
-    public static int nmaxQualityLevels(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.MAXQUALITYLEVELS); }
+    public static int nmaxQualityLevels(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.MAXQUALITYLEVELS); }
     /** Unsafe version of {@link #encodeInputPictureGranularity}. */
     public static VkExtent2D nencodeInputPictureGranularity(long struct) { return VkExtent2D.create(struct + VkVideoEncodeCapabilitiesKHR.ENCODEINPUTPICTUREGRANULARITY); }
     /** Unsafe version of {@link #supportedEncodeFeedbackFlags}. */
-    public static int nsupportedEncodeFeedbackFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeCapabilitiesKHR.SUPPORTEDENCODEFEEDBACKFLAGS); }
+    public static int nsupportedEncodeFeedbackFlags(long struct) { return memGetInt(struct + VkVideoEncodeCapabilitiesKHR.SUPPORTEDENCODEFEEDBACKFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeCapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeCapabilitiesKHR.PNEXT, value); }
 

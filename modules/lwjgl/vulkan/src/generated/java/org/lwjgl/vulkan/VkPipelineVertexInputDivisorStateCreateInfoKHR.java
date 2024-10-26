@@ -256,20 +256,20 @@ public class VkPipelineVertexInputDivisorStateCreateInfoKHR extends Struct<VkPip
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #vertexBindingDivisorCount}. */
-    public static int nvertexBindingDivisorCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.VERTEXBINDINGDIVISORCOUNT); }
+    public static int nvertexBindingDivisorCount(long struct) { return memGetInt(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.VERTEXBINDINGDIVISORCOUNT); }
     /** Unsafe version of {@link #pVertexBindingDivisors}. */
     public static VkVertexInputBindingDivisorDescriptionKHR.Buffer npVertexBindingDivisors(long struct) { return VkVertexInputBindingDivisorDescriptionKHR.create(memGetAddress(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.PVERTEXBINDINGDIVISORS), nvertexBindingDivisorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code vertexBindingDivisorCount} field of the specified {@code struct}. */
-    public static void nvertexBindingDivisorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.VERTEXBINDINGDIVISORCOUNT, value); }
+    public static void nvertexBindingDivisorCount(long struct, int value) { memPutInt(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.VERTEXBINDINGDIVISORCOUNT, value); }
     /** Unsafe version of {@link #pVertexBindingDivisors(VkVertexInputBindingDivisorDescriptionKHR.Buffer) pVertexBindingDivisors}. */
     public static void npVertexBindingDivisors(long struct, VkVertexInputBindingDivisorDescriptionKHR.Buffer value) { memPutAddress(struct + VkPipelineVertexInputDivisorStateCreateInfoKHR.PVERTEXBINDINGDIVISORS, value.address()); nvertexBindingDivisorCount(struct, value.remaining()); }
 

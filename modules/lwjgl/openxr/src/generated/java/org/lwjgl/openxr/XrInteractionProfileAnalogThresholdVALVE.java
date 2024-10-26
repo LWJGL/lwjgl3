@@ -329,34 +329,34 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInteractionProfileAnalogThresholdVALVE.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInteractionProfileAnalogThresholdVALVE.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.NEXT); }
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ACTION); }
     /** Unsafe version of {@link #binding}. */
-    public static long nbinding(long struct) { return UNSAFE.getLong(null, struct + XrInteractionProfileAnalogThresholdVALVE.BINDING); }
+    public static long nbinding(long struct) { return memGetLong(struct + XrInteractionProfileAnalogThresholdVALVE.BINDING); }
     /** Unsafe version of {@link #onThreshold}. */
-    public static float nonThreshold(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileAnalogThresholdVALVE.ONTHRESHOLD); }
+    public static float nonThreshold(long struct) { return memGetFloat(struct + XrInteractionProfileAnalogThresholdVALVE.ONTHRESHOLD); }
     /** Unsafe version of {@link #offThreshold}. */
-    public static float noffThreshold(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileAnalogThresholdVALVE.OFFTHRESHOLD); }
+    public static float noffThreshold(long struct) { return memGetFloat(struct + XrInteractionProfileAnalogThresholdVALVE.OFFTHRESHOLD); }
     /** Unsafe version of {@link #onHaptic}. */
     @Nullable public static XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ONHAPTIC)); }
     /** Unsafe version of {@link #offHaptic}. */
     @Nullable public static XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.OFFHAPTIC)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInteractionProfileAnalogThresholdVALVE.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInteractionProfileAnalogThresholdVALVE.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ACTION, value.address()); }
     /** Unsafe version of {@link #binding(long) binding}. */
-    public static void nbinding(long struct, long value) { UNSAFE.putLong(null, struct + XrInteractionProfileAnalogThresholdVALVE.BINDING, value); }
+    public static void nbinding(long struct, long value) { memPutLong(struct + XrInteractionProfileAnalogThresholdVALVE.BINDING, value); }
     /** Unsafe version of {@link #onThreshold(float) onThreshold}. */
-    public static void nonThreshold(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileAnalogThresholdVALVE.ONTHRESHOLD, value); }
+    public static void nonThreshold(long struct, float value) { memPutFloat(struct + XrInteractionProfileAnalogThresholdVALVE.ONTHRESHOLD, value); }
     /** Unsafe version of {@link #offThreshold(float) offThreshold}. */
-    public static void noffThreshold(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileAnalogThresholdVALVE.OFFTHRESHOLD, value); }
+    public static void noffThreshold(long struct, float value) { memPutFloat(struct + XrInteractionProfileAnalogThresholdVALVE.OFFTHRESHOLD, value); }
     /** Unsafe version of {@link #onHaptic(XrHapticBaseHeader) onHaptic}. */
     public static void nonHaptic(long struct, @Nullable XrHapticBaseHeader value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ONHAPTIC, memAddressSafe(value)); }
     /** Unsafe version of {@link #offHaptic(XrHapticBaseHeader) offHaptic}. */

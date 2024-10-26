@@ -326,46 +326,46 @@ public class OVRTextureSwapChainDesc extends Struct<OVRTextureSwapChainDesc> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #Type}. */
-    public static int nType(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.TYPE); }
+    public static int nType(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.TYPE); }
     /** Unsafe version of {@link #Format}. */
-    public static int nFormat(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.FORMAT); }
+    public static int nFormat(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.FORMAT); }
     /** Unsafe version of {@link #ArraySize}. */
-    public static int nArraySize(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.ARRAYSIZE); }
+    public static int nArraySize(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.ARRAYSIZE); }
     /** Unsafe version of {@link #Width}. */
-    public static int nWidth(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.WIDTH); }
+    public static int nWidth(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.WIDTH); }
     /** Unsafe version of {@link #Height}. */
-    public static int nHeight(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.HEIGHT); }
+    public static int nHeight(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.HEIGHT); }
     /** Unsafe version of {@link #MipLevels}. */
-    public static int nMipLevels(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.MIPLEVELS); }
+    public static int nMipLevels(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.MIPLEVELS); }
     /** Unsafe version of {@link #SampleCount}. */
-    public static int nSampleCount(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.SAMPLECOUNT); }
+    public static int nSampleCount(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.SAMPLECOUNT); }
     /** Unsafe version of {@link #StaticImage}. */
-    public static boolean nStaticImage(long struct) { return UNSAFE.getByte(null, struct + OVRTextureSwapChainDesc.STATICIMAGE) != 0; }
+    public static boolean nStaticImage(long struct) { return memGetByte(struct + OVRTextureSwapChainDesc.STATICIMAGE) != 0; }
     /** Unsafe version of {@link #MiscFlags}. */
-    public static int nMiscFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.MISCFLAGS); }
+    public static int nMiscFlags(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.MISCFLAGS); }
     /** Unsafe version of {@link #BindFlags}. */
-    public static int nBindFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.BINDFLAGS); }
+    public static int nBindFlags(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.BINDFLAGS); }
 
     /** Unsafe version of {@link #Type(int) Type}. */
-    public static void nType(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.TYPE, value); }
+    public static void nType(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.TYPE, value); }
     /** Unsafe version of {@link #Format(int) Format}. */
-    public static void nFormat(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.FORMAT, value); }
+    public static void nFormat(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.FORMAT, value); }
     /** Unsafe version of {@link #ArraySize(int) ArraySize}. */
-    public static void nArraySize(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.ARRAYSIZE, value); }
+    public static void nArraySize(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.ARRAYSIZE, value); }
     /** Unsafe version of {@link #Width(int) Width}. */
-    public static void nWidth(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.WIDTH, value); }
+    public static void nWidth(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.WIDTH, value); }
     /** Unsafe version of {@link #Height(int) Height}. */
-    public static void nHeight(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.HEIGHT, value); }
+    public static void nHeight(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.HEIGHT, value); }
     /** Unsafe version of {@link #MipLevels(int) MipLevels}. */
-    public static void nMipLevels(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.MIPLEVELS, value); }
+    public static void nMipLevels(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.MIPLEVELS, value); }
     /** Unsafe version of {@link #SampleCount(int) SampleCount}. */
-    public static void nSampleCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.SAMPLECOUNT, value); }
+    public static void nSampleCount(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.SAMPLECOUNT, value); }
     /** Unsafe version of {@link #StaticImage(boolean) StaticImage}. */
-    public static void nStaticImage(long struct, boolean value) { UNSAFE.putByte(null, struct + OVRTextureSwapChainDesc.STATICIMAGE, value ? (byte)1 : (byte)0); }
+    public static void nStaticImage(long struct, boolean value) { memPutByte(struct + OVRTextureSwapChainDesc.STATICIMAGE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #MiscFlags(int) MiscFlags}. */
-    public static void nMiscFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.MISCFLAGS, value); }
+    public static void nMiscFlags(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.MISCFLAGS, value); }
     /** Unsafe version of {@link #BindFlags(int) BindFlags}. */
-    public static void nBindFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.BINDFLAGS, value); }
+    public static void nBindFlags(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.BINDFLAGS, value); }
 
     // -----------------------------------
 

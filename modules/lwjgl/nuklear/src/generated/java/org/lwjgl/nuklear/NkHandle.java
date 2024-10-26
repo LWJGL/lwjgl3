@@ -231,12 +231,12 @@ public class NkHandle extends Struct<NkHandle> implements NativeResource {
     /** Unsafe version of {@link #ptr}. */
     public static long nptr(long struct) { return memGetAddress(struct + NkHandle.PTR); }
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + NkHandle.ID); }
+    public static int nid(long struct) { return memGetInt(struct + NkHandle.ID); }
 
     /** Unsafe version of {@link #ptr(long) ptr}. */
     public static void nptr(long struct, long value) { memPutAddress(struct + NkHandle.PTR, value); }
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + NkHandle.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + NkHandle.ID, value); }
 
     // -----------------------------------
 

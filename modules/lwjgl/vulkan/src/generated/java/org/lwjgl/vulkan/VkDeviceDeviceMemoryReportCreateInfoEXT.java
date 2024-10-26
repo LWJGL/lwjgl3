@@ -283,22 +283,22 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceDeviceMemoryReportCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDeviceDeviceMemoryReportCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #pfnUserCallback}. */
     public static VkDeviceMemoryReportCallbackEXT npfnUserCallback(long struct) { return VkDeviceMemoryReportCallbackEXT.create(memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK)); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceDeviceMemoryReportCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceDeviceMemoryReportCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #pfnUserCallback(VkDeviceMemoryReportCallbackEXTI) pfnUserCallback}. */
     public static void npfnUserCallback(long struct, VkDeviceMemoryReportCallbackEXTI value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK, value.address()); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */

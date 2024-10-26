@@ -249,14 +249,14 @@ public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #Type}. */
-    public static int nType(long struct) { return UNSAFE.getInt(null, struct + OVRLayerHeader.TYPE); }
+    public static int nType(long struct) { return memGetInt(struct + OVRLayerHeader.TYPE); }
     /** Unsafe version of {@link #Flags}. */
-    public static int nFlags(long struct) { return UNSAFE.getInt(null, struct + OVRLayerHeader.FLAGS); }
+    public static int nFlags(long struct) { return memGetInt(struct + OVRLayerHeader.FLAGS); }
 
     /** Unsafe version of {@link #Type(int) Type}. */
-    public static void nType(long struct, int value) { UNSAFE.putInt(null, struct + OVRLayerHeader.TYPE, value); }
+    public static void nType(long struct, int value) { memPutInt(struct + OVRLayerHeader.TYPE, value); }
     /** Unsafe version of {@link #Flags(int) Flags}. */
-    public static void nFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRLayerHeader.FLAGS, value); }
+    public static void nFlags(long struct, int value) { memPutInt(struct + OVRLayerHeader.FLAGS, value); }
 
     // -----------------------------------
 

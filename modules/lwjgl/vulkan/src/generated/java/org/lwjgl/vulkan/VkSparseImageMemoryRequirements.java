@@ -240,13 +240,13 @@ public class VkSparseImageMemoryRequirements extends Struct<VkSparseImageMemoryR
     /** Unsafe version of {@link #formatProperties}. */
     public static VkSparseImageFormatProperties nformatProperties(long struct) { return VkSparseImageFormatProperties.create(struct + VkSparseImageMemoryRequirements.FORMATPROPERTIES); }
     /** Unsafe version of {@link #imageMipTailFirstLod}. */
-    public static int nimageMipTailFirstLod(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILFIRSTLOD); }
+    public static int nimageMipTailFirstLod(long struct) { return memGetInt(struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILFIRSTLOD); }
     /** Unsafe version of {@link #imageMipTailSize}. */
-    public static long nimageMipTailSize(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILSIZE); }
+    public static long nimageMipTailSize(long struct) { return memGetLong(struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILSIZE); }
     /** Unsafe version of {@link #imageMipTailOffset}. */
-    public static long nimageMipTailOffset(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILOFFSET); }
+    public static long nimageMipTailOffset(long struct) { return memGetLong(struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILOFFSET); }
     /** Unsafe version of {@link #imageMipTailStride}. */
-    public static long nimageMipTailStride(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILSTRIDE); }
+    public static long nimageMipTailStride(long struct) { return memGetLong(struct + VkSparseImageMemoryRequirements.IMAGEMIPTAILSTRIDE); }
 
     // -----------------------------------
 

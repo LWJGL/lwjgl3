@@ -232,7 +232,7 @@ public class CUIPCEventHandle extends Struct<CUIPCEventHandle> implements Native
     public static ByteBuffer nreserved(long struct) { return memByteBuffer(struct + CUIPCEventHandle.RESERVED, CU_IPC_HANDLE_SIZE); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static byte nreserved(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUIPCEventHandle.RESERVED + check(index, CU_IPC_HANDLE_SIZE) * 1);
+        return memGetByte(struct + CUIPCEventHandle.RESERVED + check(index, CU_IPC_HANDLE_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #reserved(ByteBuffer) reserved}. */
@@ -242,7 +242,7 @@ public class CUIPCEventHandle extends Struct<CUIPCEventHandle> implements Native
     }
     /** Unsafe version of {@link #reserved(int, byte) reserved}. */
     public static void nreserved(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUIPCEventHandle.RESERVED + check(index, CU_IPC_HANDLE_SIZE) * 1, value);
+        memPutByte(struct + CUIPCEventHandle.RESERVED + check(index, CU_IPC_HANDLE_SIZE) * 1, value);
     }
 
     // -----------------------------------

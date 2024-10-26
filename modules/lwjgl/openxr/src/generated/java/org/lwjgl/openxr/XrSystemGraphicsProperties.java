@@ -238,18 +238,18 @@ public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsPropertie
     // -----------------------------------
 
     /** Unsafe version of {@link #maxSwapchainImageHeight}. */
-    public static int nmaxSwapchainImageHeight(long struct) { return UNSAFE.getInt(null, struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEHEIGHT); }
+    public static int nmaxSwapchainImageHeight(long struct) { return memGetInt(struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEHEIGHT); }
     /** Unsafe version of {@link #maxSwapchainImageWidth}. */
-    public static int nmaxSwapchainImageWidth(long struct) { return UNSAFE.getInt(null, struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEWIDTH); }
+    public static int nmaxSwapchainImageWidth(long struct) { return memGetInt(struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEWIDTH); }
     /** Unsafe version of {@link #maxLayerCount}. */
-    public static int nmaxLayerCount(long struct) { return UNSAFE.getInt(null, struct + XrSystemGraphicsProperties.MAXLAYERCOUNT); }
+    public static int nmaxLayerCount(long struct) { return memGetInt(struct + XrSystemGraphicsProperties.MAXLAYERCOUNT); }
 
     /** Unsafe version of {@link #maxSwapchainImageHeight(int) maxSwapchainImageHeight}. */
-    public static void nmaxSwapchainImageHeight(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEHEIGHT, value); }
+    public static void nmaxSwapchainImageHeight(long struct, int value) { memPutInt(struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEHEIGHT, value); }
     /** Unsafe version of {@link #maxSwapchainImageWidth(int) maxSwapchainImageWidth}. */
-    public static void nmaxSwapchainImageWidth(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEWIDTH, value); }
+    public static void nmaxSwapchainImageWidth(long struct, int value) { memPutInt(struct + XrSystemGraphicsProperties.MAXSWAPCHAINIMAGEWIDTH, value); }
     /** Unsafe version of {@link #maxLayerCount(int) maxLayerCount}. */
-    public static void nmaxLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemGraphicsProperties.MAXLAYERCOUNT, value); }
+    public static void nmaxLayerCount(long struct, int value) { memPutInt(struct + XrSystemGraphicsProperties.MAXLAYERCOUNT, value); }
 
     // -----------------------------------
 

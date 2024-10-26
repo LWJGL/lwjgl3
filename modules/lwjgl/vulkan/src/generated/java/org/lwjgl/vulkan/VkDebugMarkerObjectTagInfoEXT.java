@@ -322,30 +322,30 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectTagInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugMarkerObjectTagInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugMarkerObjectTagInfoEXT.PNEXT); }
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectTagInfoEXT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return memGetInt(struct + VkDebugMarkerObjectTagInfoEXT.OBJECTTYPE); }
     /** Unsafe version of {@link #object}. */
-    public static long nobject(long struct) { return UNSAFE.getLong(null, struct + VkDebugMarkerObjectTagInfoEXT.OBJECT); }
+    public static long nobject(long struct) { return memGetLong(struct + VkDebugMarkerObjectTagInfoEXT.OBJECT); }
     /** Unsafe version of {@link #tagName}. */
-    public static long ntagName(long struct) { return UNSAFE.getLong(null, struct + VkDebugMarkerObjectTagInfoEXT.TAGNAME); }
+    public static long ntagName(long struct) { return memGetLong(struct + VkDebugMarkerObjectTagInfoEXT.TAGNAME); }
     /** Unsafe version of {@link #tagSize}. */
     public static long ntagSize(long struct) { return memGetAddress(struct + VkDebugMarkerObjectTagInfoEXT.TAGSIZE); }
     /** Unsafe version of {@link #pTag() pTag}. */
     public static ByteBuffer npTag(long struct) { return memByteBuffer(memGetAddress(struct + VkDebugMarkerObjectTagInfoEXT.PTAG), (int)ntagSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectTagInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectTagInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugMarkerObjectTagInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectTagInfoEXT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectTagInfoEXT.OBJECTTYPE, value); }
     /** Unsafe version of {@link #object(long) object}. */
-    public static void nobject(long struct, long value) { UNSAFE.putLong(null, struct + VkDebugMarkerObjectTagInfoEXT.OBJECT, value); }
+    public static void nobject(long struct, long value) { memPutLong(struct + VkDebugMarkerObjectTagInfoEXT.OBJECT, value); }
     /** Unsafe version of {@link #tagName(long) tagName}. */
-    public static void ntagName(long struct, long value) { UNSAFE.putLong(null, struct + VkDebugMarkerObjectTagInfoEXT.TAGNAME, value); }
+    public static void ntagName(long struct, long value) { memPutLong(struct + VkDebugMarkerObjectTagInfoEXT.TAGNAME, value); }
     /** Sets the specified value to the {@code tagSize} field of the specified {@code struct}. */
     public static void ntagSize(long struct, long value) { memPutAddress(struct + VkDebugMarkerObjectTagInfoEXT.TAGSIZE, value); }
     /** Unsafe version of {@link #pTag(ByteBuffer) pTag}. */

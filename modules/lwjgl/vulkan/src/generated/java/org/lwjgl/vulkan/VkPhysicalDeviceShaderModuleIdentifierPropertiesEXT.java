@@ -255,18 +255,18 @@ public class VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderModuleIdentifierAlgorithmUUID}. */
     public static ByteBuffer nshaderModuleIdentifierAlgorithmUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.SHADERMODULEIDENTIFIERALGORITHMUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #shaderModuleIdentifierAlgorithmUUID(int) shaderModuleIdentifierAlgorithmUUID}. */
     public static byte nshaderModuleIdentifierAlgorithmUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.SHADERMODULEIDENTIFIERALGORITHMUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.SHADERMODULEIDENTIFIERALGORITHMUUID + check(index, VK_UUID_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.PNEXT, value); }
 

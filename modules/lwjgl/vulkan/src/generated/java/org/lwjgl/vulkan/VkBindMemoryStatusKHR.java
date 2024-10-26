@@ -252,14 +252,14 @@ public class VkBindMemoryStatusKHR extends Struct<VkBindMemoryStatusKHR> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindMemoryStatusKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindMemoryStatusKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindMemoryStatusKHR.PNEXT); }
     /** Unsafe version of {@link #pResult(int) pResult}. */
     public static IntBuffer npResult(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + VkBindMemoryStatusKHR.PRESULT), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindMemoryStatusKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindMemoryStatusKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindMemoryStatusKHR.PNEXT, value); }
     /** Unsafe version of {@link #pResult(IntBuffer) pResult}. */

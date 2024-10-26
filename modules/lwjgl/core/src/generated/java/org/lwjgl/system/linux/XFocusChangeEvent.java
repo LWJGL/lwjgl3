@@ -293,34 +293,34 @@ public class XFocusChangeEvent extends Struct<XFocusChangeEvent> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XFocusChangeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XFocusChangeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XFocusChangeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XFocusChangeEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetCLong(struct + XFocusChangeEvent.WINDOW); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + XFocusChangeEvent.MODE); }
     /** Unsafe version of {@link #detail}. */
-    public static int ndetail(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.DETAIL); }
+    public static int ndetail(long struct) { return memGetInt(struct + XFocusChangeEvent.DETAIL); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XFocusChangeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XFocusChangeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XFocusChangeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XFocusChangeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
     public static void nwindow(long struct, long value) { memPutCLong(struct + XFocusChangeEvent.WINDOW, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + XFocusChangeEvent.MODE, value); }
     /** Unsafe version of {@link #detail(int) detail}. */
-    public static void ndetail(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.DETAIL, value); }
+    public static void ndetail(long struct, int value) { memPutInt(struct + XFocusChangeEvent.DETAIL, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

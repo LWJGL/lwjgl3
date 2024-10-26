@@ -323,48 +323,48 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     /** Unsafe version of {@link #flags}. */
     public static StdVideoDecodeH265PictureInfoFlags nflags(long struct) { return StdVideoDecodeH265PictureInfoFlags.create(struct + StdVideoDecodeH265PictureInfo.FLAGS); }
     /** Unsafe version of {@link #sps_seq_parameter_set_id}. */
-    public static byte nsps_seq_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.SPS_SEQ_PARAMETER_SET_ID); }
+    public static byte nsps_seq_parameter_set_id(long struct) { return memGetByte(struct + StdVideoDecodeH265PictureInfo.SPS_SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #pps_pic_parameter_set_id}. */
-    public static byte npps_pic_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.PPS_PIC_PARAMETER_SET_ID); }
+    public static byte npps_pic_parameter_set_id(long struct) { return memGetByte(struct + StdVideoDecodeH265PictureInfo.PPS_PIC_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #NumDeltaPocsOfRefRpsIdx}. */
-    public static byte nNumDeltaPocsOfRefRpsIdx(long struct) { return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.NUMDELTAPOCSOFREFRPSIDX); }
+    public static byte nNumDeltaPocsOfRefRpsIdx(long struct) { return memGetByte(struct + StdVideoDecodeH265PictureInfo.NUMDELTAPOCSOFREFRPSIDX); }
     /** Unsafe version of {@link #PicOrderCntVal}. */
-    public static int nPicOrderCntVal(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL); }
+    public static int nPicOrderCntVal(long struct) { return memGetInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice}. */
-    public static short nNumBitsForSTRefPicSetInSlice(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE); }
-    public static short nreserved(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH265PictureInfo.RESERVED); }
+    public static short nNumBitsForSTRefPicSetInSlice(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE); }
+    public static short nreserved(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.RESERVED); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore}. */
     public static ByteBuffer nRefPicSetStCurrBefore(long struct) { return memByteBuffer(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(int) RefPicSetStCurrBefore}. */
     public static byte nRefPicSetStCurrBefore(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #RefPicSetStCurrAfter}. */
     public static ByteBuffer nRefPicSetStCurrAfter(long struct) { return memByteBuffer(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRAFTER, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
     /** Unsafe version of {@link #RefPicSetStCurrAfter(int) RefPicSetStCurrAfter}. */
     public static byte nRefPicSetStCurrAfter(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRAFTER + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRAFTER + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #RefPicSetLtCurr}. */
     public static ByteBuffer nRefPicSetLtCurr(long struct) { return memByteBuffer(struct + StdVideoDecodeH265PictureInfo.REFPICSETLTCURR, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
     /** Unsafe version of {@link #RefPicSetLtCurr(int) RefPicSetLtCurr}. */
     public static byte nRefPicSetLtCurr(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETLTCURR + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETLTCURR + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #flags(StdVideoDecodeH265PictureInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoDecodeH265PictureInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeH265PictureInfo.FLAGS, StdVideoDecodeH265PictureInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #sps_seq_parameter_set_id(byte) sps_seq_parameter_set_id}. */
-    public static void nsps_seq_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.SPS_SEQ_PARAMETER_SET_ID, value); }
+    public static void nsps_seq_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoDecodeH265PictureInfo.SPS_SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #pps_pic_parameter_set_id(byte) pps_pic_parameter_set_id}. */
-    public static void npps_pic_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.PPS_PIC_PARAMETER_SET_ID, value); }
+    public static void npps_pic_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoDecodeH265PictureInfo.PPS_PIC_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #NumDeltaPocsOfRefRpsIdx(byte) NumDeltaPocsOfRefRpsIdx}. */
-    public static void nNumDeltaPocsOfRefRpsIdx(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.NUMDELTAPOCSOFREFRPSIDX, value); }
+    public static void nNumDeltaPocsOfRefRpsIdx(long struct, byte value) { memPutByte(struct + StdVideoDecodeH265PictureInfo.NUMDELTAPOCSOFREFRPSIDX, value); }
     /** Unsafe version of {@link #PicOrderCntVal(int) PicOrderCntVal}. */
-    public static void nPicOrderCntVal(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL, value); }
+    public static void nPicOrderCntVal(long struct, int value) { memPutInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL, value); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice(short) NumBitsForSTRefPicSetInSlice}. */
-    public static void nNumBitsForSTRefPicSetInSlice(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE, value); }
-    public static void nreserved(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
+    public static void nNumBitsForSTRefPicSetInSlice(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE, value); }
+    public static void nreserved(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(ByteBuffer) RefPicSetStCurrBefore}. */
     public static void nRefPicSetStCurrBefore(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
@@ -372,7 +372,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(int, byte) RefPicSetStCurrBefore}. */
     public static void nRefPicSetStCurrBefore(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #RefPicSetStCurrAfter(ByteBuffer) RefPicSetStCurrAfter}. */
     public static void nRefPicSetStCurrAfter(long struct, ByteBuffer value) {
@@ -381,7 +381,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     }
     /** Unsafe version of {@link #RefPicSetStCurrAfter(int, byte) RefPicSetStCurrAfter}. */
     public static void nRefPicSetStCurrAfter(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRAFTER + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRAFTER + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #RefPicSetLtCurr(ByteBuffer) RefPicSetLtCurr}. */
     public static void nRefPicSetLtCurr(long struct, ByteBuffer value) {
@@ -390,7 +390,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     }
     /** Unsafe version of {@link #RefPicSetLtCurr(int, byte) RefPicSetLtCurr}. */
     public static void nRefPicSetLtCurr(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoDecodeH265PictureInfo.REFPICSETLTCURR + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoDecodeH265PictureInfo.REFPICSETLTCURR + check(index, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE) * 1, value);
     }
 
     // -----------------------------------

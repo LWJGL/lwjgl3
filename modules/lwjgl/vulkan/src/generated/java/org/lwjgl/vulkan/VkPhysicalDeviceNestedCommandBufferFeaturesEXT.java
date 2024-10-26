@@ -268,26 +268,26 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #nestedCommandBuffer}. */
-    public static int nnestedCommandBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFER); }
+    public static int nnestedCommandBuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFER); }
     /** Unsafe version of {@link #nestedCommandBufferRendering}. */
-    public static int nnestedCommandBufferRendering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERRENDERING); }
+    public static int nnestedCommandBufferRendering(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERRENDERING); }
     /** Unsafe version of {@link #nestedCommandBufferSimultaneousUse}. */
-    public static int nnestedCommandBufferSimultaneousUse(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERSIMULTANEOUSUSE); }
+    public static int nnestedCommandBufferSimultaneousUse(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERSIMULTANEOUSUSE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #nestedCommandBuffer(boolean) nestedCommandBuffer}. */
-    public static void nnestedCommandBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFER, value); }
+    public static void nnestedCommandBuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFER, value); }
     /** Unsafe version of {@link #nestedCommandBufferRendering(boolean) nestedCommandBufferRendering}. */
-    public static void nnestedCommandBufferRendering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERRENDERING, value); }
+    public static void nnestedCommandBufferRendering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERRENDERING, value); }
     /** Unsafe version of {@link #nestedCommandBufferSimultaneousUse(boolean) nestedCommandBufferSimultaneousUse}. */
-    public static void nnestedCommandBufferSimultaneousUse(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERSIMULTANEOUSUSE, value); }
+    public static void nnestedCommandBufferSimultaneousUse(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferFeaturesEXT.NESTEDCOMMANDBUFFERSIMULTANEOUSUSE, value); }
 
     // -----------------------------------
 

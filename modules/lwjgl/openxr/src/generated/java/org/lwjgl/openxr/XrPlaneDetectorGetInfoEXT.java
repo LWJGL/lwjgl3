@@ -261,22 +261,22 @@ public class XrPlaneDetectorGetInfoEXT extends Struct<XrPlaneDetectorGetInfoEXT>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorGetInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPlaneDetectorGetInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPlaneDetectorGetInfoEXT.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrPlaneDetectorGetInfoEXT.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrPlaneDetectorGetInfoEXT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrPlaneDetectorGetInfoEXT.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorGetInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPlaneDetectorGetInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPlaneDetectorGetInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrPlaneDetectorGetInfoEXT.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrPlaneDetectorGetInfoEXT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrPlaneDetectorGetInfoEXT.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

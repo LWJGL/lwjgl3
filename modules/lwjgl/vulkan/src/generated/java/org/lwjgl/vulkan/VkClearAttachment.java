@@ -273,16 +273,16 @@ public class VkClearAttachment extends Struct<VkClearAttachment> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkClearAttachment.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkClearAttachment.ASPECTMASK); }
     /** Unsafe version of {@link #colorAttachment}. */
-    public static int ncolorAttachment(long struct) { return UNSAFE.getInt(null, struct + VkClearAttachment.COLORATTACHMENT); }
+    public static int ncolorAttachment(long struct) { return memGetInt(struct + VkClearAttachment.COLORATTACHMENT); }
     /** Unsafe version of {@link #clearValue}. */
     public static VkClearValue nclearValue(long struct) { return VkClearValue.create(struct + VkClearAttachment.CLEARVALUE); }
 
     /** Unsafe version of {@link #aspectMask(int) aspectMask}. */
-    public static void naspectMask(long struct, int value) { UNSAFE.putInt(null, struct + VkClearAttachment.ASPECTMASK, value); }
+    public static void naspectMask(long struct, int value) { memPutInt(struct + VkClearAttachment.ASPECTMASK, value); }
     /** Unsafe version of {@link #colorAttachment(int) colorAttachment}. */
-    public static void ncolorAttachment(long struct, int value) { UNSAFE.putInt(null, struct + VkClearAttachment.COLORATTACHMENT, value); }
+    public static void ncolorAttachment(long struct, int value) { memPutInt(struct + VkClearAttachment.COLORATTACHMENT, value); }
     /** Unsafe version of {@link #clearValue(VkClearValue) clearValue}. */
     public static void nclearValue(long struct, VkClearValue value) { memCopy(value.address(), struct + VkClearAttachment.CLEARVALUE, VkClearValue.SIZEOF); }
 

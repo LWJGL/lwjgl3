@@ -247,20 +247,20 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     /** Unsafe version of {@link #ctx}. */
     public static long nctx(long struct) { return memGetAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.CTX); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT); }
     /** Unsafe version of {@link #paramArray}. */
     @Nullable public static CUstreamBatchMemOpParams.Buffer nparamArray(long struct) { return CUstreamBatchMemOpParams.createSafe(memGetAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY), ncount(struct)); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS); }
 
     /** Unsafe version of {@link #ctx(long) ctx}. */
     public static void nctx(long struct, long value) { memPutAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.CTX, check(value)); }
     /** Sets the specified value to the {@code count} field of the specified {@code struct}. */
-    public static void ncount(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT, value); }
+    public static void ncount(long struct, int value) { memPutInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT, value); }
     /** Unsafe version of {@link #paramArray(CUstreamBatchMemOpParams.Buffer) paramArray}. */
     public static void nparamArray(long struct, @Nullable CUstreamBatchMemOpParams.Buffer value) { memPutAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY, memAddressSafe(value)); ncount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

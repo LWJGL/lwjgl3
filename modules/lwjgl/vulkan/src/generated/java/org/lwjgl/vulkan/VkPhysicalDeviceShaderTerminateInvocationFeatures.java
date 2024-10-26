@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeatures extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderTerminateInvocation}. */
-    public static int nshaderTerminateInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.SHADERTERMINATEINVOCATION); }
+    public static int nshaderTerminateInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.SHADERTERMINATEINVOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderTerminateInvocation(boolean) shaderTerminateInvocation}. */
-    public static void nshaderTerminateInvocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.SHADERTERMINATEINVOCATION, value); }
+    public static void nshaderTerminateInvocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTerminateInvocationFeatures.SHADERTERMINATEINVOCATION, value); }
 
     // -----------------------------------
 

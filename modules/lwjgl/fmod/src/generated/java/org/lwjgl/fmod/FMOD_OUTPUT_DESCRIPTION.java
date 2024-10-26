@@ -422,15 +422,15 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #apiversion}. */
-    public static int napiversion(long struct) { return UNSAFE.getInt(null, struct + FMOD_OUTPUT_DESCRIPTION.APIVERSION); }
+    public static int napiversion(long struct) { return memGetInt(struct + FMOD_OUTPUT_DESCRIPTION.APIVERSION); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBufferNT1(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.NAME)); }
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memUTF8(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.NAME)); }
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + FMOD_OUTPUT_DESCRIPTION.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + FMOD_OUTPUT_DESCRIPTION.VERSION); }
     /** Unsafe version of {@link #method}. */
-    public static int nmethod(long struct) { return UNSAFE.getInt(null, struct + FMOD_OUTPUT_DESCRIPTION.METHOD); }
+    public static int nmethod(long struct) { return memGetInt(struct + FMOD_OUTPUT_DESCRIPTION.METHOD); }
     /** Unsafe version of {@link #getnumdrivers}. */
     public static FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK ngetnumdrivers(long struct) { return FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK.create(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.GETNUMDRIVERS)); }
     /** Unsafe version of {@link #getdriverinfo}. */
@@ -465,16 +465,16 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     @Nullable public static FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK ndevicelistchanged(long struct) { return FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.DEVICELISTCHANGED)); }
 
     /** Unsafe version of {@link #apiversion(int) apiversion}. */
-    public static void napiversion(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_OUTPUT_DESCRIPTION.APIVERSION, value); }
+    public static void napiversion(long struct, int value) { memPutInt(struct + FMOD_OUTPUT_DESCRIPTION.APIVERSION, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
         memPutAddress(struct + FMOD_OUTPUT_DESCRIPTION.NAME, memAddress(value));
     }
     /** Unsafe version of {@link #version(int) version}. */
-    public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_OUTPUT_DESCRIPTION.VERSION, value); }
+    public static void nversion(long struct, int value) { memPutInt(struct + FMOD_OUTPUT_DESCRIPTION.VERSION, value); }
     /** Unsafe version of {@link #method(int) method}. */
-    public static void nmethod(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_OUTPUT_DESCRIPTION.METHOD, value); }
+    public static void nmethod(long struct, int value) { memPutInt(struct + FMOD_OUTPUT_DESCRIPTION.METHOD, value); }
     /** Unsafe version of {@link #getnumdrivers(FMOD_OUTPUT_GETNUMDRIVERS_CALLBACKI) getnumdrivers}. */
     public static void ngetnumdrivers(long struct, FMOD_OUTPUT_GETNUMDRIVERS_CALLBACKI value) { memPutAddress(struct + FMOD_OUTPUT_DESCRIPTION.GETNUMDRIVERS, value.address()); }
     /** Unsafe version of {@link #getdriverinfo(FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI) getdriverinfo}. */

@@ -253,18 +253,18 @@ public class XrMarkerDetectorSizeInfoML extends Struct<XrMarkerDetectorSizeInfoM
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorSizeInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMarkerDetectorSizeInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMarkerDetectorSizeInfoML.NEXT); }
     /** Unsafe version of {@link #markerLength}. */
-    public static float nmarkerLength(long struct) { return UNSAFE.getFloat(null, struct + XrMarkerDetectorSizeInfoML.MARKERLENGTH); }
+    public static float nmarkerLength(long struct) { return memGetFloat(struct + XrMarkerDetectorSizeInfoML.MARKERLENGTH); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorSizeInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMarkerDetectorSizeInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerDetectorSizeInfoML.NEXT, value); }
     /** Unsafe version of {@link #markerLength(float) markerLength}. */
-    public static void nmarkerLength(long struct, float value) { UNSAFE.putFloat(null, struct + XrMarkerDetectorSizeInfoML.MARKERLENGTH, value); }
+    public static void nmarkerLength(long struct, float value) { memPutFloat(struct + XrMarkerDetectorSizeInfoML.MARKERLENGTH, value); }
 
     // -----------------------------------
 

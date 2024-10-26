@@ -242,14 +242,14 @@ public class VkSurfaceCapabilitiesPresentBarrierNV extends Struct<VkSurfaceCapab
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceCapabilitiesPresentBarrierNV.PNEXT); }
     /** Unsafe version of {@link #presentBarrierSupported}. */
-    public static int npresentBarrierSupported(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.PRESENTBARRIERSUPPORTED); }
+    public static int npresentBarrierSupported(long struct) { return memGetInt(struct + VkSurfaceCapabilitiesPresentBarrierNV.PRESENTBARRIERSUPPORTED); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceCapabilitiesPresentBarrierNV.PNEXT, value); }
 

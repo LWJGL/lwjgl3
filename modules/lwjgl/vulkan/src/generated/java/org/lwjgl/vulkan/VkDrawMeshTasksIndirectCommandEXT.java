@@ -255,18 +255,18 @@ public class VkDrawMeshTasksIndirectCommandEXT extends Struct<VkDrawMeshTasksInd
     // -----------------------------------
 
     /** Unsafe version of {@link #groupCountX}. */
-    public static int ngroupCountX(long struct) { return UNSAFE.getInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTX); }
+    public static int ngroupCountX(long struct) { return memGetInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTX); }
     /** Unsafe version of {@link #groupCountY}. */
-    public static int ngroupCountY(long struct) { return UNSAFE.getInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTY); }
+    public static int ngroupCountY(long struct) { return memGetInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTY); }
     /** Unsafe version of {@link #groupCountZ}. */
-    public static int ngroupCountZ(long struct) { return UNSAFE.getInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTZ); }
+    public static int ngroupCountZ(long struct) { return memGetInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTZ); }
 
     /** Unsafe version of {@link #groupCountX(int) groupCountX}. */
-    public static void ngroupCountX(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTX, value); }
+    public static void ngroupCountX(long struct, int value) { memPutInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTX, value); }
     /** Unsafe version of {@link #groupCountY(int) groupCountY}. */
-    public static void ngroupCountY(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTY, value); }
+    public static void ngroupCountY(long struct, int value) { memPutInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTY, value); }
     /** Unsafe version of {@link #groupCountZ(int) groupCountZ}. */
-    public static void ngroupCountZ(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTZ, value); }
+    public static void ngroupCountZ(long struct, int value) { memPutInt(struct + VkDrawMeshTasksIndirectCommandEXT.GROUPCOUNTZ, value); }
 
     // -----------------------------------
 

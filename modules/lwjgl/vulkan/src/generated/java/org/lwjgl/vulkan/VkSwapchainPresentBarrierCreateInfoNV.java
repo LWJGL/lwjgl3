@@ -246,18 +246,18 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentBarrierCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentBarrierCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentBarrierCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #presentBarrierEnable}. */
-    public static int npresentBarrierEnable(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentBarrierCreateInfoNV.PRESENTBARRIERENABLE); }
+    public static int npresentBarrierEnable(long struct) { return memGetInt(struct + VkSwapchainPresentBarrierCreateInfoNV.PRESENTBARRIERENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentBarrierCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentBarrierCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentBarrierCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #presentBarrierEnable(boolean) presentBarrierEnable}. */
-    public static void npresentBarrierEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentBarrierCreateInfoNV.PRESENTBARRIERENABLE, value); }
+    public static void npresentBarrierEnable(long struct, int value) { memPutInt(struct + VkSwapchainPresentBarrierCreateInfoNV.PRESENTBARRIERENABLE, value); }
 
     // -----------------------------------
 

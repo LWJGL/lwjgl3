@@ -235,18 +235,18 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + XrColor3f.R); }
+    public static float nr(long struct) { return memGetFloat(struct + XrColor3f.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + XrColor3f.G); }
+    public static float ng(long struct) { return memGetFloat(struct + XrColor3f.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + XrColor3f.B); }
+    public static float nb(long struct) { return memGetFloat(struct + XrColor3f.B); }
 
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor3f.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + XrColor3f.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor3f.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + XrColor3f.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor3f.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + XrColor3f.B, value); }
 
     // -----------------------------------
 

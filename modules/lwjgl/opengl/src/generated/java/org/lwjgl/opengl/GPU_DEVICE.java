@@ -257,7 +257,7 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #cb}. */
-    public static int ncb(long struct) { return UNSAFE.getInt(null, struct + GPU_DEVICE.CB); }
+    public static int ncb(long struct) { return memGetInt(struct + GPU_DEVICE.CB); }
     /** Unsafe version of {@link #DeviceName}. */
     public static ByteBuffer nDeviceName(long struct) { return memByteBuffer(struct + GPU_DEVICE.DEVICENAME, 32); }
     /** Unsafe version of {@link #DeviceNameString}. */
@@ -267,7 +267,7 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
     /** Unsafe version of {@link #DeviceStringString}. */
     public static String nDeviceStringString(long struct) { return memASCII(struct + GPU_DEVICE.DEVICESTRING); }
     /** Unsafe version of {@link #Flags}. */
-    public static int nFlags(long struct) { return UNSAFE.getInt(null, struct + GPU_DEVICE.FLAGS); }
+    public static int nFlags(long struct) { return memGetInt(struct + GPU_DEVICE.FLAGS); }
     /** Unsafe version of {@link #rcVirtualScreen}. */
     public static RECT nrcVirtualScreen(long struct) { return RECT.create(struct + GPU_DEVICE.RCVIRTUALSCREEN); }
 

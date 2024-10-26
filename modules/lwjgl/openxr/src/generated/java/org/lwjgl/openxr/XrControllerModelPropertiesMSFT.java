@@ -272,24 +272,24 @@ public class XrControllerModelPropertiesMSFT extends Struct<XrControllerModelPro
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelPropertiesMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrControllerModelPropertiesMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrControllerModelPropertiesMSFT.NEXT); }
     /** Unsafe version of {@link #nodeCapacityInput}. */
-    public static int nnodeCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelPropertiesMSFT.NODECAPACITYINPUT); }
+    public static int nnodeCapacityInput(long struct) { return memGetInt(struct + XrControllerModelPropertiesMSFT.NODECAPACITYINPUT); }
     /** Unsafe version of {@link #nodeCountOutput}. */
-    public static int nnodeCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelPropertiesMSFT.NODECOUNTOUTPUT); }
+    public static int nnodeCountOutput(long struct) { return memGetInt(struct + XrControllerModelPropertiesMSFT.NODECOUNTOUTPUT); }
     /** Unsafe version of {@link #nodeProperties}. */
     @Nullable public static XrControllerModelNodePropertiesMSFT.Buffer nnodeProperties(long struct) { return XrControllerModelNodePropertiesMSFT.createSafe(memGetAddress(struct + XrControllerModelPropertiesMSFT.NODEPROPERTIES), nnodeCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelPropertiesMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrControllerModelPropertiesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelPropertiesMSFT.NEXT, value); }
     /** Sets the specified value to the {@code nodeCapacityInput} field of the specified {@code struct}. */
-    public static void nnodeCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelPropertiesMSFT.NODECAPACITYINPUT, value); }
+    public static void nnodeCapacityInput(long struct, int value) { memPutInt(struct + XrControllerModelPropertiesMSFT.NODECAPACITYINPUT, value); }
     /** Unsafe version of {@link #nodeCountOutput(int) nodeCountOutput}. */
-    public static void nnodeCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelPropertiesMSFT.NODECOUNTOUTPUT, value); }
+    public static void nnodeCountOutput(long struct, int value) { memPutInt(struct + XrControllerModelPropertiesMSFT.NODECOUNTOUTPUT, value); }
     /** Unsafe version of {@link #nodeProperties(XrControllerModelNodePropertiesMSFT.Buffer) nodeProperties}. */
     public static void nnodeProperties(long struct, @Nullable XrControllerModelNodePropertiesMSFT.Buffer value) { memPutAddress(struct + XrControllerModelPropertiesMSFT.NODEPROPERTIES, memAddressSafe(value)); if (value != null) { nnodeCapacityInput(struct, value.remaining()); } }
 

@@ -271,22 +271,22 @@ public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #stableDst}. */
-    public static int nstableDst(long struct) { return UNSAFE.getInt(null, struct + LZ4FDecompressOptions.STABLEDST); }
+    public static int nstableDst(long struct) { return memGetInt(struct + LZ4FDecompressOptions.STABLEDST); }
     /** Unsafe version of {@link #skipChecksums}. */
-    public static int nskipChecksums(long struct) { return UNSAFE.getInt(null, struct + LZ4FDecompressOptions.SKIPCHECKSUMS); }
+    public static int nskipChecksums(long struct) { return memGetInt(struct + LZ4FDecompressOptions.SKIPCHECKSUMS); }
     /** Unsafe version of {@link #reserved1}. */
-    public static int nreserved1(long struct) { return UNSAFE.getInt(null, struct + LZ4FDecompressOptions.RESERVED1); }
+    public static int nreserved1(long struct) { return memGetInt(struct + LZ4FDecompressOptions.RESERVED1); }
     /** Unsafe version of {@link #reserved0}. */
-    public static int nreserved0(long struct) { return UNSAFE.getInt(null, struct + LZ4FDecompressOptions.RESERVED0); }
+    public static int nreserved0(long struct) { return memGetInt(struct + LZ4FDecompressOptions.RESERVED0); }
 
     /** Unsafe version of {@link #stableDst(int) stableDst}. */
-    public static void nstableDst(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FDecompressOptions.STABLEDST, value); }
+    public static void nstableDst(long struct, int value) { memPutInt(struct + LZ4FDecompressOptions.STABLEDST, value); }
     /** Unsafe version of {@link #skipChecksums(int) skipChecksums}. */
-    public static void nskipChecksums(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FDecompressOptions.SKIPCHECKSUMS, value); }
+    public static void nskipChecksums(long struct, int value) { memPutInt(struct + LZ4FDecompressOptions.SKIPCHECKSUMS, value); }
     /** Unsafe version of {@link #reserved1(int) reserved1}. */
-    public static void nreserved1(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FDecompressOptions.RESERVED1, value); }
+    public static void nreserved1(long struct, int value) { memPutInt(struct + LZ4FDecompressOptions.RESERVED1, value); }
     /** Unsafe version of {@link #reserved0(int) reserved0}. */
-    public static void nreserved0(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FDecompressOptions.RESERVED0, value); }
+    public static void nreserved0(long struct, int value) { memPutInt(struct + LZ4FDecompressOptions.RESERVED0, value); }
 
     // -----------------------------------
 

@@ -277,7 +277,7 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     /** Unsafe version of {@link #value() value}. */
     @Nullable public static ByteBuffer nvalue(long struct) { return memByteBufferSafe(memGetAddress(struct + EXRAttribute.VALUE), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + EXRAttribute.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + EXRAttribute.SIZE); }
 
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
@@ -298,7 +298,7 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     /** Unsafe version of {@link #value(ByteBuffer) value}. */
     public static void nvalue(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + EXRAttribute.VALUE, memAddressSafe(value)); nsize(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + EXRAttribute.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + EXRAttribute.SIZE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

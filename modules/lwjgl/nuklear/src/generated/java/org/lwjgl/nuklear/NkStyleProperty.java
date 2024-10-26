@@ -475,19 +475,19 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     /** Unsafe version of {@link #label_active}. */
     public static NkColor nlabel_active(long struct) { return NkColor.create(struct + NkStyleProperty.LABEL_ACTIVE); }
     /** Unsafe version of {@link #sym_left}. */
-    public static int nsym_left(long struct) { return UNSAFE.getInt(null, struct + NkStyleProperty.SYM_LEFT); }
+    public static int nsym_left(long struct) { return memGetInt(struct + NkStyleProperty.SYM_LEFT); }
     /** Unsafe version of {@link #sym_right}. */
-    public static int nsym_right(long struct) { return UNSAFE.getInt(null, struct + NkStyleProperty.SYM_RIGHT); }
+    public static int nsym_right(long struct) { return memGetInt(struct + NkStyleProperty.SYM_RIGHT); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleProperty.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.ROUNDING); }
+    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleProperty.ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleProperty.PADDING); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleProperty.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProperty.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleProperty.DISABLED_FACTOR); }
     /** Unsafe version of {@link #edit}. */
     public static NkStyleEdit nedit(long struct) { return NkStyleEdit.create(struct + NkStyleProperty.EDIT); }
     /** Unsafe version of {@link #inc_button}. */
@@ -516,19 +516,19 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     /** Unsafe version of {@link #label_active(NkColor) label_active}. */
     public static void nlabel_active(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleProperty.LABEL_ACTIVE, NkColor.SIZEOF); }
     /** Unsafe version of {@link #sym_left(int) sym_left}. */
-    public static void nsym_left(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleProperty.SYM_LEFT, value); }
+    public static void nsym_left(long struct, int value) { memPutInt(struct + NkStyleProperty.SYM_LEFT, value); }
     /** Unsafe version of {@link #sym_right(int) sym_right}. */
-    public static void nsym_right(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleProperty.SYM_RIGHT, value); }
+    public static void nsym_right(long struct, int value) { memPutInt(struct + NkStyleProperty.SYM_RIGHT, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleProperty.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleProperty.ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleProperty.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleProperty.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProperty.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleProperty.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #edit(NkStyleEdit) edit}. */
     public static void nedit(long struct, NkStyleEdit value) { memCopy(value.address(), struct + NkStyleProperty.EDIT, NkStyleEdit.SIZEOF); }
     /** Unsafe version of {@link #inc_button(NkStyleButton) inc_button}. */

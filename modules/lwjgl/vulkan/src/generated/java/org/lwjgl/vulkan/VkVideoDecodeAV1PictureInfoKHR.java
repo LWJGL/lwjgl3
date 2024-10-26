@@ -401,7 +401,7 @@ public class VkVideoDecodeAV1PictureInfoKHR extends Struct<VkVideoDecodeAV1Pictu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeAV1PictureInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeAV1PictureInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pStdPictureInfo}. */
@@ -410,19 +410,19 @@ public class VkVideoDecodeAV1PictureInfoKHR extends Struct<VkVideoDecodeAV1Pictu
     public static IntBuffer nreferenceNameSlotIndices(long struct) { return memIntBuffer(struct + VkVideoDecodeAV1PictureInfoKHR.REFERENCENAMESLOTINDICES, VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR); }
     /** Unsafe version of {@link #referenceNameSlotIndices(int) referenceNameSlotIndices}. */
     public static int nreferenceNameSlotIndices(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.REFERENCENAMESLOTINDICES + check(index, VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR) * 4);
+        return memGetInt(struct + VkVideoDecodeAV1PictureInfoKHR.REFERENCENAMESLOTINDICES + check(index, VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR) * 4);
     }
     /** Unsafe version of {@link #frameHeaderOffset}. */
-    public static int nframeHeaderOffset(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.FRAMEHEADEROFFSET); }
+    public static int nframeHeaderOffset(long struct) { return memGetInt(struct + VkVideoDecodeAV1PictureInfoKHR.FRAMEHEADEROFFSET); }
     /** Unsafe version of {@link #tileCount}. */
-    public static int ntileCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.TILECOUNT); }
+    public static int ntileCount(long struct) { return memGetInt(struct + VkVideoDecodeAV1PictureInfoKHR.TILECOUNT); }
     /** Unsafe version of {@link #pTileOffsets() pTileOffsets}. */
     public static IntBuffer npTileOffsets(long struct) { return memIntBuffer(memGetAddress(struct + VkVideoDecodeAV1PictureInfoKHR.PTILEOFFSETS), ntileCount(struct)); }
     /** Unsafe version of {@link #pTileSizes() pTileSizes}. */
     public static IntBuffer npTileSizes(long struct) { return memIntBuffer(memGetAddress(struct + VkVideoDecodeAV1PictureInfoKHR.PTILESIZES), ntileCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1PictureInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeAV1PictureInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pStdPictureInfo(StdVideoDecodeAV1PictureInfo) pStdPictureInfo}. */
@@ -434,12 +434,12 @@ public class VkVideoDecodeAV1PictureInfoKHR extends Struct<VkVideoDecodeAV1Pictu
     }
     /** Unsafe version of {@link #referenceNameSlotIndices(int, int) referenceNameSlotIndices}. */
     public static void nreferenceNameSlotIndices(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.REFERENCENAMESLOTINDICES + check(index, VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR) * 4, value);
+        memPutInt(struct + VkVideoDecodeAV1PictureInfoKHR.REFERENCENAMESLOTINDICES + check(index, VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR) * 4, value);
     }
     /** Unsafe version of {@link #frameHeaderOffset(int) frameHeaderOffset}. */
-    public static void nframeHeaderOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.FRAMEHEADEROFFSET, value); }
+    public static void nframeHeaderOffset(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1PictureInfoKHR.FRAMEHEADEROFFSET, value); }
     /** Sets the specified value to the {@code tileCount} field of the specified {@code struct}. */
-    public static void ntileCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1PictureInfoKHR.TILECOUNT, value); }
+    public static void ntileCount(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1PictureInfoKHR.TILECOUNT, value); }
     /** Unsafe version of {@link #pTileOffsets(IntBuffer) pTileOffsets}. */
     public static void npTileOffsets(long struct, IntBuffer value) { memPutAddress(struct + VkVideoDecodeAV1PictureInfoKHR.PTILEOFFSETS, memAddress(value)); }
     /** Unsafe version of {@link #pTileSizes(IntBuffer) pTileSizes}. */

@@ -113,7 +113,7 @@ class NkConfigStackFloat extends Struct<NkConfigStackFloat> {
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackFloat.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackFloat.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackFloatElement.Buffer nelements(long struct) { return NkConfigStackFloatElement.create(struct + NkConfigStackFloat.ELEMENTS, 32); }
     /** Unsafe version of {@link #elements(int) elements}. */

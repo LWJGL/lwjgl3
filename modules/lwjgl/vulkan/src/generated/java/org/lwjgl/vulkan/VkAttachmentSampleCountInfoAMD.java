@@ -271,26 +271,26 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentSampleCountInfoAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAttachmentSampleCountInfoAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentSampleCountInfoAMD.PNEXT); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentSamples() pColorAttachmentSamples}. */
     @Nullable public static IntBuffer npColorAttachmentSamples(long struct) { return memIntBufferSafe(memGetAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthStencilAttachmentSamples}. */
-    public static int ndepthStencilAttachmentSamples(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES); }
+    public static int ndepthStencilAttachmentSamples(long struct) { return memGetInt(struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleCountInfoAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAttachmentSampleCountInfoAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentSampleCountInfoAMD.PNEXT, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentSamples(IntBuffer) pColorAttachmentSamples}. */
     public static void npColorAttachmentSamples(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #depthStencilAttachmentSamples(int) depthStencilAttachmentSamples}. */
-    public static void ndepthStencilAttachmentSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES, value); }
+    public static void ndepthStencilAttachmentSamples(long struct, int value) { memPutInt(struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES, value); }
 
     // -----------------------------------
 

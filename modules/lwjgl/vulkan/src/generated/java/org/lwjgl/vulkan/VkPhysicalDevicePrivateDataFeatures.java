@@ -246,18 +246,18 @@ public class VkPhysicalDevicePrivateDataFeatures extends Struct<VkPhysicalDevice
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePrivateDataFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePrivateDataFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePrivateDataFeatures.PNEXT); }
     /** Unsafe version of {@link #privateData}. */
-    public static int nprivateData(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePrivateDataFeatures.PRIVATEDATA); }
+    public static int nprivateData(long struct) { return memGetInt(struct + VkPhysicalDevicePrivateDataFeatures.PRIVATEDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePrivateDataFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePrivateDataFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePrivateDataFeatures.PNEXT, value); }
     /** Unsafe version of {@link #privateData(boolean) privateData}. */
-    public static void nprivateData(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePrivateDataFeatures.PRIVATEDATA, value); }
+    public static void nprivateData(long struct, int value) { memPutInt(struct + VkPhysicalDevicePrivateDataFeatures.PRIVATEDATA, value); }
 
     // -----------------------------------
 

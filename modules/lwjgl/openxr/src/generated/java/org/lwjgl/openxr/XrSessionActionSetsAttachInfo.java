@@ -257,20 +257,20 @@ public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAtt
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSessionActionSetsAttachInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSessionActionSetsAttachInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSessionActionSetsAttachInfo.NEXT); }
     /** Unsafe version of {@link #countActionSets}. */
-    public static int ncountActionSets(long struct) { return UNSAFE.getInt(null, struct + XrSessionActionSetsAttachInfo.COUNTACTIONSETS); }
+    public static int ncountActionSets(long struct) { return memGetInt(struct + XrSessionActionSetsAttachInfo.COUNTACTIONSETS); }
     /** Unsafe version of {@link #actionSets() actionSets}. */
     public static PointerBuffer nactionSets(long struct) { return memPointerBuffer(memGetAddress(struct + XrSessionActionSetsAttachInfo.ACTIONSETS), ncountActionSets(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionActionSetsAttachInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSessionActionSetsAttachInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionActionSetsAttachInfo.NEXT, value); }
     /** Sets the specified value to the {@code countActionSets} field of the specified {@code struct}. */
-    public static void ncountActionSets(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionActionSetsAttachInfo.COUNTACTIONSETS, value); }
+    public static void ncountActionSets(long struct, int value) { memPutInt(struct + XrSessionActionSetsAttachInfo.COUNTACTIONSETS, value); }
     /** Unsafe version of {@link #actionSets(PointerBuffer) actionSets}. */
     public static void nactionSets(long struct, PointerBuffer value) { memPutAddress(struct + XrSessionActionSetsAttachInfo.ACTIONSETS, memAddress(value)); ncountActionSets(struct, value.remaining()); }
 

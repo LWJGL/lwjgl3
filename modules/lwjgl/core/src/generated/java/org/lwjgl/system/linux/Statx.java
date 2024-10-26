@@ -441,31 +441,31 @@ public class Statx extends Struct<Statx> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #stx_mask}. */
-    public static int nstx_mask(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_MASK); }
+    public static int nstx_mask(long struct) { return memGetInt(struct + Statx.STX_MASK); }
     /** Unsafe version of {@link #stx_blksize}. */
-    public static int nstx_blksize(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_BLKSIZE); }
+    public static int nstx_blksize(long struct) { return memGetInt(struct + Statx.STX_BLKSIZE); }
     /** Unsafe version of {@link #stx_attributes}. */
-    public static long nstx_attributes(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_ATTRIBUTES); }
+    public static long nstx_attributes(long struct) { return memGetLong(struct + Statx.STX_ATTRIBUTES); }
     /** Unsafe version of {@link #stx_nlink}. */
-    public static int nstx_nlink(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_NLINK); }
+    public static int nstx_nlink(long struct) { return memGetInt(struct + Statx.STX_NLINK); }
     /** Unsafe version of {@link #stx_uid}. */
-    public static int nstx_uid(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_UID); }
+    public static int nstx_uid(long struct) { return memGetInt(struct + Statx.STX_UID); }
     /** Unsafe version of {@link #stx_gid}. */
-    public static int nstx_gid(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_GID); }
+    public static int nstx_gid(long struct) { return memGetInt(struct + Statx.STX_GID); }
     /** Unsafe version of {@link #stx_mode}. */
-    public static short nstx_mode(long struct) { return UNSAFE.getShort(null, struct + Statx.STX_MODE); }
+    public static short nstx_mode(long struct) { return memGetShort(struct + Statx.STX_MODE); }
     public static ShortBuffer n__spare0(long struct) { return memShortBuffer(struct + Statx.__SPARE0, 1); }
     public static short n__spare0(long struct, int index) {
-        return UNSAFE.getShort(null, struct + Statx.__SPARE0 + check(index, 1) * 2);
+        return memGetShort(struct + Statx.__SPARE0 + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #stx_ino}. */
-    public static long nstx_ino(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_INO); }
+    public static long nstx_ino(long struct) { return memGetLong(struct + Statx.STX_INO); }
     /** Unsafe version of {@link #stx_size}. */
-    public static long nstx_size(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_SIZE); }
+    public static long nstx_size(long struct) { return memGetLong(struct + Statx.STX_SIZE); }
     /** Unsafe version of {@link #stx_blocks}. */
-    public static long nstx_blocks(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_BLOCKS); }
+    public static long nstx_blocks(long struct) { return memGetLong(struct + Statx.STX_BLOCKS); }
     /** Unsafe version of {@link #stx_attributes_mask}. */
-    public static long nstx_attributes_mask(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_ATTRIBUTES_MASK); }
+    public static long nstx_attributes_mask(long struct) { return memGetLong(struct + Statx.STX_ATTRIBUTES_MASK); }
     /** Unsafe version of {@link #stx_atime}. */
     public static StatxTimestamp nstx_atime(long struct) { return StatxTimestamp.create(struct + Statx.STX_ATIME); }
     /** Unsafe version of {@link #stx_btime}. */
@@ -475,50 +475,50 @@ public class Statx extends Struct<Statx> implements NativeResource {
     /** Unsafe version of {@link #stx_mtime}. */
     public static StatxTimestamp nstx_mtime(long struct) { return StatxTimestamp.create(struct + Statx.STX_MTIME); }
     /** Unsafe version of {@link #stx_rdev_major}. */
-    public static int nstx_rdev_major(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_RDEV_MAJOR); }
+    public static int nstx_rdev_major(long struct) { return memGetInt(struct + Statx.STX_RDEV_MAJOR); }
     /** Unsafe version of {@link #stx_rdev_minor}. */
-    public static int nstx_rdev_minor(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_RDEV_MINOR); }
+    public static int nstx_rdev_minor(long struct) { return memGetInt(struct + Statx.STX_RDEV_MINOR); }
     /** Unsafe version of {@link #stx_dev_major}. */
-    public static int nstx_dev_major(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_DEV_MAJOR); }
+    public static int nstx_dev_major(long struct) { return memGetInt(struct + Statx.STX_DEV_MAJOR); }
     /** Unsafe version of {@link #stx_dev_minor}. */
-    public static int nstx_dev_minor(long struct) { return UNSAFE.getInt(null, struct + Statx.STX_DEV_MINOR); }
+    public static int nstx_dev_minor(long struct) { return memGetInt(struct + Statx.STX_DEV_MINOR); }
     /** Unsafe version of {@link #stx_mnt_id}. */
-    public static long nstx_mnt_id(long struct) { return UNSAFE.getLong(null, struct + Statx.STX_MNT_ID); }
-    public static long n__spare2(long struct) { return UNSAFE.getLong(null, struct + Statx.__SPARE2); }
+    public static long nstx_mnt_id(long struct) { return memGetLong(struct + Statx.STX_MNT_ID); }
+    public static long n__spare2(long struct) { return memGetLong(struct + Statx.__SPARE2); }
     public static LongBuffer n__spare3(long struct) { return memLongBuffer(struct + Statx.__SPARE3, 12); }
     public static long n__spare3(long struct, int index) {
-        return UNSAFE.getLong(null, struct + Statx.__SPARE3 + check(index, 12) * 8);
+        return memGetLong(struct + Statx.__SPARE3 + check(index, 12) * 8);
     }
 
     /** Unsafe version of {@link #stx_mask(int) stx_mask}. */
-    public static void nstx_mask(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_MASK, value); }
+    public static void nstx_mask(long struct, int value) { memPutInt(struct + Statx.STX_MASK, value); }
     /** Unsafe version of {@link #stx_blksize(int) stx_blksize}. */
-    public static void nstx_blksize(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_BLKSIZE, value); }
+    public static void nstx_blksize(long struct, int value) { memPutInt(struct + Statx.STX_BLKSIZE, value); }
     /** Unsafe version of {@link #stx_attributes(long) stx_attributes}. */
-    public static void nstx_attributes(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_ATTRIBUTES, value); }
+    public static void nstx_attributes(long struct, long value) { memPutLong(struct + Statx.STX_ATTRIBUTES, value); }
     /** Unsafe version of {@link #stx_nlink(int) stx_nlink}. */
-    public static void nstx_nlink(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_NLINK, value); }
+    public static void nstx_nlink(long struct, int value) { memPutInt(struct + Statx.STX_NLINK, value); }
     /** Unsafe version of {@link #stx_uid(int) stx_uid}. */
-    public static void nstx_uid(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_UID, value); }
+    public static void nstx_uid(long struct, int value) { memPutInt(struct + Statx.STX_UID, value); }
     /** Unsafe version of {@link #stx_gid(int) stx_gid}. */
-    public static void nstx_gid(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_GID, value); }
+    public static void nstx_gid(long struct, int value) { memPutInt(struct + Statx.STX_GID, value); }
     /** Unsafe version of {@link #stx_mode(short) stx_mode}. */
-    public static void nstx_mode(long struct, short value) { UNSAFE.putShort(null, struct + Statx.STX_MODE, value); }
+    public static void nstx_mode(long struct, short value) { memPutShort(struct + Statx.STX_MODE, value); }
     public static void n__spare0(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + Statx.__SPARE0, value.remaining() * 2);
     }
     public static void n__spare0(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + Statx.__SPARE0 + check(index, 1) * 2, value);
+        memPutShort(struct + Statx.__SPARE0 + check(index, 1) * 2, value);
     }
     /** Unsafe version of {@link #stx_ino(long) stx_ino}. */
-    public static void nstx_ino(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_INO, value); }
+    public static void nstx_ino(long struct, long value) { memPutLong(struct + Statx.STX_INO, value); }
     /** Unsafe version of {@link #stx_size(long) stx_size}. */
-    public static void nstx_size(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_SIZE, value); }
+    public static void nstx_size(long struct, long value) { memPutLong(struct + Statx.STX_SIZE, value); }
     /** Unsafe version of {@link #stx_blocks(long) stx_blocks}. */
-    public static void nstx_blocks(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_BLOCKS, value); }
+    public static void nstx_blocks(long struct, long value) { memPutLong(struct + Statx.STX_BLOCKS, value); }
     /** Unsafe version of {@link #stx_attributes_mask(long) stx_attributes_mask}. */
-    public static void nstx_attributes_mask(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_ATTRIBUTES_MASK, value); }
+    public static void nstx_attributes_mask(long struct, long value) { memPutLong(struct + Statx.STX_ATTRIBUTES_MASK, value); }
     /** Unsafe version of {@link #stx_atime(StatxTimestamp) stx_atime}. */
     public static void nstx_atime(long struct, StatxTimestamp value) { memCopy(value.address(), struct + Statx.STX_ATIME, StatxTimestamp.SIZEOF); }
     /** Unsafe version of {@link #stx_btime(StatxTimestamp) stx_btime}. */
@@ -528,22 +528,22 @@ public class Statx extends Struct<Statx> implements NativeResource {
     /** Unsafe version of {@link #stx_mtime(StatxTimestamp) stx_mtime}. */
     public static void nstx_mtime(long struct, StatxTimestamp value) { memCopy(value.address(), struct + Statx.STX_MTIME, StatxTimestamp.SIZEOF); }
     /** Unsafe version of {@link #stx_rdev_major(int) stx_rdev_major}. */
-    public static void nstx_rdev_major(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_RDEV_MAJOR, value); }
+    public static void nstx_rdev_major(long struct, int value) { memPutInt(struct + Statx.STX_RDEV_MAJOR, value); }
     /** Unsafe version of {@link #stx_rdev_minor(int) stx_rdev_minor}. */
-    public static void nstx_rdev_minor(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_RDEV_MINOR, value); }
+    public static void nstx_rdev_minor(long struct, int value) { memPutInt(struct + Statx.STX_RDEV_MINOR, value); }
     /** Unsafe version of {@link #stx_dev_major(int) stx_dev_major}. */
-    public static void nstx_dev_major(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_DEV_MAJOR, value); }
+    public static void nstx_dev_major(long struct, int value) { memPutInt(struct + Statx.STX_DEV_MAJOR, value); }
     /** Unsafe version of {@link #stx_dev_minor(int) stx_dev_minor}. */
-    public static void nstx_dev_minor(long struct, int value) { UNSAFE.putInt(null, struct + Statx.STX_DEV_MINOR, value); }
+    public static void nstx_dev_minor(long struct, int value) { memPutInt(struct + Statx.STX_DEV_MINOR, value); }
     /** Unsafe version of {@link #stx_mnt_id(long) stx_mnt_id}. */
-    public static void nstx_mnt_id(long struct, long value) { UNSAFE.putLong(null, struct + Statx.STX_MNT_ID, value); }
-    public static void n__spare2(long struct, long value) { UNSAFE.putLong(null, struct + Statx.__SPARE2, value); }
+    public static void nstx_mnt_id(long struct, long value) { memPutLong(struct + Statx.STX_MNT_ID, value); }
+    public static void n__spare2(long struct, long value) { memPutLong(struct + Statx.__SPARE2, value); }
     public static void n__spare3(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 12); }
         memCopy(memAddress(value), struct + Statx.__SPARE3, value.remaining() * 8);
     }
     public static void n__spare3(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + Statx.__SPARE3 + check(index, 12) * 8, value);
+        memPutLong(struct + Statx.__SPARE3 + check(index, 12) * 8, value);
     }
 
     // -----------------------------------

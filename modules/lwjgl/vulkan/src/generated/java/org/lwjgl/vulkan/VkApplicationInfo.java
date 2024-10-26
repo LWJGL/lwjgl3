@@ -360,7 +360,7 @@ public class VkApplicationInfo extends Struct<VkApplicationInfo> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkApplicationInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkApplicationInfo.PNEXT); }
     /** Unsafe version of {@link #pApplicationName}. */
@@ -368,18 +368,18 @@ public class VkApplicationInfo extends Struct<VkApplicationInfo> implements Nati
     /** Unsafe version of {@link #pApplicationNameString}. */
     @Nullable public static String npApplicationNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkApplicationInfo.PAPPLICATIONNAME)); }
     /** Unsafe version of {@link #applicationVersion}. */
-    public static int napplicationVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.APPLICATIONVERSION); }
+    public static int napplicationVersion(long struct) { return memGetInt(struct + VkApplicationInfo.APPLICATIONVERSION); }
     /** Unsafe version of {@link #pEngineName}. */
     @Nullable public static ByteBuffer npEngineName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkApplicationInfo.PENGINENAME)); }
     /** Unsafe version of {@link #pEngineNameString}. */
     @Nullable public static String npEngineNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkApplicationInfo.PENGINENAME)); }
     /** Unsafe version of {@link #engineVersion}. */
-    public static int nengineVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.ENGINEVERSION); }
+    public static int nengineVersion(long struct) { return memGetInt(struct + VkApplicationInfo.ENGINEVERSION); }
     /** Unsafe version of {@link #apiVersion}. */
-    public static int napiVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.APIVERSION); }
+    public static int napiVersion(long struct) { return memGetInt(struct + VkApplicationInfo.APIVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkApplicationInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkApplicationInfo.PNEXT, value); }
     /** Unsafe version of {@link #pApplicationName(ByteBuffer) pApplicationName}. */
@@ -388,16 +388,16 @@ public class VkApplicationInfo extends Struct<VkApplicationInfo> implements Nati
         memPutAddress(struct + VkApplicationInfo.PAPPLICATIONNAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #applicationVersion(int) applicationVersion}. */
-    public static void napplicationVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.APPLICATIONVERSION, value); }
+    public static void napplicationVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.APPLICATIONVERSION, value); }
     /** Unsafe version of {@link #pEngineName(ByteBuffer) pEngineName}. */
     public static void npEngineName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
         memPutAddress(struct + VkApplicationInfo.PENGINENAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #engineVersion(int) engineVersion}. */
-    public static void nengineVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.ENGINEVERSION, value); }
+    public static void nengineVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.ENGINEVERSION, value); }
     /** Unsafe version of {@link #apiVersion(int) apiVersion}. */
-    public static void napiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.APIVERSION, value); }
+    public static void napiVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.APIVERSION, value); }
 
     // -----------------------------------
 

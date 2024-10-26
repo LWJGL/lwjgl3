@@ -261,9 +261,9 @@ public class FMOD_ERRORCALLBACK_INFO extends Struct<FMOD_ERRORCALLBACK_INFO> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + FMOD_ERRORCALLBACK_INFO.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + FMOD_ERRORCALLBACK_INFO.RESULT); }
     /** Unsafe version of {@link #instancetype}. */
-    public static int ninstancetype(long struct) { return UNSAFE.getInt(null, struct + FMOD_ERRORCALLBACK_INFO.INSTANCETYPE); }
+    public static int ninstancetype(long struct) { return memGetInt(struct + FMOD_ERRORCALLBACK_INFO.INSTANCETYPE); }
     /** Unsafe version of {@link #instance}. */
     public static long ninstance(long struct) { return memGetAddress(struct + FMOD_ERRORCALLBACK_INFO.INSTANCE); }
     /** Unsafe version of {@link #functionname}. */
@@ -276,9 +276,9 @@ public class FMOD_ERRORCALLBACK_INFO extends Struct<FMOD_ERRORCALLBACK_INFO> imp
     public static String nfunctionparamsString(long struct) { return memUTF8(memGetAddress(struct + FMOD_ERRORCALLBACK_INFO.FUNCTIONPARAMS)); }
 
     /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ERRORCALLBACK_INFO.RESULT, value); }
+    public static void nresult(long struct, int value) { memPutInt(struct + FMOD_ERRORCALLBACK_INFO.RESULT, value); }
     /** Unsafe version of {@link #instancetype(int) instancetype}. */
-    public static void ninstancetype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ERRORCALLBACK_INFO.INSTANCETYPE, value); }
+    public static void ninstancetype(long struct, int value) { memPutInt(struct + FMOD_ERRORCALLBACK_INFO.INSTANCETYPE, value); }
     /** Unsafe version of {@link #instance(long) instance}. */
     public static void ninstance(long struct, long value) { memPutAddress(struct + FMOD_ERRORCALLBACK_INFO.INSTANCE, check(value)); }
     /** Unsafe version of {@link #functionname(ByteBuffer) functionname}. */

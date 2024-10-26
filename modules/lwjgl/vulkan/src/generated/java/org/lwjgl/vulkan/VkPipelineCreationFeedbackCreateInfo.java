@@ -279,24 +279,24 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct<VkPipelineCreat
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCreationFeedbackCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineCreationFeedbackCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PNEXT); }
     /** Unsafe version of {@link #pPipelineCreationFeedback}. */
     public static VkPipelineCreationFeedback npPipelineCreationFeedback(long struct) { return VkPipelineCreationFeedback.create(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINECREATIONFEEDBACK)); }
     /** Unsafe version of {@link #pipelineStageCreationFeedbackCount}. */
-    public static int npipelineStageCreationFeedbackCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT); }
+    public static int npipelineStageCreationFeedbackCount(long struct) { return memGetInt(struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT); }
     /** Unsafe version of {@link #pPipelineStageCreationFeedbacks}. */
     @Nullable public static VkPipelineCreationFeedback.Buffer npPipelineStageCreationFeedbacks(long struct) { return VkPipelineCreationFeedback.createSafe(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS), npipelineStageCreationFeedbackCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCreationFeedbackCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCreationFeedbackCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineCreationFeedbackCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #pPipelineCreationFeedback(VkPipelineCreationFeedback) pPipelineCreationFeedback}. */
     public static void npPipelineCreationFeedback(long struct, VkPipelineCreationFeedback value) { memPutAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINECREATIONFEEDBACK, value.address()); }
     /** Sets the specified value to the {@code pipelineStageCreationFeedbackCount} field of the specified {@code struct}. */
-    public static void npipelineStageCreationFeedbackCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT, value); }
+    public static void npipelineStageCreationFeedbackCount(long struct, int value) { memPutInt(struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT, value); }
     /** Unsafe version of {@link #pPipelineStageCreationFeedbacks(VkPipelineCreationFeedback.Buffer) pPipelineStageCreationFeedbacks}. */
     public static void npPipelineStageCreationFeedbacks(long struct, @Nullable VkPipelineCreationFeedback.Buffer value) { memPutAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS, memAddressSafe(value)); npipelineStageCreationFeedbackCount(struct, value == null ? 0 : value.remaining()); }
 

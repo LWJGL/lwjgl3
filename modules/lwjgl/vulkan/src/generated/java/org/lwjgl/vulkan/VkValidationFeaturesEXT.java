@@ -298,28 +298,28 @@ public class VkValidationFeaturesEXT extends Struct<VkValidationFeaturesEXT> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkValidationFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkValidationFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkValidationFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #enabledValidationFeatureCount}. */
-    public static int nenabledValidationFeatureCount(long struct) { return UNSAFE.getInt(null, struct + VkValidationFeaturesEXT.ENABLEDVALIDATIONFEATURECOUNT); }
+    public static int nenabledValidationFeatureCount(long struct) { return memGetInt(struct + VkValidationFeaturesEXT.ENABLEDVALIDATIONFEATURECOUNT); }
     /** Unsafe version of {@link #pEnabledValidationFeatures() pEnabledValidationFeatures}. */
     @Nullable public static IntBuffer npEnabledValidationFeatures(long struct) { return memIntBufferSafe(memGetAddress(struct + VkValidationFeaturesEXT.PENABLEDVALIDATIONFEATURES), nenabledValidationFeatureCount(struct)); }
     /** Unsafe version of {@link #disabledValidationFeatureCount}. */
-    public static int ndisabledValidationFeatureCount(long struct) { return UNSAFE.getInt(null, struct + VkValidationFeaturesEXT.DISABLEDVALIDATIONFEATURECOUNT); }
+    public static int ndisabledValidationFeatureCount(long struct) { return memGetInt(struct + VkValidationFeaturesEXT.DISABLEDVALIDATIONFEATURECOUNT); }
     /** Unsafe version of {@link #pDisabledValidationFeatures() pDisabledValidationFeatures}. */
     @Nullable public static IntBuffer npDisabledValidationFeatures(long struct) { return memIntBufferSafe(memGetAddress(struct + VkValidationFeaturesEXT.PDISABLEDVALIDATIONFEATURES), ndisabledValidationFeatureCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkValidationFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkValidationFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkValidationFeaturesEXT.PNEXT, value); }
     /** Sets the specified value to the {@code enabledValidationFeatureCount} field of the specified {@code struct}. */
-    public static void nenabledValidationFeatureCount(long struct, int value) { UNSAFE.putInt(null, struct + VkValidationFeaturesEXT.ENABLEDVALIDATIONFEATURECOUNT, value); }
+    public static void nenabledValidationFeatureCount(long struct, int value) { memPutInt(struct + VkValidationFeaturesEXT.ENABLEDVALIDATIONFEATURECOUNT, value); }
     /** Unsafe version of {@link #pEnabledValidationFeatures(IntBuffer) pEnabledValidationFeatures}. */
     public static void npEnabledValidationFeatures(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkValidationFeaturesEXT.PENABLEDVALIDATIONFEATURES, memAddressSafe(value)); nenabledValidationFeatureCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code disabledValidationFeatureCount} field of the specified {@code struct}. */
-    public static void ndisabledValidationFeatureCount(long struct, int value) { UNSAFE.putInt(null, struct + VkValidationFeaturesEXT.DISABLEDVALIDATIONFEATURECOUNT, value); }
+    public static void ndisabledValidationFeatureCount(long struct, int value) { memPutInt(struct + VkValidationFeaturesEXT.DISABLEDVALIDATIONFEATURECOUNT, value); }
     /** Unsafe version of {@link #pDisabledValidationFeatures(IntBuffer) pDisabledValidationFeatures}. */
     public static void npDisabledValidationFeatures(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkValidationFeaturesEXT.PDISABLEDVALIDATIONFEATURES, memAddressSafe(value)); ndisabledValidationFeatureCount(struct, value == null ? 0 : value.remaining()); }
 

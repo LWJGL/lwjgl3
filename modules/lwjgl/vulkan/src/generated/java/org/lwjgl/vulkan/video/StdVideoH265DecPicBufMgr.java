@@ -253,19 +253,19 @@ public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> i
     public static IntBuffer nmax_latency_increase_plus1(long struct) { return memIntBuffer(struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE); }
     /** Unsafe version of {@link #max_latency_increase_plus1(int) max_latency_increase_plus1}. */
     public static int nmax_latency_increase_plus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 4);
+        return memGetInt(struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1}. */
     public static ByteBuffer nmax_dec_pic_buffering_minus1(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE); }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(int) max_dec_pic_buffering_minus1}. */
     public static byte nmax_dec_pic_buffering_minus1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #max_num_reorder_pics}. */
     public static ByteBuffer nmax_num_reorder_pics(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE); }
     /** Unsafe version of {@link #max_num_reorder_pics(int) max_num_reorder_pics}. */
     public static byte nmax_num_reorder_pics(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1);
+        return memGetByte(struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #max_latency_increase_plus1(IntBuffer) max_latency_increase_plus1}. */
@@ -275,7 +275,7 @@ public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> i
     }
     /** Unsafe version of {@link #max_latency_increase_plus1(int, int) max_latency_increase_plus1}. */
     public static void nmax_latency_increase_plus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 4, value);
+        memPutInt(struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(ByteBuffer) max_dec_pic_buffering_minus1}. */
     public static void nmax_dec_pic_buffering_minus1(long struct, ByteBuffer value) {
@@ -284,7 +284,7 @@ public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> i
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(int, byte) max_dec_pic_buffering_minus1}. */
     public static void nmax_dec_pic_buffering_minus1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #max_num_reorder_pics(ByteBuffer) max_num_reorder_pics}. */
     public static void nmax_num_reorder_pics(long struct, ByteBuffer value) {
@@ -293,7 +293,7 @@ public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> i
     }
     /** Unsafe version of {@link #max_num_reorder_pics(int, byte) max_num_reorder_pics}. */
     public static void nmax_num_reorder_pics(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1, value);
+        memPutByte(struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 1, value);
     }
 
     // -----------------------------------

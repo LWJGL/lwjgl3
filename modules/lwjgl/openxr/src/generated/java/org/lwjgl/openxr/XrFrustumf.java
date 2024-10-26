@@ -261,18 +261,18 @@ public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
     /** Unsafe version of {@link #fov}. */
     public static XrFovf nfov(long struct) { return XrFovf.create(struct + XrFrustumf.FOV); }
     /** Unsafe version of {@link #nearZ}. */
-    public static float nnearZ(long struct) { return UNSAFE.getFloat(null, struct + XrFrustumf.NEARZ); }
+    public static float nnearZ(long struct) { return memGetFloat(struct + XrFrustumf.NEARZ); }
     /** Unsafe version of {@link #farZ}. */
-    public static float nfarZ(long struct) { return UNSAFE.getFloat(null, struct + XrFrustumf.FARZ); }
+    public static float nfarZ(long struct) { return memGetFloat(struct + XrFrustumf.FARZ); }
 
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrFrustumf.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #fov(XrFovf) fov}. */
     public static void nfov(long struct, XrFovf value) { memCopy(value.address(), struct + XrFrustumf.FOV, XrFovf.SIZEOF); }
     /** Unsafe version of {@link #nearZ(float) nearZ}. */
-    public static void nnearZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrFrustumf.NEARZ, value); }
+    public static void nnearZ(long struct, float value) { memPutFloat(struct + XrFrustumf.NEARZ, value); }
     /** Unsafe version of {@link #farZ(float) farZ}. */
-    public static void nfarZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrFrustumf.FARZ, value); }
+    public static void nfarZ(long struct, float value) { memPutFloat(struct + XrFrustumf.FARZ, value); }
 
     // -----------------------------------
 

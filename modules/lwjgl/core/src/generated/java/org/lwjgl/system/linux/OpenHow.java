@@ -240,18 +240,18 @@ public class OpenHow extends Struct<OpenHow> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + OpenHow.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + OpenHow.FLAGS); }
     /** Unsafe version of {@link #mode}. */
-    public static long nmode(long struct) { return UNSAFE.getLong(null, struct + OpenHow.MODE); }
+    public static long nmode(long struct) { return memGetLong(struct + OpenHow.MODE); }
     /** Unsafe version of {@link #resolve}. */
-    public static long nresolve(long struct) { return UNSAFE.getLong(null, struct + OpenHow.RESOLVE); }
+    public static long nresolve(long struct) { return memGetLong(struct + OpenHow.RESOLVE); }
 
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + OpenHow.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + OpenHow.FLAGS, value); }
     /** Unsafe version of {@link #mode(long) mode}. */
-    public static void nmode(long struct, long value) { UNSAFE.putLong(null, struct + OpenHow.MODE, value); }
+    public static void nmode(long struct, long value) { memPutLong(struct + OpenHow.MODE, value); }
     /** Unsafe version of {@link #resolve(long) resolve}. */
-    public static void nresolve(long struct, long value) { UNSAFE.putLong(null, struct + OpenHow.RESOLVE, value); }
+    public static void nresolve(long struct, long value) { memPutLong(struct + OpenHow.RESOLVE, value); }
 
     // -----------------------------------
 

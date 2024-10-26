@@ -265,18 +265,18 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #cornerSampledImage}. */
-    public static int ncornerSampledImage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.CORNERSAMPLEDIMAGE); }
+    public static int ncornerSampledImage(long struct) { return memGetInt(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.CORNERSAMPLEDIMAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #cornerSampledImage(boolean) cornerSampledImage}. */
-    public static void ncornerSampledImage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.CORNERSAMPLEDIMAGE, value); }
+    public static void ncornerSampledImage(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCornerSampledImageFeaturesNV.CORNERSAMPLEDIMAGE, value); }
 
     // -----------------------------------
 

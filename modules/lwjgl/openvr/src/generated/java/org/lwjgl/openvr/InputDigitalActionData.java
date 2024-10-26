@@ -233,15 +233,15 @@ public class InputDigitalActionData extends Struct<InputDigitalActionData> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #bActive}. */
-    public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputDigitalActionData.BACTIVE) != 0; }
+    public static boolean nbActive(long struct) { return memGetByte(struct + InputDigitalActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
-    public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputDigitalActionData.ACTIVEORIGIN); }
+    public static long nactiveOrigin(long struct) { return memGetLong(struct + InputDigitalActionData.ACTIVEORIGIN); }
     /** Unsafe version of {@link #bState}. */
-    public static boolean nbState(long struct) { return UNSAFE.getByte(null, struct + InputDigitalActionData.BSTATE) != 0; }
+    public static boolean nbState(long struct) { return memGetByte(struct + InputDigitalActionData.BSTATE) != 0; }
     /** Unsafe version of {@link #bChanged}. */
-    public static boolean nbChanged(long struct) { return UNSAFE.getByte(null, struct + InputDigitalActionData.BCHANGED) != 0; }
+    public static boolean nbChanged(long struct) { return memGetByte(struct + InputDigitalActionData.BCHANGED) != 0; }
     /** Unsafe version of {@link #fUpdateTime}. */
-    public static float nfUpdateTime(long struct) { return UNSAFE.getFloat(null, struct + InputDigitalActionData.FUPDATETIME); }
+    public static float nfUpdateTime(long struct) { return memGetFloat(struct + InputDigitalActionData.FUPDATETIME); }
 
     // -----------------------------------
 

@@ -232,18 +232,18 @@ public class StdVideoEncodeH264RefListModEntry extends Struct<StdVideoEncodeH264
     // -----------------------------------
 
     /** Unsafe version of {@link #modification_of_pic_nums_idc}. */
-    public static int nmodification_of_pic_nums_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264RefListModEntry.MODIFICATION_OF_PIC_NUMS_IDC); }
+    public static int nmodification_of_pic_nums_idc(long struct) { return memGetInt(struct + StdVideoEncodeH264RefListModEntry.MODIFICATION_OF_PIC_NUMS_IDC); }
     /** Unsafe version of {@link #abs_diff_pic_num_minus1}. */
-    public static short nabs_diff_pic_num_minus1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264RefListModEntry.ABS_DIFF_PIC_NUM_MINUS1); }
+    public static short nabs_diff_pic_num_minus1(long struct) { return memGetShort(struct + StdVideoEncodeH264RefListModEntry.ABS_DIFF_PIC_NUM_MINUS1); }
     /** Unsafe version of {@link #long_term_pic_num}. */
-    public static short nlong_term_pic_num(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264RefListModEntry.LONG_TERM_PIC_NUM); }
+    public static short nlong_term_pic_num(long struct) { return memGetShort(struct + StdVideoEncodeH264RefListModEntry.LONG_TERM_PIC_NUM); }
 
     /** Unsafe version of {@link #modification_of_pic_nums_idc(int) modification_of_pic_nums_idc}. */
-    public static void nmodification_of_pic_nums_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264RefListModEntry.MODIFICATION_OF_PIC_NUMS_IDC, value); }
+    public static void nmodification_of_pic_nums_idc(long struct, int value) { memPutInt(struct + StdVideoEncodeH264RefListModEntry.MODIFICATION_OF_PIC_NUMS_IDC, value); }
     /** Unsafe version of {@link #abs_diff_pic_num_minus1(short) abs_diff_pic_num_minus1}. */
-    public static void nabs_diff_pic_num_minus1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264RefListModEntry.ABS_DIFF_PIC_NUM_MINUS1, value); }
+    public static void nabs_diff_pic_num_minus1(long struct, short value) { memPutShort(struct + StdVideoEncodeH264RefListModEntry.ABS_DIFF_PIC_NUM_MINUS1, value); }
     /** Unsafe version of {@link #long_term_pic_num(short) long_term_pic_num}. */
-    public static void nlong_term_pic_num(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264RefListModEntry.LONG_TERM_PIC_NUM, value); }
+    public static void nlong_term_pic_num(long struct, short value) { memPutShort(struct + StdVideoEncodeH264RefListModEntry.LONG_TERM_PIC_NUM, value); }
 
     // -----------------------------------
 

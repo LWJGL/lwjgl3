@@ -309,24 +309,24 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRender
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupRenderPassBeginInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupRenderPassBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupRenderPassBeginInfo.PNEXT); }
     /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupRenderPassBeginInfo.DEVICEMASK); }
+    public static int ndeviceMask(long struct) { return memGetInt(struct + VkDeviceGroupRenderPassBeginInfo.DEVICEMASK); }
     /** Unsafe version of {@link #deviceRenderAreaCount}. */
-    public static int ndeviceRenderAreaCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupRenderPassBeginInfo.DEVICERENDERAREACOUNT); }
+    public static int ndeviceRenderAreaCount(long struct) { return memGetInt(struct + VkDeviceGroupRenderPassBeginInfo.DEVICERENDERAREACOUNT); }
     /** Unsafe version of {@link #pDeviceRenderAreas}. */
     @Nullable public static VkRect2D.Buffer npDeviceRenderAreas(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkDeviceGroupRenderPassBeginInfo.PDEVICERENDERAREAS), ndeviceRenderAreaCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupRenderPassBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupRenderPassBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupRenderPassBeginInfo.PNEXT, value); }
     /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupRenderPassBeginInfo.DEVICEMASK, value); }
+    public static void ndeviceMask(long struct, int value) { memPutInt(struct + VkDeviceGroupRenderPassBeginInfo.DEVICEMASK, value); }
     /** Sets the specified value to the {@code deviceRenderAreaCount} field of the specified {@code struct}. */
-    public static void ndeviceRenderAreaCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupRenderPassBeginInfo.DEVICERENDERAREACOUNT, value); }
+    public static void ndeviceRenderAreaCount(long struct, int value) { memPutInt(struct + VkDeviceGroupRenderPassBeginInfo.DEVICERENDERAREACOUNT, value); }
     /** Unsafe version of {@link #pDeviceRenderAreas(VkRect2D.Buffer) pDeviceRenderAreas}. */
     public static void npDeviceRenderAreas(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkDeviceGroupRenderPassBeginInfo.PDEVICERENDERAREAS, memAddressSafe(value)); ndeviceRenderAreaCount(struct, value == null ? 0 : value.remaining()); }
 

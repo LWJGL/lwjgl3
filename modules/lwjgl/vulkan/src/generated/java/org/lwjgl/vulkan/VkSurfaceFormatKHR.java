@@ -218,9 +218,9 @@ public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFormatKHR.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkSurfaceFormatKHR.FORMAT); }
     /** Unsafe version of {@link #colorSpace}. */
-    public static int ncolorSpace(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFormatKHR.COLORSPACE); }
+    public static int ncolorSpace(long struct) { return memGetInt(struct + VkSurfaceFormatKHR.COLORSPACE); }
 
     // -----------------------------------
 

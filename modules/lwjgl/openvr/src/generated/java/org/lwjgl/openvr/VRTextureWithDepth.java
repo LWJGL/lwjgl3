@@ -268,18 +268,18 @@ public class VRTextureWithDepth extends Struct<VRTextureWithDepth> implements Na
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + VRTextureWithDepth.HANDLE); }
     /** Unsafe version of {@link #eType}. */
-    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithDepth.ETYPE); }
+    public static int neType(long struct) { return memGetInt(struct + VRTextureWithDepth.ETYPE); }
     /** Unsafe version of {@link #eColorSpace}. */
-    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithDepth.ECOLORSPACE); }
+    public static int neColorSpace(long struct) { return memGetInt(struct + VRTextureWithDepth.ECOLORSPACE); }
     /** Unsafe version of {@link #depth}. */
     public static VRTextureDepthInfo ndepth(long struct) { return VRTextureDepthInfo.create(struct + VRTextureWithDepth.DEPTH); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + VRTextureWithDepth.HANDLE, check(value)); }
     /** Unsafe version of {@link #eType(int) eType}. */
-    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithDepth.ETYPE, value); }
+    public static void neType(long struct, int value) { memPutInt(struct + VRTextureWithDepth.ETYPE, value); }
     /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
-    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithDepth.ECOLORSPACE, value); }
+    public static void neColorSpace(long struct, int value) { memPutInt(struct + VRTextureWithDepth.ECOLORSPACE, value); }
     /** Unsafe version of {@link #depth(VRTextureDepthInfo) depth}. */
     public static void ndepth(long struct, VRTextureDepthInfo value) { memCopy(value.address(), struct + VRTextureWithDepth.DEPTH, VRTextureDepthInfo.SIZEOF); }
 

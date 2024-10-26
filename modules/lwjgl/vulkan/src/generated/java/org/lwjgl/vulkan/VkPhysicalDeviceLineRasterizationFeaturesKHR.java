@@ -301,38 +301,38 @@ public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #rectangularLines}. */
-    public static int nrectangularLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES); }
+    public static int nrectangularLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES); }
     /** Unsafe version of {@link #bresenhamLines}. */
-    public static int nbresenhamLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES); }
+    public static int nbresenhamLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES); }
     /** Unsafe version of {@link #smoothLines}. */
-    public static int nsmoothLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES); }
+    public static int nsmoothLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES); }
     /** Unsafe version of {@link #stippledRectangularLines}. */
-    public static int nstippledRectangularLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES); }
+    public static int nstippledRectangularLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES); }
     /** Unsafe version of {@link #stippledBresenhamLines}. */
-    public static int nstippledBresenhamLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES); }
+    public static int nstippledBresenhamLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES); }
     /** Unsafe version of {@link #stippledSmoothLines}. */
-    public static int nstippledSmoothLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES); }
+    public static int nstippledSmoothLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #rectangularLines(boolean) rectangularLines}. */
-    public static void nrectangularLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES, value); }
+    public static void nrectangularLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES, value); }
     /** Unsafe version of {@link #bresenhamLines(boolean) bresenhamLines}. */
-    public static void nbresenhamLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES, value); }
+    public static void nbresenhamLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES, value); }
     /** Unsafe version of {@link #smoothLines(boolean) smoothLines}. */
-    public static void nsmoothLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES, value); }
+    public static void nsmoothLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES, value); }
     /** Unsafe version of {@link #stippledRectangularLines(boolean) stippledRectangularLines}. */
-    public static void nstippledRectangularLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES, value); }
+    public static void nstippledRectangularLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES, value); }
     /** Unsafe version of {@link #stippledBresenhamLines(boolean) stippledBresenhamLines}. */
-    public static void nstippledBresenhamLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES, value); }
+    public static void nstippledBresenhamLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES, value); }
     /** Unsafe version of {@link #stippledSmoothLines(boolean) stippledSmoothLines}. */
-    public static void nstippledSmoothLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES, value); }
+    public static void nstippledSmoothLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES, value); }
 
     // -----------------------------------
 

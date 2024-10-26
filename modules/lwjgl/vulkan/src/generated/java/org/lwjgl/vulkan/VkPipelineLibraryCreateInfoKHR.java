@@ -268,20 +268,20 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLibraryCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineLibraryCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineLibraryCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #libraryCount}. */
-    public static int nlibraryCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineLibraryCreateInfoKHR.LIBRARYCOUNT); }
+    public static int nlibraryCount(long struct) { return memGetInt(struct + VkPipelineLibraryCreateInfoKHR.LIBRARYCOUNT); }
     /** Unsafe version of {@link #pLibraries() pLibraries}. */
     @Nullable public static LongBuffer npLibraries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLibraryCreateInfoKHR.PLIBRARIES), nlibraryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLibraryCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineLibraryCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineLibraryCreateInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code libraryCount} field of the specified {@code struct}. */
-    public static void nlibraryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineLibraryCreateInfoKHR.LIBRARYCOUNT, value); }
+    public static void nlibraryCount(long struct, int value) { memPutInt(struct + VkPipelineLibraryCreateInfoKHR.LIBRARYCOUNT, value); }
     /** Unsafe version of {@link #pLibraries(LongBuffer) pLibraries}. */
     public static void npLibraries(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkPipelineLibraryCreateInfoKHR.PLIBRARIES, memAddressSafe(value)); nlibraryCount(struct, value == null ? 0 : value.remaining()); }
 

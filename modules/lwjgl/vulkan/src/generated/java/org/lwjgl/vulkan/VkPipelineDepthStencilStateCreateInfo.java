@@ -378,54 +378,54 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct<VkPipelineDept
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineDepthStencilStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #depthTestEnable}. */
-    public static int ndepthTestEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHTESTENABLE); }
+    public static int ndepthTestEnable(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHTESTENABLE); }
     /** Unsafe version of {@link #depthWriteEnable}. */
-    public static int ndepthWriteEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHWRITEENABLE); }
+    public static int ndepthWriteEnable(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHWRITEENABLE); }
     /** Unsafe version of {@link #depthCompareOp}. */
-    public static int ndepthCompareOp(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHCOMPAREOP); }
+    public static int ndepthCompareOp(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHCOMPAREOP); }
     /** Unsafe version of {@link #depthBoundsTestEnable}. */
-    public static int ndepthBoundsTestEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHBOUNDSTESTENABLE); }
+    public static int ndepthBoundsTestEnable(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHBOUNDSTESTENABLE); }
     /** Unsafe version of {@link #stencilTestEnable}. */
-    public static int nstencilTestEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDepthStencilStateCreateInfo.STENCILTESTENABLE); }
+    public static int nstencilTestEnable(long struct) { return memGetInt(struct + VkPipelineDepthStencilStateCreateInfo.STENCILTESTENABLE); }
     /** Unsafe version of {@link #front}. */
     public static VkStencilOpState nfront(long struct) { return VkStencilOpState.create(struct + VkPipelineDepthStencilStateCreateInfo.FRONT); }
     /** Unsafe version of {@link #back}. */
     public static VkStencilOpState nback(long struct) { return VkStencilOpState.create(struct + VkPipelineDepthStencilStateCreateInfo.BACK); }
     /** Unsafe version of {@link #minDepthBounds}. */
-    public static float nminDepthBounds(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineDepthStencilStateCreateInfo.MINDEPTHBOUNDS); }
+    public static float nminDepthBounds(long struct) { return memGetFloat(struct + VkPipelineDepthStencilStateCreateInfo.MINDEPTHBOUNDS); }
     /** Unsafe version of {@link #maxDepthBounds}. */
-    public static float nmaxDepthBounds(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineDepthStencilStateCreateInfo.MAXDEPTHBOUNDS); }
+    public static float nmaxDepthBounds(long struct) { return memGetFloat(struct + VkPipelineDepthStencilStateCreateInfo.MAXDEPTHBOUNDS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineDepthStencilStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #depthTestEnable(boolean) depthTestEnable}. */
-    public static void ndepthTestEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHTESTENABLE, value); }
+    public static void ndepthTestEnable(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHTESTENABLE, value); }
     /** Unsafe version of {@link #depthWriteEnable(boolean) depthWriteEnable}. */
-    public static void ndepthWriteEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHWRITEENABLE, value); }
+    public static void ndepthWriteEnable(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHWRITEENABLE, value); }
     /** Unsafe version of {@link #depthCompareOp(int) depthCompareOp}. */
-    public static void ndepthCompareOp(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHCOMPAREOP, value); }
+    public static void ndepthCompareOp(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHCOMPAREOP, value); }
     /** Unsafe version of {@link #depthBoundsTestEnable(boolean) depthBoundsTestEnable}. */
-    public static void ndepthBoundsTestEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.DEPTHBOUNDSTESTENABLE, value); }
+    public static void ndepthBoundsTestEnable(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.DEPTHBOUNDSTESTENABLE, value); }
     /** Unsafe version of {@link #stencilTestEnable(boolean) stencilTestEnable}. */
-    public static void nstencilTestEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDepthStencilStateCreateInfo.STENCILTESTENABLE, value); }
+    public static void nstencilTestEnable(long struct, int value) { memPutInt(struct + VkPipelineDepthStencilStateCreateInfo.STENCILTESTENABLE, value); }
     /** Unsafe version of {@link #front(VkStencilOpState) front}. */
     public static void nfront(long struct, VkStencilOpState value) { memCopy(value.address(), struct + VkPipelineDepthStencilStateCreateInfo.FRONT, VkStencilOpState.SIZEOF); }
     /** Unsafe version of {@link #back(VkStencilOpState) back}. */
     public static void nback(long struct, VkStencilOpState value) { memCopy(value.address(), struct + VkPipelineDepthStencilStateCreateInfo.BACK, VkStencilOpState.SIZEOF); }
     /** Unsafe version of {@link #minDepthBounds(float) minDepthBounds}. */
-    public static void nminDepthBounds(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineDepthStencilStateCreateInfo.MINDEPTHBOUNDS, value); }
+    public static void nminDepthBounds(long struct, float value) { memPutFloat(struct + VkPipelineDepthStencilStateCreateInfo.MINDEPTHBOUNDS, value); }
     /** Unsafe version of {@link #maxDepthBounds(float) maxDepthBounds}. */
-    public static void nmaxDepthBounds(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineDepthStencilStateCreateInfo.MAXDEPTHBOUNDS, value); }
+    public static void nmaxDepthBounds(long struct, float value) { memPutFloat(struct + VkPipelineDepthStencilStateCreateInfo.MAXDEPTHBOUNDS, value); }
 
     // -----------------------------------
 

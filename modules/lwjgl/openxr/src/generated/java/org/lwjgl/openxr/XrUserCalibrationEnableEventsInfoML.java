@@ -248,18 +248,18 @@ public class XrUserCalibrationEnableEventsInfoML extends Struct<XrUserCalibratio
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrUserCalibrationEnableEventsInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrUserCalibrationEnableEventsInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrUserCalibrationEnableEventsInfoML.NEXT); }
     /** Unsafe version of {@link #enabled}. */
-    public static int nenabled(long struct) { return UNSAFE.getInt(null, struct + XrUserCalibrationEnableEventsInfoML.ENABLED); }
+    public static int nenabled(long struct) { return memGetInt(struct + XrUserCalibrationEnableEventsInfoML.ENABLED); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrUserCalibrationEnableEventsInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrUserCalibrationEnableEventsInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrUserCalibrationEnableEventsInfoML.NEXT, value); }
     /** Unsafe version of {@link #enabled(boolean) enabled}. */
-    public static void nenabled(long struct, int value) { UNSAFE.putInt(null, struct + XrUserCalibrationEnableEventsInfoML.ENABLED, value); }
+    public static void nenabled(long struct, int value) { memPutInt(struct + XrUserCalibrationEnableEventsInfoML.ENABLED, value); }
 
     // -----------------------------------
 

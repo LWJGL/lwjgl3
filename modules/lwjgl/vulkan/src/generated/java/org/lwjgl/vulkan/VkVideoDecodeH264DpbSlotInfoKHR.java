@@ -290,14 +290,14 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct<VkVideoDecodeH264Dpb
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264DpbSlotInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH264DpbSlotInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264DpbSlotInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pStdReferenceInfo}. */
     public static StdVideoDecodeH264ReferenceInfo npStdReferenceInfo(long struct) { return StdVideoDecodeH264ReferenceInfo.create(memGetAddress(struct + VkVideoDecodeH264DpbSlotInfoKHR.PSTDREFERENCEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264DpbSlotInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH264DpbSlotInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264DpbSlotInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pStdReferenceInfo(StdVideoDecodeH264ReferenceInfo) pStdReferenceInfo}. */

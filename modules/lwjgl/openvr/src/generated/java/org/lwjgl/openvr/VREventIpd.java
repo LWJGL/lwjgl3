@@ -102,7 +102,7 @@ public class VREventIpd extends Struct<VREventIpd> {
     // -----------------------------------
 
     /** Unsafe version of {@link #ipdMeters}. */
-    public static float nipdMeters(long struct) { return UNSAFE.getFloat(null, struct + VREventIpd.IPDMETERS); }
+    public static float nipdMeters(long struct) { return memGetFloat(struct + VREventIpd.IPDMETERS); }
 
     // -----------------------------------
 

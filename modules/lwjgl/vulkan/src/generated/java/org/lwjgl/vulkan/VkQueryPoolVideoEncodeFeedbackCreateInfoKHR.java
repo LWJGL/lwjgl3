@@ -244,18 +244,18 @@ public class VkQueryPoolVideoEncodeFeedbackCreateInfoKHR extends Struct<VkQueryP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #encodeFeedbackFlags}. */
-    public static int nencodeFeedbackFlags(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.ENCODEFEEDBACKFLAGS); }
+    public static int nencodeFeedbackFlags(long struct) { return memGetInt(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.ENCODEFEEDBACKFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #encodeFeedbackFlags(int) encodeFeedbackFlags}. */
-    public static void nencodeFeedbackFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.ENCODEFEEDBACKFLAGS, value); }
+    public static void nencodeFeedbackFlags(long struct, int value) { memPutInt(struct + VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.ENCODEFEEDBACKFLAGS, value); }
 
     // -----------------------------------
 

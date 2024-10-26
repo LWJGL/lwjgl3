@@ -277,34 +277,34 @@ public class PathRead extends Struct<PathRead> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #ulPath}. */
-    public static long nulPath(long struct) { return UNSAFE.getLong(null, struct + PathRead.ULPATH); }
+    public static long nulPath(long struct) { return memGetLong(struct + PathRead.ULPATH); }
     /** Unsafe version of {@link #pvBuffer() pvBuffer}. */
     public static ByteBuffer npvBuffer(long struct) { return memByteBuffer(memGetAddress(struct + PathRead.PVBUFFER), nunBufferSize(struct)); }
     /** Unsafe version of {@link #unBufferSize}. */
-    public static int nunBufferSize(long struct) { return UNSAFE.getInt(null, struct + PathRead.UNBUFFERSIZE); }
+    public static int nunBufferSize(long struct) { return memGetInt(struct + PathRead.UNBUFFERSIZE); }
     /** Unsafe version of {@link #unTag}. */
-    public static int nunTag(long struct) { return UNSAFE.getInt(null, struct + PathRead.UNTAG); }
+    public static int nunTag(long struct) { return memGetInt(struct + PathRead.UNTAG); }
     /** Unsafe version of {@link #unRequiredBufferSize}. */
-    public static int nunRequiredBufferSize(long struct) { return UNSAFE.getInt(null, struct + PathRead.UNREQUIREDBUFFERSIZE); }
+    public static int nunRequiredBufferSize(long struct) { return memGetInt(struct + PathRead.UNREQUIREDBUFFERSIZE); }
     /** Unsafe version of {@link #eError}. */
-    public static int neError(long struct) { return UNSAFE.getInt(null, struct + PathRead.EERROR); }
+    public static int neError(long struct) { return memGetInt(struct + PathRead.EERROR); }
     /** Unsafe version of {@link #pszPath}. */
     public static ByteBuffer npszPath(long struct) { return memByteBufferNT1(memGetAddress(struct + PathRead.PSZPATH)); }
     /** Unsafe version of {@link #pszPathString}. */
     public static String npszPathString(long struct) { return memASCII(memGetAddress(struct + PathRead.PSZPATH)); }
 
     /** Unsafe version of {@link #ulPath(long) ulPath}. */
-    public static void nulPath(long struct, long value) { UNSAFE.putLong(null, struct + PathRead.ULPATH, value); }
+    public static void nulPath(long struct, long value) { memPutLong(struct + PathRead.ULPATH, value); }
     /** Unsafe version of {@link #pvBuffer(ByteBuffer) pvBuffer}. */
     public static void npvBuffer(long struct, ByteBuffer value) { memPutAddress(struct + PathRead.PVBUFFER, memAddress(value)); nunBufferSize(struct, value.remaining()); }
     /** Sets the specified value to the {@code unBufferSize} field of the specified {@code struct}. */
-    public static void nunBufferSize(long struct, int value) { UNSAFE.putInt(null, struct + PathRead.UNBUFFERSIZE, value); }
+    public static void nunBufferSize(long struct, int value) { memPutInt(struct + PathRead.UNBUFFERSIZE, value); }
     /** Unsafe version of {@link #unTag(int) unTag}. */
-    public static void nunTag(long struct, int value) { UNSAFE.putInt(null, struct + PathRead.UNTAG, value); }
+    public static void nunTag(long struct, int value) { memPutInt(struct + PathRead.UNTAG, value); }
     /** Unsafe version of {@link #unRequiredBufferSize(int) unRequiredBufferSize}. */
-    public static void nunRequiredBufferSize(long struct, int value) { UNSAFE.putInt(null, struct + PathRead.UNREQUIREDBUFFERSIZE, value); }
+    public static void nunRequiredBufferSize(long struct, int value) { memPutInt(struct + PathRead.UNREQUIREDBUFFERSIZE, value); }
     /** Unsafe version of {@link #eError(int) eError}. */
-    public static void neError(long struct, int value) { UNSAFE.putInt(null, struct + PathRead.EERROR, value); }
+    public static void neError(long struct, int value) { memPutInt(struct + PathRead.EERROR, value); }
     /** Unsafe version of {@link #pszPath(ByteBuffer) pszPath}. */
     public static void npszPath(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

@@ -216,11 +216,11 @@ public class FT_MM_Var extends Struct<FT_MM_Var> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #num_axis}. */
-    public static int nnum_axis(long struct) { return UNSAFE.getInt(null, struct + FT_MM_Var.NUM_AXIS); }
+    public static int nnum_axis(long struct) { return memGetInt(struct + FT_MM_Var.NUM_AXIS); }
     /** Unsafe version of {@link #num_designs}. */
-    public static int nnum_designs(long struct) { return UNSAFE.getInt(null, struct + FT_MM_Var.NUM_DESIGNS); }
+    public static int nnum_designs(long struct) { return memGetInt(struct + FT_MM_Var.NUM_DESIGNS); }
     /** Unsafe version of {@link #num_namedstyles}. */
-    public static int nnum_namedstyles(long struct) { return UNSAFE.getInt(null, struct + FT_MM_Var.NUM_NAMEDSTYLES); }
+    public static int nnum_namedstyles(long struct) { return memGetInt(struct + FT_MM_Var.NUM_NAMEDSTYLES); }
     /** Unsafe version of {@link #axis}. */
     public static FT_Var_Axis.Buffer naxis(long struct) { return FT_Var_Axis.create(memGetAddress(struct + FT_MM_Var.AXIS), nnum_axis(struct)); }
     /** Unsafe version of {@link #namedstyle}. */

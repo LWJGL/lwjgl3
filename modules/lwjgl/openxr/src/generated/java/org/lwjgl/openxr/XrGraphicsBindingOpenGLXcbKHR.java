@@ -315,38 +315,38 @@ public class XrGraphicsBindingOpenGLXcbKHR extends Struct<XrGraphicsBindingOpenG
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXcbKHR.NEXT); }
     /** Unsafe version of {@link #connection}. */
     public static long nconnection(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLXcbKHR.CONNECTION); }
     /** Unsafe version of {@link #screenNumber}. */
-    public static int nscreenNumber(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.SCREENNUMBER); }
+    public static int nscreenNumber(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.SCREENNUMBER); }
     /** Unsafe version of {@link #fbconfigid}. */
-    public static int nfbconfigid(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.FBCONFIGID); }
+    public static int nfbconfigid(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.FBCONFIGID); }
     /** Unsafe version of {@link #visualid}. */
-    public static int nvisualid(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.VISUALID); }
+    public static int nvisualid(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.VISUALID); }
     /** Unsafe version of {@link #glxDrawable}. */
-    public static int nglxDrawable(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.GLXDRAWABLE); }
+    public static int nglxDrawable(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.GLXDRAWABLE); }
     /** Unsafe version of {@link #glxContext}. */
-    public static int nglxContext(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.GLXCONTEXT); }
+    public static int nglxContext(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLXcbKHR.GLXCONTEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXcbKHR.NEXT, value); }
     /** Unsafe version of {@link #connection(long) connection}. */
     public static void nconnection(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXcbKHR.CONNECTION, check(value)); }
     /** Unsafe version of {@link #screenNumber(int) screenNumber}. */
-    public static void nscreenNumber(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.SCREENNUMBER, value); }
+    public static void nscreenNumber(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.SCREENNUMBER, value); }
     /** Unsafe version of {@link #fbconfigid(int) fbconfigid}. */
-    public static void nfbconfigid(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.FBCONFIGID, value); }
+    public static void nfbconfigid(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.FBCONFIGID, value); }
     /** Unsafe version of {@link #visualid(int) visualid}. */
-    public static void nvisualid(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.VISUALID, value); }
+    public static void nvisualid(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.VISUALID, value); }
     /** Unsafe version of {@link #glxDrawable(int) glxDrawable}. */
-    public static void nglxDrawable(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.GLXDRAWABLE, value); }
+    public static void nglxDrawable(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.GLXDRAWABLE, value); }
     /** Unsafe version of {@link #glxContext(int) glxContext}. */
-    public static void nglxContext(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.GLXCONTEXT, value); }
+    public static void nglxContext(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLXcbKHR.GLXCONTEXT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

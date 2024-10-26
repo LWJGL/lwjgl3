@@ -259,22 +259,22 @@ public class HmdQuaternionf extends Struct<HmdQuaternionf> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + HmdQuaternionf.W); }
+    public static float nw(long struct) { return memGetFloat(struct + HmdQuaternionf.W); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + HmdQuaternionf.X); }
+    public static float nx(long struct) { return memGetFloat(struct + HmdQuaternionf.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + HmdQuaternionf.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + HmdQuaternionf.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + HmdQuaternionf.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + HmdQuaternionf.Z); }
 
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + HmdQuaternionf.W, value); }
+    public static void nw(long struct, float value) { memPutFloat(struct + HmdQuaternionf.W, value); }
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + HmdQuaternionf.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + HmdQuaternionf.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + HmdQuaternionf.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + HmdQuaternionf.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + HmdQuaternionf.Z, value); }
+    public static void nz(long struct, float value) { memPutFloat(struct + HmdQuaternionf.Z, value); }
 
     // -----------------------------------
 

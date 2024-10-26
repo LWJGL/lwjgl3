@@ -288,26 +288,26 @@ public class VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #extendedDynamicState2}. */
-    public static int nextendedDynamicState2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2); }
+    public static int nextendedDynamicState2(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2); }
     /** Unsafe version of {@link #extendedDynamicState2LogicOp}. */
-    public static int nextendedDynamicState2LogicOp(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2LOGICOP); }
+    public static int nextendedDynamicState2LogicOp(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2LOGICOP); }
     /** Unsafe version of {@link #extendedDynamicState2PatchControlPoints}. */
-    public static int nextendedDynamicState2PatchControlPoints(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2PATCHCONTROLPOINTS); }
+    public static int nextendedDynamicState2PatchControlPoints(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2PATCHCONTROLPOINTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #extendedDynamicState2(boolean) extendedDynamicState2}. */
-    public static void nextendedDynamicState2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2, value); }
+    public static void nextendedDynamicState2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2, value); }
     /** Unsafe version of {@link #extendedDynamicState2LogicOp(boolean) extendedDynamicState2LogicOp}. */
-    public static void nextendedDynamicState2LogicOp(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2LOGICOP, value); }
+    public static void nextendedDynamicState2LogicOp(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2LOGICOP, value); }
     /** Unsafe version of {@link #extendedDynamicState2PatchControlPoints(boolean) extendedDynamicState2PatchControlPoints}. */
-    public static void nextendedDynamicState2PatchControlPoints(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2PATCHCONTROLPOINTS, value); }
+    public static void nextendedDynamicState2PatchControlPoints(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.EXTENDEDDYNAMICSTATE2PATCHCONTROLPOINTS, value); }
 
     // -----------------------------------
 

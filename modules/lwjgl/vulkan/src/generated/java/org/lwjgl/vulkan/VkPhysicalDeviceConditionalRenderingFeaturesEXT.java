@@ -276,22 +276,22 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #conditionalRendering}. */
-    public static int nconditionalRendering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.CONDITIONALRENDERING); }
+    public static int nconditionalRendering(long struct) { return memGetInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.CONDITIONALRENDERING); }
     /** Unsafe version of {@link #inheritedConditionalRendering}. */
-    public static int ninheritedConditionalRendering(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.INHERITEDCONDITIONALRENDERING); }
+    public static int ninheritedConditionalRendering(long struct) { return memGetInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.INHERITEDCONDITIONALRENDERING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #conditionalRendering(boolean) conditionalRendering}. */
-    public static void nconditionalRendering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.CONDITIONALRENDERING, value); }
+    public static void nconditionalRendering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.CONDITIONALRENDERING, value); }
     /** Unsafe version of {@link #inheritedConditionalRendering(boolean) inheritedConditionalRendering}. */
-    public static void ninheritedConditionalRendering(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.INHERITEDCONDITIONALRENDERING, value); }
+    public static void ninheritedConditionalRendering(long struct, int value) { memPutInt(struct + VkPhysicalDeviceConditionalRenderingFeaturesEXT.INHERITEDCONDITIONALRENDERING, value); }
 
     // -----------------------------------
 

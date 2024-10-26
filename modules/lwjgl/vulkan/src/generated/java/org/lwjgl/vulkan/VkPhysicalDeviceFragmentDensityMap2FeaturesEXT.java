@@ -246,18 +246,18 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #fragmentDensityMapDeferred}. */
-    public static int nfragmentDensityMapDeferred(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.FRAGMENTDENSITYMAPDEFERRED); }
+    public static int nfragmentDensityMapDeferred(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.FRAGMENTDENSITYMAPDEFERRED); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #fragmentDensityMapDeferred(boolean) fragmentDensityMapDeferred}. */
-    public static void nfragmentDensityMapDeferred(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.FRAGMENTDENSITYMAPDEFERRED, value); }
+    public static void nfragmentDensityMapDeferred(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.FRAGMENTDENSITYMAPDEFERRED, value); }
 
     // -----------------------------------
 

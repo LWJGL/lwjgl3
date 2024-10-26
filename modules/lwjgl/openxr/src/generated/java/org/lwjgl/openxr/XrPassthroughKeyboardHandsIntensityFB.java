@@ -265,22 +265,22 @@ public class XrPassthroughKeyboardHandsIntensityFB extends Struct<XrPassthroughK
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughKeyboardHandsIntensityFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughKeyboardHandsIntensityFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughKeyboardHandsIntensityFB.NEXT); }
     /** Unsafe version of {@link #leftHandIntensity}. */
-    public static float nleftHandIntensity(long struct) { return UNSAFE.getFloat(null, struct + XrPassthroughKeyboardHandsIntensityFB.LEFTHANDINTENSITY); }
+    public static float nleftHandIntensity(long struct) { return memGetFloat(struct + XrPassthroughKeyboardHandsIntensityFB.LEFTHANDINTENSITY); }
     /** Unsafe version of {@link #rightHandIntensity}. */
-    public static float nrightHandIntensity(long struct) { return UNSAFE.getFloat(null, struct + XrPassthroughKeyboardHandsIntensityFB.RIGHTHANDINTENSITY); }
+    public static float nrightHandIntensity(long struct) { return memGetFloat(struct + XrPassthroughKeyboardHandsIntensityFB.RIGHTHANDINTENSITY); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughKeyboardHandsIntensityFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughKeyboardHandsIntensityFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughKeyboardHandsIntensityFB.NEXT, value); }
     /** Unsafe version of {@link #leftHandIntensity(float) leftHandIntensity}. */
-    public static void nleftHandIntensity(long struct, float value) { UNSAFE.putFloat(null, struct + XrPassthroughKeyboardHandsIntensityFB.LEFTHANDINTENSITY, value); }
+    public static void nleftHandIntensity(long struct, float value) { memPutFloat(struct + XrPassthroughKeyboardHandsIntensityFB.LEFTHANDINTENSITY, value); }
     /** Unsafe version of {@link #rightHandIntensity(float) rightHandIntensity}. */
-    public static void nrightHandIntensity(long struct, float value) { UNSAFE.putFloat(null, struct + XrPassthroughKeyboardHandsIntensityFB.RIGHTHANDINTENSITY, value); }
+    public static void nrightHandIntensity(long struct, float value) { memPutFloat(struct + XrPassthroughKeyboardHandsIntensityFB.RIGHTHANDINTENSITY, value); }
 
     // -----------------------------------
 

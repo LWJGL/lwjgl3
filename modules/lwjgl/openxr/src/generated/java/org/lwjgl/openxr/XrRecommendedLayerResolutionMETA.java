@@ -254,16 +254,16 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRecommendedLayerResolutionMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRecommendedLayerResolutionMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRecommendedLayerResolutionMETA.NEXT); }
     /** Unsafe version of {@link #recommendedImageDimensions}. */
     public static XrExtent2Di nrecommendedImageDimensions(long struct) { return XrExtent2Di.create(struct + XrRecommendedLayerResolutionMETA.RECOMMENDEDIMAGEDIMENSIONS); }
     /** Unsafe version of {@link #isValid}. */
-    public static int nisValid(long struct) { return UNSAFE.getInt(null, struct + XrRecommendedLayerResolutionMETA.ISVALID); }
+    public static int nisValid(long struct) { return memGetInt(struct + XrRecommendedLayerResolutionMETA.ISVALID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRecommendedLayerResolutionMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRecommendedLayerResolutionMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRecommendedLayerResolutionMETA.NEXT, value); }
 

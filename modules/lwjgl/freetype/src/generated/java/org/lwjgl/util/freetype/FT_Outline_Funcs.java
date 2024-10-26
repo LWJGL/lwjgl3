@@ -274,7 +274,7 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     /** Unsafe version of {@link #cubic_to}. */
     @Nullable public static FT_Outline_CubicToFunc ncubic_to(long struct) { return FT_Outline_CubicToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.CUBIC_TO)); }
     /** Unsafe version of {@link #shift}. */
-    public static int nshift(long struct) { return UNSAFE.getInt(null, struct + FT_Outline_Funcs.SHIFT); }
+    public static int nshift(long struct) { return memGetInt(struct + FT_Outline_Funcs.SHIFT); }
     /** Unsafe version of {@link #delta}. */
     public static long ndelta(long struct) { return memGetCLong(struct + FT_Outline_Funcs.DELTA); }
 
@@ -287,7 +287,7 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     /** Unsafe version of {@link #cubic_to(FT_Outline_CubicToFuncI) cubic_to}. */
     public static void ncubic_to(long struct, @Nullable FT_Outline_CubicToFuncI value) { memPutAddress(struct + FT_Outline_Funcs.CUBIC_TO, memAddressSafe(value)); }
     /** Unsafe version of {@link #shift(int) shift}. */
-    public static void nshift(long struct, int value) { UNSAFE.putInt(null, struct + FT_Outline_Funcs.SHIFT, value); }
+    public static void nshift(long struct, int value) { memPutInt(struct + FT_Outline_Funcs.SHIFT, value); }
     /** Unsafe version of {@link #delta(long) delta}. */
     public static void ndelta(long struct, long value) { memPutCLong(struct + FT_Outline_Funcs.DELTA, value); }
 

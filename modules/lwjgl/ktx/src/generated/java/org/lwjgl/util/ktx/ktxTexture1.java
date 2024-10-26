@@ -371,7 +371,7 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #classId}. */
-    public static int nclassId(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.CLASSID); }
+    public static int nclassId(long struct) { return memGetInt(struct + ktxTexture1.CLASSID); }
     /** Unsafe version of {@link #vtbl}. */
     public static ktxTexture_vtbl nvtbl(long struct) { return ktxTexture_vtbl.create(memGetAddress(struct + ktxTexture1.VTBL)); }
     /** Unsafe version of {@link #vvtbl}. */
@@ -379,33 +379,33 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
     /** Unsafe version of {@link #_protected(int) _protected}. */
     public static PointerBuffer n_protected(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PROTECTED), capacity); }
     /** Unsafe version of {@link #isArray}. */
-    public static boolean nisArray(long struct) { return UNSAFE.getByte(null, struct + ktxTexture1.ISARRAY) != 0; }
+    public static boolean nisArray(long struct) { return memGetByte(struct + ktxTexture1.ISARRAY) != 0; }
     /** Unsafe version of {@link #isCubemap}. */
-    public static boolean nisCubemap(long struct) { return UNSAFE.getByte(null, struct + ktxTexture1.ISCUBEMAP) != 0; }
+    public static boolean nisCubemap(long struct) { return memGetByte(struct + ktxTexture1.ISCUBEMAP) != 0; }
     /** Unsafe version of {@link #isCompressed}. */
-    public static boolean nisCompressed(long struct) { return UNSAFE.getByte(null, struct + ktxTexture1.ISCOMPRESSED) != 0; }
+    public static boolean nisCompressed(long struct) { return memGetByte(struct + ktxTexture1.ISCOMPRESSED) != 0; }
     /** Unsafe version of {@link #generateMipmaps}. */
-    public static boolean ngenerateMipmaps(long struct) { return UNSAFE.getByte(null, struct + ktxTexture1.GENERATEMIPMAPS) != 0; }
+    public static boolean ngenerateMipmaps(long struct) { return memGetByte(struct + ktxTexture1.GENERATEMIPMAPS) != 0; }
     /** Unsafe version of {@link #baseWidth}. */
-    public static int nbaseWidth(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.BASEWIDTH); }
+    public static int nbaseWidth(long struct) { return memGetInt(struct + ktxTexture1.BASEWIDTH); }
     /** Unsafe version of {@link #baseHeight}. */
-    public static int nbaseHeight(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.BASEHEIGHT); }
+    public static int nbaseHeight(long struct) { return memGetInt(struct + ktxTexture1.BASEHEIGHT); }
     /** Unsafe version of {@link #baseDepth}. */
-    public static int nbaseDepth(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.BASEDEPTH); }
+    public static int nbaseDepth(long struct) { return memGetInt(struct + ktxTexture1.BASEDEPTH); }
     /** Unsafe version of {@link #numDimensions}. */
-    public static int nnumDimensions(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.NUMDIMENSIONS); }
+    public static int nnumDimensions(long struct) { return memGetInt(struct + ktxTexture1.NUMDIMENSIONS); }
     /** Unsafe version of {@link #numLevels}. */
-    public static int nnumLevels(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.NUMLEVELS); }
+    public static int nnumLevels(long struct) { return memGetInt(struct + ktxTexture1.NUMLEVELS); }
     /** Unsafe version of {@link #numLayers}. */
-    public static int nnumLayers(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.NUMLAYERS); }
+    public static int nnumLayers(long struct) { return memGetInt(struct + ktxTexture1.NUMLAYERS); }
     /** Unsafe version of {@link #numFaces}. */
-    public static int nnumFaces(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.NUMFACES); }
+    public static int nnumFaces(long struct) { return memGetInt(struct + ktxTexture1.NUMFACES); }
     /** Unsafe version of {@link #orientation}. */
     public static ktxOrientation norientation(long struct) { return ktxOrientation.create(struct + ktxTexture1.ORIENTATION); }
     /** Unsafe version of {@link #kvDataHead}. */
     public static long nkvDataHead(long struct) { return memGetAddress(struct + ktxTexture1.KVDATAHEAD); }
     /** Unsafe version of {@link #kvDataLen}. */
-    public static int nkvDataLen(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.KVDATALEN); }
+    public static int nkvDataLen(long struct) { return memGetInt(struct + ktxTexture1.KVDATALEN); }
     /** Unsafe version of {@link #kvData() kvData}. */
     @Nullable public static ByteBuffer nkvData(long struct) { return memByteBufferSafe(memGetAddress(struct + ktxTexture1.KVDATA), nkvDataLen(struct)); }
     /** Unsafe version of {@link #dataSize}. */
@@ -413,13 +413,13 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
     /** Unsafe version of {@link #pData() pData}. */
     public static ByteBuffer npData(long struct) { return memByteBuffer(memGetAddress(struct + ktxTexture1.PDATA), (int)ndataSize(struct)); }
     /** Unsafe version of {@link #glFormat}. */
-    public static int nglFormat(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.GLFORMAT); }
+    public static int nglFormat(long struct) { return memGetInt(struct + ktxTexture1.GLFORMAT); }
     /** Unsafe version of {@link #glInternalformat}. */
-    public static int nglInternalformat(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.GLINTERNALFORMAT); }
+    public static int nglInternalformat(long struct) { return memGetInt(struct + ktxTexture1.GLINTERNALFORMAT); }
     /** Unsafe version of {@link #glBaseInternalformat}. */
-    public static int nglBaseInternalformat(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.GLBASEINTERNALFORMAT); }
+    public static int nglBaseInternalformat(long struct) { return memGetInt(struct + ktxTexture1.GLBASEINTERNALFORMAT); }
     /** Unsafe version of {@link #glType}. */
-    public static int nglType(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.GLTYPE); }
+    public static int nglType(long struct) { return memGetInt(struct + ktxTexture1.GLTYPE); }
     public static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PRIVATE), capacity); }
 
     // -----------------------------------

@@ -273,20 +273,20 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     // -----------------------------------
 
     /** Unsafe version of {@link #vertexUpdateTime}. */
-    public static long nvertexUpdateTime(long struct) { return UNSAFE.getLong(null, struct + XrHandMeshVertexBufferMSFT.VERTEXUPDATETIME); }
+    public static long nvertexUpdateTime(long struct) { return memGetLong(struct + XrHandMeshVertexBufferMSFT.VERTEXUPDATETIME); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
-    public static int nvertexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshVertexBufferMSFT.VERTEXCAPACITYINPUT); }
+    public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT); }
+    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
     @Nullable public static XrHandMeshVertexMSFT.Buffer nvertices(long struct) { return XrHandMeshVertexMSFT.createSafe(memGetAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES), nvertexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #vertexUpdateTime(long) vertexUpdateTime}. */
-    public static void nvertexUpdateTime(long struct, long value) { UNSAFE.putLong(null, struct + XrHandMeshVertexBufferMSFT.VERTEXUPDATETIME, value); }
+    public static void nvertexUpdateTime(long struct, long value) { memPutLong(struct + XrHandMeshVertexBufferMSFT.VERTEXUPDATETIME, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
-    public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshVertexBufferMSFT.VERTEXCAPACITYINPUT, value); }
+    public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT, value); }
+    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrHandMeshVertexMSFT.Buffer) vertices}. */
     public static void nvertices(long struct, @Nullable XrHandMeshVertexMSFT.Buffer value) { memPutAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 

@@ -315,36 +315,36 @@ public class VkVideoDecodeH265SessionParametersAddInfoKHR extends Struct<VkVideo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stdVPSCount}. */
-    public static int nstdVPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDVPSCOUNT); }
+    public static int nstdVPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDVPSCOUNT); }
     /** Unsafe version of {@link #pStdVPSs}. */
     @Nullable public static StdVideoH265VideoParameterSet.Buffer npStdVPSs(long struct) { return StdVideoH265VideoParameterSet.createSafe(memGetAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDVPSS), nstdVPSCount(struct)); }
     /** Unsafe version of {@link #stdSPSCount}. */
-    public static int nstdSPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDSPSCOUNT); }
+    public static int nstdSPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDSPSCOUNT); }
     /** Unsafe version of {@link #pStdSPSs}. */
     @Nullable public static StdVideoH265SequenceParameterSet.Buffer npStdSPSs(long struct) { return StdVideoH265SequenceParameterSet.createSafe(memGetAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDSPSS), nstdSPSCount(struct)); }
     /** Unsafe version of {@link #stdPPSCount}. */
-    public static int nstdPPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDPPSCOUNT); }
+    public static int nstdPPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDPPSCOUNT); }
     /** Unsafe version of {@link #pStdPPSs}. */
     @Nullable public static StdVideoH265PictureParameterSet.Buffer npStdPPSs(long struct) { return StdVideoH265PictureParameterSet.createSafe(memGetAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDPPSS), nstdPPSCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code stdVPSCount} field of the specified {@code struct}. */
-    public static void nstdVPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDVPSCOUNT, value); }
+    public static void nstdVPSCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDVPSCOUNT, value); }
     /** Unsafe version of {@link #pStdVPSs(StdVideoH265VideoParameterSet.Buffer) pStdVPSs}. */
     public static void npStdVPSs(long struct, @Nullable StdVideoH265VideoParameterSet.Buffer value) { memPutAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDVPSS, memAddressSafe(value)); nstdVPSCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code stdSPSCount} field of the specified {@code struct}. */
-    public static void nstdSPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDSPSCOUNT, value); }
+    public static void nstdSPSCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDSPSCOUNT, value); }
     /** Unsafe version of {@link #pStdSPSs(StdVideoH265SequenceParameterSet.Buffer) pStdSPSs}. */
     public static void npStdSPSs(long struct, @Nullable StdVideoH265SequenceParameterSet.Buffer value) { memPutAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDSPSS, memAddressSafe(value)); nstdSPSCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code stdPPSCount} field of the specified {@code struct}. */
-    public static void nstdPPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDPPSCOUNT, value); }
+    public static void nstdPPSCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.STDPPSCOUNT, value); }
     /** Unsafe version of {@link #pStdPPSs(StdVideoH265PictureParameterSet.Buffer) pStdPPSs}. */
     public static void npStdPPSs(long struct, @Nullable StdVideoH265PictureParameterSet.Buffer value) { memPutAddress(struct + VkVideoDecodeH265SessionParametersAddInfoKHR.PSTDPPSS, memAddressSafe(value)); nstdPPSCount(struct, value == null ? 0 : value.remaining()); }
 

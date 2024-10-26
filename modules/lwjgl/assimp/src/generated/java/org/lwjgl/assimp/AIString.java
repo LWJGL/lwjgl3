@@ -234,14 +234,14 @@ public class AIString extends Struct<AIString> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + AIString.LENGTH); }
+    public static int nlength(long struct) { return memGetInt(struct + AIString.LENGTH); }
     /** Unsafe version of {@link #data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(struct + AIString.DATA, nlength(struct)); }
     /** Unsafe version of {@link #dataString}. */
     public static String ndataString(long struct) { return memUTF8(ndata(struct)); }
 
     /** Sets the specified value to the {@code length} field of the specified {@code struct}. */
-    public static void nlength(long struct, int value) { UNSAFE.putInt(null, struct + AIString.LENGTH, value); }
+    public static void nlength(long struct, int value) { memPutInt(struct + AIString.LENGTH, value); }
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) {
         if (CHECKS) {

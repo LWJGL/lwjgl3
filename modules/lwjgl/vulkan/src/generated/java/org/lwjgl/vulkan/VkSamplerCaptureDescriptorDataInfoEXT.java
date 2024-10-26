@@ -254,18 +254,18 @@ public class VkSamplerCaptureDescriptorDataInfoEXT extends Struct<VkSamplerCaptu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCaptureDescriptorDataInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerCaptureDescriptorDataInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerCaptureDescriptorDataInfoEXT.PNEXT); }
     /** Unsafe version of {@link #sampler}. */
-    public static long nsampler(long struct) { return UNSAFE.getLong(null, struct + VkSamplerCaptureDescriptorDataInfoEXT.SAMPLER); }
+    public static long nsampler(long struct) { return memGetLong(struct + VkSamplerCaptureDescriptorDataInfoEXT.SAMPLER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCaptureDescriptorDataInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerCaptureDescriptorDataInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerCaptureDescriptorDataInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #sampler(long) sampler}. */
-    public static void nsampler(long struct, long value) { UNSAFE.putLong(null, struct + VkSamplerCaptureDescriptorDataInfoEXT.SAMPLER, value); }
+    public static void nsampler(long struct, long value) { memPutLong(struct + VkSamplerCaptureDescriptorDataInfoEXT.SAMPLER, value); }
 
     // -----------------------------------
 

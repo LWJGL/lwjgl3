@@ -399,11 +399,11 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #initialised}. */
-    public static int ninitialised(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.INITIALISED); }
+    public static int ninitialised(long struct) { return memGetInt(struct + RMTProperty.INITIALISED); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + RMTProperty.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + RMTProperty.FLAGS); }
     /** Unsafe version of {@link #value}. */
     public static RMTPropertyValue nvalue(long struct) { return RMTPropertyValue.create(struct + RMTProperty.VALUE); }
     /** Unsafe version of {@link #lastFrameValue}. */
@@ -411,7 +411,7 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** Unsafe version of {@link #prevValue}. */
     public static RMTPropertyValue nprevValue(long struct) { return RMTPropertyValue.create(struct + RMTProperty.PREVVALUE); }
     /** Unsafe version of {@link #prevValueFrame}. */
-    public static int nprevValueFrame(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.PREVVALUEFRAME); }
+    public static int nprevValueFrame(long struct) { return memGetInt(struct + RMTProperty.PREVVALUEFRAME); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBufferNT1(memGetAddress(struct + RMTProperty.NAME)); }
     /** Unsafe version of {@link #nameString}. */
@@ -431,16 +431,16 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** Unsafe version of {@link #nextSibling}. */
     @Nullable public static RMTProperty nnextSibling(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.NEXTSIBLING)); }
     /** Unsafe version of {@link #nameHash}. */
-    public static int nnameHash(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.NAMEHASH); }
+    public static int nnameHash(long struct) { return memGetInt(struct + RMTProperty.NAMEHASH); }
     /** Unsafe version of {@link #uniqueID}. */
-    public static int nuniqueID(long struct) { return UNSAFE.getInt(null, struct + RMTProperty.UNIQUEID); }
+    public static int nuniqueID(long struct) { return memGetInt(struct + RMTProperty.UNIQUEID); }
 
     /** Unsafe version of {@link #initialised(boolean) initialised}. */
-    public static void ninitialised(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.INITIALISED, value); }
+    public static void ninitialised(long struct, int value) { memPutInt(struct + RMTProperty.INITIALISED, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + RMTProperty.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + RMTProperty.FLAGS, value); }
     /** Unsafe version of {@link #value(RMTPropertyValue) value}. */
     public static void nvalue(long struct, RMTPropertyValue value) { memCopy(value.address(), struct + RMTProperty.VALUE, RMTPropertyValue.SIZEOF); }
     /** Unsafe version of {@link #lastFrameValue(RMTPropertyValue) lastFrameValue}. */
@@ -448,7 +448,7 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** Unsafe version of {@link #prevValue(RMTPropertyValue) prevValue}. */
     public static void nprevValue(long struct, RMTPropertyValue value) { memCopy(value.address(), struct + RMTProperty.PREVVALUE, RMTPropertyValue.SIZEOF); }
     /** Unsafe version of {@link #prevValueFrame(int) prevValueFrame}. */
-    public static void nprevValueFrame(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.PREVVALUEFRAME, value); }
+    public static void nprevValueFrame(long struct, int value) { memPutInt(struct + RMTProperty.PREVVALUEFRAME, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
@@ -470,9 +470,9 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** Unsafe version of {@link #nextSibling(RMTProperty) nextSibling}. */
     public static void nnextSibling(long struct, @Nullable RMTProperty value) { memPutAddress(struct + RMTProperty.NEXTSIBLING, memAddressSafe(value)); }
     /** Unsafe version of {@link #nameHash(int) nameHash}. */
-    public static void nnameHash(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.NAMEHASH, value); }
+    public static void nnameHash(long struct, int value) { memPutInt(struct + RMTProperty.NAMEHASH, value); }
     /** Unsafe version of {@link #uniqueID(int) uniqueID}. */
-    public static void nuniqueID(long struct, int value) { UNSAFE.putInt(null, struct + RMTProperty.UNIQUEID, value); }
+    public static void nuniqueID(long struct, int value) { memPutInt(struct + RMTProperty.UNIQUEID, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

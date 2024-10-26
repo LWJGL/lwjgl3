@@ -150,16 +150,16 @@ public class NkTextUndoState extends Struct<NkTextUndoState> {
     public static IntBuffer nundo_char(long struct) { return memIntBuffer(struct + NkTextUndoState.UNDO_CHAR, 999); }
     /** Unsafe version of {@link #undo_char(int) undo_char}. */
     public static int nundo_char(long struct, int index) {
-        return UNSAFE.getInt(null, struct + NkTextUndoState.UNDO_CHAR + check(index, 999) * 4);
+        return memGetInt(struct + NkTextUndoState.UNDO_CHAR + check(index, 999) * 4);
     }
     /** Unsafe version of {@link #undo_point}. */
-    public static short nundo_point(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoState.UNDO_POINT); }
+    public static short nundo_point(long struct) { return memGetShort(struct + NkTextUndoState.UNDO_POINT); }
     /** Unsafe version of {@link #redo_point}. */
-    public static short nredo_point(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoState.REDO_POINT); }
+    public static short nredo_point(long struct) { return memGetShort(struct + NkTextUndoState.REDO_POINT); }
     /** Unsafe version of {@link #undo_char_point}. */
-    public static short nundo_char_point(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoState.UNDO_CHAR_POINT); }
+    public static short nundo_char_point(long struct) { return memGetShort(struct + NkTextUndoState.UNDO_CHAR_POINT); }
     /** Unsafe version of {@link #redo_char_point}. */
-    public static short nredo_char_point(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoState.REDO_CHAR_POINT); }
+    public static short nredo_char_point(long struct) { return memGetShort(struct + NkTextUndoState.REDO_CHAR_POINT); }
 
     // -----------------------------------
 

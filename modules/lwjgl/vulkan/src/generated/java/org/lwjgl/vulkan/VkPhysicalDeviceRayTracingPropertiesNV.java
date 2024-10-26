@@ -314,28 +314,28 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayTracingPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #shaderGroupHandleSize}. */
-    public static int nshaderGroupHandleSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPHANDLESIZE); }
+    public static int nshaderGroupHandleSize(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPHANDLESIZE); }
     /** Unsafe version of {@link #maxRecursionDepth}. */
-    public static int nmaxRecursionDepth(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXRECURSIONDEPTH); }
+    public static int nmaxRecursionDepth(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXRECURSIONDEPTH); }
     /** Unsafe version of {@link #maxShaderGroupStride}. */
-    public static int nmaxShaderGroupStride(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXSHADERGROUPSTRIDE); }
+    public static int nmaxShaderGroupStride(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXSHADERGROUPSTRIDE); }
     /** Unsafe version of {@link #shaderGroupBaseAlignment}. */
-    public static int nshaderGroupBaseAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPBASEALIGNMENT); }
+    public static int nshaderGroupBaseAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPBASEALIGNMENT); }
     /** Unsafe version of {@link #maxGeometryCount}. */
-    public static long nmaxGeometryCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXGEOMETRYCOUNT); }
+    public static long nmaxGeometryCount(long struct) { return memGetLong(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXGEOMETRYCOUNT); }
     /** Unsafe version of {@link #maxInstanceCount}. */
-    public static long nmaxInstanceCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXINSTANCECOUNT); }
+    public static long nmaxInstanceCount(long struct) { return memGetLong(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXINSTANCECOUNT); }
     /** Unsafe version of {@link #maxTriangleCount}. */
-    public static long nmaxTriangleCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXTRIANGLECOUNT); }
+    public static long nmaxTriangleCount(long struct) { return memGetLong(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXTRIANGLECOUNT); }
     /** Unsafe version of {@link #maxDescriptorSetAccelerationStructures}. */
-    public static int nmaxDescriptorSetAccelerationStructures(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXDESCRIPTORSETACCELERATIONSTRUCTURES); }
+    public static int nmaxDescriptorSetAccelerationStructures(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXDESCRIPTORSETACCELERATIONSTRUCTURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingPropertiesNV.PNEXT, value); }
 

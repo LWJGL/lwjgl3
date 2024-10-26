@@ -248,14 +248,14 @@ public class XrSystemPassthroughProperties2FB extends Struct<XrSystemPassthrough
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemPassthroughProperties2FB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemPassthroughProperties2FB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemPassthroughProperties2FB.NEXT); }
     /** Unsafe version of {@link #capabilities}. */
-    public static long ncapabilities(long struct) { return UNSAFE.getLong(null, struct + XrSystemPassthroughProperties2FB.CAPABILITIES); }
+    public static long ncapabilities(long struct) { return memGetLong(struct + XrSystemPassthroughProperties2FB.CAPABILITIES); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemPassthroughProperties2FB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemPassthroughProperties2FB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemPassthroughProperties2FB.NEXT, value); }
 

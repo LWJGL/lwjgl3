@@ -285,24 +285,24 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFaceTrackerCreateInfo2FB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfo2FB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFaceTrackerCreateInfo2FB.NEXT); }
     /** Unsafe version of {@link #faceExpressionSet}. */
-    public static int nfaceExpressionSet(long struct) { return UNSAFE.getInt(null, struct + XrFaceTrackerCreateInfo2FB.FACEEXPRESSIONSET); }
+    public static int nfaceExpressionSet(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfo2FB.FACEEXPRESSIONSET); }
     /** Unsafe version of {@link #requestedDataSourceCount}. */
-    public static int nrequestedDataSourceCount(long struct) { return UNSAFE.getInt(null, struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCECOUNT); }
+    public static int nrequestedDataSourceCount(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCECOUNT); }
     /** Unsafe version of {@link #requestedDataSources() requestedDataSources}. */
     @Nullable public static IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceTrackerCreateInfo2FB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfo2FB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFaceTrackerCreateInfo2FB.NEXT, value); }
     /** Unsafe version of {@link #faceExpressionSet(int) faceExpressionSet}. */
-    public static void nfaceExpressionSet(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceTrackerCreateInfo2FB.FACEEXPRESSIONSET, value); }
+    public static void nfaceExpressionSet(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfo2FB.FACEEXPRESSIONSET, value); }
     /** Sets the specified value to the {@code requestedDataSourceCount} field of the specified {@code struct}. */
-    public static void nrequestedDataSourceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCECOUNT, value); }
+    public static void nrequestedDataSourceCount(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCECOUNT, value); }
     /** Unsafe version of {@link #requestedDataSources(IntBuffer) requestedDataSources}. */
     public static void nrequestedDataSources(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCES, memAddressSafe(value)); if (value != null) { nrequestedDataSourceCount(struct, value.remaining()); } }
 

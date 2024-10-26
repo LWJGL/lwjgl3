@@ -288,30 +288,30 @@ public class VkBindVideoSessionMemoryInfoKHR extends Struct<VkBindVideoSessionMe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindVideoSessionMemoryInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindVideoSessionMemoryInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindVideoSessionMemoryInfoKHR.PNEXT); }
     /** Unsafe version of {@link #memoryBindIndex}. */
-    public static int nmemoryBindIndex(long struct) { return UNSAFE.getInt(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYBINDINDEX); }
+    public static int nmemoryBindIndex(long struct) { return memGetInt(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYBINDINDEX); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYOFFSET); }
     /** Unsafe version of {@link #memorySize}. */
-    public static long nmemorySize(long struct) { return UNSAFE.getLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYSIZE); }
+    public static long nmemorySize(long struct) { return memGetLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVideoSessionMemoryInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindVideoSessionMemoryInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindVideoSessionMemoryInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #memoryBindIndex(int) memoryBindIndex}. */
-    public static void nmemoryBindIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYBINDINDEX, value); }
+    public static void nmemoryBindIndex(long struct, int value) { memPutInt(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYBINDINDEX, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYOFFSET, value); }
     /** Unsafe version of {@link #memorySize(long) memorySize}. */
-    public static void nmemorySize(long struct, long value) { UNSAFE.putLong(null, struct + VkBindVideoSessionMemoryInfoKHR.MEMORYSIZE, value); }
+    public static void nmemorySize(long struct, long value) { memPutLong(struct + VkBindVideoSessionMemoryInfoKHR.MEMORYSIZE, value); }
 
     // -----------------------------------
 

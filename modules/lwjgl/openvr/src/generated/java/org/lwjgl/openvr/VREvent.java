@@ -232,11 +232,11 @@ public class VREvent extends Struct<VREvent> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #eventType}. */
-    public static int neventType(long struct) { return UNSAFE.getInt(null, struct + VREvent.EVENTTYPE); }
+    public static int neventType(long struct) { return memGetInt(struct + VREvent.EVENTTYPE); }
     /** Unsafe version of {@link #trackedDeviceIndex}. */
-    public static int ntrackedDeviceIndex(long struct) { return UNSAFE.getInt(null, struct + VREvent.TRACKEDDEVICEINDEX); }
+    public static int ntrackedDeviceIndex(long struct) { return memGetInt(struct + VREvent.TRACKEDDEVICEINDEX); }
     /** Unsafe version of {@link #eventAgeSeconds}. */
-    public static float neventAgeSeconds(long struct) { return UNSAFE.getFloat(null, struct + VREvent.EVENTAGESECONDS); }
+    public static float neventAgeSeconds(long struct) { return memGetFloat(struct + VREvent.EVENTAGESECONDS); }
     /** Unsafe version of {@link #data}. */
     public static VREventData ndata(long struct) { return VREventData.create(struct + VREvent.DATA); }
 

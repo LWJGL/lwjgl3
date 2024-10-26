@@ -263,22 +263,22 @@ public class VkAttachmentDescriptionStencilLayout extends Struct<VkAttachmentDes
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescriptionStencilLayout.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAttachmentDescriptionStencilLayout.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentDescriptionStencilLayout.PNEXT); }
     /** Unsafe version of {@link #stencilInitialLayout}. */
-    public static int nstencilInitialLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescriptionStencilLayout.STENCILINITIALLAYOUT); }
+    public static int nstencilInitialLayout(long struct) { return memGetInt(struct + VkAttachmentDescriptionStencilLayout.STENCILINITIALLAYOUT); }
     /** Unsafe version of {@link #stencilFinalLayout}. */
-    public static int nstencilFinalLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescriptionStencilLayout.STENCILFINALLAYOUT); }
+    public static int nstencilFinalLayout(long struct) { return memGetInt(struct + VkAttachmentDescriptionStencilLayout.STENCILFINALLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescriptionStencilLayout.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAttachmentDescriptionStencilLayout.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentDescriptionStencilLayout.PNEXT, value); }
     /** Unsafe version of {@link #stencilInitialLayout(int) stencilInitialLayout}. */
-    public static void nstencilInitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescriptionStencilLayout.STENCILINITIALLAYOUT, value); }
+    public static void nstencilInitialLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescriptionStencilLayout.STENCILINITIALLAYOUT, value); }
     /** Unsafe version of {@link #stencilFinalLayout(int) stencilFinalLayout}. */
-    public static void nstencilFinalLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescriptionStencilLayout.STENCILFINALLAYOUT, value); }
+    public static void nstencilFinalLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescriptionStencilLayout.STENCILFINALLAYOUT, value); }
 
     // -----------------------------------
 

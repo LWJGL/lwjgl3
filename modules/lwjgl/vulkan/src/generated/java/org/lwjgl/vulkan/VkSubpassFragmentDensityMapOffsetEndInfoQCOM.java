@@ -278,20 +278,20 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #fragmentDensityOffsetCount}. */
-    public static int nfragmentDensityOffsetCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT); }
+    public static int nfragmentDensityOffsetCount(long struct) { return memGetInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT); }
     /** Unsafe version of {@link #pFragmentDensityOffsets}. */
     @Nullable public static VkOffset2D.Buffer npFragmentDensityOffsets(long struct) { return VkOffset2D.createSafe(memGetAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS), nfragmentDensityOffsetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PNEXT, value); }
     /** Sets the specified value to the {@code fragmentDensityOffsetCount} field of the specified {@code struct}. */
-    public static void nfragmentDensityOffsetCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT, value); }
+    public static void nfragmentDensityOffsetCount(long struct, int value) { memPutInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT, value); }
     /** Unsafe version of {@link #pFragmentDensityOffsets(VkOffset2D.Buffer) pFragmentDensityOffsets}. */
     public static void npFragmentDensityOffsets(long struct, @Nullable VkOffset2D.Buffer value) { memPutAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS, memAddressSafe(value)); nfragmentDensityOffsetCount(struct, value == null ? 0 : value.remaining()); }
 

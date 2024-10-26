@@ -242,14 +242,14 @@ public class POINT extends Struct<POINT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + POINT.X); }
+    public static int nx(long struct) { return memGetInt(struct + POINT.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + POINT.Y); }
+    public static int ny(long struct) { return memGetInt(struct + POINT.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + POINT.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + POINT.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + POINT.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + POINT.Y, value); }
 
     // -----------------------------------
 

@@ -271,14 +271,14 @@ public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageVulkanKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainImageVulkanKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainImageVulkanKHR.NEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainImageVulkanKHR.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + XrSwapchainImageVulkanKHR.IMAGE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageVulkanKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainImageVulkanKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageVulkanKHR.NEXT, value); }
 

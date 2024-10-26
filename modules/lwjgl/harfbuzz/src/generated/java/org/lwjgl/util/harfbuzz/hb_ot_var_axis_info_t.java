@@ -283,36 +283,36 @@ public class hb_ot_var_axis_info_t extends Struct<hb_ot_var_axis_info_t> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #axis_index}. */
-    public static int naxis_index(long struct) { return UNSAFE.getInt(null, struct + hb_ot_var_axis_info_t.AXIS_INDEX); }
+    public static int naxis_index(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.AXIS_INDEX); }
     /** Unsafe version of {@link #tag}. */
-    public static int ntag(long struct) { return UNSAFE.getInt(null, struct + hb_ot_var_axis_info_t.TAG); }
+    public static int ntag(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.TAG); }
     /** Unsafe version of {@link #name_id}. */
-    public static int nname_id(long struct) { return UNSAFE.getInt(null, struct + hb_ot_var_axis_info_t.NAME_ID); }
+    public static int nname_id(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.NAME_ID); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + hb_ot_var_axis_info_t.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.FLAGS); }
     /** Unsafe version of {@link #min_value}. */
-    public static float nmin_value(long struct) { return UNSAFE.getFloat(null, struct + hb_ot_var_axis_info_t.MIN_VALUE); }
+    public static float nmin_value(long struct) { return memGetFloat(struct + hb_ot_var_axis_info_t.MIN_VALUE); }
     /** Unsafe version of {@link #default_value}. */
-    public static float ndefault_value(long struct) { return UNSAFE.getFloat(null, struct + hb_ot_var_axis_info_t.DEFAULT_VALUE); }
+    public static float ndefault_value(long struct) { return memGetFloat(struct + hb_ot_var_axis_info_t.DEFAULT_VALUE); }
     /** Unsafe version of {@link #max_value}. */
-    public static float nmax_value(long struct) { return UNSAFE.getFloat(null, struct + hb_ot_var_axis_info_t.MAX_VALUE); }
-    public static int nreserved(long struct) { return UNSAFE.getInt(null, struct + hb_ot_var_axis_info_t.RESERVED); }
+    public static float nmax_value(long struct) { return memGetFloat(struct + hb_ot_var_axis_info_t.MAX_VALUE); }
+    public static int nreserved(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.RESERVED); }
 
     /** Unsafe version of {@link #axis_index(int) axis_index}. */
-    public static void naxis_index(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_var_axis_info_t.AXIS_INDEX, value); }
+    public static void naxis_index(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.AXIS_INDEX, value); }
     /** Unsafe version of {@link #tag(int) tag}. */
-    public static void ntag(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_var_axis_info_t.TAG, value); }
+    public static void ntag(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.TAG, value); }
     /** Unsafe version of {@link #name_id(int) name_id}. */
-    public static void nname_id(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_var_axis_info_t.NAME_ID, value); }
+    public static void nname_id(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.NAME_ID, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_var_axis_info_t.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.FLAGS, value); }
     /** Unsafe version of {@link #min_value(float) min_value}. */
-    public static void nmin_value(long struct, float value) { UNSAFE.putFloat(null, struct + hb_ot_var_axis_info_t.MIN_VALUE, value); }
+    public static void nmin_value(long struct, float value) { memPutFloat(struct + hb_ot_var_axis_info_t.MIN_VALUE, value); }
     /** Unsafe version of {@link #default_value(float) default_value}. */
-    public static void ndefault_value(long struct, float value) { UNSAFE.putFloat(null, struct + hb_ot_var_axis_info_t.DEFAULT_VALUE, value); }
+    public static void ndefault_value(long struct, float value) { memPutFloat(struct + hb_ot_var_axis_info_t.DEFAULT_VALUE, value); }
     /** Unsafe version of {@link #max_value(float) max_value}. */
-    public static void nmax_value(long struct, float value) { UNSAFE.putFloat(null, struct + hb_ot_var_axis_info_t.MAX_VALUE, value); }
-    public static void nreserved(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_var_axis_info_t.RESERVED, value); }
+    public static void nmax_value(long struct, float value) { memPutFloat(struct + hb_ot_var_axis_info_t.MAX_VALUE, value); }
+    public static void nreserved(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.RESERVED, value); }
 
     // -----------------------------------
 

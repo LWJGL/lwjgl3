@@ -241,14 +241,14 @@ public class OVRVector2i extends Struct<OVRVector2i> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + OVRVector2i.X); }
+    public static int nx(long struct) { return memGetInt(struct + OVRVector2i.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + OVRVector2i.Y); }
+    public static int ny(long struct) { return memGetInt(struct + OVRVector2i.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + OVRVector2i.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + OVRVector2i.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + OVRVector2i.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + OVRVector2i.Y, value); }
 
     // -----------------------------------
 

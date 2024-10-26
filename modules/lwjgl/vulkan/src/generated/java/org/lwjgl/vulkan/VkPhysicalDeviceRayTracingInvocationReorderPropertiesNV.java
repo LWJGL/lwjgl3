@@ -247,14 +247,14 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #rayTracingInvocationReorderReorderingHint}. */
-    public static int nrayTracingInvocationReorderReorderingHint(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.RAYTRACINGINVOCATIONREORDERREORDERINGHINT); }
+    public static int nrayTracingInvocationReorderReorderingHint(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.RAYTRACINGINVOCATIONREORDERREORDERINGHINT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.PNEXT, value); }
 

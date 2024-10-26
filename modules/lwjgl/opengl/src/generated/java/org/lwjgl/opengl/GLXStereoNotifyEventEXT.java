@@ -148,21 +148,21 @@ public class GLXStereoNotifyEventEXT extends Struct<GLXStereoNotifyEventEXT> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + GLXStereoNotifyEventEXT.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + GLXStereoNotifyEventEXT.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + GLXStereoNotifyEventEXT.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + GLXStereoNotifyEventEXT.DISPLAY); }
     /** Unsafe version of {@link #extension}. */
-    public static int nextension(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.EXTENSION); }
+    public static int nextension(long struct) { return memGetInt(struct + GLXStereoNotifyEventEXT.EXTENSION); }
     /** Unsafe version of {@link #evtype}. */
-    public static int nevtype(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.EVTYPE); }
+    public static int nevtype(long struct) { return memGetInt(struct + GLXStereoNotifyEventEXT.EVTYPE); }
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetAddress(struct + GLXStereoNotifyEventEXT.WINDOW); }
     /** Unsafe version of {@link #stereo_tree}. */
-    public static int nstereo_tree(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.STEREO_TREE); }
+    public static int nstereo_tree(long struct) { return memGetInt(struct + GLXStereoNotifyEventEXT.STEREO_TREE); }
 
     // -----------------------------------
 

@@ -291,26 +291,26 @@ public class VkBindDescriptorBufferEmbeddedSamplersInfoEXT extends Struct<VkBind
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.PNEXT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STAGEFLAGS); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.LAYOUT); }
     /** Unsafe version of {@link #set}. */
-    public static int nset(long struct) { return UNSAFE.getInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.SET); }
+    public static int nset(long struct) { return memGetInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.SET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.STAGEFLAGS, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.LAYOUT, value); }
     /** Unsafe version of {@link #set(int) set}. */
-    public static void nset(long struct, int value) { UNSAFE.putInt(null, struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.SET, value); }
+    public static void nset(long struct, int value) { memPutInt(struct + VkBindDescriptorBufferEmbeddedSamplersInfoEXT.SET, value); }
 
     // -----------------------------------
 

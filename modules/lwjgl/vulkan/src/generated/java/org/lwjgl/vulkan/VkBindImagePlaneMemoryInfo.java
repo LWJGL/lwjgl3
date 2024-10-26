@@ -269,18 +269,18 @@ public class VkBindImagePlaneMemoryInfo extends Struct<VkBindImagePlaneMemoryInf
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImagePlaneMemoryInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindImagePlaneMemoryInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImagePlaneMemoryInfo.PNEXT); }
     /** Unsafe version of {@link #planeAspect}. */
-    public static int nplaneAspect(long struct) { return UNSAFE.getInt(null, struct + VkBindImagePlaneMemoryInfo.PLANEASPECT); }
+    public static int nplaneAspect(long struct) { return memGetInt(struct + VkBindImagePlaneMemoryInfo.PLANEASPECT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImagePlaneMemoryInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImagePlaneMemoryInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImagePlaneMemoryInfo.PNEXT, value); }
     /** Unsafe version of {@link #planeAspect(int) planeAspect}. */
-    public static void nplaneAspect(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImagePlaneMemoryInfo.PLANEASPECT, value); }
+    public static void nplaneAspect(long struct, int value) { memPutInt(struct + VkBindImagePlaneMemoryInfo.PLANEASPECT, value); }
 
     // -----------------------------------
 

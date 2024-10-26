@@ -247,18 +247,18 @@ public class VkOutOfBandQueueTypeInfoNV extends Struct<VkOutOfBandQueueTypeInfoN
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkOutOfBandQueueTypeInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkOutOfBandQueueTypeInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkOutOfBandQueueTypeInfoNV.PNEXT); }
     /** Unsafe version of {@link #queueType}. */
-    public static int nqueueType(long struct) { return UNSAFE.getInt(null, struct + VkOutOfBandQueueTypeInfoNV.QUEUETYPE); }
+    public static int nqueueType(long struct) { return memGetInt(struct + VkOutOfBandQueueTypeInfoNV.QUEUETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkOutOfBandQueueTypeInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkOutOfBandQueueTypeInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkOutOfBandQueueTypeInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #queueType(int) queueType}. */
-    public static void nqueueType(long struct, int value) { UNSAFE.putInt(null, struct + VkOutOfBandQueueTypeInfoNV.QUEUETYPE, value); }
+    public static void nqueueType(long struct, int value) { memPutInt(struct + VkOutOfBandQueueTypeInfoNV.QUEUETYPE, value); }
 
     // -----------------------------------
 

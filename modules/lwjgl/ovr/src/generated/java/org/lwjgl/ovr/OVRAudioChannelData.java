@@ -224,9 +224,9 @@ public class OVRAudioChannelData extends Struct<OVRAudioChannelData> implements 
     /** Unsafe version of {@link #Samples() Samples}. */
     public static FloatBuffer nSamples(long struct) { return memFloatBuffer(memGetAddress(struct + OVRAudioChannelData.SAMPLES), nSamplesCount(struct)); }
     /** Unsafe version of {@link #SamplesCount}. */
-    public static int nSamplesCount(long struct) { return UNSAFE.getInt(null, struct + OVRAudioChannelData.SAMPLESCOUNT); }
+    public static int nSamplesCount(long struct) { return memGetInt(struct + OVRAudioChannelData.SAMPLESCOUNT); }
     /** Unsafe version of {@link #Frequency}. */
-    public static int nFrequency(long struct) { return UNSAFE.getInt(null, struct + OVRAudioChannelData.FREQUENCY); }
+    public static int nFrequency(long struct) { return memGetInt(struct + OVRAudioChannelData.FREQUENCY); }
 
     // -----------------------------------
 

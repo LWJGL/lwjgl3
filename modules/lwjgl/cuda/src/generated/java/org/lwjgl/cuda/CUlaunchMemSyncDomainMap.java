@@ -221,14 +221,14 @@ public class CUlaunchMemSyncDomainMap extends Struct<CUlaunchMemSyncDomainMap> i
     // -----------------------------------
 
     /** Unsafe version of {@link #default_}. */
-    public static byte ndefault_(long struct) { return UNSAFE.getByte(null, struct + CUlaunchMemSyncDomainMap.DEFAULT_); }
+    public static byte ndefault_(long struct) { return memGetByte(struct + CUlaunchMemSyncDomainMap.DEFAULT_); }
     /** Unsafe version of {@link #remote}. */
-    public static byte nremote(long struct) { return UNSAFE.getByte(null, struct + CUlaunchMemSyncDomainMap.REMOTE); }
+    public static byte nremote(long struct) { return memGetByte(struct + CUlaunchMemSyncDomainMap.REMOTE); }
 
     /** Unsafe version of {@link #default_(byte) default_}. */
-    public static void ndefault_(long struct, byte value) { UNSAFE.putByte(null, struct + CUlaunchMemSyncDomainMap.DEFAULT_, value); }
+    public static void ndefault_(long struct, byte value) { memPutByte(struct + CUlaunchMemSyncDomainMap.DEFAULT_, value); }
     /** Unsafe version of {@link #remote(byte) remote}. */
-    public static void nremote(long struct, byte value) { UNSAFE.putByte(null, struct + CUlaunchMemSyncDomainMap.REMOTE, value); }
+    public static void nremote(long struct, byte value) { memPutByte(struct + CUlaunchMemSyncDomainMap.REMOTE, value); }
 
     // -----------------------------------
 

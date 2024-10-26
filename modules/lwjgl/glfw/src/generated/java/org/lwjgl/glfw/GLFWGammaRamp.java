@@ -274,7 +274,7 @@ public class GLFWGammaRamp extends Struct<GLFWGammaRamp> implements NativeResour
     /** Unsafe version of {@link #blue() blue}. */
     public static ShortBuffer nblue(long struct) { return memShortBuffer(memGetAddress(struct + GLFWGammaRamp.BLUE), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + GLFWGammaRamp.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + GLFWGammaRamp.SIZE); }
 
     /** Unsafe version of {@link #red(ShortBuffer) red}. */
     public static void nred(long struct, ShortBuffer value) { memPutAddress(struct + GLFWGammaRamp.RED, memAddress(value)); }
@@ -283,7 +283,7 @@ public class GLFWGammaRamp extends Struct<GLFWGammaRamp> implements NativeResour
     /** Unsafe version of {@link #blue(ShortBuffer) blue}. */
     public static void nblue(long struct, ShortBuffer value) { memPutAddress(struct + GLFWGammaRamp.BLUE, memAddress(value)); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + GLFWGammaRamp.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + GLFWGammaRamp.SIZE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

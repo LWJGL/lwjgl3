@@ -355,20 +355,20 @@ public class XrCompositionLayerBaseHeader extends Struct<XrCompositionLayerBaseH
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerBaseHeader.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerBaseHeader.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerBaseHeader.NEXT); }
     /** Unsafe version of {@link #layerFlags}. */
-    public static long nlayerFlags(long struct) { return UNSAFE.getLong(null, struct + XrCompositionLayerBaseHeader.LAYERFLAGS); }
+    public static long nlayerFlags(long struct) { return memGetLong(struct + XrCompositionLayerBaseHeader.LAYERFLAGS); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrCompositionLayerBaseHeader.SPACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerBaseHeader.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerBaseHeader.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerBaseHeader.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
-    public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerBaseHeader.LAYERFLAGS, value); }
+    public static void nlayerFlags(long struct, long value) { memPutLong(struct + XrCompositionLayerBaseHeader.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerBaseHeader.SPACE, value.address()); }
 

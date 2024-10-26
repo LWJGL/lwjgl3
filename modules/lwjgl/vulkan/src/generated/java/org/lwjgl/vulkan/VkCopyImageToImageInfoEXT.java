@@ -422,40 +422,40 @@ public class VkCopyImageToImageInfoEXT extends Struct<VkCopyImageToImageInfoEXT>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCopyImageToImageInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCopyImageToImageInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCopyImageToImageInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkCopyImageToImageInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkCopyImageToImageInfoEXT.FLAGS); }
     /** Unsafe version of {@link #srcImage}. */
-    public static long nsrcImage(long struct) { return UNSAFE.getLong(null, struct + VkCopyImageToImageInfoEXT.SRCIMAGE); }
+    public static long nsrcImage(long struct) { return memGetLong(struct + VkCopyImageToImageInfoEXT.SRCIMAGE); }
     /** Unsafe version of {@link #srcImageLayout}. */
-    public static int nsrcImageLayout(long struct) { return UNSAFE.getInt(null, struct + VkCopyImageToImageInfoEXT.SRCIMAGELAYOUT); }
+    public static int nsrcImageLayout(long struct) { return memGetInt(struct + VkCopyImageToImageInfoEXT.SRCIMAGELAYOUT); }
     /** Unsafe version of {@link #dstImage}. */
-    public static long ndstImage(long struct) { return UNSAFE.getLong(null, struct + VkCopyImageToImageInfoEXT.DSTIMAGE); }
+    public static long ndstImage(long struct) { return memGetLong(struct + VkCopyImageToImageInfoEXT.DSTIMAGE); }
     /** Unsafe version of {@link #dstImageLayout}. */
-    public static int ndstImageLayout(long struct) { return UNSAFE.getInt(null, struct + VkCopyImageToImageInfoEXT.DSTIMAGELAYOUT); }
+    public static int ndstImageLayout(long struct) { return memGetInt(struct + VkCopyImageToImageInfoEXT.DSTIMAGELAYOUT); }
     /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkCopyImageToImageInfoEXT.REGIONCOUNT); }
+    public static int nregionCount(long struct) { return memGetInt(struct + VkCopyImageToImageInfoEXT.REGIONCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     public static VkImageCopy2.Buffer npRegions(long struct) { return VkImageCopy2.create(memGetAddress(struct + VkCopyImageToImageInfoEXT.PREGIONS), nregionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyImageToImageInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCopyImageToImageInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCopyImageToImageInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyImageToImageInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkCopyImageToImageInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #srcImage(long) srcImage}. */
-    public static void nsrcImage(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyImageToImageInfoEXT.SRCIMAGE, value); }
+    public static void nsrcImage(long struct, long value) { memPutLong(struct + VkCopyImageToImageInfoEXT.SRCIMAGE, value); }
     /** Unsafe version of {@link #srcImageLayout(int) srcImageLayout}. */
-    public static void nsrcImageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyImageToImageInfoEXT.SRCIMAGELAYOUT, value); }
+    public static void nsrcImageLayout(long struct, int value) { memPutInt(struct + VkCopyImageToImageInfoEXT.SRCIMAGELAYOUT, value); }
     /** Unsafe version of {@link #dstImage(long) dstImage}. */
-    public static void ndstImage(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyImageToImageInfoEXT.DSTIMAGE, value); }
+    public static void ndstImage(long struct, long value) { memPutLong(struct + VkCopyImageToImageInfoEXT.DSTIMAGE, value); }
     /** Unsafe version of {@link #dstImageLayout(int) dstImageLayout}. */
-    public static void ndstImageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyImageToImageInfoEXT.DSTIMAGELAYOUT, value); }
+    public static void ndstImageLayout(long struct, int value) { memPutInt(struct + VkCopyImageToImageInfoEXT.DSTIMAGELAYOUT, value); }
     /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyImageToImageInfoEXT.REGIONCOUNT, value); }
+    public static void nregionCount(long struct, int value) { memPutInt(struct + VkCopyImageToImageInfoEXT.REGIONCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkImageCopy2.Buffer) pRegions}. */
     public static void npRegions(long struct, VkImageCopy2.Buffer value) { memPutAddress(struct + VkCopyImageToImageInfoEXT.PREGIONS, value.address()); nregionCount(struct, value.remaining()); }
 

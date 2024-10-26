@@ -259,22 +259,22 @@ public class VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.PNEXT); }
     /** Unsafe version of {@link #clustercullingShader}. */
-    public static int nclustercullingShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.CLUSTERCULLINGSHADER); }
+    public static int nclustercullingShader(long struct) { return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.CLUSTERCULLINGSHADER); }
     /** Unsafe version of {@link #multiviewClusterCullingShader}. */
-    public static int nmultiviewClusterCullingShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.MULTIVIEWCLUSTERCULLINGSHADER); }
+    public static int nmultiviewClusterCullingShader(long struct) { return memGetInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.MULTIVIEWCLUSTERCULLINGSHADER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.PNEXT, value); }
     /** Unsafe version of {@link #clustercullingShader(boolean) clustercullingShader}. */
-    public static void nclustercullingShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.CLUSTERCULLINGSHADER, value); }
+    public static void nclustercullingShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.CLUSTERCULLINGSHADER, value); }
     /** Unsafe version of {@link #multiviewClusterCullingShader(boolean) multiviewClusterCullingShader}. */
-    public static void nmultiviewClusterCullingShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.MULTIVIEWCLUSTERCULLINGSHADER, value); }
+    public static void nmultiviewClusterCullingShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.MULTIVIEWCLUSTERCULLINGSHADER, value); }
 
     // -----------------------------------
 

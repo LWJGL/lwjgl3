@@ -231,14 +231,14 @@ public class XrOffset2Di extends Struct<XrOffset2Di> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XrOffset2Di.X); }
+    public static int nx(long struct) { return memGetInt(struct + XrOffset2Di.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XrOffset2Di.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XrOffset2Di.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XrOffset2Di.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XrOffset2Di.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XrOffset2Di.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XrOffset2Di.Y, value); }
 
     // -----------------------------------
 

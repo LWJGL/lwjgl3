@@ -437,25 +437,25 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_obj.TYPE); }
     /** Unsafe version of {@link #subtype}. */
     public static ByteBuffer nsubtype(long struct) { return memByteBufferNT1(memGetAddress(struct + hwloc_obj.SUBTYPE)); }
     /** Unsafe version of {@link #subtypeString}. */
     public static String nsubtypeString(long struct) { return memASCII(memGetAddress(struct + hwloc_obj.SUBTYPE)); }
     /** Unsafe version of {@link #os_index}. */
-    public static int nos_index(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.OS_INDEX); }
+    public static int nos_index(long struct) { return memGetInt(struct + hwloc_obj.OS_INDEX); }
     /** Unsafe version of {@link #name}. */
     @Nullable public static ByteBuffer nname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + hwloc_obj.NAME)); }
     /** Unsafe version of {@link #nameString}. */
     @Nullable public static String nnameString(long struct) { return memASCIISafe(memGetAddress(struct + hwloc_obj.NAME)); }
     /** Unsafe version of {@link #total_memory}. */
-    public static long ntotal_memory(long struct) { return UNSAFE.getLong(null, struct + hwloc_obj.TOTAL_MEMORY); }
+    public static long ntotal_memory(long struct) { return memGetLong(struct + hwloc_obj.TOTAL_MEMORY); }
     /** Unsafe version of {@link #attr}. */
     public static hwloc_obj_attr_u nattr(long struct) { return hwloc_obj_attr_u.create(memGetAddress(struct + hwloc_obj.ATTR)); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + hwloc_obj.DEPTH); }
     /** Unsafe version of {@link #logical_index}. */
-    public static int nlogical_index(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.LOGICAL_INDEX); }
+    public static int nlogical_index(long struct) { return memGetInt(struct + hwloc_obj.LOGICAL_INDEX); }
     /** Unsafe version of {@link #next_cousin}. */
     @Nullable public static hwloc_obj nnext_cousin(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_COUSIN)); }
     /** Unsafe version of {@link #prev_cousin}. */
@@ -463,13 +463,13 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #parent}. */
     @Nullable public static hwloc_obj nparent(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PARENT)); }
     /** Unsafe version of {@link #sibling_rank}. */
-    public static int nsibling_rank(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.SIBLING_RANK); }
+    public static int nsibling_rank(long struct) { return memGetInt(struct + hwloc_obj.SIBLING_RANK); }
     /** Unsafe version of {@link #next_sibling}. */
     @Nullable public static hwloc_obj nnext_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_SIBLING)); }
     /** Unsafe version of {@link #prev_sibling}. */
     @Nullable public static hwloc_obj nprev_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PREV_SIBLING)); }
     /** Unsafe version of {@link #arity}. */
-    public static int narity(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.ARITY); }
+    public static int narity(long struct) { return memGetInt(struct + hwloc_obj.ARITY); }
     /** Unsafe version of {@link #children() children}. */
     @Nullable public static PointerBuffer nchildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + hwloc_obj.CHILDREN), narity(struct)); }
     /** Unsafe version of {@link #first_child}. */
@@ -477,17 +477,17 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #last_child}. */
     @Nullable public static hwloc_obj nlast_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.LAST_CHILD)); }
     /** Unsafe version of {@link #symmetric_subtree}. */
-    public static int nsymmetric_subtree(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.SYMMETRIC_SUBTREE); }
+    public static int nsymmetric_subtree(long struct) { return memGetInt(struct + hwloc_obj.SYMMETRIC_SUBTREE); }
     /** Unsafe version of {@link #memory_arity}. */
-    public static int nmemory_arity(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.MEMORY_ARITY); }
+    public static int nmemory_arity(long struct) { return memGetInt(struct + hwloc_obj.MEMORY_ARITY); }
     /** Unsafe version of {@link #memory_first_child}. */
     @Nullable public static hwloc_obj nmemory_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MEMORY_FIRST_CHILD)); }
     /** Unsafe version of {@link #io_arity}. */
-    public static int nio_arity(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.IO_ARITY); }
+    public static int nio_arity(long struct) { return memGetInt(struct + hwloc_obj.IO_ARITY); }
     /** Unsafe version of {@link #io_first_child}. */
     @Nullable public static hwloc_obj nio_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.IO_FIRST_CHILD)); }
     /** Unsafe version of {@link #misc_arity}. */
-    public static int nmisc_arity(long struct) { return UNSAFE.getInt(null, struct + hwloc_obj.MISC_ARITY); }
+    public static int nmisc_arity(long struct) { return memGetInt(struct + hwloc_obj.MISC_ARITY); }
     /** Unsafe version of {@link #misc_first_child}. */
     @Nullable public static hwloc_obj nmisc_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MISC_FIRST_CHILD)); }
     /** Unsafe version of {@link #cpuset}. */
@@ -503,7 +503,7 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + hwloc_obj.USERDATA); }
     /** Unsafe version of {@link #gp_index}. */
-    public static long ngp_index(long struct) { return UNSAFE.getLong(null, struct + hwloc_obj.GP_INDEX); }
+    public static long ngp_index(long struct) { return memGetLong(struct + hwloc_obj.GP_INDEX); }
 
     /** Unsafe version of {@link #userdata(long) userdata}. */
     public static void nuserdata(long struct, long value) { memPutAddress(struct + hwloc_obj.USERDATA, value); }

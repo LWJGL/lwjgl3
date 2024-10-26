@@ -269,22 +269,22 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCreateInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMarkerDetectorCreateInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMarkerDetectorCreateInfoML.NEXT); }
     /** Unsafe version of {@link #profile}. */
-    public static int nprofile(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCreateInfoML.PROFILE); }
+    public static int nprofile(long struct) { return memGetInt(struct + XrMarkerDetectorCreateInfoML.PROFILE); }
     /** Unsafe version of {@link #markerType}. */
-    public static int nmarkerType(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCreateInfoML.MARKERTYPE); }
+    public static int nmarkerType(long struct) { return memGetInt(struct + XrMarkerDetectorCreateInfoML.MARKERTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCreateInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMarkerDetectorCreateInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerDetectorCreateInfoML.NEXT, value); }
     /** Unsafe version of {@link #profile(int) profile}. */
-    public static void nprofile(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCreateInfoML.PROFILE, value); }
+    public static void nprofile(long struct, int value) { memPutInt(struct + XrMarkerDetectorCreateInfoML.PROFILE, value); }
     /** Unsafe version of {@link #markerType(int) markerType}. */
-    public static void nmarkerType(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCreateInfoML.MARKERTYPE, value); }
+    public static void nmarkerType(long struct, int value) { memPutInt(struct + XrMarkerDetectorCreateInfoML.MARKERTYPE, value); }
 
     // -----------------------------------
 

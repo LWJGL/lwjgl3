@@ -289,24 +289,24 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct<VkPipeli
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportWScalingStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #viewportWScalingEnable}. */
-    public static int nviewportWScalingEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTWSCALINGENABLE); }
+    public static int nviewportWScalingEnable(long struct) { return memGetInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTWSCALINGENABLE); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pViewportWScalings}. */
     @Nullable public static VkViewportWScalingNV.Buffer npViewportWScalings(long struct) { return VkViewportWScalingNV.createSafe(memGetAddress(struct + VkPipelineViewportWScalingStateCreateInfoNV.PVIEWPORTWSCALINGS), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportWScalingStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #viewportWScalingEnable(boolean) viewportWScalingEnable}. */
-    public static void nviewportWScalingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTWSCALINGENABLE, value); }
+    public static void nviewportWScalingEnable(long struct, int value) { memPutInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTWSCALINGENABLE, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportWScalingStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pViewportWScalings(VkViewportWScalingNV.Buffer) pViewportWScalings}. */
     public static void npViewportWScalings(long struct, @Nullable VkViewportWScalingNV.Buffer value) { memPutAddress(struct + VkPipelineViewportWScalingStateCreateInfoNV.PVIEWPORTWSCALINGS, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
 

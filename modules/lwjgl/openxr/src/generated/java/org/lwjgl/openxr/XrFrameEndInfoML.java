@@ -255,22 +255,22 @@ public class XrFrameEndInfoML extends Struct<XrFrameEndInfoML> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFrameEndInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFrameEndInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFrameEndInfoML.NEXT); }
     /** Unsafe version of {@link #focusDistance}. */
-    public static float nfocusDistance(long struct) { return UNSAFE.getFloat(null, struct + XrFrameEndInfoML.FOCUSDISTANCE); }
+    public static float nfocusDistance(long struct) { return memGetFloat(struct + XrFrameEndInfoML.FOCUSDISTANCE); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrFrameEndInfoML.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrFrameEndInfoML.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFrameEndInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameEndInfoML.NEXT, value); }
     /** Unsafe version of {@link #focusDistance(float) focusDistance}. */
-    public static void nfocusDistance(long struct, float value) { UNSAFE.putFloat(null, struct + XrFrameEndInfoML.FOCUSDISTANCE, value); }
+    public static void nfocusDistance(long struct, float value) { memPutFloat(struct + XrFrameEndInfoML.FOCUSDISTANCE, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrFrameEndInfoML.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrFrameEndInfoML.FLAGS, value); }
 
     // -----------------------------------
 

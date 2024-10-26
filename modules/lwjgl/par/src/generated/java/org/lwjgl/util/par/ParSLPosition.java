@@ -241,14 +241,14 @@ public class ParSLPosition extends Struct<ParSLPosition> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + ParSLPosition.X); }
+    public static float nx(long struct) { return memGetFloat(struct + ParSLPosition.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + ParSLPosition.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + ParSLPosition.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLPosition.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + ParSLPosition.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + ParSLPosition.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + ParSLPosition.Y, value); }
 
     // -----------------------------------
 

@@ -295,28 +295,28 @@ public class ZDICTCoverParams extends Struct<ZDICTCoverParams> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #k}. */
-    public static int nk(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.K); }
+    public static int nk(long struct) { return memGetInt(struct + ZDICTCoverParams.K); }
     /** Unsafe version of {@link #d}. */
-    public static int nd(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.D); }
+    public static int nd(long struct) { return memGetInt(struct + ZDICTCoverParams.D); }
     /** Unsafe version of {@link #steps}. */
-    public static int nsteps(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.STEPS); }
+    public static int nsteps(long struct) { return memGetInt(struct + ZDICTCoverParams.STEPS); }
     /** Unsafe version of {@link #nbThreads}. */
-    public static int nnbThreads(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.NBTHREADS); }
+    public static int nnbThreads(long struct) { return memGetInt(struct + ZDICTCoverParams.NBTHREADS); }
     /** Unsafe version of {@link #splitPoint}. */
-    public static double nsplitPoint(long struct) { return UNSAFE.getDouble(null, struct + ZDICTCoverParams.SPLITPOINT); }
+    public static double nsplitPoint(long struct) { return memGetDouble(struct + ZDICTCoverParams.SPLITPOINT); }
     /** Unsafe version of {@link #zParams}. */
     public static ZDICTParams nzParams(long struct) { return ZDICTParams.create(struct + ZDICTCoverParams.ZPARAMS); }
 
     /** Unsafe version of {@link #k(int) k}. */
-    public static void nk(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.K, value); }
+    public static void nk(long struct, int value) { memPutInt(struct + ZDICTCoverParams.K, value); }
     /** Unsafe version of {@link #d(int) d}. */
-    public static void nd(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.D, value); }
+    public static void nd(long struct, int value) { memPutInt(struct + ZDICTCoverParams.D, value); }
     /** Unsafe version of {@link #steps(int) steps}. */
-    public static void nsteps(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.STEPS, value); }
+    public static void nsteps(long struct, int value) { memPutInt(struct + ZDICTCoverParams.STEPS, value); }
     /** Unsafe version of {@link #nbThreads(int) nbThreads}. */
-    public static void nnbThreads(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.NBTHREADS, value); }
+    public static void nnbThreads(long struct, int value) { memPutInt(struct + ZDICTCoverParams.NBTHREADS, value); }
     /** Unsafe version of {@link #splitPoint(double) splitPoint}. */
-    public static void nsplitPoint(long struct, double value) { UNSAFE.putDouble(null, struct + ZDICTCoverParams.SPLITPOINT, value); }
+    public static void nsplitPoint(long struct, double value) { memPutDouble(struct + ZDICTCoverParams.SPLITPOINT, value); }
     /** Unsafe version of {@link #zParams(ZDICTParams) zParams}. */
     public static void nzParams(long struct, ZDICTParams value) { memCopy(value.address(), struct + ZDICTCoverParams.ZPARAMS, ZDICTParams.SIZEOF); }
 

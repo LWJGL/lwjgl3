@@ -266,18 +266,18 @@ public class VkPerformanceMarkerInfoINTEL extends Struct<VkPerformanceMarkerInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceMarkerInfoINTEL.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPerformanceMarkerInfoINTEL.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPerformanceMarkerInfoINTEL.PNEXT); }
     /** Unsafe version of {@link #marker}. */
-    public static long nmarker(long struct) { return UNSAFE.getLong(null, struct + VkPerformanceMarkerInfoINTEL.MARKER); }
+    public static long nmarker(long struct) { return memGetLong(struct + VkPerformanceMarkerInfoINTEL.MARKER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceMarkerInfoINTEL.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPerformanceMarkerInfoINTEL.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPerformanceMarkerInfoINTEL.PNEXT, value); }
     /** Unsafe version of {@link #marker(long) marker}. */
-    public static void nmarker(long struct, long value) { UNSAFE.putLong(null, struct + VkPerformanceMarkerInfoINTEL.MARKER, value); }
+    public static void nmarker(long struct, long value) { memPutLong(struct + VkPerformanceMarkerInfoINTEL.MARKER, value); }
 
     // -----------------------------------
 

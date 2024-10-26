@@ -109,9 +109,9 @@ public class hwloc_memory_page_type_s extends Struct<hwloc_memory_page_type_s> {
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + hwloc_memory_page_type_s.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + hwloc_memory_page_type_s.SIZE); }
     /** Unsafe version of {@link #count}. */
-    public static long ncount(long struct) { return UNSAFE.getLong(null, struct + hwloc_memory_page_type_s.COUNT); }
+    public static long ncount(long struct) { return memGetLong(struct + hwloc_memory_page_type_s.COUNT); }
 
     // -----------------------------------
 

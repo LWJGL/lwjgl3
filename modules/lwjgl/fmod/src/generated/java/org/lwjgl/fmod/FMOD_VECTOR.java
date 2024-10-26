@@ -229,18 +229,18 @@ public class FMOD_VECTOR extends Struct<FMOD_VECTOR> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + FMOD_VECTOR.X); }
+    public static float nx(long struct) { return memGetFloat(struct + FMOD_VECTOR.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + FMOD_VECTOR.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + FMOD_VECTOR.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + FMOD_VECTOR.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + FMOD_VECTOR.Z); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_VECTOR.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + FMOD_VECTOR.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_VECTOR.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + FMOD_VECTOR.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_VECTOR.Z, value); }
+    public static void nz(long struct, float value) { memPutFloat(struct + FMOD_VECTOR.Z, value); }
 
     // -----------------------------------
 

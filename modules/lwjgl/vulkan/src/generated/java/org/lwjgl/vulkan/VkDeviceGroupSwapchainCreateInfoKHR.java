@@ -267,18 +267,18 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct<VkDeviceGroupSwa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupSwapchainCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #modes}. */
-    public static int nmodes(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES); }
+    public static int nmodes(long struct) { return memGetInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupSwapchainCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #modes(int) modes}. */
-    public static void nmodes(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES, value); }
+    public static void nmodes(long struct, int value) { memPutInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES, value); }
 
     // -----------------------------------
 

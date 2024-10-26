@@ -313,32 +313,32 @@ public class XrHapticPcmVibrationFB extends Struct<XrHapticPcmVibrationFB> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHapticPcmVibrationFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHapticPcmVibrationFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHapticPcmVibrationFB.NEXT); }
     /** Unsafe version of {@link #bufferSize}. */
-    public static int nbufferSize(long struct) { return UNSAFE.getInt(null, struct + XrHapticPcmVibrationFB.BUFFERSIZE); }
+    public static int nbufferSize(long struct) { return memGetInt(struct + XrHapticPcmVibrationFB.BUFFERSIZE); }
     /** Unsafe version of {@link #buffer() buffer}. */
     public static FloatBuffer nbuffer(long struct) { return memFloatBuffer(memGetAddress(struct + XrHapticPcmVibrationFB.BUFFER), nbufferSize(struct)); }
     /** Unsafe version of {@link #sampleRate}. */
-    public static float nsampleRate(long struct) { return UNSAFE.getFloat(null, struct + XrHapticPcmVibrationFB.SAMPLERATE); }
+    public static float nsampleRate(long struct) { return memGetFloat(struct + XrHapticPcmVibrationFB.SAMPLERATE); }
     /** Unsafe version of {@link #append}. */
-    public static int nappend(long struct) { return UNSAFE.getInt(null, struct + XrHapticPcmVibrationFB.APPEND); }
+    public static int nappend(long struct) { return memGetInt(struct + XrHapticPcmVibrationFB.APPEND); }
     /** Unsafe version of {@link #samplesConsumed(int) samplesConsumed}. */
     public static IntBuffer nsamplesConsumed(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + XrHapticPcmVibrationFB.SAMPLESCONSUMED), capacity); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticPcmVibrationFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHapticPcmVibrationFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHapticPcmVibrationFB.NEXT, value); }
     /** Sets the specified value to the {@code bufferSize} field of the specified {@code struct}. */
-    public static void nbufferSize(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticPcmVibrationFB.BUFFERSIZE, value); }
+    public static void nbufferSize(long struct, int value) { memPutInt(struct + XrHapticPcmVibrationFB.BUFFERSIZE, value); }
     /** Unsafe version of {@link #buffer(FloatBuffer) buffer}. */
     public static void nbuffer(long struct, FloatBuffer value) { memPutAddress(struct + XrHapticPcmVibrationFB.BUFFER, memAddress(value)); nbufferSize(struct, value.remaining()); }
     /** Unsafe version of {@link #sampleRate(float) sampleRate}. */
-    public static void nsampleRate(long struct, float value) { UNSAFE.putFloat(null, struct + XrHapticPcmVibrationFB.SAMPLERATE, value); }
+    public static void nsampleRate(long struct, float value) { memPutFloat(struct + XrHapticPcmVibrationFB.SAMPLERATE, value); }
     /** Unsafe version of {@link #append(boolean) append}. */
-    public static void nappend(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticPcmVibrationFB.APPEND, value); }
+    public static void nappend(long struct, int value) { memPutInt(struct + XrHapticPcmVibrationFB.APPEND, value); }
     /** Unsafe version of {@link #samplesConsumed(IntBuffer) samplesConsumed}. */
     public static void nsamplesConsumed(long struct, IntBuffer value) { memPutAddress(struct + XrHapticPcmVibrationFB.SAMPLESCONSUMED, memAddress(value)); }
 

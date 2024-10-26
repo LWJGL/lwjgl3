@@ -198,11 +198,11 @@ public class STBTTKerningentry extends Struct<STBTTKerningentry> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #glyph1}. */
-    public static int nglyph1(long struct) { return UNSAFE.getInt(null, struct + STBTTKerningentry.GLYPH1); }
+    public static int nglyph1(long struct) { return memGetInt(struct + STBTTKerningentry.GLYPH1); }
     /** Unsafe version of {@link #glyph2}. */
-    public static int nglyph2(long struct) { return UNSAFE.getInt(null, struct + STBTTKerningentry.GLYPH2); }
+    public static int nglyph2(long struct) { return memGetInt(struct + STBTTKerningentry.GLYPH2); }
     /** Unsafe version of {@link #advance}. */
-    public static int nadvance(long struct) { return UNSAFE.getInt(null, struct + STBTTKerningentry.ADVANCE); }
+    public static int nadvance(long struct) { return memGetInt(struct + STBTTKerningentry.ADVANCE); }
 
     // -----------------------------------
 

@@ -103,7 +103,7 @@ public class VREventHDCPError extends Struct<VREventHDCPError> {
     // -----------------------------------
 
     /** Unsafe version of {@link #eCode}. */
-    public static int neCode(long struct) { return UNSAFE.getInt(null, struct + VREventHDCPError.ECODE); }
+    public static int neCode(long struct) { return memGetInt(struct + VREventHDCPError.ECODE); }
 
     // -----------------------------------
 

@@ -120,13 +120,13 @@ public class NkTextUndoRecord extends Struct<NkTextUndoRecord> {
     // -----------------------------------
 
     /** Unsafe version of {@link #where}. */
-    public static int nwhere(long struct) { return UNSAFE.getInt(null, struct + NkTextUndoRecord.WHERE); }
+    public static int nwhere(long struct) { return memGetInt(struct + NkTextUndoRecord.WHERE); }
     /** Unsafe version of {@link #insert_length}. */
-    public static short ninsert_length(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.INSERT_LENGTH); }
+    public static short ninsert_length(long struct) { return memGetShort(struct + NkTextUndoRecord.INSERT_LENGTH); }
     /** Unsafe version of {@link #delete_length}. */
-    public static short ndelete_length(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.DELETE_LENGTH); }
+    public static short ndelete_length(long struct) { return memGetShort(struct + NkTextUndoRecord.DELETE_LENGTH); }
     /** Unsafe version of {@link #char_storage}. */
-    public static short nchar_storage(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.CHAR_STORAGE); }
+    public static short nchar_storage(long struct) { return memGetShort(struct + NkTextUndoRecord.CHAR_STORAGE); }
 
     // -----------------------------------
 

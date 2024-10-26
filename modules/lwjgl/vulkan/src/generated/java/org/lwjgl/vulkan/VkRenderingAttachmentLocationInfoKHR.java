@@ -289,20 +289,20 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAttachmentLocationInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingAttachmentLocationInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingAttachmentLocationInfoKHR.PNEXT); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderingAttachmentLocationInfoKHR.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingAttachmentLocationInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentLocations() pColorAttachmentLocations}. */
     @Nullable public static IntBuffer npColorAttachmentLocations(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAttachmentLocationInfoKHR.PCOLORATTACHMENTLOCATIONS), ncolorAttachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAttachmentLocationInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingAttachmentLocationInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingAttachmentLocationInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingAttachmentLocationInfoKHR.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkRenderingAttachmentLocationInfoKHR.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentLocations(IntBuffer) pColorAttachmentLocations}. */
     public static void npColorAttachmentLocations(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderingAttachmentLocationInfoKHR.PCOLORATTACHMENTLOCATIONS, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
 

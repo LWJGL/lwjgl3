@@ -244,14 +244,14 @@ public class XrSystemPlaneDetectionPropertiesEXT extends Struct<XrSystemPlaneDet
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemPlaneDetectionPropertiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemPlaneDetectionPropertiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemPlaneDetectionPropertiesEXT.NEXT); }
     /** Unsafe version of {@link #supportedFeatures}. */
-    public static long nsupportedFeatures(long struct) { return UNSAFE.getLong(null, struct + XrSystemPlaneDetectionPropertiesEXT.SUPPORTEDFEATURES); }
+    public static long nsupportedFeatures(long struct) { return memGetLong(struct + XrSystemPlaneDetectionPropertiesEXT.SUPPORTEDFEATURES); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemPlaneDetectionPropertiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemPlaneDetectionPropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemPlaneDetectionPropertiesEXT.NEXT, value); }
 

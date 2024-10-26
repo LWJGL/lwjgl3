@@ -296,34 +296,34 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #rayTracingPipeline}. */
-    public static int nrayTracingPipeline(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINE); }
+    public static int nrayTracingPipeline(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINE); }
     /** Unsafe version of {@link #rayTracingPipelineShaderGroupHandleCaptureReplay}. */
-    public static int nrayTracingPipelineShaderGroupHandleCaptureReplay(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAY); }
+    public static int nrayTracingPipelineShaderGroupHandleCaptureReplay(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAY); }
     /** Unsafe version of {@link #rayTracingPipelineShaderGroupHandleCaptureReplayMixed}. */
-    public static int nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED); }
+    public static int nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED); }
     /** Unsafe version of {@link #rayTracingPipelineTraceRaysIndirect}. */
-    public static int nrayTracingPipelineTraceRaysIndirect(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINETRACERAYSINDIRECT); }
+    public static int nrayTracingPipelineTraceRaysIndirect(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINETRACERAYSINDIRECT); }
     /** Unsafe version of {@link #rayTraversalPrimitiveCulling}. */
-    public static int nrayTraversalPrimitiveCulling(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRAVERSALPRIMITIVECULLING); }
+    public static int nrayTraversalPrimitiveCulling(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRAVERSALPRIMITIVECULLING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #rayTracingPipeline(boolean) rayTracingPipeline}. */
-    public static void nrayTracingPipeline(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINE, value); }
+    public static void nrayTracingPipeline(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINE, value); }
     /** Unsafe version of {@link #rayTracingPipelineShaderGroupHandleCaptureReplay(boolean) rayTracingPipelineShaderGroupHandleCaptureReplay}. */
-    public static void nrayTracingPipelineShaderGroupHandleCaptureReplay(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAY, value); }
+    public static void nrayTracingPipelineShaderGroupHandleCaptureReplay(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAY, value); }
     /** Unsafe version of {@link #rayTracingPipelineShaderGroupHandleCaptureReplayMixed(boolean) rayTracingPipelineShaderGroupHandleCaptureReplayMixed}. */
-    public static void nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED, value); }
+    public static void nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED, value); }
     /** Unsafe version of {@link #rayTracingPipelineTraceRaysIndirect(boolean) rayTracingPipelineTraceRaysIndirect}. */
-    public static void nrayTracingPipelineTraceRaysIndirect(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINETRACERAYSINDIRECT, value); }
+    public static void nrayTracingPipelineTraceRaysIndirect(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRACINGPIPELINETRACERAYSINDIRECT, value); }
     /** Unsafe version of {@link #rayTraversalPrimitiveCulling(boolean) rayTraversalPrimitiveCulling}. */
-    public static void nrayTraversalPrimitiveCulling(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRAVERSALPRIMITIVECULLING, value); }
+    public static void nrayTraversalPrimitiveCulling(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPipelineFeaturesKHR.RAYTRAVERSALPRIMITIVECULLING, value); }
 
     // -----------------------------------
 

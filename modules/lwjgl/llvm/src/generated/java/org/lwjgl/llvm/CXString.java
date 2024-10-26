@@ -223,7 +223,7 @@ public class CXString extends Struct<CXString> implements NativeResource {
     /** Unsafe version of {@link #data(int) data}. */
     public static ByteBuffer ndata(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + CXString.DATA), capacity); }
     /** Unsafe version of {@link #private_flags}. */
-    public static int nprivate_flags(long struct) { return UNSAFE.getInt(null, struct + CXString.PRIVATE_FLAGS); }
+    public static int nprivate_flags(long struct) { return memGetInt(struct + CXString.PRIVATE_FLAGS); }
 
     // -----------------------------------
 

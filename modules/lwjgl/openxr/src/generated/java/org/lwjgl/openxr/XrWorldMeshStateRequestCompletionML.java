@@ -326,32 +326,32 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshStateRequestCompletionML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshStateRequestCompletionML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshStateRequestCompletionML.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
-    public static int nfutureResult(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshStateRequestCompletionML.FUTURERESULT); }
+    public static int nfutureResult(long struct) { return memGetInt(struct + XrWorldMeshStateRequestCompletionML.FUTURERESULT); }
     /** Unsafe version of {@link #timestamp}. */
-    public static long ntimestamp(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshStateRequestCompletionML.TIMESTAMP); }
+    public static long ntimestamp(long struct) { return memGetLong(struct + XrWorldMeshStateRequestCompletionML.TIMESTAMP); }
     /** Unsafe version of {@link #meshBlockStateCapacityInput}. */
-    public static int nmeshBlockStateCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECAPACITYINPUT); }
+    public static int nmeshBlockStateCapacityInput(long struct) { return memGetInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECAPACITYINPUT); }
     /** Unsafe version of {@link #meshBlockStateCountOutput}. */
-    public static int nmeshBlockStateCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT); }
+    public static int nmeshBlockStateCountOutput(long struct) { return memGetInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT); }
     /** Unsafe version of {@link #meshBlockStates}. */
     @Nullable public static XrWorldMeshBlockStateML.Buffer nmeshBlockStates(long struct) { return XrWorldMeshBlockStateML.createSafe(memGetAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES), nmeshBlockStateCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshStateRequestCompletionML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshStateRequestCompletionML.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
-    public static void nfutureResult(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshStateRequestCompletionML.FUTURERESULT, value); }
+    public static void nfutureResult(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.FUTURERESULT, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
-    public static void ntimestamp(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshStateRequestCompletionML.TIMESTAMP, value); }
+    public static void ntimestamp(long struct, long value) { memPutLong(struct + XrWorldMeshStateRequestCompletionML.TIMESTAMP, value); }
     /** Sets the specified value to the {@code meshBlockStateCapacityInput} field of the specified {@code struct}. */
-    public static void nmeshBlockStateCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECAPACITYINPUT, value); }
+    public static void nmeshBlockStateCapacityInput(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECAPACITYINPUT, value); }
     /** Unsafe version of {@link #meshBlockStateCountOutput(int) meshBlockStateCountOutput}. */
-    public static void nmeshBlockStateCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT, value); }
+    public static void nmeshBlockStateCountOutput(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT, value); }
     /** Unsafe version of {@link #meshBlockStates(XrWorldMeshBlockStateML.Buffer) meshBlockStates}. */
     public static void nmeshBlockStates(long struct, @Nullable XrWorldMeshBlockStateML.Buffer value) { memPutAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES, memAddressSafe(value)); if (value != null) { nmeshBlockStateCapacityInput(struct, value.remaining()); } }
 

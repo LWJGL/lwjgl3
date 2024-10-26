@@ -338,26 +338,26 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemoryInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemoryInfo.PNEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.IMAGE); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.MEMORYOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemoryInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemoryInfo.PNEXT, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.IMAGE, value); }
+    public static void nimage(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.IMAGE, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.MEMORYOFFSET, value); }
 
     // -----------------------------------
 

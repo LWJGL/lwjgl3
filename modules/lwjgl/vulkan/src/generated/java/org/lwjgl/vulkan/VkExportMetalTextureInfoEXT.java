@@ -292,32 +292,32 @@ public class VkExportMetalTextureInfoEXT extends Struct<VkExportMetalTextureInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalTextureInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMetalTextureInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMetalTextureInfoEXT.PNEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalTextureInfoEXT.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + VkExportMetalTextureInfoEXT.IMAGE); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalTextureInfoEXT.IMAGEVIEW); }
+    public static long nimageView(long struct) { return memGetLong(struct + VkExportMetalTextureInfoEXT.IMAGEVIEW); }
     /** Unsafe version of {@link #bufferView}. */
-    public static long nbufferView(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalTextureInfoEXT.BUFFERVIEW); }
+    public static long nbufferView(long struct) { return memGetLong(struct + VkExportMetalTextureInfoEXT.BUFFERVIEW); }
     /** Unsafe version of {@link #plane}. */
-    public static int nplane(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalTextureInfoEXT.PLANE); }
+    public static int nplane(long struct) { return memGetInt(struct + VkExportMetalTextureInfoEXT.PLANE); }
     /** Unsafe version of {@link #mtlTexture}. */
     public static long nmtlTexture(long struct) { return memGetAddress(struct + VkExportMetalTextureInfoEXT.MTLTEXTURE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalTextureInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMetalTextureInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMetalTextureInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalTextureInfoEXT.IMAGE, value); }
+    public static void nimage(long struct, long value) { memPutLong(struct + VkExportMetalTextureInfoEXT.IMAGE, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalTextureInfoEXT.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { memPutLong(struct + VkExportMetalTextureInfoEXT.IMAGEVIEW, value); }
     /** Unsafe version of {@link #bufferView(long) bufferView}. */
-    public static void nbufferView(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalTextureInfoEXT.BUFFERVIEW, value); }
+    public static void nbufferView(long struct, long value) { memPutLong(struct + VkExportMetalTextureInfoEXT.BUFFERVIEW, value); }
     /** Unsafe version of {@link #plane(int) plane}. */
-    public static void nplane(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalTextureInfoEXT.PLANE, value); }
+    public static void nplane(long struct, int value) { memPutInt(struct + VkExportMetalTextureInfoEXT.PLANE, value); }
     /** Unsafe version of {@link #mtlTexture(long) mtlTexture}. */
     public static void nmtlTexture(long struct, long value) { memPutAddress(struct + VkExportMetalTextureInfoEXT.MTLTEXTURE, check(value)); }
 

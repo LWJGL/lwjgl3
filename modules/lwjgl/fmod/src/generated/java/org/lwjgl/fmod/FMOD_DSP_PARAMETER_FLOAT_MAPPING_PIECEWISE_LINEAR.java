@@ -233,14 +233,14 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR extends Struct<FM
     // -----------------------------------
 
     /** Unsafe version of {@link #numpoints}. */
-    public static int nnumpoints(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.NUMPOINTS); }
+    public static int nnumpoints(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.NUMPOINTS); }
     /** Unsafe version of {@link #pointparamvalues() pointparamvalues}. */
     public static FloatBuffer npointparamvalues(long struct) { return memFloatBuffer(memGetAddress(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.POINTPARAMVALUES), nnumpoints(struct)); }
     /** Unsafe version of {@link #pointpositions() pointpositions}. */
     @Nullable public static FloatBuffer npointpositions(long struct) { return memFloatBufferSafe(memGetAddress(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.POINTPOSITIONS), nnumpoints(struct)); }
 
     /** Sets the specified value to the {@code numpoints} field of the specified {@code struct}. */
-    public static void nnumpoints(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.NUMPOINTS, value); }
+    public static void nnumpoints(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.NUMPOINTS, value); }
     /** Unsafe version of {@link #pointparamvalues(FloatBuffer) pointparamvalues}. */
     public static void npointparamvalues(long struct, FloatBuffer value) { memPutAddress(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.POINTPARAMVALUES, memAddress(value)); }
     /** Unsafe version of {@link #pointpositions(FloatBuffer) pointpositions}. */

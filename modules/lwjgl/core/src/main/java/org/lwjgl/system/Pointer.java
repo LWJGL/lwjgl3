@@ -52,12 +52,6 @@ public interface Pointer {
     /** Default {@link Pointer} implementation. */
     abstract class Default implements Pointer {
 
-        protected static final sun.misc.Unsafe UNSAFE;
-
-        static {
-            UNSAFE = MemoryUtil.UNSAFE;
-        }
-
         // Removed final due to JDK-8139758. TODO: Restore if the fix is backported to JDK 8.
         protected long address;
 

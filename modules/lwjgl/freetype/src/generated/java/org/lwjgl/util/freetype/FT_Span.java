@@ -117,11 +117,11 @@ public class FT_Span extends Struct<FT_Span> {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + FT_Span.X); }
+    public static short nx(long struct) { return memGetShort(struct + FT_Span.X); }
     /** Unsafe version of {@link #len}. */
-    public static short nlen(long struct) { return UNSAFE.getShort(null, struct + FT_Span.LEN); }
+    public static short nlen(long struct) { return memGetShort(struct + FT_Span.LEN); }
     /** Unsafe version of {@link #coverage}. */
-    public static byte ncoverage(long struct) { return UNSAFE.getByte(null, struct + FT_Span.COVERAGE); }
+    public static byte ncoverage(long struct) { return memGetByte(struct + FT_Span.COVERAGE); }
 
     // -----------------------------------
 

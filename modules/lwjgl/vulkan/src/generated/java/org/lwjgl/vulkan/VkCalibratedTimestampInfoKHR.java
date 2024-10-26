@@ -254,18 +254,18 @@ public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampIn
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCalibratedTimestampInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCalibratedTimestampInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCalibratedTimestampInfoKHR.PNEXT); }
     /** Unsafe version of {@link #timeDomain}. */
-    public static int ntimeDomain(long struct) { return UNSAFE.getInt(null, struct + VkCalibratedTimestampInfoKHR.TIMEDOMAIN); }
+    public static int ntimeDomain(long struct) { return memGetInt(struct + VkCalibratedTimestampInfoKHR.TIMEDOMAIN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCalibratedTimestampInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCalibratedTimestampInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCalibratedTimestampInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #timeDomain(int) timeDomain}. */
-    public static void ntimeDomain(long struct, int value) { UNSAFE.putInt(null, struct + VkCalibratedTimestampInfoKHR.TIMEDOMAIN, value); }
+    public static void ntimeDomain(long struct, int value) { memPutInt(struct + VkCalibratedTimestampInfoKHR.TIMEDOMAIN, value); }
 
     // -----------------------------------
 

@@ -242,18 +242,18 @@ public class VkMultiDrawIndexedInfoEXT extends Struct<VkMultiDrawIndexedInfoEXT>
     // -----------------------------------
 
     /** Unsafe version of {@link #firstIndex}. */
-    public static int nfirstIndex(long struct) { return UNSAFE.getInt(null, struct + VkMultiDrawIndexedInfoEXT.FIRSTINDEX); }
+    public static int nfirstIndex(long struct) { return memGetInt(struct + VkMultiDrawIndexedInfoEXT.FIRSTINDEX); }
     /** Unsafe version of {@link #indexCount}. */
-    public static int nindexCount(long struct) { return UNSAFE.getInt(null, struct + VkMultiDrawIndexedInfoEXT.INDEXCOUNT); }
+    public static int nindexCount(long struct) { return memGetInt(struct + VkMultiDrawIndexedInfoEXT.INDEXCOUNT); }
     /** Unsafe version of {@link #vertexOffset}. */
-    public static int nvertexOffset(long struct) { return UNSAFE.getInt(null, struct + VkMultiDrawIndexedInfoEXT.VERTEXOFFSET); }
+    public static int nvertexOffset(long struct) { return memGetInt(struct + VkMultiDrawIndexedInfoEXT.VERTEXOFFSET); }
 
     /** Unsafe version of {@link #firstIndex(int) firstIndex}. */
-    public static void nfirstIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiDrawIndexedInfoEXT.FIRSTINDEX, value); }
+    public static void nfirstIndex(long struct, int value) { memPutInt(struct + VkMultiDrawIndexedInfoEXT.FIRSTINDEX, value); }
     /** Unsafe version of {@link #indexCount(int) indexCount}. */
-    public static void nindexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiDrawIndexedInfoEXT.INDEXCOUNT, value); }
+    public static void nindexCount(long struct, int value) { memPutInt(struct + VkMultiDrawIndexedInfoEXT.INDEXCOUNT, value); }
     /** Unsafe version of {@link #vertexOffset(int) vertexOffset}. */
-    public static void nvertexOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiDrawIndexedInfoEXT.VERTEXOFFSET, value); }
+    public static void nvertexOffset(long struct, int value) { memPutInt(struct + VkMultiDrawIndexedInfoEXT.VERTEXOFFSET, value); }
 
     // -----------------------------------
 

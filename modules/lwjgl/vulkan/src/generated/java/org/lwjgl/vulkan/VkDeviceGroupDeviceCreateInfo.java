@@ -285,20 +285,20 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupDeviceCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupDeviceCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PNEXT); }
     /** Unsafe version of {@link #physicalDeviceCount}. */
-    public static int nphysicalDeviceCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT); }
+    public static int nphysicalDeviceCount(long struct) { return memGetInt(struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT); }
     /** Unsafe version of {@link #pPhysicalDevices() pPhysicalDevices}. */
     @Nullable public static PointerBuffer npPhysicalDevices(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES), nphysicalDeviceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupDeviceCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupDeviceCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupDeviceCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code physicalDeviceCount} field of the specified {@code struct}. */
-    public static void nphysicalDeviceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT, value); }
+    public static void nphysicalDeviceCount(long struct, int value) { memPutInt(struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT, value); }
     /** Unsafe version of {@link #pPhysicalDevices(PointerBuffer) pPhysicalDevices}. */
     public static void npPhysicalDevices(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES, memAddressSafe(value)); nphysicalDeviceCount(struct, value == null ? 0 : value.remaining()); }
 

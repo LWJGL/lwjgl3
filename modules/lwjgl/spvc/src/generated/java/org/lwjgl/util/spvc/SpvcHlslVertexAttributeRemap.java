@@ -228,14 +228,14 @@ public class SpvcHlslVertexAttributeRemap extends Struct<SpvcHlslVertexAttribute
     // -----------------------------------
 
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + SpvcHlslVertexAttributeRemap.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + SpvcHlslVertexAttributeRemap.LOCATION); }
     /** Unsafe version of {@link #semantic}. */
     public static ByteBuffer nsemantic(long struct) { return memByteBufferNT1(memGetAddress(struct + SpvcHlslVertexAttributeRemap.SEMANTIC)); }
     /** Unsafe version of {@link #semanticString}. */
     public static String nsemanticString(long struct) { return memUTF8(memGetAddress(struct + SpvcHlslVertexAttributeRemap.SEMANTIC)); }
 
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHlslVertexAttributeRemap.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + SpvcHlslVertexAttributeRemap.LOCATION, value); }
     /** Unsafe version of {@link #semantic(ByteBuffer) semantic}. */
     public static void nsemantic(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

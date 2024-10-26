@@ -218,14 +218,14 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct<StdVideoEncodeH26
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0); }
     /** Unsafe version of {@link #direct_spatial_mv_pred_flag}. */
     public static int ndirect_spatial_mv_pred_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #num_ref_idx_active_override_flag}. */
     public static int nnum_ref_idx_active_override_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
     public static int nreserved(long struct) { return nbitfield0(struct) >>> 2; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #direct_spatial_mv_pred_flag(boolean) direct_spatial_mv_pred_flag}. */
     public static void ndirect_spatial_mv_pred_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #num_ref_idx_active_override_flag(boolean) num_ref_idx_active_override_flag}. */

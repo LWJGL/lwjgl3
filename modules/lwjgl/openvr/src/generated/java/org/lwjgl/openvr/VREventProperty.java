@@ -110,9 +110,9 @@ public class VREventProperty extends Struct<VREventProperty> {
     // -----------------------------------
 
     /** Unsafe version of {@link #container}. */
-    public static long ncontainer(long struct) { return UNSAFE.getLong(null, struct + VREventProperty.CONTAINER); }
+    public static long ncontainer(long struct) { return memGetLong(struct + VREventProperty.CONTAINER); }
     /** Unsafe version of {@link #prop}. */
-    public static int nprop(long struct) { return UNSAFE.getInt(null, struct + VREventProperty.PROP); }
+    public static int nprop(long struct) { return memGetInt(struct + VREventProperty.PROP); }
 
     // -----------------------------------
 

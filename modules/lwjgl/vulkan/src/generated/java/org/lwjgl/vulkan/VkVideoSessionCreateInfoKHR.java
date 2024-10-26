@@ -367,48 +367,48 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoSessionCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #queueFamilyIndex}. */
-    public static int nqueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.QUEUEFAMILYINDEX); }
+    public static int nqueueFamilyIndex(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.QUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #pVideoProfile}. */
     public static VkVideoProfileInfoKHR npVideoProfile(long struct) { return VkVideoProfileInfoKHR.create(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PVIDEOPROFILE)); }
     /** Unsafe version of {@link #pictureFormat}. */
-    public static int npictureFormat(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT); }
+    public static int npictureFormat(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT); }
     /** Unsafe version of {@link #maxCodedExtent}. */
     public static VkExtent2D nmaxCodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoSessionCreateInfoKHR.MAXCODEDEXTENT); }
     /** Unsafe version of {@link #referencePictureFormat}. */
-    public static int nreferencePictureFormat(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT); }
+    public static int nreferencePictureFormat(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT); }
     /** Unsafe version of {@link #maxDpbSlots}. */
-    public static int nmaxDpbSlots(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS); }
+    public static int nmaxDpbSlots(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS); }
     /** Unsafe version of {@link #maxActiveReferencePictures}. */
-    public static int nmaxActiveReferencePictures(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES); }
+    public static int nmaxActiveReferencePictures(long struct) { return memGetInt(struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES); }
     /** Unsafe version of {@link #pStdHeaderVersion}. */
     public static VkExtensionProperties npStdHeaderVersion(long struct) { return VkExtensionProperties.create(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoSessionCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #queueFamilyIndex(int) queueFamilyIndex}. */
-    public static void nqueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.QUEUEFAMILYINDEX, value); }
+    public static void nqueueFamilyIndex(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.QUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #pVideoProfile(VkVideoProfileInfoKHR) pVideoProfile}. */
     public static void npVideoProfile(long struct, VkVideoProfileInfoKHR value) { memPutAddress(struct + VkVideoSessionCreateInfoKHR.PVIDEOPROFILE, value.address()); }
     /** Unsafe version of {@link #pictureFormat(int) pictureFormat}. */
-    public static void npictureFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT, value); }
+    public static void npictureFormat(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT, value); }
     /** Unsafe version of {@link #maxCodedExtent(VkExtent2D) maxCodedExtent}. */
     public static void nmaxCodedExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoSessionCreateInfoKHR.MAXCODEDEXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #referencePictureFormat(int) referencePictureFormat}. */
-    public static void nreferencePictureFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT, value); }
+    public static void nreferencePictureFormat(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT, value); }
     /** Unsafe version of {@link #maxDpbSlots(int) maxDpbSlots}. */
-    public static void nmaxDpbSlots(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS, value); }
+    public static void nmaxDpbSlots(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS, value); }
     /** Unsafe version of {@link #maxActiveReferencePictures(int) maxActiveReferencePictures}. */
-    public static void nmaxActiveReferencePictures(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES, value); }
+    public static void nmaxActiveReferencePictures(long struct, int value) { memPutInt(struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES, value); }
     /** Unsafe version of {@link #pStdHeaderVersion(VkExtensionProperties) pStdHeaderVersion}. */
     public static void npStdHeaderVersion(long struct, VkExtensionProperties value) { memPutAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION, value.address()); }
 

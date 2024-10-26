@@ -261,22 +261,22 @@ public class XrWorldMeshBlockRequestML extends Struct<XrWorldMeshBlockRequestML>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockRequestML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshBlockRequestML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshBlockRequestML.NEXT); }
     /** Unsafe version of {@link #uuid}. */
     public static XrUuidEXT nuuid(long struct) { return XrUuidEXT.create(struct + XrWorldMeshBlockRequestML.UUID); }
     /** Unsafe version of {@link #lod}. */
-    public static int nlod(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockRequestML.LOD); }
+    public static int nlod(long struct) { return memGetInt(struct + XrWorldMeshBlockRequestML.LOD); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockRequestML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshBlockRequestML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshBlockRequestML.NEXT, value); }
     /** Unsafe version of {@link #uuid(XrUuidEXT) uuid}. */
     public static void nuuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrWorldMeshBlockRequestML.UUID, XrUuidEXT.SIZEOF); }
     /** Unsafe version of {@link #lod(int) lod}. */
-    public static void nlod(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockRequestML.LOD, value); }
+    public static void nlod(long struct, int value) { memPutInt(struct + XrWorldMeshBlockRequestML.LOD, value); }
 
     // -----------------------------------
 

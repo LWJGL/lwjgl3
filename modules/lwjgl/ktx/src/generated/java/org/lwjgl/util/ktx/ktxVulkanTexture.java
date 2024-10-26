@@ -278,27 +278,27 @@ public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements Native
     /** Unsafe version of {@link #vkFreeMemory}. */
     public static long nvkFreeMemory(long struct) { return memGetAddress(struct + ktxVulkanTexture.VKFREEMEMORY); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + ktxVulkanTexture.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + ktxVulkanTexture.IMAGE); }
     /** Unsafe version of {@link #imageFormat}. */
-    public static int nimageFormat(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.IMAGEFORMAT); }
+    public static int nimageFormat(long struct) { return memGetInt(struct + ktxVulkanTexture.IMAGEFORMAT); }
     /** Unsafe version of {@link #imageLayout}. */
-    public static int nimageLayout(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.IMAGELAYOUT); }
+    public static int nimageLayout(long struct) { return memGetInt(struct + ktxVulkanTexture.IMAGELAYOUT); }
     /** Unsafe version of {@link #deviceMemory}. */
-    public static long ndeviceMemory(long struct) { return UNSAFE.getLong(null, struct + ktxVulkanTexture.DEVICEMEMORY); }
+    public static long ndeviceMemory(long struct) { return memGetLong(struct + ktxVulkanTexture.DEVICEMEMORY); }
     /** Unsafe version of {@link #viewType}. */
-    public static int nviewType(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.VIEWTYPE); }
+    public static int nviewType(long struct) { return memGetInt(struct + ktxVulkanTexture.VIEWTYPE); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + ktxVulkanTexture.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + ktxVulkanTexture.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + ktxVulkanTexture.DEPTH); }
     /** Unsafe version of {@link #levelCount}. */
-    public static int nlevelCount(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.LEVELCOUNT); }
+    public static int nlevelCount(long struct) { return memGetInt(struct + ktxVulkanTexture.LEVELCOUNT); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + ktxVulkanTexture.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + ktxVulkanTexture.LAYERCOUNT); }
     /** Unsafe version of {@link #allocationId}. */
-    public static long nallocationId(long struct) { return UNSAFE.getLong(null, struct + ktxVulkanTexture.ALLOCATIONID); }
+    public static long nallocationId(long struct) { return memGetLong(struct + ktxVulkanTexture.ALLOCATIONID); }
 
     // -----------------------------------
 

@@ -268,28 +268,28 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NkBakedFont.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + NkBakedFont.HEIGHT); }
     /** Unsafe version of {@link #ascent}. */
-    public static float nascent(long struct) { return UNSAFE.getFloat(null, struct + NkBakedFont.ASCENT); }
+    public static float nascent(long struct) { return memGetFloat(struct + NkBakedFont.ASCENT); }
     /** Unsafe version of {@link #descent}. */
-    public static float ndescent(long struct) { return UNSAFE.getFloat(null, struct + NkBakedFont.DESCENT); }
+    public static float ndescent(long struct) { return memGetFloat(struct + NkBakedFont.DESCENT); }
     /** Unsafe version of {@link #glyph_offset}. */
-    public static int nglyph_offset(long struct) { return UNSAFE.getInt(null, struct + NkBakedFont.GLYPH_OFFSET); }
+    public static int nglyph_offset(long struct) { return memGetInt(struct + NkBakedFont.GLYPH_OFFSET); }
     /** Unsafe version of {@link #glyph_count}. */
-    public static int nglyph_count(long struct) { return UNSAFE.getInt(null, struct + NkBakedFont.GLYPH_COUNT); }
+    public static int nglyph_count(long struct) { return memGetInt(struct + NkBakedFont.GLYPH_COUNT); }
     /** Unsafe version of {@link #ranges(int) ranges}. */
     @Nullable public static IntBuffer nranges(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + NkBakedFont.RANGES), capacity); }
 
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + NkBakedFont.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + NkBakedFont.HEIGHT, value); }
     /** Unsafe version of {@link #ascent(float) ascent}. */
-    public static void nascent(long struct, float value) { UNSAFE.putFloat(null, struct + NkBakedFont.ASCENT, value); }
+    public static void nascent(long struct, float value) { memPutFloat(struct + NkBakedFont.ASCENT, value); }
     /** Unsafe version of {@link #descent(float) descent}. */
-    public static void ndescent(long struct, float value) { UNSAFE.putFloat(null, struct + NkBakedFont.DESCENT, value); }
+    public static void ndescent(long struct, float value) { memPutFloat(struct + NkBakedFont.DESCENT, value); }
     /** Unsafe version of {@link #glyph_offset(int) glyph_offset}. */
-    public static void nglyph_offset(long struct, int value) { UNSAFE.putInt(null, struct + NkBakedFont.GLYPH_OFFSET, value); }
+    public static void nglyph_offset(long struct, int value) { memPutInt(struct + NkBakedFont.GLYPH_OFFSET, value); }
     /** Unsafe version of {@link #glyph_count(int) glyph_count}. */
-    public static void nglyph_count(long struct, int value) { UNSAFE.putInt(null, struct + NkBakedFont.GLYPH_COUNT, value); }
+    public static void nglyph_count(long struct, int value) { memPutInt(struct + NkBakedFont.GLYPH_COUNT, value); }
     /** Unsafe version of {@link #ranges(IntBuffer) ranges}. */
     public static void nranges(long struct, @Nullable IntBuffer value) { memPutAddress(struct + NkBakedFont.RANGES, memAddressSafe(value)); }
 

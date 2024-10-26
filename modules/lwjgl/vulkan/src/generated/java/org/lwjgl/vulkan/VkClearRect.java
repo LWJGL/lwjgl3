@@ -264,16 +264,16 @@ public class VkClearRect extends Struct<VkClearRect> implements NativeResource {
     /** Unsafe version of {@link #rect}. */
     public static VkRect2D nrect(long struct) { return VkRect2D.create(struct + VkClearRect.RECT); }
     /** Unsafe version of {@link #baseArrayLayer}. */
-    public static int nbaseArrayLayer(long struct) { return UNSAFE.getInt(null, struct + VkClearRect.BASEARRAYLAYER); }
+    public static int nbaseArrayLayer(long struct) { return memGetInt(struct + VkClearRect.BASEARRAYLAYER); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkClearRect.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + VkClearRect.LAYERCOUNT); }
 
     /** Unsafe version of {@link #rect(VkRect2D) rect}. */
     public static void nrect(long struct, VkRect2D value) { memCopy(value.address(), struct + VkClearRect.RECT, VkRect2D.SIZEOF); }
     /** Unsafe version of {@link #baseArrayLayer(int) baseArrayLayer}. */
-    public static void nbaseArrayLayer(long struct, int value) { UNSAFE.putInt(null, struct + VkClearRect.BASEARRAYLAYER, value); }
+    public static void nbaseArrayLayer(long struct, int value) { memPutInt(struct + VkClearRect.BASEARRAYLAYER, value); }
     /** Unsafe version of {@link #layerCount(int) layerCount}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkClearRect.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + VkClearRect.LAYERCOUNT, value); }
 
     // -----------------------------------
 

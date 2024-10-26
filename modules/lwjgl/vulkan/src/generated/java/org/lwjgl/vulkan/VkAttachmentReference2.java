@@ -295,26 +295,26 @@ public class VkAttachmentReference2 extends Struct<VkAttachmentReference2> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAttachmentReference2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentReference2.PNEXT); }
     /** Unsafe version of {@link #attachment}. */
-    public static int nattachment(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference2.ATTACHMENT); }
+    public static int nattachment(long struct) { return memGetInt(struct + VkAttachmentReference2.ATTACHMENT); }
     /** Unsafe version of {@link #layout}. */
-    public static int nlayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference2.LAYOUT); }
+    public static int nlayout(long struct) { return memGetInt(struct + VkAttachmentReference2.LAYOUT); }
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference2.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkAttachmentReference2.ASPECTMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAttachmentReference2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentReference2.PNEXT, value); }
     /** Unsafe version of {@link #attachment(int) attachment}. */
-    public static void nattachment(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference2.ATTACHMENT, value); }
+    public static void nattachment(long struct, int value) { memPutInt(struct + VkAttachmentReference2.ATTACHMENT, value); }
     /** Unsafe version of {@link #layout(int) layout}. */
-    public static void nlayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference2.LAYOUT, value); }
+    public static void nlayout(long struct, int value) { memPutInt(struct + VkAttachmentReference2.LAYOUT, value); }
     /** Unsafe version of {@link #aspectMask(int) aspectMask}. */
-    public static void naspectMask(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference2.ASPECTMASK, value); }
+    public static void naspectMask(long struct, int value) { memPutInt(struct + VkAttachmentReference2.ASPECTMASK, value); }
 
     // -----------------------------------
 

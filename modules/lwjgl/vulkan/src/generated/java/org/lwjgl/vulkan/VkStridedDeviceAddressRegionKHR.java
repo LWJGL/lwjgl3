@@ -245,18 +245,18 @@ public class VkStridedDeviceAddressRegionKHR extends Struct<VkStridedDeviceAddre
     // -----------------------------------
 
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkStridedDeviceAddressRegionKHR.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkStridedDeviceAddressRegionKHR.DEVICEADDRESS); }
     /** Unsafe version of {@link #stride}. */
-    public static long nstride(long struct) { return UNSAFE.getLong(null, struct + VkStridedDeviceAddressRegionKHR.STRIDE); }
+    public static long nstride(long struct) { return memGetLong(struct + VkStridedDeviceAddressRegionKHR.STRIDE); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkStridedDeviceAddressRegionKHR.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkStridedDeviceAddressRegionKHR.SIZE); }
 
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkStridedDeviceAddressRegionKHR.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkStridedDeviceAddressRegionKHR.DEVICEADDRESS, value); }
     /** Unsafe version of {@link #stride(long) stride}. */
-    public static void nstride(long struct, long value) { UNSAFE.putLong(null, struct + VkStridedDeviceAddressRegionKHR.STRIDE, value); }
+    public static void nstride(long struct, long value) { memPutLong(struct + VkStridedDeviceAddressRegionKHR.STRIDE, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkStridedDeviceAddressRegionKHR.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkStridedDeviceAddressRegionKHR.SIZE, value); }
 
     // -----------------------------------
 

@@ -252,18 +252,18 @@ public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDevice
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueShaderCoreControlCreateInfoARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.PNEXT); }
     /** Unsafe version of {@link #shaderCoreCount}. */
-    public static int nshaderCoreCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueShaderCoreControlCreateInfoARM.SHADERCORECOUNT); }
+    public static int nshaderCoreCount(long struct) { return memGetInt(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.SHADERCORECOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueShaderCoreControlCreateInfoARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.PNEXT, value); }
     /** Unsafe version of {@link #shaderCoreCount(int) shaderCoreCount}. */
-    public static void nshaderCoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueShaderCoreControlCreateInfoARM.SHADERCORECOUNT, value); }
+    public static void nshaderCoreCount(long struct, int value) { memPutInt(struct + VkDeviceQueueShaderCoreControlCreateInfoARM.SHADERCORECOUNT, value); }
 
     // -----------------------------------
 

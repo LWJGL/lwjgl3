@@ -319,36 +319,36 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxIndirectPipelineCount}. */
-    public static int nmaxIndirectPipelineCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTPIPELINECOUNT); }
+    public static int nmaxIndirectPipelineCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTPIPELINECOUNT); }
     /** Unsafe version of {@link #maxIndirectShaderObjectCount}. */
-    public static int nmaxIndirectShaderObjectCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTSHADEROBJECTCOUNT); }
+    public static int nmaxIndirectShaderObjectCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTSHADEROBJECTCOUNT); }
     /** Unsafe version of {@link #maxIndirectSequenceCount}. */
-    public static int nmaxIndirectSequenceCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTSEQUENCECOUNT); }
+    public static int nmaxIndirectSequenceCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTSEQUENCECOUNT); }
     /** Unsafe version of {@link #maxIndirectCommandsTokenCount}. */
-    public static int nmaxIndirectCommandsTokenCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSTOKENCOUNT); }
+    public static int nmaxIndirectCommandsTokenCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSTOKENCOUNT); }
     /** Unsafe version of {@link #maxIndirectCommandsTokenOffset}. */
-    public static int nmaxIndirectCommandsTokenOffset(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSTOKENOFFSET); }
+    public static int nmaxIndirectCommandsTokenOffset(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSTOKENOFFSET); }
     /** Unsafe version of {@link #maxIndirectCommandsIndirectStride}. */
-    public static int nmaxIndirectCommandsIndirectStride(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSINDIRECTSTRIDE); }
+    public static int nmaxIndirectCommandsIndirectStride(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.MAXINDIRECTCOMMANDSINDIRECTSTRIDE); }
     /** Unsafe version of {@link #supportedIndirectCommandsInputModes}. */
-    public static int nsupportedIndirectCommandsInputModes(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSINPUTMODES); }
+    public static int nsupportedIndirectCommandsInputModes(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSINPUTMODES); }
     /** Unsafe version of {@link #supportedIndirectCommandsShaderStages}. */
-    public static int nsupportedIndirectCommandsShaderStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGES); }
+    public static int nsupportedIndirectCommandsShaderStages(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGES); }
     /** Unsafe version of {@link #supportedIndirectCommandsShaderStagesPipelineBinding}. */
-    public static int nsupportedIndirectCommandsShaderStagesPipelineBinding(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGESPIPELINEBINDING); }
+    public static int nsupportedIndirectCommandsShaderStagesPipelineBinding(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGESPIPELINEBINDING); }
     /** Unsafe version of {@link #supportedIndirectCommandsShaderStagesShaderBinding}. */
-    public static int nsupportedIndirectCommandsShaderStagesShaderBinding(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGESSHADERBINDING); }
+    public static int nsupportedIndirectCommandsShaderStagesShaderBinding(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.SUPPORTEDINDIRECTCOMMANDSSHADERSTAGESSHADERBINDING); }
     /** Unsafe version of {@link #deviceGeneratedCommandsTransformFeedback}. */
-    public static int ndeviceGeneratedCommandsTransformFeedback(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.DEVICEGENERATEDCOMMANDSTRANSFORMFEEDBACK); }
+    public static int ndeviceGeneratedCommandsTransformFeedback(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.DEVICEGENERATEDCOMMANDSTRANSFORMFEEDBACK); }
     /** Unsafe version of {@link #deviceGeneratedCommandsMultiDrawIndirectCount}. */
-    public static int ndeviceGeneratedCommandsMultiDrawIndirectCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.DEVICEGENERATEDCOMMANDSMULTIDRAWINDIRECTCOUNT); }
+    public static int ndeviceGeneratedCommandsMultiDrawIndirectCount(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.DEVICEGENERATEDCOMMANDSMULTIDRAWINDIRECTCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.PNEXT, value); }
 

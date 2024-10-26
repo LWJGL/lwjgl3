@@ -284,30 +284,30 @@ public class XrActionStateBoolean extends Struct<XrActionStateBoolean> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionStateBoolean.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionStateBoolean.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionStateBoolean.NEXT); }
     /** Unsafe version of {@link #currentState}. */
-    public static int ncurrentState(long struct) { return UNSAFE.getInt(null, struct + XrActionStateBoolean.CURRENTSTATE); }
+    public static int ncurrentState(long struct) { return memGetInt(struct + XrActionStateBoolean.CURRENTSTATE); }
     /** Unsafe version of {@link #changedSinceLastSync}. */
-    public static int nchangedSinceLastSync(long struct) { return UNSAFE.getInt(null, struct + XrActionStateBoolean.CHANGEDSINCELASTSYNC); }
+    public static int nchangedSinceLastSync(long struct) { return memGetInt(struct + XrActionStateBoolean.CHANGEDSINCELASTSYNC); }
     /** Unsafe version of {@link #lastChangeTime}. */
-    public static long nlastChangeTime(long struct) { return UNSAFE.getLong(null, struct + XrActionStateBoolean.LASTCHANGETIME); }
+    public static long nlastChangeTime(long struct) { return memGetLong(struct + XrActionStateBoolean.LASTCHANGETIME); }
     /** Unsafe version of {@link #isActive}. */
-    public static int nisActive(long struct) { return UNSAFE.getInt(null, struct + XrActionStateBoolean.ISACTIVE); }
+    public static int nisActive(long struct) { return memGetInt(struct + XrActionStateBoolean.ISACTIVE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateBoolean.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionStateBoolean.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateBoolean.NEXT, value); }
     /** Unsafe version of {@link #currentState(boolean) currentState}. */
-    public static void ncurrentState(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateBoolean.CURRENTSTATE, value); }
+    public static void ncurrentState(long struct, int value) { memPutInt(struct + XrActionStateBoolean.CURRENTSTATE, value); }
     /** Unsafe version of {@link #changedSinceLastSync(boolean) changedSinceLastSync}. */
-    public static void nchangedSinceLastSync(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateBoolean.CHANGEDSINCELASTSYNC, value); }
+    public static void nchangedSinceLastSync(long struct, int value) { memPutInt(struct + XrActionStateBoolean.CHANGEDSINCELASTSYNC, value); }
     /** Unsafe version of {@link #lastChangeTime(long) lastChangeTime}. */
-    public static void nlastChangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrActionStateBoolean.LASTCHANGETIME, value); }
+    public static void nlastChangeTime(long struct, long value) { memPutLong(struct + XrActionStateBoolean.LASTCHANGETIME, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateBoolean.ISACTIVE, value); }
+    public static void nisActive(long struct, int value) { memPutInt(struct + XrActionStateBoolean.ISACTIVE, value); }
 
     // -----------------------------------
 

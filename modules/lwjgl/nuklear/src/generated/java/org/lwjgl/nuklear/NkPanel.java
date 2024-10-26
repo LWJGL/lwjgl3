@@ -224,9 +224,9 @@ public class NkPanel extends Struct<NkPanel> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkPanel.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkPanel.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + NkPanel.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + NkPanel.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
     public static NkRect nbounds(long struct) { return NkRect.create(struct + NkPanel.BOUNDS); }
     /** Unsafe version of {@link #offset_x(int) offset_x}. */
@@ -234,19 +234,19 @@ public class NkPanel extends Struct<NkPanel> {
     /** Unsafe version of {@link #offset_y(int) offset_y}. */
     public static IntBuffer noffset_y(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkPanel.OFFSET_Y), capacity); }
     /** Unsafe version of {@link #at_x}. */
-    public static float nat_x(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.AT_X); }
+    public static float nat_x(long struct) { return memGetFloat(struct + NkPanel.AT_X); }
     /** Unsafe version of {@link #at_y}. */
-    public static float nat_y(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.AT_Y); }
+    public static float nat_y(long struct) { return memGetFloat(struct + NkPanel.AT_Y); }
     /** Unsafe version of {@link #max_x}. */
-    public static float nmax_x(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.MAX_X); }
+    public static float nmax_x(long struct) { return memGetFloat(struct + NkPanel.MAX_X); }
     /** Unsafe version of {@link #footer_height}. */
-    public static float nfooter_height(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.FOOTER_HEIGHT); }
+    public static float nfooter_height(long struct) { return memGetFloat(struct + NkPanel.FOOTER_HEIGHT); }
     /** Unsafe version of {@link #header_height}. */
-    public static float nheader_height(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.HEADER_HEIGHT); }
+    public static float nheader_height(long struct) { return memGetFloat(struct + NkPanel.HEADER_HEIGHT); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkPanel.BORDER); }
     /** Unsafe version of {@link #has_scrolling}. */
-    public static int nhas_scrolling(long struct) { return UNSAFE.getInt(null, struct + NkPanel.HAS_SCROLLING); }
+    public static int nhas_scrolling(long struct) { return memGetInt(struct + NkPanel.HAS_SCROLLING); }
     /** Unsafe version of {@link #clip}. */
     public static NkRect nclip(long struct) { return NkRect.create(struct + NkPanel.CLIP); }
     /** Unsafe version of {@link #menu}. */

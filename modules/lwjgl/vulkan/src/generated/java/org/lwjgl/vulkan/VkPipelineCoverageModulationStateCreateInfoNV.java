@@ -340,32 +340,32 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #coverageModulationMode}. */
-    public static int ncoverageModulationMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE); }
+    public static int ncoverageModulationMode(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE); }
     /** Unsafe version of {@link #coverageModulationTableEnable}. */
-    public static int ncoverageModulationTableEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE); }
+    public static int ncoverageModulationTableEnable(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE); }
     /** Unsafe version of {@link #coverageModulationTableCount}. */
-    public static int ncoverageModulationTableCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT); }
+    public static int ncoverageModulationTableCount(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT); }
     /** Unsafe version of {@link #pCoverageModulationTable() pCoverageModulationTable}. */
     @Nullable public static FloatBuffer npCoverageModulationTable(long struct) { return memFloatBufferSafe(memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE), ncoverageModulationTableCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS, value); }
     /** Unsafe version of {@link #coverageModulationMode(int) coverageModulationMode}. */
-    public static void ncoverageModulationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE, value); }
+    public static void ncoverageModulationMode(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE, value); }
     /** Unsafe version of {@link #coverageModulationTableEnable(boolean) coverageModulationTableEnable}. */
-    public static void ncoverageModulationTableEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE, value); }
+    public static void ncoverageModulationTableEnable(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE, value); }
     /** Sets the specified value to the {@code coverageModulationTableCount} field of the specified {@code struct}. */
-    public static void ncoverageModulationTableCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT, value); }
+    public static void ncoverageModulationTableCount(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT, value); }
     /** Unsafe version of {@link #pCoverageModulationTable(FloatBuffer) pCoverageModulationTable}. */
     public static void npCoverageModulationTable(long struct, @Nullable FloatBuffer value) { memPutAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE, memAddressSafe(value)); if (value != null) { ncoverageModulationTableCount(struct, value.remaining()); } }
 

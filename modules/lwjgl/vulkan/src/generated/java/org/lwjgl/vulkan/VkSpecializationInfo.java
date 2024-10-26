@@ -278,7 +278,7 @@ public class VkSpecializationInfo extends Struct<VkSpecializationInfo> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #mapEntryCount}. */
-    public static int nmapEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkSpecializationInfo.MAPENTRYCOUNT); }
+    public static int nmapEntryCount(long struct) { return memGetInt(struct + VkSpecializationInfo.MAPENTRYCOUNT); }
     /** Unsafe version of {@link #pMapEntries}. */
     @Nullable public static VkSpecializationMapEntry.Buffer npMapEntries(long struct) { return VkSpecializationMapEntry.createSafe(memGetAddress(struct + VkSpecializationInfo.PMAPENTRIES), nmapEntryCount(struct)); }
     /** Unsafe version of {@link #dataSize}. */
@@ -287,7 +287,7 @@ public class VkSpecializationInfo extends Struct<VkSpecializationInfo> implement
     @Nullable public static ByteBuffer npData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkSpecializationInfo.PDATA), (int)ndataSize(struct)); }
 
     /** Sets the specified value to the {@code mapEntryCount} field of the specified {@code struct}. */
-    public static void nmapEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSpecializationInfo.MAPENTRYCOUNT, value); }
+    public static void nmapEntryCount(long struct, int value) { memPutInt(struct + VkSpecializationInfo.MAPENTRYCOUNT, value); }
     /** Unsafe version of {@link #pMapEntries(VkSpecializationMapEntry.Buffer) pMapEntries}. */
     public static void npMapEntries(long struct, @Nullable VkSpecializationMapEntry.Buffer value) { memPutAddress(struct + VkSpecializationInfo.PMAPENTRIES, memAddressSafe(value)); nmapEntryCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */

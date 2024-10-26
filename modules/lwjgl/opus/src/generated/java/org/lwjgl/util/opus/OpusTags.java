@@ -231,7 +231,7 @@ public class OpusTags extends Struct<OpusTags> implements NativeResource {
     /** Unsafe version of {@link #comment_lengths() comment_lengths}. */
     public static IntBuffer ncomment_lengths(long struct) { return memIntBuffer(memGetAddress(struct + OpusTags.COMMENT_LENGTHS), ncomments(struct)); }
     /** Unsafe version of {@link #comments}. */
-    public static int ncomments(long struct) { return UNSAFE.getInt(null, struct + OpusTags.COMMENTS); }
+    public static int ncomments(long struct) { return memGetInt(struct + OpusTags.COMMENTS); }
     /** Unsafe version of {@link #vendor}. */
     public static ByteBuffer nvendor(long struct) { return memByteBufferNT1(memGetAddress(struct + OpusTags.VENDOR)); }
     /** Unsafe version of {@link #vendorString}. */

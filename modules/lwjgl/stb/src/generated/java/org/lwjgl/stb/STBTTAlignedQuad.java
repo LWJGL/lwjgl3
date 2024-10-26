@@ -249,21 +249,21 @@ public class STBTTAlignedQuad extends Struct<STBTTAlignedQuad> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #x0}. */
-    public static float nx0(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.X0); }
+    public static float nx0(long struct) { return memGetFloat(struct + STBTTAlignedQuad.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static float ny0(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.Y0); }
+    public static float ny0(long struct) { return memGetFloat(struct + STBTTAlignedQuad.Y0); }
     /** Unsafe version of {@link #s0}. */
-    public static float ns0(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.S0); }
+    public static float ns0(long struct) { return memGetFloat(struct + STBTTAlignedQuad.S0); }
     /** Unsafe version of {@link #t0}. */
-    public static float nt0(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.T0); }
+    public static float nt0(long struct) { return memGetFloat(struct + STBTTAlignedQuad.T0); }
     /** Unsafe version of {@link #x1}. */
-    public static float nx1(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.X1); }
+    public static float nx1(long struct) { return memGetFloat(struct + STBTTAlignedQuad.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static float ny1(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.Y1); }
+    public static float ny1(long struct) { return memGetFloat(struct + STBTTAlignedQuad.Y1); }
     /** Unsafe version of {@link #s1}. */
-    public static float ns1(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.S1); }
+    public static float ns1(long struct) { return memGetFloat(struct + STBTTAlignedQuad.S1); }
     /** Unsafe version of {@link #t1}. */
-    public static float nt1(long struct) { return UNSAFE.getFloat(null, struct + STBTTAlignedQuad.T1); }
+    public static float nt1(long struct) { return memGetFloat(struct + STBTTAlignedQuad.T1); }
 
     // -----------------------------------
 

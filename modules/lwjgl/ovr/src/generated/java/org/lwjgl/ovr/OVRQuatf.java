@@ -261,22 +261,22 @@ public class OVRQuatf extends Struct<OVRQuatf> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + OVRQuatf.X); }
+    public static float nx(long struct) { return memGetFloat(struct + OVRQuatf.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + OVRQuatf.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + OVRQuatf.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + OVRQuatf.Z); }
+    public static float nz(long struct) { return memGetFloat(struct + OVRQuatf.Z); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + OVRQuatf.W); }
+    public static float nw(long struct) { return memGetFloat(struct + OVRQuatf.W); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + OVRQuatf.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + OVRQuatf.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + OVRQuatf.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + OVRQuatf.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + OVRQuatf.Z, value); }
+    public static void nz(long struct, float value) { memPutFloat(struct + OVRQuatf.Z, value); }
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + OVRQuatf.W, value); }
+    public static void nw(long struct, float value) { memPutFloat(struct + OVRQuatf.W, value); }
 
     // -----------------------------------
 

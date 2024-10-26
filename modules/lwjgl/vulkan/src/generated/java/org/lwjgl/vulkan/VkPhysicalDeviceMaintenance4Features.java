@@ -257,18 +257,18 @@ public class VkPhysicalDeviceMaintenance4Features extends Struct<VkPhysicalDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance4Features.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance4Features.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance4Features.PNEXT); }
     /** Unsafe version of {@link #maintenance4}. */
-    public static int nmaintenance4(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance4Features.MAINTENANCE4); }
+    public static int nmaintenance4(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance4Features.MAINTENANCE4); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance4Features.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance4Features.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance4Features.PNEXT, value); }
     /** Unsafe version of {@link #maintenance4(boolean) maintenance4}. */
-    public static void nmaintenance4(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance4Features.MAINTENANCE4, value); }
+    public static void nmaintenance4(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance4Features.MAINTENANCE4, value); }
 
     // -----------------------------------
 

@@ -239,13 +239,13 @@ public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> impleme
     public static FloatBuffer nflFingerCurl(long struct) { return memFloatBuffer(struct + VRSkeletalSummaryData.FLFINGERCURL, 5); }
     /** Unsafe version of {@link #flFingerCurl(int) flFingerCurl}. */
     public static float nflFingerCurl(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VRSkeletalSummaryData.FLFINGERCURL + check(index, 5) * 4);
+        return memGetFloat(struct + VRSkeletalSummaryData.FLFINGERCURL + check(index, 5) * 4);
     }
     /** Unsafe version of {@link #flFingerSplay}. */
     public static FloatBuffer nflFingerSplay(long struct) { return memFloatBuffer(struct + VRSkeletalSummaryData.FLFINGERSPLAY, 4); }
     /** Unsafe version of {@link #flFingerSplay(int) flFingerSplay}. */
     public static float nflFingerSplay(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VRSkeletalSummaryData.FLFINGERSPLAY + check(index, 4) * 4);
+        return memGetFloat(struct + VRSkeletalSummaryData.FLFINGERSPLAY + check(index, 4) * 4);
     }
 
     // -----------------------------------

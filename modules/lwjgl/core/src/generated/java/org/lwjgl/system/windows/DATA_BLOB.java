@@ -211,12 +211,12 @@ public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #cbData}. */
-    public static int ncbData(long struct) { return UNSAFE.getInt(null, struct + DATA_BLOB.CBDATA); }
+    public static int ncbData(long struct) { return memGetInt(struct + DATA_BLOB.CBDATA); }
     /** Unsafe version of {@link #pbData() pbData}. */
     public static ByteBuffer npbData(long struct) { return memByteBuffer(memGetAddress(struct + DATA_BLOB.PBDATA), ncbData(struct)); }
 
     /** Sets the specified value to the {@code cbData} field of the specified {@code struct}. */
-    public static void ncbData(long struct, int value) { UNSAFE.putInt(null, struct + DATA_BLOB.CBDATA, value); }
+    public static void ncbData(long struct, int value) { memPutInt(struct + DATA_BLOB.CBDATA, value); }
     /** Unsafe version of {@link #pbData(ByteBuffer) pbData}. */
     public static void npbData(long struct, ByteBuffer value) { memPutAddress(struct + DATA_BLOB.PBDATA, memAddress(value)); ncbData(struct, value.remaining()); }
 

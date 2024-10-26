@@ -258,14 +258,14 @@ public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeRe
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIMeshMorphAnim.MNAME); }
     /** Unsafe version of {@link #mNumKeys}. */
-    public static int nmNumKeys(long struct) { return UNSAFE.getInt(null, struct + AIMeshMorphAnim.MNUMKEYS); }
+    public static int nmNumKeys(long struct) { return memGetInt(struct + AIMeshMorphAnim.MNUMKEYS); }
     /** Unsafe version of {@link #mKeys}. */
     public static AIMeshMorphKey.Buffer nmKeys(long struct) { return AIMeshMorphKey.create(memGetAddress(struct + AIMeshMorphAnim.MKEYS), nmNumKeys(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIMeshMorphAnim.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumKeys} field of the specified {@code struct}. */
-    public static void nmNumKeys(long struct, int value) { UNSAFE.putInt(null, struct + AIMeshMorphAnim.MNUMKEYS, value); }
+    public static void nmNumKeys(long struct, int value) { memPutInt(struct + AIMeshMorphAnim.MNUMKEYS, value); }
     /** Unsafe version of {@link #mKeys(AIMeshMorphKey.Buffer) mKeys}. */
     public static void nmKeys(long struct, AIMeshMorphKey.Buffer value) { memPutAddress(struct + AIMeshMorphAnim.MKEYS, value.address()); nmNumKeys(struct, value.remaining()); }
 

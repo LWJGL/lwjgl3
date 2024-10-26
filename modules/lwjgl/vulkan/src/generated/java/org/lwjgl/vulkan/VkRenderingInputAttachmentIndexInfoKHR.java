@@ -333,11 +333,11 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInputAttachmentIndexInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderingInputAttachmentIndexInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PNEXT); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderingInputAttachmentIndexInfoKHR.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingInputAttachmentIndexInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentInputIndices() pColorAttachmentInputIndices}. */
     @Nullable public static IntBuffer npColorAttachmentInputIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PCOLORATTACHMENTINPUTINDICES), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pDepthInputAttachmentIndex(int) pDepthInputAttachmentIndex}. */
@@ -346,11 +346,11 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     @Nullable public static IntBuffer npStencilInputAttachmentIndex(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PSTENCILINPUTATTACHMENTINDEX), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInputAttachmentIndexInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingInputAttachmentIndexInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderingInputAttachmentIndexInfoKHR.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkRenderingInputAttachmentIndexInfoKHR.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentInputIndices(IntBuffer) pColorAttachmentInputIndices}. */
     public static void npColorAttachmentInputIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PCOLORATTACHMENTINPUTINDICES, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pDepthInputAttachmentIndex(IntBuffer) pDepthInputAttachmentIndex}. */

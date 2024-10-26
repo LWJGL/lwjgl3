@@ -260,12 +260,12 @@ public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCom
     /** Unsafe version of {@link #uuid}. */
     public static XrUuidEXT nuuid(long struct) { return XrUuidEXT.create(struct + XrSpatialAnchorCompletionResultML.UUID); }
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorCompletionResultML.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + XrSpatialAnchorCompletionResultML.RESULT); }
 
     /** Unsafe version of {@link #uuid(XrUuidEXT) uuid}. */
     public static void nuuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrSpatialAnchorCompletionResultML.UUID, XrUuidEXT.SIZEOF); }
     /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorCompletionResultML.RESULT, value); }
+    public static void nresult(long struct, int value) { memPutInt(struct + XrSpatialAnchorCompletionResultML.RESULT, value); }
 
     // -----------------------------------
 

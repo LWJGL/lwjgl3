@@ -224,12 +224,12 @@ public class EpollEvent extends Struct<EpollEvent> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #events}. */
-    public static int nevents(long struct) { return UNSAFE.getInt(null, struct + EpollEvent.EVENTS); }
+    public static int nevents(long struct) { return memGetInt(struct + EpollEvent.EVENTS); }
     /** Unsafe version of {@link #data}. */
     public static EpollData ndata(long struct) { return EpollData.create(struct + EpollEvent.DATA); }
 
     /** Unsafe version of {@link #events(int) events}. */
-    public static void nevents(long struct, int value) { UNSAFE.putInt(null, struct + EpollEvent.EVENTS, value); }
+    public static void nevents(long struct, int value) { memPutInt(struct + EpollEvent.EVENTS, value); }
     /** Unsafe version of {@link #data(EpollData) data}. */
     public static void ndata(long struct, EpollData value) { memCopy(value.address(), struct + EpollEvent.DATA, EpollData.SIZEOF); }
 

@@ -233,7 +233,7 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct<StdVideoDecodeH
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH264ReferenceInfoFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeH264ReferenceInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #top_field_flag}. */
     public static int ntop_field_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #bottom_field_flag}. */
@@ -243,7 +243,7 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct<StdVideoDecodeH
     /** Unsafe version of {@link #is_non_existing}. */
     public static int nis_non_existing(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH264ReferenceInfoFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeH264ReferenceInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #top_field_flag(boolean) top_field_flag}. */
     public static void ntop_field_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #bottom_field_flag(boolean) bottom_field_flag}. */

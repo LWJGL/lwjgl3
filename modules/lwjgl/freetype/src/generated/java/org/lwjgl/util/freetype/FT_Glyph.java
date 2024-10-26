@@ -125,7 +125,7 @@ public class FT_Glyph extends Struct<FT_Glyph> {
     public static long nlibrary(long struct) { return memGetAddress(struct + FT_Glyph.LIBRARY); }
     public static long nclazz(long struct) { return memGetAddress(struct + FT_Glyph.CLAZZ); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + FT_Glyph.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + FT_Glyph.FORMAT); }
     /** Unsafe version of {@link #advance}. */
     public static FT_Vector nadvance(long struct) { return FT_Vector.create(struct + FT_Glyph.ADVANCE); }
 

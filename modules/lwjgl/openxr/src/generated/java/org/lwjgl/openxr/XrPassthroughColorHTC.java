@@ -251,18 +251,18 @@ public class XrPassthroughColorHTC extends Struct<XrPassthroughColorHTC> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughColorHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughColorHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughColorHTC.NEXT); }
     /** Unsafe version of {@link #alpha}. */
-    public static float nalpha(long struct) { return UNSAFE.getFloat(null, struct + XrPassthroughColorHTC.ALPHA); }
+    public static float nalpha(long struct) { return memGetFloat(struct + XrPassthroughColorHTC.ALPHA); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughColorHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughColorHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughColorHTC.NEXT, value); }
     /** Unsafe version of {@link #alpha(float) alpha}. */
-    public static void nalpha(long struct, float value) { UNSAFE.putFloat(null, struct + XrPassthroughColorHTC.ALPHA, value); }
+    public static void nalpha(long struct, float value) { memPutFloat(struct + XrPassthroughColorHTC.ALPHA, value); }
 
     // -----------------------------------
 

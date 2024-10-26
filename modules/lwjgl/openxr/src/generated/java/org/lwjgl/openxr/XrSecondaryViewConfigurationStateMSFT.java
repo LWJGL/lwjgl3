@@ -268,22 +268,22 @@ public class XrSecondaryViewConfigurationStateMSFT extends Struct<XrSecondaryVie
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationStateMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationStateMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSecondaryViewConfigurationStateMSFT.NEXT); }
     /** Unsafe version of {@link #viewConfigurationType}. */
-    public static int nviewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationStateMSFT.VIEWCONFIGURATIONTYPE); }
+    public static int nviewConfigurationType(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationStateMSFT.VIEWCONFIGURATIONTYPE); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationStateMSFT.ACTIVE); }
+    public static int nactive(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationStateMSFT.ACTIVE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationStateMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationStateMSFT.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
-    public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationStateMSFT.VIEWCONFIGURATIONTYPE, value); }
+    public static void nviewConfigurationType(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationStateMSFT.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #active(boolean) active}. */
-    public static void nactive(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationStateMSFT.ACTIVE, value); }
+    public static void nactive(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationStateMSFT.ACTIVE, value); }
 
     // -----------------------------------
 

@@ -227,14 +227,14 @@ public class VRVulkanTextureArrayData extends Struct<VRVulkanTextureArrayData> i
     // -----------------------------------
 
     /** Unsafe version of {@link #m_unArrayIndex}. */
-    public static int nm_unArrayIndex(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureArrayData.M_UNARRAYINDEX); }
+    public static int nm_unArrayIndex(long struct) { return memGetInt(struct + VRVulkanTextureArrayData.M_UNARRAYINDEX); }
     /** Unsafe version of {@link #m_unArraySize}. */
-    public static int nm_unArraySize(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureArrayData.M_UNARRAYSIZE); }
+    public static int nm_unArraySize(long struct) { return memGetInt(struct + VRVulkanTextureArrayData.M_UNARRAYSIZE); }
 
     /** Unsafe version of {@link #m_unArrayIndex(int) m_unArrayIndex}. */
-    public static void nm_unArrayIndex(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureArrayData.M_UNARRAYINDEX, value); }
+    public static void nm_unArrayIndex(long struct, int value) { memPutInt(struct + VRVulkanTextureArrayData.M_UNARRAYINDEX, value); }
     /** Unsafe version of {@link #m_unArraySize(int) m_unArraySize}. */
-    public static void nm_unArraySize(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureArrayData.M_UNARRAYSIZE, value); }
+    public static void nm_unArraySize(long struct, int value) { memPutInt(struct + VRVulkanTextureArrayData.M_UNARRAYSIZE, value); }
 
     // -----------------------------------
 

@@ -228,9 +228,9 @@ public class OVRBoundaryTestResult extends Struct<OVRBoundaryTestResult> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #IsTriggering}. */
-    public static boolean nIsTriggering(long struct) { return UNSAFE.getByte(null, struct + OVRBoundaryTestResult.ISTRIGGERING) != 0; }
+    public static boolean nIsTriggering(long struct) { return memGetByte(struct + OVRBoundaryTestResult.ISTRIGGERING) != 0; }
     /** Unsafe version of {@link #ClosestDistance}. */
-    public static float nClosestDistance(long struct) { return UNSAFE.getFloat(null, struct + OVRBoundaryTestResult.CLOSESTDISTANCE); }
+    public static float nClosestDistance(long struct) { return memGetFloat(struct + OVRBoundaryTestResult.CLOSESTDISTANCE); }
     /** Unsafe version of {@link #ClosestPoint}. */
     public static OVRVector3f nClosestPoint(long struct) { return OVRVector3f.create(struct + OVRBoundaryTestResult.CLOSESTPOINT); }
     /** Unsafe version of {@link #ClosestPointNormal}. */

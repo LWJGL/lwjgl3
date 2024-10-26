@@ -264,7 +264,7 @@ public class XrView extends Struct<XrView> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrView.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrView.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrView.NEXT); }
     /** Unsafe version of {@link #pose}. */
@@ -273,7 +273,7 @@ public class XrView extends Struct<XrView> implements NativeResource {
     public static XrFovf nfov(long struct) { return XrFovf.create(struct + XrView.FOV); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrView.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrView.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrView.NEXT, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */

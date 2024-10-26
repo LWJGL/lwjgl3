@@ -240,14 +240,14 @@ public class XrSystemMarkerUnderstandingPropertiesML extends Struct<XrSystemMark
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemMarkerUnderstandingPropertiesML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemMarkerUnderstandingPropertiesML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemMarkerUnderstandingPropertiesML.NEXT); }
     /** Unsafe version of {@link #supportsMarkerUnderstanding}. */
-    public static int nsupportsMarkerUnderstanding(long struct) { return UNSAFE.getInt(null, struct + XrSystemMarkerUnderstandingPropertiesML.SUPPORTSMARKERUNDERSTANDING); }
+    public static int nsupportsMarkerUnderstanding(long struct) { return memGetInt(struct + XrSystemMarkerUnderstandingPropertiesML.SUPPORTSMARKERUNDERSTANDING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerUnderstandingPropertiesML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemMarkerUnderstandingPropertiesML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemMarkerUnderstandingPropertiesML.NEXT, value); }
 

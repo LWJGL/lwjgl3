@@ -253,18 +253,18 @@ public class XrLocalDimmingFrameEndInfoMETA extends Struct<XrLocalDimmingFrameEn
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrLocalDimmingFrameEndInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrLocalDimmingFrameEndInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrLocalDimmingFrameEndInfoMETA.NEXT); }
     /** Unsafe version of {@link #localDimmingMode}. */
-    public static int nlocalDimmingMode(long struct) { return UNSAFE.getInt(null, struct + XrLocalDimmingFrameEndInfoMETA.LOCALDIMMINGMODE); }
+    public static int nlocalDimmingMode(long struct) { return memGetInt(struct + XrLocalDimmingFrameEndInfoMETA.LOCALDIMMINGMODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrLocalDimmingFrameEndInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrLocalDimmingFrameEndInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrLocalDimmingFrameEndInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #localDimmingMode(int) localDimmingMode}. */
-    public static void nlocalDimmingMode(long struct, int value) { UNSAFE.putInt(null, struct + XrLocalDimmingFrameEndInfoMETA.LOCALDIMMINGMODE, value); }
+    public static void nlocalDimmingMode(long struct, int value) { memPutInt(struct + XrLocalDimmingFrameEndInfoMETA.LOCALDIMMINGMODE, value); }
 
     // -----------------------------------
 

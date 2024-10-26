@@ -248,18 +248,18 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #fragmentShaderBarycentric}. */
-    public static int nfragmentShaderBarycentric(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.FRAGMENTSHADERBARYCENTRIC); }
+    public static int nfragmentShaderBarycentric(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.FRAGMENTSHADERBARYCENTRIC); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #fragmentShaderBarycentric(boolean) fragmentShaderBarycentric}. */
-    public static void nfragmentShaderBarycentric(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.FRAGMENTSHADERBARYCENTRIC, value); }
+    public static void nfragmentShaderBarycentric(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.FRAGMENTSHADERBARYCENTRIC, value); }
 
     // -----------------------------------
 

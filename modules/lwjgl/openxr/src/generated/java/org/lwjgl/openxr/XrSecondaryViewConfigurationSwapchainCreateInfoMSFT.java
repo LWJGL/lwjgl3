@@ -255,18 +255,18 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #viewConfigurationType}. */
-    public static int nviewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.VIEWCONFIGURATIONTYPE); }
+    public static int nviewConfigurationType(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.VIEWCONFIGURATIONTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
-    public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.VIEWCONFIGURATIONTYPE, value); }
+    public static void nviewConfigurationType(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.VIEWCONFIGURATIONTYPE, value); }
 
     // -----------------------------------
 

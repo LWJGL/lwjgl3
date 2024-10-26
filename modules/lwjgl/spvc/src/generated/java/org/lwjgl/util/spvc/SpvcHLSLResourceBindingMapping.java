@@ -222,14 +222,14 @@ public class SpvcHLSLResourceBindingMapping extends Struct<SpvcHLSLResourceBindi
     // -----------------------------------
 
     /** Unsafe version of {@link #register_space}. */
-    public static int nregister_space(long struct) { return UNSAFE.getInt(null, struct + SpvcHLSLResourceBindingMapping.REGISTER_SPACE); }
+    public static int nregister_space(long struct) { return memGetInt(struct + SpvcHLSLResourceBindingMapping.REGISTER_SPACE); }
     /** Unsafe version of {@link #register_binding}. */
-    public static int nregister_binding(long struct) { return UNSAFE.getInt(null, struct + SpvcHLSLResourceBindingMapping.REGISTER_BINDING); }
+    public static int nregister_binding(long struct) { return memGetInt(struct + SpvcHLSLResourceBindingMapping.REGISTER_BINDING); }
 
     /** Unsafe version of {@link #register_space(int) register_space}. */
-    public static void nregister_space(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHLSLResourceBindingMapping.REGISTER_SPACE, value); }
+    public static void nregister_space(long struct, int value) { memPutInt(struct + SpvcHLSLResourceBindingMapping.REGISTER_SPACE, value); }
     /** Unsafe version of {@link #register_binding(int) register_binding}. */
-    public static void nregister_binding(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHLSLResourceBindingMapping.REGISTER_BINDING, value); }
+    public static void nregister_binding(long struct, int value) { memPutInt(struct + SpvcHLSLResourceBindingMapping.REGISTER_BINDING, value); }
 
     // -----------------------------------
 

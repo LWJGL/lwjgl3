@@ -266,20 +266,20 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingDataSourceInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandTrackingDataSourceInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandTrackingDataSourceInfoEXT.NEXT); }
     /** Unsafe version of {@link #requestedDataSourceCount}. */
-    public static int nrequestedDataSourceCount(long struct) { return UNSAFE.getInt(null, struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCECOUNT); }
+    public static int nrequestedDataSourceCount(long struct) { return memGetInt(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCECOUNT); }
     /** Unsafe version of {@link #requestedDataSources() requestedDataSources}. */
     @Nullable public static IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingDataSourceInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingDataSourceInfoEXT.NEXT, value); }
     /** Sets the specified value to the {@code requestedDataSourceCount} field of the specified {@code struct}. */
-    public static void nrequestedDataSourceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCECOUNT, value); }
+    public static void nrequestedDataSourceCount(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCECOUNT, value); }
     /** Unsafe version of {@link #requestedDataSources(IntBuffer) requestedDataSources}. */
     public static void nrequestedDataSources(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCES, memAddressSafe(value)); nrequestedDataSourceCount(struct, value == null ? 0 : value.remaining()); }
 

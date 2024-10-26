@@ -252,18 +252,18 @@ public class XrSpaceUserCreateInfoFB extends Struct<XrSpaceUserCreateInfoFB> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceUserCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceUserCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceUserCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #userId}. */
-    public static long nuserId(long struct) { return UNSAFE.getLong(null, struct + XrSpaceUserCreateInfoFB.USERID); }
+    public static long nuserId(long struct) { return memGetLong(struct + XrSpaceUserCreateInfoFB.USERID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceUserCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceUserCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceUserCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #userId(long) userId}. */
-    public static void nuserId(long struct, long value) { UNSAFE.putLong(null, struct + XrSpaceUserCreateInfoFB.USERID, value); }
+    public static void nuserId(long struct, long value) { memPutLong(struct + XrSpaceUserCreateInfoFB.USERID, value); }
 
     // -----------------------------------
 

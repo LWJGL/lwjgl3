@@ -276,24 +276,24 @@ public class XrRenderModelBufferFB extends Struct<XrRenderModelBufferFB> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelBufferFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRenderModelBufferFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRenderModelBufferFB.NEXT); }
     /** Unsafe version of {@link #bufferCapacityInput}. */
-    public static int nbufferCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelBufferFB.BUFFERCAPACITYINPUT); }
+    public static int nbufferCapacityInput(long struct) { return memGetInt(struct + XrRenderModelBufferFB.BUFFERCAPACITYINPUT); }
     /** Unsafe version of {@link #bufferCountOutput}. */
-    public static int nbufferCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelBufferFB.BUFFERCOUNTOUTPUT); }
+    public static int nbufferCountOutput(long struct) { return memGetInt(struct + XrRenderModelBufferFB.BUFFERCOUNTOUTPUT); }
     /** Unsafe version of {@link #buffer() buffer}. */
     @Nullable public static ByteBuffer nbuffer(long struct) { return memByteBufferSafe(memGetAddress(struct + XrRenderModelBufferFB.BUFFER), nbufferCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelBufferFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRenderModelBufferFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRenderModelBufferFB.NEXT, value); }
     /** Sets the specified value to the {@code bufferCapacityInput} field of the specified {@code struct}. */
-    public static void nbufferCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelBufferFB.BUFFERCAPACITYINPUT, value); }
+    public static void nbufferCapacityInput(long struct, int value) { memPutInt(struct + XrRenderModelBufferFB.BUFFERCAPACITYINPUT, value); }
     /** Unsafe version of {@link #bufferCountOutput(int) bufferCountOutput}. */
-    public static void nbufferCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelBufferFB.BUFFERCOUNTOUTPUT, value); }
+    public static void nbufferCountOutput(long struct, int value) { memPutInt(struct + XrRenderModelBufferFB.BUFFERCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
     public static void nbuffer(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + XrRenderModelBufferFB.BUFFER, memAddressSafe(value)); if (value != null) { nbufferCapacityInput(struct, value.remaining()); } }
 

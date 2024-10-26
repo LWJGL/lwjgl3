@@ -313,32 +313,32 @@ public class VkPushDescriptorSetInfoKHR extends Struct<VkPushDescriptorSetInfoKH
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPushDescriptorSetInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPushDescriptorSetInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetInfoKHR.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkPushDescriptorSetInfoKHR.STAGEFLAGS); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkPushDescriptorSetInfoKHR.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkPushDescriptorSetInfoKHR.LAYOUT); }
     /** Unsafe version of {@link #set}. */
-    public static int nset(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetInfoKHR.SET); }
+    public static int nset(long struct) { return memGetInt(struct + VkPushDescriptorSetInfoKHR.SET); }
     /** Unsafe version of {@link #descriptorWriteCount}. */
-    public static int ndescriptorWriteCount(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetInfoKHR.DESCRIPTORWRITECOUNT); }
+    public static int ndescriptorWriteCount(long struct) { return memGetInt(struct + VkPushDescriptorSetInfoKHR.DESCRIPTORWRITECOUNT); }
     /** Unsafe version of {@link #pDescriptorWrites}. */
     public static VkWriteDescriptorSet.Buffer npDescriptorWrites(long struct) { return VkWriteDescriptorSet.create(memGetAddress(struct + VkPushDescriptorSetInfoKHR.PDESCRIPTORWRITES), ndescriptorWriteCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPushDescriptorSetInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPushDescriptorSetInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetInfoKHR.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkPushDescriptorSetInfoKHR.STAGEFLAGS, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkPushDescriptorSetInfoKHR.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkPushDescriptorSetInfoKHR.LAYOUT, value); }
     /** Unsafe version of {@link #set(int) set}. */
-    public static void nset(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetInfoKHR.SET, value); }
+    public static void nset(long struct, int value) { memPutInt(struct + VkPushDescriptorSetInfoKHR.SET, value); }
     /** Sets the specified value to the {@code descriptorWriteCount} field of the specified {@code struct}. */
-    public static void ndescriptorWriteCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetInfoKHR.DESCRIPTORWRITECOUNT, value); }
+    public static void ndescriptorWriteCount(long struct, int value) { memPutInt(struct + VkPushDescriptorSetInfoKHR.DESCRIPTORWRITECOUNT, value); }
     /** Unsafe version of {@link #pDescriptorWrites(VkWriteDescriptorSet.Buffer) pDescriptorWrites}. */
     public static void npDescriptorWrites(long struct, VkWriteDescriptorSet.Buffer value) { memPutAddress(struct + VkPushDescriptorSetInfoKHR.PDESCRIPTORWRITES, value.address()); ndescriptorWriteCount(struct, value.remaining()); }
 

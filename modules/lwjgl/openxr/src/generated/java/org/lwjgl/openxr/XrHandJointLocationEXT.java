@@ -251,18 +251,18 @@ public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #locationFlags}. */
-    public static long nlocationFlags(long struct) { return UNSAFE.getLong(null, struct + XrHandJointLocationEXT.LOCATIONFLAGS); }
+    public static long nlocationFlags(long struct) { return memGetLong(struct + XrHandJointLocationEXT.LOCATIONFLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrHandJointLocationEXT.POSE); }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + XrHandJointLocationEXT.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + XrHandJointLocationEXT.RADIUS); }
 
     /** Unsafe version of {@link #locationFlags(long) locationFlags}. */
-    public static void nlocationFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrHandJointLocationEXT.LOCATIONFLAGS, value); }
+    public static void nlocationFlags(long struct, long value) { memPutLong(struct + XrHandJointLocationEXT.LOCATIONFLAGS, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrHandJointLocationEXT.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandJointLocationEXT.RADIUS, value); }
+    public static void nradius(long struct, float value) { memPutFloat(struct + XrHandJointLocationEXT.RADIUS, value); }
 
     // -----------------------------------
 

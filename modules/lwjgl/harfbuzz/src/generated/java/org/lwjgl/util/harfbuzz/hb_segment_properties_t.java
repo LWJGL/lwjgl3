@@ -244,18 +244,18 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return UNSAFE.getInt(null, struct + hb_segment_properties_t.DIRECTION); }
+    public static int ndirection(long struct) { return memGetInt(struct + hb_segment_properties_t.DIRECTION); }
     /** Unsafe version of {@link #script}. */
-    public static int nscript(long struct) { return UNSAFE.getInt(null, struct + hb_segment_properties_t.SCRIPT); }
+    public static int nscript(long struct) { return memGetInt(struct + hb_segment_properties_t.SCRIPT); }
     /** Unsafe version of {@link #language}. */
     public static long nlanguage(long struct) { return memGetAddress(struct + hb_segment_properties_t.LANGUAGE); }
     public static long nreserved1(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED1); }
     public static long nreserved2(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED2); }
 
     /** Unsafe version of {@link #direction(int) direction}. */
-    public static void ndirection(long struct, int value) { UNSAFE.putInt(null, struct + hb_segment_properties_t.DIRECTION, value); }
+    public static void ndirection(long struct, int value) { memPutInt(struct + hb_segment_properties_t.DIRECTION, value); }
     /** Unsafe version of {@link #script(int) script}. */
-    public static void nscript(long struct, int value) { UNSAFE.putInt(null, struct + hb_segment_properties_t.SCRIPT, value); }
+    public static void nscript(long struct, int value) { memPutInt(struct + hb_segment_properties_t.SCRIPT, value); }
     /** Unsafe version of {@link #language(long) language}. */
     public static void nlanguage(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.LANGUAGE, value); }
     public static void nreserved1(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.RESERVED1, value); }

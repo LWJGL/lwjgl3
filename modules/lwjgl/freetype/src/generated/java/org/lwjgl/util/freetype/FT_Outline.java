@@ -222,9 +222,9 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #n_contours}. */
-    public static short nn_contours(long struct) { return UNSAFE.getShort(null, struct + FT_Outline.N_CONTOURS); }
+    public static short nn_contours(long struct) { return memGetShort(struct + FT_Outline.N_CONTOURS); }
     /** Unsafe version of {@link #n_points}. */
-    public static short nn_points(long struct) { return UNSAFE.getShort(null, struct + FT_Outline.N_POINTS); }
+    public static short nn_points(long struct) { return memGetShort(struct + FT_Outline.N_POINTS); }
     /** Unsafe version of {@link #points}. */
     public static FT_Vector.Buffer npoints(long struct) { return FT_Vector.create(memGetAddress(struct + FT_Outline.POINTS), Short.toUnsignedInt(nn_points(struct))); }
     /** Unsafe version of {@link #tags() tags}. */
@@ -232,7 +232,7 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
     /** Unsafe version of {@link #contours() contours}. */
     public static ShortBuffer ncontours(long struct) { return memShortBuffer(memGetAddress(struct + FT_Outline.CONTOURS), Short.toUnsignedInt(nn_contours(struct))); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FT_Outline.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FT_Outline.FLAGS); }
 
     // -----------------------------------
 

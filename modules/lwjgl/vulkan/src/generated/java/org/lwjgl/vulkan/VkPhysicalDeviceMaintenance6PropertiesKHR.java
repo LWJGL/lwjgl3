@@ -256,18 +256,18 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #blockTexelViewCompatibleMultipleLayers}. */
-    public static int nblockTexelViewCompatibleMultipleLayers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6PropertiesKHR.BLOCKTEXELVIEWCOMPATIBLEMULTIPLELAYERS); }
+    public static int nblockTexelViewCompatibleMultipleLayers(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.BLOCKTEXELVIEWCOMPATIBLEMULTIPLELAYERS); }
     /** Unsafe version of {@link #maxCombinedImageSamplerDescriptorCount}. */
-    public static int nmaxCombinedImageSamplerDescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6PropertiesKHR.MAXCOMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
+    public static int nmaxCombinedImageSamplerDescriptorCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.MAXCOMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
     /** Unsafe version of {@link #fragmentShadingRateClampCombinerInputs}. */
-    public static int nfragmentShadingRateClampCombinerInputs(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance6PropertiesKHR.FRAGMENTSHADINGRATECLAMPCOMBINERINPUTS); }
+    public static int nfragmentShadingRateClampCombinerInputs(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.FRAGMENTSHADINGRATECLAMPCOMBINERINPUTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.PNEXT, value); }
 

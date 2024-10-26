@@ -344,38 +344,38 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct<VkPipelineColorB
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineColorBlendStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineColorBlendStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineColorBlendStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #logicOpEnable}. */
-    public static int nlogicOpEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendStateCreateInfo.LOGICOPENABLE); }
+    public static int nlogicOpEnable(long struct) { return memGetInt(struct + VkPipelineColorBlendStateCreateInfo.LOGICOPENABLE); }
     /** Unsafe version of {@link #logicOp}. */
-    public static int nlogicOp(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendStateCreateInfo.LOGICOP); }
+    public static int nlogicOp(long struct) { return memGetInt(struct + VkPipelineColorBlendStateCreateInfo.LOGICOP); }
     /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendStateCreateInfo.ATTACHMENTCOUNT); }
+    public static int nattachmentCount(long struct) { return memGetInt(struct + VkPipelineColorBlendStateCreateInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments}. */
     @Nullable public static VkPipelineColorBlendAttachmentState.Buffer npAttachments(long struct) { return VkPipelineColorBlendAttachmentState.createSafe(memGetAddress(struct + VkPipelineColorBlendStateCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
     /** Unsafe version of {@link #blendConstants}. */
     public static FloatBuffer nblendConstants(long struct) { return memFloatBuffer(struct + VkPipelineColorBlendStateCreateInfo.BLENDCONSTANTS, 4); }
     /** Unsafe version of {@link #blendConstants(int) blendConstants}. */
     public static float nblendConstants(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + VkPipelineColorBlendStateCreateInfo.BLENDCONSTANTS + check(index, 4) * 4);
+        return memGetFloat(struct + VkPipelineColorBlendStateCreateInfo.BLENDCONSTANTS + check(index, 4) * 4);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineColorBlendStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineColorBlendStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineColorBlendStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #logicOpEnable(boolean) logicOpEnable}. */
-    public static void nlogicOpEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendStateCreateInfo.LOGICOPENABLE, value); }
+    public static void nlogicOpEnable(long struct, int value) { memPutInt(struct + VkPipelineColorBlendStateCreateInfo.LOGICOPENABLE, value); }
     /** Unsafe version of {@link #logicOp(int) logicOp}. */
-    public static void nlogicOp(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendStateCreateInfo.LOGICOP, value); }
+    public static void nlogicOp(long struct, int value) { memPutInt(struct + VkPipelineColorBlendStateCreateInfo.LOGICOP, value); }
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendStateCreateInfo.ATTACHMENTCOUNT, value); }
+    public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkPipelineColorBlendStateCreateInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(VkPipelineColorBlendAttachmentState.Buffer) pAttachments}. */
     public static void npAttachments(long struct, @Nullable VkPipelineColorBlendAttachmentState.Buffer value) { memPutAddress(struct + VkPipelineColorBlendStateCreateInfo.PATTACHMENTS, memAddressSafe(value)); if (value != null) { nattachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #blendConstants(FloatBuffer) blendConstants}. */
@@ -385,7 +385,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct<VkPipelineColorB
     }
     /** Unsafe version of {@link #blendConstants(int, float) blendConstants}. */
     public static void nblendConstants(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + VkPipelineColorBlendStateCreateInfo.BLENDCONSTANTS + check(index, 4) * 4, value);
+        memPutFloat(struct + VkPipelineColorBlendStateCreateInfo.BLENDCONSTANTS + check(index, 4) * 4, value);
     }
 
     // -----------------------------------

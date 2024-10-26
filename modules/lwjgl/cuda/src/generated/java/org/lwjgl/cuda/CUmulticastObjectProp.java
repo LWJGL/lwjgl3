@@ -243,22 +243,22 @@ public class CUmulticastObjectProp extends Struct<CUmulticastObjectProp> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #numDevices}. */
-    public static int nnumDevices(long struct) { return UNSAFE.getInt(null, struct + CUmulticastObjectProp.NUMDEVICES); }
+    public static int nnumDevices(long struct) { return memGetInt(struct + CUmulticastObjectProp.NUMDEVICES); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + CUmulticastObjectProp.SIZE); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static long nhandleTypes(long struct) { return UNSAFE.getLong(null, struct + CUmulticastObjectProp.HANDLETYPES); }
+    public static long nhandleTypes(long struct) { return memGetLong(struct + CUmulticastObjectProp.HANDLETYPES); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + CUmulticastObjectProp.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + CUmulticastObjectProp.FLAGS); }
 
     /** Unsafe version of {@link #numDevices(int) numDevices}. */
-    public static void nnumDevices(long struct, int value) { UNSAFE.putInt(null, struct + CUmulticastObjectProp.NUMDEVICES, value); }
+    public static void nnumDevices(long struct, int value) { memPutInt(struct + CUmulticastObjectProp.NUMDEVICES, value); }
     /** Unsafe version of {@link #size(long) size}. */
     public static void nsize(long struct, long value) { memPutAddress(struct + CUmulticastObjectProp.SIZE, value); }
     /** Unsafe version of {@link #handleTypes(long) handleTypes}. */
-    public static void nhandleTypes(long struct, long value) { UNSAFE.putLong(null, struct + CUmulticastObjectProp.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, long value) { memPutLong(struct + CUmulticastObjectProp.HANDLETYPES, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + CUmulticastObjectProp.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + CUmulticastObjectProp.FLAGS, value); }
 
     // -----------------------------------
 

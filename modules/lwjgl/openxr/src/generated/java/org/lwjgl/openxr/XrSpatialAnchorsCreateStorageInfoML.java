@@ -244,12 +244,12 @@ public class XrSpatialAnchorsCreateStorageInfoML extends Struct<XrSpatialAnchors
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsCreateStorageInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsCreateStorageInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsCreateStorageInfoML.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsCreateStorageInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsCreateStorageInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsCreateStorageInfoML.NEXT, value); }
 

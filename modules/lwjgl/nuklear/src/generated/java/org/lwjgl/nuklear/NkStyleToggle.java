@@ -483,19 +483,19 @@ public class NkStyleToggle extends Struct<NkStyleToggle> implements NativeResour
     /** Unsafe version of {@link #text_background}. */
     public static NkColor ntext_background(long struct) { return NkColor.create(struct + NkStyleToggle.TEXT_BACKGROUND); }
     /** Unsafe version of {@link #text_alignment}. */
-    public static int ntext_alignment(long struct) { return UNSAFE.getInt(null, struct + NkStyleToggle.TEXT_ALIGNMENT); }
+    public static int ntext_alignment(long struct) { return memGetInt(struct + NkStyleToggle.TEXT_ALIGNMENT); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleToggle.PADDING); }
     /** Unsafe version of {@link #touch_padding}. */
     public static NkVec2 ntouch_padding(long struct) { return NkVec2.create(struct + NkStyleToggle.TOUCH_PADDING); }
     /** Unsafe version of {@link #spacing}. */
-    public static float nspacing(long struct) { return UNSAFE.getFloat(null, struct + NkStyleToggle.SPACING); }
+    public static float nspacing(long struct) { return memGetFloat(struct + NkStyleToggle.SPACING); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleToggle.BORDER); }
+    public static float nborder(long struct) { return memGetFloat(struct + NkStyleToggle.BORDER); }
     /** Unsafe version of {@link #color_factor}. */
-    public static float ncolor_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleToggle.COLOR_FACTOR); }
+    public static float ncolor_factor(long struct) { return memGetFloat(struct + NkStyleToggle.COLOR_FACTOR); }
     /** Unsafe version of {@link #disabled_factor}. */
-    public static float ndisabled_factor(long struct) { return UNSAFE.getFloat(null, struct + NkStyleToggle.DISABLED_FACTOR); }
+    public static float ndisabled_factor(long struct) { return memGetFloat(struct + NkStyleToggle.DISABLED_FACTOR); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleToggle.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
@@ -524,19 +524,19 @@ public class NkStyleToggle extends Struct<NkStyleToggle> implements NativeResour
     /** Unsafe version of {@link #text_background(NkColor) text_background}. */
     public static void ntext_background(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleToggle.TEXT_BACKGROUND, NkColor.SIZEOF); }
     /** Unsafe version of {@link #text_alignment(int) text_alignment}. */
-    public static void ntext_alignment(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleToggle.TEXT_ALIGNMENT, value); }
+    public static void ntext_alignment(long struct, int value) { memPutInt(struct + NkStyleToggle.TEXT_ALIGNMENT, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleToggle.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #touch_padding(NkVec2) touch_padding}. */
     public static void ntouch_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleToggle.TOUCH_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #spacing(float) spacing}. */
-    public static void nspacing(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleToggle.SPACING, value); }
+    public static void nspacing(long struct, float value) { memPutFloat(struct + NkStyleToggle.SPACING, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleToggle.BORDER, value); }
+    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleToggle.BORDER, value); }
     /** Unsafe version of {@link #color_factor(float) color_factor}. */
-    public static void ncolor_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleToggle.COLOR_FACTOR, value); }
+    public static void ncolor_factor(long struct, float value) { memPutFloat(struct + NkStyleToggle.COLOR_FACTOR, value); }
     /** Unsafe version of {@link #disabled_factor(float) disabled_factor}. */
-    public static void ndisabled_factor(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleToggle.DISABLED_FACTOR, value); }
+    public static void ndisabled_factor(long struct, float value) { memPutFloat(struct + NkStyleToggle.DISABLED_FACTOR, value); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkStyleToggle.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #draw_begin(NkDrawBeginCallbackI) draw_begin}. */

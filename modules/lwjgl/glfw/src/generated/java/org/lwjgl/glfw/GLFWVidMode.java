@@ -134,17 +134,17 @@ public class GLFWVidMode extends Struct<GLFWVidMode> {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + GLFWVidMode.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + GLFWVidMode.HEIGHT); }
     /** Unsafe version of {@link #redBits}. */
-    public static int nredBits(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.REDBITS); }
+    public static int nredBits(long struct) { return memGetInt(struct + GLFWVidMode.REDBITS); }
     /** Unsafe version of {@link #greenBits}. */
-    public static int ngreenBits(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.GREENBITS); }
+    public static int ngreenBits(long struct) { return memGetInt(struct + GLFWVidMode.GREENBITS); }
     /** Unsafe version of {@link #blueBits}. */
-    public static int nblueBits(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.BLUEBITS); }
+    public static int nblueBits(long struct) { return memGetInt(struct + GLFWVidMode.BLUEBITS); }
     /** Unsafe version of {@link #refreshRate}. */
-    public static int nrefreshRate(long struct) { return UNSAFE.getInt(null, struct + GLFWVidMode.REFRESHRATE); }
+    public static int nrefreshRate(long struct) { return memGetInt(struct + GLFWVidMode.REFRESHRATE); }
 
     // -----------------------------------
 

@@ -270,20 +270,20 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportDepthClampControlCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #depthClampMode}. */
-    public static int ndepthClampMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportDepthClampControlCreateInfoEXT.DEPTHCLAMPMODE); }
+    public static int ndepthClampMode(long struct) { return memGetInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.DEPTHCLAMPMODE); }
     /** Unsafe version of {@link #pDepthClampRange}. */
     @Nullable public static VkDepthClampRangeEXT npDepthClampRange(long struct) { return VkDepthClampRangeEXT.createSafe(memGetAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PDEPTHCLAMPRANGE)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportDepthClampControlCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #depthClampMode(int) depthClampMode}. */
-    public static void ndepthClampMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportDepthClampControlCreateInfoEXT.DEPTHCLAMPMODE, value); }
+    public static void ndepthClampMode(long struct, int value) { memPutInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.DEPTHCLAMPMODE, value); }
     /** Unsafe version of {@link #pDepthClampRange(VkDepthClampRangeEXT) pDepthClampRange}. */
     public static void npDepthClampRange(long struct, @Nullable VkDepthClampRangeEXT value) { memPutAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PDEPTHCLAMPRANGE, memAddressSafe(value)); }
 

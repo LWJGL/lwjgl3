@@ -269,24 +269,24 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct<CUDA_EXTER
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.OFFSET); }
     /** Unsafe version of {@link #arrayDesc}. */
     public static CUDA_ARRAY3D_DESCRIPTOR narrayDesc(long struct) { return CUDA_ARRAY3D_DESCRIPTOR.create(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.ARRAYDESC); }
     /** Unsafe version of {@link #numLevels}. */
-    public static int nnumLevels(long struct) { return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.NUMLEVELS); }
+    public static int nnumLevels(long struct) { return memGetInt(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.NUMLEVELS); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.RESERVED, 16); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.RESERVED + check(index, 16) * 4);
+        return memGetInt(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.RESERVED + check(index, 16) * 4);
     }
 
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.OFFSET, value); }
     /** Unsafe version of {@link #arrayDesc(CUDA_ARRAY3D_DESCRIPTOR) arrayDesc}. */
     public static void narrayDesc(long struct, CUDA_ARRAY3D_DESCRIPTOR value) { memCopy(value.address(), struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.ARRAYDESC, CUDA_ARRAY3D_DESCRIPTOR.SIZEOF); }
     /** Unsafe version of {@link #numLevels(int) numLevels}. */
-    public static void nnumLevels(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.NUMLEVELS, value); }
+    public static void nnumLevels(long struct, int value) { memPutInt(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.NUMLEVELS, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 16); }
@@ -294,7 +294,7 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct<CUDA_EXTER
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.RESERVED + check(index, 16) * 4, value);
+        memPutInt(struct + CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.RESERVED + check(index, 16) * 4, value);
     }
 
     // -----------------------------------

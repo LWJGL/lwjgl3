@@ -253,18 +253,18 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + FFIType.SIZE); }
     /** Unsafe version of {@link #alignment}. */
-    public static short nalignment(long struct) { return UNSAFE.getShort(null, struct + FFIType.ALIGNMENT); }
+    public static short nalignment(long struct) { return memGetShort(struct + FFIType.ALIGNMENT); }
     /** Unsafe version of {@link #type}. */
-    public static short ntype(long struct) { return UNSAFE.getShort(null, struct + FFIType.TYPE); }
+    public static short ntype(long struct) { return memGetShort(struct + FFIType.TYPE); }
     /** Unsafe version of {@link #elements(int) elements}. */
     @Nullable public static PointerBuffer nelements(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + FFIType.ELEMENTS), capacity); }
 
     /** Unsafe version of {@link #size(long) size}. */
     public static void nsize(long struct, long value) { memPutAddress(struct + FFIType.SIZE, value); }
     /** Unsafe version of {@link #alignment(short) alignment}. */
-    public static void nalignment(long struct, short value) { UNSAFE.putShort(null, struct + FFIType.ALIGNMENT, value); }
+    public static void nalignment(long struct, short value) { memPutShort(struct + FFIType.ALIGNMENT, value); }
     /** Unsafe version of {@link #type(short) type}. */
-    public static void ntype(long struct, short value) { UNSAFE.putShort(null, struct + FFIType.TYPE, value); }
+    public static void ntype(long struct, short value) { memPutShort(struct + FFIType.TYPE, value); }
     /** Unsafe version of {@link #elements(PointerBuffer) elements}. */
     public static void nelements(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + FFIType.ELEMENTS, memAddressSafe(value)); }
 

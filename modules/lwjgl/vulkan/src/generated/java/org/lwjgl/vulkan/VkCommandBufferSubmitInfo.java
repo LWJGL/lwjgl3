@@ -272,22 +272,22 @@ public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferSubmitInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferSubmitInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferSubmitInfo.PNEXT); }
     /** Unsafe version of {@link #commandBuffer}. */
     public static long ncommandBuffer(long struct) { return memGetAddress(struct + VkCommandBufferSubmitInfo.COMMANDBUFFER); }
     /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferSubmitInfo.DEVICEMASK); }
+    public static int ndeviceMask(long struct) { return memGetInt(struct + VkCommandBufferSubmitInfo.DEVICEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferSubmitInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferSubmitInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferSubmitInfo.PNEXT, value); }
     /** Unsafe version of {@link #commandBuffer(VkCommandBuffer) commandBuffer}. */
     public static void ncommandBuffer(long struct, VkCommandBuffer value) { memPutAddress(struct + VkCommandBufferSubmitInfo.COMMANDBUFFER, value.address()); }
     /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferSubmitInfo.DEVICEMASK, value); }
+    public static void ndeviceMask(long struct, int value) { memPutInt(struct + VkCommandBufferSubmitInfo.DEVICEMASK, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

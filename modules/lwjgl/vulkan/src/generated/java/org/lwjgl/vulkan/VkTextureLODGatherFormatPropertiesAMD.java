@@ -257,14 +257,14 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct<VkTextureLODGa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkTextureLODGatherFormatPropertiesAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkTextureLODGatherFormatPropertiesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkTextureLODGatherFormatPropertiesAMD.PNEXT); }
     /** Unsafe version of {@link #supportsTextureGatherLODBiasAMD}. */
-    public static int nsupportsTextureGatherLODBiasAMD(long struct) { return UNSAFE.getInt(null, struct + VkTextureLODGatherFormatPropertiesAMD.SUPPORTSTEXTUREGATHERLODBIASAMD); }
+    public static int nsupportsTextureGatherLODBiasAMD(long struct) { return memGetInt(struct + VkTextureLODGatherFormatPropertiesAMD.SUPPORTSTEXTUREGATHERLODBIASAMD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkTextureLODGatherFormatPropertiesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkTextureLODGatherFormatPropertiesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkTextureLODGatherFormatPropertiesAMD.PNEXT, value); }
 

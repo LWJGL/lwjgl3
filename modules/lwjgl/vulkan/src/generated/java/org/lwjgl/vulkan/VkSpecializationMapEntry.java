@@ -267,16 +267,16 @@ public class VkSpecializationMapEntry extends Struct<VkSpecializationMapEntry> i
     // -----------------------------------
 
     /** Unsafe version of {@link #constantID}. */
-    public static int nconstantID(long struct) { return UNSAFE.getInt(null, struct + VkSpecializationMapEntry.CONSTANTID); }
+    public static int nconstantID(long struct) { return memGetInt(struct + VkSpecializationMapEntry.CONSTANTID); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkSpecializationMapEntry.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkSpecializationMapEntry.OFFSET); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + VkSpecializationMapEntry.SIZE); }
 
     /** Unsafe version of {@link #constantID(int) constantID}. */
-    public static void nconstantID(long struct, int value) { UNSAFE.putInt(null, struct + VkSpecializationMapEntry.CONSTANTID, value); }
+    public static void nconstantID(long struct, int value) { memPutInt(struct + VkSpecializationMapEntry.CONSTANTID, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkSpecializationMapEntry.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkSpecializationMapEntry.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
     public static void nsize(long struct, long value) { memPutAddress(struct + VkSpecializationMapEntry.SIZE, value); }
 

@@ -185,34 +185,34 @@ public class NkRowLayout extends Struct<NkRowLayout> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkRowLayout.TYPE); }
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.INDEX); }
+    public static int nindex(long struct) { return memGetInt(struct + NkRowLayout.INDEX); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + NkRowLayout.HEIGHT); }
     /** Unsafe version of {@link #min_height}. */
-    public static float nmin_height(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.MIN_HEIGHT); }
+    public static float nmin_height(long struct) { return memGetFloat(struct + NkRowLayout.MIN_HEIGHT); }
     /** Unsafe version of {@link #columns}. */
-    public static int ncolumns(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.COLUMNS); }
+    public static int ncolumns(long struct) { return memGetInt(struct + NkRowLayout.COLUMNS); }
     /** Unsafe version of {@link #ratio(int) ratio}. */
     public static FloatBuffer nratio(long struct, int capacity) { return memFloatBuffer(memGetAddress(struct + NkRowLayout.RATIO), capacity); }
     /** Unsafe version of {@link #item_width}. */
-    public static float nitem_width(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_WIDTH); }
+    public static float nitem_width(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_WIDTH); }
     /** Unsafe version of {@link #item_height}. */
-    public static float nitem_height(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_HEIGHT); }
+    public static float nitem_height(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_HEIGHT); }
     /** Unsafe version of {@link #item_offset}. */
-    public static float nitem_offset(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_OFFSET); }
+    public static float nitem_offset(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_OFFSET); }
     /** Unsafe version of {@link #filled}. */
-    public static float nfilled(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.FILLED); }
+    public static float nfilled(long struct) { return memGetFloat(struct + NkRowLayout.FILLED); }
     /** Unsafe version of {@link #item}. */
     public static NkRect nitem(long struct) { return NkRect.create(struct + NkRowLayout.ITEM); }
     /** Unsafe version of {@link #tree_depth}. */
-    public static int ntree_depth(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.TREE_DEPTH); }
+    public static int ntree_depth(long struct) { return memGetInt(struct + NkRowLayout.TREE_DEPTH); }
     /** Unsafe version of {@link #templates}. */
     public static FloatBuffer ntemplates(long struct) { return memFloatBuffer(struct + NkRowLayout.TEMPLATES, 16); }
     /** Unsafe version of {@link #templates(int) templates}. */
     public static float ntemplates(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NkRowLayout.TEMPLATES + check(index, 16) * 4);
+        return memGetFloat(struct + NkRowLayout.TEMPLATES + check(index, 16) * 4);
     }
 
     // -----------------------------------

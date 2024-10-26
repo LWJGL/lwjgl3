@@ -236,12 +236,12 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrActionSuggestedBinding.ACTION); }
     /** Unsafe version of {@link #binding}. */
-    public static long nbinding(long struct) { return UNSAFE.getLong(null, struct + XrActionSuggestedBinding.BINDING); }
+    public static long nbinding(long struct) { return memGetLong(struct + XrActionSuggestedBinding.BINDING); }
 
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrActionSuggestedBinding.ACTION, value.address()); }
     /** Unsafe version of {@link #binding(long) binding}. */
-    public static void nbinding(long struct, long value) { UNSAFE.putLong(null, struct + XrActionSuggestedBinding.BINDING, value); }
+    public static void nbinding(long struct, long value) { memPutLong(struct + XrActionSuggestedBinding.BINDING, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -289,7 +289,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     /** Unsafe version of {@link #source(int) source}. */
     @Nullable public static ByteBuffer nsource(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Raster_Params.SOURCE), capacity); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FT_Raster_Params.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FT_Raster_Params.FLAGS); }
     /** Unsafe version of {@link #gray_spans}. */
     @Nullable public static FT_SpanFunc ngray_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.GRAY_SPANS)); }
     @Nullable public static FT_SpanFunc nblack_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.BLACK_SPANS)); }
@@ -305,7 +305,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     /** Unsafe version of {@link #source(ByteBuffer) source}. */
     public static void nsource(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Raster_Params.SOURCE, memAddressSafe(value)); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + FT_Raster_Params.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + FT_Raster_Params.FLAGS, value); }
     /** Unsafe version of {@link #gray_spans(FT_SpanFuncI) gray_spans}. */
     public static void ngray_spans(long struct, @Nullable FT_SpanFuncI value) { memPutAddress(struct + FT_Raster_Params.GRAY_SPANS, memAddressSafe(value)); }
     public static void nblack_spans(long struct, @Nullable FT_SpanFuncI value) { memPutAddress(struct + FT_Raster_Params.BLACK_SPANS, memAddressSafe(value)); }

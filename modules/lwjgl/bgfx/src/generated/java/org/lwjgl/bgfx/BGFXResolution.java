@@ -227,33 +227,33 @@ public class BGFXResolution extends Struct<BGFXResolution> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + BGFXResolution.FORMAT); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + BGFXResolution.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + BGFXResolution.HEIGHT); }
     /** Unsafe version of {@link #reset}. */
-    public static int nreset(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.RESET); }
+    public static int nreset(long struct) { return memGetInt(struct + BGFXResolution.RESET); }
     /** Unsafe version of {@link #numBackBuffers}. */
-    public static byte nnumBackBuffers(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.NUMBACKBUFFERS); }
+    public static byte nnumBackBuffers(long struct) { return memGetByte(struct + BGFXResolution.NUMBACKBUFFERS); }
     /** Unsafe version of {@link #maxFrameLatency}. */
-    public static byte nmaxFrameLatency(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.MAXFRAMELATENCY); }
+    public static byte nmaxFrameLatency(long struct) { return memGetByte(struct + BGFXResolution.MAXFRAMELATENCY); }
     /** Unsafe version of {@link #debugTextScale}. */
-    public static byte ndebugTextScale(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.DEBUGTEXTSCALE); }
+    public static byte ndebugTextScale(long struct) { return memGetByte(struct + BGFXResolution.DEBUGTEXTSCALE); }
 
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + BGFXResolution.FORMAT, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + BGFXResolution.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + BGFXResolution.HEIGHT, value); }
     /** Unsafe version of {@link #reset(int) reset}. */
-    public static void nreset(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.RESET, value); }
+    public static void nreset(long struct, int value) { memPutInt(struct + BGFXResolution.RESET, value); }
     /** Unsafe version of {@link #numBackBuffers(byte) numBackBuffers}. */
-    public static void nnumBackBuffers(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.NUMBACKBUFFERS, value); }
+    public static void nnumBackBuffers(long struct, byte value) { memPutByte(struct + BGFXResolution.NUMBACKBUFFERS, value); }
     /** Unsafe version of {@link #maxFrameLatency(byte) maxFrameLatency}. */
-    public static void nmaxFrameLatency(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.MAXFRAMELATENCY, value); }
+    public static void nmaxFrameLatency(long struct, byte value) { memPutByte(struct + BGFXResolution.MAXFRAMELATENCY, value); }
     /** Unsafe version of {@link #debugTextScale(byte) debugTextScale}. */
-    public static void ndebugTextScale(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.DEBUGTEXTSCALE, value); }
+    public static void ndebugTextScale(long struct, byte value) { memPutByte(struct + BGFXResolution.DEBUGTEXTSCALE, value); }
 
 }

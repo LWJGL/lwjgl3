@@ -264,22 +264,22 @@ public class VkCuFunctionCreateInfoNVX extends Struct<VkCuFunctionCreateInfoNVX>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCuFunctionCreateInfoNVX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCuFunctionCreateInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCuFunctionCreateInfoNVX.PNEXT); }
     /** Unsafe version of {@link #module}. */
-    public static long nmodule(long struct) { return UNSAFE.getLong(null, struct + VkCuFunctionCreateInfoNVX.MODULE); }
+    public static long nmodule(long struct) { return memGetLong(struct + VkCuFunctionCreateInfoNVX.MODULE); }
     /** Unsafe version of {@link #pName}. */
     public static ByteBuffer npName(long struct) { return memByteBufferNT1(memGetAddress(struct + VkCuFunctionCreateInfoNVX.PNAME)); }
     /** Unsafe version of {@link #pNameString}. */
     public static String npNameString(long struct) { return memUTF8(memGetAddress(struct + VkCuFunctionCreateInfoNVX.PNAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCuFunctionCreateInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCuFunctionCreateInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCuFunctionCreateInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #module(long) module}. */
-    public static void nmodule(long struct, long value) { UNSAFE.putLong(null, struct + VkCuFunctionCreateInfoNVX.MODULE, value); }
+    public static void nmodule(long struct, long value) { memPutLong(struct + VkCuFunctionCreateInfoNVX.MODULE, value); }
     /** Unsafe version of {@link #pName(ByteBuffer) pName}. */
     public static void npName(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

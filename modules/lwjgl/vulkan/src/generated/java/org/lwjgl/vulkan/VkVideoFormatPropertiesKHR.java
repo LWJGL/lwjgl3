@@ -277,24 +277,24 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoFormatPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.FORMAT); }
     /** Unsafe version of {@link #componentMapping}. */
     public static VkComponentMapping ncomponentMapping(long struct) { return VkComponentMapping.create(struct + VkVideoFormatPropertiesKHR.COMPONENTMAPPING); }
     /** Unsafe version of {@link #imageCreateFlags}. */
-    public static int nimageCreateFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGECREATEFLAGS); }
+    public static int nimageCreateFlags(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.IMAGECREATEFLAGS); }
     /** Unsafe version of {@link #imageType}. */
-    public static int nimageType(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGETYPE); }
+    public static int nimageType(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.IMAGETYPE); }
     /** Unsafe version of {@link #imageTiling}. */
-    public static int nimageTiling(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGETILING); }
+    public static int nimageTiling(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.IMAGETILING); }
     /** Unsafe version of {@link #imageUsageFlags}. */
-    public static int nimageUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGEUSAGEFLAGS); }
+    public static int nimageUsageFlags(long struct) { return memGetInt(struct + VkVideoFormatPropertiesKHR.IMAGEUSAGEFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoFormatPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoFormatPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoFormatPropertiesKHR.PNEXT, value); }
 

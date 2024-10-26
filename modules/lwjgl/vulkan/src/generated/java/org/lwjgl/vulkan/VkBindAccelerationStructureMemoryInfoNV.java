@@ -322,32 +322,32 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct<VkBindAccele
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindAccelerationStructureMemoryInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindAccelerationStructureMemoryInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindAccelerationStructureMemoryInfoNV.PNEXT); }
     /** Unsafe version of {@link #accelerationStructure}. */
-    public static long naccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.ACCELERATIONSTRUCTURE); }
+    public static long naccelerationStructure(long struct) { return memGetLong(struct + VkBindAccelerationStructureMemoryInfoNV.ACCELERATIONSTRUCTURE); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkBindAccelerationStructureMemoryInfoNV.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkBindAccelerationStructureMemoryInfoNV.MEMORYOFFSET); }
     /** Unsafe version of {@link #deviceIndexCount}. */
-    public static int ndeviceIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkBindAccelerationStructureMemoryInfoNV.DEVICEINDEXCOUNT); }
+    public static int ndeviceIndexCount(long struct) { return memGetInt(struct + VkBindAccelerationStructureMemoryInfoNV.DEVICEINDEXCOUNT); }
     /** Unsafe version of {@link #pDeviceIndices() pDeviceIndices}. */
     @Nullable public static IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindAccelerationStructureMemoryInfoNV.PDEVICEINDICES), ndeviceIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindAccelerationStructureMemoryInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindAccelerationStructureMemoryInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindAccelerationStructureMemoryInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #accelerationStructure(long) accelerationStructure}. */
-    public static void naccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.ACCELERATIONSTRUCTURE, value); }
+    public static void naccelerationStructure(long struct, long value) { memPutLong(struct + VkBindAccelerationStructureMemoryInfoNV.ACCELERATIONSTRUCTURE, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkBindAccelerationStructureMemoryInfoNV.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBindAccelerationStructureMemoryInfoNV.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkBindAccelerationStructureMemoryInfoNV.MEMORYOFFSET, value); }
     /** Sets the specified value to the {@code deviceIndexCount} field of the specified {@code struct}. */
-    public static void ndeviceIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindAccelerationStructureMemoryInfoNV.DEVICEINDEXCOUNT, value); }
+    public static void ndeviceIndexCount(long struct, int value) { memPutInt(struct + VkBindAccelerationStructureMemoryInfoNV.DEVICEINDEXCOUNT, value); }
     /** Unsafe version of {@link #pDeviceIndices(IntBuffer) pDeviceIndices}. */
     public static void npDeviceIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBindAccelerationStructureMemoryInfoNV.PDEVICEINDICES, memAddressSafe(value)); ndeviceIndexCount(struct, value == null ? 0 : value.remaining()); }
 

@@ -247,12 +247,12 @@ public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #shadingRatePaletteEntryCount}. */
-    public static int nshadingRatePaletteEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkShadingRatePaletteNV.SHADINGRATEPALETTEENTRYCOUNT); }
+    public static int nshadingRatePaletteEntryCount(long struct) { return memGetInt(struct + VkShadingRatePaletteNV.SHADINGRATEPALETTEENTRYCOUNT); }
     /** Unsafe version of {@link #pShadingRatePaletteEntries() pShadingRatePaletteEntries}. */
     public static IntBuffer npShadingRatePaletteEntries(long struct) { return memIntBuffer(memGetAddress(struct + VkShadingRatePaletteNV.PSHADINGRATEPALETTEENTRIES), nshadingRatePaletteEntryCount(struct)); }
 
     /** Sets the specified value to the {@code shadingRatePaletteEntryCount} field of the specified {@code struct}. */
-    public static void nshadingRatePaletteEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkShadingRatePaletteNV.SHADINGRATEPALETTEENTRYCOUNT, value); }
+    public static void nshadingRatePaletteEntryCount(long struct, int value) { memPutInt(struct + VkShadingRatePaletteNV.SHADINGRATEPALETTEENTRYCOUNT, value); }
     /** Unsafe version of {@link #pShadingRatePaletteEntries(IntBuffer) pShadingRatePaletteEntries}. */
     public static void npShadingRatePaletteEntries(long struct, IntBuffer value) { memPutAddress(struct + VkShadingRatePaletteNV.PSHADINGRATEPALETTEENTRIES, memAddress(value)); nshadingRatePaletteEntryCount(struct, value.remaining()); }
 

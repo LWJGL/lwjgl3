@@ -306,7 +306,7 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageResolve2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageResolve2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageResolve2.PNEXT); }
     /** Unsafe version of {@link #srcSubresource}. */
@@ -321,7 +321,7 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
     public static VkExtent3D nextent(long struct) { return VkExtent3D.create(struct + VkImageResolve2.EXTENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageResolve2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageResolve2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageResolve2.PNEXT, value); }
     /** Unsafe version of {@link #srcSubresource(VkImageSubresourceLayers) srcSubresource}. */

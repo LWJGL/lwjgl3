@@ -301,78 +301,78 @@ public class PS_Private extends Struct<PS_Private> {
     // -----------------------------------
 
     /** Unsafe version of {@link #unique_id}. */
-    public static int nunique_id(long struct) { return UNSAFE.getInt(null, struct + PS_Private.UNIQUE_ID); }
+    public static int nunique_id(long struct) { return memGetInt(struct + PS_Private.UNIQUE_ID); }
     /** Unsafe version of {@link #lenIV}. */
-    public static int nlenIV(long struct) { return UNSAFE.getInt(null, struct + PS_Private.LENIV); }
+    public static int nlenIV(long struct) { return memGetInt(struct + PS_Private.LENIV); }
     /** Unsafe version of {@link #num_blue_values}. */
-    public static byte nnum_blue_values(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_BLUE_VALUES); }
+    public static byte nnum_blue_values(long struct) { return memGetByte(struct + PS_Private.NUM_BLUE_VALUES); }
     /** Unsafe version of {@link #num_other_blues}. */
-    public static byte nnum_other_blues(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_OTHER_BLUES); }
+    public static byte nnum_other_blues(long struct) { return memGetByte(struct + PS_Private.NUM_OTHER_BLUES); }
     /** Unsafe version of {@link #num_family_blues}. */
-    public static byte nnum_family_blues(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_FAMILY_BLUES); }
+    public static byte nnum_family_blues(long struct) { return memGetByte(struct + PS_Private.NUM_FAMILY_BLUES); }
     /** Unsafe version of {@link #num_family_other_blues}. */
-    public static byte nnum_family_other_blues(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_FAMILY_OTHER_BLUES); }
+    public static byte nnum_family_other_blues(long struct) { return memGetByte(struct + PS_Private.NUM_FAMILY_OTHER_BLUES); }
     /** Unsafe version of {@link #blue_values}. */
     public static ShortBuffer nblue_values(long struct) { return memShortBuffer(struct + PS_Private.BLUE_VALUES, 14); }
     /** Unsafe version of {@link #blue_values(int) blue_values}. */
     public static short nblue_values(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.BLUE_VALUES + check(index, 14) * 2);
+        return memGetShort(struct + PS_Private.BLUE_VALUES + check(index, 14) * 2);
     }
     /** Unsafe version of {@link #other_blues}. */
     public static ShortBuffer nother_blues(long struct) { return memShortBuffer(struct + PS_Private.OTHER_BLUES, 10); }
     /** Unsafe version of {@link #other_blues(int) other_blues}. */
     public static short nother_blues(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.OTHER_BLUES + check(index, 10) * 2);
+        return memGetShort(struct + PS_Private.OTHER_BLUES + check(index, 10) * 2);
     }
     /** Unsafe version of {@link #family_blues}. */
     public static ShortBuffer nfamily_blues(long struct) { return memShortBuffer(struct + PS_Private.FAMILY_BLUES, 14); }
     /** Unsafe version of {@link #family_blues(int) family_blues}. */
     public static short nfamily_blues(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.FAMILY_BLUES + check(index, 14) * 2);
+        return memGetShort(struct + PS_Private.FAMILY_BLUES + check(index, 14) * 2);
     }
     /** Unsafe version of {@link #family_other_blues}. */
     public static ShortBuffer nfamily_other_blues(long struct) { return memShortBuffer(struct + PS_Private.FAMILY_OTHER_BLUES, 10); }
     /** Unsafe version of {@link #family_other_blues(int) family_other_blues}. */
     public static short nfamily_other_blues(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.FAMILY_OTHER_BLUES + check(index, 10) * 2);
+        return memGetShort(struct + PS_Private.FAMILY_OTHER_BLUES + check(index, 10) * 2);
     }
     /** Unsafe version of {@link #blue_scale}. */
     public static long nblue_scale(long struct) { return memGetCLong(struct + PS_Private.BLUE_SCALE); }
     /** Unsafe version of {@link #blue_shift}. */
-    public static int nblue_shift(long struct) { return UNSAFE.getInt(null, struct + PS_Private.BLUE_SHIFT); }
+    public static int nblue_shift(long struct) { return memGetInt(struct + PS_Private.BLUE_SHIFT); }
     /** Unsafe version of {@link #blue_fuzz}. */
-    public static int nblue_fuzz(long struct) { return UNSAFE.getInt(null, struct + PS_Private.BLUE_FUZZ); }
+    public static int nblue_fuzz(long struct) { return memGetInt(struct + PS_Private.BLUE_FUZZ); }
     /** Unsafe version of {@link #standard_width}. */
     public static ShortBuffer nstandard_width(long struct) { return memShortBuffer(struct + PS_Private.STANDARD_WIDTH, 1); }
     /** Unsafe version of {@link #standard_width(int) standard_width}. */
     public static short nstandard_width(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.STANDARD_WIDTH + check(index, 1) * 2);
+        return memGetShort(struct + PS_Private.STANDARD_WIDTH + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #standard_height}. */
     public static ShortBuffer nstandard_height(long struct) { return memShortBuffer(struct + PS_Private.STANDARD_HEIGHT, 1); }
     /** Unsafe version of {@link #standard_height(int) standard_height}. */
     public static short nstandard_height(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.STANDARD_HEIGHT + check(index, 1) * 2);
+        return memGetShort(struct + PS_Private.STANDARD_HEIGHT + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #num_snap_widths}. */
-    public static byte nnum_snap_widths(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_SNAP_WIDTHS); }
+    public static byte nnum_snap_widths(long struct) { return memGetByte(struct + PS_Private.NUM_SNAP_WIDTHS); }
     /** Unsafe version of {@link #num_snap_heights}. */
-    public static byte nnum_snap_heights(long struct) { return UNSAFE.getByte(null, struct + PS_Private.NUM_SNAP_HEIGHTS); }
+    public static byte nnum_snap_heights(long struct) { return memGetByte(struct + PS_Private.NUM_SNAP_HEIGHTS); }
     /** Unsafe version of {@link #force_bold}. */
-    public static boolean nforce_bold(long struct) { return UNSAFE.getByte(null, struct + PS_Private.FORCE_BOLD) != 0; }
+    public static boolean nforce_bold(long struct) { return memGetByte(struct + PS_Private.FORCE_BOLD) != 0; }
     /** Unsafe version of {@link #round_stem_up}. */
-    public static boolean nround_stem_up(long struct) { return UNSAFE.getByte(null, struct + PS_Private.ROUND_STEM_UP) != 0; }
+    public static boolean nround_stem_up(long struct) { return memGetByte(struct + PS_Private.ROUND_STEM_UP) != 0; }
     /** Unsafe version of {@link #snap_widths}. */
     public static ShortBuffer nsnap_widths(long struct) { return memShortBuffer(struct + PS_Private.SNAP_WIDTHS, 13); }
     /** Unsafe version of {@link #snap_widths(int) snap_widths}. */
     public static short nsnap_widths(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.SNAP_WIDTHS + check(index, 13) * 2);
+        return memGetShort(struct + PS_Private.SNAP_WIDTHS + check(index, 13) * 2);
     }
     /** Unsafe version of {@link #snap_heights}. */
     public static ShortBuffer nsnap_heights(long struct) { return memShortBuffer(struct + PS_Private.SNAP_HEIGHTS, 13); }
     /** Unsafe version of {@link #snap_heights(int) snap_heights}. */
     public static short nsnap_heights(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.SNAP_HEIGHTS + check(index, 13) * 2);
+        return memGetShort(struct + PS_Private.SNAP_HEIGHTS + check(index, 13) * 2);
     }
     /** Unsafe version of {@link #expansion_factor}. */
     public static long nexpansion_factor(long struct) { return memGetCLong(struct + PS_Private.EXPANSION_FACTOR); }
@@ -384,7 +384,7 @@ public class PS_Private extends Struct<PS_Private> {
     public static ShortBuffer nmin_feature(long struct) { return memShortBuffer(struct + PS_Private.MIN_FEATURE, 2); }
     /** Unsafe version of {@link #min_feature(int) min_feature}. */
     public static short nmin_feature(long struct, int index) {
-        return UNSAFE.getShort(null, struct + PS_Private.MIN_FEATURE + check(index, 2) * 2);
+        return memGetShort(struct + PS_Private.MIN_FEATURE + check(index, 2) * 2);
     }
 
     // -----------------------------------

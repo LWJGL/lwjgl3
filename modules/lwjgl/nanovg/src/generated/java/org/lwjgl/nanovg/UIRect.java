@@ -271,16 +271,16 @@ public class UIRect extends Struct<UIRect> implements NativeResource {
     public static IntBuffer nv(long struct) { return memIntBuffer(struct + UIRect.V, 4); }
     /** Unsafe version of {@link #v(int) v}. */
     public static int nv(long struct, int index) {
-        return UNSAFE.getInt(null, struct + UIRect.V + check(index, 4) * 4);
+        return memGetInt(struct + UIRect.V + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + UIRect.X); }
+    public static int nx(long struct) { return memGetInt(struct + UIRect.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + UIRect.Y); }
+    public static int ny(long struct) { return memGetInt(struct + UIRect.Y); }
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return UNSAFE.getInt(null, struct + UIRect.W); }
+    public static int nw(long struct) { return memGetInt(struct + UIRect.W); }
     /** Unsafe version of {@link #h}. */
-    public static int nh(long struct) { return UNSAFE.getInt(null, struct + UIRect.H); }
+    public static int nh(long struct) { return memGetInt(struct + UIRect.H); }
 
     /** Unsafe version of {@link #v(IntBuffer) v}. */
     public static void nv(long struct, IntBuffer value) {
@@ -289,16 +289,16 @@ public class UIRect extends Struct<UIRect> implements NativeResource {
     }
     /** Unsafe version of {@link #v(int, int) v}. */
     public static void nv(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + UIRect.V + check(index, 4) * 4, value);
+        memPutInt(struct + UIRect.V + check(index, 4) * 4, value);
     }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + UIRect.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + UIRect.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + UIRect.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + UIRect.Y, value); }
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + UIRect.W, value); }
+    public static void nw(long struct, int value) { memPutInt(struct + UIRect.W, value); }
     /** Unsafe version of {@link #h(int) h}. */
-    public static void nh(long struct, int value) { UNSAFE.putInt(null, struct + UIRect.H, value); }
+    public static void nh(long struct, int value) { memPutInt(struct + UIRect.H, value); }
 
     // -----------------------------------
 

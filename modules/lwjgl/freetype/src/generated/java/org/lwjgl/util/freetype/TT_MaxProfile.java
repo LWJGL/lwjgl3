@@ -204,33 +204,33 @@ public class TT_MaxProfile extends Struct<TT_MaxProfile> {
     /** Unsafe version of {@link #version}. */
     public static long nversion(long struct) { return memGetCLong(struct + TT_MaxProfile.VERSION); }
     /** Unsafe version of {@link #numGlyphs}. */
-    public static short nnumGlyphs(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.NUMGLYPHS); }
+    public static short nnumGlyphs(long struct) { return memGetShort(struct + TT_MaxProfile.NUMGLYPHS); }
     /** Unsafe version of {@link #maxPoints}. */
-    public static short nmaxPoints(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXPOINTS); }
+    public static short nmaxPoints(long struct) { return memGetShort(struct + TT_MaxProfile.MAXPOINTS); }
     /** Unsafe version of {@link #maxContours}. */
-    public static short nmaxContours(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXCONTOURS); }
+    public static short nmaxContours(long struct) { return memGetShort(struct + TT_MaxProfile.MAXCONTOURS); }
     /** Unsafe version of {@link #maxCompositePoints}. */
-    public static short nmaxCompositePoints(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXCOMPOSITEPOINTS); }
+    public static short nmaxCompositePoints(long struct) { return memGetShort(struct + TT_MaxProfile.MAXCOMPOSITEPOINTS); }
     /** Unsafe version of {@link #maxCompositeContours}. */
-    public static short nmaxCompositeContours(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXCOMPOSITECONTOURS); }
+    public static short nmaxCompositeContours(long struct) { return memGetShort(struct + TT_MaxProfile.MAXCOMPOSITECONTOURS); }
     /** Unsafe version of {@link #maxZones}. */
-    public static short nmaxZones(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXZONES); }
+    public static short nmaxZones(long struct) { return memGetShort(struct + TT_MaxProfile.MAXZONES); }
     /** Unsafe version of {@link #maxTwilightPoints}. */
-    public static short nmaxTwilightPoints(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXTWILIGHTPOINTS); }
+    public static short nmaxTwilightPoints(long struct) { return memGetShort(struct + TT_MaxProfile.MAXTWILIGHTPOINTS); }
     /** Unsafe version of {@link #maxStorage}. */
-    public static short nmaxStorage(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXSTORAGE); }
+    public static short nmaxStorage(long struct) { return memGetShort(struct + TT_MaxProfile.MAXSTORAGE); }
     /** Unsafe version of {@link #maxFunctionDefs}. */
-    public static short nmaxFunctionDefs(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXFUNCTIONDEFS); }
+    public static short nmaxFunctionDefs(long struct) { return memGetShort(struct + TT_MaxProfile.MAXFUNCTIONDEFS); }
     /** Unsafe version of {@link #maxInstructionDefs}. */
-    public static short nmaxInstructionDefs(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXINSTRUCTIONDEFS); }
+    public static short nmaxInstructionDefs(long struct) { return memGetShort(struct + TT_MaxProfile.MAXINSTRUCTIONDEFS); }
     /** Unsafe version of {@link #maxStackElements}. */
-    public static short nmaxStackElements(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXSTACKELEMENTS); }
+    public static short nmaxStackElements(long struct) { return memGetShort(struct + TT_MaxProfile.MAXSTACKELEMENTS); }
     /** Unsafe version of {@link #maxSizeOfInstructions}. */
-    public static short nmaxSizeOfInstructions(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXSIZEOFINSTRUCTIONS); }
+    public static short nmaxSizeOfInstructions(long struct) { return memGetShort(struct + TT_MaxProfile.MAXSIZEOFINSTRUCTIONS); }
     /** Unsafe version of {@link #maxComponentElements}. */
-    public static short nmaxComponentElements(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXCOMPONENTELEMENTS); }
+    public static short nmaxComponentElements(long struct) { return memGetShort(struct + TT_MaxProfile.MAXCOMPONENTELEMENTS); }
     /** Unsafe version of {@link #maxComponentDepth}. */
-    public static short nmaxComponentDepth(long struct) { return UNSAFE.getShort(null, struct + TT_MaxProfile.MAXCOMPONENTDEPTH); }
+    public static short nmaxComponentDepth(long struct) { return memGetShort(struct + TT_MaxProfile.MAXCOMPONENTDEPTH); }
 
     // -----------------------------------
 

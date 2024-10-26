@@ -235,12 +235,12 @@ public class XrDeserializeSceneFragmentMSFT extends Struct<XrDeserializeSceneFra
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferSize}. */
-    public static int nbufferSize(long struct) { return UNSAFE.getInt(null, struct + XrDeserializeSceneFragmentMSFT.BUFFERSIZE); }
+    public static int nbufferSize(long struct) { return memGetInt(struct + XrDeserializeSceneFragmentMSFT.BUFFERSIZE); }
     /** Unsafe version of {@link #buffer() buffer}. */
     @Nullable public static ByteBuffer nbuffer(long struct) { return memByteBufferSafe(memGetAddress(struct + XrDeserializeSceneFragmentMSFT.BUFFER), nbufferSize(struct)); }
 
     /** Sets the specified value to the {@code bufferSize} field of the specified {@code struct}. */
-    public static void nbufferSize(long struct, int value) { UNSAFE.putInt(null, struct + XrDeserializeSceneFragmentMSFT.BUFFERSIZE, value); }
+    public static void nbufferSize(long struct, int value) { memPutInt(struct + XrDeserializeSceneFragmentMSFT.BUFFERSIZE, value); }
     /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
     public static void nbuffer(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + XrDeserializeSceneFragmentMSFT.BUFFER, memAddressSafe(value)); if (value != null) { nbufferSize(struct, value.remaining()); } }
 

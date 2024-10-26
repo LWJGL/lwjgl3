@@ -260,18 +260,18 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct<XrSwapchainImageFo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageFoveationVulkanFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainImageFoveationVulkanFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainImageFoveationVulkanFB.NEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainImageFoveationVulkanFB.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + XrSwapchainImageFoveationVulkanFB.IMAGE); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageFoveationVulkanFB.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XrSwapchainImageFoveationVulkanFB.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageFoveationVulkanFB.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XrSwapchainImageFoveationVulkanFB.HEIGHT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageFoveationVulkanFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainImageFoveationVulkanFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageFoveationVulkanFB.NEXT, value); }
 

@@ -290,34 +290,34 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #accelerationStructure}. */
-    public static int naccelerationStructure(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURE); }
+    public static int naccelerationStructure(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURE); }
     /** Unsafe version of {@link #accelerationStructureCaptureReplay}. */
-    public static int naccelerationStructureCaptureReplay(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURECAPTUREREPLAY); }
+    public static int naccelerationStructureCaptureReplay(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURECAPTUREREPLAY); }
     /** Unsafe version of {@link #accelerationStructureIndirectBuild}. */
-    public static int naccelerationStructureIndirectBuild(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREINDIRECTBUILD); }
+    public static int naccelerationStructureIndirectBuild(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREINDIRECTBUILD); }
     /** Unsafe version of {@link #accelerationStructureHostCommands}. */
-    public static int naccelerationStructureHostCommands(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREHOSTCOMMANDS); }
+    public static int naccelerationStructureHostCommands(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREHOSTCOMMANDS); }
     /** Unsafe version of {@link #descriptorBindingAccelerationStructureUpdateAfterBind}. */
-    public static int ndescriptorBindingAccelerationStructureUpdateAfterBind(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.DESCRIPTORBINDINGACCELERATIONSTRUCTUREUPDATEAFTERBIND); }
+    public static int ndescriptorBindingAccelerationStructureUpdateAfterBind(long struct) { return memGetInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.DESCRIPTORBINDINGACCELERATIONSTRUCTUREUPDATEAFTERBIND); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #accelerationStructure(boolean) accelerationStructure}. */
-    public static void naccelerationStructure(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURE, value); }
+    public static void naccelerationStructure(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURE, value); }
     /** Unsafe version of {@link #accelerationStructureCaptureReplay(boolean) accelerationStructureCaptureReplay}. */
-    public static void naccelerationStructureCaptureReplay(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURECAPTUREREPLAY, value); }
+    public static void naccelerationStructureCaptureReplay(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTURECAPTUREREPLAY, value); }
     /** Unsafe version of {@link #accelerationStructureIndirectBuild(boolean) accelerationStructureIndirectBuild}. */
-    public static void naccelerationStructureIndirectBuild(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREINDIRECTBUILD, value); }
+    public static void naccelerationStructureIndirectBuild(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREINDIRECTBUILD, value); }
     /** Unsafe version of {@link #accelerationStructureHostCommands(boolean) accelerationStructureHostCommands}. */
-    public static void naccelerationStructureHostCommands(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREHOSTCOMMANDS, value); }
+    public static void naccelerationStructureHostCommands(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.ACCELERATIONSTRUCTUREHOSTCOMMANDS, value); }
     /** Unsafe version of {@link #descriptorBindingAccelerationStructureUpdateAfterBind(boolean) descriptorBindingAccelerationStructureUpdateAfterBind}. */
-    public static void ndescriptorBindingAccelerationStructureUpdateAfterBind(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.DESCRIPTORBINDINGACCELERATIONSTRUCTUREUPDATEAFTERBIND, value); }
+    public static void ndescriptorBindingAccelerationStructureUpdateAfterBind(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAccelerationStructureFeaturesKHR.DESCRIPTORBINDINGACCELERATIONSTRUCTUREUPDATEAFTERBIND, value); }
 
     // -----------------------------------
 

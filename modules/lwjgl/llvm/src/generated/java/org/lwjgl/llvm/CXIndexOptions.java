@@ -330,12 +330,12 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #Size}. */
-    public static int nSize(long struct) { return UNSAFE.getInt(null, struct + CXIndexOptions.SIZE); }
+    public static int nSize(long struct) { return memGetInt(struct + CXIndexOptions.SIZE); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForIndexing}. */
-    public static byte nThreadBackgroundPriorityForIndexing(long struct) { return UNSAFE.getByte(null, struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING); }
+    public static byte nThreadBackgroundPriorityForIndexing(long struct) { return memGetByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForEditing}. */
-    public static byte nThreadBackgroundPriorityForEditing(long struct) { return UNSAFE.getByte(null, struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING); }
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + CXIndexOptions.BITFIELD0); }
+    public static byte nThreadBackgroundPriorityForEditing(long struct) { return memGetByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + CXIndexOptions.BITFIELD0); }
     /** Unsafe version of {@link #ExcludeDeclarationsFromPCH}. */
     public static int nExcludeDeclarationsFromPCH(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #DisplayDiagnostics}. */
@@ -353,12 +353,12 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     @Nullable public static String nInvocationEmissionPathString(long struct) { return memUTF8Safe(memGetAddress(struct + CXIndexOptions.INVOCATIONEMISSIONPATH)); }
 
     /** Unsafe version of {@link #Size(int) Size}. */
-    public static void nSize(long struct, int value) { UNSAFE.putInt(null, struct + CXIndexOptions.SIZE, value); }
+    public static void nSize(long struct, int value) { memPutInt(struct + CXIndexOptions.SIZE, value); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForIndexing(byte) ThreadBackgroundPriorityForIndexing}. */
-    public static void nThreadBackgroundPriorityForIndexing(long struct, byte value) { UNSAFE.putByte(null, struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING, value); }
+    public static void nThreadBackgroundPriorityForIndexing(long struct, byte value) { memPutByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING, value); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForEditing(byte) ThreadBackgroundPriorityForEditing}. */
-    public static void nThreadBackgroundPriorityForEditing(long struct, byte value) { UNSAFE.putByte(null, struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING, value); }
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + CXIndexOptions.BITFIELD0, value); }
+    public static void nThreadBackgroundPriorityForEditing(long struct, byte value) { memPutByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + CXIndexOptions.BITFIELD0, value); }
     /** Unsafe version of {@link #ExcludeDeclarationsFromPCH(boolean) ExcludeDeclarationsFromPCH}. */
     public static void nExcludeDeclarationsFromPCH(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #DisplayDiagnostics(boolean) DisplayDiagnostics}. */

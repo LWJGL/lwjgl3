@@ -266,24 +266,24 @@ public class VkOpticalFlowSessionCreatePrivateDataInfoNV extends Struct<VkOptica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.PNEXT); }
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.ID); }
+    public static int nid(long struct) { return memGetInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.ID); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.SIZE); }
     /** Unsafe version of {@link #pPrivateData}. */
     public static long npPrivateData(long struct) { return memGetAddress(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.PPRIVATEDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.ID, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.SIZE, value); }
     /** Unsafe version of {@link #pPrivateData(long) pPrivateData}. */
     public static void npPrivateData(long struct, long value) { memPutAddress(struct + VkOpticalFlowSessionCreatePrivateDataInfoNV.PPRIVATEDATA, check(value)); }
 

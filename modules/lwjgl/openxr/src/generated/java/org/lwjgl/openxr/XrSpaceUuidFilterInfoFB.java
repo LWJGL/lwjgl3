@@ -272,20 +272,20 @@ public class XrSpaceUuidFilterInfoFB extends Struct<XrSpaceUuidFilterInfoFB> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceUuidFilterInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceUuidFilterInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceUuidFilterInfoFB.NEXT); }
     /** Unsafe version of {@link #uuidCount}. */
-    public static int nuuidCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceUuidFilterInfoFB.UUIDCOUNT); }
+    public static int nuuidCount(long struct) { return memGetInt(struct + XrSpaceUuidFilterInfoFB.UUIDCOUNT); }
     /** Unsafe version of {@link #uuids}. */
     public static XrUuidEXT.Buffer nuuids(long struct) { return XrUuidEXT.create(memGetAddress(struct + XrSpaceUuidFilterInfoFB.UUIDS), nuuidCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceUuidFilterInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceUuidFilterInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceUuidFilterInfoFB.NEXT, value); }
     /** Sets the specified value to the {@code uuidCount} field of the specified {@code struct}. */
-    public static void nuuidCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceUuidFilterInfoFB.UUIDCOUNT, value); }
+    public static void nuuidCount(long struct, int value) { memPutInt(struct + XrSpaceUuidFilterInfoFB.UUIDCOUNT, value); }
     /** Unsafe version of {@link #uuids(XrUuidEXT.Buffer) uuids}. */
     public static void nuuids(long struct, XrUuidEXT.Buffer value) { memPutAddress(struct + XrSpaceUuidFilterInfoFB.UUIDS, value.address()); nuuidCount(struct, value.remaining()); }
 

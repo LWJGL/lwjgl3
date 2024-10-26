@@ -265,20 +265,20 @@ public class XrSpaceLocations extends Struct<XrSpaceLocations> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceLocations.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceLocations.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceLocations.NEXT); }
     /** Unsafe version of {@link #locationCount}. */
-    public static int nlocationCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceLocations.LOCATIONCOUNT); }
+    public static int nlocationCount(long struct) { return memGetInt(struct + XrSpaceLocations.LOCATIONCOUNT); }
     /** Unsafe version of {@link #locations}. */
     public static XrSpaceLocationData.Buffer nlocations(long struct) { return XrSpaceLocationData.create(memGetAddress(struct + XrSpaceLocations.LOCATIONS), nlocationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceLocations.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceLocations.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceLocations.NEXT, value); }
     /** Sets the specified value to the {@code locationCount} field of the specified {@code struct}. */
-    public static void nlocationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceLocations.LOCATIONCOUNT, value); }
+    public static void nlocationCount(long struct, int value) { memPutInt(struct + XrSpaceLocations.LOCATIONCOUNT, value); }
     /** Unsafe version of {@link #locations(XrSpaceLocationData.Buffer) locations}. */
     public static void nlocations(long struct, XrSpaceLocationData.Buffer value) { memPutAddress(struct + XrSpaceLocations.LOCATIONS, value.address()); nlocationCount(struct, value.remaining()); }
 

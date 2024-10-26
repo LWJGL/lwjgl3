@@ -233,14 +233,14 @@ public class XrSceneMeshMSFT extends Struct<XrSceneMeshMSFT> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #meshBufferId}. */
-    public static long nmeshBufferId(long struct) { return UNSAFE.getLong(null, struct + XrSceneMeshMSFT.MESHBUFFERID); }
+    public static long nmeshBufferId(long struct) { return memGetLong(struct + XrSceneMeshMSFT.MESHBUFFERID); }
     /** Unsafe version of {@link #supportsIndicesUint16}. */
-    public static int nsupportsIndicesUint16(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshMSFT.SUPPORTSINDICESUINT16); }
+    public static int nsupportsIndicesUint16(long struct) { return memGetInt(struct + XrSceneMeshMSFT.SUPPORTSINDICESUINT16); }
 
     /** Unsafe version of {@link #meshBufferId(long) meshBufferId}. */
-    public static void nmeshBufferId(long struct, long value) { UNSAFE.putLong(null, struct + XrSceneMeshMSFT.MESHBUFFERID, value); }
+    public static void nmeshBufferId(long struct, long value) { memPutLong(struct + XrSceneMeshMSFT.MESHBUFFERID, value); }
     /** Unsafe version of {@link #supportsIndicesUint16(boolean) supportsIndicesUint16}. */
-    public static void nsupportsIndicesUint16(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshMSFT.SUPPORTSINDICESUINT16, value); }
+    public static void nsupportsIndicesUint16(long struct, int value) { memPutInt(struct + XrSceneMeshMSFT.SUPPORTSINDICESUINT16, value); }
 
     // -----------------------------------
 

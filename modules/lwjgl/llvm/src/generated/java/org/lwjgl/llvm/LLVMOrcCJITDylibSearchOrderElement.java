@@ -226,12 +226,12 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct<LLVMOrcCJITDylibS
     /** Unsafe version of {@link #JD}. */
     public static long nJD(long struct) { return memGetAddress(struct + LLVMOrcCJITDylibSearchOrderElement.JD); }
     /** Unsafe version of {@link #JDLookupFlags}. */
-    public static int nJDLookupFlags(long struct) { return UNSAFE.getInt(null, struct + LLVMOrcCJITDylibSearchOrderElement.JDLOOKUPFLAGS); }
+    public static int nJDLookupFlags(long struct) { return memGetInt(struct + LLVMOrcCJITDylibSearchOrderElement.JDLOOKUPFLAGS); }
 
     /** Unsafe version of {@link #JD(long) JD}. */
     public static void nJD(long struct, long value) { memPutAddress(struct + LLVMOrcCJITDylibSearchOrderElement.JD, check(value)); }
     /** Unsafe version of {@link #JDLookupFlags(int) JDLookupFlags}. */
-    public static void nJDLookupFlags(long struct, int value) { UNSAFE.putInt(null, struct + LLVMOrcCJITDylibSearchOrderElement.JDLOOKUPFLAGS, value); }
+    public static void nJDLookupFlags(long struct, int value) { memPutInt(struct + LLVMOrcCJITDylibSearchOrderElement.JDLOOKUPFLAGS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

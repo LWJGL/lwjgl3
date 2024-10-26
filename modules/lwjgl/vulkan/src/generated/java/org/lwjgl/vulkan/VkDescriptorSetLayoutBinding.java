@@ -316,24 +316,24 @@ public class VkDescriptorSetLayoutBinding extends Struct<VkDescriptorSetLayoutBi
     // -----------------------------------
 
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutBinding.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkDescriptorSetLayoutBinding.BINDING); }
     /** Unsafe version of {@link #descriptorType}. */
-    public static int ndescriptorType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutBinding.DESCRIPTORTYPE); }
+    public static int ndescriptorType(long struct) { return memGetInt(struct + VkDescriptorSetLayoutBinding.DESCRIPTORTYPE); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutBinding.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkDescriptorSetLayoutBinding.DESCRIPTORCOUNT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutBinding.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkDescriptorSetLayoutBinding.STAGEFLAGS); }
     /** Unsafe version of {@link #pImmutableSamplers() pImmutableSamplers}. */
     @Nullable public static LongBuffer npImmutableSamplers(long struct) { return memLongBufferSafe(memGetAddress(struct + VkDescriptorSetLayoutBinding.PIMMUTABLESAMPLERS), ndescriptorCount(struct)); }
 
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutBinding.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBinding.BINDING, value); }
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
-    public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutBinding.DESCRIPTORTYPE, value); }
+    public static void ndescriptorType(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBinding.DESCRIPTORTYPE, value); }
     /** Sets the specified value to the {@code descriptorCount} field of the specified {@code struct}. */
-    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutBinding.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBinding.DESCRIPTORCOUNT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutBinding.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBinding.STAGEFLAGS, value); }
     /** Unsafe version of {@link #pImmutableSamplers(LongBuffer) pImmutableSamplers}. */
     public static void npImmutableSamplers(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkDescriptorSetLayoutBinding.PIMMUTABLESAMPLERS, memAddressSafe(value)); if (value != null) { ndescriptorCount(struct, value.remaining()); } }
 

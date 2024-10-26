@@ -212,10 +212,10 @@ public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndire
     // -----------------------------------
 
     /** Unsafe version of {@link #pipelineAddress}. */
-    public static long npipelineAddress(long struct) { return UNSAFE.getLong(null, struct + VkBindPipelineIndirectCommandNV.PIPELINEADDRESS); }
+    public static long npipelineAddress(long struct) { return memGetLong(struct + VkBindPipelineIndirectCommandNV.PIPELINEADDRESS); }
 
     /** Unsafe version of {@link #pipelineAddress(long) pipelineAddress}. */
-    public static void npipelineAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBindPipelineIndirectCommandNV.PIPELINEADDRESS, value); }
+    public static void npipelineAddress(long struct, long value) { memPutLong(struct + VkBindPipelineIndirectCommandNV.PIPELINEADDRESS, value); }
 
     // -----------------------------------
 

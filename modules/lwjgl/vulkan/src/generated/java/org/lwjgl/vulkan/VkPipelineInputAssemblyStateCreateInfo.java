@@ -304,26 +304,26 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct<VkPipelineInp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineInputAssemblyStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #topology}. */
-    public static int ntopology(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY); }
+    public static int ntopology(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY); }
     /** Unsafe version of {@link #primitiveRestartEnable}. */
-    public static int nprimitiveRestartEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE); }
+    public static int nprimitiveRestartEnable(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineInputAssemblyStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #topology(int) topology}. */
-    public static void ntopology(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY, value); }
+    public static void ntopology(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY, value); }
     /** Unsafe version of {@link #primitiveRestartEnable(boolean) primitiveRestartEnable}. */
-    public static void nprimitiveRestartEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE, value); }
+    public static void nprimitiveRestartEnable(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE, value); }
 
     // -----------------------------------
 

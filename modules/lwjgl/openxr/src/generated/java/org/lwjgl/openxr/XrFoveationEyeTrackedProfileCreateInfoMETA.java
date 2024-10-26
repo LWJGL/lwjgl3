@@ -249,18 +249,18 @@ public class XrFoveationEyeTrackedProfileCreateInfoMETA extends Struct<XrFoveati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveationEyeTrackedProfileCreateInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrFoveationEyeTrackedProfileCreateInfoMETA.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationEyeTrackedProfileCreateInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrFoveationEyeTrackedProfileCreateInfoMETA.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrFoveationEyeTrackedProfileCreateInfoMETA.FLAGS, value); }
 
     // -----------------------------------
 

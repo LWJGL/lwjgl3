@@ -200,10 +200,10 @@ public class FMOD_DSP_PARAMETER_DESC_DATA extends Struct<FMOD_DSP_PARAMETER_DESC
     // -----------------------------------
 
     /** Unsafe version of {@link #datatype}. */
-    public static int ndatatype(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_DATA.DATATYPE); }
+    public static int ndatatype(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_DATA.DATATYPE); }
 
     /** Unsafe version of {@link #datatype(int) datatype}. */
-    public static void ndatatype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_DATA.DATATYPE, value); }
+    public static void ndatatype(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_DATA.DATATYPE, value); }
 
     // -----------------------------------
 

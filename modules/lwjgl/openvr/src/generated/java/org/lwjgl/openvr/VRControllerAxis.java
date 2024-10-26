@@ -241,14 +241,14 @@ public class VRControllerAxis extends Struct<VRControllerAxis> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VRControllerAxis.X); }
+    public static float nx(long struct) { return memGetFloat(struct + VRControllerAxis.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VRControllerAxis.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + VRControllerAxis.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + VRControllerAxis.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + VRControllerAxis.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + VRControllerAxis.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + VRControllerAxis.Y, value); }
 
     // -----------------------------------
 

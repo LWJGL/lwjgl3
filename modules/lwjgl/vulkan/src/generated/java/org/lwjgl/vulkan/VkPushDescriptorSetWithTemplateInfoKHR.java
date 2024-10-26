@@ -305,28 +305,28 @@ public class VkPushDescriptorSetWithTemplateInfoKHR extends Struct<VkPushDescrip
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPushDescriptorSetWithTemplateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPushDescriptorSetWithTemplateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #descriptorUpdateTemplate}. */
-    public static long ndescriptorUpdateTemplate(long struct) { return UNSAFE.getLong(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.DESCRIPTORUPDATETEMPLATE); }
+    public static long ndescriptorUpdateTemplate(long struct) { return memGetLong(struct + VkPushDescriptorSetWithTemplateInfoKHR.DESCRIPTORUPDATETEMPLATE); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkPushDescriptorSetWithTemplateInfoKHR.LAYOUT); }
     /** Unsafe version of {@link #set}. */
-    public static int nset(long struct) { return UNSAFE.getInt(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.SET); }
+    public static int nset(long struct) { return memGetInt(struct + VkPushDescriptorSetWithTemplateInfoKHR.SET); }
     /** Unsafe version of {@link #pData}. */
     public static long npData(long struct) { return memGetAddress(struct + VkPushDescriptorSetWithTemplateInfoKHR.PDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPushDescriptorSetWithTemplateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPushDescriptorSetWithTemplateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #descriptorUpdateTemplate(long) descriptorUpdateTemplate}. */
-    public static void ndescriptorUpdateTemplate(long struct, long value) { UNSAFE.putLong(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.DESCRIPTORUPDATETEMPLATE, value); }
+    public static void ndescriptorUpdateTemplate(long struct, long value) { memPutLong(struct + VkPushDescriptorSetWithTemplateInfoKHR.DESCRIPTORUPDATETEMPLATE, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkPushDescriptorSetWithTemplateInfoKHR.LAYOUT, value); }
     /** Unsafe version of {@link #set(int) set}. */
-    public static void nset(long struct, int value) { UNSAFE.putInt(null, struct + VkPushDescriptorSetWithTemplateInfoKHR.SET, value); }
+    public static void nset(long struct, int value) { memPutInt(struct + VkPushDescriptorSetWithTemplateInfoKHR.SET, value); }
     /** Unsafe version of {@link #pData(long) pData}. */
     public static void npData(long struct, long value) { memPutAddress(struct + VkPushDescriptorSetWithTemplateInfoKHR.PDATA, check(value)); }
 

@@ -206,13 +206,13 @@ public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStati
     // -----------------------------------
 
     /** Unsafe version of {@link #vertices_transformed}. */
-    public static int nvertices_transformed(long struct) { return UNSAFE.getInt(null, struct + MeshoptVertexCacheStatistics.VERTICES_TRANSFORMED); }
+    public static int nvertices_transformed(long struct) { return memGetInt(struct + MeshoptVertexCacheStatistics.VERTICES_TRANSFORMED); }
     /** Unsafe version of {@link #warps_executed}. */
-    public static int nwarps_executed(long struct) { return UNSAFE.getInt(null, struct + MeshoptVertexCacheStatistics.WARPS_EXECUTED); }
+    public static int nwarps_executed(long struct) { return memGetInt(struct + MeshoptVertexCacheStatistics.WARPS_EXECUTED); }
     /** Unsafe version of {@link #acmr}. */
-    public static float nacmr(long struct) { return UNSAFE.getFloat(null, struct + MeshoptVertexCacheStatistics.ACMR); }
+    public static float nacmr(long struct) { return memGetFloat(struct + MeshoptVertexCacheStatistics.ACMR); }
     /** Unsafe version of {@link #atvr}. */
-    public static float natvr(long struct) { return UNSAFE.getFloat(null, struct + MeshoptVertexCacheStatistics.ATVR); }
+    public static float natvr(long struct) { return memGetFloat(struct + MeshoptVertexCacheStatistics.ATVR); }
 
     // -----------------------------------
 

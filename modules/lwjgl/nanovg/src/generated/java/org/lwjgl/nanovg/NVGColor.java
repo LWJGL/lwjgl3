@@ -271,16 +271,16 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
     public static FloatBuffer nrgba(long struct) { return memFloatBuffer(struct + NVGColor.RGBA, 4); }
     /** Unsafe version of {@link #rgba(int) rgba}. */
     public static float nrgba(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NVGColor.RGBA + check(index, 4) * 4);
+        return memGetFloat(struct + NVGColor.RGBA + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.R); }
+    public static float nr(long struct) { return memGetFloat(struct + NVGColor.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.G); }
+    public static float ng(long struct) { return memGetFloat(struct + NVGColor.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.B); }
+    public static float nb(long struct) { return memGetFloat(struct + NVGColor.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.A); }
+    public static float na(long struct) { return memGetFloat(struct + NVGColor.A); }
 
     /** Unsafe version of {@link #rgba(FloatBuffer) rgba}. */
     public static void nrgba(long struct, FloatBuffer value) {
@@ -289,16 +289,16 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
     }
     /** Unsafe version of {@link #rgba(int, float) rgba}. */
     public static void nrgba(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + NVGColor.RGBA + check(index, 4) * 4, value);
+        memPutFloat(struct + NVGColor.RGBA + check(index, 4) * 4, value);
     }
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + NVGColor.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + NVGColor.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + NVGColor.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + NVGColor.A, value); }
 
     // -----------------------------------
 

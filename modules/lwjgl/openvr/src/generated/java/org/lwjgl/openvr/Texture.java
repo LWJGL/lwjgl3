@@ -255,16 +255,16 @@ public class Texture extends Struct<Texture> implements NativeResource {
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + Texture.HANDLE); }
     /** Unsafe version of {@link #eType}. */
-    public static int neType(long struct) { return UNSAFE.getInt(null, struct + Texture.ETYPE); }
+    public static int neType(long struct) { return memGetInt(struct + Texture.ETYPE); }
     /** Unsafe version of {@link #eColorSpace}. */
-    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + Texture.ECOLORSPACE); }
+    public static int neColorSpace(long struct) { return memGetInt(struct + Texture.ECOLORSPACE); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + Texture.HANDLE, check(value)); }
     /** Unsafe version of {@link #eType(int) eType}. */
-    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + Texture.ETYPE, value); }
+    public static void neType(long struct, int value) { memPutInt(struct + Texture.ETYPE, value); }
     /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
-    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + Texture.ECOLORSPACE, value); }
+    public static void neColorSpace(long struct, int value) { memPutInt(struct + Texture.ECOLORSPACE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

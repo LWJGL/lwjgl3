@@ -244,9 +244,9 @@ public class VkLayerProperties extends Struct<VkLayerProperties> implements Nati
     /** Unsafe version of {@link #layerNameString}. */
     public static String nlayerNameString(long struct) { return memUTF8(struct + VkLayerProperties.LAYERNAME); }
     /** Unsafe version of {@link #specVersion}. */
-    public static int nspecVersion(long struct) { return UNSAFE.getInt(null, struct + VkLayerProperties.SPECVERSION); }
+    public static int nspecVersion(long struct) { return memGetInt(struct + VkLayerProperties.SPECVERSION); }
     /** Unsafe version of {@link #implementationVersion}. */
-    public static int nimplementationVersion(long struct) { return UNSAFE.getInt(null, struct + VkLayerProperties.IMPLEMENTATIONVERSION); }
+    public static int nimplementationVersion(long struct) { return memGetInt(struct + VkLayerProperties.IMPLEMENTATIONVERSION); }
     /** Unsafe version of {@link #description}. */
     public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + VkLayerProperties.DESCRIPTION, VK_MAX_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #descriptionString}. */

@@ -554,102 +554,102 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct<VkPhysicalDeviceV
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVulkan13Properties.PNEXT); }
     /** Unsafe version of {@link #minSubgroupSize}. */
-    public static int nminSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MINSUBGROUPSIZE); }
+    public static int nminSubgroupSize(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MINSUBGROUPSIZE); }
     /** Unsafe version of {@link #maxSubgroupSize}. */
-    public static int nmaxSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXSUBGROUPSIZE); }
+    public static int nmaxSubgroupSize(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXSUBGROUPSIZE); }
     /** Unsafe version of {@link #maxComputeWorkgroupSubgroups}. */
-    public static int nmaxComputeWorkgroupSubgroups(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXCOMPUTEWORKGROUPSUBGROUPS); }
+    public static int nmaxComputeWorkgroupSubgroups(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXCOMPUTEWORKGROUPSUBGROUPS); }
     /** Unsafe version of {@link #requiredSubgroupSizeStages}. */
-    public static int nrequiredSubgroupSizeStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.REQUIREDSUBGROUPSIZESTAGES); }
+    public static int nrequiredSubgroupSizeStages(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.REQUIREDSUBGROUPSIZESTAGES); }
     /** Unsafe version of {@link #maxInlineUniformBlockSize}. */
-    public static int nmaxInlineUniformBlockSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXINLINEUNIFORMBLOCKSIZE); }
+    public static int nmaxInlineUniformBlockSize(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXINLINEUNIFORMBLOCKSIZE); }
     /** Unsafe version of {@link #maxPerStageDescriptorInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS); }
+    public static int nmaxPerStageDescriptorInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxDescriptorSetInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXDESCRIPTORSETINLINEUNIFORMBLOCKS); }
+    public static int nmaxDescriptorSetInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXDESCRIPTORSETINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
+    public static int nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
     /** Unsafe version of {@link #maxInlineUniformTotalSize}. */
-    public static int nmaxInlineUniformTotalSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.MAXINLINEUNIFORMTOTALSIZE); }
+    public static int nmaxInlineUniformTotalSize(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.MAXINLINEUNIFORMTOTALSIZE); }
     /** Unsafe version of {@link #integerDotProduct8BitUnsignedAccelerated}. */
-    public static int nintegerDotProduct8BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProduct8BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct8BitSignedAccelerated}. */
-    public static int nintegerDotProduct8BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITSIGNEDACCELERATED); }
+    public static int nintegerDotProduct8BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct8BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProduct8BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProduct8BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT8BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct4x8BitPackedUnsignedAccelerated}. */
-    public static int nintegerDotProduct4x8BitPackedUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDUNSIGNEDACCELERATED); }
+    public static int nintegerDotProduct4x8BitPackedUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct4x8BitPackedSignedAccelerated}. */
-    public static int nintegerDotProduct4x8BitPackedSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDSIGNEDACCELERATED); }
+    public static int nintegerDotProduct4x8BitPackedSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct4x8BitPackedMixedSignednessAccelerated}. */
-    public static int nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct16BitUnsignedAccelerated}. */
-    public static int nintegerDotProduct16BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProduct16BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct16BitSignedAccelerated}. */
-    public static int nintegerDotProduct16BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITSIGNEDACCELERATED); }
+    public static int nintegerDotProduct16BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct16BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProduct16BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProduct16BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT16BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct32BitUnsignedAccelerated}. */
-    public static int nintegerDotProduct32BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProduct32BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct32BitSignedAccelerated}. */
-    public static int nintegerDotProduct32BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITSIGNEDACCELERATED); }
+    public static int nintegerDotProduct32BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct32BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProduct32BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProduct32BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT32BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct64BitUnsignedAccelerated}. */
-    public static int nintegerDotProduct64BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProduct64BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct64BitSignedAccelerated}. */
-    public static int nintegerDotProduct64BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITSIGNEDACCELERATED); }
+    public static int nintegerDotProduct64BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProduct64BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProduct64BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProduct64BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCT64BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitUnsignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitSignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDUNSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitUnsignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitSignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitUnsignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitSignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitUnsignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITUNSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITUNSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitSignedAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITSIGNEDACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITSIGNEDACCELERATED); }
     /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated}. */
-    public static int nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITMIXEDSIGNEDNESSACCELERATED); }
+    public static int nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITMIXEDSIGNEDNESSACCELERATED); }
     /** Unsafe version of {@link #storageTexelBufferOffsetAlignmentBytes}. */
-    public static long nstorageTexelBufferOffsetAlignmentBytes(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceVulkan13Properties.STORAGETEXELBUFFEROFFSETALIGNMENTBYTES); }
+    public static long nstorageTexelBufferOffsetAlignmentBytes(long struct) { return memGetLong(struct + VkPhysicalDeviceVulkan13Properties.STORAGETEXELBUFFEROFFSETALIGNMENTBYTES); }
     /** Unsafe version of {@link #storageTexelBufferOffsetSingleTexelAlignment}. */
-    public static int nstorageTexelBufferOffsetSingleTexelAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
+    public static int nstorageTexelBufferOffsetSingleTexelAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
     /** Unsafe version of {@link #uniformTexelBufferOffsetAlignmentBytes}. */
-    public static long nuniformTexelBufferOffsetAlignmentBytes(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceVulkan13Properties.UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES); }
+    public static long nuniformTexelBufferOffsetAlignmentBytes(long struct) { return memGetLong(struct + VkPhysicalDeviceVulkan13Properties.UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES); }
     /** Unsafe version of {@link #uniformTexelBufferOffsetSingleTexelAlignment}. */
-    public static int nuniformTexelBufferOffsetSingleTexelAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkan13Properties.UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
+    public static int nuniformTexelBufferOffsetSingleTexelAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkan13Properties.UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT); }
     /** Unsafe version of {@link #maxBufferSize}. */
-    public static long nmaxBufferSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceVulkan13Properties.MAXBUFFERSIZE); }
+    public static long nmaxBufferSize(long struct) { return memGetLong(struct + VkPhysicalDeviceVulkan13Properties.MAXBUFFERSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan13Properties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkan13Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkan13Properties.PNEXT, value); }
 

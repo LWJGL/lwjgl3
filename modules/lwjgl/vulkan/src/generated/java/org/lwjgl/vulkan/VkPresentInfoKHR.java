@@ -362,15 +362,15 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPresentInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPresentInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPresentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #waitSemaphoreCount}. */
-    public static int nwaitSemaphoreCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentInfoKHR.WAITSEMAPHORECOUNT); }
+    public static int nwaitSemaphoreCount(long struct) { return memGetInt(struct + VkPresentInfoKHR.WAITSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphores() pWaitSemaphores}. */
     @Nullable public static LongBuffer npWaitSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPresentInfoKHR.PWAITSEMAPHORES), nwaitSemaphoreCount(struct)); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentInfoKHR.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentInfoKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pSwapchains() pSwapchains}. */
     public static LongBuffer npSwapchains(long struct) { return memLongBuffer(memGetAddress(struct + VkPresentInfoKHR.PSWAPCHAINS), nswapchainCount(struct)); }
     /** Unsafe version of {@link #pImageIndices() pImageIndices}. */
@@ -379,15 +379,15 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     @Nullable public static IntBuffer npResults(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPresentInfoKHR.PRESULTS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPresentInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code waitSemaphoreCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentInfoKHR.WAITSEMAPHORECOUNT, value); }
+    public static void nwaitSemaphoreCount(long struct, int value) { memPutInt(struct + VkPresentInfoKHR.WAITSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pWaitSemaphores(LongBuffer) pWaitSemaphores}. */
     public static void npWaitSemaphores(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkPresentInfoKHR.PWAITSEMAPHORES, memAddressSafe(value)); nwaitSemaphoreCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentInfoKHR.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentInfoKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pSwapchains(LongBuffer) pSwapchains}. */
     public static void npSwapchains(long struct, LongBuffer value) { memPutAddress(struct + VkPresentInfoKHR.PSWAPCHAINS, memAddress(value)); }
     /** Unsafe version of {@link #pImageIndices(IntBuffer) pImageIndices}. */

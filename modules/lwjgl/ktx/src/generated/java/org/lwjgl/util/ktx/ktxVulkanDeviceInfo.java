@@ -331,7 +331,7 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     /** Unsafe version of {@link #cmdBuffer}. */
     public static long ncmdBuffer(long struct) { return memGetAddress(struct + ktxVulkanDeviceInfo.CMDBUFFER); }
     /** Unsafe version of {@link #cmdPool}. */
-    public static long ncmdPool(long struct) { return UNSAFE.getLong(null, struct + ktxVulkanDeviceInfo.CMDPOOL); }
+    public static long ncmdPool(long struct) { return memGetLong(struct + ktxVulkanDeviceInfo.CMDPOOL); }
     /** Unsafe version of {@link #pAllocator}. */
     @Nullable public static VkAllocationCallbacks npAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + ktxVulkanDeviceInfo.PALLOCATOR)); }
     /** Unsafe version of {@link #deviceMemoryProperties}. */
@@ -350,7 +350,7 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     /** Unsafe version of {@link #cmdBuffer(VkCommandBuffer) cmdBuffer}. */
     public static void ncmdBuffer(long struct, VkCommandBuffer value) { memPutAddress(struct + ktxVulkanDeviceInfo.CMDBUFFER, value.address()); }
     /** Unsafe version of {@link #cmdPool(long) cmdPool}. */
-    public static void ncmdPool(long struct, long value) { UNSAFE.putLong(null, struct + ktxVulkanDeviceInfo.CMDPOOL, value); }
+    public static void ncmdPool(long struct, long value) { memPutLong(struct + ktxVulkanDeviceInfo.CMDPOOL, value); }
     /** Unsafe version of {@link #pAllocator(VkAllocationCallbacks) pAllocator}. */
     public static void npAllocator(long struct, @Nullable VkAllocationCallbacks value) { memPutAddress(struct + ktxVulkanDeviceInfo.PALLOCATOR, memAddressSafe(value)); }
     /** Unsafe version of {@link #deviceMemoryProperties(VkPhysicalDeviceMemoryProperties) deviceMemoryProperties}. */

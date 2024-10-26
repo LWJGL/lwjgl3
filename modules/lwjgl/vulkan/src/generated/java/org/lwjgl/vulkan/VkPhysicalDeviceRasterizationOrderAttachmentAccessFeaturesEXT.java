@@ -268,26 +268,26 @@ public class VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT exten
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #rasterizationOrderColorAttachmentAccess}. */
-    public static int nrasterizationOrderColorAttachmentAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERCOLORATTACHMENTACCESS); }
+    public static int nrasterizationOrderColorAttachmentAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERCOLORATTACHMENTACCESS); }
     /** Unsafe version of {@link #rasterizationOrderDepthAttachmentAccess}. */
-    public static int nrasterizationOrderDepthAttachmentAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERDEPTHATTACHMENTACCESS); }
+    public static int nrasterizationOrderDepthAttachmentAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERDEPTHATTACHMENTACCESS); }
     /** Unsafe version of {@link #rasterizationOrderStencilAttachmentAccess}. */
-    public static int nrasterizationOrderStencilAttachmentAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERSTENCILATTACHMENTACCESS); }
+    public static int nrasterizationOrderStencilAttachmentAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERSTENCILATTACHMENTACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #rasterizationOrderColorAttachmentAccess(boolean) rasterizationOrderColorAttachmentAccess}. */
-    public static void nrasterizationOrderColorAttachmentAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERCOLORATTACHMENTACCESS, value); }
+    public static void nrasterizationOrderColorAttachmentAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERCOLORATTACHMENTACCESS, value); }
     /** Unsafe version of {@link #rasterizationOrderDepthAttachmentAccess(boolean) rasterizationOrderDepthAttachmentAccess}. */
-    public static void nrasterizationOrderDepthAttachmentAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERDEPTHATTACHMENTACCESS, value); }
+    public static void nrasterizationOrderDepthAttachmentAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERDEPTHATTACHMENTACCESS, value); }
     /** Unsafe version of {@link #rasterizationOrderStencilAttachmentAccess(boolean) rasterizationOrderStencilAttachmentAccess}. */
-    public static void nrasterizationOrderStencilAttachmentAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERSTENCILATTACHMENTACCESS, value); }
+    public static void nrasterizationOrderStencilAttachmentAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.RASTERIZATIONORDERSTENCILATTACHMENTACCESS, value); }
 
     // -----------------------------------
 

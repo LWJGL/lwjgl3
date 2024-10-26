@@ -255,16 +255,16 @@ public class XrSystemEnvironmentDepthPropertiesMETA extends Struct<XrSystemEnvir
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemEnvironmentDepthPropertiesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemEnvironmentDepthPropertiesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemEnvironmentDepthPropertiesMETA.NEXT); }
     /** Unsafe version of {@link #supportsEnvironmentDepth}. */
-    public static int nsupportsEnvironmentDepth(long struct) { return UNSAFE.getInt(null, struct + XrSystemEnvironmentDepthPropertiesMETA.SUPPORTSENVIRONMENTDEPTH); }
+    public static int nsupportsEnvironmentDepth(long struct) { return memGetInt(struct + XrSystemEnvironmentDepthPropertiesMETA.SUPPORTSENVIRONMENTDEPTH); }
     /** Unsafe version of {@link #supportsHandRemoval}. */
-    public static int nsupportsHandRemoval(long struct) { return UNSAFE.getInt(null, struct + XrSystemEnvironmentDepthPropertiesMETA.SUPPORTSHANDREMOVAL); }
+    public static int nsupportsHandRemoval(long struct) { return memGetInt(struct + XrSystemEnvironmentDepthPropertiesMETA.SUPPORTSHANDREMOVAL); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemEnvironmentDepthPropertiesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemEnvironmentDepthPropertiesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemEnvironmentDepthPropertiesMETA.NEXT, value); }
 

@@ -222,14 +222,14 @@ public class KernelTimespec extends Struct<KernelTimespec> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #tv_sec}. */
-    public static long ntv_sec(long struct) { return UNSAFE.getLong(null, struct + KernelTimespec.TV_SEC); }
+    public static long ntv_sec(long struct) { return memGetLong(struct + KernelTimespec.TV_SEC); }
     /** Unsafe version of {@link #tv_nsec}. */
-    public static long ntv_nsec(long struct) { return UNSAFE.getLong(null, struct + KernelTimespec.TV_NSEC); }
+    public static long ntv_nsec(long struct) { return memGetLong(struct + KernelTimespec.TV_NSEC); }
 
     /** Unsafe version of {@link #tv_sec(long) tv_sec}. */
-    public static void ntv_sec(long struct, long value) { UNSAFE.putLong(null, struct + KernelTimespec.TV_SEC, value); }
+    public static void ntv_sec(long struct, long value) { memPutLong(struct + KernelTimespec.TV_SEC, value); }
     /** Unsafe version of {@link #tv_nsec(long) tv_nsec}. */
-    public static void ntv_nsec(long struct, long value) { UNSAFE.putLong(null, struct + KernelTimespec.TV_NSEC, value); }
+    public static void ntv_nsec(long struct, long value) { memPutLong(struct + KernelTimespec.TV_NSEC, value); }
 
     // -----------------------------------
 

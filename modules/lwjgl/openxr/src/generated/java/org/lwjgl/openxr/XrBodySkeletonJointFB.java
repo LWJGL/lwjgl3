@@ -245,16 +245,16 @@ public class XrBodySkeletonJointFB extends Struct<XrBodySkeletonJointFB> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #joint}. */
-    public static int njoint(long struct) { return UNSAFE.getInt(null, struct + XrBodySkeletonJointFB.JOINT); }
+    public static int njoint(long struct) { return memGetInt(struct + XrBodySkeletonJointFB.JOINT); }
     /** Unsafe version of {@link #parentJoint}. */
-    public static int nparentJoint(long struct) { return UNSAFE.getInt(null, struct + XrBodySkeletonJointFB.PARENTJOINT); }
+    public static int nparentJoint(long struct) { return memGetInt(struct + XrBodySkeletonJointFB.PARENTJOINT); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrBodySkeletonJointFB.POSE); }
 
     /** Unsafe version of {@link #joint(int) joint}. */
-    public static void njoint(long struct, int value) { UNSAFE.putInt(null, struct + XrBodySkeletonJointFB.JOINT, value); }
+    public static void njoint(long struct, int value) { memPutInt(struct + XrBodySkeletonJointFB.JOINT, value); }
     /** Unsafe version of {@link #parentJoint(int) parentJoint}. */
-    public static void nparentJoint(long struct, int value) { UNSAFE.putInt(null, struct + XrBodySkeletonJointFB.PARENTJOINT, value); }
+    public static void nparentJoint(long struct, int value) { memPutInt(struct + XrBodySkeletonJointFB.PARENTJOINT, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrBodySkeletonJointFB.POSE, XrPosef.SIZEOF); }
 

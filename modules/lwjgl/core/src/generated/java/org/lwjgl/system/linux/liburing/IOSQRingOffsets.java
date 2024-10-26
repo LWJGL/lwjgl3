@@ -294,40 +294,40 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + IOSQRingOffsets.HEAD); }
     /** Unsafe version of {@link #tail}. */
-    public static int ntail(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.TAIL); }
+    public static int ntail(long struct) { return memGetInt(struct + IOSQRingOffsets.TAIL); }
     /** Unsafe version of {@link #ring_mask}. */
-    public static int nring_mask(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.RING_MASK); }
+    public static int nring_mask(long struct) { return memGetInt(struct + IOSQRingOffsets.RING_MASK); }
     /** Unsafe version of {@link #ring_entries}. */
-    public static int nring_entries(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.RING_ENTRIES); }
+    public static int nring_entries(long struct) { return memGetInt(struct + IOSQRingOffsets.RING_ENTRIES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + IOSQRingOffsets.FLAGS); }
     /** Unsafe version of {@link #dropped}. */
-    public static int ndropped(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.DROPPED); }
+    public static int ndropped(long struct) { return memGetInt(struct + IOSQRingOffsets.DROPPED); }
     /** Unsafe version of {@link #array}. */
-    public static int narray(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.ARRAY); }
-    public static int nresv1(long struct) { return UNSAFE.getInt(null, struct + IOSQRingOffsets.RESV1); }
+    public static int narray(long struct) { return memGetInt(struct + IOSQRingOffsets.ARRAY); }
+    public static int nresv1(long struct) { return memGetInt(struct + IOSQRingOffsets.RESV1); }
     /** Unsafe version of {@link #user_addr}. */
-    public static long nuser_addr(long struct) { return UNSAFE.getLong(null, struct + IOSQRingOffsets.USER_ADDR); }
+    public static long nuser_addr(long struct) { return memGetLong(struct + IOSQRingOffsets.USER_ADDR); }
 
     /** Unsafe version of {@link #head(int) head}. */
-    public static void nhead(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.HEAD, value); }
+    public static void nhead(long struct, int value) { memPutInt(struct + IOSQRingOffsets.HEAD, value); }
     /** Unsafe version of {@link #tail(int) tail}. */
-    public static void ntail(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.TAIL, value); }
+    public static void ntail(long struct, int value) { memPutInt(struct + IOSQRingOffsets.TAIL, value); }
     /** Unsafe version of {@link #ring_mask(int) ring_mask}. */
-    public static void nring_mask(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.RING_MASK, value); }
+    public static void nring_mask(long struct, int value) { memPutInt(struct + IOSQRingOffsets.RING_MASK, value); }
     /** Unsafe version of {@link #ring_entries(int) ring_entries}. */
-    public static void nring_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.RING_ENTRIES, value); }
+    public static void nring_entries(long struct, int value) { memPutInt(struct + IOSQRingOffsets.RING_ENTRIES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOSQRingOffsets.FLAGS, value); }
     /** Unsafe version of {@link #dropped(int) dropped}. */
-    public static void ndropped(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.DROPPED, value); }
+    public static void ndropped(long struct, int value) { memPutInt(struct + IOSQRingOffsets.DROPPED, value); }
     /** Unsafe version of {@link #array(int) array}. */
-    public static void narray(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.ARRAY, value); }
-    public static void nresv1(long struct, int value) { UNSAFE.putInt(null, struct + IOSQRingOffsets.RESV1, value); }
+    public static void narray(long struct, int value) { memPutInt(struct + IOSQRingOffsets.ARRAY, value); }
+    public static void nresv1(long struct, int value) { memPutInt(struct + IOSQRingOffsets.RESV1, value); }
     /** Unsafe version of {@link #user_addr(long) user_addr}. */
-    public static void nuser_addr(long struct, long value) { UNSAFE.putLong(null, struct + IOSQRingOffsets.USER_ADDR, value); }
+    public static void nuser_addr(long struct, long value) { memPutLong(struct + IOSQRingOffsets.USER_ADDR, value); }
 
     // -----------------------------------
 

@@ -291,28 +291,28 @@ public class XrSpacesLocateInfo extends Struct<XrSpacesLocateInfo> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpacesLocateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpacesLocateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpacesLocateInfo.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrSpacesLocateInfo.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrSpacesLocateInfo.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrSpacesLocateInfo.TIME); }
     /** Unsafe version of {@link #spaceCount}. */
-    public static int nspaceCount(long struct) { return UNSAFE.getInt(null, struct + XrSpacesLocateInfo.SPACECOUNT); }
+    public static int nspaceCount(long struct) { return memGetInt(struct + XrSpacesLocateInfo.SPACECOUNT); }
     /** Unsafe version of {@link #spaces() spaces}. */
     public static PointerBuffer nspaces(long struct) { return memPointerBuffer(memGetAddress(struct + XrSpacesLocateInfo.SPACES), nspaceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpacesLocateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpacesLocateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpacesLocateInfo.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrSpacesLocateInfo.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrSpacesLocateInfo.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrSpacesLocateInfo.TIME, value); }
     /** Sets the specified value to the {@code spaceCount} field of the specified {@code struct}. */
-    public static void nspaceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpacesLocateInfo.SPACECOUNT, value); }
+    public static void nspaceCount(long struct, int value) { memPutInt(struct + XrSpacesLocateInfo.SPACECOUNT, value); }
     /** Unsafe version of {@link #spaces(PointerBuffer) spaces}. */
     public static void nspaces(long struct, PointerBuffer value) { memPutAddress(struct + XrSpacesLocateInfo.SPACES, memAddress(value)); nspaceCount(struct, value.remaining()); }
 

@@ -294,24 +294,24 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDynamicStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineDynamicStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDynamicStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineDynamicStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #dynamicStateCount}. */
-    public static int ndynamicStateCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT); }
+    public static int ndynamicStateCount(long struct) { return memGetInt(struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT); }
     /** Unsafe version of {@link #pDynamicStates() pDynamicStates}. */
     @Nullable public static IntBuffer npDynamicStates(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES), ndynamicStateCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDynamicStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineDynamicStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineDynamicStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDynamicStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineDynamicStateCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code dynamicStateCount} field of the specified {@code struct}. */
-    public static void ndynamicStateCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT, value); }
+    public static void ndynamicStateCount(long struct, int value) { memPutInt(struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT, value); }
     /** Unsafe version of {@link #pDynamicStates(IntBuffer) pDynamicStates}. */
     public static void npDynamicStates(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES, memAddressSafe(value)); ndynamicStateCount(struct, value == null ? 0 : value.remaining()); }
 

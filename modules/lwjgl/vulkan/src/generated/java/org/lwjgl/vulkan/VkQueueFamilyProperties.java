@@ -263,11 +263,11 @@ public class VkQueueFamilyProperties extends Struct<VkQueueFamilyProperties> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #queueFlags}. */
-    public static int nqueueFlags(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.QUEUEFLAGS); }
+    public static int nqueueFlags(long struct) { return memGetInt(struct + VkQueueFamilyProperties.QUEUEFLAGS); }
     /** Unsafe version of {@link #queueCount}. */
-    public static int nqueueCount(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.QUEUECOUNT); }
+    public static int nqueueCount(long struct) { return memGetInt(struct + VkQueueFamilyProperties.QUEUECOUNT); }
     /** Unsafe version of {@link #timestampValidBits}. */
-    public static int ntimestampValidBits(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.TIMESTAMPVALIDBITS); }
+    public static int ntimestampValidBits(long struct) { return memGetInt(struct + VkQueueFamilyProperties.TIMESTAMPVALIDBITS); }
     /** Unsafe version of {@link #minImageTransferGranularity}. */
     public static VkExtent3D nminImageTransferGranularity(long struct) { return VkExtent3D.create(struct + VkQueueFamilyProperties.MINIMAGETRANSFERGRANULARITY); }
 

@@ -291,20 +291,20 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #exclusiveScissorCount}. */
-    public static int nexclusiveScissorCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT); }
+    public static int nexclusiveScissorCount(long struct) { return memGetInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT); }
     /** Unsafe version of {@link #pExclusiveScissors}. */
     @Nullable public static VkRect2D.Buffer npExclusiveScissors(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS), nexclusiveScissorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code exclusiveScissorCount} field of the specified {@code struct}. */
-    public static void nexclusiveScissorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT, value); }
+    public static void nexclusiveScissorCount(long struct, int value) { memPutInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT, value); }
     /** Unsafe version of {@link #pExclusiveScissors(VkRect2D.Buffer) pExclusiveScissors}. */
     public static void npExclusiveScissors(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS, memAddressSafe(value)); if (value != null) { nexclusiveScissorCount(struct, value.remaining()); } }
 

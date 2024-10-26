@@ -277,24 +277,24 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #heapBudget}. */
     public static LongBuffer nheapBudget(long struct) { return memLongBuffer(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPBUDGET, VK_MAX_MEMORY_HEAPS); }
     /** Unsafe version of {@link #heapBudget(int) heapBudget}. */
     public static long nheapBudget(long struct, int index) {
-        return UNSAFE.getLong(null, struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPBUDGET + check(index, VK_MAX_MEMORY_HEAPS) * 8);
+        return memGetLong(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPBUDGET + check(index, VK_MAX_MEMORY_HEAPS) * 8);
     }
     /** Unsafe version of {@link #heapUsage}. */
     public static LongBuffer nheapUsage(long struct) { return memLongBuffer(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPUSAGE, VK_MAX_MEMORY_HEAPS); }
     /** Unsafe version of {@link #heapUsage(int) heapUsage}. */
     public static long nheapUsage(long struct, int index) {
-        return UNSAFE.getLong(null, struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPUSAGE + check(index, VK_MAX_MEMORY_HEAPS) * 8);
+        return memGetLong(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.HEAPUSAGE + check(index, VK_MAX_MEMORY_HEAPS) * 8);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMemoryBudgetPropertiesEXT.PNEXT, value); }
 

@@ -261,20 +261,20 @@ public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresen
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentModeCompatibilityEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfacePresentModeCompatibilityEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfacePresentModeCompatibilityEXT.PNEXT); }
     /** Unsafe version of {@link #presentModeCount}. */
-    public static int npresentModeCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT); }
+    public static int npresentModeCount(long struct) { return memGetInt(struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT); }
     /** Unsafe version of {@link #pPresentModes() pPresentModes}. */
     @Nullable public static IntBuffer npPresentModes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSurfacePresentModeCompatibilityEXT.PPRESENTMODES), npresentModeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfacePresentModeCompatibilityEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfacePresentModeCompatibilityEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfacePresentModeCompatibilityEXT.PNEXT, value); }
     /** Sets the specified value to the {@code presentModeCount} field of the specified {@code struct}. */
-    public static void npresentModeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT, value); }
+    public static void npresentModeCount(long struct, int value) { memPutInt(struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT, value); }
     /** Unsafe version of {@link #pPresentModes(IntBuffer) pPresentModes}. */
     public static void npPresentModes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSurfacePresentModeCompatibilityEXT.PPRESENTMODES, memAddressSafe(value)); if (value != null) { npresentModeCount(struct, value.remaining()); } }
 

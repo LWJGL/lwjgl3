@@ -110,9 +110,9 @@ public class NkKey extends Struct<NkKey> {
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static boolean ndown(long struct) { return UNSAFE.getByte(null, struct + NkKey.DOWN) != 0; }
+    public static boolean ndown(long struct) { return memGetByte(struct + NkKey.DOWN) != 0; }
     /** Unsafe version of {@link #clicked}. */
-    public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkKey.CLICKED); }
+    public static int nclicked(long struct) { return memGetInt(struct + NkKey.CLICKED); }
 
     // -----------------------------------
 

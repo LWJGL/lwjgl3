@@ -341,38 +341,38 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct<VkAc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureGeometryTrianglesDataKHR.PNEXT); }
     /** Unsafe version of {@link #vertexFormat}. */
-    public static int nvertexFormat(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXFORMAT); }
+    public static int nvertexFormat(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXFORMAT); }
     /** Unsafe version of {@link #vertexData}. */
     public static VkDeviceOrHostAddressConstKHR nvertexData(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXDATA); }
     /** Unsafe version of {@link #vertexStride}. */
-    public static long nvertexStride(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXSTRIDE); }
+    public static long nvertexStride(long struct) { return memGetLong(struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXSTRIDE); }
     /** Unsafe version of {@link #maxVertex}. */
-    public static int nmaxVertex(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.MAXVERTEX); }
+    public static int nmaxVertex(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.MAXVERTEX); }
     /** Unsafe version of {@link #indexType}. */
-    public static int nindexType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXTYPE); }
+    public static int nindexType(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXTYPE); }
     /** Unsafe version of {@link #indexData}. */
     public static VkDeviceOrHostAddressConstKHR nindexData(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXDATA); }
     /** Unsafe version of {@link #transformData}. */
     public static VkDeviceOrHostAddressConstKHR ntransformData(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureGeometryTrianglesDataKHR.TRANSFORMDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureGeometryTrianglesDataKHR.PNEXT, value); }
     /** Unsafe version of {@link #vertexFormat(int) vertexFormat}. */
-    public static void nvertexFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXFORMAT, value); }
+    public static void nvertexFormat(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXFORMAT, value); }
     /** Unsafe version of {@link #vertexData(VkDeviceOrHostAddressConstKHR) vertexData}. */
     public static void nvertexData(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXDATA, VkDeviceOrHostAddressConstKHR.SIZEOF); }
     /** Unsafe version of {@link #vertexStride(long) vertexStride}. */
-    public static void nvertexStride(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXSTRIDE, value); }
+    public static void nvertexStride(long struct, long value) { memPutLong(struct + VkAccelerationStructureGeometryTrianglesDataKHR.VERTEXSTRIDE, value); }
     /** Unsafe version of {@link #maxVertex(int) maxVertex}. */
-    public static void nmaxVertex(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.MAXVERTEX, value); }
+    public static void nmaxVertex(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.MAXVERTEX, value); }
     /** Unsafe version of {@link #indexType(int) indexType}. */
-    public static void nindexType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXTYPE, value); }
+    public static void nindexType(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXTYPE, value); }
     /** Unsafe version of {@link #indexData(VkDeviceOrHostAddressConstKHR) indexData}. */
     public static void nindexData(long struct, VkDeviceOrHostAddressConstKHR value) { memCopy(value.address(), struct + VkAccelerationStructureGeometryTrianglesDataKHR.INDEXDATA, VkDeviceOrHostAddressConstKHR.SIZEOF); }
     /** Unsafe version of {@link #transformData(VkDeviceOrHostAddressConstKHR) transformData}. */

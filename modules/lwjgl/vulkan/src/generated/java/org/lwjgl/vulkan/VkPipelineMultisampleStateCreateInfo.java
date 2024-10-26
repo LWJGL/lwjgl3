@@ -363,42 +363,42 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineMultisampleStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #rasterizationSamples}. */
-    public static int nrasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.RASTERIZATIONSAMPLES); }
+    public static int nrasterizationSamples(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.RASTERIZATIONSAMPLES); }
     /** Unsafe version of {@link #sampleShadingEnable}. */
-    public static int nsampleShadingEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.SAMPLESHADINGENABLE); }
+    public static int nsampleShadingEnable(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.SAMPLESHADINGENABLE); }
     /** Unsafe version of {@link #minSampleShading}. */
-    public static float nminSampleShading(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineMultisampleStateCreateInfo.MINSAMPLESHADING); }
+    public static float nminSampleShading(long struct) { return memGetFloat(struct + VkPipelineMultisampleStateCreateInfo.MINSAMPLESHADING); }
     /** Unsafe version of {@link #pSampleMask(int) pSampleMask}. */
     @Nullable public static IntBuffer npSampleMask(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkPipelineMultisampleStateCreateInfo.PSAMPLEMASK), capacity); }
     /** Unsafe version of {@link #alphaToCoverageEnable}. */
-    public static int nalphaToCoverageEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.ALPHATOCOVERAGEENABLE); }
+    public static int nalphaToCoverageEnable(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.ALPHATOCOVERAGEENABLE); }
     /** Unsafe version of {@link #alphaToOneEnable}. */
-    public static int nalphaToOneEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineMultisampleStateCreateInfo.ALPHATOONEENABLE); }
+    public static int nalphaToOneEnable(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.ALPHATOONEENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineMultisampleStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #rasterizationSamples(int) rasterizationSamples}. */
-    public static void nrasterizationSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.RASTERIZATIONSAMPLES, value); }
+    public static void nrasterizationSamples(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.RASTERIZATIONSAMPLES, value); }
     /** Unsafe version of {@link #sampleShadingEnable(boolean) sampleShadingEnable}. */
-    public static void nsampleShadingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.SAMPLESHADINGENABLE, value); }
+    public static void nsampleShadingEnable(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.SAMPLESHADINGENABLE, value); }
     /** Unsafe version of {@link #minSampleShading(float) minSampleShading}. */
-    public static void nminSampleShading(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineMultisampleStateCreateInfo.MINSAMPLESHADING, value); }
+    public static void nminSampleShading(long struct, float value) { memPutFloat(struct + VkPipelineMultisampleStateCreateInfo.MINSAMPLESHADING, value); }
     /** Unsafe version of {@link #pSampleMask(IntBuffer) pSampleMask}. */
     public static void npSampleMask(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineMultisampleStateCreateInfo.PSAMPLEMASK, memAddressSafe(value)); }
     /** Unsafe version of {@link #alphaToCoverageEnable(boolean) alphaToCoverageEnable}. */
-    public static void nalphaToCoverageEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.ALPHATOCOVERAGEENABLE, value); }
+    public static void nalphaToCoverageEnable(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.ALPHATOCOVERAGEENABLE, value); }
     /** Unsafe version of {@link #alphaToOneEnable(boolean) alphaToOneEnable}. */
-    public static void nalphaToOneEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineMultisampleStateCreateInfo.ALPHATOONEENABLE, value); }
+    public static void nalphaToOneEnable(long struct, int value) { memPutInt(struct + VkPipelineMultisampleStateCreateInfo.ALPHATOONEENABLE, value); }
 
     // -----------------------------------
 

@@ -236,11 +236,11 @@ public class VkFormatProperties extends Struct<VkFormatProperties> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #linearTilingFeatures}. */
-    public static int nlinearTilingFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.LINEARTILINGFEATURES); }
+    public static int nlinearTilingFeatures(long struct) { return memGetInt(struct + VkFormatProperties.LINEARTILINGFEATURES); }
     /** Unsafe version of {@link #optimalTilingFeatures}. */
-    public static int noptimalTilingFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.OPTIMALTILINGFEATURES); }
+    public static int noptimalTilingFeatures(long struct) { return memGetInt(struct + VkFormatProperties.OPTIMALTILINGFEATURES); }
     /** Unsafe version of {@link #bufferFeatures}. */
-    public static int nbufferFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.BUFFERFEATURES); }
+    public static int nbufferFeatures(long struct) { return memGetInt(struct + VkFormatProperties.BUFFERFEATURES); }
 
     // -----------------------------------
 

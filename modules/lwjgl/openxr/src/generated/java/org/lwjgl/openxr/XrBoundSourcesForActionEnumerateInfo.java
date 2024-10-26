@@ -249,14 +249,14 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesF
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBoundSourcesForActionEnumerateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBoundSourcesForActionEnumerateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBoundSourcesForActionEnumerateInfo.NEXT); }
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrBoundSourcesForActionEnumerateInfo.ACTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBoundSourcesForActionEnumerateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBoundSourcesForActionEnumerateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBoundSourcesForActionEnumerateInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */

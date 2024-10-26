@@ -233,14 +233,14 @@ public class SpvcBufferRange extends Struct<SpvcBufferRange> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + SpvcBufferRange.INDEX); }
+    public static int nindex(long struct) { return memGetInt(struct + SpvcBufferRange.INDEX); }
     /** Unsafe version of {@link #offset}. */
     public static long noffset(long struct) { return memGetAddress(struct + SpvcBufferRange.OFFSET); }
     /** Unsafe version of {@link #range}. */
     public static long nrange(long struct) { return memGetAddress(struct + SpvcBufferRange.RANGE); }
 
     /** Unsafe version of {@link #index(int) index}. */
-    public static void nindex(long struct, int value) { UNSAFE.putInt(null, struct + SpvcBufferRange.INDEX, value); }
+    public static void nindex(long struct, int value) { memPutInt(struct + SpvcBufferRange.INDEX, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
     public static void noffset(long struct, long value) { memPutAddress(struct + SpvcBufferRange.OFFSET, value); }
     /** Unsafe version of {@link #range(long) range}. */

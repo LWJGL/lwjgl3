@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #minLod}. */
-    public static int nminLod(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.MINLOD); }
+    public static int nminLod(long struct) { return memGetInt(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.MINLOD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #minLod(boolean) minLod}. */
-    public static void nminLod(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.MINLOD, value); }
+    public static void nminLod(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageViewMinLodFeaturesEXT.MINLOD, value); }
 
     // -----------------------------------
 

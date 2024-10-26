@@ -347,38 +347,38 @@ public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinea
     // -----------------------------------
 
     /** Unsafe version of {@link #WarpLeft}. */
-    public static float nWarpLeft(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.WARPLEFT); }
+    public static float nWarpLeft(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.WARPLEFT); }
     /** Unsafe version of {@link #WarpRight}. */
-    public static float nWarpRight(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.WARPRIGHT); }
+    public static float nWarpRight(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.WARPRIGHT); }
     /** Unsafe version of {@link #WarpUp}. */
-    public static float nWarpUp(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.WARPUP); }
+    public static float nWarpUp(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.WARPUP); }
     /** Unsafe version of {@link #WarpDown}. */
-    public static float nWarpDown(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.WARPDOWN); }
+    public static float nWarpDown(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.WARPDOWN); }
     /** Unsafe version of {@link #SizeLeft}. */
-    public static float nSizeLeft(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.SIZELEFT); }
+    public static float nSizeLeft(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.SIZELEFT); }
     /** Unsafe version of {@link #SizeRight}. */
-    public static float nSizeRight(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.SIZERIGHT); }
+    public static float nSizeRight(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.SIZERIGHT); }
     /** Unsafe version of {@link #SizeUp}. */
-    public static float nSizeUp(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.SIZEUP); }
+    public static float nSizeUp(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.SIZEUP); }
     /** Unsafe version of {@link #SizeDown}. */
-    public static float nSizeDown(long struct) { return UNSAFE.getFloat(null, struct + OVRTextureLayoutOctilinear.SIZEDOWN); }
+    public static float nSizeDown(long struct) { return memGetFloat(struct + OVRTextureLayoutOctilinear.SIZEDOWN); }
 
     /** Unsafe version of {@link #WarpLeft(float) WarpLeft}. */
-    public static void nWarpLeft(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.WARPLEFT, value); }
+    public static void nWarpLeft(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.WARPLEFT, value); }
     /** Unsafe version of {@link #WarpRight(float) WarpRight}. */
-    public static void nWarpRight(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.WARPRIGHT, value); }
+    public static void nWarpRight(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.WARPRIGHT, value); }
     /** Unsafe version of {@link #WarpUp(float) WarpUp}. */
-    public static void nWarpUp(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.WARPUP, value); }
+    public static void nWarpUp(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.WARPUP, value); }
     /** Unsafe version of {@link #WarpDown(float) WarpDown}. */
-    public static void nWarpDown(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.WARPDOWN, value); }
+    public static void nWarpDown(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.WARPDOWN, value); }
     /** Unsafe version of {@link #SizeLeft(float) SizeLeft}. */
-    public static void nSizeLeft(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.SIZELEFT, value); }
+    public static void nSizeLeft(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.SIZELEFT, value); }
     /** Unsafe version of {@link #SizeRight(float) SizeRight}. */
-    public static void nSizeRight(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.SIZERIGHT, value); }
+    public static void nSizeRight(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.SIZERIGHT, value); }
     /** Unsafe version of {@link #SizeUp(float) SizeUp}. */
-    public static void nSizeUp(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.SIZEUP, value); }
+    public static void nSizeUp(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.SIZEUP, value); }
     /** Unsafe version of {@link #SizeDown(float) SizeDown}. */
-    public static void nSizeDown(long struct, float value) { UNSAFE.putFloat(null, struct + OVRTextureLayoutOctilinear.SIZEDOWN, value); }
+    public static void nSizeDown(long struct, float value) { memPutFloat(struct + OVRTextureLayoutOctilinear.SIZEDOWN, value); }
 
     // -----------------------------------
 

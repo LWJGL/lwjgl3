@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT extends
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #imageCompressionControlSwapchain}. */
-    public static int nimageCompressionControlSwapchain(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.IMAGECOMPRESSIONCONTROLSWAPCHAIN); }
+    public static int nimageCompressionControlSwapchain(long struct) { return memGetInt(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.IMAGECOMPRESSIONCONTROLSWAPCHAIN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #imageCompressionControlSwapchain(boolean) imageCompressionControlSwapchain}. */
-    public static void nimageCompressionControlSwapchain(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.IMAGECOMPRESSIONCONTROLSWAPCHAIN, value); }
+    public static void nimageCompressionControlSwapchain(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.IMAGECOMPRESSIONCONTROLSWAPCHAIN, value); }
 
     // -----------------------------------
 

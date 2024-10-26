@@ -222,12 +222,12 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
     // -----------------------------------
 
     /** Unsafe version of {@link #defaultval}. */
-    public static int ndefaultval(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL); }
+    public static int ndefaultval(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL); }
     /** Unsafe version of {@link #valuenames() valuenames}. */
     @Nullable public static PointerBuffer nvaluenames(long struct) { return memPointerBufferSafe(memGetAddress(struct + FMOD_DSP_PARAMETER_DESC_BOOL.VALUENAMES), 2); }
 
     /** Unsafe version of {@link #defaultval(int) defaultval}. */
-    public static void ndefaultval(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL, value); }
+    public static void ndefaultval(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL, value); }
     /** Unsafe version of {@link #valuenames(PointerBuffer) valuenames}. */
     public static void nvaluenames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + FMOD_DSP_PARAMETER_DESC_BOOL.VALUENAMES, memAddressSafe(value)); }
 

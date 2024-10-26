@@ -216,9 +216,9 @@ public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements Na
     /** Unsafe version of {@link #allocationInfo}. */
     public static VmaAllocationInfo nallocationInfo(long struct) { return VmaAllocationInfo.create(struct + VmaAllocationInfo2.ALLOCATIONINFO); }
     /** Unsafe version of {@link #blockSize}. */
-    public static long nblockSize(long struct) { return UNSAFE.getLong(null, struct + VmaAllocationInfo2.BLOCKSIZE); }
+    public static long nblockSize(long struct) { return memGetLong(struct + VmaAllocationInfo2.BLOCKSIZE); }
     /** Unsafe version of {@link #dedicatedMemory}. */
-    public static int ndedicatedMemory(long struct) { return UNSAFE.getInt(null, struct + VmaAllocationInfo2.DEDICATEDMEMORY); }
+    public static int ndedicatedMemory(long struct) { return memGetInt(struct + VmaAllocationInfo2.DEDICATEDMEMORY); }
 
     // -----------------------------------
 

@@ -319,42 +319,42 @@ public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEX
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPlaneDetectorLocationEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPlaneDetectorLocationEXT.NEXT); }
     /** Unsafe version of {@link #planeId}. */
-    public static long nplaneId(long struct) { return UNSAFE.getLong(null, struct + XrPlaneDetectorLocationEXT.PLANEID); }
+    public static long nplaneId(long struct) { return memGetLong(struct + XrPlaneDetectorLocationEXT.PLANEID); }
     /** Unsafe version of {@link #locationFlags}. */
-    public static long nlocationFlags(long struct) { return UNSAFE.getLong(null, struct + XrPlaneDetectorLocationEXT.LOCATIONFLAGS); }
+    public static long nlocationFlags(long struct) { return memGetLong(struct + XrPlaneDetectorLocationEXT.LOCATIONFLAGS); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrPlaneDetectorLocationEXT.POSE); }
     /** Unsafe version of {@link #extents}. */
     public static XrExtent2Df nextents(long struct) { return XrExtent2Df.create(struct + XrPlaneDetectorLocationEXT.EXTENTS); }
     /** Unsafe version of {@link #orientation}. */
-    public static int norientation(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationEXT.ORIENTATION); }
+    public static int norientation(long struct) { return memGetInt(struct + XrPlaneDetectorLocationEXT.ORIENTATION); }
     /** Unsafe version of {@link #semanticType}. */
-    public static int nsemanticType(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationEXT.SEMANTICTYPE); }
+    public static int nsemanticType(long struct) { return memGetInt(struct + XrPlaneDetectorLocationEXT.SEMANTICTYPE); }
     /** Unsafe version of {@link #polygonBufferCount}. */
-    public static int npolygonBufferCount(long struct) { return UNSAFE.getInt(null, struct + XrPlaneDetectorLocationEXT.POLYGONBUFFERCOUNT); }
+    public static int npolygonBufferCount(long struct) { return memGetInt(struct + XrPlaneDetectorLocationEXT.POLYGONBUFFERCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPlaneDetectorLocationEXT.NEXT, value); }
     /** Unsafe version of {@link #planeId(long) planeId}. */
-    public static void nplaneId(long struct, long value) { UNSAFE.putLong(null, struct + XrPlaneDetectorLocationEXT.PLANEID, value); }
+    public static void nplaneId(long struct, long value) { memPutLong(struct + XrPlaneDetectorLocationEXT.PLANEID, value); }
     /** Unsafe version of {@link #locationFlags(long) locationFlags}. */
-    public static void nlocationFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrPlaneDetectorLocationEXT.LOCATIONFLAGS, value); }
+    public static void nlocationFlags(long struct, long value) { memPutLong(struct + XrPlaneDetectorLocationEXT.LOCATIONFLAGS, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrPlaneDetectorLocationEXT.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #extents(XrExtent2Df) extents}. */
     public static void nextents(long struct, XrExtent2Df value) { memCopy(value.address(), struct + XrPlaneDetectorLocationEXT.EXTENTS, XrExtent2Df.SIZEOF); }
     /** Unsafe version of {@link #orientation(int) orientation}. */
-    public static void norientation(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationEXT.ORIENTATION, value); }
+    public static void norientation(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationEXT.ORIENTATION, value); }
     /** Unsafe version of {@link #semanticType(int) semanticType}. */
-    public static void nsemanticType(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationEXT.SEMANTICTYPE, value); }
+    public static void nsemanticType(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationEXT.SEMANTICTYPE, value); }
     /** Unsafe version of {@link #polygonBufferCount(int) polygonBufferCount}. */
-    public static void npolygonBufferCount(long struct, int value) { UNSAFE.putInt(null, struct + XrPlaneDetectorLocationEXT.POLYGONBUFFERCOUNT, value); }
+    public static void npolygonBufferCount(long struct, int value) { memPutInt(struct + XrPlaneDetectorLocationEXT.POLYGONBUFFERCOUNT, value); }
 
     // -----------------------------------
 

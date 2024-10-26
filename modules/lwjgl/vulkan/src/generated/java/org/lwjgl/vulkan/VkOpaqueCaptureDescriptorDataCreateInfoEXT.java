@@ -248,14 +248,14 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #opaqueCaptureDescriptorData}. */
     public static long nopaqueCaptureDescriptorData(long struct) { return memGetAddress(struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.OPAQUECAPTUREDESCRIPTORDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkOpaqueCaptureDescriptorDataCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #opaqueCaptureDescriptorData(long) opaqueCaptureDescriptorData}. */

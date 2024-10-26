@@ -255,18 +255,18 @@ public class VkMemoryGetAndroidHardwareBufferInfoANDROID extends Struct<VkMemory
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.PNEXT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.MEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.PNEXT, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkMemoryGetAndroidHardwareBufferInfoANDROID.MEMORY, value); }
 
     // -----------------------------------
 

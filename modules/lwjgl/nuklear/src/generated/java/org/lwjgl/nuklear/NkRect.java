@@ -259,22 +259,22 @@ public class NkRect extends Struct<NkRect> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NkRect.X); }
+    public static float nx(long struct) { return memGetFloat(struct + NkRect.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + NkRect.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + NkRect.Y); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + NkRect.W); }
+    public static float nw(long struct) { return memGetFloat(struct + NkRect.W); }
     /** Unsafe version of {@link #h}. */
-    public static float nh(long struct) { return UNSAFE.getFloat(null, struct + NkRect.H); }
+    public static float nh(long struct) { return memGetFloat(struct + NkRect.H); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + NkRect.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + NkRect.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + NkRect.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + NkRect.Y, value); }
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + NkRect.W, value); }
+    public static void nw(long struct, float value) { memPutFloat(struct + NkRect.W, value); }
     /** Unsafe version of {@link #h(float) h}. */
-    public static void nh(long struct, float value) { UNSAFE.putFloat(null, struct + NkRect.H, value); }
+    public static void nh(long struct, float value) { memPutFloat(struct + NkRect.H, value); }
 
     // -----------------------------------
 

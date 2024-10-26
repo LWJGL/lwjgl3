@@ -221,17 +221,17 @@ public class FT_SfntName extends Struct<FT_SfntName> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #platform_id}. */
-    public static short nplatform_id(long struct) { return UNSAFE.getShort(null, struct + FT_SfntName.PLATFORM_ID); }
+    public static short nplatform_id(long struct) { return memGetShort(struct + FT_SfntName.PLATFORM_ID); }
     /** Unsafe version of {@link #encoding_id}. */
-    public static short nencoding_id(long struct) { return UNSAFE.getShort(null, struct + FT_SfntName.ENCODING_ID); }
+    public static short nencoding_id(long struct) { return memGetShort(struct + FT_SfntName.ENCODING_ID); }
     /** Unsafe version of {@link #language_id}. */
-    public static short nlanguage_id(long struct) { return UNSAFE.getShort(null, struct + FT_SfntName.LANGUAGE_ID); }
+    public static short nlanguage_id(long struct) { return memGetShort(struct + FT_SfntName.LANGUAGE_ID); }
     /** Unsafe version of {@link #name_id}. */
-    public static short nname_id(long struct) { return UNSAFE.getShort(null, struct + FT_SfntName.NAME_ID); }
+    public static short nname_id(long struct) { return memGetShort(struct + FT_SfntName.NAME_ID); }
     /** Unsafe version of {@link #string() string}. */
     public static ByteBuffer nstring(long struct) { return memByteBuffer(memGetAddress(struct + FT_SfntName.STRING), nstring_len(struct)); }
     /** Unsafe version of {@link #string_len}. */
-    public static int nstring_len(long struct) { return UNSAFE.getInt(null, struct + FT_SfntName.STRING_LEN); }
+    public static int nstring_len(long struct) { return memGetInt(struct + FT_SfntName.STRING_LEN); }
 
     // -----------------------------------
 

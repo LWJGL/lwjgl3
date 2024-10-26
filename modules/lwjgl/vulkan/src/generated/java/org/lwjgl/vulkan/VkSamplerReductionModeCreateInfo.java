@@ -249,18 +249,18 @@ public class VkSamplerReductionModeCreateInfo extends Struct<VkSamplerReductionM
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerReductionModeCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerReductionModeCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerReductionModeCreateInfo.PNEXT); }
     /** Unsafe version of {@link #reductionMode}. */
-    public static int nreductionMode(long struct) { return UNSAFE.getInt(null, struct + VkSamplerReductionModeCreateInfo.REDUCTIONMODE); }
+    public static int nreductionMode(long struct) { return memGetInt(struct + VkSamplerReductionModeCreateInfo.REDUCTIONMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerReductionModeCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerReductionModeCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerReductionModeCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #reductionMode(int) reductionMode}. */
-    public static void nreductionMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerReductionModeCreateInfo.REDUCTIONMODE, value); }
+    public static void nreductionMode(long struct, int value) { memPutInt(struct + VkSamplerReductionModeCreateInfo.REDUCTIONMODE, value); }
 
     // -----------------------------------
 

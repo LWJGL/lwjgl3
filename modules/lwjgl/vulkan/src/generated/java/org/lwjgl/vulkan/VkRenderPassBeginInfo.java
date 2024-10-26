@@ -382,32 +382,32 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassBeginInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassBeginInfo.PNEXT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkRenderPassBeginInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return memGetLong(struct + VkRenderPassBeginInfo.RENDERPASS); }
     /** Unsafe version of {@link #framebuffer}. */
-    public static long nframebuffer(long struct) { return UNSAFE.getLong(null, struct + VkRenderPassBeginInfo.FRAMEBUFFER); }
+    public static long nframebuffer(long struct) { return memGetLong(struct + VkRenderPassBeginInfo.FRAMEBUFFER); }
     /** Unsafe version of {@link #renderArea}. */
     public static VkRect2D nrenderArea(long struct) { return VkRect2D.create(struct + VkRenderPassBeginInfo.RENDERAREA); }
     /** Unsafe version of {@link #clearValueCount}. */
-    public static int nclearValueCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassBeginInfo.CLEARVALUECOUNT); }
+    public static int nclearValueCount(long struct) { return memGetInt(struct + VkRenderPassBeginInfo.CLEARVALUECOUNT); }
     /** Unsafe version of {@link #pClearValues}. */
     @Nullable public static VkClearValue.Buffer npClearValues(long struct) { return VkClearValue.createSafe(memGetAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES), nclearValueCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassBeginInfo.PNEXT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderPassBeginInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkRenderPassBeginInfo.RENDERPASS, value); }
     /** Unsafe version of {@link #framebuffer(long) framebuffer}. */
-    public static void nframebuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderPassBeginInfo.FRAMEBUFFER, value); }
+    public static void nframebuffer(long struct, long value) { memPutLong(struct + VkRenderPassBeginInfo.FRAMEBUFFER, value); }
     /** Unsafe version of {@link #renderArea(VkRect2D) renderArea}. */
     public static void nrenderArea(long struct, VkRect2D value) { memCopy(value.address(), struct + VkRenderPassBeginInfo.RENDERAREA, VkRect2D.SIZEOF); }
     /** Sets the specified value to the {@code clearValueCount} field of the specified {@code struct}. */
-    public static void nclearValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassBeginInfo.CLEARVALUECOUNT, value); }
+    public static void nclearValueCount(long struct, int value) { memPutInt(struct + VkRenderPassBeginInfo.CLEARVALUECOUNT, value); }
     /** Unsafe version of {@link #pClearValues(VkClearValue.Buffer) pClearValues}. */
     public static void npClearValues(long struct, @Nullable VkClearValue.Buffer value) { memPutAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES, memAddressSafe(value)); if (value != null) { nclearValueCount(struct, value.remaining()); } }
 

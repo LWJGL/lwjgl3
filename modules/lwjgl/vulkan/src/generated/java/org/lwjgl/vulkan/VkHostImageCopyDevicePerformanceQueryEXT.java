@@ -268,16 +268,16 @@ public class VkHostImageCopyDevicePerformanceQueryEXT extends Struct<VkHostImage
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkHostImageCopyDevicePerformanceQueryEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkHostImageCopyDevicePerformanceQueryEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkHostImageCopyDevicePerformanceQueryEXT.PNEXT); }
     /** Unsafe version of {@link #optimalDeviceAccess}. */
-    public static int noptimalDeviceAccess(long struct) { return UNSAFE.getInt(null, struct + VkHostImageCopyDevicePerformanceQueryEXT.OPTIMALDEVICEACCESS); }
+    public static int noptimalDeviceAccess(long struct) { return memGetInt(struct + VkHostImageCopyDevicePerformanceQueryEXT.OPTIMALDEVICEACCESS); }
     /** Unsafe version of {@link #identicalMemoryLayout}. */
-    public static int nidenticalMemoryLayout(long struct) { return UNSAFE.getInt(null, struct + VkHostImageCopyDevicePerformanceQueryEXT.IDENTICALMEMORYLAYOUT); }
+    public static int nidenticalMemoryLayout(long struct) { return memGetInt(struct + VkHostImageCopyDevicePerformanceQueryEXT.IDENTICALMEMORYLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkHostImageCopyDevicePerformanceQueryEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkHostImageCopyDevicePerformanceQueryEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkHostImageCopyDevicePerformanceQueryEXT.PNEXT, value); }
 

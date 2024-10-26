@@ -220,7 +220,7 @@ public class OVRHapticsClip extends Struct<OVRHapticsClip> implements NativeReso
     /** Unsafe version of {@link #Samples(int) Samples}. */
     public static ByteBuffer nSamples(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + OVRHapticsClip.SAMPLES), capacity); }
     /** Unsafe version of {@link #SamplesCount}. */
-    public static int nSamplesCount(long struct) { return UNSAFE.getInt(null, struct + OVRHapticsClip.SAMPLESCOUNT); }
+    public static int nSamplesCount(long struct) { return memGetInt(struct + OVRHapticsClip.SAMPLESCOUNT); }
 
     // -----------------------------------
 

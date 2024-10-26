@@ -163,17 +163,17 @@ public class hwloc_bridge_attr_s extends Struct<hwloc_bridge_attr_s> {
     /** Unsafe version of {@link #upstream_pci}. */
     public static hwloc_pcidev_attr_s nupstream_pci(long struct) { return hwloc_pcidev_attr_s.create(struct + hwloc_bridge_attr_s.UPSTREAM_PCI); }
     /** Unsafe version of {@link #upstream_type}. */
-    public static int nupstream_type(long struct) { return UNSAFE.getInt(null, struct + hwloc_bridge_attr_s.UPSTREAM_TYPE); }
+    public static int nupstream_type(long struct) { return memGetInt(struct + hwloc_bridge_attr_s.UPSTREAM_TYPE); }
     /** Unsafe version of {@link #downstream_pci_domain}. */
-    public static int ndownstream_pci_domain(long struct) { return UNSAFE.getInt(null, struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_DOMAIN); }
+    public static int ndownstream_pci_domain(long struct) { return memGetInt(struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_DOMAIN); }
     /** Unsafe version of {@link #downstream_pci_secondary_bus}. */
-    public static byte ndownstream_pci_secondary_bus(long struct) { return UNSAFE.getByte(null, struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_SECONDARY_BUS); }
+    public static byte ndownstream_pci_secondary_bus(long struct) { return memGetByte(struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_SECONDARY_BUS); }
     /** Unsafe version of {@link #downstream_pci_subordinate_bus}. */
-    public static byte ndownstream_pci_subordinate_bus(long struct) { return UNSAFE.getByte(null, struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_SUBORDINATE_BUS); }
+    public static byte ndownstream_pci_subordinate_bus(long struct) { return memGetByte(struct + hwloc_bridge_attr_s.DOWNSTREAM_PCI_SUBORDINATE_BUS); }
     /** Unsafe version of {@link #downstream_type}. */
-    public static int ndownstream_type(long struct) { return UNSAFE.getInt(null, struct + hwloc_bridge_attr_s.DOWNSTREAM_TYPE); }
+    public static int ndownstream_type(long struct) { return memGetInt(struct + hwloc_bridge_attr_s.DOWNSTREAM_TYPE); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + hwloc_bridge_attr_s.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + hwloc_bridge_attr_s.DEPTH); }
 
     // -----------------------------------
 

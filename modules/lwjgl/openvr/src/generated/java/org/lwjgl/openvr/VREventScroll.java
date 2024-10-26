@@ -130,15 +130,15 @@ public class VREventScroll extends Struct<VREventScroll> {
     // -----------------------------------
 
     /** Unsafe version of {@link #xdelta}. */
-    public static float nxdelta(long struct) { return UNSAFE.getFloat(null, struct + VREventScroll.XDELTA); }
+    public static float nxdelta(long struct) { return memGetFloat(struct + VREventScroll.XDELTA); }
     /** Unsafe version of {@link #ydelta}. */
-    public static float nydelta(long struct) { return UNSAFE.getFloat(null, struct + VREventScroll.YDELTA); }
+    public static float nydelta(long struct) { return memGetFloat(struct + VREventScroll.YDELTA); }
     /** Unsafe version of {@link #unused}. */
-    public static int nunused(long struct) { return UNSAFE.getInt(null, struct + VREventScroll.UNUSED); }
+    public static int nunused(long struct) { return memGetInt(struct + VREventScroll.UNUSED); }
     /** Unsafe version of {@link #viewportscale}. */
-    public static float nviewportscale(long struct) { return UNSAFE.getFloat(null, struct + VREventScroll.VIEWPORTSCALE); }
+    public static float nviewportscale(long struct) { return memGetFloat(struct + VREventScroll.VIEWPORTSCALE); }
     /** Unsafe version of {@link #cursorIndex}. */
-    public static int ncursorIndex(long struct) { return UNSAFE.getInt(null, struct + VREventScroll.CURSORINDEX); }
+    public static int ncursorIndex(long struct) { return memGetInt(struct + VREventScroll.CURSORINDEX); }
 
     // -----------------------------------
 

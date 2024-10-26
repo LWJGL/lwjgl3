@@ -264,20 +264,20 @@ public class XrBodySkeletonFB extends Struct<XrBodySkeletonFB> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBodySkeletonFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBodySkeletonFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBodySkeletonFB.NEXT); }
     /** Unsafe version of {@link #jointCount}. */
-    public static int njointCount(long struct) { return UNSAFE.getInt(null, struct + XrBodySkeletonFB.JOINTCOUNT); }
+    public static int njointCount(long struct) { return memGetInt(struct + XrBodySkeletonFB.JOINTCOUNT); }
     /** Unsafe version of {@link #joints}. */
     public static XrBodySkeletonJointFB.Buffer njoints(long struct) { return XrBodySkeletonJointFB.create(memGetAddress(struct + XrBodySkeletonFB.JOINTS), njointCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBodySkeletonFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBodySkeletonFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBodySkeletonFB.NEXT, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
-    public static void njointCount(long struct, int value) { UNSAFE.putInt(null, struct + XrBodySkeletonFB.JOINTCOUNT, value); }
+    public static void njointCount(long struct, int value) { memPutInt(struct + XrBodySkeletonFB.JOINTCOUNT, value); }
     /** Unsafe version of {@link #joints(XrBodySkeletonJointFB.Buffer) joints}. */
     public static void njoints(long struct, XrBodySkeletonJointFB.Buffer value) { memPutAddress(struct + XrBodySkeletonFB.JOINTS, value.address()); njointCount(struct, value.remaining()); }
 

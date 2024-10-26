@@ -271,18 +271,18 @@ public class VkVertexInputBindingDescription extends Struct<VkVertexInputBinding
     // -----------------------------------
 
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.BINDING); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.STRIDE); }
     /** Unsafe version of {@link #inputRate}. */
-    public static int ninputRate(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.INPUTRATE); }
+    public static int ninputRate(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.INPUTRATE); }
 
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.BINDING, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.STRIDE, value); }
     /** Unsafe version of {@link #inputRate(int) inputRate}. */
-    public static void ninputRate(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.INPUTRATE, value); }
+    public static void ninputRate(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.INPUTRATE, value); }
 
     // -----------------------------------
 

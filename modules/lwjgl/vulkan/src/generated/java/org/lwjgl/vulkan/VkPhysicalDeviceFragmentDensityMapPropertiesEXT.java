@@ -277,7 +277,7 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #minFragmentDensityTexelSize}. */
@@ -285,10 +285,10 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPh
     /** Unsafe version of {@link #maxFragmentDensityTexelSize}. */
     public static VkExtent2D nmaxFragmentDensityTexelSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.MAXFRAGMENTDENSITYTEXELSIZE); }
     /** Unsafe version of {@link #fragmentDensityInvocations}. */
-    public static int nfragmentDensityInvocations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.FRAGMENTDENSITYINVOCATIONS); }
+    public static int nfragmentDensityInvocations(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.FRAGMENTDENSITYINVOCATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMapPropertiesEXT.PNEXT, value); }
 

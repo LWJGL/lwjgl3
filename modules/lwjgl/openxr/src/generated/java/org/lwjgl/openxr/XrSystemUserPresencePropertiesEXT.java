@@ -252,14 +252,14 @@ public class XrSystemUserPresencePropertiesEXT extends Struct<XrSystemUserPresen
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemUserPresencePropertiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemUserPresencePropertiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemUserPresencePropertiesEXT.NEXT); }
     /** Unsafe version of {@link #supportsUserPresence}. */
-    public static int nsupportsUserPresence(long struct) { return UNSAFE.getInt(null, struct + XrSystemUserPresencePropertiesEXT.SUPPORTSUSERPRESENCE); }
+    public static int nsupportsUserPresence(long struct) { return memGetInt(struct + XrSystemUserPresencePropertiesEXT.SUPPORTSUSERPRESENCE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemUserPresencePropertiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemUserPresencePropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemUserPresencePropertiesEXT.NEXT, value); }
 

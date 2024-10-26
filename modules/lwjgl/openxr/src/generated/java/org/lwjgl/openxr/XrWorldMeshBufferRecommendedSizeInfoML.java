@@ -252,18 +252,18 @@ public class XrWorldMeshBufferRecommendedSizeInfoML extends Struct<XrWorldMeshBu
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBufferRecommendedSizeInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshBufferRecommendedSizeInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshBufferRecommendedSizeInfoML.NEXT); }
     /** Unsafe version of {@link #maxBlockCount}. */
-    public static int nmaxBlockCount(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBufferRecommendedSizeInfoML.MAXBLOCKCOUNT); }
+    public static int nmaxBlockCount(long struct) { return memGetInt(struct + XrWorldMeshBufferRecommendedSizeInfoML.MAXBLOCKCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBufferRecommendedSizeInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshBufferRecommendedSizeInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshBufferRecommendedSizeInfoML.NEXT, value); }
     /** Unsafe version of {@link #maxBlockCount(int) maxBlockCount}. */
-    public static void nmaxBlockCount(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBufferRecommendedSizeInfoML.MAXBLOCKCOUNT, value); }
+    public static void nmaxBlockCount(long struct, int value) { memPutInt(struct + XrWorldMeshBufferRecommendedSizeInfoML.MAXBLOCKCOUNT, value); }
 
     // -----------------------------------
 

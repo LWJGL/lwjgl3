@@ -212,12 +212,12 @@ public class CUkernelNodeAttrValue extends Struct<CUkernelNodeAttrValue> impleme
     /** Unsafe version of {@link #accessPolicyWindow}. */
     public static CUaccessPolicyWindow naccessPolicyWindow(long struct) { return CUaccessPolicyWindow.create(struct + CUkernelNodeAttrValue.ACCESSPOLICYWINDOW); }
     /** Unsafe version of {@link #cooperative}. */
-    public static int ncooperative(long struct) { return UNSAFE.getInt(null, struct + CUkernelNodeAttrValue.COOPERATIVE); }
+    public static int ncooperative(long struct) { return memGetInt(struct + CUkernelNodeAttrValue.COOPERATIVE); }
 
     /** Unsafe version of {@link #accessPolicyWindow(CUaccessPolicyWindow) accessPolicyWindow}. */
     public static void naccessPolicyWindow(long struct, CUaccessPolicyWindow value) { memCopy(value.address(), struct + CUkernelNodeAttrValue.ACCESSPOLICYWINDOW, CUaccessPolicyWindow.SIZEOF); }
     /** Unsafe version of {@link #cooperative(int) cooperative}. */
-    public static void ncooperative(long struct, int value) { UNSAFE.putInt(null, struct + CUkernelNodeAttrValue.COOPERATIVE, value); }
+    public static void ncooperative(long struct, int value) { memPutInt(struct + CUkernelNodeAttrValue.COOPERATIVE, value); }
 
     // -----------------------------------
 

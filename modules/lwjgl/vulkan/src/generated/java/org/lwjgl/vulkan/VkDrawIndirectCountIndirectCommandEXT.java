@@ -245,18 +245,18 @@ public class VkDrawIndirectCountIndirectCommandEXT extends Struct<VkDrawIndirect
     // -----------------------------------
 
     /** Unsafe version of {@link #bufferAddress}. */
-    public static long nbufferAddress(long struct) { return UNSAFE.getLong(null, struct + VkDrawIndirectCountIndirectCommandEXT.BUFFERADDRESS); }
+    public static long nbufferAddress(long struct) { return memGetLong(struct + VkDrawIndirectCountIndirectCommandEXT.BUFFERADDRESS); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCountIndirectCommandEXT.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + VkDrawIndirectCountIndirectCommandEXT.STRIDE); }
     /** Unsafe version of {@link #commandCount}. */
-    public static int ncommandCount(long struct) { return UNSAFE.getInt(null, struct + VkDrawIndirectCountIndirectCommandEXT.COMMANDCOUNT); }
+    public static int ncommandCount(long struct) { return memGetInt(struct + VkDrawIndirectCountIndirectCommandEXT.COMMANDCOUNT); }
 
     /** Unsafe version of {@link #bufferAddress(long) bufferAddress}. */
-    public static void nbufferAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDrawIndirectCountIndirectCommandEXT.BUFFERADDRESS, value); }
+    public static void nbufferAddress(long struct, long value) { memPutLong(struct + VkDrawIndirectCountIndirectCommandEXT.BUFFERADDRESS, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCountIndirectCommandEXT.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + VkDrawIndirectCountIndirectCommandEXT.STRIDE, value); }
     /** Unsafe version of {@link #commandCount(int) commandCount}. */
-    public static void ncommandCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDrawIndirectCountIndirectCommandEXT.COMMANDCOUNT, value); }
+    public static void ncommandCount(long struct, int value) { memPutInt(struct + VkDrawIndirectCountIndirectCommandEXT.COMMANDCOUNT, value); }
 
     // -----------------------------------
 

@@ -285,28 +285,28 @@ public class OVRFovStencilMeshBuffer extends Struct<OVRFovStencilMeshBuffer> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #AllocVertexCount}. */
-    public static int nAllocVertexCount(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilMeshBuffer.ALLOCVERTEXCOUNT); }
+    public static int nAllocVertexCount(long struct) { return memGetInt(struct + OVRFovStencilMeshBuffer.ALLOCVERTEXCOUNT); }
     /** Unsafe version of {@link #UsedVertexCount}. */
-    public static int nUsedVertexCount(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilMeshBuffer.USEDVERTEXCOUNT); }
+    public static int nUsedVertexCount(long struct) { return memGetInt(struct + OVRFovStencilMeshBuffer.USEDVERTEXCOUNT); }
     /** Unsafe version of {@link #VertexBuffer}. */
     @Nullable public static OVRVector2f.Buffer nVertexBuffer(long struct) { return OVRVector2f.createSafe(memGetAddress(struct + OVRFovStencilMeshBuffer.VERTEXBUFFER), nAllocVertexCount(struct)); }
     /** Unsafe version of {@link #AllocIndexCount}. */
-    public static int nAllocIndexCount(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilMeshBuffer.ALLOCINDEXCOUNT); }
+    public static int nAllocIndexCount(long struct) { return memGetInt(struct + OVRFovStencilMeshBuffer.ALLOCINDEXCOUNT); }
     /** Unsafe version of {@link #UsedIndexCount}. */
-    public static int nUsedIndexCount(long struct) { return UNSAFE.getInt(null, struct + OVRFovStencilMeshBuffer.USEDINDEXCOUNT); }
+    public static int nUsedIndexCount(long struct) { return memGetInt(struct + OVRFovStencilMeshBuffer.USEDINDEXCOUNT); }
     /** Unsafe version of {@link #IndexBuffer() IndexBuffer}. */
     @Nullable public static ShortBuffer nIndexBuffer(long struct) { return memShortBufferSafe(memGetAddress(struct + OVRFovStencilMeshBuffer.INDEXBUFFER), nAllocIndexCount(struct)); }
 
     /** Sets the specified value to the {@code AllocVertexCount} field of the specified {@code struct}. */
-    public static void nAllocVertexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilMeshBuffer.ALLOCVERTEXCOUNT, value); }
+    public static void nAllocVertexCount(long struct, int value) { memPutInt(struct + OVRFovStencilMeshBuffer.ALLOCVERTEXCOUNT, value); }
     /** Unsafe version of {@link #UsedVertexCount(int) UsedVertexCount}. */
-    public static void nUsedVertexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilMeshBuffer.USEDVERTEXCOUNT, value); }
+    public static void nUsedVertexCount(long struct, int value) { memPutInt(struct + OVRFovStencilMeshBuffer.USEDVERTEXCOUNT, value); }
     /** Unsafe version of {@link #VertexBuffer(OVRVector2f.Buffer) VertexBuffer}. */
     public static void nVertexBuffer(long struct, @Nullable OVRVector2f.Buffer value) { memPutAddress(struct + OVRFovStencilMeshBuffer.VERTEXBUFFER, memAddressSafe(value)); nAllocVertexCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code AllocIndexCount} field of the specified {@code struct}. */
-    public static void nAllocIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilMeshBuffer.ALLOCINDEXCOUNT, value); }
+    public static void nAllocIndexCount(long struct, int value) { memPutInt(struct + OVRFovStencilMeshBuffer.ALLOCINDEXCOUNT, value); }
     /** Unsafe version of {@link #UsedIndexCount(int) UsedIndexCount}. */
-    public static void nUsedIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRFovStencilMeshBuffer.USEDINDEXCOUNT, value); }
+    public static void nUsedIndexCount(long struct, int value) { memPutInt(struct + OVRFovStencilMeshBuffer.USEDINDEXCOUNT, value); }
     /** Unsafe version of {@link #IndexBuffer(ShortBuffer) IndexBuffer}. */
     public static void nIndexBuffer(long struct, @Nullable ShortBuffer value) { memPutAddress(struct + OVRFovStencilMeshBuffer.INDEXBUFFER, memAddressSafe(value)); nAllocIndexCount(struct, value == null ? 0 : value.remaining()); }
 

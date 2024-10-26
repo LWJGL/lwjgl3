@@ -272,7 +272,7 @@ public class FT_COLR_Paint extends Struct<FT_COLR_Paint> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + FT_COLR_Paint.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + FT_COLR_Paint.FORMAT); }
     /** Unsafe version of {@link #u_colr_layers}. */
     public static FT_PaintColrLayers nu_colr_layers(long struct) { return FT_PaintColrLayers.create(struct + FT_COLR_Paint.U_COLR_LAYERS); }
     /** Unsafe version of {@link #u_glyph}. */

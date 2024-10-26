@@ -265,18 +265,18 @@ public class VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV extends 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #dedicatedAllocationImageAliasing}. */
-    public static int ndedicatedAllocationImageAliasing(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.DEDICATEDALLOCATIONIMAGEALIASING); }
+    public static int ndedicatedAllocationImageAliasing(long struct) { return memGetInt(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.DEDICATEDALLOCATIONIMAGEALIASING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #dedicatedAllocationImageAliasing(boolean) dedicatedAllocationImageAliasing}. */
-    public static void ndedicatedAllocationImageAliasing(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.DEDICATEDALLOCATIONIMAGEALIASING, value); }
+    public static void ndedicatedAllocationImageAliasing(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.DEDICATEDALLOCATIONIMAGEALIASING, value); }
 
     // -----------------------------------
 

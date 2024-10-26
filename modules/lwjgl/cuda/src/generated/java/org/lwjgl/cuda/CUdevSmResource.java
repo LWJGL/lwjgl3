@@ -102,7 +102,7 @@ public class CUdevSmResource extends Struct<CUdevSmResource> {
     // -----------------------------------
 
     /** Unsafe version of {@link #smCount}. */
-    public static int nsmCount(long struct) { return UNSAFE.getInt(null, struct + CUdevSmResource.SMCOUNT); }
+    public static int nsmCount(long struct) { return memGetInt(struct + CUdevSmResource.SMCOUNT); }
 
     // -----------------------------------
 

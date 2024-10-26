@@ -268,26 +268,26 @@ public class VkPhysicalDeviceShaderTileImageFeaturesEXT extends Struct<VkPhysica
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderTileImageColorReadAccess}. */
-    public static int nshaderTileImageColorReadAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGECOLORREADACCESS); }
+    public static int nshaderTileImageColorReadAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGECOLORREADACCESS); }
     /** Unsafe version of {@link #shaderTileImageDepthReadAccess}. */
-    public static int nshaderTileImageDepthReadAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGEDEPTHREADACCESS); }
+    public static int nshaderTileImageDepthReadAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGEDEPTHREADACCESS); }
     /** Unsafe version of {@link #shaderTileImageStencilReadAccess}. */
-    public static int nshaderTileImageStencilReadAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGESTENCILREADACCESS); }
+    public static int nshaderTileImageStencilReadAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGESTENCILREADACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderTileImageColorReadAccess(boolean) shaderTileImageColorReadAccess}. */
-    public static void nshaderTileImageColorReadAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGECOLORREADACCESS, value); }
+    public static void nshaderTileImageColorReadAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGECOLORREADACCESS, value); }
     /** Unsafe version of {@link #shaderTileImageDepthReadAccess(boolean) shaderTileImageDepthReadAccess}. */
-    public static void nshaderTileImageDepthReadAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGEDEPTHREADACCESS, value); }
+    public static void nshaderTileImageDepthReadAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGEDEPTHREADACCESS, value); }
     /** Unsafe version of {@link #shaderTileImageStencilReadAccess(boolean) shaderTileImageStencilReadAccess}. */
-    public static void nshaderTileImageStencilReadAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGESTENCILREADACCESS, value); }
+    public static void nshaderTileImageStencilReadAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTileImageFeaturesEXT.SHADERTILEIMAGESTENCILREADACCESS, value); }
 
     // -----------------------------------
 

@@ -259,22 +259,22 @@ public class NkColorf extends Struct<NkColorf> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + NkColorf.R); }
+    public static float nr(long struct) { return memGetFloat(struct + NkColorf.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + NkColorf.G); }
+    public static float ng(long struct) { return memGetFloat(struct + NkColorf.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + NkColorf.B); }
+    public static float nb(long struct) { return memGetFloat(struct + NkColorf.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + NkColorf.A); }
+    public static float na(long struct) { return memGetFloat(struct + NkColorf.A); }
 
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + NkColorf.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + NkColorf.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + NkColorf.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + NkColorf.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + NkColorf.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + NkColorf.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + NkColorf.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + NkColorf.A, value); }
 
     // -----------------------------------
 

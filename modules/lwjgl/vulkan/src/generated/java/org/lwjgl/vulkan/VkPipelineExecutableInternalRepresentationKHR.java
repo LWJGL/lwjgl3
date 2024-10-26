@@ -305,7 +305,7 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct<VkPipe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineExecutableInternalRepresentationKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineExecutableInternalRepresentationKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineExecutableInternalRepresentationKHR.PNEXT); }
     /** Unsafe version of {@link #name}. */
@@ -317,14 +317,14 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct<VkPipe
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkPipelineExecutableInternalRepresentationKHR.DESCRIPTION); }
     /** Unsafe version of {@link #isText}. */
-    public static int nisText(long struct) { return UNSAFE.getInt(null, struct + VkPipelineExecutableInternalRepresentationKHR.ISTEXT); }
+    public static int nisText(long struct) { return memGetInt(struct + VkPipelineExecutableInternalRepresentationKHR.ISTEXT); }
     /** Unsafe version of {@link #dataSize}. */
     public static long ndataSize(long struct) { return memGetAddress(struct + VkPipelineExecutableInternalRepresentationKHR.DATASIZE); }
     /** Unsafe version of {@link #pData() pData}. */
     @Nullable public static ByteBuffer npData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineExecutableInternalRepresentationKHR.PDATA), (int)ndataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineExecutableInternalRepresentationKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineExecutableInternalRepresentationKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineExecutableInternalRepresentationKHR.PNEXT, value); }
 

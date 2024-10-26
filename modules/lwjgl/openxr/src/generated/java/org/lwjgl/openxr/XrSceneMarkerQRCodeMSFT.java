@@ -121,9 +121,9 @@ public class XrSceneMarkerQRCodeMSFT extends Struct<XrSceneMarkerQRCodeMSFT> {
     // -----------------------------------
 
     /** Unsafe version of {@link #symbolType}. */
-    public static int nsymbolType(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerQRCodeMSFT.SYMBOLTYPE); }
+    public static int nsymbolType(long struct) { return memGetInt(struct + XrSceneMarkerQRCodeMSFT.SYMBOLTYPE); }
     /** Unsafe version of {@link #version}. */
-    public static byte nversion(long struct) { return UNSAFE.getByte(null, struct + XrSceneMarkerQRCodeMSFT.VERSION); }
+    public static byte nversion(long struct) { return memGetByte(struct + XrSceneMarkerQRCodeMSFT.VERSION); }
 
     // -----------------------------------
 

@@ -249,16 +249,16 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #decompressionMethods}. */
-    public static long ndecompressionMethods(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.DECOMPRESSIONMETHODS); }
+    public static long ndecompressionMethods(long struct) { return memGetLong(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.DECOMPRESSIONMETHODS); }
     /** Unsafe version of {@link #maxDecompressionIndirectCount}. */
-    public static long nmaxDecompressionIndirectCount(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.MAXDECOMPRESSIONINDIRECTCOUNT); }
+    public static long nmaxDecompressionIndirectCount(long struct) { return memGetLong(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.MAXDECOMPRESSIONINDIRECTCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMemoryDecompressionPropertiesNV.PNEXT, value); }
 

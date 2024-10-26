@@ -313,28 +313,28 @@ public class VkSampleLocationsInfoEXT extends Struct<VkSampleLocationsInfoEXT> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSampleLocationsInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSampleLocationsInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSampleLocationsInfoEXT.PNEXT); }
     /** Unsafe version of {@link #sampleLocationsPerPixel}. */
-    public static int nsampleLocationsPerPixel(long struct) { return UNSAFE.getInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSPERPIXEL); }
+    public static int nsampleLocationsPerPixel(long struct) { return memGetInt(struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSPERPIXEL); }
     /** Unsafe version of {@link #sampleLocationGridSize}. */
     public static VkExtent2D nsampleLocationGridSize(long struct) { return VkExtent2D.create(struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONGRIDSIZE); }
     /** Unsafe version of {@link #sampleLocationsCount}. */
-    public static int nsampleLocationsCount(long struct) { return UNSAFE.getInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT); }
+    public static int nsampleLocationsCount(long struct) { return memGetInt(struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pSampleLocations}. */
     @Nullable public static VkSampleLocationEXT.Buffer npSampleLocations(long struct) { return VkSampleLocationEXT.createSafe(memGetAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS), nsampleLocationsCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSampleLocationsInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSampleLocationsInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSampleLocationsInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #sampleLocationsPerPixel(int) sampleLocationsPerPixel}. */
-    public static void nsampleLocationsPerPixel(long struct, int value) { UNSAFE.putInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSPERPIXEL, value); }
+    public static void nsampleLocationsPerPixel(long struct, int value) { memPutInt(struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSPERPIXEL, value); }
     /** Unsafe version of {@link #sampleLocationGridSize(VkExtent2D) sampleLocationGridSize}. */
     public static void nsampleLocationGridSize(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONGRIDSIZE, VkExtent2D.SIZEOF); }
     /** Sets the specified value to the {@code sampleLocationsCount} field of the specified {@code struct}. */
-    public static void nsampleLocationsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT, value); }
+    public static void nsampleLocationsCount(long struct, int value) { memPutInt(struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pSampleLocations(VkSampleLocationEXT.Buffer) pSampleLocations}. */
     public static void npSampleLocations(long struct, @Nullable VkSampleLocationEXT.Buffer value) { memPutAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS, memAddressSafe(value)); nsampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
 

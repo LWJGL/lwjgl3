@@ -285,11 +285,11 @@ public class SpvcHLSLResourceBinding extends Struct<SpvcHLSLResourceBinding> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #stage}. */
-    public static int nstage(long struct) { return UNSAFE.getInt(null, struct + SpvcHLSLResourceBinding.STAGE); }
+    public static int nstage(long struct) { return memGetInt(struct + SpvcHLSLResourceBinding.STAGE); }
     /** Unsafe version of {@link #desc_set}. */
-    public static int ndesc_set(long struct) { return UNSAFE.getInt(null, struct + SpvcHLSLResourceBinding.DESC_SET); }
+    public static int ndesc_set(long struct) { return memGetInt(struct + SpvcHLSLResourceBinding.DESC_SET); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + SpvcHLSLResourceBinding.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + SpvcHLSLResourceBinding.BINDING); }
     /** Unsafe version of {@link #cbv}. */
     public static SpvcHLSLResourceBindingMapping ncbv(long struct) { return SpvcHLSLResourceBindingMapping.create(struct + SpvcHLSLResourceBinding.CBV); }
     /** Unsafe version of {@link #uav}. */
@@ -300,11 +300,11 @@ public class SpvcHLSLResourceBinding extends Struct<SpvcHLSLResourceBinding> imp
     public static SpvcHLSLResourceBindingMapping nsampler(long struct) { return SpvcHLSLResourceBindingMapping.create(struct + SpvcHLSLResourceBinding.SAMPLER); }
 
     /** Unsafe version of {@link #stage(int) stage}. */
-    public static void nstage(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHLSLResourceBinding.STAGE, value); }
+    public static void nstage(long struct, int value) { memPutInt(struct + SpvcHLSLResourceBinding.STAGE, value); }
     /** Unsafe version of {@link #desc_set(int) desc_set}. */
-    public static void ndesc_set(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHLSLResourceBinding.DESC_SET, value); }
+    public static void ndesc_set(long struct, int value) { memPutInt(struct + SpvcHLSLResourceBinding.DESC_SET, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHLSLResourceBinding.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + SpvcHLSLResourceBinding.BINDING, value); }
     /** Unsafe version of {@link #cbv(SpvcHLSLResourceBindingMapping) cbv}. */
     public static void ncbv(long struct, SpvcHLSLResourceBindingMapping value) { memCopy(value.address(), struct + SpvcHLSLResourceBinding.CBV, SpvcHLSLResourceBindingMapping.SIZEOF); }
     /** Unsafe version of {@link #uav(SpvcHLSLResourceBindingMapping) uav}. */

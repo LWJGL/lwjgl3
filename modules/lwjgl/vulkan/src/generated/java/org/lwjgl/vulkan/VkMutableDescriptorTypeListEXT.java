@@ -234,12 +234,12 @@ public class VkMutableDescriptorTypeListEXT extends Struct<VkMutableDescriptorTy
     // -----------------------------------
 
     /** Unsafe version of {@link #descriptorTypeCount}. */
-    public static int ndescriptorTypeCount(long struct) { return UNSAFE.getInt(null, struct + VkMutableDescriptorTypeListEXT.DESCRIPTORTYPECOUNT); }
+    public static int ndescriptorTypeCount(long struct) { return memGetInt(struct + VkMutableDescriptorTypeListEXT.DESCRIPTORTYPECOUNT); }
     /** Unsafe version of {@link #pDescriptorTypes() pDescriptorTypes}. */
     @Nullable public static IntBuffer npDescriptorTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkMutableDescriptorTypeListEXT.PDESCRIPTORTYPES), ndescriptorTypeCount(struct)); }
 
     /** Sets the specified value to the {@code descriptorTypeCount} field of the specified {@code struct}. */
-    public static void ndescriptorTypeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMutableDescriptorTypeListEXT.DESCRIPTORTYPECOUNT, value); }
+    public static void ndescriptorTypeCount(long struct, int value) { memPutInt(struct + VkMutableDescriptorTypeListEXT.DESCRIPTORTYPECOUNT, value); }
     /** Unsafe version of {@link #pDescriptorTypes(IntBuffer) pDescriptorTypes}. */
     public static void npDescriptorTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkMutableDescriptorTypeListEXT.PDESCRIPTORTYPES, memAddressSafe(value)); ndescriptorTypeCount(struct, value == null ? 0 : value.remaining()); }
 

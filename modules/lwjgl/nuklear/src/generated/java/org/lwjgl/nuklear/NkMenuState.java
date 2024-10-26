@@ -127,13 +127,13 @@ public class NkMenuState extends Struct<NkMenuState> {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.X); }
+    public static float nx(long struct) { return memGetFloat(struct + NkMenuState.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + NkMenuState.Y); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.W); }
+    public static float nw(long struct) { return memGetFloat(struct + NkMenuState.W); }
     /** Unsafe version of {@link #h}. */
-    public static float nh(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.H); }
+    public static float nh(long struct) { return memGetFloat(struct + NkMenuState.H); }
     /** Unsafe version of {@link #offset}. */
     public static NkScroll noffset(long struct) { return NkScroll.create(struct + NkMenuState.OFFSET); }
 

@@ -222,9 +222,9 @@ public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
     /** Unsafe version of {@link #statistics}. */
     public static VmaStatistics nstatistics(long struct) { return VmaStatistics.create(struct + VmaBudget.STATISTICS); }
     /** Unsafe version of {@link #usage}. */
-    public static long nusage(long struct) { return UNSAFE.getLong(null, struct + VmaBudget.USAGE); }
+    public static long nusage(long struct) { return memGetLong(struct + VmaBudget.USAGE); }
     /** Unsafe version of {@link #budget}. */
-    public static long nbudget(long struct) { return UNSAFE.getLong(null, struct + VmaBudget.BUDGET); }
+    public static long nbudget(long struct) { return memGetLong(struct + VmaBudget.BUDGET); }
 
     // -----------------------------------
 

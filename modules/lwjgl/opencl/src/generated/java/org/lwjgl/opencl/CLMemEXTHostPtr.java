@@ -243,14 +243,14 @@ public class CLMemEXTHostPtr extends Struct<CLMemEXTHostPtr> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #allocation_type}. */
-    public static int nallocation_type(long struct) { return UNSAFE.getInt(null, struct + CLMemEXTHostPtr.ALLOCATION_TYPE); }
+    public static int nallocation_type(long struct) { return memGetInt(struct + CLMemEXTHostPtr.ALLOCATION_TYPE); }
     /** Unsafe version of {@link #host_cache_policy}. */
-    public static int nhost_cache_policy(long struct) { return UNSAFE.getInt(null, struct + CLMemEXTHostPtr.HOST_CACHE_POLICY); }
+    public static int nhost_cache_policy(long struct) { return memGetInt(struct + CLMemEXTHostPtr.HOST_CACHE_POLICY); }
 
     /** Unsafe version of {@link #allocation_type(int) allocation_type}. */
-    public static void nallocation_type(long struct, int value) { UNSAFE.putInt(null, struct + CLMemEXTHostPtr.ALLOCATION_TYPE, value); }
+    public static void nallocation_type(long struct, int value) { memPutInt(struct + CLMemEXTHostPtr.ALLOCATION_TYPE, value); }
     /** Unsafe version of {@link #host_cache_policy(int) host_cache_policy}. */
-    public static void nhost_cache_policy(long struct, int value) { UNSAFE.putInt(null, struct + CLMemEXTHostPtr.HOST_CACHE_POLICY, value); }
+    public static void nhost_cache_policy(long struct, int value) { memPutInt(struct + CLMemEXTHostPtr.HOST_CACHE_POLICY, value); }
 
     // -----------------------------------
 

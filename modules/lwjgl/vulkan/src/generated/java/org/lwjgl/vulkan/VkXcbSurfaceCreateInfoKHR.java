@@ -277,26 +277,26 @@ public class VkXcbSurfaceCreateInfoKHR extends Struct<VkXcbSurfaceCreateInfoKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkXcbSurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkXcbSurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkXcbSurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkXcbSurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkXcbSurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #connection}. */
     public static long nconnection(long struct) { return memGetAddress(struct + VkXcbSurfaceCreateInfoKHR.CONNECTION); }
     /** Unsafe version of {@link #window}. */
-    public static int nwindow(long struct) { return UNSAFE.getInt(null, struct + VkXcbSurfaceCreateInfoKHR.WINDOW); }
+    public static int nwindow(long struct) { return memGetInt(struct + VkXcbSurfaceCreateInfoKHR.WINDOW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkXcbSurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkXcbSurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkXcbSurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkXcbSurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkXcbSurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #connection(long) connection}. */
     public static void nconnection(long struct, long value) { memPutAddress(struct + VkXcbSurfaceCreateInfoKHR.CONNECTION, value); }
     /** Unsafe version of {@link #window(int) window}. */
-    public static void nwindow(long struct, int value) { UNSAFE.putInt(null, struct + VkXcbSurfaceCreateInfoKHR.WINDOW, value); }
+    public static void nwindow(long struct, int value) { memPutInt(struct + VkXcbSurfaceCreateInfoKHR.WINDOW, value); }
 
     // -----------------------------------
 

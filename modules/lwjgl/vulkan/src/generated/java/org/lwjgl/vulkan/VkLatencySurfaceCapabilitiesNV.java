@@ -259,20 +259,20 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLatencySurfaceCapabilitiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLatencySurfaceCapabilitiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLatencySurfaceCapabilitiesNV.PNEXT); }
     /** Unsafe version of {@link #presentModeCount}. */
-    public static int npresentModeCount(long struct) { return UNSAFE.getInt(null, struct + VkLatencySurfaceCapabilitiesNV.PRESENTMODECOUNT); }
+    public static int npresentModeCount(long struct) { return memGetInt(struct + VkLatencySurfaceCapabilitiesNV.PRESENTMODECOUNT); }
     /** Unsafe version of {@link #pPresentModes() pPresentModes}. */
     @Nullable public static IntBuffer npPresentModes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkLatencySurfaceCapabilitiesNV.PPRESENTMODES), npresentModeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySurfaceCapabilitiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLatencySurfaceCapabilitiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencySurfaceCapabilitiesNV.PNEXT, value); }
     /** Sets the specified value to the {@code presentModeCount} field of the specified {@code struct}. */
-    public static void npresentModeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySurfaceCapabilitiesNV.PRESENTMODECOUNT, value); }
+    public static void npresentModeCount(long struct, int value) { memPutInt(struct + VkLatencySurfaceCapabilitiesNV.PRESENTMODECOUNT, value); }
     /** Unsafe version of {@link #pPresentModes(IntBuffer) pPresentModes}. */
     public static void npPresentModes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkLatencySurfaceCapabilitiesNV.PPRESENTMODES, memAddressSafe(value)); if (value != null) { npresentModeCount(struct, value.remaining()); } }
 

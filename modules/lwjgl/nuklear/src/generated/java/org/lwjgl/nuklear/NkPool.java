@@ -154,15 +154,15 @@ class NkPool extends Struct<NkPool> {
     /** Unsafe version of {@link #alloc}. */
     public static NkAllocator nalloc(long struct) { return NkAllocator.create(struct + NkPool.ALLOC); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkPool.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkPool.TYPE); }
     /** Unsafe version of {@link #page_count}. */
-    public static int npage_count(long struct) { return UNSAFE.getInt(null, struct + NkPool.PAGE_COUNT); }
+    public static int npage_count(long struct) { return memGetInt(struct + NkPool.PAGE_COUNT); }
     /** Unsafe version of {@link #pages}. */
     public static long npages(long struct) { return memGetAddress(struct + NkPool.PAGES); }
     /** Unsafe version of {@link #freelist}. */
     public static long nfreelist(long struct) { return memGetAddress(struct + NkPool.FREELIST); }
     /** Unsafe version of {@link #capacity$}. */
-    public static int ncapacity$(long struct) { return UNSAFE.getInt(null, struct + NkPool.CAPACITY); }
+    public static int ncapacity$(long struct) { return memGetInt(struct + NkPool.CAPACITY); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + NkPool.SIZE); }
     /** Unsafe version of {@link #cap}. */

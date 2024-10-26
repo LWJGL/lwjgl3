@@ -323,35 +323,35 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAcceler
     public static VkSRTDataNV ntransformT0(long struct) { return VkSRTDataNV.create(struct + VkAccelerationStructureSRTMotionInstanceNV.TRANSFORMT0); }
     /** Unsafe version of {@link #transformT1}. */
     public static VkSRTDataNV ntransformT1(long struct) { return VkSRTDataNV.create(struct + VkAccelerationStructureSRTMotionInstanceNV.TRANSFORMT1); }
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD0); }
     /** Unsafe version of {@link #instanceCustomIndex}. */
     public static int ninstanceCustomIndex(long struct) { return nbitfield0(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #mask}. */
     public static int nmask(long struct) { return nbitfield0(struct) >>> 24; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD1); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset}. */
     public static int ninstanceShaderBindingTableRecordOffset(long struct) { return nbitfield1(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return nbitfield1(struct) >>> 24; }
     /** Unsafe version of {@link #accelerationStructureReference}. */
-    public static long naccelerationStructureReference(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureSRTMotionInstanceNV.ACCELERATIONSTRUCTUREREFERENCE); }
+    public static long naccelerationStructureReference(long struct) { return memGetLong(struct + VkAccelerationStructureSRTMotionInstanceNV.ACCELERATIONSTRUCTUREREFERENCE); }
 
     /** Unsafe version of {@link #transformT0(VkSRTDataNV) transformT0}. */
     public static void ntransformT0(long struct, VkSRTDataNV value) { memCopy(value.address(), struct + VkAccelerationStructureSRTMotionInstanceNV.TRANSFORMT0, VkSRTDataNV.SIZEOF); }
     /** Unsafe version of {@link #transformT1(VkSRTDataNV) transformT1}. */
     public static void ntransformT1(long struct, VkSRTDataNV value) { memCopy(value.address(), struct + VkAccelerationStructureSRTMotionInstanceNV.TRANSFORMT1, VkSRTDataNV.SIZEOF); }
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD0, value); }
     /** Unsafe version of {@link #instanceCustomIndex(int) instanceCustomIndex}. */
     public static void ninstanceCustomIndex(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #mask(int) mask}. */
     public static void nmask(long struct, int value) { nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FF_FF)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + VkAccelerationStructureSRTMotionInstanceNV.BITFIELD1, value); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset(int) instanceShaderBindingTableRecordOffset}. */
     public static void ninstanceShaderBindingTableRecordOffset(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { nbitfield1(struct, (value << 24) | (nbitfield1(struct) & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #accelerationStructureReference(long) accelerationStructureReference}. */
-    public static void naccelerationStructureReference(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureSRTMotionInstanceNV.ACCELERATIONSTRUCTUREREFERENCE, value); }
+    public static void naccelerationStructureReference(long struct, long value) { memPutLong(struct + VkAccelerationStructureSRTMotionInstanceNV.ACCELERATIONSTRUCTUREREFERENCE, value); }
 
     // -----------------------------------
 

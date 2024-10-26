@@ -324,36 +324,36 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerCubeKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerCubeKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerCubeKHR.NEXT); }
     /** Unsafe version of {@link #layerFlags}. */
-    public static long nlayerFlags(long struct) { return UNSAFE.getLong(null, struct + XrCompositionLayerCubeKHR.LAYERFLAGS); }
+    public static long nlayerFlags(long struct) { return memGetLong(struct + XrCompositionLayerCubeKHR.LAYERFLAGS); }
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrCompositionLayerCubeKHR.SPACE); }
     /** Unsafe version of {@link #eyeVisibility}. */
-    public static int neyeVisibility(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerCubeKHR.EYEVISIBILITY); }
+    public static int neyeVisibility(long struct) { return memGetInt(struct + XrCompositionLayerCubeKHR.EYEVISIBILITY); }
     /** Unsafe version of {@link #swapchain}. */
     public static long nswapchain(long struct) { return memGetAddress(struct + XrCompositionLayerCubeKHR.SWAPCHAIN); }
     /** Unsafe version of {@link #imageArrayIndex}. */
-    public static int nimageArrayIndex(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerCubeKHR.IMAGEARRAYINDEX); }
+    public static int nimageArrayIndex(long struct) { return memGetInt(struct + XrCompositionLayerCubeKHR.IMAGEARRAYINDEX); }
     /** Unsafe version of {@link #orientation}. */
     public static XrQuaternionf norientation(long struct) { return XrQuaternionf.create(struct + XrCompositionLayerCubeKHR.ORIENTATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerCubeKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerCubeKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerCubeKHR.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
-    public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerCubeKHR.LAYERFLAGS, value); }
+    public static void nlayerFlags(long struct, long value) { memPutLong(struct + XrCompositionLayerCubeKHR.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerCubeKHR.SPACE, value.address()); }
     /** Unsafe version of {@link #eyeVisibility(int) eyeVisibility}. */
-    public static void neyeVisibility(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerCubeKHR.EYEVISIBILITY, value); }
+    public static void neyeVisibility(long struct, int value) { memPutInt(struct + XrCompositionLayerCubeKHR.EYEVISIBILITY, value); }
     /** Unsafe version of {@link #swapchain(XrSwapchain) swapchain}. */
     public static void nswapchain(long struct, XrSwapchain value) { memPutAddress(struct + XrCompositionLayerCubeKHR.SWAPCHAIN, value.address()); }
     /** Unsafe version of {@link #imageArrayIndex(int) imageArrayIndex}. */
-    public static void nimageArrayIndex(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerCubeKHR.IMAGEARRAYINDEX, value); }
+    public static void nimageArrayIndex(long struct, int value) { memPutInt(struct + XrCompositionLayerCubeKHR.IMAGEARRAYINDEX, value); }
     /** Unsafe version of {@link #orientation(XrQuaternionf) orientation}. */
     public static void norientation(long struct, XrQuaternionf value) { memCopy(value.address(), struct + XrCompositionLayerCubeKHR.ORIENTATION, XrQuaternionf.SIZEOF); }
 

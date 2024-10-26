@@ -222,14 +222,14 @@ public class SpvcSpecializationConstant extends Struct<SpvcSpecializationConstan
     // -----------------------------------
 
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + SpvcSpecializationConstant.ID); }
+    public static int nid(long struct) { return memGetInt(struct + SpvcSpecializationConstant.ID); }
     /** Unsafe version of {@link #constant_id}. */
-    public static int nconstant_id(long struct) { return UNSAFE.getInt(null, struct + SpvcSpecializationConstant.CONSTANT_ID); }
+    public static int nconstant_id(long struct) { return memGetInt(struct + SpvcSpecializationConstant.CONSTANT_ID); }
 
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + SpvcSpecializationConstant.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + SpvcSpecializationConstant.ID, value); }
     /** Unsafe version of {@link #constant_id(int) constant_id}. */
-    public static void nconstant_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcSpecializationConstant.CONSTANT_ID, value); }
+    public static void nconstant_id(long struct, int value) { memPutInt(struct + SpvcSpecializationConstant.CONSTANT_ID, value); }
 
     // -----------------------------------
 

@@ -257,22 +257,22 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #vertexAttributeInstanceRateDivisor}. */
-    public static int nvertexAttributeInstanceRateDivisor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEDIVISOR); }
+    public static int nvertexAttributeInstanceRateDivisor(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEDIVISOR); }
     /** Unsafe version of {@link #vertexAttributeInstanceRateZeroDivisor}. */
-    public static int nvertexAttributeInstanceRateZeroDivisor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEZERODIVISOR); }
+    public static int nvertexAttributeInstanceRateZeroDivisor(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEZERODIVISOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #vertexAttributeInstanceRateDivisor(boolean) vertexAttributeInstanceRateDivisor}. */
-    public static void nvertexAttributeInstanceRateDivisor(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEDIVISOR, value); }
+    public static void nvertexAttributeInstanceRateDivisor(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEDIVISOR, value); }
     /** Unsafe version of {@link #vertexAttributeInstanceRateZeroDivisor(boolean) vertexAttributeInstanceRateZeroDivisor}. */
-    public static void nvertexAttributeInstanceRateZeroDivisor(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEZERODIVISOR, value); }
+    public static void nvertexAttributeInstanceRateZeroDivisor(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.VERTEXATTRIBUTEINSTANCERATEZERODIVISOR, value); }
 
     // -----------------------------------
 

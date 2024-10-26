@@ -250,14 +250,14 @@ public class VkMemoryMapPlacedInfoEXT extends Struct<VkMemoryMapPlacedInfoEXT> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryMapPlacedInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryMapPlacedInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryMapPlacedInfoEXT.PNEXT); }
     /** Unsafe version of {@link #pPlacedAddress}. */
     public static long npPlacedAddress(long struct) { return memGetAddress(struct + VkMemoryMapPlacedInfoEXT.PPLACEDADDRESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryMapPlacedInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryMapPlacedInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryMapPlacedInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #pPlacedAddress(long) pPlacedAddress}. */

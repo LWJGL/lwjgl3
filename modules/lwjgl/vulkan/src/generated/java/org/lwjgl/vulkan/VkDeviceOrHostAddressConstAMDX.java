@@ -216,12 +216,12 @@ public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddress
     // -----------------------------------
 
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkDeviceOrHostAddressConstAMDX.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkDeviceOrHostAddressConstAMDX.DEVICEADDRESS); }
     /** Unsafe version of {@link #hostAddress}. */
     public static long nhostAddress(long struct) { return memGetAddress(struct + VkDeviceOrHostAddressConstAMDX.HOSTADDRESS); }
 
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceOrHostAddressConstAMDX.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkDeviceOrHostAddressConstAMDX.DEVICEADDRESS, value); }
     /** Unsafe version of {@link #hostAddress(long) hostAddress}. */
     public static void nhostAddress(long struct, long value) { memPutAddress(struct + VkDeviceOrHostAddressConstAMDX.HOSTADDRESS, value); }
 

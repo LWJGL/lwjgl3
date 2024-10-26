@@ -316,7 +316,7 @@ public class VkImageBlit2 extends Struct<VkImageBlit2> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageBlit2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageBlit2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageBlit2.PNEXT); }
     /** Unsafe version of {@link #srcSubresource}. */
@@ -337,7 +337,7 @@ public class VkImageBlit2 extends Struct<VkImageBlit2> implements NativeResource
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageBlit2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageBlit2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageBlit2.PNEXT, value); }
     /** Unsafe version of {@link #srcSubresource(VkImageSubresourceLayers) srcSubresource}. */

@@ -265,22 +265,22 @@ public class VkSamplerBlockMatchWindowCreateInfoQCOM extends Struct<VkSamplerBlo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerBlockMatchWindowCreateInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #windowExtent}. */
     public static VkExtent2D nwindowExtent(long struct) { return VkExtent2D.create(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWEXTENT); }
     /** Unsafe version of {@link #windowCompareMode}. */
-    public static int nwindowCompareMode(long struct) { return UNSAFE.getInt(null, struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWCOMPAREMODE); }
+    public static int nwindowCompareMode(long struct) { return memGetInt(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWCOMPAREMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerBlockMatchWindowCreateInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #windowExtent(VkExtent2D) windowExtent}. */
     public static void nwindowExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWEXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #windowCompareMode(int) windowCompareMode}. */
-    public static void nwindowCompareMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWCOMPAREMODE, value); }
+    public static void nwindowCompareMode(long struct, int value) { memPutInt(struct + VkSamplerBlockMatchWindowCreateInfoQCOM.WINDOWCOMPAREMODE, value); }
 
     // -----------------------------------
 

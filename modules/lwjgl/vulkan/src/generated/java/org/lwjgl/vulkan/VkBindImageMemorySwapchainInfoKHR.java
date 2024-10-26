@@ -292,22 +292,22 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct<VkBindImageMemoryS
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemorySwapchainInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemorySwapchainInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemorySwapchainInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN); }
+    public static long nswapchain(long struct) { return memGetLong(struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN); }
     /** Unsafe version of {@link #imageIndex}. */
-    public static int nimageIndex(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX); }
+    public static int nimageIndex(long struct) { return memGetInt(struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemorySwapchainInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemorySwapchainInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemorySwapchainInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN, value); }
+    public static void nswapchain(long struct, long value) { memPutLong(struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN, value); }
     /** Unsafe version of {@link #imageIndex(int) imageIndex}. */
-    public static void nimageIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX, value); }
+    public static void nimageIndex(long struct, int value) { memPutInt(struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX, value); }
 
     // -----------------------------------
 

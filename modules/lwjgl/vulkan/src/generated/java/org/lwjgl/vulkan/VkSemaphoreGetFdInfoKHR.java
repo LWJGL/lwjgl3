@@ -295,22 +295,22 @@ public class VkSemaphoreGetFdInfoKHR extends Struct<VkSemaphoreGetFdInfoKHR> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreGetFdInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSemaphoreGetFdInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreGetFdInfoKHR.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreGetFdInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkSemaphoreGetFdInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreGetFdInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkSemaphoreGetFdInfoKHR.HANDLETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreGetFdInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSemaphoreGetFdInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreGetFdInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreGetFdInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkSemaphoreGetFdInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreGetFdInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkSemaphoreGetFdInfoKHR.HANDLETYPE, value); }
 
     // -----------------------------------
 

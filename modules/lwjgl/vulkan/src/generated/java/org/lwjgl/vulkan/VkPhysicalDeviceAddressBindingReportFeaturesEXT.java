@@ -246,18 +246,18 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #reportAddressBinding}. */
-    public static int nreportAddressBinding(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.REPORTADDRESSBINDING); }
+    public static int nreportAddressBinding(long struct) { return memGetInt(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.REPORTADDRESSBINDING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #reportAddressBinding(boolean) reportAddressBinding}. */
-    public static void nreportAddressBinding(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.REPORTADDRESSBINDING, value); }
+    public static void nreportAddressBinding(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAddressBindingReportFeaturesEXT.REPORTADDRESSBINDING, value); }
 
     // -----------------------------------
 

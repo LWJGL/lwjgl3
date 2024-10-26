@@ -103,7 +103,7 @@ public class VREventShowUI extends Struct<VREventShowUI> {
     // -----------------------------------
 
     /** Unsafe version of {@link #eType}. */
-    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VREventShowUI.ETYPE); }
+    public static int neType(long struct) { return memGetInt(struct + VREventShowUI.ETYPE); }
 
     // -----------------------------------
 

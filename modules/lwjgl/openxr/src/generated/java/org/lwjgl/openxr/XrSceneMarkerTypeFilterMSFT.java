@@ -269,20 +269,20 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerTypeFilterMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMarkerTypeFilterMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMarkerTypeFilterMSFT.NEXT); }
     /** Unsafe version of {@link #markerTypeCount}. */
-    public static int nmarkerTypeCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPECOUNT); }
+    public static int nmarkerTypeCount(long struct) { return memGetInt(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPECOUNT); }
     /** Unsafe version of {@link #markerTypes() markerTypes}. */
     @Nullable public static IntBuffer nmarkerTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPES), nmarkerTypeCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkerTypeFilterMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkerTypeFilterMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMarkerTypeFilterMSFT.NEXT, value); }
     /** Sets the specified value to the {@code markerTypeCount} field of the specified {@code struct}. */
-    public static void nmarkerTypeCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPECOUNT, value); }
+    public static void nmarkerTypeCount(long struct, int value) { memPutInt(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPECOUNT, value); }
     /** Unsafe version of {@link #markerTypes(IntBuffer) markerTypes}. */
     public static void nmarkerTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPES, memAddressSafe(value)); if (value != null) { nmarkerTypeCount(struct, value.remaining()); } }
 

@@ -297,21 +297,21 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     /** Unsafe version of {@link #lexicalContainer}. */
     public static CXIdxContainerInfo nlexicalContainer(long struct) { return CXIdxContainerInfo.create(memGetAddress(struct + CXIdxDeclInfo.LEXICALCONTAINER)); }
     /** Unsafe version of {@link #isRedeclaration}. */
-    public static int nisRedeclaration(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.ISREDECLARATION); }
+    public static int nisRedeclaration(long struct) { return memGetInt(struct + CXIdxDeclInfo.ISREDECLARATION); }
     /** Unsafe version of {@link #isDefinition}. */
-    public static int nisDefinition(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.ISDEFINITION); }
+    public static int nisDefinition(long struct) { return memGetInt(struct + CXIdxDeclInfo.ISDEFINITION); }
     /** Unsafe version of {@link #isContainer}. */
-    public static int nisContainer(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.ISCONTAINER); }
+    public static int nisContainer(long struct) { return memGetInt(struct + CXIdxDeclInfo.ISCONTAINER); }
     /** Unsafe version of {@link #declAsContainer}. */
     public static CXIdxContainerInfo ndeclAsContainer(long struct) { return CXIdxContainerInfo.create(memGetAddress(struct + CXIdxDeclInfo.DECLASCONTAINER)); }
     /** Unsafe version of {@link #isImplicit}. */
-    public static int nisImplicit(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.ISIMPLICIT); }
+    public static int nisImplicit(long struct) { return memGetInt(struct + CXIdxDeclInfo.ISIMPLICIT); }
     /** Unsafe version of {@link #attributes() attributes}. */
     public static PointerBuffer nattributes(long struct) { return memPointerBuffer(memGetAddress(struct + CXIdxDeclInfo.ATTRIBUTES), nnumAttributes(struct)); }
     /** Unsafe version of {@link #numAttributes}. */
-    public static int nnumAttributes(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.NUMATTRIBUTES); }
+    public static int nnumAttributes(long struct) { return memGetInt(struct + CXIdxDeclInfo.NUMATTRIBUTES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CXIdxDeclInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CXIdxDeclInfo.FLAGS); }
 
     // -----------------------------------
 

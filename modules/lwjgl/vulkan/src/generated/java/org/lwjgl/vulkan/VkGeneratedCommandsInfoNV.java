@@ -414,66 +414,66 @@ public class VkGeneratedCommandsInfoNV extends Struct<VkGeneratedCommandsInfoNV>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeneratedCommandsInfoNV.PNEXT); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoNV.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoNV.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.PIPELINE); }
     /** Unsafe version of {@link #indirectCommandsLayout}. */
-    public static long nindirectCommandsLayout(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.INDIRECTCOMMANDSLAYOUT); }
+    public static long nindirectCommandsLayout(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.INDIRECTCOMMANDSLAYOUT); }
     /** Unsafe version of {@link #streamCount}. */
-    public static int nstreamCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoNV.STREAMCOUNT); }
+    public static int nstreamCount(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoNV.STREAMCOUNT); }
     /** Unsafe version of {@link #pStreams}. */
     public static VkIndirectCommandsStreamNV.Buffer npStreams(long struct) { return VkIndirectCommandsStreamNV.create(memGetAddress(struct + VkGeneratedCommandsInfoNV.PSTREAMS), nstreamCount(struct)); }
     /** Unsafe version of {@link #sequencesCount}. */
-    public static int nsequencesCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNT); }
+    public static int nsequencesCount(long struct) { return memGetInt(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNT); }
     /** Unsafe version of {@link #preprocessBuffer}. */
-    public static long npreprocessBuffer(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSBUFFER); }
+    public static long npreprocessBuffer(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSBUFFER); }
     /** Unsafe version of {@link #preprocessOffset}. */
-    public static long npreprocessOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSOFFSET); }
+    public static long npreprocessOffset(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSOFFSET); }
     /** Unsafe version of {@link #preprocessSize}. */
-    public static long npreprocessSize(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSSIZE); }
+    public static long npreprocessSize(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSSIZE); }
     /** Unsafe version of {@link #sequencesCountBuffer}. */
-    public static long nsequencesCountBuffer(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTBUFFER); }
+    public static long nsequencesCountBuffer(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTBUFFER); }
     /** Unsafe version of {@link #sequencesCountOffset}. */
-    public static long nsequencesCountOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTOFFSET); }
+    public static long nsequencesCountOffset(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTOFFSET); }
     /** Unsafe version of {@link #sequencesIndexBuffer}. */
-    public static long nsequencesIndexBuffer(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXBUFFER); }
+    public static long nsequencesIndexBuffer(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXBUFFER); }
     /** Unsafe version of {@link #sequencesIndexOffset}. */
-    public static long nsequencesIndexOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXOFFSET); }
+    public static long nsequencesIndexOffset(long struct) { return memGetLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeneratedCommandsInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoNV.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoNV.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.PIPELINE, value); }
     /** Unsafe version of {@link #indirectCommandsLayout(long) indirectCommandsLayout}. */
-    public static void nindirectCommandsLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.INDIRECTCOMMANDSLAYOUT, value); }
+    public static void nindirectCommandsLayout(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.INDIRECTCOMMANDSLAYOUT, value); }
     /** Sets the specified value to the {@code streamCount} field of the specified {@code struct}. */
-    public static void nstreamCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoNV.STREAMCOUNT, value); }
+    public static void nstreamCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoNV.STREAMCOUNT, value); }
     /** Unsafe version of {@link #pStreams(VkIndirectCommandsStreamNV.Buffer) pStreams}. */
     public static void npStreams(long struct, VkIndirectCommandsStreamNV.Buffer value) { memPutAddress(struct + VkGeneratedCommandsInfoNV.PSTREAMS, value.address()); nstreamCount(struct, value.remaining()); }
     /** Unsafe version of {@link #sequencesCount(int) sequencesCount}. */
-    public static void nsequencesCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNT, value); }
+    public static void nsequencesCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNT, value); }
     /** Unsafe version of {@link #preprocessBuffer(long) preprocessBuffer}. */
-    public static void npreprocessBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSBUFFER, value); }
+    public static void npreprocessBuffer(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSBUFFER, value); }
     /** Unsafe version of {@link #preprocessOffset(long) preprocessOffset}. */
-    public static void npreprocessOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSOFFSET, value); }
+    public static void npreprocessOffset(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSOFFSET, value); }
     /** Unsafe version of {@link #preprocessSize(long) preprocessSize}. */
-    public static void npreprocessSize(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.PREPROCESSSIZE, value); }
+    public static void npreprocessSize(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.PREPROCESSSIZE, value); }
     /** Unsafe version of {@link #sequencesCountBuffer(long) sequencesCountBuffer}. */
-    public static void nsequencesCountBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTBUFFER, value); }
+    public static void nsequencesCountBuffer(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTBUFFER, value); }
     /** Unsafe version of {@link #sequencesCountOffset(long) sequencesCountOffset}. */
-    public static void nsequencesCountOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTOFFSET, value); }
+    public static void nsequencesCountOffset(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESCOUNTOFFSET, value); }
     /** Unsafe version of {@link #sequencesIndexBuffer(long) sequencesIndexBuffer}. */
-    public static void nsequencesIndexBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXBUFFER, value); }
+    public static void nsequencesIndexBuffer(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXBUFFER, value); }
     /** Unsafe version of {@link #sequencesIndexOffset(long) sequencesIndexOffset}. */
-    public static void nsequencesIndexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXOFFSET, value); }
+    public static void nsequencesIndexOffset(long struct, long value) { memPutLong(struct + VkGeneratedCommandsInfoNV.SEQUENCESINDEXOFFSET, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

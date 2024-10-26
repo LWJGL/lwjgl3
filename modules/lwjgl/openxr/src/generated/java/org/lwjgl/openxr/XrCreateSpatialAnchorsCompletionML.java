@@ -305,24 +305,24 @@ public class XrCreateSpatialAnchorsCompletionML extends Struct<XrCreateSpatialAn
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCreateSpatialAnchorsCompletionML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCreateSpatialAnchorsCompletionML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCreateSpatialAnchorsCompletionML.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
-    public static int nfutureResult(long struct) { return UNSAFE.getInt(null, struct + XrCreateSpatialAnchorsCompletionML.FUTURERESULT); }
+    public static int nfutureResult(long struct) { return memGetInt(struct + XrCreateSpatialAnchorsCompletionML.FUTURERESULT); }
     /** Unsafe version of {@link #spaceCount}. */
-    public static int nspaceCount(long struct) { return UNSAFE.getInt(null, struct + XrCreateSpatialAnchorsCompletionML.SPACECOUNT); }
+    public static int nspaceCount(long struct) { return memGetInt(struct + XrCreateSpatialAnchorsCompletionML.SPACECOUNT); }
     /** Unsafe version of {@link #spaces() spaces}. */
     @Nullable public static PointerBuffer nspaces(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrCreateSpatialAnchorsCompletionML.SPACES), nspaceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCreateSpatialAnchorsCompletionML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCreateSpatialAnchorsCompletionML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCreateSpatialAnchorsCompletionML.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
-    public static void nfutureResult(long struct, int value) { UNSAFE.putInt(null, struct + XrCreateSpatialAnchorsCompletionML.FUTURERESULT, value); }
+    public static void nfutureResult(long struct, int value) { memPutInt(struct + XrCreateSpatialAnchorsCompletionML.FUTURERESULT, value); }
     /** Sets the specified value to the {@code spaceCount} field of the specified {@code struct}. */
-    public static void nspaceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrCreateSpatialAnchorsCompletionML.SPACECOUNT, value); }
+    public static void nspaceCount(long struct, int value) { memPutInt(struct + XrCreateSpatialAnchorsCompletionML.SPACECOUNT, value); }
     /** Unsafe version of {@link #spaces(PointerBuffer) spaces}. */
     public static void nspaces(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrCreateSpatialAnchorsCompletionML.SPACES, memAddressSafe(value)); if (value != null) { nspaceCount(struct, value.remaining()); } }
 

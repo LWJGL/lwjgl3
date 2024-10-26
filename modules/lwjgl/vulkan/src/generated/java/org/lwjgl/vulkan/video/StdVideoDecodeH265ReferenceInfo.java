@@ -224,12 +224,12 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct<StdVideoDecodeH265Re
     /** Unsafe version of {@link #flags}. */
     public static StdVideoDecodeH265ReferenceInfoFlags nflags(long struct) { return StdVideoDecodeH265ReferenceInfoFlags.create(struct + StdVideoDecodeH265ReferenceInfo.FLAGS); }
     /** Unsafe version of {@link #PicOrderCntVal}. */
-    public static int nPicOrderCntVal(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL); }
+    public static int nPicOrderCntVal(long struct) { return memGetInt(struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL); }
 
     /** Unsafe version of {@link #flags(StdVideoDecodeH265ReferenceInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoDecodeH265ReferenceInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeH265ReferenceInfo.FLAGS, StdVideoDecodeH265ReferenceInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #PicOrderCntVal(int) PicOrderCntVal}. */
-    public static void nPicOrderCntVal(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL, value); }
+    public static void nPicOrderCntVal(long struct, int value) { memPutInt(struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL, value); }
 
     // -----------------------------------
 

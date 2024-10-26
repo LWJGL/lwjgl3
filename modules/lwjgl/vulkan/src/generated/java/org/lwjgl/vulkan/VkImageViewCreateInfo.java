@@ -500,34 +500,34 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkImageViewCreateInfo.FLAGS); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkImageViewCreateInfo.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + VkImageViewCreateInfo.IMAGE); }
     /** Unsafe version of {@link #viewType}. */
-    public static int nviewType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.VIEWTYPE); }
+    public static int nviewType(long struct) { return memGetInt(struct + VkImageViewCreateInfo.VIEWTYPE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkImageViewCreateInfo.FORMAT); }
     /** Unsafe version of {@link #components}. */
     public static VkComponentMapping ncomponents(long struct) { return VkComponentMapping.create(struct + VkImageViewCreateInfo.COMPONENTS); }
     /** Unsafe version of {@link #subresourceRange}. */
     public static VkImageSubresourceRange nsubresourceRange(long struct) { return VkImageSubresourceRange.create(struct + VkImageViewCreateInfo.SUBRESOURCERANGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkImageViewCreateInfo.IMAGE, value); }
+    public static void nimage(long struct, long value) { memPutLong(struct + VkImageViewCreateInfo.IMAGE, value); }
     /** Unsafe version of {@link #viewType(int) viewType}. */
-    public static void nviewType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.VIEWTYPE, value); }
+    public static void nviewType(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.VIEWTYPE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.FORMAT, value); }
     /** Unsafe version of {@link #components(VkComponentMapping) components}. */
     public static void ncomponents(long struct, VkComponentMapping value) { memCopy(value.address(), struct + VkImageViewCreateInfo.COMPONENTS, VkComponentMapping.SIZEOF); }
     /** Unsafe version of {@link #subresourceRange(VkImageSubresourceRange) subresourceRange}. */

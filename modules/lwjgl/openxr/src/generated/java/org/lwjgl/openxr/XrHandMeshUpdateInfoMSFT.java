@@ -266,22 +266,22 @@ public class XrHandMeshUpdateInfoMSFT extends Struct<XrHandMeshUpdateInfoMSFT> i
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshUpdateInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandMeshUpdateInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandMeshUpdateInfoMSFT.NEXT); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrHandMeshUpdateInfoMSFT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrHandMeshUpdateInfoMSFT.TIME); }
     /** Unsafe version of {@link #handPoseType}. */
-    public static int nhandPoseType(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshUpdateInfoMSFT.HANDPOSETYPE); }
+    public static int nhandPoseType(long struct) { return memGetInt(struct + XrHandMeshUpdateInfoMSFT.HANDPOSETYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshUpdateInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandMeshUpdateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandMeshUpdateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrHandMeshUpdateInfoMSFT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrHandMeshUpdateInfoMSFT.TIME, value); }
     /** Unsafe version of {@link #handPoseType(int) handPoseType}. */
-    public static void nhandPoseType(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshUpdateInfoMSFT.HANDPOSETYPE, value); }
+    public static void nhandPoseType(long struct, int value) { memPutInt(struct + XrHandMeshUpdateInfoMSFT.HANDPOSETYPE, value); }
 
     // -----------------------------------
 

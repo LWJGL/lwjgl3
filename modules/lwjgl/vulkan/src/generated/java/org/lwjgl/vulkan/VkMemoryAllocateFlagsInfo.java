@@ -291,22 +291,22 @@ public class VkMemoryAllocateFlagsInfo extends Struct<VkMemoryAllocateFlagsInfo>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryAllocateFlagsInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryAllocateFlagsInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryAllocateFlagsInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMemoryAllocateFlagsInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMemoryAllocateFlagsInfo.FLAGS); }
     /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryAllocateFlagsInfo.DEVICEMASK); }
+    public static int ndeviceMask(long struct) { return memGetInt(struct + VkMemoryAllocateFlagsInfo.DEVICEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryAllocateFlagsInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryAllocateFlagsInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryAllocateFlagsInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryAllocateFlagsInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkMemoryAllocateFlagsInfo.FLAGS, value); }
     /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryAllocateFlagsInfo.DEVICEMASK, value); }
+    public static void ndeviceMask(long struct, int value) { memPutInt(struct + VkMemoryAllocateFlagsInfo.DEVICEMASK, value); }
 
     // -----------------------------------
 

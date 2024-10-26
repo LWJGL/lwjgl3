@@ -286,26 +286,26 @@ public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeRe
     /** Unsafe version of {@link #frameInfo}. */
     public static LZ4FFrameInfo nframeInfo(long struct) { return LZ4FFrameInfo.create(struct + LZ4FPreferences.FRAMEINFO); }
     /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return UNSAFE.getInt(null, struct + LZ4FPreferences.COMPRESSIONLEVEL); }
+    public static int ncompressionLevel(long struct) { return memGetInt(struct + LZ4FPreferences.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #autoFlush}. */
-    public static int nautoFlush(long struct) { return UNSAFE.getInt(null, struct + LZ4FPreferences.AUTOFLUSH); }
+    public static int nautoFlush(long struct) { return memGetInt(struct + LZ4FPreferences.AUTOFLUSH); }
     /** Unsafe version of {@link #favorDecSpeed}. */
-    public static int nfavorDecSpeed(long struct) { return UNSAFE.getInt(null, struct + LZ4FPreferences.FAVORDECSPEED); }
+    public static int nfavorDecSpeed(long struct) { return memGetInt(struct + LZ4FPreferences.FAVORDECSPEED); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + LZ4FPreferences.RESERVED, 3); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + LZ4FPreferences.RESERVED + check(index, 3) * 4);
+        return memGetInt(struct + LZ4FPreferences.RESERVED + check(index, 3) * 4);
     }
 
     /** Unsafe version of {@link #frameInfo(LZ4FFrameInfo) frameInfo}. */
     public static void nframeInfo(long struct, LZ4FFrameInfo value) { memCopy(value.address(), struct + LZ4FPreferences.FRAMEINFO, LZ4FFrameInfo.SIZEOF); }
     /** Unsafe version of {@link #compressionLevel(int) compressionLevel}. */
-    public static void ncompressionLevel(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FPreferences.COMPRESSIONLEVEL, value); }
+    public static void ncompressionLevel(long struct, int value) { memPutInt(struct + LZ4FPreferences.COMPRESSIONLEVEL, value); }
     /** Unsafe version of {@link #autoFlush(boolean) autoFlush}. */
-    public static void nautoFlush(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FPreferences.AUTOFLUSH, value); }
+    public static void nautoFlush(long struct, int value) { memPutInt(struct + LZ4FPreferences.AUTOFLUSH, value); }
     /** Unsafe version of {@link #favorDecSpeed(boolean) favorDecSpeed}. */
-    public static void nfavorDecSpeed(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FPreferences.FAVORDECSPEED, value); }
+    public static void nfavorDecSpeed(long struct, int value) { memPutInt(struct + LZ4FPreferences.FAVORDECSPEED, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
@@ -313,7 +313,7 @@ public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeRe
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + LZ4FPreferences.RESERVED + check(index, 3) * 4, value);
+        memPutInt(struct + LZ4FPreferences.RESERVED + check(index, 3) * 4, value);
     }
 
     // -----------------------------------

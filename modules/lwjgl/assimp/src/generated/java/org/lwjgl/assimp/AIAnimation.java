@@ -317,38 +317,38 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIAnimation.MNAME); }
     /** Unsafe version of {@link #mDuration}. */
-    public static double nmDuration(long struct) { return UNSAFE.getDouble(null, struct + AIAnimation.MDURATION); }
+    public static double nmDuration(long struct) { return memGetDouble(struct + AIAnimation.MDURATION); }
     /** Unsafe version of {@link #mTicksPerSecond}. */
-    public static double nmTicksPerSecond(long struct) { return UNSAFE.getDouble(null, struct + AIAnimation.MTICKSPERSECOND); }
+    public static double nmTicksPerSecond(long struct) { return memGetDouble(struct + AIAnimation.MTICKSPERSECOND); }
     /** Unsafe version of {@link #mNumChannels}. */
-    public static int nmNumChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMCHANNELS); }
+    public static int nmNumChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMCHANNELS); }
     /** Unsafe version of {@link #mChannels() mChannels}. */
     @Nullable public static PointerBuffer nmChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
     /** Unsafe version of {@link #mNumMeshChannels}. */
-    public static int nmNumMeshChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMMESHCHANNELS); }
+    public static int nmNumMeshChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMMESHCHANNELS); }
     /** Unsafe version of {@link #mMeshChannels() mMeshChannels}. */
     @Nullable public static PointerBuffer nmMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
     /** Unsafe version of {@link #mNumMorphMeshChannels}. */
-    public static int nmNumMorphMeshChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMMORPHMESHCHANNELS); }
+    public static int nmNumMorphMeshChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMMORPHMESHCHANNELS); }
     /** Unsafe version of {@link #mMorphMeshChannels() mMorphMeshChannels}. */
     @Nullable public static PointerBuffer nmMorphMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMORPHMESHCHANNELS), nmNumMorphMeshChannels(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimation.MNAME, AIString.SIZEOF); }
     /** Unsafe version of {@link #mDuration(double) mDuration}. */
-    public static void nmDuration(long struct, double value) { UNSAFE.putDouble(null, struct + AIAnimation.MDURATION, value); }
+    public static void nmDuration(long struct, double value) { memPutDouble(struct + AIAnimation.MDURATION, value); }
     /** Unsafe version of {@link #mTicksPerSecond(double) mTicksPerSecond}. */
-    public static void nmTicksPerSecond(long struct, double value) { UNSAFE.putDouble(null, struct + AIAnimation.MTICKSPERSECOND, value); }
+    public static void nmTicksPerSecond(long struct, double value) { memPutDouble(struct + AIAnimation.MTICKSPERSECOND, value); }
     /** Sets the specified value to the {@code mNumChannels} field of the specified {@code struct}. */
-    public static void nmNumChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMCHANNELS, value); }
+    public static void nmNumChannels(long struct, int value) { memPutInt(struct + AIAnimation.MNUMCHANNELS, value); }
     /** Unsafe version of {@link #mChannels(PointerBuffer) mChannels}. */
     public static void nmChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MCHANNELS, memAddressSafe(value)); nmNumChannels(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumMeshChannels} field of the specified {@code struct}. */
-    public static void nmNumMeshChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMMESHCHANNELS, value); }
+    public static void nmNumMeshChannels(long struct, int value) { memPutInt(struct + AIAnimation.MNUMMESHCHANNELS, value); }
     /** Unsafe version of {@link #mMeshChannels(PointerBuffer) mMeshChannels}. */
     public static void nmMeshChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MMESHCHANNELS, memAddressSafe(value)); nmNumMeshChannels(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumMorphMeshChannels} field of the specified {@code struct}. */
-    public static void nmNumMorphMeshChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMMORPHMESHCHANNELS, value); }
+    public static void nmNumMorphMeshChannels(long struct, int value) { memPutInt(struct + AIAnimation.MNUMMORPHMESHCHANNELS, value); }
     /** Unsafe version of {@link #mMorphMeshChannels(PointerBuffer) mMorphMeshChannels}. */
     public static void nmMorphMeshChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MMORPHMESHCHANNELS, memAddressSafe(value)); nmNumMorphMeshChannels(struct, value == null ? 0 : value.remaining()); }
 

@@ -245,18 +245,18 @@ public class VkPipelinePropertiesIdentifierEXT extends Struct<VkPipelineProperti
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelinePropertiesIdentifierEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelinePropertiesIdentifierEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelinePropertiesIdentifierEXT.PNEXT); }
     /** Unsafe version of {@link #pipelineIdentifier}. */
     public static ByteBuffer npipelineIdentifier(long struct) { return memByteBuffer(struct + VkPipelinePropertiesIdentifierEXT.PIPELINEIDENTIFIER, VK_UUID_SIZE); }
     /** Unsafe version of {@link #pipelineIdentifier(int) pipelineIdentifier}. */
     public static byte npipelineIdentifier(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPipelinePropertiesIdentifierEXT.PIPELINEIDENTIFIER + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPipelinePropertiesIdentifierEXT.PIPELINEIDENTIFIER + check(index, VK_UUID_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelinePropertiesIdentifierEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelinePropertiesIdentifierEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelinePropertiesIdentifierEXT.PNEXT, value); }
 

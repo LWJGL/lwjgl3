@@ -306,22 +306,22 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH264PictureInfoFlags nflags(long struct) { return StdVideoEncodeH264PictureInfoFlags.create(struct + StdVideoEncodeH264PictureInfo.FLAGS); }
     /** Unsafe version of {@link #seq_parameter_set_id}. */
-    public static byte nseq_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID); }
+    public static byte nseq_parameter_set_id(long struct) { return memGetByte(struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #pic_parameter_set_id}. */
-    public static byte npic_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID); }
+    public static byte npic_parameter_set_id(long struct) { return memGetByte(struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #idr_pic_id}. */
-    public static short nidr_pic_id(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264PictureInfo.IDR_PIC_ID); }
+    public static short nidr_pic_id(long struct) { return memGetShort(struct + StdVideoEncodeH264PictureInfo.IDR_PIC_ID); }
     /** Unsafe version of {@link #primary_pic_type}. */
-    public static int nprimary_pic_type(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264PictureInfo.PRIMARY_PIC_TYPE); }
+    public static int nprimary_pic_type(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfo.PRIMARY_PIC_TYPE); }
     /** Unsafe version of {@link #frame_num}. */
-    public static int nframe_num(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264PictureInfo.FRAME_NUM); }
+    public static int nframe_num(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfo.FRAME_NUM); }
     /** Unsafe version of {@link #PicOrderCnt}. */
-    public static int nPicOrderCnt(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264PictureInfo.PICORDERCNT); }
+    public static int nPicOrderCnt(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfo.PICORDERCNT); }
     /** Unsafe version of {@link #temporal_id}. */
-    public static byte ntemporal_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID); }
+    public static byte ntemporal_id(long struct) { return memGetByte(struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID); }
     public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeH264PictureInfo.RESERVED1, 3); }
     public static byte nreserved1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1);
+        return memGetByte(struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #pRefLists}. */
     public static StdVideoEncodeH264ReferenceListsInfo npRefLists(long struct) { return StdVideoEncodeH264ReferenceListsInfo.create(memGetAddress(struct + StdVideoEncodeH264PictureInfo.PREFLISTS)); }
@@ -329,25 +329,25 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
     /** Unsafe version of {@link #flags(StdVideoEncodeH264PictureInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH264PictureInfoFlags value) { memCopy(value.address(), struct + StdVideoEncodeH264PictureInfo.FLAGS, StdVideoEncodeH264PictureInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #seq_parameter_set_id(byte) seq_parameter_set_id}. */
-    public static void nseq_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID, value); }
+    public static void nseq_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #pic_parameter_set_id(byte) pic_parameter_set_id}. */
-    public static void npic_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID, value); }
+    public static void npic_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #idr_pic_id(short) idr_pic_id}. */
-    public static void nidr_pic_id(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264PictureInfo.IDR_PIC_ID, value); }
+    public static void nidr_pic_id(long struct, short value) { memPutShort(struct + StdVideoEncodeH264PictureInfo.IDR_PIC_ID, value); }
     /** Unsafe version of {@link #primary_pic_type(int) primary_pic_type}. */
-    public static void nprimary_pic_type(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfo.PRIMARY_PIC_TYPE, value); }
+    public static void nprimary_pic_type(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfo.PRIMARY_PIC_TYPE, value); }
     /** Unsafe version of {@link #frame_num(int) frame_num}. */
-    public static void nframe_num(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfo.FRAME_NUM, value); }
+    public static void nframe_num(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfo.FRAME_NUM, value); }
     /** Unsafe version of {@link #PicOrderCnt(int) PicOrderCnt}. */
-    public static void nPicOrderCnt(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfo.PICORDERCNT, value); }
+    public static void nPicOrderCnt(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfo.PICORDERCNT, value); }
     /** Unsafe version of {@link #temporal_id(byte) temporal_id}. */
-    public static void ntemporal_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID, value); }
+    public static void ntemporal_id(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID, value); }
     public static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoEncodeH264PictureInfo.RESERVED1, value.remaining() * 1);
     }
     public static void nreserved1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1, value);
+        memPutByte(struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #pRefLists(StdVideoEncodeH264ReferenceListsInfo) pRefLists}. */
     public static void npRefLists(long struct, StdVideoEncodeH264ReferenceListsInfo value) { memPutAddress(struct + StdVideoEncodeH264PictureInfo.PREFLISTS, value.address()); }

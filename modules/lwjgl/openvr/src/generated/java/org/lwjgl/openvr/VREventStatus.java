@@ -105,7 +105,7 @@ public class VREventStatus extends Struct<VREventStatus> {
     // -----------------------------------
 
     /** Unsafe version of {@link #statusState}. */
-    public static int nstatusState(long struct) { return UNSAFE.getInt(null, struct + VREventStatus.STATUSSTATE); }
+    public static int nstatusState(long struct) { return memGetInt(struct + VREventStatus.STATUSSTATE); }
 
     // -----------------------------------
 

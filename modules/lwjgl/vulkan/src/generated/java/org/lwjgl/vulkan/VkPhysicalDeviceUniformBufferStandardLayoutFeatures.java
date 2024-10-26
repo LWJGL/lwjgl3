@@ -246,18 +246,18 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.PNEXT); }
     /** Unsafe version of {@link #uniformBufferStandardLayout}. */
-    public static int nuniformBufferStandardLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.UNIFORMBUFFERSTANDARDLAYOUT); }
+    public static int nuniformBufferStandardLayout(long struct) { return memGetInt(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.UNIFORMBUFFERSTANDARDLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.PNEXT, value); }
     /** Unsafe version of {@link #uniformBufferStandardLayout(boolean) uniformBufferStandardLayout}. */
-    public static void nuniformBufferStandardLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.UNIFORMBUFFERSTANDARDLAYOUT, value); }
+    public static void nuniformBufferStandardLayout(long struct, int value) { memPutInt(struct + VkPhysicalDeviceUniformBufferStandardLayoutFeatures.UNIFORMBUFFERSTANDARDLAYOUT, value); }
 
     // -----------------------------------
 

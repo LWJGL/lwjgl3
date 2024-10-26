@@ -275,26 +275,26 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.PNEXT); }
     /** Unsafe version of {@link #bufferDeviceAddress}. */
-    public static int nbufferDeviceAddress(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESS); }
+    public static int nbufferDeviceAddress(long struct) { return memGetInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESS); }
     /** Unsafe version of {@link #bufferDeviceAddressCaptureReplay}. */
-    public static int nbufferDeviceAddressCaptureReplay(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSCAPTUREREPLAY); }
+    public static int nbufferDeviceAddressCaptureReplay(long struct) { return memGetInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSCAPTUREREPLAY); }
     /** Unsafe version of {@link #bufferDeviceAddressMultiDevice}. */
-    public static int nbufferDeviceAddressMultiDevice(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSMULTIDEVICE); }
+    public static int nbufferDeviceAddressMultiDevice(long struct) { return memGetInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSMULTIDEVICE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.PNEXT, value); }
     /** Unsafe version of {@link #bufferDeviceAddress(boolean) bufferDeviceAddress}. */
-    public static void nbufferDeviceAddress(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESS, value); }
+    public static void nbufferDeviceAddress(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESS, value); }
     /** Unsafe version of {@link #bufferDeviceAddressCaptureReplay(boolean) bufferDeviceAddressCaptureReplay}. */
-    public static void nbufferDeviceAddressCaptureReplay(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSCAPTUREREPLAY, value); }
+    public static void nbufferDeviceAddressCaptureReplay(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSCAPTUREREPLAY, value); }
     /** Unsafe version of {@link #bufferDeviceAddressMultiDevice(boolean) bufferDeviceAddressMultiDevice}. */
-    public static void nbufferDeviceAddressMultiDevice(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSMULTIDEVICE, value); }
+    public static void nbufferDeviceAddressMultiDevice(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBufferDeviceAddressFeatures.BUFFERDEVICEADDRESSMULTIDEVICE, value); }
 
     // -----------------------------------
 

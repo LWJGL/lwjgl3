@@ -342,30 +342,30 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugUtilsMessengerCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #messageSeverity}. */
-    public static int nmessageSeverity(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGESEVERITY); }
+    public static int nmessageSeverity(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGESEVERITY); }
     /** Unsafe version of {@link #messageType}. */
-    public static int nmessageType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGETYPE); }
+    public static int nmessageType(long struct) { return memGetInt(struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGETYPE); }
     /** Unsafe version of {@link #pfnUserCallback}. */
     public static VkDebugUtilsMessengerCallbackEXT npfnUserCallback(long struct) { return VkDebugUtilsMessengerCallbackEXT.create(memGetAddress(struct + VkDebugUtilsMessengerCreateInfoEXT.PFNUSERCALLBACK)); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VkDebugUtilsMessengerCreateInfoEXT.PUSERDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugUtilsMessengerCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #messageSeverity(int) messageSeverity}. */
-    public static void nmessageSeverity(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGESEVERITY, value); }
+    public static void nmessageSeverity(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGESEVERITY, value); }
     /** Unsafe version of {@link #messageType(int) messageType}. */
-    public static void nmessageType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGETYPE, value); }
+    public static void nmessageType(long struct, int value) { memPutInt(struct + VkDebugUtilsMessengerCreateInfoEXT.MESSAGETYPE, value); }
     /** Unsafe version of {@link #pfnUserCallback(VkDebugUtilsMessengerCallbackEXTI) pfnUserCallback}. */
     public static void npfnUserCallback(long struct, VkDebugUtilsMessengerCallbackEXTI value) { memPutAddress(struct + VkDebugUtilsMessengerCreateInfoEXT.PFNUSERCALLBACK, value.address()); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */

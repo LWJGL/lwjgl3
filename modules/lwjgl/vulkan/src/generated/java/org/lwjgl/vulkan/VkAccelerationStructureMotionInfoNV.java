@@ -254,22 +254,22 @@ public class VkAccelerationStructureMotionInfoNV extends Struct<VkAccelerationSt
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMotionInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureMotionInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureMotionInfoNV.PNEXT); }
     /** Unsafe version of {@link #maxInstances}. */
-    public static int nmaxInstances(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMotionInfoNV.MAXINSTANCES); }
+    public static int nmaxInstances(long struct) { return memGetInt(struct + VkAccelerationStructureMotionInfoNV.MAXINSTANCES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureMotionInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAccelerationStructureMotionInfoNV.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMotionInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureMotionInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureMotionInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #maxInstances(int) maxInstances}. */
-    public static void nmaxInstances(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMotionInfoNV.MAXINSTANCES, value); }
+    public static void nmaxInstances(long struct, int value) { memPutInt(struct + VkAccelerationStructureMotionInfoNV.MAXINSTANCES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureMotionInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAccelerationStructureMotionInfoNV.FLAGS, value); }
 
     // -----------------------------------
 

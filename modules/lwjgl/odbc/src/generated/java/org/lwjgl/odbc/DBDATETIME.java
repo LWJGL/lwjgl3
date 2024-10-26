@@ -240,14 +240,14 @@ public class DBDATETIME extends Struct<DBDATETIME> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #dtdays}. */
-    public static int ndtdays(long struct) { return UNSAFE.getInt(null, struct + DBDATETIME.DTDAYS); }
+    public static int ndtdays(long struct) { return memGetInt(struct + DBDATETIME.DTDAYS); }
     /** Unsafe version of {@link #dttime}. */
-    public static int ndttime(long struct) { return UNSAFE.getInt(null, struct + DBDATETIME.DTTIME); }
+    public static int ndttime(long struct) { return memGetInt(struct + DBDATETIME.DTTIME); }
 
     /** Unsafe version of {@link #dtdays(int) dtdays}. */
-    public static void ndtdays(long struct, int value) { UNSAFE.putInt(null, struct + DBDATETIME.DTDAYS, value); }
+    public static void ndtdays(long struct, int value) { memPutInt(struct + DBDATETIME.DTDAYS, value); }
     /** Unsafe version of {@link #dttime(int) dttime}. */
-    public static void ndttime(long struct, int value) { UNSAFE.putInt(null, struct + DBDATETIME.DTTIME, value); }
+    public static void ndttime(long struct, int value) { memPutInt(struct + DBDATETIME.DTTIME, value); }
 
     // -----------------------------------
 

@@ -229,17 +229,17 @@ public class CLDeviceIntegerDotProductAccelerationPropertiesKHR extends Struct<C
     // -----------------------------------
 
     /** Unsafe version of {@link #signed_accelerated}. */
-    public static int nsigned_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.SIGNED_ACCELERATED); }
+    public static int nsigned_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.SIGNED_ACCELERATED); }
     /** Unsafe version of {@link #unsigned_accelerated}. */
-    public static int nunsigned_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.UNSIGNED_ACCELERATED); }
+    public static int nunsigned_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.UNSIGNED_ACCELERATED); }
     /** Unsafe version of {@link #mixed_signedness_accelerated}. */
-    public static int nmixed_signedness_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.MIXED_SIGNEDNESS_ACCELERATED); }
+    public static int nmixed_signedness_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.MIXED_SIGNEDNESS_ACCELERATED); }
     /** Unsafe version of {@link #accumulating_saturating_signed_accelerated}. */
-    public static int naccumulating_saturating_signed_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_SIGNED_ACCELERATED); }
+    public static int naccumulating_saturating_signed_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_SIGNED_ACCELERATED); }
     /** Unsafe version of {@link #accumulating_saturating_unsigned_accelerated}. */
-    public static int naccumulating_saturating_unsigned_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_UNSIGNED_ACCELERATED); }
+    public static int naccumulating_saturating_unsigned_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_UNSIGNED_ACCELERATED); }
     /** Unsafe version of {@link #accumulating_saturating_mixed_signedness_accelerated}. */
-    public static int naccumulating_saturating_mixed_signedness_accelerated(long struct) { return UNSAFE.getInt(null, struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_MIXED_SIGNEDNESS_ACCELERATED); }
+    public static int naccumulating_saturating_mixed_signedness_accelerated(long struct) { return memGetInt(struct + CLDeviceIntegerDotProductAccelerationPropertiesKHR.ACCUMULATING_SATURATING_MIXED_SIGNEDNESS_ACCELERATED); }
 
     // -----------------------------------
 

@@ -227,7 +227,7 @@ public class OVRTrackerPose extends Struct<OVRTrackerPose> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #TrackerFlags}. */
-    public static int nTrackerFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTrackerPose.TRACKERFLAGS); }
+    public static int nTrackerFlags(long struct) { return memGetInt(struct + OVRTrackerPose.TRACKERFLAGS); }
     /** Unsafe version of {@link #Pose}. */
     public static OVRPosef nPose(long struct) { return OVRPosef.create(struct + OVRTrackerPose.POSE); }
     /** Unsafe version of {@link #LeveledPose}. */

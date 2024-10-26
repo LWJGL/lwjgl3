@@ -339,28 +339,28 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorPoolCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorPoolCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDescriptorPoolCreateInfo.FLAGS); }
     /** Unsafe version of {@link #maxSets}. */
-    public static int nmaxSets(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolCreateInfo.MAXSETS); }
+    public static int nmaxSets(long struct) { return memGetInt(struct + VkDescriptorPoolCreateInfo.MAXSETS); }
     /** Unsafe version of {@link #poolSizeCount}. */
-    public static int npoolSizeCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolCreateInfo.POOLSIZECOUNT); }
+    public static int npoolSizeCount(long struct) { return memGetInt(struct + VkDescriptorPoolCreateInfo.POOLSIZECOUNT); }
     /** Unsafe version of {@link #pPoolSizes}. */
     @Nullable public static VkDescriptorPoolSize.Buffer npPoolSizes(long struct) { return VkDescriptorPoolSize.createSafe(memGetAddress(struct + VkDescriptorPoolCreateInfo.PPOOLSIZES), npoolSizeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorPoolCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorPoolCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDescriptorPoolCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #maxSets(int) maxSets}. */
-    public static void nmaxSets(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolCreateInfo.MAXSETS, value); }
+    public static void nmaxSets(long struct, int value) { memPutInt(struct + VkDescriptorPoolCreateInfo.MAXSETS, value); }
     /** Sets the specified value to the {@code poolSizeCount} field of the specified {@code struct}. */
-    public static void npoolSizeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolCreateInfo.POOLSIZECOUNT, value); }
+    public static void npoolSizeCount(long struct, int value) { memPutInt(struct + VkDescriptorPoolCreateInfo.POOLSIZECOUNT, value); }
     /** Unsafe version of {@link #pPoolSizes(VkDescriptorPoolSize.Buffer) pPoolSizes}. */
     public static void npPoolSizes(long struct, @Nullable VkDescriptorPoolSize.Buffer value) { memPutAddress(struct + VkDescriptorPoolCreateInfo.PPOOLSIZES, memAddressSafe(value)); npoolSizeCount(struct, value == null ? 0 : value.remaining()); }
 

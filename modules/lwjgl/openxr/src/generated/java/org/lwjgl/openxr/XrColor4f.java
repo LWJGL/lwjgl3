@@ -251,22 +251,22 @@ public class XrColor4f extends Struct<XrColor4f> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + XrColor4f.R); }
+    public static float nr(long struct) { return memGetFloat(struct + XrColor4f.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + XrColor4f.G); }
+    public static float ng(long struct) { return memGetFloat(struct + XrColor4f.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + XrColor4f.B); }
+    public static float nb(long struct) { return memGetFloat(struct + XrColor4f.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + XrColor4f.A); }
+    public static float na(long struct) { return memGetFloat(struct + XrColor4f.A); }
 
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor4f.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + XrColor4f.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor4f.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + XrColor4f.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor4f.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + XrColor4f.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + XrColor4f.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + XrColor4f.A, value); }
 
     // -----------------------------------
 

@@ -256,18 +256,18 @@ public class VkPhysicalDeviceExternalFormatResolvePropertiesANDROID extends Stru
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.PNEXT); }
     /** Unsafe version of {@link #nullColorAttachmentWithExternalFormatResolve}. */
-    public static int nnullColorAttachmentWithExternalFormatResolve(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.NULLCOLORATTACHMENTWITHEXTERNALFORMATRESOLVE); }
+    public static int nnullColorAttachmentWithExternalFormatResolve(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.NULLCOLORATTACHMENTWITHEXTERNALFORMATRESOLVE); }
     /** Unsafe version of {@link #externalFormatResolveChromaOffsetX}. */
-    public static int nexternalFormatResolveChromaOffsetX(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.EXTERNALFORMATRESOLVECHROMAOFFSETX); }
+    public static int nexternalFormatResolveChromaOffsetX(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.EXTERNALFORMATRESOLVECHROMAOFFSETX); }
     /** Unsafe version of {@link #externalFormatResolveChromaOffsetY}. */
-    public static int nexternalFormatResolveChromaOffsetY(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.EXTERNALFORMATRESOLVECHROMAOFFSETY); }
+    public static int nexternalFormatResolveChromaOffsetY(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.EXTERNALFORMATRESOLVECHROMAOFFSETY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.PNEXT, value); }
 

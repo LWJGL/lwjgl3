@@ -240,14 +240,14 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct<VkVideoDecodeH265Ca
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH265CapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH265CapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #maxLevelIdc}. */
-    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesKHR.MAXLEVELIDC); }
+    public static int nmaxLevelIdc(long struct) { return memGetInt(struct + VkVideoDecodeH265CapabilitiesKHR.MAXLEVELIDC); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265CapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH265CapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH265CapabilitiesKHR.PNEXT, value); }
 

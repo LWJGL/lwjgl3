@@ -285,22 +285,22 @@ public class VkPipelineRasterizationStateStreamCreateInfoEXT extends Struct<VkPi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #rasterizationStream}. */
-    public static int nrasterizationStream(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.RASTERIZATIONSTREAM); }
+    public static int nrasterizationStream(long struct) { return memGetInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.RASTERIZATIONSTREAM); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #rasterizationStream(int) rasterizationStream}. */
-    public static void nrasterizationStream(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateStreamCreateInfoEXT.RASTERIZATIONSTREAM, value); }
+    public static void nrasterizationStream(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateStreamCreateInfoEXT.RASTERIZATIONSTREAM, value); }
 
     // -----------------------------------
 

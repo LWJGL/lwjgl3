@@ -287,22 +287,22 @@ public class VkExportMemoryWin32HandleInfoNV extends Struct<VkExportMemoryWin32H
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMemoryWin32HandleInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMemoryWin32HandleInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMemoryWin32HandleInfoNV.PNEXT); }
     /** Unsafe version of {@link #pAttributes}. */
     @Nullable public static SECURITY_ATTRIBUTES npAttributes(long struct) { return SECURITY_ATTRIBUTES.createSafe(memGetAddress(struct + VkExportMemoryWin32HandleInfoNV.PATTRIBUTES)); }
     /** Unsafe version of {@link #dwAccess}. */
-    public static int ndwAccess(long struct) { return UNSAFE.getInt(null, struct + VkExportMemoryWin32HandleInfoNV.DWACCESS); }
+    public static int ndwAccess(long struct) { return memGetInt(struct + VkExportMemoryWin32HandleInfoNV.DWACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMemoryWin32HandleInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMemoryWin32HandleInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMemoryWin32HandleInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #pAttributes(SECURITY_ATTRIBUTES) pAttributes}. */
     public static void npAttributes(long struct, @Nullable SECURITY_ATTRIBUTES value) { memPutAddress(struct + VkExportMemoryWin32HandleInfoNV.PATTRIBUTES, memAddressSafe(value)); }
     /** Unsafe version of {@link #dwAccess(int) dwAccess}. */
-    public static void ndwAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMemoryWin32HandleInfoNV.DWACCESS, value); }
+    public static void ndwAccess(long struct, int value) { memPutInt(struct + VkExportMemoryWin32HandleInfoNV.DWACCESS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

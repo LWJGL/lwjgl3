@@ -126,9 +126,9 @@ public class VREventKeyboard extends Struct<VREventKeyboard> {
     /** Unsafe version of {@link #cNewInputString}. */
     public static String ncNewInputString(long struct) { return memUTF8(struct + VREventKeyboard.CNEWINPUT); }
     /** Unsafe version of {@link #uUserValue}. */
-    public static long nuUserValue(long struct) { return UNSAFE.getLong(null, struct + VREventKeyboard.UUSERVALUE); }
+    public static long nuUserValue(long struct) { return memGetLong(struct + VREventKeyboard.UUSERVALUE); }
     /** Unsafe version of {@link #overlayHandle}. */
-    public static long noverlayHandle(long struct) { return UNSAFE.getLong(null, struct + VREventKeyboard.OVERLAYHANDLE); }
+    public static long noverlayHandle(long struct) { return memGetLong(struct + VREventKeyboard.OVERLAYHANDLE); }
 
     // -----------------------------------
 

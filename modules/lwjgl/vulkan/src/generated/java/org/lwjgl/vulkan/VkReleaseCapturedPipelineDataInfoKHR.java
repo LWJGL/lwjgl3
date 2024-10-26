@@ -255,18 +255,18 @@ public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCaptur
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkReleaseCapturedPipelineDataInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkReleaseCapturedPipelineDataInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkReleaseCapturedPipelineDataInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkReleaseCapturedPipelineDataInfoKHR.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkReleaseCapturedPipelineDataInfoKHR.PIPELINE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkReleaseCapturedPipelineDataInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkReleaseCapturedPipelineDataInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkReleaseCapturedPipelineDataInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkReleaseCapturedPipelineDataInfoKHR.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkReleaseCapturedPipelineDataInfoKHR.PIPELINE, value); }
 
     // -----------------------------------
 

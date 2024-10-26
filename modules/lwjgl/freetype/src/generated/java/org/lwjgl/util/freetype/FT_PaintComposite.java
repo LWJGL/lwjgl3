@@ -121,7 +121,7 @@ public class FT_PaintComposite extends Struct<FT_PaintComposite> {
     /** Unsafe version of {@link #source_paint}. */
     public static FT_OpaquePaint nsource_paint(long struct) { return FT_OpaquePaint.create(struct + FT_PaintComposite.SOURCE_PAINT); }
     /** Unsafe version of {@link #composite_mode}. */
-    public static int ncomposite_mode(long struct) { return UNSAFE.getInt(null, struct + FT_PaintComposite.COMPOSITE_MODE); }
+    public static int ncomposite_mode(long struct) { return memGetInt(struct + FT_PaintComposite.COMPOSITE_MODE); }
     /** Unsafe version of {@link #backdrop_paint}. */
     public static FT_OpaquePaint nbackdrop_paint(long struct) { return FT_OpaquePaint.create(struct + FT_PaintComposite.BACKDROP_PAINT); }
 

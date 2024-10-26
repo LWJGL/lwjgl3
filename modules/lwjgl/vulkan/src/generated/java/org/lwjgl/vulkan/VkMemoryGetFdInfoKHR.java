@@ -295,22 +295,22 @@ public class VkMemoryGetFdInfoKHR extends Struct<VkMemoryGetFdInfoKHR> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryGetFdInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryGetFdInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryGetFdInfoKHR.PNEXT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkMemoryGetFdInfoKHR.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkMemoryGetFdInfoKHR.MEMORY); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryGetFdInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkMemoryGetFdInfoKHR.HANDLETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryGetFdInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryGetFdInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryGetFdInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryGetFdInfoKHR.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkMemoryGetFdInfoKHR.MEMORY, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryGetFdInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkMemoryGetFdInfoKHR.HANDLETYPE, value); }
 
     // -----------------------------------
 

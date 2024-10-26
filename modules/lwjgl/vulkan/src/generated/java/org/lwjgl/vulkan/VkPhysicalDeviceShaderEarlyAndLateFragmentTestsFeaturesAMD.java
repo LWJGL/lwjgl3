@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.PNEXT); }
     /** Unsafe version of {@link #shaderEarlyAndLateFragmentTests}. */
-    public static int nshaderEarlyAndLateFragmentTests(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.SHADEREARLYANDLATEFRAGMENTTESTS); }
+    public static int nshaderEarlyAndLateFragmentTests(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.SHADEREARLYANDLATEFRAGMENTTESTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.PNEXT, value); }
     /** Unsafe version of {@link #shaderEarlyAndLateFragmentTests(boolean) shaderEarlyAndLateFragmentTests}. */
-    public static void nshaderEarlyAndLateFragmentTests(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.SHADEREARLYANDLATEFRAGMENTTESTS, value); }
+    public static void nshaderEarlyAndLateFragmentTests(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.SHADEREARLYANDLATEFRAGMENTTESTS, value); }
 
     // -----------------------------------
 

@@ -257,22 +257,22 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderFloat16Int8Features.PNEXT); }
     /** Unsafe version of {@link #shaderFloat16}. */
-    public static int nshaderFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERFLOAT16); }
+    public static int nshaderFloat16(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERFLOAT16); }
     /** Unsafe version of {@link #shaderInt8}. */
-    public static int nshaderInt8(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERINT8); }
+    public static int nshaderInt8(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERINT8); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderFloat16Int8Features.PNEXT, value); }
     /** Unsafe version of {@link #shaderFloat16(boolean) shaderFloat16}. */
-    public static void nshaderFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERFLOAT16, value); }
+    public static void nshaderFloat16(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERFLOAT16, value); }
     /** Unsafe version of {@link #shaderInt8(boolean) shaderInt8}. */
-    public static void nshaderInt8(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERINT8, value); }
+    public static void nshaderInt8(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderFloat16Int8Features.SHADERINT8, value); }
 
     // -----------------------------------
 

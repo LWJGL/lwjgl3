@@ -242,14 +242,14 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.PNEXT); }
     /** Unsafe version of {@link #maxVariableDescriptorCount}. */
-    public static int nmaxVariableDescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.MAXVARIABLEDESCRIPTORCOUNT); }
+    public static int nmaxVariableDescriptorCount(long struct) { return memGetInt(struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.MAXVARIABLEDESCRIPTORCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorSetVariableDescriptorCountLayoutSupport.PNEXT, value); }
 

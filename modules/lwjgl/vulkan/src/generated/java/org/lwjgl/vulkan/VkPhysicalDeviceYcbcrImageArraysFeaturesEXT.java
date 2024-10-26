@@ -265,18 +265,18 @@ public class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #ycbcrImageArrays}. */
-    public static int nycbcrImageArrays(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.YCBCRIMAGEARRAYS); }
+    public static int nycbcrImageArrays(long struct) { return memGetInt(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.YCBCRIMAGEARRAYS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #ycbcrImageArrays(boolean) ycbcrImageArrays}. */
-    public static void nycbcrImageArrays(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.YCBCRIMAGEARRAYS, value); }
+    public static void nycbcrImageArrays(long struct, int value) { memPutInt(struct + VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.YCBCRIMAGEARRAYS, value); }
 
     // -----------------------------------
 

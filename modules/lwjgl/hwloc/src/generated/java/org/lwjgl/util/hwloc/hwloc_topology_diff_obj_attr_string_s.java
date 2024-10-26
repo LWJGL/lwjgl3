@@ -132,7 +132,7 @@ public class hwloc_topology_diff_obj_attr_string_s extends Struct<hwloc_topology
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_topology_diff_obj_attr_string_s.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_string_s.TYPE); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBufferNT1(memGetAddress(struct + hwloc_topology_diff_obj_attr_string_s.NAME)); }
     /** Unsafe version of {@link #nameString}. */

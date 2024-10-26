@@ -309,34 +309,34 @@ public class VkVideoEncodeH264RateControlInfoKHR extends Struct<VkVideoEncodeH26
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264RateControlInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.FLAGS); }
     /** Unsafe version of {@link #gopFrameCount}. */
-    public static int ngopFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.GOPFRAMECOUNT); }
+    public static int ngopFrameCount(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.GOPFRAMECOUNT); }
     /** Unsafe version of {@link #idrPeriod}. */
-    public static int nidrPeriod(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.IDRPERIOD); }
+    public static int nidrPeriod(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.IDRPERIOD); }
     /** Unsafe version of {@link #consecutiveBFrameCount}. */
-    public static int nconsecutiveBFrameCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.CONSECUTIVEBFRAMECOUNT); }
+    public static int nconsecutiveBFrameCount(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.CONSECUTIVEBFRAMECOUNT); }
     /** Unsafe version of {@link #temporalLayerCount}. */
-    public static int ntemporalLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.TEMPORALLAYERCOUNT); }
+    public static int ntemporalLayerCount(long struct) { return memGetInt(struct + VkVideoEncodeH264RateControlInfoKHR.TEMPORALLAYERCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264RateControlInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #gopFrameCount(int) gopFrameCount}. */
-    public static void ngopFrameCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.GOPFRAMECOUNT, value); }
+    public static void ngopFrameCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.GOPFRAMECOUNT, value); }
     /** Unsafe version of {@link #idrPeriod(int) idrPeriod}. */
-    public static void nidrPeriod(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.IDRPERIOD, value); }
+    public static void nidrPeriod(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.IDRPERIOD, value); }
     /** Unsafe version of {@link #consecutiveBFrameCount(int) consecutiveBFrameCount}. */
-    public static void nconsecutiveBFrameCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.CONSECUTIVEBFRAMECOUNT, value); }
+    public static void nconsecutiveBFrameCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.CONSECUTIVEBFRAMECOUNT, value); }
     /** Unsafe version of {@link #temporalLayerCount(int) temporalLayerCount}. */
-    public static void ntemporalLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoKHR.TEMPORALLAYERCOUNT, value); }
+    public static void ntemporalLayerCount(long struct, int value) { memPutInt(struct + VkVideoEncodeH264RateControlInfoKHR.TEMPORALLAYERCOUNT, value); }
 
     // -----------------------------------
 

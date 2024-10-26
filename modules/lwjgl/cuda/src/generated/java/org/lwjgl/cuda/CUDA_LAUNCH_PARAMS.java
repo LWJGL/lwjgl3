@@ -336,19 +336,19 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     /** Unsafe version of {@link #function}. */
     public static long nfunction(long struct) { return memGetAddress(struct + CUDA_LAUNCH_PARAMS.FUNCTION); }
     /** Unsafe version of {@link #gridDimX}. */
-    public static int ngridDimX(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMX); }
+    public static int ngridDimX(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMX); }
     /** Unsafe version of {@link #gridDimY}. */
-    public static int ngridDimY(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMY); }
+    public static int ngridDimY(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMY); }
     /** Unsafe version of {@link #gridDimZ}. */
-    public static int ngridDimZ(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMZ); }
+    public static int ngridDimZ(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMZ); }
     /** Unsafe version of {@link #blockDimX}. */
-    public static int nblockDimX(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMX); }
+    public static int nblockDimX(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMX); }
     /** Unsafe version of {@link #blockDimY}. */
-    public static int nblockDimY(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMY); }
+    public static int nblockDimY(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMY); }
     /** Unsafe version of {@link #blockDimZ}. */
-    public static int nblockDimZ(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMZ); }
+    public static int nblockDimZ(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMZ); }
     /** Unsafe version of {@link #sharedMemBytes}. */
-    public static int nsharedMemBytes(long struct) { return UNSAFE.getInt(null, struct + CUDA_LAUNCH_PARAMS.SHAREDMEMBYTES); }
+    public static int nsharedMemBytes(long struct) { return memGetInt(struct + CUDA_LAUNCH_PARAMS.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #hStream}. */
     public static long nhStream(long struct) { return memGetAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
@@ -357,19 +357,19 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     /** Unsafe version of {@link #function(long) function}. */
     public static void nfunction(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.FUNCTION, check(value)); }
     /** Unsafe version of {@link #gridDimX(int) gridDimX}. */
-    public static void ngridDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMX, value); }
+    public static void ngridDimX(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMX, value); }
     /** Unsafe version of {@link #gridDimY(int) gridDimY}. */
-    public static void ngridDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMY, value); }
+    public static void ngridDimY(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMY, value); }
     /** Unsafe version of {@link #gridDimZ(int) gridDimZ}. */
-    public static void ngridDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.GRIDDIMZ, value); }
+    public static void ngridDimZ(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.GRIDDIMZ, value); }
     /** Unsafe version of {@link #blockDimX(int) blockDimX}. */
-    public static void nblockDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMX, value); }
+    public static void nblockDimX(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMX, value); }
     /** Unsafe version of {@link #blockDimY(int) blockDimY}. */
-    public static void nblockDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMY, value); }
+    public static void nblockDimY(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMY, value); }
     /** Unsafe version of {@link #blockDimZ(int) blockDimZ}. */
-    public static void nblockDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.BLOCKDIMZ, value); }
+    public static void nblockDimZ(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.BLOCKDIMZ, value); }
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
-    public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.SHAREDMEMBYTES, value); }
+    public static void nsharedMemBytes(long struct, int value) { memPutInt(struct + CUDA_LAUNCH_PARAMS.SHAREDMEMBYTES, value); }
     /** Unsafe version of {@link #hStream(long) hStream}. */
     public static void nhStream(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM, value); }
     /** Unsafe version of {@link #kernelParams(PointerBuffer) kernelParams}. */

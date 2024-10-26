@@ -211,7 +211,7 @@ public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationG
     // -----------------------------------
 
     /** Unsafe version of {@link #refreshDuration}. */
-    public static long nrefreshDuration(long struct) { return UNSAFE.getLong(null, struct + VkRefreshCycleDurationGOOGLE.REFRESHDURATION); }
+    public static long nrefreshDuration(long struct) { return memGetLong(struct + VkRefreshCycleDurationGOOGLE.REFRESHDURATION); }
 
     // -----------------------------------
 

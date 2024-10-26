@@ -762,138 +762,138 @@ public class VkPhysicalDeviceExtendedDynamicState3FeaturesEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #extendedDynamicState3TessellationDomainOrigin}. */
-    public static int nextendedDynamicState3TessellationDomainOrigin(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3TESSELLATIONDOMAINORIGIN); }
+    public static int nextendedDynamicState3TessellationDomainOrigin(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3TESSELLATIONDOMAINORIGIN); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClampEnable}. */
-    public static int nextendedDynamicState3DepthClampEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLAMPENABLE); }
+    public static int nextendedDynamicState3DepthClampEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLAMPENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3PolygonMode}. */
-    public static int nextendedDynamicState3PolygonMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3POLYGONMODE); }
+    public static int nextendedDynamicState3PolygonMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3POLYGONMODE); }
     /** Unsafe version of {@link #extendedDynamicState3RasterizationSamples}. */
-    public static int nextendedDynamicState3RasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSAMPLES); }
+    public static int nextendedDynamicState3RasterizationSamples(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSAMPLES); }
     /** Unsafe version of {@link #extendedDynamicState3SampleMask}. */
-    public static int nextendedDynamicState3SampleMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLEMASK); }
+    public static int nextendedDynamicState3SampleMask(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLEMASK); }
     /** Unsafe version of {@link #extendedDynamicState3AlphaToCoverageEnable}. */
-    public static int nextendedDynamicState3AlphaToCoverageEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOCOVERAGEENABLE); }
+    public static int nextendedDynamicState3AlphaToCoverageEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOCOVERAGEENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3AlphaToOneEnable}. */
-    public static int nextendedDynamicState3AlphaToOneEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOONEENABLE); }
+    public static int nextendedDynamicState3AlphaToOneEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOONEENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3LogicOpEnable}. */
-    public static int nextendedDynamicState3LogicOpEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LOGICOPENABLE); }
+    public static int nextendedDynamicState3LogicOpEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LOGICOPENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendEnable}. */
-    public static int nextendedDynamicState3ColorBlendEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDENABLE); }
+    public static int nextendedDynamicState3ColorBlendEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendEquation}. */
-    public static int nextendedDynamicState3ColorBlendEquation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDEQUATION); }
+    public static int nextendedDynamicState3ColorBlendEquation(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDEQUATION); }
     /** Unsafe version of {@link #extendedDynamicState3ColorWriteMask}. */
-    public static int nextendedDynamicState3ColorWriteMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORWRITEMASK); }
+    public static int nextendedDynamicState3ColorWriteMask(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORWRITEMASK); }
     /** Unsafe version of {@link #extendedDynamicState3RasterizationStream}. */
-    public static int nextendedDynamicState3RasterizationStream(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSTREAM); }
+    public static int nextendedDynamicState3RasterizationStream(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSTREAM); }
     /** Unsafe version of {@link #extendedDynamicState3ConservativeRasterizationMode}. */
-    public static int nextendedDynamicState3ConservativeRasterizationMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3CONSERVATIVERASTERIZATIONMODE); }
+    public static int nextendedDynamicState3ConservativeRasterizationMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3CONSERVATIVERASTERIZATIONMODE); }
     /** Unsafe version of {@link #extendedDynamicState3ExtraPrimitiveOverestimationSize}. */
-    public static int nextendedDynamicState3ExtraPrimitiveOverestimationSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3EXTRAPRIMITIVEOVERESTIMATIONSIZE); }
+    public static int nextendedDynamicState3ExtraPrimitiveOverestimationSize(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3EXTRAPRIMITIVEOVERESTIMATIONSIZE); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClipEnable}. */
-    public static int nextendedDynamicState3DepthClipEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPENABLE); }
+    public static int nextendedDynamicState3DepthClipEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3SampleLocationsEnable}. */
-    public static int nextendedDynamicState3SampleLocationsEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLELOCATIONSENABLE); }
+    public static int nextendedDynamicState3SampleLocationsEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLELOCATIONSENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendAdvanced}. */
-    public static int nextendedDynamicState3ColorBlendAdvanced(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDADVANCED); }
+    public static int nextendedDynamicState3ColorBlendAdvanced(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDADVANCED); }
     /** Unsafe version of {@link #extendedDynamicState3ProvokingVertexMode}. */
-    public static int nextendedDynamicState3ProvokingVertexMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3PROVOKINGVERTEXMODE); }
+    public static int nextendedDynamicState3ProvokingVertexMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3PROVOKINGVERTEXMODE); }
     /** Unsafe version of {@link #extendedDynamicState3LineRasterizationMode}. */
-    public static int nextendedDynamicState3LineRasterizationMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINERASTERIZATIONMODE); }
+    public static int nextendedDynamicState3LineRasterizationMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINERASTERIZATIONMODE); }
     /** Unsafe version of {@link #extendedDynamicState3LineStippleEnable}. */
-    public static int nextendedDynamicState3LineStippleEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINESTIPPLEENABLE); }
+    public static int nextendedDynamicState3LineStippleEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINESTIPPLEENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClipNegativeOneToOne}. */
-    public static int nextendedDynamicState3DepthClipNegativeOneToOne(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPNEGATIVEONETOONE); }
+    public static int nextendedDynamicState3DepthClipNegativeOneToOne(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPNEGATIVEONETOONE); }
     /** Unsafe version of {@link #extendedDynamicState3ViewportWScalingEnable}. */
-    public static int nextendedDynamicState3ViewportWScalingEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTWSCALINGENABLE); }
+    public static int nextendedDynamicState3ViewportWScalingEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTWSCALINGENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3ViewportSwizzle}. */
-    public static int nextendedDynamicState3ViewportSwizzle(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTSWIZZLE); }
+    public static int nextendedDynamicState3ViewportSwizzle(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTSWIZZLE); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageToColorEnable}. */
-    public static int nextendedDynamicState3CoverageToColorEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORENABLE); }
+    public static int nextendedDynamicState3CoverageToColorEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageToColorLocation}. */
-    public static int nextendedDynamicState3CoverageToColorLocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORLOCATION); }
+    public static int nextendedDynamicState3CoverageToColorLocation(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORLOCATION); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationMode}. */
-    public static int nextendedDynamicState3CoverageModulationMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONMODE); }
+    public static int nextendedDynamicState3CoverageModulationMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONMODE); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationTableEnable}. */
-    public static int nextendedDynamicState3CoverageModulationTableEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLEENABLE); }
+    public static int nextendedDynamicState3CoverageModulationTableEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLEENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationTable}. */
-    public static int nextendedDynamicState3CoverageModulationTable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLE); }
+    public static int nextendedDynamicState3CoverageModulationTable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLE); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageReductionMode}. */
-    public static int nextendedDynamicState3CoverageReductionMode(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEREDUCTIONMODE); }
+    public static int nextendedDynamicState3CoverageReductionMode(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEREDUCTIONMODE); }
     /** Unsafe version of {@link #extendedDynamicState3RepresentativeFragmentTestEnable}. */
-    public static int nextendedDynamicState3RepresentativeFragmentTestEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3REPRESENTATIVEFRAGMENTTESTENABLE); }
+    public static int nextendedDynamicState3RepresentativeFragmentTestEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3REPRESENTATIVEFRAGMENTTESTENABLE); }
     /** Unsafe version of {@link #extendedDynamicState3ShadingRateImageEnable}. */
-    public static int nextendedDynamicState3ShadingRateImageEnable(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SHADINGRATEIMAGEENABLE); }
+    public static int nextendedDynamicState3ShadingRateImageEnable(long struct) { return memGetInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SHADINGRATEIMAGEENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #extendedDynamicState3TessellationDomainOrigin(boolean) extendedDynamicState3TessellationDomainOrigin}. */
-    public static void nextendedDynamicState3TessellationDomainOrigin(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3TESSELLATIONDOMAINORIGIN, value); }
+    public static void nextendedDynamicState3TessellationDomainOrigin(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3TESSELLATIONDOMAINORIGIN, value); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClampEnable(boolean) extendedDynamicState3DepthClampEnable}. */
-    public static void nextendedDynamicState3DepthClampEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLAMPENABLE, value); }
+    public static void nextendedDynamicState3DepthClampEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLAMPENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3PolygonMode(boolean) extendedDynamicState3PolygonMode}. */
-    public static void nextendedDynamicState3PolygonMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3POLYGONMODE, value); }
+    public static void nextendedDynamicState3PolygonMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3POLYGONMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3RasterizationSamples(boolean) extendedDynamicState3RasterizationSamples}. */
-    public static void nextendedDynamicState3RasterizationSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSAMPLES, value); }
+    public static void nextendedDynamicState3RasterizationSamples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSAMPLES, value); }
     /** Unsafe version of {@link #extendedDynamicState3SampleMask(boolean) extendedDynamicState3SampleMask}. */
-    public static void nextendedDynamicState3SampleMask(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLEMASK, value); }
+    public static void nextendedDynamicState3SampleMask(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLEMASK, value); }
     /** Unsafe version of {@link #extendedDynamicState3AlphaToCoverageEnable(boolean) extendedDynamicState3AlphaToCoverageEnable}. */
-    public static void nextendedDynamicState3AlphaToCoverageEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOCOVERAGEENABLE, value); }
+    public static void nextendedDynamicState3AlphaToCoverageEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOCOVERAGEENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3AlphaToOneEnable(boolean) extendedDynamicState3AlphaToOneEnable}. */
-    public static void nextendedDynamicState3AlphaToOneEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOONEENABLE, value); }
+    public static void nextendedDynamicState3AlphaToOneEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3ALPHATOONEENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3LogicOpEnable(boolean) extendedDynamicState3LogicOpEnable}. */
-    public static void nextendedDynamicState3LogicOpEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LOGICOPENABLE, value); }
+    public static void nextendedDynamicState3LogicOpEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LOGICOPENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendEnable(boolean) extendedDynamicState3ColorBlendEnable}. */
-    public static void nextendedDynamicState3ColorBlendEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDENABLE, value); }
+    public static void nextendedDynamicState3ColorBlendEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendEquation(boolean) extendedDynamicState3ColorBlendEquation}. */
-    public static void nextendedDynamicState3ColorBlendEquation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDEQUATION, value); }
+    public static void nextendedDynamicState3ColorBlendEquation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDEQUATION, value); }
     /** Unsafe version of {@link #extendedDynamicState3ColorWriteMask(boolean) extendedDynamicState3ColorWriteMask}. */
-    public static void nextendedDynamicState3ColorWriteMask(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORWRITEMASK, value); }
+    public static void nextendedDynamicState3ColorWriteMask(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORWRITEMASK, value); }
     /** Unsafe version of {@link #extendedDynamicState3RasterizationStream(boolean) extendedDynamicState3RasterizationStream}. */
-    public static void nextendedDynamicState3RasterizationStream(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSTREAM, value); }
+    public static void nextendedDynamicState3RasterizationStream(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3RASTERIZATIONSTREAM, value); }
     /** Unsafe version of {@link #extendedDynamicState3ConservativeRasterizationMode(boolean) extendedDynamicState3ConservativeRasterizationMode}. */
-    public static void nextendedDynamicState3ConservativeRasterizationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3CONSERVATIVERASTERIZATIONMODE, value); }
+    public static void nextendedDynamicState3ConservativeRasterizationMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3CONSERVATIVERASTERIZATIONMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ExtraPrimitiveOverestimationSize(boolean) extendedDynamicState3ExtraPrimitiveOverestimationSize}. */
-    public static void nextendedDynamicState3ExtraPrimitiveOverestimationSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3EXTRAPRIMITIVEOVERESTIMATIONSIZE, value); }
+    public static void nextendedDynamicState3ExtraPrimitiveOverestimationSize(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3EXTRAPRIMITIVEOVERESTIMATIONSIZE, value); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClipEnable(boolean) extendedDynamicState3DepthClipEnable}. */
-    public static void nextendedDynamicState3DepthClipEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPENABLE, value); }
+    public static void nextendedDynamicState3DepthClipEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3SampleLocationsEnable(boolean) extendedDynamicState3SampleLocationsEnable}. */
-    public static void nextendedDynamicState3SampleLocationsEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLELOCATIONSENABLE, value); }
+    public static void nextendedDynamicState3SampleLocationsEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SAMPLELOCATIONSENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ColorBlendAdvanced(boolean) extendedDynamicState3ColorBlendAdvanced}. */
-    public static void nextendedDynamicState3ColorBlendAdvanced(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDADVANCED, value); }
+    public static void nextendedDynamicState3ColorBlendAdvanced(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COLORBLENDADVANCED, value); }
     /** Unsafe version of {@link #extendedDynamicState3ProvokingVertexMode(boolean) extendedDynamicState3ProvokingVertexMode}. */
-    public static void nextendedDynamicState3ProvokingVertexMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3PROVOKINGVERTEXMODE, value); }
+    public static void nextendedDynamicState3ProvokingVertexMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3PROVOKINGVERTEXMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3LineRasterizationMode(boolean) extendedDynamicState3LineRasterizationMode}. */
-    public static void nextendedDynamicState3LineRasterizationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINERASTERIZATIONMODE, value); }
+    public static void nextendedDynamicState3LineRasterizationMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINERASTERIZATIONMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3LineStippleEnable(boolean) extendedDynamicState3LineStippleEnable}. */
-    public static void nextendedDynamicState3LineStippleEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINESTIPPLEENABLE, value); }
+    public static void nextendedDynamicState3LineStippleEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3LINESTIPPLEENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3DepthClipNegativeOneToOne(boolean) extendedDynamicState3DepthClipNegativeOneToOne}. */
-    public static void nextendedDynamicState3DepthClipNegativeOneToOne(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPNEGATIVEONETOONE, value); }
+    public static void nextendedDynamicState3DepthClipNegativeOneToOne(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3DEPTHCLIPNEGATIVEONETOONE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ViewportWScalingEnable(boolean) extendedDynamicState3ViewportWScalingEnable}. */
-    public static void nextendedDynamicState3ViewportWScalingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTWSCALINGENABLE, value); }
+    public static void nextendedDynamicState3ViewportWScalingEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTWSCALINGENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ViewportSwizzle(boolean) extendedDynamicState3ViewportSwizzle}. */
-    public static void nextendedDynamicState3ViewportSwizzle(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTSWIZZLE, value); }
+    public static void nextendedDynamicState3ViewportSwizzle(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3VIEWPORTSWIZZLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageToColorEnable(boolean) extendedDynamicState3CoverageToColorEnable}. */
-    public static void nextendedDynamicState3CoverageToColorEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORENABLE, value); }
+    public static void nextendedDynamicState3CoverageToColorEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageToColorLocation(boolean) extendedDynamicState3CoverageToColorLocation}. */
-    public static void nextendedDynamicState3CoverageToColorLocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORLOCATION, value); }
+    public static void nextendedDynamicState3CoverageToColorLocation(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGETOCOLORLOCATION, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationMode(boolean) extendedDynamicState3CoverageModulationMode}. */
-    public static void nextendedDynamicState3CoverageModulationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONMODE, value); }
+    public static void nextendedDynamicState3CoverageModulationMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationTableEnable(boolean) extendedDynamicState3CoverageModulationTableEnable}. */
-    public static void nextendedDynamicState3CoverageModulationTableEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLEENABLE, value); }
+    public static void nextendedDynamicState3CoverageModulationTableEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLEENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageModulationTable(boolean) extendedDynamicState3CoverageModulationTable}. */
-    public static void nextendedDynamicState3CoverageModulationTable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLE, value); }
+    public static void nextendedDynamicState3CoverageModulationTable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEMODULATIONTABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3CoverageReductionMode(boolean) extendedDynamicState3CoverageReductionMode}. */
-    public static void nextendedDynamicState3CoverageReductionMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEREDUCTIONMODE, value); }
+    public static void nextendedDynamicState3CoverageReductionMode(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3COVERAGEREDUCTIONMODE, value); }
     /** Unsafe version of {@link #extendedDynamicState3RepresentativeFragmentTestEnable(boolean) extendedDynamicState3RepresentativeFragmentTestEnable}. */
-    public static void nextendedDynamicState3RepresentativeFragmentTestEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3REPRESENTATIVEFRAGMENTTESTENABLE, value); }
+    public static void nextendedDynamicState3RepresentativeFragmentTestEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3REPRESENTATIVEFRAGMENTTESTENABLE, value); }
     /** Unsafe version of {@link #extendedDynamicState3ShadingRateImageEnable(boolean) extendedDynamicState3ShadingRateImageEnable}. */
-    public static void nextendedDynamicState3ShadingRateImageEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SHADINGRATEIMAGEENABLE, value); }
+    public static void nextendedDynamicState3ShadingRateImageEnable(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.EXTENDEDDYNAMICSTATE3SHADINGRATEIMAGEENABLE, value); }
 
     // -----------------------------------
 

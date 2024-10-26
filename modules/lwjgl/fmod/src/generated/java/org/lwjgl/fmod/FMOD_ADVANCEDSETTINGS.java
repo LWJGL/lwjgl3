@@ -427,94 +427,94 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #cbSize}. */
-    public static int ncbSize(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.CBSIZE); }
+    public static int ncbSize(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.CBSIZE); }
     /** Unsafe version of {@link #maxMPEGCodecs}. */
-    public static int nmaxMPEGCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXMPEGCODECS); }
+    public static int nmaxMPEGCodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXMPEGCODECS); }
     /** Unsafe version of {@link #maxADPCMCodecs}. */
-    public static int nmaxADPCMCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXADPCMCODECS); }
+    public static int nmaxADPCMCodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXADPCMCODECS); }
     /** Unsafe version of {@link #maxXMACodecs}. */
-    public static int nmaxXMACodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXXMACODECS); }
+    public static int nmaxXMACodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXXMACODECS); }
     /** Unsafe version of {@link #maxVorbisCodecs}. */
-    public static int nmaxVorbisCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXVORBISCODECS); }
+    public static int nmaxVorbisCodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXVORBISCODECS); }
     /** Unsafe version of {@link #maxAT9Codecs}. */
-    public static int nmaxAT9Codecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXAT9CODECS); }
+    public static int nmaxAT9Codecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXAT9CODECS); }
     /** Unsafe version of {@link #maxFADPCMCodecs}. */
-    public static int nmaxFADPCMCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXFADPCMCODECS); }
+    public static int nmaxFADPCMCodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXFADPCMCODECS); }
     /** Unsafe version of {@link #maxOpusCodecs}. */
-    public static int nmaxOpusCodecs(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS); }
+    public static int nmaxOpusCodecs(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS); }
     /** Unsafe version of {@link #ASIONumChannels}. */
-    public static int nASIONumChannels(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.ASIONUMCHANNELS); }
+    public static int nASIONumChannels(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.ASIONUMCHANNELS); }
     /** Unsafe version of {@link #ASIOChannelList() ASIOChannelList}. */
     public static PointerBuffer nASIOChannelList(long struct) { return memPointerBuffer(memGetAddress(struct + FMOD_ADVANCEDSETTINGS.ASIOCHANNELLIST), nASIONumChannels(struct)); }
     /** Unsafe version of {@link #ASIOSpeakerList() ASIOSpeakerList}. */
     public static IntBuffer nASIOSpeakerList(long struct) { return memIntBuffer(memGetAddress(struct + FMOD_ADVANCEDSETTINGS.ASIOSPEAKERLIST), nASIONumChannels(struct)); }
     /** Unsafe version of {@link #vol0virtualvol}. */
-    public static float nvol0virtualvol(long struct) { return UNSAFE.getFloat(null, struct + FMOD_ADVANCEDSETTINGS.VOL0VIRTUALVOL); }
+    public static float nvol0virtualvol(long struct) { return memGetFloat(struct + FMOD_ADVANCEDSETTINGS.VOL0VIRTUALVOL); }
     /** Unsafe version of {@link #defaultDecodeBufferSize}. */
-    public static int ndefaultDecodeBufferSize(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.DEFAULTDECODEBUFFERSIZE); }
+    public static int ndefaultDecodeBufferSize(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.DEFAULTDECODEBUFFERSIZE); }
     /** Unsafe version of {@link #profilePort}. */
-    public static short nprofilePort(long struct) { return UNSAFE.getShort(null, struct + FMOD_ADVANCEDSETTINGS.PROFILEPORT); }
+    public static short nprofilePort(long struct) { return memGetShort(struct + FMOD_ADVANCEDSETTINGS.PROFILEPORT); }
     /** Unsafe version of {@link #geometryMaxFadeTime}. */
-    public static int ngeometryMaxFadeTime(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.GEOMETRYMAXFADETIME); }
+    public static int ngeometryMaxFadeTime(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.GEOMETRYMAXFADETIME); }
     /** Unsafe version of {@link #distanceFilterCenterFreq}. */
-    public static float ndistanceFilterCenterFreq(long struct) { return UNSAFE.getFloat(null, struct + FMOD_ADVANCEDSETTINGS.DISTANCEFILTERCENTERFREQ); }
+    public static float ndistanceFilterCenterFreq(long struct) { return memGetFloat(struct + FMOD_ADVANCEDSETTINGS.DISTANCEFILTERCENTERFREQ); }
     /** Unsafe version of {@link #reverb3Dinstance}. */
-    public static int nreverb3Dinstance(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.REVERB3DINSTANCE); }
+    public static int nreverb3Dinstance(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.REVERB3DINSTANCE); }
     /** Unsafe version of {@link #DSPBufferPoolSize}. */
-    public static int nDSPBufferPoolSize(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.DSPBUFFERPOOLSIZE); }
+    public static int nDSPBufferPoolSize(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.DSPBUFFERPOOLSIZE); }
     /** Unsafe version of {@link #resamplerMethod}. */
-    public static int nresamplerMethod(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.RESAMPLERMETHOD); }
+    public static int nresamplerMethod(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.RESAMPLERMETHOD); }
     /** Unsafe version of {@link #randomSeed}. */
-    public static int nrandomSeed(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.RANDOMSEED); }
+    public static int nrandomSeed(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.RANDOMSEED); }
     /** Unsafe version of {@link #maxConvolutionThreads}. */
-    public static int nmaxConvolutionThreads(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS); }
+    public static int nmaxConvolutionThreads(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS); }
     /** Unsafe version of {@link #maxSpatialObjects}. */
-    public static int nmaxSpatialObjects(long struct) { return UNSAFE.getInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS); }
+    public static int nmaxSpatialObjects(long struct) { return memGetInt(struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
-    public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.CBSIZE, value); }
+    public static void ncbSize(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.CBSIZE, value); }
     /** Unsafe version of {@link #maxMPEGCodecs(int) maxMPEGCodecs}. */
-    public static void nmaxMPEGCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXMPEGCODECS, value); }
+    public static void nmaxMPEGCodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXMPEGCODECS, value); }
     /** Unsafe version of {@link #maxADPCMCodecs(int) maxADPCMCodecs}. */
-    public static void nmaxADPCMCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXADPCMCODECS, value); }
+    public static void nmaxADPCMCodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXADPCMCODECS, value); }
     /** Unsafe version of {@link #maxXMACodecs(int) maxXMACodecs}. */
-    public static void nmaxXMACodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXXMACODECS, value); }
+    public static void nmaxXMACodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXXMACODECS, value); }
     /** Unsafe version of {@link #maxVorbisCodecs(int) maxVorbisCodecs}. */
-    public static void nmaxVorbisCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXVORBISCODECS, value); }
+    public static void nmaxVorbisCodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXVORBISCODECS, value); }
     /** Unsafe version of {@link #maxAT9Codecs(int) maxAT9Codecs}. */
-    public static void nmaxAT9Codecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXAT9CODECS, value); }
+    public static void nmaxAT9Codecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXAT9CODECS, value); }
     /** Unsafe version of {@link #maxFADPCMCodecs(int) maxFADPCMCodecs}. */
-    public static void nmaxFADPCMCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXFADPCMCODECS, value); }
+    public static void nmaxFADPCMCodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXFADPCMCODECS, value); }
     /** Unsafe version of {@link #maxOpusCodecs(int) maxOpusCodecs}. */
-    public static void nmaxOpusCodecs(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS, value); }
+    public static void nmaxOpusCodecs(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXOPUSCODECS, value); }
     /** Sets the specified value to the {@code ASIONumChannels} field of the specified {@code struct}. */
-    public static void nASIONumChannels(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.ASIONUMCHANNELS, value); }
+    public static void nASIONumChannels(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.ASIONUMCHANNELS, value); }
     /** Unsafe version of {@link #ASIOChannelList(PointerBuffer) ASIOChannelList}. */
     public static void nASIOChannelList(long struct, PointerBuffer value) { memPutAddress(struct + FMOD_ADVANCEDSETTINGS.ASIOCHANNELLIST, memAddress(value)); }
     /** Unsafe version of {@link #ASIOSpeakerList(IntBuffer) ASIOSpeakerList}. */
     public static void nASIOSpeakerList(long struct, IntBuffer value) { memPutAddress(struct + FMOD_ADVANCEDSETTINGS.ASIOSPEAKERLIST, memAddress(value)); }
     /** Unsafe version of {@link #vol0virtualvol(float) vol0virtualvol}. */
-    public static void nvol0virtualvol(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_ADVANCEDSETTINGS.VOL0VIRTUALVOL, value); }
+    public static void nvol0virtualvol(long struct, float value) { memPutFloat(struct + FMOD_ADVANCEDSETTINGS.VOL0VIRTUALVOL, value); }
     /** Unsafe version of {@link #defaultDecodeBufferSize(int) defaultDecodeBufferSize}. */
-    public static void ndefaultDecodeBufferSize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.DEFAULTDECODEBUFFERSIZE, value); }
+    public static void ndefaultDecodeBufferSize(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.DEFAULTDECODEBUFFERSIZE, value); }
     /** Unsafe version of {@link #profilePort(short) profilePort}. */
-    public static void nprofilePort(long struct, short value) { UNSAFE.putShort(null, struct + FMOD_ADVANCEDSETTINGS.PROFILEPORT, value); }
+    public static void nprofilePort(long struct, short value) { memPutShort(struct + FMOD_ADVANCEDSETTINGS.PROFILEPORT, value); }
     /** Unsafe version of {@link #geometryMaxFadeTime(int) geometryMaxFadeTime}. */
-    public static void ngeometryMaxFadeTime(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.GEOMETRYMAXFADETIME, value); }
+    public static void ngeometryMaxFadeTime(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.GEOMETRYMAXFADETIME, value); }
     /** Unsafe version of {@link #distanceFilterCenterFreq(float) distanceFilterCenterFreq}. */
-    public static void ndistanceFilterCenterFreq(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_ADVANCEDSETTINGS.DISTANCEFILTERCENTERFREQ, value); }
+    public static void ndistanceFilterCenterFreq(long struct, float value) { memPutFloat(struct + FMOD_ADVANCEDSETTINGS.DISTANCEFILTERCENTERFREQ, value); }
     /** Unsafe version of {@link #reverb3Dinstance(int) reverb3Dinstance}. */
-    public static void nreverb3Dinstance(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.REVERB3DINSTANCE, value); }
+    public static void nreverb3Dinstance(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.REVERB3DINSTANCE, value); }
     /** Unsafe version of {@link #DSPBufferPoolSize(int) DSPBufferPoolSize}. */
-    public static void nDSPBufferPoolSize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.DSPBUFFERPOOLSIZE, value); }
+    public static void nDSPBufferPoolSize(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.DSPBUFFERPOOLSIZE, value); }
     /** Unsafe version of {@link #resamplerMethod(int) resamplerMethod}. */
-    public static void nresamplerMethod(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.RESAMPLERMETHOD, value); }
+    public static void nresamplerMethod(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.RESAMPLERMETHOD, value); }
     /** Unsafe version of {@link #randomSeed(int) randomSeed}. */
-    public static void nrandomSeed(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.RANDOMSEED, value); }
+    public static void nrandomSeed(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.RANDOMSEED, value); }
     /** Unsafe version of {@link #maxConvolutionThreads(int) maxConvolutionThreads}. */
-    public static void nmaxConvolutionThreads(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS, value); }
+    public static void nmaxConvolutionThreads(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXCONVOLUTIONTHREADS, value); }
     /** Unsafe version of {@link #maxSpatialObjects(int) maxSpatialObjects}. */
-    public static void nmaxSpatialObjects(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS, value); }
+    public static void nmaxSpatialObjects(long struct, int value) { memPutInt(struct + FMOD_ADVANCEDSETTINGS.MAXSPATIALOBJECTS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

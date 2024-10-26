@@ -211,7 +211,7 @@ public class CUDA_ARRAY_MEMORY_REQUIREMENTS extends Struct<CUDA_ARRAY_MEMORY_REQ
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + CUDA_ARRAY_MEMORY_REQUIREMENTS.RESERVED, 4); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUDA_ARRAY_MEMORY_REQUIREMENTS.RESERVED + check(index, 4) * 4);
+        return memGetInt(struct + CUDA_ARRAY_MEMORY_REQUIREMENTS.RESERVED + check(index, 4) * 4);
     }
 
     // -----------------------------------

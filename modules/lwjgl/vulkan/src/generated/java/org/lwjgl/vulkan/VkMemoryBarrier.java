@@ -285,22 +285,22 @@ public class VkMemoryBarrier extends Struct<VkMemoryBarrier> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryBarrier.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryBarrier.PNEXT); }
     /** Unsafe version of {@link #srcAccessMask}. */
-    public static int nsrcAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier.SRCACCESSMASK); }
+    public static int nsrcAccessMask(long struct) { return memGetInt(struct + VkMemoryBarrier.SRCACCESSMASK); }
     /** Unsafe version of {@link #dstAccessMask}. */
-    public static int ndstAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier.DSTACCESSMASK); }
+    public static int ndstAccessMask(long struct) { return memGetInt(struct + VkMemoryBarrier.DSTACCESSMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryBarrier.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryBarrier.PNEXT, value); }
     /** Unsafe version of {@link #srcAccessMask(int) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier.SRCACCESSMASK, value); }
+    public static void nsrcAccessMask(long struct, int value) { memPutInt(struct + VkMemoryBarrier.SRCACCESSMASK, value); }
     /** Unsafe version of {@link #dstAccessMask(int) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier.DSTACCESSMASK, value); }
+    public static void ndstAccessMask(long struct, int value) { memPutInt(struct + VkMemoryBarrier.DSTACCESSMASK, value); }
 
     // -----------------------------------
 

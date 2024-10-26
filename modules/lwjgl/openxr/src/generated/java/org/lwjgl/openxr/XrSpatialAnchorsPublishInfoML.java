@@ -269,26 +269,26 @@ public class XrSpatialAnchorsPublishInfoML extends Struct<XrSpatialAnchorsPublis
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsPublishInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsPublishInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsPublishInfoML.NEXT); }
     /** Unsafe version of {@link #anchorCount}. */
-    public static int nanchorCount(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsPublishInfoML.ANCHORCOUNT); }
+    public static int nanchorCount(long struct) { return memGetInt(struct + XrSpatialAnchorsPublishInfoML.ANCHORCOUNT); }
     /** Unsafe version of {@link #anchors() anchors}. */
     public static PointerBuffer nanchors(long struct) { return memPointerBuffer(memGetAddress(struct + XrSpatialAnchorsPublishInfoML.ANCHORS), nanchorCount(struct)); }
     /** Unsafe version of {@link #expiration}. */
-    public static long nexpiration(long struct) { return UNSAFE.getLong(null, struct + XrSpatialAnchorsPublishInfoML.EXPIRATION); }
+    public static long nexpiration(long struct) { return memGetLong(struct + XrSpatialAnchorsPublishInfoML.EXPIRATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsPublishInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsPublishInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsPublishInfoML.NEXT, value); }
     /** Sets the specified value to the {@code anchorCount} field of the specified {@code struct}. */
-    public static void nanchorCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsPublishInfoML.ANCHORCOUNT, value); }
+    public static void nanchorCount(long struct, int value) { memPutInt(struct + XrSpatialAnchorsPublishInfoML.ANCHORCOUNT, value); }
     /** Unsafe version of {@link #anchors(PointerBuffer) anchors}. */
     public static void nanchors(long struct, PointerBuffer value) { memPutAddress(struct + XrSpatialAnchorsPublishInfoML.ANCHORS, memAddress(value)); nanchorCount(struct, value.remaining()); }
     /** Unsafe version of {@link #expiration(long) expiration}. */
-    public static void nexpiration(long struct, long value) { UNSAFE.putLong(null, struct + XrSpatialAnchorsPublishInfoML.EXPIRATION, value); }
+    public static void nexpiration(long struct, long value) { memPutLong(struct + XrSpatialAnchorsPublishInfoML.EXPIRATION, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

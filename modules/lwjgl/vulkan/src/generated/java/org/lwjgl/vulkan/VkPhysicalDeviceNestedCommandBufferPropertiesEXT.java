@@ -246,18 +246,18 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxCommandBufferNestingLevel}. */
-    public static int nmaxCommandBufferNestingLevel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.MAXCOMMANDBUFFERNESTINGLEVEL); }
+    public static int nmaxCommandBufferNestingLevel(long struct) { return memGetInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.MAXCOMMANDBUFFERNESTINGLEVEL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.PNEXT, value); }
     /** Unsafe version of {@link #maxCommandBufferNestingLevel(int) maxCommandBufferNestingLevel}. */
-    public static void nmaxCommandBufferNestingLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.MAXCOMMANDBUFFERNESTINGLEVEL, value); }
+    public static void nmaxCommandBufferNestingLevel(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.MAXCOMMANDBUFFERNESTINGLEVEL, value); }
 
     // -----------------------------------
 

@@ -220,9 +220,9 @@ public class ZSTDBounds extends Struct<ZSTDBounds> implements NativeResource {
     /** Unsafe version of {@link #error}. */
     public static long nerror(long struct) { return memGetAddress(struct + ZSTDBounds.ERROR); }
     /** Unsafe version of {@link #lowerBound}. */
-    public static int nlowerBound(long struct) { return UNSAFE.getInt(null, struct + ZSTDBounds.LOWERBOUND); }
+    public static int nlowerBound(long struct) { return memGetInt(struct + ZSTDBounds.LOWERBOUND); }
     /** Unsafe version of {@link #upperBound}. */
-    public static int nupperBound(long struct) { return UNSAFE.getInt(null, struct + ZSTDBounds.UPPERBOUND); }
+    public static int nupperBound(long struct) { return memGetInt(struct + ZSTDBounds.UPPERBOUND); }
 
     // -----------------------------------
 

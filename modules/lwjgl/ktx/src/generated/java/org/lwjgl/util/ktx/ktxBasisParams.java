@@ -575,82 +575,82 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #structSize}. */
-    public static int nstructSize(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.STRUCTSIZE); }
+    public static int nstructSize(long struct) { return memGetInt(struct + ktxBasisParams.STRUCTSIZE); }
     /** Unsafe version of {@link #uastc}. */
-    public static boolean nuastc(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.UASTC) != 0; }
+    public static boolean nuastc(long struct) { return memGetByte(struct + ktxBasisParams.UASTC) != 0; }
     /** Unsafe version of {@link #verbose}. */
-    public static boolean nverbose(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.VERBOSE) != 0; }
+    public static boolean nverbose(long struct) { return memGetByte(struct + ktxBasisParams.VERBOSE) != 0; }
     /** Unsafe version of {@link #noSSE}. */
-    public static boolean nnoSSE(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.NOSSE) != 0; }
+    public static boolean nnoSSE(long struct) { return memGetByte(struct + ktxBasisParams.NOSSE) != 0; }
     /** Unsafe version of {@link #threadCount}. */
-    public static int nthreadCount(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.THREADCOUNT); }
+    public static int nthreadCount(long struct) { return memGetInt(struct + ktxBasisParams.THREADCOUNT); }
     /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.COMPRESSIONLEVEL); }
+    public static int ncompressionLevel(long struct) { return memGetInt(struct + ktxBasisParams.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #qualityLevel}. */
-    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.QUALITYLEVEL); }
+    public static int nqualityLevel(long struct) { return memGetInt(struct + ktxBasisParams.QUALITYLEVEL); }
     /** Unsafe version of {@link #maxEndpoints}. */
-    public static int nmaxEndpoints(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.MAXENDPOINTS); }
+    public static int nmaxEndpoints(long struct) { return memGetInt(struct + ktxBasisParams.MAXENDPOINTS); }
     /** Unsafe version of {@link #endpointRDOThreshold}. */
-    public static float nendpointRDOThreshold(long struct) { return UNSAFE.getFloat(null, struct + ktxBasisParams.ENDPOINTRDOTHRESHOLD); }
+    public static float nendpointRDOThreshold(long struct) { return memGetFloat(struct + ktxBasisParams.ENDPOINTRDOTHRESHOLD); }
     /** Unsafe version of {@link #maxSelectors}. */
-    public static int nmaxSelectors(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.MAXSELECTORS); }
+    public static int nmaxSelectors(long struct) { return memGetInt(struct + ktxBasisParams.MAXSELECTORS); }
     /** Unsafe version of {@link #selectorRDOThreshold}. */
-    public static float nselectorRDOThreshold(long struct) { return UNSAFE.getFloat(null, struct + ktxBasisParams.SELECTORRDOTHRESHOLD); }
+    public static float nselectorRDOThreshold(long struct) { return memGetFloat(struct + ktxBasisParams.SELECTORRDOTHRESHOLD); }
     /** Unsafe version of {@link #inputSwizzle}. */
     public static ByteBuffer ninputSwizzle(long struct) { return memByteBuffer(struct + ktxBasisParams.INPUTSWIZZLE, 4); }
     /** Unsafe version of {@link #inputSwizzle(int) inputSwizzle}. */
     public static byte ninputSwizzle(long struct, int index) {
-        return UNSAFE.getByte(null, struct + ktxBasisParams.INPUTSWIZZLE + check(index, 4) * 1);
+        return memGetByte(struct + ktxBasisParams.INPUTSWIZZLE + check(index, 4) * 1);
     }
     /** Unsafe version of {@link #normalMap}. */
-    public static boolean nnormalMap(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.NORMALMAP) != 0; }
+    public static boolean nnormalMap(long struct) { return memGetByte(struct + ktxBasisParams.NORMALMAP) != 0; }
     /** Unsafe version of {@link #separateRGToRGB_A}. */
-    public static boolean nseparateRGToRGB_A(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.SEPARATERGTORGB_A) != 0; }
+    public static boolean nseparateRGToRGB_A(long struct) { return memGetByte(struct + ktxBasisParams.SEPARATERGTORGB_A) != 0; }
     /** Unsafe version of {@link #preSwizzle}. */
-    public static boolean npreSwizzle(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.PRESWIZZLE) != 0; }
+    public static boolean npreSwizzle(long struct) { return memGetByte(struct + ktxBasisParams.PRESWIZZLE) != 0; }
     /** Unsafe version of {@link #noEndpointRDO}. */
-    public static boolean nnoEndpointRDO(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.NOENDPOINTRDO) != 0; }
+    public static boolean nnoEndpointRDO(long struct) { return memGetByte(struct + ktxBasisParams.NOENDPOINTRDO) != 0; }
     /** Unsafe version of {@link #noSelectorRDO}. */
-    public static boolean nnoSelectorRDO(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.NOSELECTORRDO) != 0; }
+    public static boolean nnoSelectorRDO(long struct) { return memGetByte(struct + ktxBasisParams.NOSELECTORRDO) != 0; }
     /** Unsafe version of {@link #uastcFlags}. */
-    public static int nuastcFlags(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.UASTCFLAGS); }
+    public static int nuastcFlags(long struct) { return memGetInt(struct + ktxBasisParams.UASTCFLAGS); }
     /** Unsafe version of {@link #uastcRDO}. */
-    public static boolean nuastcRDO(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.UASTCRDO) != 0; }
+    public static boolean nuastcRDO(long struct) { return memGetByte(struct + ktxBasisParams.UASTCRDO) != 0; }
     /** Unsafe version of {@link #uastcRDOQualityScalar}. */
-    public static float nuastcRDOQualityScalar(long struct) { return UNSAFE.getFloat(null, struct + ktxBasisParams.UASTCRDOQUALITYSCALAR); }
+    public static float nuastcRDOQualityScalar(long struct) { return memGetFloat(struct + ktxBasisParams.UASTCRDOQUALITYSCALAR); }
     /** Unsafe version of {@link #uastcRDODictSize}. */
-    public static int nuastcRDODictSize(long struct) { return UNSAFE.getInt(null, struct + ktxBasisParams.UASTCRDODICTSIZE); }
+    public static int nuastcRDODictSize(long struct) { return memGetInt(struct + ktxBasisParams.UASTCRDODICTSIZE); }
     /** Unsafe version of {@link #uastcRDOMaxSmoothBlockErrorScale}. */
-    public static float nuastcRDOMaxSmoothBlockErrorScale(long struct) { return UNSAFE.getFloat(null, struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKERRORSCALE); }
+    public static float nuastcRDOMaxSmoothBlockErrorScale(long struct) { return memGetFloat(struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKERRORSCALE); }
     /** Unsafe version of {@link #uastcRDOMaxSmoothBlockStdDev}. */
-    public static float nuastcRDOMaxSmoothBlockStdDev(long struct) { return UNSAFE.getFloat(null, struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKSTDDEV); }
+    public static float nuastcRDOMaxSmoothBlockStdDev(long struct) { return memGetFloat(struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKSTDDEV); }
     /** Unsafe version of {@link #uastcRDODontFavorSimplerModes}. */
-    public static boolean nuastcRDODontFavorSimplerModes(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES) != 0; }
+    public static boolean nuastcRDODontFavorSimplerModes(long struct) { return memGetByte(struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES) != 0; }
     /** Unsafe version of {@link #uastcRDONoMultithreading}. */
-    public static boolean nuastcRDONoMultithreading(long struct) { return UNSAFE.getByte(null, struct + ktxBasisParams.UASTCRDONOMULTITHREADING) != 0; }
+    public static boolean nuastcRDONoMultithreading(long struct) { return memGetByte(struct + ktxBasisParams.UASTCRDONOMULTITHREADING) != 0; }
 
     /** Unsafe version of {@link #structSize(int) structSize}. */
-    public static void nstructSize(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.STRUCTSIZE, value); }
+    public static void nstructSize(long struct, int value) { memPutInt(struct + ktxBasisParams.STRUCTSIZE, value); }
     /** Unsafe version of {@link #uastc(boolean) uastc}. */
-    public static void nuastc(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.UASTC, value ? (byte)1 : (byte)0); }
+    public static void nuastc(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTC, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #verbose(boolean) verbose}. */
-    public static void nverbose(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.VERBOSE, value ? (byte)1 : (byte)0); }
+    public static void nverbose(long struct, boolean value) { memPutByte(struct + ktxBasisParams.VERBOSE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #noSSE(boolean) noSSE}. */
-    public static void nnoSSE(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.NOSSE, value ? (byte)1 : (byte)0); }
+    public static void nnoSSE(long struct, boolean value) { memPutByte(struct + ktxBasisParams.NOSSE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #threadCount(int) threadCount}. */
-    public static void nthreadCount(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.THREADCOUNT, value); }
+    public static void nthreadCount(long struct, int value) { memPutInt(struct + ktxBasisParams.THREADCOUNT, value); }
     /** Unsafe version of {@link #compressionLevel(int) compressionLevel}. */
-    public static void ncompressionLevel(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.COMPRESSIONLEVEL, value); }
+    public static void ncompressionLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.COMPRESSIONLEVEL, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
-    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.QUALITYLEVEL, value); }
+    public static void nqualityLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.QUALITYLEVEL, value); }
     /** Unsafe version of {@link #maxEndpoints(int) maxEndpoints}. */
-    public static void nmaxEndpoints(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.MAXENDPOINTS, value); }
+    public static void nmaxEndpoints(long struct, int value) { memPutInt(struct + ktxBasisParams.MAXENDPOINTS, value); }
     /** Unsafe version of {@link #endpointRDOThreshold(float) endpointRDOThreshold}. */
-    public static void nendpointRDOThreshold(long struct, float value) { UNSAFE.putFloat(null, struct + ktxBasisParams.ENDPOINTRDOTHRESHOLD, value); }
+    public static void nendpointRDOThreshold(long struct, float value) { memPutFloat(struct + ktxBasisParams.ENDPOINTRDOTHRESHOLD, value); }
     /** Unsafe version of {@link #maxSelectors(int) maxSelectors}. */
-    public static void nmaxSelectors(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.MAXSELECTORS, value); }
+    public static void nmaxSelectors(long struct, int value) { memPutInt(struct + ktxBasisParams.MAXSELECTORS, value); }
     /** Unsafe version of {@link #selectorRDOThreshold(float) selectorRDOThreshold}. */
-    public static void nselectorRDOThreshold(long struct, float value) { UNSAFE.putFloat(null, struct + ktxBasisParams.SELECTORRDOTHRESHOLD, value); }
+    public static void nselectorRDOThreshold(long struct, float value) { memPutFloat(struct + ktxBasisParams.SELECTORRDOTHRESHOLD, value); }
     /** Unsafe version of {@link #inputSwizzle(ByteBuffer) inputSwizzle}. */
     public static void ninputSwizzle(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -658,34 +658,34 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     }
     /** Unsafe version of {@link #inputSwizzle(int, byte) inputSwizzle}. */
     public static void ninputSwizzle(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + ktxBasisParams.INPUTSWIZZLE + check(index, 4) * 1, value);
+        memPutByte(struct + ktxBasisParams.INPUTSWIZZLE + check(index, 4) * 1, value);
     }
     /** Unsafe version of {@link #normalMap(boolean) normalMap}. */
-    public static void nnormalMap(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.NORMALMAP, value ? (byte)1 : (byte)0); }
+    public static void nnormalMap(long struct, boolean value) { memPutByte(struct + ktxBasisParams.NORMALMAP, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #separateRGToRGB_A(boolean) separateRGToRGB_A}. */
-    public static void nseparateRGToRGB_A(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.SEPARATERGTORGB_A, value ? (byte)1 : (byte)0); }
+    public static void nseparateRGToRGB_A(long struct, boolean value) { memPutByte(struct + ktxBasisParams.SEPARATERGTORGB_A, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #preSwizzle(boolean) preSwizzle}. */
-    public static void npreSwizzle(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.PRESWIZZLE, value ? (byte)1 : (byte)0); }
+    public static void npreSwizzle(long struct, boolean value) { memPutByte(struct + ktxBasisParams.PRESWIZZLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #noEndpointRDO(boolean) noEndpointRDO}. */
-    public static void nnoEndpointRDO(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.NOENDPOINTRDO, value ? (byte)1 : (byte)0); }
+    public static void nnoEndpointRDO(long struct, boolean value) { memPutByte(struct + ktxBasisParams.NOENDPOINTRDO, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #noSelectorRDO(boolean) noSelectorRDO}. */
-    public static void nnoSelectorRDO(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.NOSELECTORRDO, value ? (byte)1 : (byte)0); }
+    public static void nnoSelectorRDO(long struct, boolean value) { memPutByte(struct + ktxBasisParams.NOSELECTORRDO, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #uastcFlags(int) uastcFlags}. */
-    public static void nuastcFlags(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.UASTCFLAGS, value); }
+    public static void nuastcFlags(long struct, int value) { memPutInt(struct + ktxBasisParams.UASTCFLAGS, value); }
     /** Unsafe version of {@link #uastcRDO(boolean) uastcRDO}. */
-    public static void nuastcRDO(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.UASTCRDO, value ? (byte)1 : (byte)0); }
+    public static void nuastcRDO(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCRDO, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #uastcRDOQualityScalar(float) uastcRDOQualityScalar}. */
-    public static void nuastcRDOQualityScalar(long struct, float value) { UNSAFE.putFloat(null, struct + ktxBasisParams.UASTCRDOQUALITYSCALAR, value); }
+    public static void nuastcRDOQualityScalar(long struct, float value) { memPutFloat(struct + ktxBasisParams.UASTCRDOQUALITYSCALAR, value); }
     /** Unsafe version of {@link #uastcRDODictSize(int) uastcRDODictSize}. */
-    public static void nuastcRDODictSize(long struct, int value) { UNSAFE.putInt(null, struct + ktxBasisParams.UASTCRDODICTSIZE, value); }
+    public static void nuastcRDODictSize(long struct, int value) { memPutInt(struct + ktxBasisParams.UASTCRDODICTSIZE, value); }
     /** Unsafe version of {@link #uastcRDOMaxSmoothBlockErrorScale(float) uastcRDOMaxSmoothBlockErrorScale}. */
-    public static void nuastcRDOMaxSmoothBlockErrorScale(long struct, float value) { UNSAFE.putFloat(null, struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKERRORSCALE, value); }
+    public static void nuastcRDOMaxSmoothBlockErrorScale(long struct, float value) { memPutFloat(struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKERRORSCALE, value); }
     /** Unsafe version of {@link #uastcRDOMaxSmoothBlockStdDev(float) uastcRDOMaxSmoothBlockStdDev}. */
-    public static void nuastcRDOMaxSmoothBlockStdDev(long struct, float value) { UNSAFE.putFloat(null, struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKSTDDEV, value); }
+    public static void nuastcRDOMaxSmoothBlockStdDev(long struct, float value) { memPutFloat(struct + ktxBasisParams.UASTCRDOMAXSMOOTHBLOCKSTDDEV, value); }
     /** Unsafe version of {@link #uastcRDODontFavorSimplerModes(boolean) uastcRDODontFavorSimplerModes}. */
-    public static void nuastcRDODontFavorSimplerModes(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES, value ? (byte)1 : (byte)0); }
+    public static void nuastcRDODontFavorSimplerModes(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #uastcRDONoMultithreading(boolean) uastcRDONoMultithreading}. */
-    public static void nuastcRDONoMultithreading(long struct, boolean value) { UNSAFE.putByte(null, struct + ktxBasisParams.UASTCRDONOMULTITHREADING, value ? (byte)1 : (byte)0); }
+    public static void nuastcRDONoMultithreading(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCRDONOMULTITHREADING, value ? (byte)1 : (byte)0); }
 
     // -----------------------------------
 

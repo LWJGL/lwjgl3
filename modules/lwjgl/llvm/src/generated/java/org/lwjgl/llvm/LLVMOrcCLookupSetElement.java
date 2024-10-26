@@ -226,12 +226,12 @@ public class LLVMOrcCLookupSetElement extends Struct<LLVMOrcCLookupSetElement> i
     /** Unsafe version of {@link #Name}. */
     public static long nName(long struct) { return memGetAddress(struct + LLVMOrcCLookupSetElement.NAME); }
     /** Unsafe version of {@link #LookupFlags}. */
-    public static int nLookupFlags(long struct) { return UNSAFE.getInt(null, struct + LLVMOrcCLookupSetElement.LOOKUPFLAGS); }
+    public static int nLookupFlags(long struct) { return memGetInt(struct + LLVMOrcCLookupSetElement.LOOKUPFLAGS); }
 
     /** Unsafe version of {@link #Name(long) Name}. */
     public static void nName(long struct, long value) { memPutAddress(struct + LLVMOrcCLookupSetElement.NAME, check(value)); }
     /** Unsafe version of {@link #LookupFlags(int) LookupFlags}. */
-    public static void nLookupFlags(long struct, int value) { UNSAFE.putInt(null, struct + LLVMOrcCLookupSetElement.LOOKUPFLAGS, value); }
+    public static void nLookupFlags(long struct, int value) { memPutInt(struct + LLVMOrcCLookupSetElement.LOOKUPFLAGS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

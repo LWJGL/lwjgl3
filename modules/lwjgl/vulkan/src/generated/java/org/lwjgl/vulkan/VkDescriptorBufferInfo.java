@@ -286,18 +286,18 @@ public class VkDescriptorBufferInfo extends Struct<VkDescriptorBufferInfo> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorBufferInfo.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkDescriptorBufferInfo.BUFFER); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorBufferInfo.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkDescriptorBufferInfo.OFFSET); }
     /** Unsafe version of {@link #range}. */
-    public static long nrange(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorBufferInfo.RANGE); }
+    public static long nrange(long struct) { return memGetLong(struct + VkDescriptorBufferInfo.RANGE); }
 
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorBufferInfo.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkDescriptorBufferInfo.BUFFER, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorBufferInfo.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkDescriptorBufferInfo.OFFSET, value); }
     /** Unsafe version of {@link #range(long) range}. */
-    public static void nrange(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorBufferInfo.RANGE, value); }
+    public static void nrange(long struct, long value) { memPutLong(struct + VkDescriptorBufferInfo.RANGE, value); }
 
     // -----------------------------------
 

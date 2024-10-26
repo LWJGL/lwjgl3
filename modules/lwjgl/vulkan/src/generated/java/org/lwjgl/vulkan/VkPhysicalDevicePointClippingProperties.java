@@ -261,14 +261,14 @@ public class VkPhysicalDevicePointClippingProperties extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePointClippingProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePointClippingProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePointClippingProperties.PNEXT); }
     /** Unsafe version of {@link #pointClippingBehavior}. */
-    public static int npointClippingBehavior(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePointClippingProperties.POINTCLIPPINGBEHAVIOR); }
+    public static int npointClippingBehavior(long struct) { return memGetInt(struct + VkPhysicalDevicePointClippingProperties.POINTCLIPPINGBEHAVIOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePointClippingProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePointClippingProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePointClippingProperties.PNEXT, value); }
 

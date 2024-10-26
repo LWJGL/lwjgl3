@@ -257,7 +257,7 @@ public class FMOD_DSP_BUFFER_ARRAY extends Struct<FMOD_DSP_BUFFER_ARRAY> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #numbuffers}. */
-    public static int nnumbuffers(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_BUFFER_ARRAY.NUMBUFFERS); }
+    public static int nnumbuffers(long struct) { return memGetInt(struct + FMOD_DSP_BUFFER_ARRAY.NUMBUFFERS); }
     /** Unsafe version of {@link #buffernumchannels() buffernumchannels}. */
     public static IntBuffer nbuffernumchannels(long struct) { return memIntBuffer(memGetAddress(struct + FMOD_DSP_BUFFER_ARRAY.BUFFERNUMCHANNELS), nnumbuffers(struct)); }
     /** Unsafe version of {@link #bufferchannelmask() bufferchannelmask}. */
@@ -265,10 +265,10 @@ public class FMOD_DSP_BUFFER_ARRAY extends Struct<FMOD_DSP_BUFFER_ARRAY> impleme
     /** Unsafe version of {@link #buffers() buffers}. */
     public static PointerBuffer nbuffers(long struct) { return memPointerBuffer(memGetAddress(struct + FMOD_DSP_BUFFER_ARRAY.BUFFERS), nnumbuffers(struct)); }
     /** Unsafe version of {@link #speakermode}. */
-    public static int nspeakermode(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_BUFFER_ARRAY.SPEAKERMODE); }
+    public static int nspeakermode(long struct) { return memGetInt(struct + FMOD_DSP_BUFFER_ARRAY.SPEAKERMODE); }
 
     /** Sets the specified value to the {@code numbuffers} field of the specified {@code struct}. */
-    public static void nnumbuffers(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_BUFFER_ARRAY.NUMBUFFERS, value); }
+    public static void nnumbuffers(long struct, int value) { memPutInt(struct + FMOD_DSP_BUFFER_ARRAY.NUMBUFFERS, value); }
     /** Unsafe version of {@link #buffernumchannels(IntBuffer) buffernumchannels}. */
     public static void nbuffernumchannels(long struct, IntBuffer value) { memPutAddress(struct + FMOD_DSP_BUFFER_ARRAY.BUFFERNUMCHANNELS, memAddress(value)); }
     /** Unsafe version of {@link #bufferchannelmask(IntBuffer) bufferchannelmask}. */
@@ -276,7 +276,7 @@ public class FMOD_DSP_BUFFER_ARRAY extends Struct<FMOD_DSP_BUFFER_ARRAY> impleme
     /** Unsafe version of {@link #buffers(PointerBuffer) buffers}. */
     public static void nbuffers(long struct, PointerBuffer value) { memPutAddress(struct + FMOD_DSP_BUFFER_ARRAY.BUFFERS, memAddress(value)); }
     /** Unsafe version of {@link #speakermode(int) speakermode}. */
-    public static void nspeakermode(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_BUFFER_ARRAY.SPEAKERMODE, value); }
+    public static void nspeakermode(long struct, int value) { memPutInt(struct + FMOD_DSP_BUFFER_ARRAY.SPEAKERMODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

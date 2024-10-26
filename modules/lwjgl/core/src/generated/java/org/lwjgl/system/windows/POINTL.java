@@ -242,14 +242,14 @@ public class POINTL extends Struct<POINTL> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + POINTL.X); }
+    public static int nx(long struct) { return memGetInt(struct + POINTL.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + POINTL.Y); }
+    public static int ny(long struct) { return memGetInt(struct + POINTL.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + POINTL.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + POINTL.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + POINTL.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + POINTL.Y, value); }
 
     // -----------------------------------
 

@@ -405,62 +405,62 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PNEXT); }
     /** Unsafe version of {@link #tokenType}. */
-    public static int ntokenType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.TOKENTYPE); }
+    public static int ntokenType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.TOKENTYPE); }
     /** Unsafe version of {@link #stream$}. */
-    public static int nstream$(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.STREAM); }
+    public static int nstream$(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.STREAM); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.OFFSET); }
     /** Unsafe version of {@link #vertexBindingUnit}. */
-    public static int nvertexBindingUnit(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.VERTEXBINDINGUNIT); }
+    public static int nvertexBindingUnit(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.VERTEXBINDINGUNIT); }
     /** Unsafe version of {@link #vertexDynamicStride}. */
-    public static int nvertexDynamicStride(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.VERTEXDYNAMICSTRIDE); }
+    public static int nvertexDynamicStride(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.VERTEXDYNAMICSTRIDE); }
     /** Unsafe version of {@link #pushconstantPipelineLayout}. */
-    public static long npushconstantPipelineLayout(long struct) { return UNSAFE.getLong(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTPIPELINELAYOUT); }
+    public static long npushconstantPipelineLayout(long struct) { return memGetLong(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTPIPELINELAYOUT); }
     /** Unsafe version of {@link #pushconstantShaderStageFlags}. */
-    public static int npushconstantShaderStageFlags(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSHADERSTAGEFLAGS); }
+    public static int npushconstantShaderStageFlags(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSHADERSTAGEFLAGS); }
     /** Unsafe version of {@link #pushconstantOffset}. */
-    public static int npushconstantOffset(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTOFFSET); }
+    public static int npushconstantOffset(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTOFFSET); }
     /** Unsafe version of {@link #pushconstantSize}. */
-    public static int npushconstantSize(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSIZE); }
+    public static int npushconstantSize(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSIZE); }
     /** Unsafe version of {@link #indirectStateFlags}. */
-    public static int nindirectStateFlags(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.INDIRECTSTATEFLAGS); }
+    public static int nindirectStateFlags(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.INDIRECTSTATEFLAGS); }
     /** Unsafe version of {@link #indexTypeCount}. */
-    public static int nindexTypeCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNV.INDEXTYPECOUNT); }
+    public static int nindexTypeCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.INDEXTYPECOUNT); }
     /** Unsafe version of {@link #pIndexTypes() pIndexTypes}. */
     @Nullable public static IntBuffer npIndexTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPES), nindexTypeCount(struct)); }
     /** Unsafe version of {@link #pIndexTypeValues() pIndexTypeValues}. */
     @Nullable public static IntBuffer npIndexTypeValues(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPEVALUES), nindexTypeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectCommandsLayoutTokenNV.PNEXT, value); }
     /** Unsafe version of {@link #tokenType(int) tokenType}. */
-    public static void ntokenType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.TOKENTYPE, value); }
+    public static void ntokenType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.TOKENTYPE, value); }
     /** Unsafe version of {@link #stream$(int) stream$}. */
-    public static void nstream$(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.STREAM, value); }
+    public static void nstream$(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.STREAM, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.OFFSET, value); }
     /** Unsafe version of {@link #vertexBindingUnit(int) vertexBindingUnit}. */
-    public static void nvertexBindingUnit(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.VERTEXBINDINGUNIT, value); }
+    public static void nvertexBindingUnit(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.VERTEXBINDINGUNIT, value); }
     /** Unsafe version of {@link #vertexDynamicStride(boolean) vertexDynamicStride}. */
-    public static void nvertexDynamicStride(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.VERTEXDYNAMICSTRIDE, value); }
+    public static void nvertexDynamicStride(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.VERTEXDYNAMICSTRIDE, value); }
     /** Unsafe version of {@link #pushconstantPipelineLayout(long) pushconstantPipelineLayout}. */
-    public static void npushconstantPipelineLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTPIPELINELAYOUT, value); }
+    public static void npushconstantPipelineLayout(long struct, long value) { memPutLong(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTPIPELINELAYOUT, value); }
     /** Unsafe version of {@link #pushconstantShaderStageFlags(int) pushconstantShaderStageFlags}. */
-    public static void npushconstantShaderStageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSHADERSTAGEFLAGS, value); }
+    public static void npushconstantShaderStageFlags(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSHADERSTAGEFLAGS, value); }
     /** Unsafe version of {@link #pushconstantOffset(int) pushconstantOffset}. */
-    public static void npushconstantOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTOFFSET, value); }
+    public static void npushconstantOffset(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTOFFSET, value); }
     /** Unsafe version of {@link #pushconstantSize(int) pushconstantSize}. */
-    public static void npushconstantSize(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSIZE, value); }
+    public static void npushconstantSize(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.PUSHCONSTANTSIZE, value); }
     /** Unsafe version of {@link #indirectStateFlags(int) indirectStateFlags}. */
-    public static void nindirectStateFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.INDIRECTSTATEFLAGS, value); }
+    public static void nindirectStateFlags(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.INDIRECTSTATEFLAGS, value); }
     /** Sets the specified value to the {@code indexTypeCount} field of the specified {@code struct}. */
-    public static void nindexTypeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNV.INDEXTYPECOUNT, value); }
+    public static void nindexTypeCount(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.INDEXTYPECOUNT, value); }
     /** Unsafe version of {@link #pIndexTypes(IntBuffer) pIndexTypes}. */
     public static void npIndexTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPES, memAddressSafe(value)); }
     /** Unsafe version of {@link #pIndexTypeValues(IntBuffer) pIndexTypeValues}. */

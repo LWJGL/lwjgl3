@@ -254,14 +254,14 @@ public class XrPassthroughColorLutUpdateInfoMETA extends Struct<XrPassthroughCol
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughColorLutUpdateInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughColorLutUpdateInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughColorLutUpdateInfoMETA.NEXT); }
     /** Unsafe version of {@link #data}. */
     public static XrPassthroughColorLutDataMETA ndata(long struct) { return XrPassthroughColorLutDataMETA.create(struct + XrPassthroughColorLutUpdateInfoMETA.DATA); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughColorLutUpdateInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughColorLutUpdateInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughColorLutUpdateInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #data(XrPassthroughColorLutDataMETA) data}. */

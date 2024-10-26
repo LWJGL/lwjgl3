@@ -143,9 +143,9 @@ public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
     // -----------------------------------
 
     /** Unsafe version of {@link #height}. */
-    public static short nheight(long struct) { return UNSAFE.getShort(null, struct + FT_Bitmap_Size.HEIGHT); }
+    public static short nheight(long struct) { return memGetShort(struct + FT_Bitmap_Size.HEIGHT); }
     /** Unsafe version of {@link #width}. */
-    public static short nwidth(long struct) { return UNSAFE.getShort(null, struct + FT_Bitmap_Size.WIDTH); }
+    public static short nwidth(long struct) { return memGetShort(struct + FT_Bitmap_Size.WIDTH); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetCLong(struct + FT_Bitmap_Size.SIZE); }
     /** Unsafe version of {@link #x_ppem}. */

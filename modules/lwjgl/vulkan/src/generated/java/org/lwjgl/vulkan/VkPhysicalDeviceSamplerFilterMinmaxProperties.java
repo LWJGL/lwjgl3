@@ -270,16 +270,16 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.PNEXT); }
     /** Unsafe version of {@link #filterMinmaxSingleComponentFormats}. */
-    public static int nfilterMinmaxSingleComponentFormats(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.FILTERMINMAXSINGLECOMPONENTFORMATS); }
+    public static int nfilterMinmaxSingleComponentFormats(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.FILTERMINMAXSINGLECOMPONENTFORMATS); }
     /** Unsafe version of {@link #filterMinmaxImageComponentMapping}. */
-    public static int nfilterMinmaxImageComponentMapping(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.FILTERMINMAXIMAGECOMPONENTMAPPING); }
+    public static int nfilterMinmaxImageComponentMapping(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.FILTERMINMAXIMAGECOMPONENTMAPPING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSamplerFilterMinmaxProperties.PNEXT, value); }
 

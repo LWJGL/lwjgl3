@@ -113,7 +113,7 @@ class NkConfigStackVec2 extends Struct<NkConfigStackVec2> {
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackVec2.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackVec2.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackVec2Element.Buffer nelements(long struct) { return NkConfigStackVec2Element.create(struct + NkConfigStackVec2.ELEMENTS, 16); }
     /** Unsafe version of {@link #elements(int) elements}. */

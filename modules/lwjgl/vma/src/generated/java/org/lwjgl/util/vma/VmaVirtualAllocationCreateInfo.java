@@ -257,20 +257,20 @@ public class VmaVirtualAllocationCreateInfo extends Struct<VmaVirtualAllocationC
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationCreateInfo.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VmaVirtualAllocationCreateInfo.SIZE); }
     /** Unsafe version of {@link #alignment}. */
-    public static long nalignment(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationCreateInfo.ALIGNMENT); }
+    public static long nalignment(long struct) { return memGetLong(struct + VmaVirtualAllocationCreateInfo.ALIGNMENT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaVirtualAllocationCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VmaVirtualAllocationCreateInfo.FLAGS); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaVirtualAllocationCreateInfo.PUSERDATA); }
 
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VmaVirtualAllocationCreateInfo.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VmaVirtualAllocationCreateInfo.SIZE, value); }
     /** Unsafe version of {@link #alignment(long) alignment}. */
-    public static void nalignment(long struct, long value) { UNSAFE.putLong(null, struct + VmaVirtualAllocationCreateInfo.ALIGNMENT, value); }
+    public static void nalignment(long struct, long value) { memPutLong(struct + VmaVirtualAllocationCreateInfo.ALIGNMENT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaVirtualAllocationCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VmaVirtualAllocationCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VmaVirtualAllocationCreateInfo.PUSERDATA, value); }
 

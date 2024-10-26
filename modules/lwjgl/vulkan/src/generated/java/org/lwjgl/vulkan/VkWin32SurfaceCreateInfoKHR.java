@@ -299,22 +299,22 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct<VkWin32SurfaceCreateInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWin32SurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkWin32SurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkWin32SurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkWin32SurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #hinstance}. */
     public static long nhinstance(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.HINSTANCE); }
     /** Unsafe version of {@link #hwnd}. */
     public static long nhwnd(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.HWND); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32SurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkWin32SurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWin32SurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32SurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkWin32SurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #hinstance(long) hinstance}. */
     public static void nhinstance(long struct, long value) { memPutAddress(struct + VkWin32SurfaceCreateInfoKHR.HINSTANCE, check(value)); }
     /** Unsafe version of {@link #hwnd(long) hwnd}. */

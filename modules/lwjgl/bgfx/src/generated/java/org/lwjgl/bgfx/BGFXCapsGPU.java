@@ -112,9 +112,9 @@ public class BGFXCapsGPU extends Struct<BGFXCapsGPU> {
     // -----------------------------------
 
     /** Unsafe version of {@link #vendorId}. */
-    public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXCapsGPU.VENDORID); }
+    public static short nvendorId(long struct) { return memGetShort(struct + BGFXCapsGPU.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
-    public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXCapsGPU.DEVICEID); }
+    public static short ndeviceId(long struct) { return memGetShort(struct + BGFXCapsGPU.DEVICEID); }
 
     // -----------------------------------
 

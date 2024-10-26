@@ -238,18 +238,18 @@ public class VkVideoEncodeH265FrameSizeKHR extends Struct<VkVideoEncodeH265Frame
     // -----------------------------------
 
     /** Unsafe version of {@link #frameISize}. */
-    public static int nframeISize(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEISIZE); }
+    public static int nframeISize(long struct) { return memGetInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEISIZE); }
     /** Unsafe version of {@link #framePSize}. */
-    public static int nframePSize(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEPSIZE); }
+    public static int nframePSize(long struct) { return memGetInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEPSIZE); }
     /** Unsafe version of {@link #frameBSize}. */
-    public static int nframeBSize(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEBSIZE); }
+    public static int nframeBSize(long struct) { return memGetInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEBSIZE); }
 
     /** Unsafe version of {@link #frameISize(int) frameISize}. */
-    public static void nframeISize(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEISIZE, value); }
+    public static void nframeISize(long struct, int value) { memPutInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEISIZE, value); }
     /** Unsafe version of {@link #framePSize(int) framePSize}. */
-    public static void nframePSize(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEPSIZE, value); }
+    public static void nframePSize(long struct, int value) { memPutInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEPSIZE, value); }
     /** Unsafe version of {@link #frameBSize(int) frameBSize}. */
-    public static void nframeBSize(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265FrameSizeKHR.FRAMEBSIZE, value); }
+    public static void nframeBSize(long struct, int value) { memPutInt(struct + VkVideoEncodeH265FrameSizeKHR.FRAMEBSIZE, value); }
 
     // -----------------------------------
 

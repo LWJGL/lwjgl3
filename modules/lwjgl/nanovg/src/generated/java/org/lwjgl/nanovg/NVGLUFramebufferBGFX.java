@@ -127,11 +127,11 @@ public class NVGLUFramebufferBGFX extends Struct<NVGLUFramebufferBGFX> {
     /** Unsafe version of {@link #ctx}. */
     public static long nctx(long struct) { return memGetAddress(struct + NVGLUFramebufferBGFX.CTX); }
     /** Unsafe version of {@link #handle}. */
-    public static short nhandle(long struct) { return UNSAFE.getShort(null, struct + NVGLUFramebufferBGFX.HANDLE); }
+    public static short nhandle(long struct) { return memGetShort(struct + NVGLUFramebufferBGFX.HANDLE); }
     /** Unsafe version of {@link #image}. */
-    public static int nimage(long struct) { return UNSAFE.getInt(null, struct + NVGLUFramebufferBGFX.IMAGE); }
+    public static int nimage(long struct) { return memGetInt(struct + NVGLUFramebufferBGFX.IMAGE); }
     /** Unsafe version of {@link #viewId}. */
-    public static short nviewId(long struct) { return UNSAFE.getShort(null, struct + NVGLUFramebufferBGFX.VIEWID); }
+    public static short nviewId(long struct) { return memGetShort(struct + NVGLUFramebufferBGFX.VIEWID); }
 
     // -----------------------------------
 

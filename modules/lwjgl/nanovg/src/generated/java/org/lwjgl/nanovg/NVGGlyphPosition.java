@@ -228,11 +228,11 @@ public class NVGGlyphPosition extends Struct<NVGGlyphPosition> implements Native
     /** Unsafe version of {@link #str}. */
     public static long nstr(long struct) { return memGetAddress(struct + NVGGlyphPosition.STR); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.X); }
+    public static float nx(long struct) { return memGetFloat(struct + NVGGlyphPosition.X); }
     /** Unsafe version of {@link #minx}. */
-    public static float nminx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.MINX); }
+    public static float nminx(long struct) { return memGetFloat(struct + NVGGlyphPosition.MINX); }
     /** Unsafe version of {@link #maxx}. */
-    public static float nmaxx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.MAXX); }
+    public static float nmaxx(long struct) { return memGetFloat(struct + NVGGlyphPosition.MAXX); }
 
     // -----------------------------------
 

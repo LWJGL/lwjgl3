@@ -279,16 +279,16 @@ public class XrEventDataSpaceListSaveCompleteFB extends Struct<XrEventDataSpaceL
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceListSaveCompleteFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataSpaceListSaveCompleteFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataSpaceListSaveCompleteFB.NEXT); }
     /** Unsafe version of {@link #requestId}. */
-    public static long nrequestId(long struct) { return UNSAFE.getLong(null, struct + XrEventDataSpaceListSaveCompleteFB.REQUESTID); }
+    public static long nrequestId(long struct) { return memGetLong(struct + XrEventDataSpaceListSaveCompleteFB.REQUESTID); }
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSpaceListSaveCompleteFB.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + XrEventDataSpaceListSaveCompleteFB.RESULT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSpaceListSaveCompleteFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataSpaceListSaveCompleteFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSpaceListSaveCompleteFB.NEXT, value); }
 

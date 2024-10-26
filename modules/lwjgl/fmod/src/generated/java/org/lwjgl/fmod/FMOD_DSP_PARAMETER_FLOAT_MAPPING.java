@@ -222,12 +222,12 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct<FMOD_DSP_PARAMETER_
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.TYPE); }
     /** Unsafe version of {@link #piecewiselinearmapping}. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR npiecewiselinearmapping(long struct) { return FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.create(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.PIECEWISELINEARMAPPING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.TYPE, value); }
     /** Unsafe version of {@link #piecewiselinearmapping(FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR) piecewiselinearmapping}. */
     public static void npiecewiselinearmapping(long struct, FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR value) { memCopy(value.address(), struct + FMOD_DSP_PARAMETER_FLOAT_MAPPING.PIECEWISELINEARMAPPING, FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.SIZEOF); }
 

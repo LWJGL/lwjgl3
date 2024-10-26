@@ -264,22 +264,22 @@ public class XrHapticActionInfo extends Struct<XrHapticActionInfo> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHapticActionInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHapticActionInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHapticActionInfo.NEXT); }
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrHapticActionInfo.ACTION); }
     /** Unsafe version of {@link #subactionPath}. */
-    public static long nsubactionPath(long struct) { return UNSAFE.getLong(null, struct + XrHapticActionInfo.SUBACTIONPATH); }
+    public static long nsubactionPath(long struct) { return memGetLong(struct + XrHapticActionInfo.SUBACTIONPATH); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticActionInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHapticActionInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHapticActionInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrHapticActionInfo.ACTION, value.address()); }
     /** Unsafe version of {@link #subactionPath(long) subactionPath}. */
-    public static void nsubactionPath(long struct, long value) { UNSAFE.putLong(null, struct + XrHapticActionInfo.SUBACTIONPATH, value); }
+    public static void nsubactionPath(long struct, long value) { memPutLong(struct + XrHapticActionInfo.SUBACTIONPATH, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

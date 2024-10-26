@@ -373,42 +373,42 @@ public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBlitImageInfo2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBlitImageInfo2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBlitImageInfo2.PNEXT); }
     /** Unsafe version of {@link #srcImage}. */
-    public static long nsrcImage(long struct) { return UNSAFE.getLong(null, struct + VkBlitImageInfo2.SRCIMAGE); }
+    public static long nsrcImage(long struct) { return memGetLong(struct + VkBlitImageInfo2.SRCIMAGE); }
     /** Unsafe version of {@link #srcImageLayout}. */
-    public static int nsrcImageLayout(long struct) { return UNSAFE.getInt(null, struct + VkBlitImageInfo2.SRCIMAGELAYOUT); }
+    public static int nsrcImageLayout(long struct) { return memGetInt(struct + VkBlitImageInfo2.SRCIMAGELAYOUT); }
     /** Unsafe version of {@link #dstImage}. */
-    public static long ndstImage(long struct) { return UNSAFE.getLong(null, struct + VkBlitImageInfo2.DSTIMAGE); }
+    public static long ndstImage(long struct) { return memGetLong(struct + VkBlitImageInfo2.DSTIMAGE); }
     /** Unsafe version of {@link #dstImageLayout}. */
-    public static int ndstImageLayout(long struct) { return UNSAFE.getInt(null, struct + VkBlitImageInfo2.DSTIMAGELAYOUT); }
+    public static int ndstImageLayout(long struct) { return memGetInt(struct + VkBlitImageInfo2.DSTIMAGELAYOUT); }
     /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkBlitImageInfo2.REGIONCOUNT); }
+    public static int nregionCount(long struct) { return memGetInt(struct + VkBlitImageInfo2.REGIONCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     public static VkImageBlit2.Buffer npRegions(long struct) { return VkImageBlit2.create(memGetAddress(struct + VkBlitImageInfo2.PREGIONS), nregionCount(struct)); }
     /** Unsafe version of {@link #filter}. */
-    public static int nfilter(long struct) { return UNSAFE.getInt(null, struct + VkBlitImageInfo2.FILTER); }
+    public static int nfilter(long struct) { return memGetInt(struct + VkBlitImageInfo2.FILTER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBlitImageInfo2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBlitImageInfo2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBlitImageInfo2.PNEXT, value); }
     /** Unsafe version of {@link #srcImage(long) srcImage}. */
-    public static void nsrcImage(long struct, long value) { UNSAFE.putLong(null, struct + VkBlitImageInfo2.SRCIMAGE, value); }
+    public static void nsrcImage(long struct, long value) { memPutLong(struct + VkBlitImageInfo2.SRCIMAGE, value); }
     /** Unsafe version of {@link #srcImageLayout(int) srcImageLayout}. */
-    public static void nsrcImageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkBlitImageInfo2.SRCIMAGELAYOUT, value); }
+    public static void nsrcImageLayout(long struct, int value) { memPutInt(struct + VkBlitImageInfo2.SRCIMAGELAYOUT, value); }
     /** Unsafe version of {@link #dstImage(long) dstImage}. */
-    public static void ndstImage(long struct, long value) { UNSAFE.putLong(null, struct + VkBlitImageInfo2.DSTIMAGE, value); }
+    public static void ndstImage(long struct, long value) { memPutLong(struct + VkBlitImageInfo2.DSTIMAGE, value); }
     /** Unsafe version of {@link #dstImageLayout(int) dstImageLayout}. */
-    public static void ndstImageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkBlitImageInfo2.DSTIMAGELAYOUT, value); }
+    public static void ndstImageLayout(long struct, int value) { memPutInt(struct + VkBlitImageInfo2.DSTIMAGELAYOUT, value); }
     /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBlitImageInfo2.REGIONCOUNT, value); }
+    public static void nregionCount(long struct, int value) { memPutInt(struct + VkBlitImageInfo2.REGIONCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkImageBlit2.Buffer) pRegions}. */
     public static void npRegions(long struct, VkImageBlit2.Buffer value) { memPutAddress(struct + VkBlitImageInfo2.PREGIONS, value.address()); nregionCount(struct, value.remaining()); }
     /** Unsafe version of {@link #filter(int) filter}. */
-    public static void nfilter(long struct, int value) { UNSAFE.putInt(null, struct + VkBlitImageInfo2.FILTER, value); }
+    public static void nfilter(long struct, int value) { memPutInt(struct + VkBlitImageInfo2.FILTER, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -330,32 +330,32 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureInfoNV.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInfoNV.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.FLAGS); }
     /** Unsafe version of {@link #instanceCount}. */
-    public static int ninstanceCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInfoNV.INSTANCECOUNT); }
+    public static int ninstanceCount(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.INSTANCECOUNT); }
     /** Unsafe version of {@link #geometryCount}. */
-    public static int ngeometryCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT); }
+    public static int ngeometryCount(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT); }
     /** Unsafe version of {@link #pGeometries}. */
     @Nullable public static VkGeometryNV.Buffer npGeometries(long struct) { return VkGeometryNV.createSafe(memGetAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES), ngeometryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInfoNV.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.FLAGS, value); }
     /** Unsafe version of {@link #instanceCount(int) instanceCount}. */
-    public static void ninstanceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInfoNV.INSTANCECOUNT, value); }
+    public static void ninstanceCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.INSTANCECOUNT, value); }
     /** Sets the specified value to the {@code geometryCount} field of the specified {@code struct}. */
-    public static void ngeometryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT, value); }
+    public static void ngeometryCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT, value); }
     /** Unsafe version of {@link #pGeometries(VkGeometryNV.Buffer) pGeometries}. */
     public static void npGeometries(long struct, @Nullable VkGeometryNV.Buffer value) { memPutAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES, memAddressSafe(value)); ngeometryCount(struct, value == null ? 0 : value.remaining()); }
 

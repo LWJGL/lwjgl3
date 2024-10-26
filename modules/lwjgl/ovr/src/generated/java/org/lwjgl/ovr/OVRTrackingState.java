@@ -261,7 +261,7 @@ public class OVRTrackingState extends Struct<OVRTrackingState> implements Native
     /** Unsafe version of {@link #HeadPose}. */
     public static OVRPoseStatef nHeadPose(long struct) { return OVRPoseStatef.create(struct + OVRTrackingState.HEADPOSE); }
     /** Unsafe version of {@link #StatusFlags}. */
-    public static int nStatusFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTrackingState.STATUSFLAGS); }
+    public static int nStatusFlags(long struct) { return memGetInt(struct + OVRTrackingState.STATUSFLAGS); }
     /** Unsafe version of {@link #HandPoses}. */
     public static OVRPoseStatef.Buffer nHandPoses(long struct) { return OVRPoseStatef.create(struct + OVRTrackingState.HANDPOSES, 2); }
     /** Unsafe version of {@link #HandPoses(int) HandPoses}. */
@@ -272,7 +272,7 @@ public class OVRTrackingState extends Struct<OVRTrackingState> implements Native
     public static IntBuffer nHandStatusFlags(long struct) { return memIntBuffer(struct + OVRTrackingState.HANDSTATUSFLAGS, 2); }
     /** Unsafe version of {@link #HandStatusFlags(int) HandStatusFlags}. */
     public static int nHandStatusFlags(long struct, int index) {
-        return UNSAFE.getInt(null, struct + OVRTrackingState.HANDSTATUSFLAGS + check(index, 2) * 4);
+        return memGetInt(struct + OVRTrackingState.HANDSTATUSFLAGS + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #CalibratedOrigin}. */
     public static OVRPosef nCalibratedOrigin(long struct) { return OVRPosef.create(struct + OVRTrackingState.CALIBRATEDORIGIN); }

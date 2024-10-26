@@ -274,14 +274,14 @@ public class VkSurfaceFormat2KHR extends Struct<VkSurfaceFormat2KHR> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFormat2KHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceFormat2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceFormat2KHR.PNEXT); }
     /** Unsafe version of {@link #surfaceFormat}. */
     public static VkSurfaceFormatKHR nsurfaceFormat(long struct) { return VkSurfaceFormatKHR.create(struct + VkSurfaceFormat2KHR.SURFACEFORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceFormat2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceFormat2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceFormat2KHR.PNEXT, value); }
 

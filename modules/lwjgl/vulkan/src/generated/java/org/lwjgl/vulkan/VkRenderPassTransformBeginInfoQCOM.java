@@ -249,18 +249,18 @@ public class VkRenderPassTransformBeginInfoQCOM extends Struct<VkRenderPassTrans
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassTransformBeginInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassTransformBeginInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassTransformBeginInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #transform}. */
-    public static int ntransform(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassTransformBeginInfoQCOM.TRANSFORM); }
+    public static int ntransform(long struct) { return memGetInt(struct + VkRenderPassTransformBeginInfoQCOM.TRANSFORM); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassTransformBeginInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassTransformBeginInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassTransformBeginInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #transform(int) transform}. */
-    public static void ntransform(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassTransformBeginInfoQCOM.TRANSFORM, value); }
+    public static void ntransform(long struct, int value) { memPutInt(struct + VkRenderPassTransformBeginInfoQCOM.TRANSFORM, value); }
 
     // -----------------------------------
 

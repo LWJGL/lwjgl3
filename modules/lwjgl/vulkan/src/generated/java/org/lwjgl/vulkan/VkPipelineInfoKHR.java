@@ -267,18 +267,18 @@ public class VkPipelineInfoKHR extends Struct<VkPipelineInfoKHR> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pipeline}. */
-    public static long npipeline(long struct) { return UNSAFE.getLong(null, struct + VkPipelineInfoKHR.PIPELINE); }
+    public static long npipeline(long struct) { return memGetLong(struct + VkPipelineInfoKHR.PIPELINE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pipeline(long) pipeline}. */
-    public static void npipeline(long struct, long value) { UNSAFE.putLong(null, struct + VkPipelineInfoKHR.PIPELINE, value); }
+    public static void npipeline(long struct, long value) { memPutLong(struct + VkPipelineInfoKHR.PIPELINE, value); }
 
     // -----------------------------------
 

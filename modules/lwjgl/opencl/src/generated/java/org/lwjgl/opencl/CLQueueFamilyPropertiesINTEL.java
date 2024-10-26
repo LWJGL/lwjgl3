@@ -211,11 +211,11 @@ public class CLQueueFamilyPropertiesINTEL extends Struct<CLQueueFamilyProperties
     // -----------------------------------
 
     /** Unsafe version of {@link #properties}. */
-    public static long nproperties(long struct) { return UNSAFE.getLong(null, struct + CLQueueFamilyPropertiesINTEL.PROPERTIES); }
+    public static long nproperties(long struct) { return memGetLong(struct + CLQueueFamilyPropertiesINTEL.PROPERTIES); }
     /** Unsafe version of {@link #capabilities}. */
-    public static long ncapabilities(long struct) { return UNSAFE.getLong(null, struct + CLQueueFamilyPropertiesINTEL.CAPABILITIES); }
+    public static long ncapabilities(long struct) { return memGetLong(struct + CLQueueFamilyPropertiesINTEL.CAPABILITIES); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + CLQueueFamilyPropertiesINTEL.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + CLQueueFamilyPropertiesINTEL.COUNT); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + CLQueueFamilyPropertiesINTEL.NAME, 64); }
     /** Unsafe version of {@link #nameString}. */

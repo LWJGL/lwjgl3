@@ -251,12 +251,12 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBaseInStructure.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBaseInStructure.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     @Nullable public static VkBaseInStructure npNext(long struct) { return VkBaseInStructure.createSafe(memGetAddress(struct + VkBaseInStructure.PNEXT)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBaseInStructure.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBaseInStructure.STYPE, value); }
     /** Unsafe version of {@link #pNext(VkBaseInStructure) pNext}. */
     public static void npNext(long struct, @Nullable VkBaseInStructure value) { memPutAddress(struct + VkBaseInStructure.PNEXT, memAddressSafe(value)); }
 

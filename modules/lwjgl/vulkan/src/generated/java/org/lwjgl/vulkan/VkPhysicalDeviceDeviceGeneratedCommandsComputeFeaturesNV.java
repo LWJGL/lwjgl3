@@ -268,26 +268,26 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV extends St
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #deviceGeneratedCompute}. */
-    public static int ndeviceGeneratedCompute(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTE); }
+    public static int ndeviceGeneratedCompute(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTE); }
     /** Unsafe version of {@link #deviceGeneratedComputePipelines}. */
-    public static int ndeviceGeneratedComputePipelines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTEPIPELINES); }
+    public static int ndeviceGeneratedComputePipelines(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTEPIPELINES); }
     /** Unsafe version of {@link #deviceGeneratedComputeCaptureReplay}. */
-    public static int ndeviceGeneratedComputeCaptureReplay(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTECAPTUREREPLAY); }
+    public static int ndeviceGeneratedComputeCaptureReplay(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTECAPTUREREPLAY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #deviceGeneratedCompute(boolean) deviceGeneratedCompute}. */
-    public static void ndeviceGeneratedCompute(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTE, value); }
+    public static void ndeviceGeneratedCompute(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTE, value); }
     /** Unsafe version of {@link #deviceGeneratedComputePipelines(boolean) deviceGeneratedComputePipelines}. */
-    public static void ndeviceGeneratedComputePipelines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTEPIPELINES, value); }
+    public static void ndeviceGeneratedComputePipelines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTEPIPELINES, value); }
     /** Unsafe version of {@link #deviceGeneratedComputeCaptureReplay(boolean) deviceGeneratedComputeCaptureReplay}. */
-    public static void ndeviceGeneratedComputeCaptureReplay(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTECAPTUREREPLAY, value); }
+    public static void ndeviceGeneratedComputeCaptureReplay(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.DEVICEGENERATEDCOMPUTECAPTUREREPLAY, value); }
 
     // -----------------------------------
 

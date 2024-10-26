@@ -121,9 +121,9 @@ public class NSVGPaint extends Struct<NSVGPaint> {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static byte ntype(long struct) { return UNSAFE.getByte(null, struct + NSVGPaint.TYPE); }
+    public static byte ntype(long struct) { return memGetByte(struct + NSVGPaint.TYPE); }
     /** Unsafe version of {@link #color}. */
-    public static int ncolor(long struct) { return UNSAFE.getInt(null, struct + NSVGPaint.COLOR); }
+    public static int ncolor(long struct) { return memGetInt(struct + NSVGPaint.COLOR); }
     /** Unsafe version of {@link #gradient}. */
     public static NSVGGradient ngradient(long struct) { return NSVGGradient.create(memGetAddress(struct + NSVGPaint.GRADIENT)); }
 

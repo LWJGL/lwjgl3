@@ -221,14 +221,14 @@ public class FOwnerEx extends Struct<FOwnerEx> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + FOwnerEx.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + FOwnerEx.TYPE); }
     /** Unsafe version of {@link #pid}. */
-    public static int npid(long struct) { return UNSAFE.getInt(null, struct + FOwnerEx.PID); }
+    public static int npid(long struct) { return memGetInt(struct + FOwnerEx.PID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + FOwnerEx.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + FOwnerEx.TYPE, value); }
     /** Unsafe version of {@link #pid(int) pid}. */
-    public static void npid(long struct, int value) { UNSAFE.putInt(null, struct + FOwnerEx.PID, value); }
+    public static void npid(long struct, int value) { memPutInt(struct + FOwnerEx.PID, value); }
 
     // -----------------------------------
 

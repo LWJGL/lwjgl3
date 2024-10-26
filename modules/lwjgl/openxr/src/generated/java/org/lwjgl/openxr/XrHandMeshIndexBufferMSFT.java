@@ -275,20 +275,20 @@ public class XrHandMeshIndexBufferMSFT extends Struct<XrHandMeshIndexBufferMSFT>
     // -----------------------------------
 
     /** Unsafe version of {@link #indexBufferKey}. */
-    public static int nindexBufferKey(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXBUFFERKEY); }
+    public static int nindexBufferKey(long struct) { return memGetInt(struct + XrHandMeshIndexBufferMSFT.INDEXBUFFERKEY); }
     /** Unsafe version of {@link #indexCapacityInput}. */
-    public static int nindexCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXCAPACITYINPUT); }
+    public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrHandMeshIndexBufferMSFT.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
-    public static int nindexCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXCOUNTOUTPUT); }
+    public static int nindexCountOutput(long struct) { return memGetInt(struct + XrHandMeshIndexBufferMSFT.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
     @Nullable public static IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandMeshIndexBufferMSFT.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #indexBufferKey(int) indexBufferKey}. */
-    public static void nindexBufferKey(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXBUFFERKEY, value); }
+    public static void nindexBufferKey(long struct, int value) { memPutInt(struct + XrHandMeshIndexBufferMSFT.INDEXBUFFERKEY, value); }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
-    public static void nindexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXCAPACITYINPUT, value); }
+    public static void nindexCapacityInput(long struct, int value) { memPutInt(struct + XrHandMeshIndexBufferMSFT.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
-    public static void nindexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandMeshIndexBufferMSFT.INDEXCOUNTOUTPUT, value); }
+    public static void nindexCountOutput(long struct, int value) { memPutInt(struct + XrHandMeshIndexBufferMSFT.INDEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #indices(IntBuffer) indices}. */
     public static void nindices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrHandMeshIndexBufferMSFT.INDICES, memAddressSafe(value)); if (value != null) { nindexCapacityInput(struct, value.remaining()); } }
 

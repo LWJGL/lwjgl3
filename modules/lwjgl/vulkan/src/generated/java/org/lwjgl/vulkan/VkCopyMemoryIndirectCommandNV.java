@@ -242,18 +242,18 @@ public class VkCopyMemoryIndirectCommandNV extends Struct<VkCopyMemoryIndirectCo
     // -----------------------------------
 
     /** Unsafe version of {@link #srcAddress}. */
-    public static long nsrcAddress(long struct) { return UNSAFE.getLong(null, struct + VkCopyMemoryIndirectCommandNV.SRCADDRESS); }
+    public static long nsrcAddress(long struct) { return memGetLong(struct + VkCopyMemoryIndirectCommandNV.SRCADDRESS); }
     /** Unsafe version of {@link #dstAddress}. */
-    public static long ndstAddress(long struct) { return UNSAFE.getLong(null, struct + VkCopyMemoryIndirectCommandNV.DSTADDRESS); }
+    public static long ndstAddress(long struct) { return memGetLong(struct + VkCopyMemoryIndirectCommandNV.DSTADDRESS); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkCopyMemoryIndirectCommandNV.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkCopyMemoryIndirectCommandNV.SIZE); }
 
     /** Unsafe version of {@link #srcAddress(long) srcAddress}. */
-    public static void nsrcAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyMemoryIndirectCommandNV.SRCADDRESS, value); }
+    public static void nsrcAddress(long struct, long value) { memPutLong(struct + VkCopyMemoryIndirectCommandNV.SRCADDRESS, value); }
     /** Unsafe version of {@link #dstAddress(long) dstAddress}. */
-    public static void ndstAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyMemoryIndirectCommandNV.DSTADDRESS, value); }
+    public static void ndstAddress(long struct, long value) { memPutLong(struct + VkCopyMemoryIndirectCommandNV.DSTADDRESS, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyMemoryIndirectCommandNV.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkCopyMemoryIndirectCommandNV.SIZE, value); }
 
     // -----------------------------------
 

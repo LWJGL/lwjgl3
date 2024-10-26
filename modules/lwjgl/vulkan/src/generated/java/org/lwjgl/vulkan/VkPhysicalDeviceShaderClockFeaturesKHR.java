@@ -257,22 +257,22 @@ public class VkPhysicalDeviceShaderClockFeaturesKHR extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderClockFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #shaderSubgroupClock}. */
-    public static int nshaderSubgroupClock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERSUBGROUPCLOCK); }
+    public static int nshaderSubgroupClock(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERSUBGROUPCLOCK); }
     /** Unsafe version of {@link #shaderDeviceClock}. */
-    public static int nshaderDeviceClock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERDEVICECLOCK); }
+    public static int nshaderDeviceClock(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERDEVICECLOCK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderClockFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #shaderSubgroupClock(boolean) shaderSubgroupClock}. */
-    public static void nshaderSubgroupClock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERSUBGROUPCLOCK, value); }
+    public static void nshaderSubgroupClock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERSUBGROUPCLOCK, value); }
     /** Unsafe version of {@link #shaderDeviceClock(boolean) shaderDeviceClock}. */
-    public static void nshaderDeviceClock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERDEVICECLOCK, value); }
+    public static void nshaderDeviceClock(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderClockFeaturesKHR.SHADERDEVICECLOCK, value); }
 
     // -----------------------------------
 

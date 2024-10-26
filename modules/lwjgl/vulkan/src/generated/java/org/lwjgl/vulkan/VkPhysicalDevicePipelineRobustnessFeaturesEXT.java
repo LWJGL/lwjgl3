@@ -251,18 +251,18 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #pipelineRobustness}. */
-    public static int npipelineRobustness(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS); }
+    public static int npipelineRobustness(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #pipelineRobustness(boolean) pipelineRobustness}. */
-    public static void npipelineRobustness(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS, value); }
+    public static void npipelineRobustness(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS, value); }
 
     // -----------------------------------
 

@@ -376,46 +376,46 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInteractionProfileDpadBindingEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInteractionProfileDpadBindingEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInteractionProfileDpadBindingEXT.NEXT); }
     /** Unsafe version of {@link #binding}. */
-    public static long nbinding(long struct) { return UNSAFE.getLong(null, struct + XrInteractionProfileDpadBindingEXT.BINDING); }
+    public static long nbinding(long struct) { return memGetLong(struct + XrInteractionProfileDpadBindingEXT.BINDING); }
     /** Unsafe version of {@link #actionSet}. */
     public static long nactionSet(long struct) { return memGetAddress(struct + XrInteractionProfileDpadBindingEXT.ACTIONSET); }
     /** Unsafe version of {@link #forceThreshold}. */
-    public static float nforceThreshold(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLD); }
+    public static float nforceThreshold(long struct) { return memGetFloat(struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLD); }
     /** Unsafe version of {@link #forceThresholdReleased}. */
-    public static float nforceThresholdReleased(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLDRELEASED); }
+    public static float nforceThresholdReleased(long struct) { return memGetFloat(struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLDRELEASED); }
     /** Unsafe version of {@link #centerRegion}. */
-    public static float ncenterRegion(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileDpadBindingEXT.CENTERREGION); }
+    public static float ncenterRegion(long struct) { return memGetFloat(struct + XrInteractionProfileDpadBindingEXT.CENTERREGION); }
     /** Unsafe version of {@link #wedgeAngle}. */
-    public static float nwedgeAngle(long struct) { return UNSAFE.getFloat(null, struct + XrInteractionProfileDpadBindingEXT.WEDGEANGLE); }
+    public static float nwedgeAngle(long struct) { return memGetFloat(struct + XrInteractionProfileDpadBindingEXT.WEDGEANGLE); }
     /** Unsafe version of {@link #isSticky}. */
-    public static int nisSticky(long struct) { return UNSAFE.getInt(null, struct + XrInteractionProfileDpadBindingEXT.ISSTICKY); }
+    public static int nisSticky(long struct) { return memGetInt(struct + XrInteractionProfileDpadBindingEXT.ISSTICKY); }
     /** Unsafe version of {@link #onHaptic}. */
     @Nullable public static XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.ONHAPTIC)); }
     /** Unsafe version of {@link #offHaptic}. */
     @Nullable public static XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.OFFHAPTIC)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInteractionProfileDpadBindingEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInteractionProfileDpadBindingEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInteractionProfileDpadBindingEXT.NEXT, value); }
     /** Unsafe version of {@link #binding(long) binding}. */
-    public static void nbinding(long struct, long value) { UNSAFE.putLong(null, struct + XrInteractionProfileDpadBindingEXT.BINDING, value); }
+    public static void nbinding(long struct, long value) { memPutLong(struct + XrInteractionProfileDpadBindingEXT.BINDING, value); }
     /** Unsafe version of {@link #actionSet(XrActionSet) actionSet}. */
     public static void nactionSet(long struct, XrActionSet value) { memPutAddress(struct + XrInteractionProfileDpadBindingEXT.ACTIONSET, value.address()); }
     /** Unsafe version of {@link #forceThreshold(float) forceThreshold}. */
-    public static void nforceThreshold(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLD, value); }
+    public static void nforceThreshold(long struct, float value) { memPutFloat(struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLD, value); }
     /** Unsafe version of {@link #forceThresholdReleased(float) forceThresholdReleased}. */
-    public static void nforceThresholdReleased(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLDRELEASED, value); }
+    public static void nforceThresholdReleased(long struct, float value) { memPutFloat(struct + XrInteractionProfileDpadBindingEXT.FORCETHRESHOLDRELEASED, value); }
     /** Unsafe version of {@link #centerRegion(float) centerRegion}. */
-    public static void ncenterRegion(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileDpadBindingEXT.CENTERREGION, value); }
+    public static void ncenterRegion(long struct, float value) { memPutFloat(struct + XrInteractionProfileDpadBindingEXT.CENTERREGION, value); }
     /** Unsafe version of {@link #wedgeAngle(float) wedgeAngle}. */
-    public static void nwedgeAngle(long struct, float value) { UNSAFE.putFloat(null, struct + XrInteractionProfileDpadBindingEXT.WEDGEANGLE, value); }
+    public static void nwedgeAngle(long struct, float value) { memPutFloat(struct + XrInteractionProfileDpadBindingEXT.WEDGEANGLE, value); }
     /** Unsafe version of {@link #isSticky(boolean) isSticky}. */
-    public static void nisSticky(long struct, int value) { UNSAFE.putInt(null, struct + XrInteractionProfileDpadBindingEXT.ISSTICKY, value); }
+    public static void nisSticky(long struct, int value) { memPutInt(struct + XrInteractionProfileDpadBindingEXT.ISSTICKY, value); }
     /** Unsafe version of {@link #onHaptic(XrHapticBaseHeader) onHaptic}. */
     public static void nonHaptic(long struct, @Nullable XrHapticBaseHeader value) { memPutAddress(struct + XrInteractionProfileDpadBindingEXT.ONHAPTIC, memAddressSafe(value)); }
     /** Unsafe version of {@link #offHaptic(XrHapticBaseHeader) offHaptic}. */

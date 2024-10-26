@@ -284,11 +284,11 @@ public class XDestroyWindowEvent extends Struct<XDestroyWindowEvent> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XDestroyWindowEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XDestroyWindowEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XDestroyWindowEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XDestroyWindowEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XDestroyWindowEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XDestroyWindowEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
@@ -297,11 +297,11 @@ public class XDestroyWindowEvent extends Struct<XDestroyWindowEvent> implements 
     public static long nwindow(long struct) { return memGetCLong(struct + XDestroyWindowEvent.WINDOW); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XDestroyWindowEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XDestroyWindowEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XDestroyWindowEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XDestroyWindowEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XDestroyWindowEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XDestroyWindowEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */

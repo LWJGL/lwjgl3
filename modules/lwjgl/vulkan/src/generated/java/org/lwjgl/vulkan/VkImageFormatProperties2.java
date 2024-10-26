@@ -289,14 +289,14 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatProperties2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageFormatProperties2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageFormatProperties2.PNEXT); }
     /** Unsafe version of {@link #imageFormatProperties}. */
     public static VkImageFormatProperties nimageFormatProperties(long struct) { return VkImageFormatProperties.create(struct + VkImageFormatProperties2.IMAGEFORMATPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatProperties2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageFormatProperties2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageFormatProperties2.PNEXT, value); }
 

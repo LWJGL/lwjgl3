@@ -534,7 +534,7 @@ public class NkStyle extends Struct<NkStyle> implements NativeResource {
     /** Unsafe version of {@link #cursor_last}. */
     @Nullable public static NkCursor ncursor_last(long struct) { return NkCursor.createSafe(memGetAddress(struct + NkStyle.CURSOR_LAST)); }
     /** Unsafe version of {@link #cursor_visible}. */
-    public static int ncursor_visible(long struct) { return UNSAFE.getInt(null, struct + NkStyle.CURSOR_VISIBLE); }
+    public static int ncursor_visible(long struct) { return memGetInt(struct + NkStyle.CURSOR_VISIBLE); }
     /** Unsafe version of {@link #text}. */
     public static NkStyleText ntext(long struct) { return NkStyleText.create(struct + NkStyle.TEXT); }
     /** Unsafe version of {@link #button}. */
@@ -588,7 +588,7 @@ public class NkStyle extends Struct<NkStyle> implements NativeResource {
     /** Unsafe version of {@link #cursor_last(NkCursor) cursor_last}. */
     public static void ncursor_last(long struct, @Nullable NkCursor value) { memPutAddress(struct + NkStyle.CURSOR_LAST, memAddressSafe(value)); }
     /** Unsafe version of {@link #cursor_visible(boolean) cursor_visible}. */
-    public static void ncursor_visible(long struct, int value) { UNSAFE.putInt(null, struct + NkStyle.CURSOR_VISIBLE, value); }
+    public static void ncursor_visible(long struct, int value) { memPutInt(struct + NkStyle.CURSOR_VISIBLE, value); }
     /** Unsafe version of {@link #text(NkStyleText) text}. */
     public static void ntext(long struct, NkStyleText value) { memCopy(value.address(), struct + NkStyle.TEXT, NkStyleText.SIZEOF); }
     /** Unsafe version of {@link #button(NkStyleButton) button}. */

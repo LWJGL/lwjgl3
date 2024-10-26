@@ -362,44 +362,44 @@ public class VkVideoEncodeH265CapabilitiesKHR extends Struct<VkVideoEncodeH265Ca
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265CapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.FLAGS); }
     /** Unsafe version of {@link #maxLevelIdc}. */
-    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXLEVELIDC); }
+    public static int nmaxLevelIdc(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXLEVELIDC); }
     /** Unsafe version of {@link #maxSliceSegmentCount}. */
-    public static int nmaxSliceSegmentCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXSLICESEGMENTCOUNT); }
+    public static int nmaxSliceSegmentCount(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXSLICESEGMENTCOUNT); }
     /** Unsafe version of {@link #maxTiles}. */
     public static VkExtent2D nmaxTiles(long struct) { return VkExtent2D.create(struct + VkVideoEncodeH265CapabilitiesKHR.MAXTILES); }
     /** Unsafe version of {@link #ctbSizes}. */
-    public static int nctbSizes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.CTBSIZES); }
+    public static int nctbSizes(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.CTBSIZES); }
     /** Unsafe version of {@link #transformBlockSizes}. */
-    public static int ntransformBlockSizes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.TRANSFORMBLOCKSIZES); }
+    public static int ntransformBlockSizes(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.TRANSFORMBLOCKSIZES); }
     /** Unsafe version of {@link #maxPPictureL0ReferenceCount}. */
-    public static int nmaxPPictureL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXPPICTUREL0REFERENCECOUNT); }
+    public static int nmaxPPictureL0ReferenceCount(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXPPICTUREL0REFERENCECOUNT); }
     /** Unsafe version of {@link #maxBPictureL0ReferenceCount}. */
-    public static int nmaxBPictureL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXBPICTUREL0REFERENCECOUNT); }
+    public static int nmaxBPictureL0ReferenceCount(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXBPICTUREL0REFERENCECOUNT); }
     /** Unsafe version of {@link #maxL1ReferenceCount}. */
-    public static int nmaxL1ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXL1REFERENCECOUNT); }
+    public static int nmaxL1ReferenceCount(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXL1REFERENCECOUNT); }
     /** Unsafe version of {@link #maxSubLayerCount}. */
-    public static int nmaxSubLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXSUBLAYERCOUNT); }
+    public static int nmaxSubLayerCount(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXSUBLAYERCOUNT); }
     /** Unsafe version of {@link #expectDyadicTemporalSubLayerPattern}. */
-    public static int nexpectDyadicTemporalSubLayerPattern(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.EXPECTDYADICTEMPORALSUBLAYERPATTERN); }
+    public static int nexpectDyadicTemporalSubLayerPattern(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.EXPECTDYADICTEMPORALSUBLAYERPATTERN); }
     /** Unsafe version of {@link #minQp}. */
-    public static int nminQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MINQP); }
+    public static int nminQp(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MINQP); }
     /** Unsafe version of {@link #maxQp}. */
-    public static int nmaxQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.MAXQP); }
+    public static int nmaxQp(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.MAXQP); }
     /** Unsafe version of {@link #prefersGopRemainingFrames}. */
-    public static int nprefersGopRemainingFrames(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.PREFERSGOPREMAININGFRAMES); }
+    public static int nprefersGopRemainingFrames(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.PREFERSGOPREMAININGFRAMES); }
     /** Unsafe version of {@link #requiresGopRemainingFrames}. */
-    public static int nrequiresGopRemainingFrames(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.REQUIRESGOPREMAININGFRAMES); }
+    public static int nrequiresGopRemainingFrames(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.REQUIRESGOPREMAININGFRAMES); }
     /** Unsafe version of {@link #stdSyntaxFlags}. */
-    public static int nstdSyntaxFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.STDSYNTAXFLAGS); }
+    public static int nstdSyntaxFlags(long struct) { return memGetInt(struct + VkVideoEncodeH265CapabilitiesKHR.STDSYNTAXFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265CapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH265CapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265CapabilitiesKHR.PNEXT, value); }
 

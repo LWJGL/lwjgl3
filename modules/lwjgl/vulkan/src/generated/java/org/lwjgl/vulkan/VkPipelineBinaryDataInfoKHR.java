@@ -248,18 +248,18 @@ public class VkPipelineBinaryDataInfoKHR extends Struct<VkPipelineBinaryDataInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineBinaryDataInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineBinaryDataInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineBinaryDataInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pipelineBinary}. */
-    public static long npipelineBinary(long struct) { return UNSAFE.getLong(null, struct + VkPipelineBinaryDataInfoKHR.PIPELINEBINARY); }
+    public static long npipelineBinary(long struct) { return memGetLong(struct + VkPipelineBinaryDataInfoKHR.PIPELINEBINARY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineBinaryDataInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineBinaryDataInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineBinaryDataInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pipelineBinary(long) pipelineBinary}. */
-    public static void npipelineBinary(long struct, long value) { UNSAFE.putLong(null, struct + VkPipelineBinaryDataInfoKHR.PIPELINEBINARY, value); }
+    public static void npipelineBinary(long struct, long value) { memPutLong(struct + VkPipelineBinaryDataInfoKHR.PIPELINEBINARY, value); }
 
     // -----------------------------------
 

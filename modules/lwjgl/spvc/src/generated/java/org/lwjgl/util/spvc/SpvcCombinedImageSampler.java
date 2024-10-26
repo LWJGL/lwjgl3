@@ -233,18 +233,18 @@ public class SpvcCombinedImageSampler extends Struct<SpvcCombinedImageSampler> i
     // -----------------------------------
 
     /** Unsafe version of {@link #combined_id}. */
-    public static int ncombined_id(long struct) { return UNSAFE.getInt(null, struct + SpvcCombinedImageSampler.COMBINED_ID); }
+    public static int ncombined_id(long struct) { return memGetInt(struct + SpvcCombinedImageSampler.COMBINED_ID); }
     /** Unsafe version of {@link #image_id}. */
-    public static int nimage_id(long struct) { return UNSAFE.getInt(null, struct + SpvcCombinedImageSampler.IMAGE_ID); }
+    public static int nimage_id(long struct) { return memGetInt(struct + SpvcCombinedImageSampler.IMAGE_ID); }
     /** Unsafe version of {@link #sampler_id}. */
-    public static int nsampler_id(long struct) { return UNSAFE.getInt(null, struct + SpvcCombinedImageSampler.SAMPLER_ID); }
+    public static int nsampler_id(long struct) { return memGetInt(struct + SpvcCombinedImageSampler.SAMPLER_ID); }
 
     /** Unsafe version of {@link #combined_id(int) combined_id}. */
-    public static void ncombined_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcCombinedImageSampler.COMBINED_ID, value); }
+    public static void ncombined_id(long struct, int value) { memPutInt(struct + SpvcCombinedImageSampler.COMBINED_ID, value); }
     /** Unsafe version of {@link #image_id(int) image_id}. */
-    public static void nimage_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcCombinedImageSampler.IMAGE_ID, value); }
+    public static void nimage_id(long struct, int value) { memPutInt(struct + SpvcCombinedImageSampler.IMAGE_ID, value); }
     /** Unsafe version of {@link #sampler_id(int) sampler_id}. */
-    public static void nsampler_id(long struct, int value) { UNSAFE.putInt(null, struct + SpvcCombinedImageSampler.SAMPLER_ID, value); }
+    public static void nsampler_id(long struct, int value) { memPutInt(struct + SpvcCombinedImageSampler.SAMPLER_ID, value); }
 
     // -----------------------------------
 

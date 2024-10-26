@@ -397,11 +397,11 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XCrossingEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XCrossingEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XCrossingEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XCrossingEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -413,30 +413,30 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XCrossingEvent.TIME); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XCrossingEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XCrossingEvent.Y); }
     /** Unsafe version of {@link #x_root}. */
-    public static int nx_root(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.X_ROOT); }
+    public static int nx_root(long struct) { return memGetInt(struct + XCrossingEvent.X_ROOT); }
     /** Unsafe version of {@link #y_root}. */
-    public static int ny_root(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.Y_ROOT); }
+    public static int ny_root(long struct) { return memGetInt(struct + XCrossingEvent.Y_ROOT); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + XCrossingEvent.MODE); }
     /** Unsafe version of {@link #detail}. */
-    public static int ndetail(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.DETAIL); }
+    public static int ndetail(long struct) { return memGetInt(struct + XCrossingEvent.DETAIL); }
     /** Unsafe version of {@link #same_screen}. */
-    public static int nsame_screen(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.SAME_SCREEN); }
+    public static int nsame_screen(long struct) { return memGetInt(struct + XCrossingEvent.SAME_SCREEN); }
     /** Unsafe version of {@link #focus}. */
-    public static int nfocus(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.FOCUS); }
+    public static int nfocus(long struct) { return memGetInt(struct + XCrossingEvent.FOCUS); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XCrossingEvent.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XCrossingEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XCrossingEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XCrossingEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XCrossingEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -448,23 +448,23 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { memPutCLong(struct + XCrossingEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XCrossingEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XCrossingEvent.Y, value); }
     /** Unsafe version of {@link #x_root(int) x_root}. */
-    public static void nx_root(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.X_ROOT, value); }
+    public static void nx_root(long struct, int value) { memPutInt(struct + XCrossingEvent.X_ROOT, value); }
     /** Unsafe version of {@link #y_root(int) y_root}. */
-    public static void ny_root(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.Y_ROOT, value); }
+    public static void ny_root(long struct, int value) { memPutInt(struct + XCrossingEvent.Y_ROOT, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + XCrossingEvent.MODE, value); }
     /** Unsafe version of {@link #detail(int) detail}. */
-    public static void ndetail(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.DETAIL, value); }
+    public static void ndetail(long struct, int value) { memPutInt(struct + XCrossingEvent.DETAIL, value); }
     /** Unsafe version of {@link #same_screen(int) same_screen}. */
-    public static void nsame_screen(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.SAME_SCREEN, value); }
+    public static void nsame_screen(long struct, int value) { memPutInt(struct + XCrossingEvent.SAME_SCREEN, value); }
     /** Unsafe version of {@link #focus(int) focus}. */
-    public static void nfocus(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.FOCUS, value); }
+    public static void nfocus(long struct, int value) { memPutInt(struct + XCrossingEvent.FOCUS, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XCrossingEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

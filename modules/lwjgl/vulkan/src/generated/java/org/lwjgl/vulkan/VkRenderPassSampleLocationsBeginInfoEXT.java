@@ -295,28 +295,28 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PNEXT); }
     /** Unsafe version of {@link #attachmentInitialSampleLocationsCount}. */
-    public static int nattachmentInitialSampleLocationsCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT); }
+    public static int nattachmentInitialSampleLocationsCount(long struct) { return memGetInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pAttachmentInitialSampleLocations}. */
     @Nullable public static VkAttachmentSampleLocationsEXT.Buffer npAttachmentInitialSampleLocations(long struct) { return VkAttachmentSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS), nattachmentInitialSampleLocationsCount(struct)); }
     /** Unsafe version of {@link #postSubpassSampleLocationsCount}. */
-    public static int npostSubpassSampleLocationsCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT); }
+    public static int npostSubpassSampleLocationsCount(long struct) { return memGetInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pPostSubpassSampleLocations}. */
     @Nullable public static VkSubpassSampleLocationsEXT.Buffer npPostSubpassSampleLocations(long struct) { return VkSubpassSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS), npostSubpassSampleLocationsCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code attachmentInitialSampleLocationsCount} field of the specified {@code struct}. */
-    public static void nattachmentInitialSampleLocationsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT, value); }
+    public static void nattachmentInitialSampleLocationsCount(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pAttachmentInitialSampleLocations(VkAttachmentSampleLocationsEXT.Buffer) pAttachmentInitialSampleLocations}. */
     public static void npAttachmentInitialSampleLocations(long struct, @Nullable VkAttachmentSampleLocationsEXT.Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS, memAddressSafe(value)); nattachmentInitialSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code postSubpassSampleLocationsCount} field of the specified {@code struct}. */
-    public static void npostSubpassSampleLocationsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT, value); }
+    public static void npostSubpassSampleLocationsCount(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pPostSubpassSampleLocations(VkSubpassSampleLocationsEXT.Buffer) pPostSubpassSampleLocations}. */
     public static void npPostSubpassSampleLocations(long struct, @Nullable VkSubpassSampleLocationsEXT.Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS, memAddressSafe(value)); npostSubpassSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
 

@@ -242,14 +242,14 @@ public class VkPhysicalDeviceTimelineSemaphoreProperties extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTimelineSemaphoreProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTimelineSemaphoreProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTimelineSemaphoreProperties.PNEXT); }
     /** Unsafe version of {@link #maxTimelineSemaphoreValueDifference}. */
-    public static long nmaxTimelineSemaphoreValueDifference(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceTimelineSemaphoreProperties.MAXTIMELINESEMAPHOREVALUEDIFFERENCE); }
+    public static long nmaxTimelineSemaphoreValueDifference(long struct) { return memGetLong(struct + VkPhysicalDeviceTimelineSemaphoreProperties.MAXTIMELINESEMAPHOREVALUEDIFFERENCE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTimelineSemaphoreProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTimelineSemaphoreProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTimelineSemaphoreProperties.PNEXT, value); }
 

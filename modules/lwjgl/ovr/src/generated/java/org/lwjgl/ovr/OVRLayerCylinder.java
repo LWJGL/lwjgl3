@@ -346,11 +346,11 @@ public class OVRLayerCylinder extends Struct<OVRLayerCylinder> implements Native
     /** Unsafe version of {@link #CylinderPoseCenter}. */
     public static OVRPosef nCylinderPoseCenter(long struct) { return OVRPosef.create(struct + OVRLayerCylinder.CYLINDERPOSECENTER); }
     /** Unsafe version of {@link #CylinderRadius}. */
-    public static float nCylinderRadius(long struct) { return UNSAFE.getFloat(null, struct + OVRLayerCylinder.CYLINDERRADIUS); }
+    public static float nCylinderRadius(long struct) { return memGetFloat(struct + OVRLayerCylinder.CYLINDERRADIUS); }
     /** Unsafe version of {@link #CylinderAngle}. */
-    public static float nCylinderAngle(long struct) { return UNSAFE.getFloat(null, struct + OVRLayerCylinder.CYLINDERANGLE); }
+    public static float nCylinderAngle(long struct) { return memGetFloat(struct + OVRLayerCylinder.CYLINDERANGLE); }
     /** Unsafe version of {@link #CylinderAspectRatio}. */
-    public static float nCylinderAspectRatio(long struct) { return UNSAFE.getFloat(null, struct + OVRLayerCylinder.CYLINDERASPECTRATIO); }
+    public static float nCylinderAspectRatio(long struct) { return memGetFloat(struct + OVRLayerCylinder.CYLINDERASPECTRATIO); }
 
     /** Unsafe version of {@link #Header(OVRLayerHeader) Header}. */
     public static void nHeader(long struct, OVRLayerHeader value) { memCopy(value.address(), struct + OVRLayerCylinder.HEADER, OVRLayerHeader.SIZEOF); }
@@ -361,11 +361,11 @@ public class OVRLayerCylinder extends Struct<OVRLayerCylinder> implements Native
     /** Unsafe version of {@link #CylinderPoseCenter(OVRPosef) CylinderPoseCenter}. */
     public static void nCylinderPoseCenter(long struct, OVRPosef value) { memCopy(value.address(), struct + OVRLayerCylinder.CYLINDERPOSECENTER, OVRPosef.SIZEOF); }
     /** Unsafe version of {@link #CylinderRadius(float) CylinderRadius}. */
-    public static void nCylinderRadius(long struct, float value) { UNSAFE.putFloat(null, struct + OVRLayerCylinder.CYLINDERRADIUS, value); }
+    public static void nCylinderRadius(long struct, float value) { memPutFloat(struct + OVRLayerCylinder.CYLINDERRADIUS, value); }
     /** Unsafe version of {@link #CylinderAngle(float) CylinderAngle}. */
-    public static void nCylinderAngle(long struct, float value) { UNSAFE.putFloat(null, struct + OVRLayerCylinder.CYLINDERANGLE, value); }
+    public static void nCylinderAngle(long struct, float value) { memPutFloat(struct + OVRLayerCylinder.CYLINDERANGLE, value); }
     /** Unsafe version of {@link #CylinderAspectRatio(float) CylinderAspectRatio}. */
-    public static void nCylinderAspectRatio(long struct, float value) { UNSAFE.putFloat(null, struct + OVRLayerCylinder.CYLINDERASPECTRATIO, value); }
+    public static void nCylinderAspectRatio(long struct, float value) { memPutFloat(struct + OVRLayerCylinder.CYLINDERASPECTRATIO, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

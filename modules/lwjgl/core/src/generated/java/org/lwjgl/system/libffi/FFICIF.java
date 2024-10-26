@@ -225,17 +225,17 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #abi}. */
-    public static int nabi(long struct) { return UNSAFE.getInt(null, struct + FFICIF.ABI); }
+    public static int nabi(long struct) { return memGetInt(struct + FFICIF.ABI); }
     /** Unsafe version of {@link #nargs}. */
-    public static int nnargs(long struct) { return UNSAFE.getInt(null, struct + FFICIF.NARGS); }
+    public static int nnargs(long struct) { return memGetInt(struct + FFICIF.NARGS); }
     /** Unsafe version of {@link #arg_types(int) arg_types}. */
     public static PointerBuffer narg_types(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + FFICIF.ARG_TYPES), capacity); }
     /** Unsafe version of {@link #rtype}. */
     public static FFIType nrtype(long struct) { return FFIType.create(memGetAddress(struct + FFICIF.RTYPE)); }
     /** Unsafe version of {@link #bytes}. */
-    public static int nbytes(long struct) { return UNSAFE.getInt(null, struct + FFICIF.BYTES); }
+    public static int nbytes(long struct) { return memGetInt(struct + FFICIF.BYTES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FFICIF.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FFICIF.FLAGS); }
 
     // -----------------------------------
 

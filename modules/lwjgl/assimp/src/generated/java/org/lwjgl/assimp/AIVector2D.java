@@ -211,9 +211,9 @@ public class AIVector2D extends Struct<AIVector2D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIVector2D.X); }
+    public static float nx(long struct) { return memGetFloat(struct + AIVector2D.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + AIVector2D.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + AIVector2D.Y); }
 
     // -----------------------------------
 

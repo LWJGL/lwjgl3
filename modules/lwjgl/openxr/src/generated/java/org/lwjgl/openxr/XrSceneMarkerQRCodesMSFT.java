@@ -271,20 +271,20 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerQRCodesMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMarkerQRCodesMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMarkerQRCodesMSFT.NEXT); }
     /** Unsafe version of {@link #qrCodeCapacityInput}. */
-    public static int nqrCodeCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT); }
+    public static int nqrCodeCapacityInput(long struct) { return memGetInt(struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT); }
     /** Unsafe version of {@link #qrCodes}. */
     @Nullable public static XrSceneMarkerQRCodeMSFT.Buffer nqrCodes(long struct) { return XrSceneMarkerQRCodeMSFT.createSafe(memGetAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES), nqrCodeCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkerQRCodesMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkerQRCodesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMarkerQRCodesMSFT.NEXT, value); }
     /** Sets the specified value to the {@code qrCodeCapacityInput} field of the specified {@code struct}. */
-    public static void nqrCodeCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT, value); }
+    public static void nqrCodeCapacityInput(long struct, int value) { memPutInt(struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT, value); }
     /** Unsafe version of {@link #qrCodes(XrSceneMarkerQRCodeMSFT.Buffer) qrCodes}. */
     public static void nqrCodes(long struct, @Nullable XrSceneMarkerQRCodeMSFT.Buffer value) { memPutAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES, memAddressSafe(value)); if (value != null) { nqrCodeCapacityInput(struct, value.remaining()); } }
 

@@ -257,18 +257,18 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildSizesInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureBuildSizesInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureBuildSizesInfoKHR.PNEXT); }
     /** Unsafe version of {@link #accelerationStructureSize}. */
-    public static long naccelerationStructureSize(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.ACCELERATIONSTRUCTURESIZE); }
+    public static long naccelerationStructureSize(long struct) { return memGetLong(struct + VkAccelerationStructureBuildSizesInfoKHR.ACCELERATIONSTRUCTURESIZE); }
     /** Unsafe version of {@link #updateScratchSize}. */
-    public static long nupdateScratchSize(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.UPDATESCRATCHSIZE); }
+    public static long nupdateScratchSize(long struct) { return memGetLong(struct + VkAccelerationStructureBuildSizesInfoKHR.UPDATESCRATCHSIZE); }
     /** Unsafe version of {@link #buildScratchSize}. */
-    public static long nbuildScratchSize(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureBuildSizesInfoKHR.BUILDSCRATCHSIZE); }
+    public static long nbuildScratchSize(long struct) { return memGetLong(struct + VkAccelerationStructureBuildSizesInfoKHR.BUILDSCRATCHSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildSizesInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildSizesInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureBuildSizesInfoKHR.PNEXT, value); }
 

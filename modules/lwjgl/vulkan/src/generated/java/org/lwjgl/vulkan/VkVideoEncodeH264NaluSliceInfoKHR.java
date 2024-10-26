@@ -279,20 +279,20 @@ public class VkVideoEncodeH264NaluSliceInfoKHR extends Struct<VkVideoEncodeH264N
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264NaluSliceInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH264NaluSliceInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264NaluSliceInfoKHR.PNEXT); }
     /** Unsafe version of {@link #constantQp}. */
-    public static int nconstantQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264NaluSliceInfoKHR.CONSTANTQP); }
+    public static int nconstantQp(long struct) { return memGetInt(struct + VkVideoEncodeH264NaluSliceInfoKHR.CONSTANTQP); }
     /** Unsafe version of {@link #pStdSliceHeader}. */
     public static StdVideoEncodeH264SliceHeader npStdSliceHeader(long struct) { return StdVideoEncodeH264SliceHeader.create(memGetAddress(struct + VkVideoEncodeH264NaluSliceInfoKHR.PSTDSLICEHEADER)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264NaluSliceInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH264NaluSliceInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264NaluSliceInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #constantQp(int) constantQp}. */
-    public static void nconstantQp(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264NaluSliceInfoKHR.CONSTANTQP, value); }
+    public static void nconstantQp(long struct, int value) { memPutInt(struct + VkVideoEncodeH264NaluSliceInfoKHR.CONSTANTQP, value); }
     /** Unsafe version of {@link #pStdSliceHeader(StdVideoEncodeH264SliceHeader) pStdSliceHeader}. */
     public static void npStdSliceHeader(long struct, StdVideoEncodeH264SliceHeader value) { memPutAddress(struct + VkVideoEncodeH264NaluSliceInfoKHR.PSTDSLICEHEADER, value.address()); }
 

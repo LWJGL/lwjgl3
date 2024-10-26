@@ -246,18 +246,18 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #fragmentDensityMapOffset}. */
-    public static int nfragmentDensityMapOffset(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.FRAGMENTDENSITYMAPOFFSET); }
+    public static int nfragmentDensityMapOffset(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.FRAGMENTDENSITYMAPOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #fragmentDensityMapOffset(boolean) fragmentDensityMapOffset}. */
-    public static void nfragmentDensityMapOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.FRAGMENTDENSITYMAPOFFSET, value); }
+    public static void nfragmentDensityMapOffset(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.FRAGMENTDENSITYMAPOFFSET, value); }
 
     // -----------------------------------
 

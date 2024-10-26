@@ -248,18 +248,18 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct<VkPi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportDepthClipControlCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #negativeOneToOne}. */
-    public static int nnegativeOneToOne(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportDepthClipControlCreateInfoEXT.NEGATIVEONETOONE); }
+    public static int nnegativeOneToOne(long struct) { return memGetInt(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.NEGATIVEONETOONE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportDepthClipControlCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #negativeOneToOne(boolean) negativeOneToOne}. */
-    public static void nnegativeOneToOne(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportDepthClipControlCreateInfoEXT.NEGATIVEONETOONE, value); }
+    public static void nnegativeOneToOne(long struct, int value) { memPutInt(struct + VkPipelineViewportDepthClipControlCreateInfoEXT.NEGATIVEONETOONE, value); }
 
     // -----------------------------------
 

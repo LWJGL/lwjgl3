@@ -272,7 +272,7 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrApiLayerProperties.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrApiLayerProperties.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrApiLayerProperties.NEXT); }
     /** Unsafe version of {@link #layerName}. */
@@ -280,16 +280,16 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     /** Unsafe version of {@link #layerNameString}. */
     public static String nlayerNameString(long struct) { return memUTF8(struct + XrApiLayerProperties.LAYERNAME); }
     /** Unsafe version of {@link #specVersion}. */
-    public static long nspecVersion(long struct) { return UNSAFE.getLong(null, struct + XrApiLayerProperties.SPECVERSION); }
+    public static long nspecVersion(long struct) { return memGetLong(struct + XrApiLayerProperties.SPECVERSION); }
     /** Unsafe version of {@link #layerVersion}. */
-    public static int nlayerVersion(long struct) { return UNSAFE.getInt(null, struct + XrApiLayerProperties.LAYERVERSION); }
+    public static int nlayerVersion(long struct) { return memGetInt(struct + XrApiLayerProperties.LAYERVERSION); }
     /** Unsafe version of {@link #description}. */
     public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + XrApiLayerProperties.DESCRIPTION, XR_MAX_API_LAYER_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + XrApiLayerProperties.DESCRIPTION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrApiLayerProperties.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrApiLayerProperties.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrApiLayerProperties.NEXT, value); }
 

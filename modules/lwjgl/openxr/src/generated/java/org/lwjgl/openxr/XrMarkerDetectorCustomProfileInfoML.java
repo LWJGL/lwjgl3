@@ -310,38 +310,38 @@ public class XrMarkerDetectorCustomProfileInfoML extends Struct<XrMarkerDetector
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMarkerDetectorCustomProfileInfoML.NEXT); }
     /** Unsafe version of {@link #fpsHint}. */
-    public static int nfpsHint(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.FPSHINT); }
+    public static int nfpsHint(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.FPSHINT); }
     /** Unsafe version of {@link #resolutionHint}. */
-    public static int nresolutionHint(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.RESOLUTIONHINT); }
+    public static int nresolutionHint(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.RESOLUTIONHINT); }
     /** Unsafe version of {@link #cameraHint}. */
-    public static int ncameraHint(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.CAMERAHINT); }
+    public static int ncameraHint(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.CAMERAHINT); }
     /** Unsafe version of {@link #cornerRefineMethod}. */
-    public static int ncornerRefineMethod(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.CORNERREFINEMETHOD); }
+    public static int ncornerRefineMethod(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.CORNERREFINEMETHOD); }
     /** Unsafe version of {@link #useEdgeRefinement}. */
-    public static int nuseEdgeRefinement(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.USEEDGEREFINEMENT); }
+    public static int nuseEdgeRefinement(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.USEEDGEREFINEMENT); }
     /** Unsafe version of {@link #fullAnalysisIntervalHint}. */
-    public static int nfullAnalysisIntervalHint(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorCustomProfileInfoML.FULLANALYSISINTERVALHINT); }
+    public static int nfullAnalysisIntervalHint(long struct) { return memGetInt(struct + XrMarkerDetectorCustomProfileInfoML.FULLANALYSISINTERVALHINT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerDetectorCustomProfileInfoML.NEXT, value); }
     /** Unsafe version of {@link #fpsHint(int) fpsHint}. */
-    public static void nfpsHint(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.FPSHINT, value); }
+    public static void nfpsHint(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.FPSHINT, value); }
     /** Unsafe version of {@link #resolutionHint(int) resolutionHint}. */
-    public static void nresolutionHint(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.RESOLUTIONHINT, value); }
+    public static void nresolutionHint(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.RESOLUTIONHINT, value); }
     /** Unsafe version of {@link #cameraHint(int) cameraHint}. */
-    public static void ncameraHint(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.CAMERAHINT, value); }
+    public static void ncameraHint(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.CAMERAHINT, value); }
     /** Unsafe version of {@link #cornerRefineMethod(int) cornerRefineMethod}. */
-    public static void ncornerRefineMethod(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.CORNERREFINEMETHOD, value); }
+    public static void ncornerRefineMethod(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.CORNERREFINEMETHOD, value); }
     /** Unsafe version of {@link #useEdgeRefinement(boolean) useEdgeRefinement}. */
-    public static void nuseEdgeRefinement(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.USEEDGEREFINEMENT, value); }
+    public static void nuseEdgeRefinement(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.USEEDGEREFINEMENT, value); }
     /** Unsafe version of {@link #fullAnalysisIntervalHint(int) fullAnalysisIntervalHint}. */
-    public static void nfullAnalysisIntervalHint(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorCustomProfileInfoML.FULLANALYSISINTERVALHINT, value); }
+    public static void nfullAnalysisIntervalHint(long struct, int value) { memPutInt(struct + XrMarkerDetectorCustomProfileInfoML.FULLANALYSISINTERVALHINT, value); }
 
     // -----------------------------------
 

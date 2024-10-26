@@ -267,7 +267,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerColorScaleBiasKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerColorScaleBiasKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerColorScaleBiasKHR.NEXT); }
     /** Unsafe version of {@link #colorScale}. */
@@ -276,7 +276,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
     public static XrColor4f ncolorBias(long struct) { return XrColor4f.create(struct + XrCompositionLayerColorScaleBiasKHR.COLORBIAS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerColorScaleBiasKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerColorScaleBiasKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerColorScaleBiasKHR.NEXT, value); }
     /** Unsafe version of {@link #colorScale(XrColor4f) colorScale}. */

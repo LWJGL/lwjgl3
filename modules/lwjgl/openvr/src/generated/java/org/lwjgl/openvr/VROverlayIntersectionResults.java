@@ -232,7 +232,7 @@ public class VROverlayIntersectionResults extends Struct<VROverlayIntersectionRe
     /** Unsafe version of {@link #vUVs}. */
     public static HmdVector2 nvUVs(long struct) { return HmdVector2.create(struct + VROverlayIntersectionResults.VUVS); }
     /** Unsafe version of {@link #fDistance}. */
-    public static float nfDistance(long struct) { return UNSAFE.getFloat(null, struct + VROverlayIntersectionResults.FDISTANCE); }
+    public static float nfDistance(long struct) { return memGetFloat(struct + VROverlayIntersectionResults.FDISTANCE); }
 
     // -----------------------------------
 

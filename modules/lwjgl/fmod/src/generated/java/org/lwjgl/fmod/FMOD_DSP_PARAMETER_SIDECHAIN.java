@@ -201,10 +201,10 @@ public class FMOD_DSP_PARAMETER_SIDECHAIN extends Struct<FMOD_DSP_PARAMETER_SIDE
     // -----------------------------------
 
     /** Unsafe version of {@link #sidechainenable}. */
-    public static int nsidechainenable(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_PARAMETER_SIDECHAIN.SIDECHAINENABLE); }
+    public static int nsidechainenable(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_SIDECHAIN.SIDECHAINENABLE); }
 
     /** Unsafe version of {@link #sidechainenable(int) sidechainenable}. */
-    public static void nsidechainenable(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_PARAMETER_SIDECHAIN.SIDECHAINENABLE, value); }
+    public static void nsidechainenable(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_SIDECHAIN.SIDECHAINENABLE, value); }
 
     // -----------------------------------
 

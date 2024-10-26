@@ -364,12 +364,12 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     /** Unsafe version of {@link #ring_ptr() ring_ptr}. */
     public static ByteBuffer nring_ptr(long struct) { return memByteBuffer(memGetAddress(struct + IOURingCQ.RING_PTR), (int)nring_sz(struct)); }
     /** Unsafe version of {@link #ring_mask}. */
-    public static int nring_mask(long struct) { return UNSAFE.getInt(null, struct + IOURingCQ.RING_MASK); }
+    public static int nring_mask(long struct) { return memGetInt(struct + IOURingCQ.RING_MASK); }
     /** Unsafe version of {@link #ring_entries}. */
-    public static int nring_entries(long struct) { return UNSAFE.getInt(null, struct + IOURingCQ.RING_ENTRIES); }
+    public static int nring_entries(long struct) { return memGetInt(struct + IOURingCQ.RING_ENTRIES); }
     public static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingCQ.PAD, 2); }
     public static int npad(long struct, int index) {
-        return UNSAFE.getInt(null, struct + IOURingCQ.PAD + check(index, 2) * 4);
+        return memGetInt(struct + IOURingCQ.PAD + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #khead(IntBuffer) khead}. */
@@ -391,15 +391,15 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     /** Unsafe version of {@link #ring_ptr(ByteBuffer) ring_ptr}. */
     public static void nring_ptr(long struct, ByteBuffer value) { memPutAddress(struct + IOURingCQ.RING_PTR, memAddress(value)); nring_sz(struct, value.remaining()); }
     /** Unsafe version of {@link #ring_mask(int) ring_mask}. */
-    public static void nring_mask(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQ.RING_MASK, value); }
+    public static void nring_mask(long struct, int value) { memPutInt(struct + IOURingCQ.RING_MASK, value); }
     /** Unsafe version of {@link #ring_entries(int) ring_entries}. */
-    public static void nring_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQ.RING_ENTRIES, value); }
+    public static void nring_entries(long struct, int value) { memPutInt(struct + IOURingCQ.RING_ENTRIES, value); }
     public static void npad(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingCQ.PAD, value.remaining() * 4);
     }
     public static void npad(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + IOURingCQ.PAD + check(index, 2) * 4, value);
+        memPutInt(struct + IOURingCQ.PAD + check(index, 2) * 4, value);
     }
 
     /**

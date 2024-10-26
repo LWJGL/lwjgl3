@@ -312,44 +312,44 @@ public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> imp
     /** Unsafe version of {@link #flags}. */
     public static StdVideoAV1QuantizationFlags nflags(long struct) { return StdVideoAV1QuantizationFlags.create(struct + StdVideoAV1Quantization.FLAGS); }
     /** Unsafe version of {@link #base_q_idx}. */
-    public static byte nbase_q_idx(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.BASE_Q_IDX); }
+    public static byte nbase_q_idx(long struct) { return memGetByte(struct + StdVideoAV1Quantization.BASE_Q_IDX); }
     /** Unsafe version of {@link #DeltaQYDc}. */
-    public static byte nDeltaQYDc(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.DELTAQYDC); }
+    public static byte nDeltaQYDc(long struct) { return memGetByte(struct + StdVideoAV1Quantization.DELTAQYDC); }
     /** Unsafe version of {@link #DeltaQUDc}. */
-    public static byte nDeltaQUDc(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.DELTAQUDC); }
+    public static byte nDeltaQUDc(long struct) { return memGetByte(struct + StdVideoAV1Quantization.DELTAQUDC); }
     /** Unsafe version of {@link #DeltaQUAc}. */
-    public static byte nDeltaQUAc(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.DELTAQUAC); }
+    public static byte nDeltaQUAc(long struct) { return memGetByte(struct + StdVideoAV1Quantization.DELTAQUAC); }
     /** Unsafe version of {@link #DeltaQVDc}. */
-    public static byte nDeltaQVDc(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.DELTAQVDC); }
+    public static byte nDeltaQVDc(long struct) { return memGetByte(struct + StdVideoAV1Quantization.DELTAQVDC); }
     /** Unsafe version of {@link #DeltaQVAc}. */
-    public static byte nDeltaQVAc(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.DELTAQVAC); }
+    public static byte nDeltaQVAc(long struct) { return memGetByte(struct + StdVideoAV1Quantization.DELTAQVAC); }
     /** Unsafe version of {@link #qm_y}. */
-    public static byte nqm_y(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.QM_Y); }
+    public static byte nqm_y(long struct) { return memGetByte(struct + StdVideoAV1Quantization.QM_Y); }
     /** Unsafe version of {@link #qm_u}. */
-    public static byte nqm_u(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.QM_U); }
+    public static byte nqm_u(long struct) { return memGetByte(struct + StdVideoAV1Quantization.QM_U); }
     /** Unsafe version of {@link #qm_v}. */
-    public static byte nqm_v(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1Quantization.QM_V); }
+    public static byte nqm_v(long struct) { return memGetByte(struct + StdVideoAV1Quantization.QM_V); }
 
     /** Unsafe version of {@link #flags(StdVideoAV1QuantizationFlags) flags}. */
     public static void nflags(long struct, StdVideoAV1QuantizationFlags value) { memCopy(value.address(), struct + StdVideoAV1Quantization.FLAGS, StdVideoAV1QuantizationFlags.SIZEOF); }
     /** Unsafe version of {@link #base_q_idx(byte) base_q_idx}. */
-    public static void nbase_q_idx(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.BASE_Q_IDX, value); }
+    public static void nbase_q_idx(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.BASE_Q_IDX, value); }
     /** Unsafe version of {@link #DeltaQYDc(byte) DeltaQYDc}. */
-    public static void nDeltaQYDc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.DELTAQYDC, value); }
+    public static void nDeltaQYDc(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.DELTAQYDC, value); }
     /** Unsafe version of {@link #DeltaQUDc(byte) DeltaQUDc}. */
-    public static void nDeltaQUDc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.DELTAQUDC, value); }
+    public static void nDeltaQUDc(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.DELTAQUDC, value); }
     /** Unsafe version of {@link #DeltaQUAc(byte) DeltaQUAc}. */
-    public static void nDeltaQUAc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.DELTAQUAC, value); }
+    public static void nDeltaQUAc(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.DELTAQUAC, value); }
     /** Unsafe version of {@link #DeltaQVDc(byte) DeltaQVDc}. */
-    public static void nDeltaQVDc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.DELTAQVDC, value); }
+    public static void nDeltaQVDc(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.DELTAQVDC, value); }
     /** Unsafe version of {@link #DeltaQVAc(byte) DeltaQVAc}. */
-    public static void nDeltaQVAc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.DELTAQVAC, value); }
+    public static void nDeltaQVAc(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.DELTAQVAC, value); }
     /** Unsafe version of {@link #qm_y(byte) qm_y}. */
-    public static void nqm_y(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.QM_Y, value); }
+    public static void nqm_y(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.QM_Y, value); }
     /** Unsafe version of {@link #qm_u(byte) qm_u}. */
-    public static void nqm_u(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.QM_U, value); }
+    public static void nqm_u(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.QM_U, value); }
     /** Unsafe version of {@link #qm_v(byte) qm_v}. */
-    public static void nqm_v(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1Quantization.QM_V, value); }
+    public static void nqm_v(long struct, byte value) { memPutByte(struct + StdVideoAV1Quantization.QM_V, value); }
 
     // -----------------------------------
 

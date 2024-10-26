@@ -241,14 +241,14 @@ public class XrFaceExpressionStatusFB extends Struct<XrFaceExpressionStatusFB> i
     // -----------------------------------
 
     /** Unsafe version of {@link #isValid}. */
-    public static int nisValid(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionStatusFB.ISVALID); }
+    public static int nisValid(long struct) { return memGetInt(struct + XrFaceExpressionStatusFB.ISVALID); }
     /** Unsafe version of {@link #isEyeFollowingBlendshapesValid}. */
-    public static int nisEyeFollowingBlendshapesValid(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionStatusFB.ISEYEFOLLOWINGBLENDSHAPESVALID); }
+    public static int nisEyeFollowingBlendshapesValid(long struct) { return memGetInt(struct + XrFaceExpressionStatusFB.ISEYEFOLLOWINGBLENDSHAPESVALID); }
 
     /** Unsafe version of {@link #isValid(boolean) isValid}. */
-    public static void nisValid(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionStatusFB.ISVALID, value); }
+    public static void nisValid(long struct, int value) { memPutInt(struct + XrFaceExpressionStatusFB.ISVALID, value); }
     /** Unsafe version of {@link #isEyeFollowingBlendshapesValid(boolean) isEyeFollowingBlendshapesValid}. */
-    public static void nisEyeFollowingBlendshapesValid(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionStatusFB.ISEYEFOLLOWINGBLENDSHAPESVALID, value); }
+    public static void nisEyeFollowingBlendshapesValid(long struct, int value) { memPutInt(struct + XrFaceExpressionStatusFB.ISEYEFOLLOWINGBLENDSHAPESVALID, value); }
 
     // -----------------------------------
 

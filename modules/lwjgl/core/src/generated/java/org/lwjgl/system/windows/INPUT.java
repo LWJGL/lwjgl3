@@ -258,7 +258,7 @@ public class INPUT extends Struct<INPUT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + INPUT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + INPUT.TYPE); }
     /** Unsafe version of {@link #DUMMYUNIONNAME_mi}. */
     public static MOUSEINPUT nDUMMYUNIONNAME_mi(long struct) { return MOUSEINPUT.create(struct + INPUT.DUMMYUNIONNAME_MI); }
     /** Unsafe version of {@link #DUMMYUNIONNAME_ki}. */
@@ -267,7 +267,7 @@ public class INPUT extends Struct<INPUT> implements NativeResource {
     public static HARDWAREINPUT nDUMMYUNIONNAME_hi(long struct) { return HARDWAREINPUT.create(struct + INPUT.DUMMYUNIONNAME_HI); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + INPUT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + INPUT.TYPE, value); }
     /** Unsafe version of {@link #DUMMYUNIONNAME_mi(MOUSEINPUT) DUMMYUNIONNAME_mi}. */
     public static void nDUMMYUNIONNAME_mi(long struct, MOUSEINPUT value) { memCopy(value.address(), struct + INPUT.DUMMYUNIONNAME_MI, MOUSEINPUT.SIZEOF); }
     /** Unsafe version of {@link #DUMMYUNIONNAME_ki(KEYBDINPUT) DUMMYUNIONNAME_ki}. */

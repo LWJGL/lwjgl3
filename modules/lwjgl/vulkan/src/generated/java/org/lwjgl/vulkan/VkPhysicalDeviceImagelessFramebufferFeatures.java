@@ -246,18 +246,18 @@ public class VkPhysicalDeviceImagelessFramebufferFeatures extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImagelessFramebufferFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImagelessFramebufferFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImagelessFramebufferFeatures.PNEXT); }
     /** Unsafe version of {@link #imagelessFramebuffer}. */
-    public static int nimagelessFramebuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImagelessFramebufferFeatures.IMAGELESSFRAMEBUFFER); }
+    public static int nimagelessFramebuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceImagelessFramebufferFeatures.IMAGELESSFRAMEBUFFER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImagelessFramebufferFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImagelessFramebufferFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImagelessFramebufferFeatures.PNEXT, value); }
     /** Unsafe version of {@link #imagelessFramebuffer(boolean) imagelessFramebuffer}. */
-    public static void nimagelessFramebuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImagelessFramebufferFeatures.IMAGELESSFRAMEBUFFER, value); }
+    public static void nimagelessFramebuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImagelessFramebufferFeatures.IMAGELESSFRAMEBUFFER, value); }
 
     // -----------------------------------
 

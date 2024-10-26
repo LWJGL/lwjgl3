@@ -219,7 +219,7 @@ public class CXCodeCompleteResults extends Struct<CXCodeCompleteResults> impleme
     /** Unsafe version of {@link #Results}. */
     public static CXCompletionResult.Buffer nResults(long struct) { return CXCompletionResult.create(memGetAddress(struct + CXCodeCompleteResults.RESULTS), nNumResults(struct)); }
     /** Unsafe version of {@link #NumResults}. */
-    public static int nNumResults(long struct) { return UNSAFE.getInt(null, struct + CXCodeCompleteResults.NUMRESULTS); }
+    public static int nNumResults(long struct) { return memGetInt(struct + CXCodeCompleteResults.NUMRESULTS); }
 
     // -----------------------------------
 

@@ -283,26 +283,26 @@ public class XrHapticVibration extends Struct<XrHapticVibration> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHapticVibration.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHapticVibration.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHapticVibration.NEXT); }
     /** Unsafe version of {@link #duration}. */
-    public static long nduration(long struct) { return UNSAFE.getLong(null, struct + XrHapticVibration.DURATION); }
+    public static long nduration(long struct) { return memGetLong(struct + XrHapticVibration.DURATION); }
     /** Unsafe version of {@link #frequency}. */
-    public static float nfrequency(long struct) { return UNSAFE.getFloat(null, struct + XrHapticVibration.FREQUENCY); }
+    public static float nfrequency(long struct) { return memGetFloat(struct + XrHapticVibration.FREQUENCY); }
     /** Unsafe version of {@link #amplitude}. */
-    public static float namplitude(long struct) { return UNSAFE.getFloat(null, struct + XrHapticVibration.AMPLITUDE); }
+    public static float namplitude(long struct) { return memGetFloat(struct + XrHapticVibration.AMPLITUDE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticVibration.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHapticVibration.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHapticVibration.NEXT, value); }
     /** Unsafe version of {@link #duration(long) duration}. */
-    public static void nduration(long struct, long value) { UNSAFE.putLong(null, struct + XrHapticVibration.DURATION, value); }
+    public static void nduration(long struct, long value) { memPutLong(struct + XrHapticVibration.DURATION, value); }
     /** Unsafe version of {@link #frequency(float) frequency}. */
-    public static void nfrequency(long struct, float value) { UNSAFE.putFloat(null, struct + XrHapticVibration.FREQUENCY, value); }
+    public static void nfrequency(long struct, float value) { memPutFloat(struct + XrHapticVibration.FREQUENCY, value); }
     /** Unsafe version of {@link #amplitude(float) amplitude}. */
-    public static void namplitude(long struct, float value) { UNSAFE.putFloat(null, struct + XrHapticVibration.AMPLITUDE, value); }
+    public static void namplitude(long struct, float value) { memPutFloat(struct + XrHapticVibration.AMPLITUDE, value); }
 
     // -----------------------------------
 

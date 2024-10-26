@@ -270,20 +270,20 @@ public class XrHandJointVelocitiesEXT extends Struct<XrHandJointVelocitiesEXT> i
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrHandJointVelocitiesEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrHandJointVelocitiesEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandJointVelocitiesEXT.NEXT); }
     /** Unsafe version of {@link #jointCount}. */
-    public static int njointCount(long struct) { return UNSAFE.getInt(null, struct + XrHandJointVelocitiesEXT.JOINTCOUNT); }
+    public static int njointCount(long struct) { return memGetInt(struct + XrHandJointVelocitiesEXT.JOINTCOUNT); }
     /** Unsafe version of {@link #jointVelocities}. */
     public static XrHandJointVelocityEXT.Buffer njointVelocities(long struct) { return XrHandJointVelocityEXT.create(memGetAddress(struct + XrHandJointVelocitiesEXT.JOINTVELOCITIES), njointCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointVelocitiesEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrHandJointVelocitiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointVelocitiesEXT.NEXT, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
-    public static void njointCount(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointVelocitiesEXT.JOINTCOUNT, value); }
+    public static void njointCount(long struct, int value) { memPutInt(struct + XrHandJointVelocitiesEXT.JOINTCOUNT, value); }
     /** Unsafe version of {@link #jointVelocities(XrHandJointVelocityEXT.Buffer) jointVelocities}. */
     public static void njointVelocities(long struct, XrHandJointVelocityEXT.Buffer value) { memPutAddress(struct + XrHandJointVelocitiesEXT.JOINTVELOCITIES, value.address()); njointCount(struct, value.remaining()); }
 

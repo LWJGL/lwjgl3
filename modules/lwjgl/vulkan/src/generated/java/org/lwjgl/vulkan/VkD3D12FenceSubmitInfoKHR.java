@@ -314,28 +314,28 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct<VkD3D12FenceSubmitInfoKHR>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkD3D12FenceSubmitInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkD3D12FenceSubmitInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkD3D12FenceSubmitInfoKHR.PNEXT); }
     /** Unsafe version of {@link #waitSemaphoreValuesCount}. */
-    public static int nwaitSemaphoreValuesCount(long struct) { return UNSAFE.getInt(null, struct + VkD3D12FenceSubmitInfoKHR.WAITSEMAPHOREVALUESCOUNT); }
+    public static int nwaitSemaphoreValuesCount(long struct) { return memGetInt(struct + VkD3D12FenceSubmitInfoKHR.WAITSEMAPHOREVALUESCOUNT); }
     /** Unsafe version of {@link #pWaitSemaphoreValues() pWaitSemaphoreValues}. */
     @Nullable public static LongBuffer npWaitSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkD3D12FenceSubmitInfoKHR.PWAITSEMAPHOREVALUES), nwaitSemaphoreValuesCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreValuesCount}. */
-    public static int nsignalSemaphoreValuesCount(long struct) { return UNSAFE.getInt(null, struct + VkD3D12FenceSubmitInfoKHR.SIGNALSEMAPHOREVALUESCOUNT); }
+    public static int nsignalSemaphoreValuesCount(long struct) { return memGetInt(struct + VkD3D12FenceSubmitInfoKHR.SIGNALSEMAPHOREVALUESCOUNT); }
     /** Unsafe version of {@link #pSignalSemaphoreValues() pSignalSemaphoreValues}. */
     @Nullable public static LongBuffer npSignalSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkD3D12FenceSubmitInfoKHR.PSIGNALSEMAPHOREVALUES), nsignalSemaphoreValuesCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkD3D12FenceSubmitInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkD3D12FenceSubmitInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkD3D12FenceSubmitInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code waitSemaphoreValuesCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreValuesCount(long struct, int value) { UNSAFE.putInt(null, struct + VkD3D12FenceSubmitInfoKHR.WAITSEMAPHOREVALUESCOUNT, value); }
+    public static void nwaitSemaphoreValuesCount(long struct, int value) { memPutInt(struct + VkD3D12FenceSubmitInfoKHR.WAITSEMAPHOREVALUESCOUNT, value); }
     /** Unsafe version of {@link #pWaitSemaphoreValues(LongBuffer) pWaitSemaphoreValues}. */
     public static void npWaitSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkD3D12FenceSubmitInfoKHR.PWAITSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nwaitSemaphoreValuesCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code signalSemaphoreValuesCount} field of the specified {@code struct}. */
-    public static void nsignalSemaphoreValuesCount(long struct, int value) { UNSAFE.putInt(null, struct + VkD3D12FenceSubmitInfoKHR.SIGNALSEMAPHOREVALUESCOUNT, value); }
+    public static void nsignalSemaphoreValuesCount(long struct, int value) { memPutInt(struct + VkD3D12FenceSubmitInfoKHR.SIGNALSEMAPHOREVALUESCOUNT, value); }
     /** Unsafe version of {@link #pSignalSemaphoreValues(LongBuffer) pSignalSemaphoreValues}. */
     public static void npSignalSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkD3D12FenceSubmitInfoKHR.PSIGNALSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nsignalSemaphoreValuesCount(struct, value.remaining()); } }
 

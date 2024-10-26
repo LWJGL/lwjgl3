@@ -253,18 +253,18 @@ public class XrMarkerDetectorArucoInfoML extends Struct<XrMarkerDetectorArucoInf
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorArucoInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMarkerDetectorArucoInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMarkerDetectorArucoInfoML.NEXT); }
     /** Unsafe version of {@link #arucoDict}. */
-    public static int narucoDict(long struct) { return UNSAFE.getInt(null, struct + XrMarkerDetectorArucoInfoML.ARUCODICT); }
+    public static int narucoDict(long struct) { return memGetInt(struct + XrMarkerDetectorArucoInfoML.ARUCODICT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorArucoInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMarkerDetectorArucoInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerDetectorArucoInfoML.NEXT, value); }
     /** Unsafe version of {@link #arucoDict(int) arucoDict}. */
-    public static void narucoDict(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerDetectorArucoInfoML.ARUCODICT, value); }
+    public static void narucoDict(long struct, int value) { memPutInt(struct + XrMarkerDetectorArucoInfoML.ARUCODICT, value); }
 
     // -----------------------------------
 

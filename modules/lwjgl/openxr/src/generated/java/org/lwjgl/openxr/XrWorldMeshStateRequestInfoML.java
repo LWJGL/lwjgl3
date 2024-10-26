@@ -289,26 +289,26 @@ public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateReques
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshStateRequestInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshStateRequestInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshStateRequestInfoML.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrWorldMeshStateRequestInfoML.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshStateRequestInfoML.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrWorldMeshStateRequestInfoML.TIME); }
     /** Unsafe version of {@link #boundingBoxCenter}. */
     public static XrPosef nboundingBoxCenter(long struct) { return XrPosef.create(struct + XrWorldMeshStateRequestInfoML.BOUNDINGBOXCENTER); }
     /** Unsafe version of {@link #boundingBoxExtents}. */
     public static XrExtent3DfEXT nboundingBoxExtents(long struct) { return XrExtent3DfEXT.create(struct + XrWorldMeshStateRequestInfoML.BOUNDINGBOXEXTENTS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshStateRequestInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshStateRequestInfoML.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrWorldMeshStateRequestInfoML.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshStateRequestInfoML.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrWorldMeshStateRequestInfoML.TIME, value); }
     /** Unsafe version of {@link #boundingBoxCenter(XrPosef) boundingBoxCenter}. */
     public static void nboundingBoxCenter(long struct, XrPosef value) { memCopy(value.address(), struct + XrWorldMeshStateRequestInfoML.BOUNDINGBOXCENTER, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #boundingBoxExtents(XrExtent3DfEXT) boundingBoxExtents}. */

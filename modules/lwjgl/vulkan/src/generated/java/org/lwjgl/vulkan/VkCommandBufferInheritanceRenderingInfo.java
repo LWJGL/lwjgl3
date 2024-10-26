@@ -334,42 +334,42 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceRenderingInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.FLAGS); }
     /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.VIEWMASK); }
+    public static int nviewMask(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.VIEWMASK); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
     @Nullable public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfo.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthAttachmentFormat}. */
-    public static int ndepthAttachmentFormat(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.DEPTHATTACHMENTFORMAT); }
+    public static int ndepthAttachmentFormat(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.DEPTHATTACHMENTFORMAT); }
     /** Unsafe version of {@link #stencilAttachmentFormat}. */
-    public static int nstencilAttachmentFormat(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.STENCILATTACHMENTFORMAT); }
+    public static int nstencilAttachmentFormat(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.STENCILATTACHMENTFORMAT); }
     /** Unsafe version of {@link #rasterizationSamples}. */
-    public static int nrasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfo.RASTERIZATIONSAMPLES); }
+    public static int nrasterizationSamples(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.RASTERIZATIONSAMPLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceRenderingInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.FLAGS, value); }
     /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.VIEWMASK, value); }
+    public static void nviewMask(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.VIEWMASK, value); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentFormats(IntBuffer) pColorAttachmentFormats}. */
     public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkCommandBufferInheritanceRenderingInfo.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); ncolorAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #depthAttachmentFormat(int) depthAttachmentFormat}. */
-    public static void ndepthAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.DEPTHATTACHMENTFORMAT, value); }
+    public static void ndepthAttachmentFormat(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.DEPTHATTACHMENTFORMAT, value); }
     /** Unsafe version of {@link #stencilAttachmentFormat(int) stencilAttachmentFormat}. */
-    public static void nstencilAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.STENCILATTACHMENTFORMAT, value); }
+    public static void nstencilAttachmentFormat(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.STENCILATTACHMENTFORMAT, value); }
     /** Unsafe version of {@link #rasterizationSamples(int) rasterizationSamples}. */
-    public static void nrasterizationSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfo.RASTERIZATIONSAMPLES, value); }
+    public static void nrasterizationSamples(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderingInfo.RASTERIZATIONSAMPLES, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

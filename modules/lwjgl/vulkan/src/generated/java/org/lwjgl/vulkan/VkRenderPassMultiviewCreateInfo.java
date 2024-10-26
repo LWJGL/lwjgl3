@@ -337,36 +337,36 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassMultiviewCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PNEXT); }
     /** Unsafe version of {@link #subpassCount}. */
-    public static int nsubpassCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassMultiviewCreateInfo.SUBPASSCOUNT); }
+    public static int nsubpassCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.SUBPASSCOUNT); }
     /** Unsafe version of {@link #pViewMasks() pViewMasks}. */
     @Nullable public static IntBuffer npViewMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWMASKS), nsubpassCount(struct)); }
     /** Unsafe version of {@link #dependencyCount}. */
-    public static int ndependencyCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassMultiviewCreateInfo.DEPENDENCYCOUNT); }
+    public static int ndependencyCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.DEPENDENCYCOUNT); }
     /** Unsafe version of {@link #pViewOffsets() pViewOffsets}. */
     @Nullable public static IntBuffer npViewOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWOFFSETS), ndependencyCount(struct)); }
     /** Unsafe version of {@link #correlationMaskCount}. */
-    public static int ncorrelationMaskCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassMultiviewCreateInfo.CORRELATIONMASKCOUNT); }
+    public static int ncorrelationMaskCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.CORRELATIONMASKCOUNT); }
     /** Unsafe version of {@link #pCorrelationMasks() pCorrelationMasks}. */
     @Nullable public static IntBuffer npCorrelationMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PCORRELATIONMASKS), ncorrelationMaskCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassMultiviewCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassMultiviewCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassMultiviewCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code subpassCount} field of the specified {@code struct}. */
-    public static void nsubpassCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassMultiviewCreateInfo.SUBPASSCOUNT, value); }
+    public static void nsubpassCount(long struct, int value) { memPutInt(struct + VkRenderPassMultiviewCreateInfo.SUBPASSCOUNT, value); }
     /** Unsafe version of {@link #pViewMasks(IntBuffer) pViewMasks}. */
     public static void npViewMasks(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWMASKS, memAddressSafe(value)); nsubpassCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code dependencyCount} field of the specified {@code struct}. */
-    public static void ndependencyCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassMultiviewCreateInfo.DEPENDENCYCOUNT, value); }
+    public static void ndependencyCount(long struct, int value) { memPutInt(struct + VkRenderPassMultiviewCreateInfo.DEPENDENCYCOUNT, value); }
     /** Unsafe version of {@link #pViewOffsets(IntBuffer) pViewOffsets}. */
     public static void npViewOffsets(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWOFFSETS, memAddressSafe(value)); ndependencyCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code correlationMaskCount} field of the specified {@code struct}. */
-    public static void ncorrelationMaskCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassMultiviewCreateInfo.CORRELATIONMASKCOUNT, value); }
+    public static void ncorrelationMaskCount(long struct, int value) { memPutInt(struct + VkRenderPassMultiviewCreateInfo.CORRELATIONMASKCOUNT, value); }
     /** Unsafe version of {@link #pCorrelationMasks(IntBuffer) pCorrelationMasks}. */
     public static void npCorrelationMasks(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderPassMultiviewCreateInfo.PCORRELATIONMASKS, memAddressSafe(value)); ncorrelationMaskCount(struct, value == null ? 0 : value.remaining()); }
 

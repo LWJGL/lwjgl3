@@ -246,18 +246,18 @@ public class VkPhysicalDevicePresentWaitFeaturesKHR extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePresentWaitFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePresentWaitFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePresentWaitFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #presentWait}. */
-    public static int npresentWait(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePresentWaitFeaturesKHR.PRESENTWAIT); }
+    public static int npresentWait(long struct) { return memGetInt(struct + VkPhysicalDevicePresentWaitFeaturesKHR.PRESENTWAIT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePresentWaitFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentWaitFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePresentWaitFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #presentWait(boolean) presentWait}. */
-    public static void npresentWait(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePresentWaitFeaturesKHR.PRESENTWAIT, value); }
+    public static void npresentWait(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentWaitFeaturesKHR.PRESENTWAIT, value); }
 
     // -----------------------------------
 

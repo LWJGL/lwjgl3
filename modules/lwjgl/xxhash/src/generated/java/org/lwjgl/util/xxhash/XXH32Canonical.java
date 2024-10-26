@@ -215,7 +215,7 @@ public class XXH32Canonical extends Struct<XXH32Canonical> implements NativeReso
     public static ByteBuffer ndigest(long struct) { return memByteBuffer(struct + XXH32Canonical.DIGEST, 4); }
     /** Unsafe version of {@link #digest(int) digest}. */
     public static byte ndigest(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XXH32Canonical.DIGEST + check(index, 4) * 1);
+        return memGetByte(struct + XXH32Canonical.DIGEST + check(index, 4) * 1);
     }
 
     // -----------------------------------

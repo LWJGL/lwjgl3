@@ -299,34 +299,34 @@ public class VkPhysicalDeviceMeshShaderFeaturesEXT extends Struct<VkPhysicalDevi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #taskShader}. */
-    public static int ntaskShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.TASKSHADER); }
+    public static int ntaskShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.TASKSHADER); }
     /** Unsafe version of {@link #meshShader}. */
-    public static int nmeshShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADER); }
+    public static int nmeshShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADER); }
     /** Unsafe version of {@link #multiviewMeshShader}. */
-    public static int nmultiviewMeshShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MULTIVIEWMESHSHADER); }
+    public static int nmultiviewMeshShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MULTIVIEWMESHSHADER); }
     /** Unsafe version of {@link #primitiveFragmentShadingRateMeshShader}. */
-    public static int nprimitiveFragmentShadingRateMeshShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PRIMITIVEFRAGMENTSHADINGRATEMESHSHADER); }
+    public static int nprimitiveFragmentShadingRateMeshShader(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PRIMITIVEFRAGMENTSHADINGRATEMESHSHADER); }
     /** Unsafe version of {@link #meshShaderQueries}. */
-    public static int nmeshShaderQueries(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADERQUERIES); }
+    public static int nmeshShaderQueries(long struct) { return memGetInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADERQUERIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #taskShader(boolean) taskShader}. */
-    public static void ntaskShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.TASKSHADER, value); }
+    public static void ntaskShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.TASKSHADER, value); }
     /** Unsafe version of {@link #meshShader(boolean) meshShader}. */
-    public static void nmeshShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADER, value); }
+    public static void nmeshShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADER, value); }
     /** Unsafe version of {@link #multiviewMeshShader(boolean) multiviewMeshShader}. */
-    public static void nmultiviewMeshShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MULTIVIEWMESHSHADER, value); }
+    public static void nmultiviewMeshShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MULTIVIEWMESHSHADER, value); }
     /** Unsafe version of {@link #primitiveFragmentShadingRateMeshShader(boolean) primitiveFragmentShadingRateMeshShader}. */
-    public static void nprimitiveFragmentShadingRateMeshShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PRIMITIVEFRAGMENTSHADINGRATEMESHSHADER, value); }
+    public static void nprimitiveFragmentShadingRateMeshShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.PRIMITIVEFRAGMENTSHADINGRATEMESHSHADER, value); }
     /** Unsafe version of {@link #meshShaderQueries(boolean) meshShaderQueries}. */
-    public static void nmeshShaderQueries(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADERQUERIES, value); }
+    public static void nmeshShaderQueries(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMeshShaderFeaturesEXT.MESHSHADERQUERIES, value); }
 
     // -----------------------------------
 

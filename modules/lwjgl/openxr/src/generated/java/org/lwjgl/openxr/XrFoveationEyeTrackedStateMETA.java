@@ -260,7 +260,7 @@ public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTracked
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveationEyeTrackedStateMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveationEyeTrackedStateMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveationEyeTrackedStateMETA.NEXT); }
     /** Unsafe version of {@link #foveationCenter}. */
@@ -270,10 +270,10 @@ public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTracked
         return XrVector2f.create(struct + XrFoveationEyeTrackedStateMETA.FOVEATIONCENTER + check(index, XR_FOVEATION_CENTER_SIZE_META) * XrVector2f.SIZEOF);
     }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrFoveationEyeTrackedStateMETA.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrFoveationEyeTrackedStateMETA.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationEyeTrackedStateMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveationEyeTrackedStateMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationEyeTrackedStateMETA.NEXT, value); }
 

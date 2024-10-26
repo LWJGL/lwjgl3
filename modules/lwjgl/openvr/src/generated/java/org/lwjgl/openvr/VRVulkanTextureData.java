@@ -335,7 +335,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nImage}. */
-    public static long nm_nImage(long struct) { return UNSAFE.getLong(null, struct + VRVulkanTextureData.M_NIMAGE); }
+    public static long nm_nImage(long struct) { return memGetLong(struct + VRVulkanTextureData.M_NIMAGE); }
     /** Unsafe version of {@link #m_pDevice}. */
     public static long nm_pDevice(long struct) { return memGetAddress(struct + VRVulkanTextureData.M_PDEVICE); }
     /** Unsafe version of {@link #m_pPhysicalDevice}. */
@@ -345,18 +345,18 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     /** Unsafe version of {@link #m_pQueue}. */
     public static long nm_pQueue(long struct) { return memGetAddress(struct + VRVulkanTextureData.M_PQUEUE); }
     /** Unsafe version of {@link #m_nQueueFamilyIndex}. */
-    public static int nm_nQueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX); }
+    public static int nm_nQueueFamilyIndex(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #m_nWidth}. */
-    public static int nm_nWidth(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NWIDTH); }
+    public static int nm_nWidth(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NWIDTH); }
     /** Unsafe version of {@link #m_nHeight}. */
-    public static int nm_nHeight(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NHEIGHT); }
+    public static int nm_nHeight(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NHEIGHT); }
     /** Unsafe version of {@link #m_nFormat}. */
-    public static int nm_nFormat(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NFORMAT); }
+    public static int nm_nFormat(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NFORMAT); }
     /** Unsafe version of {@link #m_nSampleCount}. */
-    public static int nm_nSampleCount(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NSAMPLECOUNT); }
+    public static int nm_nSampleCount(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NSAMPLECOUNT); }
 
     /** Unsafe version of {@link #m_nImage(long) m_nImage}. */
-    public static void nm_nImage(long struct, long value) { UNSAFE.putLong(null, struct + VRVulkanTextureData.M_NIMAGE, value); }
+    public static void nm_nImage(long struct, long value) { memPutLong(struct + VRVulkanTextureData.M_NIMAGE, value); }
     /** Unsafe version of {@link #m_pDevice(long) m_pDevice}. */
     public static void nm_pDevice(long struct, long value) { memPutAddress(struct + VRVulkanTextureData.M_PDEVICE, check(value)); }
     /** Unsafe version of {@link #m_pPhysicalDevice(long) m_pPhysicalDevice}. */
@@ -366,15 +366,15 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     /** Unsafe version of {@link #m_pQueue(long) m_pQueue}. */
     public static void nm_pQueue(long struct, long value) { memPutAddress(struct + VRVulkanTextureData.M_PQUEUE, check(value)); }
     /** Unsafe version of {@link #m_nQueueFamilyIndex(int) m_nQueueFamilyIndex}. */
-    public static void nm_nQueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX, value); }
+    public static void nm_nQueueFamilyIndex(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #m_nWidth(int) m_nWidth}. */
-    public static void nm_nWidth(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NWIDTH, value); }
+    public static void nm_nWidth(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NWIDTH, value); }
     /** Unsafe version of {@link #m_nHeight(int) m_nHeight}. */
-    public static void nm_nHeight(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NHEIGHT, value); }
+    public static void nm_nHeight(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NHEIGHT, value); }
     /** Unsafe version of {@link #m_nFormat(int) m_nFormat}. */
-    public static void nm_nFormat(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NFORMAT, value); }
+    public static void nm_nFormat(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NFORMAT, value); }
     /** Unsafe version of {@link #m_nSampleCount(int) m_nSampleCount}. */
-    public static void nm_nSampleCount(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NSAMPLECOUNT, value); }
+    public static void nm_nSampleCount(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NSAMPLECOUNT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

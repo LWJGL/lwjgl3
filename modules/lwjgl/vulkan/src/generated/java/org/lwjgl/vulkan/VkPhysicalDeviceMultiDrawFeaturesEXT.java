@@ -246,18 +246,18 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct<VkPhysicalDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiDrawFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #multiDraw}. */
-    public static int nmultiDraw(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiDrawFeaturesEXT.MULTIDRAW); }
+    public static int nmultiDraw(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.MULTIDRAW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiDrawFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #multiDraw(boolean) multiDraw}. */
-    public static void nmultiDraw(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiDrawFeaturesEXT.MULTIDRAW, value); }
+    public static void nmultiDraw(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiDrawFeaturesEXT.MULTIDRAW, value); }
 
     // -----------------------------------
 

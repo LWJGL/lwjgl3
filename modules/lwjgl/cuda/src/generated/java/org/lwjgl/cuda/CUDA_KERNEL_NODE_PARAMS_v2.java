@@ -343,19 +343,19 @@ public class CUDA_KERNEL_NODE_PARAMS_v2 extends Struct<CUDA_KERNEL_NODE_PARAMS_v
     /** Unsafe version of {@link #func}. */
     public static long nfunc(long struct) { return memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS_v2.FUNC); }
     /** Unsafe version of {@link #gridDimX}. */
-    public static int ngridDimX(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMX); }
+    public static int ngridDimX(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMX); }
     /** Unsafe version of {@link #gridDimY}. */
-    public static int ngridDimY(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMY); }
+    public static int ngridDimY(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMY); }
     /** Unsafe version of {@link #gridDimZ}. */
-    public static int ngridDimZ(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMZ); }
+    public static int ngridDimZ(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMZ); }
     /** Unsafe version of {@link #blockDimX}. */
-    public static int nblockDimX(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMX); }
+    public static int nblockDimX(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMX); }
     /** Unsafe version of {@link #blockDimY}. */
-    public static int nblockDimY(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMY); }
+    public static int nblockDimY(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMY); }
     /** Unsafe version of {@link #blockDimZ}. */
-    public static int nblockDimZ(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMZ); }
+    public static int nblockDimZ(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMZ); }
     /** Unsafe version of {@link #sharedMemBytes}. */
-    public static int nsharedMemBytes(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.SHAREDMEMBYTES); }
+    public static int nsharedMemBytes(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
     @Nullable public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS_v2.KERNELPARAMS), capacity); }
     /** Unsafe version of {@link #extra(int) extra}. */
@@ -368,19 +368,19 @@ public class CUDA_KERNEL_NODE_PARAMS_v2 extends Struct<CUDA_KERNEL_NODE_PARAMS_v
     /** Unsafe version of {@link #func(long) func}. */
     public static void nfunc(long struct, long value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS_v2.FUNC, value); }
     /** Unsafe version of {@link #gridDimX(int) gridDimX}. */
-    public static void ngridDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMX, value); }
+    public static void ngridDimX(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMX, value); }
     /** Unsafe version of {@link #gridDimY(int) gridDimY}. */
-    public static void ngridDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMY, value); }
+    public static void ngridDimY(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMY, value); }
     /** Unsafe version of {@link #gridDimZ(int) gridDimZ}. */
-    public static void ngridDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMZ, value); }
+    public static void ngridDimZ(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.GRIDDIMZ, value); }
     /** Unsafe version of {@link #blockDimX(int) blockDimX}. */
-    public static void nblockDimX(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMX, value); }
+    public static void nblockDimX(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMX, value); }
     /** Unsafe version of {@link #blockDimY(int) blockDimY}. */
-    public static void nblockDimY(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMY, value); }
+    public static void nblockDimY(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMY, value); }
     /** Unsafe version of {@link #blockDimZ(int) blockDimZ}. */
-    public static void nblockDimZ(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMZ, value); }
+    public static void nblockDimZ(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.BLOCKDIMZ, value); }
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
-    public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS_v2.SHAREDMEMBYTES, value); }
+    public static void nsharedMemBytes(long struct, int value) { memPutInt(struct + CUDA_KERNEL_NODE_PARAMS_v2.SHAREDMEMBYTES, value); }
     /** Unsafe version of {@link #kernelParams(PointerBuffer) kernelParams}. */
     public static void nkernelParams(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS_v2.KERNELPARAMS, memAddressSafe(value)); }
     /** Unsafe version of {@link #extra(PointerBuffer) extra}. */

@@ -382,36 +382,36 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #memoryTypeIndex}. */
-    public static int nmemoryTypeIndex(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX); }
+    public static int nmemoryTypeIndex(long struct) { return memGetInt(struct + VmaPoolCreateInfo.MEMORYTYPEINDEX); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VmaPoolCreateInfo.FLAGS); }
     /** Unsafe version of {@link #blockSize}. */
-    public static long nblockSize(long struct) { return UNSAFE.getLong(null, struct + VmaPoolCreateInfo.BLOCKSIZE); }
+    public static long nblockSize(long struct) { return memGetLong(struct + VmaPoolCreateInfo.BLOCKSIZE); }
     /** Unsafe version of {@link #minBlockCount}. */
     public static long nminBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT); }
     /** Unsafe version of {@link #maxBlockCount}. */
     public static long nmaxBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT); }
     /** Unsafe version of {@link #priority}. */
-    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaPoolCreateInfo.PRIORITY); }
+    public static float npriority(long struct) { return memGetFloat(struct + VmaPoolCreateInfo.PRIORITY); }
     /** Unsafe version of {@link #minAllocationAlignment}. */
-    public static long nminAllocationAlignment(long struct) { return UNSAFE.getLong(null, struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT); }
+    public static long nminAllocationAlignment(long struct) { return memGetLong(struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT); }
     /** Unsafe version of {@link #pMemoryAllocateNext}. */
     public static long npMemoryAllocateNext(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.PMEMORYALLOCATENEXT); }
 
     /** Unsafe version of {@link #memoryTypeIndex(int) memoryTypeIndex}. */
-    public static void nmemoryTypeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
+    public static void nmemoryTypeIndex(long struct, int value) { memPutInt(struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VmaPoolCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #blockSize(long) blockSize}. */
-    public static void nblockSize(long struct, long value) { UNSAFE.putLong(null, struct + VmaPoolCreateInfo.BLOCKSIZE, value); }
+    public static void nblockSize(long struct, long value) { memPutLong(struct + VmaPoolCreateInfo.BLOCKSIZE, value); }
     /** Unsafe version of {@link #minBlockCount(long) minBlockCount}. */
     public static void nminBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT, value); }
     /** Unsafe version of {@link #maxBlockCount(long) maxBlockCount}. */
     public static void nmaxBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
-    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaPoolCreateInfo.PRIORITY, value); }
+    public static void npriority(long struct, float value) { memPutFloat(struct + VmaPoolCreateInfo.PRIORITY, value); }
     /** Unsafe version of {@link #minAllocationAlignment(long) minAllocationAlignment}. */
-    public static void nminAllocationAlignment(long struct, long value) { UNSAFE.putLong(null, struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT, value); }
+    public static void nminAllocationAlignment(long struct, long value) { memPutLong(struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT, value); }
     /** Unsafe version of {@link #pMemoryAllocateNext(long) pMemoryAllocateNext}. */
     public static void npMemoryAllocateNext(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.PMEMORYALLOCATENEXT, value); }
 

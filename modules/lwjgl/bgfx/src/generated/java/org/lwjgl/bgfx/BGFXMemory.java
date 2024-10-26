@@ -235,12 +235,12 @@ public class BGFXMemory extends Struct<BGFXMemory> implements NativeResource {
     /** Unsafe version of {@link #data() data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + BGFXMemory.DATA), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + BGFXMemory.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + BGFXMemory.SIZE); }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) { memPutAddress(struct + BGFXMemory.DATA, memAddress(value)); nsize(struct, value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXMemory.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + BGFXMemory.SIZE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

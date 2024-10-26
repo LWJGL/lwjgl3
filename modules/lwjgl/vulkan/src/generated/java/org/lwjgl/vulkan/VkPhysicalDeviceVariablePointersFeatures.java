@@ -282,22 +282,22 @@ public class VkPhysicalDeviceVariablePointersFeatures extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointersFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVariablePointersFeatures.PNEXT); }
     /** Unsafe version of {@link #variablePointersStorageBuffer}. */
-    public static int nvariablePointersStorageBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERSSTORAGEBUFFER); }
+    public static int nvariablePointersStorageBuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERSSTORAGEBUFFER); }
     /** Unsafe version of {@link #variablePointers}. */
-    public static int nvariablePointers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERS); }
+    public static int nvariablePointers(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointersFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVariablePointersFeatures.PNEXT, value); }
     /** Unsafe version of {@link #variablePointersStorageBuffer(boolean) variablePointersStorageBuffer}. */
-    public static void nvariablePointersStorageBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERSSTORAGEBUFFER, value); }
+    public static void nvariablePointersStorageBuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERSSTORAGEBUFFER, value); }
     /** Unsafe version of {@link #variablePointers(boolean) variablePointers}. */
-    public static void nvariablePointers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERS, value); }
+    public static void nvariablePointers(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointersFeatures.VARIABLEPOINTERS, value); }
 
     // -----------------------------------
 

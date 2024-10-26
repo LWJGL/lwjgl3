@@ -124,7 +124,7 @@ public class NkDrawCommand extends Struct<NkDrawCommand> {
     // -----------------------------------
 
     /** Unsafe version of {@link #elem_count}. */
-    public static int nelem_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawCommand.ELEM_COUNT); }
+    public static int nelem_count(long struct) { return memGetInt(struct + NkDrawCommand.ELEM_COUNT); }
     /** Unsafe version of {@link #clip_rect}. */
     public static NkRect nclip_rect(long struct) { return NkRect.create(struct + NkDrawCommand.CLIP_RECT); }
     /** Unsafe version of {@link #texture}. */

@@ -253,14 +253,14 @@ public class AIMetaData extends Struct<AIMetaData> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mNumProperties}. */
-    public static int nmNumProperties(long struct) { return UNSAFE.getInt(null, struct + AIMetaData.MNUMPROPERTIES); }
+    public static int nmNumProperties(long struct) { return memGetInt(struct + AIMetaData.MNUMPROPERTIES); }
     /** Unsafe version of {@link #mKeys}. */
     public static AIString.Buffer nmKeys(long struct) { return AIString.create(memGetAddress(struct + AIMetaData.MKEYS), nmNumProperties(struct)); }
     /** Unsafe version of {@link #mValues}. */
     public static AIMetaDataEntry.Buffer nmValues(long struct) { return AIMetaDataEntry.create(memGetAddress(struct + AIMetaData.MVALUES), nmNumProperties(struct)); }
 
     /** Sets the specified value to the {@code mNumProperties} field of the specified {@code struct}. */
-    public static void nmNumProperties(long struct, int value) { UNSAFE.putInt(null, struct + AIMetaData.MNUMPROPERTIES, value); }
+    public static void nmNumProperties(long struct, int value) { memPutInt(struct + AIMetaData.MNUMPROPERTIES, value); }
     /** Unsafe version of {@link #mKeys(AIString.Buffer) mKeys}. */
     public static void nmKeys(long struct, AIString.Buffer value) { memPutAddress(struct + AIMetaData.MKEYS, value.address()); }
     /** Unsafe version of {@link #mValues(AIMetaDataEntry.Buffer) mValues}. */

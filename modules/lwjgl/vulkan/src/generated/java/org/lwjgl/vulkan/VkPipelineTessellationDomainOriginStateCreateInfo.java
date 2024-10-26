@@ -266,18 +266,18 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineTessellationDomainOriginStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #domainOrigin}. */
-    public static int ndomainOrigin(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN); }
+    public static int ndomainOrigin(long struct) { return memGetInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineTessellationDomainOriginStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #domainOrigin(int) domainOrigin}. */
-    public static void ndomainOrigin(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN, value); }
+    public static void ndomainOrigin(long struct, int value) { memPutInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN, value); }
 
     // -----------------------------------
 

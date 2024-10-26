@@ -265,22 +265,22 @@ public class XrRecommendedLayerResolutionGetInfoMETA extends Struct<XrRecommende
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRecommendedLayerResolutionGetInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRecommendedLayerResolutionGetInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRecommendedLayerResolutionGetInfoMETA.NEXT); }
     /** Unsafe version of {@link #layer}. */
     public static XrCompositionLayerBaseHeader nlayer(long struct) { return XrCompositionLayerBaseHeader.create(memGetAddress(struct + XrRecommendedLayerResolutionGetInfoMETA.LAYER)); }
     /** Unsafe version of {@link #predictedDisplayTime}. */
-    public static long npredictedDisplayTime(long struct) { return UNSAFE.getLong(null, struct + XrRecommendedLayerResolutionGetInfoMETA.PREDICTEDDISPLAYTIME); }
+    public static long npredictedDisplayTime(long struct) { return memGetLong(struct + XrRecommendedLayerResolutionGetInfoMETA.PREDICTEDDISPLAYTIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRecommendedLayerResolutionGetInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRecommendedLayerResolutionGetInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRecommendedLayerResolutionGetInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #layer(XrCompositionLayerBaseHeader) layer}. */
     public static void nlayer(long struct, XrCompositionLayerBaseHeader value) { memPutAddress(struct + XrRecommendedLayerResolutionGetInfoMETA.LAYER, value.address()); }
     /** Unsafe version of {@link #predictedDisplayTime(long) predictedDisplayTime}. */
-    public static void npredictedDisplayTime(long struct, long value) { UNSAFE.putLong(null, struct + XrRecommendedLayerResolutionGetInfoMETA.PREDICTEDDISPLAYTIME, value); }
+    public static void npredictedDisplayTime(long struct, long value) { memPutLong(struct + XrRecommendedLayerResolutionGetInfoMETA.PREDICTEDDISPLAYTIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

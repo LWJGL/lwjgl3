@@ -265,22 +265,22 @@ public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #mTime}. */
-    public static double nmTime(long struct) { return UNSAFE.getDouble(null, struct + AIMeshMorphKey.MTIME); }
+    public static double nmTime(long struct) { return memGetDouble(struct + AIMeshMorphKey.MTIME); }
     /** Unsafe version of {@link #mValues() mValues}. */
     public static IntBuffer nmValues(long struct) { return memIntBuffer(memGetAddress(struct + AIMeshMorphKey.MVALUES), nmNumValuesAndWeights(struct)); }
     /** Unsafe version of {@link #mWeights() mWeights}. */
     public static DoubleBuffer nmWeights(long struct) { return memDoubleBuffer(memGetAddress(struct + AIMeshMorphKey.MWEIGHTS), nmNumValuesAndWeights(struct)); }
     /** Unsafe version of {@link #mNumValuesAndWeights}. */
-    public static int nmNumValuesAndWeights(long struct) { return UNSAFE.getInt(null, struct + AIMeshMorphKey.MNUMVALUESANDWEIGHTS); }
+    public static int nmNumValuesAndWeights(long struct) { return memGetInt(struct + AIMeshMorphKey.MNUMVALUESANDWEIGHTS); }
 
     /** Unsafe version of {@link #mTime(double) mTime}. */
-    public static void nmTime(long struct, double value) { UNSAFE.putDouble(null, struct + AIMeshMorphKey.MTIME, value); }
+    public static void nmTime(long struct, double value) { memPutDouble(struct + AIMeshMorphKey.MTIME, value); }
     /** Unsafe version of {@link #mValues(IntBuffer) mValues}. */
     public static void nmValues(long struct, IntBuffer value) { memPutAddress(struct + AIMeshMorphKey.MVALUES, memAddress(value)); }
     /** Unsafe version of {@link #mWeights(DoubleBuffer) mWeights}. */
     public static void nmWeights(long struct, DoubleBuffer value) { memPutAddress(struct + AIMeshMorphKey.MWEIGHTS, memAddress(value)); }
     /** Sets the specified value to the {@code mNumValuesAndWeights} field of the specified {@code struct}. */
-    public static void nmNumValuesAndWeights(long struct, int value) { UNSAFE.putInt(null, struct + AIMeshMorphKey.MNUMVALUESANDWEIGHTS, value); }
+    public static void nmNumValuesAndWeights(long struct, int value) { memPutInt(struct + AIMeshMorphKey.MNUMVALUESANDWEIGHTS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

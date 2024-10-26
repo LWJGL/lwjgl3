@@ -242,18 +242,18 @@ public class VkDevicePrivateDataCreateInfo extends Struct<VkDevicePrivateDataCre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDevicePrivateDataCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDevicePrivateDataCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDevicePrivateDataCreateInfo.PNEXT); }
     /** Unsafe version of {@link #privateDataSlotRequestCount}. */
-    public static int nprivateDataSlotRequestCount(long struct) { return UNSAFE.getInt(null, struct + VkDevicePrivateDataCreateInfo.PRIVATEDATASLOTREQUESTCOUNT); }
+    public static int nprivateDataSlotRequestCount(long struct) { return memGetInt(struct + VkDevicePrivateDataCreateInfo.PRIVATEDATASLOTREQUESTCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDevicePrivateDataCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDevicePrivateDataCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDevicePrivateDataCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #privateDataSlotRequestCount(int) privateDataSlotRequestCount}. */
-    public static void nprivateDataSlotRequestCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDevicePrivateDataCreateInfo.PRIVATEDATASLOTREQUESTCOUNT, value); }
+    public static void nprivateDataSlotRequestCount(long struct, int value) { memPutInt(struct + VkDevicePrivateDataCreateInfo.PRIVATEDATASLOTREQUESTCOUNT, value); }
 
     // -----------------------------------
 

@@ -113,7 +113,7 @@ class NkConfigStackStyleItem extends Struct<NkConfigStackStyleItem> {
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackStyleItem.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackStyleItem.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackStyleItemElement.Buffer nelements(long struct) { return NkConfigStackStyleItemElement.create(struct + NkConfigStackStyleItem.ELEMENTS, 16); }
     /** Unsafe version of {@link #elements(int) elements}. */

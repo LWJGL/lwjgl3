@@ -341,7 +341,7 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     /** Unsafe version of {@link #pStorageBuffer}. */
     @Nullable public static VkDescriptorAddressInfoEXT npStorageBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGEBUFFER)); }
     /** Unsafe version of {@link #accelerationStructure}. */
-    public static long naccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorDataEXT.ACCELERATIONSTRUCTURE); }
+    public static long naccelerationStructure(long struct) { return memGetLong(struct + VkDescriptorDataEXT.ACCELERATIONSTRUCTURE); }
 
     /** Unsafe version of {@link #pSampler(LongBuffer) pSampler}. */
     public static void npSampler(long struct, LongBuffer value) { memPutAddress(struct + VkDescriptorDataEXT.PSAMPLER, memAddress(value)); }
@@ -362,7 +362,7 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     /** Unsafe version of {@link #pStorageBuffer(VkDescriptorAddressInfoEXT) pStorageBuffer}. */
     public static void npStorageBuffer(long struct, @Nullable VkDescriptorAddressInfoEXT value) { memPutAddress(struct + VkDescriptorDataEXT.PSTORAGEBUFFER, memAddressSafe(value)); }
     /** Unsafe version of {@link #accelerationStructure(long) accelerationStructure}. */
-    public static void naccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorDataEXT.ACCELERATIONSTRUCTURE, value); }
+    public static void naccelerationStructure(long struct, long value) { memPutLong(struct + VkDescriptorDataEXT.ACCELERATIONSTRUCTURE, value); }
 
     // -----------------------------------
 

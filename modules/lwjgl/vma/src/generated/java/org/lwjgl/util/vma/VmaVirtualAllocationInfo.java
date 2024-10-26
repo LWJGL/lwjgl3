@@ -214,9 +214,9 @@ public class VmaVirtualAllocationInfo extends Struct<VmaVirtualAllocationInfo> i
     // -----------------------------------
 
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationInfo.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VmaVirtualAllocationInfo.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationInfo.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VmaVirtualAllocationInfo.SIZE); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaVirtualAllocationInfo.PUSERDATA); }
 

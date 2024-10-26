@@ -171,15 +171,15 @@ public class FT_SvgGlyph extends Struct<FT_SvgGlyph> {
     /** Unsafe version of {@link #svg_document_length}. */
     public static long nsvg_document_length(long struct) { return memGetCLong(struct + FT_SvgGlyph.SVG_DOCUMENT_LENGTH); }
     /** Unsafe version of {@link #glyph_index}. */
-    public static int nglyph_index(long struct) { return UNSAFE.getInt(null, struct + FT_SvgGlyph.GLYPH_INDEX); }
+    public static int nglyph_index(long struct) { return memGetInt(struct + FT_SvgGlyph.GLYPH_INDEX); }
     /** Unsafe version of {@link #metrics}. */
     public static FT_Size_Metrics nmetrics(long struct) { return FT_Size_Metrics.create(struct + FT_SvgGlyph.METRICS); }
     /** Unsafe version of {@link #units_per_EM}. */
-    public static short nunits_per_EM(long struct) { return UNSAFE.getShort(null, struct + FT_SvgGlyph.UNITS_PER_EM); }
+    public static short nunits_per_EM(long struct) { return memGetShort(struct + FT_SvgGlyph.UNITS_PER_EM); }
     /** Unsafe version of {@link #start_glyph_id}. */
-    public static short nstart_glyph_id(long struct) { return UNSAFE.getShort(null, struct + FT_SvgGlyph.START_GLYPH_ID); }
+    public static short nstart_glyph_id(long struct) { return memGetShort(struct + FT_SvgGlyph.START_GLYPH_ID); }
     /** Unsafe version of {@link #end_glyph_id}. */
-    public static short nend_glyph_id(long struct) { return UNSAFE.getShort(null, struct + FT_SvgGlyph.END_GLYPH_ID); }
+    public static short nend_glyph_id(long struct) { return memGetShort(struct + FT_SvgGlyph.END_GLYPH_ID); }
     /** Unsafe version of {@link #transform}. */
     public static FT_Matrix ntransform(long struct) { return FT_Matrix.create(struct + FT_SvgGlyph.TRANSFORM); }
     /** Unsafe version of {@link #delta}. */

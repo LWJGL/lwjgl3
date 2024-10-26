@@ -219,7 +219,7 @@ public class CXCompletionResult extends Struct<CXCompletionResult> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #CursorKind}. */
-    public static int nCursorKind(long struct) { return UNSAFE.getInt(null, struct + CXCompletionResult.CURSORKIND); }
+    public static int nCursorKind(long struct) { return memGetInt(struct + CXCompletionResult.CURSORKIND); }
     /** Unsafe version of {@link #CompletionString}. */
     public static long nCompletionString(long struct) { return memGetAddress(struct + CXCompletionResult.COMPLETIONSTRING); }
 

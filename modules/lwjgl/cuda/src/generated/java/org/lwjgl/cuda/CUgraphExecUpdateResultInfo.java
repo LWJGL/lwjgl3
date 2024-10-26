@@ -200,7 +200,7 @@ public class CUgraphExecUpdateResultInfo extends Struct<CUgraphExecUpdateResultI
     // -----------------------------------
 
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + CUgraphExecUpdateResultInfo.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + CUgraphExecUpdateResultInfo.RESULT); }
     /** Unsafe version of {@link #errorNode}. */
     public static long nerrorNode(long struct) { return memGetAddress(struct + CUgraphExecUpdateResultInfo.ERRORNODE); }
     /** Unsafe version of {@link #errorFromNode}. */

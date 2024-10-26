@@ -262,20 +262,20 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatListCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageFormatListCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageFormatListCreateInfo.PNEXT); }
     /** Unsafe version of {@link #viewFormatCount}. */
-    public static int nviewFormatCount(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatListCreateInfo.VIEWFORMATCOUNT); }
+    public static int nviewFormatCount(long struct) { return memGetInt(struct + VkImageFormatListCreateInfo.VIEWFORMATCOUNT); }
     /** Unsafe version of {@link #pViewFormats() pViewFormats}. */
     @Nullable public static IntBuffer npViewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageFormatListCreateInfo.PVIEWFORMATS), nviewFormatCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatListCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageFormatListCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageFormatListCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code viewFormatCount} field of the specified {@code struct}. */
-    public static void nviewFormatCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatListCreateInfo.VIEWFORMATCOUNT, value); }
+    public static void nviewFormatCount(long struct, int value) { memPutInt(struct + VkImageFormatListCreateInfo.VIEWFORMATCOUNT, value); }
     /** Unsafe version of {@link #pViewFormats(IntBuffer) pViewFormats}. */
     public static void npViewFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageFormatListCreateInfo.PVIEWFORMATS, memAddressSafe(value)); nviewFormatCount(struct, value == null ? 0 : value.remaining()); }
 

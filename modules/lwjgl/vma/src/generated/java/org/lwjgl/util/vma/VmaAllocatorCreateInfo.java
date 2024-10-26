@@ -324,13 +324,13 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaAllocatorCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VmaAllocatorCreateInfo.FLAGS); }
     /** Unsafe version of {@link #physicalDevice}. */
     public static long nphysicalDevice(long struct) { return memGetAddress(struct + VmaAllocatorCreateInfo.PHYSICALDEVICE); }
     /** Unsafe version of {@link #device}. */
     public static long ndevice(long struct) { return memGetAddress(struct + VmaAllocatorCreateInfo.DEVICE); }
     /** Unsafe version of {@link #preferredLargeHeapBlockSize}. */
-    public static long npreferredLargeHeapBlockSize(long struct) { return UNSAFE.getLong(null, struct + VmaAllocatorCreateInfo.PREFERREDLARGEHEAPBLOCKSIZE); }
+    public static long npreferredLargeHeapBlockSize(long struct) { return memGetLong(struct + VmaAllocatorCreateInfo.PREFERREDLARGEHEAPBLOCKSIZE); }
     /** Unsafe version of {@link #pAllocationCallbacks}. */
     @Nullable public static VkAllocationCallbacks npAllocationCallbacks(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PALLOCATIONCALLBACKS)); }
     /** Unsafe version of {@link #pDeviceMemoryCallbacks}. */
@@ -342,18 +342,18 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     /** Unsafe version of {@link #instance}. */
     public static long ninstance(long struct) { return memGetAddress(struct + VmaAllocatorCreateInfo.INSTANCE); }
     /** Unsafe version of {@link #vulkanApiVersion}. */
-    public static int nvulkanApiVersion(long struct) { return UNSAFE.getInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION); }
+    public static int nvulkanApiVersion(long struct) { return memGetInt(struct + VmaAllocatorCreateInfo.VULKANAPIVERSION); }
     /** Unsafe version of {@link #pTypeExternalMemoryHandleTypes(int) pTypeExternalMemoryHandleTypes}. */
     @Nullable public static IntBuffer npTypeExternalMemoryHandleTypes(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES), capacity); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VmaAllocatorCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #physicalDevice(VkPhysicalDevice) physicalDevice}. */
     public static void nphysicalDevice(long struct, VkPhysicalDevice value) { memPutAddress(struct + VmaAllocatorCreateInfo.PHYSICALDEVICE, value.address()); }
     /** Unsafe version of {@link #device(VkDevice) device}. */
     public static void ndevice(long struct, VkDevice value) { memPutAddress(struct + VmaAllocatorCreateInfo.DEVICE, value.address()); }
     /** Unsafe version of {@link #preferredLargeHeapBlockSize(long) preferredLargeHeapBlockSize}. */
-    public static void npreferredLargeHeapBlockSize(long struct, long value) { UNSAFE.putLong(null, struct + VmaAllocatorCreateInfo.PREFERREDLARGEHEAPBLOCKSIZE, value); }
+    public static void npreferredLargeHeapBlockSize(long struct, long value) { memPutLong(struct + VmaAllocatorCreateInfo.PREFERREDLARGEHEAPBLOCKSIZE, value); }
     /** Unsafe version of {@link #pAllocationCallbacks(VkAllocationCallbacks) pAllocationCallbacks}. */
     public static void npAllocationCallbacks(long struct, @Nullable VkAllocationCallbacks value) { memPutAddress(struct + VmaAllocatorCreateInfo.PALLOCATIONCALLBACKS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pDeviceMemoryCallbacks(VmaDeviceMemoryCallbacks) pDeviceMemoryCallbacks}. */
@@ -365,7 +365,7 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     /** Unsafe version of {@link #instance(VkInstance) instance}. */
     public static void ninstance(long struct, VkInstance value) { memPutAddress(struct + VmaAllocatorCreateInfo.INSTANCE, value.address()); }
     /** Unsafe version of {@link #vulkanApiVersion(int) vulkanApiVersion}. */
-    public static void nvulkanApiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION, value); }
+    public static void nvulkanApiVersion(long struct, int value) { memPutInt(struct + VmaAllocatorCreateInfo.VULKANAPIVERSION, value); }
     /** Unsafe version of {@link #pTypeExternalMemoryHandleTypes(IntBuffer) pTypeExternalMemoryHandleTypes}. */
     public static void npTypeExternalMemoryHandleTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES, memAddressSafe(value)); }
 

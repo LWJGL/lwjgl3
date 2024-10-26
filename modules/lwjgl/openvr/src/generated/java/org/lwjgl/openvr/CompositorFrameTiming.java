@@ -372,59 +372,59 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nSize}. */
-    public static int nm_nSize(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NSIZE); }
+    public static int nm_nSize(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NSIZE); }
     /** Unsafe version of {@link #m_nFrameIndex}. */
-    public static int nm_nFrameIndex(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NFRAMEINDEX); }
+    public static int nm_nFrameIndex(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NFRAMEINDEX); }
     /** Unsafe version of {@link #m_nNumFramePresents}. */
-    public static int nm_nNumFramePresents(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMFRAMEPRESENTS); }
+    public static int nm_nNumFramePresents(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NNUMFRAMEPRESENTS); }
     /** Unsafe version of {@link #m_nNumMisPresented}. */
-    public static int nm_nNumMisPresented(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMMISPRESENTED); }
+    public static int nm_nNumMisPresented(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NNUMMISPRESENTED); }
     /** Unsafe version of {@link #m_nNumDroppedFrames}. */
-    public static int nm_nNumDroppedFrames(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMDROPPEDFRAMES); }
+    public static int nm_nNumDroppedFrames(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NNUMDROPPEDFRAMES); }
     /** Unsafe version of {@link #m_nReprojectionFlags}. */
-    public static int nm_nReprojectionFlags(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NREPROJECTIONFLAGS); }
+    public static int nm_nReprojectionFlags(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NREPROJECTIONFLAGS); }
     /** Unsafe version of {@link #m_flSystemTimeInSeconds}. */
-    public static double nm_flSystemTimeInSeconds(long struct) { return UNSAFE.getDouble(null, struct + CompositorFrameTiming.M_FLSYSTEMTIMEINSECONDS); }
+    public static double nm_flSystemTimeInSeconds(long struct) { return memGetDouble(struct + CompositorFrameTiming.M_FLSYSTEMTIMEINSECONDS); }
     /** Unsafe version of {@link #m_flPreSubmitGpuMs}. */
-    public static float nm_flPreSubmitGpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLPRESUBMITGPUMS); }
+    public static float nm_flPreSubmitGpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLPRESUBMITGPUMS); }
     /** Unsafe version of {@link #m_flPostSubmitGpuMs}. */
-    public static float nm_flPostSubmitGpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLPOSTSUBMITGPUMS); }
+    public static float nm_flPostSubmitGpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLPOSTSUBMITGPUMS); }
     /** Unsafe version of {@link #m_flTotalRenderGpuMs}. */
-    public static float nm_flTotalRenderGpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLTOTALRENDERGPUMS); }
+    public static float nm_flTotalRenderGpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLTOTALRENDERGPUMS); }
     /** Unsafe version of {@link #m_flCompositorRenderGpuMs}. */
-    public static float nm_flCompositorRenderGpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERGPUMS); }
+    public static float nm_flCompositorRenderGpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERGPUMS); }
     /** Unsafe version of {@link #m_flCompositorRenderCpuMs}. */
-    public static float nm_flCompositorRenderCpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERCPUMS); }
+    public static float nm_flCompositorRenderCpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERCPUMS); }
     /** Unsafe version of {@link #m_flCompositorIdleCpuMs}. */
-    public static float nm_flCompositorIdleCpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORIDLECPUMS); }
+    public static float nm_flCompositorIdleCpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORIDLECPUMS); }
     /** Unsafe version of {@link #m_flClientFrameIntervalMs}. */
-    public static float nm_flClientFrameIntervalMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCLIENTFRAMEINTERVALMS); }
+    public static float nm_flClientFrameIntervalMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCLIENTFRAMEINTERVALMS); }
     /** Unsafe version of {@link #m_flPresentCallCpuMs}. */
-    public static float nm_flPresentCallCpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLPRESENTCALLCPUMS); }
+    public static float nm_flPresentCallCpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLPRESENTCALLCPUMS); }
     /** Unsafe version of {@link #m_flWaitForPresentCpuMs}. */
-    public static float nm_flWaitForPresentCpuMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLWAITFORPRESENTCPUMS); }
+    public static float nm_flWaitForPresentCpuMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLWAITFORPRESENTCPUMS); }
     /** Unsafe version of {@link #m_flSubmitFrameMs}. */
-    public static float nm_flSubmitFrameMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLSUBMITFRAMEMS); }
+    public static float nm_flSubmitFrameMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLSUBMITFRAMEMS); }
     /** Unsafe version of {@link #m_flWaitGetPosesCalledMs}. */
-    public static float nm_flWaitGetPosesCalledMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLWAITGETPOSESCALLEDMS); }
+    public static float nm_flWaitGetPosesCalledMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLWAITGETPOSESCALLEDMS); }
     /** Unsafe version of {@link #m_flNewPosesReadyMs}. */
-    public static float nm_flNewPosesReadyMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLNEWPOSESREADYMS); }
+    public static float nm_flNewPosesReadyMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLNEWPOSESREADYMS); }
     /** Unsafe version of {@link #m_flNewFrameReadyMs}. */
-    public static float nm_flNewFrameReadyMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLNEWFRAMEREADYMS); }
+    public static float nm_flNewFrameReadyMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLNEWFRAMEREADYMS); }
     /** Unsafe version of {@link #m_flCompositorUpdateStartMs}. */
-    public static float nm_flCompositorUpdateStartMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORUPDATESTARTMS); }
+    public static float nm_flCompositorUpdateStartMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORUPDATESTARTMS); }
     /** Unsafe version of {@link #m_flCompositorUpdateEndMs}. */
-    public static float nm_flCompositorUpdateEndMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORUPDATEENDMS); }
+    public static float nm_flCompositorUpdateEndMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORUPDATEENDMS); }
     /** Unsafe version of {@link #m_flCompositorRenderStartMs}. */
-    public static float nm_flCompositorRenderStartMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERSTARTMS); }
+    public static float nm_flCompositorRenderStartMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERSTARTMS); }
     /** Unsafe version of {@link #m_HmdPose}. */
     public static TrackedDevicePose nm_HmdPose(long struct) { return TrackedDevicePose.create(struct + CompositorFrameTiming.M_HMDPOSE); }
     /** Unsafe version of {@link #m_nNumVSyncsReadyForUse}. */
-    public static int nm_nNumVSyncsReadyForUse(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSREADYFORUSE); }
+    public static int nm_nNumVSyncsReadyForUse(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NNUMVSYNCSREADYFORUSE); }
     /** Unsafe version of {@link #m_nNumVSyncsToFirstView}. */
-    public static int nm_nNumVSyncsToFirstView(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSTOFIRSTVIEW); }
+    public static int nm_nNumVSyncsToFirstView(long struct) { return memGetInt(struct + CompositorFrameTiming.M_NNUMVSYNCSTOFIRSTVIEW); }
     /** Unsafe version of {@link #m_flTransferLatencyMs}. */
-    public static float nm_flTransferLatencyMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLTRANSFERLATENCYMS); }
+    public static float nm_flTransferLatencyMs(long struct) { return memGetFloat(struct + CompositorFrameTiming.M_FLTRANSFERLATENCYMS); }
 
     // -----------------------------------
 

@@ -126,13 +126,13 @@ public class AITexel extends Struct<AITexel> {
     // -----------------------------------
 
     /** Unsafe version of {@link #b}. */
-    public static byte nb(long struct) { return UNSAFE.getByte(null, struct + AITexel.B); }
+    public static byte nb(long struct) { return memGetByte(struct + AITexel.B); }
     /** Unsafe version of {@link #g}. */
-    public static byte ng(long struct) { return UNSAFE.getByte(null, struct + AITexel.G); }
+    public static byte ng(long struct) { return memGetByte(struct + AITexel.G); }
     /** Unsafe version of {@link #r}. */
-    public static byte nr(long struct) { return UNSAFE.getByte(null, struct + AITexel.R); }
+    public static byte nr(long struct) { return memGetByte(struct + AITexel.R); }
     /** Unsafe version of {@link #a}. */
-    public static byte na(long struct) { return UNSAFE.getByte(null, struct + AITexel.A); }
+    public static byte na(long struct) { return memGetByte(struct + AITexel.A); }
 
     // -----------------------------------
 

@@ -140,11 +140,11 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifier
     // -----------------------------------
 
     /** Unsafe version of {@link #drmFormatModifier}. */
-    public static long ndrmFormatModifier(long struct) { return UNSAFE.getLong(null, struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIER); }
+    public static long ndrmFormatModifier(long struct) { return memGetLong(struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIER); }
     /** Unsafe version of {@link #drmFormatModifierPlaneCount}. */
-    public static int ndrmFormatModifierPlaneCount(long struct) { return UNSAFE.getInt(null, struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIERPLANECOUNT); }
+    public static int ndrmFormatModifierPlaneCount(long struct) { return memGetInt(struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIERPLANECOUNT); }
     /** Unsafe version of {@link #drmFormatModifierTilingFeatures}. */
-    public static int ndrmFormatModifierTilingFeatures(long struct) { return UNSAFE.getInt(null, struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIERTILINGFEATURES); }
+    public static int ndrmFormatModifierTilingFeatures(long struct) { return memGetInt(struct + VkDrmFormatModifierPropertiesEXT.DRMFORMATMODIFIERTILINGFEATURES); }
 
     // -----------------------------------
 

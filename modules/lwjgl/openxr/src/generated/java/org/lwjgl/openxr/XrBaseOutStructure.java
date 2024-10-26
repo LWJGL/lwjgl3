@@ -232,12 +232,12 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBaseOutStructure.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBaseOutStructure.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static XrBaseOutStructure nnext(long struct) { return XrBaseOutStructure.create(memGetAddress(struct + XrBaseOutStructure.NEXT)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBaseOutStructure.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBaseOutStructure.TYPE, value); }
     /** Unsafe version of {@link #next(XrBaseOutStructure) next}. */
     public static void nnext(long struct, XrBaseOutStructure value) { memPutAddress(struct + XrBaseOutStructure.NEXT, value.address()); }
 

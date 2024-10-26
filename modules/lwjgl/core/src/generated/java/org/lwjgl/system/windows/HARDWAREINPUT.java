@@ -253,18 +253,18 @@ public class HARDWAREINPUT extends Struct<HARDWAREINPUT> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #uMsg}. */
-    public static int nuMsg(long struct) { return UNSAFE.getInt(null, struct + HARDWAREINPUT.UMSG); }
+    public static int nuMsg(long struct) { return memGetInt(struct + HARDWAREINPUT.UMSG); }
     /** Unsafe version of {@link #wParamL}. */
-    public static short nwParamL(long struct) { return UNSAFE.getShort(null, struct + HARDWAREINPUT.WPARAML); }
+    public static short nwParamL(long struct) { return memGetShort(struct + HARDWAREINPUT.WPARAML); }
     /** Unsafe version of {@link #wParamH}. */
-    public static short nwParamH(long struct) { return UNSAFE.getShort(null, struct + HARDWAREINPUT.WPARAMH); }
+    public static short nwParamH(long struct) { return memGetShort(struct + HARDWAREINPUT.WPARAMH); }
 
     /** Unsafe version of {@link #uMsg(int) uMsg}. */
-    public static void nuMsg(long struct, int value) { UNSAFE.putInt(null, struct + HARDWAREINPUT.UMSG, value); }
+    public static void nuMsg(long struct, int value) { memPutInt(struct + HARDWAREINPUT.UMSG, value); }
     /** Unsafe version of {@link #wParamL(short) wParamL}. */
-    public static void nwParamL(long struct, short value) { UNSAFE.putShort(null, struct + HARDWAREINPUT.WPARAML, value); }
+    public static void nwParamL(long struct, short value) { memPutShort(struct + HARDWAREINPUT.WPARAML, value); }
     /** Unsafe version of {@link #wParamH(short) wParamH}. */
-    public static void nwParamH(long struct, short value) { UNSAFE.putShort(null, struct + HARDWAREINPUT.WPARAMH, value); }
+    public static void nwParamH(long struct, short value) { memPutShort(struct + HARDWAREINPUT.WPARAMH, value); }
 
     // -----------------------------------
 

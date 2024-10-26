@@ -381,11 +381,11 @@ public class XMotionEvent extends Struct<XMotionEvent> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XMotionEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XMotionEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XMotionEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XMotionEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -397,26 +397,26 @@ public class XMotionEvent extends Struct<XMotionEvent> implements NativeResource
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XMotionEvent.TIME); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XMotionEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XMotionEvent.Y); }
     /** Unsafe version of {@link #x_root}. */
-    public static int nx_root(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.X_ROOT); }
+    public static int nx_root(long struct) { return memGetInt(struct + XMotionEvent.X_ROOT); }
     /** Unsafe version of {@link #y_root}. */
-    public static int ny_root(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.Y_ROOT); }
+    public static int ny_root(long struct) { return memGetInt(struct + XMotionEvent.Y_ROOT); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XMotionEvent.STATE); }
     /** Unsafe version of {@link #is_hint}. */
-    public static byte nis_hint(long struct) { return UNSAFE.getByte(null, struct + XMotionEvent.IS_HINT); }
+    public static byte nis_hint(long struct) { return memGetByte(struct + XMotionEvent.IS_HINT); }
     /** Unsafe version of {@link #same_screen}. */
-    public static int nsame_screen(long struct) { return UNSAFE.getInt(null, struct + XMotionEvent.SAME_SCREEN); }
+    public static int nsame_screen(long struct) { return memGetInt(struct + XMotionEvent.SAME_SCREEN); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XMotionEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XMotionEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XMotionEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XMotionEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -428,19 +428,19 @@ public class XMotionEvent extends Struct<XMotionEvent> implements NativeResource
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { memPutCLong(struct + XMotionEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XMotionEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XMotionEvent.Y, value); }
     /** Unsafe version of {@link #x_root(int) x_root}. */
-    public static void nx_root(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.X_ROOT, value); }
+    public static void nx_root(long struct, int value) { memPutInt(struct + XMotionEvent.X_ROOT, value); }
     /** Unsafe version of {@link #y_root(int) y_root}. */
-    public static void ny_root(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.Y_ROOT, value); }
+    public static void ny_root(long struct, int value) { memPutInt(struct + XMotionEvent.Y_ROOT, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XMotionEvent.STATE, value); }
     /** Unsafe version of {@link #is_hint(byte) is_hint}. */
-    public static void nis_hint(long struct, byte value) { UNSAFE.putByte(null, struct + XMotionEvent.IS_HINT, value); }
+    public static void nis_hint(long struct, byte value) { memPutByte(struct + XMotionEvent.IS_HINT, value); }
     /** Unsafe version of {@link #same_screen(boolean) same_screen}. */
-    public static void nsame_screen(long struct, int value) { UNSAFE.putInt(null, struct + XMotionEvent.SAME_SCREEN, value); }
+    public static void nsame_screen(long struct, int value) { memPutInt(struct + XMotionEvent.SAME_SCREEN, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

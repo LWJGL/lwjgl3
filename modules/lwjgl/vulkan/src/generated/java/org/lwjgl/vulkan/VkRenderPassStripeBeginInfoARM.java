@@ -267,20 +267,20 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassStripeBeginInfoARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassStripeBeginInfoARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassStripeBeginInfoARM.PNEXT); }
     /** Unsafe version of {@link #stripeInfoCount}. */
-    public static int nstripeInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassStripeBeginInfoARM.STRIPEINFOCOUNT); }
+    public static int nstripeInfoCount(long struct) { return memGetInt(struct + VkRenderPassStripeBeginInfoARM.STRIPEINFOCOUNT); }
     /** Unsafe version of {@link #pStripeInfos}. */
     public static VkRenderPassStripeInfoARM.Buffer npStripeInfos(long struct) { return VkRenderPassStripeInfoARM.create(memGetAddress(struct + VkRenderPassStripeBeginInfoARM.PSTRIPEINFOS), nstripeInfoCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassStripeBeginInfoARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassStripeBeginInfoARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassStripeBeginInfoARM.PNEXT, value); }
     /** Sets the specified value to the {@code stripeInfoCount} field of the specified {@code struct}. */
-    public static void nstripeInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassStripeBeginInfoARM.STRIPEINFOCOUNT, value); }
+    public static void nstripeInfoCount(long struct, int value) { memPutInt(struct + VkRenderPassStripeBeginInfoARM.STRIPEINFOCOUNT, value); }
     /** Unsafe version of {@link #pStripeInfos(VkRenderPassStripeInfoARM.Buffer) pStripeInfos}. */
     public static void npStripeInfos(long struct, VkRenderPassStripeInfoARM.Buffer value) { memPutAddress(struct + VkRenderPassStripeBeginInfoARM.PSTRIPEINFOS, value.address()); nstripeInfoCount(struct, value.remaining()); }
 

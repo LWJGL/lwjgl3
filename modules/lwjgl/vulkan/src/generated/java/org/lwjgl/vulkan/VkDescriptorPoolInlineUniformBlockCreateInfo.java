@@ -242,18 +242,18 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct<VkDescr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.PNEXT); }
     /** Unsafe version of {@link #maxInlineUniformBlockBindings}. */
-    public static int nmaxInlineUniformBlockBindings(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfo.MAXINLINEUNIFORMBLOCKBINDINGS); }
+    public static int nmaxInlineUniformBlockBindings(long struct) { return memGetInt(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.MAXINLINEUNIFORMBLOCKBINDINGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #maxInlineUniformBlockBindings(int) maxInlineUniformBlockBindings}. */
-    public static void nmaxInlineUniformBlockBindings(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfo.MAXINLINEUNIFORMBLOCKBINDINGS, value); }
+    public static void nmaxInlineUniformBlockBindings(long struct, int value) { memPutInt(struct + VkDescriptorPoolInlineUniformBlockCreateInfo.MAXINLINEUNIFORMBLOCKBINDINGS, value); }
 
     // -----------------------------------
 

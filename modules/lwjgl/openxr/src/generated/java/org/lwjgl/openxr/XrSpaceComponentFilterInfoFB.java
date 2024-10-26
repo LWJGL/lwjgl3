@@ -263,18 +263,18 @@ public class XrSpaceComponentFilterInfoFB extends Struct<XrSpaceComponentFilterI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceComponentFilterInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceComponentFilterInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceComponentFilterInfoFB.NEXT); }
     /** Unsafe version of {@link #componentType}. */
-    public static int ncomponentType(long struct) { return UNSAFE.getInt(null, struct + XrSpaceComponentFilterInfoFB.COMPONENTTYPE); }
+    public static int ncomponentType(long struct) { return memGetInt(struct + XrSpaceComponentFilterInfoFB.COMPONENTTYPE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceComponentFilterInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceComponentFilterInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceComponentFilterInfoFB.NEXT, value); }
     /** Unsafe version of {@link #componentType(int) componentType}. */
-    public static void ncomponentType(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceComponentFilterInfoFB.COMPONENTTYPE, value); }
+    public static void ncomponentType(long struct, int value) { memPutInt(struct + XrSpaceComponentFilterInfoFB.COMPONENTTYPE, value); }
 
     // -----------------------------------
 

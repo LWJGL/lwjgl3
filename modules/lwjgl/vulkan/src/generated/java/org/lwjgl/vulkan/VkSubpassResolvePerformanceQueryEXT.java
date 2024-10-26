@@ -242,14 +242,14 @@ public class VkSubpassResolvePerformanceQueryEXT extends Struct<VkSubpassResolve
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassResolvePerformanceQueryEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubpassResolvePerformanceQueryEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassResolvePerformanceQueryEXT.PNEXT); }
     /** Unsafe version of {@link #optimal}. */
-    public static int noptimal(long struct) { return UNSAFE.getInt(null, struct + VkSubpassResolvePerformanceQueryEXT.OPTIMAL); }
+    public static int noptimal(long struct) { return memGetInt(struct + VkSubpassResolvePerformanceQueryEXT.OPTIMAL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassResolvePerformanceQueryEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassResolvePerformanceQueryEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassResolvePerformanceQueryEXT.PNEXT, value); }
 

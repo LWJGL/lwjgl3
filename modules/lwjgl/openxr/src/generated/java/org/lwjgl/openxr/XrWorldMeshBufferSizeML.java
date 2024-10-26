@@ -248,18 +248,18 @@ public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBufferSizeML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshBufferSizeML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshBufferSizeML.NEXT); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBufferSizeML.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + XrWorldMeshBufferSizeML.SIZE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBufferSizeML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshBufferSizeML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshBufferSizeML.NEXT, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBufferSizeML.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + XrWorldMeshBufferSizeML.SIZE, value); }
 
     // -----------------------------------
 

@@ -258,18 +258,18 @@ public class XrPassthroughCreateInfoFB extends Struct<XrPassthroughCreateInfoFB>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrPassthroughCreateInfoFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrPassthroughCreateInfoFB.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrPassthroughCreateInfoFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrPassthroughCreateInfoFB.FLAGS, value); }
 
     // -----------------------------------
 

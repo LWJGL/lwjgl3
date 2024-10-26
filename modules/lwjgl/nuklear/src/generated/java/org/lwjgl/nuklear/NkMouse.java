@@ -181,11 +181,11 @@ public class NkMouse extends Struct<NkMouse> {
     /** Unsafe version of {@link #scroll_delta}. */
     public static NkVec2 nscroll_delta(long struct) { return NkVec2.create(struct + NkMouse.SCROLL_DELTA); }
     /** Unsafe version of {@link #grab}. */
-    public static boolean ngrab(long struct) { return UNSAFE.getByte(null, struct + NkMouse.GRAB) != 0; }
+    public static boolean ngrab(long struct) { return memGetByte(struct + NkMouse.GRAB) != 0; }
     /** Unsafe version of {@link #grabbed}. */
-    public static boolean ngrabbed(long struct) { return UNSAFE.getByte(null, struct + NkMouse.GRABBED) != 0; }
+    public static boolean ngrabbed(long struct) { return memGetByte(struct + NkMouse.GRABBED) != 0; }
     /** Unsafe version of {@link #ungrab}. */
-    public static boolean nungrab(long struct) { return UNSAFE.getByte(null, struct + NkMouse.UNGRAB) != 0; }
+    public static boolean nungrab(long struct) { return memGetByte(struct + NkMouse.UNGRAB) != 0; }
 
     // -----------------------------------
 

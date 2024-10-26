@@ -261,14 +261,14 @@ public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassStripeInfoARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassStripeInfoARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassStripeInfoARM.PNEXT); }
     /** Unsafe version of {@link #stripeArea}. */
     public static VkRect2D nstripeArea(long struct) { return VkRect2D.create(struct + VkRenderPassStripeInfoARM.STRIPEAREA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassStripeInfoARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassStripeInfoARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassStripeInfoARM.PNEXT, value); }
     /** Unsafe version of {@link #stripeArea(VkRect2D) stripeArea}. */

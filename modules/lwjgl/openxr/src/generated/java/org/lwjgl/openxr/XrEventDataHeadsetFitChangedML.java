@@ -261,16 +261,16 @@ public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFit
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataHeadsetFitChangedML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataHeadsetFitChangedML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataHeadsetFitChangedML.NEXT); }
     /** Unsafe version of {@link #status}. */
-    public static int nstatus(long struct) { return UNSAFE.getInt(null, struct + XrEventDataHeadsetFitChangedML.STATUS); }
+    public static int nstatus(long struct) { return memGetInt(struct + XrEventDataHeadsetFitChangedML.STATUS); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrEventDataHeadsetFitChangedML.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrEventDataHeadsetFitChangedML.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataHeadsetFitChangedML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataHeadsetFitChangedML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataHeadsetFitChangedML.NEXT, value); }
 

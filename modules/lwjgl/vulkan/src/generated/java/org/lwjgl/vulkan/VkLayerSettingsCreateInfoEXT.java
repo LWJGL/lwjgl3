@@ -256,20 +256,20 @@ public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateIn
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLayerSettingsCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLayerSettingsCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLayerSettingsCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #settingCount}. */
-    public static int nsettingCount(long struct) { return UNSAFE.getInt(null, struct + VkLayerSettingsCreateInfoEXT.SETTINGCOUNT); }
+    public static int nsettingCount(long struct) { return memGetInt(struct + VkLayerSettingsCreateInfoEXT.SETTINGCOUNT); }
     /** Unsafe version of {@link #pSettings}. */
     @Nullable public static VkLayerSettingEXT.Buffer npSettings(long struct) { return VkLayerSettingEXT.createSafe(memGetAddress(struct + VkLayerSettingsCreateInfoEXT.PSETTINGS), nsettingCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLayerSettingsCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLayerSettingsCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLayerSettingsCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code settingCount} field of the specified {@code struct}. */
-    public static void nsettingCount(long struct, int value) { UNSAFE.putInt(null, struct + VkLayerSettingsCreateInfoEXT.SETTINGCOUNT, value); }
+    public static void nsettingCount(long struct, int value) { memPutInt(struct + VkLayerSettingsCreateInfoEXT.SETTINGCOUNT, value); }
     /** Unsafe version of {@link #pSettings(VkLayerSettingEXT.Buffer) pSettings}. */
     public static void npSettings(long struct, @Nullable VkLayerSettingEXT.Buffer value) { memPutAddress(struct + VkLayerSettingsCreateInfoEXT.PSETTINGS, memAddressSafe(value)); nsettingCount(struct, value == null ? 0 : value.remaining()); }
 

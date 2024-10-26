@@ -241,18 +241,18 @@ public class XrExtent3Df extends Struct<XrExtent3Df> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + XrExtent3Df.WIDTH); }
+    public static float nwidth(long struct) { return memGetFloat(struct + XrExtent3Df.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + XrExtent3Df.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + XrExtent3Df.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static float ndepth(long struct) { return UNSAFE.getFloat(null, struct + XrExtent3Df.DEPTH); }
+    public static float ndepth(long struct) { return memGetFloat(struct + XrExtent3Df.DEPTH); }
 
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + XrExtent3Df.WIDTH, value); }
+    public static void nwidth(long struct, float value) { memPutFloat(struct + XrExtent3Df.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + XrExtent3Df.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + XrExtent3Df.HEIGHT, value); }
     /** Unsafe version of {@link #depth(float) depth}. */
-    public static void ndepth(long struct, float value) { UNSAFE.putFloat(null, struct + XrExtent3Df.DEPTH, value); }
+    public static void ndepth(long struct, float value) { memPutFloat(struct + XrExtent3Df.DEPTH, value); }
 
     // -----------------------------------
 

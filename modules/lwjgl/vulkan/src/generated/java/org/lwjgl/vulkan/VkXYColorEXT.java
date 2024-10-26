@@ -248,14 +248,14 @@ public class VkXYColorEXT extends Struct<VkXYColorEXT> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VkXYColorEXT.X); }
+    public static float nx(long struct) { return memGetFloat(struct + VkXYColorEXT.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VkXYColorEXT.Y); }
+    public static float ny(long struct) { return memGetFloat(struct + VkXYColorEXT.Y); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + VkXYColorEXT.X, value); }
+    public static void nx(long struct, float value) { memPutFloat(struct + VkXYColorEXT.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + VkXYColorEXT.Y, value); }
+    public static void ny(long struct, float value) { memPutFloat(struct + VkXYColorEXT.Y, value); }
 
     // -----------------------------------
 

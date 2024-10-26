@@ -247,14 +247,14 @@ public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubresourceLayout2KHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubresourceLayout2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubresourceLayout2KHR.PNEXT); }
     /** Unsafe version of {@link #subresourceLayout}. */
     public static VkSubresourceLayout nsubresourceLayout(long struct) { return VkSubresourceLayout.create(struct + VkSubresourceLayout2KHR.SUBRESOURCELAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubresourceLayout2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubresourceLayout2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubresourceLayout2KHR.PNEXT, value); }
 

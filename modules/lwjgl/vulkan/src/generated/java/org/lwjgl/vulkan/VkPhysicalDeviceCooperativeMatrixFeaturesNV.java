@@ -276,22 +276,22 @@ public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #cooperativeMatrix}. */
-    public static int ncooperativeMatrix(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIX); }
+    public static int ncooperativeMatrix(long struct) { return memGetInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIX); }
     /** Unsafe version of {@link #cooperativeMatrixRobustBufferAccess}. */
-    public static int ncooperativeMatrixRobustBufferAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIXROBUSTBUFFERACCESS); }
+    public static int ncooperativeMatrixRobustBufferAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIXROBUSTBUFFERACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #cooperativeMatrix(boolean) cooperativeMatrix}. */
-    public static void ncooperativeMatrix(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIX, value); }
+    public static void ncooperativeMatrix(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIX, value); }
     /** Unsafe version of {@link #cooperativeMatrixRobustBufferAccess(boolean) cooperativeMatrixRobustBufferAccess}. */
-    public static void ncooperativeMatrixRobustBufferAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIXROBUSTBUFFERACCESS, value); }
+    public static void ncooperativeMatrixRobustBufferAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCooperativeMatrixFeaturesNV.COOPERATIVEMATRIXROBUSTBUFFERACCESS, value); }
 
     // -----------------------------------
 

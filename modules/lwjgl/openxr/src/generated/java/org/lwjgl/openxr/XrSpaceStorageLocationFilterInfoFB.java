@@ -249,18 +249,18 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct<XrSpaceStorageLoc
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceStorageLocationFilterInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceStorageLocationFilterInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceStorageLocationFilterInfoFB.NEXT); }
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + XrSpaceStorageLocationFilterInfoFB.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + XrSpaceStorageLocationFilterInfoFB.LOCATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceStorageLocationFilterInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceStorageLocationFilterInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceStorageLocationFilterInfoFB.NEXT, value); }
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceStorageLocationFilterInfoFB.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + XrSpaceStorageLocationFilterInfoFB.LOCATION, value); }
 
     // -----------------------------------
 

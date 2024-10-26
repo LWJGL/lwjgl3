@@ -217,12 +217,12 @@ public class CUexecAffinityParam extends Struct<CUexecAffinityParam> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUexecAffinityParam.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUexecAffinityParam.TYPE); }
     /** Unsafe version of {@link #param_smCount}. */
     public static CUexecAffinitySmCount nparam_smCount(long struct) { return CUexecAffinitySmCount.create(struct + CUexecAffinityParam.PARAM_SMCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUexecAffinityParam.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUexecAffinityParam.TYPE, value); }
     /** Unsafe version of {@link #param_smCount(CUexecAffinitySmCount) param_smCount}. */
     public static void nparam_smCount(long struct, CUexecAffinitySmCount value) { memCopy(value.address(), struct + CUexecAffinityParam.PARAM_SMCOUNT, CUexecAffinitySmCount.SIZEOF); }
 

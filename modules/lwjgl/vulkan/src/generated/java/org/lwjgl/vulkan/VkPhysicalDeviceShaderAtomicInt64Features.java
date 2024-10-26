@@ -257,22 +257,22 @@ public class VkPhysicalDeviceShaderAtomicInt64Features extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderAtomicInt64Features.PNEXT); }
     /** Unsafe version of {@link #shaderBufferInt64Atomics}. */
-    public static int nshaderBufferInt64Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERBUFFERINT64ATOMICS); }
+    public static int nshaderBufferInt64Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERBUFFERINT64ATOMICS); }
     /** Unsafe version of {@link #shaderSharedInt64Atomics}. */
-    public static int nshaderSharedInt64Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERSHAREDINT64ATOMICS); }
+    public static int nshaderSharedInt64Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERSHAREDINT64ATOMICS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderAtomicInt64Features.PNEXT, value); }
     /** Unsafe version of {@link #shaderBufferInt64Atomics(boolean) shaderBufferInt64Atomics}. */
-    public static void nshaderBufferInt64Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERBUFFERINT64ATOMICS, value); }
+    public static void nshaderBufferInt64Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERBUFFERINT64ATOMICS, value); }
     /** Unsafe version of {@link #shaderSharedInt64Atomics(boolean) shaderSharedInt64Atomics}. */
-    public static void nshaderSharedInt64Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERSHAREDINT64ATOMICS, value); }
+    public static void nshaderSharedInt64Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicInt64Features.SHADERSHAREDINT64ATOMICS, value); }
 
     // -----------------------------------
 

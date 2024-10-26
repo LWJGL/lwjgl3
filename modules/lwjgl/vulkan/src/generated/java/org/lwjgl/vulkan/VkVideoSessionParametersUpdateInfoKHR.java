@@ -256,18 +256,18 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionParametersUpdateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoSessionParametersUpdateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoSessionParametersUpdateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #updateSequenceCount}. */
-    public static int nupdateSequenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionParametersUpdateInfoKHR.UPDATESEQUENCECOUNT); }
+    public static int nupdateSequenceCount(long struct) { return memGetInt(struct + VkVideoSessionParametersUpdateInfoKHR.UPDATESEQUENCECOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionParametersUpdateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoSessionParametersUpdateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoSessionParametersUpdateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #updateSequenceCount(int) updateSequenceCount}. */
-    public static void nupdateSequenceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionParametersUpdateInfoKHR.UPDATESEQUENCECOUNT, value); }
+    public static void nupdateSequenceCount(long struct, int value) { memPutInt(struct + VkVideoSessionParametersUpdateInfoKHR.UPDATESEQUENCECOUNT, value); }
 
     // -----------------------------------
 

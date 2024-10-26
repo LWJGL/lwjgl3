@@ -250,16 +250,16 @@ public class VkVideoDecodeH264CapabilitiesKHR extends Struct<VkVideoDecodeH264Ca
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH264CapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264CapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #maxLevelIdc}. */
-    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesKHR.MAXLEVELIDC); }
+    public static int nmaxLevelIdc(long struct) { return memGetInt(struct + VkVideoDecodeH264CapabilitiesKHR.MAXLEVELIDC); }
     /** Unsafe version of {@link #fieldOffsetGranularity}. */
     public static VkOffset2D nfieldOffsetGranularity(long struct) { return VkOffset2D.create(struct + VkVideoDecodeH264CapabilitiesKHR.FIELDOFFSETGRANULARITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264CapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH264CapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264CapabilitiesKHR.PNEXT, value); }
 

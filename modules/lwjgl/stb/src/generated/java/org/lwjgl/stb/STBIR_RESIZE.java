@@ -624,63 +624,63 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** Unsafe version of {@link #input_pixels(int) input_pixels}. */
     public static ByteBuffer ninput_pixels(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + STBIR_RESIZE.INPUT_PIXELS), capacity); }
     /** Unsafe version of {@link #input_w}. */
-    public static int ninput_w(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.INPUT_W); }
+    public static int ninput_w(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_W); }
     /** Unsafe version of {@link #input_h}. */
-    public static int ninput_h(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.INPUT_H); }
+    public static int ninput_h(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_H); }
     /** Unsafe version of {@link #input_s0}. */
-    public static double ninput_s0(long struct) { return UNSAFE.getDouble(null, struct + STBIR_RESIZE.INPUT_S0); }
+    public static double ninput_s0(long struct) { return memGetDouble(struct + STBIR_RESIZE.INPUT_S0); }
     /** Unsafe version of {@link #input_t0}. */
-    public static double ninput_t0(long struct) { return UNSAFE.getDouble(null, struct + STBIR_RESIZE.INPUT_T0); }
+    public static double ninput_t0(long struct) { return memGetDouble(struct + STBIR_RESIZE.INPUT_T0); }
     /** Unsafe version of {@link #input_s1}. */
-    public static double ninput_s1(long struct) { return UNSAFE.getDouble(null, struct + STBIR_RESIZE.INPUT_S1); }
+    public static double ninput_s1(long struct) { return memGetDouble(struct + STBIR_RESIZE.INPUT_S1); }
     /** Unsafe version of {@link #input_t1}. */
-    public static double ninput_t1(long struct) { return UNSAFE.getDouble(null, struct + STBIR_RESIZE.INPUT_T1); }
+    public static double ninput_t1(long struct) { return memGetDouble(struct + STBIR_RESIZE.INPUT_T1); }
     /** Unsafe version of {@link #input_cb(int) input_cb}. */
     @Nullable public static PointerBuffer ninput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.INPUT_CB), capacity); }
     /** Unsafe version of {@link #output_pixels(int) output_pixels}. */
     @Nullable public static ByteBuffer noutput_pixels(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_PIXELS), capacity); }
     /** Unsafe version of {@link #output_w}. */
-    public static int noutput_w(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_W); }
+    public static int noutput_w(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_W); }
     /** Unsafe version of {@link #output_h}. */
-    public static int noutput_h(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_H); }
+    public static int noutput_h(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_H); }
     /** Unsafe version of {@link #output_subx}. */
-    public static int noutput_subx(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_SUBX); }
+    public static int noutput_subx(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_SUBX); }
     /** Unsafe version of {@link #output_suby}. */
-    public static int noutput_suby(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_SUBY); }
+    public static int noutput_suby(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_SUBY); }
     /** Unsafe version of {@link #output_subw}. */
-    public static int noutput_subw(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_SUBW); }
+    public static int noutput_subw(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_SUBW); }
     /** Unsafe version of {@link #output_subh}. */
-    public static int noutput_subh(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_SUBH); }
+    public static int noutput_subh(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_SUBH); }
     /** Unsafe version of {@link #output_cb(int) output_cb}. */
     @Nullable public static PointerBuffer noutput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_CB), capacity); }
     /** Unsafe version of {@link #input_stride_in_bytes}. */
-    public static int ninput_stride_in_bytes(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.INPUT_STRIDE_IN_BYTES); }
+    public static int ninput_stride_in_bytes(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_STRIDE_IN_BYTES); }
     /** Unsafe version of {@link #output_stride_in_bytes}. */
-    public static int noutput_stride_in_bytes(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_STRIDE_IN_BYTES); }
+    public static int noutput_stride_in_bytes(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_STRIDE_IN_BYTES); }
     /** Unsafe version of {@link #splits}. */
-    public static int nsplits(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.SPLITS); }
+    public static int nsplits(long struct) { return memGetInt(struct + STBIR_RESIZE.SPLITS); }
     /** Unsafe version of {@link #fast_alpha}. */
-    public static int nfast_alpha(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.FAST_ALPHA); }
+    public static int nfast_alpha(long struct) { return memGetInt(struct + STBIR_RESIZE.FAST_ALPHA); }
     /** Unsafe version of {@link #needs_rebuild}. */
-    public static int nneeds_rebuild(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.NEEDS_REBUILD); }
+    public static int nneeds_rebuild(long struct) { return memGetInt(struct + STBIR_RESIZE.NEEDS_REBUILD); }
     /** Unsafe version of {@link #called_alloc}. */
-    public static int ncalled_alloc(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.CALLED_ALLOC); }
+    public static int ncalled_alloc(long struct) { return memGetInt(struct + STBIR_RESIZE.CALLED_ALLOC); }
     /** Unsafe version of {@link #input_pixel_layout_public}. */
-    public static int ninput_pixel_layout_public(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.INPUT_PIXEL_LAYOUT_PUBLIC); }
+    public static int ninput_pixel_layout_public(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_PIXEL_LAYOUT_PUBLIC); }
     /** Unsafe version of {@link #output_pixel_layout_public}. */
-    public static int noutput_pixel_layout_public(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_PIXEL_LAYOUT_PUBLIC); }
+    public static int noutput_pixel_layout_public(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_PIXEL_LAYOUT_PUBLIC); }
     /** Unsafe version of {@link #input_data_type}. */
-    public static int ninput_data_type(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.INPUT_DATA_TYPE); }
+    public static int ninput_data_type(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_DATA_TYPE); }
     /** Unsafe version of {@link #output_data_type}. */
-    public static int noutput_data_type(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.OUTPUT_DATA_TYPE); }
+    public static int noutput_data_type(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_DATA_TYPE); }
     /** Unsafe version of {@link #horizontal_filter}. */
-    public static int nhorizontal_filter(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.HORIZONTAL_FILTER); }
+    public static int nhorizontal_filter(long struct) { return memGetInt(struct + STBIR_RESIZE.HORIZONTAL_FILTER); }
     /** Unsafe version of {@link #vertical_filter}. */
-    public static int nvertical_filter(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.VERTICAL_FILTER); }
+    public static int nvertical_filter(long struct) { return memGetInt(struct + STBIR_RESIZE.VERTICAL_FILTER); }
     /** Unsafe version of {@link #horizontal_edge}. */
-    public static int nhorizontal_edge(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.HORIZONTAL_EDGE); }
+    public static int nhorizontal_edge(long struct) { return memGetInt(struct + STBIR_RESIZE.HORIZONTAL_EDGE); }
     /** Unsafe version of {@link #vertical_edge}. */
-    public static int nvertical_edge(long struct) { return UNSAFE.getInt(null, struct + STBIR_RESIZE.VERTICAL_EDGE); }
+    public static int nvertical_edge(long struct) { return memGetInt(struct + STBIR_RESIZE.VERTICAL_EDGE); }
     /** Unsafe version of {@link #horizontal_filter_kernel(int) horizontal_filter_kernel}. */
     @Nullable public static PointerBuffer nhorizontal_filter_kernel(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_KERNEL), capacity); }
     /** Unsafe version of {@link #horizontal_filter_support(int) horizontal_filter_support}. */
@@ -697,63 +697,63 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** Unsafe version of {@link #input_pixels(ByteBuffer) input_pixels}. */
     public static void ninput_pixels(long struct, ByteBuffer value) { memPutAddress(struct + STBIR_RESIZE.INPUT_PIXELS, memAddress(value)); }
     /** Unsafe version of {@link #input_w(int) input_w}. */
-    public static void ninput_w(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.INPUT_W, value); }
+    public static void ninput_w(long struct, int value) { memPutInt(struct + STBIR_RESIZE.INPUT_W, value); }
     /** Unsafe version of {@link #input_h(int) input_h}. */
-    public static void ninput_h(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.INPUT_H, value); }
+    public static void ninput_h(long struct, int value) { memPutInt(struct + STBIR_RESIZE.INPUT_H, value); }
     /** Unsafe version of {@link #input_s0(double) input_s0}. */
-    public static void ninput_s0(long struct, double value) { UNSAFE.putDouble(null, struct + STBIR_RESIZE.INPUT_S0, value); }
+    public static void ninput_s0(long struct, double value) { memPutDouble(struct + STBIR_RESIZE.INPUT_S0, value); }
     /** Unsafe version of {@link #input_t0(double) input_t0}. */
-    public static void ninput_t0(long struct, double value) { UNSAFE.putDouble(null, struct + STBIR_RESIZE.INPUT_T0, value); }
+    public static void ninput_t0(long struct, double value) { memPutDouble(struct + STBIR_RESIZE.INPUT_T0, value); }
     /** Unsafe version of {@link #input_s1(double) input_s1}. */
-    public static void ninput_s1(long struct, double value) { UNSAFE.putDouble(null, struct + STBIR_RESIZE.INPUT_S1, value); }
+    public static void ninput_s1(long struct, double value) { memPutDouble(struct + STBIR_RESIZE.INPUT_S1, value); }
     /** Unsafe version of {@link #input_t1(double) input_t1}. */
-    public static void ninput_t1(long struct, double value) { UNSAFE.putDouble(null, struct + STBIR_RESIZE.INPUT_T1, value); }
+    public static void ninput_t1(long struct, double value) { memPutDouble(struct + STBIR_RESIZE.INPUT_T1, value); }
     /** Unsafe version of {@link #input_cb(PointerBuffer) input_cb}. */
     public static void ninput_cb(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + STBIR_RESIZE.INPUT_CB, memAddressSafe(value)); }
     /** Unsafe version of {@link #output_pixels(ByteBuffer) output_pixels}. */
     public static void noutput_pixels(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + STBIR_RESIZE.OUTPUT_PIXELS, memAddressSafe(value)); }
     /** Unsafe version of {@link #output_w(int) output_w}. */
-    public static void noutput_w(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_W, value); }
+    public static void noutput_w(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_W, value); }
     /** Unsafe version of {@link #output_h(int) output_h}. */
-    public static void noutput_h(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_H, value); }
+    public static void noutput_h(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_H, value); }
     /** Unsafe version of {@link #output_subx(int) output_subx}. */
-    public static void noutput_subx(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_SUBX, value); }
+    public static void noutput_subx(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_SUBX, value); }
     /** Unsafe version of {@link #output_suby(int) output_suby}. */
-    public static void noutput_suby(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_SUBY, value); }
+    public static void noutput_suby(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_SUBY, value); }
     /** Unsafe version of {@link #output_subw(int) output_subw}. */
-    public static void noutput_subw(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_SUBW, value); }
+    public static void noutput_subw(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_SUBW, value); }
     /** Unsafe version of {@link #output_subh(int) output_subh}. */
-    public static void noutput_subh(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_SUBH, value); }
+    public static void noutput_subh(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_SUBH, value); }
     /** Unsafe version of {@link #output_cb(PointerBuffer) output_cb}. */
     public static void noutput_cb(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + STBIR_RESIZE.OUTPUT_CB, memAddressSafe(value)); }
     /** Unsafe version of {@link #input_stride_in_bytes(int) input_stride_in_bytes}. */
-    public static void ninput_stride_in_bytes(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.INPUT_STRIDE_IN_BYTES, value); }
+    public static void ninput_stride_in_bytes(long struct, int value) { memPutInt(struct + STBIR_RESIZE.INPUT_STRIDE_IN_BYTES, value); }
     /** Unsafe version of {@link #output_stride_in_bytes(int) output_stride_in_bytes}. */
-    public static void noutput_stride_in_bytes(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_STRIDE_IN_BYTES, value); }
+    public static void noutput_stride_in_bytes(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_STRIDE_IN_BYTES, value); }
     /** Unsafe version of {@link #splits(int) splits}. */
-    public static void nsplits(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.SPLITS, value); }
+    public static void nsplits(long struct, int value) { memPutInt(struct + STBIR_RESIZE.SPLITS, value); }
     /** Unsafe version of {@link #fast_alpha(boolean) fast_alpha}. */
-    public static void nfast_alpha(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.FAST_ALPHA, value); }
+    public static void nfast_alpha(long struct, int value) { memPutInt(struct + STBIR_RESIZE.FAST_ALPHA, value); }
     /** Unsafe version of {@link #needs_rebuild(boolean) needs_rebuild}. */
-    public static void nneeds_rebuild(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.NEEDS_REBUILD, value); }
+    public static void nneeds_rebuild(long struct, int value) { memPutInt(struct + STBIR_RESIZE.NEEDS_REBUILD, value); }
     /** Unsafe version of {@link #called_alloc(boolean) called_alloc}. */
-    public static void ncalled_alloc(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.CALLED_ALLOC, value); }
+    public static void ncalled_alloc(long struct, int value) { memPutInt(struct + STBIR_RESIZE.CALLED_ALLOC, value); }
     /** Unsafe version of {@link #input_pixel_layout_public(int) input_pixel_layout_public}. */
-    public static void ninput_pixel_layout_public(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.INPUT_PIXEL_LAYOUT_PUBLIC, value); }
+    public static void ninput_pixel_layout_public(long struct, int value) { memPutInt(struct + STBIR_RESIZE.INPUT_PIXEL_LAYOUT_PUBLIC, value); }
     /** Unsafe version of {@link #output_pixel_layout_public(int) output_pixel_layout_public}. */
-    public static void noutput_pixel_layout_public(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_PIXEL_LAYOUT_PUBLIC, value); }
+    public static void noutput_pixel_layout_public(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_PIXEL_LAYOUT_PUBLIC, value); }
     /** Unsafe version of {@link #input_data_type(int) input_data_type}. */
-    public static void ninput_data_type(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.INPUT_DATA_TYPE, value); }
+    public static void ninput_data_type(long struct, int value) { memPutInt(struct + STBIR_RESIZE.INPUT_DATA_TYPE, value); }
     /** Unsafe version of {@link #output_data_type(int) output_data_type}. */
-    public static void noutput_data_type(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.OUTPUT_DATA_TYPE, value); }
+    public static void noutput_data_type(long struct, int value) { memPutInt(struct + STBIR_RESIZE.OUTPUT_DATA_TYPE, value); }
     /** Unsafe version of {@link #horizontal_filter(int) horizontal_filter}. */
-    public static void nhorizontal_filter(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.HORIZONTAL_FILTER, value); }
+    public static void nhorizontal_filter(long struct, int value) { memPutInt(struct + STBIR_RESIZE.HORIZONTAL_FILTER, value); }
     /** Unsafe version of {@link #vertical_filter(int) vertical_filter}. */
-    public static void nvertical_filter(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.VERTICAL_FILTER, value); }
+    public static void nvertical_filter(long struct, int value) { memPutInt(struct + STBIR_RESIZE.VERTICAL_FILTER, value); }
     /** Unsafe version of {@link #horizontal_edge(int) horizontal_edge}. */
-    public static void nhorizontal_edge(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.HORIZONTAL_EDGE, value); }
+    public static void nhorizontal_edge(long struct, int value) { memPutInt(struct + STBIR_RESIZE.HORIZONTAL_EDGE, value); }
     /** Unsafe version of {@link #vertical_edge(int) vertical_edge}. */
-    public static void nvertical_edge(long struct, int value) { UNSAFE.putInt(null, struct + STBIR_RESIZE.VERTICAL_EDGE, value); }
+    public static void nvertical_edge(long struct, int value) { memPutInt(struct + STBIR_RESIZE.VERTICAL_EDGE, value); }
     /** Unsafe version of {@link #horizontal_filter_kernel(PointerBuffer) horizontal_filter_kernel}. */
     public static void nhorizontal_filter_kernel(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_KERNEL, memAddressSafe(value)); }
     /** Unsafe version of {@link #horizontal_filter_support(PointerBuffer) horizontal_filter_support}. */

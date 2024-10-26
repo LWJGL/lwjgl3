@@ -259,22 +259,22 @@ public class IntersectionMaskRectangle extends Struct<IntersectionMaskRectangle>
     // -----------------------------------
 
     /** Unsafe version of {@link #m_flTopLeftX}. */
-    public static float nm_flTopLeftX(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskRectangle.M_FLTOPLEFTX); }
+    public static float nm_flTopLeftX(long struct) { return memGetFloat(struct + IntersectionMaskRectangle.M_FLTOPLEFTX); }
     /** Unsafe version of {@link #m_flTopLeftY}. */
-    public static float nm_flTopLeftY(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskRectangle.M_FLTOPLEFTY); }
+    public static float nm_flTopLeftY(long struct) { return memGetFloat(struct + IntersectionMaskRectangle.M_FLTOPLEFTY); }
     /** Unsafe version of {@link #m_flWidth}. */
-    public static float nm_flWidth(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskRectangle.M_FLWIDTH); }
+    public static float nm_flWidth(long struct) { return memGetFloat(struct + IntersectionMaskRectangle.M_FLWIDTH); }
     /** Unsafe version of {@link #m_flHeight}. */
-    public static float nm_flHeight(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskRectangle.M_FLHEIGHT); }
+    public static float nm_flHeight(long struct) { return memGetFloat(struct + IntersectionMaskRectangle.M_FLHEIGHT); }
 
     /** Unsafe version of {@link #m_flTopLeftX(float) m_flTopLeftX}. */
-    public static void nm_flTopLeftX(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskRectangle.M_FLTOPLEFTX, value); }
+    public static void nm_flTopLeftX(long struct, float value) { memPutFloat(struct + IntersectionMaskRectangle.M_FLTOPLEFTX, value); }
     /** Unsafe version of {@link #m_flTopLeftY(float) m_flTopLeftY}. */
-    public static void nm_flTopLeftY(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskRectangle.M_FLTOPLEFTY, value); }
+    public static void nm_flTopLeftY(long struct, float value) { memPutFloat(struct + IntersectionMaskRectangle.M_FLTOPLEFTY, value); }
     /** Unsafe version of {@link #m_flWidth(float) m_flWidth}. */
-    public static void nm_flWidth(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskRectangle.M_FLWIDTH, value); }
+    public static void nm_flWidth(long struct, float value) { memPutFloat(struct + IntersectionMaskRectangle.M_FLWIDTH, value); }
     /** Unsafe version of {@link #m_flHeight(float) m_flHeight}. */
-    public static void nm_flHeight(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskRectangle.M_FLHEIGHT, value); }
+    public static void nm_flHeight(long struct, float value) { memPutFloat(struct + IntersectionMaskRectangle.M_FLHEIGHT, value); }
 
     // -----------------------------------
 

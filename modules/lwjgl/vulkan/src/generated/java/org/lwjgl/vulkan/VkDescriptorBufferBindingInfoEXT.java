@@ -279,22 +279,22 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorBufferBindingInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorBufferBindingInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorBufferBindingInfoEXT.PNEXT); }
     /** Unsafe version of {@link #address$}. */
-    public static long naddress$(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorBufferBindingInfoEXT.ADDRESS); }
+    public static long naddress$(long struct) { return memGetLong(struct + VkDescriptorBufferBindingInfoEXT.ADDRESS); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorBufferBindingInfoEXT.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VkDescriptorBufferBindingInfoEXT.USAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorBufferBindingInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorBufferBindingInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorBufferBindingInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #address$(long) address$}. */
-    public static void naddress$(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorBufferBindingInfoEXT.ADDRESS, value); }
+    public static void naddress$(long struct, long value) { memPutLong(struct + VkDescriptorBufferBindingInfoEXT.ADDRESS, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorBufferBindingInfoEXT.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VkDescriptorBufferBindingInfoEXT.USAGE, value); }
 
     // -----------------------------------
 

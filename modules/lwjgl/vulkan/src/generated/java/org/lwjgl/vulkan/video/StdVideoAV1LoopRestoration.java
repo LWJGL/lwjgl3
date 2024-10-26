@@ -237,13 +237,13 @@ public class StdVideoAV1LoopRestoration extends Struct<StdVideoAV1LoopRestoratio
     public static IntBuffer nFrameRestorationType(long struct) { return memIntBuffer(struct + StdVideoAV1LoopRestoration.FRAMERESTORATIONTYPE, STD_VIDEO_AV1_MAX_NUM_PLANES); }
     /** Unsafe version of {@link #FrameRestorationType(int) FrameRestorationType}. */
     public static int nFrameRestorationType(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoAV1LoopRestoration.FRAMERESTORATIONTYPE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 4);
+        return memGetInt(struct + StdVideoAV1LoopRestoration.FRAMERESTORATIONTYPE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 4);
     }
     /** Unsafe version of {@link #LoopRestorationSize}. */
     public static ShortBuffer nLoopRestorationSize(long struct) { return memShortBuffer(struct + StdVideoAV1LoopRestoration.LOOPRESTORATIONSIZE, STD_VIDEO_AV1_MAX_NUM_PLANES); }
     /** Unsafe version of {@link #LoopRestorationSize(int) LoopRestorationSize}. */
     public static short nLoopRestorationSize(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoAV1LoopRestoration.LOOPRESTORATIONSIZE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 2);
+        return memGetShort(struct + StdVideoAV1LoopRestoration.LOOPRESTORATIONSIZE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 2);
     }
 
     /** Unsafe version of {@link #FrameRestorationType(IntBuffer) FrameRestorationType}. */
@@ -253,7 +253,7 @@ public class StdVideoAV1LoopRestoration extends Struct<StdVideoAV1LoopRestoratio
     }
     /** Unsafe version of {@link #FrameRestorationType(int, int) FrameRestorationType}. */
     public static void nFrameRestorationType(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoAV1LoopRestoration.FRAMERESTORATIONTYPE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 4, value);
+        memPutInt(struct + StdVideoAV1LoopRestoration.FRAMERESTORATIONTYPE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 4, value);
     }
     /** Unsafe version of {@link #LoopRestorationSize(ShortBuffer) LoopRestorationSize}. */
     public static void nLoopRestorationSize(long struct, ShortBuffer value) {
@@ -262,7 +262,7 @@ public class StdVideoAV1LoopRestoration extends Struct<StdVideoAV1LoopRestoratio
     }
     /** Unsafe version of {@link #LoopRestorationSize(int, short) LoopRestorationSize}. */
     public static void nLoopRestorationSize(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoAV1LoopRestoration.LOOPRESTORATIONSIZE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 2, value);
+        memPutShort(struct + StdVideoAV1LoopRestoration.LOOPRESTORATIONSIZE + check(index, STD_VIDEO_AV1_MAX_NUM_PLANES) * 2, value);
     }
 
     // -----------------------------------

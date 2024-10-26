@@ -218,7 +218,7 @@ public class OVRGraphicsLuid extends Struct<OVRGraphicsLuid> implements NativeRe
     public static ByteBuffer nReserved(long struct) { return memByteBuffer(struct + OVRGraphicsLuid.RESERVED, 8); }
     /** Unsafe version of {@link #Reserved(int) Reserved}. */
     public static byte nReserved(long struct, int index) {
-        return UNSAFE.getByte(null, struct + OVRGraphicsLuid.RESERVED + check(index, 8) * 1);
+        return memGetByte(struct + OVRGraphicsLuid.RESERVED + check(index, 8) * 1);
     }
 
     // -----------------------------------

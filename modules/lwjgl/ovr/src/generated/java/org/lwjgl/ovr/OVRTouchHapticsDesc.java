@@ -238,17 +238,17 @@ public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #SampleRateHz}. */
-    public static int nSampleRateHz(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.SAMPLERATEHZ); }
+    public static int nSampleRateHz(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.SAMPLERATEHZ); }
     /** Unsafe version of {@link #SampleSizeInBytes}. */
-    public static int nSampleSizeInBytes(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.SAMPLESIZEINBYTES); }
+    public static int nSampleSizeInBytes(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.SAMPLESIZEINBYTES); }
     /** Unsafe version of {@link #QueueMinSizeToAvoidStarvation}. */
-    public static int nQueueMinSizeToAvoidStarvation(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.QUEUEMINSIZETOAVOIDSTARVATION); }
+    public static int nQueueMinSizeToAvoidStarvation(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.QUEUEMINSIZETOAVOIDSTARVATION); }
     /** Unsafe version of {@link #SubmitMinSamples}. */
-    public static int nSubmitMinSamples(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.SUBMITMINSAMPLES); }
+    public static int nSubmitMinSamples(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.SUBMITMINSAMPLES); }
     /** Unsafe version of {@link #SubmitMaxSamples}. */
-    public static int nSubmitMaxSamples(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.SUBMITMAXSAMPLES); }
+    public static int nSubmitMaxSamples(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.SUBMITMAXSAMPLES); }
     /** Unsafe version of {@link #SubmitOptimalSamples}. */
-    public static int nSubmitOptimalSamples(long struct) { return UNSAFE.getInt(null, struct + OVRTouchHapticsDesc.SUBMITOPTIMALSAMPLES); }
+    public static int nSubmitOptimalSamples(long struct) { return memGetInt(struct + OVRTouchHapticsDesc.SUBMITOPTIMALSAMPLES); }
 
     // -----------------------------------
 

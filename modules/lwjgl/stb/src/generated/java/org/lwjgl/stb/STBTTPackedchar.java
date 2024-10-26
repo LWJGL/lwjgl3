@@ -315,42 +315,42 @@ public class STBTTPackedchar extends Struct<STBTTPackedchar> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #x0}. */
-    public static short nx0(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.X0); }
+    public static short nx0(long struct) { return memGetShort(struct + STBTTPackedchar.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static short ny0(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.Y0); }
+    public static short ny0(long struct) { return memGetShort(struct + STBTTPackedchar.Y0); }
     /** Unsafe version of {@link #x1}. */
-    public static short nx1(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.X1); }
+    public static short nx1(long struct) { return memGetShort(struct + STBTTPackedchar.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static short ny1(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.Y1); }
+    public static short ny1(long struct) { return memGetShort(struct + STBTTPackedchar.Y1); }
     /** Unsafe version of {@link #xoff}. */
-    public static float nxoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XOFF); }
+    public static float nxoff(long struct) { return memGetFloat(struct + STBTTPackedchar.XOFF); }
     /** Unsafe version of {@link #yoff}. */
-    public static float nyoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.YOFF); }
+    public static float nyoff(long struct) { return memGetFloat(struct + STBTTPackedchar.YOFF); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XADVANCE); }
+    public static float nxadvance(long struct) { return memGetFloat(struct + STBTTPackedchar.XADVANCE); }
     /** Unsafe version of {@link #xoff2}. */
-    public static float nxoff2(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XOFF2); }
+    public static float nxoff2(long struct) { return memGetFloat(struct + STBTTPackedchar.XOFF2); }
     /** Unsafe version of {@link #yoff2}. */
-    public static float nyoff2(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.YOFF2); }
+    public static float nyoff2(long struct) { return memGetFloat(struct + STBTTPackedchar.YOFF2); }
 
     /** Unsafe version of {@link #x0(short) x0}. */
-    public static void nx0(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.X0, value); }
+    public static void nx0(long struct, short value) { memPutShort(struct + STBTTPackedchar.X0, value); }
     /** Unsafe version of {@link #y0(short) y0}. */
-    public static void ny0(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.Y0, value); }
+    public static void ny0(long struct, short value) { memPutShort(struct + STBTTPackedchar.Y0, value); }
     /** Unsafe version of {@link #x1(short) x1}. */
-    public static void nx1(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.X1, value); }
+    public static void nx1(long struct, short value) { memPutShort(struct + STBTTPackedchar.X1, value); }
     /** Unsafe version of {@link #y1(short) y1}. */
-    public static void ny1(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.Y1, value); }
+    public static void ny1(long struct, short value) { memPutShort(struct + STBTTPackedchar.Y1, value); }
     /** Unsafe version of {@link #xoff(float) xoff}. */
-    public static void nxoff(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XOFF, value); }
+    public static void nxoff(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XOFF, value); }
     /** Unsafe version of {@link #yoff(float) yoff}. */
-    public static void nyoff(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.YOFF, value); }
+    public static void nyoff(long struct, float value) { memPutFloat(struct + STBTTPackedchar.YOFF, value); }
     /** Unsafe version of {@link #xadvance(float) xadvance}. */
-    public static void nxadvance(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XADVANCE, value); }
+    public static void nxadvance(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XADVANCE, value); }
     /** Unsafe version of {@link #xoff2(float) xoff2}. */
-    public static void nxoff2(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XOFF2, value); }
+    public static void nxoff2(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XOFF2, value); }
     /** Unsafe version of {@link #yoff2(float) yoff2}. */
-    public static void nyoff2(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.YOFF2, value); }
+    public static void nyoff2(long struct, float value) { memPutFloat(struct + STBTTPackedchar.YOFF2, value); }
 
     // -----------------------------------
 

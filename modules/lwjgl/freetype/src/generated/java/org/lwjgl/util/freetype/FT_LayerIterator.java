@@ -207,9 +207,9 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #num_layers}. */
-    public static int nnum_layers(long struct) { return UNSAFE.getInt(null, struct + FT_LayerIterator.NUM_LAYERS); }
+    public static int nnum_layers(long struct) { return memGetInt(struct + FT_LayerIterator.NUM_LAYERS); }
     /** Unsafe version of {@link #layer}. */
-    public static int nlayer(long struct) { return UNSAFE.getInt(null, struct + FT_LayerIterator.LAYER); }
+    public static int nlayer(long struct) { return memGetInt(struct + FT_LayerIterator.LAYER); }
     /** Unsafe version of {@link #p(int) p}. */
     @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_LayerIterator.P), capacity); }
 

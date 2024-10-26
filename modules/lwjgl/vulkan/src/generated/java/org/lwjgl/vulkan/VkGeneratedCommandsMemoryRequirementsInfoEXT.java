@@ -303,30 +303,30 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.PNEXT); }
     /** Unsafe version of {@link #indirectExecutionSet}. */
-    public static long nindirectExecutionSet(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTEXECUTIONSET); }
+    public static long nindirectExecutionSet(long struct) { return memGetLong(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTEXECUTIONSET); }
     /** Unsafe version of {@link #indirectCommandsLayout}. */
-    public static long nindirectCommandsLayout(long struct) { return UNSAFE.getLong(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTCOMMANDSLAYOUT); }
+    public static long nindirectCommandsLayout(long struct) { return memGetLong(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTCOMMANDSLAYOUT); }
     /** Unsafe version of {@link #maxSequenceCount}. */
-    public static int nmaxSequenceCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXSEQUENCECOUNT); }
+    public static int nmaxSequenceCount(long struct) { return memGetInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXSEQUENCECOUNT); }
     /** Unsafe version of {@link #maxDrawCount}. */
-    public static int nmaxDrawCount(long struct) { return UNSAFE.getInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXDRAWCOUNT); }
+    public static int nmaxDrawCount(long struct) { return memGetInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXDRAWCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #indirectExecutionSet(long) indirectExecutionSet}. */
-    public static void nindirectExecutionSet(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTEXECUTIONSET, value); }
+    public static void nindirectExecutionSet(long struct, long value) { memPutLong(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTEXECUTIONSET, value); }
     /** Unsafe version of {@link #indirectCommandsLayout(long) indirectCommandsLayout}. */
-    public static void nindirectCommandsLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTCOMMANDSLAYOUT, value); }
+    public static void nindirectCommandsLayout(long struct, long value) { memPutLong(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.INDIRECTCOMMANDSLAYOUT, value); }
     /** Unsafe version of {@link #maxSequenceCount(int) maxSequenceCount}. */
-    public static void nmaxSequenceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXSEQUENCECOUNT, value); }
+    public static void nmaxSequenceCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXSEQUENCECOUNT, value); }
     /** Unsafe version of {@link #maxDrawCount(int) maxDrawCount}. */
-    public static void nmaxDrawCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXDRAWCOUNT, value); }
+    public static void nmaxDrawCount(long struct, int value) { memPutInt(struct + VkGeneratedCommandsMemoryRequirementsInfoEXT.MAXDRAWCOUNT, value); }
 
     // -----------------------------------
 

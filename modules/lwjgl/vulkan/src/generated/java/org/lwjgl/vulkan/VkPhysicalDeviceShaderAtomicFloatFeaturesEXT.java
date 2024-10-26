@@ -367,62 +367,62 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderBufferFloat32Atomics}. */
-    public static int nshaderBufferFloat32Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICS); }
+    public static int nshaderBufferFloat32Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICS); }
     /** Unsafe version of {@link #shaderBufferFloat32AtomicAdd}. */
-    public static int nshaderBufferFloat32AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICADD); }
+    public static int nshaderBufferFloat32AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICADD); }
     /** Unsafe version of {@link #shaderBufferFloat64Atomics}. */
-    public static int nshaderBufferFloat64Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICS); }
+    public static int nshaderBufferFloat64Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICS); }
     /** Unsafe version of {@link #shaderBufferFloat64AtomicAdd}. */
-    public static int nshaderBufferFloat64AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICADD); }
+    public static int nshaderBufferFloat64AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICADD); }
     /** Unsafe version of {@link #shaderSharedFloat32Atomics}. */
-    public static int nshaderSharedFloat32Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICS); }
+    public static int nshaderSharedFloat32Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICS); }
     /** Unsafe version of {@link #shaderSharedFloat32AtomicAdd}. */
-    public static int nshaderSharedFloat32AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICADD); }
+    public static int nshaderSharedFloat32AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICADD); }
     /** Unsafe version of {@link #shaderSharedFloat64Atomics}. */
-    public static int nshaderSharedFloat64Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICS); }
+    public static int nshaderSharedFloat64Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICS); }
     /** Unsafe version of {@link #shaderSharedFloat64AtomicAdd}. */
-    public static int nshaderSharedFloat64AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICADD); }
+    public static int nshaderSharedFloat64AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICADD); }
     /** Unsafe version of {@link #shaderImageFloat32Atomics}. */
-    public static int nshaderImageFloat32Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICS); }
+    public static int nshaderImageFloat32Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICS); }
     /** Unsafe version of {@link #shaderImageFloat32AtomicAdd}. */
-    public static int nshaderImageFloat32AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICADD); }
+    public static int nshaderImageFloat32AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICADD); }
     /** Unsafe version of {@link #sparseImageFloat32Atomics}. */
-    public static int nsparseImageFloat32Atomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICS); }
+    public static int nsparseImageFloat32Atomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICS); }
     /** Unsafe version of {@link #sparseImageFloat32AtomicAdd}. */
-    public static int nsparseImageFloat32AtomicAdd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICADD); }
+    public static int nsparseImageFloat32AtomicAdd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICADD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderBufferFloat32Atomics(boolean) shaderBufferFloat32Atomics}. */
-    public static void nshaderBufferFloat32Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICS, value); }
+    public static void nshaderBufferFloat32Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICS, value); }
     /** Unsafe version of {@link #shaderBufferFloat32AtomicAdd(boolean) shaderBufferFloat32AtomicAdd}. */
-    public static void nshaderBufferFloat32AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICADD, value); }
+    public static void nshaderBufferFloat32AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT32ATOMICADD, value); }
     /** Unsafe version of {@link #shaderBufferFloat64Atomics(boolean) shaderBufferFloat64Atomics}. */
-    public static void nshaderBufferFloat64Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICS, value); }
+    public static void nshaderBufferFloat64Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICS, value); }
     /** Unsafe version of {@link #shaderBufferFloat64AtomicAdd(boolean) shaderBufferFloat64AtomicAdd}. */
-    public static void nshaderBufferFloat64AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICADD, value); }
+    public static void nshaderBufferFloat64AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERBUFFERFLOAT64ATOMICADD, value); }
     /** Unsafe version of {@link #shaderSharedFloat32Atomics(boolean) shaderSharedFloat32Atomics}. */
-    public static void nshaderSharedFloat32Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICS, value); }
+    public static void nshaderSharedFloat32Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICS, value); }
     /** Unsafe version of {@link #shaderSharedFloat32AtomicAdd(boolean) shaderSharedFloat32AtomicAdd}. */
-    public static void nshaderSharedFloat32AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICADD, value); }
+    public static void nshaderSharedFloat32AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT32ATOMICADD, value); }
     /** Unsafe version of {@link #shaderSharedFloat64Atomics(boolean) shaderSharedFloat64Atomics}. */
-    public static void nshaderSharedFloat64Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICS, value); }
+    public static void nshaderSharedFloat64Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICS, value); }
     /** Unsafe version of {@link #shaderSharedFloat64AtomicAdd(boolean) shaderSharedFloat64AtomicAdd}. */
-    public static void nshaderSharedFloat64AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICADD, value); }
+    public static void nshaderSharedFloat64AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERSHAREDFLOAT64ATOMICADD, value); }
     /** Unsafe version of {@link #shaderImageFloat32Atomics(boolean) shaderImageFloat32Atomics}. */
-    public static void nshaderImageFloat32Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICS, value); }
+    public static void nshaderImageFloat32Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICS, value); }
     /** Unsafe version of {@link #shaderImageFloat32AtomicAdd(boolean) shaderImageFloat32AtomicAdd}. */
-    public static void nshaderImageFloat32AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICADD, value); }
+    public static void nshaderImageFloat32AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SHADERIMAGEFLOAT32ATOMICADD, value); }
     /** Unsafe version of {@link #sparseImageFloat32Atomics(boolean) sparseImageFloat32Atomics}. */
-    public static void nsparseImageFloat32Atomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICS, value); }
+    public static void nsparseImageFloat32Atomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICS, value); }
     /** Unsafe version of {@link #sparseImageFloat32AtomicAdd(boolean) sparseImageFloat32AtomicAdd}. */
-    public static void nsparseImageFloat32AtomicAdd(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICADD, value); }
+    public static void nsparseImageFloat32AtomicAdd(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.SPARSEIMAGEFLOAT32ATOMICADD, value); }
 
     // -----------------------------------
 

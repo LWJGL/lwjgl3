@@ -238,14 +238,14 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct<VkVideoDecodeCapabiliti
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeCapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeCapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeCapabilitiesKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoDecodeCapabilitiesKHR.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeCapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeCapabilitiesKHR.PNEXT, value); }
 

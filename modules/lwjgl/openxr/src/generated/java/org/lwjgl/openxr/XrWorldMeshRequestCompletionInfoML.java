@@ -261,22 +261,22 @@ public class XrWorldMeshRequestCompletionInfoML extends Struct<XrWorldMeshReques
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshRequestCompletionInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshRequestCompletionInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshRequestCompletionInfoML.NEXT); }
     /** Unsafe version of {@link #meshSpace}. */
     public static long nmeshSpace(long struct) { return memGetAddress(struct + XrWorldMeshRequestCompletionInfoML.MESHSPACE); }
     /** Unsafe version of {@link #meshSpaceLocateTime}. */
-    public static long nmeshSpaceLocateTime(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshRequestCompletionInfoML.MESHSPACELOCATETIME); }
+    public static long nmeshSpaceLocateTime(long struct) { return memGetLong(struct + XrWorldMeshRequestCompletionInfoML.MESHSPACELOCATETIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshRequestCompletionInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshRequestCompletionInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshRequestCompletionInfoML.NEXT, value); }
     /** Unsafe version of {@link #meshSpace(XrSpace) meshSpace}. */
     public static void nmeshSpace(long struct, XrSpace value) { memPutAddress(struct + XrWorldMeshRequestCompletionInfoML.MESHSPACE, value.address()); }
     /** Unsafe version of {@link #meshSpaceLocateTime(long) meshSpaceLocateTime}. */
-    public static void nmeshSpaceLocateTime(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshRequestCompletionInfoML.MESHSPACELOCATETIME, value); }
+    public static void nmeshSpaceLocateTime(long struct, long value) { memPutLong(struct + XrWorldMeshRequestCompletionInfoML.MESHSPACELOCATETIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

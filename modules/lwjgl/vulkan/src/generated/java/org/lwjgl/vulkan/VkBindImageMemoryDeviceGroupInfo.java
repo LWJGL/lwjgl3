@@ -321,28 +321,28 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct<VkBindImageMemoryDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PNEXT); }
     /** Unsafe version of {@link #deviceIndexCount}. */
-    public static int ndeviceIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
+    public static int ndeviceIndexCount(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
     /** Unsafe version of {@link #pDeviceIndices() pDeviceIndices}. */
     @Nullable public static IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PDEVICEINDICES), ndeviceIndexCount(struct)); }
     /** Unsafe version of {@link #splitInstanceBindRegionCount}. */
-    public static int nsplitInstanceBindRegionCount(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT); }
+    public static int nsplitInstanceBindRegionCount(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT); }
     /** Unsafe version of {@link #pSplitInstanceBindRegions}. */
     @Nullable public static VkRect2D.Buffer npSplitInstanceBindRegions(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PSPLITINSTANCEBINDREGIONS), nsplitInstanceBindRegionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PNEXT, value); }
     /** Sets the specified value to the {@code deviceIndexCount} field of the specified {@code struct}. */
-    public static void ndeviceIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
+    public static void ndeviceIndexCount(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
     /** Unsafe version of {@link #pDeviceIndices(IntBuffer) pDeviceIndices}. */
     public static void npDeviceIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PDEVICEINDICES, memAddressSafe(value)); ndeviceIndexCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code splitInstanceBindRegionCount} field of the specified {@code struct}. */
-    public static void nsplitInstanceBindRegionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT, value); }
+    public static void nsplitInstanceBindRegionCount(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT, value); }
     /** Unsafe version of {@link #pSplitInstanceBindRegions(VkRect2D.Buffer) pSplitInstanceBindRegions}. */
     public static void npSplitInstanceBindRegions(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PSPLITINSTANCEBINDREGIONS, memAddressSafe(value)); nsplitInstanceBindRegionCount(struct, value == null ? 0 : value.remaining()); }
 

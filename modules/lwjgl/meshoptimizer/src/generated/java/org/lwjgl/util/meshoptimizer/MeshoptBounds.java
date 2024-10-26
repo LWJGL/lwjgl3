@@ -240,32 +240,32 @@ public class MeshoptBounds extends Struct<MeshoptBounds> implements NativeResour
     public static FloatBuffer ncenter(long struct) { return memFloatBuffer(struct + MeshoptBounds.CENTER, 3); }
     /** Unsafe version of {@link #center(int) center}. */
     public static float ncenter(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + MeshoptBounds.CENTER + check(index, 3) * 4);
+        return memGetFloat(struct + MeshoptBounds.CENTER + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + MeshoptBounds.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + MeshoptBounds.RADIUS); }
     /** Unsafe version of {@link #cone_apex}. */
     public static FloatBuffer ncone_apex(long struct) { return memFloatBuffer(struct + MeshoptBounds.CONE_APEX, 3); }
     /** Unsafe version of {@link #cone_apex(int) cone_apex}. */
     public static float ncone_apex(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + MeshoptBounds.CONE_APEX + check(index, 3) * 4);
+        return memGetFloat(struct + MeshoptBounds.CONE_APEX + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #cone_axis}. */
     public static FloatBuffer ncone_axis(long struct) { return memFloatBuffer(struct + MeshoptBounds.CONE_AXIS, 3); }
     /** Unsafe version of {@link #cone_axis(int) cone_axis}. */
     public static float ncone_axis(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + MeshoptBounds.CONE_AXIS + check(index, 3) * 4);
+        return memGetFloat(struct + MeshoptBounds.CONE_AXIS + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #cone_cutoff}. */
-    public static float ncone_cutoff(long struct) { return UNSAFE.getFloat(null, struct + MeshoptBounds.CONE_CUTOFF); }
+    public static float ncone_cutoff(long struct) { return memGetFloat(struct + MeshoptBounds.CONE_CUTOFF); }
     /** Unsafe version of {@link #cone_axis_s8}. */
     public static ByteBuffer ncone_axis_s8(long struct) { return memByteBuffer(struct + MeshoptBounds.CONE_AXIS_S8, 3); }
     /** Unsafe version of {@link #cone_axis_s8(int) cone_axis_s8}. */
     public static byte ncone_axis_s8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + MeshoptBounds.CONE_AXIS_S8 + check(index, 3) * 1);
+        return memGetByte(struct + MeshoptBounds.CONE_AXIS_S8 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #cone_cutoff_s8}. */
-    public static byte ncone_cutoff_s8(long struct) { return UNSAFE.getByte(null, struct + MeshoptBounds.CONE_CUTOFF_S8); }
+    public static byte ncone_cutoff_s8(long struct) { return memGetByte(struct + MeshoptBounds.CONE_CUTOFF_S8); }
 
     // -----------------------------------
 

@@ -255,22 +255,22 @@ public class CUDA_CONDITIONAL_NODE_PARAMS extends Struct<CUDA_CONDITIONAL_NODE_P
     // -----------------------------------
 
     /** Unsafe version of {@link #handle}. */
-    public static long nhandle(long struct) { return UNSAFE.getLong(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.HANDLE); }
+    public static long nhandle(long struct) { return memGetLong(struct + CUDA_CONDITIONAL_NODE_PARAMS.HANDLE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUDA_CONDITIONAL_NODE_PARAMS.TYPE); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + CUDA_CONDITIONAL_NODE_PARAMS.SIZE); }
     /** Unsafe version of {@link #phGraph_out() phGraph_out}. */
     public static PointerBuffer nphGraph_out(long struct) { return memPointerBuffer(memGetAddress(struct + CUDA_CONDITIONAL_NODE_PARAMS.PHGRAPH_OUT), 1); }
     /** Unsafe version of {@link #ctx}. */
     public static long nctx(long struct) { return memGetAddress(struct + CUDA_CONDITIONAL_NODE_PARAMS.CTX); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
-    public static void nhandle(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.HANDLE, value); }
+    public static void nhandle(long struct, long value) { memPutLong(struct + CUDA_CONDITIONAL_NODE_PARAMS.HANDLE, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUDA_CONDITIONAL_NODE_PARAMS.TYPE, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_CONDITIONAL_NODE_PARAMS.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + CUDA_CONDITIONAL_NODE_PARAMS.SIZE, value); }
     /** Unsafe version of {@link #phGraph_out(PointerBuffer) phGraph_out}. */
     public static void nphGraph_out(long struct, PointerBuffer value) { memPutAddress(struct + CUDA_CONDITIONAL_NODE_PARAMS.PHGRAPH_OUT, memAddress(value)); }
     /** Unsafe version of {@link #ctx(long) ctx}. */

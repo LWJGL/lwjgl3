@@ -249,18 +249,18 @@ public class VkSamplerCubicWeightsCreateInfoQCOM extends Struct<VkSamplerCubicWe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCubicWeightsCreateInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerCubicWeightsCreateInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerCubicWeightsCreateInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #cubicWeights}. */
-    public static int ncubicWeights(long struct) { return UNSAFE.getInt(null, struct + VkSamplerCubicWeightsCreateInfoQCOM.CUBICWEIGHTS); }
+    public static int ncubicWeights(long struct) { return memGetInt(struct + VkSamplerCubicWeightsCreateInfoQCOM.CUBICWEIGHTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCubicWeightsCreateInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerCubicWeightsCreateInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerCubicWeightsCreateInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #cubicWeights(int) cubicWeights}. */
-    public static void ncubicWeights(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerCubicWeightsCreateInfoQCOM.CUBICWEIGHTS, value); }
+    public static void ncubicWeights(long struct, int value) { memPutInt(struct + VkSamplerCubicWeightsCreateInfoQCOM.CUBICWEIGHTS, value); }
 
     // -----------------------------------
 

@@ -272,23 +272,23 @@ public class OVRSessionStatus extends Struct<OVRSessionStatus> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #IsVisible}. */
-    public static boolean nIsVisible(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.ISVISIBLE) != 0; }
+    public static boolean nIsVisible(long struct) { return memGetByte(struct + OVRSessionStatus.ISVISIBLE) != 0; }
     /** Unsafe version of {@link #HmdPresent}. */
-    public static boolean nHmdPresent(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.HMDPRESENT) != 0; }
+    public static boolean nHmdPresent(long struct) { return memGetByte(struct + OVRSessionStatus.HMDPRESENT) != 0; }
     /** Unsafe version of {@link #HmdMounted}. */
-    public static boolean nHmdMounted(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.HMDMOUNTED) != 0; }
+    public static boolean nHmdMounted(long struct) { return memGetByte(struct + OVRSessionStatus.HMDMOUNTED) != 0; }
     /** Unsafe version of {@link #DisplayLost}. */
-    public static boolean nDisplayLost(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.DISPLAYLOST) != 0; }
+    public static boolean nDisplayLost(long struct) { return memGetByte(struct + OVRSessionStatus.DISPLAYLOST) != 0; }
     /** Unsafe version of {@link #ShouldQuit}. */
-    public static boolean nShouldQuit(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.SHOULDQUIT) != 0; }
+    public static boolean nShouldQuit(long struct) { return memGetByte(struct + OVRSessionStatus.SHOULDQUIT) != 0; }
     /** Unsafe version of {@link #ShouldRecenter}. */
-    public static boolean nShouldRecenter(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.SHOULDRECENTER) != 0; }
+    public static boolean nShouldRecenter(long struct) { return memGetByte(struct + OVRSessionStatus.SHOULDRECENTER) != 0; }
     /** Unsafe version of {@link #HasInputFocus}. */
-    public static boolean nHasInputFocus(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.HASINPUTFOCUS) != 0; }
+    public static boolean nHasInputFocus(long struct) { return memGetByte(struct + OVRSessionStatus.HASINPUTFOCUS) != 0; }
     /** Unsafe version of {@link #OverlayPresent}. */
-    public static boolean nOverlayPresent(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.OVERLAYPRESENT) != 0; }
+    public static boolean nOverlayPresent(long struct) { return memGetByte(struct + OVRSessionStatus.OVERLAYPRESENT) != 0; }
     /** Unsafe version of {@link #DepthRequested}. */
-    public static boolean nDepthRequested(long struct) { return UNSAFE.getByte(null, struct + OVRSessionStatus.DEPTHREQUESTED) != 0; }
+    public static boolean nDepthRequested(long struct) { return memGetByte(struct + OVRSessionStatus.DEPTHREQUESTED) != 0; }
 
     // -----------------------------------
 

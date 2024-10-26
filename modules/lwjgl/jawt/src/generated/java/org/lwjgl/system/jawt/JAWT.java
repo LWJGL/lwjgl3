@@ -207,7 +207,7 @@ public class JAWT extends Struct<JAWT> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + JAWT.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + JAWT.VERSION); }
     /** Unsafe version of {@link #GetDrawingSurface}. */
     public static long nGetDrawingSurface(long struct) { return memGetAddress(struct + JAWT.GETDRAWINGSURFACE); }
     /** Unsafe version of {@link #FreeDrawingSurface}. */
@@ -226,6 +226,6 @@ public class JAWT extends Struct<JAWT> implements NativeResource {
     public static long nSynthesizeWindowActivation(long struct) { return memGetAddress(struct + JAWT.SYNTHESIZEWINDOWACTIVATION); }
 
     /** Unsafe version of {@link #version(int) version}. */
-    public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + JAWT.VERSION, value); }
+    public static void nversion(long struct, int value) { memPutInt(struct + JAWT.VERSION, value); }
 
 }

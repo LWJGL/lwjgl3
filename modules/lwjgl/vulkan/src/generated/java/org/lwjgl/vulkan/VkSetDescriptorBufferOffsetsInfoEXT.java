@@ -334,34 +334,34 @@ public class VkSetDescriptorBufferOffsetsInfoEXT extends Struct<VkSetDescriptorB
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSetDescriptorBufferOffsetsInfoEXT.PNEXT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return memGetInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.STAGEFLAGS); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkSetDescriptorBufferOffsetsInfoEXT.LAYOUT); }
     /** Unsafe version of {@link #firstSet}. */
-    public static int nfirstSet(long struct) { return UNSAFE.getInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.FIRSTSET); }
+    public static int nfirstSet(long struct) { return memGetInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.FIRSTSET); }
     /** Unsafe version of {@link #setCount}. */
-    public static int nsetCount(long struct) { return UNSAFE.getInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.SETCOUNT); }
+    public static int nsetCount(long struct) { return memGetInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.SETCOUNT); }
     /** Unsafe version of {@link #pBufferIndices() pBufferIndices}. */
     public static IntBuffer npBufferIndices(long struct) { return memIntBuffer(memGetAddress(struct + VkSetDescriptorBufferOffsetsInfoEXT.PBUFFERINDICES), nsetCount(struct)); }
     /** Unsafe version of {@link #pOffsets() pOffsets}. */
     public static LongBuffer npOffsets(long struct) { return memLongBuffer(memGetAddress(struct + VkSetDescriptorBufferOffsetsInfoEXT.POFFSETS), nsetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSetDescriptorBufferOffsetsInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.STAGEFLAGS, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkSetDescriptorBufferOffsetsInfoEXT.LAYOUT, value); }
     /** Unsafe version of {@link #firstSet(int) firstSet}. */
-    public static void nfirstSet(long struct, int value) { UNSAFE.putInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.FIRSTSET, value); }
+    public static void nfirstSet(long struct, int value) { memPutInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.FIRSTSET, value); }
     /** Sets the specified value to the {@code setCount} field of the specified {@code struct}. */
-    public static void nsetCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSetDescriptorBufferOffsetsInfoEXT.SETCOUNT, value); }
+    public static void nsetCount(long struct, int value) { memPutInt(struct + VkSetDescriptorBufferOffsetsInfoEXT.SETCOUNT, value); }
     /** Unsafe version of {@link #pBufferIndices(IntBuffer) pBufferIndices}. */
     public static void npBufferIndices(long struct, IntBuffer value) { memPutAddress(struct + VkSetDescriptorBufferOffsetsInfoEXT.PBUFFERINDICES, memAddress(value)); }
     /** Unsafe version of {@link #pOffsets(LongBuffer) pOffsets}. */

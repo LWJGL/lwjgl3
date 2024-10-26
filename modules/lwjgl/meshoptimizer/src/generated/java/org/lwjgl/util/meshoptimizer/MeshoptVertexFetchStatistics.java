@@ -193,9 +193,9 @@ public class MeshoptVertexFetchStatistics extends Struct<MeshoptVertexFetchStati
     // -----------------------------------
 
     /** Unsafe version of {@link #bytes_fetched}. */
-    public static int nbytes_fetched(long struct) { return UNSAFE.getInt(null, struct + MeshoptVertexFetchStatistics.BYTES_FETCHED); }
+    public static int nbytes_fetched(long struct) { return memGetInt(struct + MeshoptVertexFetchStatistics.BYTES_FETCHED); }
     /** Unsafe version of {@link #overfetch}. */
-    public static float noverfetch(long struct) { return UNSAFE.getFloat(null, struct + MeshoptVertexFetchStatistics.OVERFETCH); }
+    public static float noverfetch(long struct) { return memGetFloat(struct + MeshoptVertexFetchStatistics.OVERFETCH); }
 
     // -----------------------------------
 

@@ -253,18 +253,18 @@ public class XrCompositionLayerReprojectionInfoMSFT extends Struct<XrComposition
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerReprojectionInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerReprojectionInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerReprojectionInfoMSFT.NEXT); }
     /** Unsafe version of {@link #reprojectionMode}. */
-    public static int nreprojectionMode(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerReprojectionInfoMSFT.REPROJECTIONMODE); }
+    public static int nreprojectionMode(long struct) { return memGetInt(struct + XrCompositionLayerReprojectionInfoMSFT.REPROJECTIONMODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerReprojectionInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerReprojectionInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerReprojectionInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #reprojectionMode(int) reprojectionMode}. */
-    public static void nreprojectionMode(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerReprojectionInfoMSFT.REPROJECTIONMODE, value); }
+    public static void nreprojectionMode(long struct, int value) { memPutInt(struct + XrCompositionLayerReprojectionInfoMSFT.REPROJECTIONMODE, value); }
 
     // -----------------------------------
 

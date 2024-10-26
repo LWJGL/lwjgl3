@@ -359,32 +359,32 @@ public class VkCopyMemoryToImageInfoEXT extends Struct<VkCopyMemoryToImageInfoEX
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToImageInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCopyMemoryToImageInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCopyMemoryToImageInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToImageInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkCopyMemoryToImageInfoEXT.FLAGS); }
     /** Unsafe version of {@link #dstImage}. */
-    public static long ndstImage(long struct) { return UNSAFE.getLong(null, struct + VkCopyMemoryToImageInfoEXT.DSTIMAGE); }
+    public static long ndstImage(long struct) { return memGetLong(struct + VkCopyMemoryToImageInfoEXT.DSTIMAGE); }
     /** Unsafe version of {@link #dstImageLayout}. */
-    public static int ndstImageLayout(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToImageInfoEXT.DSTIMAGELAYOUT); }
+    public static int ndstImageLayout(long struct) { return memGetInt(struct + VkCopyMemoryToImageInfoEXT.DSTIMAGELAYOUT); }
     /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkCopyMemoryToImageInfoEXT.REGIONCOUNT); }
+    public static int nregionCount(long struct) { return memGetInt(struct + VkCopyMemoryToImageInfoEXT.REGIONCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     public static VkMemoryToImageCopyEXT.Buffer npRegions(long struct) { return VkMemoryToImageCopyEXT.create(memGetAddress(struct + VkCopyMemoryToImageInfoEXT.PREGIONS), nregionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToImageInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCopyMemoryToImageInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToImageInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #dstImage(long) dstImage}. */
-    public static void ndstImage(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyMemoryToImageInfoEXT.DSTIMAGE, value); }
+    public static void ndstImage(long struct, long value) { memPutLong(struct + VkCopyMemoryToImageInfoEXT.DSTIMAGE, value); }
     /** Unsafe version of {@link #dstImageLayout(int) dstImageLayout}. */
-    public static void ndstImageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToImageInfoEXT.DSTIMAGELAYOUT, value); }
+    public static void ndstImageLayout(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageInfoEXT.DSTIMAGELAYOUT, value); }
     /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyMemoryToImageInfoEXT.REGIONCOUNT, value); }
+    public static void nregionCount(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageInfoEXT.REGIONCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkMemoryToImageCopyEXT.Buffer) pRegions}. */
     public static void npRegions(long struct, VkMemoryToImageCopyEXT.Buffer value) { memPutAddress(struct + VkCopyMemoryToImageInfoEXT.PREGIONS, value.address()); nregionCount(struct, value.remaining()); }
 

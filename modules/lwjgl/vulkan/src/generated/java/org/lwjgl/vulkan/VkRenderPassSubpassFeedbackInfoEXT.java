@@ -127,13 +127,13 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct<VkRenderPassSubpa
     // -----------------------------------
 
     /** Unsafe version of {@link #subpassMergeStatus}. */
-    public static int nsubpassMergeStatus(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassSubpassFeedbackInfoEXT.SUBPASSMERGESTATUS); }
+    public static int nsubpassMergeStatus(long struct) { return memGetInt(struct + VkRenderPassSubpassFeedbackInfoEXT.SUBPASSMERGESTATUS); }
     /** Unsafe version of {@link #description}. */
     public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + VkRenderPassSubpassFeedbackInfoEXT.DESCRIPTION, VK_MAX_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkRenderPassSubpassFeedbackInfoEXT.DESCRIPTION); }
     /** Unsafe version of {@link #postMergeIndex}. */
-    public static int npostMergeIndex(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassSubpassFeedbackInfoEXT.POSTMERGEINDEX); }
+    public static int npostMergeIndex(long struct) { return memGetInt(struct + VkRenderPassSubpassFeedbackInfoEXT.POSTMERGEINDEX); }
 
     // -----------------------------------
 

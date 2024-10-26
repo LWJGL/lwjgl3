@@ -283,28 +283,28 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkTimelineSemaphoreSubmitInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PNEXT); }
     /** Unsafe version of {@link #waitSemaphoreValueCount}. */
-    public static int nwaitSemaphoreValueCount(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfo.WAITSEMAPHOREVALUECOUNT); }
+    public static int nwaitSemaphoreValueCount(long struct) { return memGetInt(struct + VkTimelineSemaphoreSubmitInfo.WAITSEMAPHOREVALUECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphoreValues() pWaitSemaphoreValues}. */
     @Nullable public static LongBuffer npWaitSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PWAITSEMAPHOREVALUES), nwaitSemaphoreValueCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreValueCount}. */
-    public static int nsignalSemaphoreValueCount(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfo.SIGNALSEMAPHOREVALUECOUNT); }
+    public static int nsignalSemaphoreValueCount(long struct) { return memGetInt(struct + VkTimelineSemaphoreSubmitInfo.SIGNALSEMAPHOREVALUECOUNT); }
     /** Unsafe version of {@link #pSignalSemaphoreValues() pSignalSemaphoreValues}. */
     @Nullable public static LongBuffer npSignalSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PSIGNALSEMAPHOREVALUES), nsignalSemaphoreValueCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkTimelineSemaphoreSubmitInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfo.PNEXT, value); }
     /** Sets the specified value to the {@code waitSemaphoreValueCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfo.WAITSEMAPHOREVALUECOUNT, value); }
+    public static void nwaitSemaphoreValueCount(long struct, int value) { memPutInt(struct + VkTimelineSemaphoreSubmitInfo.WAITSEMAPHOREVALUECOUNT, value); }
     /** Unsafe version of {@link #pWaitSemaphoreValues(LongBuffer) pWaitSemaphoreValues}. */
     public static void npWaitSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfo.PWAITSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nwaitSemaphoreValueCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code signalSemaphoreValueCount} field of the specified {@code struct}. */
-    public static void nsignalSemaphoreValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfo.SIGNALSEMAPHOREVALUECOUNT, value); }
+    public static void nsignalSemaphoreValueCount(long struct, int value) { memPutInt(struct + VkTimelineSemaphoreSubmitInfo.SIGNALSEMAPHOREVALUECOUNT, value); }
     /** Unsafe version of {@link #pSignalSemaphoreValues(LongBuffer) pSignalSemaphoreValues}. */
     public static void npSignalSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfo.PSIGNALSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nsignalSemaphoreValueCount(struct, value.remaining()); } }
 

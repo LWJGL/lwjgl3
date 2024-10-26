@@ -173,27 +173,27 @@ public class hwloc_topology_cpubind_support extends Struct<hwloc_topology_cpubin
     // -----------------------------------
 
     /** Unsafe version of {@link #set_thisproc_cpubind}. */
-    public static boolean nset_thisproc_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.SET_THISPROC_CPUBIND) != 0; }
+    public static boolean nset_thisproc_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.SET_THISPROC_CPUBIND) != 0; }
     /** Unsafe version of {@link #get_thisproc_cpubind}. */
-    public static boolean nget_thisproc_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_THISPROC_CPUBIND) != 0; }
+    public static boolean nget_thisproc_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_THISPROC_CPUBIND) != 0; }
     /** Unsafe version of {@link #set_proc_cpubind}. */
-    public static boolean nset_proc_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.SET_PROC_CPUBIND) != 0; }
+    public static boolean nset_proc_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.SET_PROC_CPUBIND) != 0; }
     /** Unsafe version of {@link #get_proc_cpubind}. */
-    public static boolean nget_proc_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_PROC_CPUBIND) != 0; }
+    public static boolean nget_proc_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_PROC_CPUBIND) != 0; }
     /** Unsafe version of {@link #set_thisthread_cpubind}. */
-    public static boolean nset_thisthread_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.SET_THISTHREAD_CPUBIND) != 0; }
+    public static boolean nset_thisthread_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.SET_THISTHREAD_CPUBIND) != 0; }
     /** Unsafe version of {@link #get_thisthread_cpubind}. */
-    public static boolean nget_thisthread_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_THISTHREAD_CPUBIND) != 0; }
+    public static boolean nget_thisthread_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_THISTHREAD_CPUBIND) != 0; }
     /** Unsafe version of {@link #set_thread_cpubind}. */
-    public static boolean nset_thread_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.SET_THREAD_CPUBIND) != 0; }
+    public static boolean nset_thread_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.SET_THREAD_CPUBIND) != 0; }
     /** Unsafe version of {@link #get_thread_cpubind}. */
-    public static boolean nget_thread_cpubind(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_THREAD_CPUBIND) != 0; }
+    public static boolean nget_thread_cpubind(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_THREAD_CPUBIND) != 0; }
     /** Unsafe version of {@link #get_thisproc_last_cpu_location}. */
-    public static boolean nget_thisproc_last_cpu_location(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_THISPROC_LAST_CPU_LOCATION) != 0; }
+    public static boolean nget_thisproc_last_cpu_location(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_THISPROC_LAST_CPU_LOCATION) != 0; }
     /** Unsafe version of {@link #get_proc_last_cpu_location}. */
-    public static boolean nget_proc_last_cpu_location(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_PROC_LAST_CPU_LOCATION) != 0; }
+    public static boolean nget_proc_last_cpu_location(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_PROC_LAST_CPU_LOCATION) != 0; }
     /** Unsafe version of {@link #get_thisthread_last_cpu_location}. */
-    public static boolean nget_thisthread_last_cpu_location(long struct) { return UNSAFE.getByte(null, struct + hwloc_topology_cpubind_support.GET_THISTHREAD_LAST_CPU_LOCATION) != 0; }
+    public static boolean nget_thisthread_last_cpu_location(long struct) { return memGetByte(struct + hwloc_topology_cpubind_support.GET_THISTHREAD_LAST_CPU_LOCATION) != 0; }
 
     // -----------------------------------
 

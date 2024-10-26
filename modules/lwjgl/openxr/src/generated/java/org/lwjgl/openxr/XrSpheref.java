@@ -233,12 +233,12 @@ public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
     /** Unsafe version of {@link #center}. */
     public static XrPosef ncenter(long struct) { return XrPosef.create(struct + XrSpheref.CENTER); }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + XrSpheref.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + XrSpheref.RADIUS); }
 
     /** Unsafe version of {@link #center(XrPosef) center}. */
     public static void ncenter(long struct, XrPosef value) { memCopy(value.address(), struct + XrSpheref.CENTER, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + XrSpheref.RADIUS, value); }
+    public static void nradius(long struct, float value) { memPutFloat(struct + XrSpheref.RADIUS, value); }
 
     // -----------------------------------
 

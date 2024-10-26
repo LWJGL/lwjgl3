@@ -311,15 +311,15 @@ public class VkPhysicalDeviceProperties extends Struct<VkPhysicalDevicePropertie
     // -----------------------------------
 
     /** Unsafe version of {@link #apiVersion}. */
-    public static int napiVersion(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProperties.APIVERSION); }
+    public static int napiVersion(long struct) { return memGetInt(struct + VkPhysicalDeviceProperties.APIVERSION); }
     /** Unsafe version of {@link #driverVersion}. */
-    public static int ndriverVersion(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProperties.DRIVERVERSION); }
+    public static int ndriverVersion(long struct) { return memGetInt(struct + VkPhysicalDeviceProperties.DRIVERVERSION); }
     /** Unsafe version of {@link #vendorID}. */
-    public static int nvendorID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProperties.VENDORID); }
+    public static int nvendorID(long struct) { return memGetInt(struct + VkPhysicalDeviceProperties.VENDORID); }
     /** Unsafe version of {@link #deviceID}. */
-    public static int ndeviceID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProperties.DEVICEID); }
+    public static int ndeviceID(long struct) { return memGetInt(struct + VkPhysicalDeviceProperties.DEVICEID); }
     /** Unsafe version of {@link #deviceType}. */
-    public static int ndeviceType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProperties.DEVICETYPE); }
+    public static int ndeviceType(long struct) { return memGetInt(struct + VkPhysicalDeviceProperties.DEVICETYPE); }
     /** Unsafe version of {@link #deviceName}. */
     public static ByteBuffer ndeviceName(long struct) { return memByteBuffer(struct + VkPhysicalDeviceProperties.DEVICENAME, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE); }
     /** Unsafe version of {@link #deviceNameString}. */
@@ -328,7 +328,7 @@ public class VkPhysicalDeviceProperties extends Struct<VkPhysicalDevicePropertie
     public static ByteBuffer npipelineCacheUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceProperties.PIPELINECACHEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #pipelineCacheUUID(int) pipelineCacheUUID}. */
     public static byte npipelineCacheUUID(long struct, int index) {
-        return UNSAFE.getByte(null, struct + VkPhysicalDeviceProperties.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
+        return memGetByte(struct + VkPhysicalDeviceProperties.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #limits}. */
     public static VkPhysicalDeviceLimits nlimits(long struct) { return VkPhysicalDeviceLimits.create(struct + VkPhysicalDeviceProperties.LIMITS); }

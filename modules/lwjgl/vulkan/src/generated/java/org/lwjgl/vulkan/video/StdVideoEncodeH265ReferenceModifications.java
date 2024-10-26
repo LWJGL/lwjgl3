@@ -313,44 +313,44 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH265ReferenceModificationFlags nflags(long struct) { return StdVideoEncodeH265ReferenceModificationFlags.create(struct + StdVideoEncodeH265ReferenceModifications.FLAGS); }
     /** Unsafe version of {@link #num_ref_idx_l0_active_minus1}. */
-    public static byte nnum_ref_idx_l0_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1); }
+    public static byte nnum_ref_idx_l0_active_minus1(long struct) { return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1); }
     /** Unsafe version of {@link #num_ref_idx_l1_active_minus1}. */
-    public static byte nnum_ref_idx_l1_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1); }
+    public static byte nnum_ref_idx_l1_active_minus1(long struct) { return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1); }
     /** Unsafe version of {@link #reserved1}. */
-    public static short nreserved1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265ReferenceModifications.RESERVED1); }
+    public static short nreserved1(long struct) { return memGetShort(struct + StdVideoEncodeH265ReferenceModifications.RESERVED1); }
     /** Unsafe version of {@link #RefPicList0}. */
     public static ByteBuffer nRefPicList0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST0, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #RefPicList0(int) RefPicList0}. */
     public static byte nRefPicList0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #RefPicList1}. */
     public static ByteBuffer nRefPicList1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST1, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #RefPicList1(int) RefPicList1}. */
     public static byte nRefPicList1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #list_entry_l0}. */
     public static ByteBuffer nlist_entry_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L0, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #list_entry_l0(int) list_entry_l0}. */
     public static byte nlist_entry_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #list_entry_l1}. */
     public static ByteBuffer nlist_entry_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L1, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #list_entry_l1(int) list_entry_l1}. */
     public static byte nlist_entry_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH265ReferenceModificationFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH265ReferenceModificationFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265ReferenceModifications.FLAGS, StdVideoEncodeH265ReferenceModificationFlags.SIZEOF); }
     /** Unsafe version of {@link #num_ref_idx_l0_active_minus1(byte) num_ref_idx_l0_active_minus1}. */
-    public static void nnum_ref_idx_l0_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1, value); }
+    public static void nnum_ref_idx_l0_active_minus1(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1, value); }
     /** Unsafe version of {@link #num_ref_idx_l1_active_minus1(byte) num_ref_idx_l1_active_minus1}. */
-    public static void nnum_ref_idx_l1_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1, value); }
+    public static void nnum_ref_idx_l1_active_minus1(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1, value); }
     /** Unsafe version of {@link #reserved1(short) reserved1}. */
-    public static void nreserved1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265ReferenceModifications.RESERVED1, value); }
+    public static void nreserved1(long struct, short value) { memPutShort(struct + StdVideoEncodeH265ReferenceModifications.RESERVED1, value); }
     /** Unsafe version of {@link #RefPicList0(ByteBuffer) RefPicList0}. */
     public static void nRefPicList0(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
@@ -358,7 +358,7 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
     }
     /** Unsafe version of {@link #RefPicList0(int, byte) RefPicList0}. */
     public static void nRefPicList0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #RefPicList1(ByteBuffer) RefPicList1}. */
     public static void nRefPicList1(long struct, ByteBuffer value) {
@@ -367,7 +367,7 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
     }
     /** Unsafe version of {@link #RefPicList1(int, byte) RefPicList1}. */
     public static void nRefPicList1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265ReferenceModifications.REFPICLIST1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #list_entry_l0(ByteBuffer) list_entry_l0}. */
     public static void nlist_entry_l0(long struct, ByteBuffer value) {
@@ -376,7 +376,7 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
     }
     /** Unsafe version of {@link #list_entry_l0(int, byte) list_entry_l0}. */
     public static void nlist_entry_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #list_entry_l1(ByteBuffer) list_entry_l1}. */
     public static void nlist_entry_l1(long struct, ByteBuffer value) {
@@ -385,7 +385,7 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
     }
     /** Unsafe version of {@link #list_entry_l1(int, byte) list_entry_l1}. */
     public static void nlist_entry_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265ReferenceModifications.LIST_ENTRY_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
 
     // -----------------------------------

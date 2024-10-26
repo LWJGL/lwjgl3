@@ -279,30 +279,30 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #descriptorBuffer}. */
-    public static int ndescriptorBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFER); }
+    public static int ndescriptorBuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFER); }
     /** Unsafe version of {@link #descriptorBufferCaptureReplay}. */
-    public static int ndescriptorBufferCaptureReplay(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERCAPTUREREPLAY); }
+    public static int ndescriptorBufferCaptureReplay(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERCAPTUREREPLAY); }
     /** Unsafe version of {@link #descriptorBufferImageLayoutIgnored}. */
-    public static int ndescriptorBufferImageLayoutIgnored(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERIMAGELAYOUTIGNORED); }
+    public static int ndescriptorBufferImageLayoutIgnored(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERIMAGELAYOUTIGNORED); }
     /** Unsafe version of {@link #descriptorBufferPushDescriptors}. */
-    public static int ndescriptorBufferPushDescriptors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERPUSHDESCRIPTORS); }
+    public static int ndescriptorBufferPushDescriptors(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERPUSHDESCRIPTORS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #descriptorBuffer(boolean) descriptorBuffer}. */
-    public static void ndescriptorBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFER, value); }
+    public static void ndescriptorBuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFER, value); }
     /** Unsafe version of {@link #descriptorBufferCaptureReplay(boolean) descriptorBufferCaptureReplay}. */
-    public static void ndescriptorBufferCaptureReplay(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERCAPTUREREPLAY, value); }
+    public static void ndescriptorBufferCaptureReplay(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERCAPTUREREPLAY, value); }
     /** Unsafe version of {@link #descriptorBufferImageLayoutIgnored(boolean) descriptorBufferImageLayoutIgnored}. */
-    public static void ndescriptorBufferImageLayoutIgnored(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERIMAGELAYOUTIGNORED, value); }
+    public static void ndescriptorBufferImageLayoutIgnored(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERIMAGELAYOUTIGNORED, value); }
     /** Unsafe version of {@link #descriptorBufferPushDescriptors(boolean) descriptorBufferPushDescriptors}. */
-    public static void ndescriptorBufferPushDescriptors(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERPUSHDESCRIPTORS, value); }
+    public static void ndescriptorBufferPushDescriptors(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorBufferFeaturesEXT.DESCRIPTORBUFFERPUSHDESCRIPTORS, value); }
 
     // -----------------------------------
 

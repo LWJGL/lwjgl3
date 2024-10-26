@@ -110,9 +110,9 @@ public class VREventScreenshot extends Struct<VREventScreenshot> {
     // -----------------------------------
 
     /** Unsafe version of {@link #handle}. */
-    public static int nhandle(long struct) { return UNSAFE.getInt(null, struct + VREventScreenshot.HANDLE); }
+    public static int nhandle(long struct) { return memGetInt(struct + VREventScreenshot.HANDLE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VREventScreenshot.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VREventScreenshot.TYPE); }
 
     // -----------------------------------
 

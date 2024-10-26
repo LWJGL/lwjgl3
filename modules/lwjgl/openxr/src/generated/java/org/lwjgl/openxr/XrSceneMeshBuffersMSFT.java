@@ -237,12 +237,12 @@ public class XrSceneMeshBuffersMSFT extends Struct<XrSceneMeshBuffersMSFT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMeshBuffersMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMeshBuffersMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMeshBuffersMSFT.NEXT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshBuffersMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMeshBuffersMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshBuffersMSFT.NEXT, value); }
 

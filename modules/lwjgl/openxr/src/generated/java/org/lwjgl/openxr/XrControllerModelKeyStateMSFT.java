@@ -256,18 +256,18 @@ public class XrControllerModelKeyStateMSFT extends Struct<XrControllerModelKeySt
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrControllerModelKeyStateMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrControllerModelKeyStateMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrControllerModelKeyStateMSFT.NEXT); }
     /** Unsafe version of {@link #modelKey}. */
-    public static long nmodelKey(long struct) { return UNSAFE.getLong(null, struct + XrControllerModelKeyStateMSFT.MODELKEY); }
+    public static long nmodelKey(long struct) { return memGetLong(struct + XrControllerModelKeyStateMSFT.MODELKEY); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelKeyStateMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrControllerModelKeyStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelKeyStateMSFT.NEXT, value); }
     /** Unsafe version of {@link #modelKey(long) modelKey}. */
-    public static void nmodelKey(long struct, long value) { UNSAFE.putLong(null, struct + XrControllerModelKeyStateMSFT.MODELKEY, value); }
+    public static void nmodelKey(long struct, long value) { memPutLong(struct + XrControllerModelKeyStateMSFT.MODELKEY, value); }
 
     // -----------------------------------
 

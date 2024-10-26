@@ -257,18 +257,18 @@ public class VkVideoEncodeQualityLevelInfoKHR extends Struct<VkVideoEncodeQualit
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeQualityLevelInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeQualityLevelInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeQualityLevelInfoKHR.PNEXT); }
     /** Unsafe version of {@link #qualityLevel}. */
-    public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL); }
+    public static int nqualityLevel(long struct) { return memGetInt(struct + VkVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeQualityLevelInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeQualityLevelInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeQualityLevelInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
-    public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL, value); }
+    public static void nqualityLevel(long struct, int value) { memPutInt(struct + VkVideoEncodeQualityLevelInfoKHR.QUALITYLEVEL, value); }
 
     // -----------------------------------
 

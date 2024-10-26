@@ -116,9 +116,9 @@ public class XTimeCoord extends Struct<XTimeCoord> {
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetCLong(struct + XTimeCoord.TIME); }
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + XTimeCoord.X); }
+    public static short nx(long struct) { return memGetShort(struct + XTimeCoord.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return UNSAFE.getShort(null, struct + XTimeCoord.Y); }
+    public static short ny(long struct) { return memGetShort(struct + XTimeCoord.Y); }
 
     // -----------------------------------
 

@@ -265,22 +265,22 @@ public class JAWTRectangle extends Struct<JAWTRectangle> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + JAWTRectangle.X); }
+    public static int nx(long struct) { return memGetInt(struct + JAWTRectangle.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + JAWTRectangle.Y); }
+    public static int ny(long struct) { return memGetInt(struct + JAWTRectangle.Y); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + JAWTRectangle.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + JAWTRectangle.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + JAWTRectangle.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + JAWTRectangle.HEIGHT); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + JAWTRectangle.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + JAWTRectangle.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + JAWTRectangle.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + JAWTRectangle.Y, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + JAWTRectangle.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + JAWTRectangle.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + JAWTRectangle.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + JAWTRectangle.HEIGHT, value); }
 
     // -----------------------------------
 

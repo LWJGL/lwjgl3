@@ -168,27 +168,27 @@ public class NkEditState extends Struct<NkEditState> {
     // -----------------------------------
 
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkEditState.NAME); }
+    public static int nname(long struct) { return memGetInt(struct + NkEditState.NAME); }
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEQ); }
+    public static int nseq(long struct) { return memGetInt(struct + NkEditState.SEQ); }
     /** Unsafe version of {@link #old}. */
-    public static int nold(long struct) { return UNSAFE.getInt(null, struct + NkEditState.OLD); }
+    public static int nold(long struct) { return memGetInt(struct + NkEditState.OLD); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkEditState.ACTIVE); }
+    public static int nactive(long struct) { return memGetInt(struct + NkEditState.ACTIVE); }
     /** Unsafe version of {@link #prev}. */
-    public static int nprev(long struct) { return UNSAFE.getInt(null, struct + NkEditState.PREV); }
+    public static int nprev(long struct) { return memGetInt(struct + NkEditState.PREV); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkEditState.CURSOR); }
+    public static int ncursor(long struct) { return memGetInt(struct + NkEditState.CURSOR); }
     /** Unsafe version of {@link #sel_start}. */
-    public static int nsel_start(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEL_START); }
+    public static int nsel_start(long struct) { return memGetInt(struct + NkEditState.SEL_START); }
     /** Unsafe version of {@link #sel_end}. */
-    public static int nsel_end(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEL_END); }
+    public static int nsel_end(long struct) { return memGetInt(struct + NkEditState.SEL_END); }
     /** Unsafe version of {@link #scrollbar}. */
     public static NkScroll nscrollbar(long struct) { return NkScroll.create(struct + NkEditState.SCROLLBAR); }
     /** Unsafe version of {@link #mode}. */
-    public static byte nmode(long struct) { return UNSAFE.getByte(null, struct + NkEditState.MODE); }
+    public static byte nmode(long struct) { return memGetByte(struct + NkEditState.MODE); }
     /** Unsafe version of {@link #single_line}. */
-    public static boolean nsingle_line(long struct) { return UNSAFE.getByte(null, struct + NkEditState.SINGLE_LINE) != 0; }
+    public static boolean nsingle_line(long struct) { return memGetByte(struct + NkEditState.SINGLE_LINE) != 0; }
 
     // -----------------------------------
 

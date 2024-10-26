@@ -281,7 +281,7 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NEXT); }
     /** Unsafe version of {@link #position$}. */
@@ -292,7 +292,7 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     public static XrVector3f nvelocity(long struct) { return XrVector3f.create(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.VELOCITY); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NEXT, value); }
     /** Unsafe version of {@link #position$(XrVector3f) position$}. */

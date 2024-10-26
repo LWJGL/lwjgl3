@@ -298,7 +298,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + FT_Open_Args.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + FT_Open_Args.FLAGS); }
     /** Unsafe version of {@link #memory_base() memory_base}. */
     @Nullable public static ByteBuffer nmemory_base(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_Open_Args.MEMORY_BASE), (int)nmemory_size(struct)); }
     /** Unsafe version of {@link #memory_size}. */
@@ -312,12 +312,12 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     /** Unsafe version of {@link #driver}. */
     public static long ndriver(long struct) { return memGetAddress(struct + FT_Open_Args.DRIVER); }
     /** Unsafe version of {@link #num_params}. */
-    public static int nnum_params(long struct) { return UNSAFE.getInt(null, struct + FT_Open_Args.NUM_PARAMS); }
+    public static int nnum_params(long struct) { return memGetInt(struct + FT_Open_Args.NUM_PARAMS); }
     /** Unsafe version of {@link #params}. */
     @Nullable public static FT_Parameter.Buffer nparams(long struct) { return FT_Parameter.createSafe(memGetAddress(struct + FT_Open_Args.PARAMS), nnum_params(struct)); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + FT_Open_Args.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + FT_Open_Args.FLAGS, value); }
     /** Unsafe version of {@link #memory_base(ByteBuffer) memory_base}. */
     public static void nmemory_base(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Open_Args.MEMORY_BASE, memAddressSafe(value)); nmemory_size(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code memory_size} field of the specified {@code struct}. */
@@ -332,7 +332,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     /** Unsafe version of {@link #driver(long) driver}. */
     public static void ndriver(long struct, long value) { memPutAddress(struct + FT_Open_Args.DRIVER, value); }
     /** Sets the specified value to the {@code num_params} field of the specified {@code struct}. */
-    public static void nnum_params(long struct, int value) { UNSAFE.putInt(null, struct + FT_Open_Args.NUM_PARAMS, value); }
+    public static void nnum_params(long struct, int value) { memPutInt(struct + FT_Open_Args.NUM_PARAMS, value); }
     /** Unsafe version of {@link #params(FT_Parameter.Buffer) params}. */
     public static void nparams(long struct, @Nullable FT_Parameter.Buffer value) { memPutAddress(struct + FT_Open_Args.PARAMS, memAddressSafe(value)); nnum_params(struct, value == null ? 0 : value.remaining()); }
 

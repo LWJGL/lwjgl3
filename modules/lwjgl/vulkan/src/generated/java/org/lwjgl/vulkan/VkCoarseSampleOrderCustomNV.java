@@ -289,20 +289,20 @@ public class VkCoarseSampleOrderCustomNV extends Struct<VkCoarseSampleOrderCusto
     // -----------------------------------
 
     /** Unsafe version of {@link #shadingRate}. */
-    public static int nshadingRate(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleOrderCustomNV.SHADINGRATE); }
+    public static int nshadingRate(long struct) { return memGetInt(struct + VkCoarseSampleOrderCustomNV.SHADINGRATE); }
     /** Unsafe version of {@link #sampleCount}. */
-    public static int nsampleCount(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleOrderCustomNV.SAMPLECOUNT); }
+    public static int nsampleCount(long struct) { return memGetInt(struct + VkCoarseSampleOrderCustomNV.SAMPLECOUNT); }
     /** Unsafe version of {@link #sampleLocationCount}. */
-    public static int nsampleLocationCount(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleOrderCustomNV.SAMPLELOCATIONCOUNT); }
+    public static int nsampleLocationCount(long struct) { return memGetInt(struct + VkCoarseSampleOrderCustomNV.SAMPLELOCATIONCOUNT); }
     /** Unsafe version of {@link #pSampleLocations}. */
     public static VkCoarseSampleLocationNV.Buffer npSampleLocations(long struct) { return VkCoarseSampleLocationNV.create(memGetAddress(struct + VkCoarseSampleOrderCustomNV.PSAMPLELOCATIONS), nsampleLocationCount(struct)); }
 
     /** Unsafe version of {@link #shadingRate(int) shadingRate}. */
-    public static void nshadingRate(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleOrderCustomNV.SHADINGRATE, value); }
+    public static void nshadingRate(long struct, int value) { memPutInt(struct + VkCoarseSampleOrderCustomNV.SHADINGRATE, value); }
     /** Unsafe version of {@link #sampleCount(int) sampleCount}. */
-    public static void nsampleCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleOrderCustomNV.SAMPLECOUNT, value); }
+    public static void nsampleCount(long struct, int value) { memPutInt(struct + VkCoarseSampleOrderCustomNV.SAMPLECOUNT, value); }
     /** Sets the specified value to the {@code sampleLocationCount} field of the specified {@code struct}. */
-    public static void nsampleLocationCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleOrderCustomNV.SAMPLELOCATIONCOUNT, value); }
+    public static void nsampleLocationCount(long struct, int value) { memPutInt(struct + VkCoarseSampleOrderCustomNV.SAMPLELOCATIONCOUNT, value); }
     /** Unsafe version of {@link #pSampleLocations(VkCoarseSampleLocationNV.Buffer) pSampleLocations}. */
     public static void npSampleLocations(long struct, VkCoarseSampleLocationNV.Buffer value) { memPutAddress(struct + VkCoarseSampleOrderCustomNV.PSAMPLELOCATIONS, value.address()); nsampleLocationCount(struct, value.remaining()); }
 

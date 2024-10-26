@@ -278,22 +278,22 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevice4444FormatsFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #formatA4R4G4B4}. */
-    public static int nformatA4R4G4B4(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4R4G4B4); }
+    public static int nformatA4R4G4B4(long struct) { return memGetInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4R4G4B4); }
     /** Unsafe version of {@link #formatA4B4G4R4}. */
-    public static int nformatA4B4G4R4(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4B4G4R4); }
+    public static int nformatA4B4G4R4(long struct) { return memGetInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4B4G4R4); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevice4444FormatsFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #formatA4R4G4B4(boolean) formatA4R4G4B4}. */
-    public static void nformatA4R4G4B4(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4R4G4B4, value); }
+    public static void nformatA4R4G4B4(long struct, int value) { memPutInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4R4G4B4, value); }
     /** Unsafe version of {@link #formatA4B4G4R4(boolean) formatA4B4G4R4}. */
-    public static void nformatA4B4G4R4(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4B4G4R4, value); }
+    public static void nformatA4B4G4R4(long struct, int value) { memPutInt(struct + VkPhysicalDevice4444FormatsFeaturesEXT.FORMATA4B4G4R4, value); }
 
     // -----------------------------------
 

@@ -161,19 +161,19 @@ public class BGFXCaps extends Struct<BGFXCaps> {
     // -----------------------------------
 
     /** Unsafe version of {@link #rendererType}. */
-    public static int nrendererType(long struct) { return UNSAFE.getInt(null, struct + BGFXCaps.RENDERERTYPE); }
+    public static int nrendererType(long struct) { return memGetInt(struct + BGFXCaps.RENDERERTYPE); }
     /** Unsafe version of {@link #supported}. */
-    public static long nsupported(long struct) { return UNSAFE.getLong(null, struct + BGFXCaps.SUPPORTED); }
+    public static long nsupported(long struct) { return memGetLong(struct + BGFXCaps.SUPPORTED); }
     /** Unsafe version of {@link #vendorId}. */
-    public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXCaps.VENDORID); }
+    public static short nvendorId(long struct) { return memGetShort(struct + BGFXCaps.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
-    public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXCaps.DEVICEID); }
+    public static short ndeviceId(long struct) { return memGetShort(struct + BGFXCaps.DEVICEID); }
     /** Unsafe version of {@link #homogeneousDepth}. */
-    public static boolean nhomogeneousDepth(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.HOMOGENEOUSDEPTH) != 0; }
+    public static boolean nhomogeneousDepth(long struct) { return memGetByte(struct + BGFXCaps.HOMOGENEOUSDEPTH) != 0; }
     /** Unsafe version of {@link #originBottomLeft}. */
-    public static boolean noriginBottomLeft(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.ORIGINBOTTOMLEFT) != 0; }
+    public static boolean noriginBottomLeft(long struct) { return memGetByte(struct + BGFXCaps.ORIGINBOTTOMLEFT) != 0; }
     /** Unsafe version of {@link #numGPUs}. */
-    public static byte nnumGPUs(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.NUMGPUS); }
+    public static byte nnumGPUs(long struct) { return memGetByte(struct + BGFXCaps.NUMGPUS); }
     /** Unsafe version of {@link #gpu}. */
     public static BGFXCapsGPU.Buffer ngpu(long struct) { return BGFXCapsGPU.create(struct + BGFXCaps.GPU, Byte.toUnsignedInt(nnumGPUs(struct))); }
     /** Unsafe version of {@link #gpu(int) gpu}. */
@@ -186,7 +186,7 @@ public class BGFXCaps extends Struct<BGFXCaps> {
     public static ShortBuffer nformats(long struct) { return memShortBuffer(struct + BGFXCaps.FORMATS, BGFX_TEXTURE_FORMAT_COUNT); }
     /** Unsafe version of {@link #formats(int) formats}. */
     public static short nformats(long struct, int index) {
-        return UNSAFE.getShort(null, struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 2);
+        return memGetShort(struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 2);
     }
 
 }

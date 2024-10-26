@@ -208,7 +208,7 @@ public class hwloc_distances_s extends Struct<hwloc_distances_s> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #nbobjs}. */
-    public static int nnbobjs(long struct) { return UNSAFE.getInt(null, struct + hwloc_distances_s.NBOBJS); }
+    public static int nnbobjs(long struct) { return memGetInt(struct + hwloc_distances_s.NBOBJS); }
     /** Unsafe version of {@link #objs() objs}. */
     public static PointerBuffer nobjs(long struct) { return memPointerBuffer(memGetAddress(struct + hwloc_distances_s.OBJS), nnbobjs(struct)); }
     /** Unsafe version of {@link #kind}. */

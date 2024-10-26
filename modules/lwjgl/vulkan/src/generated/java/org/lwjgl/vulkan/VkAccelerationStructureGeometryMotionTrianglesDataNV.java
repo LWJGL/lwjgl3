@@ -253,14 +253,14 @@ public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.PNEXT); }
     /** Unsafe version of {@link #vertexData}. */
     public static VkDeviceOrHostAddressConstKHR nvertexData(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.VERTEXDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureGeometryMotionTrianglesDataNV.PNEXT, value); }
     /** Unsafe version of {@link #vertexData(VkDeviceOrHostAddressConstKHR) vertexData}. */

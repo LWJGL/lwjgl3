@@ -270,7 +270,7 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct<XrGraphicsBindingOpe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsBindingOpenGLWin32KHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGraphicsBindingOpenGLWin32KHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLWin32KHR.NEXT); }
     /** Unsafe version of {@link #hDC}. */
@@ -279,7 +279,7 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct<XrGraphicsBindingOpe
     public static long nhGLRC(long struct) { return memGetAddress(struct + XrGraphicsBindingOpenGLWin32KHR.HGLRC); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLWin32KHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGraphicsBindingOpenGLWin32KHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWin32KHR.NEXT, value); }
     /** Unsafe version of {@link #hDC(long) hDC}. */

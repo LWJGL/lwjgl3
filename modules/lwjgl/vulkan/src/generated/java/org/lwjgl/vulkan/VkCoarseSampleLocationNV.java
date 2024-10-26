@@ -265,18 +265,18 @@ public class VkCoarseSampleLocationNV extends Struct<VkCoarseSampleLocationNV> i
     // -----------------------------------
 
     /** Unsafe version of {@link #pixelX}. */
-    public static int npixelX(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.PIXELX); }
+    public static int npixelX(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.PIXELX); }
     /** Unsafe version of {@link #pixelY}. */
-    public static int npixelY(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.PIXELY); }
+    public static int npixelY(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.PIXELY); }
     /** Unsafe version of {@link #sample}. */
-    public static int nsample(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.SAMPLE); }
+    public static int nsample(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.SAMPLE); }
 
     /** Unsafe version of {@link #pixelX(int) pixelX}. */
-    public static void npixelX(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.PIXELX, value); }
+    public static void npixelX(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.PIXELX, value); }
     /** Unsafe version of {@link #pixelY(int) pixelY}. */
-    public static void npixelY(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.PIXELY, value); }
+    public static void npixelY(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.PIXELY, value); }
     /** Unsafe version of {@link #sample(int) sample}. */
-    public static void nsample(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.SAMPLE, value); }
+    public static void nsample(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.SAMPLE, value); }
 
     // -----------------------------------
 

@@ -123,13 +123,13 @@ public class ImuSample extends Struct<ImuSample> {
     // -----------------------------------
 
     /** Unsafe version of {@link #fSampleTime}. */
-    public static double nfSampleTime(long struct) { return UNSAFE.getDouble(null, struct + ImuSample.FSAMPLETIME); }
+    public static double nfSampleTime(long struct) { return memGetDouble(struct + ImuSample.FSAMPLETIME); }
     /** Unsafe version of {@link #vAccel}. */
     public static HmdVector3d nvAccel(long struct) { return HmdVector3d.create(struct + ImuSample.VACCEL); }
     /** Unsafe version of {@link #vGyro}. */
     public static HmdVector3d nvGyro(long struct) { return HmdVector3d.create(struct + ImuSample.VGYRO); }
     /** Unsafe version of {@link #unOffScaleFlags}. */
-    public static int nunOffScaleFlags(long struct) { return UNSAFE.getInt(null, struct + ImuSample.UNOFFSCALEFLAGS); }
+    public static int nunOffScaleFlags(long struct) { return memGetInt(struct + ImuSample.UNOFFSCALEFLAGS); }
 
     // -----------------------------------
 

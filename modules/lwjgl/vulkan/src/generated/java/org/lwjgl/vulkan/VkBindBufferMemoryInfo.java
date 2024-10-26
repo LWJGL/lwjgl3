@@ -323,26 +323,26 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindBufferMemoryInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindBufferMemoryInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindBufferMemoryInfo.PNEXT); }
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkBindBufferMemoryInfo.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkBindBufferMemoryInfo.BUFFER); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkBindBufferMemoryInfo.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkBindBufferMemoryInfo.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkBindBufferMemoryInfo.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkBindBufferMemoryInfo.MEMORYOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindBufferMemoryInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindBufferMemoryInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindBufferMemoryInfo.PNEXT, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkBindBufferMemoryInfo.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkBindBufferMemoryInfo.BUFFER, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkBindBufferMemoryInfo.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkBindBufferMemoryInfo.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBindBufferMemoryInfo.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkBindBufferMemoryInfo.MEMORYOFFSET, value); }
 
     // -----------------------------------
 

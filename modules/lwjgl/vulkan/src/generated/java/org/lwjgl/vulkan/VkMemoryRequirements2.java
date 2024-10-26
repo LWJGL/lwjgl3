@@ -266,14 +266,14 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryRequirements2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryRequirements2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryRequirements2.PNEXT); }
     /** Unsafe version of {@link #memoryRequirements}. */
     public static VkMemoryRequirements nmemoryRequirements(long struct) { return VkMemoryRequirements.create(struct + VkMemoryRequirements2.MEMORYREQUIREMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryRequirements2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryRequirements2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryRequirements2.PNEXT, value); }
 

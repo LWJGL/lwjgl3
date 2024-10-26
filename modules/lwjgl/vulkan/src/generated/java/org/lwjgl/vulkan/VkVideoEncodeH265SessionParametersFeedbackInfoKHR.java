@@ -252,18 +252,18 @@ public class VkVideoEncodeH265SessionParametersFeedbackInfoKHR extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.PNEXT); }
     /** Unsafe version of {@link #hasStdVPSOverrides}. */
-    public static int nhasStdVPSOverrides(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDVPSOVERRIDES); }
+    public static int nhasStdVPSOverrides(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDVPSOVERRIDES); }
     /** Unsafe version of {@link #hasStdSPSOverrides}. */
-    public static int nhasStdSPSOverrides(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDSPSOVERRIDES); }
+    public static int nhasStdSPSOverrides(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDSPSOVERRIDES); }
     /** Unsafe version of {@link #hasStdPPSOverrides}. */
-    public static int nhasStdPPSOverrides(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDPPSOVERRIDES); }
+    public static int nhasStdPPSOverrides(long struct) { return memGetInt(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.HASSTDPPSOVERRIDES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersFeedbackInfoKHR.PNEXT, value); }
 

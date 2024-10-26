@@ -292,28 +292,28 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct<XrSecondar
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.NEXT); }
     /** Unsafe version of {@link #viewConfigurationType}. */
-    public static int nviewConfigurationType(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.VIEWCONFIGURATIONTYPE); }
+    public static int nviewConfigurationType(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.VIEWCONFIGURATIONTYPE); }
     /** Unsafe version of {@link #environmentBlendMode}. */
-    public static int nenvironmentBlendMode(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.ENVIRONMENTBLENDMODE); }
+    public static int nenvironmentBlendMode(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.ENVIRONMENTBLENDMODE); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERCOUNT); }
     /** Unsafe version of {@link #layers() layers}. */
     public static PointerBuffer nlayers(long struct) { return memPointerBuffer(memGetAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERS), nlayerCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
-    public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.VIEWCONFIGURATIONTYPE, value); }
+    public static void nviewConfigurationType(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #environmentBlendMode(int) environmentBlendMode}. */
-    public static void nenvironmentBlendMode(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.ENVIRONMENTBLENDMODE, value); }
+    public static void nenvironmentBlendMode(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.ENVIRONMENTBLENDMODE, value); }
     /** Sets the specified value to the {@code layerCount} field of the specified {@code struct}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERCOUNT, value); }
     /** Unsafe version of {@link #layers(PointerBuffer) layers}. */
     public static void nlayers(long struct, PointerBuffer value) { memPutAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERS, memAddress(value)); nlayerCount(struct, value.remaining()); }
 

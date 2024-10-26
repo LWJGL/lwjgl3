@@ -311,25 +311,25 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     /** Unsafe version of {@link #scrollbar}. */
     public static NkVec2 nscrollbar(long struct) { return NkVec2.create(struct + NkTextEdit.SCROLLBAR); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.CURSOR); }
+    public static int ncursor(long struct) { return memGetInt(struct + NkTextEdit.CURSOR); }
     /** Unsafe version of {@link #select_start}. */
-    public static int nselect_start(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.SELECT_START); }
+    public static int nselect_start(long struct) { return memGetInt(struct + NkTextEdit.SELECT_START); }
     /** Unsafe version of {@link #select_end}. */
-    public static int nselect_end(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.SELECT_END); }
+    public static int nselect_end(long struct) { return memGetInt(struct + NkTextEdit.SELECT_END); }
     /** Unsafe version of {@link #mode}. */
-    public static byte nmode(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.MODE); }
+    public static byte nmode(long struct) { return memGetByte(struct + NkTextEdit.MODE); }
     /** Unsafe version of {@link #cursor_at_end_of_line}. */
-    public static boolean ncursor_at_end_of_line(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.CURSOR_AT_END_OF_LINE) != 0; }
+    public static boolean ncursor_at_end_of_line(long struct) { return memGetByte(struct + NkTextEdit.CURSOR_AT_END_OF_LINE) != 0; }
     /** Unsafe version of {@link #initialized}. */
-    public static boolean ninitialized(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.INITIALIZED) != 0; }
+    public static boolean ninitialized(long struct) { return memGetByte(struct + NkTextEdit.INITIALIZED) != 0; }
     /** Unsafe version of {@link #has_preferred_x}. */
-    public static boolean nhas_preferred_x(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.HAS_PREFERRED_X) != 0; }
+    public static boolean nhas_preferred_x(long struct) { return memGetByte(struct + NkTextEdit.HAS_PREFERRED_X) != 0; }
     /** Unsafe version of {@link #single_line}. */
-    public static boolean nsingle_line(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.SINGLE_LINE) != 0; }
+    public static boolean nsingle_line(long struct) { return memGetByte(struct + NkTextEdit.SINGLE_LINE) != 0; }
     /** Unsafe version of {@link #active}. */
-    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.ACTIVE) != 0; }
+    public static boolean nactive(long struct) { return memGetByte(struct + NkTextEdit.ACTIVE) != 0; }
     /** Unsafe version of {@link #preferred_x}. */
-    public static float npreferred_x(long struct) { return UNSAFE.getFloat(null, struct + NkTextEdit.PREFERRED_X); }
+    public static float npreferred_x(long struct) { return memGetFloat(struct + NkTextEdit.PREFERRED_X); }
     /** Unsafe version of {@link #undo}. */
     public static NkTextUndoState nundo(long struct) { return NkTextUndoState.create(struct + NkTextEdit.UNDO); }
 

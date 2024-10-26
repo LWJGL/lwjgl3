@@ -283,20 +283,20 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMetalSurfaceCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMetalSurfaceCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMetalSurfaceCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMetalSurfaceCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkMetalSurfaceCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #pLayer(int) pLayer}. */
     @Nullable public static PointerBuffer npLayer(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + VkMetalSurfaceCreateInfoEXT.PLAYER), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMetalSurfaceCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMetalSurfaceCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMetalSurfaceCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMetalSurfaceCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkMetalSurfaceCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #pLayer(PointerBuffer) pLayer}. */
     public static void npLayer(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkMetalSurfaceCreateInfoEXT.PLAYER, memAddressSafe(value)); }
 

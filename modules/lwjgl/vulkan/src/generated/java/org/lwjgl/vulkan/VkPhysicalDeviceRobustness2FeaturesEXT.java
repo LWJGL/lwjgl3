@@ -274,26 +274,26 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRobustness2FeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #robustBufferAccess2}. */
-    public static int nrobustBufferAccess2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2); }
+    public static int nrobustBufferAccess2(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2); }
     /** Unsafe version of {@link #robustImageAccess2}. */
-    public static int nrobustImageAccess2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2); }
+    public static int nrobustImageAccess2(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2); }
     /** Unsafe version of {@link #nullDescriptor}. */
-    public static int nnullDescriptor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR); }
+    public static int nnullDescriptor(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRobustness2FeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #robustBufferAccess2(boolean) robustBufferAccess2}. */
-    public static void nrobustBufferAccess2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2, value); }
+    public static void nrobustBufferAccess2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2, value); }
     /** Unsafe version of {@link #robustImageAccess2(boolean) robustImageAccess2}. */
-    public static void nrobustImageAccess2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2, value); }
+    public static void nrobustImageAccess2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2, value); }
     /** Unsafe version of {@link #nullDescriptor(boolean) nullDescriptor}. */
-    public static void nnullDescriptor(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR, value); }
+    public static void nnullDescriptor(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR, value); }
 
     // -----------------------------------
 

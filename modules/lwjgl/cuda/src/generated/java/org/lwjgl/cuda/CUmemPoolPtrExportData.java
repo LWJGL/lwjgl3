@@ -210,7 +210,7 @@ public class CUmemPoolPtrExportData extends Struct<CUmemPoolPtrExportData> imple
     public static ByteBuffer nreserved(long struct) { return memByteBuffer(struct + CUmemPoolPtrExportData.RESERVED, 64); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static byte nreserved(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CUmemPoolPtrExportData.RESERVED + check(index, 64) * 1);
+        return memGetByte(struct + CUmemPoolPtrExportData.RESERVED + check(index, 64) * 1);
     }
 
     /** Unsafe version of {@link #reserved(ByteBuffer) reserved}. */
@@ -220,7 +220,7 @@ public class CUmemPoolPtrExportData extends Struct<CUmemPoolPtrExportData> imple
     }
     /** Unsafe version of {@link #reserved(int, byte) reserved}. */
     public static void nreserved(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CUmemPoolPtrExportData.RESERVED + check(index, 64) * 1, value);
+        memPutByte(struct + CUmemPoolPtrExportData.RESERVED + check(index, 64) * 1, value);
     }
 
     // -----------------------------------

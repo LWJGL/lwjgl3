@@ -265,20 +265,20 @@ public class XrSceneDeserializeInfoMSFT extends Struct<XrSceneDeserializeInfoMSF
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneDeserializeInfoMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneDeserializeInfoMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneDeserializeInfoMSFT.NEXT); }
     /** Unsafe version of {@link #fragmentCount}. */
-    public static int nfragmentCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneDeserializeInfoMSFT.FRAGMENTCOUNT); }
+    public static int nfragmentCount(long struct) { return memGetInt(struct + XrSceneDeserializeInfoMSFT.FRAGMENTCOUNT); }
     /** Unsafe version of {@link #fragments}. */
     @Nullable public static XrDeserializeSceneFragmentMSFT.Buffer nfragments(long struct) { return XrDeserializeSceneFragmentMSFT.createSafe(memGetAddress(struct + XrSceneDeserializeInfoMSFT.FRAGMENTS), nfragmentCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneDeserializeInfoMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneDeserializeInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneDeserializeInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code fragmentCount} field of the specified {@code struct}. */
-    public static void nfragmentCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneDeserializeInfoMSFT.FRAGMENTCOUNT, value); }
+    public static void nfragmentCount(long struct, int value) { memPutInt(struct + XrSceneDeserializeInfoMSFT.FRAGMENTCOUNT, value); }
     /** Unsafe version of {@link #fragments(XrDeserializeSceneFragmentMSFT.Buffer) fragments}. */
     public static void nfragments(long struct, @Nullable XrDeserializeSceneFragmentMSFT.Buffer value) { memPutAddress(struct + XrSceneDeserializeInfoMSFT.FRAGMENTS, memAddressSafe(value)); if (value != null) { nfragmentCount(struct, value.remaining()); } }
 

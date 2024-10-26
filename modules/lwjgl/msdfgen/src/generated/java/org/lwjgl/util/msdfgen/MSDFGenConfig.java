@@ -201,10 +201,10 @@ public class MSDFGenConfig extends Struct<MSDFGenConfig> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #overlap_support}. */
-    public static int noverlap_support(long struct) { return UNSAFE.getInt(null, struct + MSDFGenConfig.OVERLAP_SUPPORT); }
+    public static int noverlap_support(long struct) { return memGetInt(struct + MSDFGenConfig.OVERLAP_SUPPORT); }
 
     /** Unsafe version of {@link #overlap_support(int) overlap_support}. */
-    public static void noverlap_support(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenConfig.OVERLAP_SUPPORT, value); }
+    public static void noverlap_support(long struct, int value) { memPutInt(struct + MSDFGenConfig.OVERLAP_SUPPORT, value); }
 
     // -----------------------------------
 

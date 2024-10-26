@@ -249,18 +249,18 @@ public class XrBodyTrackerCreateInfoFB extends Struct<XrBodyTrackerCreateInfoFB>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBodyTrackerCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBodyTrackerCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrBodyTrackerCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #bodyJointSet}. */
-    public static int nbodyJointSet(long struct) { return UNSAFE.getInt(null, struct + XrBodyTrackerCreateInfoFB.BODYJOINTSET); }
+    public static int nbodyJointSet(long struct) { return memGetInt(struct + XrBodyTrackerCreateInfoFB.BODYJOINTSET); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyTrackerCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBodyTrackerCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBodyTrackerCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #bodyJointSet(int) bodyJointSet}. */
-    public static void nbodyJointSet(long struct, int value) { UNSAFE.putInt(null, struct + XrBodyTrackerCreateInfoFB.BODYJOINTSET, value); }
+    public static void nbodyJointSet(long struct, int value) { memPutInt(struct + XrBodyTrackerCreateInfoFB.BODYJOINTSET, value); }
 
     // -----------------------------------
 

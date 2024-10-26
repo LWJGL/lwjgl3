@@ -275,26 +275,26 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct<XrSpaceComponentStat
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceComponentStatusSetInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceComponentStatusSetInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceComponentStatusSetInfoFB.NEXT); }
     /** Unsafe version of {@link #componentType}. */
-    public static int ncomponentType(long struct) { return UNSAFE.getInt(null, struct + XrSpaceComponentStatusSetInfoFB.COMPONENTTYPE); }
+    public static int ncomponentType(long struct) { return memGetInt(struct + XrSpaceComponentStatusSetInfoFB.COMPONENTTYPE); }
     /** Unsafe version of {@link #enabled}. */
-    public static int nenabled(long struct) { return UNSAFE.getInt(null, struct + XrSpaceComponentStatusSetInfoFB.ENABLED); }
+    public static int nenabled(long struct) { return memGetInt(struct + XrSpaceComponentStatusSetInfoFB.ENABLED); }
     /** Unsafe version of {@link #timeout}. */
-    public static long ntimeout(long struct) { return UNSAFE.getLong(null, struct + XrSpaceComponentStatusSetInfoFB.TIMEOUT); }
+    public static long ntimeout(long struct) { return memGetLong(struct + XrSpaceComponentStatusSetInfoFB.TIMEOUT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceComponentStatusSetInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceComponentStatusSetInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceComponentStatusSetInfoFB.NEXT, value); }
     /** Unsafe version of {@link #componentType(int) componentType}. */
-    public static void ncomponentType(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceComponentStatusSetInfoFB.COMPONENTTYPE, value); }
+    public static void ncomponentType(long struct, int value) { memPutInt(struct + XrSpaceComponentStatusSetInfoFB.COMPONENTTYPE, value); }
     /** Unsafe version of {@link #enabled(boolean) enabled}. */
-    public static void nenabled(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceComponentStatusSetInfoFB.ENABLED, value); }
+    public static void nenabled(long struct, int value) { memPutInt(struct + XrSpaceComponentStatusSetInfoFB.ENABLED, value); }
     /** Unsafe version of {@link #timeout(long) timeout}. */
-    public static void ntimeout(long struct, long value) { UNSAFE.putLong(null, struct + XrSpaceComponentStatusSetInfoFB.TIMEOUT, value); }
+    public static void ntimeout(long struct, long value) { memPutLong(struct + XrSpaceComponentStatusSetInfoFB.TIMEOUT, value); }
 
     // -----------------------------------
 

@@ -375,42 +375,42 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.FLAGS); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT); }
+    public static int nstageCount(long struct) { return memGetInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     @Nullable public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pLibraryInfo}. */
     @Nullable public static VkPipelineLibraryCreateInfoKHR npLibraryInfo(long struct) { return VkPipelineLibraryCreateInfoKHR.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PLIBRARYINFO)); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkExecutionGraphPipelineCreateInfoAMDX.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.FLAGS, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, @Nullable VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES, memAddressSafe(value)); if (value != null) { nstageCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pLibraryInfo(VkPipelineLibraryCreateInfoKHR) pLibraryInfo}. */
     public static void npLibraryInfo(long struct, @Nullable VkPipelineLibraryCreateInfoKHR value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PLIBRARYINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineCreateInfoAMDX.LAYOUT, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

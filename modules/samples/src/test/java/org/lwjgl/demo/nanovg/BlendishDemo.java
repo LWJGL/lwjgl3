@@ -1369,10 +1369,10 @@ class UIData extends Struct<UIData> implements NativeResource {
         return address == NULL ? null : new UIData(address, null);
     }
 
-    public static int nsubtype(long struct)                              { return UNSAFE.getInt(null, struct + UIData.SUBTYPE); }
+    public static int nsubtype(long struct)                              { return memGetInt(struct + UIData.SUBTYPE); }
     @Nullable public static UIHandler nhandler(long struct)              { return UIHandler.createSafe(memGetAddress(struct + UIData.HANDLER)); }
 
-    public static void nsubtype(long struct, int value)                  { UNSAFE.putInt(null, struct + UIData.SUBTYPE, value); }
+    public static void nsubtype(long struct, int value)                  { memPutInt(struct + UIData.SUBTYPE, value); }
     public static void nhandler(long struct, @Nullable UIHandlerI value) { memPutAddress(struct + UIData.HANDLER, memAddressSafe(value)); }
 
 }
@@ -1533,12 +1533,12 @@ class UIButtonData extends Struct<UIButtonData> implements NativeResource {
     }
 
     public static UIData nhead(long struct)                  { return UIData.create(struct + UIButtonData.HEAD); }
-    public static int niconid(long struct)                   { return UNSAFE.getInt(null, struct + UIButtonData.ICONID); }
+    public static int niconid(long struct)                   { return memGetInt(struct + UIButtonData.ICONID); }
     @Nullable public static ByteBuffer nlabel(long struct)   { return memByteBufferNT1Safe(memGetAddress(struct + UIButtonData.LABEL)); }
     @Nullable public static String nlabelString(long struct) { return memUTF8Safe(memGetAddress(struct + UIButtonData.LABEL)); }
 
     public static void nhead(long struct, UIData value)      { memCopy(value.address(), struct + UIButtonData.HEAD, UIData.SIZEOF); }
-    public static void niconid(long struct, int value)       { UNSAFE.putInt(null, struct + UIButtonData.ICONID, value); }
+    public static void niconid(long struct, int value)       { memPutInt(struct + UIButtonData.ICONID, value); }
     public static void nlabel(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) {
             checkNT1Safe(value);
@@ -1709,13 +1709,13 @@ class UIRadioData extends Struct<UIRadioData> implements NativeResource {
     }
 
     public static UIData nhead(long struct)                   { return UIData.create(struct + UIRadioData.HEAD); }
-    public static int niconid(long struct)                    { return UNSAFE.getInt(null, struct + UIRadioData.ICONID); }
+    public static int niconid(long struct)                    { return memGetInt(struct + UIRadioData.ICONID); }
     @Nullable public static ByteBuffer nlabel(long struct)    { return memByteBufferNT1Safe(memGetAddress(struct + UIRadioData.LABEL)); }
     @Nullable public static String nlabelString(long struct)  { return memUTF8Safe(memGetAddress(struct + UIRadioData.LABEL)); }
     public static IntBuffer nvalue(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + UIRadioData.VALUE), capacity); }
 
     public static void nhead(long struct, UIData value)       { memCopy(value.address(), struct + UIRadioData.HEAD, UIData.SIZEOF); }
-    public static void niconid(long struct, int value)        { UNSAFE.putInt(null, struct + UIRadioData.ICONID, value); }
+    public static void niconid(long struct, int value)        { memPutInt(struct + UIRadioData.ICONID, value); }
     public static void nlabel(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) {
             checkNT1Safe(value);
@@ -1880,7 +1880,7 @@ class UITextData extends Struct<UITextData> implements NativeResource {
     public static UIData nhead(long struct)                 { return UIData.create(struct + UITextData.HEAD); }
     @Nullable public static ByteBuffer ntext(long struct)   { return memByteBufferNT1Safe(memGetAddress(struct + UITextData.TEXT)); }
     @Nullable public static String ntextString(long struct) { return memUTF8Safe(memGetAddress(struct + UITextData.TEXT)); }
-    public static int nmaxsize(long struct)                 { return UNSAFE.getInt(null, struct + UITextData.MAXSIZE); }
+    public static int nmaxsize(long struct)                 { return memGetInt(struct + UITextData.MAXSIZE); }
 
     public static void nhead(long struct, UIData value)     { memCopy(value.address(), struct + UITextData.HEAD, UIData.SIZEOF); }
     public static void ntext(long struct, @Nullable ByteBuffer value) {
@@ -1889,6 +1889,6 @@ class UITextData extends Struct<UITextData> implements NativeResource {
         }
         memPutAddress(struct + UITextData.TEXT, memAddressSafe(value));
     }
-    public static void nmaxsize(long struct, int value) { UNSAFE.putInt(null, struct + UITextData.MAXSIZE, value); }
+    public static void nmaxsize(long struct, int value) { memPutInt(struct + UITextData.MAXSIZE, value); }
 
 }

@@ -284,20 +284,20 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #pciDomain}. */
-    public static int npciDomain(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDOMAIN); }
+    public static int npciDomain(long struct) { return memGetInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDOMAIN); }
     /** Unsafe version of {@link #pciBus}. */
-    public static int npciBus(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIBUS); }
+    public static int npciBus(long struct) { return memGetInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIBUS); }
     /** Unsafe version of {@link #pciDevice}. */
-    public static int npciDevice(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDEVICE); }
+    public static int npciDevice(long struct) { return memGetInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDEVICE); }
     /** Unsafe version of {@link #pciFunction}. */
-    public static int npciFunction(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIFUNCTION); }
+    public static int npciFunction(long struct) { return memGetInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIFUNCTION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PNEXT, value); }
 

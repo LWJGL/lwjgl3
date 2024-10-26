@@ -264,22 +264,22 @@ public class VkLatencySleepInfoNV extends Struct<VkLatencySleepInfoNV> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLatencySleepInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLatencySleepInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLatencySleepInfoNV.PNEXT); }
     /** Unsafe version of {@link #signalSemaphore}. */
-    public static long nsignalSemaphore(long struct) { return UNSAFE.getLong(null, struct + VkLatencySleepInfoNV.SIGNALSEMAPHORE); }
+    public static long nsignalSemaphore(long struct) { return memGetLong(struct + VkLatencySleepInfoNV.SIGNALSEMAPHORE); }
     /** Unsafe version of {@link #value}. */
-    public static long nvalue(long struct) { return UNSAFE.getLong(null, struct + VkLatencySleepInfoNV.VALUE); }
+    public static long nvalue(long struct) { return memGetLong(struct + VkLatencySleepInfoNV.VALUE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencySleepInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLatencySleepInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencySleepInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #signalSemaphore(long) signalSemaphore}. */
-    public static void nsignalSemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencySleepInfoNV.SIGNALSEMAPHORE, value); }
+    public static void nsignalSemaphore(long struct, long value) { memPutLong(struct + VkLatencySleepInfoNV.SIGNALSEMAPHORE, value); }
     /** Unsafe version of {@link #value(long) value}. */
-    public static void nvalue(long struct, long value) { UNSAFE.putLong(null, struct + VkLatencySleepInfoNV.VALUE, value); }
+    public static void nvalue(long struct, long value) { memPutLong(struct + VkLatencySleepInfoNV.VALUE, value); }
 
     // -----------------------------------
 

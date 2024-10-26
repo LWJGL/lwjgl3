@@ -304,11 +304,11 @@ public class XColormapEvent extends Struct<XColormapEvent> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XColormapEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XColormapEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XColormapEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XColormapEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
@@ -316,16 +316,16 @@ public class XColormapEvent extends Struct<XColormapEvent> implements NativeReso
     /** Unsafe version of {@link #colormap}. */
     public static long ncolormap(long struct) { return memGetCLong(struct + XColormapEvent.COLORMAP); }
     /** Unsafe version of {@link #new$}. */
-    public static int nnew$(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.NEW); }
+    public static int nnew$(long struct) { return memGetInt(struct + XColormapEvent.NEW); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.STATE); }
+    public static int nstate(long struct) { return memGetInt(struct + XColormapEvent.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XColormapEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XColormapEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XColormapEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XColormapEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
@@ -333,9 +333,9 @@ public class XColormapEvent extends Struct<XColormapEvent> implements NativeReso
     /** Unsafe version of {@link #colormap(long) colormap}. */
     public static void ncolormap(long struct, long value) { memPutCLong(struct + XColormapEvent.COLORMAP, value); }
     /** Unsafe version of {@link #new$(int) new$}. */
-    public static void nnew$(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.NEW, value); }
+    public static void nnew$(long struct, int value) { memPutInt(struct + XColormapEvent.NEW, value); }
     /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.STATE, value); }
+    public static void nstate(long struct, int value) { memPutInt(struct + XColormapEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

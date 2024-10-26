@@ -221,14 +221,14 @@ public class FMOD_STUDIO_PARAMETER_ID extends Struct<FMOD_STUDIO_PARAMETER_ID> i
     // -----------------------------------
 
     /** Unsafe version of {@link #data1}. */
-    public static int ndata1(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_PARAMETER_ID.DATA1); }
+    public static int ndata1(long struct) { return memGetInt(struct + FMOD_STUDIO_PARAMETER_ID.DATA1); }
     /** Unsafe version of {@link #data2}. */
-    public static int ndata2(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_PARAMETER_ID.DATA2); }
+    public static int ndata2(long struct) { return memGetInt(struct + FMOD_STUDIO_PARAMETER_ID.DATA2); }
 
     /** Unsafe version of {@link #data1(int) data1}. */
-    public static void ndata1(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_PARAMETER_ID.DATA1, value); }
+    public static void ndata1(long struct, int value) { memPutInt(struct + FMOD_STUDIO_PARAMETER_ID.DATA1, value); }
     /** Unsafe version of {@link #data2(int) data2}. */
-    public static void ndata2(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_PARAMETER_ID.DATA2, value); }
+    public static void ndata2(long struct, int value) { memPutInt(struct + FMOD_STUDIO_PARAMETER_ID.DATA2, value); }
 
     // -----------------------------------
 

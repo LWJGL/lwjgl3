@@ -308,24 +308,24 @@ public class VkVideoDecodeH264PictureInfoKHR extends Struct<VkVideoDecodeH264Pic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264PictureInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeH264PictureInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264PictureInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pStdPictureInfo}. */
     public static StdVideoDecodeH264PictureInfo npStdPictureInfo(long struct) { return StdVideoDecodeH264PictureInfo.create(memGetAddress(struct + VkVideoDecodeH264PictureInfoKHR.PSTDPICTUREINFO)); }
     /** Unsafe version of {@link #sliceCount}. */
-    public static int nsliceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264PictureInfoKHR.SLICECOUNT); }
+    public static int nsliceCount(long struct) { return memGetInt(struct + VkVideoDecodeH264PictureInfoKHR.SLICECOUNT); }
     /** Unsafe version of {@link #pSliceOffsets() pSliceOffsets}. */
     public static IntBuffer npSliceOffsets(long struct) { return memIntBuffer(memGetAddress(struct + VkVideoDecodeH264PictureInfoKHR.PSLICEOFFSETS), nsliceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264PictureInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH264PictureInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pStdPictureInfo(StdVideoDecodeH264PictureInfo) pStdPictureInfo}. */
     public static void npStdPictureInfo(long struct, StdVideoDecodeH264PictureInfo value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoKHR.PSTDPICTUREINFO, value.address()); }
     /** Sets the specified value to the {@code sliceCount} field of the specified {@code struct}. */
-    public static void nsliceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264PictureInfoKHR.SLICECOUNT, value); }
+    public static void nsliceCount(long struct, int value) { memPutInt(struct + VkVideoDecodeH264PictureInfoKHR.SLICECOUNT, value); }
     /** Unsafe version of {@link #pSliceOffsets(IntBuffer) pSliceOffsets}. */
     public static void npSliceOffsets(long struct, IntBuffer value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoKHR.PSLICEOFFSETS, memAddress(value)); nsliceCount(struct, value.remaining()); }
 

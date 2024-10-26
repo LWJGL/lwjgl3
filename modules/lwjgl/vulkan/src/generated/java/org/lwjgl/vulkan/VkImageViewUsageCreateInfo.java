@@ -267,18 +267,18 @@ public class VkImageViewUsageCreateInfo extends Struct<VkImageViewUsageCreateInf
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewUsageCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageViewUsageCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewUsageCreateInfo.PNEXT); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkImageViewUsageCreateInfo.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VkImageViewUsageCreateInfo.USAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewUsageCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewUsageCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewUsageCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewUsageCreateInfo.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VkImageViewUsageCreateInfo.USAGE, value); }
 
     // -----------------------------------
 

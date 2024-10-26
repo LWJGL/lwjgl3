@@ -407,42 +407,42 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFramebufferCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.FLAGS); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkFramebufferCreateInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return memGetLong(struct + VkFramebufferCreateInfo.RENDERPASS); }
     /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT); }
+    public static int nattachmentCount(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments() pAttachments}. */
     @Nullable public static LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.HEIGHT); }
     /** Unsafe version of {@link #layers}. */
-    public static int nlayers(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferCreateInfo.LAYERS); }
+    public static int nlayers(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.LAYERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFramebufferCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkFramebufferCreateInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkFramebufferCreateInfo.RENDERPASS, value); }
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT, value); }
+    public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(LongBuffer) pAttachments}. */
     public static void npAttachments(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS, memAddressSafe(value)); if (value != null) { nattachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.HEIGHT, value); }
     /** Unsafe version of {@link #layers(int) layers}. */
-    public static void nlayers(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.LAYERS, value); }
+    public static void nlayers(long struct, int value) { memPutInt(struct + VkFramebufferCreateInfo.LAYERS, value); }
 
     // -----------------------------------
 

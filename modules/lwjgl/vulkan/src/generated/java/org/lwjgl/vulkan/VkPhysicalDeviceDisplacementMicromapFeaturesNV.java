@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDisplacementMicromapFeaturesNV extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #displacementMicromap}. */
-    public static int ndisplacementMicromap(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.DISPLACEMENTMICROMAP); }
+    public static int ndisplacementMicromap(long struct) { return memGetInt(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.DISPLACEMENTMICROMAP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #displacementMicromap(boolean) displacementMicromap}. */
-    public static void ndisplacementMicromap(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.DISPLACEMENTMICROMAP, value); }
+    public static void ndisplacementMicromap(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDisplacementMicromapFeaturesNV.DISPLACEMENTMICROMAP, value); }
 
     // -----------------------------------
 

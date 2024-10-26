@@ -269,18 +269,18 @@ public class VkDispatchIndirectCommand extends Struct<VkDispatchIndirectCommand>
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.X); }
+    public static int nx(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.Y); }
+    public static int ny(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.Z); }
+    public static int nz(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.Z); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.Y, value); }
     /** Unsafe version of {@link #z(int) z}. */
-    public static void nz(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.Z, value); }
+    public static void nz(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.Z, value); }
 
     // -----------------------------------
 

@@ -297,7 +297,7 @@ public class StdVideoH264SpsVuiFlags extends Struct<StdVideoH264SpsVuiFlags> imp
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SpsVuiFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH264SpsVuiFlags.BITFIELD0); }
     /** Unsafe version of {@link #aspect_ratio_info_present_flag}. */
     public static int naspect_ratio_info_present_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #overscan_info_present_flag}. */
@@ -323,7 +323,7 @@ public class StdVideoH264SpsVuiFlags extends Struct<StdVideoH264SpsVuiFlags> imp
     /** Unsafe version of {@link #vcl_hrd_parameters_present_flag}. */
     public static int nvcl_hrd_parameters_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SpsVuiFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH264SpsVuiFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #aspect_ratio_info_present_flag(boolean) aspect_ratio_info_present_flag}. */
     public static void naspect_ratio_info_present_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #overscan_info_present_flag(boolean) overscan_info_present_flag}. */

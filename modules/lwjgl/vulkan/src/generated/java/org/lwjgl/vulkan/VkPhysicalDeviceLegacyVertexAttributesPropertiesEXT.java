@@ -246,18 +246,18 @@ public class VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #nativeUnalignedPerformance}. */
-    public static int nnativeUnalignedPerformance(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.NATIVEUNALIGNEDPERFORMANCE); }
+    public static int nnativeUnalignedPerformance(long struct) { return memGetInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.NATIVEUNALIGNEDPERFORMANCE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.PNEXT, value); }
     /** Unsafe version of {@link #nativeUnalignedPerformance(boolean) nativeUnalignedPerformance}. */
-    public static void nnativeUnalignedPerformance(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.NATIVEUNALIGNEDPERFORMANCE, value); }
+    public static void nnativeUnalignedPerformance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.NATIVEUNALIGNEDPERFORMANCE, value); }
 
     // -----------------------------------
 

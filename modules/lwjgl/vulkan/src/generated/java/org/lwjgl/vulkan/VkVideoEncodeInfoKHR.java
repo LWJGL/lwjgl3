@@ -359,50 +359,50 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkVideoEncodeInfoKHR.FLAGS); }
     /** Unsafe version of {@link #dstBuffer}. */
-    public static long ndstBuffer(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFER); }
+    public static long ndstBuffer(long struct) { return memGetLong(struct + VkVideoEncodeInfoKHR.DSTBUFFER); }
     /** Unsafe version of {@link #dstBufferOffset}. */
-    public static long ndstBufferOffset(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFEROFFSET); }
+    public static long ndstBufferOffset(long struct) { return memGetLong(struct + VkVideoEncodeInfoKHR.DSTBUFFEROFFSET); }
     /** Unsafe version of {@link #dstBufferRange}. */
-    public static long ndstBufferRange(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFERRANGE); }
+    public static long ndstBufferRange(long struct) { return memGetLong(struct + VkVideoEncodeInfoKHR.DSTBUFFERRANGE); }
     /** Unsafe version of {@link #srcPictureResource}. */
     public static VkVideoPictureResourceInfoKHR nsrcPictureResource(long struct) { return VkVideoPictureResourceInfoKHR.create(struct + VkVideoEncodeInfoKHR.SRCPICTURERESOURCE); }
     /** Unsafe version of {@link #pSetupReferenceSlot}. */
     @Nullable public static VkVideoReferenceSlotInfoKHR npSetupReferenceSlot(long struct) { return VkVideoReferenceSlotInfoKHR.createSafe(memGetAddress(struct + VkVideoEncodeInfoKHR.PSETUPREFERENCESLOT)); }
     /** Unsafe version of {@link #referenceSlotCount}. */
-    public static int nreferenceSlotCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT); }
+    public static int nreferenceSlotCount(long struct) { return memGetInt(struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT); }
     /** Unsafe version of {@link #pReferenceSlots}. */
     @Nullable public static VkVideoReferenceSlotInfoKHR.Buffer npReferenceSlots(long struct) { return VkVideoReferenceSlotInfoKHR.createSafe(memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS), nreferenceSlotCount(struct)); }
     /** Unsafe version of {@link #precedingExternallyEncodedBytes}. */
-    public static int nprecedingExternallyEncodedBytes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.PRECEDINGEXTERNALLYENCODEDBYTES); }
+    public static int nprecedingExternallyEncodedBytes(long struct) { return memGetInt(struct + VkVideoEncodeInfoKHR.PRECEDINGEXTERNALLYENCODEDBYTES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkVideoEncodeInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #dstBuffer(long) dstBuffer}. */
-    public static void ndstBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFER, value); }
+    public static void ndstBuffer(long struct, long value) { memPutLong(struct + VkVideoEncodeInfoKHR.DSTBUFFER, value); }
     /** Unsafe version of {@link #dstBufferOffset(long) dstBufferOffset}. */
-    public static void ndstBufferOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFEROFFSET, value); }
+    public static void ndstBufferOffset(long struct, long value) { memPutLong(struct + VkVideoEncodeInfoKHR.DSTBUFFEROFFSET, value); }
     /** Unsafe version of {@link #dstBufferRange(long) dstBufferRange}. */
-    public static void ndstBufferRange(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeInfoKHR.DSTBUFFERRANGE, value); }
+    public static void ndstBufferRange(long struct, long value) { memPutLong(struct + VkVideoEncodeInfoKHR.DSTBUFFERRANGE, value); }
     /** Unsafe version of {@link #srcPictureResource(VkVideoPictureResourceInfoKHR) srcPictureResource}. */
     public static void nsrcPictureResource(long struct, VkVideoPictureResourceInfoKHR value) { memCopy(value.address(), struct + VkVideoEncodeInfoKHR.SRCPICTURERESOURCE, VkVideoPictureResourceInfoKHR.SIZEOF); }
     /** Unsafe version of {@link #pSetupReferenceSlot(VkVideoReferenceSlotInfoKHR) pSetupReferenceSlot}. */
     public static void npSetupReferenceSlot(long struct, @Nullable VkVideoReferenceSlotInfoKHR value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PSETUPREFERENCESLOT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code referenceSlotCount} field of the specified {@code struct}. */
-    public static void nreferenceSlotCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT, value); }
+    public static void nreferenceSlotCount(long struct, int value) { memPutInt(struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT, value); }
     /** Unsafe version of {@link #pReferenceSlots(VkVideoReferenceSlotInfoKHR.Buffer) pReferenceSlots}. */
     public static void npReferenceSlots(long struct, @Nullable VkVideoReferenceSlotInfoKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS, memAddressSafe(value)); nreferenceSlotCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #precedingExternallyEncodedBytes(int) precedingExternallyEncodedBytes}. */
-    public static void nprecedingExternallyEncodedBytes(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.PRECEDINGEXTERNALLYENCODEDBYTES, value); }
+    public static void nprecedingExternallyEncodedBytes(long struct, int value) { memPutInt(struct + VkVideoEncodeInfoKHR.PRECEDINGEXTERNALLYENCODEDBYTES, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

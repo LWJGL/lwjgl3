@@ -260,20 +260,20 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMutableDescriptorTypeCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMutableDescriptorTypeCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #mutableDescriptorTypeListCount}. */
-    public static int nmutableDescriptorTypeListCount(long struct) { return UNSAFE.getInt(null, struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT); }
+    public static int nmutableDescriptorTypeListCount(long struct) { return memGetInt(struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT); }
     /** Unsafe version of {@link #pMutableDescriptorTypeLists}. */
     @Nullable public static VkMutableDescriptorTypeListEXT.Buffer npMutableDescriptorTypeLists(long struct) { return VkMutableDescriptorTypeListEXT.createSafe(memGetAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS), nmutableDescriptorTypeListCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMutableDescriptorTypeCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMutableDescriptorTypeCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code mutableDescriptorTypeListCount} field of the specified {@code struct}. */
-    public static void nmutableDescriptorTypeListCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT, value); }
+    public static void nmutableDescriptorTypeListCount(long struct, int value) { memPutInt(struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT, value); }
     /** Unsafe version of {@link #pMutableDescriptorTypeLists(VkMutableDescriptorTypeListEXT.Buffer) pMutableDescriptorTypeLists}. */
     public static void npMutableDescriptorTypeLists(long struct, @Nullable VkMutableDescriptorTypeListEXT.Buffer value) { memPutAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS, memAddressSafe(value)); nmutableDescriptorTypeListCount(struct, value == null ? 0 : value.remaining()); }
 

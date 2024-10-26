@@ -244,14 +244,14 @@ public class VkQueryLowLatencySupportNV extends Struct<VkQueryLowLatencySupportN
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueryLowLatencySupportNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueryLowLatencySupportNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueryLowLatencySupportNV.PNEXT); }
     /** Unsafe version of {@link #pQueriedLowLatencyData}. */
     public static long npQueriedLowLatencyData(long struct) { return memGetAddress(struct + VkQueryLowLatencySupportNV.PQUERIEDLOWLATENCYDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryLowLatencySupportNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueryLowLatencySupportNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueryLowLatencySupportNV.PNEXT, value); }
     /** Unsafe version of {@link #pQueriedLowLatencyData(long) pQueriedLowLatencyData}. */

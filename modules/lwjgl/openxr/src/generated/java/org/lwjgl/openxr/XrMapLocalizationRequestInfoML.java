@@ -249,14 +249,14 @@ public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequ
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrMapLocalizationRequestInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrMapLocalizationRequestInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrMapLocalizationRequestInfoML.NEXT); }
     /** Unsafe version of {@link #mapUuid}. */
     public static XrUuidEXT nmapUuid(long struct) { return XrUuidEXT.create(struct + XrMapLocalizationRequestInfoML.MAPUUID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMapLocalizationRequestInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrMapLocalizationRequestInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrMapLocalizationRequestInfoML.NEXT, value); }
     /** Unsafe version of {@link #mapUuid(XrUuidEXT) mapUuid}. */

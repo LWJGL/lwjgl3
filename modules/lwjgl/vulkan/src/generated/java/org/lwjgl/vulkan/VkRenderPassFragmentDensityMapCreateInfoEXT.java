@@ -290,14 +290,14 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct<VkRender
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassFragmentDensityMapCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassFragmentDensityMapCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassFragmentDensityMapCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #fragmentDensityMapAttachment}. */
     public static VkAttachmentReference nfragmentDensityMapAttachment(long struct) { return VkAttachmentReference.create(struct + VkRenderPassFragmentDensityMapCreateInfoEXT.FRAGMENTDENSITYMAPATTACHMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassFragmentDensityMapCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassFragmentDensityMapCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassFragmentDensityMapCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #fragmentDensityMapAttachment(VkAttachmentReference) fragmentDensityMapAttachment}. */

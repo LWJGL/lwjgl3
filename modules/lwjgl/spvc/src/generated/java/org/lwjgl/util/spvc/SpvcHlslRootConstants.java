@@ -248,22 +248,22 @@ public class SpvcHlslRootConstants extends Struct<SpvcHlslRootConstants> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #start}. */
-    public static int nstart(long struct) { return UNSAFE.getInt(null, struct + SpvcHlslRootConstants.START); }
+    public static int nstart(long struct) { return memGetInt(struct + SpvcHlslRootConstants.START); }
     /** Unsafe version of {@link #end}. */
-    public static int nend(long struct) { return UNSAFE.getInt(null, struct + SpvcHlslRootConstants.END); }
+    public static int nend(long struct) { return memGetInt(struct + SpvcHlslRootConstants.END); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + SpvcHlslRootConstants.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + SpvcHlslRootConstants.BINDING); }
     /** Unsafe version of {@link #space}. */
-    public static int nspace(long struct) { return UNSAFE.getInt(null, struct + SpvcHlslRootConstants.SPACE); }
+    public static int nspace(long struct) { return memGetInt(struct + SpvcHlslRootConstants.SPACE); }
 
     /** Unsafe version of {@link #start(int) start}. */
-    public static void nstart(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHlslRootConstants.START, value); }
+    public static void nstart(long struct, int value) { memPutInt(struct + SpvcHlslRootConstants.START, value); }
     /** Unsafe version of {@link #end(int) end}. */
-    public static void nend(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHlslRootConstants.END, value); }
+    public static void nend(long struct, int value) { memPutInt(struct + SpvcHlslRootConstants.END, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHlslRootConstants.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + SpvcHlslRootConstants.BINDING, value); }
     /** Unsafe version of {@link #space(int) space}. */
-    public static void nspace(long struct, int value) { UNSAFE.putInt(null, struct + SpvcHlslRootConstants.SPACE, value); }
+    public static void nspace(long struct, int value) { memPutInt(struct + SpvcHlslRootConstants.SPACE, value); }
 
     // -----------------------------------
 

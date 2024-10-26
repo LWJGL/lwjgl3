@@ -246,18 +246,18 @@ public class VkPhysicalDeviceCubicWeightsFeaturesQCOM extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #selectableCubicWeights}. */
-    public static int nselectableCubicWeights(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.SELECTABLECUBICWEIGHTS); }
+    public static int nselectableCubicWeights(long struct) { return memGetInt(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.SELECTABLECUBICWEIGHTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #selectableCubicWeights(boolean) selectableCubicWeights}. */
-    public static void nselectableCubicWeights(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.SELECTABLECUBICWEIGHTS, value); }
+    public static void nselectableCubicWeights(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCubicWeightsFeaturesQCOM.SELECTABLECUBICWEIGHTS, value); }
 
     // -----------------------------------
 

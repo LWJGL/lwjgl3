@@ -268,18 +268,18 @@ public class VkImageSwapchainCreateInfoKHR extends Struct<VkImageSwapchainCreate
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageSwapchainCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageSwapchainCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageSwapchainCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return UNSAFE.getLong(null, struct + VkImageSwapchainCreateInfoKHR.SWAPCHAIN); }
+    public static long nswapchain(long struct) { return memGetLong(struct + VkImageSwapchainCreateInfoKHR.SWAPCHAIN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageSwapchainCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageSwapchainCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageSwapchainCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkImageSwapchainCreateInfoKHR.SWAPCHAIN, value); }
+    public static void nswapchain(long struct, long value) { memPutLong(struct + VkImageSwapchainCreateInfoKHR.SWAPCHAIN, value); }
 
     // -----------------------------------
 

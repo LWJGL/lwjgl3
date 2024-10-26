@@ -237,13 +237,13 @@ public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> imp
     public static ByteBuffer nGmType(long struct) { return memByteBuffer(struct + StdVideoAV1GlobalMotion.GMTYPE, STD_VIDEO_AV1_NUM_REF_FRAMES); }
     /** Unsafe version of {@link #GmType(int) GmType}. */
     public static byte nGmType(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1GlobalMotion.GMTYPE + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1);
+        return memGetByte(struct + StdVideoAV1GlobalMotion.GMTYPE + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1);
     }
     /** Unsafe version of {@link #gm_params}. */
     public static IntBuffer ngm_params(long struct) { return memIntBuffer(struct + StdVideoAV1GlobalMotion.GM_PARAMS, STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS); }
     /** Unsafe version of {@link #gm_params(int) gm_params}. */
     public static int ngm_params(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoAV1GlobalMotion.GM_PARAMS + check(index, STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS) * 4);
+        return memGetInt(struct + StdVideoAV1GlobalMotion.GM_PARAMS + check(index, STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS) * 4);
     }
 
     /** Unsafe version of {@link #GmType(ByteBuffer) GmType}. */
@@ -253,7 +253,7 @@ public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> imp
     }
     /** Unsafe version of {@link #GmType(int, byte) GmType}. */
     public static void nGmType(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1GlobalMotion.GMTYPE + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1, value);
+        memPutByte(struct + StdVideoAV1GlobalMotion.GMTYPE + check(index, STD_VIDEO_AV1_NUM_REF_FRAMES) * 1, value);
     }
     /** Unsafe version of {@link #gm_params(IntBuffer) gm_params}. */
     public static void ngm_params(long struct, IntBuffer value) {
@@ -262,7 +262,7 @@ public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> imp
     }
     /** Unsafe version of {@link #gm_params(int, int) gm_params}. */
     public static void ngm_params(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoAV1GlobalMotion.GM_PARAMS + check(index, STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS) * 4, value);
+        memPutInt(struct + StdVideoAV1GlobalMotion.GM_PARAMS + check(index, STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS) * 4, value);
     }
 
     // -----------------------------------

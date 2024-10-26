@@ -321,24 +321,24 @@ public class VkDescriptorSetLayoutCreateInfo extends Struct<VkDescriptorSetLayou
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorSetLayoutCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorSetLayoutCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkDescriptorSetLayoutCreateInfo.FLAGS); }
     /** Unsafe version of {@link #bindingCount}. */
-    public static int nbindingCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetLayoutCreateInfo.BINDINGCOUNT); }
+    public static int nbindingCount(long struct) { return memGetInt(struct + VkDescriptorSetLayoutCreateInfo.BINDINGCOUNT); }
     /** Unsafe version of {@link #pBindings}. */
     @Nullable public static VkDescriptorSetLayoutBinding.Buffer npBindings(long struct) { return VkDescriptorSetLayoutBinding.createSafe(memGetAddress(struct + VkDescriptorSetLayoutCreateInfo.PBINDINGS), nbindingCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorSetLayoutCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code bindingCount} field of the specified {@code struct}. */
-    public static void nbindingCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetLayoutCreateInfo.BINDINGCOUNT, value); }
+    public static void nbindingCount(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutCreateInfo.BINDINGCOUNT, value); }
     /** Unsafe version of {@link #pBindings(VkDescriptorSetLayoutBinding.Buffer) pBindings}. */
     public static void npBindings(long struct, @Nullable VkDescriptorSetLayoutBinding.Buffer value) { memPutAddress(struct + VkDescriptorSetLayoutCreateInfo.PBINDINGS, memAddressSafe(value)); nbindingCount(struct, value == null ? 0 : value.remaining()); }
 

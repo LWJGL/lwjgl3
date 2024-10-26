@@ -111,9 +111,9 @@ public class FT_ColorIndex extends Struct<FT_ColorIndex> {
     // -----------------------------------
 
     /** Unsafe version of {@link #palette_index}. */
-    public static short npalette_index(long struct) { return UNSAFE.getShort(null, struct + FT_ColorIndex.PALETTE_INDEX); }
+    public static short npalette_index(long struct) { return memGetShort(struct + FT_ColorIndex.PALETTE_INDEX); }
     /** Unsafe version of {@link #alpha}. */
-    public static short nalpha(long struct) { return UNSAFE.getShort(null, struct + FT_ColorIndex.ALPHA); }
+    public static short nalpha(long struct) { return memGetShort(struct + FT_ColorIndex.ALPHA); }
 
     // -----------------------------------
 

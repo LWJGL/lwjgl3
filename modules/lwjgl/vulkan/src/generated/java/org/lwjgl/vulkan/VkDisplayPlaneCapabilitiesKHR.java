@@ -271,7 +271,7 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabili
     // -----------------------------------
 
     /** Unsafe version of {@link #supportedAlpha}. */
-    public static int nsupportedAlpha(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPlaneCapabilitiesKHR.SUPPORTEDALPHA); }
+    public static int nsupportedAlpha(long struct) { return memGetInt(struct + VkDisplayPlaneCapabilitiesKHR.SUPPORTEDALPHA); }
     /** Unsafe version of {@link #minSrcPosition}. */
     public static VkOffset2D nminSrcPosition(long struct) { return VkOffset2D.create(struct + VkDisplayPlaneCapabilitiesKHR.MINSRCPOSITION); }
     /** Unsafe version of {@link #maxSrcPosition}. */

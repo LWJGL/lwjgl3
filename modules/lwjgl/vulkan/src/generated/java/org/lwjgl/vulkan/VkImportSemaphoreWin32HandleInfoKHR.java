@@ -354,15 +354,15 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct<VkImportSemaphor
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportSemaphoreWin32HandleInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportSemaphoreWin32HandleInfoKHR.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkImportSemaphoreWin32HandleInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkImportSemaphoreWin32HandleInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkImportSemaphoreWin32HandleInfoKHR.FLAGS); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return memGetInt(struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLETYPE); }
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLE); }
     /** Unsafe version of {@link #name}. */
@@ -371,15 +371,15 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct<VkImportSemaphor
     public static String nnameString(long struct) { return memUTF16(memGetAddress(struct + VkImportSemaphoreWin32HandleInfoKHR.NAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportSemaphoreWin32HandleInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportSemaphoreWin32HandleInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkImportSemaphoreWin32HandleInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkImportSemaphoreWin32HandleInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkImportSemaphoreWin32HandleInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { memPutInt(struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLETYPE, value); }
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + VkImportSemaphoreWin32HandleInfoKHR.HANDLE, check(value)); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */

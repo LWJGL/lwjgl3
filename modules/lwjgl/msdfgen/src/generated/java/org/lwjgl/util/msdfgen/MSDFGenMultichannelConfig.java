@@ -250,26 +250,26 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
     // -----------------------------------
 
     /** Unsafe version of {@link #overlap_support}. */
-    public static int noverlap_support(long struct) { return UNSAFE.getInt(null, struct + MSDFGenMultichannelConfig.OVERLAP_SUPPORT); }
+    public static int noverlap_support(long struct) { return memGetInt(struct + MSDFGenMultichannelConfig.OVERLAP_SUPPORT); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + MSDFGenMultichannelConfig.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + MSDFGenMultichannelConfig.MODE); }
     /** Unsafe version of {@link #distance_check_mode}. */
-    public static int ndistance_check_mode(long struct) { return UNSAFE.getInt(null, struct + MSDFGenMultichannelConfig.DISTANCE_CHECK_MODE); }
+    public static int ndistance_check_mode(long struct) { return memGetInt(struct + MSDFGenMultichannelConfig.DISTANCE_CHECK_MODE); }
     /** Unsafe version of {@link #min_deviation_ratio}. */
-    public static double nmin_deviation_ratio(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenMultichannelConfig.MIN_DEVIATION_RATIO); }
+    public static double nmin_deviation_ratio(long struct) { return memGetDouble(struct + MSDFGenMultichannelConfig.MIN_DEVIATION_RATIO); }
     /** Unsafe version of {@link #min_improve_ratio}. */
-    public static double nmin_improve_ratio(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenMultichannelConfig.MIN_IMPROVE_RATIO); }
+    public static double nmin_improve_ratio(long struct) { return memGetDouble(struct + MSDFGenMultichannelConfig.MIN_IMPROVE_RATIO); }
 
     /** Unsafe version of {@link #overlap_support(int) overlap_support}. */
-    public static void noverlap_support(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenMultichannelConfig.OVERLAP_SUPPORT, value); }
+    public static void noverlap_support(long struct, int value) { memPutInt(struct + MSDFGenMultichannelConfig.OVERLAP_SUPPORT, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenMultichannelConfig.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + MSDFGenMultichannelConfig.MODE, value); }
     /** Unsafe version of {@link #distance_check_mode(int) distance_check_mode}. */
-    public static void ndistance_check_mode(long struct, int value) { UNSAFE.putInt(null, struct + MSDFGenMultichannelConfig.DISTANCE_CHECK_MODE, value); }
+    public static void ndistance_check_mode(long struct, int value) { memPutInt(struct + MSDFGenMultichannelConfig.DISTANCE_CHECK_MODE, value); }
     /** Unsafe version of {@link #min_deviation_ratio(double) min_deviation_ratio}. */
-    public static void nmin_deviation_ratio(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenMultichannelConfig.MIN_DEVIATION_RATIO, value); }
+    public static void nmin_deviation_ratio(long struct, double value) { memPutDouble(struct + MSDFGenMultichannelConfig.MIN_DEVIATION_RATIO, value); }
     /** Unsafe version of {@link #min_improve_ratio(double) min_improve_ratio}. */
-    public static void nmin_improve_ratio(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenMultichannelConfig.MIN_IMPROVE_RATIO, value); }
+    public static void nmin_improve_ratio(long struct, double value) { memPutDouble(struct + MSDFGenMultichannelConfig.MIN_IMPROVE_RATIO, value); }
 
     // -----------------------------------
 

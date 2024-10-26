@@ -296,20 +296,20 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferBeginInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferBeginInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferBeginInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkCommandBufferBeginInfo.FLAGS); }
     /** Unsafe version of {@link #pInheritanceInfo}. */
     @Nullable public static VkCommandBufferInheritanceInfo npInheritanceInfo(long struct) { return VkCommandBufferInheritanceInfo.createSafe(memGetAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferBeginInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferBeginInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkCommandBufferBeginInfo.FLAGS, value); }
     /** Unsafe version of {@link #pInheritanceInfo(VkCommandBufferInheritanceInfo) pInheritanceInfo}. */
     public static void npInheritanceInfo(long struct, @Nullable VkCommandBufferInheritanceInfo value) { memPutAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO, memAddressSafe(value)); }
 

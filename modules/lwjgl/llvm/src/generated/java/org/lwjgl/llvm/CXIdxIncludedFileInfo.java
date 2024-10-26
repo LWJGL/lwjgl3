@@ -149,11 +149,11 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
     /** Unsafe version of {@link #file}. */
     public static long nfile(long struct) { return memGetAddress(struct + CXIdxIncludedFileInfo.FILE); }
     /** Unsafe version of {@link #isImport}. */
-    public static int nisImport(long struct) { return UNSAFE.getInt(null, struct + CXIdxIncludedFileInfo.ISIMPORT); }
+    public static int nisImport(long struct) { return memGetInt(struct + CXIdxIncludedFileInfo.ISIMPORT); }
     /** Unsafe version of {@link #isAngled}. */
-    public static int nisAngled(long struct) { return UNSAFE.getInt(null, struct + CXIdxIncludedFileInfo.ISANGLED); }
+    public static int nisAngled(long struct) { return memGetInt(struct + CXIdxIncludedFileInfo.ISANGLED); }
     /** Unsafe version of {@link #isModuleImport}. */
-    public static int nisModuleImport(long struct) { return UNSAFE.getInt(null, struct + CXIdxIncludedFileInfo.ISMODULEIMPORT); }
+    public static int nisModuleImport(long struct) { return memGetInt(struct + CXIdxIncludedFileInfo.ISMODULEIMPORT); }
 
     // -----------------------------------
 

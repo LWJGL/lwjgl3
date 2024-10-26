@@ -360,7 +360,7 @@ public class OVRLayerEyeFov extends Struct<OVRLayerEyeFov> implements NativeReso
         return OVRPosef.create(struct + OVRLayerEyeFov.RENDERPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime}. */
-    public static double nSensorSampleTime(long struct) { return UNSAFE.getDouble(null, struct + OVRLayerEyeFov.SENSORSAMPLETIME); }
+    public static double nSensorSampleTime(long struct) { return memGetDouble(struct + OVRLayerEyeFov.SENSORSAMPLETIME); }
 
     /** Unsafe version of {@link #Header(OVRLayerHeader) Header}. */
     public static void nHeader(long struct, OVRLayerHeader value) { memCopy(value.address(), struct + OVRLayerEyeFov.HEADER, OVRLayerHeader.SIZEOF); }
@@ -401,7 +401,7 @@ public class OVRLayerEyeFov extends Struct<OVRLayerEyeFov> implements NativeReso
         memCopy(value.address(), struct + OVRLayerEyeFov.RENDERPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF, OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime(double) SensorSampleTime}. */
-    public static void nSensorSampleTime(long struct, double value) { UNSAFE.putDouble(null, struct + OVRLayerEyeFov.SENSORSAMPLETIME, value); }
+    public static void nSensorSampleTime(long struct, double value) { memPutDouble(struct + OVRLayerEyeFov.SENSORSAMPLETIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

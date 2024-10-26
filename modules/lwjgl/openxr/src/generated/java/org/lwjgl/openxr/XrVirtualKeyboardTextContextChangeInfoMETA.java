@@ -253,7 +253,7 @@ public class XrVirtualKeyboardTextContextChangeInfoMETA extends Struct<XrVirtual
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrVirtualKeyboardTextContextChangeInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrVirtualKeyboardTextContextChangeInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrVirtualKeyboardTextContextChangeInfoMETA.NEXT); }
     /** Unsafe version of {@link #textContext}. */
@@ -262,7 +262,7 @@ public class XrVirtualKeyboardTextContextChangeInfoMETA extends Struct<XrVirtual
     public static String ntextContextString(long struct) { return memUTF8(memGetAddress(struct + XrVirtualKeyboardTextContextChangeInfoMETA.TEXTCONTEXT)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVirtualKeyboardTextContextChangeInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrVirtualKeyboardTextContextChangeInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrVirtualKeyboardTextContextChangeInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #textContext(ByteBuffer) textContext}. */

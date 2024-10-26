@@ -302,24 +302,24 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #drmFormatModifier}. */
-    public static long ndrmFormatModifier(long struct) { return UNSAFE.getLong(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIER); }
+    public static long ndrmFormatModifier(long struct) { return memGetLong(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIER); }
     /** Unsafe version of {@link #drmFormatModifierPlaneCount}. */
-    public static int ndrmFormatModifierPlaneCount(long struct) { return UNSAFE.getInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT); }
+    public static int ndrmFormatModifierPlaneCount(long struct) { return memGetInt(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT); }
     /** Unsafe version of {@link #pPlaneLayouts}. */
     public static VkSubresourceLayout.Buffer npPlaneLayouts(long struct) { return VkSubresourceLayout.create(memGetAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS), ndrmFormatModifierPlaneCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #drmFormatModifier(long) drmFormatModifier}. */
-    public static void ndrmFormatModifier(long struct, long value) { UNSAFE.putLong(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIER, value); }
+    public static void ndrmFormatModifier(long struct, long value) { memPutLong(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIER, value); }
     /** Sets the specified value to the {@code drmFormatModifierPlaneCount} field of the specified {@code struct}. */
-    public static void ndrmFormatModifierPlaneCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT, value); }
+    public static void ndrmFormatModifierPlaneCount(long struct, int value) { memPutInt(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.DRMFORMATMODIFIERPLANECOUNT, value); }
     /** Unsafe version of {@link #pPlaneLayouts(VkSubresourceLayout.Buffer) pPlaneLayouts}. */
     public static void npPlaneLayouts(long struct, VkSubresourceLayout.Buffer value) { memPutAddress(struct + VkImageDrmFormatModifierExplicitCreateInfoEXT.PPLANELAYOUTS, value.address()); ndrmFormatModifierPlaneCount(struct, value.remaining()); }
 

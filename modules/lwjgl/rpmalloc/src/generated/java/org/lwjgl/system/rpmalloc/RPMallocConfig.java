@@ -324,7 +324,7 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     /** Unsafe version of {@link #span_map_count}. */
     public static long nspan_map_count(long struct) { return memGetAddress(struct + RPMallocConfig.SPAN_MAP_COUNT); }
     /** Unsafe version of {@link #enable_huge_pages}. */
-    public static int nenable_huge_pages(long struct) { return UNSAFE.getInt(null, struct + RPMallocConfig.ENABLE_HUGE_PAGES); }
+    public static int nenable_huge_pages(long struct) { return memGetInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES); }
     /** Unsafe version of {@link #page_name}. */
     @Nullable public static ByteBuffer npage_name(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RPMallocConfig.PAGE_NAME)); }
     /** Unsafe version of {@link #page_nameString}. */
@@ -349,7 +349,7 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     /** Unsafe version of {@link #span_map_count(long) span_map_count}. */
     public static void nspan_map_count(long struct, long value) { memPutAddress(struct + RPMallocConfig.SPAN_MAP_COUNT, value); }
     /** Unsafe version of {@link #enable_huge_pages(boolean) enable_huge_pages}. */
-    public static void nenable_huge_pages(long struct, int value) { UNSAFE.putInt(null, struct + RPMallocConfig.ENABLE_HUGE_PAGES, value); }
+    public static void nenable_huge_pages(long struct, int value) { memPutInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES, value); }
     /** Unsafe version of {@link #page_name(ByteBuffer) page_name}. */
     public static void npage_name(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }

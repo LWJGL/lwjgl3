@@ -449,7 +449,7 @@ public class StdVideoH265PpsFlags extends Struct<StdVideoH265PpsFlags> implement
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265PpsFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoH265PpsFlags.BITFIELD0); }
     /** Unsafe version of {@link #dependent_slice_segments_enabled_flag}. */
     public static int ndependent_slice_segments_enabled_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #output_flag_present_flag}. */
@@ -513,7 +513,7 @@ public class StdVideoH265PpsFlags extends Struct<StdVideoH265PpsFlags> implement
     /** Unsafe version of {@link #pps_range_extension_flag}. */
     public static int npps_range_extension_flag(long struct) { return (nbitfield0(struct) & 0x40_00_00_00) >>> 30; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265PpsFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoH265PpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #dependent_slice_segments_enabled_flag(boolean) dependent_slice_segments_enabled_flag}. */
     public static void ndependent_slice_segments_enabled_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #output_flag_present_flag(boolean) output_flag_present_flag}. */

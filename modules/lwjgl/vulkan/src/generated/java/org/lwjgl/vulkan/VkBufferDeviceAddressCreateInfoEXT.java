@@ -271,18 +271,18 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct<VkBufferDeviceAdd
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferDeviceAddressCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBufferDeviceAddressCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBufferDeviceAddressCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #deviceAddress}. */
-    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS); }
+    public static long ndeviceAddress(long struct) { return memGetLong(struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferDeviceAddressCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBufferDeviceAddressCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferDeviceAddressCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
-    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS, value); }
+    public static void ndeviceAddress(long struct, long value) { memPutLong(struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS, value); }
 
     // -----------------------------------
 

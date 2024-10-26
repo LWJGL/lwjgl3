@@ -330,11 +330,11 @@ public class XSelectionRequestEvent extends Struct<XSelectionRequestEvent> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XSelectionRequestEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XSelectionRequestEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XSelectionRequestEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XSelectionRequestEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XSelectionRequestEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XSelectionRequestEvent.DISPLAY); }
     /** Unsafe version of {@link #owner}. */
@@ -351,11 +351,11 @@ public class XSelectionRequestEvent extends Struct<XSelectionRequestEvent> imple
     public static long ntime(long struct) { return memGetCLong(struct + XSelectionRequestEvent.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionRequestEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XSelectionRequestEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionRequestEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XSelectionRequestEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #owner(long) owner}. */

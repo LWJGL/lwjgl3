@@ -245,14 +245,14 @@ public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #operation}. */
-    public static int noperation(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationMove.OPERATION); }
+    public static int noperation(long struct) { return memGetInt(struct + VmaDefragmentationMove.OPERATION); }
     /** Unsafe version of {@link #srcAllocation}. */
     public static long nsrcAllocation(long struct) { return memGetAddress(struct + VmaDefragmentationMove.SRCALLOCATION); }
     /** Unsafe version of {@link #dstTmpAllocation}. */
     public static long ndstTmpAllocation(long struct) { return memGetAddress(struct + VmaDefragmentationMove.DSTTMPALLOCATION); }
 
     /** Unsafe version of {@link #operation(int) operation}. */
-    public static void noperation(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationMove.OPERATION, value); }
+    public static void noperation(long struct, int value) { memPutInt(struct + VmaDefragmentationMove.OPERATION, value); }
     /** Unsafe version of {@link #srcAllocation(long) srcAllocation}. */
     public static void nsrcAllocation(long struct, long value) { memPutAddress(struct + VmaDefragmentationMove.SRCALLOCATION, check(value)); }
     /** Unsafe version of {@link #dstTmpAllocation(long) dstTmpAllocation}. */

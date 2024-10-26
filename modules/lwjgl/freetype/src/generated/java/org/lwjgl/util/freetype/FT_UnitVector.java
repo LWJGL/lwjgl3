@@ -223,14 +223,14 @@ public class FT_UnitVector extends Struct<FT_UnitVector> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + FT_UnitVector.X); }
+    public static short nx(long struct) { return memGetShort(struct + FT_UnitVector.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return UNSAFE.getShort(null, struct + FT_UnitVector.Y); }
+    public static short ny(long struct) { return memGetShort(struct + FT_UnitVector.Y); }
 
     /** Unsafe version of {@link #x(short) x}. */
-    public static void nx(long struct, short value) { UNSAFE.putShort(null, struct + FT_UnitVector.X, value); }
+    public static void nx(long struct, short value) { memPutShort(struct + FT_UnitVector.X, value); }
     /** Unsafe version of {@link #y(short) y}. */
-    public static void ny(long struct, short value) { UNSAFE.putShort(null, struct + FT_UnitVector.Y, value); }
+    public static void ny(long struct, short value) { memPutShort(struct + FT_UnitVector.Y, value); }
 
     // -----------------------------------
 

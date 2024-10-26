@@ -240,14 +240,14 @@ public class DBDATETIM4 extends Struct<DBDATETIM4> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #numdays}. */
-    public static short nnumdays(long struct) { return UNSAFE.getShort(null, struct + DBDATETIM4.NUMDAYS); }
+    public static short nnumdays(long struct) { return memGetShort(struct + DBDATETIM4.NUMDAYS); }
     /** Unsafe version of {@link #nummins}. */
-    public static short nnummins(long struct) { return UNSAFE.getShort(null, struct + DBDATETIM4.NUMMINS); }
+    public static short nnummins(long struct) { return memGetShort(struct + DBDATETIM4.NUMMINS); }
 
     /** Unsafe version of {@link #numdays(short) numdays}. */
-    public static void nnumdays(long struct, short value) { UNSAFE.putShort(null, struct + DBDATETIM4.NUMDAYS, value); }
+    public static void nnumdays(long struct, short value) { memPutShort(struct + DBDATETIM4.NUMDAYS, value); }
     /** Unsafe version of {@link #nummins(short) nummins}. */
-    public static void nnummins(long struct, short value) { UNSAFE.putShort(null, struct + DBDATETIM4.NUMMINS, value); }
+    public static void nnummins(long struct, short value) { memPutShort(struct + DBDATETIM4.NUMMINS, value); }
 
     // -----------------------------------
 

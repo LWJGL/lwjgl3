@@ -525,106 +525,106 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     /** Unsafe version of {@link #flags}. */
     public static StdVideoAV1FilmGrainFlags nflags(long struct) { return StdVideoAV1FilmGrainFlags.create(struct + StdVideoAV1FilmGrain.FLAGS); }
     /** Unsafe version of {@link #grain_scaling_minus_8}. */
-    public static byte ngrain_scaling_minus_8(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.GRAIN_SCALING_MINUS_8); }
+    public static byte ngrain_scaling_minus_8(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.GRAIN_SCALING_MINUS_8); }
     /** Unsafe version of {@link #ar_coeff_lag}. */
-    public static byte nar_coeff_lag(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.AR_COEFF_LAG); }
+    public static byte nar_coeff_lag(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.AR_COEFF_LAG); }
     /** Unsafe version of {@link #ar_coeff_shift_minus_6}. */
-    public static byte nar_coeff_shift_minus_6(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.AR_COEFF_SHIFT_MINUS_6); }
+    public static byte nar_coeff_shift_minus_6(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.AR_COEFF_SHIFT_MINUS_6); }
     /** Unsafe version of {@link #grain_scale_shift}. */
-    public static byte ngrain_scale_shift(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.GRAIN_SCALE_SHIFT); }
+    public static byte ngrain_scale_shift(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.GRAIN_SCALE_SHIFT); }
     /** Unsafe version of {@link #grain_seed}. */
-    public static short ngrain_seed(long struct) { return UNSAFE.getShort(null, struct + StdVideoAV1FilmGrain.GRAIN_SEED); }
+    public static short ngrain_seed(long struct) { return memGetShort(struct + StdVideoAV1FilmGrain.GRAIN_SEED); }
     /** Unsafe version of {@link #film_grain_params_ref_idx}. */
-    public static byte nfilm_grain_params_ref_idx(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.FILM_GRAIN_PARAMS_REF_IDX); }
+    public static byte nfilm_grain_params_ref_idx(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.FILM_GRAIN_PARAMS_REF_IDX); }
     /** Unsafe version of {@link #num_y_points}. */
-    public static byte nnum_y_points(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.NUM_Y_POINTS); }
+    public static byte nnum_y_points(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.NUM_Y_POINTS); }
     /** Unsafe version of {@link #point_y_value}. */
     public static ByteBuffer npoint_y_value(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_Y_VALUE, STD_VIDEO_AV1_MAX_NUM_Y_POINTS); }
     /** Unsafe version of {@link #point_y_value(int) point_y_value}. */
     public static byte npoint_y_value(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_Y_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_Y_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1);
     }
     /** Unsafe version of {@link #point_y_scaling}. */
     public static ByteBuffer npoint_y_scaling(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_Y_SCALING, STD_VIDEO_AV1_MAX_NUM_Y_POINTS); }
     /** Unsafe version of {@link #point_y_scaling(int) point_y_scaling}. */
     public static byte npoint_y_scaling(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_Y_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_Y_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1);
     }
     /** Unsafe version of {@link #num_cb_points}. */
-    public static byte nnum_cb_points(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.NUM_CB_POINTS); }
+    public static byte nnum_cb_points(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.NUM_CB_POINTS); }
     /** Unsafe version of {@link #point_cb_value}. */
     public static ByteBuffer npoint_cb_value(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_CB_VALUE, STD_VIDEO_AV1_MAX_NUM_CB_POINTS); }
     /** Unsafe version of {@link #point_cb_value(int) point_cb_value}. */
     public static byte npoint_cb_value(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_CB_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_CB_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1);
     }
     /** Unsafe version of {@link #point_cb_scaling}. */
     public static ByteBuffer npoint_cb_scaling(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_CB_SCALING, STD_VIDEO_AV1_MAX_NUM_CB_POINTS); }
     /** Unsafe version of {@link #point_cb_scaling(int) point_cb_scaling}. */
     public static byte npoint_cb_scaling(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_CB_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_CB_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1);
     }
     /** Unsafe version of {@link #num_cr_points}. */
-    public static byte nnum_cr_points(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.NUM_CR_POINTS); }
+    public static byte nnum_cr_points(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.NUM_CR_POINTS); }
     /** Unsafe version of {@link #point_cr_value}. */
     public static ByteBuffer npoint_cr_value(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_CR_VALUE, STD_VIDEO_AV1_MAX_NUM_CR_POINTS); }
     /** Unsafe version of {@link #point_cr_value(int) point_cr_value}. */
     public static byte npoint_cr_value(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_CR_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_CR_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1);
     }
     /** Unsafe version of {@link #point_cr_scaling}. */
     public static ByteBuffer npoint_cr_scaling(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.POINT_CR_SCALING, STD_VIDEO_AV1_MAX_NUM_CR_POINTS); }
     /** Unsafe version of {@link #point_cr_scaling(int) point_cr_scaling}. */
     public static byte npoint_cr_scaling(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.POINT_CR_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.POINT_CR_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1);
     }
     /** Unsafe version of {@link #ar_coeffs_y_plus_128}. */
     public static ByteBuffer nar_coeffs_y_plus_128(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.AR_COEFFS_Y_PLUS_128, STD_VIDEO_AV1_MAX_NUM_POS_LUMA); }
     /** Unsafe version of {@link #ar_coeffs_y_plus_128(int) ar_coeffs_y_plus_128}. */
     public static byte nar_coeffs_y_plus_128(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_Y_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_LUMA) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_Y_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_LUMA) * 1);
     }
     /** Unsafe version of {@link #ar_coeffs_cb_plus_128}. */
     public static ByteBuffer nar_coeffs_cb_plus_128(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.AR_COEFFS_CB_PLUS_128, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA); }
     /** Unsafe version of {@link #ar_coeffs_cb_plus_128(int) ar_coeffs_cb_plus_128}. */
     public static byte nar_coeffs_cb_plus_128(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_CB_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_CB_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1);
     }
     /** Unsafe version of {@link #ar_coeffs_cr_plus_128}. */
     public static ByteBuffer nar_coeffs_cr_plus_128(long struct) { return memByteBuffer(struct + StdVideoAV1FilmGrain.AR_COEFFS_CR_PLUS_128, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA); }
     /** Unsafe version of {@link #ar_coeffs_cr_plus_128(int) ar_coeffs_cr_plus_128}. */
     public static byte nar_coeffs_cr_plus_128(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_CR_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1);
+        return memGetByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_CR_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1);
     }
     /** Unsafe version of {@link #cb_mult}. */
-    public static byte ncb_mult(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.CB_MULT); }
+    public static byte ncb_mult(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.CB_MULT); }
     /** Unsafe version of {@link #cb_luma_mult}. */
-    public static byte ncb_luma_mult(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.CB_LUMA_MULT); }
+    public static byte ncb_luma_mult(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.CB_LUMA_MULT); }
     /** Unsafe version of {@link #cb_offset}. */
-    public static short ncb_offset(long struct) { return UNSAFE.getShort(null, struct + StdVideoAV1FilmGrain.CB_OFFSET); }
+    public static short ncb_offset(long struct) { return memGetShort(struct + StdVideoAV1FilmGrain.CB_OFFSET); }
     /** Unsafe version of {@link #cr_mult}. */
-    public static byte ncr_mult(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.CR_MULT); }
+    public static byte ncr_mult(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.CR_MULT); }
     /** Unsafe version of {@link #cr_luma_mult}. */
-    public static byte ncr_luma_mult(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1FilmGrain.CR_LUMA_MULT); }
+    public static byte ncr_luma_mult(long struct) { return memGetByte(struct + StdVideoAV1FilmGrain.CR_LUMA_MULT); }
     /** Unsafe version of {@link #cr_offset}. */
-    public static short ncr_offset(long struct) { return UNSAFE.getShort(null, struct + StdVideoAV1FilmGrain.CR_OFFSET); }
+    public static short ncr_offset(long struct) { return memGetShort(struct + StdVideoAV1FilmGrain.CR_OFFSET); }
 
     /** Unsafe version of {@link #flags(StdVideoAV1FilmGrainFlags) flags}. */
     public static void nflags(long struct, StdVideoAV1FilmGrainFlags value) { memCopy(value.address(), struct + StdVideoAV1FilmGrain.FLAGS, StdVideoAV1FilmGrainFlags.SIZEOF); }
     /** Unsafe version of {@link #grain_scaling_minus_8(byte) grain_scaling_minus_8}. */
-    public static void ngrain_scaling_minus_8(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.GRAIN_SCALING_MINUS_8, value); }
+    public static void ngrain_scaling_minus_8(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.GRAIN_SCALING_MINUS_8, value); }
     /** Unsafe version of {@link #ar_coeff_lag(byte) ar_coeff_lag}. */
-    public static void nar_coeff_lag(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.AR_COEFF_LAG, value); }
+    public static void nar_coeff_lag(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.AR_COEFF_LAG, value); }
     /** Unsafe version of {@link #ar_coeff_shift_minus_6(byte) ar_coeff_shift_minus_6}. */
-    public static void nar_coeff_shift_minus_6(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.AR_COEFF_SHIFT_MINUS_6, value); }
+    public static void nar_coeff_shift_minus_6(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.AR_COEFF_SHIFT_MINUS_6, value); }
     /** Unsafe version of {@link #grain_scale_shift(byte) grain_scale_shift}. */
-    public static void ngrain_scale_shift(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.GRAIN_SCALE_SHIFT, value); }
+    public static void ngrain_scale_shift(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.GRAIN_SCALE_SHIFT, value); }
     /** Unsafe version of {@link #grain_seed(short) grain_seed}. */
-    public static void ngrain_seed(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoAV1FilmGrain.GRAIN_SEED, value); }
+    public static void ngrain_seed(long struct, short value) { memPutShort(struct + StdVideoAV1FilmGrain.GRAIN_SEED, value); }
     /** Unsafe version of {@link #film_grain_params_ref_idx(byte) film_grain_params_ref_idx}. */
-    public static void nfilm_grain_params_ref_idx(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.FILM_GRAIN_PARAMS_REF_IDX, value); }
+    public static void nfilm_grain_params_ref_idx(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.FILM_GRAIN_PARAMS_REF_IDX, value); }
     /** Unsafe version of {@link #num_y_points(byte) num_y_points}. */
-    public static void nnum_y_points(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.NUM_Y_POINTS, value); }
+    public static void nnum_y_points(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.NUM_Y_POINTS, value); }
     /** Unsafe version of {@link #point_y_value(ByteBuffer) point_y_value}. */
     public static void npoint_y_value(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_MAX_NUM_Y_POINTS); }
@@ -632,7 +632,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_y_value(int, byte) point_y_value}. */
     public static void npoint_y_value(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_Y_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_Y_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #point_y_scaling(ByteBuffer) point_y_scaling}. */
     public static void npoint_y_scaling(long struct, ByteBuffer value) {
@@ -641,10 +641,10 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_y_scaling(int, byte) point_y_scaling}. */
     public static void npoint_y_scaling(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_Y_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_Y_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_Y_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #num_cb_points(byte) num_cb_points}. */
-    public static void nnum_cb_points(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.NUM_CB_POINTS, value); }
+    public static void nnum_cb_points(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.NUM_CB_POINTS, value); }
     /** Unsafe version of {@link #point_cb_value(ByteBuffer) point_cb_value}. */
     public static void npoint_cb_value(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_MAX_NUM_CB_POINTS); }
@@ -652,7 +652,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_cb_value(int, byte) point_cb_value}. */
     public static void npoint_cb_value(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_CB_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_CB_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #point_cb_scaling(ByteBuffer) point_cb_scaling}. */
     public static void npoint_cb_scaling(long struct, ByteBuffer value) {
@@ -661,10 +661,10 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_cb_scaling(int, byte) point_cb_scaling}. */
     public static void npoint_cb_scaling(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_CB_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_CB_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CB_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #num_cr_points(byte) num_cr_points}. */
-    public static void nnum_cr_points(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.NUM_CR_POINTS, value); }
+    public static void nnum_cr_points(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.NUM_CR_POINTS, value); }
     /** Unsafe version of {@link #point_cr_value(ByteBuffer) point_cr_value}. */
     public static void npoint_cr_value(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_AV1_MAX_NUM_CR_POINTS); }
@@ -672,7 +672,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_cr_value(int, byte) point_cr_value}. */
     public static void npoint_cr_value(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_CR_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_CR_VALUE + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #point_cr_scaling(ByteBuffer) point_cr_scaling}. */
     public static void npoint_cr_scaling(long struct, ByteBuffer value) {
@@ -681,7 +681,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #point_cr_scaling(int, byte) point_cr_scaling}. */
     public static void npoint_cr_scaling(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.POINT_CR_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.POINT_CR_SCALING + check(index, STD_VIDEO_AV1_MAX_NUM_CR_POINTS) * 1, value);
     }
     /** Unsafe version of {@link #ar_coeffs_y_plus_128(ByteBuffer) ar_coeffs_y_plus_128}. */
     public static void nar_coeffs_y_plus_128(long struct, ByteBuffer value) {
@@ -690,7 +690,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #ar_coeffs_y_plus_128(int, byte) ar_coeffs_y_plus_128}. */
     public static void nar_coeffs_y_plus_128(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_Y_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_LUMA) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_Y_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_LUMA) * 1, value);
     }
     /** Unsafe version of {@link #ar_coeffs_cb_plus_128(ByteBuffer) ar_coeffs_cb_plus_128}. */
     public static void nar_coeffs_cb_plus_128(long struct, ByteBuffer value) {
@@ -699,7 +699,7 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #ar_coeffs_cb_plus_128(int, byte) ar_coeffs_cb_plus_128}. */
     public static void nar_coeffs_cb_plus_128(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_CB_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_CB_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1, value);
     }
     /** Unsafe version of {@link #ar_coeffs_cr_plus_128(ByteBuffer) ar_coeffs_cr_plus_128}. */
     public static void nar_coeffs_cr_plus_128(long struct, ByteBuffer value) {
@@ -708,20 +708,20 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
     }
     /** Unsafe version of {@link #ar_coeffs_cr_plus_128(int, byte) ar_coeffs_cr_plus_128}. */
     public static void nar_coeffs_cr_plus_128(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.AR_COEFFS_CR_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1, value);
+        memPutByte(struct + StdVideoAV1FilmGrain.AR_COEFFS_CR_PLUS_128 + check(index, STD_VIDEO_AV1_MAX_NUM_POS_CHROMA) * 1, value);
     }
     /** Unsafe version of {@link #cb_mult(byte) cb_mult}. */
-    public static void ncb_mult(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.CB_MULT, value); }
+    public static void ncb_mult(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.CB_MULT, value); }
     /** Unsafe version of {@link #cb_luma_mult(byte) cb_luma_mult}. */
-    public static void ncb_luma_mult(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.CB_LUMA_MULT, value); }
+    public static void ncb_luma_mult(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.CB_LUMA_MULT, value); }
     /** Unsafe version of {@link #cb_offset(short) cb_offset}. */
-    public static void ncb_offset(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoAV1FilmGrain.CB_OFFSET, value); }
+    public static void ncb_offset(long struct, short value) { memPutShort(struct + StdVideoAV1FilmGrain.CB_OFFSET, value); }
     /** Unsafe version of {@link #cr_mult(byte) cr_mult}. */
-    public static void ncr_mult(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.CR_MULT, value); }
+    public static void ncr_mult(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.CR_MULT, value); }
     /** Unsafe version of {@link #cr_luma_mult(byte) cr_luma_mult}. */
-    public static void ncr_luma_mult(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1FilmGrain.CR_LUMA_MULT, value); }
+    public static void ncr_luma_mult(long struct, byte value) { memPutByte(struct + StdVideoAV1FilmGrain.CR_LUMA_MULT, value); }
     /** Unsafe version of {@link #cr_offset(short) cr_offset}. */
-    public static void ncr_offset(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoAV1FilmGrain.CR_OFFSET, value); }
+    public static void ncr_offset(long struct, short value) { memPutShort(struct + StdVideoAV1FilmGrain.CR_OFFSET, value); }
 
     // -----------------------------------
 

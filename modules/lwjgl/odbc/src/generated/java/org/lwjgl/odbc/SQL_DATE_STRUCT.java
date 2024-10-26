@@ -251,18 +251,18 @@ public class SQL_DATE_STRUCT extends Struct<SQL_DATE_STRUCT> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #year}. */
-    public static short nyear(long struct) { return UNSAFE.getShort(null, struct + SQL_DATE_STRUCT.YEAR); }
+    public static short nyear(long struct) { return memGetShort(struct + SQL_DATE_STRUCT.YEAR); }
     /** Unsafe version of {@link #month}. */
-    public static short nmonth(long struct) { return UNSAFE.getShort(null, struct + SQL_DATE_STRUCT.MONTH); }
+    public static short nmonth(long struct) { return memGetShort(struct + SQL_DATE_STRUCT.MONTH); }
     /** Unsafe version of {@link #day}. */
-    public static short nday(long struct) { return UNSAFE.getShort(null, struct + SQL_DATE_STRUCT.DAY); }
+    public static short nday(long struct) { return memGetShort(struct + SQL_DATE_STRUCT.DAY); }
 
     /** Unsafe version of {@link #year(short) year}. */
-    public static void nyear(long struct, short value) { UNSAFE.putShort(null, struct + SQL_DATE_STRUCT.YEAR, value); }
+    public static void nyear(long struct, short value) { memPutShort(struct + SQL_DATE_STRUCT.YEAR, value); }
     /** Unsafe version of {@link #month(short) month}. */
-    public static void nmonth(long struct, short value) { UNSAFE.putShort(null, struct + SQL_DATE_STRUCT.MONTH, value); }
+    public static void nmonth(long struct, short value) { memPutShort(struct + SQL_DATE_STRUCT.MONTH, value); }
     /** Unsafe version of {@link #day(short) day}. */
-    public static void nday(long struct, short value) { UNSAFE.putShort(null, struct + SQL_DATE_STRUCT.DAY, value); }
+    public static void nday(long struct, short value) { memPutShort(struct + SQL_DATE_STRUCT.DAY, value); }
 
     // -----------------------------------
 

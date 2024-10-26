@@ -246,18 +246,18 @@ public class VkPhysicalDevicePresentIdFeaturesKHR extends Struct<VkPhysicalDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePresentIdFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePresentIdFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePresentIdFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #presentId}. */
-    public static int npresentId(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePresentIdFeaturesKHR.PRESENTID); }
+    public static int npresentId(long struct) { return memGetInt(struct + VkPhysicalDevicePresentIdFeaturesKHR.PRESENTID); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePresentIdFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentIdFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePresentIdFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #presentId(boolean) presentId}. */
-    public static void npresentId(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePresentIdFeaturesKHR.PRESENTID, value); }
+    public static void npresentId(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentIdFeaturesKHR.PRESENTID, value); }
 
     // -----------------------------------
 

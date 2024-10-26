@@ -290,30 +290,30 @@ public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputA
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription2EXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription2EXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVertexInputAttributeDescription2EXT.PNEXT); }
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription2EXT.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription2EXT.LOCATION); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription2EXT.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription2EXT.BINDING); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription2EXT.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription2EXT.FORMAT); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputAttributeDescription2EXT.OFFSET); }
+    public static int noffset(long struct) { return memGetInt(struct + VkVertexInputAttributeDescription2EXT.OFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription2EXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription2EXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVertexInputAttributeDescription2EXT.PNEXT, value); }
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription2EXT.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription2EXT.LOCATION, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription2EXT.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription2EXT.BINDING, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription2EXT.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription2EXT.FORMAT, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputAttributeDescription2EXT.OFFSET, value); }
+    public static void noffset(long struct, int value) { memPutInt(struct + VkVertexInputAttributeDescription2EXT.OFFSET, value); }
 
     // -----------------------------------
 

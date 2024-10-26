@@ -247,18 +247,18 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #globalPriority}. */
-    public static int nglobalPriority(long struct) { return UNSAFE.getInt(null, struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY); }
+    public static int nglobalPriority(long struct) { return memGetInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #globalPriority(int) globalPriority}. */
-    public static void nglobalPriority(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY, value); }
+    public static void nglobalPriority(long struct, int value) { memPutInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY, value); }
 
     // -----------------------------------
 

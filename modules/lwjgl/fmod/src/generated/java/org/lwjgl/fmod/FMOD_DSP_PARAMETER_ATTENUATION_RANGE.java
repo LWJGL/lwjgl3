@@ -219,14 +219,14 @@ public class FMOD_DSP_PARAMETER_ATTENUATION_RANGE extends Struct<FMOD_DSP_PARAME
     // -----------------------------------
 
     /** Unsafe version of {@link #min}. */
-    public static float nmin(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MIN); }
+    public static float nmin(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MIN); }
     /** Unsafe version of {@link #max}. */
-    public static float nmax(long struct) { return UNSAFE.getFloat(null, struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MAX); }
+    public static float nmax(long struct) { return memGetFloat(struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MAX); }
 
     /** Unsafe version of {@link #min(float) min}. */
-    public static void nmin(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MIN, value); }
+    public static void nmin(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MIN, value); }
     /** Unsafe version of {@link #max(float) max}. */
-    public static void nmax(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MAX, value); }
+    public static void nmax(long struct, float value) { memPutFloat(struct + FMOD_DSP_PARAMETER_ATTENUATION_RANGE.MAX, value); }
 
     // -----------------------------------
 

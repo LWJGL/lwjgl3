@@ -396,58 +396,58 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDescriptorIndexingProperties.PNEXT); }
     /** Unsafe version of {@link #maxUpdateAfterBindDescriptorsInAllPools}. */
-    public static int nmaxUpdateAfterBindDescriptorsInAllPools(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXUPDATEAFTERBINDDESCRIPTORSINALLPOOLS); }
+    public static int nmaxUpdateAfterBindDescriptorsInAllPools(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXUPDATEAFTERBINDDESCRIPTORSINALLPOOLS); }
     /** Unsafe version of {@link #shaderUniformBufferArrayNonUniformIndexingNative}. */
-    public static int nshaderUniformBufferArrayNonUniformIndexingNative(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXINGNATIVE); }
+    public static int nshaderUniformBufferArrayNonUniformIndexingNative(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXINGNATIVE); }
     /** Unsafe version of {@link #shaderSampledImageArrayNonUniformIndexingNative}. */
-    public static int nshaderSampledImageArrayNonUniformIndexingNative(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXINGNATIVE); }
+    public static int nshaderSampledImageArrayNonUniformIndexingNative(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXINGNATIVE); }
     /** Unsafe version of {@link #shaderStorageBufferArrayNonUniformIndexingNative}. */
-    public static int nshaderStorageBufferArrayNonUniformIndexingNative(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXINGNATIVE); }
+    public static int nshaderStorageBufferArrayNonUniformIndexingNative(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXINGNATIVE); }
     /** Unsafe version of {@link #shaderStorageImageArrayNonUniformIndexingNative}. */
-    public static int nshaderStorageImageArrayNonUniformIndexingNative(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXINGNATIVE); }
+    public static int nshaderStorageImageArrayNonUniformIndexingNative(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXINGNATIVE); }
     /** Unsafe version of {@link #shaderInputAttachmentArrayNonUniformIndexingNative}. */
-    public static int nshaderInputAttachmentArrayNonUniformIndexingNative(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXINGNATIVE); }
+    public static int nshaderInputAttachmentArrayNonUniformIndexingNative(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXINGNATIVE); }
     /** Unsafe version of {@link #robustBufferAccessUpdateAfterBind}. */
-    public static int nrobustBufferAccessUpdateAfterBind(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.ROBUSTBUFFERACCESSUPDATEAFTERBIND); }
+    public static int nrobustBufferAccessUpdateAfterBind(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.ROBUSTBUFFERACCESSUPDATEAFTERBIND); }
     /** Unsafe version of {@link #quadDivergentImplicitLod}. */
-    public static int nquadDivergentImplicitLod(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.QUADDIVERGENTIMPLICITLOD); }
+    public static int nquadDivergentImplicitLod(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.QUADDIVERGENTIMPLICITLOD); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindSamplers}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindSamplers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLERS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindSamplers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLERS); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindUniformBuffers}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDUNIFORMBUFFERS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDUNIFORMBUFFERS); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindStorageBuffers}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEBUFFERS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEBUFFERS); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindSampledImages}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindSampledImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLEDIMAGES); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindSampledImages(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLEDIMAGES); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindStorageImages}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindStorageImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEIMAGES); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindStorageImages(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEIMAGES); }
     /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindInputAttachments}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindInputAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINPUTATTACHMENTS); }
+    public static int nmaxPerStageDescriptorUpdateAfterBindInputAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINPUTATTACHMENTS); }
     /** Unsafe version of {@link #maxPerStageUpdateAfterBindResources}. */
-    public static int nmaxPerStageUpdateAfterBindResources(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEUPDATEAFTERBINDRESOURCES); }
+    public static int nmaxPerStageUpdateAfterBindResources(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXPERSTAGEUPDATEAFTERBINDRESOURCES); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindSamplers}. */
-    public static int nmaxDescriptorSetUpdateAfterBindSamplers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLERS); }
+    public static int nmaxDescriptorSetUpdateAfterBindSamplers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLERS); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindUniformBuffers}. */
-    public static int nmaxDescriptorSetUpdateAfterBindUniformBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERS); }
+    public static int nmaxDescriptorSetUpdateAfterBindUniformBuffers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERS); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindUniformBuffersDynamic}. */
-    public static int nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERSDYNAMIC); }
+    public static int nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERSDYNAMIC); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageBuffers}. */
-    public static int nmaxDescriptorSetUpdateAfterBindStorageBuffers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERS); }
+    public static int nmaxDescriptorSetUpdateAfterBindStorageBuffers(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERS); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageBuffersDynamic}. */
-    public static int nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERSDYNAMIC); }
+    public static int nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERSDYNAMIC); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindSampledImages}. */
-    public static int nmaxDescriptorSetUpdateAfterBindSampledImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLEDIMAGES); }
+    public static int nmaxDescriptorSetUpdateAfterBindSampledImages(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLEDIMAGES); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageImages}. */
-    public static int nmaxDescriptorSetUpdateAfterBindStorageImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEIMAGES); }
+    public static int nmaxDescriptorSetUpdateAfterBindStorageImages(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEIMAGES); }
     /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindInputAttachments}. */
-    public static int nmaxDescriptorSetUpdateAfterBindInputAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDINPUTATTACHMENTS); }
+    public static int nmaxDescriptorSetUpdateAfterBindInputAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.MAXDESCRIPTORSETUPDATEAFTERBINDINPUTATTACHMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDescriptorIndexingProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDescriptorIndexingProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDescriptorIndexingProperties.PNEXT, value); }
 

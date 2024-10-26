@@ -387,7 +387,7 @@ public class OVRLayerEyeMatrix extends Struct<OVRLayerEyeMatrix> implements Nati
         return OVRMatrix4f.create(struct + OVRLayerEyeMatrix.MATRIX + check(index, ovrEye_Count) * OVRMatrix4f.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime}. */
-    public static double nSensorSampleTime(long struct) { return UNSAFE.getDouble(null, struct + OVRLayerEyeMatrix.SENSORSAMPLETIME); }
+    public static double nSensorSampleTime(long struct) { return memGetDouble(struct + OVRLayerEyeMatrix.SENSORSAMPLETIME); }
 
     /** Unsafe version of {@link #Header(OVRLayerHeader) Header}. */
     public static void nHeader(long struct, OVRLayerHeader value) { memCopy(value.address(), struct + OVRLayerEyeMatrix.HEADER, OVRLayerHeader.SIZEOF); }
@@ -428,7 +428,7 @@ public class OVRLayerEyeMatrix extends Struct<OVRLayerEyeMatrix> implements Nati
         memCopy(value.address(), struct + OVRLayerEyeMatrix.MATRIX + check(index, ovrEye_Count) * OVRMatrix4f.SIZEOF, OVRMatrix4f.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime(double) SensorSampleTime}. */
-    public static void nSensorSampleTime(long struct, double value) { UNSAFE.putDouble(null, struct + OVRLayerEyeMatrix.SENSORSAMPLETIME, value); }
+    public static void nSensorSampleTime(long struct, double value) { memPutDouble(struct + OVRLayerEyeMatrix.SENSORSAMPLETIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

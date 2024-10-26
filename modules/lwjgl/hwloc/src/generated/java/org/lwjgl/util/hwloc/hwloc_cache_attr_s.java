@@ -129,15 +129,15 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + hwloc_cache_attr_s.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + hwloc_cache_attr_s.SIZE); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + hwloc_cache_attr_s.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + hwloc_cache_attr_s.DEPTH); }
     /** Unsafe version of {@link #linesize}. */
-    public static int nlinesize(long struct) { return UNSAFE.getInt(null, struct + hwloc_cache_attr_s.LINESIZE); }
+    public static int nlinesize(long struct) { return memGetInt(struct + hwloc_cache_attr_s.LINESIZE); }
     /** Unsafe version of {@link #associativity}. */
-    public static int nassociativity(long struct) { return UNSAFE.getInt(null, struct + hwloc_cache_attr_s.ASSOCIATIVITY); }
+    public static int nassociativity(long struct) { return memGetInt(struct + hwloc_cache_attr_s.ASSOCIATIVITY); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_cache_attr_s.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_cache_attr_s.TYPE); }
 
     // -----------------------------------
 

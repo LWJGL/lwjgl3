@@ -292,40 +292,40 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.HEAD); }
+    public static int nhead(long struct) { return memGetInt(struct + IOCQRingOffsets.HEAD); }
     /** Unsafe version of {@link #tail}. */
-    public static int ntail(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.TAIL); }
+    public static int ntail(long struct) { return memGetInt(struct + IOCQRingOffsets.TAIL); }
     /** Unsafe version of {@link #ring_mask}. */
-    public static int nring_mask(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.RING_MASK); }
+    public static int nring_mask(long struct) { return memGetInt(struct + IOCQRingOffsets.RING_MASK); }
     /** Unsafe version of {@link #ring_entries}. */
-    public static int nring_entries(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.RING_ENTRIES); }
+    public static int nring_entries(long struct) { return memGetInt(struct + IOCQRingOffsets.RING_ENTRIES); }
     /** Unsafe version of {@link #overflow}. */
-    public static int noverflow(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.OVERFLOW); }
+    public static int noverflow(long struct) { return memGetInt(struct + IOCQRingOffsets.OVERFLOW); }
     /** Unsafe version of {@link #cqes}. */
-    public static int ncqes(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.CQES); }
+    public static int ncqes(long struct) { return memGetInt(struct + IOCQRingOffsets.CQES); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.FLAGS); }
-    public static int nresv1(long struct) { return UNSAFE.getInt(null, struct + IOCQRingOffsets.RESV1); }
+    public static int nflags(long struct) { return memGetInt(struct + IOCQRingOffsets.FLAGS); }
+    public static int nresv1(long struct) { return memGetInt(struct + IOCQRingOffsets.RESV1); }
     /** Unsafe version of {@link #user_addr}. */
-    public static long nuser_addr(long struct) { return UNSAFE.getLong(null, struct + IOCQRingOffsets.USER_ADDR); }
+    public static long nuser_addr(long struct) { return memGetLong(struct + IOCQRingOffsets.USER_ADDR); }
 
     /** Unsafe version of {@link #head(int) head}. */
-    public static void nhead(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.HEAD, value); }
+    public static void nhead(long struct, int value) { memPutInt(struct + IOCQRingOffsets.HEAD, value); }
     /** Unsafe version of {@link #tail(int) tail}. */
-    public static void ntail(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.TAIL, value); }
+    public static void ntail(long struct, int value) { memPutInt(struct + IOCQRingOffsets.TAIL, value); }
     /** Unsafe version of {@link #ring_mask(int) ring_mask}. */
-    public static void nring_mask(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.RING_MASK, value); }
+    public static void nring_mask(long struct, int value) { memPutInt(struct + IOCQRingOffsets.RING_MASK, value); }
     /** Unsafe version of {@link #ring_entries(int) ring_entries}. */
-    public static void nring_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.RING_ENTRIES, value); }
+    public static void nring_entries(long struct, int value) { memPutInt(struct + IOCQRingOffsets.RING_ENTRIES, value); }
     /** Unsafe version of {@link #overflow(int) overflow}. */
-    public static void noverflow(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.OVERFLOW, value); }
+    public static void noverflow(long struct, int value) { memPutInt(struct + IOCQRingOffsets.OVERFLOW, value); }
     /** Unsafe version of {@link #cqes(int) cqes}. */
-    public static void ncqes(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.CQES, value); }
+    public static void ncqes(long struct, int value) { memPutInt(struct + IOCQRingOffsets.CQES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.FLAGS, value); }
-    public static void nresv1(long struct, int value) { UNSAFE.putInt(null, struct + IOCQRingOffsets.RESV1, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOCQRingOffsets.FLAGS, value); }
+    public static void nresv1(long struct, int value) { memPutInt(struct + IOCQRingOffsets.RESV1, value); }
     /** Unsafe version of {@link #user_addr(long) user_addr}. */
-    public static void nuser_addr(long struct, long value) { UNSAFE.putLong(null, struct + IOCQRingOffsets.USER_ADDR, value); }
+    public static void nuser_addr(long struct, long value) { memPutLong(struct + IOCQRingOffsets.USER_ADDR, value); }
 
     // -----------------------------------
 

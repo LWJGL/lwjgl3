@@ -250,18 +250,18 @@ public class XrRenderModelCapabilitiesRequestFB extends Struct<XrRenderModelCapa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrRenderModelCapabilitiesRequestFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrRenderModelCapabilitiesRequestFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrRenderModelCapabilitiesRequestFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrRenderModelCapabilitiesRequestFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrRenderModelCapabilitiesRequestFB.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelCapabilitiesRequestFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrRenderModelCapabilitiesRequestFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRenderModelCapabilitiesRequestFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrRenderModelCapabilitiesRequestFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrRenderModelCapabilitiesRequestFB.FLAGS, value); }
 
     // -----------------------------------
 

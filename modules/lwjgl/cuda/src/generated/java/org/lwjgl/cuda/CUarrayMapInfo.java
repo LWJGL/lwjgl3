@@ -426,96 +426,96 @@ public class CUarrayMapInfo extends Struct<CUarrayMapInfo> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #resourceType}. */
-    public static int nresourceType(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.RESOURCETYPE); }
+    public static int nresourceType(long struct) { return memGetInt(struct + CUarrayMapInfo.RESOURCETYPE); }
     /** Unsafe version of {@link #resource_mipmap}. */
     public static long nresource_mipmap(long struct) { return memGetAddress(struct + CUarrayMapInfo.RESOURCE_MIPMAP); }
     /** Unsafe version of {@link #resource_array}. */
     public static long nresource_array(long struct) { return memGetAddress(struct + CUarrayMapInfo.RESOURCE_ARRAY); }
     /** Unsafe version of {@link #subresourceType}. */
-    public static int nsubresourceType(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCETYPE); }
+    public static int nsubresourceType(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCETYPE); }
     /** Unsafe version of {@link #subresource_sparseLevel_level}. */
-    public static int nsubresource_sparseLevel_level(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LEVEL); }
+    public static int nsubresource_sparseLevel_level(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LEVEL); }
     /** Unsafe version of {@link #subresource_sparseLevel_layer}. */
-    public static int nsubresource_sparseLevel_layer(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LAYER); }
+    public static int nsubresource_sparseLevel_layer(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LAYER); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetX}. */
-    public static int nsubresource_sparseLevel_offsetX(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETX); }
+    public static int nsubresource_sparseLevel_offsetX(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETX); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetY}. */
-    public static int nsubresource_sparseLevel_offsetY(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETY); }
+    public static int nsubresource_sparseLevel_offsetY(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETY); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetZ}. */
-    public static int nsubresource_sparseLevel_offsetZ(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETZ); }
+    public static int nsubresource_sparseLevel_offsetZ(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETZ); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentWidth}. */
-    public static int nsubresource_sparseLevel_extentWidth(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTWIDTH); }
+    public static int nsubresource_sparseLevel_extentWidth(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTWIDTH); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentHeight}. */
-    public static int nsubresource_sparseLevel_extentHeight(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTHEIGHT); }
+    public static int nsubresource_sparseLevel_extentHeight(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTHEIGHT); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentDepth}. */
-    public static int nsubresource_sparseLevel_extentDepth(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTDEPTH); }
+    public static int nsubresource_sparseLevel_extentDepth(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTDEPTH); }
     /** Unsafe version of {@link #subresource_miptail_layer}. */
-    public static int nsubresource_miptail_layer(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_LAYER); }
+    public static int nsubresource_miptail_layer(long struct) { return memGetInt(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_LAYER); }
     /** Unsafe version of {@link #subresource_miptail_offset}. */
-    public static long nsubresource_miptail_offset(long struct) { return UNSAFE.getLong(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_OFFSET); }
+    public static long nsubresource_miptail_offset(long struct) { return memGetLong(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_OFFSET); }
     /** Unsafe version of {@link #subresource_miptail_size}. */
-    public static long nsubresource_miptail_size(long struct) { return UNSAFE.getLong(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_SIZE); }
+    public static long nsubresource_miptail_size(long struct) { return memGetLong(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_SIZE); }
     /** Unsafe version of {@link #memOperationType}. */
-    public static int nmemOperationType(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.MEMOPERATIONTYPE); }
+    public static int nmemOperationType(long struct) { return memGetInt(struct + CUarrayMapInfo.MEMOPERATIONTYPE); }
     /** Unsafe version of {@link #memHandleType}. */
-    public static int nmemHandleType(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.MEMHANDLETYPE); }
+    public static int nmemHandleType(long struct) { return memGetInt(struct + CUarrayMapInfo.MEMHANDLETYPE); }
     /** Unsafe version of {@link #memHandle_memHandle}. */
-    public static long nmemHandle_memHandle(long struct) { return UNSAFE.getLong(null, struct + CUarrayMapInfo.MEMHANDLE_MEMHANDLE); }
+    public static long nmemHandle_memHandle(long struct) { return memGetLong(struct + CUarrayMapInfo.MEMHANDLE_MEMHANDLE); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + CUarrayMapInfo.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + CUarrayMapInfo.OFFSET); }
     /** Unsafe version of {@link #deviceBitMask}. */
-    public static int ndeviceBitMask(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.DEVICEBITMASK); }
+    public static int ndeviceBitMask(long struct) { return memGetInt(struct + CUarrayMapInfo.DEVICEBITMASK); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUarrayMapInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUarrayMapInfo.FLAGS); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + CUarrayMapInfo.RESERVED, 2); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUarrayMapInfo.RESERVED + check(index, 2) * 4);
+        return memGetInt(struct + CUarrayMapInfo.RESERVED + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #resourceType(int) resourceType}. */
-    public static void nresourceType(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.RESOURCETYPE, value); }
+    public static void nresourceType(long struct, int value) { memPutInt(struct + CUarrayMapInfo.RESOURCETYPE, value); }
     /** Unsafe version of {@link #resource_mipmap(long) resource_mipmap}. */
     public static void nresource_mipmap(long struct, long value) { memPutAddress(struct + CUarrayMapInfo.RESOURCE_MIPMAP, value); }
     /** Unsafe version of {@link #resource_array(long) resource_array}. */
     public static void nresource_array(long struct, long value) { memPutAddress(struct + CUarrayMapInfo.RESOURCE_ARRAY, value); }
     /** Unsafe version of {@link #subresourceType(int) subresourceType}. */
-    public static void nsubresourceType(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCETYPE, value); }
+    public static void nsubresourceType(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCETYPE, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_level(int) subresource_sparseLevel_level}. */
-    public static void nsubresource_sparseLevel_level(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LEVEL, value); }
+    public static void nsubresource_sparseLevel_level(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LEVEL, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_layer(int) subresource_sparseLevel_layer}. */
-    public static void nsubresource_sparseLevel_layer(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LAYER, value); }
+    public static void nsubresource_sparseLevel_layer(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_LAYER, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetX(int) subresource_sparseLevel_offsetX}. */
-    public static void nsubresource_sparseLevel_offsetX(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETX, value); }
+    public static void nsubresource_sparseLevel_offsetX(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETX, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetY(int) subresource_sparseLevel_offsetY}. */
-    public static void nsubresource_sparseLevel_offsetY(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETY, value); }
+    public static void nsubresource_sparseLevel_offsetY(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETY, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_offsetZ(int) subresource_sparseLevel_offsetZ}. */
-    public static void nsubresource_sparseLevel_offsetZ(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETZ, value); }
+    public static void nsubresource_sparseLevel_offsetZ(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_OFFSETZ, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentWidth(int) subresource_sparseLevel_extentWidth}. */
-    public static void nsubresource_sparseLevel_extentWidth(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTWIDTH, value); }
+    public static void nsubresource_sparseLevel_extentWidth(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTWIDTH, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentHeight(int) subresource_sparseLevel_extentHeight}. */
-    public static void nsubresource_sparseLevel_extentHeight(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTHEIGHT, value); }
+    public static void nsubresource_sparseLevel_extentHeight(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTHEIGHT, value); }
     /** Unsafe version of {@link #subresource_sparseLevel_extentDepth(int) subresource_sparseLevel_extentDepth}. */
-    public static void nsubresource_sparseLevel_extentDepth(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTDEPTH, value); }
+    public static void nsubresource_sparseLevel_extentDepth(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_SPARSELEVEL_EXTENTDEPTH, value); }
     /** Unsafe version of {@link #subresource_miptail_layer(int) subresource_miptail_layer}. */
-    public static void nsubresource_miptail_layer(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_LAYER, value); }
+    public static void nsubresource_miptail_layer(long struct, int value) { memPutInt(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_LAYER, value); }
     /** Unsafe version of {@link #subresource_miptail_offset(long) subresource_miptail_offset}. */
-    public static void nsubresource_miptail_offset(long struct, long value) { UNSAFE.putLong(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_OFFSET, value); }
+    public static void nsubresource_miptail_offset(long struct, long value) { memPutLong(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_OFFSET, value); }
     /** Unsafe version of {@link #subresource_miptail_size(long) subresource_miptail_size}. */
-    public static void nsubresource_miptail_size(long struct, long value) { UNSAFE.putLong(null, struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_SIZE, value); }
+    public static void nsubresource_miptail_size(long struct, long value) { memPutLong(struct + CUarrayMapInfo.SUBRESOURCE_MIPTAIL_SIZE, value); }
     /** Unsafe version of {@link #memOperationType(int) memOperationType}. */
-    public static void nmemOperationType(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.MEMOPERATIONTYPE, value); }
+    public static void nmemOperationType(long struct, int value) { memPutInt(struct + CUarrayMapInfo.MEMOPERATIONTYPE, value); }
     /** Unsafe version of {@link #memHandleType(int) memHandleType}. */
-    public static void nmemHandleType(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.MEMHANDLETYPE, value); }
+    public static void nmemHandleType(long struct, int value) { memPutInt(struct + CUarrayMapInfo.MEMHANDLETYPE, value); }
     /** Unsafe version of {@link #memHandle_memHandle(long) memHandle_memHandle}. */
-    public static void nmemHandle_memHandle(long struct, long value) { UNSAFE.putLong(null, struct + CUarrayMapInfo.MEMHANDLE_MEMHANDLE, value); }
+    public static void nmemHandle_memHandle(long struct, long value) { memPutLong(struct + CUarrayMapInfo.MEMHANDLE_MEMHANDLE, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + CUarrayMapInfo.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + CUarrayMapInfo.OFFSET, value); }
     /** Unsafe version of {@link #deviceBitMask(int) deviceBitMask}. */
-    public static void ndeviceBitMask(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.DEVICEBITMASK, value); }
+    public static void ndeviceBitMask(long struct, int value) { memPutInt(struct + CUarrayMapInfo.DEVICEBITMASK, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUarrayMapInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUarrayMapInfo.FLAGS, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -523,7 +523,7 @@ public class CUarrayMapInfo extends Struct<CUarrayMapInfo> implements NativeReso
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUarrayMapInfo.RESERVED + check(index, 2) * 4, value);
+        memPutInt(struct + CUarrayMapInfo.RESERVED + check(index, 2) * 4, value);
     }
 
     // -----------------------------------

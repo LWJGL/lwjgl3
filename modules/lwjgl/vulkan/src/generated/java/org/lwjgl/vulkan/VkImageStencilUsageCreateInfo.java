@@ -258,18 +258,18 @@ public class VkImageStencilUsageCreateInfo extends Struct<VkImageStencilUsageCre
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageStencilUsageCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageStencilUsageCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageStencilUsageCreateInfo.PNEXT); }
     /** Unsafe version of {@link #stencilUsage}. */
-    public static int nstencilUsage(long struct) { return UNSAFE.getInt(null, struct + VkImageStencilUsageCreateInfo.STENCILUSAGE); }
+    public static int nstencilUsage(long struct) { return memGetInt(struct + VkImageStencilUsageCreateInfo.STENCILUSAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageStencilUsageCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageStencilUsageCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageStencilUsageCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #stencilUsage(int) stencilUsage}. */
-    public static void nstencilUsage(long struct, int value) { UNSAFE.putInt(null, struct + VkImageStencilUsageCreateInfo.STENCILUSAGE, value); }
+    public static void nstencilUsage(long struct, int value) { memPutInt(struct + VkImageStencilUsageCreateInfo.STENCILUSAGE, value); }
 
     // -----------------------------------
 

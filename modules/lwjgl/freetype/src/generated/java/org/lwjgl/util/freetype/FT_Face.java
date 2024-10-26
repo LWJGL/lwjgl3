@@ -318,11 +318,11 @@ public class FT_Face extends Struct<FT_Face> {
     /** Unsafe version of {@link #style_nameString}. */
     public static String nstyle_nameString(long struct) { return memUTF8(memGetAddress(struct + FT_Face.STYLE_NAME)); }
     /** Unsafe version of {@link #num_fixed_sizes}. */
-    public static int nnum_fixed_sizes(long struct) { return UNSAFE.getInt(null, struct + FT_Face.NUM_FIXED_SIZES); }
+    public static int nnum_fixed_sizes(long struct) { return memGetInt(struct + FT_Face.NUM_FIXED_SIZES); }
     /** Unsafe version of {@link #available_sizes}. */
     @Nullable public static FT_Bitmap_Size.Buffer navailable_sizes(long struct) { return FT_Bitmap_Size.createSafe(memGetAddress(struct + FT_Face.AVAILABLE_SIZES), nnum_fixed_sizes(struct)); }
     /** Unsafe version of {@link #num_charmaps}. */
-    public static int nnum_charmaps(long struct) { return UNSAFE.getInt(null, struct + FT_Face.NUM_CHARMAPS); }
+    public static int nnum_charmaps(long struct) { return memGetInt(struct + FT_Face.NUM_CHARMAPS); }
     /** Unsafe version of {@link #charmaps() charmaps}. */
     public static PointerBuffer ncharmaps(long struct) { return memPointerBuffer(memGetAddress(struct + FT_Face.CHARMAPS), nnum_charmaps(struct)); }
     /** Unsafe version of {@link #generic}. */
@@ -330,21 +330,21 @@ public class FT_Face extends Struct<FT_Face> {
     /** Unsafe version of {@link #bbox}. */
     public static FT_BBox nbbox(long struct) { return FT_BBox.create(struct + FT_Face.BBOX); }
     /** Unsafe version of {@link #units_per_EM}. */
-    public static short nunits_per_EM(long struct) { return UNSAFE.getShort(null, struct + FT_Face.UNITS_PER_EM); }
+    public static short nunits_per_EM(long struct) { return memGetShort(struct + FT_Face.UNITS_PER_EM); }
     /** Unsafe version of {@link #ascender}. */
-    public static short nascender(long struct) { return UNSAFE.getShort(null, struct + FT_Face.ASCENDER); }
+    public static short nascender(long struct) { return memGetShort(struct + FT_Face.ASCENDER); }
     /** Unsafe version of {@link #descender}. */
-    public static short ndescender(long struct) { return UNSAFE.getShort(null, struct + FT_Face.DESCENDER); }
+    public static short ndescender(long struct) { return memGetShort(struct + FT_Face.DESCENDER); }
     /** Unsafe version of {@link #height}. */
-    public static short nheight(long struct) { return UNSAFE.getShort(null, struct + FT_Face.HEIGHT); }
+    public static short nheight(long struct) { return memGetShort(struct + FT_Face.HEIGHT); }
     /** Unsafe version of {@link #max_advance_width}. */
-    public static short nmax_advance_width(long struct) { return UNSAFE.getShort(null, struct + FT_Face.MAX_ADVANCE_WIDTH); }
+    public static short nmax_advance_width(long struct) { return memGetShort(struct + FT_Face.MAX_ADVANCE_WIDTH); }
     /** Unsafe version of {@link #max_advance_height}. */
-    public static short nmax_advance_height(long struct) { return UNSAFE.getShort(null, struct + FT_Face.MAX_ADVANCE_HEIGHT); }
+    public static short nmax_advance_height(long struct) { return memGetShort(struct + FT_Face.MAX_ADVANCE_HEIGHT); }
     /** Unsafe version of {@link #underline_position}. */
-    public static short nunderline_position(long struct) { return UNSAFE.getShort(null, struct + FT_Face.UNDERLINE_POSITION); }
+    public static short nunderline_position(long struct) { return memGetShort(struct + FT_Face.UNDERLINE_POSITION); }
     /** Unsafe version of {@link #underline_thickness}. */
-    public static short nunderline_thickness(long struct) { return UNSAFE.getShort(null, struct + FT_Face.UNDERLINE_THICKNESS); }
+    public static short nunderline_thickness(long struct) { return memGetShort(struct + FT_Face.UNDERLINE_THICKNESS); }
     /** Unsafe version of {@link #glyph}. */
     @Nullable public static FT_GlyphSlot nglyph(long struct) { return FT_GlyphSlot.createSafe(memGetAddress(struct + FT_Face.GLYPH)); }
     /** Unsafe version of {@link #size}. */

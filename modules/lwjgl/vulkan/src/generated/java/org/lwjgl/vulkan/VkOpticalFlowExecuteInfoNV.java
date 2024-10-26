@@ -275,24 +275,24 @@ public class VkOpticalFlowExecuteInfoNV extends Struct<VkOpticalFlowExecuteInfoN
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowExecuteInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkOpticalFlowExecuteInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkOpticalFlowExecuteInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowExecuteInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkOpticalFlowExecuteInfoNV.FLAGS); }
     /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowExecuteInfoNV.REGIONCOUNT); }
+    public static int nregionCount(long struct) { return memGetInt(struct + VkOpticalFlowExecuteInfoNV.REGIONCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     @Nullable public static VkRect2D.Buffer npRegions(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkOpticalFlowExecuteInfoNV.PREGIONS), nregionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowExecuteInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkOpticalFlowExecuteInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkOpticalFlowExecuteInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowExecuteInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkOpticalFlowExecuteInfoNV.FLAGS, value); }
     /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowExecuteInfoNV.REGIONCOUNT, value); }
+    public static void nregionCount(long struct, int value) { memPutInt(struct + VkOpticalFlowExecuteInfoNV.REGIONCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkRect2D.Buffer) pRegions}. */
     public static void npRegions(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkOpticalFlowExecuteInfoNV.PREGIONS, memAddressSafe(value)); nregionCount(struct, value == null ? 0 : value.remaining()); }
 

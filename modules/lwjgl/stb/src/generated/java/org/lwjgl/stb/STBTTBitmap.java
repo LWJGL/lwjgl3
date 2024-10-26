@@ -267,20 +267,20 @@ public class STBTTBitmap extends Struct<STBTTBitmap> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return UNSAFE.getInt(null, struct + STBTTBitmap.W); }
+    public static int nw(long struct) { return memGetInt(struct + STBTTBitmap.W); }
     /** Unsafe version of {@link #h}. */
-    public static int nh(long struct) { return UNSAFE.getInt(null, struct + STBTTBitmap.H); }
+    public static int nh(long struct) { return memGetInt(struct + STBTTBitmap.H); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + STBTTBitmap.STRIDE); }
+    public static int nstride(long struct) { return memGetInt(struct + STBTTBitmap.STRIDE); }
     /** Unsafe version of {@link #pixels(int) pixels}. */
     public static ByteBuffer npixels(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + STBTTBitmap.PIXELS), capacity); }
 
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + STBTTBitmap.W, value); }
+    public static void nw(long struct, int value) { memPutInt(struct + STBTTBitmap.W, value); }
     /** Unsafe version of {@link #h(int) h}. */
-    public static void nh(long struct, int value) { UNSAFE.putInt(null, struct + STBTTBitmap.H, value); }
+    public static void nh(long struct, int value) { memPutInt(struct + STBTTBitmap.H, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + STBTTBitmap.STRIDE, value); }
+    public static void nstride(long struct, int value) { memPutInt(struct + STBTTBitmap.STRIDE, value); }
     /** Unsafe version of {@link #pixels(ByteBuffer) pixels}. */
     public static void npixels(long struct, ByteBuffer value) { memPutAddress(struct + STBTTBitmap.PIXELS, memAddress(value)); }
 

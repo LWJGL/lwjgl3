@@ -306,40 +306,40 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH264SliceHeaderFlags nflags(long struct) { return StdVideoEncodeH264SliceHeaderFlags.create(struct + StdVideoEncodeH264SliceHeader.FLAGS); }
     /** Unsafe version of {@link #first_mb_in_slice}. */
-    public static int nfirst_mb_in_slice(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE); }
+    public static int nfirst_mb_in_slice(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE); }
     /** Unsafe version of {@link #slice_type}. */
-    public static int nslice_type(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE); }
+    public static int nslice_type(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE); }
     /** Unsafe version of {@link #slice_alpha_c0_offset_div2}. */
-    public static byte nslice_alpha_c0_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2); }
+    public static byte nslice_alpha_c0_offset_div2(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_beta_offset_div2}. */
-    public static byte nslice_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
+    public static byte nslice_beta_offset_div2(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_qp_delta}. */
-    public static byte nslice_qp_delta(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA); }
-    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
+    public static byte nslice_qp_delta(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA); }
+    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
     /** Unsafe version of {@link #cabac_init_idc}. */
-    public static int ncabac_init_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC); }
+    public static int ncabac_init_idc(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc}. */
-    public static int ndisable_deblocking_filter_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.DISABLE_DEBLOCKING_FILTER_IDC); }
+    public static int ndisable_deblocking_filter_idc(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeader.DISABLE_DEBLOCKING_FILTER_IDC); }
     /** Unsafe version of {@link #pWeightTable}. */
     public static StdVideoEncodeH264WeightTable npWeightTable(long struct) { return StdVideoEncodeH264WeightTable.create(memGetAddress(struct + StdVideoEncodeH264SliceHeader.PWEIGHTTABLE)); }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH264SliceHeaderFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH264SliceHeaderFlags value) { memCopy(value.address(), struct + StdVideoEncodeH264SliceHeader.FLAGS, StdVideoEncodeH264SliceHeaderFlags.SIZEOF); }
     /** Unsafe version of {@link #first_mb_in_slice(int) first_mb_in_slice}. */
-    public static void nfirst_mb_in_slice(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE, value); }
+    public static void nfirst_mb_in_slice(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE, value); }
     /** Unsafe version of {@link #slice_type(int) slice_type}. */
-    public static void nslice_type(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE, value); }
+    public static void nslice_type(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE, value); }
     /** Unsafe version of {@link #slice_alpha_c0_offset_div2(byte) slice_alpha_c0_offset_div2}. */
-    public static void nslice_alpha_c0_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2, value); }
+    public static void nslice_alpha_c0_offset_div2(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_beta_offset_div2(byte) slice_beta_offset_div2}. */
-    public static void nslice_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
+    public static void nslice_beta_offset_div2(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_qp_delta(byte) slice_qp_delta}. */
-    public static void nslice_qp_delta(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA, value); }
-    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
+    public static void nslice_qp_delta(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA, value); }
+    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
     /** Unsafe version of {@link #cabac_init_idc(int) cabac_init_idc}. */
-    public static void ncabac_init_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC, value); }
+    public static void ncabac_init_idc(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC, value); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc(int) disable_deblocking_filter_idc}. */
-    public static void ndisable_deblocking_filter_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.DISABLE_DEBLOCKING_FILTER_IDC, value); }
+    public static void ndisable_deblocking_filter_idc(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeader.DISABLE_DEBLOCKING_FILTER_IDC, value); }
     /** Unsafe version of {@link #pWeightTable(StdVideoEncodeH264WeightTable) pWeightTable}. */
     public static void npWeightTable(long struct, StdVideoEncodeH264WeightTable value) { memPutAddress(struct + StdVideoEncodeH264SliceHeader.PWEIGHTTABLE, value.address()); }
 

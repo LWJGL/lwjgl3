@@ -374,34 +374,34 @@ public class VkComputePipelineCreateInfo extends Struct<VkComputePipelineCreateI
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkComputePipelineCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkComputePipelineCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkComputePipelineCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkComputePipelineCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkComputePipelineCreateInfo.FLAGS); }
     /** Unsafe version of {@link #stage}. */
     public static VkPipelineShaderStageCreateInfo nstage(long struct) { return VkPipelineShaderStageCreateInfo.create(struct + VkComputePipelineCreateInfo.STAGE); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkComputePipelineCreateInfo.LAYOUT); }
+    public static long nlayout(long struct) { return memGetLong(struct + VkComputePipelineCreateInfo.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkComputePipelineCreateInfo.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkComputePipelineCreateInfo.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkComputePipelineCreateInfo.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkComputePipelineCreateInfo.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkComputePipelineCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkComputePipelineCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkComputePipelineCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkComputePipelineCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkComputePipelineCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #stage(VkPipelineShaderStageCreateInfo) stage}. */
     public static void nstage(long struct, VkPipelineShaderStageCreateInfo value) { memCopy(value.address(), struct + VkComputePipelineCreateInfo.STAGE, VkPipelineShaderStageCreateInfo.SIZEOF); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkComputePipelineCreateInfo.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { memPutLong(struct + VkComputePipelineCreateInfo.LAYOUT, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkComputePipelineCreateInfo.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkComputePipelineCreateInfo.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkComputePipelineCreateInfo.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkComputePipelineCreateInfo.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

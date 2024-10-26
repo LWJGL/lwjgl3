@@ -213,9 +213,9 @@ public class InputSkeletalActionData extends Struct<InputSkeletalActionData> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #bActive}. */
-    public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputSkeletalActionData.BACTIVE) != 0; }
+    public static boolean nbActive(long struct) { return memGetByte(struct + InputSkeletalActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
-    public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputSkeletalActionData.ACTIVEORIGIN); }
+    public static long nactiveOrigin(long struct) { return memGetLong(struct + InputSkeletalActionData.ACTIVEORIGIN); }
 
     // -----------------------------------
 

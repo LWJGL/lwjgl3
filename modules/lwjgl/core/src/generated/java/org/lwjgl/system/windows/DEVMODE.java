@@ -540,88 +540,88 @@ public class DEVMODE extends Struct<DEVMODE> implements NativeResource {
     /** Unsafe version of {@link #dmDeviceNameString}. */
     public static String ndmDeviceNameString(long struct) { return memUTF16(struct + DEVMODE.DMDEVICENAME); }
     /** Unsafe version of {@link #dmSpecVersion}. */
-    public static short ndmSpecVersion(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSPECVERSION); }
+    public static short ndmSpecVersion(long struct) { return memGetShort(struct + DEVMODE.DMSPECVERSION); }
     /** Unsafe version of {@link #dmDriverVersion}. */
-    public static short ndmDriverVersion(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDRIVERVERSION); }
+    public static short ndmDriverVersion(long struct) { return memGetShort(struct + DEVMODE.DMDRIVERVERSION); }
     /** Unsafe version of {@link #dmSize}. */
-    public static short ndmSize(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSIZE); }
+    public static short ndmSize(long struct) { return memGetShort(struct + DEVMODE.DMSIZE); }
     /** Unsafe version of {@link #dmDriverExtra}. */
-    public static short ndmDriverExtra(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDRIVEREXTRA); }
+    public static short ndmDriverExtra(long struct) { return memGetShort(struct + DEVMODE.DMDRIVEREXTRA); }
     /** Unsafe version of {@link #dmFields}. */
-    public static int ndmFields(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMFIELDS); }
+    public static int ndmFields(long struct) { return memGetInt(struct + DEVMODE.DMFIELDS); }
     /** Unsafe version of {@link #dmOrientation}. */
-    public static short ndmOrientation(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMORIENTATION); }
+    public static short ndmOrientation(long struct) { return memGetShort(struct + DEVMODE.DMORIENTATION); }
     /** Unsafe version of {@link #dmPaperSize}. */
-    public static short ndmPaperSize(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERSIZE); }
+    public static short ndmPaperSize(long struct) { return memGetShort(struct + DEVMODE.DMPAPERSIZE); }
     /** Unsafe version of {@link #dmPaperLength}. */
-    public static short ndmPaperLength(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERLENGTH); }
+    public static short ndmPaperLength(long struct) { return memGetShort(struct + DEVMODE.DMPAPERLENGTH); }
     /** Unsafe version of {@link #dmPaperWidth}. */
-    public static short ndmPaperWidth(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERWIDTH); }
+    public static short ndmPaperWidth(long struct) { return memGetShort(struct + DEVMODE.DMPAPERWIDTH); }
     /** Unsafe version of {@link #dmScale}. */
-    public static short ndmScale(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSCALE); }
+    public static short ndmScale(long struct) { return memGetShort(struct + DEVMODE.DMSCALE); }
     /** Unsafe version of {@link #dmCopies}. */
-    public static short ndmCopies(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOPIES); }
+    public static short ndmCopies(long struct) { return memGetShort(struct + DEVMODE.DMCOPIES); }
     /** Unsafe version of {@link #dmDefaultSource}. */
-    public static short ndmDefaultSource(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDEFAULTSOURCE); }
+    public static short ndmDefaultSource(long struct) { return memGetShort(struct + DEVMODE.DMDEFAULTSOURCE); }
     /** Unsafe version of {@link #dmPrintQuality}. */
-    public static short ndmPrintQuality(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPRINTQUALITY); }
+    public static short ndmPrintQuality(long struct) { return memGetShort(struct + DEVMODE.DMPRINTQUALITY); }
     /** Unsafe version of {@link #dmPosition}. */
     public static POINTL ndmPosition(long struct) { return POINTL.create(struct + DEVMODE.DMPOSITION); }
     /** Unsafe version of {@link #dmDisplayOrientation}. */
-    public static int ndmDisplayOrientation(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYORIENTATION); }
+    public static int ndmDisplayOrientation(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYORIENTATION); }
     /** Unsafe version of {@link #dmDisplayFixedOutput}. */
-    public static int ndmDisplayFixedOutput(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFIXEDOUTPUT); }
+    public static int ndmDisplayFixedOutput(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFIXEDOUTPUT); }
     /** Unsafe version of {@link #dmColor}. */
-    public static short ndmColor(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOLOR); }
+    public static short ndmColor(long struct) { return memGetShort(struct + DEVMODE.DMCOLOR); }
     /** Unsafe version of {@link #dmDuplex}. */
-    public static short ndmDuplex(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDUPLEX); }
+    public static short ndmDuplex(long struct) { return memGetShort(struct + DEVMODE.DMDUPLEX); }
     /** Unsafe version of {@link #dmYResolution}. */
-    public static short ndmYResolution(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMYRESOLUTION); }
+    public static short ndmYResolution(long struct) { return memGetShort(struct + DEVMODE.DMYRESOLUTION); }
     /** Unsafe version of {@link #dmTTOption}. */
-    public static short ndmTTOption(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMTTOPTION); }
+    public static short ndmTTOption(long struct) { return memGetShort(struct + DEVMODE.DMTTOPTION); }
     /** Unsafe version of {@link #dmCollate}. */
-    public static short ndmCollate(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOLLATE); }
+    public static short ndmCollate(long struct) { return memGetShort(struct + DEVMODE.DMCOLLATE); }
     /** Unsafe version of {@link #dmFormName}. */
     public static ByteBuffer ndmFormName(long struct) { return memByteBuffer(struct + DEVMODE.DMFORMNAME, 32 * 2); }
     /** Unsafe version of {@link #dmFormNameString}. */
     public static String ndmFormNameString(long struct) { return memUTF16(struct + DEVMODE.DMFORMNAME); }
     /** Unsafe version of {@link #dmLogPixels}. */
-    public static short ndmLogPixels(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMLOGPIXELS); }
+    public static short ndmLogPixels(long struct) { return memGetShort(struct + DEVMODE.DMLOGPIXELS); }
     /** Unsafe version of {@link #dmBitsPerPel}. */
-    public static int ndmBitsPerPel(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMBITSPERPEL); }
+    public static int ndmBitsPerPel(long struct) { return memGetInt(struct + DEVMODE.DMBITSPERPEL); }
     /** Unsafe version of {@link #dmPelsWidth}. */
-    public static int ndmPelsWidth(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPELSWIDTH); }
+    public static int ndmPelsWidth(long struct) { return memGetInt(struct + DEVMODE.DMPELSWIDTH); }
     /** Unsafe version of {@link #dmPelsHeight}. */
-    public static int ndmPelsHeight(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPELSHEIGHT); }
+    public static int ndmPelsHeight(long struct) { return memGetInt(struct + DEVMODE.DMPELSHEIGHT); }
     /** Unsafe version of {@link #dmDisplayFlags}. */
-    public static int ndmDisplayFlags(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFLAGS); }
+    public static int ndmDisplayFlags(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFLAGS); }
     /** Unsafe version of {@link #dmNup}. */
-    public static int ndmNup(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMNUP); }
+    public static int ndmNup(long struct) { return memGetInt(struct + DEVMODE.DMNUP); }
     /** Unsafe version of {@link #dmDisplayFrequency}. */
-    public static int ndmDisplayFrequency(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFREQUENCY); }
+    public static int ndmDisplayFrequency(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFREQUENCY); }
     /** Unsafe version of {@link #dmICMMethod}. */
-    public static int ndmICMMethod(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMICMMETHOD); }
+    public static int ndmICMMethod(long struct) { return memGetInt(struct + DEVMODE.DMICMMETHOD); }
     /** Unsafe version of {@link #dmICMIntent}. */
-    public static int ndmICMIntent(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMICMINTENT); }
+    public static int ndmICMIntent(long struct) { return memGetInt(struct + DEVMODE.DMICMINTENT); }
     /** Unsafe version of {@link #dmMediaType}. */
-    public static int ndmMediaType(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMMEDIATYPE); }
+    public static int ndmMediaType(long struct) { return memGetInt(struct + DEVMODE.DMMEDIATYPE); }
     /** Unsafe version of {@link #dmDitherType}. */
-    public static int ndmDitherType(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDITHERTYPE); }
+    public static int ndmDitherType(long struct) { return memGetInt(struct + DEVMODE.DMDITHERTYPE); }
     /** Unsafe version of {@link #dmReserved1}. */
-    public static int ndmReserved1(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMRESERVED1); }
+    public static int ndmReserved1(long struct) { return memGetInt(struct + DEVMODE.DMRESERVED1); }
     /** Unsafe version of {@link #dmReserved2}. */
-    public static int ndmReserved2(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMRESERVED2); }
+    public static int ndmReserved2(long struct) { return memGetInt(struct + DEVMODE.DMRESERVED2); }
     /** Unsafe version of {@link #dmPanningWidth}. */
-    public static int ndmPanningWidth(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPANNINGWIDTH); }
+    public static int ndmPanningWidth(long struct) { return memGetInt(struct + DEVMODE.DMPANNINGWIDTH); }
     /** Unsafe version of {@link #dmPanningHeight}. */
-    public static int ndmPanningHeight(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPANNINGHEIGHT); }
+    public static int ndmPanningHeight(long struct) { return memGetInt(struct + DEVMODE.DMPANNINGHEIGHT); }
 
     /** Unsafe version of {@link #dmSpecVersion(short) dmSpecVersion}. */
-    public static void ndmSpecVersion(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMSPECVERSION, value); }
+    public static void ndmSpecVersion(long struct, short value) { memPutShort(struct + DEVMODE.DMSPECVERSION, value); }
     /** Unsafe version of {@link #dmSize(short) dmSize}. */
-    public static void ndmSize(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMSIZE, value); }
+    public static void ndmSize(long struct, short value) { memPutShort(struct + DEVMODE.DMSIZE, value); }
     /** Unsafe version of {@link #dmDriverExtra(short) dmDriverExtra}. */
-    public static void ndmDriverExtra(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMDRIVEREXTRA, value); }
+    public static void ndmDriverExtra(long struct, short value) { memPutShort(struct + DEVMODE.DMDRIVEREXTRA, value); }
 
     // -----------------------------------
 

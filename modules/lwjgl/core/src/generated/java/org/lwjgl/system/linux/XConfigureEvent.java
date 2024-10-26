@@ -347,54 +347,54 @@ public class XConfigureEvent extends Struct<XConfigureEvent> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XConfigureEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XConfigureEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XConfigureEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XConfigureEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetCLong(struct + XConfigureEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XConfigureEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XConfigureEvent.Y); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XConfigureEvent.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XConfigureEvent.HEIGHT); }
     /** Unsafe version of {@link #border_width}. */
-    public static int nborder_width(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.BORDER_WIDTH); }
+    public static int nborder_width(long struct) { return memGetInt(struct + XConfigureEvent.BORDER_WIDTH); }
     /** Unsafe version of {@link #above}. */
     public static long nabove(long struct) { return memGetCLong(struct + XConfigureEvent.ABOVE); }
     /** Unsafe version of {@link #override_redirect}. */
-    public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.OVERRIDE_REDIRECT); }
+    public static int noverride_redirect(long struct) { return memGetInt(struct + XConfigureEvent.OVERRIDE_REDIRECT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XConfigureEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XConfigureEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XConfigureEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XConfigureEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
     public static void nwindow(long struct, long value) { memPutCLong(struct + XConfigureEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XConfigureEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XConfigureEvent.Y, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + XConfigureEvent.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + XConfigureEvent.HEIGHT, value); }
     /** Unsafe version of {@link #border_width(int) border_width}. */
-    public static void nborder_width(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.BORDER_WIDTH, value); }
+    public static void nborder_width(long struct, int value) { memPutInt(struct + XConfigureEvent.BORDER_WIDTH, value); }
     /** Unsafe version of {@link #above(long) above}. */
     public static void nabove(long struct, long value) { memPutCLong(struct + XConfigureEvent.ABOVE, value); }
     /** Unsafe version of {@link #override_redirect(boolean) override_redirect}. */
-    public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.OVERRIDE_REDIRECT, value); }
+    public static void noverride_redirect(long struct, int value) { memPutInt(struct + XConfigureEvent.OVERRIDE_REDIRECT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

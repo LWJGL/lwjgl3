@@ -265,14 +265,14 @@ public class XrEventDataInstanceLossPending extends Struct<XrEventDataInstanceLo
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataInstanceLossPending.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataInstanceLossPending.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataInstanceLossPending.NEXT); }
     /** Unsafe version of {@link #lossTime}. */
-    public static long nlossTime(long struct) { return UNSAFE.getLong(null, struct + XrEventDataInstanceLossPending.LOSSTIME); }
+    public static long nlossTime(long struct) { return memGetLong(struct + XrEventDataInstanceLossPending.LOSSTIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataInstanceLossPending.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataInstanceLossPending.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInstanceLossPending.NEXT, value); }
 

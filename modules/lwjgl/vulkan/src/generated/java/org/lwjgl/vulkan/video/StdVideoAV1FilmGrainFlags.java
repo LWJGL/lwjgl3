@@ -237,7 +237,7 @@ public class StdVideoAV1FilmGrainFlags extends Struct<StdVideoAV1FilmGrainFlags>
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1FilmGrainFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoAV1FilmGrainFlags.BITFIELD0); }
     /** Unsafe version of {@link #chroma_scaling_from_luma}. */
     public static int nchroma_scaling_from_luma(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #overlap_flag}. */
@@ -246,10 +246,10 @@ public class StdVideoAV1FilmGrainFlags extends Struct<StdVideoAV1FilmGrainFlags>
     public static int nclip_to_restricted_range(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #update_grain}. */
     public static int nupdate_grain(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1FilmGrainFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoAV1FilmGrainFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x0F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1FilmGrainFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoAV1FilmGrainFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #chroma_scaling_from_luma(boolean) chroma_scaling_from_luma}. */
     public static void nchroma_scaling_from_luma(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #overlap_flag(boolean) overlap_flag}. */
@@ -258,7 +258,7 @@ public class StdVideoAV1FilmGrainFlags extends Struct<StdVideoAV1FilmGrainFlags>
     public static void nclip_to_restricted_range(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #update_grain(boolean) update_grain}. */
     public static void nupdate_grain(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1FilmGrainFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoAV1FilmGrainFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xF0_00_00_00) | (value & 0x0F_FF_FF_FF)); }
 
     // -----------------------------------

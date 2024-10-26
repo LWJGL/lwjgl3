@@ -220,14 +220,14 @@ public class CUmemLocation extends Struct<CUmemLocation> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + CUmemLocation.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + CUmemLocation.TYPE); }
     /** Unsafe version of {@link #id}. */
-    public static int nid(long struct) { return UNSAFE.getInt(null, struct + CUmemLocation.ID); }
+    public static int nid(long struct) { return memGetInt(struct + CUmemLocation.ID); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + CUmemLocation.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + CUmemLocation.TYPE, value); }
     /** Unsafe version of {@link #id(int) id}. */
-    public static void nid(long struct, int value) { UNSAFE.putInt(null, struct + CUmemLocation.ID, value); }
+    public static void nid(long struct, int value) { memPutInt(struct + CUmemLocation.ID, value); }
 
     // -----------------------------------
 

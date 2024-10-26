@@ -246,14 +246,14 @@ public class VkExtent2D extends Struct<VkExtent2D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkExtent2D.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkExtent2D.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkExtent2D.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkExtent2D.HEIGHT); }
 
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkExtent2D.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkExtent2D.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkExtent2D.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkExtent2D.HEIGHT, value); }
 
     // -----------------------------------
 

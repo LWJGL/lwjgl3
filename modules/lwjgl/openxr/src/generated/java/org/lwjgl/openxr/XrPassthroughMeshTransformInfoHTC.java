@@ -335,42 +335,42 @@ public class XrPassthroughMeshTransformInfoHTC extends Struct<XrPassthroughMeshT
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughMeshTransformInfoHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughMeshTransformInfoHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughMeshTransformInfoHTC.NEXT); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughMeshTransformInfoHTC.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + XrPassthroughMeshTransformInfoHTC.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertices}. */
     public static XrVector3f.Buffer nvertices(long struct) { return XrVector3f.create(memGetAddress(struct + XrPassthroughMeshTransformInfoHTC.VERTICES), nvertexCount(struct)); }
     /** Unsafe version of {@link #indexCount}. */
-    public static int nindexCount(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughMeshTransformInfoHTC.INDEXCOUNT); }
+    public static int nindexCount(long struct) { return memGetInt(struct + XrPassthroughMeshTransformInfoHTC.INDEXCOUNT); }
     /** Unsafe version of {@link #indices() indices}. */
     public static IntBuffer nindices(long struct) { return memIntBuffer(memGetAddress(struct + XrPassthroughMeshTransformInfoHTC.INDICES), nindexCount(struct)); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrPassthroughMeshTransformInfoHTC.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrPassthroughMeshTransformInfoHTC.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrPassthroughMeshTransformInfoHTC.TIME); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrPassthroughMeshTransformInfoHTC.POSE); }
     /** Unsafe version of {@link #scale}. */
     public static XrVector3f nscale(long struct) { return XrVector3f.create(struct + XrPassthroughMeshTransformInfoHTC.SCALE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughMeshTransformInfoHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughMeshTransformInfoHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughMeshTransformInfoHTC.NEXT, value); }
     /** Sets the specified value to the {@code vertexCount} field of the specified {@code struct}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughMeshTransformInfoHTC.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + XrPassthroughMeshTransformInfoHTC.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #vertices(XrVector3f.Buffer) vertices}. */
     public static void nvertices(long struct, XrVector3f.Buffer value) { memPutAddress(struct + XrPassthroughMeshTransformInfoHTC.VERTICES, value.address()); nvertexCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code indexCount} field of the specified {@code struct}. */
-    public static void nindexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughMeshTransformInfoHTC.INDEXCOUNT, value); }
+    public static void nindexCount(long struct, int value) { memPutInt(struct + XrPassthroughMeshTransformInfoHTC.INDEXCOUNT, value); }
     /** Unsafe version of {@link #indices(IntBuffer) indices}. */
     public static void nindices(long struct, IntBuffer value) { memPutAddress(struct + XrPassthroughMeshTransformInfoHTC.INDICES, memAddress(value)); nindexCount(struct, value.remaining()); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrPassthroughMeshTransformInfoHTC.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrPassthroughMeshTransformInfoHTC.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrPassthroughMeshTransformInfoHTC.TIME, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrPassthroughMeshTransformInfoHTC.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #scale(XrVector3f) scale}. */

@@ -237,7 +237,7 @@ public class OVREyeRenderDesc extends Struct<OVREyeRenderDesc> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #Eye}. */
-    public static int nEye(long struct) { return UNSAFE.getInt(null, struct + OVREyeRenderDesc.EYE); }
+    public static int nEye(long struct) { return memGetInt(struct + OVREyeRenderDesc.EYE); }
     /** Unsafe version of {@link #Fov}. */
     public static OVRFovPort nFov(long struct) { return OVRFovPort.create(struct + OVREyeRenderDesc.FOV); }
     /** Unsafe version of {@link #DistortedViewport}. */

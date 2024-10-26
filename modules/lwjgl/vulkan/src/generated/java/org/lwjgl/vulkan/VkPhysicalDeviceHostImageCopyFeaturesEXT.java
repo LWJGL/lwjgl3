@@ -246,18 +246,18 @@ public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #hostImageCopy}. */
-    public static int nhostImageCopy(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY); }
+    public static int nhostImageCopy(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #hostImageCopy(boolean) hostImageCopy}. */
-    public static void nhostImageCopy(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY, value); }
+    public static void nhostImageCopy(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY, value); }
 
     // -----------------------------------
 

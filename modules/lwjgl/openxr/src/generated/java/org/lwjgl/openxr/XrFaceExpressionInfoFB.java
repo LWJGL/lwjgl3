@@ -252,18 +252,18 @@ public class XrFaceExpressionInfoFB extends Struct<XrFaceExpressionInfoFB> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFaceExpressionInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFaceExpressionInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFaceExpressionInfoFB.NEXT); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrFaceExpressionInfoFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrFaceExpressionInfoFB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceExpressionInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFaceExpressionInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFaceExpressionInfoFB.NEXT, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrFaceExpressionInfoFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrFaceExpressionInfoFB.TIME, value); }
 
     // -----------------------------------
 

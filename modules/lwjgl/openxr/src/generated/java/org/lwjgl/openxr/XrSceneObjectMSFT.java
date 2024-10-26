@@ -214,10 +214,10 @@ public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + XrSceneObjectMSFT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return memGetInt(struct + XrSceneObjectMSFT.OBJECTTYPE); }
 
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneObjectMSFT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { memPutInt(struct + XrSceneObjectMSFT.OBJECTTYPE, value); }
 
     // -----------------------------------
 

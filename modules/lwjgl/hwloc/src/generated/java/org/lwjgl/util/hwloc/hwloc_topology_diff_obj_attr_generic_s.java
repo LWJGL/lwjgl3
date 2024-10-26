@@ -102,7 +102,7 @@ public class hwloc_topology_diff_obj_attr_generic_s extends Struct<hwloc_topolog
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + hwloc_topology_diff_obj_attr_generic_s.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_generic_s.TYPE); }
 
     // -----------------------------------
 

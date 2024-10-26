@@ -219,13 +219,13 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #num_palettes}. */
-    public static short nnum_palettes(long struct) { return UNSAFE.getShort(null, struct + FT_Palette_Data.NUM_PALETTES); }
+    public static short nnum_palettes(long struct) { return memGetShort(struct + FT_Palette_Data.NUM_PALETTES); }
     /** Unsafe version of {@link #palette_name_ids() palette_name_ids}. */
     @Nullable public static ShortBuffer npalette_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_NAME_IDS), Short.toUnsignedInt(nnum_palettes(struct))); }
     /** Unsafe version of {@link #palette_flags() palette_flags}. */
     @Nullable public static ShortBuffer npalette_flags(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_FLAGS), Short.toUnsignedInt(nnum_palettes(struct))); }
     /** Unsafe version of {@link #num_palette_entries}. */
-    public static short nnum_palette_entries(long struct) { return UNSAFE.getShort(null, struct + FT_Palette_Data.NUM_PALETTE_ENTRIES); }
+    public static short nnum_palette_entries(long struct) { return memGetShort(struct + FT_Palette_Data.NUM_PALETTE_ENTRIES); }
     /** Unsafe version of {@link #palette_entry_name_ids() palette_entry_name_ids}. */
     @Nullable public static ShortBuffer npalette_entry_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_ENTRY_NAME_IDS), Short.toUnsignedInt(nnum_palette_entries(struct))); }
 

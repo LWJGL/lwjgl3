@@ -237,13 +237,13 @@ public class RenderModel extends Struct<RenderModel> implements NativeResource {
     /** Unsafe version of {@link #rVertexData}. */
     public static RenderModelVertex.Buffer nrVertexData(long struct) { return RenderModelVertex.create(memGetAddress(struct + RenderModel.RVERTEXDATA), nunVertexCount(struct)); }
     /** Unsafe version of {@link #unVertexCount}. */
-    public static int nunVertexCount(long struct) { return UNSAFE.getInt(null, struct + RenderModel.UNVERTEXCOUNT); }
+    public static int nunVertexCount(long struct) { return memGetInt(struct + RenderModel.UNVERTEXCOUNT); }
     /** Unsafe version of {@link #IndexData() IndexData}. */
     public static ShortBuffer nIndexData(long struct) { return memShortBuffer(memGetAddress(struct + RenderModel.INDEXDATA), (nunTriangleCount(struct) * 3)); }
     /** Unsafe version of {@link #unTriangleCount}. */
-    public static int nunTriangleCount(long struct) { return UNSAFE.getInt(null, struct + RenderModel.UNTRIANGLECOUNT); }
+    public static int nunTriangleCount(long struct) { return memGetInt(struct + RenderModel.UNTRIANGLECOUNT); }
     /** Unsafe version of {@link #diffuseTextureId}. */
-    public static int ndiffuseTextureId(long struct) { return UNSAFE.getInt(null, struct + RenderModel.DIFFUSETEXTUREID); }
+    public static int ndiffuseTextureId(long struct) { return memGetInt(struct + RenderModel.DIFFUSETEXTUREID); }
 
     // -----------------------------------
 

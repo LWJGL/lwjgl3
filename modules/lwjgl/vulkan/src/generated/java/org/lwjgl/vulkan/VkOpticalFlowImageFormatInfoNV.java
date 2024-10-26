@@ -248,18 +248,18 @@ public class VkOpticalFlowImageFormatInfoNV extends Struct<VkOpticalFlowImageFor
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowImageFormatInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkOpticalFlowImageFormatInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkOpticalFlowImageFormatInfoNV.PNEXT); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkOpticalFlowImageFormatInfoNV.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VkOpticalFlowImageFormatInfoNV.USAGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowImageFormatInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkOpticalFlowImageFormatInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkOpticalFlowImageFormatInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkOpticalFlowImageFormatInfoNV.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VkOpticalFlowImageFormatInfoNV.USAGE, value); }
 
     // -----------------------------------
 

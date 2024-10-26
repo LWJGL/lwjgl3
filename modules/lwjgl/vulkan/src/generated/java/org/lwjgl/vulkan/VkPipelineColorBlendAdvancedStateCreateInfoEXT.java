@@ -296,26 +296,26 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct<VkPip
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #srcPremultiplied}. */
-    public static int nsrcPremultiplied(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED); }
+    public static int nsrcPremultiplied(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED); }
     /** Unsafe version of {@link #dstPremultiplied}. */
-    public static int ndstPremultiplied(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED); }
+    public static int ndstPremultiplied(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED); }
     /** Unsafe version of {@link #blendOverlap}. */
-    public static int nblendOverlap(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP); }
+    public static int nblendOverlap(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #srcPremultiplied(boolean) srcPremultiplied}. */
-    public static void nsrcPremultiplied(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED, value); }
+    public static void nsrcPremultiplied(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED, value); }
     /** Unsafe version of {@link #dstPremultiplied(boolean) dstPremultiplied}. */
-    public static void ndstPremultiplied(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED, value); }
+    public static void ndstPremultiplied(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED, value); }
     /** Unsafe version of {@link #blendOverlap(int) blendOverlap}. */
-    public static void nblendOverlap(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP, value); }
+    public static void nblendOverlap(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP, value); }
 
     // -----------------------------------
 

@@ -261,22 +261,22 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct<VkMultisa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMultisampledRenderToSingleSampledInfoEXT.PNEXT); }
     /** Unsafe version of {@link #multisampledRenderToSingleSampledEnable}. */
-    public static int nmultisampledRenderToSingleSampledEnable(long struct) { return UNSAFE.getInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.MULTISAMPLEDRENDERTOSINGLESAMPLEDENABLE); }
+    public static int nmultisampledRenderToSingleSampledEnable(long struct) { return memGetInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.MULTISAMPLEDRENDERTOSINGLESAMPLEDENABLE); }
     /** Unsafe version of {@link #rasterizationSamples}. */
-    public static int nrasterizationSamples(long struct) { return UNSAFE.getInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.RASTERIZATIONSAMPLES); }
+    public static int nrasterizationSamples(long struct) { return memGetInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.RASTERIZATIONSAMPLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMultisampledRenderToSingleSampledInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #multisampledRenderToSingleSampledEnable(boolean) multisampledRenderToSingleSampledEnable}. */
-    public static void nmultisampledRenderToSingleSampledEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.MULTISAMPLEDRENDERTOSINGLESAMPLEDENABLE, value); }
+    public static void nmultisampledRenderToSingleSampledEnable(long struct, int value) { memPutInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.MULTISAMPLEDRENDERTOSINGLESAMPLEDENABLE, value); }
     /** Unsafe version of {@link #rasterizationSamples(int) rasterizationSamples}. */
-    public static void nrasterizationSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkMultisampledRenderToSingleSampledInfoEXT.RASTERIZATIONSAMPLES, value); }
+    public static void nrasterizationSamples(long struct, int value) { memPutInt(struct + VkMultisampledRenderToSingleSampledInfoEXT.RASTERIZATIONSAMPLES, value); }
 
     // -----------------------------------
 

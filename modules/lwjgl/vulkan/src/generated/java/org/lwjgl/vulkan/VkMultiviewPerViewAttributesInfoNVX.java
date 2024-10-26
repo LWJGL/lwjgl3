@@ -257,22 +257,22 @@ public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerVi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMultiviewPerViewAttributesInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMultiviewPerViewAttributesInfoNVX.PNEXT); }
     /** Unsafe version of {@link #perViewAttributes}. */
-    public static int nperViewAttributes(long struct) { return UNSAFE.getInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTES); }
+    public static int nperViewAttributes(long struct) { return memGetInt(struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTES); }
     /** Unsafe version of {@link #perViewAttributesPositionXOnly}. */
-    public static int nperViewAttributesPositionXOnly(long struct) { return UNSAFE.getInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTESPOSITIONXONLY); }
+    public static int nperViewAttributesPositionXOnly(long struct) { return memGetInt(struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTESPOSITIONXONLY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMultiviewPerViewAttributesInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMultiviewPerViewAttributesInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #perViewAttributes(boolean) perViewAttributes}. */
-    public static void nperViewAttributes(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTES, value); }
+    public static void nperViewAttributes(long struct, int value) { memPutInt(struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTES, value); }
     /** Unsafe version of {@link #perViewAttributesPositionXOnly(boolean) perViewAttributesPositionXOnly}. */
-    public static void nperViewAttributesPositionXOnly(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTESPOSITIONXONLY, value); }
+    public static void nperViewAttributesPositionXOnly(long struct, int value) { memPutInt(struct + VkMultiviewPerViewAttributesInfoNVX.PERVIEWATTRIBUTESPOSITIONXONLY, value); }
 
     // -----------------------------------
 

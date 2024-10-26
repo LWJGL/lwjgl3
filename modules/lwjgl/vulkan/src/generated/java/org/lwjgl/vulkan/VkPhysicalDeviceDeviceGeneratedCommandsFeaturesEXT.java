@@ -257,22 +257,22 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #deviceGeneratedCommands}. */
-    public static int ndeviceGeneratedCommands(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DEVICEGENERATEDCOMMANDS); }
+    public static int ndeviceGeneratedCommands(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DEVICEGENERATEDCOMMANDS); }
     /** Unsafe version of {@link #dynamicGeneratedPipelineLayout}. */
-    public static int ndynamicGeneratedPipelineLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DYNAMICGENERATEDPIPELINELAYOUT); }
+    public static int ndynamicGeneratedPipelineLayout(long struct) { return memGetInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DYNAMICGENERATEDPIPELINELAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #deviceGeneratedCommands(boolean) deviceGeneratedCommands}. */
-    public static void ndeviceGeneratedCommands(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DEVICEGENERATEDCOMMANDS, value); }
+    public static void ndeviceGeneratedCommands(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DEVICEGENERATEDCOMMANDS, value); }
     /** Unsafe version of {@link #dynamicGeneratedPipelineLayout(boolean) dynamicGeneratedPipelineLayout}. */
-    public static void ndynamicGeneratedPipelineLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DYNAMICGENERATEDPIPELINELAYOUT, value); }
+    public static void ndynamicGeneratedPipelineLayout(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.DYNAMICGENERATEDPIPELINELAYOUT, value); }
 
     // -----------------------------------
 

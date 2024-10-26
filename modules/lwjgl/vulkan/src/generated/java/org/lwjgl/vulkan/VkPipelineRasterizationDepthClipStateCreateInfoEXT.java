@@ -273,22 +273,22 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #depthClipEnable}. */
-    public static int ndepthClipEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.DEPTHCLIPENABLE); }
+    public static int ndepthClipEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.DEPTHCLIPENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #depthClipEnable(boolean) depthClipEnable}. */
-    public static void ndepthClipEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.DEPTHCLIPENABLE, value); }
+    public static void ndepthClipEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationDepthClipStateCreateInfoEXT.DEPTHCLIPENABLE, value); }
 
     // -----------------------------------
 

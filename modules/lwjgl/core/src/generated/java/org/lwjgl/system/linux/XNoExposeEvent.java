@@ -293,34 +293,34 @@ public class XNoExposeEvent extends Struct<XNoExposeEvent> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XNoExposeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XNoExposeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XNoExposeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XNoExposeEvent.DISPLAY); }
     /** Unsafe version of {@link #drawable}. */
     public static long ndrawable(long struct) { return memGetCLong(struct + XNoExposeEvent.DRAWABLE); }
     /** Unsafe version of {@link #major_code}. */
-    public static int nmajor_code(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.MAJOR_CODE); }
+    public static int nmajor_code(long struct) { return memGetInt(struct + XNoExposeEvent.MAJOR_CODE); }
     /** Unsafe version of {@link #minor_code}. */
-    public static int nminor_code(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.MINOR_CODE); }
+    public static int nminor_code(long struct) { return memGetInt(struct + XNoExposeEvent.MINOR_CODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XNoExposeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XNoExposeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XNoExposeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XNoExposeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #drawable(long) drawable}. */
     public static void ndrawable(long struct, long value) { memPutCLong(struct + XNoExposeEvent.DRAWABLE, value); }
     /** Unsafe version of {@link #major_code(int) major_code}. */
-    public static void nmajor_code(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.MAJOR_CODE, value); }
+    public static void nmajor_code(long struct, int value) { memPutInt(struct + XNoExposeEvent.MAJOR_CODE, value); }
     /** Unsafe version of {@link #minor_code(int) minor_code}. */
-    public static void nminor_code(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.MINOR_CODE, value); }
+    public static void nminor_code(long struct, int value) { memPutInt(struct + XNoExposeEvent.MINOR_CODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

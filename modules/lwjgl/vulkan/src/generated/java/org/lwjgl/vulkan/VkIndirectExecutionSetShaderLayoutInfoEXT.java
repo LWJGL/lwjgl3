@@ -265,20 +265,20 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderLayoutInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PNEXT); }
     /** Unsafe version of {@link #setLayoutCount}. */
-    public static int nsetLayoutCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectExecutionSetShaderLayoutInfoEXT.SETLAYOUTCOUNT); }
+    public static int nsetLayoutCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.SETLAYOUTCOUNT); }
     /** Unsafe version of {@link #pSetLayouts() pSetLayouts}. */
     @Nullable public static LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PSETLAYOUTS), nsetLayoutCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderLayoutInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code setLayoutCount} field of the specified {@code struct}. */
-    public static void nsetLayoutCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectExecutionSetShaderLayoutInfoEXT.SETLAYOUTCOUNT, value); }
+    public static void nsetLayoutCount(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.SETLAYOUTCOUNT, value); }
     /** Unsafe version of {@link #pSetLayouts(LongBuffer) pSetLayouts}. */
     public static void npSetLayouts(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PSETLAYOUTS, memAddressSafe(value)); if (value != null) { nsetLayoutCount(struct, value.remaining()); } }
 

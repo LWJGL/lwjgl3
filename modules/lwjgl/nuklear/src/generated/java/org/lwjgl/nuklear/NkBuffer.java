@@ -273,11 +273,11 @@ public class NkBuffer extends Struct<NkBuffer> implements NativeResource {
     /** Unsafe version of {@link #pool}. */
     public static NkAllocator npool(long struct) { return NkAllocator.create(struct + NkBuffer.POOL); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkBuffer.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkBuffer.TYPE); }
     /** Unsafe version of {@link #memory}. */
     public static NkMemory nmemory(long struct) { return NkMemory.create(struct + NkBuffer.MEMORY); }
     /** Unsafe version of {@link #grow_factor}. */
-    public static float ngrow_factor(long struct) { return UNSAFE.getFloat(null, struct + NkBuffer.GROW_FACTOR); }
+    public static float ngrow_factor(long struct) { return memGetFloat(struct + NkBuffer.GROW_FACTOR); }
     /** Unsafe version of {@link #allocated}. */
     public static long nallocated(long struct) { return memGetAddress(struct + NkBuffer.ALLOCATED); }
     /** Unsafe version of {@link #needed}. */

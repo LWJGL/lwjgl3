@@ -255,12 +255,12 @@ public class UIVec2 extends Struct<UIVec2> implements NativeResource {
     public static IntBuffer nv(long struct) { return memIntBuffer(struct + UIVec2.V, 2); }
     /** Unsafe version of {@link #v(int) v}. */
     public static int nv(long struct, int index) {
-        return UNSAFE.getInt(null, struct + UIVec2.V + check(index, 2) * 4);
+        return memGetInt(struct + UIVec2.V + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + UIVec2.X); }
+    public static int nx(long struct) { return memGetInt(struct + UIVec2.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + UIVec2.Y); }
+    public static int ny(long struct) { return memGetInt(struct + UIVec2.Y); }
 
     /** Unsafe version of {@link #v(IntBuffer) v}. */
     public static void nv(long struct, IntBuffer value) {
@@ -269,12 +269,12 @@ public class UIVec2 extends Struct<UIVec2> implements NativeResource {
     }
     /** Unsafe version of {@link #v(int, int) v}. */
     public static void nv(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + UIVec2.V + check(index, 2) * 4, value);
+        memPutInt(struct + UIVec2.V + check(index, 2) * 4, value);
     }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + UIVec2.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + UIVec2.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + UIVec2.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + UIVec2.Y, value); }
 
     // -----------------------------------
 

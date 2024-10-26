@@ -245,18 +245,18 @@ public class XrSwapchainCreateInfoFoveationFB extends Struct<XrSwapchainCreateIn
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainCreateInfoFoveationFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSwapchainCreateInfoFoveationFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSwapchainCreateInfoFoveationFB.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrSwapchainCreateInfoFoveationFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrSwapchainCreateInfoFoveationFB.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfoFoveationFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSwapchainCreateInfoFoveationFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainCreateInfoFoveationFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainCreateInfoFoveationFB.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrSwapchainCreateInfoFoveationFB.FLAGS, value); }
 
     // -----------------------------------
 

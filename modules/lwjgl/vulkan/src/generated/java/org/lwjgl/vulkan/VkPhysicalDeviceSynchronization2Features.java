@@ -246,18 +246,18 @@ public class VkPhysicalDeviceSynchronization2Features extends Struct<VkPhysicalD
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSynchronization2Features.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSynchronization2Features.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSynchronization2Features.PNEXT); }
     /** Unsafe version of {@link #synchronization2}. */
-    public static int nsynchronization2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSynchronization2Features.SYNCHRONIZATION2); }
+    public static int nsynchronization2(long struct) { return memGetInt(struct + VkPhysicalDeviceSynchronization2Features.SYNCHRONIZATION2); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSynchronization2Features.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSynchronization2Features.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSynchronization2Features.PNEXT, value); }
     /** Unsafe version of {@link #synchronization2(boolean) synchronization2}. */
-    public static void nsynchronization2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSynchronization2Features.SYNCHRONIZATION2, value); }
+    public static void nsynchronization2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSynchronization2Features.SYNCHRONIZATION2, value); }
 
     // -----------------------------------
 

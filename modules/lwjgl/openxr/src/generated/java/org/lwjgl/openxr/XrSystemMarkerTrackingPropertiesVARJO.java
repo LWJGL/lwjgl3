@@ -250,14 +250,14 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct<XrSystemMarker
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT); }
     /** Unsafe version of {@link #supportsMarkerTracking}. */
-    public static int nsupportsMarkerTracking(long struct) { return UNSAFE.getInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.SUPPORTSMARKERTRACKING); }
+    public static int nsupportsMarkerTracking(long struct) { return memGetInt(struct + XrSystemMarkerTrackingPropertiesVARJO.SUPPORTSMARKERTRACKING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT, value); }
 

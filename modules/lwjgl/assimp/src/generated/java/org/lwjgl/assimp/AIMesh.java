@@ -573,11 +573,11 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #mPrimitiveTypes}. */
-    public static int nmPrimitiveTypes(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MPRIMITIVETYPES); }
+    public static int nmPrimitiveTypes(long struct) { return memGetInt(struct + AIMesh.MPRIMITIVETYPES); }
     /** Unsafe version of {@link #mNumVertices}. */
-    public static int nmNumVertices(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MNUMVERTICES); }
+    public static int nmNumVertices(long struct) { return memGetInt(struct + AIMesh.MNUMVERTICES); }
     /** Unsafe version of {@link #mNumFaces}. */
-    public static int nmNumFaces(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MNUMFACES); }
+    public static int nmNumFaces(long struct) { return memGetInt(struct + AIMesh.MNUMFACES); }
     /** Unsafe version of {@link #mVertices}. */
     public static AIVector3D.Buffer nmVertices(long struct) { return AIVector3D.create(memGetAddress(struct + AIMesh.MVERTICES), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mNormals}. */
@@ -602,35 +602,35 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
     public static IntBuffer nmNumUVComponents(long struct) { return memIntBuffer(struct + AIMesh.MNUMUVCOMPONENTS, AI_MAX_NUMBER_OF_TEXTURECOORDS); }
     /** Unsafe version of {@link #mNumUVComponents(int) mNumUVComponents}. */
     public static int nmNumUVComponents(long struct, int index) {
-        return UNSAFE.getInt(null, struct + AIMesh.MNUMUVCOMPONENTS + check(index, AI_MAX_NUMBER_OF_TEXTURECOORDS) * 4);
+        return memGetInt(struct + AIMesh.MNUMUVCOMPONENTS + check(index, AI_MAX_NUMBER_OF_TEXTURECOORDS) * 4);
     }
     /** Unsafe version of {@link #mFaces}. */
     public static AIFace.Buffer nmFaces(long struct) { return AIFace.create(memGetAddress(struct + AIMesh.MFACES), nmNumFaces(struct)); }
     /** Unsafe version of {@link #mNumBones}. */
-    public static int nmNumBones(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MNUMBONES); }
+    public static int nmNumBones(long struct) { return memGetInt(struct + AIMesh.MNUMBONES); }
     /** Unsafe version of {@link #mBones() mBones}. */
     @Nullable public static PointerBuffer nmBones(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIMesh.MBONES), nmNumBones(struct)); }
     /** Unsafe version of {@link #mMaterialIndex}. */
-    public static int nmMaterialIndex(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MMATERIALINDEX); }
+    public static int nmMaterialIndex(long struct) { return memGetInt(struct + AIMesh.MMATERIALINDEX); }
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIMesh.MNAME); }
     /** Unsafe version of {@link #mNumAnimMeshes}. */
-    public static int nmNumAnimMeshes(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MNUMANIMMESHES); }
+    public static int nmNumAnimMeshes(long struct) { return memGetInt(struct + AIMesh.MNUMANIMMESHES); }
     /** Unsafe version of {@link #mAnimMeshes() mAnimMeshes}. */
     @Nullable public static PointerBuffer nmAnimMeshes(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIMesh.MANIMMESHES), nmNumAnimMeshes(struct)); }
     /** Unsafe version of {@link #mMethod}. */
-    public static int nmMethod(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MMETHOD); }
+    public static int nmMethod(long struct) { return memGetInt(struct + AIMesh.MMETHOD); }
     /** Unsafe version of {@link #mAABB}. */
     public static AIAABB nmAABB(long struct) { return AIAABB.create(struct + AIMesh.MAABB); }
     /** Unsafe version of {@link #mTextureCoordsNames() mTextureCoordsNames}. */
     @Nullable public static PointerBuffer nmTextureCoordsNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIMesh.MTEXTURECOORDSNAMES), AI_MAX_NUMBER_OF_TEXTURECOORDS); }
 
     /** Unsafe version of {@link #mPrimitiveTypes(int) mPrimitiveTypes}. */
-    public static void nmPrimitiveTypes(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MPRIMITIVETYPES, value); }
+    public static void nmPrimitiveTypes(long struct, int value) { memPutInt(struct + AIMesh.MPRIMITIVETYPES, value); }
     /** Sets the specified value to the {@code mNumVertices} field of the specified {@code struct}. */
-    public static void nmNumVertices(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MNUMVERTICES, value); }
+    public static void nmNumVertices(long struct, int value) { memPutInt(struct + AIMesh.MNUMVERTICES, value); }
     /** Sets the specified value to the {@code mNumFaces} field of the specified {@code struct}. */
-    public static void nmNumFaces(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MNUMFACES, value); }
+    public static void nmNumFaces(long struct, int value) { memPutInt(struct + AIMesh.MNUMFACES, value); }
     /** Unsafe version of {@link #mVertices(AIVector3D.Buffer) mVertices}. */
     public static void nmVertices(long struct, AIVector3D.Buffer value) { memPutAddress(struct + AIMesh.MVERTICES, value.address()); }
     /** Unsafe version of {@link #mNormals(AIVector3D.Buffer) mNormals}. */
@@ -664,24 +664,24 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
     }
     /** Unsafe version of {@link #mNumUVComponents(int, int) mNumUVComponents}. */
     public static void nmNumUVComponents(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + AIMesh.MNUMUVCOMPONENTS + check(index, AI_MAX_NUMBER_OF_TEXTURECOORDS) * 4, value);
+        memPutInt(struct + AIMesh.MNUMUVCOMPONENTS + check(index, AI_MAX_NUMBER_OF_TEXTURECOORDS) * 4, value);
     }
     /** Unsafe version of {@link #mFaces(AIFace.Buffer) mFaces}. */
     public static void nmFaces(long struct, AIFace.Buffer value) { memPutAddress(struct + AIMesh.MFACES, value.address()); nmNumFaces(struct, value.remaining()); }
     /** Sets the specified value to the {@code mNumBones} field of the specified {@code struct}. */
-    public static void nmNumBones(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MNUMBONES, value); }
+    public static void nmNumBones(long struct, int value) { memPutInt(struct + AIMesh.MNUMBONES, value); }
     /** Unsafe version of {@link #mBones(PointerBuffer) mBones}. */
     public static void nmBones(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIMesh.MBONES, memAddressSafe(value)); nmNumBones(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMaterialIndex(int) mMaterialIndex}. */
-    public static void nmMaterialIndex(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MMATERIALINDEX, value); }
+    public static void nmMaterialIndex(long struct, int value) { memPutInt(struct + AIMesh.MMATERIALINDEX, value); }
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIMesh.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumAnimMeshes} field of the specified {@code struct}. */
-    public static void nmNumAnimMeshes(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MNUMANIMMESHES, value); }
+    public static void nmNumAnimMeshes(long struct, int value) { memPutInt(struct + AIMesh.MNUMANIMMESHES, value); }
     /** Unsafe version of {@link #mAnimMeshes(PointerBuffer) mAnimMeshes}. */
     public static void nmAnimMeshes(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIMesh.MANIMMESHES, memAddressSafe(value)); nmNumAnimMeshes(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMethod(int) mMethod}. */
-    public static void nmMethod(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MMETHOD, value); }
+    public static void nmMethod(long struct, int value) { memPutInt(struct + AIMesh.MMETHOD, value); }
     /** Unsafe version of {@link #mAABB(AIAABB) mAABB}. */
     public static void nmAABB(long struct, AIAABB value) { memCopy(value.address(), struct + AIMesh.MAABB, AIAABB.SIZEOF); }
     /** Unsafe version of {@link #mTextureCoordsNames(PointerBuffer) mTextureCoordsNames}. */

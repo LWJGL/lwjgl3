@@ -246,18 +246,18 @@ public class VkPhysicalDeviceCubicClampFeaturesQCOM extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCubicClampFeaturesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.PNEXT); }
     /** Unsafe version of {@link #cubicRangeClamp}. */
-    public static int ncubicRangeClamp(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCubicClampFeaturesQCOM.CUBICRANGECLAMP); }
+    public static int ncubicRangeClamp(long struct) { return memGetInt(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.CUBICRANGECLAMP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCubicClampFeaturesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.PNEXT, value); }
     /** Unsafe version of {@link #cubicRangeClamp(boolean) cubicRangeClamp}. */
-    public static void ncubicRangeClamp(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCubicClampFeaturesQCOM.CUBICRANGECLAMP, value); }
+    public static void ncubicRangeClamp(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCubicClampFeaturesQCOM.CUBICRANGECLAMP, value); }
 
     // -----------------------------------
 

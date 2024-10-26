@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #dynamicRenderingLocalRead}. */
-    public static int ndynamicRenderingLocalRead(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD); }
+    public static int ndynamicRenderingLocalRead(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #dynamicRenderingLocalRead(boolean) dynamicRenderingLocalRead}. */
-    public static void ndynamicRenderingLocalRead(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD, value); }
+    public static void ndynamicRenderingLocalRead(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD, value); }
 
     // -----------------------------------
 

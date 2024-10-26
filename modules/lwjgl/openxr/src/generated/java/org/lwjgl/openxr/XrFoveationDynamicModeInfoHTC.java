@@ -249,18 +249,18 @@ public class XrFoveationDynamicModeInfoHTC extends Struct<XrFoveationDynamicMode
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveationDynamicModeInfoHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveationDynamicModeInfoHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveationDynamicModeInfoHTC.NEXT); }
     /** Unsafe version of {@link #dynamicFlags}. */
-    public static long ndynamicFlags(long struct) { return UNSAFE.getLong(null, struct + XrFoveationDynamicModeInfoHTC.DYNAMICFLAGS); }
+    public static long ndynamicFlags(long struct) { return memGetLong(struct + XrFoveationDynamicModeInfoHTC.DYNAMICFLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationDynamicModeInfoHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveationDynamicModeInfoHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationDynamicModeInfoHTC.NEXT, value); }
     /** Unsafe version of {@link #dynamicFlags(long) dynamicFlags}. */
-    public static void ndynamicFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrFoveationDynamicModeInfoHTC.DYNAMICFLAGS, value); }
+    public static void ndynamicFlags(long struct, long value) { memPutLong(struct + XrFoveationDynamicModeInfoHTC.DYNAMICFLAGS, value); }
 
     // -----------------------------------
 

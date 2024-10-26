@@ -247,14 +247,14 @@ public class VkPhysicalDeviceImageProcessing2PropertiesQCOM extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.PNEXT); }
     /** Unsafe version of {@link #maxBlockMatchWindow}. */
     public static VkExtent2D nmaxBlockMatchWindow(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.MAXBLOCKMATCHWINDOW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageProcessing2PropertiesQCOM.PNEXT, value); }
 

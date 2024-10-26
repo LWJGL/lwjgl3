@@ -246,16 +246,16 @@ public class VmaVirtualBlockCreateInfo extends Struct<VmaVirtualBlockCreateInfo>
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualBlockCreateInfo.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VmaVirtualBlockCreateInfo.SIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaVirtualBlockCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VmaVirtualBlockCreateInfo.FLAGS); }
     /** Unsafe version of {@link #pAllocationCallbacks}. */
     @Nullable public static VkAllocationCallbacks npAllocationCallbacks(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + VmaVirtualBlockCreateInfo.PALLOCATIONCALLBACKS)); }
 
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VmaVirtualBlockCreateInfo.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VmaVirtualBlockCreateInfo.SIZE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaVirtualBlockCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VmaVirtualBlockCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #pAllocationCallbacks(VkAllocationCallbacks) pAllocationCallbacks}. */
     public static void npAllocationCallbacks(long struct, @Nullable VkAllocationCallbacks value) { memPutAddress(struct + VmaVirtualBlockCreateInfo.PALLOCATIONCALLBACKS, memAddressSafe(value)); }
 

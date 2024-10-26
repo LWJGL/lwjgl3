@@ -259,24 +259,24 @@ public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {
     /** Unsafe version of {@link #img}. */
     public static NkImage nimg(long struct) { return NkImage.create(struct + NkNineSlice.IMG); }
     /** Unsafe version of {@link #l}. */
-    public static short nl(long struct) { return UNSAFE.getShort(null, struct + NkNineSlice.L); }
+    public static short nl(long struct) { return memGetShort(struct + NkNineSlice.L); }
     /** Unsafe version of {@link #t}. */
-    public static short nt(long struct) { return UNSAFE.getShort(null, struct + NkNineSlice.T); }
+    public static short nt(long struct) { return memGetShort(struct + NkNineSlice.T); }
     /** Unsafe version of {@link #r}. */
-    public static short nr(long struct) { return UNSAFE.getShort(null, struct + NkNineSlice.R); }
+    public static short nr(long struct) { return memGetShort(struct + NkNineSlice.R); }
     /** Unsafe version of {@link #b}. */
-    public static short nb(long struct) { return UNSAFE.getShort(null, struct + NkNineSlice.B); }
+    public static short nb(long struct) { return memGetShort(struct + NkNineSlice.B); }
 
     /** Unsafe version of {@link #img(NkImage) img}. */
     public static void nimg(long struct, NkImage value) { memCopy(value.address(), struct + NkNineSlice.IMG, NkImage.SIZEOF); }
     /** Unsafe version of {@link #l(short) l}. */
-    public static void nl(long struct, short value) { UNSAFE.putShort(null, struct + NkNineSlice.L, value); }
+    public static void nl(long struct, short value) { memPutShort(struct + NkNineSlice.L, value); }
     /** Unsafe version of {@link #t(short) t}. */
-    public static void nt(long struct, short value) { UNSAFE.putShort(null, struct + NkNineSlice.T, value); }
+    public static void nt(long struct, short value) { memPutShort(struct + NkNineSlice.T, value); }
     /** Unsafe version of {@link #r(short) r}. */
-    public static void nr(long struct, short value) { UNSAFE.putShort(null, struct + NkNineSlice.R, value); }
+    public static void nr(long struct, short value) { memPutShort(struct + NkNineSlice.R, value); }
     /** Unsafe version of {@link #b(short) b}. */
-    public static void nb(long struct, short value) { UNSAFE.putShort(null, struct + NkNineSlice.B, value); }
+    public static void nb(long struct, short value) { memPutShort(struct + NkNineSlice.B, value); }
 
     // -----------------------------------
 

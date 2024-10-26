@@ -269,22 +269,22 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #components}. */
     public static VkComponentMapping ncomponents(long struct) { return VkComponentMapping.create(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.COMPONENTS); }
     /** Unsafe version of {@link #srgb}. */
-    public static int nsrgb(long struct) { return UNSAFE.getInt(null, struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.SRGB); }
+    public static int nsrgb(long struct) { return memGetInt(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.SRGB); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #components(VkComponentMapping) components}. */
     public static void ncomponents(long struct, VkComponentMapping value) { memCopy(value.address(), struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.COMPONENTS, VkComponentMapping.SIZEOF); }
     /** Unsafe version of {@link #srgb(boolean) srgb}. */
-    public static void nsrgb(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.SRGB, value); }
+    public static void nsrgb(long struct, int value) { memPutInt(struct + VkSamplerBorderColorComponentMappingCreateInfoEXT.SRGB, value); }
 
     // -----------------------------------
 

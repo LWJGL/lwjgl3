@@ -366,11 +366,11 @@ public class XConfigureRequestEvent extends Struct<XConfigureRequestEvent> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XConfigureRequestEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XConfigureRequestEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XConfigureRequestEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XConfigureRequestEvent.DISPLAY); }
     /** Unsafe version of {@link #parent}. */
@@ -378,28 +378,28 @@ public class XConfigureRequestEvent extends Struct<XConfigureRequestEvent> imple
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetCLong(struct + XConfigureRequestEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XConfigureRequestEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XConfigureRequestEvent.Y); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XConfigureRequestEvent.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XConfigureRequestEvent.HEIGHT); }
     /** Unsafe version of {@link #border_width}. */
-    public static int nborder_width(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.BORDER_WIDTH); }
+    public static int nborder_width(long struct) { return memGetInt(struct + XConfigureRequestEvent.BORDER_WIDTH); }
     /** Unsafe version of {@link #above}. */
     public static long nabove(long struct) { return memGetCLong(struct + XConfigureRequestEvent.ABOVE); }
     /** Unsafe version of {@link #detail}. */
-    public static int ndetail(long struct) { return UNSAFE.getInt(null, struct + XConfigureRequestEvent.DETAIL); }
+    public static int ndetail(long struct) { return memGetInt(struct + XConfigureRequestEvent.DETAIL); }
     /** Unsafe version of {@link #value_mask}. */
     public static long nvalue_mask(long struct) { return memGetCLong(struct + XConfigureRequestEvent.VALUE_MASK); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XConfigureRequestEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XConfigureRequestEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #parent(long) parent}. */
@@ -407,19 +407,19 @@ public class XConfigureRequestEvent extends Struct<XConfigureRequestEvent> imple
     /** Unsafe version of {@link #window(long) window}. */
     public static void nwindow(long struct, long value) { memPutCLong(struct + XConfigureRequestEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.Y, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.HEIGHT, value); }
     /** Unsafe version of {@link #border_width(int) border_width}. */
-    public static void nborder_width(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.BORDER_WIDTH, value); }
+    public static void nborder_width(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.BORDER_WIDTH, value); }
     /** Unsafe version of {@link #above(long) above}. */
     public static void nabove(long struct, long value) { memPutCLong(struct + XConfigureRequestEvent.ABOVE, value); }
     /** Unsafe version of {@link #detail(int) detail}. */
-    public static void ndetail(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureRequestEvent.DETAIL, value); }
+    public static void ndetail(long struct, int value) { memPutInt(struct + XConfigureRequestEvent.DETAIL, value); }
     /** Unsafe version of {@link #value_mask(long) value_mask}. */
     public static void nvalue_mask(long struct, long value) { memPutCLong(struct + XConfigureRequestEvent.VALUE_MASK, value); }
 

@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #rayTracingPositionFetch}. */
-    public static int nrayTracingPositionFetch(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.RAYTRACINGPOSITIONFETCH); }
+    public static int nrayTracingPositionFetch(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.RAYTRACINGPOSITIONFETCH); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #rayTracingPositionFetch(boolean) rayTracingPositionFetch}. */
-    public static void nrayTracingPositionFetch(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.RAYTRACINGPOSITIONFETCH, value); }
+    public static void nrayTracingPositionFetch(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.RAYTRACINGPOSITIONFETCH, value); }
 
     // -----------------------------------
 

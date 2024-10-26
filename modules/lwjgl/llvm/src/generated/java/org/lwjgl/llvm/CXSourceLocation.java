@@ -226,7 +226,7 @@ public class CXSourceLocation extends Struct<CXSourceLocation> implements Native
         return memGetAddress(struct + CXSourceLocation.PTR_DATA + check(index, 2) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #int_data}. */
-    public static int nint_data(long struct) { return UNSAFE.getInt(null, struct + CXSourceLocation.INT_DATA); }
+    public static int nint_data(long struct) { return memGetInt(struct + CXSourceLocation.INT_DATA); }
 
     // -----------------------------------
 

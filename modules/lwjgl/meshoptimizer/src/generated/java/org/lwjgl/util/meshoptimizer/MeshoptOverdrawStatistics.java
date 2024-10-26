@@ -200,11 +200,11 @@ public class MeshoptOverdrawStatistics extends Struct<MeshoptOverdrawStatistics>
     // -----------------------------------
 
     /** Unsafe version of {@link #pixels_covered}. */
-    public static int npixels_covered(long struct) { return UNSAFE.getInt(null, struct + MeshoptOverdrawStatistics.PIXELS_COVERED); }
+    public static int npixels_covered(long struct) { return memGetInt(struct + MeshoptOverdrawStatistics.PIXELS_COVERED); }
     /** Unsafe version of {@link #pixels_shaded}. */
-    public static int npixels_shaded(long struct) { return UNSAFE.getInt(null, struct + MeshoptOverdrawStatistics.PIXELS_SHADED); }
+    public static int npixels_shaded(long struct) { return memGetInt(struct + MeshoptOverdrawStatistics.PIXELS_SHADED); }
     /** Unsafe version of {@link #overdraw}. */
-    public static float noverdraw(long struct) { return UNSAFE.getFloat(null, struct + MeshoptOverdrawStatistics.OVERDRAW); }
+    public static float noverdraw(long struct) { return memGetFloat(struct + MeshoptOverdrawStatistics.OVERDRAW); }
 
     // -----------------------------------
 

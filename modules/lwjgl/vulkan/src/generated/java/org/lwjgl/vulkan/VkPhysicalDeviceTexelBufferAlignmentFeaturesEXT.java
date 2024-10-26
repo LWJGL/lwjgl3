@@ -265,18 +265,18 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #texelBufferAlignment}. */
-    public static int ntexelBufferAlignment(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.TEXELBUFFERALIGNMENT); }
+    public static int ntexelBufferAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.TEXELBUFFERALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #texelBufferAlignment(boolean) texelBufferAlignment}. */
-    public static void ntexelBufferAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.TEXELBUFFERALIGNMENT, value); }
+    public static void ntexelBufferAlignment(long struct, int value) { memPutInt(struct + VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.TEXELBUFFERALIGNMENT, value); }
 
     // -----------------------------------
 

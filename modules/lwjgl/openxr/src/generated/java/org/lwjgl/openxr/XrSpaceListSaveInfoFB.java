@@ -274,26 +274,26 @@ public class XrSpaceListSaveInfoFB extends Struct<XrSpaceListSaveInfoFB> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpaceListSaveInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpaceListSaveInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpaceListSaveInfoFB.NEXT); }
     /** Unsafe version of {@link #spaceCount}. */
-    public static int nspaceCount(long struct) { return UNSAFE.getInt(null, struct + XrSpaceListSaveInfoFB.SPACECOUNT); }
+    public static int nspaceCount(long struct) { return memGetInt(struct + XrSpaceListSaveInfoFB.SPACECOUNT); }
     /** Unsafe version of {@link #spaces() spaces}. */
     public static PointerBuffer nspaces(long struct) { return memPointerBuffer(memGetAddress(struct + XrSpaceListSaveInfoFB.SPACES), nspaceCount(struct)); }
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + XrSpaceListSaveInfoFB.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + XrSpaceListSaveInfoFB.LOCATION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceListSaveInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceListSaveInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceListSaveInfoFB.NEXT, value); }
     /** Sets the specified value to the {@code spaceCount} field of the specified {@code struct}. */
-    public static void nspaceCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceListSaveInfoFB.SPACECOUNT, value); }
+    public static void nspaceCount(long struct, int value) { memPutInt(struct + XrSpaceListSaveInfoFB.SPACECOUNT, value); }
     /** Unsafe version of {@link #spaces(PointerBuffer) spaces}. */
     public static void nspaces(long struct, PointerBuffer value) { memPutAddress(struct + XrSpaceListSaveInfoFB.SPACES, memAddress(value)); nspaceCount(struct, value.remaining()); }
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceListSaveInfoFB.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + XrSpaceListSaveInfoFB.LOCATION, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

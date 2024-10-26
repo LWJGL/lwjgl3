@@ -245,16 +245,16 @@ public class VkImageCompressionPropertiesEXT extends Struct<VkImageCompressionPr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImageCompressionPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageCompressionPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #imageCompressionFlags}. */
-    public static int nimageCompressionFlags(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionPropertiesEXT.IMAGECOMPRESSIONFLAGS); }
+    public static int nimageCompressionFlags(long struct) { return memGetInt(struct + VkImageCompressionPropertiesEXT.IMAGECOMPRESSIONFLAGS); }
     /** Unsafe version of {@link #imageCompressionFixedRateFlags}. */
-    public static int nimageCompressionFixedRateFlags(long struct) { return UNSAFE.getInt(null, struct + VkImageCompressionPropertiesEXT.IMAGECOMPRESSIONFIXEDRATEFLAGS); }
+    public static int nimageCompressionFixedRateFlags(long struct) { return memGetInt(struct + VkImageCompressionPropertiesEXT.IMAGECOMPRESSIONFIXEDRATEFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCompressionPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImageCompressionPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageCompressionPropertiesEXT.PNEXT, value); }
 

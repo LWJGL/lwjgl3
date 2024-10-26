@@ -249,7 +249,7 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH26
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH264PictureInfoFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeH264PictureInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #field_pic_flag}. */
     public static int nfield_pic_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #is_intra}. */
@@ -263,7 +263,7 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH26
     /** Unsafe version of {@link #complementary_field_pair}. */
     public static int ncomplementary_field_pair(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH264PictureInfoFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeH264PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #field_pic_flag(boolean) field_pic_flag}. */
     public static void nfield_pic_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #is_intra(boolean) is_intra}. */

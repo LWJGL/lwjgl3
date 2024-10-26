@@ -251,32 +251,32 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #ring_addr}. */
-    public static long nring_addr(long struct) { return UNSAFE.getLong(null, struct + IOURingBufReg.RING_ADDR); }
+    public static long nring_addr(long struct) { return memGetLong(struct + IOURingBufReg.RING_ADDR); }
     /** Unsafe version of {@link #ring_entries}. */
-    public static int nring_entries(long struct) { return UNSAFE.getInt(null, struct + IOURingBufReg.RING_ENTRIES); }
+    public static int nring_entries(long struct) { return memGetInt(struct + IOURingBufReg.RING_ENTRIES); }
     /** Unsafe version of {@link #bgid}. */
-    public static short nbgid(long struct) { return UNSAFE.getShort(null, struct + IOURingBufReg.BGID); }
+    public static short nbgid(long struct) { return memGetShort(struct + IOURingBufReg.BGID); }
     /** Unsafe version of {@link #flags}. */
-    public static short nflags(long struct) { return UNSAFE.getShort(null, struct + IOURingBufReg.FLAGS); }
+    public static short nflags(long struct) { return memGetShort(struct + IOURingBufReg.FLAGS); }
     public static LongBuffer nresv(long struct) { return memLongBuffer(struct + IOURingBufReg.RESV, 3); }
     public static long nresv(long struct, int index) {
-        return UNSAFE.getLong(null, struct + IOURingBufReg.RESV + check(index, 3) * 8);
+        return memGetLong(struct + IOURingBufReg.RESV + check(index, 3) * 8);
     }
 
     /** Unsafe version of {@link #ring_addr(long) ring_addr}. */
-    public static void nring_addr(long struct, long value) { UNSAFE.putLong(null, struct + IOURingBufReg.RING_ADDR, value); }
+    public static void nring_addr(long struct, long value) { memPutLong(struct + IOURingBufReg.RING_ADDR, value); }
     /** Unsafe version of {@link #ring_entries(int) ring_entries}. */
-    public static void nring_entries(long struct, int value) { UNSAFE.putInt(null, struct + IOURingBufReg.RING_ENTRIES, value); }
+    public static void nring_entries(long struct, int value) { memPutInt(struct + IOURingBufReg.RING_ENTRIES, value); }
     /** Unsafe version of {@link #bgid(short) bgid}. */
-    public static void nbgid(long struct, short value) { UNSAFE.putShort(null, struct + IOURingBufReg.BGID, value); }
+    public static void nbgid(long struct, short value) { memPutShort(struct + IOURingBufReg.BGID, value); }
     /** Unsafe version of {@link #flags(short) flags}. */
-    public static void nflags(long struct, short value) { UNSAFE.putShort(null, struct + IOURingBufReg.FLAGS, value); }
+    public static void nflags(long struct, short value) { memPutShort(struct + IOURingBufReg.FLAGS, value); }
     public static void nresv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingBufReg.RESV, value.remaining() * 8);
     }
     public static void nresv(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + IOURingBufReg.RESV + check(index, 3) * 8, value);
+        memPutLong(struct + IOURingBufReg.RESV + check(index, 3) * 8, value);
     }
 
     // -----------------------------------

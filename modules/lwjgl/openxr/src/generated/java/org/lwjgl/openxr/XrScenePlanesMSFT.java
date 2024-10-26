@@ -261,20 +261,20 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrScenePlanesMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrScenePlanesMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrScenePlanesMSFT.NEXT); }
     /** Unsafe version of {@link #scenePlaneCount}. */
-    public static int nscenePlaneCount(long struct) { return UNSAFE.getInt(null, struct + XrScenePlanesMSFT.SCENEPLANECOUNT); }
+    public static int nscenePlaneCount(long struct) { return memGetInt(struct + XrScenePlanesMSFT.SCENEPLANECOUNT); }
     /** Unsafe version of {@link #scenePlanes}. */
     @Nullable public static XrScenePlaneMSFT.Buffer nscenePlanes(long struct) { return XrScenePlaneMSFT.createSafe(memGetAddress(struct + XrScenePlanesMSFT.SCENEPLANES), nscenePlaneCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlanesMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrScenePlanesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrScenePlanesMSFT.NEXT, value); }
     /** Sets the specified value to the {@code scenePlaneCount} field of the specified {@code struct}. */
-    public static void nscenePlaneCount(long struct, int value) { UNSAFE.putInt(null, struct + XrScenePlanesMSFT.SCENEPLANECOUNT, value); }
+    public static void nscenePlaneCount(long struct, int value) { memPutInt(struct + XrScenePlanesMSFT.SCENEPLANECOUNT, value); }
     /** Unsafe version of {@link #scenePlanes(XrScenePlaneMSFT.Buffer) scenePlanes}. */
     public static void nscenePlanes(long struct, @Nullable XrScenePlaneMSFT.Buffer value) { memPutAddress(struct + XrScenePlanesMSFT.SCENEPLANES, memAddressSafe(value)); if (value != null) { nscenePlaneCount(struct, value.remaining()); } }
 

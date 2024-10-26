@@ -258,20 +258,20 @@ public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsDeleteInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSpatialAnchorsDeleteInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorsDeleteInfoML.NEXT); }
     /** Unsafe version of {@link #uuidCount}. */
-    public static int nuuidCount(long struct) { return UNSAFE.getInt(null, struct + XrSpatialAnchorsDeleteInfoML.UUIDCOUNT); }
+    public static int nuuidCount(long struct) { return memGetInt(struct + XrSpatialAnchorsDeleteInfoML.UUIDCOUNT); }
     /** Unsafe version of {@link #uuids}. */
     public static XrUuidEXT.Buffer nuuids(long struct) { return XrUuidEXT.create(memGetAddress(struct + XrSpatialAnchorsDeleteInfoML.UUIDS), nuuidCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsDeleteInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorsDeleteInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorsDeleteInfoML.NEXT, value); }
     /** Sets the specified value to the {@code uuidCount} field of the specified {@code struct}. */
-    public static void nuuidCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorsDeleteInfoML.UUIDCOUNT, value); }
+    public static void nuuidCount(long struct, int value) { memPutInt(struct + XrSpatialAnchorsDeleteInfoML.UUIDCOUNT, value); }
     /** Unsafe version of {@link #uuids(XrUuidEXT.Buffer) uuids}. */
     public static void nuuids(long struct, XrUuidEXT.Buffer value) { memPutAddress(struct + XrSpatialAnchorsDeleteInfoML.UUIDS, value.address()); nuuidCount(struct, value.remaining()); }
 

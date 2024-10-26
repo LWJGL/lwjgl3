@@ -231,14 +231,14 @@ public class VkMultiDrawInfoEXT extends Struct<VkMultiDrawInfoEXT> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #firstVertex}. */
-    public static int nfirstVertex(long struct) { return UNSAFE.getInt(null, struct + VkMultiDrawInfoEXT.FIRSTVERTEX); }
+    public static int nfirstVertex(long struct) { return memGetInt(struct + VkMultiDrawInfoEXT.FIRSTVERTEX); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + VkMultiDrawInfoEXT.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return memGetInt(struct + VkMultiDrawInfoEXT.VERTEXCOUNT); }
 
     /** Unsafe version of {@link #firstVertex(int) firstVertex}. */
-    public static void nfirstVertex(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiDrawInfoEXT.FIRSTVERTEX, value); }
+    public static void nfirstVertex(long struct, int value) { memPutInt(struct + VkMultiDrawInfoEXT.FIRSTVERTEX, value); }
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */
-    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMultiDrawInfoEXT.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { memPutInt(struct + VkMultiDrawInfoEXT.VERTEXCOUNT, value); }
 
     // -----------------------------------
 

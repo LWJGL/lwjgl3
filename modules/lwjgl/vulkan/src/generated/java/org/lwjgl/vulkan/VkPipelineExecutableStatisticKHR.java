@@ -290,7 +290,7 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineExecutableStatisticKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineExecutableStatisticKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineExecutableStatisticKHR.PNEXT); }
     /** Unsafe version of {@link #name}. */
@@ -302,12 +302,12 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkPipelineExecutableStatisticKHR.DESCRIPTION); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkPipelineExecutableStatisticKHR.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkPipelineExecutableStatisticKHR.FORMAT); }
     /** Unsafe version of {@link #value}. */
     public static VkPipelineExecutableStatisticValueKHR nvalue(long struct) { return VkPipelineExecutableStatisticValueKHR.create(struct + VkPipelineExecutableStatisticKHR.VALUE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineExecutableStatisticKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineExecutableStatisticKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineExecutableStatisticKHR.PNEXT, value); }
 

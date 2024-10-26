@@ -262,22 +262,22 @@ public class VkVideoDecodeAV1ProfileInfoKHR extends Struct<VkVideoDecodeAV1Profi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoDecodeAV1ProfileInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeAV1ProfileInfoKHR.PNEXT); }
     /** Unsafe version of {@link #stdProfile}. */
-    public static int nstdProfile(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.STDPROFILE); }
+    public static int nstdProfile(long struct) { return memGetInt(struct + VkVideoDecodeAV1ProfileInfoKHR.STDPROFILE); }
     /** Unsafe version of {@link #filmGrainSupport}. */
-    public static int nfilmGrainSupport(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.FILMGRAINSUPPORT); }
+    public static int nfilmGrainSupport(long struct) { return memGetInt(struct + VkVideoDecodeAV1ProfileInfoKHR.FILMGRAINSUPPORT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1ProfileInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeAV1ProfileInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #stdProfile(int) stdProfile}. */
-    public static void nstdProfile(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.STDPROFILE, value); }
+    public static void nstdProfile(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1ProfileInfoKHR.STDPROFILE, value); }
     /** Unsafe version of {@link #filmGrainSupport(boolean) filmGrainSupport}. */
-    public static void nfilmGrainSupport(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeAV1ProfileInfoKHR.FILMGRAINSUPPORT, value); }
+    public static void nfilmGrainSupport(long struct, int value) { memPutInt(struct + VkVideoDecodeAV1ProfileInfoKHR.FILMGRAINSUPPORT, value); }
 
     // -----------------------------------
 

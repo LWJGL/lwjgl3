@@ -280,18 +280,18 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewC
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFoveatedViewConfigurationViewVARJO.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFoveatedViewConfigurationViewVARJO.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFoveatedViewConfigurationViewVARJO.NEXT); }
     /** Unsafe version of {@link #foveatedRenderingActive}. */
-    public static int nfoveatedRenderingActive(long struct) { return UNSAFE.getInt(null, struct + XrFoveatedViewConfigurationViewVARJO.FOVEATEDRENDERINGACTIVE); }
+    public static int nfoveatedRenderingActive(long struct) { return memGetInt(struct + XrFoveatedViewConfigurationViewVARJO.FOVEATEDRENDERINGACTIVE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveatedViewConfigurationViewVARJO.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFoveatedViewConfigurationViewVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveatedViewConfigurationViewVARJO.NEXT, value); }
     /** Unsafe version of {@link #foveatedRenderingActive(boolean) foveatedRenderingActive}. */
-    public static void nfoveatedRenderingActive(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveatedViewConfigurationViewVARJO.FOVEATEDRENDERINGACTIVE, value); }
+    public static void nfoveatedRenderingActive(long struct, int value) { memPutInt(struct + XrFoveatedViewConfigurationViewVARJO.FOVEATEDRENDERINGACTIVE, value); }
 
     // -----------------------------------
 

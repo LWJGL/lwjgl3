@@ -274,18 +274,18 @@ public class VkDedicatedAllocationImageCreateInfoNV extends Struct<VkDedicatedAl
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDedicatedAllocationImageCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDedicatedAllocationImageCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDedicatedAllocationImageCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #dedicatedAllocation}. */
-    public static int ndedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkDedicatedAllocationImageCreateInfoNV.DEDICATEDALLOCATION); }
+    public static int ndedicatedAllocation(long struct) { return memGetInt(struct + VkDedicatedAllocationImageCreateInfoNV.DEDICATEDALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDedicatedAllocationImageCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDedicatedAllocationImageCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDedicatedAllocationImageCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #dedicatedAllocation(boolean) dedicatedAllocation}. */
-    public static void ndedicatedAllocation(long struct, int value) { UNSAFE.putInt(null, struct + VkDedicatedAllocationImageCreateInfoNV.DEDICATEDALLOCATION, value); }
+    public static void ndedicatedAllocation(long struct, int value) { memPutInt(struct + VkDedicatedAllocationImageCreateInfoNV.DEDICATEDALLOCATION, value); }
 
     // -----------------------------------
 

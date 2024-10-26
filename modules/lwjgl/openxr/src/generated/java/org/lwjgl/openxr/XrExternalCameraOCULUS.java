@@ -261,7 +261,7 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrExternalCameraOCULUS.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrExternalCameraOCULUS.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrExternalCameraOCULUS.NEXT); }
     /** Unsafe version of {@link #name}. */
@@ -274,7 +274,7 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
     public static XrExternalCameraExtrinsicsOCULUS nextrinsics(long struct) { return XrExternalCameraExtrinsicsOCULUS.create(struct + XrExternalCameraOCULUS.EXTRINSICS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrExternalCameraOCULUS.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrExternalCameraOCULUS.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrExternalCameraOCULUS.NEXT, value); }
 

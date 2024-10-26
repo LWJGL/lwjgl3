@@ -386,87 +386,87 @@ public class BGFXStats extends Struct<BGFXStats> {
     // -----------------------------------
 
     /** Unsafe version of {@link #cpuTimeFrame}. */
-    public static long ncpuTimeFrame(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.CPUTIMEFRAME); }
+    public static long ncpuTimeFrame(long struct) { return memGetLong(struct + BGFXStats.CPUTIMEFRAME); }
     /** Unsafe version of {@link #cpuTimeBegin}. */
-    public static long ncpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.CPUTIMEBEGIN); }
+    public static long ncpuTimeBegin(long struct) { return memGetLong(struct + BGFXStats.CPUTIMEBEGIN); }
     /** Unsafe version of {@link #cpuTimeEnd}. */
-    public static long ncpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.CPUTIMEEND); }
+    public static long ncpuTimeEnd(long struct) { return memGetLong(struct + BGFXStats.CPUTIMEEND); }
     /** Unsafe version of {@link #cpuTimerFreq}. */
-    public static long ncpuTimerFreq(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.CPUTIMERFREQ); }
+    public static long ncpuTimerFreq(long struct) { return memGetLong(struct + BGFXStats.CPUTIMERFREQ); }
     /** Unsafe version of {@link #gpuTimeBegin}. */
-    public static long ngpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.GPUTIMEBEGIN); }
+    public static long ngpuTimeBegin(long struct) { return memGetLong(struct + BGFXStats.GPUTIMEBEGIN); }
     /** Unsafe version of {@link #gpuTimeEnd}. */
-    public static long ngpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.GPUTIMEEND); }
+    public static long ngpuTimeEnd(long struct) { return memGetLong(struct + BGFXStats.GPUTIMEEND); }
     /** Unsafe version of {@link #gpuTimerFreq}. */
-    public static long ngpuTimerFreq(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.GPUTIMERFREQ); }
+    public static long ngpuTimerFreq(long struct) { return memGetLong(struct + BGFXStats.GPUTIMERFREQ); }
     /** Unsafe version of {@link #waitRender}. */
-    public static long nwaitRender(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.WAITRENDER); }
+    public static long nwaitRender(long struct) { return memGetLong(struct + BGFXStats.WAITRENDER); }
     /** Unsafe version of {@link #waitSubmit}. */
-    public static long nwaitSubmit(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.WAITSUBMIT); }
+    public static long nwaitSubmit(long struct) { return memGetLong(struct + BGFXStats.WAITSUBMIT); }
     /** Unsafe version of {@link #numDraw}. */
-    public static int nnumDraw(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.NUMDRAW); }
+    public static int nnumDraw(long struct) { return memGetInt(struct + BGFXStats.NUMDRAW); }
     /** Unsafe version of {@link #numCompute}. */
-    public static int nnumCompute(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.NUMCOMPUTE); }
+    public static int nnumCompute(long struct) { return memGetInt(struct + BGFXStats.NUMCOMPUTE); }
     /** Unsafe version of {@link #numBlit}. */
-    public static int nnumBlit(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.NUMBLIT); }
+    public static int nnumBlit(long struct) { return memGetInt(struct + BGFXStats.NUMBLIT); }
     /** Unsafe version of {@link #maxGpuLatency}. */
-    public static int nmaxGpuLatency(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.MAXGPULATENCY); }
+    public static int nmaxGpuLatency(long struct) { return memGetInt(struct + BGFXStats.MAXGPULATENCY); }
     /** Unsafe version of {@link #gpuFrameNum}. */
-    public static int ngpuFrameNum(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.GPUFRAMENUM); }
+    public static int ngpuFrameNum(long struct) { return memGetInt(struct + BGFXStats.GPUFRAMENUM); }
     /** Unsafe version of {@link #numDynamicIndexBuffers}. */
-    public static short nnumDynamicIndexBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMDYNAMICINDEXBUFFERS); }
+    public static short nnumDynamicIndexBuffers(long struct) { return memGetShort(struct + BGFXStats.NUMDYNAMICINDEXBUFFERS); }
     /** Unsafe version of {@link #numDynamicVertexBuffers}. */
-    public static short nnumDynamicVertexBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMDYNAMICVERTEXBUFFERS); }
+    public static short nnumDynamicVertexBuffers(long struct) { return memGetShort(struct + BGFXStats.NUMDYNAMICVERTEXBUFFERS); }
     /** Unsafe version of {@link #numFrameBuffers}. */
-    public static short nnumFrameBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMFRAMEBUFFERS); }
+    public static short nnumFrameBuffers(long struct) { return memGetShort(struct + BGFXStats.NUMFRAMEBUFFERS); }
     /** Unsafe version of {@link #numIndexBuffers}. */
-    public static short nnumIndexBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMINDEXBUFFERS); }
+    public static short nnumIndexBuffers(long struct) { return memGetShort(struct + BGFXStats.NUMINDEXBUFFERS); }
     /** Unsafe version of {@link #numOcclusionQueries}. */
-    public static short nnumOcclusionQueries(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMOCCLUSIONQUERIES); }
+    public static short nnumOcclusionQueries(long struct) { return memGetShort(struct + BGFXStats.NUMOCCLUSIONQUERIES); }
     /** Unsafe version of {@link #numPrograms}. */
-    public static short nnumPrograms(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMPROGRAMS); }
+    public static short nnumPrograms(long struct) { return memGetShort(struct + BGFXStats.NUMPROGRAMS); }
     /** Unsafe version of {@link #numShaders}. */
-    public static short nnumShaders(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMSHADERS); }
+    public static short nnumShaders(long struct) { return memGetShort(struct + BGFXStats.NUMSHADERS); }
     /** Unsafe version of {@link #numTextures}. */
-    public static short nnumTextures(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMTEXTURES); }
+    public static short nnumTextures(long struct) { return memGetShort(struct + BGFXStats.NUMTEXTURES); }
     /** Unsafe version of {@link #numUniforms}. */
-    public static short nnumUniforms(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMUNIFORMS); }
+    public static short nnumUniforms(long struct) { return memGetShort(struct + BGFXStats.NUMUNIFORMS); }
     /** Unsafe version of {@link #numVertexBuffers}. */
-    public static short nnumVertexBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVERTEXBUFFERS); }
+    public static short nnumVertexBuffers(long struct) { return memGetShort(struct + BGFXStats.NUMVERTEXBUFFERS); }
     /** Unsafe version of {@link #numVertexLayouts}. */
-    public static short nnumVertexLayouts(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVERTEXLAYOUTS); }
+    public static short nnumVertexLayouts(long struct) { return memGetShort(struct + BGFXStats.NUMVERTEXLAYOUTS); }
     /** Unsafe version of {@link #textureMemoryUsed}. */
-    public static long ntextureMemoryUsed(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.TEXTUREMEMORYUSED); }
+    public static long ntextureMemoryUsed(long struct) { return memGetLong(struct + BGFXStats.TEXTUREMEMORYUSED); }
     /** Unsafe version of {@link #rtMemoryUsed}. */
-    public static long nrtMemoryUsed(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.RTMEMORYUSED); }
+    public static long nrtMemoryUsed(long struct) { return memGetLong(struct + BGFXStats.RTMEMORYUSED); }
     /** Unsafe version of {@link #transientVbUsed}. */
-    public static int ntransientVbUsed(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.TRANSIENTVBUSED); }
+    public static int ntransientVbUsed(long struct) { return memGetInt(struct + BGFXStats.TRANSIENTVBUSED); }
     /** Unsafe version of {@link #transientIbUsed}. */
-    public static int ntransientIbUsed(long struct) { return UNSAFE.getInt(null, struct + BGFXStats.TRANSIENTIBUSED); }
+    public static int ntransientIbUsed(long struct) { return memGetInt(struct + BGFXStats.TRANSIENTIBUSED); }
     /** Unsafe version of {@link #numPrims}. */
     public static IntBuffer nnumPrims(long struct) { return memIntBuffer(struct + BGFXStats.NUMPRIMS, BGFX_TOPOLOGY_COUNT); }
     /** Unsafe version of {@link #numPrims(int) numPrims}. */
     public static int nnumPrims(long struct, int index) {
-        return UNSAFE.getInt(null, struct + BGFXStats.NUMPRIMS + check(index, BGFX_TOPOLOGY_COUNT) * 4);
+        return memGetInt(struct + BGFXStats.NUMPRIMS + check(index, BGFX_TOPOLOGY_COUNT) * 4);
     }
     /** Unsafe version of {@link #gpuMemoryMax}. */
-    public static long ngpuMemoryMax(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.GPUMEMORYMAX); }
+    public static long ngpuMemoryMax(long struct) { return memGetLong(struct + BGFXStats.GPUMEMORYMAX); }
     /** Unsafe version of {@link #gpuMemoryUsed}. */
-    public static long ngpuMemoryUsed(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.GPUMEMORYUSED); }
+    public static long ngpuMemoryUsed(long struct) { return memGetLong(struct + BGFXStats.GPUMEMORYUSED); }
     /** Unsafe version of {@link #width}. */
-    public static short nwidth(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.WIDTH); }
+    public static short nwidth(long struct) { return memGetShort(struct + BGFXStats.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static short nheight(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.HEIGHT); }
+    public static short nheight(long struct) { return memGetShort(struct + BGFXStats.HEIGHT); }
     /** Unsafe version of {@link #textWidth}. */
-    public static short ntextWidth(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.TEXTWIDTH); }
+    public static short ntextWidth(long struct) { return memGetShort(struct + BGFXStats.TEXTWIDTH); }
     /** Unsafe version of {@link #textHeight}. */
-    public static short ntextHeight(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.TEXTHEIGHT); }
+    public static short ntextHeight(long struct) { return memGetShort(struct + BGFXStats.TEXTHEIGHT); }
     /** Unsafe version of {@link #numViews}. */
-    public static short nnumViews(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVIEWS); }
+    public static short nnumViews(long struct) { return memGetShort(struct + BGFXStats.NUMVIEWS); }
     /** Unsafe version of {@link #viewStats}. */
     public static BGFXViewStats.Buffer nviewStats(long struct) { return BGFXViewStats.create(memGetAddress(struct + BGFXStats.VIEWSTATS), Short.toUnsignedInt(nnumViews(struct))); }
     /** Unsafe version of {@link #numEncoders}. */
-    public static short nnumEncoders(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMENCODERS); }
+    public static short nnumEncoders(long struct) { return memGetShort(struct + BGFXStats.NUMENCODERS); }
     /** Unsafe version of {@link #encoderStats}. */
     public static BGFXEncoderStats.Buffer nencoderStats(long struct) { return BGFXEncoderStats.create(memGetAddress(struct + BGFXStats.ENCODERSTATS), Short.toUnsignedInt(nnumEncoders(struct))); }
 

@@ -275,11 +275,11 @@ public class VkPerformanceCounterDescriptionKHR extends Struct<VkPerformanceCoun
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceCounterDescriptionKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPerformanceCounterDescriptionKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPerformanceCounterDescriptionKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceCounterDescriptionKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPerformanceCounterDescriptionKHR.FLAGS); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + VkPerformanceCounterDescriptionKHR.NAME, VK_MAX_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #nameString}. */
@@ -294,7 +294,7 @@ public class VkPerformanceCounterDescriptionKHR extends Struct<VkPerformanceCoun
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkPerformanceCounterDescriptionKHR.DESCRIPTION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceCounterDescriptionKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPerformanceCounterDescriptionKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPerformanceCounterDescriptionKHR.PNEXT, value); }
 

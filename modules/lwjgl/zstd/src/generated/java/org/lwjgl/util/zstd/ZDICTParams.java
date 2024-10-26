@@ -260,18 +260,18 @@ public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.COMPRESSIONLEVEL); }
+    public static int ncompressionLevel(long struct) { return memGetInt(struct + ZDICTParams.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #notificationLevel}. */
-    public static int nnotificationLevel(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.NOTIFICATIONLEVEL); }
+    public static int nnotificationLevel(long struct) { return memGetInt(struct + ZDICTParams.NOTIFICATIONLEVEL); }
     /** Unsafe version of {@link #dictID}. */
-    public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.DICTID); }
+    public static int ndictID(long struct) { return memGetInt(struct + ZDICTParams.DICTID); }
 
     /** Unsafe version of {@link #compressionLevel(int) compressionLevel}. */
-    public static void ncompressionLevel(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.COMPRESSIONLEVEL, value); }
+    public static void ncompressionLevel(long struct, int value) { memPutInt(struct + ZDICTParams.COMPRESSIONLEVEL, value); }
     /** Unsafe version of {@link #notificationLevel(int) notificationLevel}. */
-    public static void nnotificationLevel(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.NOTIFICATIONLEVEL, value); }
+    public static void nnotificationLevel(long struct, int value) { memPutInt(struct + ZDICTParams.NOTIFICATIONLEVEL, value); }
     /** Unsafe version of {@link #dictID(int) dictID}. */
-    public static void ndictID(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.DICTID, value); }
+    public static void ndictID(long struct, int value) { memPutInt(struct + ZDICTParams.DICTID, value); }
 
     // -----------------------------------
 

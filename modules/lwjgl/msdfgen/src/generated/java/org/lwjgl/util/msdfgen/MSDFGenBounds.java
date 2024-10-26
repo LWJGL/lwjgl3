@@ -240,22 +240,22 @@ public class MSDFGenBounds extends Struct<MSDFGenBounds> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #l}. */
-    public static double nl(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenBounds.L); }
+    public static double nl(long struct) { return memGetDouble(struct + MSDFGenBounds.L); }
     /** Unsafe version of {@link #b}. */
-    public static double nb(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenBounds.B); }
+    public static double nb(long struct) { return memGetDouble(struct + MSDFGenBounds.B); }
     /** Unsafe version of {@link #r}. */
-    public static double nr(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenBounds.R); }
+    public static double nr(long struct) { return memGetDouble(struct + MSDFGenBounds.R); }
     /** Unsafe version of {@link #t}. */
-    public static double nt(long struct) { return UNSAFE.getDouble(null, struct + MSDFGenBounds.T); }
+    public static double nt(long struct) { return memGetDouble(struct + MSDFGenBounds.T); }
 
     /** Unsafe version of {@link #l(double) l}. */
-    public static void nl(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenBounds.L, value); }
+    public static void nl(long struct, double value) { memPutDouble(struct + MSDFGenBounds.L, value); }
     /** Unsafe version of {@link #b(double) b}. */
-    public static void nb(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenBounds.B, value); }
+    public static void nb(long struct, double value) { memPutDouble(struct + MSDFGenBounds.B, value); }
     /** Unsafe version of {@link #r(double) r}. */
-    public static void nr(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenBounds.R, value); }
+    public static void nr(long struct, double value) { memPutDouble(struct + MSDFGenBounds.R, value); }
     /** Unsafe version of {@link #t(double) t}. */
-    public static void nt(long struct, double value) { UNSAFE.putDouble(null, struct + MSDFGenBounds.T, value); }
+    public static void nt(long struct, double value) { memPutDouble(struct + MSDFGenBounds.T, value); }
 
     // -----------------------------------
 

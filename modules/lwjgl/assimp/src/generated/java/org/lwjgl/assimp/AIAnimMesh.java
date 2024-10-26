@@ -377,9 +377,9 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MTEXTURECOORDS + check(index, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS) * POINTER_SIZE), nmNumVertices(struct));
     }
     /** Unsafe version of {@link #mNumVertices}. */
-    public static int nmNumVertices(long struct) { return UNSAFE.getInt(null, struct + AIAnimMesh.MNUMVERTICES); }
+    public static int nmNumVertices(long struct) { return memGetInt(struct + AIAnimMesh.MNUMVERTICES); }
     /** Unsafe version of {@link #mWeight}. */
-    public static float nmWeight(long struct) { return UNSAFE.getFloat(null, struct + AIAnimMesh.MWEIGHT); }
+    public static float nmWeight(long struct) { return memGetFloat(struct + AIAnimMesh.MWEIGHT); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimMesh.MNAME, AIString.SIZEOF); }
@@ -410,9 +410,9 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         memPutAddress(struct + AIAnimMesh.MTEXTURECOORDS + check(index, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS) * POINTER_SIZE, memAddressSafe(value));
     }
     /** Sets the specified value to the {@code mNumVertices} field of the specified {@code struct}. */
-    public static void nmNumVertices(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimMesh.MNUMVERTICES, value); }
+    public static void nmNumVertices(long struct, int value) { memPutInt(struct + AIAnimMesh.MNUMVERTICES, value); }
     /** Unsafe version of {@link #mWeight(float) mWeight}. */
-    public static void nmWeight(long struct, float value) { UNSAFE.putFloat(null, struct + AIAnimMesh.MWEIGHT, value); }
+    public static void nmWeight(long struct, float value) { memPutFloat(struct + AIAnimMesh.MWEIGHT, value); }
 
     // -----------------------------------
 

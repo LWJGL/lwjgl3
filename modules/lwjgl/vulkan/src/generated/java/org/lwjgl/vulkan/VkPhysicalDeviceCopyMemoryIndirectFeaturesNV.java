@@ -246,18 +246,18 @@ public class VkPhysicalDeviceCopyMemoryIndirectFeaturesNV extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #indirectCopy}. */
-    public static int nindirectCopy(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.INDIRECTCOPY); }
+    public static int nindirectCopy(long struct) { return memGetInt(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.INDIRECTCOPY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #indirectCopy(boolean) indirectCopy}. */
-    public static void nindirectCopy(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.INDIRECTCOPY, value); }
+    public static void nindirectCopy(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.INDIRECTCOPY, value); }
 
     // -----------------------------------
 

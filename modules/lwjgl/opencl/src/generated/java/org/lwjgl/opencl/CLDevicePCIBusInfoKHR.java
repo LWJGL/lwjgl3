@@ -208,13 +208,13 @@ public class CLDevicePCIBusInfoKHR extends Struct<CLDevicePCIBusInfoKHR> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #pci_domain}. */
-    public static int npci_domain(long struct) { return UNSAFE.getInt(null, struct + CLDevicePCIBusInfoKHR.PCI_DOMAIN); }
+    public static int npci_domain(long struct) { return memGetInt(struct + CLDevicePCIBusInfoKHR.PCI_DOMAIN); }
     /** Unsafe version of {@link #pci_bus}. */
-    public static int npci_bus(long struct) { return UNSAFE.getInt(null, struct + CLDevicePCIBusInfoKHR.PCI_BUS); }
+    public static int npci_bus(long struct) { return memGetInt(struct + CLDevicePCIBusInfoKHR.PCI_BUS); }
     /** Unsafe version of {@link #pci_device}. */
-    public static int npci_device(long struct) { return UNSAFE.getInt(null, struct + CLDevicePCIBusInfoKHR.PCI_DEVICE); }
+    public static int npci_device(long struct) { return memGetInt(struct + CLDevicePCIBusInfoKHR.PCI_DEVICE); }
     /** Unsafe version of {@link #pci_function}. */
-    public static int npci_function(long struct) { return UNSAFE.getInt(null, struct + CLDevicePCIBusInfoKHR.PCI_FUNCTION); }
+    public static int npci_function(long struct) { return memGetInt(struct + CLDevicePCIBusInfoKHR.PCI_FUNCTION); }
 
     // -----------------------------------
 

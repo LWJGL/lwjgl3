@@ -366,64 +366,64 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH265WeightTableFlags nflags(long struct) { return StdVideoEncodeH265WeightTableFlags.create(struct + StdVideoEncodeH265WeightTable.FLAGS); }
     /** Unsafe version of {@link #luma_log2_weight_denom}. */
-    public static byte nluma_log2_weight_denom(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_LOG2_WEIGHT_DENOM); }
+    public static byte nluma_log2_weight_denom(long struct) { return memGetByte(struct + StdVideoEncodeH265WeightTable.LUMA_LOG2_WEIGHT_DENOM); }
     /** Unsafe version of {@link #delta_chroma_log2_weight_denom}. */
-    public static byte ndelta_chroma_log2_weight_denom(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_LOG2_WEIGHT_DENOM); }
+    public static byte ndelta_chroma_log2_weight_denom(long struct) { return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_LOG2_WEIGHT_DENOM); }
     /** Unsafe version of {@link #delta_luma_weight_l0}. */
     public static ByteBuffer ndelta_luma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L0, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #delta_luma_weight_l0(int) delta_luma_weight_l0}. */
     public static byte ndelta_luma_weight_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #luma_offset_l0}. */
     public static ByteBuffer nluma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L0, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #luma_offset_l0(int) luma_offset_l0}. */
     public static byte nluma_offset_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0}. */
     public static ByteBuffer ndelta_chroma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L0, STD_VIDEO_H265_MAX_CHROMA_PLANES); }
     /** Unsafe version of {@link #delta_chroma_weight_l0(int) delta_chroma_weight_l0}. */
     public static byte ndelta_chroma_weight_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0}. */
     public static ByteBuffer ndelta_chroma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L0, STD_VIDEO_H265_MAX_CHROMA_PLANES); }
     /** Unsafe version of {@link #delta_chroma_offset_l0(int) delta_chroma_offset_l0}. */
     public static byte ndelta_chroma_offset_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
     }
     /** Unsafe version of {@link #delta_luma_weight_l1}. */
     public static ByteBuffer ndelta_luma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L1, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #delta_luma_weight_l1(int) delta_luma_weight_l1}. */
     public static byte ndelta_luma_weight_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #luma_offset_l1}. */
     public static ByteBuffer nluma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L1, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
     /** Unsafe version of {@link #luma_offset_l1(int) luma_offset_l1}. */
     public static byte nluma_offset_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1}. */
     public static ByteBuffer ndelta_chroma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L1, STD_VIDEO_H265_MAX_CHROMA_PLANES); }
     /** Unsafe version of {@link #delta_chroma_weight_l1(int) delta_chroma_weight_l1}. */
     public static byte ndelta_chroma_weight_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1}. */
     public static ByteBuffer ndelta_chroma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L1, STD_VIDEO_H265_MAX_CHROMA_PLANES); }
     /** Unsafe version of {@link #delta_chroma_offset_l1(int) delta_chroma_offset_l1}. */
     public static byte ndelta_chroma_offset_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
+        return memGetByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1);
     }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH265WeightTableFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH265WeightTableFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265WeightTable.FLAGS, StdVideoEncodeH265WeightTableFlags.SIZEOF); }
     /** Unsafe version of {@link #luma_log2_weight_denom(byte) luma_log2_weight_denom}. */
-    public static void nluma_log2_weight_denom(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_LOG2_WEIGHT_DENOM, value); }
+    public static void nluma_log2_weight_denom(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265WeightTable.LUMA_LOG2_WEIGHT_DENOM, value); }
     /** Unsafe version of {@link #delta_chroma_log2_weight_denom(byte) delta_chroma_log2_weight_denom}. */
-    public static void ndelta_chroma_log2_weight_denom(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_LOG2_WEIGHT_DENOM, value); }
+    public static void ndelta_chroma_log2_weight_denom(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_LOG2_WEIGHT_DENOM, value); }
     /** Unsafe version of {@link #delta_luma_weight_l0(ByteBuffer) delta_luma_weight_l0}. */
     public static void ndelta_luma_weight_l0(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_MAX_NUM_LIST_REF); }
@@ -431,7 +431,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_luma_weight_l0(int, byte) delta_luma_weight_l0}. */
     public static void ndelta_luma_weight_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #luma_offset_l0(ByteBuffer) luma_offset_l0}. */
     public static void nluma_offset_l0(long struct, ByteBuffer value) {
@@ -440,7 +440,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #luma_offset_l0(int, byte) luma_offset_l0}. */
     public static void nluma_offset_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0(ByteBuffer) delta_chroma_weight_l0}. */
     public static void ndelta_chroma_weight_l0(long struct, ByteBuffer value) {
@@ -449,7 +449,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0(int, byte) delta_chroma_weight_l0}. */
     public static void ndelta_chroma_weight_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0(ByteBuffer) delta_chroma_offset_l0}. */
     public static void ndelta_chroma_offset_l0(long struct, ByteBuffer value) {
@@ -458,7 +458,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0(int, byte) delta_chroma_offset_l0}. */
     public static void ndelta_chroma_offset_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
     }
     /** Unsafe version of {@link #delta_luma_weight_l1(ByteBuffer) delta_luma_weight_l1}. */
     public static void ndelta_luma_weight_l1(long struct, ByteBuffer value) {
@@ -467,7 +467,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_luma_weight_l1(int, byte) delta_luma_weight_l1}. */
     public static void ndelta_luma_weight_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #luma_offset_l1(ByteBuffer) luma_offset_l1}. */
     public static void nluma_offset_l1(long struct, ByteBuffer value) {
@@ -476,7 +476,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #luma_offset_l1(int, byte) luma_offset_l1}. */
     public static void nluma_offset_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.LUMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_NUM_LIST_REF) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1(ByteBuffer) delta_chroma_weight_l1}. */
     public static void ndelta_chroma_weight_l1(long struct, ByteBuffer value) {
@@ -485,7 +485,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1(int, byte) delta_chroma_weight_l1}. */
     public static void ndelta_chroma_weight_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1(ByteBuffer) delta_chroma_offset_l1}. */
     public static void ndelta_chroma_offset_l1(long struct, ByteBuffer value) {
@@ -494,7 +494,7 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1(int, byte) delta_chroma_offset_l1}. */
     public static void ndelta_chroma_offset_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265WeightTable.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_H265_MAX_CHROMA_PLANES) * 1, value);
     }
 
     // -----------------------------------

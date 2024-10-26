@@ -255,22 +255,22 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct<XrGlobalDimmerFrameEndI
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGlobalDimmerFrameEndInfoML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGlobalDimmerFrameEndInfoML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGlobalDimmerFrameEndInfoML.NEXT); }
     /** Unsafe version of {@link #dimmerValue}. */
-    public static float ndimmerValue(long struct) { return UNSAFE.getFloat(null, struct + XrGlobalDimmerFrameEndInfoML.DIMMERVALUE); }
+    public static float ndimmerValue(long struct) { return memGetFloat(struct + XrGlobalDimmerFrameEndInfoML.DIMMERVALUE); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrGlobalDimmerFrameEndInfoML.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrGlobalDimmerFrameEndInfoML.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGlobalDimmerFrameEndInfoML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGlobalDimmerFrameEndInfoML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGlobalDimmerFrameEndInfoML.NEXT, value); }
     /** Unsafe version of {@link #dimmerValue(float) dimmerValue}. */
-    public static void ndimmerValue(long struct, float value) { UNSAFE.putFloat(null, struct + XrGlobalDimmerFrameEndInfoML.DIMMERVALUE, value); }
+    public static void ndimmerValue(long struct, float value) { memPutFloat(struct + XrGlobalDimmerFrameEndInfoML.DIMMERVALUE, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrGlobalDimmerFrameEndInfoML.FLAGS, value); }
+    public static void nflags(long struct, long value) { memPutLong(struct + XrGlobalDimmerFrameEndInfoML.FLAGS, value); }
 
     // -----------------------------------
 

@@ -298,30 +298,30 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct<VkPhysicalDevic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevice16BitStorageFeatures.PNEXT); }
     /** Unsafe version of {@link #storageBuffer16BitAccess}. */
-    public static int nstorageBuffer16BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS); }
+    public static int nstorageBuffer16BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS); }
     /** Unsafe version of {@link #uniformAndStorageBuffer16BitAccess}. */
-    public static int nuniformAndStorageBuffer16BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS); }
+    public static int nuniformAndStorageBuffer16BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS); }
     /** Unsafe version of {@link #storagePushConstant16}. */
-    public static int nstoragePushConstant16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16); }
+    public static int nstoragePushConstant16(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16); }
     /** Unsafe version of {@link #storageInputOutput16}. */
-    public static int nstorageInputOutput16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16); }
+    public static int nstorageInputOutput16(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevice16BitStorageFeatures.PNEXT, value); }
     /** Unsafe version of {@link #storageBuffer16BitAccess(boolean) storageBuffer16BitAccess}. */
-    public static void nstorageBuffer16BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS, value); }
+    public static void nstorageBuffer16BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS, value); }
     /** Unsafe version of {@link #uniformAndStorageBuffer16BitAccess(boolean) uniformAndStorageBuffer16BitAccess}. */
-    public static void nuniformAndStorageBuffer16BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS, value); }
+    public static void nuniformAndStorageBuffer16BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS, value); }
     /** Unsafe version of {@link #storagePushConstant16(boolean) storagePushConstant16}. */
-    public static void nstoragePushConstant16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16, value); }
+    public static void nstoragePushConstant16(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16, value); }
     /** Unsafe version of {@link #storageInputOutput16(boolean) storageInputOutput16}. */
-    public static void nstorageInputOutput16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16, value); }
+    public static void nstorageInputOutput16(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16, value); }
 
     // -----------------------------------
 

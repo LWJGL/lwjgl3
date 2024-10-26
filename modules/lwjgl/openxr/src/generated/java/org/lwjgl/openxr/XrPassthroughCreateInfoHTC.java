@@ -249,18 +249,18 @@ public class XrPassthroughCreateInfoHTC extends Struct<XrPassthroughCreateInfoHT
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughCreateInfoHTC.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughCreateInfoHTC.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughCreateInfoHTC.NEXT); }
     /** Unsafe version of {@link #form}. */
-    public static int nform(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughCreateInfoHTC.FORM); }
+    public static int nform(long struct) { return memGetInt(struct + XrPassthroughCreateInfoHTC.FORM); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughCreateInfoHTC.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughCreateInfoHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughCreateInfoHTC.NEXT, value); }
     /** Unsafe version of {@link #form(int) form}. */
-    public static void nform(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughCreateInfoHTC.FORM, value); }
+    public static void nform(long struct, int value) { memPutInt(struct + XrPassthroughCreateInfoHTC.FORM, value); }
 
     // -----------------------------------
 

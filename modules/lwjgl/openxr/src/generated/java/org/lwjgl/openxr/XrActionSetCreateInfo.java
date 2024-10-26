@@ -290,7 +290,7 @@ public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionSetCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionSetCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionSetCreateInfo.NEXT); }
     /** Unsafe version of {@link #actionSetName}. */
@@ -302,10 +302,10 @@ public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> impleme
     /** Unsafe version of {@link #localizedActionSetNameString}. */
     public static String nlocalizedActionSetNameString(long struct) { return memUTF8(struct + XrActionSetCreateInfo.LOCALIZEDACTIONSETNAME); }
     /** Unsafe version of {@link #priority}. */
-    public static int npriority(long struct) { return UNSAFE.getInt(null, struct + XrActionSetCreateInfo.PRIORITY); }
+    public static int npriority(long struct) { return memGetInt(struct + XrActionSetCreateInfo.PRIORITY); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionSetCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionSetCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionSetCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #actionSetName(ByteBuffer) actionSetName}. */
@@ -325,7 +325,7 @@ public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> impleme
         memCopy(memAddress(value), struct + XrActionSetCreateInfo.LOCALIZEDACTIONSETNAME, value.remaining());
     }
     /** Unsafe version of {@link #priority(int) priority}. */
-    public static void npriority(long struct, int value) { UNSAFE.putInt(null, struct + XrActionSetCreateInfo.PRIORITY, value); }
+    public static void npriority(long struct, int value) { memPutInt(struct + XrActionSetCreateInfo.PRIORITY, value); }
 
     // -----------------------------------
 

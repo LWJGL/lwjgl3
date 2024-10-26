@@ -268,26 +268,26 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct<VkPhysicalDevice
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevice8BitStorageFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevice8BitStorageFeatures.PNEXT); }
     /** Unsafe version of {@link #storageBuffer8BitAccess}. */
-    public static int nstorageBuffer8BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STORAGEBUFFER8BITACCESS); }
+    public static int nstorageBuffer8BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice8BitStorageFeatures.STORAGEBUFFER8BITACCESS); }
     /** Unsafe version of {@link #uniformAndStorageBuffer8BitAccess}. */
-    public static int nuniformAndStorageBuffer8BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice8BitStorageFeatures.UNIFORMANDSTORAGEBUFFER8BITACCESS); }
+    public static int nuniformAndStorageBuffer8BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice8BitStorageFeatures.UNIFORMANDSTORAGEBUFFER8BITACCESS); }
     /** Unsafe version of {@link #storagePushConstant8}. */
-    public static int nstoragePushConstant8(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STORAGEPUSHCONSTANT8); }
+    public static int nstoragePushConstant8(long struct) { return memGetInt(struct + VkPhysicalDevice8BitStorageFeatures.STORAGEPUSHCONSTANT8); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevice8BitStorageFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevice8BitStorageFeatures.PNEXT, value); }
     /** Unsafe version of {@link #storageBuffer8BitAccess(boolean) storageBuffer8BitAccess}. */
-    public static void nstorageBuffer8BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STORAGEBUFFER8BITACCESS, value); }
+    public static void nstorageBuffer8BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice8BitStorageFeatures.STORAGEBUFFER8BITACCESS, value); }
     /** Unsafe version of {@link #uniformAndStorageBuffer8BitAccess(boolean) uniformAndStorageBuffer8BitAccess}. */
-    public static void nuniformAndStorageBuffer8BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice8BitStorageFeatures.UNIFORMANDSTORAGEBUFFER8BITACCESS, value); }
+    public static void nuniformAndStorageBuffer8BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice8BitStorageFeatures.UNIFORMANDSTORAGEBUFFER8BITACCESS, value); }
     /** Unsafe version of {@link #storagePushConstant8(boolean) storagePushConstant8}. */
-    public static void nstoragePushConstant8(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice8BitStorageFeatures.STORAGEPUSHCONSTANT8, value); }
+    public static void nstoragePushConstant8(long struct, int value) { memPutInt(struct + VkPhysicalDevice8BitStorageFeatures.STORAGEPUSHCONSTANT8, value); }
 
     // -----------------------------------
 

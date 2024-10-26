@@ -242,14 +242,14 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct<VkQueueFamilyCh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyCheckpointProperties2NV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkQueueFamilyCheckpointProperties2NV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyCheckpointProperties2NV.PNEXT); }
     /** Unsafe version of {@link #checkpointExecutionStageMask}. */
-    public static long ncheckpointExecutionStageMask(long struct) { return UNSAFE.getLong(null, struct + VkQueueFamilyCheckpointProperties2NV.CHECKPOINTEXECUTIONSTAGEMASK); }
+    public static long ncheckpointExecutionStageMask(long struct) { return memGetLong(struct + VkQueueFamilyCheckpointProperties2NV.CHECKPOINTEXECUTIONSTAGEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyCheckpointProperties2NV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyCheckpointProperties2NV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyCheckpointProperties2NV.PNEXT, value); }
 

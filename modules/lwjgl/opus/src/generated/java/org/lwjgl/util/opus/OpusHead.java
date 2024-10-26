@@ -282,26 +282,26 @@ public class OpusHead extends Struct<OpusHead> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + OpusHead.VERSION); }
+    public static int nversion(long struct) { return memGetInt(struct + OpusHead.VERSION); }
     /** Unsafe version of {@link #channel_count}. */
-    public static int nchannel_count(long struct) { return UNSAFE.getInt(null, struct + OpusHead.CHANNEL_COUNT); }
+    public static int nchannel_count(long struct) { return memGetInt(struct + OpusHead.CHANNEL_COUNT); }
     /** Unsafe version of {@link #pre_skip}. */
-    public static int npre_skip(long struct) { return UNSAFE.getInt(null, struct + OpusHead.PRE_SKIP); }
+    public static int npre_skip(long struct) { return memGetInt(struct + OpusHead.PRE_SKIP); }
     /** Unsafe version of {@link #input_sample_rate}. */
-    public static int ninput_sample_rate(long struct) { return UNSAFE.getInt(null, struct + OpusHead.INPUT_SAMPLE_RATE); }
+    public static int ninput_sample_rate(long struct) { return memGetInt(struct + OpusHead.INPUT_SAMPLE_RATE); }
     /** Unsafe version of {@link #output_gain}. */
-    public static int noutput_gain(long struct) { return UNSAFE.getInt(null, struct + OpusHead.OUTPUT_GAIN); }
+    public static int noutput_gain(long struct) { return memGetInt(struct + OpusHead.OUTPUT_GAIN); }
     /** Unsafe version of {@link #mapping_family}. */
-    public static int nmapping_family(long struct) { return UNSAFE.getInt(null, struct + OpusHead.MAPPING_FAMILY); }
+    public static int nmapping_family(long struct) { return memGetInt(struct + OpusHead.MAPPING_FAMILY); }
     /** Unsafe version of {@link #stream_count}. */
-    public static int nstream_count(long struct) { return UNSAFE.getInt(null, struct + OpusHead.STREAM_COUNT); }
+    public static int nstream_count(long struct) { return memGetInt(struct + OpusHead.STREAM_COUNT); }
     /** Unsafe version of {@link #coupled_count}. */
-    public static int ncoupled_count(long struct) { return UNSAFE.getInt(null, struct + OpusHead.COUPLED_COUNT); }
+    public static int ncoupled_count(long struct) { return memGetInt(struct + OpusHead.COUPLED_COUNT); }
     /** Unsafe version of {@link #mapping}. */
     public static ByteBuffer nmapping(long struct) { return memByteBuffer(struct + OpusHead.MAPPING, 255); }
     /** Unsafe version of {@link #mapping(int) mapping}. */
     public static byte nmapping(long struct, int index) {
-        return UNSAFE.getByte(null, struct + OpusHead.MAPPING + check(index, 255) * 1);
+        return memGetByte(struct + OpusHead.MAPPING + check(index, 255) * 1);
     }
 
     // -----------------------------------

@@ -276,22 +276,22 @@ public class VkPhysicalDeviceLayeredApiPropertiesKHR extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #vendorID}. */
-    public static int nvendorID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesKHR.VENDORID); }
+    public static int nvendorID(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.VENDORID); }
     /** Unsafe version of {@link #deviceID}. */
-    public static int ndeviceID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesKHR.DEVICEID); }
+    public static int ndeviceID(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.DEVICEID); }
     /** Unsafe version of {@link #layeredAPI}. */
-    public static int nlayeredAPI(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesKHR.LAYEREDAPI); }
+    public static int nlayeredAPI(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.LAYEREDAPI); }
     /** Unsafe version of {@link #deviceName}. */
     public static ByteBuffer ndeviceName(long struct) { return memByteBuffer(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.DEVICENAME, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE); }
     /** Unsafe version of {@link #deviceNameString}. */
     public static String ndeviceNameString(long struct) { return memUTF8(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.DEVICENAME); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLayeredApiPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiPropertiesKHR.PNEXT, value); }
 

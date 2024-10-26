@@ -272,24 +272,24 @@ public class XrActionSpaceCreateInfo extends Struct<XrActionSpaceCreateInfo> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrActionSpaceCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrActionSpaceCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrActionSpaceCreateInfo.NEXT); }
     /** Unsafe version of {@link #action}. */
     public static long naction(long struct) { return memGetAddress(struct + XrActionSpaceCreateInfo.ACTION); }
     /** Unsafe version of {@link #subactionPath}. */
-    public static long nsubactionPath(long struct) { return UNSAFE.getLong(null, struct + XrActionSpaceCreateInfo.SUBACTIONPATH); }
+    public static long nsubactionPath(long struct) { return memGetLong(struct + XrActionSpaceCreateInfo.SUBACTIONPATH); }
     /** Unsafe version of {@link #poseInActionSpace}. */
     public static XrPosef nposeInActionSpace(long struct) { return XrPosef.create(struct + XrActionSpaceCreateInfo.POSEINACTIONSPACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionSpaceCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrActionSpaceCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrActionSpaceCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrActionSpaceCreateInfo.ACTION, value.address()); }
     /** Unsafe version of {@link #subactionPath(long) subactionPath}. */
-    public static void nsubactionPath(long struct, long value) { UNSAFE.putLong(null, struct + XrActionSpaceCreateInfo.SUBACTIONPATH, value); }
+    public static void nsubactionPath(long struct, long value) { memPutLong(struct + XrActionSpaceCreateInfo.SUBACTIONPATH, value); }
     /** Unsafe version of {@link #poseInActionSpace(XrPosef) poseInActionSpace}. */
     public static void nposeInActionSpace(long struct, XrPosef value) { memCopy(value.address(), struct + XrActionSpaceCreateInfo.POSEINACTIONSPACE, XrPosef.SIZEOF); }
 

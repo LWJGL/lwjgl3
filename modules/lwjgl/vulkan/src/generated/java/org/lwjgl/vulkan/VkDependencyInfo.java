@@ -315,40 +315,40 @@ public class VkDependencyInfo extends Struct<VkDependencyInfo> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDependencyInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDependencyInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDependencyInfo.PNEXT); }
     /** Unsafe version of {@link #dependencyFlags}. */
-    public static int ndependencyFlags(long struct) { return UNSAFE.getInt(null, struct + VkDependencyInfo.DEPENDENCYFLAGS); }
+    public static int ndependencyFlags(long struct) { return memGetInt(struct + VkDependencyInfo.DEPENDENCYFLAGS); }
     /** Unsafe version of {@link #memoryBarrierCount}. */
-    public static int nmemoryBarrierCount(long struct) { return UNSAFE.getInt(null, struct + VkDependencyInfo.MEMORYBARRIERCOUNT); }
+    public static int nmemoryBarrierCount(long struct) { return memGetInt(struct + VkDependencyInfo.MEMORYBARRIERCOUNT); }
     /** Unsafe version of {@link #pMemoryBarriers}. */
     @Nullable public static VkMemoryBarrier2.Buffer npMemoryBarriers(long struct) { return VkMemoryBarrier2.createSafe(memGetAddress(struct + VkDependencyInfo.PMEMORYBARRIERS), nmemoryBarrierCount(struct)); }
     /** Unsafe version of {@link #bufferMemoryBarrierCount}. */
-    public static int nbufferMemoryBarrierCount(long struct) { return UNSAFE.getInt(null, struct + VkDependencyInfo.BUFFERMEMORYBARRIERCOUNT); }
+    public static int nbufferMemoryBarrierCount(long struct) { return memGetInt(struct + VkDependencyInfo.BUFFERMEMORYBARRIERCOUNT); }
     /** Unsafe version of {@link #pBufferMemoryBarriers}. */
     @Nullable public static VkBufferMemoryBarrier2.Buffer npBufferMemoryBarriers(long struct) { return VkBufferMemoryBarrier2.createSafe(memGetAddress(struct + VkDependencyInfo.PBUFFERMEMORYBARRIERS), nbufferMemoryBarrierCount(struct)); }
     /** Unsafe version of {@link #imageMemoryBarrierCount}. */
-    public static int nimageMemoryBarrierCount(long struct) { return UNSAFE.getInt(null, struct + VkDependencyInfo.IMAGEMEMORYBARRIERCOUNT); }
+    public static int nimageMemoryBarrierCount(long struct) { return memGetInt(struct + VkDependencyInfo.IMAGEMEMORYBARRIERCOUNT); }
     /** Unsafe version of {@link #pImageMemoryBarriers}. */
     @Nullable public static VkImageMemoryBarrier2.Buffer npImageMemoryBarriers(long struct) { return VkImageMemoryBarrier2.createSafe(memGetAddress(struct + VkDependencyInfo.PIMAGEMEMORYBARRIERS), nimageMemoryBarrierCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDependencyInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDependencyInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDependencyInfo.PNEXT, value); }
     /** Unsafe version of {@link #dependencyFlags(int) dependencyFlags}. */
-    public static void ndependencyFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkDependencyInfo.DEPENDENCYFLAGS, value); }
+    public static void ndependencyFlags(long struct, int value) { memPutInt(struct + VkDependencyInfo.DEPENDENCYFLAGS, value); }
     /** Sets the specified value to the {@code memoryBarrierCount} field of the specified {@code struct}. */
-    public static void nmemoryBarrierCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDependencyInfo.MEMORYBARRIERCOUNT, value); }
+    public static void nmemoryBarrierCount(long struct, int value) { memPutInt(struct + VkDependencyInfo.MEMORYBARRIERCOUNT, value); }
     /** Unsafe version of {@link #pMemoryBarriers(VkMemoryBarrier2.Buffer) pMemoryBarriers}. */
     public static void npMemoryBarriers(long struct, @Nullable VkMemoryBarrier2.Buffer value) { memPutAddress(struct + VkDependencyInfo.PMEMORYBARRIERS, memAddressSafe(value)); nmemoryBarrierCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code bufferMemoryBarrierCount} field of the specified {@code struct}. */
-    public static void nbufferMemoryBarrierCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDependencyInfo.BUFFERMEMORYBARRIERCOUNT, value); }
+    public static void nbufferMemoryBarrierCount(long struct, int value) { memPutInt(struct + VkDependencyInfo.BUFFERMEMORYBARRIERCOUNT, value); }
     /** Unsafe version of {@link #pBufferMemoryBarriers(VkBufferMemoryBarrier2.Buffer) pBufferMemoryBarriers}. */
     public static void npBufferMemoryBarriers(long struct, @Nullable VkBufferMemoryBarrier2.Buffer value) { memPutAddress(struct + VkDependencyInfo.PBUFFERMEMORYBARRIERS, memAddressSafe(value)); nbufferMemoryBarrierCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code imageMemoryBarrierCount} field of the specified {@code struct}. */
-    public static void nimageMemoryBarrierCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDependencyInfo.IMAGEMEMORYBARRIERCOUNT, value); }
+    public static void nimageMemoryBarrierCount(long struct, int value) { memPutInt(struct + VkDependencyInfo.IMAGEMEMORYBARRIERCOUNT, value); }
     /** Unsafe version of {@link #pImageMemoryBarriers(VkImageMemoryBarrier2.Buffer) pImageMemoryBarriers}. */
     public static void npImageMemoryBarriers(long struct, @Nullable VkImageMemoryBarrier2.Buffer value) { memPutAddress(struct + VkDependencyInfo.PIMAGEMEMORYBARRIERS, memAddressSafe(value)); nimageMemoryBarrierCount(struct, value == null ? 0 : value.remaining()); }
 

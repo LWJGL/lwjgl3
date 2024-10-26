@@ -159,22 +159,22 @@ public class VkShaderStatisticsInfoAMD extends Struct<VkShaderStatisticsInfoAMD>
     // -----------------------------------
 
     /** Unsafe version of {@link #shaderStageMask}. */
-    public static int nshaderStageMask(long struct) { return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.SHADERSTAGEMASK); }
+    public static int nshaderStageMask(long struct) { return memGetInt(struct + VkShaderStatisticsInfoAMD.SHADERSTAGEMASK); }
     /** Unsafe version of {@link #resourceUsage}. */
     public static VkShaderResourceUsageAMD nresourceUsage(long struct) { return VkShaderResourceUsageAMD.create(struct + VkShaderStatisticsInfoAMD.RESOURCEUSAGE); }
     /** Unsafe version of {@link #numPhysicalVgprs}. */
-    public static int nnumPhysicalVgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.NUMPHYSICALVGPRS); }
+    public static int nnumPhysicalVgprs(long struct) { return memGetInt(struct + VkShaderStatisticsInfoAMD.NUMPHYSICALVGPRS); }
     /** Unsafe version of {@link #numPhysicalSgprs}. */
-    public static int nnumPhysicalSgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.NUMPHYSICALSGPRS); }
+    public static int nnumPhysicalSgprs(long struct) { return memGetInt(struct + VkShaderStatisticsInfoAMD.NUMPHYSICALSGPRS); }
     /** Unsafe version of {@link #numAvailableVgprs}. */
-    public static int nnumAvailableVgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.NUMAVAILABLEVGPRS); }
+    public static int nnumAvailableVgprs(long struct) { return memGetInt(struct + VkShaderStatisticsInfoAMD.NUMAVAILABLEVGPRS); }
     /** Unsafe version of {@link #numAvailableSgprs}. */
-    public static int nnumAvailableSgprs(long struct) { return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.NUMAVAILABLESGPRS); }
+    public static int nnumAvailableSgprs(long struct) { return memGetInt(struct + VkShaderStatisticsInfoAMD.NUMAVAILABLESGPRS); }
     /** Unsafe version of {@link #computeWorkGroupSize}. */
     public static IntBuffer ncomputeWorkGroupSize(long struct) { return memIntBuffer(struct + VkShaderStatisticsInfoAMD.COMPUTEWORKGROUPSIZE, 3); }
     /** Unsafe version of {@link #computeWorkGroupSize(int) computeWorkGroupSize}. */
     public static int ncomputeWorkGroupSize(long struct, int index) {
-        return UNSAFE.getInt(null, struct + VkShaderStatisticsInfoAMD.COMPUTEWORKGROUPSIZE + check(index, 3) * 4);
+        return memGetInt(struct + VkShaderStatisticsInfoAMD.COMPUTEWORKGROUPSIZE + check(index, 3) * 4);
     }
 
     // -----------------------------------

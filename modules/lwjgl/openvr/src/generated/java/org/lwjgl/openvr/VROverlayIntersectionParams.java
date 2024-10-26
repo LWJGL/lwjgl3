@@ -260,14 +260,14 @@ public class VROverlayIntersectionParams extends Struct<VROverlayIntersectionPar
     /** Unsafe version of {@link #vDirection}. */
     public static HmdVector3 nvDirection(long struct) { return HmdVector3.create(struct + VROverlayIntersectionParams.VDIRECTION); }
     /** Unsafe version of {@link #eOrigin}. */
-    public static int neOrigin(long struct) { return UNSAFE.getInt(null, struct + VROverlayIntersectionParams.EORIGIN); }
+    public static int neOrigin(long struct) { return memGetInt(struct + VROverlayIntersectionParams.EORIGIN); }
 
     /** Unsafe version of {@link #vSource(HmdVector3) vSource}. */
     public static void nvSource(long struct, HmdVector3 value) { memCopy(value.address(), struct + VROverlayIntersectionParams.VSOURCE, HmdVector3.SIZEOF); }
     /** Unsafe version of {@link #vDirection(HmdVector3) vDirection}. */
     public static void nvDirection(long struct, HmdVector3 value) { memCopy(value.address(), struct + VROverlayIntersectionParams.VDIRECTION, HmdVector3.SIZEOF); }
     /** Unsafe version of {@link #eOrigin(int) eOrigin}. */
-    public static void neOrigin(long struct, int value) { UNSAFE.putInt(null, struct + VROverlayIntersectionParams.EORIGIN, value); }
+    public static void neOrigin(long struct, int value) { memPutInt(struct + VROverlayIntersectionParams.EORIGIN, value); }
 
     // -----------------------------------
 

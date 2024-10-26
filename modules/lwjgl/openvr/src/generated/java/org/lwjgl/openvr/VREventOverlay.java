@@ -126,13 +126,13 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     // -----------------------------------
 
     /** Unsafe version of {@link #overlayHandle}. */
-    public static long noverlayHandle(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.OVERLAYHANDLE); }
+    public static long noverlayHandle(long struct) { return memGetLong(struct + VREventOverlay.OVERLAYHANDLE); }
     /** Unsafe version of {@link #devicePath}. */
-    public static long ndevicePath(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.DEVICEPATH); }
+    public static long ndevicePath(long struct) { return memGetLong(struct + VREventOverlay.DEVICEPATH); }
     /** Unsafe version of {@link #memoryBlockId}. */
-    public static long nmemoryBlockId(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.MEMORYBLOCKID); }
+    public static long nmemoryBlockId(long struct) { return memGetLong(struct + VREventOverlay.MEMORYBLOCKID); }
     /** Unsafe version of {@link #cursorIndex}. */
-    public static int ncursorIndex(long struct) { return UNSAFE.getInt(null, struct + VREventOverlay.CURSORINDEX); }
+    public static int ncursorIndex(long struct) { return memGetInt(struct + VREventOverlay.CURSORINDEX); }
 
     // -----------------------------------
 

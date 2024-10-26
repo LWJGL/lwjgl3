@@ -297,34 +297,34 @@ public class OVRCameraExtrinsics extends Struct<OVRCameraExtrinsics> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #LastChangedTimeSeconds}. */
-    public static double nLastChangedTimeSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS); }
+    public static double nLastChangedTimeSeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS); }
     /** Unsafe version of {@link #CameraStatusFlags}. */
-    public static int nCameraStatusFlags(long struct) { return UNSAFE.getInt(null, struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS); }
+    public static int nCameraStatusFlags(long struct) { return memGetInt(struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS); }
     /** Unsafe version of {@link #AttachedToDevice}. */
-    public static int nAttachedToDevice(long struct) { return UNSAFE.getInt(null, struct + OVRCameraExtrinsics.ATTACHEDTODEVICE); }
+    public static int nAttachedToDevice(long struct) { return memGetInt(struct + OVRCameraExtrinsics.ATTACHEDTODEVICE); }
     /** Unsafe version of {@link #RelativePose}. */
     public static OVRPosef nRelativePose(long struct) { return OVRPosef.create(struct + OVRCameraExtrinsics.RELATIVEPOSE); }
     /** Unsafe version of {@link #LastExposureTimeSeconds}. */
-    public static double nLastExposureTimeSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS); }
+    public static double nLastExposureTimeSeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS); }
     /** Unsafe version of {@link #ExposureLatencySeconds}. */
-    public static double nExposureLatencySeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS); }
+    public static double nExposureLatencySeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS); }
     /** Unsafe version of {@link #AdditionalLatencySeconds}. */
-    public static double nAdditionalLatencySeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS); }
+    public static double nAdditionalLatencySeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS); }
 
     /** Unsafe version of {@link #LastChangedTimeSeconds(double) LastChangedTimeSeconds}. */
-    public static void nLastChangedTimeSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS, value); }
+    public static void nLastChangedTimeSeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS, value); }
     /** Unsafe version of {@link #CameraStatusFlags(int) CameraStatusFlags}. */
-    public static void nCameraStatusFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS, value); }
+    public static void nCameraStatusFlags(long struct, int value) { memPutInt(struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS, value); }
     /** Unsafe version of {@link #AttachedToDevice(int) AttachedToDevice}. */
-    public static void nAttachedToDevice(long struct, int value) { UNSAFE.putInt(null, struct + OVRCameraExtrinsics.ATTACHEDTODEVICE, value); }
+    public static void nAttachedToDevice(long struct, int value) { memPutInt(struct + OVRCameraExtrinsics.ATTACHEDTODEVICE, value); }
     /** Unsafe version of {@link #RelativePose(OVRPosef) RelativePose}. */
     public static void nRelativePose(long struct, OVRPosef value) { memCopy(value.address(), struct + OVRCameraExtrinsics.RELATIVEPOSE, OVRPosef.SIZEOF); }
     /** Unsafe version of {@link #LastExposureTimeSeconds(double) LastExposureTimeSeconds}. */
-    public static void nLastExposureTimeSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS, value); }
+    public static void nLastExposureTimeSeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS, value); }
     /** Unsafe version of {@link #ExposureLatencySeconds(double) ExposureLatencySeconds}. */
-    public static void nExposureLatencySeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS, value); }
+    public static void nExposureLatencySeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS, value); }
     /** Unsafe version of {@link #AdditionalLatencySeconds(double) AdditionalLatencySeconds}. */
-    public static void nAdditionalLatencySeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS, value); }
+    public static void nAdditionalLatencySeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS, value); }
 
     // -----------------------------------
 

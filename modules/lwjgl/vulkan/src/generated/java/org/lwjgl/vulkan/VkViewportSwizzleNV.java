@@ -277,22 +277,22 @@ public class VkViewportSwizzleNV extends Struct<VkViewportSwizzleNV> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.X); }
+    public static int nx(long struct) { return memGetInt(struct + VkViewportSwizzleNV.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.Y); }
+    public static int ny(long struct) { return memGetInt(struct + VkViewportSwizzleNV.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.Z); }
+    public static int nz(long struct) { return memGetInt(struct + VkViewportSwizzleNV.Z); }
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.W); }
+    public static int nw(long struct) { return memGetInt(struct + VkViewportSwizzleNV.W); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.Y, value); }
     /** Unsafe version of {@link #z(int) z}. */
-    public static void nz(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.Z, value); }
+    public static void nz(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.Z, value); }
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.W, value); }
+    public static void nw(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.W, value); }
 
     // -----------------------------------
 

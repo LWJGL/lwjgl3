@@ -270,24 +270,24 @@ public class SQL_NUMERIC_STRUCT extends Struct<SQL_NUMERIC_STRUCT> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #precision}. */
-    public static byte nprecision(long struct) { return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.PRECISION); }
+    public static byte nprecision(long struct) { return memGetByte(struct + SQL_NUMERIC_STRUCT.PRECISION); }
     /** Unsafe version of {@link #scale}. */
-    public static byte nscale(long struct) { return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.SCALE); }
+    public static byte nscale(long struct) { return memGetByte(struct + SQL_NUMERIC_STRUCT.SCALE); }
     /** Unsafe version of {@link #sign}. */
-    public static byte nsign(long struct) { return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.SIGN); }
+    public static byte nsign(long struct) { return memGetByte(struct + SQL_NUMERIC_STRUCT.SIGN); }
     /** Unsafe version of {@link #val}. */
     public static ByteBuffer nval(long struct) { return memByteBuffer(struct + SQL_NUMERIC_STRUCT.VAL, SQL_MAX_NUMERIC_LEN); }
     /** Unsafe version of {@link #val(int) val}. */
     public static byte nval(long struct, int index) {
-        return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1);
+        return memGetByte(struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1);
     }
 
     /** Unsafe version of {@link #precision(byte) precision}. */
-    public static void nprecision(long struct, byte value) { UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.PRECISION, value); }
+    public static void nprecision(long struct, byte value) { memPutByte(struct + SQL_NUMERIC_STRUCT.PRECISION, value); }
     /** Unsafe version of {@link #scale(byte) scale}. */
-    public static void nscale(long struct, byte value) { UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.SCALE, value); }
+    public static void nscale(long struct, byte value) { memPutByte(struct + SQL_NUMERIC_STRUCT.SCALE, value); }
     /** Unsafe version of {@link #sign(byte) sign}. */
-    public static void nsign(long struct, byte value) { UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.SIGN, value); }
+    public static void nsign(long struct, byte value) { memPutByte(struct + SQL_NUMERIC_STRUCT.SIGN, value); }
     /** Unsafe version of {@link #val(ByteBuffer) val}. */
     public static void nval(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, SQL_MAX_NUMERIC_LEN); }
@@ -295,7 +295,7 @@ public class SQL_NUMERIC_STRUCT extends Struct<SQL_NUMERIC_STRUCT> implements Na
     }
     /** Unsafe version of {@link #val(int, byte) val}. */
     public static void nval(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1, value);
+        memPutByte(struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1, value);
     }
 
     // -----------------------------------

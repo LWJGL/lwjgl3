@@ -122,13 +122,13 @@ public class ParSLAnnotation extends Struct<ParSLAnnotation> {
     // -----------------------------------
 
     /** Unsafe version of {@link #u_along_curve}. */
-    public static float nu_along_curve(long struct) { return UNSAFE.getFloat(null, struct + ParSLAnnotation.U_ALONG_CURVE); }
+    public static float nu_along_curve(long struct) { return memGetFloat(struct + ParSLAnnotation.U_ALONG_CURVE); }
     /** Unsafe version of {@link #v_across_curve}. */
-    public static float nv_across_curve(long struct) { return UNSAFE.getFloat(null, struct + ParSLAnnotation.V_ACROSS_CURVE); }
+    public static float nv_across_curve(long struct) { return memGetFloat(struct + ParSLAnnotation.V_ACROSS_CURVE); }
     /** Unsafe version of {@link #spine_to_edge_x}. */
-    public static float nspine_to_edge_x(long struct) { return UNSAFE.getFloat(null, struct + ParSLAnnotation.SPINE_TO_EDGE_X); }
+    public static float nspine_to_edge_x(long struct) { return memGetFloat(struct + ParSLAnnotation.SPINE_TO_EDGE_X); }
     /** Unsafe version of {@link #spine_to_edge_y}. */
-    public static float nspine_to_edge_y(long struct) { return UNSAFE.getFloat(null, struct + ParSLAnnotation.SPINE_TO_EDGE_Y); }
+    public static float nspine_to_edge_y(long struct) { return memGetFloat(struct + ParSLAnnotation.SPINE_TO_EDGE_Y); }
 
     // -----------------------------------
 

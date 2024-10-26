@@ -242,14 +242,14 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #lineSubPixelPrecisionBits}. */
-    public static int nlineSubPixelPrecisionBits(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.LINESUBPIXELPRECISIONBITS); }
+    public static int nlineSubPixelPrecisionBits(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.LINESUBPIXELPRECISIONBITS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.PNEXT, value); }
 

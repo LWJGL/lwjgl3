@@ -311,24 +311,24 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     public static FloatBuffer nxform(long struct) { return memFloatBuffer(struct + NVGPaint.XFORM, 6); }
     /** Unsafe version of {@link #xform(int) xform}. */
     public static float nxform(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NVGPaint.XFORM + check(index, 6) * 4);
+        return memGetFloat(struct + NVGPaint.XFORM + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #extent}. */
     public static FloatBuffer nextent(long struct) { return memFloatBuffer(struct + NVGPaint.EXTENT, 2); }
     /** Unsafe version of {@link #extent(int) extent}. */
     public static float nextent(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NVGPaint.EXTENT + check(index, 2) * 4);
+        return memGetFloat(struct + NVGPaint.EXTENT + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + NVGPaint.RADIUS); }
+    public static float nradius(long struct) { return memGetFloat(struct + NVGPaint.RADIUS); }
     /** Unsafe version of {@link #feather}. */
-    public static float nfeather(long struct) { return UNSAFE.getFloat(null, struct + NVGPaint.FEATHER); }
+    public static float nfeather(long struct) { return memGetFloat(struct + NVGPaint.FEATHER); }
     /** Unsafe version of {@link #innerColor}. */
     public static NVGColor ninnerColor(long struct) { return NVGColor.create(struct + NVGPaint.INNERCOLOR); }
     /** Unsafe version of {@link #outerColor}. */
     public static NVGColor nouterColor(long struct) { return NVGColor.create(struct + NVGPaint.OUTERCOLOR); }
     /** Unsafe version of {@link #image}. */
-    public static int nimage(long struct) { return UNSAFE.getInt(null, struct + NVGPaint.IMAGE); }
+    public static int nimage(long struct) { return memGetInt(struct + NVGPaint.IMAGE); }
 
     /** Unsafe version of {@link #xform(FloatBuffer) xform}. */
     public static void nxform(long struct, FloatBuffer value) {
@@ -337,7 +337,7 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     }
     /** Unsafe version of {@link #xform(int, float) xform}. */
     public static void nxform(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + NVGPaint.XFORM + check(index, 6) * 4, value);
+        memPutFloat(struct + NVGPaint.XFORM + check(index, 6) * 4, value);
     }
     /** Unsafe version of {@link #extent(FloatBuffer) extent}. */
     public static void nextent(long struct, FloatBuffer value) {
@@ -346,18 +346,18 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     }
     /** Unsafe version of {@link #extent(int, float) extent}. */
     public static void nextent(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + NVGPaint.EXTENT + check(index, 2) * 4, value);
+        memPutFloat(struct + NVGPaint.EXTENT + check(index, 2) * 4, value);
     }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + NVGPaint.RADIUS, value); }
+    public static void nradius(long struct, float value) { memPutFloat(struct + NVGPaint.RADIUS, value); }
     /** Unsafe version of {@link #feather(float) feather}. */
-    public static void nfeather(long struct, float value) { UNSAFE.putFloat(null, struct + NVGPaint.FEATHER, value); }
+    public static void nfeather(long struct, float value) { memPutFloat(struct + NVGPaint.FEATHER, value); }
     /** Unsafe version of {@link #innerColor(NVGColor) innerColor}. */
     public static void ninnerColor(long struct, NVGColor value) { memCopy(value.address(), struct + NVGPaint.INNERCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #outerColor(NVGColor) outerColor}. */
     public static void nouterColor(long struct, NVGColor value) { memCopy(value.address(), struct + NVGPaint.OUTERCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #image(int) image}. */
-    public static void nimage(long struct, int value) { UNSAFE.putInt(null, struct + NVGPaint.IMAGE, value); }
+    public static void nimage(long struct, int value) { memPutInt(struct + NVGPaint.IMAGE, value); }
 
     // -----------------------------------
 

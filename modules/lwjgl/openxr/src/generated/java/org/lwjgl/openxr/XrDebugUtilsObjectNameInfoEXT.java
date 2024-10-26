@@ -285,26 +285,26 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsObjectNameInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrDebugUtilsObjectNameInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.NEXT); }
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + XrDebugUtilsObjectNameInfoEXT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return memGetInt(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTTYPE); }
     /** Unsafe version of {@link #objectHandle}. */
-    public static long nobjectHandle(long struct) { return UNSAFE.getLong(null, struct + XrDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
+    public static long nobjectHandle(long struct) { return memGetLong(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
     /** Unsafe version of {@link #objectName}. */
     @Nullable public static ByteBuffer nobjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
     /** Unsafe version of {@link #objectNameString}. */
     @Nullable public static String nobjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsObjectNameInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrDebugUtilsObjectNameInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsObjectNameInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsObjectNameInfoEXT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { memPutInt(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTTYPE, value); }
     /** Unsafe version of {@link #objectHandle(long) objectHandle}. */
-    public static void nobjectHandle(long struct, long value) { UNSAFE.putLong(null, struct + XrDebugUtilsObjectNameInfoEXT.OBJECTHANDLE, value); }
+    public static void nobjectHandle(long struct, long value) { memPutLong(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTHANDLE, value); }
     /** Unsafe version of {@link #objectName(ByteBuffer) objectName}. */
     public static void nobjectName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }

@@ -210,13 +210,13 @@ public class MeshoptMeshlet extends Struct<MeshoptMeshlet> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #vertex_offset}. */
-    public static int nvertex_offset(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.VERTEX_OFFSET); }
+    public static int nvertex_offset(long struct) { return memGetInt(struct + MeshoptMeshlet.VERTEX_OFFSET); }
     /** Unsafe version of {@link #triangle_offset}. */
-    public static int ntriangle_offset(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.TRIANGLE_OFFSET); }
+    public static int ntriangle_offset(long struct) { return memGetInt(struct + MeshoptMeshlet.TRIANGLE_OFFSET); }
     /** Unsafe version of {@link #vertex_count}. */
-    public static int nvertex_count(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.VERTEX_COUNT); }
+    public static int nvertex_count(long struct) { return memGetInt(struct + MeshoptMeshlet.VERTEX_COUNT); }
     /** Unsafe version of {@link #triangle_count}. */
-    public static int ntriangle_count(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.TRIANGLE_COUNT); }
+    public static int ntriangle_count(long struct) { return memGetInt(struct + MeshoptMeshlet.TRIANGLE_COUNT); }
 
     // -----------------------------------
 

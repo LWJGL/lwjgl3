@@ -213,12 +213,12 @@ public class CUstreamAttrValue extends Struct<CUstreamAttrValue> implements Nati
     /** Unsafe version of {@link #accessPolicyWindow}. */
     public static CUaccessPolicyWindow naccessPolicyWindow(long struct) { return CUaccessPolicyWindow.create(struct + CUstreamAttrValue.ACCESSPOLICYWINDOW); }
     /** Unsafe version of {@link #syncPolicy}. */
-    public static int nsyncPolicy(long struct) { return UNSAFE.getInt(null, struct + CUstreamAttrValue.SYNCPOLICY); }
+    public static int nsyncPolicy(long struct) { return memGetInt(struct + CUstreamAttrValue.SYNCPOLICY); }
 
     /** Unsafe version of {@link #accessPolicyWindow(CUaccessPolicyWindow) accessPolicyWindow}. */
     public static void naccessPolicyWindow(long struct, CUaccessPolicyWindow value) { memCopy(value.address(), struct + CUstreamAttrValue.ACCESSPOLICYWINDOW, CUaccessPolicyWindow.SIZEOF); }
     /** Unsafe version of {@link #syncPolicy(int) syncPolicy}. */
-    public static void nsyncPolicy(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamAttrValue.SYNCPOLICY, value); }
+    public static void nsyncPolicy(long struct, int value) { memPutInt(struct + CUstreamAttrValue.SYNCPOLICY, value); }
 
     // -----------------------------------
 

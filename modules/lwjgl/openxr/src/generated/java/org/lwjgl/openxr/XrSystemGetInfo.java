@@ -252,18 +252,18 @@ public class XrSystemGetInfo extends Struct<XrSystemGetInfo> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemGetInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemGetInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemGetInfo.NEXT); }
     /** Unsafe version of {@link #formFactor}. */
-    public static int nformFactor(long struct) { return UNSAFE.getInt(null, struct + XrSystemGetInfo.FORMFACTOR); }
+    public static int nformFactor(long struct) { return memGetInt(struct + XrSystemGetInfo.FORMFACTOR); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemGetInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemGetInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemGetInfo.NEXT, value); }
     /** Unsafe version of {@link #formFactor(int) formFactor}. */
-    public static void nformFactor(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemGetInfo.FORMFACTOR, value); }
+    public static void nformFactor(long struct, int value) { memPutInt(struct + XrSystemGetInfo.FORMFACTOR, value); }
 
     // -----------------------------------
 

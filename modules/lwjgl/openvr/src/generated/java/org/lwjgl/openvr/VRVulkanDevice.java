@@ -264,7 +264,7 @@ public class VRVulkanDevice extends Struct<VRVulkanDevice> implements NativeReso
     /** Unsafe version of {@link #m_pQueue}. */
     public static long nm_pQueue(long struct) { return memGetAddress(struct + VRVulkanDevice.M_PQUEUE); }
     /** Unsafe version of {@link #m_uQueueFamilyIndex}. */
-    public static int nm_uQueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VRVulkanDevice.M_UQUEUEFAMILYINDEX); }
+    public static int nm_uQueueFamilyIndex(long struct) { return memGetInt(struct + VRVulkanDevice.M_UQUEUEFAMILYINDEX); }
 
     /** Unsafe version of {@link #m_pInstance(long) m_pInstance}. */
     public static void nm_pInstance(long struct, long value) { memPutAddress(struct + VRVulkanDevice.M_PINSTANCE, check(value)); }
@@ -275,7 +275,7 @@ public class VRVulkanDevice extends Struct<VRVulkanDevice> implements NativeReso
     /** Unsafe version of {@link #m_pQueue(long) m_pQueue}. */
     public static void nm_pQueue(long struct, long value) { memPutAddress(struct + VRVulkanDevice.M_PQUEUE, check(value)); }
     /** Unsafe version of {@link #m_uQueueFamilyIndex(int) m_uQueueFamilyIndex}. */
-    public static void nm_uQueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanDevice.M_UQUEUEFAMILYINDEX, value); }
+    public static void nm_uQueueFamilyIndex(long struct, int value) { memPutInt(struct + VRVulkanDevice.M_UQUEUEFAMILYINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

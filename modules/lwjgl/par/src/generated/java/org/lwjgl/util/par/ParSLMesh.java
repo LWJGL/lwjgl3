@@ -157,9 +157,9 @@ public class ParSLMesh extends Struct<ParSLMesh> {
     // -----------------------------------
 
     /** Unsafe version of {@link #num_vertices}. */
-    public static int nnum_vertices(long struct) { return UNSAFE.getInt(null, struct + ParSLMesh.NUM_VERTICES); }
+    public static int nnum_vertices(long struct) { return memGetInt(struct + ParSLMesh.NUM_VERTICES); }
     /** Unsafe version of {@link #num_triangles}. */
-    public static int nnum_triangles(long struct) { return UNSAFE.getInt(null, struct + ParSLMesh.NUM_TRIANGLES); }
+    public static int nnum_triangles(long struct) { return memGetInt(struct + ParSLMesh.NUM_TRIANGLES); }
     /** Unsafe version of {@link #triangle_indices(int) triangle_indices}. */
     public static IntBuffer ntriangle_indices(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + ParSLMesh.TRIANGLE_INDICES), capacity); }
     /** Unsafe version of {@link #positions}. */

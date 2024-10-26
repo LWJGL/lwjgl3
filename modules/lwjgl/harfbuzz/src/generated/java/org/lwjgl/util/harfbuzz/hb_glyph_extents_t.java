@@ -247,22 +247,22 @@ public class hb_glyph_extents_t extends Struct<hb_glyph_extents_t> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #x_bearing}. */
-    public static int nx_bearing(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_extents_t.X_BEARING); }
+    public static int nx_bearing(long struct) { return memGetInt(struct + hb_glyph_extents_t.X_BEARING); }
     /** Unsafe version of {@link #y_bearing}. */
-    public static int ny_bearing(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_extents_t.Y_BEARING); }
+    public static int ny_bearing(long struct) { return memGetInt(struct + hb_glyph_extents_t.Y_BEARING); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_extents_t.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + hb_glyph_extents_t.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + hb_glyph_extents_t.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + hb_glyph_extents_t.HEIGHT); }
 
     /** Unsafe version of {@link #x_bearing(int) x_bearing}. */
-    public static void nx_bearing(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_extents_t.X_BEARING, value); }
+    public static void nx_bearing(long struct, int value) { memPutInt(struct + hb_glyph_extents_t.X_BEARING, value); }
     /** Unsafe version of {@link #y_bearing(int) y_bearing}. */
-    public static void ny_bearing(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_extents_t.Y_BEARING, value); }
+    public static void ny_bearing(long struct, int value) { memPutInt(struct + hb_glyph_extents_t.Y_BEARING, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_extents_t.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + hb_glyph_extents_t.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + hb_glyph_extents_t.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + hb_glyph_extents_t.HEIGHT, value); }
 
     // -----------------------------------
 

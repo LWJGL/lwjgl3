@@ -323,13 +323,13 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #mParent}. */
-    public static int nmParent(long struct) { return UNSAFE.getInt(null, struct + AISkeletonBone.MPARENT); }
+    public static int nmParent(long struct) { return memGetInt(struct + AISkeletonBone.MPARENT); }
     /** Unsafe version of {@link #mArmature}. */
     @Nullable public static AINode nmArmature(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MARMATURE)); }
     /** Unsafe version of {@link #mNode}. */
     @Nullable public static AINode nmNode(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MNODE)); }
     /** Unsafe version of {@link #mNumnWeights}. */
-    public static int nmNumnWeights(long struct) { return UNSAFE.getInt(null, struct + AISkeletonBone.MNUMNWEIGHTS); }
+    public static int nmNumnWeights(long struct) { return memGetInt(struct + AISkeletonBone.MNUMNWEIGHTS); }
     /** Unsafe version of {@link #mMeshId}. */
     public static AIMesh.Buffer nmMeshId(long struct) { return AIMesh.create(memGetAddress(struct + AISkeletonBone.MMESHID), nmNumnWeights(struct)); }
     /** Unsafe version of {@link #mWeights}. */
@@ -340,13 +340,13 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     public static AIMatrix4x4 nmLocalMatrix(long struct) { return AIMatrix4x4.create(struct + AISkeletonBone.MLOCALMATRIX); }
 
     /** Unsafe version of {@link #mParent(int) mParent}. */
-    public static void nmParent(long struct, int value) { UNSAFE.putInt(null, struct + AISkeletonBone.MPARENT, value); }
+    public static void nmParent(long struct, int value) { memPutInt(struct + AISkeletonBone.MPARENT, value); }
     /** Unsafe version of {@link #mArmature(AINode) mArmature}. */
     public static void nmArmature(long struct, @Nullable AINode value) { memPutAddress(struct + AISkeletonBone.MARMATURE, memAddressSafe(value)); }
     /** Unsafe version of {@link #mNode(AINode) mNode}. */
     public static void nmNode(long struct, @Nullable AINode value) { memPutAddress(struct + AISkeletonBone.MNODE, memAddressSafe(value)); }
     /** Sets the specified value to the {@code mNumnWeights} field of the specified {@code struct}. */
-    public static void nmNumnWeights(long struct, int value) { UNSAFE.putInt(null, struct + AISkeletonBone.MNUMNWEIGHTS, value); }
+    public static void nmNumnWeights(long struct, int value) { memPutInt(struct + AISkeletonBone.MNUMNWEIGHTS, value); }
     /** Unsafe version of {@link #mMeshId(AIMesh.Buffer) mMeshId}. */
     public static void nmMeshId(long struct, AIMesh.Buffer value) { memPutAddress(struct + AISkeletonBone.MMESHID, value.address()); }
     /** Unsafe version of {@link #mWeights(AIVertexWeight.Buffer) mWeights}. */

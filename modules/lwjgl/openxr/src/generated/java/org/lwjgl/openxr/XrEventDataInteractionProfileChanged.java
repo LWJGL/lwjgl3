@@ -259,14 +259,14 @@ public class XrEventDataInteractionProfileChanged extends Struct<XrEventDataInte
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataInteractionProfileChanged.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataInteractionProfileChanged.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataInteractionProfileChanged.NEXT); }
     /** Unsafe version of {@link #session}. */
     public static long nsession(long struct) { return memGetAddress(struct + XrEventDataInteractionProfileChanged.SESSION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataInteractionProfileChanged.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataInteractionProfileChanged.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.NEXT, value); }
 

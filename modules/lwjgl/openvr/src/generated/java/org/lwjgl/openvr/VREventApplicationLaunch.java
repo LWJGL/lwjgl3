@@ -110,9 +110,9 @@ public class VREventApplicationLaunch extends Struct<VREventApplicationLaunch> {
     // -----------------------------------
 
     /** Unsafe version of {@link #pid}. */
-    public static int npid(long struct) { return UNSAFE.getInt(null, struct + VREventApplicationLaunch.PID); }
+    public static int npid(long struct) { return memGetInt(struct + VREventApplicationLaunch.PID); }
     /** Unsafe version of {@link #unArgsHandle}. */
-    public static int nunArgsHandle(long struct) { return UNSAFE.getInt(null, struct + VREventApplicationLaunch.UNARGSHANDLE); }
+    public static int nunArgsHandle(long struct) { return memGetInt(struct + VREventApplicationLaunch.UNARGSHANDLE); }
 
     // -----------------------------------
 

@@ -263,20 +263,20 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct<VkP
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #subsampledLoads}. */
-    public static int nsubsampledLoads(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.SUBSAMPLEDLOADS); }
+    public static int nsubsampledLoads(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.SUBSAMPLEDLOADS); }
     /** Unsafe version of {@link #subsampledCoarseReconstructionEarlyAccess}. */
-    public static int nsubsampledCoarseReconstructionEarlyAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.SUBSAMPLEDCOARSERECONSTRUCTIONEARLYACCESS); }
+    public static int nsubsampledCoarseReconstructionEarlyAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.SUBSAMPLEDCOARSERECONSTRUCTIONEARLYACCESS); }
     /** Unsafe version of {@link #maxSubsampledArrayLayers}. */
-    public static int nmaxSubsampledArrayLayers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.MAXSUBSAMPLEDARRAYLAYERS); }
+    public static int nmaxSubsampledArrayLayers(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.MAXSUBSAMPLEDARRAYLAYERS); }
     /** Unsafe version of {@link #maxDescriptorSetSubsampledSamplers}. */
-    public static int nmaxDescriptorSetSubsampledSamplers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.MAXDESCRIPTORSETSUBSAMPLEDSAMPLERS); }
+    public static int nmaxDescriptorSetSubsampledSamplers(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.MAXDESCRIPTORSETSUBSAMPLEDSAMPLERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.PNEXT, value); }
 

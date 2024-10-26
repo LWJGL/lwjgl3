@@ -341,40 +341,40 @@ public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {
     /** Unsafe version of {@link #mNodeName}. */
     public static AIString nmNodeName(long struct) { return AIString.create(struct + AINodeAnim.MNODENAME); }
     /** Unsafe version of {@link #mNumPositionKeys}. */
-    public static int nmNumPositionKeys(long struct) { return UNSAFE.getInt(null, struct + AINodeAnim.MNUMPOSITIONKEYS); }
+    public static int nmNumPositionKeys(long struct) { return memGetInt(struct + AINodeAnim.MNUMPOSITIONKEYS); }
     /** Unsafe version of {@link #mPositionKeys}. */
     @Nullable public static AIVectorKey.Buffer nmPositionKeys(long struct) { return AIVectorKey.createSafe(memGetAddress(struct + AINodeAnim.MPOSITIONKEYS), nmNumPositionKeys(struct)); }
     /** Unsafe version of {@link #mNumRotationKeys}. */
-    public static int nmNumRotationKeys(long struct) { return UNSAFE.getInt(null, struct + AINodeAnim.MNUMROTATIONKEYS); }
+    public static int nmNumRotationKeys(long struct) { return memGetInt(struct + AINodeAnim.MNUMROTATIONKEYS); }
     /** Unsafe version of {@link #mRotationKeys}. */
     @Nullable public static AIQuatKey.Buffer nmRotationKeys(long struct) { return AIQuatKey.createSafe(memGetAddress(struct + AINodeAnim.MROTATIONKEYS), nmNumRotationKeys(struct)); }
     /** Unsafe version of {@link #mNumScalingKeys}. */
-    public static int nmNumScalingKeys(long struct) { return UNSAFE.getInt(null, struct + AINodeAnim.MNUMSCALINGKEYS); }
+    public static int nmNumScalingKeys(long struct) { return memGetInt(struct + AINodeAnim.MNUMSCALINGKEYS); }
     /** Unsafe version of {@link #mScalingKeys}. */
     @Nullable public static AIVectorKey.Buffer nmScalingKeys(long struct) { return AIVectorKey.createSafe(memGetAddress(struct + AINodeAnim.MSCALINGKEYS), nmNumScalingKeys(struct)); }
     /** Unsafe version of {@link #mPreState}. */
-    public static int nmPreState(long struct) { return UNSAFE.getInt(null, struct + AINodeAnim.MPRESTATE); }
+    public static int nmPreState(long struct) { return memGetInt(struct + AINodeAnim.MPRESTATE); }
     /** Unsafe version of {@link #mPostState}. */
-    public static int nmPostState(long struct) { return UNSAFE.getInt(null, struct + AINodeAnim.MPOSTSTATE); }
+    public static int nmPostState(long struct) { return memGetInt(struct + AINodeAnim.MPOSTSTATE); }
 
     /** Unsafe version of {@link #mNodeName(AIString) mNodeName}. */
     public static void nmNodeName(long struct, AIString value) { memCopy(value.address(), struct + AINodeAnim.MNODENAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumPositionKeys} field of the specified {@code struct}. */
-    public static void nmNumPositionKeys(long struct, int value) { UNSAFE.putInt(null, struct + AINodeAnim.MNUMPOSITIONKEYS, value); }
+    public static void nmNumPositionKeys(long struct, int value) { memPutInt(struct + AINodeAnim.MNUMPOSITIONKEYS, value); }
     /** Unsafe version of {@link #mPositionKeys(AIVectorKey.Buffer) mPositionKeys}. */
     public static void nmPositionKeys(long struct, @Nullable AIVectorKey.Buffer value) { memPutAddress(struct + AINodeAnim.MPOSITIONKEYS, memAddressSafe(value)); nmNumPositionKeys(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumRotationKeys} field of the specified {@code struct}. */
-    public static void nmNumRotationKeys(long struct, int value) { UNSAFE.putInt(null, struct + AINodeAnim.MNUMROTATIONKEYS, value); }
+    public static void nmNumRotationKeys(long struct, int value) { memPutInt(struct + AINodeAnim.MNUMROTATIONKEYS, value); }
     /** Unsafe version of {@link #mRotationKeys(AIQuatKey.Buffer) mRotationKeys}. */
     public static void nmRotationKeys(long struct, @Nullable AIQuatKey.Buffer value) { memPutAddress(struct + AINodeAnim.MROTATIONKEYS, memAddressSafe(value)); nmNumRotationKeys(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumScalingKeys} field of the specified {@code struct}. */
-    public static void nmNumScalingKeys(long struct, int value) { UNSAFE.putInt(null, struct + AINodeAnim.MNUMSCALINGKEYS, value); }
+    public static void nmNumScalingKeys(long struct, int value) { memPutInt(struct + AINodeAnim.MNUMSCALINGKEYS, value); }
     /** Unsafe version of {@link #mScalingKeys(AIVectorKey.Buffer) mScalingKeys}. */
     public static void nmScalingKeys(long struct, @Nullable AIVectorKey.Buffer value) { memPutAddress(struct + AINodeAnim.MSCALINGKEYS, memAddressSafe(value)); nmNumScalingKeys(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mPreState(int) mPreState}. */
-    public static void nmPreState(long struct, int value) { UNSAFE.putInt(null, struct + AINodeAnim.MPRESTATE, value); }
+    public static void nmPreState(long struct, int value) { memPutInt(struct + AINodeAnim.MPRESTATE, value); }
     /** Unsafe version of {@link #mPostState(int) mPostState}. */
-    public static void nmPostState(long struct, int value) { UNSAFE.putInt(null, struct + AINodeAnim.MPOSTSTATE, value); }
+    public static void nmPostState(long struct, int value) { memPutInt(struct + AINodeAnim.MPOSTSTATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

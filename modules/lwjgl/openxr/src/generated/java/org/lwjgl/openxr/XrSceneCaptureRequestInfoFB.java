@@ -265,20 +265,20 @@ public class XrSceneCaptureRequestInfoFB extends Struct<XrSceneCaptureRequestInf
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneCaptureRequestInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneCaptureRequestInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneCaptureRequestInfoFB.NEXT); }
     /** Unsafe version of {@link #requestByteCount}. */
-    public static int nrequestByteCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneCaptureRequestInfoFB.REQUESTBYTECOUNT); }
+    public static int nrequestByteCount(long struct) { return memGetInt(struct + XrSceneCaptureRequestInfoFB.REQUESTBYTECOUNT); }
     /** Unsafe version of {@link #request() request}. */
     @Nullable public static ByteBuffer nrequest(long struct) { return memByteBufferSafe(memGetAddress(struct + XrSceneCaptureRequestInfoFB.REQUEST), nrequestByteCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneCaptureRequestInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneCaptureRequestInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneCaptureRequestInfoFB.NEXT, value); }
     /** Sets the specified value to the {@code requestByteCount} field of the specified {@code struct}. */
-    public static void nrequestByteCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneCaptureRequestInfoFB.REQUESTBYTECOUNT, value); }
+    public static void nrequestByteCount(long struct, int value) { memPutInt(struct + XrSceneCaptureRequestInfoFB.REQUESTBYTECOUNT, value); }
     /** Unsafe version of {@link #request(ByteBuffer) request}. */
     public static void nrequest(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + XrSceneCaptureRequestInfoFB.REQUEST, memAddressSafe(value)); if (value != null) { nrequestByteCount(struct, value.remaining()); } }
 

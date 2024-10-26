@@ -350,28 +350,28 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     /** Unsafe version of {@link #flags}. */
     public static StdVideoAV1SequenceHeaderFlags nflags(long struct) { return StdVideoAV1SequenceHeaderFlags.create(struct + StdVideoAV1SequenceHeader.FLAGS); }
     /** Unsafe version of {@link #seq_profile}. */
-    public static int nseq_profile(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1SequenceHeader.SEQ_PROFILE); }
+    public static int nseq_profile(long struct) { return memGetInt(struct + StdVideoAV1SequenceHeader.SEQ_PROFILE); }
     /** Unsafe version of {@link #frame_width_bits_minus_1}. */
-    public static byte nframe_width_bits_minus_1(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.FRAME_WIDTH_BITS_MINUS_1); }
+    public static byte nframe_width_bits_minus_1(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.FRAME_WIDTH_BITS_MINUS_1); }
     /** Unsafe version of {@link #frame_height_bits_minus_1}. */
-    public static byte nframe_height_bits_minus_1(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.FRAME_HEIGHT_BITS_MINUS_1); }
+    public static byte nframe_height_bits_minus_1(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.FRAME_HEIGHT_BITS_MINUS_1); }
     /** Unsafe version of {@link #max_frame_width_minus_1}. */
-    public static short nmax_frame_width_minus_1(long struct) { return UNSAFE.getShort(null, struct + StdVideoAV1SequenceHeader.MAX_FRAME_WIDTH_MINUS_1); }
+    public static short nmax_frame_width_minus_1(long struct) { return memGetShort(struct + StdVideoAV1SequenceHeader.MAX_FRAME_WIDTH_MINUS_1); }
     /** Unsafe version of {@link #max_frame_height_minus_1}. */
-    public static short nmax_frame_height_minus_1(long struct) { return UNSAFE.getShort(null, struct + StdVideoAV1SequenceHeader.MAX_FRAME_HEIGHT_MINUS_1); }
+    public static short nmax_frame_height_minus_1(long struct) { return memGetShort(struct + StdVideoAV1SequenceHeader.MAX_FRAME_HEIGHT_MINUS_1); }
     /** Unsafe version of {@link #delta_frame_id_length_minus_2}. */
-    public static byte ndelta_frame_id_length_minus_2(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.DELTA_FRAME_ID_LENGTH_MINUS_2); }
+    public static byte ndelta_frame_id_length_minus_2(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.DELTA_FRAME_ID_LENGTH_MINUS_2); }
     /** Unsafe version of {@link #additional_frame_id_length_minus_1}. */
-    public static byte nadditional_frame_id_length_minus_1(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.ADDITIONAL_FRAME_ID_LENGTH_MINUS_1); }
+    public static byte nadditional_frame_id_length_minus_1(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.ADDITIONAL_FRAME_ID_LENGTH_MINUS_1); }
     /** Unsafe version of {@link #order_hint_bits_minus_1}. */
-    public static byte norder_hint_bits_minus_1(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.ORDER_HINT_BITS_MINUS_1); }
+    public static byte norder_hint_bits_minus_1(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.ORDER_HINT_BITS_MINUS_1); }
     /** Unsafe version of {@link #seq_force_integer_mv}. */
-    public static byte nseq_force_integer_mv(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV); }
+    public static byte nseq_force_integer_mv(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV); }
     /** Unsafe version of {@link #seq_force_screen_content_tools}. */
-    public static byte nseq_force_screen_content_tools(long struct) { return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS); }
+    public static byte nseq_force_screen_content_tools(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS); }
     public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoAV1SequenceHeader.RESERVED1, 5); }
     public static byte nreserved1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1);
+        return memGetByte(struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1);
     }
     /** Unsafe version of {@link #pColorConfig}. */
     public static StdVideoAV1ColorConfig npColorConfig(long struct) { return StdVideoAV1ColorConfig.create(memGetAddress(struct + StdVideoAV1SequenceHeader.PCOLORCONFIG)); }
@@ -381,31 +381,31 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     /** Unsafe version of {@link #flags(StdVideoAV1SequenceHeaderFlags) flags}. */
     public static void nflags(long struct, StdVideoAV1SequenceHeaderFlags value) { memCopy(value.address(), struct + StdVideoAV1SequenceHeader.FLAGS, StdVideoAV1SequenceHeaderFlags.SIZEOF); }
     /** Unsafe version of {@link #seq_profile(int) seq_profile}. */
-    public static void nseq_profile(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1SequenceHeader.SEQ_PROFILE, value); }
+    public static void nseq_profile(long struct, int value) { memPutInt(struct + StdVideoAV1SequenceHeader.SEQ_PROFILE, value); }
     /** Unsafe version of {@link #frame_width_bits_minus_1(byte) frame_width_bits_minus_1}. */
-    public static void nframe_width_bits_minus_1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.FRAME_WIDTH_BITS_MINUS_1, value); }
+    public static void nframe_width_bits_minus_1(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.FRAME_WIDTH_BITS_MINUS_1, value); }
     /** Unsafe version of {@link #frame_height_bits_minus_1(byte) frame_height_bits_minus_1}. */
-    public static void nframe_height_bits_minus_1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.FRAME_HEIGHT_BITS_MINUS_1, value); }
+    public static void nframe_height_bits_minus_1(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.FRAME_HEIGHT_BITS_MINUS_1, value); }
     /** Unsafe version of {@link #max_frame_width_minus_1(short) max_frame_width_minus_1}. */
-    public static void nmax_frame_width_minus_1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoAV1SequenceHeader.MAX_FRAME_WIDTH_MINUS_1, value); }
+    public static void nmax_frame_width_minus_1(long struct, short value) { memPutShort(struct + StdVideoAV1SequenceHeader.MAX_FRAME_WIDTH_MINUS_1, value); }
     /** Unsafe version of {@link #max_frame_height_minus_1(short) max_frame_height_minus_1}. */
-    public static void nmax_frame_height_minus_1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoAV1SequenceHeader.MAX_FRAME_HEIGHT_MINUS_1, value); }
+    public static void nmax_frame_height_minus_1(long struct, short value) { memPutShort(struct + StdVideoAV1SequenceHeader.MAX_FRAME_HEIGHT_MINUS_1, value); }
     /** Unsafe version of {@link #delta_frame_id_length_minus_2(byte) delta_frame_id_length_minus_2}. */
-    public static void ndelta_frame_id_length_minus_2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.DELTA_FRAME_ID_LENGTH_MINUS_2, value); }
+    public static void ndelta_frame_id_length_minus_2(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.DELTA_FRAME_ID_LENGTH_MINUS_2, value); }
     /** Unsafe version of {@link #additional_frame_id_length_minus_1(byte) additional_frame_id_length_minus_1}. */
-    public static void nadditional_frame_id_length_minus_1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.ADDITIONAL_FRAME_ID_LENGTH_MINUS_1, value); }
+    public static void nadditional_frame_id_length_minus_1(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.ADDITIONAL_FRAME_ID_LENGTH_MINUS_1, value); }
     /** Unsafe version of {@link #order_hint_bits_minus_1(byte) order_hint_bits_minus_1}. */
-    public static void norder_hint_bits_minus_1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.ORDER_HINT_BITS_MINUS_1, value); }
+    public static void norder_hint_bits_minus_1(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.ORDER_HINT_BITS_MINUS_1, value); }
     /** Unsafe version of {@link #seq_force_integer_mv(byte) seq_force_integer_mv}. */
-    public static void nseq_force_integer_mv(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV, value); }
+    public static void nseq_force_integer_mv(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV, value); }
     /** Unsafe version of {@link #seq_force_screen_content_tools(byte) seq_force_screen_content_tools}. */
-    public static void nseq_force_screen_content_tools(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS, value); }
+    public static void nseq_force_screen_content_tools(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS, value); }
     public static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 5); }
         memCopy(memAddress(value), struct + StdVideoAV1SequenceHeader.RESERVED1, value.remaining() * 1);
     }
     public static void nreserved1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1, value);
+        memPutByte(struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1, value);
     }
     /** Unsafe version of {@link #pColorConfig(StdVideoAV1ColorConfig) pColorConfig}. */
     public static void npColorConfig(long struct, StdVideoAV1ColorConfig value) { memPutAddress(struct + StdVideoAV1SequenceHeader.PCOLORCONFIG, value.address()); }

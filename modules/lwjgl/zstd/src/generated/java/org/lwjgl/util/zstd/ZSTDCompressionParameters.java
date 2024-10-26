@@ -296,34 +296,34 @@ public class ZSTDCompressionParameters extends Struct<ZSTDCompressionParameters>
     // -----------------------------------
 
     /** Unsafe version of {@link #windowLog}. */
-    public static int nwindowLog(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.WINDOWLOG); }
+    public static int nwindowLog(long struct) { return memGetInt(struct + ZSTDCompressionParameters.WINDOWLOG); }
     /** Unsafe version of {@link #chainLog}. */
-    public static int nchainLog(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.CHAINLOG); }
+    public static int nchainLog(long struct) { return memGetInt(struct + ZSTDCompressionParameters.CHAINLOG); }
     /** Unsafe version of {@link #hashLog}. */
-    public static int nhashLog(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.HASHLOG); }
+    public static int nhashLog(long struct) { return memGetInt(struct + ZSTDCompressionParameters.HASHLOG); }
     /** Unsafe version of {@link #searchLog}. */
-    public static int nsearchLog(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.SEARCHLOG); }
+    public static int nsearchLog(long struct) { return memGetInt(struct + ZSTDCompressionParameters.SEARCHLOG); }
     /** Unsafe version of {@link #minMatch}. */
-    public static int nminMatch(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.MINMATCH); }
+    public static int nminMatch(long struct) { return memGetInt(struct + ZSTDCompressionParameters.MINMATCH); }
     /** Unsafe version of {@link #targetLength}. */
-    public static int ntargetLength(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.TARGETLENGTH); }
+    public static int ntargetLength(long struct) { return memGetInt(struct + ZSTDCompressionParameters.TARGETLENGTH); }
     /** Unsafe version of {@link #strategy}. */
-    public static int nstrategy(long struct) { return UNSAFE.getInt(null, struct + ZSTDCompressionParameters.STRATEGY); }
+    public static int nstrategy(long struct) { return memGetInt(struct + ZSTDCompressionParameters.STRATEGY); }
 
     /** Unsafe version of {@link #windowLog(int) windowLog}. */
-    public static void nwindowLog(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.WINDOWLOG, value); }
+    public static void nwindowLog(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.WINDOWLOG, value); }
     /** Unsafe version of {@link #chainLog(int) chainLog}. */
-    public static void nchainLog(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.CHAINLOG, value); }
+    public static void nchainLog(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.CHAINLOG, value); }
     /** Unsafe version of {@link #hashLog(int) hashLog}. */
-    public static void nhashLog(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.HASHLOG, value); }
+    public static void nhashLog(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.HASHLOG, value); }
     /** Unsafe version of {@link #searchLog(int) searchLog}. */
-    public static void nsearchLog(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.SEARCHLOG, value); }
+    public static void nsearchLog(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.SEARCHLOG, value); }
     /** Unsafe version of {@link #minMatch(int) minMatch}. */
-    public static void nminMatch(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.MINMATCH, value); }
+    public static void nminMatch(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.MINMATCH, value); }
     /** Unsafe version of {@link #targetLength(int) targetLength}. */
-    public static void ntargetLength(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.TARGETLENGTH, value); }
+    public static void ntargetLength(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.TARGETLENGTH, value); }
     /** Unsafe version of {@link #strategy(int) strategy}. */
-    public static void nstrategy(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDCompressionParameters.STRATEGY, value); }
+    public static void nstrategy(long struct, int value) { memPutInt(struct + ZSTDCompressionParameters.STRATEGY, value); }
 
     // -----------------------------------
 

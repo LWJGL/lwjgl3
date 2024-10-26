@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderReplicatedComposites}. */
-    public static int nshaderReplicatedComposites(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.SHADERREPLICATEDCOMPOSITES); }
+    public static int nshaderReplicatedComposites(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.SHADERREPLICATEDCOMPOSITES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #shaderReplicatedComposites(boolean) shaderReplicatedComposites}. */
-    public static void nshaderReplicatedComposites(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.SHADERREPLICATEDCOMPOSITES, value); }
+    public static void nshaderReplicatedComposites(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.SHADERREPLICATEDCOMPOSITES, value); }
 
     // -----------------------------------
 

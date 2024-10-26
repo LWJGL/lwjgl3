@@ -263,22 +263,22 @@ public class XrGraphicsRequirementsOpenGLKHR extends Struct<XrGraphicsRequiremen
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGraphicsRequirementsOpenGLKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGraphicsRequirementsOpenGLKHR.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGraphicsRequirementsOpenGLKHR.NEXT); }
     /** Unsafe version of {@link #minApiVersionSupported}. */
-    public static long nminApiVersionSupported(long struct) { return UNSAFE.getLong(null, struct + XrGraphicsRequirementsOpenGLKHR.MINAPIVERSIONSUPPORTED); }
+    public static long nminApiVersionSupported(long struct) { return memGetLong(struct + XrGraphicsRequirementsOpenGLKHR.MINAPIVERSIONSUPPORTED); }
     /** Unsafe version of {@link #maxApiVersionSupported}. */
-    public static long nmaxApiVersionSupported(long struct) { return UNSAFE.getLong(null, struct + XrGraphicsRequirementsOpenGLKHR.MAXAPIVERSIONSUPPORTED); }
+    public static long nmaxApiVersionSupported(long struct) { return memGetLong(struct + XrGraphicsRequirementsOpenGLKHR.MAXAPIVERSIONSUPPORTED); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsRequirementsOpenGLKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGraphicsRequirementsOpenGLKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsRequirementsOpenGLKHR.NEXT, value); }
     /** Unsafe version of {@link #minApiVersionSupported(long) minApiVersionSupported}. */
-    public static void nminApiVersionSupported(long struct, long value) { UNSAFE.putLong(null, struct + XrGraphicsRequirementsOpenGLKHR.MINAPIVERSIONSUPPORTED, value); }
+    public static void nminApiVersionSupported(long struct, long value) { memPutLong(struct + XrGraphicsRequirementsOpenGLKHR.MINAPIVERSIONSUPPORTED, value); }
     /** Unsafe version of {@link #maxApiVersionSupported(long) maxApiVersionSupported}. */
-    public static void nmaxApiVersionSupported(long struct, long value) { UNSAFE.putLong(null, struct + XrGraphicsRequirementsOpenGLKHR.MAXAPIVERSIONSUPPORTED, value); }
+    public static void nmaxApiVersionSupported(long struct, long value) { memPutLong(struct + XrGraphicsRequirementsOpenGLKHR.MAXAPIVERSIONSUPPORTED, value); }
 
     // -----------------------------------
 

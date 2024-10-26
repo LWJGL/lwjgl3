@@ -212,7 +212,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct<StdVideoH265Pred
     public static ShortBuffer nPredictorPaletteEntries(long struct) { return memShortBuffer(struct + StdVideoH265PredictorPaletteEntries.PREDICTORPALETTEENTRIES, STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE); }
     /** Unsafe version of {@link #PredictorPaletteEntries(int) PredictorPaletteEntries}. */
     public static short nPredictorPaletteEntries(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoH265PredictorPaletteEntries.PREDICTORPALETTEENTRIES + check(index, STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE) * 2);
+        return memGetShort(struct + StdVideoH265PredictorPaletteEntries.PREDICTORPALETTEENTRIES + check(index, STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE) * 2);
     }
 
     /** Unsafe version of {@link #PredictorPaletteEntries(ShortBuffer) PredictorPaletteEntries}. */
@@ -222,7 +222,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct<StdVideoH265Pred
     }
     /** Unsafe version of {@link #PredictorPaletteEntries(int, short) PredictorPaletteEntries}. */
     public static void nPredictorPaletteEntries(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoH265PredictorPaletteEntries.PREDICTORPALETTEENTRIES + check(index, STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE) * 2, value);
+        memPutShort(struct + StdVideoH265PredictorPaletteEntries.PREDICTORPALETTEENTRIES + check(index, STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE) * 2, value);
     }
 
     // -----------------------------------

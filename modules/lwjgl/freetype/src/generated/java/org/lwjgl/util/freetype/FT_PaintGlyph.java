@@ -113,7 +113,7 @@ public class FT_PaintGlyph extends Struct<FT_PaintGlyph> {
     /** Unsafe version of {@link #paint}. */
     public static FT_OpaquePaint npaint(long struct) { return FT_OpaquePaint.create(struct + FT_PaintGlyph.PAINT); }
     /** Unsafe version of {@link #glyphID}. */
-    public static int nglyphID(long struct) { return UNSAFE.getInt(null, struct + FT_PaintGlyph.GLYPHID); }
+    public static int nglyphID(long struct) { return memGetInt(struct + FT_PaintGlyph.GLYPHID); }
 
     // -----------------------------------
 

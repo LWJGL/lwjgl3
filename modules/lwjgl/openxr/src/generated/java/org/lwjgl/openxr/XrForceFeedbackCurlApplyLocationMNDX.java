@@ -237,14 +237,14 @@ public class XrForceFeedbackCurlApplyLocationMNDX extends Struct<XrForceFeedback
     // -----------------------------------
 
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + XrForceFeedbackCurlApplyLocationMNDX.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + XrForceFeedbackCurlApplyLocationMNDX.LOCATION); }
     /** Unsafe version of {@link #value}. */
-    public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + XrForceFeedbackCurlApplyLocationMNDX.VALUE); }
+    public static float nvalue(long struct) { return memGetFloat(struct + XrForceFeedbackCurlApplyLocationMNDX.VALUE); }
 
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + XrForceFeedbackCurlApplyLocationMNDX.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + XrForceFeedbackCurlApplyLocationMNDX.LOCATION, value); }
     /** Unsafe version of {@link #value(float) value}. */
-    public static void nvalue(long struct, float value) { UNSAFE.putFloat(null, struct + XrForceFeedbackCurlApplyLocationMNDX.VALUE, value); }
+    public static void nvalue(long struct, float value) { memPutFloat(struct + XrForceFeedbackCurlApplyLocationMNDX.VALUE, value); }
 
     // -----------------------------------
 

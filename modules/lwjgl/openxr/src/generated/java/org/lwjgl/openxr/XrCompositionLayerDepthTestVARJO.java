@@ -257,22 +257,22 @@ public class XrCompositionLayerDepthTestVARJO extends Struct<XrCompositionLayerD
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerDepthTestVARJO.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerDepthTestVARJO.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerDepthTestVARJO.NEXT); }
     /** Unsafe version of {@link #depthTestRangeNearZ}. */
-    public static float ndepthTestRangeNearZ(long struct) { return UNSAFE.getFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGENEARZ); }
+    public static float ndepthTestRangeNearZ(long struct) { return memGetFloat(struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGENEARZ); }
     /** Unsafe version of {@link #depthTestRangeFarZ}. */
-    public static float ndepthTestRangeFarZ(long struct) { return UNSAFE.getFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGEFARZ); }
+    public static float ndepthTestRangeFarZ(long struct) { return memGetFloat(struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGEFARZ); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthTestVARJO.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerDepthTestVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthTestVARJO.NEXT, value); }
     /** Unsafe version of {@link #depthTestRangeNearZ(float) depthTestRangeNearZ}. */
-    public static void ndepthTestRangeNearZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGENEARZ, value); }
+    public static void ndepthTestRangeNearZ(long struct, float value) { memPutFloat(struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGENEARZ, value); }
     /** Unsafe version of {@link #depthTestRangeFarZ(float) depthTestRangeFarZ}. */
-    public static void ndepthTestRangeFarZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGEFARZ, value); }
+    public static void ndepthTestRangeFarZ(long struct, float value) { memPutFloat(struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGEFARZ, value); }
 
     // -----------------------------------
 

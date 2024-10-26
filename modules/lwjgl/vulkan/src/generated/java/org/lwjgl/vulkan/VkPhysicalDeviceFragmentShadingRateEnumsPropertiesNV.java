@@ -249,18 +249,18 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #maxFragmentShadingRateInvocationCount}. */
-    public static int nmaxFragmentShadingRateInvocationCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.MAXFRAGMENTSHADINGRATEINVOCATIONCOUNT); }
+    public static int nmaxFragmentShadingRateInvocationCount(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.MAXFRAGMENTSHADINGRATEINVOCATIONCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.PNEXT, value); }
     /** Unsafe version of {@link #maxFragmentShadingRateInvocationCount(int) maxFragmentShadingRateInvocationCount}. */
-    public static void nmaxFragmentShadingRateInvocationCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.MAXFRAGMENTSHADINGRATEINVOCATIONCOUNT, value); }
+    public static void nmaxFragmentShadingRateInvocationCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.MAXFRAGMENTSHADINGRATEINVOCATIONCOUNT, value); }
 
     // -----------------------------------
 

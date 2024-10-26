@@ -299,40 +299,40 @@ public class StdVideoEncodeH265LongTermRefPics extends Struct<StdVideoEncodeH265
     // -----------------------------------
 
     /** Unsafe version of {@link #num_long_term_sps}. */
-    public static byte nnum_long_term_sps(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_SPS); }
+    public static byte nnum_long_term_sps(long struct) { return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_SPS); }
     /** Unsafe version of {@link #num_long_term_pics}. */
-    public static byte nnum_long_term_pics(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_PICS); }
+    public static byte nnum_long_term_pics(long struct) { return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_PICS); }
     /** Unsafe version of {@link #lt_idx_sps}. */
     public static ByteBuffer nlt_idx_sps(long struct) { return memByteBuffer(struct + StdVideoEncodeH265LongTermRefPics.LT_IDX_SPS, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS); }
     /** Unsafe version of {@link #lt_idx_sps(int) lt_idx_sps}. */
     public static byte nlt_idx_sps(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.LT_IDX_SPS + check(index, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS) * 1);
+        return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.LT_IDX_SPS + check(index, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS) * 1);
     }
     /** Unsafe version of {@link #poc_lsb_lt}. */
     public static ByteBuffer npoc_lsb_lt(long struct) { return memByteBuffer(struct + StdVideoEncodeH265LongTermRefPics.POC_LSB_LT, STD_VIDEO_H265_MAX_LONG_TERM_PICS); }
     /** Unsafe version of {@link #poc_lsb_lt(int) poc_lsb_lt}. */
     public static byte npoc_lsb_lt(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.POC_LSB_LT + check(index, STD_VIDEO_H265_MAX_LONG_TERM_PICS) * 1);
+        return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.POC_LSB_LT + check(index, STD_VIDEO_H265_MAX_LONG_TERM_PICS) * 1);
     }
     /** Unsafe version of {@link #used_by_curr_pic_lt_flag}. */
-    public static short nused_by_curr_pic_lt_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265LongTermRefPics.USED_BY_CURR_PIC_LT_FLAG); }
+    public static short nused_by_curr_pic_lt_flag(long struct) { return memGetShort(struct + StdVideoEncodeH265LongTermRefPics.USED_BY_CURR_PIC_LT_FLAG); }
     /** Unsafe version of {@link #delta_poc_msb_present_flag}. */
     public static ByteBuffer ndelta_poc_msb_present_flag(long struct) { return memByteBuffer(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_PRESENT_FLAG, STD_VIDEO_H265_MAX_DELTA_POC); }
     /** Unsafe version of {@link #delta_poc_msb_present_flag(int) delta_poc_msb_present_flag}. */
     public static byte ndelta_poc_msb_present_flag(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_PRESENT_FLAG + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1);
+        return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_PRESENT_FLAG + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1);
     }
     /** Unsafe version of {@link #delta_poc_msb_cycle_lt}. */
     public static ByteBuffer ndelta_poc_msb_cycle_lt(long struct) { return memByteBuffer(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_CYCLE_LT, STD_VIDEO_H265_MAX_DELTA_POC); }
     /** Unsafe version of {@link #delta_poc_msb_cycle_lt(int) delta_poc_msb_cycle_lt}. */
     public static byte ndelta_poc_msb_cycle_lt(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_CYCLE_LT + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1);
+        return memGetByte(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_CYCLE_LT + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1);
     }
 
     /** Unsafe version of {@link #num_long_term_sps(byte) num_long_term_sps}. */
-    public static void nnum_long_term_sps(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_SPS, value); }
+    public static void nnum_long_term_sps(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_SPS, value); }
     /** Unsafe version of {@link #num_long_term_pics(byte) num_long_term_pics}. */
-    public static void nnum_long_term_pics(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_PICS, value); }
+    public static void nnum_long_term_pics(long struct, byte value) { memPutByte(struct + StdVideoEncodeH265LongTermRefPics.NUM_LONG_TERM_PICS, value); }
     /** Unsafe version of {@link #lt_idx_sps(ByteBuffer) lt_idx_sps}. */
     public static void nlt_idx_sps(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS); }
@@ -340,7 +340,7 @@ public class StdVideoEncodeH265LongTermRefPics extends Struct<StdVideoEncodeH265
     }
     /** Unsafe version of {@link #lt_idx_sps(int, byte) lt_idx_sps}. */
     public static void nlt_idx_sps(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.LT_IDX_SPS + check(index, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265LongTermRefPics.LT_IDX_SPS + check(index, STD_VIDEO_H265_MAX_LONG_TERM_REF_PICS_SPS) * 1, value);
     }
     /** Unsafe version of {@link #poc_lsb_lt(ByteBuffer) poc_lsb_lt}. */
     public static void npoc_lsb_lt(long struct, ByteBuffer value) {
@@ -349,10 +349,10 @@ public class StdVideoEncodeH265LongTermRefPics extends Struct<StdVideoEncodeH265
     }
     /** Unsafe version of {@link #poc_lsb_lt(int, byte) poc_lsb_lt}. */
     public static void npoc_lsb_lt(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.POC_LSB_LT + check(index, STD_VIDEO_H265_MAX_LONG_TERM_PICS) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265LongTermRefPics.POC_LSB_LT + check(index, STD_VIDEO_H265_MAX_LONG_TERM_PICS) * 1, value);
     }
     /** Unsafe version of {@link #used_by_curr_pic_lt_flag(short) used_by_curr_pic_lt_flag}. */
-    public static void nused_by_curr_pic_lt_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265LongTermRefPics.USED_BY_CURR_PIC_LT_FLAG, value); }
+    public static void nused_by_curr_pic_lt_flag(long struct, short value) { memPutShort(struct + StdVideoEncodeH265LongTermRefPics.USED_BY_CURR_PIC_LT_FLAG, value); }
     /** Unsafe version of {@link #delta_poc_msb_present_flag(ByteBuffer) delta_poc_msb_present_flag}. */
     public static void ndelta_poc_msb_present_flag(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_MAX_DELTA_POC); }
@@ -360,7 +360,7 @@ public class StdVideoEncodeH265LongTermRefPics extends Struct<StdVideoEncodeH265
     }
     /** Unsafe version of {@link #delta_poc_msb_present_flag(int, byte) delta_poc_msb_present_flag}. */
     public static void ndelta_poc_msb_present_flag(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_PRESENT_FLAG + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_PRESENT_FLAG + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1, value);
     }
     /** Unsafe version of {@link #delta_poc_msb_cycle_lt(ByteBuffer) delta_poc_msb_cycle_lt}. */
     public static void ndelta_poc_msb_cycle_lt(long struct, ByteBuffer value) {
@@ -369,7 +369,7 @@ public class StdVideoEncodeH265LongTermRefPics extends Struct<StdVideoEncodeH265
     }
     /** Unsafe version of {@link #delta_poc_msb_cycle_lt(int, byte) delta_poc_msb_cycle_lt}. */
     public static void ndelta_poc_msb_cycle_lt(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_CYCLE_LT + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1, value);
+        memPutByte(struct + StdVideoEncodeH265LongTermRefPics.DELTA_POC_MSB_CYCLE_LT + check(index, STD_VIDEO_H265_MAX_DELTA_POC) * 1, value);
     }
 
     // -----------------------------------

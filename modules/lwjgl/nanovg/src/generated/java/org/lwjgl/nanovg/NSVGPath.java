@@ -135,14 +135,14 @@ public class NSVGPath extends Struct<NSVGPath> {
     /** Unsafe version of {@link #pts() pts}. */
     public static FloatBuffer npts(long struct) { return memFloatBuffer(memGetAddress(struct + NSVGPath.PTS), (nnpts(struct) << 1)); }
     /** Unsafe version of {@link #npts}. */
-    public static int nnpts(long struct) { return UNSAFE.getInt(null, struct + NSVGPath.NPTS); }
+    public static int nnpts(long struct) { return memGetInt(struct + NSVGPath.NPTS); }
     /** Unsafe version of {@link #closed}. */
-    public static byte nclosed(long struct) { return UNSAFE.getByte(null, struct + NSVGPath.CLOSED); }
+    public static byte nclosed(long struct) { return memGetByte(struct + NSVGPath.CLOSED); }
     /** Unsafe version of {@link #bounds}. */
     public static FloatBuffer nbounds(long struct) { return memFloatBuffer(struct + NSVGPath.BOUNDS, 4); }
     /** Unsafe version of {@link #bounds(int) bounds}. */
     public static float nbounds(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + NSVGPath.BOUNDS + check(index, 4) * 4);
+        return memGetFloat(struct + NSVGPath.BOUNDS + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #next}. */
     public static NSVGPath nnext(long struct) { return NSVGPath.create(memGetAddress(struct + NSVGPath.NEXT)); }

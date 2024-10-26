@@ -134,10 +134,10 @@ public class NkKeyboard extends Struct<NkKeyboard> {
     public static ByteBuffer ntext(long struct) { return memByteBuffer(struct + NkKeyboard.TEXT, NK_INPUT_MAX); }
     /** Unsafe version of {@link #text(int) text}. */
     public static byte ntext(long struct, int index) {
-        return UNSAFE.getByte(null, struct + NkKeyboard.TEXT + check(index, NK_INPUT_MAX) * 1);
+        return memGetByte(struct + NkKeyboard.TEXT + check(index, NK_INPUT_MAX) * 1);
     }
     /** Unsafe version of {@link #text_len}. */
-    public static int ntext_len(long struct) { return UNSAFE.getInt(null, struct + NkKeyboard.TEXT_LEN); }
+    public static int ntext_len(long struct) { return memGetInt(struct + NkKeyboard.TEXT_LEN); }
 
     // -----------------------------------
 

@@ -261,14 +261,14 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPh
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #minImportedHostPointerAlignment}. */
-    public static long nminImportedHostPointerAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT); }
+    public static long nminImportedHostPointerAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.PNEXT, value); }
 

@@ -103,7 +103,7 @@ public class VREventPerformanceTest extends Struct<VREventPerformanceTest> {
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nFidelityLevel}. */
-    public static int nm_nFidelityLevel(long struct) { return UNSAFE.getInt(null, struct + VREventPerformanceTest.M_NFIDELITYLEVEL); }
+    public static int nm_nFidelityLevel(long struct) { return memGetInt(struct + VREventPerformanceTest.M_NFIDELITYLEVEL); }
 
     // -----------------------------------
 

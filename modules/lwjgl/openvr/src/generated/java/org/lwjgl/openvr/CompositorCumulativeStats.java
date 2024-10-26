@@ -356,49 +356,49 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nPid}. */
-    public static int nm_nPid(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NPID); }
+    public static int nm_nPid(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NPID); }
     /** Unsafe version of {@link #m_nNumFramePresents}. */
-    public static int nm_nNumFramePresents(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTS); }
+    public static int nm_nNumFramePresents(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTS); }
     /** Unsafe version of {@link #m_nNumDroppedFrames}. */
-    public static int nm_nNumDroppedFrames(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMES); }
+    public static int nm_nNumDroppedFrames(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMES); }
     /** Unsafe version of {@link #m_nNumReprojectedFrames}. */
-    public static int nm_nNumReprojectedFrames(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMES); }
+    public static int nm_nNumReprojectedFrames(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMES); }
     /** Unsafe version of {@link #m_nNumFramePresentsOnStartup}. */
-    public static int nm_nNumFramePresentsOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSONSTARTUP); }
+    public static int nm_nNumFramePresentsOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSONSTARTUP); }
     /** Unsafe version of {@link #m_nNumDroppedFramesOnStartup}. */
-    public static int nm_nNumDroppedFramesOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESONSTARTUP); }
+    public static int nm_nNumDroppedFramesOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESONSTARTUP); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesOnStartup}. */
-    public static int nm_nNumReprojectedFramesOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESONSTARTUP); }
+    public static int nm_nNumReprojectedFramesOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESONSTARTUP); }
     /** Unsafe version of {@link #m_nNumLoading}. */
-    public static int nm_nNumLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMLOADING); }
+    public static int nm_nNumLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMLOADING); }
     /** Unsafe version of {@link #m_nNumFramePresentsLoading}. */
-    public static int nm_nNumFramePresentsLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSLOADING); }
+    public static int nm_nNumFramePresentsLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSLOADING); }
     /** Unsafe version of {@link #m_nNumDroppedFramesLoading}. */
-    public static int nm_nNumDroppedFramesLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESLOADING); }
+    public static int nm_nNumDroppedFramesLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESLOADING); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesLoading}. */
-    public static int nm_nNumReprojectedFramesLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESLOADING); }
+    public static int nm_nNumReprojectedFramesLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESLOADING); }
     /** Unsafe version of {@link #m_nNumTimedOut}. */
-    public static int nm_nNumTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMTIMEDOUT); }
+    public static int nm_nNumTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumFramePresentsTimedOut}. */
-    public static int nm_nNumFramePresentsTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSTIMEDOUT); }
+    public static int nm_nNumFramePresentsTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumDroppedFramesTimedOut}. */
-    public static int nm_nNumDroppedFramesTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESTIMEDOUT); }
+    public static int nm_nNumDroppedFramesTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesTimedOut}. */
-    public static int nm_nNumReprojectedFramesTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESTIMEDOUT); }
+    public static int nm_nNumReprojectedFramesTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumFrameSubmits}. */
-    public static int nm_nNumFrameSubmits(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMESUBMITS); }
+    public static int nm_nNumFrameSubmits(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMESUBMITS); }
     /** Unsafe version of {@link #m_flSumCompositorCPUTimeMS}. */
-    public static double nm_flSumCompositorCPUTimeMS(long struct) { return UNSAFE.getDouble(null, struct + CompositorCumulativeStats.M_FLSUMCOMPOSITORCPUTIMEMS); }
+    public static double nm_flSumCompositorCPUTimeMS(long struct) { return memGetDouble(struct + CompositorCumulativeStats.M_FLSUMCOMPOSITORCPUTIMEMS); }
     /** Unsafe version of {@link #m_flSumCompositorGPUTimeMS}. */
-    public static double nm_flSumCompositorGPUTimeMS(long struct) { return UNSAFE.getDouble(null, struct + CompositorCumulativeStats.M_FLSUMCOMPOSITORGPUTIMEMS); }
+    public static double nm_flSumCompositorGPUTimeMS(long struct) { return memGetDouble(struct + CompositorCumulativeStats.M_FLSUMCOMPOSITORGPUTIMEMS); }
     /** Unsafe version of {@link #m_flSumTargetFrameTimes}. */
-    public static double nm_flSumTargetFrameTimes(long struct) { return UNSAFE.getDouble(null, struct + CompositorCumulativeStats.M_FLSUMTARGETFRAMETIMES); }
+    public static double nm_flSumTargetFrameTimes(long struct) { return memGetDouble(struct + CompositorCumulativeStats.M_FLSUMTARGETFRAMETIMES); }
     /** Unsafe version of {@link #m_flSumApplicationCPUTimeMS}. */
-    public static double nm_flSumApplicationCPUTimeMS(long struct) { return UNSAFE.getDouble(null, struct + CompositorCumulativeStats.M_FLSUMAPPLICATIONCPUTIMEMS); }
+    public static double nm_flSumApplicationCPUTimeMS(long struct) { return memGetDouble(struct + CompositorCumulativeStats.M_FLSUMAPPLICATIONCPUTIMEMS); }
     /** Unsafe version of {@link #m_flSumApplicationGPUTimeMS}. */
-    public static double nm_flSumApplicationGPUTimeMS(long struct) { return UNSAFE.getDouble(null, struct + CompositorCumulativeStats.M_FLSUMAPPLICATIONGPUTIMEMS); }
+    public static double nm_flSumApplicationGPUTimeMS(long struct) { return memGetDouble(struct + CompositorCumulativeStats.M_FLSUMAPPLICATIONGPUTIMEMS); }
     /** Unsafe version of {@link #m_nNumFramesWithDepth}. */
-    public static int nm_nNumFramesWithDepth(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMESWITHDEPTH); }
+    public static int nm_nNumFramesWithDepth(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMESWITHDEPTH); }
 
     // -----------------------------------
 

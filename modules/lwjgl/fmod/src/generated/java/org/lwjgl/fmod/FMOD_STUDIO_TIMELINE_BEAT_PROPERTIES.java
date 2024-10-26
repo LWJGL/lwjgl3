@@ -259,30 +259,30 @@ public class FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES extends Struct<FMOD_STUDIO_TIM
     // -----------------------------------
 
     /** Unsafe version of {@link #bar}. */
-    public static int nbar(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BAR); }
+    public static int nbar(long struct) { return memGetInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BAR); }
     /** Unsafe version of {@link #beat}. */
-    public static int nbeat(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BEAT); }
+    public static int nbeat(long struct) { return memGetInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BEAT); }
     /** Unsafe version of {@link #position$}. */
-    public static int nposition$(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.POSITION); }
+    public static int nposition$(long struct) { return memGetInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.POSITION); }
     /** Unsafe version of {@link #tempo}. */
-    public static float ntempo(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TEMPO); }
+    public static float ntempo(long struct) { return memGetFloat(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TEMPO); }
     /** Unsafe version of {@link #timesignatureupper}. */
-    public static int ntimesignatureupper(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATUREUPPER); }
+    public static int ntimesignatureupper(long struct) { return memGetInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATUREUPPER); }
     /** Unsafe version of {@link #timesignaturelower}. */
-    public static int ntimesignaturelower(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATURELOWER); }
+    public static int ntimesignaturelower(long struct) { return memGetInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATURELOWER); }
 
     /** Unsafe version of {@link #bar(int) bar}. */
-    public static void nbar(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BAR, value); }
+    public static void nbar(long struct, int value) { memPutInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BAR, value); }
     /** Unsafe version of {@link #beat(int) beat}. */
-    public static void nbeat(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BEAT, value); }
+    public static void nbeat(long struct, int value) { memPutInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.BEAT, value); }
     /** Unsafe version of {@link #position$(int) position$}. */
-    public static void nposition$(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.POSITION, value); }
+    public static void nposition$(long struct, int value) { memPutInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.POSITION, value); }
     /** Unsafe version of {@link #tempo(float) tempo}. */
-    public static void ntempo(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TEMPO, value); }
+    public static void ntempo(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TEMPO, value); }
     /** Unsafe version of {@link #timesignatureupper(int) timesignatureupper}. */
-    public static void ntimesignatureupper(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATUREUPPER, value); }
+    public static void ntimesignatureupper(long struct, int value) { memPutInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATUREUPPER, value); }
     /** Unsafe version of {@link #timesignaturelower(int) timesignaturelower}. */
-    public static void ntimesignaturelower(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATURELOWER, value); }
+    public static void ntimesignaturelower(long struct, int value) { memPutInt(struct + FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.TIMESIGNATURELOWER, value); }
 
     // -----------------------------------
 

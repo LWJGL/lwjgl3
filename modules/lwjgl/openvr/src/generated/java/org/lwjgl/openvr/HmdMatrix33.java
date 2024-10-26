@@ -229,7 +229,7 @@ public class HmdMatrix33 extends Struct<HmdMatrix33> implements NativeResource {
     public static FloatBuffer nm(long struct) { return memFloatBuffer(struct + HmdMatrix33.M, 9); }
     /** Unsafe version of {@link #m(int) m}. */
     public static float nm(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + HmdMatrix33.M + check(index, 9) * 4);
+        return memGetFloat(struct + HmdMatrix33.M + check(index, 9) * 4);
     }
 
     /** Unsafe version of {@link #m(FloatBuffer) m}. */
@@ -239,7 +239,7 @@ public class HmdMatrix33 extends Struct<HmdMatrix33> implements NativeResource {
     }
     /** Unsafe version of {@link #m(int, float) m}. */
     public static void nm(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + HmdMatrix33.M + check(index, 9) * 4, value);
+        memPutFloat(struct + HmdMatrix33.M + check(index, 9) * 4, value);
     }
 
     // -----------------------------------

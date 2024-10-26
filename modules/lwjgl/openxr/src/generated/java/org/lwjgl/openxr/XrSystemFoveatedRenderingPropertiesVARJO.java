@@ -244,14 +244,14 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct<XrSystemFov
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT); }
     /** Unsafe version of {@link #supportsFoveatedRendering}. */
-    public static int nsupportsFoveatedRendering(long struct) { return UNSAFE.getInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.SUPPORTSFOVEATEDRENDERING); }
+    public static int nsupportsFoveatedRendering(long struct) { return memGetInt(struct + XrSystemFoveatedRenderingPropertiesVARJO.SUPPORTSFOVEATEDRENDERING); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT, value); }
 

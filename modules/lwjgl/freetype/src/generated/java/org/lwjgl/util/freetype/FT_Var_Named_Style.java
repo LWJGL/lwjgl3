@@ -125,9 +125,9 @@ public class FT_Var_Named_Style extends Struct<FT_Var_Named_Style> {
     /** Unsafe version of {@link #coords(int) coords}. */
     public static CLongBuffer ncoords(long struct, int capacity) { return memCLongBuffer(memGetAddress(struct + FT_Var_Named_Style.COORDS), capacity); }
     /** Unsafe version of {@link #strid}. */
-    public static int nstrid(long struct) { return UNSAFE.getInt(null, struct + FT_Var_Named_Style.STRID); }
+    public static int nstrid(long struct) { return memGetInt(struct + FT_Var_Named_Style.STRID); }
     /** Unsafe version of {@link #psid}. */
-    public static int npsid(long struct) { return UNSAFE.getInt(null, struct + FT_Var_Named_Style.PSID); }
+    public static int npsid(long struct) { return memGetInt(struct + FT_Var_Named_Style.PSID); }
 
     // -----------------------------------
 

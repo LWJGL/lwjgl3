@@ -225,12 +225,12 @@ public class VRNativeDevice extends Struct<VRNativeDevice> implements NativeReso
     /** Unsafe version of {@link #handle}. */
     public static long nhandle(long struct) { return memGetAddress(struct + VRNativeDevice.HANDLE); }
     /** Unsafe version of {@link #eType}. */
-    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRNativeDevice.ETYPE); }
+    public static int neType(long struct) { return memGetInt(struct + VRNativeDevice.ETYPE); }
 
     /** Unsafe version of {@link #handle(long) handle}. */
     public static void nhandle(long struct, long value) { memPutAddress(struct + VRNativeDevice.HANDLE, check(value)); }
     /** Unsafe version of {@link #eType(int) eType}. */
-    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRNativeDevice.ETYPE, value); }
+    public static void neType(long struct, int value) { memPutInt(struct + VRNativeDevice.ETYPE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -244,14 +244,14 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesKHR extends Struct<VkPhy
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #cooperativeMatrixSupportedStages}. */
-    public static int ncooperativeMatrixSupportedStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.COOPERATIVEMATRIXSUPPORTEDSTAGES); }
+    public static int ncooperativeMatrixSupportedStages(long struct) { return memGetInt(struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.COOPERATIVEMATRIXSUPPORTEDSTAGES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceCooperativeMatrixPropertiesKHR.PNEXT, value); }
 

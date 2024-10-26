@@ -255,7 +255,7 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrExtensionProperties.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrExtensionProperties.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrExtensionProperties.NEXT); }
     /** Unsafe version of {@link #extensionName}. */
@@ -263,10 +263,10 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
     /** Unsafe version of {@link #extensionNameString}. */
     public static String nextensionNameString(long struct) { return memUTF8(struct + XrExtensionProperties.EXTENSIONNAME); }
     /** Unsafe version of {@link #extensionVersion}. */
-    public static int nextensionVersion(long struct) { return UNSAFE.getInt(null, struct + XrExtensionProperties.EXTENSIONVERSION); }
+    public static int nextensionVersion(long struct) { return memGetInt(struct + XrExtensionProperties.EXTENSIONVERSION); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrExtensionProperties.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrExtensionProperties.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrExtensionProperties.NEXT, value); }
 

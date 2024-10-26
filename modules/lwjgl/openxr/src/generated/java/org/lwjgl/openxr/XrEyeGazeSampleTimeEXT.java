@@ -244,18 +244,18 @@ public class XrEyeGazeSampleTimeEXT extends Struct<XrEyeGazeSampleTimeEXT> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEyeGazeSampleTimeEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEyeGazeSampleTimeEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEyeGazeSampleTimeEXT.NEXT); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrEyeGazeSampleTimeEXT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrEyeGazeSampleTimeEXT.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEyeGazeSampleTimeEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEyeGazeSampleTimeEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEyeGazeSampleTimeEXT.NEXT, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEyeGazeSampleTimeEXT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrEyeGazeSampleTimeEXT.TIME, value); }
 
     // -----------------------------------
 

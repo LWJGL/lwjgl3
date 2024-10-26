@@ -267,18 +267,18 @@ public class VkDisplayEventInfoEXT extends Struct<VkDisplayEventInfoEXT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDisplayEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #displayEvent}. */
-    public static int ndisplayEvent(long struct) { return UNSAFE.getInt(null, struct + VkDisplayEventInfoEXT.DISPLAYEVENT); }
+    public static int ndisplayEvent(long struct) { return memGetInt(struct + VkDisplayEventInfoEXT.DISPLAYEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #displayEvent(int) displayEvent}. */
-    public static void ndisplayEvent(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayEventInfoEXT.DISPLAYEVENT, value); }
+    public static void ndisplayEvent(long struct, int value) { memPutInt(struct + VkDisplayEventInfoEXT.DISPLAYEVENT, value); }
 
     // -----------------------------------
 

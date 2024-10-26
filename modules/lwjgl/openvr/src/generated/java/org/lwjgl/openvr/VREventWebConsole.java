@@ -103,7 +103,7 @@ public class VREventWebConsole extends Struct<VREventWebConsole> {
     // -----------------------------------
 
     /** Unsafe version of {@link #webConsoleHandle}. */
-    public static long nwebConsoleHandle(long struct) { return UNSAFE.getLong(null, struct + VREventWebConsole.WEBCONSOLEHANDLE); }
+    public static long nwebConsoleHandle(long struct) { return memGetLong(struct + VREventWebConsole.WEBCONSOLEHANDLE); }
 
     // -----------------------------------
 

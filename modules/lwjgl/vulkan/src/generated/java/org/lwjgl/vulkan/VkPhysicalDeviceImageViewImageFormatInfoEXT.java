@@ -262,18 +262,18 @@ public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.PNEXT); }
     /** Unsafe version of {@link #imageViewType}. */
-    public static int nimageViewType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.IMAGEVIEWTYPE); }
+    public static int nimageViewType(long struct) { return memGetInt(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.IMAGEVIEWTYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #imageViewType(int) imageViewType}. */
-    public static void nimageViewType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.IMAGEVIEWTYPE, value); }
+    public static void nimageViewType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceImageViewImageFormatInfoEXT.IMAGEVIEWTYPE, value); }
 
     // -----------------------------------
 

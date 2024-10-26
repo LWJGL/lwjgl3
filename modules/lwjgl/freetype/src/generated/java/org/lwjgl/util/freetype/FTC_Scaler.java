@@ -142,15 +142,15 @@ public class FTC_Scaler extends Struct<FTC_Scaler> {
     /** Unsafe version of {@link #face_id}. */
     public static long nface_id(long struct) { return memGetAddress(struct + FTC_Scaler.FACE_ID); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + FTC_Scaler.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + FTC_Scaler.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + FTC_Scaler.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + FTC_Scaler.HEIGHT); }
     /** Unsafe version of {@link #pixel}. */
-    public static int npixel(long struct) { return UNSAFE.getInt(null, struct + FTC_Scaler.PIXEL); }
+    public static int npixel(long struct) { return memGetInt(struct + FTC_Scaler.PIXEL); }
     /** Unsafe version of {@link #x_res}. */
-    public static int nx_res(long struct) { return UNSAFE.getInt(null, struct + FTC_Scaler.X_RES); }
+    public static int nx_res(long struct) { return memGetInt(struct + FTC_Scaler.X_RES); }
     /** Unsafe version of {@link #y_res}. */
-    public static int ny_res(long struct) { return UNSAFE.getInt(null, struct + FTC_Scaler.Y_RES); }
+    public static int ny_res(long struct) { return memGetInt(struct + FTC_Scaler.Y_RES); }
 
     // -----------------------------------
 

@@ -272,36 +272,36 @@ public class hb_font_extents_t extends Struct<hb_font_extents_t> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #ascender}. */
-    public static int nascender(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.ASCENDER); }
+    public static int nascender(long struct) { return memGetInt(struct + hb_font_extents_t.ASCENDER); }
     /** Unsafe version of {@link #descender}. */
-    public static int ndescender(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.DESCENDER); }
+    public static int ndescender(long struct) { return memGetInt(struct + hb_font_extents_t.DESCENDER); }
     /** Unsafe version of {@link #line_gap}. */
-    public static int nline_gap(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.LINE_GAP); }
-    public static int nreserved9(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED9); }
-    public static int nreserved8(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED8); }
-    public static int nreserved7(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED7); }
-    public static int nreserved6(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED6); }
-    public static int nreserved5(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED5); }
-    public static int nreserved4(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED4); }
-    public static int nreserved3(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED3); }
-    public static int nreserved2(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED2); }
-    public static int nreserved1(long struct) { return UNSAFE.getInt(null, struct + hb_font_extents_t.RESERVED1); }
+    public static int nline_gap(long struct) { return memGetInt(struct + hb_font_extents_t.LINE_GAP); }
+    public static int nreserved9(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED9); }
+    public static int nreserved8(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED8); }
+    public static int nreserved7(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED7); }
+    public static int nreserved6(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED6); }
+    public static int nreserved5(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED5); }
+    public static int nreserved4(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED4); }
+    public static int nreserved3(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED3); }
+    public static int nreserved2(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED2); }
+    public static int nreserved1(long struct) { return memGetInt(struct + hb_font_extents_t.RESERVED1); }
 
     /** Unsafe version of {@link #ascender(int) ascender}. */
-    public static void nascender(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.ASCENDER, value); }
+    public static void nascender(long struct, int value) { memPutInt(struct + hb_font_extents_t.ASCENDER, value); }
     /** Unsafe version of {@link #descender(int) descender}. */
-    public static void ndescender(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.DESCENDER, value); }
+    public static void ndescender(long struct, int value) { memPutInt(struct + hb_font_extents_t.DESCENDER, value); }
     /** Unsafe version of {@link #line_gap(int) line_gap}. */
-    public static void nline_gap(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.LINE_GAP, value); }
-    public static void nreserved9(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED9, value); }
-    public static void nreserved8(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED8, value); }
-    public static void nreserved7(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED7, value); }
-    public static void nreserved6(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED6, value); }
-    public static void nreserved5(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED5, value); }
-    public static void nreserved4(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED4, value); }
-    public static void nreserved3(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED3, value); }
-    public static void nreserved2(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED2, value); }
-    public static void nreserved1(long struct, int value) { UNSAFE.putInt(null, struct + hb_font_extents_t.RESERVED1, value); }
+    public static void nline_gap(long struct, int value) { memPutInt(struct + hb_font_extents_t.LINE_GAP, value); }
+    public static void nreserved9(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED9, value); }
+    public static void nreserved8(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED8, value); }
+    public static void nreserved7(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED7, value); }
+    public static void nreserved6(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED6, value); }
+    public static void nreserved5(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED5, value); }
+    public static void nreserved4(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED4, value); }
+    public static void nreserved3(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED3, value); }
+    public static void nreserved2(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED2, value); }
+    public static void nreserved1(long struct, int value) { memPutInt(struct + hb_font_extents_t.RESERVED1, value); }
 
     // -----------------------------------
 

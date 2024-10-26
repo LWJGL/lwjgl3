@@ -250,14 +250,14 @@ public class XrPassthroughPreferencesMETA extends Struct<XrPassthroughPreference
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughPreferencesMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughPreferencesMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughPreferencesMETA.NEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrPassthroughPreferencesMETA.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrPassthroughPreferencesMETA.FLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughPreferencesMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughPreferencesMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughPreferencesMETA.NEXT, value); }
 

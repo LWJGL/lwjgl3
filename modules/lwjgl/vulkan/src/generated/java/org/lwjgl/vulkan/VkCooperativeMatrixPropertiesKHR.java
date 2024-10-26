@@ -307,30 +307,30 @@ public class VkCooperativeMatrixPropertiesKHR extends Struct<VkCooperativeMatrix
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCooperativeMatrixPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #MSize}. */
-    public static int nMSize(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.MSIZE); }
+    public static int nMSize(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.MSIZE); }
     /** Unsafe version of {@link #NSize}. */
-    public static int nNSize(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.NSIZE); }
+    public static int nNSize(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.NSIZE); }
     /** Unsafe version of {@link #KSize}. */
-    public static int nKSize(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.KSIZE); }
+    public static int nKSize(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.KSIZE); }
     /** Unsafe version of {@link #AType}. */
-    public static int nAType(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.ATYPE); }
+    public static int nAType(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.ATYPE); }
     /** Unsafe version of {@link #BType}. */
-    public static int nBType(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.BTYPE); }
+    public static int nBType(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.BTYPE); }
     /** Unsafe version of {@link #CType}. */
-    public static int nCType(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.CTYPE); }
+    public static int nCType(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.CTYPE); }
     /** Unsafe version of {@link #ResultType}. */
-    public static int nResultType(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.RESULTTYPE); }
+    public static int nResultType(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.RESULTTYPE); }
     /** Unsafe version of {@link #saturatingAccumulation}. */
-    public static int nsaturatingAccumulation(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.SATURATINGACCUMULATION); }
+    public static int nsaturatingAccumulation(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.SATURATINGACCUMULATION); }
     /** Unsafe version of {@link #scope}. */
-    public static int nscope(long struct) { return UNSAFE.getInt(null, struct + VkCooperativeMatrixPropertiesKHR.SCOPE); }
+    public static int nscope(long struct) { return memGetInt(struct + VkCooperativeMatrixPropertiesKHR.SCOPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCooperativeMatrixPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCooperativeMatrixPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCooperativeMatrixPropertiesKHR.PNEXT, value); }
 

@@ -271,20 +271,20 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkersMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneMarkersMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneMarkersMSFT.NEXT); }
     /** Unsafe version of {@link #sceneMarkerCapacityInput}. */
-    public static int nsceneMarkerCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT); }
+    public static int nsceneMarkerCapacityInput(long struct) { return memGetInt(struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT); }
     /** Unsafe version of {@link #sceneMarkers}. */
     @Nullable public static XrSceneMarkerMSFT.Buffer nsceneMarkers(long struct) { return XrSceneMarkerMSFT.createSafe(memGetAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS), nsceneMarkerCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkersMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkersMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMarkersMSFT.NEXT, value); }
     /** Sets the specified value to the {@code sceneMarkerCapacityInput} field of the specified {@code struct}. */
-    public static void nsceneMarkerCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT, value); }
+    public static void nsceneMarkerCapacityInput(long struct, int value) { memPutInt(struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT, value); }
     /** Unsafe version of {@link #sceneMarkers(XrSceneMarkerMSFT.Buffer) sceneMarkers}. */
     public static void nsceneMarkers(long struct, @Nullable XrSceneMarkerMSFT.Buffer value) { memPutAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS, memAddressSafe(value)); if (value != null) { nsceneMarkerCapacityInput(struct, value.remaining()); } }
 

@@ -268,14 +268,14 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolSize.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkDescriptorPoolSize.TYPE); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolSize.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkDescriptorPoolSize.DESCRIPTORCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolSize.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkDescriptorPoolSize.TYPE, value); }
     /** Unsafe version of {@link #descriptorCount(int) descriptorCount}. */
-    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolSize.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkDescriptorPoolSize.DESCRIPTORCOUNT, value); }
 
     // -----------------------------------
 

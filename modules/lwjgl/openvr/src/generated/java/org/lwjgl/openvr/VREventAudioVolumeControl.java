@@ -102,7 +102,7 @@ public class VREventAudioVolumeControl extends Struct<VREventAudioVolumeControl>
     // -----------------------------------
 
     /** Unsafe version of {@link #fVolumeLevel}. */
-    public static float nfVolumeLevel(long struct) { return UNSAFE.getFloat(null, struct + VREventAudioVolumeControl.FVOLUMELEVEL); }
+    public static float nfVolumeLevel(long struct) { return memGetFloat(struct + VREventAudioVolumeControl.FVOLUMELEVEL); }
 
     // -----------------------------------
 

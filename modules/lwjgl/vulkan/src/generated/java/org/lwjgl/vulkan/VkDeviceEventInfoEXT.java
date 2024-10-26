@@ -267,18 +267,18 @@ public class VkDeviceEventInfoEXT extends Struct<VkDeviceEventInfoEXT> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #deviceEvent}. */
-    public static int ndeviceEvent(long struct) { return UNSAFE.getInt(null, struct + VkDeviceEventInfoEXT.DEVICEEVENT); }
+    public static int ndeviceEvent(long struct) { return memGetInt(struct + VkDeviceEventInfoEXT.DEVICEEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #deviceEvent(int) deviceEvent}. */
-    public static void ndeviceEvent(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceEventInfoEXT.DEVICEEVENT, value); }
+    public static void ndeviceEvent(long struct, int value) { memPutInt(struct + VkDeviceEventInfoEXT.DEVICEEVENT, value); }
 
     // -----------------------------------
 

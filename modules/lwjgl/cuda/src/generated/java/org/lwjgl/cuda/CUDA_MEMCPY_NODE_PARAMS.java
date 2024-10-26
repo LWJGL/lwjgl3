@@ -243,18 +243,18 @@ public class CUDA_MEMCPY_NODE_PARAMS extends Struct<CUDA_MEMCPY_NODE_PARAMS> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY_NODE_PARAMS.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + CUDA_MEMCPY_NODE_PARAMS.FLAGS); }
     /** Unsafe version of {@link #reserved}. */
-    public static int nreserved(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY_NODE_PARAMS.RESERVED); }
+    public static int nreserved(long struct) { return memGetInt(struct + CUDA_MEMCPY_NODE_PARAMS.RESERVED); }
     /** Unsafe version of {@link #copyCtx}. */
     public static long ncopyCtx(long struct) { return memGetAddress(struct + CUDA_MEMCPY_NODE_PARAMS.COPYCTX); }
     /** Unsafe version of {@link #copyParams}. */
     public static CUDA_MEMCPY3D ncopyParams(long struct) { return CUDA_MEMCPY3D.create(struct + CUDA_MEMCPY_NODE_PARAMS.COPYPARAMS); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY_NODE_PARAMS.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + CUDA_MEMCPY_NODE_PARAMS.FLAGS, value); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
-    public static void nreserved(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY_NODE_PARAMS.RESERVED, value); }
+    public static void nreserved(long struct, int value) { memPutInt(struct + CUDA_MEMCPY_NODE_PARAMS.RESERVED, value); }
     /** Unsafe version of {@link #copyCtx(long) copyCtx}. */
     public static void ncopyCtx(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY_NODE_PARAMS.COPYCTX, check(value)); }
     /** Unsafe version of {@link #copyParams(CUDA_MEMCPY3D) copyParams}. */

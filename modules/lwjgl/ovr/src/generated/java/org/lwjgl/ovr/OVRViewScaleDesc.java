@@ -270,7 +270,7 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
         return OVRPosef.create(struct + OVRViewScaleDesc.HMDTOEYEPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #HmdSpaceToWorldScaleInMeters}. */
-    public static float nHmdSpaceToWorldScaleInMeters(long struct) { return UNSAFE.getFloat(null, struct + OVRViewScaleDesc.HMDSPACETOWORLDSCALEINMETERS); }
+    public static float nHmdSpaceToWorldScaleInMeters(long struct) { return memGetFloat(struct + OVRViewScaleDesc.HMDSPACETOWORLDSCALEINMETERS); }
 
     /** Unsafe version of {@link #HmdToEyePose(OVRPosef.Buffer) HmdToEyePose}. */
     public static void nHmdToEyePose(long struct, OVRPosef.Buffer value) {
@@ -282,7 +282,7 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
         memCopy(value.address(), struct + OVRViewScaleDesc.HMDTOEYEPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF, OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #HmdSpaceToWorldScaleInMeters(float) HmdSpaceToWorldScaleInMeters}. */
-    public static void nHmdSpaceToWorldScaleInMeters(long struct, float value) { UNSAFE.putFloat(null, struct + OVRViewScaleDesc.HMDSPACETOWORLDSCALEINMETERS, value); }
+    public static void nHmdSpaceToWorldScaleInMeters(long struct, float value) { memPutFloat(struct + OVRViewScaleDesc.HMDSPACETOWORLDSCALEINMETERS, value); }
 
     // -----------------------------------
 

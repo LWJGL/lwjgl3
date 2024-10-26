@@ -246,18 +246,18 @@ public class VkPhysicalDeviceOpticalFlowFeaturesNV extends Struct<VkPhysicalDevi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #opticalFlow}. */
-    public static int nopticalFlow(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceOpticalFlowFeaturesNV.OPTICALFLOW); }
+    public static int nopticalFlow(long struct) { return memGetInt(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.OPTICALFLOW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceOpticalFlowFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #opticalFlow(boolean) opticalFlow}. */
-    public static void nopticalFlow(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceOpticalFlowFeaturesNV.OPTICALFLOW, value); }
+    public static void nopticalFlow(long struct, int value) { memPutInt(struct + VkPhysicalDeviceOpticalFlowFeaturesNV.OPTICALFLOW, value); }
 
     // -----------------------------------
 

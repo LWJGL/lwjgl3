@@ -343,54 +343,54 @@ public class XGraphicsExposeEvent extends Struct<XGraphicsExposeEvent> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XGraphicsExposeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XGraphicsExposeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XGraphicsExposeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XGraphicsExposeEvent.DISPLAY); }
     /** Unsafe version of {@link #drawable}. */
     public static long ndrawable(long struct) { return memGetCLong(struct + XGraphicsExposeEvent.DRAWABLE); }
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.X); }
+    public static int nx(long struct) { return memGetInt(struct + XGraphicsExposeEvent.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.Y); }
+    public static int ny(long struct) { return memGetInt(struct + XGraphicsExposeEvent.Y); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + XGraphicsExposeEvent.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + XGraphicsExposeEvent.HEIGHT); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + XGraphicsExposeEvent.COUNT); }
     /** Unsafe version of {@link #major_code}. */
-    public static int nmajor_code(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.MAJOR_CODE); }
+    public static int nmajor_code(long struct) { return memGetInt(struct + XGraphicsExposeEvent.MAJOR_CODE); }
     /** Unsafe version of {@link #minor_code}. */
-    public static int nminor_code(long struct) { return UNSAFE.getInt(null, struct + XGraphicsExposeEvent.MINOR_CODE); }
+    public static int nminor_code(long struct) { return memGetInt(struct + XGraphicsExposeEvent.MINOR_CODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XGraphicsExposeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XGraphicsExposeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #drawable(long) drawable}. */
     public static void ndrawable(long struct, long value) { memPutCLong(struct + XGraphicsExposeEvent.DRAWABLE, value); }
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.Y, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.HEIGHT, value); }
     /** Unsafe version of {@link #count(int) count}. */
-    public static void ncount(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.COUNT, value); }
+    public static void ncount(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.COUNT, value); }
     /** Unsafe version of {@link #major_code(int) major_code}. */
-    public static void nmajor_code(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.MAJOR_CODE, value); }
+    public static void nmajor_code(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.MAJOR_CODE, value); }
     /** Unsafe version of {@link #minor_code(int) minor_code}. */
-    public static void nminor_code(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.MINOR_CODE, value); }
+    public static void nminor_code(long struct, int value) { memPutInt(struct + XGraphicsExposeEvent.MINOR_CODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

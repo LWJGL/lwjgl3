@@ -297,34 +297,34 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #font_size}. */
-    public static float nfont_size(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackRange.FONT_SIZE); }
+    public static float nfont_size(long struct) { return memGetFloat(struct + STBTTPackRange.FONT_SIZE); }
     /** Unsafe version of {@link #first_unicode_codepoint_in_range}. */
-    public static int nfirst_unicode_codepoint_in_range(long struct) { return UNSAFE.getInt(null, struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE); }
+    public static int nfirst_unicode_codepoint_in_range(long struct) { return memGetInt(struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE); }
     /** Unsafe version of {@link #array_of_unicode_codepoints() array_of_unicode_codepoints}. */
     @Nullable public static IntBuffer narray_of_unicode_codepoints(long struct) { return memIntBufferSafe(memGetAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS), nnum_chars(struct)); }
     /** Unsafe version of {@link #num_chars}. */
-    public static int nnum_chars(long struct) { return UNSAFE.getInt(null, struct + STBTTPackRange.NUM_CHARS); }
+    public static int nnum_chars(long struct) { return memGetInt(struct + STBTTPackRange.NUM_CHARS); }
     /** Unsafe version of {@link #chardata_for_range}. */
     public static STBTTPackedchar.Buffer nchardata_for_range(long struct) { return STBTTPackedchar.create(memGetAddress(struct + STBTTPackRange.CHARDATA_FOR_RANGE), nnum_chars(struct)); }
     /** Unsafe version of {@link #h_oversample}. */
-    public static byte nh_oversample(long struct) { return UNSAFE.getByte(null, struct + STBTTPackRange.H_OVERSAMPLE); }
+    public static byte nh_oversample(long struct) { return memGetByte(struct + STBTTPackRange.H_OVERSAMPLE); }
     /** Unsafe version of {@link #v_oversample}. */
-    public static byte nv_oversample(long struct) { return UNSAFE.getByte(null, struct + STBTTPackRange.V_OVERSAMPLE); }
+    public static byte nv_oversample(long struct) { return memGetByte(struct + STBTTPackRange.V_OVERSAMPLE); }
 
     /** Unsafe version of {@link #font_size(float) font_size}. */
-    public static void nfont_size(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackRange.FONT_SIZE, value); }
+    public static void nfont_size(long struct, float value) { memPutFloat(struct + STBTTPackRange.FONT_SIZE, value); }
     /** Unsafe version of {@link #first_unicode_codepoint_in_range(int) first_unicode_codepoint_in_range}. */
-    public static void nfirst_unicode_codepoint_in_range(long struct, int value) { UNSAFE.putInt(null, struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE, value); }
+    public static void nfirst_unicode_codepoint_in_range(long struct, int value) { memPutInt(struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE, value); }
     /** Unsafe version of {@link #array_of_unicode_codepoints(IntBuffer) array_of_unicode_codepoints}. */
     public static void narray_of_unicode_codepoints(long struct, @Nullable IntBuffer value) { memPutAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code num_chars} field of the specified {@code struct}. */
-    public static void nnum_chars(long struct, int value) { UNSAFE.putInt(null, struct + STBTTPackRange.NUM_CHARS, value); }
+    public static void nnum_chars(long struct, int value) { memPutInt(struct + STBTTPackRange.NUM_CHARS, value); }
     /** Unsafe version of {@link #chardata_for_range(STBTTPackedchar.Buffer) chardata_for_range}. */
     public static void nchardata_for_range(long struct, STBTTPackedchar.Buffer value) { memPutAddress(struct + STBTTPackRange.CHARDATA_FOR_RANGE, value.address()); }
     /** Unsafe version of {@link #h_oversample(byte) h_oversample}. */
-    public static void nh_oversample(long struct, byte value) { UNSAFE.putByte(null, struct + STBTTPackRange.H_OVERSAMPLE, value); }
+    public static void nh_oversample(long struct, byte value) { memPutByte(struct + STBTTPackRange.H_OVERSAMPLE, value); }
     /** Unsafe version of {@link #v_oversample(byte) v_oversample}. */
-    public static void nv_oversample(long struct, byte value) { UNSAFE.putByte(null, struct + STBTTPackRange.V_OVERSAMPLE, value); }
+    public static void nv_oversample(long struct, byte value) { memPutByte(struct + STBTTPackRange.V_OVERSAMPLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -257,14 +257,14 @@ public class XrEventDataEventsLost extends Struct<XrEventDataEventsLost> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataEventsLost.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataEventsLost.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataEventsLost.NEXT); }
     /** Unsafe version of {@link #lostEventCount}. */
-    public static int nlostEventCount(long struct) { return UNSAFE.getInt(null, struct + XrEventDataEventsLost.LOSTEVENTCOUNT); }
+    public static int nlostEventCount(long struct) { return memGetInt(struct + XrEventDataEventsLost.LOSTEVENTCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataEventsLost.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataEventsLost.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataEventsLost.NEXT, value); }
 

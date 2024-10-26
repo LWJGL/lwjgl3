@@ -246,18 +246,18 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.PNEXT); }
     /** Unsafe version of {@link #separateDepthStencilLayouts}. */
-    public static int nseparateDepthStencilLayouts(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.SEPARATEDEPTHSTENCILLAYOUTS); }
+    public static int nseparateDepthStencilLayouts(long struct) { return memGetInt(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.SEPARATEDEPTHSTENCILLAYOUTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.PNEXT, value); }
     /** Unsafe version of {@link #separateDepthStencilLayouts(boolean) separateDepthStencilLayouts}. */
-    public static void nseparateDepthStencilLayouts(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.SEPARATEDEPTHSTENCILLAYOUTS, value); }
+    public static void nseparateDepthStencilLayouts(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.SEPARATEDEPTHSTENCILLAYOUTS, value); }
 
     // -----------------------------------
 

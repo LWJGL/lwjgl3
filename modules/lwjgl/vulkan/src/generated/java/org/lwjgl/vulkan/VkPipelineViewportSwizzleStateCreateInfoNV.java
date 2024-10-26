@@ -293,24 +293,24 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct<VkPipelin
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pViewportSwizzles}. */
     public static VkViewportSwizzleNV.Buffer npViewportSwizzles(long struct) { return VkViewportSwizzleNV.create(memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pViewportSwizzles(VkViewportSwizzleNV.Buffer) pViewportSwizzles}. */
     public static void npViewportSwizzles(long struct, VkViewportSwizzleNV.Buffer value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES, value.address()); nviewportCount(struct, value.remaining()); }
 

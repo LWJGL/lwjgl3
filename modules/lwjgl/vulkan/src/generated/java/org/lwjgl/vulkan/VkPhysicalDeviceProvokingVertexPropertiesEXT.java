@@ -249,16 +249,16 @@ public class VkPhysicalDeviceProvokingVertexPropertiesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #provokingVertexModePerPipeline}. */
-    public static int nprovokingVertexModePerPipeline(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.PROVOKINGVERTEXMODEPERPIPELINE); }
+    public static int nprovokingVertexModePerPipeline(long struct) { return memGetInt(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.PROVOKINGVERTEXMODEPERPIPELINE); }
     /** Unsafe version of {@link #transformFeedbackPreservesTriangleFanProvokingVertex}. */
-    public static int ntransformFeedbackPreservesTriangleFanProvokingVertex(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.TRANSFORMFEEDBACKPRESERVESTRIANGLEFANPROVOKINGVERTEX); }
+    public static int ntransformFeedbackPreservesTriangleFanProvokingVertex(long struct) { return memGetInt(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.TRANSFORMFEEDBACKPRESERVESTRIANGLEFANPROVOKINGVERTEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceProvokingVertexPropertiesEXT.PNEXT, value); }
 

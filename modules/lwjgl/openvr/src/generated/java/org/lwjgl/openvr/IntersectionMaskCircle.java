@@ -249,18 +249,18 @@ public class IntersectionMaskCircle extends Struct<IntersectionMaskCircle> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #m_flCenterX}. */
-    public static float nm_flCenterX(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskCircle.M_FLCENTERX); }
+    public static float nm_flCenterX(long struct) { return memGetFloat(struct + IntersectionMaskCircle.M_FLCENTERX); }
     /** Unsafe version of {@link #m_flCenterY}. */
-    public static float nm_flCenterY(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskCircle.M_FLCENTERY); }
+    public static float nm_flCenterY(long struct) { return memGetFloat(struct + IntersectionMaskCircle.M_FLCENTERY); }
     /** Unsafe version of {@link #m_flRadius}. */
-    public static float nm_flRadius(long struct) { return UNSAFE.getFloat(null, struct + IntersectionMaskCircle.M_FLRADIUS); }
+    public static float nm_flRadius(long struct) { return memGetFloat(struct + IntersectionMaskCircle.M_FLRADIUS); }
 
     /** Unsafe version of {@link #m_flCenterX(float) m_flCenterX}. */
-    public static void nm_flCenterX(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskCircle.M_FLCENTERX, value); }
+    public static void nm_flCenterX(long struct, float value) { memPutFloat(struct + IntersectionMaskCircle.M_FLCENTERX, value); }
     /** Unsafe version of {@link #m_flCenterY(float) m_flCenterY}. */
-    public static void nm_flCenterY(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskCircle.M_FLCENTERY, value); }
+    public static void nm_flCenterY(long struct, float value) { memPutFloat(struct + IntersectionMaskCircle.M_FLCENTERY, value); }
     /** Unsafe version of {@link #m_flRadius(float) m_flRadius}. */
-    public static void nm_flRadius(long struct, float value) { UNSAFE.putFloat(null, struct + IntersectionMaskCircle.M_FLRADIUS, value); }
+    public static void nm_flRadius(long struct, float value) { memPutFloat(struct + IntersectionMaskCircle.M_FLRADIUS, value); }
 
     // -----------------------------------
 

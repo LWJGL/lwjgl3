@@ -261,13 +261,13 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memUTF8(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.NAME)); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_USER_PROPERTY.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + FMOD_STUDIO_USER_PROPERTY.TYPE); }
     /** Unsafe version of {@link #intvalue}. */
-    public static int nintvalue(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_USER_PROPERTY.INTVALUE); }
+    public static int nintvalue(long struct) { return memGetInt(struct + FMOD_STUDIO_USER_PROPERTY.INTVALUE); }
     /** Unsafe version of {@link #boolvalue}. */
-    public static int nboolvalue(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_USER_PROPERTY.BOOLVALUE); }
+    public static int nboolvalue(long struct) { return memGetInt(struct + FMOD_STUDIO_USER_PROPERTY.BOOLVALUE); }
     /** Unsafe version of {@link #floatvalue}. */
-    public static float nfloatvalue(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_USER_PROPERTY.FLOATVALUE); }
+    public static float nfloatvalue(long struct) { return memGetFloat(struct + FMOD_STUDIO_USER_PROPERTY.FLOATVALUE); }
     /** Unsafe version of {@link #stringvalue}. */
     @Nullable public static ByteBuffer nstringvalue(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.STRINGVALUE)); }
     /** Unsafe version of {@link #stringvalueString}. */
@@ -279,13 +279,13 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
         memPutAddress(struct + FMOD_STUDIO_USER_PROPERTY.NAME, memAddress(value));
     }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_USER_PROPERTY.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + FMOD_STUDIO_USER_PROPERTY.TYPE, value); }
     /** Unsafe version of {@link #intvalue(int) intvalue}. */
-    public static void nintvalue(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_USER_PROPERTY.INTVALUE, value); }
+    public static void nintvalue(long struct, int value) { memPutInt(struct + FMOD_STUDIO_USER_PROPERTY.INTVALUE, value); }
     /** Unsafe version of {@link #boolvalue(int) boolvalue}. */
-    public static void nboolvalue(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_USER_PROPERTY.BOOLVALUE, value); }
+    public static void nboolvalue(long struct, int value) { memPutInt(struct + FMOD_STUDIO_USER_PROPERTY.BOOLVALUE, value); }
     /** Unsafe version of {@link #floatvalue(float) floatvalue}. */
-    public static void nfloatvalue(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_USER_PROPERTY.FLOATVALUE, value); }
+    public static void nfloatvalue(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_USER_PROPERTY.FLOATVALUE, value); }
     /** Unsafe version of {@link #stringvalue(ByteBuffer) stringvalue}. */
     public static void nstringvalue(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }

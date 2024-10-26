@@ -264,22 +264,22 @@ public class XrCompositionLayerDepthTestFB extends Struct<XrCompositionLayerDept
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerDepthTestFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrCompositionLayerDepthTestFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrCompositionLayerDepthTestFB.NEXT); }
     /** Unsafe version of {@link #depthMask}. */
-    public static int ndepthMask(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerDepthTestFB.DEPTHMASK); }
+    public static int ndepthMask(long struct) { return memGetInt(struct + XrCompositionLayerDepthTestFB.DEPTHMASK); }
     /** Unsafe version of {@link #compareOp}. */
-    public static int ncompareOp(long struct) { return UNSAFE.getInt(null, struct + XrCompositionLayerDepthTestFB.COMPAREOP); }
+    public static int ncompareOp(long struct) { return memGetInt(struct + XrCompositionLayerDepthTestFB.COMPAREOP); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthTestFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrCompositionLayerDepthTestFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthTestFB.NEXT, value); }
     /** Unsafe version of {@link #depthMask(boolean) depthMask}. */
-    public static void ndepthMask(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthTestFB.DEPTHMASK, value); }
+    public static void ndepthMask(long struct, int value) { memPutInt(struct + XrCompositionLayerDepthTestFB.DEPTHMASK, value); }
     /** Unsafe version of {@link #compareOp(int) compareOp}. */
-    public static void ncompareOp(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthTestFB.COMPAREOP, value); }
+    public static void ncompareOp(long struct, int value) { memPutInt(struct + XrCompositionLayerDepthTestFB.COMPAREOP, value); }
 
     // -----------------------------------
 

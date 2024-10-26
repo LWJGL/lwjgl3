@@ -277,7 +277,7 @@ public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthrou
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrPassthroughColorMapInterpolatedLutMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrPassthroughColorMapInterpolatedLutMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrPassthroughColorMapInterpolatedLutMETA.NEXT); }
     /** Unsafe version of {@link #sourceColorLut}. */
@@ -285,10 +285,10 @@ public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthrou
     /** Unsafe version of {@link #targetColorLut}. */
     public static long ntargetColorLut(long struct) { return memGetAddress(struct + XrPassthroughColorMapInterpolatedLutMETA.TARGETCOLORLUT); }
     /** Unsafe version of {@link #weight}. */
-    public static float nweight(long struct) { return UNSAFE.getFloat(null, struct + XrPassthroughColorMapInterpolatedLutMETA.WEIGHT); }
+    public static float nweight(long struct) { return memGetFloat(struct + XrPassthroughColorMapInterpolatedLutMETA.WEIGHT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughColorMapInterpolatedLutMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrPassthroughColorMapInterpolatedLutMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughColorMapInterpolatedLutMETA.NEXT, value); }
     /** Unsafe version of {@link #sourceColorLut(XrPassthroughColorLutMETA) sourceColorLut}. */
@@ -296,7 +296,7 @@ public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthrou
     /** Unsafe version of {@link #targetColorLut(XrPassthroughColorLutMETA) targetColorLut}. */
     public static void ntargetColorLut(long struct, XrPassthroughColorLutMETA value) { memPutAddress(struct + XrPassthroughColorMapInterpolatedLutMETA.TARGETCOLORLUT, value.address()); }
     /** Unsafe version of {@link #weight(float) weight}. */
-    public static void nweight(long struct, float value) { UNSAFE.putFloat(null, struct + XrPassthroughColorMapInterpolatedLutMETA.WEIGHT, value); }
+    public static void nweight(long struct, float value) { memPutFloat(struct + XrPassthroughColorMapInterpolatedLutMETA.WEIGHT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

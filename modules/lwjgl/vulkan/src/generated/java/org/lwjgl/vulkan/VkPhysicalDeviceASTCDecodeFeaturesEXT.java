@@ -265,18 +265,18 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct<VkPhysicalDevi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #decodeModeSharedExponent}. */
-    public static int ndecodeModeSharedExponent(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.DECODEMODESHAREDEXPONENT); }
+    public static int ndecodeModeSharedExponent(long struct) { return memGetInt(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.DECODEMODESHAREDEXPONENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #decodeModeSharedExponent(boolean) decodeModeSharedExponent}. */
-    public static void ndecodeModeSharedExponent(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.DECODEMODESHAREDEXPONENT, value); }
+    public static void ndecodeModeSharedExponent(long struct, int value) { memPutInt(struct + VkPhysicalDeviceASTCDecodeFeaturesEXT.DECODEMODESHAREDEXPONENT, value); }
 
     // -----------------------------------
 

@@ -238,14 +238,14 @@ public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubresourceHostMemcpySizeEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSubresourceHostMemcpySizeEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubresourceHostMemcpySizeEXT.PNEXT); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceHostMemcpySizeEXT.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkSubresourceHostMemcpySizeEXT.SIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubresourceHostMemcpySizeEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSubresourceHostMemcpySizeEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubresourceHostMemcpySizeEXT.PNEXT, value); }
 

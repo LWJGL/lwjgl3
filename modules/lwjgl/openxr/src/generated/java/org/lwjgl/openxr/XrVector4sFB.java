@@ -264,22 +264,22 @@ public class XrVector4sFB extends Struct<XrVector4sFB> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + XrVector4sFB.X); }
+    public static short nx(long struct) { return memGetShort(struct + XrVector4sFB.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return UNSAFE.getShort(null, struct + XrVector4sFB.Y); }
+    public static short ny(long struct) { return memGetShort(struct + XrVector4sFB.Y); }
     /** Unsafe version of {@link #z}. */
-    public static short nz(long struct) { return UNSAFE.getShort(null, struct + XrVector4sFB.Z); }
+    public static short nz(long struct) { return memGetShort(struct + XrVector4sFB.Z); }
     /** Unsafe version of {@link #w}. */
-    public static short nw(long struct) { return UNSAFE.getShort(null, struct + XrVector4sFB.W); }
+    public static short nw(long struct) { return memGetShort(struct + XrVector4sFB.W); }
 
     /** Unsafe version of {@link #x(short) x}. */
-    public static void nx(long struct, short value) { UNSAFE.putShort(null, struct + XrVector4sFB.X, value); }
+    public static void nx(long struct, short value) { memPutShort(struct + XrVector4sFB.X, value); }
     /** Unsafe version of {@link #y(short) y}. */
-    public static void ny(long struct, short value) { UNSAFE.putShort(null, struct + XrVector4sFB.Y, value); }
+    public static void ny(long struct, short value) { memPutShort(struct + XrVector4sFB.Y, value); }
     /** Unsafe version of {@link #z(short) z}. */
-    public static void nz(long struct, short value) { UNSAFE.putShort(null, struct + XrVector4sFB.Z, value); }
+    public static void nz(long struct, short value) { memPutShort(struct + XrVector4sFB.Z, value); }
     /** Unsafe version of {@link #w(short) w}. */
-    public static void nw(long struct, short value) { UNSAFE.putShort(null, struct + XrVector4sFB.W, value); }
+    public static void nw(long struct, short value) { memPutShort(struct + XrVector4sFB.W, value); }
 
     // -----------------------------------
 

@@ -263,30 +263,30 @@ public class PropertyRead extends Struct<PropertyRead> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #prop}. */
-    public static int nprop(long struct) { return UNSAFE.getInt(null, struct + PropertyRead.PROP); }
+    public static int nprop(long struct) { return memGetInt(struct + PropertyRead.PROP); }
     /** Unsafe version of {@link #pvBuffer() pvBuffer}. */
     public static ByteBuffer npvBuffer(long struct) { return memByteBuffer(memGetAddress(struct + PropertyRead.PVBUFFER), nunBufferSize(struct)); }
     /** Unsafe version of {@link #unBufferSize}. */
-    public static int nunBufferSize(long struct) { return UNSAFE.getInt(null, struct + PropertyRead.UNBUFFERSIZE); }
+    public static int nunBufferSize(long struct) { return memGetInt(struct + PropertyRead.UNBUFFERSIZE); }
     /** Unsafe version of {@link #unTag}. */
-    public static int nunTag(long struct) { return UNSAFE.getInt(null, struct + PropertyRead.UNTAG); }
+    public static int nunTag(long struct) { return memGetInt(struct + PropertyRead.UNTAG); }
     /** Unsafe version of {@link #unRequiredBufferSize}. */
-    public static int nunRequiredBufferSize(long struct) { return UNSAFE.getInt(null, struct + PropertyRead.UNREQUIREDBUFFERSIZE); }
+    public static int nunRequiredBufferSize(long struct) { return memGetInt(struct + PropertyRead.UNREQUIREDBUFFERSIZE); }
     /** Unsafe version of {@link #eError}. */
-    public static int neError(long struct) { return UNSAFE.getInt(null, struct + PropertyRead.EERROR); }
+    public static int neError(long struct) { return memGetInt(struct + PropertyRead.EERROR); }
 
     /** Unsafe version of {@link #prop(int) prop}. */
-    public static void nprop(long struct, int value) { UNSAFE.putInt(null, struct + PropertyRead.PROP, value); }
+    public static void nprop(long struct, int value) { memPutInt(struct + PropertyRead.PROP, value); }
     /** Unsafe version of {@link #pvBuffer(ByteBuffer) pvBuffer}. */
     public static void npvBuffer(long struct, ByteBuffer value) { memPutAddress(struct + PropertyRead.PVBUFFER, memAddress(value)); nunBufferSize(struct, value.remaining()); }
     /** Sets the specified value to the {@code unBufferSize} field of the specified {@code struct}. */
-    public static void nunBufferSize(long struct, int value) { UNSAFE.putInt(null, struct + PropertyRead.UNBUFFERSIZE, value); }
+    public static void nunBufferSize(long struct, int value) { memPutInt(struct + PropertyRead.UNBUFFERSIZE, value); }
     /** Unsafe version of {@link #unTag(int) unTag}. */
-    public static void nunTag(long struct, int value) { UNSAFE.putInt(null, struct + PropertyRead.UNTAG, value); }
+    public static void nunTag(long struct, int value) { memPutInt(struct + PropertyRead.UNTAG, value); }
     /** Unsafe version of {@link #unRequiredBufferSize(int) unRequiredBufferSize}. */
-    public static void nunRequiredBufferSize(long struct, int value) { UNSAFE.putInt(null, struct + PropertyRead.UNREQUIREDBUFFERSIZE, value); }
+    public static void nunRequiredBufferSize(long struct, int value) { memPutInt(struct + PropertyRead.UNREQUIREDBUFFERSIZE, value); }
     /** Unsafe version of {@link #eError(int) eError}. */
-    public static void neError(long struct, int value) { UNSAFE.putInt(null, struct + PropertyRead.EERROR, value); }
+    public static void neError(long struct, int value) { memPutInt(struct + PropertyRead.EERROR, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

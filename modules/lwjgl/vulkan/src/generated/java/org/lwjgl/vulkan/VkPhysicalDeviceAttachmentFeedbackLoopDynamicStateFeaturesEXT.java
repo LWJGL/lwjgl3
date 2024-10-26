@@ -246,18 +246,18 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #attachmentFeedbackLoopDynamicState}. */
-    public static int nattachmentFeedbackLoopDynamicState(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.ATTACHMENTFEEDBACKLOOPDYNAMICSTATE); }
+    public static int nattachmentFeedbackLoopDynamicState(long struct) { return memGetInt(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.ATTACHMENTFEEDBACKLOOPDYNAMICSTATE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #attachmentFeedbackLoopDynamicState(boolean) attachmentFeedbackLoopDynamicState}. */
-    public static void nattachmentFeedbackLoopDynamicState(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.ATTACHMENTFEEDBACKLOOPDYNAMICSTATE, value); }
+    public static void nattachmentFeedbackLoopDynamicState(long struct, int value) { memPutInt(struct + VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.ATTACHMENTFEEDBACKLOOPDYNAMICSTATE, value); }
 
     // -----------------------------------
 

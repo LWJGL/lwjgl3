@@ -233,11 +233,11 @@ public class VkExternalImageFormatPropertiesNV extends Struct<VkExternalImageFor
     /** Unsafe version of {@link #imageFormatProperties}. */
     public static VkImageFormatProperties nimageFormatProperties(long struct) { return VkImageFormatProperties.create(struct + VkExternalImageFormatPropertiesNV.IMAGEFORMATPROPERTIES); }
     /** Unsafe version of {@link #externalMemoryFeatures}. */
-    public static int nexternalMemoryFeatures(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.EXTERNALMEMORYFEATURES); }
+    public static int nexternalMemoryFeatures(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.EXTERNALMEMORYFEATURES); }
     /** Unsafe version of {@link #exportFromImportedHandleTypes}. */
-    public static int nexportFromImportedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.EXPORTFROMIMPORTEDHANDLETYPES); }
+    public static int nexportFromImportedHandleTypes(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.EXPORTFROMIMPORTEDHANDLETYPES); }
     /** Unsafe version of {@link #compatibleHandleTypes}. */
-    public static int ncompatibleHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.COMPATIBLEHANDLETYPES); }
+    public static int ncompatibleHandleTypes(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.COMPATIBLEHANDLETYPES); }
 
     // -----------------------------------
 

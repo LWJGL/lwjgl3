@@ -233,27 +233,27 @@ public class IOURingNAPI extends Struct<IOURingNAPI> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #busy_poll_to}. */
-    public static int nbusy_poll_to(long struct) { return UNSAFE.getInt(null, struct + IOURingNAPI.BUSY_POLL_TO); }
+    public static int nbusy_poll_to(long struct) { return memGetInt(struct + IOURingNAPI.BUSY_POLL_TO); }
     /** Unsafe version of {@link #prefer_busy_poll}. */
-    public static byte nprefer_busy_poll(long struct) { return UNSAFE.getByte(null, struct + IOURingNAPI.PREFER_BUSY_POLL); }
+    public static byte nprefer_busy_poll(long struct) { return memGetByte(struct + IOURingNAPI.PREFER_BUSY_POLL); }
     public static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURingNAPI.PAD, 3); }
     public static byte npad(long struct, int index) {
-        return UNSAFE.getByte(null, struct + IOURingNAPI.PAD + check(index, 3) * 1);
+        return memGetByte(struct + IOURingNAPI.PAD + check(index, 3) * 1);
     }
-    public static long nresv(long struct) { return UNSAFE.getLong(null, struct + IOURingNAPI.RESV); }
+    public static long nresv(long struct) { return memGetLong(struct + IOURingNAPI.RESV); }
 
     /** Unsafe version of {@link #busy_poll_to(int) busy_poll_to}. */
-    public static void nbusy_poll_to(long struct, int value) { UNSAFE.putInt(null, struct + IOURingNAPI.BUSY_POLL_TO, value); }
+    public static void nbusy_poll_to(long struct, int value) { memPutInt(struct + IOURingNAPI.BUSY_POLL_TO, value); }
     /** Unsafe version of {@link #prefer_busy_poll(byte) prefer_busy_poll}. */
-    public static void nprefer_busy_poll(long struct, byte value) { UNSAFE.putByte(null, struct + IOURingNAPI.PREFER_BUSY_POLL, value); }
+    public static void nprefer_busy_poll(long struct, byte value) { memPutByte(struct + IOURingNAPI.PREFER_BUSY_POLL, value); }
     public static void npad(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingNAPI.PAD, value.remaining() * 1);
     }
     public static void npad(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + IOURingNAPI.PAD + check(index, 3) * 1, value);
+        memPutByte(struct + IOURingNAPI.PAD + check(index, 3) * 1, value);
     }
-    public static void nresv(long struct, long value) { UNSAFE.putLong(null, struct + IOURingNAPI.RESV, value); }
+    public static void nresv(long struct, long value) { memPutLong(struct + IOURingNAPI.RESV, value); }
 
     // -----------------------------------
 

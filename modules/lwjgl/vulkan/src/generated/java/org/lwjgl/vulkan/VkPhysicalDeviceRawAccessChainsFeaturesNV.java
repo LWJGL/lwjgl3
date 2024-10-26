@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRawAccessChainsFeaturesNV extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #shaderRawAccessChains}. */
-    public static int nshaderRawAccessChains(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.SHADERRAWACCESSCHAINS); }
+    public static int nshaderRawAccessChains(long struct) { return memGetInt(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.SHADERRAWACCESSCHAINS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #shaderRawAccessChains(boolean) shaderRawAccessChains}. */
-    public static void nshaderRawAccessChains(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.SHADERRAWACCESSCHAINS, value); }
+    public static void nshaderRawAccessChains(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRawAccessChainsFeaturesNV.SHADERRAWACCESSCHAINS, value); }
 
     // -----------------------------------
 

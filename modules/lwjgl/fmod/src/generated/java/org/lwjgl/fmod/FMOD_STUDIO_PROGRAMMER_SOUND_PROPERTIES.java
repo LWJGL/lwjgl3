@@ -241,7 +241,7 @@ public class FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES extends Struct<FMOD_STUDIO_
     /** Unsafe version of {@link #sound}. */
     public static long nsound(long struct) { return memGetAddress(struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SOUND); }
     /** Unsafe version of {@link #subsoundIndex}. */
-    public static int nsubsoundIndex(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SUBSOUNDINDEX); }
+    public static int nsubsoundIndex(long struct) { return memGetInt(struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SUBSOUNDINDEX); }
 
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
@@ -251,7 +251,7 @@ public class FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES extends Struct<FMOD_STUDIO_
     /** Unsafe version of {@link #sound(long) sound}. */
     public static void nsound(long struct, long value) { memPutAddress(struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SOUND, check(value)); }
     /** Unsafe version of {@link #subsoundIndex(int) subsoundIndex}. */
-    public static void nsubsoundIndex(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SUBSOUNDINDEX, value); }
+    public static void nsubsoundIndex(long struct, int value) { memPutInt(struct + FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES.SUBSOUNDINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

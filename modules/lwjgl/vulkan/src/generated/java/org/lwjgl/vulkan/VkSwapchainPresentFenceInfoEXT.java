@@ -277,20 +277,20 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentFenceInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentFenceInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentFenceInfoEXT.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pFences() pFences}. */
     public static LongBuffer npFences(long struct) { return memLongBuffer(memGetAddress(struct + VkSwapchainPresentFenceInfoEXT.PFENCES), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentFenceInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentFenceInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentFenceInfoEXT.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pFences(LongBuffer) pFences}. */
     public static void npFences(long struct, LongBuffer value) { memPutAddress(struct + VkSwapchainPresentFenceInfoEXT.PFENCES, memAddress(value)); nswapchainCount(struct, value.remaining()); }
 

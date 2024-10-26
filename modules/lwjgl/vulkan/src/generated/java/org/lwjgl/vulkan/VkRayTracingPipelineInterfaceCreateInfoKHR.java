@@ -273,22 +273,22 @@ public class VkRayTracingPipelineInterfaceCreateInfoKHR extends Struct<VkRayTrac
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #maxPipelineRayPayloadSize}. */
-    public static int nmaxPipelineRayPayloadSize(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYPAYLOADSIZE); }
+    public static int nmaxPipelineRayPayloadSize(long struct) { return memGetInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYPAYLOADSIZE); }
     /** Unsafe version of {@link #maxPipelineRayHitAttributeSize}. */
-    public static int nmaxPipelineRayHitAttributeSize(long struct) { return UNSAFE.getInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYHITATTRIBUTESIZE); }
+    public static int nmaxPipelineRayHitAttributeSize(long struct) { return memGetInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYHITATTRIBUTESIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #maxPipelineRayPayloadSize(int) maxPipelineRayPayloadSize}. */
-    public static void nmaxPipelineRayPayloadSize(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYPAYLOADSIZE, value); }
+    public static void nmaxPipelineRayPayloadSize(long struct, int value) { memPutInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYPAYLOADSIZE, value); }
     /** Unsafe version of {@link #maxPipelineRayHitAttributeSize(int) maxPipelineRayHitAttributeSize}. */
-    public static void nmaxPipelineRayHitAttributeSize(long struct, int value) { UNSAFE.putInt(null, struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYHITATTRIBUTESIZE, value); }
+    public static void nmaxPipelineRayHitAttributeSize(long struct, int value) { memPutInt(struct + VkRayTracingPipelineInterfaceCreateInfoKHR.MAXPIPELINERAYHITATTRIBUTESIZE, value); }
 
     // -----------------------------------
 

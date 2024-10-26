@@ -232,12 +232,12 @@ public class XrBaseInStructure extends Struct<XrBaseInStructure> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrBaseInStructure.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrBaseInStructure.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static XrBaseInStructure nnext(long struct) { return XrBaseInStructure.create(memGetAddress(struct + XrBaseInStructure.NEXT)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBaseInStructure.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrBaseInStructure.TYPE, value); }
     /** Unsafe version of {@link #next(XrBaseInStructure) next}. */
     public static void nnext(long struct, XrBaseInStructure value) { memPutAddress(struct + XrBaseInStructure.NEXT, value.address()); }
 

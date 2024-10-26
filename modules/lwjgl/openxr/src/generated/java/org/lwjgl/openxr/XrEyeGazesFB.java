@@ -271,7 +271,7 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEyeGazesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEyeGazesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEyeGazesFB.NEXT); }
     /** Unsafe version of {@link #gaze}. */
@@ -281,10 +281,10 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
         return XrEyeGazeFB.create(struct + XrEyeGazesFB.GAZE + check(index, XR_EYE_POSITION_COUNT_FB) * XrEyeGazeFB.SIZEOF);
     }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrEyeGazesFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrEyeGazesFB.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEyeGazesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEyeGazesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEyeGazesFB.NEXT, value); }
     /** Unsafe version of {@link #gaze(XrEyeGazeFB.Buffer) gaze}. */
@@ -297,7 +297,7 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
         memCopy(value.address(), struct + XrEyeGazesFB.GAZE + check(index, XR_EYE_POSITION_COUNT_FB) * XrEyeGazeFB.SIZEOF, XrEyeGazeFB.SIZEOF);
     }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEyeGazesFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrEyeGazesFB.TIME, value); }
 
     // -----------------------------------
 

@@ -257,22 +257,22 @@ public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFau
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFaultFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFaultFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #deviceFault}. */
-    public static int ndeviceFault(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULT); }
+    public static int ndeviceFault(long struct) { return memGetInt(struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULT); }
     /** Unsafe version of {@link #deviceFaultVendorBinary}. */
-    public static int ndeviceFaultVendorBinary(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULTVENDORBINARY); }
+    public static int ndeviceFaultVendorBinary(long struct) { return memGetInt(struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULTVENDORBINARY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFaultFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFaultFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #deviceFault(boolean) deviceFault}. */
-    public static void ndeviceFault(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULT, value); }
+    public static void ndeviceFault(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULT, value); }
     /** Unsafe version of {@link #deviceFaultVendorBinary(boolean) deviceFaultVendorBinary}. */
-    public static void ndeviceFaultVendorBinary(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULTVENDORBINARY, value); }
+    public static void ndeviceFaultVendorBinary(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFaultFeaturesEXT.DEVICEFAULTVENDORBINARY, value); }
 
     // -----------------------------------
 

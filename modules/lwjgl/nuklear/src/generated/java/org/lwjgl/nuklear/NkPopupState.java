@@ -170,21 +170,21 @@ public class NkPopupState extends Struct<NkPopupState> {
     /** Unsafe version of {@link #win}. */
     public static NkWindow nwin(long struct) { return NkWindow.create(memGetAddress(struct + NkPopupState.WIN)); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + NkPopupState.TYPE); }
     /** Unsafe version of {@link #buf}. */
     public static NkPopupBuffer nbuf(long struct) { return NkPopupBuffer.create(struct + NkPopupState.BUF); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.NAME); }
+    public static int nname(long struct) { return memGetInt(struct + NkPopupState.NAME); }
     /** Unsafe version of {@link #active}. */
-    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkPopupState.ACTIVE) != 0; }
+    public static boolean nactive(long struct) { return memGetByte(struct + NkPopupState.ACTIVE) != 0; }
     /** Unsafe version of {@link #combo_count}. */
-    public static int ncombo_count(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.COMBO_COUNT); }
+    public static int ncombo_count(long struct) { return memGetInt(struct + NkPopupState.COMBO_COUNT); }
     /** Unsafe version of {@link #con_count}. */
-    public static int ncon_count(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.CON_COUNT); }
+    public static int ncon_count(long struct) { return memGetInt(struct + NkPopupState.CON_COUNT); }
     /** Unsafe version of {@link #con_old}. */
-    public static int ncon_old(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.CON_OLD); }
+    public static int ncon_old(long struct) { return memGetInt(struct + NkPopupState.CON_OLD); }
     /** Unsafe version of {@link #active_con}. */
-    public static int nactive_con(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.ACTIVE_CON); }
+    public static int nactive_con(long struct) { return memGetInt(struct + NkPopupState.ACTIVE_CON); }
     /** Unsafe version of {@link #header}. */
     public static NkRect nheader(long struct) { return NkRect.create(struct + NkPopupState.HEADER); }
 

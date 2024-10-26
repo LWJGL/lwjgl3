@@ -331,9 +331,9 @@ public class BNDwidgetTheme extends Struct<BNDwidgetTheme> implements NativeReso
     /** Unsafe version of {@link #textSelectedColor}. */
     public static NVGColor ntextSelectedColor(long struct) { return NVGColor.create(struct + BNDwidgetTheme.TEXTSELECTEDCOLOR); }
     /** Unsafe version of {@link #shadeTop}. */
-    public static int nshadeTop(long struct) { return UNSAFE.getInt(null, struct + BNDwidgetTheme.SHADETOP); }
+    public static int nshadeTop(long struct) { return memGetInt(struct + BNDwidgetTheme.SHADETOP); }
     /** Unsafe version of {@link #shadeDown}. */
-    public static int nshadeDown(long struct) { return UNSAFE.getInt(null, struct + BNDwidgetTheme.SHADEDOWN); }
+    public static int nshadeDown(long struct) { return memGetInt(struct + BNDwidgetTheme.SHADEDOWN); }
 
     /** Unsafe version of {@link #outlineColor(NVGColor) outlineColor}. */
     public static void noutlineColor(long struct, NVGColor value) { memCopy(value.address(), struct + BNDwidgetTheme.OUTLINECOLOR, NVGColor.SIZEOF); }
@@ -348,9 +348,9 @@ public class BNDwidgetTheme extends Struct<BNDwidgetTheme> implements NativeReso
     /** Unsafe version of {@link #textSelectedColor(NVGColor) textSelectedColor}. */
     public static void ntextSelectedColor(long struct, NVGColor value) { memCopy(value.address(), struct + BNDwidgetTheme.TEXTSELECTEDCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #shadeTop(int) shadeTop}. */
-    public static void nshadeTop(long struct, int value) { UNSAFE.putInt(null, struct + BNDwidgetTheme.SHADETOP, value); }
+    public static void nshadeTop(long struct, int value) { memPutInt(struct + BNDwidgetTheme.SHADETOP, value); }
     /** Unsafe version of {@link #shadeDown(int) shadeDown}. */
-    public static void nshadeDown(long struct, int value) { UNSAFE.putInt(null, struct + BNDwidgetTheme.SHADEDOWN, value); }
+    public static void nshadeDown(long struct, int value) { memPutInt(struct + BNDwidgetTheme.SHADEDOWN, value); }
 
     // -----------------------------------
 

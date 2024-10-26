@@ -137,17 +137,17 @@ public class VREventProgressUpdate extends Struct<VREventProgressUpdate> {
     // -----------------------------------
 
     /** Unsafe version of {@link #ulApplicationPropertyContainer}. */
-    public static long nulApplicationPropertyContainer(long struct) { return UNSAFE.getLong(null, struct + VREventProgressUpdate.ULAPPLICATIONPROPERTYCONTAINER); }
+    public static long nulApplicationPropertyContainer(long struct) { return memGetLong(struct + VREventProgressUpdate.ULAPPLICATIONPROPERTYCONTAINER); }
     /** Unsafe version of {@link #pathDevice}. */
-    public static long npathDevice(long struct) { return UNSAFE.getLong(null, struct + VREventProgressUpdate.PATHDEVICE); }
+    public static long npathDevice(long struct) { return memGetLong(struct + VREventProgressUpdate.PATHDEVICE); }
     /** Unsafe version of {@link #pathInputSource}. */
-    public static long npathInputSource(long struct) { return UNSAFE.getLong(null, struct + VREventProgressUpdate.PATHINPUTSOURCE); }
+    public static long npathInputSource(long struct) { return memGetLong(struct + VREventProgressUpdate.PATHINPUTSOURCE); }
     /** Unsafe version of {@link #pathProgressAction}. */
-    public static long npathProgressAction(long struct) { return UNSAFE.getLong(null, struct + VREventProgressUpdate.PATHPROGRESSACTION); }
+    public static long npathProgressAction(long struct) { return memGetLong(struct + VREventProgressUpdate.PATHPROGRESSACTION); }
     /** Unsafe version of {@link #pathIcon}. */
-    public static long npathIcon(long struct) { return UNSAFE.getLong(null, struct + VREventProgressUpdate.PATHICON); }
+    public static long npathIcon(long struct) { return memGetLong(struct + VREventProgressUpdate.PATHICON); }
     /** Unsafe version of {@link #fProgress}. */
-    public static float nfProgress(long struct) { return UNSAFE.getFloat(null, struct + VREventProgressUpdate.FPROGRESS); }
+    public static float nfProgress(long struct) { return memGetFloat(struct + VREventProgressUpdate.FPROGRESS); }
 
     // -----------------------------------
 

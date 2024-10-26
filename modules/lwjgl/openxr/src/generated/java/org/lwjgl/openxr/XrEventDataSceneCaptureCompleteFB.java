@@ -260,22 +260,22 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSceneCaptureCompleteFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEventDataSceneCaptureCompleteFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEventDataSceneCaptureCompleteFB.NEXT); }
     /** Unsafe version of {@link #requestId}. */
-    public static long nrequestId(long struct) { return UNSAFE.getLong(null, struct + XrEventDataSceneCaptureCompleteFB.REQUESTID); }
+    public static long nrequestId(long struct) { return memGetLong(struct + XrEventDataSceneCaptureCompleteFB.REQUESTID); }
     /** Unsafe version of {@link #result}. */
-    public static int nresult(long struct) { return UNSAFE.getInt(null, struct + XrEventDataSceneCaptureCompleteFB.RESULT); }
+    public static int nresult(long struct) { return memGetInt(struct + XrEventDataSceneCaptureCompleteFB.RESULT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSceneCaptureCompleteFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataSceneCaptureCompleteFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSceneCaptureCompleteFB.NEXT, value); }
     /** Unsafe version of {@link #requestId(long) requestId}. */
-    public static void nrequestId(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataSceneCaptureCompleteFB.REQUESTID, value); }
+    public static void nrequestId(long struct, long value) { memPutLong(struct + XrEventDataSceneCaptureCompleteFB.REQUESTID, value); }
     /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSceneCaptureCompleteFB.RESULT, value); }
+    public static void nresult(long struct, int value) { memPutInt(struct + XrEventDataSceneCaptureCompleteFB.RESULT, value); }
 
     // -----------------------------------
 

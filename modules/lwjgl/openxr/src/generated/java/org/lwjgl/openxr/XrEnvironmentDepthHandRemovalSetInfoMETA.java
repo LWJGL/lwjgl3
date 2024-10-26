@@ -252,18 +252,18 @@ public class XrEnvironmentDepthHandRemovalSetInfoMETA extends Struct<XrEnvironme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthHandRemovalSetInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.NEXT); }
     /** Unsafe version of {@link #enabled}. */
-    public static int nenabled(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthHandRemovalSetInfoMETA.ENABLED); }
+    public static int nenabled(long struct) { return memGetInt(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.ENABLED); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthHandRemovalSetInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #enabled(boolean) enabled}. */
-    public static void nenabled(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthHandRemovalSetInfoMETA.ENABLED, value); }
+    public static void nenabled(long struct, int value) { memPutInt(struct + XrEnvironmentDepthHandRemovalSetInfoMETA.ENABLED, value); }
 
     // -----------------------------------
 

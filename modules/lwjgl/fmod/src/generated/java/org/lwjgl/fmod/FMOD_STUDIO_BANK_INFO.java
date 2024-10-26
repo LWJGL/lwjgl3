@@ -272,11 +272,11 @@ public class FMOD_STUDIO_BANK_INFO extends Struct<FMOD_STUDIO_BANK_INFO> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BANK_INFO.SIZE); }
+    public static int nsize(long struct) { return memGetInt(struct + FMOD_STUDIO_BANK_INFO.SIZE); }
     /** Unsafe version of {@link #userdata() userdata}. */
     @Nullable public static ByteBuffer nuserdata(long struct) { return memByteBufferSafe(memGetAddress(struct + FMOD_STUDIO_BANK_INFO.USERDATA), nuserdatalength(struct)); }
     /** Unsafe version of {@link #userdatalength}. */
-    public static int nuserdatalength(long struct) { return UNSAFE.getInt(null, struct + FMOD_STUDIO_BANK_INFO.USERDATALENGTH); }
+    public static int nuserdatalength(long struct) { return memGetInt(struct + FMOD_STUDIO_BANK_INFO.USERDATALENGTH); }
     /** Unsafe version of {@link #opencallback}. */
     public static FMOD_FILE_OPEN_CALLBACK nopencallback(long struct) { return FMOD_FILE_OPEN_CALLBACK.create(memGetAddress(struct + FMOD_STUDIO_BANK_INFO.OPENCALLBACK)); }
     /** Unsafe version of {@link #closecallback}. */
@@ -287,11 +287,11 @@ public class FMOD_STUDIO_BANK_INFO extends Struct<FMOD_STUDIO_BANK_INFO> impleme
     public static FMOD_FILE_SEEK_CALLBACK nseekcallback(long struct) { return FMOD_FILE_SEEK_CALLBACK.create(memGetAddress(struct + FMOD_STUDIO_BANK_INFO.SEEKCALLBACK)); }
 
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BANK_INFO.SIZE, value); }
+    public static void nsize(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BANK_INFO.SIZE, value); }
     /** Unsafe version of {@link #userdata(ByteBuffer) userdata}. */
     public static void nuserdata(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FMOD_STUDIO_BANK_INFO.USERDATA, memAddressSafe(value)); nuserdatalength(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code userdatalength} field of the specified {@code struct}. */
-    public static void nuserdatalength(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_STUDIO_BANK_INFO.USERDATALENGTH, value); }
+    public static void nuserdatalength(long struct, int value) { memPutInt(struct + FMOD_STUDIO_BANK_INFO.USERDATALENGTH, value); }
     /** Unsafe version of {@link #opencallback(FMOD_FILE_OPEN_CALLBACKI) opencallback}. */
     public static void nopencallback(long struct, FMOD_FILE_OPEN_CALLBACKI value) { memPutAddress(struct + FMOD_STUDIO_BANK_INFO.OPENCALLBACK, value.address()); }
     /** Unsafe version of {@link #closecallback(FMOD_FILE_CLOSE_CALLBACKI) closecallback}. */

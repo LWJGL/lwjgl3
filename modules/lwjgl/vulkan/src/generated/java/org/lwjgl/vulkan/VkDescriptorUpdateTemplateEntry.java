@@ -312,26 +312,26 @@ public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTe
     // -----------------------------------
 
     /** Unsafe version of {@link #dstBinding}. */
-    public static int ndstBinding(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateEntry.DSTBINDING); }
+    public static int ndstBinding(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateEntry.DSTBINDING); }
     /** Unsafe version of {@link #dstArrayElement}. */
-    public static int ndstArrayElement(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateEntry.DSTARRAYELEMENT); }
+    public static int ndstArrayElement(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateEntry.DSTARRAYELEMENT); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORCOUNT); }
     /** Unsafe version of {@link #descriptorType}. */
-    public static int ndescriptorType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORTYPE); }
+    public static int ndescriptorType(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORTYPE); }
     /** Unsafe version of {@link #offset}. */
     public static long noffset(long struct) { return memGetAddress(struct + VkDescriptorUpdateTemplateEntry.OFFSET); }
     /** Unsafe version of {@link #stride}. */
     public static long nstride(long struct) { return memGetAddress(struct + VkDescriptorUpdateTemplateEntry.STRIDE); }
 
     /** Unsafe version of {@link #dstBinding(int) dstBinding}. */
-    public static void ndstBinding(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateEntry.DSTBINDING, value); }
+    public static void ndstBinding(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateEntry.DSTBINDING, value); }
     /** Unsafe version of {@link #dstArrayElement(int) dstArrayElement}. */
-    public static void ndstArrayElement(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateEntry.DSTARRAYELEMENT, value); }
+    public static void ndstArrayElement(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateEntry.DSTARRAYELEMENT, value); }
     /** Unsafe version of {@link #descriptorCount(int) descriptorCount}. */
-    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORCOUNT, value); }
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
-    public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORTYPE, value); }
+    public static void ndescriptorType(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateEntry.DESCRIPTORTYPE, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
     public static void noffset(long struct, long value) { memPutAddress(struct + VkDescriptorUpdateTemplateEntry.OFFSET, value); }
     /** Unsafe version of {@link #stride(long) stride}. */

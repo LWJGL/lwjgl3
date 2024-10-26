@@ -246,18 +246,18 @@ public class VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #shaderFloat16VectorAtomics}. */
-    public static int nshaderFloat16VectorAtomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.SHADERFLOAT16VECTORATOMICS); }
+    public static int nshaderFloat16VectorAtomics(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.SHADERFLOAT16VECTORATOMICS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #shaderFloat16VectorAtomics(boolean) shaderFloat16VectorAtomics}. */
-    public static void nshaderFloat16VectorAtomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.SHADERFLOAT16VECTORATOMICS, value); }
+    public static void nshaderFloat16VectorAtomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.SHADERFLOAT16VECTORATOMICS, value); }
 
     // -----------------------------------
 

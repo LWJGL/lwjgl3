@@ -287,26 +287,26 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct<VkPhys
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #fragmentDensityMap}. */
-    public static int nfragmentDensityMap(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAP); }
+    public static int nfragmentDensityMap(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAP); }
     /** Unsafe version of {@link #fragmentDensityMapDynamic}. */
-    public static int nfragmentDensityMapDynamic(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPDYNAMIC); }
+    public static int nfragmentDensityMapDynamic(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPDYNAMIC); }
     /** Unsafe version of {@link #fragmentDensityMapNonSubsampledImages}. */
-    public static int nfragmentDensityMapNonSubsampledImages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPNONSUBSAMPLEDIMAGES); }
+    public static int nfragmentDensityMapNonSubsampledImages(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPNONSUBSAMPLEDIMAGES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #fragmentDensityMap(boolean) fragmentDensityMap}. */
-    public static void nfragmentDensityMap(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAP, value); }
+    public static void nfragmentDensityMap(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAP, value); }
     /** Unsafe version of {@link #fragmentDensityMapDynamic(boolean) fragmentDensityMapDynamic}. */
-    public static void nfragmentDensityMapDynamic(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPDYNAMIC, value); }
+    public static void nfragmentDensityMapDynamic(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPDYNAMIC, value); }
     /** Unsafe version of {@link #fragmentDensityMapNonSubsampledImages(boolean) fragmentDensityMapNonSubsampledImages}. */
-    public static void nfragmentDensityMapNonSubsampledImages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPNONSUBSAMPLEDIMAGES, value); }
+    public static void nfragmentDensityMapNonSubsampledImages(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapFeaturesEXT.FRAGMENTDENSITYMAPNONSUBSAMPLEDIMAGES, value); }
 
     // -----------------------------------
 

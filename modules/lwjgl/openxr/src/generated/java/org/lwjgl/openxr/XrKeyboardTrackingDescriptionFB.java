@@ -227,11 +227,11 @@ public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDe
     // -----------------------------------
 
     /** Unsafe version of {@link #trackedKeyboardId}. */
-    public static long ntrackedKeyboardId(long struct) { return UNSAFE.getLong(null, struct + XrKeyboardTrackingDescriptionFB.TRACKEDKEYBOARDID); }
+    public static long ntrackedKeyboardId(long struct) { return memGetLong(struct + XrKeyboardTrackingDescriptionFB.TRACKEDKEYBOARDID); }
     /** Unsafe version of {@link #size}. */
     public static XrVector3f nsize(long struct) { return XrVector3f.create(struct + XrKeyboardTrackingDescriptionFB.SIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static long nflags(long struct) { return UNSAFE.getLong(null, struct + XrKeyboardTrackingDescriptionFB.FLAGS); }
+    public static long nflags(long struct) { return memGetLong(struct + XrKeyboardTrackingDescriptionFB.FLAGS); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBuffer(struct + XrKeyboardTrackingDescriptionFB.NAME, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB); }
     /** Unsafe version of {@link #nameString}. */

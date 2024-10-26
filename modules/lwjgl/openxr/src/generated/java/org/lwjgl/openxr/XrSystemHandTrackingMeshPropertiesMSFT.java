@@ -264,18 +264,18 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct<XrSystemHandT
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemHandTrackingMeshPropertiesMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemHandTrackingMeshPropertiesMSFT.NEXT); }
     /** Unsafe version of {@link #supportsHandTrackingMesh}. */
-    public static int nsupportsHandTrackingMesh(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.SUPPORTSHANDTRACKINGMESH); }
+    public static int nsupportsHandTrackingMesh(long struct) { return memGetInt(struct + XrSystemHandTrackingMeshPropertiesMSFT.SUPPORTSHANDTRACKINGMESH); }
     /** Unsafe version of {@link #maxHandMeshIndexCount}. */
-    public static int nmaxHandMeshIndexCount(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHINDEXCOUNT); }
+    public static int nmaxHandMeshIndexCount(long struct) { return memGetInt(struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHINDEXCOUNT); }
     /** Unsafe version of {@link #maxHandMeshVertexCount}. */
-    public static int nmaxHandMeshVertexCount(long struct) { return UNSAFE.getInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHVERTEXCOUNT); }
+    public static int nmaxHandMeshVertexCount(long struct) { return memGetInt(struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHVERTEXCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemHandTrackingMeshPropertiesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemHandTrackingMeshPropertiesMSFT.NEXT, value); }
 

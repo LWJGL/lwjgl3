@@ -267,38 +267,38 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
     // -----------------------------------
 
     /** Unsafe version of {@link #u32}. */
-    public static int nu32(long struct) { return UNSAFE.getInt(null, struct + hb_var_int_t.U32); }
+    public static int nu32(long struct) { return memGetInt(struct + hb_var_int_t.U32); }
     /** Unsafe version of {@link #i32}. */
-    public static int ni32(long struct) { return UNSAFE.getInt(null, struct + hb_var_int_t.I32); }
+    public static int ni32(long struct) { return memGetInt(struct + hb_var_int_t.I32); }
     /** Unsafe version of {@link #u16}. */
     public static ShortBuffer nu16(long struct) { return memShortBuffer(struct + hb_var_int_t.U16, 2); }
     /** Unsafe version of {@link #u16(int) u16}. */
     public static short nu16(long struct, int index) {
-        return UNSAFE.getShort(null, struct + hb_var_int_t.U16 + check(index, 2) * 2);
+        return memGetShort(struct + hb_var_int_t.U16 + check(index, 2) * 2);
     }
     /** Unsafe version of {@link #i16}. */
     public static ShortBuffer ni16(long struct) { return memShortBuffer(struct + hb_var_int_t.I16, 2); }
     /** Unsafe version of {@link #i16(int) i16}. */
     public static short ni16(long struct, int index) {
-        return UNSAFE.getShort(null, struct + hb_var_int_t.I16 + check(index, 2) * 2);
+        return memGetShort(struct + hb_var_int_t.I16 + check(index, 2) * 2);
     }
     /** Unsafe version of {@link #u8}. */
     public static ByteBuffer nu8(long struct) { return memByteBuffer(struct + hb_var_int_t.U8, 4); }
     /** Unsafe version of {@link #u8(int) u8}. */
     public static byte nu8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + hb_var_int_t.U8 + check(index, 4) * 1);
+        return memGetByte(struct + hb_var_int_t.U8 + check(index, 4) * 1);
     }
     /** Unsafe version of {@link #i8}. */
     public static ByteBuffer ni8(long struct) { return memByteBuffer(struct + hb_var_int_t.I8, 4); }
     /** Unsafe version of {@link #i8(int) i8}. */
     public static byte ni8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + hb_var_int_t.I8 + check(index, 4) * 1);
+        return memGetByte(struct + hb_var_int_t.I8 + check(index, 4) * 1);
     }
 
     /** Unsafe version of {@link #u32(int) u32}. */
-    public static void nu32(long struct, int value) { UNSAFE.putInt(null, struct + hb_var_int_t.U32, value); }
+    public static void nu32(long struct, int value) { memPutInt(struct + hb_var_int_t.U32, value); }
     /** Unsafe version of {@link #i32(int) i32}. */
-    public static void ni32(long struct, int value) { UNSAFE.putInt(null, struct + hb_var_int_t.I32, value); }
+    public static void ni32(long struct, int value) { memPutInt(struct + hb_var_int_t.I32, value); }
     /** Unsafe version of {@link #u16(ShortBuffer) u16}. */
     public static void nu16(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -306,7 +306,7 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
     }
     /** Unsafe version of {@link #u16(int, short) u16}. */
     public static void nu16(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + hb_var_int_t.U16 + check(index, 2) * 2, value);
+        memPutShort(struct + hb_var_int_t.U16 + check(index, 2) * 2, value);
     }
     /** Unsafe version of {@link #i16(ShortBuffer) i16}. */
     public static void ni16(long struct, ShortBuffer value) {
@@ -315,7 +315,7 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
     }
     /** Unsafe version of {@link #i16(int, short) i16}. */
     public static void ni16(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + hb_var_int_t.I16 + check(index, 2) * 2, value);
+        memPutShort(struct + hb_var_int_t.I16 + check(index, 2) * 2, value);
     }
     /** Unsafe version of {@link #u8(ByteBuffer) u8}. */
     public static void nu8(long struct, ByteBuffer value) {
@@ -324,7 +324,7 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
     }
     /** Unsafe version of {@link #u8(int, byte) u8}. */
     public static void nu8(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + hb_var_int_t.U8 + check(index, 4) * 1, value);
+        memPutByte(struct + hb_var_int_t.U8 + check(index, 4) * 1, value);
     }
     /** Unsafe version of {@link #i8(ByteBuffer) i8}. */
     public static void ni8(long struct, ByteBuffer value) {
@@ -333,7 +333,7 @@ public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource
     }
     /** Unsafe version of {@link #i8(int, byte) i8}. */
     public static void ni8(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + hb_var_int_t.I8 + check(index, 4) * 1, value);
+        memPutByte(struct + hb_var_int_t.I8 + check(index, 4) * 1, value);
     }
 
     // -----------------------------------

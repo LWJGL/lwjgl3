@@ -268,24 +268,24 @@ public class VkExportMetalSharedEventInfoEXT extends Struct<VkExportMetalSharedE
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMetalSharedEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExportMetalSharedEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMetalSharedEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalSharedEventInfoEXT.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkExportMetalSharedEventInfoEXT.SEMAPHORE); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return UNSAFE.getLong(null, struct + VkExportMetalSharedEventInfoEXT.EVENT); }
+    public static long nevent(long struct) { return memGetLong(struct + VkExportMetalSharedEventInfoEXT.EVENT); }
     /** Unsafe version of {@link #mtlSharedEvent}. */
     public static long nmtlSharedEvent(long struct) { return memGetAddress(struct + VkExportMetalSharedEventInfoEXT.MTLSHAREDEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMetalSharedEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMetalSharedEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMetalSharedEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalSharedEventInfoEXT.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkExportMetalSharedEventInfoEXT.SEMAPHORE, value); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { UNSAFE.putLong(null, struct + VkExportMetalSharedEventInfoEXT.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutLong(struct + VkExportMetalSharedEventInfoEXT.EVENT, value); }
     /** Unsafe version of {@link #mtlSharedEvent(long) mtlSharedEvent}. */
     public static void nmtlSharedEvent(long struct, long value) { memPutAddress(struct + VkExportMetalSharedEventInfoEXT.MTLSHAREDEVENT, check(value)); }
 

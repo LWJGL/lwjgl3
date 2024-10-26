@@ -124,13 +124,13 @@ public class VREventInputBindingLoad extends Struct<VREventInputBindingLoad> {
     // -----------------------------------
 
     /** Unsafe version of {@link #ulAppContainer}. */
-    public static long nulAppContainer(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.ULAPPCONTAINER); }
+    public static long nulAppContainer(long struct) { return memGetLong(struct + VREventInputBindingLoad.ULAPPCONTAINER); }
     /** Unsafe version of {@link #pathMessage}. */
-    public static long npathMessage(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHMESSAGE); }
+    public static long npathMessage(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHMESSAGE); }
     /** Unsafe version of {@link #pathUrl}. */
-    public static long npathUrl(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHURL); }
+    public static long npathUrl(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHURL); }
     /** Unsafe version of {@link #pathControllerType}. */
-    public static long npathControllerType(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHCONTROLLERTYPE); }
+    public static long npathControllerType(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHCONTROLLERTYPE); }
 
     // -----------------------------------
 

@@ -296,7 +296,7 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockStateML.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrWorldMeshBlockStateML.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrWorldMeshBlockStateML.NEXT); }
     /** Unsafe version of {@link #uuid}. */
@@ -306,12 +306,12 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
     /** Unsafe version of {@link #meshBoundingBoxExtents}. */
     public static XrExtent3DfEXT nmeshBoundingBoxExtents(long struct) { return XrExtent3DfEXT.create(struct + XrWorldMeshBlockStateML.MESHBOUNDINGBOXEXTENTS); }
     /** Unsafe version of {@link #lastUpdateTime}. */
-    public static long nlastUpdateTime(long struct) { return UNSAFE.getLong(null, struct + XrWorldMeshBlockStateML.LASTUPDATETIME); }
+    public static long nlastUpdateTime(long struct) { return memGetLong(struct + XrWorldMeshBlockStateML.LASTUPDATETIME); }
     /** Unsafe version of {@link #status}. */
-    public static int nstatus(long struct) { return UNSAFE.getInt(null, struct + XrWorldMeshBlockStateML.STATUS); }
+    public static int nstatus(long struct) { return memGetInt(struct + XrWorldMeshBlockStateML.STATUS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockStateML.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshBlockStateML.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrWorldMeshBlockStateML.NEXT, value); }
     /** Unsafe version of {@link #uuid(XrUuidEXT) uuid}. */
@@ -321,9 +321,9 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
     /** Unsafe version of {@link #meshBoundingBoxExtents(XrExtent3DfEXT) meshBoundingBoxExtents}. */
     public static void nmeshBoundingBoxExtents(long struct, XrExtent3DfEXT value) { memCopy(value.address(), struct + XrWorldMeshBlockStateML.MESHBOUNDINGBOXEXTENTS, XrExtent3DfEXT.SIZEOF); }
     /** Unsafe version of {@link #lastUpdateTime(long) lastUpdateTime}. */
-    public static void nlastUpdateTime(long struct, long value) { UNSAFE.putLong(null, struct + XrWorldMeshBlockStateML.LASTUPDATETIME, value); }
+    public static void nlastUpdateTime(long struct, long value) { memPutLong(struct + XrWorldMeshBlockStateML.LASTUPDATETIME, value); }
     /** Unsafe version of {@link #status(int) status}. */
-    public static void nstatus(long struct, int value) { UNSAFE.putInt(null, struct + XrWorldMeshBlockStateML.STATUS, value); }
+    public static void nstatus(long struct, int value) { memPutInt(struct + XrWorldMeshBlockStateML.STATUS, value); }
 
     // -----------------------------------
 

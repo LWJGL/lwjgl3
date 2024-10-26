@@ -256,21 +256,21 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
     // -----------------------------------
 
     /** Unsafe version of {@link #frameContentSize}. */
-    public static long nframeContentSize(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameHeader.FRAMECONTENTSIZE); }
+    public static long nframeContentSize(long struct) { return memGetLong(struct + ZSTDFrameHeader.FRAMECONTENTSIZE); }
     /** Unsafe version of {@link #windowSize}. */
-    public static long nwindowSize(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameHeader.WINDOWSIZE); }
+    public static long nwindowSize(long struct) { return memGetLong(struct + ZSTDFrameHeader.WINDOWSIZE); }
     /** Unsafe version of {@link #blockSizeMax}. */
-    public static int nblockSizeMax(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.BLOCKSIZEMAX); }
+    public static int nblockSizeMax(long struct) { return memGetInt(struct + ZSTDFrameHeader.BLOCKSIZEMAX); }
     /** Unsafe version of {@link #frameType}. */
-    public static int nframeType(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.FRAMETYPE); }
+    public static int nframeType(long struct) { return memGetInt(struct + ZSTDFrameHeader.FRAMETYPE); }
     /** Unsafe version of {@link #headerSize}. */
-    public static int nheaderSize(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.HEADERSIZE); }
+    public static int nheaderSize(long struct) { return memGetInt(struct + ZSTDFrameHeader.HEADERSIZE); }
     /** Unsafe version of {@link #dictID}. */
-    public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.DICTID); }
+    public static int ndictID(long struct) { return memGetInt(struct + ZSTDFrameHeader.DICTID); }
     /** Unsafe version of {@link #checksumFlag}. */
-    public static int nchecksumFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.CHECKSUMFLAG); }
-    public static int n_reserved1(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader._RESERVED1); }
-    public static int n_reserved2(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader._RESERVED2); }
+    public static int nchecksumFlag(long struct) { return memGetInt(struct + ZSTDFrameHeader.CHECKSUMFLAG); }
+    public static int n_reserved1(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED1); }
+    public static int n_reserved2(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED2); }
 
     // -----------------------------------
 

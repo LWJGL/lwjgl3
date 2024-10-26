@@ -258,18 +258,18 @@ public class VkPhysicalDeviceShaderCorePropertiesARM extends Struct<VkPhysicalDe
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesARM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderCorePropertiesARM.PNEXT); }
     /** Unsafe version of {@link #pixelRate}. */
-    public static int npixelRate(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesARM.PIXELRATE); }
+    public static int npixelRate(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesARM.PIXELRATE); }
     /** Unsafe version of {@link #texelRate}. */
-    public static int ntexelRate(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesARM.TEXELRATE); }
+    public static int ntexelRate(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesARM.TEXELRATE); }
     /** Unsafe version of {@link #fmaRate}. */
-    public static int nfmaRate(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesARM.FMARATE); }
+    public static int nfmaRate(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesARM.FMARATE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderCorePropertiesARM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderCorePropertiesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderCorePropertiesARM.PNEXT, value); }
 

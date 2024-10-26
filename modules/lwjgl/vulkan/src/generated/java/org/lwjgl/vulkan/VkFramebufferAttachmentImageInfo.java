@@ -325,40 +325,40 @@ public class VkFramebufferAttachmentImageInfo extends Struct<VkFramebufferAttach
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFramebufferAttachmentImageInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.FLAGS); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.USAGE); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.HEIGHT); }
     /** Unsafe version of {@link #layerCount}. */
-    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.LAYERCOUNT); }
+    public static int nlayerCount(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.LAYERCOUNT); }
     /** Unsafe version of {@link #viewFormatCount}. */
-    public static int nviewFormatCount(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentImageInfo.VIEWFORMATCOUNT); }
+    public static int nviewFormatCount(long struct) { return memGetInt(struct + VkFramebufferAttachmentImageInfo.VIEWFORMATCOUNT); }
     /** Unsafe version of {@link #pViewFormats() pViewFormats}. */
     @Nullable public static IntBuffer npViewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkFramebufferAttachmentImageInfo.PVIEWFORMATS), nviewFormatCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkFramebufferAttachmentImageInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.FLAGS, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.USAGE, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.HEIGHT, value); }
     /** Unsafe version of {@link #layerCount(int) layerCount}. */
-    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.LAYERCOUNT, value); }
+    public static void nlayerCount(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.LAYERCOUNT, value); }
     /** Sets the specified value to the {@code viewFormatCount} field of the specified {@code struct}. */
-    public static void nviewFormatCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentImageInfo.VIEWFORMATCOUNT, value); }
+    public static void nviewFormatCount(long struct, int value) { memPutInt(struct + VkFramebufferAttachmentImageInfo.VIEWFORMATCOUNT, value); }
     /** Unsafe version of {@link #pViewFormats(IntBuffer) pViewFormats}. */
     public static void npViewFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkFramebufferAttachmentImageInfo.PVIEWFORMATS, memAddressSafe(value)); nviewFormatCount(struct, value == null ? 0 : value.remaining()); }
 

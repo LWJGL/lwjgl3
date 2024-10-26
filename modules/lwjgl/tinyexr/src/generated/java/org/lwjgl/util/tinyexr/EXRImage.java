@@ -315,38 +315,38 @@ public class EXRImage extends Struct<EXRImage> implements NativeResource {
     /** Unsafe version of {@link #next_level}. */
     @Nullable public static EXRImage nnext_level(long struct) { return EXRImage.createSafe(memGetAddress(struct + EXRImage.NEXT_LEVEL)); }
     /** Unsafe version of {@link #level_x}. */
-    public static int nlevel_x(long struct) { return UNSAFE.getInt(null, struct + EXRImage.LEVEL_X); }
+    public static int nlevel_x(long struct) { return memGetInt(struct + EXRImage.LEVEL_X); }
     /** Unsafe version of {@link #level_y}. */
-    public static int nlevel_y(long struct) { return UNSAFE.getInt(null, struct + EXRImage.LEVEL_Y); }
+    public static int nlevel_y(long struct) { return memGetInt(struct + EXRImage.LEVEL_Y); }
     /** Unsafe version of {@link #images() images}. */
     @Nullable public static PointerBuffer nimages(long struct) { return memPointerBufferSafe(memGetAddress(struct + EXRImage.IMAGES), nnum_channels(struct)); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + EXRImage.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + EXRImage.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + EXRImage.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + EXRImage.HEIGHT); }
     /** Unsafe version of {@link #num_channels}. */
-    public static int nnum_channels(long struct) { return UNSAFE.getInt(null, struct + EXRImage.NUM_CHANNELS); }
+    public static int nnum_channels(long struct) { return memGetInt(struct + EXRImage.NUM_CHANNELS); }
     /** Unsafe version of {@link #num_tiles}. */
-    public static int nnum_tiles(long struct) { return UNSAFE.getInt(null, struct + EXRImage.NUM_TILES); }
+    public static int nnum_tiles(long struct) { return memGetInt(struct + EXRImage.NUM_TILES); }
 
     /** Unsafe version of {@link #tiles(EXRTile.Buffer) tiles}. */
     public static void ntiles(long struct, @Nullable EXRTile.Buffer value) { memPutAddress(struct + EXRImage.TILES, memAddressSafe(value)); nnum_tiles(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #next_level(EXRImage) next_level}. */
     public static void nnext_level(long struct, @Nullable EXRImage value) { memPutAddress(struct + EXRImage.NEXT_LEVEL, memAddressSafe(value)); }
     /** Unsafe version of {@link #level_x(int) level_x}. */
-    public static void nlevel_x(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.LEVEL_X, value); }
+    public static void nlevel_x(long struct, int value) { memPutInt(struct + EXRImage.LEVEL_X, value); }
     /** Unsafe version of {@link #level_y(int) level_y}. */
-    public static void nlevel_y(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.LEVEL_Y, value); }
+    public static void nlevel_y(long struct, int value) { memPutInt(struct + EXRImage.LEVEL_Y, value); }
     /** Unsafe version of {@link #images(PointerBuffer) images}. */
     public static void nimages(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + EXRImage.IMAGES, memAddressSafe(value)); nnum_channels(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + EXRImage.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + EXRImage.HEIGHT, value); }
     /** Sets the specified value to the {@code num_channels} field of the specified {@code struct}. */
-    public static void nnum_channels(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.NUM_CHANNELS, value); }
+    public static void nnum_channels(long struct, int value) { memPutInt(struct + EXRImage.NUM_CHANNELS, value); }
     /** Sets the specified value to the {@code num_tiles} field of the specified {@code struct}. */
-    public static void nnum_tiles(long struct, int value) { UNSAFE.putInt(null, struct + EXRImage.NUM_TILES, value); }
+    public static void nnum_tiles(long struct, int value) { memPutInt(struct + EXRImage.NUM_TILES, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

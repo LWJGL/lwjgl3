@@ -275,16 +275,16 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct<VkDrmFormatModi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDrmFormatModifierPropertiesListEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDrmFormatModifierPropertiesListEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDrmFormatModifierPropertiesListEXT.PNEXT); }
     /** Unsafe version of {@link #drmFormatModifierCount}. */
-    public static int ndrmFormatModifierCount(long struct) { return UNSAFE.getInt(null, struct + VkDrmFormatModifierPropertiesListEXT.DRMFORMATMODIFIERCOUNT); }
+    public static int ndrmFormatModifierCount(long struct) { return memGetInt(struct + VkDrmFormatModifierPropertiesListEXT.DRMFORMATMODIFIERCOUNT); }
     /** Unsafe version of {@link #pDrmFormatModifierProperties}. */
     @Nullable public static VkDrmFormatModifierPropertiesEXT.Buffer npDrmFormatModifierProperties(long struct) { return VkDrmFormatModifierPropertiesEXT.createSafe(memGetAddress(struct + VkDrmFormatModifierPropertiesListEXT.PDRMFORMATMODIFIERPROPERTIES), ndrmFormatModifierCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDrmFormatModifierPropertiesListEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDrmFormatModifierPropertiesListEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDrmFormatModifierPropertiesListEXT.PNEXT, value); }
 

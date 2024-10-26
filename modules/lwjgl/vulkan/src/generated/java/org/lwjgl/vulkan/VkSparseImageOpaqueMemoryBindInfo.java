@@ -279,16 +279,16 @@ public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqu
     // -----------------------------------
 
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkSparseImageOpaqueMemoryBindInfo.IMAGE); }
+    public static long nimage(long struct) { return memGetLong(struct + VkSparseImageOpaqueMemoryBindInfo.IMAGE); }
     /** Unsafe version of {@link #bindCount}. */
-    public static int nbindCount(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageOpaqueMemoryBindInfo.BINDCOUNT); }
+    public static int nbindCount(long struct) { return memGetInt(struct + VkSparseImageOpaqueMemoryBindInfo.BINDCOUNT); }
     /** Unsafe version of {@link #pBinds}. */
     public static VkSparseMemoryBind.Buffer npBinds(long struct) { return VkSparseMemoryBind.create(memGetAddress(struct + VkSparseImageOpaqueMemoryBindInfo.PBINDS), nbindCount(struct)); }
 
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseImageOpaqueMemoryBindInfo.IMAGE, value); }
+    public static void nimage(long struct, long value) { memPutLong(struct + VkSparseImageOpaqueMemoryBindInfo.IMAGE, value); }
     /** Sets the specified value to the {@code bindCount} field of the specified {@code struct}. */
-    public static void nbindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseImageOpaqueMemoryBindInfo.BINDCOUNT, value); }
+    public static void nbindCount(long struct, int value) { memPutInt(struct + VkSparseImageOpaqueMemoryBindInfo.BINDCOUNT, value); }
     /** Unsafe version of {@link #pBinds(VkSparseMemoryBind.Buffer) pBinds}. */
     public static void npBinds(long struct, VkSparseMemoryBind.Buffer value) { memPutAddress(struct + VkSparseImageOpaqueMemoryBindInfo.PBINDS, value.address()); nbindCount(struct, value.remaining()); }
 

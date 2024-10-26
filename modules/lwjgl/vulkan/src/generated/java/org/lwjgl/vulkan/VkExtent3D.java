@@ -257,18 +257,18 @@ public class VkExtent3D extends Struct<VkExtent3D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkExtent3D.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkExtent3D.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkExtent3D.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkExtent3D.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + VkExtent3D.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + VkExtent3D.DEPTH); }
 
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkExtent3D.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkExtent3D.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkExtent3D.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkExtent3D.HEIGHT, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
-    public static void ndepth(long struct, int value) { UNSAFE.putInt(null, struct + VkExtent3D.DEPTH, value); }
+    public static void ndepth(long struct, int value) { memPutInt(struct + VkExtent3D.DEPTH, value); }
 
     // -----------------------------------
 

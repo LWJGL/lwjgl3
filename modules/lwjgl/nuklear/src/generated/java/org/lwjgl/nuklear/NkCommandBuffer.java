@@ -149,7 +149,7 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
     /** Unsafe version of {@link #clip}. */
     public static NkRect nclip(long struct) { return NkRect.create(struct + NkCommandBuffer.CLIP); }
     /** Unsafe version of {@link #use_clipping}. */
-    public static int nuse_clipping(long struct) { return UNSAFE.getInt(null, struct + NkCommandBuffer.USE_CLIPPING); }
+    public static int nuse_clipping(long struct) { return memGetInt(struct + NkCommandBuffer.USE_CLIPPING); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkCommandBuffer.USERDATA); }
     /** Unsafe version of {@link #begin}. */

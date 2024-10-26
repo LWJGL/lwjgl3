@@ -249,14 +249,14 @@ public class VkImportMetalIOSurfaceInfoEXT extends Struct<VkImportMetalIOSurface
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportMetalIOSurfaceInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkImportMetalIOSurfaceInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportMetalIOSurfaceInfoEXT.PNEXT); }
     /** Unsafe version of {@link #ioSurface}. */
     public static long nioSurface(long struct) { return memGetAddress(struct + VkImportMetalIOSurfaceInfoEXT.IOSURFACE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportMetalIOSurfaceInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkImportMetalIOSurfaceInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportMetalIOSurfaceInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #ioSurface(long) ioSurface}. */

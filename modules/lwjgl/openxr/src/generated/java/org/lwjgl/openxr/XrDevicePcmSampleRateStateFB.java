@@ -247,18 +247,18 @@ public class XrDevicePcmSampleRateStateFB extends Struct<XrDevicePcmSampleRateSt
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrDevicePcmSampleRateStateFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrDevicePcmSampleRateStateFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrDevicePcmSampleRateStateFB.NEXT); }
     /** Unsafe version of {@link #sampleRate}. */
-    public static float nsampleRate(long struct) { return UNSAFE.getFloat(null, struct + XrDevicePcmSampleRateStateFB.SAMPLERATE); }
+    public static float nsampleRate(long struct) { return memGetFloat(struct + XrDevicePcmSampleRateStateFB.SAMPLERATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDevicePcmSampleRateStateFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrDevicePcmSampleRateStateFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrDevicePcmSampleRateStateFB.NEXT, value); }
     /** Unsafe version of {@link #sampleRate(float) sampleRate}. */
-    public static void nsampleRate(long struct, float value) { UNSAFE.putFloat(null, struct + XrDevicePcmSampleRateStateFB.SAMPLERATE, value); }
+    public static void nsampleRate(long struct, float value) { memPutFloat(struct + XrDevicePcmSampleRateStateFB.SAMPLERATE, value); }
 
     // -----------------------------------
 

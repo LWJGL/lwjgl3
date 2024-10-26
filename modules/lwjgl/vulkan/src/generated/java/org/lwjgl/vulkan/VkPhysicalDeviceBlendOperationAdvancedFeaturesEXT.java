@@ -265,18 +265,18 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct<Vk
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #advancedBlendCoherentOperations}. */
-    public static int nadvancedBlendCoherentOperations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS); }
+    public static int nadvancedBlendCoherentOperations(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #advancedBlendCoherentOperations(boolean) advancedBlendCoherentOperations}. */
-    public static void nadvancedBlendCoherentOperations(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS, value); }
+    public static void nadvancedBlendCoherentOperations(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS, value); }
 
     // -----------------------------------
 

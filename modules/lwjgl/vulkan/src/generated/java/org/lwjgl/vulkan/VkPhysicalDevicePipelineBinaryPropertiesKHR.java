@@ -295,34 +295,34 @@ public class VkPhysicalDevicePipelineBinaryPropertiesKHR extends Struct<VkPhysic
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #pipelineBinaryInternalCache}. */
-    public static int npipelineBinaryInternalCache(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHE); }
+    public static int npipelineBinaryInternalCache(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHE); }
     /** Unsafe version of {@link #pipelineBinaryInternalCacheControl}. */
-    public static int npipelineBinaryInternalCacheControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHECONTROL); }
+    public static int npipelineBinaryInternalCacheControl(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHECONTROL); }
     /** Unsafe version of {@link #pipelineBinaryPrefersInternalCache}. */
-    public static int npipelineBinaryPrefersInternalCache(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPREFERSINTERNALCACHE); }
+    public static int npipelineBinaryPrefersInternalCache(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPREFERSINTERNALCACHE); }
     /** Unsafe version of {@link #pipelineBinaryPrecompiledInternalCache}. */
-    public static int npipelineBinaryPrecompiledInternalCache(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPRECOMPILEDINTERNALCACHE); }
+    public static int npipelineBinaryPrecompiledInternalCache(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPRECOMPILEDINTERNALCACHE); }
     /** Unsafe version of {@link #pipelineBinaryCompressedData}. */
-    public static int npipelineBinaryCompressedData(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYCOMPRESSEDDATA); }
+    public static int npipelineBinaryCompressedData(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYCOMPRESSEDDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PNEXT, value); }
     /** Unsafe version of {@link #pipelineBinaryInternalCache(boolean) pipelineBinaryInternalCache}. */
-    public static void npipelineBinaryInternalCache(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHE, value); }
+    public static void npipelineBinaryInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHE, value); }
     /** Unsafe version of {@link #pipelineBinaryInternalCacheControl(boolean) pipelineBinaryInternalCacheControl}. */
-    public static void npipelineBinaryInternalCacheControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHECONTROL, value); }
+    public static void npipelineBinaryInternalCacheControl(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHECONTROL, value); }
     /** Unsafe version of {@link #pipelineBinaryPrefersInternalCache(boolean) pipelineBinaryPrefersInternalCache}. */
-    public static void npipelineBinaryPrefersInternalCache(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPREFERSINTERNALCACHE, value); }
+    public static void npipelineBinaryPrefersInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPREFERSINTERNALCACHE, value); }
     /** Unsafe version of {@link #pipelineBinaryPrecompiledInternalCache(boolean) pipelineBinaryPrecompiledInternalCache}. */
-    public static void npipelineBinaryPrecompiledInternalCache(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPRECOMPILEDINTERNALCACHE, value); }
+    public static void npipelineBinaryPrecompiledInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPRECOMPILEDINTERNALCACHE, value); }
     /** Unsafe version of {@link #pipelineBinaryCompressedData(boolean) pipelineBinaryCompressedData}. */
-    public static void npipelineBinaryCompressedData(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYCOMPRESSEDDATA, value); }
+    public static void npipelineBinaryCompressedData(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYCOMPRESSEDDATA, value); }
 
     // -----------------------------------
 

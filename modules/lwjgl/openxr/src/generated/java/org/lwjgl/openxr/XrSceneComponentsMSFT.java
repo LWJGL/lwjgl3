@@ -282,24 +282,24 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentsMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSceneComponentsMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSceneComponentsMSFT.NEXT); }
     /** Unsafe version of {@link #componentCapacityInput}. */
-    public static int ncomponentCapacityInput(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentsMSFT.COMPONENTCAPACITYINPUT); }
+    public static int ncomponentCapacityInput(long struct) { return memGetInt(struct + XrSceneComponentsMSFT.COMPONENTCAPACITYINPUT); }
     /** Unsafe version of {@link #componentCountOutput}. */
-    public static int ncomponentCountOutput(long struct) { return UNSAFE.getInt(null, struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT); }
+    public static int ncomponentCountOutput(long struct) { return memGetInt(struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT); }
     /** Unsafe version of {@link #components}. */
     @Nullable public static XrSceneComponentMSFT.Buffer ncomponents(long struct) { return XrSceneComponentMSFT.createSafe(memGetAddress(struct + XrSceneComponentsMSFT.COMPONENTS), ncomponentCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSceneComponentsMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentsMSFT.NEXT, value); }
     /** Sets the specified value to the {@code componentCapacityInput} field of the specified {@code struct}. */
-    public static void ncomponentCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.COMPONENTCAPACITYINPUT, value); }
+    public static void ncomponentCapacityInput(long struct, int value) { memPutInt(struct + XrSceneComponentsMSFT.COMPONENTCAPACITYINPUT, value); }
     /** Unsafe version of {@link #componentCountOutput(int) componentCountOutput}. */
-    public static void ncomponentCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT, value); }
+    public static void ncomponentCountOutput(long struct, int value) { memPutInt(struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #components(XrSceneComponentMSFT.Buffer) components}. */
     public static void ncomponents(long struct, @Nullable XrSceneComponentMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentsMSFT.COMPONENTS, memAddressSafe(value)); if (value != null) { ncomponentCapacityInput(struct, value.remaining()); } }
 

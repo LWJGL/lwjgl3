@@ -254,18 +254,18 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct<VkDeviceMemor
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.PNEXT); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfo.MEMORY); }
+    public static long nmemory(long struct) { return memGetLong(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.MEMORY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.PNEXT, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfo.MEMORY, value); }
+    public static void nmemory(long struct, long value) { memPutLong(struct + VkDeviceMemoryOpaqueCaptureAddressInfo.MEMORY, value); }
 
     // -----------------------------------
 

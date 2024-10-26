@@ -257,14 +257,14 @@ public class VkDisplayNativeHdrSurfaceCapabilitiesAMD extends Struct<VkDisplayNa
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.PNEXT); }
     /** Unsafe version of {@link #localDimmingSupport}. */
-    public static int nlocalDimmingSupport(long struct) { return UNSAFE.getInt(null, struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.LOCALDIMMINGSUPPORT); }
+    public static int nlocalDimmingSupport(long struct) { return memGetInt(struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.LOCALDIMMINGSUPPORT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayNativeHdrSurfaceCapabilitiesAMD.PNEXT, value); }
 

@@ -344,32 +344,32 @@ public class VkPipelineViewportStateCreateInfo extends Struct<VkPipelineViewport
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineViewportStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportStateCreateInfo.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportStateCreateInfo.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pViewports}. */
     @Nullable public static VkViewport.Buffer npViewports(long struct) { return VkViewport.createSafe(memGetAddress(struct + VkPipelineViewportStateCreateInfo.PVIEWPORTS), nviewportCount(struct)); }
     /** Unsafe version of {@link #scissorCount}. */
-    public static int nscissorCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportStateCreateInfo.SCISSORCOUNT); }
+    public static int nscissorCount(long struct) { return memGetInt(struct + VkPipelineViewportStateCreateInfo.SCISSORCOUNT); }
     /** Unsafe version of {@link #pScissors}. */
     @Nullable public static VkRect2D.Buffer npScissors(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineViewportStateCreateInfo.PSCISSORS), nscissorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineViewportStateCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportStateCreateInfo.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportStateCreateInfo.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pViewports(VkViewport.Buffer) pViewports}. */
     public static void npViewports(long struct, @Nullable VkViewport.Buffer value) { memPutAddress(struct + VkPipelineViewportStateCreateInfo.PVIEWPORTS, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code scissorCount} field of the specified {@code struct}. */
-    public static void nscissorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportStateCreateInfo.SCISSORCOUNT, value); }
+    public static void nscissorCount(long struct, int value) { memPutInt(struct + VkPipelineViewportStateCreateInfo.SCISSORCOUNT, value); }
     /** Unsafe version of {@link #pScissors(VkRect2D.Buffer) pScissors}. */
     public static void npScissors(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkPipelineViewportStateCreateInfo.PSCISSORS, memAddressSafe(value)); if (value != null) { nscissorCount(struct, value.remaining()); } }
 

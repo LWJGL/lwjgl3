@@ -294,30 +294,30 @@ public class VkColorBlendEquationEXT extends Struct<VkColorBlendEquationEXT> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #srcColorBlendFactor}. */
-    public static int nsrcColorBlendFactor(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.SRCCOLORBLENDFACTOR); }
+    public static int nsrcColorBlendFactor(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.SRCCOLORBLENDFACTOR); }
     /** Unsafe version of {@link #dstColorBlendFactor}. */
-    public static int ndstColorBlendFactor(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.DSTCOLORBLENDFACTOR); }
+    public static int ndstColorBlendFactor(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.DSTCOLORBLENDFACTOR); }
     /** Unsafe version of {@link #colorBlendOp}. */
-    public static int ncolorBlendOp(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.COLORBLENDOP); }
+    public static int ncolorBlendOp(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.COLORBLENDOP); }
     /** Unsafe version of {@link #srcAlphaBlendFactor}. */
-    public static int nsrcAlphaBlendFactor(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.SRCALPHABLENDFACTOR); }
+    public static int nsrcAlphaBlendFactor(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.SRCALPHABLENDFACTOR); }
     /** Unsafe version of {@link #dstAlphaBlendFactor}. */
-    public static int ndstAlphaBlendFactor(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.DSTALPHABLENDFACTOR); }
+    public static int ndstAlphaBlendFactor(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.DSTALPHABLENDFACTOR); }
     /** Unsafe version of {@link #alphaBlendOp}. */
-    public static int nalphaBlendOp(long struct) { return UNSAFE.getInt(null, struct + VkColorBlendEquationEXT.ALPHABLENDOP); }
+    public static int nalphaBlendOp(long struct) { return memGetInt(struct + VkColorBlendEquationEXT.ALPHABLENDOP); }
 
     /** Unsafe version of {@link #srcColorBlendFactor(int) srcColorBlendFactor}. */
-    public static void nsrcColorBlendFactor(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.SRCCOLORBLENDFACTOR, value); }
+    public static void nsrcColorBlendFactor(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.SRCCOLORBLENDFACTOR, value); }
     /** Unsafe version of {@link #dstColorBlendFactor(int) dstColorBlendFactor}. */
-    public static void ndstColorBlendFactor(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.DSTCOLORBLENDFACTOR, value); }
+    public static void ndstColorBlendFactor(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.DSTCOLORBLENDFACTOR, value); }
     /** Unsafe version of {@link #colorBlendOp(int) colorBlendOp}. */
-    public static void ncolorBlendOp(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.COLORBLENDOP, value); }
+    public static void ncolorBlendOp(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.COLORBLENDOP, value); }
     /** Unsafe version of {@link #srcAlphaBlendFactor(int) srcAlphaBlendFactor}. */
-    public static void nsrcAlphaBlendFactor(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.SRCALPHABLENDFACTOR, value); }
+    public static void nsrcAlphaBlendFactor(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.SRCALPHABLENDFACTOR, value); }
     /** Unsafe version of {@link #dstAlphaBlendFactor(int) dstAlphaBlendFactor}. */
-    public static void ndstAlphaBlendFactor(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.DSTALPHABLENDFACTOR, value); }
+    public static void ndstAlphaBlendFactor(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.DSTALPHABLENDFACTOR, value); }
     /** Unsafe version of {@link #alphaBlendOp(int) alphaBlendOp}. */
-    public static void nalphaBlendOp(long struct, int value) { UNSAFE.putInt(null, struct + VkColorBlendEquationEXT.ALPHABLENDOP, value); }
+    public static void nalphaBlendOp(long struct, int value) { memPutInt(struct + VkColorBlendEquationEXT.ALPHABLENDOP, value); }
 
     // -----------------------------------
 

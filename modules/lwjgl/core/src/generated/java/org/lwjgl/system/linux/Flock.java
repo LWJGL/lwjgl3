@@ -253,26 +253,26 @@ public class Flock extends Struct<Flock> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #l_type}. */
-    public static short nl_type(long struct) { return UNSAFE.getShort(null, struct + Flock.L_TYPE); }
+    public static short nl_type(long struct) { return memGetShort(struct + Flock.L_TYPE); }
     /** Unsafe version of {@link #l_whence}. */
-    public static short nl_whence(long struct) { return UNSAFE.getShort(null, struct + Flock.L_WHENCE); }
+    public static short nl_whence(long struct) { return memGetShort(struct + Flock.L_WHENCE); }
     /** Unsafe version of {@link #l_start}. */
-    public static long nl_start(long struct) { return UNSAFE.getLong(null, struct + Flock.L_START); }
+    public static long nl_start(long struct) { return memGetLong(struct + Flock.L_START); }
     /** Unsafe version of {@link #l_len}. */
-    public static long nl_len(long struct) { return UNSAFE.getLong(null, struct + Flock.L_LEN); }
+    public static long nl_len(long struct) { return memGetLong(struct + Flock.L_LEN); }
     /** Unsafe version of {@link #l_pid}. */
-    public static int nl_pid(long struct) { return UNSAFE.getInt(null, struct + Flock.L_PID); }
+    public static int nl_pid(long struct) { return memGetInt(struct + Flock.L_PID); }
 
     /** Unsafe version of {@link #l_type(short) l_type}. */
-    public static void nl_type(long struct, short value) { UNSAFE.putShort(null, struct + Flock.L_TYPE, value); }
+    public static void nl_type(long struct, short value) { memPutShort(struct + Flock.L_TYPE, value); }
     /** Unsafe version of {@link #l_whence(short) l_whence}. */
-    public static void nl_whence(long struct, short value) { UNSAFE.putShort(null, struct + Flock.L_WHENCE, value); }
+    public static void nl_whence(long struct, short value) { memPutShort(struct + Flock.L_WHENCE, value); }
     /** Unsafe version of {@link #l_start(long) l_start}. */
-    public static void nl_start(long struct, long value) { UNSAFE.putLong(null, struct + Flock.L_START, value); }
+    public static void nl_start(long struct, long value) { memPutLong(struct + Flock.L_START, value); }
     /** Unsafe version of {@link #l_len(long) l_len}. */
-    public static void nl_len(long struct, long value) { UNSAFE.putLong(null, struct + Flock.L_LEN, value); }
+    public static void nl_len(long struct, long value) { memPutLong(struct + Flock.L_LEN, value); }
     /** Unsafe version of {@link #l_pid(int) l_pid}. */
-    public static void nl_pid(long struct, int value) { UNSAFE.putInt(null, struct + Flock.L_PID, value); }
+    public static void nl_pid(long struct, int value) { memPutInt(struct + Flock.L_PID, value); }
 
     // -----------------------------------
 

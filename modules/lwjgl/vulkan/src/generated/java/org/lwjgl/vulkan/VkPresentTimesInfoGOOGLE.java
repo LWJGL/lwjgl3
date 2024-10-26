@@ -285,20 +285,20 @@ public class VkPresentTimesInfoGOOGLE extends Struct<VkPresentTimesInfoGOOGLE> i
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPresentTimesInfoGOOGLE.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPresentTimesInfoGOOGLE.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPresentTimesInfoGOOGLE.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentTimesInfoGOOGLE.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentTimesInfoGOOGLE.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pTimes}. */
     @Nullable public static VkPresentTimeGOOGLE.Buffer npTimes(long struct) { return VkPresentTimeGOOGLE.createSafe(memGetAddress(struct + VkPresentTimesInfoGOOGLE.PTIMES), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentTimesInfoGOOGLE.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPresentTimesInfoGOOGLE.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentTimesInfoGOOGLE.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentTimesInfoGOOGLE.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentTimesInfoGOOGLE.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pTimes(VkPresentTimeGOOGLE.Buffer) pTimes}. */
     public static void npTimes(long struct, @Nullable VkPresentTimeGOOGLE.Buffer value) { memPutAddress(struct + VkPresentTimesInfoGOOGLE.PTIMES, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
 

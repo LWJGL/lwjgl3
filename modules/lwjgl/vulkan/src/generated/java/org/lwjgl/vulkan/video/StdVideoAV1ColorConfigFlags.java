@@ -237,7 +237,7 @@ public class StdVideoAV1ColorConfigFlags extends Struct<StdVideoAV1ColorConfigFl
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1ColorConfigFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoAV1ColorConfigFlags.BITFIELD0); }
     /** Unsafe version of {@link #mono_chrome}. */
     public static int nmono_chrome(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #color_range}. */
@@ -246,10 +246,10 @@ public class StdVideoAV1ColorConfigFlags extends Struct<StdVideoAV1ColorConfigFl
     public static int nseparate_uv_delta_q(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #color_description_present_flag}. */
     public static int ncolor_description_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoAV1ColorConfigFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoAV1ColorConfigFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x0F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1ColorConfigFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoAV1ColorConfigFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #mono_chrome(boolean) mono_chrome}. */
     public static void nmono_chrome(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #color_range(boolean) color_range}. */
@@ -258,7 +258,7 @@ public class StdVideoAV1ColorConfigFlags extends Struct<StdVideoAV1ColorConfigFl
     public static void nseparate_uv_delta_q(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #color_description_present_flag(boolean) color_description_present_flag}. */
     public static void ncolor_description_present_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoAV1ColorConfigFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoAV1ColorConfigFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xF0_00_00_00) | (value & 0x0F_FF_FF_FF)); }
 
     // -----------------------------------

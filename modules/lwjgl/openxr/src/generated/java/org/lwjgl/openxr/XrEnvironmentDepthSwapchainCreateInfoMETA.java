@@ -253,18 +253,18 @@ public class XrEnvironmentDepthSwapchainCreateInfoMETA extends Struct<XrEnvironm
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrEnvironmentDepthSwapchainCreateInfoMETA.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.NEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static long ncreateFlags(long struct) { return UNSAFE.getLong(null, struct + XrEnvironmentDepthSwapchainCreateInfoMETA.CREATEFLAGS); }
+    public static long ncreateFlags(long struct) { return memGetLong(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.CREATEFLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEnvironmentDepthSwapchainCreateInfoMETA.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
-    public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrEnvironmentDepthSwapchainCreateInfoMETA.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, long value) { memPutLong(struct + XrEnvironmentDepthSwapchainCreateInfoMETA.CREATEFLAGS, value); }
 
     // -----------------------------------
 

@@ -297,7 +297,7 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XErrorEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XErrorEvent.TYPE); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XErrorEvent.DISPLAY); }
     /** Unsafe version of {@link #resourceid}. */
@@ -305,14 +305,14 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XErrorEvent.SERIAL); }
     /** Unsafe version of {@link #error_code}. */
-    public static byte nerror_code(long struct) { return UNSAFE.getByte(null, struct + XErrorEvent.ERROR_CODE); }
+    public static byte nerror_code(long struct) { return memGetByte(struct + XErrorEvent.ERROR_CODE); }
     /** Unsafe version of {@link #request_code}. */
-    public static byte nrequest_code(long struct) { return UNSAFE.getByte(null, struct + XErrorEvent.REQUEST_CODE); }
+    public static byte nrequest_code(long struct) { return memGetByte(struct + XErrorEvent.REQUEST_CODE); }
     /** Unsafe version of {@link #minor_code}. */
-    public static byte nminor_code(long struct) { return UNSAFE.getByte(null, struct + XErrorEvent.MINOR_CODE); }
+    public static byte nminor_code(long struct) { return memGetByte(struct + XErrorEvent.MINOR_CODE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XErrorEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XErrorEvent.TYPE, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XErrorEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #resourceid(long) resourceid}. */
@@ -320,11 +320,11 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XErrorEvent.SERIAL, value); }
     /** Unsafe version of {@link #error_code(byte) error_code}. */
-    public static void nerror_code(long struct, byte value) { UNSAFE.putByte(null, struct + XErrorEvent.ERROR_CODE, value); }
+    public static void nerror_code(long struct, byte value) { memPutByte(struct + XErrorEvent.ERROR_CODE, value); }
     /** Unsafe version of {@link #request_code(byte) request_code}. */
-    public static void nrequest_code(long struct, byte value) { UNSAFE.putByte(null, struct + XErrorEvent.REQUEST_CODE, value); }
+    public static void nrequest_code(long struct, byte value) { memPutByte(struct + XErrorEvent.REQUEST_CODE, value); }
     /** Unsafe version of {@link #minor_code(byte) minor_code}. */
-    public static void nminor_code(long struct, byte value) { UNSAFE.putByte(null, struct + XErrorEvent.MINOR_CODE, value); }
+    public static void nminor_code(long struct, byte value) { memPutByte(struct + XErrorEvent.MINOR_CODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

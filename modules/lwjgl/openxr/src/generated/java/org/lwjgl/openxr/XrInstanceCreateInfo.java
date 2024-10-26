@@ -304,36 +304,36 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrInstanceCreateInfo.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrInstanceCreateInfo.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrInstanceCreateInfo.NEXT); }
     /** Unsafe version of {@link #createFlags}. */
-    public static long ncreateFlags(long struct) { return UNSAFE.getLong(null, struct + XrInstanceCreateInfo.CREATEFLAGS); }
+    public static long ncreateFlags(long struct) { return memGetLong(struct + XrInstanceCreateInfo.CREATEFLAGS); }
     /** Unsafe version of {@link #applicationInfo}. */
     public static XrApplicationInfo napplicationInfo(long struct) { return XrApplicationInfo.create(struct + XrInstanceCreateInfo.APPLICATIONINFO); }
     /** Unsafe version of {@link #enabledApiLayerCount}. */
-    public static int nenabledApiLayerCount(long struct) { return UNSAFE.getInt(null, struct + XrInstanceCreateInfo.ENABLEDAPILAYERCOUNT); }
+    public static int nenabledApiLayerCount(long struct) { return memGetInt(struct + XrInstanceCreateInfo.ENABLEDAPILAYERCOUNT); }
     /** Unsafe version of {@link #enabledApiLayerNames() enabledApiLayerNames}. */
     @Nullable public static PointerBuffer nenabledApiLayerNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDAPILAYERNAMES), nenabledApiLayerCount(struct)); }
     /** Unsafe version of {@link #enabledExtensionCount}. */
-    public static int nenabledExtensionCount(long struct) { return UNSAFE.getInt(null, struct + XrInstanceCreateInfo.ENABLEDEXTENSIONCOUNT); }
+    public static int nenabledExtensionCount(long struct) { return memGetInt(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONCOUNT); }
     /** Unsafe version of {@link #enabledExtensionNames() enabledExtensionNames}. */
     @Nullable public static PointerBuffer nenabledExtensionNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONNAMES), nenabledExtensionCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceCreateInfo.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrInstanceCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
-    public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrInstanceCreateInfo.CREATEFLAGS, value); }
+    public static void ncreateFlags(long struct, long value) { memPutLong(struct + XrInstanceCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #applicationInfo(XrApplicationInfo) applicationInfo}. */
     public static void napplicationInfo(long struct, XrApplicationInfo value) { memCopy(value.address(), struct + XrInstanceCreateInfo.APPLICATIONINFO, XrApplicationInfo.SIZEOF); }
     /** Sets the specified value to the {@code enabledApiLayerCount} field of the specified {@code struct}. */
-    public static void nenabledApiLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceCreateInfo.ENABLEDAPILAYERCOUNT, value); }
+    public static void nenabledApiLayerCount(long struct, int value) { memPutInt(struct + XrInstanceCreateInfo.ENABLEDAPILAYERCOUNT, value); }
     /** Unsafe version of {@link #enabledApiLayerNames(PointerBuffer) enabledApiLayerNames}. */
     public static void nenabledApiLayerNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrInstanceCreateInfo.ENABLEDAPILAYERNAMES, memAddressSafe(value)); nenabledApiLayerCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code enabledExtensionCount} field of the specified {@code struct}. */
-    public static void nenabledExtensionCount(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
+    public static void nenabledExtensionCount(long struct, int value) { memPutInt(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONCOUNT, value); }
     /** Unsafe version of {@link #enabledExtensionNames(PointerBuffer) enabledExtensionNames}. */
     public static void nenabledExtensionNames(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONNAMES, memAddressSafe(value)); nenabledExtensionCount(struct, value == null ? 0 : value.remaining()); }
 

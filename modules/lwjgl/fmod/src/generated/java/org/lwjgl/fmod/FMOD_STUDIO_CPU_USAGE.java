@@ -200,10 +200,10 @@ public class FMOD_STUDIO_CPU_USAGE extends Struct<FMOD_STUDIO_CPU_USAGE> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #update}. */
-    public static float nupdate(long struct) { return UNSAFE.getFloat(null, struct + FMOD_STUDIO_CPU_USAGE.UPDATE); }
+    public static float nupdate(long struct) { return memGetFloat(struct + FMOD_STUDIO_CPU_USAGE.UPDATE); }
 
     /** Unsafe version of {@link #update(float) update}. */
-    public static void nupdate(long struct, float value) { UNSAFE.putFloat(null, struct + FMOD_STUDIO_CPU_USAGE.UPDATE, value); }
+    public static void nupdate(long struct, float value) { memPutFloat(struct + FMOD_STUDIO_CPU_USAGE.UPDATE, value); }
 
     // -----------------------------------
 

@@ -252,18 +252,18 @@ public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #isValid}. */
-    public static int nisValid(long struct) { return UNSAFE.getInt(null, struct + XrEyeGazeFB.ISVALID); }
+    public static int nisValid(long struct) { return memGetInt(struct + XrEyeGazeFB.ISVALID); }
     /** Unsafe version of {@link #gazePose}. */
     public static XrPosef ngazePose(long struct) { return XrPosef.create(struct + XrEyeGazeFB.GAZEPOSE); }
     /** Unsafe version of {@link #gazeConfidence}. */
-    public static float ngazeConfidence(long struct) { return UNSAFE.getFloat(null, struct + XrEyeGazeFB.GAZECONFIDENCE); }
+    public static float ngazeConfidence(long struct) { return memGetFloat(struct + XrEyeGazeFB.GAZECONFIDENCE); }
 
     /** Unsafe version of {@link #isValid(boolean) isValid}. */
-    public static void nisValid(long struct, int value) { UNSAFE.putInt(null, struct + XrEyeGazeFB.ISVALID, value); }
+    public static void nisValid(long struct, int value) { memPutInt(struct + XrEyeGazeFB.ISVALID, value); }
     /** Unsafe version of {@link #gazePose(XrPosef) gazePose}. */
     public static void ngazePose(long struct, XrPosef value) { memCopy(value.address(), struct + XrEyeGazeFB.GAZEPOSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #gazeConfidence(float) gazeConfidence}. */
-    public static void ngazeConfidence(long struct, float value) { UNSAFE.putFloat(null, struct + XrEyeGazeFB.GAZECONFIDENCE, value); }
+    public static void ngazeConfidence(long struct, float value) { memPutFloat(struct + XrEyeGazeFB.GAZECONFIDENCE, value); }
 
     // -----------------------------------
 

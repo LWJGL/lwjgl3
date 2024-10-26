@@ -251,22 +251,22 @@ public class SpvcMslShaderInterfaceVar extends Struct<SpvcMslShaderInterfaceVar>
     // -----------------------------------
 
     /** Unsafe version of {@link #location}. */
-    public static int nlocation(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar.LOCATION); }
+    public static int nlocation(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar.LOCATION); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar.FORMAT); }
     /** Unsafe version of {@link #builtin}. */
-    public static int nbuiltin(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar.BUILTIN); }
+    public static int nbuiltin(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar.BUILTIN); }
     /** Unsafe version of {@link #vecsize}. */
-    public static int nvecsize(long struct) { return UNSAFE.getInt(null, struct + SpvcMslShaderInterfaceVar.VECSIZE); }
+    public static int nvecsize(long struct) { return memGetInt(struct + SpvcMslShaderInterfaceVar.VECSIZE); }
 
     /** Unsafe version of {@link #location(int) location}. */
-    public static void nlocation(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar.LOCATION, value); }
+    public static void nlocation(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar.LOCATION, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar.FORMAT, value); }
     /** Unsafe version of {@link #builtin(int) builtin}. */
-    public static void nbuiltin(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar.BUILTIN, value); }
+    public static void nbuiltin(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar.BUILTIN, value); }
     /** Unsafe version of {@link #vecsize(int) vecsize}. */
-    public static void nvecsize(long struct, int value) { UNSAFE.putInt(null, struct + SpvcMslShaderInterfaceVar.VECSIZE, value); }
+    public static void nvecsize(long struct, int value) { memPutInt(struct + SpvcMslShaderInterfaceVar.VECSIZE, value); }
 
     // -----------------------------------
 

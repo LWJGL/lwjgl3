@@ -224,11 +224,11 @@ public class VkSparseImageFormatProperties extends Struct<VkSparseImageFormatPro
     // -----------------------------------
 
     /** Unsafe version of {@link #aspectMask}. */
-    public static int naspectMask(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageFormatProperties.ASPECTMASK); }
+    public static int naspectMask(long struct) { return memGetInt(struct + VkSparseImageFormatProperties.ASPECTMASK); }
     /** Unsafe version of {@link #imageGranularity}. */
     public static VkExtent3D nimageGranularity(long struct) { return VkExtent3D.create(struct + VkSparseImageFormatProperties.IMAGEGRANULARITY); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageFormatProperties.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkSparseImageFormatProperties.FLAGS); }
 
     // -----------------------------------
 

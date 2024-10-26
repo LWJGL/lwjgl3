@@ -245,17 +245,17 @@ public class CompositorStageRenderSettings extends Struct<CompositorStageRenderS
     /** Unsafe version of {@link #m_SecondaryColor}. */
     public static HmdColor nm_SecondaryColor(long struct) { return HmdColor.create(struct + CompositorStageRenderSettings.M_SECONDARYCOLOR); }
     /** Unsafe version of {@link #m_flVignetteInnerRadius}. */
-    public static float nm_flVignetteInnerRadius(long struct) { return UNSAFE.getFloat(null, struct + CompositorStageRenderSettings.M_FLVIGNETTEINNERRADIUS); }
+    public static float nm_flVignetteInnerRadius(long struct) { return memGetFloat(struct + CompositorStageRenderSettings.M_FLVIGNETTEINNERRADIUS); }
     /** Unsafe version of {@link #m_flVignetteOuterRadius}. */
-    public static float nm_flVignetteOuterRadius(long struct) { return UNSAFE.getFloat(null, struct + CompositorStageRenderSettings.M_FLVIGNETTEOUTERRADIUS); }
+    public static float nm_flVignetteOuterRadius(long struct) { return memGetFloat(struct + CompositorStageRenderSettings.M_FLVIGNETTEOUTERRADIUS); }
     /** Unsafe version of {@link #m_flFresnelStrength}. */
-    public static float nm_flFresnelStrength(long struct) { return UNSAFE.getFloat(null, struct + CompositorStageRenderSettings.M_FLFRESNELSTRENGTH); }
+    public static float nm_flFresnelStrength(long struct) { return memGetFloat(struct + CompositorStageRenderSettings.M_FLFRESNELSTRENGTH); }
     /** Unsafe version of {@link #m_bBackfaceCulling}. */
-    public static boolean nm_bBackfaceCulling(long struct) { return UNSAFE.getByte(null, struct + CompositorStageRenderSettings.M_BBACKFACECULLING) != 0; }
+    public static boolean nm_bBackfaceCulling(long struct) { return memGetByte(struct + CompositorStageRenderSettings.M_BBACKFACECULLING) != 0; }
     /** Unsafe version of {@link #m_bGreyscale}. */
-    public static boolean nm_bGreyscale(long struct) { return UNSAFE.getByte(null, struct + CompositorStageRenderSettings.M_BGREYSCALE) != 0; }
+    public static boolean nm_bGreyscale(long struct) { return memGetByte(struct + CompositorStageRenderSettings.M_BGREYSCALE) != 0; }
     /** Unsafe version of {@link #m_bWireframe}. */
-    public static boolean nm_bWireframe(long struct) { return UNSAFE.getByte(null, struct + CompositorStageRenderSettings.M_BWIREFRAME) != 0; }
+    public static boolean nm_bWireframe(long struct) { return memGetByte(struct + CompositorStageRenderSettings.M_BWIREFRAME) != 0; }
 
     // -----------------------------------
 

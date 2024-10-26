@@ -333,40 +333,40 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkLatencyTimingsFrameReportNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkLatencyTimingsFrameReportNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkLatencyTimingsFrameReportNV.PNEXT); }
     /** Unsafe version of {@link #presentID}. */
-    public static long npresentID(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTID); }
+    public static long npresentID(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.PRESENTID); }
     /** Unsafe version of {@link #inputSampleTimeUs}. */
-    public static long ninputSampleTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.INPUTSAMPLETIMEUS); }
+    public static long ninputSampleTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.INPUTSAMPLETIMEUS); }
     /** Unsafe version of {@link #simStartTimeUs}. */
-    public static long nsimStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.SIMSTARTTIMEUS); }
+    public static long nsimStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.SIMSTARTTIMEUS); }
     /** Unsafe version of {@link #simEndTimeUs}. */
-    public static long nsimEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.SIMENDTIMEUS); }
+    public static long nsimEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.SIMENDTIMEUS); }
     /** Unsafe version of {@link #renderSubmitStartTimeUs}. */
-    public static long nrenderSubmitStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITSTARTTIMEUS); }
+    public static long nrenderSubmitStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITSTARTTIMEUS); }
     /** Unsafe version of {@link #renderSubmitEndTimeUs}. */
-    public static long nrenderSubmitEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITENDTIMEUS); }
+    public static long nrenderSubmitEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.RENDERSUBMITENDTIMEUS); }
     /** Unsafe version of {@link #presentStartTimeUs}. */
-    public static long npresentStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTSTARTTIMEUS); }
+    public static long npresentStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.PRESENTSTARTTIMEUS); }
     /** Unsafe version of {@link #presentEndTimeUs}. */
-    public static long npresentEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.PRESENTENDTIMEUS); }
+    public static long npresentEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.PRESENTENDTIMEUS); }
     /** Unsafe version of {@link #driverStartTimeUs}. */
-    public static long ndriverStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.DRIVERSTARTTIMEUS); }
+    public static long ndriverStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.DRIVERSTARTTIMEUS); }
     /** Unsafe version of {@link #driverEndTimeUs}. */
-    public static long ndriverEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.DRIVERENDTIMEUS); }
+    public static long ndriverEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.DRIVERENDTIMEUS); }
     /** Unsafe version of {@link #osRenderQueueStartTimeUs}. */
-    public static long nosRenderQueueStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUESTARTTIMEUS); }
+    public static long nosRenderQueueStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUESTARTTIMEUS); }
     /** Unsafe version of {@link #osRenderQueueEndTimeUs}. */
-    public static long nosRenderQueueEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUEENDTIMEUS); }
+    public static long nosRenderQueueEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.OSRENDERQUEUEENDTIMEUS); }
     /** Unsafe version of {@link #gpuRenderStartTimeUs}. */
-    public static long ngpuRenderStartTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.GPURENDERSTARTTIMEUS); }
+    public static long ngpuRenderStartTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.GPURENDERSTARTTIMEUS); }
     /** Unsafe version of {@link #gpuRenderEndTimeUs}. */
-    public static long ngpuRenderEndTimeUs(long struct) { return UNSAFE.getLong(null, struct + VkLatencyTimingsFrameReportNV.GPURENDERENDTIMEUS); }
+    public static long ngpuRenderEndTimeUs(long struct) { return memGetLong(struct + VkLatencyTimingsFrameReportNV.GPURENDERENDTIMEUS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkLatencyTimingsFrameReportNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkLatencyTimingsFrameReportNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkLatencyTimingsFrameReportNV.PNEXT, value); }
 

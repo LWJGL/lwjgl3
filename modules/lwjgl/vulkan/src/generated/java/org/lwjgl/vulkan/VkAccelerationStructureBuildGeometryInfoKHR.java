@@ -376,21 +376,21 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.FLAGS); }
     /** Unsafe version of {@link #mode}. */
-    public static int nmode(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.MODE); }
+    public static int nmode(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.MODE); }
     /** Unsafe version of {@link #srcAccelerationStructure}. */
-    public static long nsrcAccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.SRCACCELERATIONSTRUCTURE); }
+    public static long nsrcAccelerationStructure(long struct) { return memGetLong(struct + VkAccelerationStructureBuildGeometryInfoKHR.SRCACCELERATIONSTRUCTURE); }
     /** Unsafe version of {@link #dstAccelerationStructure}. */
-    public static long ndstAccelerationStructure(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.DSTACCELERATIONSTRUCTURE); }
+    public static long ndstAccelerationStructure(long struct) { return memGetLong(struct + VkAccelerationStructureBuildGeometryInfoKHR.DSTACCELERATIONSTRUCTURE); }
     /** Unsafe version of {@link #geometryCount}. */
-    public static int ngeometryCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT); }
+    public static int ngeometryCount(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT); }
     /** Unsafe version of {@link #pGeometries}. */
     @Nullable public static VkAccelerationStructureGeometryKHR.Buffer npGeometries(long struct) { return VkAccelerationStructureGeometryKHR.createSafe(memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES), ngeometryCount(struct)); }
     /** Unsafe version of {@link #ppGeometries() ppGeometries}. */
@@ -399,21 +399,21 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     public static VkDeviceOrHostAddressKHR nscratchData(long struct) { return VkDeviceOrHostAddressKHR.create(struct + VkAccelerationStructureBuildGeometryInfoKHR.SCRATCHDATA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
-    public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.MODE, value); }
+    public static void nmode(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.MODE, value); }
     /** Unsafe version of {@link #srcAccelerationStructure(long) srcAccelerationStructure}. */
-    public static void nsrcAccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.SRCACCELERATIONSTRUCTURE, value); }
+    public static void nsrcAccelerationStructure(long struct, long value) { memPutLong(struct + VkAccelerationStructureBuildGeometryInfoKHR.SRCACCELERATIONSTRUCTURE, value); }
     /** Unsafe version of {@link #dstAccelerationStructure(long) dstAccelerationStructure}. */
-    public static void ndstAccelerationStructure(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.DSTACCELERATIONSTRUCTURE, value); }
+    public static void ndstAccelerationStructure(long struct, long value) { memPutLong(struct + VkAccelerationStructureBuildGeometryInfoKHR.DSTACCELERATIONSTRUCTURE, value); }
     /** Sets the specified value to the {@code geometryCount} field of the specified {@code struct}. */
-    public static void ngeometryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT, value); }
+    public static void ngeometryCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT, value); }
     /** Unsafe version of {@link #pGeometries(VkAccelerationStructureGeometryKHR.Buffer) pGeometries}. */
     public static void npGeometries(long struct, @Nullable VkAccelerationStructureGeometryKHR.Buffer value) { memPutAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppGeometries(PointerBuffer) ppGeometries}. */

@@ -145,9 +145,9 @@ public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
     // -----------------------------------
 
     /** Unsafe version of {@link #markerType}. */
-    public static int nmarkerType(long struct) { return UNSAFE.getInt(null, struct + XrSceneMarkerMSFT.MARKERTYPE); }
+    public static int nmarkerType(long struct) { return memGetInt(struct + XrSceneMarkerMSFT.MARKERTYPE); }
     /** Unsafe version of {@link #lastSeenTime}. */
-    public static long nlastSeenTime(long struct) { return UNSAFE.getLong(null, struct + XrSceneMarkerMSFT.LASTSEENTIME); }
+    public static long nlastSeenTime(long struct) { return memGetLong(struct + XrSceneMarkerMSFT.LASTSEENTIME); }
     /** Unsafe version of {@link #center}. */
     public static XrOffset2Df ncenter(long struct) { return XrOffset2Df.create(struct + XrSceneMarkerMSFT.CENTER); }
     /** Unsafe version of {@link #size}. */

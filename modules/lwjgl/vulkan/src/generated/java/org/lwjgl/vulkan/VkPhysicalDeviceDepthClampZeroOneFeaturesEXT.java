@@ -246,18 +246,18 @@ public class VkPhysicalDeviceDepthClampZeroOneFeaturesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #depthClampZeroOne}. */
-    public static int ndepthClampZeroOne(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.DEPTHCLAMPZEROONE); }
+    public static int ndepthClampZeroOne(long struct) { return memGetInt(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.DEPTHCLAMPZEROONE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #depthClampZeroOne(boolean) depthClampZeroOne}. */
-    public static void ndepthClampZeroOne(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.DEPTHCLAMPZEROONE, value); }
+    public static void ndepthClampZeroOne(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.DEPTHCLAMPZEROONE, value); }
 
     // -----------------------------------
 

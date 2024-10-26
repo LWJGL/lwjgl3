@@ -246,14 +246,14 @@ public class VkOffset2D extends Struct<VkOffset2D> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkOffset2D.X); }
+    public static int nx(long struct) { return memGetInt(struct + VkOffset2D.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkOffset2D.Y); }
+    public static int ny(long struct) { return memGetInt(struct + VkOffset2D.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset2D.X, value); }
+    public static void nx(long struct, int value) { memPutInt(struct + VkOffset2D.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset2D.Y, value); }
+    public static void ny(long struct, int value) { memPutInt(struct + VkOffset2D.Y, value); }
 
     // -----------------------------------
 

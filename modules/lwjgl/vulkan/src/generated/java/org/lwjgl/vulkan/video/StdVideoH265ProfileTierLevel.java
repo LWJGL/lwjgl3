@@ -235,16 +235,16 @@ public class StdVideoH265ProfileTierLevel extends Struct<StdVideoH265ProfileTier
     /** Unsafe version of {@link #flags}. */
     public static StdVideoH265ProfileTierLevelFlags nflags(long struct) { return StdVideoH265ProfileTierLevelFlags.create(struct + StdVideoH265ProfileTierLevel.FLAGS); }
     /** Unsafe version of {@link #general_profile_idc}. */
-    public static int ngeneral_profile_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265ProfileTierLevel.GENERAL_PROFILE_IDC); }
+    public static int ngeneral_profile_idc(long struct) { return memGetInt(struct + StdVideoH265ProfileTierLevel.GENERAL_PROFILE_IDC); }
     /** Unsafe version of {@link #general_level_idc}. */
-    public static int ngeneral_level_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265ProfileTierLevel.GENERAL_LEVEL_IDC); }
+    public static int ngeneral_level_idc(long struct) { return memGetInt(struct + StdVideoH265ProfileTierLevel.GENERAL_LEVEL_IDC); }
 
     /** Unsafe version of {@link #flags(StdVideoH265ProfileTierLevelFlags) flags}. */
     public static void nflags(long struct, StdVideoH265ProfileTierLevelFlags value) { memCopy(value.address(), struct + StdVideoH265ProfileTierLevel.FLAGS, StdVideoH265ProfileTierLevelFlags.SIZEOF); }
     /** Unsafe version of {@link #general_profile_idc(int) general_profile_idc}. */
-    public static void ngeneral_profile_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265ProfileTierLevel.GENERAL_PROFILE_IDC, value); }
+    public static void ngeneral_profile_idc(long struct, int value) { memPutInt(struct + StdVideoH265ProfileTierLevel.GENERAL_PROFILE_IDC, value); }
     /** Unsafe version of {@link #general_level_idc(int) general_level_idc}. */
-    public static void ngeneral_level_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265ProfileTierLevel.GENERAL_LEVEL_IDC, value); }
+    public static void ngeneral_level_idc(long struct, int value) { memPutInt(struct + StdVideoH265ProfileTierLevel.GENERAL_LEVEL_IDC, value); }
 
     // -----------------------------------
 

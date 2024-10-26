@@ -273,7 +273,7 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #cb}. */
-    public static int ncb(long struct) { return UNSAFE.getInt(null, struct + DISPLAY_DEVICE.CB); }
+    public static int ncb(long struct) { return memGetInt(struct + DISPLAY_DEVICE.CB); }
     /** Unsafe version of {@link #DeviceName}. */
     public static ByteBuffer nDeviceName(long struct) { return memByteBuffer(struct + DISPLAY_DEVICE.DEVICENAME, 32 * 2); }
     /** Unsafe version of {@link #DeviceNameString}. */
@@ -283,7 +283,7 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     /** Unsafe version of {@link #DeviceStringString}. */
     public static String nDeviceStringString(long struct) { return memUTF16(struct + DISPLAY_DEVICE.DEVICESTRING); }
     /** Unsafe version of {@link #StateFlags}. */
-    public static int nStateFlags(long struct) { return UNSAFE.getInt(null, struct + DISPLAY_DEVICE.STATEFLAGS); }
+    public static int nStateFlags(long struct) { return memGetInt(struct + DISPLAY_DEVICE.STATEFLAGS); }
     /** Unsafe version of {@link #DeviceID}. */
     public static ByteBuffer nDeviceID(long struct) { return memByteBuffer(struct + DISPLAY_DEVICE.DEVICEID, 128 * 2); }
     /** Unsafe version of {@link #DeviceIDString}. */
@@ -294,7 +294,7 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     public static String nDeviceKeyString(long struct) { return memUTF16(struct + DISPLAY_DEVICE.DEVICEKEY); }
 
     /** Unsafe version of {@link #cb(int) cb}. */
-    public static void ncb(long struct, int value) { UNSAFE.putInt(null, struct + DISPLAY_DEVICE.CB, value); }
+    public static void ncb(long struct, int value) { memPutInt(struct + DISPLAY_DEVICE.CB, value); }
 
     // -----------------------------------
 

@@ -255,24 +255,24 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #addr}. */
-    public static long naddr(long struct) { return UNSAFE.getLong(null, struct + IOURingSyncCancelReg.ADDR); }
+    public static long naddr(long struct) { return memGetLong(struct + IOURingSyncCancelReg.ADDR); }
     /** Unsafe version of {@link #fd}. */
-    public static int nfd(long struct) { return UNSAFE.getInt(null, struct + IOURingSyncCancelReg.FD); }
+    public static int nfd(long struct) { return memGetInt(struct + IOURingSyncCancelReg.FD); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingSyncCancelReg.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + IOURingSyncCancelReg.FLAGS); }
     /** Unsafe version of {@link #timeout}. */
     public static KernelTimespec ntimeout(long struct) { return KernelTimespec.create(struct + IOURingSyncCancelReg.TIMEOUT); }
     public static LongBuffer npad(long struct) { return memLongBuffer(struct + IOURingSyncCancelReg.PAD, 4); }
     public static long npad(long struct, int index) {
-        return UNSAFE.getLong(null, struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8);
+        return memGetLong(struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8);
     }
 
     /** Unsafe version of {@link #addr(long) addr}. */
-    public static void naddr(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSyncCancelReg.ADDR, value); }
+    public static void naddr(long struct, long value) { memPutLong(struct + IOURingSyncCancelReg.ADDR, value); }
     /** Unsafe version of {@link #fd(int) fd}. */
-    public static void nfd(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSyncCancelReg.FD, value); }
+    public static void nfd(long struct, int value) { memPutInt(struct + IOURingSyncCancelReg.FD, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSyncCancelReg.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + IOURingSyncCancelReg.FLAGS, value); }
     /** Unsafe version of {@link #timeout(KernelTimespec) timeout}. */
     public static void ntimeout(long struct, KernelTimespec value) { memCopy(value.address(), struct + IOURingSyncCancelReg.TIMEOUT, KernelTimespec.SIZEOF); }
     public static void npad(long struct, LongBuffer value) {
@@ -280,7 +280,7 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD, value.remaining() * 8);
     }
     public static void npad(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8, value);
+        memPutLong(struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8, value);
     }
 
     // -----------------------------------

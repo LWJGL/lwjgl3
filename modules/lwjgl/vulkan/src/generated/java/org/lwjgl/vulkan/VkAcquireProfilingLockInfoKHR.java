@@ -261,22 +261,22 @@ public class VkAcquireProfilingLockInfoKHR extends Struct<VkAcquireProfilingLock
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAcquireProfilingLockInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAcquireProfilingLockInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAcquireProfilingLockInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAcquireProfilingLockInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkAcquireProfilingLockInfoKHR.FLAGS); }
     /** Unsafe version of {@link #timeout}. */
-    public static long ntimeout(long struct) { return UNSAFE.getLong(null, struct + VkAcquireProfilingLockInfoKHR.TIMEOUT); }
+    public static long ntimeout(long struct) { return memGetLong(struct + VkAcquireProfilingLockInfoKHR.TIMEOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireProfilingLockInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAcquireProfilingLockInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAcquireProfilingLockInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireProfilingLockInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { memPutInt(struct + VkAcquireProfilingLockInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #timeout(long) timeout}. */
-    public static void ntimeout(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireProfilingLockInfoKHR.TIMEOUT, value); }
+    public static void ntimeout(long struct, long value) { memPutLong(struct + VkAcquireProfilingLockInfoKHR.TIMEOUT, value); }
 
     // -----------------------------------
 

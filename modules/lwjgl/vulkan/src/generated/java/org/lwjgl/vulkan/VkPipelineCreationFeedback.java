@@ -119,9 +119,9 @@ public class VkPipelineCreationFeedback extends Struct<VkPipelineCreationFeedbac
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCreationFeedback.FLAGS); }
+    public static int nflags(long struct) { return memGetInt(struct + VkPipelineCreationFeedback.FLAGS); }
     /** Unsafe version of {@link #duration}. */
-    public static long nduration(long struct) { return UNSAFE.getLong(null, struct + VkPipelineCreationFeedback.DURATION); }
+    public static long nduration(long struct) { return memGetLong(struct + VkPipelineCreationFeedback.DURATION); }
 
     // -----------------------------------
 

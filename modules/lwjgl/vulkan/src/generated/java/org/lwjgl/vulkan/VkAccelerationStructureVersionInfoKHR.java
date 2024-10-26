@@ -260,14 +260,14 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct<VkAcceleration
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureVersionInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureVersionInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureVersionInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pVersionData(int) pVersionData}. */
     public static ByteBuffer npVersionData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + VkAccelerationStructureVersionInfoKHR.PVERSIONDATA), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureVersionInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureVersionInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureVersionInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #pVersionData(ByteBuffer) pVersionData}. */

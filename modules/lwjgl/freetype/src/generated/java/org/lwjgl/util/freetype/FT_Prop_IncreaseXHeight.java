@@ -112,7 +112,7 @@ public class FT_Prop_IncreaseXHeight extends Struct<FT_Prop_IncreaseXHeight> {
     /** Unsafe version of {@link #face}. */
     public static FT_Face nface(long struct) { return FT_Face.create(memGetAddress(struct + FT_Prop_IncreaseXHeight.FACE)); }
     /** Unsafe version of {@link #limit$}. */
-    public static int nlimit$(long struct) { return UNSAFE.getInt(null, struct + FT_Prop_IncreaseXHeight.LIMIT); }
+    public static int nlimit$(long struct) { return memGetInt(struct + FT_Prop_IncreaseXHeight.LIMIT); }
 
     // -----------------------------------
 

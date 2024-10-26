@@ -262,20 +262,20 @@ public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct<XrSeconda
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationFrameStateMSFT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.NEXT); }
     /** Unsafe version of {@link #viewConfigurationCount}. */
-    public static int nviewConfigurationCount(long struct) { return UNSAFE.getInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONCOUNT); }
+    public static int nviewConfigurationCount(long struct) { return memGetInt(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONCOUNT); }
     /** Unsafe version of {@link #viewConfigurationStates}. */
     public static XrSecondaryViewConfigurationStateMSFT.Buffer nviewConfigurationStates(long struct) { return XrSecondaryViewConfigurationStateMSFT.create(memGetAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONSTATES), nviewConfigurationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationFrameStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.NEXT, value); }
     /** Sets the specified value to the {@code viewConfigurationCount} field of the specified {@code struct}. */
-    public static void nviewConfigurationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONCOUNT, value); }
+    public static void nviewConfigurationCount(long struct, int value) { memPutInt(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONCOUNT, value); }
     /** Unsafe version of {@link #viewConfigurationStates(XrSecondaryViewConfigurationStateMSFT.Buffer) viewConfigurationStates}. */
     public static void nviewConfigurationStates(long struct, XrSecondaryViewConfigurationStateMSFT.Buffer value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONSTATES, value.address()); nviewConfigurationCount(struct, value.remaining()); }
 

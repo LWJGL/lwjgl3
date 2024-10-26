@@ -281,7 +281,7 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkUserFont.USERDATA); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NkUserFont.HEIGHT); }
+    public static float nheight(long struct) { return memGetFloat(struct + NkUserFont.HEIGHT); }
     /** Unsafe version of {@link #width}. */
     @Nullable public static NkTextWidthCallback nwidth(long struct) { return NkTextWidthCallback.createSafe(memGetAddress(struct + NkUserFont.WIDTH)); }
     /** Unsafe version of {@link #query}. */
@@ -292,7 +292,7 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkUserFont.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + NkUserFont.HEIGHT, value); }
+    public static void nheight(long struct, float value) { memPutFloat(struct + NkUserFont.HEIGHT, value); }
     /** Unsafe version of {@link #width(NkTextWidthCallbackI) width}. */
     public static void nwidth(long struct, @Nullable NkTextWidthCallbackI value) { memPutAddress(struct + NkUserFont.WIDTH, memAddressSafe(value)); }
     /** Unsafe version of {@link #query(NkQueryFontGlyphCallbackI) query}. */

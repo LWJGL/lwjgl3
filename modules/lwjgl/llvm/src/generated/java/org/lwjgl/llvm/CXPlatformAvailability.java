@@ -248,7 +248,7 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
     /** Unsafe version of {@link #Obsoleted}. */
     public static CXVersion nObsoleted(long struct) { return CXVersion.create(struct + CXPlatformAvailability.OBSOLETED); }
     /** Unsafe version of {@link #Unavailable}. */
-    public static int nUnavailable(long struct) { return UNSAFE.getInt(null, struct + CXPlatformAvailability.UNAVAILABLE); }
+    public static int nUnavailable(long struct) { return memGetInt(struct + CXPlatformAvailability.UNAVAILABLE); }
     /** Unsafe version of {@link #Message}. */
     public static CXString nMessage(long struct) { return CXString.create(struct + CXPlatformAvailability.MESSAGE); }
 

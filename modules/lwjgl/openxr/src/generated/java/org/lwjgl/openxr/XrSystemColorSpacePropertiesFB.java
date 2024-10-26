@@ -240,14 +240,14 @@ public class XrSystemColorSpacePropertiesFB extends Struct<XrSystemColorSpacePro
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrSystemColorSpacePropertiesFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrSystemColorSpacePropertiesFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrSystemColorSpacePropertiesFB.NEXT); }
     /** Unsafe version of {@link #colorSpace}. */
-    public static int ncolorSpace(long struct) { return UNSAFE.getInt(null, struct + XrSystemColorSpacePropertiesFB.COLORSPACE); }
+    public static int ncolorSpace(long struct) { return memGetInt(struct + XrSystemColorSpacePropertiesFB.COLORSPACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemColorSpacePropertiesFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrSystemColorSpacePropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemColorSpacePropertiesFB.NEXT, value); }
 

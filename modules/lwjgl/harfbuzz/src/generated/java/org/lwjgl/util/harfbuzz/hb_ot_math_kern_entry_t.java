@@ -223,14 +223,14 @@ public class hb_ot_math_kern_entry_t extends Struct<hb_ot_math_kern_entry_t> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #max_correction_height}. */
-    public static int nmax_correction_height(long struct) { return UNSAFE.getInt(null, struct + hb_ot_math_kern_entry_t.MAX_CORRECTION_HEIGHT); }
+    public static int nmax_correction_height(long struct) { return memGetInt(struct + hb_ot_math_kern_entry_t.MAX_CORRECTION_HEIGHT); }
     /** Unsafe version of {@link #kern_value}. */
-    public static int nkern_value(long struct) { return UNSAFE.getInt(null, struct + hb_ot_math_kern_entry_t.KERN_VALUE); }
+    public static int nkern_value(long struct) { return memGetInt(struct + hb_ot_math_kern_entry_t.KERN_VALUE); }
 
     /** Unsafe version of {@link #max_correction_height(int) max_correction_height}. */
-    public static void nmax_correction_height(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_math_kern_entry_t.MAX_CORRECTION_HEIGHT, value); }
+    public static void nmax_correction_height(long struct, int value) { memPutInt(struct + hb_ot_math_kern_entry_t.MAX_CORRECTION_HEIGHT, value); }
     /** Unsafe version of {@link #kern_value(int) kern_value}. */
-    public static void nkern_value(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_math_kern_entry_t.KERN_VALUE, value); }
+    public static void nkern_value(long struct, int value) { memPutInt(struct + hb_ot_math_kern_entry_t.KERN_VALUE, value); }
 
     // -----------------------------------
 

@@ -224,7 +224,7 @@ public class CXIdxLoc extends Struct<CXIdxLoc> implements NativeResource {
         return memGetAddress(struct + CXIdxLoc.PTR_DATA + check(index, 2) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #int_data}. */
-    public static int nint_data(long struct) { return UNSAFE.getInt(null, struct + CXIdxLoc.INT_DATA); }
+    public static int nint_data(long struct) { return memGetInt(struct + CXIdxLoc.INT_DATA); }
 
     // -----------------------------------
 

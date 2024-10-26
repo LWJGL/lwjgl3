@@ -246,18 +246,18 @@ public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<V
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #pipelineProtectedAccess}. */
-    public static int npipelineProtectedAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS); }
+    public static int npipelineProtectedAccess(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #pipelineProtectedAccess(boolean) pipelineProtectedAccess}. */
-    public static void npipelineProtectedAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS, value); }
+    public static void npipelineProtectedAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS, value); }
 
     // -----------------------------------
 

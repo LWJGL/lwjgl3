@@ -268,18 +268,18 @@ public class VkSwapchainCounterCreateInfoEXT extends Struct<VkSwapchainCounterCr
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainCounterCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainCounterCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainCounterCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #surfaceCounters}. */
-    public static int nsurfaceCounters(long struct) { return UNSAFE.getInt(null, struct + VkSwapchainCounterCreateInfoEXT.SURFACECOUNTERS); }
+    public static int nsurfaceCounters(long struct) { return memGetInt(struct + VkSwapchainCounterCreateInfoEXT.SURFACECOUNTERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainCounterCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainCounterCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainCounterCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #surfaceCounters(int) surfaceCounters}. */
-    public static void nsurfaceCounters(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainCounterCreateInfoEXT.SURFACECOUNTERS, value); }
+    public static void nsurfaceCounters(long struct, int value) { memPutInt(struct + VkSwapchainCounterCreateInfoEXT.SURFACECOUNTERS, value); }
 
     // -----------------------------------
 

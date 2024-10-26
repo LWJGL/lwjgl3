@@ -322,34 +322,34 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSparseImageFormatInfo2.PNEXT); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.FORMAT); }
+    public static int nformat(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.FORMAT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.TYPE); }
     /** Unsafe version of {@link #samples}. */
-    public static int nsamples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.SAMPLES); }
+    public static int nsamples(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.SAMPLES); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.USAGE); }
+    public static int nusage(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.USAGE); }
     /** Unsafe version of {@link #tiling}. */
-    public static int ntiling(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.TILING); }
+    public static int ntiling(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.TILING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSparseImageFormatInfo2.PNEXT, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.FORMAT, value); }
+    public static void nformat(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.FORMAT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.TYPE, value); }
     /** Unsafe version of {@link #samples(int) samples}. */
-    public static void nsamples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.SAMPLES, value); }
+    public static void nsamples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.SAMPLES, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.USAGE, value); }
+    public static void nusage(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.USAGE, value); }
     /** Unsafe version of {@link #tiling(int) tiling}. */
-    public static void ntiling(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSparseImageFormatInfo2.TILING, value); }
+    public static void ntiling(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSparseImageFormatInfo2.TILING, value); }
 
     // -----------------------------------
 

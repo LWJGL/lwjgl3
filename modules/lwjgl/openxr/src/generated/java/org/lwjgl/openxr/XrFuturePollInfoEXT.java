@@ -252,18 +252,18 @@ public class XrFuturePollInfoEXT extends Struct<XrFuturePollInfoEXT> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFuturePollInfoEXT.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFuturePollInfoEXT.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFuturePollInfoEXT.NEXT); }
     /** Unsafe version of {@link #future}. */
-    public static long nfuture(long struct) { return UNSAFE.getLong(null, struct + XrFuturePollInfoEXT.FUTURE); }
+    public static long nfuture(long struct) { return memGetLong(struct + XrFuturePollInfoEXT.FUTURE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFuturePollInfoEXT.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFuturePollInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFuturePollInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #future(long) future}. */
-    public static void nfuture(long struct, long value) { UNSAFE.putLong(null, struct + XrFuturePollInfoEXT.FUTURE, value); }
+    public static void nfuture(long struct, long value) { memPutLong(struct + XrFuturePollInfoEXT.FUTURE, value); }
 
     // -----------------------------------
 

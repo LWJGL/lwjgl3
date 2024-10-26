@@ -233,14 +233,14 @@ public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implement
     // -----------------------------------
 
     /** Unsafe version of {@link #minDepthClamp}. */
-    public static float nminDepthClamp(long struct) { return UNSAFE.getFloat(null, struct + VkDepthClampRangeEXT.MINDEPTHCLAMP); }
+    public static float nminDepthClamp(long struct) { return memGetFloat(struct + VkDepthClampRangeEXT.MINDEPTHCLAMP); }
     /** Unsafe version of {@link #maxDepthClamp}. */
-    public static float nmaxDepthClamp(long struct) { return UNSAFE.getFloat(null, struct + VkDepthClampRangeEXT.MAXDEPTHCLAMP); }
+    public static float nmaxDepthClamp(long struct) { return memGetFloat(struct + VkDepthClampRangeEXT.MAXDEPTHCLAMP); }
 
     /** Unsafe version of {@link #minDepthClamp(float) minDepthClamp}. */
-    public static void nminDepthClamp(long struct, float value) { UNSAFE.putFloat(null, struct + VkDepthClampRangeEXT.MINDEPTHCLAMP, value); }
+    public static void nminDepthClamp(long struct, float value) { memPutFloat(struct + VkDepthClampRangeEXT.MINDEPTHCLAMP, value); }
     /** Unsafe version of {@link #maxDepthClamp(float) maxDepthClamp}. */
-    public static void nmaxDepthClamp(long struct, float value) { UNSAFE.putFloat(null, struct + VkDepthClampRangeEXT.MAXDEPTHCLAMP, value); }
+    public static void nmaxDepthClamp(long struct, float value) { memPutFloat(struct + VkDepthClampRangeEXT.MAXDEPTHCLAMP, value); }
 
     // -----------------------------------
 

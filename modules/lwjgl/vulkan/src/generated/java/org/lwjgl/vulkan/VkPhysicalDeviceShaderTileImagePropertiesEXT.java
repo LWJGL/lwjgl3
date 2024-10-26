@@ -258,18 +258,18 @@ public class VkPhysicalDeviceShaderTileImagePropertiesEXT extends Struct<VkPhysi
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #shaderTileImageCoherentReadAccelerated}. */
-    public static int nshaderTileImageCoherentReadAccelerated(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGECOHERENTREADACCELERATED); }
+    public static int nshaderTileImageCoherentReadAccelerated(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGECOHERENTREADACCELERATED); }
     /** Unsafe version of {@link #shaderTileImageReadSampleFromPixelRateInvocation}. */
-    public static int nshaderTileImageReadSampleFromPixelRateInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGEREADSAMPLEFROMPIXELRATEINVOCATION); }
+    public static int nshaderTileImageReadSampleFromPixelRateInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGEREADSAMPLEFROMPIXELRATEINVOCATION); }
     /** Unsafe version of {@link #shaderTileImageReadFromHelperInvocation}. */
-    public static int nshaderTileImageReadFromHelperInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGEREADFROMHELPERINVOCATION); }
+    public static int nshaderTileImageReadFromHelperInvocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.SHADERTILEIMAGEREADFROMHELPERINVOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderTileImagePropertiesEXT.PNEXT, value); }
 

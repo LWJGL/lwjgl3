@@ -277,24 +277,24 @@ public class VkPhysicalDeviceMaintenance5PropertiesKHR extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #earlyFragmentMultisampleCoverageAfterSampleCounting}. */
-    public static int nearlyFragmentMultisampleCoverageAfterSampleCounting(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.EARLYFRAGMENTMULTISAMPLECOVERAGEAFTERSAMPLECOUNTING); }
+    public static int nearlyFragmentMultisampleCoverageAfterSampleCounting(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.EARLYFRAGMENTMULTISAMPLECOVERAGEAFTERSAMPLECOUNTING); }
     /** Unsafe version of {@link #earlyFragmentSampleMaskTestBeforeSampleCounting}. */
-    public static int nearlyFragmentSampleMaskTestBeforeSampleCounting(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.EARLYFRAGMENTSAMPLEMASKTESTBEFORESAMPLECOUNTING); }
+    public static int nearlyFragmentSampleMaskTestBeforeSampleCounting(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.EARLYFRAGMENTSAMPLEMASKTESTBEFORESAMPLECOUNTING); }
     /** Unsafe version of {@link #depthStencilSwizzleOneSupport}. */
-    public static int ndepthStencilSwizzleOneSupport(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.DEPTHSTENCILSWIZZLEONESUPPORT); }
+    public static int ndepthStencilSwizzleOneSupport(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.DEPTHSTENCILSWIZZLEONESUPPORT); }
     /** Unsafe version of {@link #polygonModePointSize}. */
-    public static int npolygonModePointSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.POLYGONMODEPOINTSIZE); }
+    public static int npolygonModePointSize(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.POLYGONMODEPOINTSIZE); }
     /** Unsafe version of {@link #nonStrictSinglePixelWideLinesUseParallelogram}. */
-    public static int nnonStrictSinglePixelWideLinesUseParallelogram(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.NONSTRICTSINGLEPIXELWIDELINESUSEPARALLELOGRAM); }
+    public static int nnonStrictSinglePixelWideLinesUseParallelogram(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.NONSTRICTSINGLEPIXELWIDELINESUSEPARALLELOGRAM); }
     /** Unsafe version of {@link #nonStrictWideLinesUseParallelogram}. */
-    public static int nnonStrictWideLinesUseParallelogram(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.NONSTRICTWIDELINESUSEPARALLELOGRAM); }
+    public static int nnonStrictWideLinesUseParallelogram(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.NONSTRICTWIDELINESUSEPARALLELOGRAM); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance5PropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance5PropertiesKHR.PNEXT, value); }
 

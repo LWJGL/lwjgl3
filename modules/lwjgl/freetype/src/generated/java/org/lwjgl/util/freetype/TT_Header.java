@@ -232,9 +232,9 @@ public class TT_Header extends Struct<TT_Header> {
     /** Unsafe version of {@link #Magic_Number}. */
     public static long nMagic_Number(long struct) { return memGetCLong(struct + TT_Header.MAGIC_NUMBER); }
     /** Unsafe version of {@link #Flags}. */
-    public static short nFlags(long struct) { return UNSAFE.getShort(null, struct + TT_Header.FLAGS); }
+    public static short nFlags(long struct) { return memGetShort(struct + TT_Header.FLAGS); }
     /** Unsafe version of {@link #Units_Per_EM}. */
-    public static short nUnits_Per_EM(long struct) { return UNSAFE.getShort(null, struct + TT_Header.UNITS_PER_EM); }
+    public static short nUnits_Per_EM(long struct) { return memGetShort(struct + TT_Header.UNITS_PER_EM); }
     /** Unsafe version of {@link #Created}. */
     public static CLongBuffer nCreated(long struct) { return memCLongBuffer(struct + TT_Header.CREATED, 2); }
     /** Unsafe version of {@link #Created(int) Created}. */
@@ -248,23 +248,23 @@ public class TT_Header extends Struct<TT_Header> {
         return memGetCLong(struct + TT_Header.MODIFIED + check(index, 2) * CLONG_SIZE);
     }
     /** Unsafe version of {@link #xMin}. */
-    public static short nxMin(long struct) { return UNSAFE.getShort(null, struct + TT_Header.XMIN); }
+    public static short nxMin(long struct) { return memGetShort(struct + TT_Header.XMIN); }
     /** Unsafe version of {@link #yMin}. */
-    public static short nyMin(long struct) { return UNSAFE.getShort(null, struct + TT_Header.YMIN); }
+    public static short nyMin(long struct) { return memGetShort(struct + TT_Header.YMIN); }
     /** Unsafe version of {@link #xMax}. */
-    public static short nxMax(long struct) { return UNSAFE.getShort(null, struct + TT_Header.XMAX); }
+    public static short nxMax(long struct) { return memGetShort(struct + TT_Header.XMAX); }
     /** Unsafe version of {@link #yMax}. */
-    public static short nyMax(long struct) { return UNSAFE.getShort(null, struct + TT_Header.YMAX); }
+    public static short nyMax(long struct) { return memGetShort(struct + TT_Header.YMAX); }
     /** Unsafe version of {@link #Mac_Style}. */
-    public static short nMac_Style(long struct) { return UNSAFE.getShort(null, struct + TT_Header.MAC_STYLE); }
+    public static short nMac_Style(long struct) { return memGetShort(struct + TT_Header.MAC_STYLE); }
     /** Unsafe version of {@link #Lowest_Rec_PPEM}. */
-    public static short nLowest_Rec_PPEM(long struct) { return UNSAFE.getShort(null, struct + TT_Header.LOWEST_REC_PPEM); }
+    public static short nLowest_Rec_PPEM(long struct) { return memGetShort(struct + TT_Header.LOWEST_REC_PPEM); }
     /** Unsafe version of {@link #Font_Direction}. */
-    public static short nFont_Direction(long struct) { return UNSAFE.getShort(null, struct + TT_Header.FONT_DIRECTION); }
+    public static short nFont_Direction(long struct) { return memGetShort(struct + TT_Header.FONT_DIRECTION); }
     /** Unsafe version of {@link #Index_To_Loc_Format}. */
-    public static short nIndex_To_Loc_Format(long struct) { return UNSAFE.getShort(null, struct + TT_Header.INDEX_TO_LOC_FORMAT); }
+    public static short nIndex_To_Loc_Format(long struct) { return memGetShort(struct + TT_Header.INDEX_TO_LOC_FORMAT); }
     /** Unsafe version of {@link #Glyph_Data_Format}. */
-    public static short nGlyph_Data_Format(long struct) { return UNSAFE.getShort(null, struct + TT_Header.GLYPH_DATA_FORMAT); }
+    public static short nGlyph_Data_Format(long struct) { return memGetShort(struct + TT_Header.GLYPH_DATA_FORMAT); }
 
     // -----------------------------------
 

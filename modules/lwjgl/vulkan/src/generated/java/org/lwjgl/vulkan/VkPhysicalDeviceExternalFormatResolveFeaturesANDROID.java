@@ -246,18 +246,18 @@ public class VkPhysicalDeviceExternalFormatResolveFeaturesANDROID extends Struct
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.PNEXT); }
     /** Unsafe version of {@link #externalFormatResolve}. */
-    public static int nexternalFormatResolve(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.EXTERNALFORMATRESOLVE); }
+    public static int nexternalFormatResolve(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.EXTERNALFORMATRESOLVE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.PNEXT, value); }
     /** Unsafe version of {@link #externalFormatResolve(boolean) externalFormatResolve}. */
-    public static void nexternalFormatResolve(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.EXTERNALFORMATRESOLVE, value); }
+    public static void nexternalFormatResolve(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.EXTERNALFORMATRESOLVE, value); }
 
     // -----------------------------------
 

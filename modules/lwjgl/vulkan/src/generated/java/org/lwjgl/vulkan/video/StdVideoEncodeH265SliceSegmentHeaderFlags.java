@@ -301,7 +301,7 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEn
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0); }
     /** Unsafe version of {@link #first_slice_segment_in_pic_flag}. */
     public static int nfirst_slice_segment_in_pic_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #dependent_slice_segment_flag}. */
@@ -326,10 +326,10 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEn
     public static int ncollocated_from_l0_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
     /** Unsafe version of {@link #slice_loop_filter_across_slices_enabled_flag}. */
     public static int nslice_loop_filter_across_slices_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
-    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD1); }
+    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD1); }
     public static int nreserved(long struct) { return nbitfield1(struct) & 0x00_0F_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #first_slice_segment_in_pic_flag(boolean) first_slice_segment_in_pic_flag}. */
     public static void nfirst_slice_segment_in_pic_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #dependent_slice_segment_flag(boolean) dependent_slice_segment_flag}. */
@@ -354,7 +354,7 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEn
     public static void ncollocated_from_l0_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
     /** Unsafe version of {@link #slice_loop_filter_across_slices_enabled_flag(boolean) slice_loop_filter_across_slices_enabled_flag}. */
     public static void nslice_loop_filter_across_slices_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
-    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD1, value); }
+    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD1, value); }
     public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_F0_00_00) | (value & 0x00_0F_FF_FF)); }
 
     // -----------------------------------

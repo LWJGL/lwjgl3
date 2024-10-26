@@ -288,20 +288,20 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindBufferMemoryDeviceGroupInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBindBufferMemoryDeviceGroupInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PNEXT); }
     /** Unsafe version of {@link #deviceIndexCount}. */
-    public static int ndeviceIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkBindBufferMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
+    public static int ndeviceIndexCount(long struct) { return memGetInt(struct + VkBindBufferMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
     /** Unsafe version of {@link #pDeviceIndices() pDeviceIndices}. */
     @Nullable public static IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PDEVICEINDICES), ndeviceIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindBufferMemoryDeviceGroupInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBindBufferMemoryDeviceGroupInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PNEXT, value); }
     /** Sets the specified value to the {@code deviceIndexCount} field of the specified {@code struct}. */
-    public static void ndeviceIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindBufferMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
+    public static void ndeviceIndexCount(long struct, int value) { memPutInt(struct + VkBindBufferMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
     /** Unsafe version of {@link #pDeviceIndices(IntBuffer) pDeviceIndices}. */
     public static void npDeviceIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PDEVICEINDICES, memAddressSafe(value)); ndeviceIndexCount(struct, value == null ? 0 : value.remaining()); }
 

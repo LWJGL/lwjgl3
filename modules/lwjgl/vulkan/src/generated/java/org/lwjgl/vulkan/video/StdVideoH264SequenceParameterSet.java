@@ -469,45 +469,45 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     /** Unsafe version of {@link #flags}. */
     public static StdVideoH264SpsFlags nflags(long struct) { return StdVideoH264SpsFlags.create(struct + StdVideoH264SequenceParameterSet.FLAGS); }
     /** Unsafe version of {@link #profile_idc}. */
-    public static int nprofile_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.PROFILE_IDC); }
+    public static int nprofile_idc(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.PROFILE_IDC); }
     /** Unsafe version of {@link #level_idc}. */
-    public static int nlevel_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.LEVEL_IDC); }
+    public static int nlevel_idc(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.LEVEL_IDC); }
     /** Unsafe version of {@link #chroma_format_idc}. */
-    public static int nchroma_format_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.CHROMA_FORMAT_IDC); }
+    public static int nchroma_format_idc(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.CHROMA_FORMAT_IDC); }
     /** Unsafe version of {@link #seq_parameter_set_id}. */
-    public static byte nseq_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.SEQ_PARAMETER_SET_ID); }
+    public static byte nseq_parameter_set_id(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #bit_depth_luma_minus8}. */
-    public static byte nbit_depth_luma_minus8(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_LUMA_MINUS8); }
+    public static byte nbit_depth_luma_minus8(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_LUMA_MINUS8); }
     /** Unsafe version of {@link #bit_depth_chroma_minus8}. */
-    public static byte nbit_depth_chroma_minus8(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_CHROMA_MINUS8); }
+    public static byte nbit_depth_chroma_minus8(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_CHROMA_MINUS8); }
     /** Unsafe version of {@link #log2_max_frame_num_minus4}. */
-    public static byte nlog2_max_frame_num_minus4(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.LOG2_MAX_FRAME_NUM_MINUS4); }
+    public static byte nlog2_max_frame_num_minus4(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.LOG2_MAX_FRAME_NUM_MINUS4); }
     /** Unsafe version of {@link #pic_order_cnt_type}. */
-    public static int npic_order_cnt_type(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.PIC_ORDER_CNT_TYPE); }
+    public static int npic_order_cnt_type(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.PIC_ORDER_CNT_TYPE); }
     /** Unsafe version of {@link #offset_for_non_ref_pic}. */
-    public static int noffset_for_non_ref_pic(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_NON_REF_PIC); }
+    public static int noffset_for_non_ref_pic(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_NON_REF_PIC); }
     /** Unsafe version of {@link #offset_for_top_to_bottom_field}. */
-    public static int noffset_for_top_to_bottom_field(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_TOP_TO_BOTTOM_FIELD); }
+    public static int noffset_for_top_to_bottom_field(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_TOP_TO_BOTTOM_FIELD); }
     /** Unsafe version of {@link #log2_max_pic_order_cnt_lsb_minus4}. */
-    public static byte nlog2_max_pic_order_cnt_lsb_minus4(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4); }
+    public static byte nlog2_max_pic_order_cnt_lsb_minus4(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4); }
     /** Unsafe version of {@link #num_ref_frames_in_pic_order_cnt_cycle}. */
-    public static byte nnum_ref_frames_in_pic_order_cnt_cycle(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE); }
+    public static byte nnum_ref_frames_in_pic_order_cnt_cycle(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE); }
     /** Unsafe version of {@link #max_num_ref_frames}. */
-    public static byte nmax_num_ref_frames(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES); }
-    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSet.RESERVED1); }
+    public static byte nmax_num_ref_frames(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES); }
+    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.RESERVED1); }
     /** Unsafe version of {@link #pic_width_in_mbs_minus1}. */
-    public static int npic_width_in_mbs_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1); }
+    public static int npic_width_in_mbs_minus1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1); }
     /** Unsafe version of {@link #pic_height_in_map_units_minus1}. */
-    public static int npic_height_in_map_units_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.PIC_HEIGHT_IN_MAP_UNITS_MINUS1); }
+    public static int npic_height_in_map_units_minus1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.PIC_HEIGHT_IN_MAP_UNITS_MINUS1); }
     /** Unsafe version of {@link #frame_crop_left_offset}. */
-    public static int nframe_crop_left_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_LEFT_OFFSET); }
+    public static int nframe_crop_left_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_LEFT_OFFSET); }
     /** Unsafe version of {@link #frame_crop_right_offset}. */
-    public static int nframe_crop_right_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_RIGHT_OFFSET); }
+    public static int nframe_crop_right_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_RIGHT_OFFSET); }
     /** Unsafe version of {@link #frame_crop_top_offset}. */
-    public static int nframe_crop_top_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET); }
+    public static int nframe_crop_top_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET); }
     /** Unsafe version of {@link #frame_crop_bottom_offset}. */
-    public static int nframe_crop_bottom_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET); }
-    public static int nreserved2(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.RESERVED2); }
+    public static int nframe_crop_bottom_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET); }
+    public static int nreserved2(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.RESERVED2); }
     /** Unsafe version of {@link #pOffsetForRefFrame() pOffsetForRefFrame}. */
     @Nullable public static IntBuffer npOffsetForRefFrame(long struct) { return memIntBufferSafe(memGetAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME), Byte.toUnsignedInt(nnum_ref_frames_in_pic_order_cnt_cycle(struct))); }
     /** Unsafe version of {@link #pScalingLists}. */
@@ -518,45 +518,45 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     /** Unsafe version of {@link #flags(StdVideoH264SpsFlags) flags}. */
     public static void nflags(long struct, StdVideoH264SpsFlags value) { memCopy(value.address(), struct + StdVideoH264SequenceParameterSet.FLAGS, StdVideoH264SpsFlags.SIZEOF); }
     /** Unsafe version of {@link #profile_idc(int) profile_idc}. */
-    public static void nprofile_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.PROFILE_IDC, value); }
+    public static void nprofile_idc(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.PROFILE_IDC, value); }
     /** Unsafe version of {@link #level_idc(int) level_idc}. */
-    public static void nlevel_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.LEVEL_IDC, value); }
+    public static void nlevel_idc(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.LEVEL_IDC, value); }
     /** Unsafe version of {@link #chroma_format_idc(int) chroma_format_idc}. */
-    public static void nchroma_format_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.CHROMA_FORMAT_IDC, value); }
+    public static void nchroma_format_idc(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.CHROMA_FORMAT_IDC, value); }
     /** Unsafe version of {@link #seq_parameter_set_id(byte) seq_parameter_set_id}. */
-    public static void nseq_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.SEQ_PARAMETER_SET_ID, value); }
+    public static void nseq_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #bit_depth_luma_minus8(byte) bit_depth_luma_minus8}. */
-    public static void nbit_depth_luma_minus8(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_LUMA_MINUS8, value); }
+    public static void nbit_depth_luma_minus8(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_LUMA_MINUS8, value); }
     /** Unsafe version of {@link #bit_depth_chroma_minus8(byte) bit_depth_chroma_minus8}. */
-    public static void nbit_depth_chroma_minus8(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_CHROMA_MINUS8, value); }
+    public static void nbit_depth_chroma_minus8(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.BIT_DEPTH_CHROMA_MINUS8, value); }
     /** Unsafe version of {@link #log2_max_frame_num_minus4(byte) log2_max_frame_num_minus4}. */
-    public static void nlog2_max_frame_num_minus4(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.LOG2_MAX_FRAME_NUM_MINUS4, value); }
+    public static void nlog2_max_frame_num_minus4(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.LOG2_MAX_FRAME_NUM_MINUS4, value); }
     /** Unsafe version of {@link #pic_order_cnt_type(int) pic_order_cnt_type}. */
-    public static void npic_order_cnt_type(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.PIC_ORDER_CNT_TYPE, value); }
+    public static void npic_order_cnt_type(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.PIC_ORDER_CNT_TYPE, value); }
     /** Unsafe version of {@link #offset_for_non_ref_pic(int) offset_for_non_ref_pic}. */
-    public static void noffset_for_non_ref_pic(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_NON_REF_PIC, value); }
+    public static void noffset_for_non_ref_pic(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_NON_REF_PIC, value); }
     /** Unsafe version of {@link #offset_for_top_to_bottom_field(int) offset_for_top_to_bottom_field}. */
-    public static void noffset_for_top_to_bottom_field(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_TOP_TO_BOTTOM_FIELD, value); }
+    public static void noffset_for_top_to_bottom_field(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.OFFSET_FOR_TOP_TO_BOTTOM_FIELD, value); }
     /** Unsafe version of {@link #log2_max_pic_order_cnt_lsb_minus4(byte) log2_max_pic_order_cnt_lsb_minus4}. */
-    public static void nlog2_max_pic_order_cnt_lsb_minus4(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4, value); }
+    public static void nlog2_max_pic_order_cnt_lsb_minus4(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4, value); }
     /** Sets the specified value to the {@code num_ref_frames_in_pic_order_cnt_cycle} field of the specified {@code struct}. */
-    public static void nnum_ref_frames_in_pic_order_cnt_cycle(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE, value); }
+    public static void nnum_ref_frames_in_pic_order_cnt_cycle(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE, value); }
     /** Unsafe version of {@link #max_num_ref_frames(byte) max_num_ref_frames}. */
-    public static void nmax_num_ref_frames(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES, value); }
-    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSet.RESERVED1, value); }
+    public static void nmax_num_ref_frames(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES, value); }
+    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.RESERVED1, value); }
     /** Unsafe version of {@link #pic_width_in_mbs_minus1(int) pic_width_in_mbs_minus1}. */
-    public static void npic_width_in_mbs_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1, value); }
+    public static void npic_width_in_mbs_minus1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1, value); }
     /** Unsafe version of {@link #pic_height_in_map_units_minus1(int) pic_height_in_map_units_minus1}. */
-    public static void npic_height_in_map_units_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.PIC_HEIGHT_IN_MAP_UNITS_MINUS1, value); }
+    public static void npic_height_in_map_units_minus1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.PIC_HEIGHT_IN_MAP_UNITS_MINUS1, value); }
     /** Unsafe version of {@link #frame_crop_left_offset(int) frame_crop_left_offset}. */
-    public static void nframe_crop_left_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_LEFT_OFFSET, value); }
+    public static void nframe_crop_left_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_LEFT_OFFSET, value); }
     /** Unsafe version of {@link #frame_crop_right_offset(int) frame_crop_right_offset}. */
-    public static void nframe_crop_right_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_RIGHT_OFFSET, value); }
+    public static void nframe_crop_right_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_RIGHT_OFFSET, value); }
     /** Unsafe version of {@link #frame_crop_top_offset(int) frame_crop_top_offset}. */
-    public static void nframe_crop_top_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET, value); }
+    public static void nframe_crop_top_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET, value); }
     /** Unsafe version of {@link #frame_crop_bottom_offset(int) frame_crop_bottom_offset}. */
-    public static void nframe_crop_bottom_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET, value); }
-    public static void nreserved2(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.RESERVED2, value); }
+    public static void nframe_crop_bottom_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET, value); }
+    public static void nreserved2(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #pOffsetForRefFrame(IntBuffer) pOffsetForRefFrame}. */
     public static void npOffsetForRefFrame(long struct, @Nullable IntBuffer value) { memPutAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME, memAddressSafe(value)); nnum_ref_frames_in_pic_order_cnt_cycle(struct, value == null ? 0 : (byte)value.remaining()); }
     /** Unsafe version of {@link #pScalingLists(StdVideoH264ScalingLists) pScalingLists}. */

@@ -303,38 +303,38 @@ public class XMappingEvent extends Struct<XMappingEvent> implements NativeResour
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XMappingEvent.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XMappingEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
     public static long nserial(long struct) { return memGetCLong(struct + XMappingEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
-    public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XMappingEvent.SEND_EVENT); }
+    public static int nsend_event(long struct) { return memGetInt(struct + XMappingEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XMappingEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
     public static long nwindow(long struct) { return memGetCLong(struct + XMappingEvent.WINDOW); }
     /** Unsafe version of {@link #request}. */
-    public static int nrequest(long struct) { return UNSAFE.getInt(null, struct + XMappingEvent.REQUEST); }
+    public static int nrequest(long struct) { return memGetInt(struct + XMappingEvent.REQUEST); }
     /** Unsafe version of {@link #first_keycode}. */
-    public static int nfirst_keycode(long struct) { return UNSAFE.getInt(null, struct + XMappingEvent.FIRST_KEYCODE); }
+    public static int nfirst_keycode(long struct) { return memGetInt(struct + XMappingEvent.FIRST_KEYCODE); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + XMappingEvent.COUNT); }
+    public static int ncount(long struct) { return memGetInt(struct + XMappingEvent.COUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XMappingEvent.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XMappingEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
     public static void nserial(long struct, long value) { memPutCLong(struct + XMappingEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
-    public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XMappingEvent.SEND_EVENT, value); }
+    public static void nsend_event(long struct, int value) { memPutInt(struct + XMappingEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XMappingEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
     public static void nwindow(long struct, long value) { memPutCLong(struct + XMappingEvent.WINDOW, value); }
     /** Unsafe version of {@link #request(int) request}. */
-    public static void nrequest(long struct, int value) { UNSAFE.putInt(null, struct + XMappingEvent.REQUEST, value); }
+    public static void nrequest(long struct, int value) { memPutInt(struct + XMappingEvent.REQUEST, value); }
     /** Unsafe version of {@link #first_keycode(int) first_keycode}. */
-    public static void nfirst_keycode(long struct, int value) { UNSAFE.putInt(null, struct + XMappingEvent.FIRST_KEYCODE, value); }
+    public static void nfirst_keycode(long struct, int value) { memPutInt(struct + XMappingEvent.FIRST_KEYCODE, value); }
     /** Unsafe version of {@link #count(int) count}. */
-    public static void ncount(long struct, int value) { UNSAFE.putInt(null, struct + XMappingEvent.COUNT, value); }
+    public static void ncount(long struct, int value) { memPutInt(struct + XMappingEvent.COUNT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

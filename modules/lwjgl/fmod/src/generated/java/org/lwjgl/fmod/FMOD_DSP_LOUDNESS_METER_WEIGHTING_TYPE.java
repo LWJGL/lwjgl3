@@ -209,7 +209,7 @@ public class FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE extends Struct<FMOD_DSP_LOUD
     public static FloatBuffer nchannelweight(long struct) { return memFloatBuffer(struct + FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE.CHANNELWEIGHT, 32); }
     /** Unsafe version of {@link #channelweight(int) channelweight}. */
     public static float nchannelweight(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE.CHANNELWEIGHT + check(index, 32) * 4);
+        return memGetFloat(struct + FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE.CHANNELWEIGHT + check(index, 32) * 4);
     }
 
     /** Unsafe version of {@link #channelweight(FloatBuffer) channelweight}. */
@@ -219,7 +219,7 @@ public class FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE extends Struct<FMOD_DSP_LOUD
     }
     /** Unsafe version of {@link #channelweight(int, float) channelweight}. */
     public static void nchannelweight(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE.CHANNELWEIGHT + check(index, 32) * 4, value);
+        memPutFloat(struct + FMOD_DSP_LOUDNESS_METER_WEIGHTING_TYPE.CHANNELWEIGHT + check(index, 32) * 4, value);
     }
 
     // -----------------------------------

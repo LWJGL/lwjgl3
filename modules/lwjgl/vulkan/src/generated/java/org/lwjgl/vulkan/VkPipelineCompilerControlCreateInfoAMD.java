@@ -262,18 +262,18 @@ public class VkPipelineCompilerControlCreateInfoAMD extends Struct<VkPipelineCom
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCompilerControlCreateInfoAMD.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineCompilerControlCreateInfoAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineCompilerControlCreateInfoAMD.PNEXT); }
     /** Unsafe version of {@link #compilerControlFlags}. */
-    public static int ncompilerControlFlags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCompilerControlCreateInfoAMD.COMPILERCONTROLFLAGS); }
+    public static int ncompilerControlFlags(long struct) { return memGetInt(struct + VkPipelineCompilerControlCreateInfoAMD.COMPILERCONTROLFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCompilerControlCreateInfoAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCompilerControlCreateInfoAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineCompilerControlCreateInfoAMD.PNEXT, value); }
     /** Unsafe version of {@link #compilerControlFlags(int) compilerControlFlags}. */
-    public static void ncompilerControlFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCompilerControlCreateInfoAMD.COMPILERCONTROLFLAGS, value); }
+    public static void ncompilerControlFlags(long struct, int value) { memPutInt(struct + VkPipelineCompilerControlCreateInfoAMD.COMPILERCONTROLFLAGS, value); }
 
     // -----------------------------------
 

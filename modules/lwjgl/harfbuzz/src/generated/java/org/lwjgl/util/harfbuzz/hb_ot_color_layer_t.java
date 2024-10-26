@@ -225,14 +225,14 @@ public class hb_ot_color_layer_t extends Struct<hb_ot_color_layer_t> implements 
     // -----------------------------------
 
     /** Unsafe version of {@link #glyph}. */
-    public static int nglyph(long struct) { return UNSAFE.getInt(null, struct + hb_ot_color_layer_t.GLYPH); }
+    public static int nglyph(long struct) { return memGetInt(struct + hb_ot_color_layer_t.GLYPH); }
     /** Unsafe version of {@link #color_index}. */
-    public static int ncolor_index(long struct) { return UNSAFE.getInt(null, struct + hb_ot_color_layer_t.COLOR_INDEX); }
+    public static int ncolor_index(long struct) { return memGetInt(struct + hb_ot_color_layer_t.COLOR_INDEX); }
 
     /** Unsafe version of {@link #glyph(int) glyph}. */
-    public static void nglyph(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_color_layer_t.GLYPH, value); }
+    public static void nglyph(long struct, int value) { memPutInt(struct + hb_ot_color_layer_t.GLYPH, value); }
     /** Unsafe version of {@link #color_index(int) color_index}. */
-    public static void ncolor_index(long struct, int value) { UNSAFE.putInt(null, struct + hb_ot_color_layer_t.COLOR_INDEX, value); }
+    public static void ncolor_index(long struct, int value) { memPutInt(struct + hb_ot_color_layer_t.COLOR_INDEX, value); }
 
     // -----------------------------------
 

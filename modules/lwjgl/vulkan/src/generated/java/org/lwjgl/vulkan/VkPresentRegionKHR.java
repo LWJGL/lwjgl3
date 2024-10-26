@@ -253,12 +253,12 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
     // -----------------------------------
 
     /** Unsafe version of {@link #rectangleCount}. */
-    public static int nrectangleCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentRegionKHR.RECTANGLECOUNT); }
+    public static int nrectangleCount(long struct) { return memGetInt(struct + VkPresentRegionKHR.RECTANGLECOUNT); }
     /** Unsafe version of {@link #pRectangles}. */
     @Nullable public static VkRectLayerKHR.Buffer npRectangles(long struct) { return VkRectLayerKHR.createSafe(memGetAddress(struct + VkPresentRegionKHR.PRECTANGLES), nrectangleCount(struct)); }
 
     /** Sets the specified value to the {@code rectangleCount} field of the specified {@code struct}. */
-    public static void nrectangleCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentRegionKHR.RECTANGLECOUNT, value); }
+    public static void nrectangleCount(long struct, int value) { memPutInt(struct + VkPresentRegionKHR.RECTANGLECOUNT, value); }
     /** Unsafe version of {@link #pRectangles(VkRectLayerKHR.Buffer) pRectangles}. */
     public static void npRectangles(long struct, @Nullable VkRectLayerKHR.Buffer value) { memPutAddress(struct + VkPresentRegionKHR.PRECTANGLES, memAddressSafe(value)); if (value != null) { nrectangleCount(struct, value.remaining()); } }
 

@@ -241,14 +241,14 @@ public class VkIndirectCommandsStreamNV extends Struct<VkIndirectCommandsStreamN
     // -----------------------------------
 
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkIndirectCommandsStreamNV.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkIndirectCommandsStreamNV.BUFFER); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkIndirectCommandsStreamNV.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkIndirectCommandsStreamNV.OFFSET); }
 
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkIndirectCommandsStreamNV.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkIndirectCommandsStreamNV.BUFFER, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkIndirectCommandsStreamNV.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkIndirectCommandsStreamNV.OFFSET, value); }
 
     // -----------------------------------
 

@@ -226,14 +226,14 @@ public class SpvcEntryPoint extends Struct<SpvcEntryPoint> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #execution_model}. */
-    public static int nexecution_model(long struct) { return UNSAFE.getInt(null, struct + SpvcEntryPoint.EXECUTION_MODEL); }
+    public static int nexecution_model(long struct) { return memGetInt(struct + SpvcEntryPoint.EXECUTION_MODEL); }
     /** Unsafe version of {@link #name}. */
     public static ByteBuffer nname(long struct) { return memByteBufferNT1(memGetAddress(struct + SpvcEntryPoint.NAME)); }
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memUTF8(memGetAddress(struct + SpvcEntryPoint.NAME)); }
 
     /** Unsafe version of {@link #execution_model(int) execution_model}. */
-    public static void nexecution_model(long struct, int value) { UNSAFE.putInt(null, struct + SpvcEntryPoint.EXECUTION_MODEL, value); }
+    public static void nexecution_model(long struct, int value) { memPutInt(struct + SpvcEntryPoint.EXECUTION_MODEL, value); }
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }

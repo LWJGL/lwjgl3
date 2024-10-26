@@ -246,18 +246,18 @@ public class VkPhysicalDeviceScalarBlockLayoutFeatures extends Struct<VkPhysical
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceScalarBlockLayoutFeatures.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.PNEXT); }
     /** Unsafe version of {@link #scalarBlockLayout}. */
-    public static int nscalarBlockLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceScalarBlockLayoutFeatures.SCALARBLOCKLAYOUT); }
+    public static int nscalarBlockLayout(long struct) { return memGetInt(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.SCALARBLOCKLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceScalarBlockLayoutFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.PNEXT, value); }
     /** Unsafe version of {@link #scalarBlockLayout(boolean) scalarBlockLayout}. */
-    public static void nscalarBlockLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceScalarBlockLayoutFeatures.SCALARBLOCKLAYOUT, value); }
+    public static void nscalarBlockLayout(long struct, int value) { memPutInt(struct + VkPhysicalDeviceScalarBlockLayoutFeatures.SCALARBLOCKLAYOUT, value); }
 
     // -----------------------------------
 

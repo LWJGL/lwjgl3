@@ -268,22 +268,22 @@ public class VkSemaphoreSignalInfo extends Struct<VkSemaphoreSignalInfo> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreSignalInfo.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSemaphoreSignalInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreSignalInfo.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSignalInfo.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return memGetLong(struct + VkSemaphoreSignalInfo.SEMAPHORE); }
     /** Unsafe version of {@link #value}. */
-    public static long nvalue(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSignalInfo.VALUE); }
+    public static long nvalue(long struct) { return memGetLong(struct + VkSemaphoreSignalInfo.VALUE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreSignalInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSemaphoreSignalInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreSignalInfo.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSignalInfo.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkSemaphoreSignalInfo.SEMAPHORE, value); }
     /** Unsafe version of {@link #value(long) value}. */
-    public static void nvalue(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSignalInfo.VALUE, value); }
+    public static void nvalue(long struct, long value) { memPutLong(struct + VkSemaphoreSignalInfo.VALUE, value); }
 
     // -----------------------------------
 

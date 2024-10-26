@@ -268,7 +268,7 @@ public class VkDisplayPropertiesKHR extends Struct<VkDisplayPropertiesKHR> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #display}. */
-    public static long ndisplay(long struct) { return UNSAFE.getLong(null, struct + VkDisplayPropertiesKHR.DISPLAY); }
+    public static long ndisplay(long struct) { return memGetLong(struct + VkDisplayPropertiesKHR.DISPLAY); }
     /** Unsafe version of {@link #displayName}. */
     public static ByteBuffer ndisplayName(long struct) { return memByteBufferNT1(memGetAddress(struct + VkDisplayPropertiesKHR.DISPLAYNAME)); }
     /** Unsafe version of {@link #displayNameString}. */
@@ -278,11 +278,11 @@ public class VkDisplayPropertiesKHR extends Struct<VkDisplayPropertiesKHR> imple
     /** Unsafe version of {@link #physicalResolution}. */
     public static VkExtent2D nphysicalResolution(long struct) { return VkExtent2D.create(struct + VkDisplayPropertiesKHR.PHYSICALRESOLUTION); }
     /** Unsafe version of {@link #supportedTransforms}. */
-    public static int nsupportedTransforms(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPropertiesKHR.SUPPORTEDTRANSFORMS); }
+    public static int nsupportedTransforms(long struct) { return memGetInt(struct + VkDisplayPropertiesKHR.SUPPORTEDTRANSFORMS); }
     /** Unsafe version of {@link #planeReorderPossible}. */
-    public static int nplaneReorderPossible(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPropertiesKHR.PLANEREORDERPOSSIBLE); }
+    public static int nplaneReorderPossible(long struct) { return memGetInt(struct + VkDisplayPropertiesKHR.PLANEREORDERPOSSIBLE); }
     /** Unsafe version of {@link #persistentContent}. */
-    public static int npersistentContent(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPropertiesKHR.PERSISTENTCONTENT); }
+    public static int npersistentContent(long struct) { return memGetInt(struct + VkDisplayPropertiesKHR.PERSISTENTCONTENT); }
 
     // -----------------------------------
 

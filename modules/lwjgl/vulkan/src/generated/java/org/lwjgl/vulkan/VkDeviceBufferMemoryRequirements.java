@@ -249,14 +249,14 @@ public class VkDeviceBufferMemoryRequirements extends Struct<VkDeviceBufferMemor
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceBufferMemoryRequirements.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceBufferMemoryRequirements.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceBufferMemoryRequirements.PNEXT); }
     /** Unsafe version of {@link #pCreateInfo}. */
     public static VkBufferCreateInfo npCreateInfo(long struct) { return VkBufferCreateInfo.create(memGetAddress(struct + VkDeviceBufferMemoryRequirements.PCREATEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceBufferMemoryRequirements.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceBufferMemoryRequirements.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceBufferMemoryRequirements.PNEXT, value); }
     /** Unsafe version of {@link #pCreateInfo(VkBufferCreateInfo) pCreateInfo}. */

@@ -257,16 +257,16 @@ public class AIMaterial extends Struct<AIMaterial> implements NativeResource {
     /** Unsafe version of {@link #mProperties() mProperties}. */
     public static PointerBuffer nmProperties(long struct) { return memPointerBuffer(memGetAddress(struct + AIMaterial.MPROPERTIES), nmNumProperties(struct)); }
     /** Unsafe version of {@link #mNumProperties}. */
-    public static int nmNumProperties(long struct) { return UNSAFE.getInt(null, struct + AIMaterial.MNUMPROPERTIES); }
+    public static int nmNumProperties(long struct) { return memGetInt(struct + AIMaterial.MNUMPROPERTIES); }
     /** Unsafe version of {@link #mNumAllocated}. */
-    public static int nmNumAllocated(long struct) { return UNSAFE.getInt(null, struct + AIMaterial.MNUMALLOCATED); }
+    public static int nmNumAllocated(long struct) { return memGetInt(struct + AIMaterial.MNUMALLOCATED); }
 
     /** Unsafe version of {@link #mProperties(PointerBuffer) mProperties}. */
     public static void nmProperties(long struct, PointerBuffer value) { memPutAddress(struct + AIMaterial.MPROPERTIES, memAddress(value)); nmNumProperties(struct, value.remaining()); }
     /** Sets the specified value to the {@code mNumProperties} field of the specified {@code struct}. */
-    public static void nmNumProperties(long struct, int value) { UNSAFE.putInt(null, struct + AIMaterial.MNUMPROPERTIES, value); }
+    public static void nmNumProperties(long struct, int value) { memPutInt(struct + AIMaterial.MNUMPROPERTIES, value); }
     /** Unsafe version of {@link #mNumAllocated(int) mNumAllocated}. */
-    public static void nmNumAllocated(long struct, int value) { UNSAFE.putInt(null, struct + AIMaterial.MNUMALLOCATED, value); }
+    public static void nmNumAllocated(long struct, int value) { memPutInt(struct + AIMaterial.MNUMALLOCATED, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -490,50 +490,50 @@ public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferMemoryBarrier2.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkBufferMemoryBarrier2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBufferMemoryBarrier2.PNEXT); }
     /** Unsafe version of {@link #srcStageMask}. */
-    public static long nsrcStageMask(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.SRCSTAGEMASK); }
+    public static long nsrcStageMask(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.SRCSTAGEMASK); }
     /** Unsafe version of {@link #srcAccessMask}. */
-    public static long nsrcAccessMask(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.SRCACCESSMASK); }
+    public static long nsrcAccessMask(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.SRCACCESSMASK); }
     /** Unsafe version of {@link #dstStageMask}. */
-    public static long ndstStageMask(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.DSTSTAGEMASK); }
+    public static long ndstStageMask(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.DSTSTAGEMASK); }
     /** Unsafe version of {@link #dstAccessMask}. */
-    public static long ndstAccessMask(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.DSTACCESSMASK); }
+    public static long ndstAccessMask(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.DSTACCESSMASK); }
     /** Unsafe version of {@link #srcQueueFamilyIndex}. */
-    public static int nsrcQueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkBufferMemoryBarrier2.SRCQUEUEFAMILYINDEX); }
+    public static int nsrcQueueFamilyIndex(long struct) { return memGetInt(struct + VkBufferMemoryBarrier2.SRCQUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #dstQueueFamilyIndex}. */
-    public static int ndstQueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VkBufferMemoryBarrier2.DSTQUEUEFAMILYINDEX); }
+    public static int ndstQueueFamilyIndex(long struct) { return memGetInt(struct + VkBufferMemoryBarrier2.DSTQUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.BUFFER); }
+    public static long nbuffer(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.BUFFER); }
     /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.OFFSET); }
+    public static long noffset(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkBufferMemoryBarrier2.SIZE); }
+    public static long nsize(long struct) { return memGetLong(struct + VkBufferMemoryBarrier2.SIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferMemoryBarrier2.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkBufferMemoryBarrier2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferMemoryBarrier2.PNEXT, value); }
     /** Unsafe version of {@link #srcStageMask(long) srcStageMask}. */
-    public static void nsrcStageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.SRCSTAGEMASK, value); }
+    public static void nsrcStageMask(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.SRCSTAGEMASK, value); }
     /** Unsafe version of {@link #srcAccessMask(long) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.SRCACCESSMASK, value); }
+    public static void nsrcAccessMask(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.SRCACCESSMASK, value); }
     /** Unsafe version of {@link #dstStageMask(long) dstStageMask}. */
-    public static void ndstStageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.DSTSTAGEMASK, value); }
+    public static void ndstStageMask(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.DSTSTAGEMASK, value); }
     /** Unsafe version of {@link #dstAccessMask(long) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.DSTACCESSMASK, value); }
+    public static void ndstAccessMask(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.DSTACCESSMASK, value); }
     /** Unsafe version of {@link #srcQueueFamilyIndex(int) srcQueueFamilyIndex}. */
-    public static void nsrcQueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferMemoryBarrier2.SRCQUEUEFAMILYINDEX, value); }
+    public static void nsrcQueueFamilyIndex(long struct, int value) { memPutInt(struct + VkBufferMemoryBarrier2.SRCQUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #dstQueueFamilyIndex(int) dstQueueFamilyIndex}. */
-    public static void ndstQueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferMemoryBarrier2.DSTQUEUEFAMILYINDEX, value); }
+    public static void ndstQueueFamilyIndex(long struct, int value) { memPutInt(struct + VkBufferMemoryBarrier2.DSTQUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.BUFFER, value); }
     /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.OFFSET, value); }
+    public static void noffset(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.OFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferMemoryBarrier2.SIZE, value); }
+    public static void nsize(long struct, long value) { memPutLong(struct + VkBufferMemoryBarrier2.SIZE, value); }
 
     // -----------------------------------
 

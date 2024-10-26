@@ -252,18 +252,18 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct<VkPerformanceQuerySu
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceQuerySubmitInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPerformanceQuerySubmitInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPerformanceQuerySubmitInfoKHR.PNEXT); }
     /** Unsafe version of {@link #counterPassIndex}. */
-    public static int ncounterPassIndex(long struct) { return UNSAFE.getInt(null, struct + VkPerformanceQuerySubmitInfoKHR.COUNTERPASSINDEX); }
+    public static int ncounterPassIndex(long struct) { return memGetInt(struct + VkPerformanceQuerySubmitInfoKHR.COUNTERPASSINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceQuerySubmitInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPerformanceQuerySubmitInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPerformanceQuerySubmitInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #counterPassIndex(int) counterPassIndex}. */
-    public static void ncounterPassIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkPerformanceQuerySubmitInfoKHR.COUNTERPASSINDEX, value); }
+    public static void ncounterPassIndex(long struct, int value) { memPutInt(struct + VkPerformanceQuerySubmitInfoKHR.COUNTERPASSINDEX, value); }
 
     // -----------------------------------
 

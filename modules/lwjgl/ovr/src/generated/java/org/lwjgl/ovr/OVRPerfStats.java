@@ -284,15 +284,15 @@ public class OVRPerfStats extends Struct<OVRPerfStats> implements NativeResource
         return OVRPerfStatsPerCompositorFrame.create(struct + OVRPerfStats.FRAMESTATS + check(index, nFrameStatsCount(struct)) * OVRPerfStatsPerCompositorFrame.SIZEOF);
     }
     /** Unsafe version of {@link #FrameStatsCount}. */
-    public static int nFrameStatsCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStats.FRAMESTATSCOUNT); }
+    public static int nFrameStatsCount(long struct) { return memGetInt(struct + OVRPerfStats.FRAMESTATSCOUNT); }
     /** Unsafe version of {@link #AnyFrameStatsDropped}. */
-    public static boolean nAnyFrameStatsDropped(long struct) { return UNSAFE.getByte(null, struct + OVRPerfStats.ANYFRAMESTATSDROPPED) != 0; }
+    public static boolean nAnyFrameStatsDropped(long struct) { return memGetByte(struct + OVRPerfStats.ANYFRAMESTATSDROPPED) != 0; }
     /** Unsafe version of {@link #AdaptiveGpuPerformanceScale}. */
-    public static float nAdaptiveGpuPerformanceScale(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStats.ADAPTIVEGPUPERFORMANCESCALE); }
+    public static float nAdaptiveGpuPerformanceScale(long struct) { return memGetFloat(struct + OVRPerfStats.ADAPTIVEGPUPERFORMANCESCALE); }
     /** Unsafe version of {@link #AswIsAvailable}. */
-    public static boolean nAswIsAvailable(long struct) { return UNSAFE.getByte(null, struct + OVRPerfStats.ASWISAVAILABLE) != 0; }
+    public static boolean nAswIsAvailable(long struct) { return memGetByte(struct + OVRPerfStats.ASWISAVAILABLE) != 0; }
     /** Unsafe version of {@link #VisibleProcessId}. */
-    public static int nVisibleProcessId(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStats.VISIBLEPROCESSID); }
+    public static int nVisibleProcessId(long struct) { return memGetInt(struct + OVRPerfStats.VISIBLEPROCESSID); }
 
     // -----------------------------------
 

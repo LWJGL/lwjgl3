@@ -253,18 +253,18 @@ public class XrFaceTrackerCreateInfoFB extends Struct<XrFaceTrackerCreateInfoFB>
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrFaceTrackerCreateInfoFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfoFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrFaceTrackerCreateInfoFB.NEXT); }
     /** Unsafe version of {@link #faceExpressionSet}. */
-    public static int nfaceExpressionSet(long struct) { return UNSAFE.getInt(null, struct + XrFaceTrackerCreateInfoFB.FACEEXPRESSIONSET); }
+    public static int nfaceExpressionSet(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfoFB.FACEEXPRESSIONSET); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceTrackerCreateInfoFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrFaceTrackerCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #faceExpressionSet(int) faceExpressionSet}. */
-    public static void nfaceExpressionSet(long struct, int value) { UNSAFE.putInt(null, struct + XrFaceTrackerCreateInfoFB.FACEEXPRESSIONSET, value); }
+    public static void nfaceExpressionSet(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfoFB.FACEEXPRESSIONSET, value); }
 
     // -----------------------------------
 

@@ -118,7 +118,7 @@ public class CXToken extends Struct<CXToken> {
     public static IntBuffer nint_data(long struct) { return memIntBuffer(struct + CXToken.INT_DATA, 4); }
     /** Unsafe version of {@link #int_data(int) int_data}. */
     public static int nint_data(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CXToken.INT_DATA + check(index, 4) * 4);
+        return memGetInt(struct + CXToken.INT_DATA + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #ptr_data}. */
     public static long nptr_data(long struct) { return memGetAddress(struct + CXToken.PTR_DATA); }

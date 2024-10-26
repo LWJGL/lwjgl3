@@ -124,7 +124,7 @@ public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
     // -----------------------------------
 
     /** Unsafe version of {@link #velocityFlags}. */
-    public static long nvelocityFlags(long struct) { return UNSAFE.getLong(null, struct + XrSpaceVelocityData.VELOCITYFLAGS); }
+    public static long nvelocityFlags(long struct) { return memGetLong(struct + XrSpaceVelocityData.VELOCITYFLAGS); }
     /** Unsafe version of {@link #linearVelocity}. */
     public static XrVector3f nlinearVelocity(long struct) { return XrVector3f.create(struct + XrSpaceVelocityData.LINEARVELOCITY); }
     /** Unsafe version of {@link #angularVelocity}. */

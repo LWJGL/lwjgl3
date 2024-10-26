@@ -262,14 +262,14 @@ public class VkMemoryWin32HandlePropertiesKHR extends Struct<VkMemoryWin32Handle
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryWin32HandlePropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkMemoryWin32HandlePropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryWin32HandlePropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #memoryTypeBits}. */
-    public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VkMemoryWin32HandlePropertiesKHR.MEMORYTYPEBITS); }
+    public static int nmemoryTypeBits(long struct) { return memGetInt(struct + VkMemoryWin32HandlePropertiesKHR.MEMORYTYPEBITS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryWin32HandlePropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryWin32HandlePropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryWin32HandlePropertiesKHR.PNEXT, value); }
 

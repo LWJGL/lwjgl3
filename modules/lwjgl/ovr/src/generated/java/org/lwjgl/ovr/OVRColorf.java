@@ -261,22 +261,22 @@ public class OVRColorf extends Struct<OVRColorf> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + OVRColorf.R); }
+    public static float nr(long struct) { return memGetFloat(struct + OVRColorf.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + OVRColorf.G); }
+    public static float ng(long struct) { return memGetFloat(struct + OVRColorf.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + OVRColorf.B); }
+    public static float nb(long struct) { return memGetFloat(struct + OVRColorf.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return UNSAFE.getFloat(null, struct + OVRColorf.A); }
+    public static float na(long struct) { return memGetFloat(struct + OVRColorf.A); }
 
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + OVRColorf.R, value); }
+    public static void nr(long struct, float value) { memPutFloat(struct + OVRColorf.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + OVRColorf.G, value); }
+    public static void ng(long struct, float value) { memPutFloat(struct + OVRColorf.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + OVRColorf.B, value); }
+    public static void nb(long struct, float value) { memPutFloat(struct + OVRColorf.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + OVRColorf.A, value); }
+    public static void na(long struct, float value) { memPutFloat(struct + OVRColorf.A, value); }
 
     // -----------------------------------
 

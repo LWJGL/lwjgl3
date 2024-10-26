@@ -252,14 +252,14 @@ public class VkVideoEncodeSessionParametersFeedbackInfoKHR extends Struct<VkVide
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.PNEXT); }
     /** Unsafe version of {@link #hasOverrides}. */
-    public static int nhasOverrides(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.HASOVERRIDES); }
+    public static int nhasOverrides(long struct) { return memGetInt(struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.HASOVERRIDES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeSessionParametersFeedbackInfoKHR.PNEXT, value); }
 

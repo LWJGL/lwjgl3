@@ -259,22 +259,22 @@ public class VkDescriptorSetBindingReferenceVALVE extends Struct<VkDescriptorSet
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetBindingReferenceVALVE.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorSetBindingReferenceVALVE.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorSetBindingReferenceVALVE.PNEXT); }
     /** Unsafe version of {@link #descriptorSetLayout}. */
-    public static long ndescriptorSetLayout(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorSetBindingReferenceVALVE.DESCRIPTORSETLAYOUT); }
+    public static long ndescriptorSetLayout(long struct) { return memGetLong(struct + VkDescriptorSetBindingReferenceVALVE.DESCRIPTORSETLAYOUT); }
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorSetBindingReferenceVALVE.BINDING); }
+    public static int nbinding(long struct) { return memGetInt(struct + VkDescriptorSetBindingReferenceVALVE.BINDING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetBindingReferenceVALVE.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetBindingReferenceVALVE.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorSetBindingReferenceVALVE.PNEXT, value); }
     /** Unsafe version of {@link #descriptorSetLayout(long) descriptorSetLayout}. */
-    public static void ndescriptorSetLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorSetBindingReferenceVALVE.DESCRIPTORSETLAYOUT, value); }
+    public static void ndescriptorSetLayout(long struct, long value) { memPutLong(struct + VkDescriptorSetBindingReferenceVALVE.DESCRIPTORSETLAYOUT, value); }
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorSetBindingReferenceVALVE.BINDING, value); }
+    public static void nbinding(long struct, int value) { memPutInt(struct + VkDescriptorSetBindingReferenceVALVE.BINDING, value); }
 
     // -----------------------------------
 

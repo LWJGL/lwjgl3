@@ -247,18 +247,18 @@ public class VkTraceRaysIndirectCommandKHR extends Struct<VkTraceRaysIndirectCom
     // -----------------------------------
 
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommandKHR.WIDTH); }
+    public static int nwidth(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommandKHR.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommandKHR.HEIGHT); }
+    public static int nheight(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommandKHR.HEIGHT); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + VkTraceRaysIndirectCommandKHR.DEPTH); }
+    public static int ndepth(long struct) { return memGetInt(struct + VkTraceRaysIndirectCommandKHR.DEPTH); }
 
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommandKHR.WIDTH, value); }
+    public static void nwidth(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommandKHR.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommandKHR.HEIGHT, value); }
+    public static void nheight(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommandKHR.HEIGHT, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
-    public static void ndepth(long struct, int value) { UNSAFE.putInt(null, struct + VkTraceRaysIndirectCommandKHR.DEPTH, value); }
+    public static void ndepth(long struct, int value) { memPutInt(struct + VkTraceRaysIndirectCommandKHR.DEPTH, value); }
 
     // -----------------------------------
 

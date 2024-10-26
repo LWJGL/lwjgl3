@@ -296,26 +296,26 @@ public class XrGeometryInstanceTransformFB extends Struct<XrGeometryInstanceTran
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XrGeometryInstanceTransformFB.TYPE); }
+    public static int ntype(long struct) { return memGetInt(struct + XrGeometryInstanceTransformFB.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrGeometryInstanceTransformFB.NEXT); }
     /** Unsafe version of {@link #baseSpace}. */
     public static long nbaseSpace(long struct) { return memGetAddress(struct + XrGeometryInstanceTransformFB.BASESPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrGeometryInstanceTransformFB.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrGeometryInstanceTransformFB.TIME); }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrGeometryInstanceTransformFB.POSE); }
     /** Unsafe version of {@link #scale}. */
     public static XrVector3f nscale(long struct) { return XrVector3f.create(struct + XrGeometryInstanceTransformFB.SCALE); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGeometryInstanceTransformFB.TYPE, value); }
+    public static void ntype(long struct, int value) { memPutInt(struct + XrGeometryInstanceTransformFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceTransformFB.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrGeometryInstanceTransformFB.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrGeometryInstanceTransformFB.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrGeometryInstanceTransformFB.TIME, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrGeometryInstanceTransformFB.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #scale(XrVector3f) scale}. */

@@ -130,11 +130,11 @@ public class FT_CharMap extends Struct<FT_CharMap> {
     /** Unsafe version of {@link #face}. */
     public static FT_Face nface(long struct) { return FT_Face.create(memGetAddress(struct + FT_CharMap.FACE)); }
     /** Unsafe version of {@link #encoding}. */
-    public static int nencoding(long struct) { return UNSAFE.getInt(null, struct + FT_CharMap.ENCODING); }
+    public static int nencoding(long struct) { return memGetInt(struct + FT_CharMap.ENCODING); }
     /** Unsafe version of {@link #platform_id}. */
-    public static short nplatform_id(long struct) { return UNSAFE.getShort(null, struct + FT_CharMap.PLATFORM_ID); }
+    public static short nplatform_id(long struct) { return memGetShort(struct + FT_CharMap.PLATFORM_ID); }
     /** Unsafe version of {@link #encoding_id}. */
-    public static short nencoding_id(long struct) { return UNSAFE.getShort(null, struct + FT_CharMap.ENCODING_ID); }
+    public static short nencoding_id(long struct) { return memGetShort(struct + FT_CharMap.ENCODING_ID); }
 
     // -----------------------------------
 

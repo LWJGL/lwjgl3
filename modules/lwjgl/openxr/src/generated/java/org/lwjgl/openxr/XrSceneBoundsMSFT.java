@@ -309,34 +309,34 @@ public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements Nati
     /** Unsafe version of {@link #space}. */
     public static long nspace(long struct) { return memGetAddress(struct + XrSceneBoundsMSFT.SPACE); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return UNSAFE.getLong(null, struct + XrSceneBoundsMSFT.TIME); }
+    public static long ntime(long struct) { return memGetLong(struct + XrSceneBoundsMSFT.TIME); }
     /** Unsafe version of {@link #sphereCount}. */
-    public static int nsphereCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneBoundsMSFT.SPHERECOUNT); }
+    public static int nsphereCount(long struct) { return memGetInt(struct + XrSceneBoundsMSFT.SPHERECOUNT); }
     /** Unsafe version of {@link #spheres}. */
     @Nullable public static XrSceneSphereBoundMSFT.Buffer nspheres(long struct) { return XrSceneSphereBoundMSFT.createSafe(memGetAddress(struct + XrSceneBoundsMSFT.SPHERES), nsphereCount(struct)); }
     /** Unsafe version of {@link #boxCount}. */
-    public static int nboxCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneBoundsMSFT.BOXCOUNT); }
+    public static int nboxCount(long struct) { return memGetInt(struct + XrSceneBoundsMSFT.BOXCOUNT); }
     /** Unsafe version of {@link #boxes}. */
     @Nullable public static XrSceneOrientedBoxBoundMSFT.Buffer nboxes(long struct) { return XrSceneOrientedBoxBoundMSFT.createSafe(memGetAddress(struct + XrSceneBoundsMSFT.BOXES), nboxCount(struct)); }
     /** Unsafe version of {@link #frustumCount}. */
-    public static int nfrustumCount(long struct) { return UNSAFE.getInt(null, struct + XrSceneBoundsMSFT.FRUSTUMCOUNT); }
+    public static int nfrustumCount(long struct) { return memGetInt(struct + XrSceneBoundsMSFT.FRUSTUMCOUNT); }
     /** Unsafe version of {@link #frustums}. */
     @Nullable public static XrSceneFrustumBoundMSFT.Buffer nfrustums(long struct) { return XrSceneFrustumBoundMSFT.createSafe(memGetAddress(struct + XrSceneBoundsMSFT.FRUSTUMS), nfrustumCount(struct)); }
 
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrSceneBoundsMSFT.SPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrSceneBoundsMSFT.TIME, value); }
+    public static void ntime(long struct, long value) { memPutLong(struct + XrSceneBoundsMSFT.TIME, value); }
     /** Sets the specified value to the {@code sphereCount} field of the specified {@code struct}. */
-    public static void nsphereCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneBoundsMSFT.SPHERECOUNT, value); }
+    public static void nsphereCount(long struct, int value) { memPutInt(struct + XrSceneBoundsMSFT.SPHERECOUNT, value); }
     /** Unsafe version of {@link #spheres(XrSceneSphereBoundMSFT.Buffer) spheres}. */
     public static void nspheres(long struct, @Nullable XrSceneSphereBoundMSFT.Buffer value) { memPutAddress(struct + XrSceneBoundsMSFT.SPHERES, memAddressSafe(value)); if (value != null) { nsphereCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code boxCount} field of the specified {@code struct}. */
-    public static void nboxCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneBoundsMSFT.BOXCOUNT, value); }
+    public static void nboxCount(long struct, int value) { memPutInt(struct + XrSceneBoundsMSFT.BOXCOUNT, value); }
     /** Unsafe version of {@link #boxes(XrSceneOrientedBoxBoundMSFT.Buffer) boxes}. */
     public static void nboxes(long struct, @Nullable XrSceneOrientedBoxBoundMSFT.Buffer value) { memPutAddress(struct + XrSceneBoundsMSFT.BOXES, memAddressSafe(value)); if (value != null) { nboxCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code frustumCount} field of the specified {@code struct}. */
-    public static void nfrustumCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneBoundsMSFT.FRUSTUMCOUNT, value); }
+    public static void nfrustumCount(long struct, int value) { memPutInt(struct + XrSceneBoundsMSFT.FRUSTUMCOUNT, value); }
     /** Unsafe version of {@link #frustums(XrSceneFrustumBoundMSFT.Buffer) frustums}. */
     public static void nfrustums(long struct, @Nullable XrSceneFrustumBoundMSFT.Buffer value) { memPutAddress(struct + XrSceneBoundsMSFT.FRUSTUMS, memAddressSafe(value)); if (value != null) { nfrustumCount(struct, value.remaining()); } }
 

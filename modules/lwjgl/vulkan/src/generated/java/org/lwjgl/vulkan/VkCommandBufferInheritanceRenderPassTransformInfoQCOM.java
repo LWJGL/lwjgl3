@@ -268,20 +268,20 @@ public class VkCommandBufferInheritanceRenderPassTransformInfoQCOM extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.PNEXT); }
     /** Unsafe version of {@link #transform}. */
-    public static int ntransform(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.TRANSFORM); }
+    public static int ntransform(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.TRANSFORM); }
     /** Unsafe version of {@link #renderArea}. */
     public static VkRect2D nrenderArea(long struct) { return VkRect2D.create(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.RENDERAREA); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.PNEXT, value); }
     /** Unsafe version of {@link #transform(int) transform}. */
-    public static void ntransform(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.TRANSFORM, value); }
+    public static void ntransform(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.TRANSFORM, value); }
     /** Unsafe version of {@link #renderArea(VkRect2D) renderArea}. */
     public static void nrenderArea(long struct, VkRect2D value) { memCopy(value.address(), struct + VkCommandBufferInheritanceRenderPassTransformInfoQCOM.RENDERAREA, VkRect2D.SIZEOF); }
 

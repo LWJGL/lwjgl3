@@ -252,18 +252,18 @@ public class VkExternalFormatANDROID extends Struct<VkExternalFormatANDROID> imp
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalFormatANDROID.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkExternalFormatANDROID.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalFormatANDROID.PNEXT); }
     /** Unsafe version of {@link #externalFormat}. */
-    public static long nexternalFormat(long struct) { return UNSAFE.getLong(null, struct + VkExternalFormatANDROID.EXTERNALFORMAT); }
+    public static long nexternalFormat(long struct) { return memGetLong(struct + VkExternalFormatANDROID.EXTERNALFORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalFormatANDROID.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalFormatANDROID.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalFormatANDROID.PNEXT, value); }
     /** Unsafe version of {@link #externalFormat(long) externalFormat}. */
-    public static void nexternalFormat(long struct, long value) { UNSAFE.putLong(null, struct + VkExternalFormatANDROID.EXTERNALFORMAT, value); }
+    public static void nexternalFormat(long struct, long value) { memPutLong(struct + VkExternalFormatANDROID.EXTERNALFORMAT, value); }
 
     // -----------------------------------
 

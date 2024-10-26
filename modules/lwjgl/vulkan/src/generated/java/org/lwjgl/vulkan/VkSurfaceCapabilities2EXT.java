@@ -335,13 +335,13 @@ public class VkSurfaceCapabilities2EXT extends Struct<VkSurfaceCapabilities2EXT>
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceCapabilities2EXT.PNEXT); }
     /** Unsafe version of {@link #minImageCount}. */
-    public static int nminImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MINIMAGECOUNT); }
+    public static int nminImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MINIMAGECOUNT); }
     /** Unsafe version of {@link #maxImageCount}. */
-    public static int nmaxImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MAXIMAGECOUNT); }
+    public static int nmaxImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MAXIMAGECOUNT); }
     /** Unsafe version of {@link #currentExtent}. */
     public static VkExtent2D ncurrentExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilities2EXT.CURRENTEXTENT); }
     /** Unsafe version of {@link #minImageExtent}. */
@@ -349,20 +349,20 @@ public class VkSurfaceCapabilities2EXT extends Struct<VkSurfaceCapabilities2EXT>
     /** Unsafe version of {@link #maxImageExtent}. */
     public static VkExtent2D nmaxImageExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilities2EXT.MAXIMAGEEXTENT); }
     /** Unsafe version of {@link #maxImageArrayLayers}. */
-    public static int nmaxImageArrayLayers(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MAXIMAGEARRAYLAYERS); }
+    public static int nmaxImageArrayLayers(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MAXIMAGEARRAYLAYERS); }
     /** Unsafe version of {@link #supportedTransforms}. */
-    public static int nsupportedTransforms(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDTRANSFORMS); }
+    public static int nsupportedTransforms(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDTRANSFORMS); }
     /** Unsafe version of {@link #currentTransform}. */
-    public static int ncurrentTransform(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.CURRENTTRANSFORM); }
+    public static int ncurrentTransform(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.CURRENTTRANSFORM); }
     /** Unsafe version of {@link #supportedCompositeAlpha}. */
-    public static int nsupportedCompositeAlpha(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDCOMPOSITEALPHA); }
+    public static int nsupportedCompositeAlpha(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDCOMPOSITEALPHA); }
     /** Unsafe version of {@link #supportedUsageFlags}. */
-    public static int nsupportedUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDUSAGEFLAGS); }
+    public static int nsupportedUsageFlags(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDUSAGEFLAGS); }
     /** Unsafe version of {@link #supportedSurfaceCounters}. */
-    public static int nsupportedSurfaceCounters(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDSURFACECOUNTERS); }
+    public static int nsupportedSurfaceCounters(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDSURFACECOUNTERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilities2EXT.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceCapabilities2EXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceCapabilities2EXT.PNEXT, value); }
 

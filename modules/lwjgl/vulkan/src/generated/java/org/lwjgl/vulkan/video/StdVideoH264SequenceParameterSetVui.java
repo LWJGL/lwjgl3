@@ -372,64 +372,64 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
     /** Unsafe version of {@link #flags}. */
     public static StdVideoH264SpsVuiFlags nflags(long struct) { return StdVideoH264SpsVuiFlags.create(struct + StdVideoH264SequenceParameterSetVui.FLAGS); }
     /** Unsafe version of {@link #aspect_ratio_idc}. */
-    public static int naspect_ratio_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.ASPECT_RATIO_IDC); }
+    public static int naspect_ratio_idc(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.ASPECT_RATIO_IDC); }
     /** Unsafe version of {@link #sar_width}. */
-    public static short nsar_width(long struct) { return UNSAFE.getShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_WIDTH); }
+    public static short nsar_width(long struct) { return memGetShort(struct + StdVideoH264SequenceParameterSetVui.SAR_WIDTH); }
     /** Unsafe version of {@link #sar_height}. */
-    public static short nsar_height(long struct) { return UNSAFE.getShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT); }
+    public static short nsar_height(long struct) { return memGetShort(struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT); }
     /** Unsafe version of {@link #video_format}. */
-    public static byte nvideo_format(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT); }
+    public static byte nvideo_format(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT); }
     /** Unsafe version of {@link #colour_primaries}. */
-    public static byte ncolour_primaries(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES); }
+    public static byte ncolour_primaries(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES); }
     /** Unsafe version of {@link #transfer_characteristics}. */
-    public static byte ntransfer_characteristics(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS); }
+    public static byte ntransfer_characteristics(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS); }
     /** Unsafe version of {@link #matrix_coefficients}. */
-    public static byte nmatrix_coefficients(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.MATRIX_COEFFICIENTS); }
+    public static byte nmatrix_coefficients(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.MATRIX_COEFFICIENTS); }
     /** Unsafe version of {@link #num_units_in_tick}. */
-    public static int nnum_units_in_tick(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK); }
+    public static int nnum_units_in_tick(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK); }
     /** Unsafe version of {@link #time_scale}. */
-    public static int ntime_scale(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE); }
+    public static int ntime_scale(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE); }
     /** Unsafe version of {@link #max_num_reorder_frames}. */
-    public static byte nmax_num_reorder_frames(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES); }
+    public static byte nmax_num_reorder_frames(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES); }
     /** Unsafe version of {@link #max_dec_frame_buffering}. */
-    public static byte nmax_dec_frame_buffering(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING); }
+    public static byte nmax_dec_frame_buffering(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING); }
     /** Unsafe version of {@link #chroma_sample_loc_type_top_field}. */
-    public static byte nchroma_sample_loc_type_top_field(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD); }
+    public static byte nchroma_sample_loc_type_top_field(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field}. */
-    public static byte nchroma_sample_loc_type_bottom_field(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD); }
-    public static int nreserved1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.RESERVED1); }
+    public static byte nchroma_sample_loc_type_bottom_field(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD); }
+    public static int nreserved1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1); }
     /** Unsafe version of {@link #pHrdParameters}. */
     public static StdVideoH264HrdParameters npHrdParameters(long struct) { return StdVideoH264HrdParameters.create(memGetAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS)); }
 
     /** Unsafe version of {@link #flags(StdVideoH264SpsVuiFlags) flags}. */
     public static void nflags(long struct, StdVideoH264SpsVuiFlags value) { memCopy(value.address(), struct + StdVideoH264SequenceParameterSetVui.FLAGS, StdVideoH264SpsVuiFlags.SIZEOF); }
     /** Unsafe version of {@link #aspect_ratio_idc(int) aspect_ratio_idc}. */
-    public static void naspect_ratio_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.ASPECT_RATIO_IDC, value); }
+    public static void naspect_ratio_idc(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.ASPECT_RATIO_IDC, value); }
     /** Unsafe version of {@link #sar_width(short) sar_width}. */
-    public static void nsar_width(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_WIDTH, value); }
+    public static void nsar_width(long struct, short value) { memPutShort(struct + StdVideoH264SequenceParameterSetVui.SAR_WIDTH, value); }
     /** Unsafe version of {@link #sar_height(short) sar_height}. */
-    public static void nsar_height(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT, value); }
+    public static void nsar_height(long struct, short value) { memPutShort(struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT, value); }
     /** Unsafe version of {@link #video_format(byte) video_format}. */
-    public static void nvideo_format(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT, value); }
+    public static void nvideo_format(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT, value); }
     /** Unsafe version of {@link #colour_primaries(byte) colour_primaries}. */
-    public static void ncolour_primaries(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES, value); }
+    public static void ncolour_primaries(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES, value); }
     /** Unsafe version of {@link #transfer_characteristics(byte) transfer_characteristics}. */
-    public static void ntransfer_characteristics(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS, value); }
+    public static void ntransfer_characteristics(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS, value); }
     /** Unsafe version of {@link #matrix_coefficients(byte) matrix_coefficients}. */
-    public static void nmatrix_coefficients(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.MATRIX_COEFFICIENTS, value); }
+    public static void nmatrix_coefficients(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.MATRIX_COEFFICIENTS, value); }
     /** Unsafe version of {@link #num_units_in_tick(int) num_units_in_tick}. */
-    public static void nnum_units_in_tick(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK, value); }
+    public static void nnum_units_in_tick(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK, value); }
     /** Unsafe version of {@link #time_scale(int) time_scale}. */
-    public static void ntime_scale(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE, value); }
+    public static void ntime_scale(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE, value); }
     /** Unsafe version of {@link #max_num_reorder_frames(byte) max_num_reorder_frames}. */
-    public static void nmax_num_reorder_frames(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES, value); }
+    public static void nmax_num_reorder_frames(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES, value); }
     /** Unsafe version of {@link #max_dec_frame_buffering(byte) max_dec_frame_buffering}. */
-    public static void nmax_dec_frame_buffering(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING, value); }
+    public static void nmax_dec_frame_buffering(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING, value); }
     /** Unsafe version of {@link #chroma_sample_loc_type_top_field(byte) chroma_sample_loc_type_top_field}. */
-    public static void nchroma_sample_loc_type_top_field(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD, value); }
+    public static void nchroma_sample_loc_type_top_field(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD, value); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field(byte) chroma_sample_loc_type_bottom_field}. */
-    public static void nchroma_sample_loc_type_bottom_field(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD, value); }
-    public static void nreserved1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.RESERVED1, value); }
+    public static void nchroma_sample_loc_type_bottom_field(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD, value); }
+    public static void nreserved1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1, value); }
     /** Unsafe version of {@link #pHrdParameters(StdVideoH264HrdParameters) pHrdParameters}. */
     public static void npHrdParameters(long struct, StdVideoH264HrdParameters value) { memPutAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS, value.address()); }
 

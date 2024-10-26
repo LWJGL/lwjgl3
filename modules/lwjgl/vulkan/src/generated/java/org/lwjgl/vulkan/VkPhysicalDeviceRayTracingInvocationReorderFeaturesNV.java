@@ -246,18 +246,18 @@ public class VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV extends Struc
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #rayTracingInvocationReorder}. */
-    public static int nrayTracingInvocationReorder(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.RAYTRACINGINVOCATIONREORDER); }
+    public static int nrayTracingInvocationReorder(long struct) { return memGetInt(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.RAYTRACINGINVOCATIONREORDER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #rayTracingInvocationReorder(boolean) rayTracingInvocationReorder}. */
-    public static void nrayTracingInvocationReorder(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.RAYTRACINGINVOCATIONREORDER, value); }
+    public static void nrayTracingInvocationReorder(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.RAYTRACINGINVOCATIONREORDER, value); }
 
     // -----------------------------------
 

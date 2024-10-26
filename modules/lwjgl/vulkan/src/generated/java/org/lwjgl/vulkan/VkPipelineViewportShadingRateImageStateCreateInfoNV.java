@@ -300,24 +300,24 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #shadingRateImageEnable}. */
-    public static int nshadingRateImageEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE); }
+    public static int nshadingRateImageEnable(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pShadingRatePalettes}. */
     @Nullable public static VkShadingRatePaletteNV.Buffer npShadingRatePalettes(long struct) { return VkShadingRatePaletteNV.createSafe(memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #shadingRateImageEnable(boolean) shadingRateImageEnable}. */
-    public static void nshadingRateImageEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE, value); }
+    public static void nshadingRateImageEnable(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pShadingRatePalettes(VkShadingRatePaletteNV.Buffer) pShadingRatePalettes}. */
     public static void npShadingRatePalettes(long struct, @Nullable VkShadingRatePaletteNV.Buffer value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
 

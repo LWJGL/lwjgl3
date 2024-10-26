@@ -250,24 +250,24 @@ public class FMOD_DSP_METERING_INFO extends Struct<FMOD_DSP_METERING_INFO> imple
     // -----------------------------------
 
     /** Unsafe version of {@link #numsamples}. */
-    public static int nnumsamples(long struct) { return UNSAFE.getInt(null, struct + FMOD_DSP_METERING_INFO.NUMSAMPLES); }
+    public static int nnumsamples(long struct) { return memGetInt(struct + FMOD_DSP_METERING_INFO.NUMSAMPLES); }
     /** Unsafe version of {@link #peaklevel}. */
     public static FloatBuffer npeaklevel(long struct) { return memFloatBuffer(struct + FMOD_DSP_METERING_INFO.PEAKLEVEL, 32); }
     /** Unsafe version of {@link #peaklevel(int) peaklevel}. */
     public static float npeaklevel(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + FMOD_DSP_METERING_INFO.PEAKLEVEL + check(index, 32) * 4);
+        return memGetFloat(struct + FMOD_DSP_METERING_INFO.PEAKLEVEL + check(index, 32) * 4);
     }
     /** Unsafe version of {@link #rmslevel}. */
     public static FloatBuffer nrmslevel(long struct) { return memFloatBuffer(struct + FMOD_DSP_METERING_INFO.RMSLEVEL, 32); }
     /** Unsafe version of {@link #rmslevel(int) rmslevel}. */
     public static float nrmslevel(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + FMOD_DSP_METERING_INFO.RMSLEVEL + check(index, 32) * 4);
+        return memGetFloat(struct + FMOD_DSP_METERING_INFO.RMSLEVEL + check(index, 32) * 4);
     }
     /** Unsafe version of {@link #numchannels}. */
-    public static short nnumchannels(long struct) { return UNSAFE.getShort(null, struct + FMOD_DSP_METERING_INFO.NUMCHANNELS); }
+    public static short nnumchannels(long struct) { return memGetShort(struct + FMOD_DSP_METERING_INFO.NUMCHANNELS); }
 
     /** Unsafe version of {@link #numsamples(int) numsamples}. */
-    public static void nnumsamples(long struct, int value) { UNSAFE.putInt(null, struct + FMOD_DSP_METERING_INFO.NUMSAMPLES, value); }
+    public static void nnumsamples(long struct, int value) { memPutInt(struct + FMOD_DSP_METERING_INFO.NUMSAMPLES, value); }
     /** Unsafe version of {@link #peaklevel(FloatBuffer) peaklevel}. */
     public static void npeaklevel(long struct, FloatBuffer value) {
         if (CHECKS) { checkGT(value, 32); }
@@ -275,7 +275,7 @@ public class FMOD_DSP_METERING_INFO extends Struct<FMOD_DSP_METERING_INFO> imple
     }
     /** Unsafe version of {@link #peaklevel(int, float) peaklevel}. */
     public static void npeaklevel(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + FMOD_DSP_METERING_INFO.PEAKLEVEL + check(index, 32) * 4, value);
+        memPutFloat(struct + FMOD_DSP_METERING_INFO.PEAKLEVEL + check(index, 32) * 4, value);
     }
     /** Unsafe version of {@link #rmslevel(FloatBuffer) rmslevel}. */
     public static void nrmslevel(long struct, FloatBuffer value) {
@@ -284,10 +284,10 @@ public class FMOD_DSP_METERING_INFO extends Struct<FMOD_DSP_METERING_INFO> imple
     }
     /** Unsafe version of {@link #rmslevel(int, float) rmslevel}. */
     public static void nrmslevel(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + FMOD_DSP_METERING_INFO.RMSLEVEL + check(index, 32) * 4, value);
+        memPutFloat(struct + FMOD_DSP_METERING_INFO.RMSLEVEL + check(index, 32) * 4, value);
     }
     /** Unsafe version of {@link #numchannels(short) numchannels}. */
-    public static void nnumchannels(long struct, short value) { UNSAFE.putShort(null, struct + FMOD_DSP_METERING_INFO.NUMCHANNELS, value); }
+    public static void nnumchannels(long struct, short value) { memPutShort(struct + FMOD_DSP_METERING_INFO.NUMCHANNELS, value); }
 
     // -----------------------------------
 

@@ -152,7 +152,7 @@ public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
     // -----------------------------------
 
     /** Unsafe version of {@link #kind}. */
-    public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXIdxEntityRefInfo.KIND); }
+    public static int nkind(long struct) { return memGetInt(struct + CXIdxEntityRefInfo.KIND); }
     /** Unsafe version of {@link #cursor}. */
     public static CXCursor ncursor(long struct) { return CXCursor.create(struct + CXIdxEntityRefInfo.CURSOR); }
     /** Unsafe version of {@link #loc}. */
@@ -164,7 +164,7 @@ public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
     /** Unsafe version of {@link #container}. */
     public static CXIdxContainerInfo ncontainer(long struct) { return CXIdxContainerInfo.create(memGetAddress(struct + CXIdxEntityRefInfo.CONTAINER)); }
     /** Unsafe version of {@link #role}. */
-    public static int nrole(long struct) { return UNSAFE.getInt(null, struct + CXIdxEntityRefInfo.ROLE); }
+    public static int nrole(long struct) { return memGetInt(struct + CXIdxEntityRefInfo.ROLE); }
 
     // -----------------------------------
 

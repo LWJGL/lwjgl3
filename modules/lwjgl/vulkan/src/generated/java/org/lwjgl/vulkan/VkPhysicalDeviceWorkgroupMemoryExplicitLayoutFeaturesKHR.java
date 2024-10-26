@@ -279,30 +279,30 @@ public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends St
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout}. */
-    public static int nworkgroupMemoryExplicitLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT); }
+    public static int nworkgroupMemoryExplicitLayout(long struct) { return memGetInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayoutScalarBlockLayout}. */
-    public static int nworkgroupMemoryExplicitLayoutScalarBlockLayout(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUTSCALARBLOCKLAYOUT); }
+    public static int nworkgroupMemoryExplicitLayoutScalarBlockLayout(long struct) { return memGetInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUTSCALARBLOCKLAYOUT); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout8BitAccess}. */
-    public static int nworkgroupMemoryExplicitLayout8BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT8BITACCESS); }
+    public static int nworkgroupMemoryExplicitLayout8BitAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT8BITACCESS); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout16BitAccess}. */
-    public static int nworkgroupMemoryExplicitLayout16BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT16BITACCESS); }
+    public static int nworkgroupMemoryExplicitLayout16BitAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT16BITACCESS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.PNEXT, value); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout(boolean) workgroupMemoryExplicitLayout}. */
-    public static void nworkgroupMemoryExplicitLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT, value); }
+    public static void nworkgroupMemoryExplicitLayout(long struct, int value) { memPutInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT, value); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayoutScalarBlockLayout(boolean) workgroupMemoryExplicitLayoutScalarBlockLayout}. */
-    public static void nworkgroupMemoryExplicitLayoutScalarBlockLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUTSCALARBLOCKLAYOUT, value); }
+    public static void nworkgroupMemoryExplicitLayoutScalarBlockLayout(long struct, int value) { memPutInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUTSCALARBLOCKLAYOUT, value); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout8BitAccess(boolean) workgroupMemoryExplicitLayout8BitAccess}. */
-    public static void nworkgroupMemoryExplicitLayout8BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT8BITACCESS, value); }
+    public static void nworkgroupMemoryExplicitLayout8BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT8BITACCESS, value); }
     /** Unsafe version of {@link #workgroupMemoryExplicitLayout16BitAccess(boolean) workgroupMemoryExplicitLayout16BitAccess}. */
-    public static void nworkgroupMemoryExplicitLayout16BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT16BITACCESS, value); }
+    public static void nworkgroupMemoryExplicitLayout16BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.WORKGROUPMEMORYEXPLICITLAYOUT16BITACCESS, value); }
 
     // -----------------------------------
 

@@ -103,7 +103,7 @@ public class VREventAudioMuteControl extends Struct<VREventAudioMuteControl> {
     // -----------------------------------
 
     /** Unsafe version of {@link #bMute}. */
-    public static boolean nbMute(long struct) { return UNSAFE.getByte(null, struct + VREventAudioMuteControl.BMUTE) != 0; }
+    public static boolean nbMute(long struct) { return memGetByte(struct + VREventAudioMuteControl.BMUTE) != 0; }
 
     // -----------------------------------
 
