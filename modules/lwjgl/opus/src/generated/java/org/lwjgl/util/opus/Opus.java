@@ -1844,10 +1844,10 @@ public class Opus {
         @Override
         int apply(long st, long __functionAddress) {
             try (MemoryStack stack = stackPush()) {
-                ByteBuffer arguments = stack.malloc(POINTER_SIZE + Integer.BYTES + POINTER_SIZE);
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE * 2 + Integer.BYTES);
                 PointerBuffer.put(arguments, 0, st);
-                arguments.putInt(POINTER_SIZE, request);
-                PointerBuffer.put(arguments, POINTER_SIZE + Integer.BYTES, address);
+                PointerBuffer.put(arguments, POINTER_SIZE, address);
+                arguments.putInt(POINTER_SIZE * 2, request);
 
                 ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
 
@@ -1857,8 +1857,8 @@ public class Opus {
                     cif, __functionAddress, rvalue,
                     stack.mallocPointer(3)
                         .put(0, avalues)
-                        .put(1, avalues + POINTER_SIZE)
-                        .put(2, avalues + POINTER_SIZE + Integer.BYTES)
+                        .put(1, avalues + POINTER_SIZE * 2)
+                        .put(2, avalues + POINTER_SIZE)
                 );
                 return rvalue.getInt(0);
             }
@@ -1884,11 +1884,11 @@ public class Opus {
         @Override
         int apply(long st, long __functionAddress) {
             try (MemoryStack stack = stackPush()) {
-                ByteBuffer arguments = stack.malloc(POINTER_SIZE + Integer.BYTES + POINTER_SIZE + Integer.BYTES);
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE * 2 + Integer.BYTES * 2);
                 PointerBuffer.put(arguments, 0, st);
-                arguments.putInt(POINTER_SIZE, request);
-                PointerBuffer.put(arguments, POINTER_SIZE + Integer.BYTES, address);
-                arguments.putInt(POINTER_SIZE + Integer.BYTES + POINTER_SIZE, value);
+                PointerBuffer.put(arguments, POINTER_SIZE, address);
+                arguments.putInt(POINTER_SIZE * 2, request);
+                arguments.putInt(POINTER_SIZE * 2 + Integer.BYTES, value);
 
                 ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
 
@@ -1898,9 +1898,9 @@ public class Opus {
                     cif, __functionAddress, rvalue,
                     stack.mallocPointer(4)
                         .put(0, avalues)
-                        .put(1, avalues + POINTER_SIZE)
-                        .put(2, avalues + POINTER_SIZE + Integer.BYTES)
-                        .put(3, avalues + POINTER_SIZE + Integer.BYTES + POINTER_SIZE)
+                        .put(1, avalues + POINTER_SIZE * 2)
+                        .put(2, avalues + POINTER_SIZE)
+                        .put(3, avalues + POINTER_SIZE * 2 + Integer.BYTES)
                 );
                 return rvalue.getInt(0);
             }
