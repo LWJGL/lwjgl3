@@ -353,6 +353,48 @@ public final class MemoryUtil {
             nmemFree(UNSAFE.getLong(ptr, ADDRESS));
         }
     }
+    /** {@code ByteBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable ByteBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code ShortBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable ShortBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code CharBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable CharBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code IntBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable IntBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code LongBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable LongBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code FloatBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable FloatBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
+    /** {@code DoubleBuffer} version of {@link #memFree(Buffer)}. */
+    public static void memFree(@Nullable DoubleBuffer ptr) {
+        if (ptr != null) {
+            nmemFree(UNSAFE.getLong(ptr, ADDRESS));
+        }
+    }
 
     /** {@code CustomBuffer} version of {@link #memFree}. */
     public static void memFree(@Nullable CustomBuffer<?> ptr) {
@@ -728,6 +770,20 @@ public final class MemoryUtil {
      * @return the memory address
      */
     public static long memAddress0(Buffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code ByteBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(ByteBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code ShortBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(ShortBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code CharBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(CharBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code IntBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(IntBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code LongBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(LongBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code FloatBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(FloatBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
+    /** {@code DoubleBuffer} version of {@link #memAddress0(Buffer)}. */
+    public static long memAddress0(DoubleBuffer buffer) { return UNSAFE.getLong(buffer, ADDRESS); }
 
     // --- [ Buffer address ] ---
 
@@ -820,7 +876,7 @@ public final class MemoryUtil {
         } else {
             elementShift = 3;
         }
-        return address(buffer.position(), elementShift, memAddress0(buffer));
+        return address(buffer.position(), elementShift, UNSAFE.getLong(buffer, ADDRESS));
     }
 
     /** CustomBuffer version of {@link #memAddress(ByteBuffer)}. */
