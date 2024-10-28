@@ -890,7 +890,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(ShortBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 1) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 1);
     }
@@ -907,7 +907,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(CharBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 1) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 1);
     }
@@ -924,7 +924,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(IntBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 2) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 2);
     }
@@ -941,7 +941,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(LongBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 3) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 3);
     }
@@ -958,7 +958,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(FloatBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 2) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 2);
     }
@@ -975,7 +975,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(DoubleBuffer buffer) {
         if (CHECKS && (Integer.MAX_VALUE >> 3) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() << 3);
     }
@@ -991,7 +991,7 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBuffer(CustomBuffer<?> buffer) {
         if (CHECKS && (Integer.MAX_VALUE / buffer.sizeof()) < buffer.remaining()) {
-            throw new IllegalArgumentException("The source buffer range is too wide");
+            throw new IllegalStateException("The source buffer range is too wide");
         }
         return wrapBufferByte(memAddress(buffer), buffer.remaining() * buffer.sizeof());
     }
