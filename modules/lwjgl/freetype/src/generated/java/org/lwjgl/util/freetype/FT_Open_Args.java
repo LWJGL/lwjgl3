@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,23 +104,19 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     @NativeType("FT_UInt")
     public int flags() { return nflags(address()); }
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code memory_base} field. */
-    @Nullable
     @NativeType("FT_Byte const *")
-    public ByteBuffer memory_base() { return nmemory_base(address()); }
+    public @Nullable ByteBuffer memory_base() { return nmemory_base(address()); }
     /** @return the value of the {@code memory_size} field. */
     @NativeType("FT_Long")
     public long memory_size() { return nmemory_size(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pathname} field. */
-    @Nullable
     @NativeType("FT_String *")
-    public ByteBuffer pathname() { return npathname(address()); }
+    public @Nullable ByteBuffer pathname() { return npathname(address()); }
     /** @return the null-terminated string pointed to by the {@code pathname} field. */
-    @Nullable
     @NativeType("FT_String *")
-    public String pathnameString() { return npathnameString(address()); }
+    public @Nullable String pathnameString() { return npathnameString(address()); }
     /** @return a {@link FT_Stream} view of the struct pointed to by the {@code stream} field. */
-    @Nullable
-    public FT_Stream stream$() { return nstream$(address()); }
+    public @Nullable FT_Stream stream$() { return nstream$(address()); }
     /** @return the value of the {@code driver} field. */
     @NativeType("FT_Module")
     public long driver() { return ndriver(address()); }
@@ -128,9 +124,8 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     @NativeType("FT_Int")
     public int num_params() { return nnum_params(address()); }
     /** @return a {@link FT_Parameter.Buffer} view of the struct array pointed to by the {@code params} field. */
-    @Nullable
     @NativeType("FT_Parameter *")
-    public FT_Parameter.Buffer params() { return nparams(address()); }
+    public FT_Parameter.@Nullable Buffer params() { return nparams(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public FT_Open_Args flags(@NativeType("FT_UInt") int value) { nflags(address(), value); return this; }
@@ -147,7 +142,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     /** Sets the specified value to the {@code num_params} field. */
     public FT_Open_Args num_params(@NativeType("FT_Int") int value) { nnum_params(address(), value); return this; }
     /** Sets the address of the specified {@link FT_Parameter.Buffer} to the {@code params} field. */
-    public FT_Open_Args params(@Nullable @NativeType("FT_Parameter *") FT_Parameter.Buffer value) { nparams(address(), value); return this; }
+    public FT_Open_Args params(@NativeType("FT_Parameter *") FT_Parameter.@Nullable Buffer value) { nparams(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public FT_Open_Args set(
@@ -158,7 +153,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
         @Nullable FT_Stream stream$,
         long driver,
         int num_params,
-        @Nullable FT_Parameter.Buffer params
+        FT_Parameter.@Nullable Buffer params
     ) {
         flags(flags);
         memory_base(memory_base);
@@ -208,8 +203,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Open_Args createSafe(long address) {
+    public static @Nullable FT_Open_Args createSafe(long address) {
         return address == NULL ? null : new FT_Open_Args(address, null);
     }
 
@@ -252,8 +246,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Open_Args.Buffer createSafe(long address, int capacity) {
+    public static FT_Open_Args.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -300,21 +293,21 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + FT_Open_Args.FLAGS); }
     /** Unsafe version of {@link #memory_base() memory_base}. */
-    @Nullable public static ByteBuffer nmemory_base(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_Open_Args.MEMORY_BASE), (int)nmemory_size(struct)); }
+    public static @Nullable ByteBuffer nmemory_base(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_Open_Args.MEMORY_BASE), (int)nmemory_size(struct)); }
     /** Unsafe version of {@link #memory_size}. */
     public static long nmemory_size(long struct) { return memGetCLong(struct + FT_Open_Args.MEMORY_SIZE); }
     /** Unsafe version of {@link #pathname}. */
-    @Nullable public static ByteBuffer npathname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FT_Open_Args.PATHNAME)); }
+    public static @Nullable ByteBuffer npathname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FT_Open_Args.PATHNAME)); }
     /** Unsafe version of {@link #pathnameString}. */
-    @Nullable public static String npathnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FT_Open_Args.PATHNAME)); }
+    public static @Nullable String npathnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FT_Open_Args.PATHNAME)); }
     /** Unsafe version of {@link #stream$}. */
-    @Nullable public static FT_Stream nstream$(long struct) { return FT_Stream.createSafe(memGetAddress(struct + FT_Open_Args.STREAM)); }
+    public static @Nullable FT_Stream nstream$(long struct) { return FT_Stream.createSafe(memGetAddress(struct + FT_Open_Args.STREAM)); }
     /** Unsafe version of {@link #driver}. */
     public static long ndriver(long struct) { return memGetAddress(struct + FT_Open_Args.DRIVER); }
     /** Unsafe version of {@link #num_params}. */
     public static int nnum_params(long struct) { return memGetInt(struct + FT_Open_Args.NUM_PARAMS); }
     /** Unsafe version of {@link #params}. */
-    @Nullable public static FT_Parameter.Buffer nparams(long struct) { return FT_Parameter.createSafe(memGetAddress(struct + FT_Open_Args.PARAMS), nnum_params(struct)); }
+    public static FT_Parameter.@Nullable Buffer nparams(long struct) { return FT_Parameter.createSafe(memGetAddress(struct + FT_Open_Args.PARAMS), nnum_params(struct)); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + FT_Open_Args.FLAGS, value); }
@@ -334,7 +327,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
     /** Sets the specified value to the {@code num_params} field of the specified {@code struct}. */
     public static void nnum_params(long struct, int value) { memPutInt(struct + FT_Open_Args.NUM_PARAMS, value); }
     /** Unsafe version of {@link #params(FT_Parameter.Buffer) params}. */
-    public static void nparams(long struct, @Nullable FT_Parameter.Buffer value) { memPutAddress(struct + FT_Open_Args.PARAMS, memAddressSafe(value)); nnum_params(struct, value == null ? 0 : value.remaining()); }
+    public static void nparams(long struct, FT_Parameter.@Nullable Buffer value) { memPutAddress(struct + FT_Open_Args.PARAMS, memAddressSafe(value)); nnum_params(struct, value == null ? 0 : value.remaining()); }
 
     // -----------------------------------
 
@@ -383,23 +376,19 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
         @NativeType("FT_UInt")
         public int flags() { return FT_Open_Args.nflags(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code memory_base} field. */
-        @Nullable
         @NativeType("FT_Byte const *")
-        public ByteBuffer memory_base() { return FT_Open_Args.nmemory_base(address()); }
+        public @Nullable ByteBuffer memory_base() { return FT_Open_Args.nmemory_base(address()); }
         /** @return the value of the {@code memory_size} field. */
         @NativeType("FT_Long")
         public long memory_size() { return FT_Open_Args.nmemory_size(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pathname} field. */
-        @Nullable
         @NativeType("FT_String *")
-        public ByteBuffer pathname() { return FT_Open_Args.npathname(address()); }
+        public @Nullable ByteBuffer pathname() { return FT_Open_Args.npathname(address()); }
         /** @return the null-terminated string pointed to by the {@code pathname} field. */
-        @Nullable
         @NativeType("FT_String *")
-        public String pathnameString() { return FT_Open_Args.npathnameString(address()); }
+        public @Nullable String pathnameString() { return FT_Open_Args.npathnameString(address()); }
         /** @return a {@link FT_Stream} view of the struct pointed to by the {@code stream} field. */
-        @Nullable
-        public FT_Stream stream$() { return FT_Open_Args.nstream$(address()); }
+        public @Nullable FT_Stream stream$() { return FT_Open_Args.nstream$(address()); }
         /** @return the value of the {@code driver} field. */
         @NativeType("FT_Module")
         public long driver() { return FT_Open_Args.ndriver(address()); }
@@ -407,9 +396,8 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
         @NativeType("FT_Int")
         public int num_params() { return FT_Open_Args.nnum_params(address()); }
         /** @return a {@link FT_Parameter.Buffer} view of the struct array pointed to by the {@code params} field. */
-        @Nullable
         @NativeType("FT_Parameter *")
-        public FT_Parameter.Buffer params() { return FT_Open_Args.nparams(address()); }
+        public FT_Parameter.@Nullable Buffer params() { return FT_Open_Args.nparams(address()); }
 
         /** Sets the specified value to the {@code flags} field. */
         public FT_Open_Args.Buffer flags(@NativeType("FT_UInt") int value) { FT_Open_Args.nflags(address(), value); return this; }
@@ -426,7 +414,7 @@ public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource
         /** Sets the specified value to the {@code num_params} field. */
         public FT_Open_Args.Buffer num_params(@NativeType("FT_Int") int value) { FT_Open_Args.nnum_params(address(), value); return this; }
         /** Sets the address of the specified {@link FT_Parameter.Buffer} to the {@code params} field. */
-        public FT_Open_Args.Buffer params(@Nullable @NativeType("FT_Parameter *") FT_Parameter.Buffer value) { FT_Open_Args.nparams(address(), value); return this; }
+        public FT_Open_Args.Buffer params(@NativeType("FT_Parameter *") FT_Parameter.@Nullable Buffer value) { FT_Open_Args.nparams(address(), value); return this; }
 
     }
 

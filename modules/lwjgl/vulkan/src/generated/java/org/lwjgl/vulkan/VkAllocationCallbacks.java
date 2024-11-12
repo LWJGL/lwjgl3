@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,25 +107,20 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
     /** a {@link VkAllocationFunction} pointer to an application-defined memory allocation function. */
-    @Nullable
     @NativeType("PFN_vkAllocationFunction")
-    public VkAllocationFunction pfnAllocation() { return npfnAllocation(address()); }
+    public @Nullable VkAllocationFunction pfnAllocation() { return npfnAllocation(address()); }
     /** a {@link VkReallocationFunction} pointer to an application-defined memory reallocation function. */
-    @Nullable
     @NativeType("PFN_vkReallocationFunction")
-    public VkReallocationFunction pfnReallocation() { return npfnReallocation(address()); }
+    public @Nullable VkReallocationFunction pfnReallocation() { return npfnReallocation(address()); }
     /** a {@link VkFreeFunction} pointer to an application-defined memory free function. */
-    @Nullable
     @NativeType("PFN_vkFreeFunction")
-    public VkFreeFunction pfnFree() { return npfnFree(address()); }
+    public @Nullable VkFreeFunction pfnFree() { return npfnFree(address()); }
     /** a {@link VkInternalAllocationNotification} pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations. */
-    @Nullable
     @NativeType("PFN_vkInternalAllocationNotification")
-    public VkInternalAllocationNotification pfnInternalAllocation() { return npfnInternalAllocation(address()); }
+    public @Nullable VkInternalAllocationNotification pfnInternalAllocation() { return npfnInternalAllocation(address()); }
     /** a {@link VkInternalFreeNotification} pointer to an application-defined function that is called by the implementation when the implementation frees internal allocations. */
-    @Nullable
     @NativeType("PFN_vkInternalFreeNotification")
-    public VkInternalFreeNotification pfnInternalFree() { return npfnInternalFree(address()); }
+    public @Nullable VkInternalFreeNotification pfnInternalFree() { return npfnInternalFree(address()); }
 
     /** Sets the specified value to the {@link #pUserData} field. */
     public VkAllocationCallbacks pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
@@ -195,8 +190,7 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAllocationCallbacks createSafe(long address) {
+    public static @Nullable VkAllocationCallbacks createSafe(long address) {
         return address == NULL ? null : new VkAllocationCallbacks(address, null);
     }
 
@@ -239,8 +233,7 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAllocationCallbacks.Buffer createSafe(long address, int capacity) {
+    public static VkAllocationCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -306,15 +299,15 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VkAllocationCallbacks.PUSERDATA); }
     /** Unsafe version of {@link #pfnAllocation}. */
-    @Nullable public static VkAllocationFunction npfnAllocation(long struct) { return VkAllocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNALLOCATION)); }
+    public static @Nullable VkAllocationFunction npfnAllocation(long struct) { return VkAllocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNALLOCATION)); }
     /** Unsafe version of {@link #pfnReallocation}. */
-    @Nullable public static VkReallocationFunction npfnReallocation(long struct) { return VkReallocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNREALLOCATION)); }
+    public static @Nullable VkReallocationFunction npfnReallocation(long struct) { return VkReallocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNREALLOCATION)); }
     /** Unsafe version of {@link #pfnFree}. */
-    @Nullable public static VkFreeFunction npfnFree(long struct) { return VkFreeFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNFREE)); }
+    public static @Nullable VkFreeFunction npfnFree(long struct) { return VkFreeFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNFREE)); }
     /** Unsafe version of {@link #pfnInternalAllocation}. */
-    @Nullable public static VkInternalAllocationNotification npfnInternalAllocation(long struct) { return VkInternalAllocationNotification.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNINTERNALALLOCATION)); }
+    public static @Nullable VkInternalAllocationNotification npfnInternalAllocation(long struct) { return VkInternalAllocationNotification.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNINTERNALALLOCATION)); }
     /** Unsafe version of {@link #pfnInternalFree}. */
-    @Nullable public static VkInternalFreeNotification npfnInternalFree(long struct) { return VkInternalFreeNotification.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNINTERNALFREE)); }
+    public static @Nullable VkInternalFreeNotification npfnInternalFree(long struct) { return VkInternalFreeNotification.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNINTERNALFREE)); }
 
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VkAllocationCallbacks.PUSERDATA, value); }
@@ -376,25 +369,20 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
         @NativeType("void *")
         public long pUserData() { return VkAllocationCallbacks.npUserData(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnAllocation} field. */
-        @Nullable
         @NativeType("PFN_vkAllocationFunction")
-        public VkAllocationFunction pfnAllocation() { return VkAllocationCallbacks.npfnAllocation(address()); }
+        public @Nullable VkAllocationFunction pfnAllocation() { return VkAllocationCallbacks.npfnAllocation(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnReallocation} field. */
-        @Nullable
         @NativeType("PFN_vkReallocationFunction")
-        public VkReallocationFunction pfnReallocation() { return VkAllocationCallbacks.npfnReallocation(address()); }
+        public @Nullable VkReallocationFunction pfnReallocation() { return VkAllocationCallbacks.npfnReallocation(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnFree} field. */
-        @Nullable
         @NativeType("PFN_vkFreeFunction")
-        public VkFreeFunction pfnFree() { return VkAllocationCallbacks.npfnFree(address()); }
+        public @Nullable VkFreeFunction pfnFree() { return VkAllocationCallbacks.npfnFree(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnInternalAllocation} field. */
-        @Nullable
         @NativeType("PFN_vkInternalAllocationNotification")
-        public VkInternalAllocationNotification pfnInternalAllocation() { return VkAllocationCallbacks.npfnInternalAllocation(address()); }
+        public @Nullable VkInternalAllocationNotification pfnInternalAllocation() { return VkAllocationCallbacks.npfnInternalAllocation(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnInternalFree} field. */
-        @Nullable
         @NativeType("PFN_vkInternalFreeNotification")
-        public VkInternalFreeNotification pfnInternalFree() { return VkAllocationCallbacks.npfnInternalFree(address()); }
+        public @Nullable VkInternalFreeNotification pfnInternalFree() { return VkAllocationCallbacks.npfnInternalFree(address()); }
 
         /** Sets the specified value to the {@link VkAllocationCallbacks#pUserData} field. */
         public VkAllocationCallbacks.Buffer pUserData(@NativeType("void *") long value) { VkAllocationCallbacks.npUserData(address(), value); return this; }

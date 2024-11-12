@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meshoptimizer;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class MeshoptStream extends Struct<MeshoptStream> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptStream createSafe(long address) {
+    public static @Nullable MeshoptStream createSafe(long address) {
         return address == NULL ? null : new MeshoptStream(address, null);
     }
 
@@ -196,8 +195,7 @@ public class MeshoptStream extends Struct<MeshoptStream> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptStream.Buffer createSafe(long address, int capacity) {
+    public static MeshoptStream.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

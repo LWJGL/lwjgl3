@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,9 +86,8 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to the next structure in a structure chain. */
-    @Nullable
     @NativeType("VkBaseInStructure const *")
-    public VkBaseInStructure pNext() { return npNext(address()); }
+    public @Nullable VkBaseInStructure pNext() { return npNext(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBaseInStructure sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -142,8 +141,7 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBaseInStructure createSafe(long address) {
+    public static @Nullable VkBaseInStructure createSafe(long address) {
         return address == NULL ? null : new VkBaseInStructure(address, null);
     }
 
@@ -186,8 +184,7 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBaseInStructure.Buffer createSafe(long address, int capacity) {
+    public static VkBaseInStructure.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -253,7 +250,7 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return memGetInt(struct + VkBaseInStructure.STYPE); }
     /** Unsafe version of {@link #pNext}. */
-    @Nullable public static VkBaseInStructure npNext(long struct) { return VkBaseInStructure.createSafe(memGetAddress(struct + VkBaseInStructure.PNEXT)); }
+    public static @Nullable VkBaseInStructure npNext(long struct) { return VkBaseInStructure.createSafe(memGetAddress(struct + VkBaseInStructure.PNEXT)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkBaseInStructure.STYPE, value); }
@@ -307,9 +304,8 @@ public class VkBaseInStructure extends Struct<VkBaseInStructure> implements Nati
         @NativeType("VkStructureType")
         public int sType() { return VkBaseInStructure.nsType(address()); }
         /** @return a {@link VkBaseInStructure} view of the struct pointed to by the {@link VkBaseInStructure#pNext} field. */
-        @Nullable
         @NativeType("VkBaseInStructure const *")
-        public VkBaseInStructure pNext() { return VkBaseInStructure.npNext(address()); }
+        public @Nullable VkBaseInStructure pNext() { return VkBaseInStructure.npNext(address()); }
 
         /** Sets the specified value to the {@link VkBaseInStructure#sType} field. */
         public VkBaseInStructure.Buffer sType(@NativeType("VkStructureType") int value) { VkBaseInStructure.nsType(address(), value); return this; }

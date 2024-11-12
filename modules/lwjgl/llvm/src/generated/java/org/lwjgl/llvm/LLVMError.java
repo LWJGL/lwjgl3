@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,9 +86,8 @@ public class LLVMError {
      * <p>This operation consumes the error, and the given {@code LLVMErrorRef} value is not usable once this call returns. The caller is responsible for
      * disposing of the string by calling {@link #LLVMDisposeErrorMessage DisposeErrorMessage}.</p>
      */
-    @Nullable
     @NativeType("char *")
-    public static ByteBuffer LLVMGetErrorMessage(@NativeType("LLVMErrorRef") long Err) {
+    public static @Nullable ByteBuffer LLVMGetErrorMessage(@NativeType("LLVMErrorRef") long Err) {
         long __result = nLLVMGetErrorMessage(Err);
         return memByteBufferNT1Safe(__result);
     }

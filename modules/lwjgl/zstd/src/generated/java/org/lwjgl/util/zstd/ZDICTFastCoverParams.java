@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -208,8 +208,7 @@ public class ZDICTFastCoverParams extends Struct<ZDICTFastCoverParams> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZDICTFastCoverParams createSafe(long address) {
+    public static @Nullable ZDICTFastCoverParams createSafe(long address) {
         return address == NULL ? null : new ZDICTFastCoverParams(address, null);
     }
 
@@ -252,8 +251,7 @@ public class ZDICTFastCoverParams extends Struct<ZDICTFastCoverParams> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZDICTFastCoverParams.Buffer createSafe(long address, int capacity) {
+    public static ZDICTFastCoverParams.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

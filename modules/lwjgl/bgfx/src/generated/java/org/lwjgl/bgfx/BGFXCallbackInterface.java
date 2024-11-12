@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,8 +119,7 @@ public class BGFXCallbackInterface extends Struct<BGFXCallbackInterface> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCallbackInterface createSafe(long address) {
+    public static @Nullable BGFXCallbackInterface createSafe(long address) {
         return address == NULL ? null : new BGFXCallbackInterface(address, null);
     }
 

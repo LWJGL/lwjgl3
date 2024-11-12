@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class VkClearValue extends Struct<VkClearValue> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearValue createSafe(long address) {
+    public static @Nullable VkClearValue createSafe(long address) {
         return address == NULL ? null : new VkClearValue(address, null);
     }
 
@@ -176,8 +175,7 @@ public class VkClearValue extends Struct<VkClearValue> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearValue.Buffer createSafe(long address, int capacity) {
+    public static VkClearValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

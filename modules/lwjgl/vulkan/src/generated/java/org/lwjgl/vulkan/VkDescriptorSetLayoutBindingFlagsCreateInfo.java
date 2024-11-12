@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,9 +124,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
     @NativeType("uint32_t")
     public int bindingCount() { return nbindingCount(address()); }
     /** a pointer to an array of {@code VkDescriptorBindingFlags} bitfields, one for each descriptor set layout binding. */
-    @Nullable
     @NativeType("VkDescriptorBindingFlags const *")
-    public IntBuffer pBindingFlags() { return npBindingFlags(address()); }
+    public @Nullable IntBuffer pBindingFlags() { return npBindingFlags(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -190,8 +189,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo createSafe(long address) {
+    public static @Nullable VkDescriptorSetLayoutBindingFlagsCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkDescriptorSetLayoutBindingFlagsCreateInfo(address, null);
     }
 
@@ -234,8 +232,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -286,7 +283,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
     /** Unsafe version of {@link #bindingCount}. */
     public static int nbindingCount(long struct) { return memGetInt(struct + VkDescriptorSetLayoutBindingFlagsCreateInfo.BINDINGCOUNT); }
     /** Unsafe version of {@link #pBindingFlags() pBindingFlags}. */
-    @Nullable public static IntBuffer npBindingFlags(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDescriptorSetLayoutBindingFlagsCreateInfo.PBINDINGFLAGS), nbindingCount(struct)); }
+    public static @Nullable IntBuffer npBindingFlags(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDescriptorSetLayoutBindingFlagsCreateInfo.PBINDINGFLAGS), nbindingCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBindingFlagsCreateInfo.STYPE, value); }
@@ -350,9 +347,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
         @NativeType("uint32_t")
         public int bindingCount() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.nbindingCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pBindingFlags} field. */
-        @Nullable
         @NativeType("VkDescriptorBindingFlags const *")
-        public IntBuffer pBindingFlags() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.npBindingFlags(address()); }
+        public @Nullable IntBuffer pBindingFlags() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.npBindingFlags(address()); }
 
         /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.nsType(address(), value); return this; }

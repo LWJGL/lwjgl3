@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -151,8 +151,7 @@ public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCom
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectCommandsExecutionSetTokenEXT createSafe(long address) {
+    public static @Nullable VkIndirectCommandsExecutionSetTokenEXT createSafe(long address) {
         return address == NULL ? null : new VkIndirectCommandsExecutionSetTokenEXT(address, null);
     }
 
@@ -195,8 +194,7 @@ public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCom
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectCommandsExecutionSetTokenEXT.Buffer createSafe(long address, int capacity) {
+    public static VkIndirectCommandsExecutionSetTokenEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

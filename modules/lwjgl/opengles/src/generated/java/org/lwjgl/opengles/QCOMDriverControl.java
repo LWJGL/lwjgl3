@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -40,7 +40,7 @@ public class QCOMDriverControl {
 
     public static native void nglGetDriverControlsQCOM(long num, int size, long driverControls);
 
-    public static void glGetDriverControlsQCOM(@Nullable @NativeType("GLint *") IntBuffer num, @Nullable @NativeType("GLuint *") IntBuffer driverControls) {
+    public static void glGetDriverControlsQCOM(@NativeType("GLint *") @Nullable IntBuffer num, @NativeType("GLuint *") @Nullable IntBuffer driverControls) {
         if (CHECKS) {
             checkSafe(num, 1);
         }
@@ -51,7 +51,7 @@ public class QCOMDriverControl {
 
     public static native void nglGetDriverControlStringQCOM(int driverControl, int bufSize, long length, long driverControlString);
 
-    public static void glGetDriverControlStringQCOM(@NativeType("GLuint") int driverControl, @Nullable @NativeType("GLsizei *") IntBuffer length, @Nullable @NativeType("GLchar *") ByteBuffer driverControlString) {
+    public static void glGetDriverControlStringQCOM(@NativeType("GLuint") int driverControl, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") @Nullable ByteBuffer driverControlString) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -80,7 +80,7 @@ public class QCOMDriverControl {
     public static native void glDisableDriverControlQCOM(@NativeType("GLuint") int driverControl);
 
     /** Array version of: {@link #glGetDriverControlsQCOM GetDriverControlsQCOM} */
-    public static void glGetDriverControlsQCOM(@Nullable @NativeType("GLint *") int[] num, @Nullable @NativeType("GLuint *") int[] driverControls) {
+    public static void glGetDriverControlsQCOM(@NativeType("GLint *") int @Nullable [] num, @NativeType("GLuint *") int @Nullable [] driverControls) {
         long __functionAddress = GLES.getICD().glGetDriverControlsQCOM;
         if (CHECKS) {
             check(__functionAddress);
@@ -90,7 +90,7 @@ public class QCOMDriverControl {
     }
 
     /** Array version of: {@link #glGetDriverControlStringQCOM GetDriverControlStringQCOM} */
-    public static void glGetDriverControlStringQCOM(@NativeType("GLuint") int driverControl, @Nullable @NativeType("GLsizei *") int[] length, @Nullable @NativeType("GLchar *") ByteBuffer driverControlString) {
+    public static void glGetDriverControlStringQCOM(@NativeType("GLuint") int driverControl, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") @Nullable ByteBuffer driverControlString) {
         long __functionAddress = GLES.getICD().glGetDriverControlStringQCOM;
         if (CHECKS) {
             check(__functionAddress);

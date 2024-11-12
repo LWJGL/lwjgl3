@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -212,8 +212,7 @@ public class CID_FaceInfo extends Struct<CID_FaceInfo> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CID_FaceInfo createSafe(long address) {
+    public static @Nullable CID_FaceInfo createSafe(long address) {
         return address == NULL ? null : new CID_FaceInfo(address, null);
     }
 
@@ -228,8 +227,7 @@ public class CID_FaceInfo extends Struct<CID_FaceInfo> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CID_FaceInfo.Buffer createSafe(long address, int capacity) {
+    public static CID_FaceInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDefragmentationMove createSafe(long address) {
+    public static @Nullable VmaDefragmentationMove createSafe(long address) {
         return address == NULL ? null : new VmaDefragmentationMove(address, null);
     }
 
@@ -199,8 +198,7 @@ public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDefragmentationMove.Buffer createSafe(long address, int capacity) {
+    public static VmaDefragmentationMove.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

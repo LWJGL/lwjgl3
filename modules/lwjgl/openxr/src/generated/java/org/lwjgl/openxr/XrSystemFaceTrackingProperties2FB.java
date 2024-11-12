@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class XrSystemFaceTrackingProperties2FB extends Struct<XrSystemFaceTracki
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemFaceTrackingProperties2FB createSafe(long address) {
+    public static @Nullable XrSystemFaceTrackingProperties2FB createSafe(long address) {
         return address == NULL ? null : new XrSystemFaceTrackingProperties2FB(address, null);
     }
 
@@ -207,8 +206,7 @@ public class XrSystemFaceTrackingProperties2FB extends Struct<XrSystemFaceTracki
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemFaceTrackingProperties2FB.Buffer createSafe(long address, int capacity) {
+    public static XrSystemFaceTrackingProperties2FB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

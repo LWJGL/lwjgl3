@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -642,9 +642,8 @@ public class GL15 extends GL14 {
      * 
      * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access) {
+    public static @Nullable ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access) {
         return GL15C.glMapBuffer(target, access);
     }
 
@@ -664,9 +663,8 @@ public class GL15 extends GL14 {
      * 
      * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, @Nullable ByteBuffer old_buffer) {
         return GL15C.glMapBuffer(target, access, old_buffer);
     }
 
@@ -686,9 +684,8 @@ public class GL15 extends GL14 {
      * 
      * @see <a href="https://docs.gl/gl4/glMapBuffer">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, long length, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, long length, @Nullable ByteBuffer old_buffer) {
         return GL15C.glMapBuffer(target, access, length, old_buffer);
     }
 

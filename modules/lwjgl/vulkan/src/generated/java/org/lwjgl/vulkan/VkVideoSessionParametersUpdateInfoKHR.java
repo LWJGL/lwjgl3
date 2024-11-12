@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,8 +166,7 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoSessionParametersUpdateInfoKHR createSafe(long address) {
+    public static @Nullable VkVideoSessionParametersUpdateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoSessionParametersUpdateInfoKHR(address, null);
     }
 
@@ -210,8 +209,7 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoSessionParametersUpdateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoSessionParametersUpdateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -10,6 +10,6 @@
  * <p>It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of
  * most vector and bitmap font formats.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.freetype;
 

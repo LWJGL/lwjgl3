@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -273,9 +273,8 @@ public class LLVMTargetMachine {
     }
 
     /** Returns the name of a target. See {@code llvm::Target::getName} */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetTargetName(@NativeType("LLVMTargetRef") long T) {
+    public static @Nullable String LLVMGetTargetName(@NativeType("LLVMTargetRef") long T) {
         long __result = nLLVMGetTargetName(T);
         return memUTF8Safe(__result);
     }
@@ -292,9 +291,8 @@ public class LLVMTargetMachine {
     }
 
     /** Returns the description  of a target. See {@code llvm::Target::getDescription} */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetTargetDescription(@NativeType("LLVMTargetRef") long T) {
+    public static @Nullable String LLVMGetTargetDescription(@NativeType("LLVMTargetRef") long T) {
         long __result = nLLVMGetTargetDescription(T);
         return memUTF8Safe(__result);
     }
@@ -641,9 +639,8 @@ public class LLVMTargetMachine {
      * Returns the triple used creating this target machine. See {@code llvm::TargetMachine::getTriple}. The result needs to be disposed with
      * {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.
      */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetTargetMachineTriple(@NativeType("LLVMTargetMachineRef") long T) {
+    public static @Nullable String LLVMGetTargetMachineTriple(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineTriple(T);
         return memUTF8Safe(__result);
     }
@@ -660,9 +657,8 @@ public class LLVMTargetMachine {
     }
 
     /** Returns the cpu used creating this target machine. See {@code llvm::TargetMachine::getCPU}. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetTargetMachineCPU(@NativeType("LLVMTargetMachineRef") long T) {
+    public static @Nullable String LLVMGetTargetMachineCPU(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineCPU(T);
         return memUTF8Safe(__result);
     }
@@ -682,9 +678,8 @@ public class LLVMTargetMachine {
      * Returns the feature string used creating this target machine. See {@code llvm::TargetMachine::getFeatureString}. The result needs to be disposed with
      * {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.
      */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetTargetMachineFeatureString(@NativeType("LLVMTargetMachineRef") long T) {
+    public static @Nullable String LLVMGetTargetMachineFeatureString(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineFeatureString(T);
         return memUTF8Safe(__result);
     }
@@ -851,9 +846,8 @@ public class LLVMTargetMachine {
     }
 
     /** Get a triple for the host machine as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetDefaultTargetTriple() {
+    public static @Nullable String LLVMGetDefaultTargetTriple() {
         long __result = nLLVMGetDefaultTargetTriple();
         return memUTF8Safe(__result);
     }
@@ -870,9 +864,8 @@ public class LLVMTargetMachine {
     }
 
     /** Normalize a target triple. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMNormalizeTargetTriple(@NativeType("char const *") ByteBuffer triple) {
+    public static @Nullable String LLVMNormalizeTargetTriple(@NativeType("char const *") ByteBuffer triple) {
         if (CHECKS) {
             checkNT1(triple);
         }
@@ -881,9 +874,8 @@ public class LLVMTargetMachine {
     }
 
     /** Normalize a target triple. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMNormalizeTargetTriple(@NativeType("char const *") CharSequence triple) {
+    public static @Nullable String LLVMNormalizeTargetTriple(@NativeType("char const *") CharSequence triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(triple, true);
@@ -907,9 +899,8 @@ public class LLVMTargetMachine {
     }
 
     /** Get the host CPU as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetHostCPUName() {
+    public static @Nullable String LLVMGetHostCPUName() {
         long __result = nLLVMGetHostCPUName();
         return memUTF8Safe(__result);
     }
@@ -926,9 +917,8 @@ public class LLVMTargetMachine {
     }
 
     /** Get the host CPU's features as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMGetHostCPUFeatures() {
+    public static @Nullable String LLVMGetHostCPUFeatures() {
         long __result = nLLVMGetHostCPUFeatures();
         return memUTF8Safe(__result);
     }

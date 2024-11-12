@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class CUlaunchAttribute extends Struct<CUlaunchAttribute> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchAttribute createSafe(long address) {
+    public static @Nullable CUlaunchAttribute createSafe(long address) {
         return address == NULL ? null : new CUlaunchAttribute(address, null);
     }
 
@@ -193,8 +192,7 @@ public class CUlaunchAttribute extends Struct<CUlaunchAttribute> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchAttribute.Buffer createSafe(long address, int capacity) {
+    public static CUlaunchAttribute.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

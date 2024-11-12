@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -192,8 +192,7 @@ public class OpusHead extends Struct<OpusHead> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusHead createSafe(long address) {
+    public static @Nullable OpusHead createSafe(long address) {
         return address == NULL ? null : new OpusHead(address, null);
     }
 
@@ -236,8 +235,7 @@ public class OpusHead extends Struct<OpusHead> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusHead.Buffer createSafe(long address, int capacity) {
+    public static OpusHead.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

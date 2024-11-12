@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -44,9 +44,8 @@ public class WGLARBExtensionsString {
      *
      * @param hdc the device context to query extensions for
      */
-    @Nullable
     @NativeType("char const *")
-    public static String wglGetExtensionsStringARB(@NativeType("HDC") long hdc) {
+    public static @Nullable String wglGetExtensionsStringARB(@NativeType("HDC") long hdc) {
         long __result = nwglGetExtensionsStringARB(hdc);
         return memASCIISafe(__result);
     }

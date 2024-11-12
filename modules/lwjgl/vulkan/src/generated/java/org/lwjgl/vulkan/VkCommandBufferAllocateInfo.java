@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -181,8 +181,7 @@ public class VkCommandBufferAllocateInfo extends Struct<VkCommandBufferAllocateI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferAllocateInfo createSafe(long address) {
+    public static @Nullable VkCommandBufferAllocateInfo createSafe(long address) {
         return address == NULL ? null : new VkCommandBufferAllocateInfo(address, null);
     }
 
@@ -225,8 +224,7 @@ public class VkCommandBufferAllocateInfo extends Struct<VkCommandBufferAllocateI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferAllocateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkCommandBufferAllocateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

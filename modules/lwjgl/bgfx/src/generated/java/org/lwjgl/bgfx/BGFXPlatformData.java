@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class BGFXPlatformData extends Struct<BGFXPlatformData> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXPlatformData createSafe(long address) {
+    public static @Nullable BGFXPlatformData createSafe(long address) {
         return address == NULL ? null : new BGFXPlatformData(address, null);
     }
 

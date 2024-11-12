@@ -14,6 +14,6 @@
  * 
  * <p>Developed by Micha Mettke.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.nuklear;
 

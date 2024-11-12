@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -78,8 +78,7 @@ public class VREventAudioVolumeControl extends Struct<VREventAudioVolumeControl>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventAudioVolumeControl createSafe(long address) {
+    public static @Nullable VREventAudioVolumeControl createSafe(long address) {
         return address == NULL ? null : new VREventAudioVolumeControl(address, null);
     }
 
@@ -94,8 +93,7 @@ public class VREventAudioVolumeControl extends Struct<VREventAudioVolumeControl>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventAudioVolumeControl.Buffer createSafe(long address, int capacity) {
+    public static VREventAudioVolumeControl.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

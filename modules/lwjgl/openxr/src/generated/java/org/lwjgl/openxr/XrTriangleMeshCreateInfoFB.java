@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,9 +134,8 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
     @NativeType("uint32_t")
     public int vertexCount() { return nvertexCount(address()); }
     /** a pointer to the vertex data. The size of the array must be {@code vertexCount} elements. When the mesh is mutable ({@code ({@code flags} &amp; {@link FBTriangleMesh#XR_TRIANGLE_MESH_MUTABLE_BIT_FB TRIANGLE_MESH_MUTABLE_BIT_FB}) != 0}), the {@code vertexBuffer} parameter <b>must</b> be {@code NULL} and mesh data <b>must</b> be populated separately. */
-    @Nullable
     @NativeType("XrVector3f const *")
-    public XrVector3f vertexBuffer() { return nvertexBuffer(address()); }
+    public @Nullable XrVector3f vertexBuffer() { return nvertexBuffer(address()); }
     /** the number of triangles in the mesh. In the case of the mutable mesh, the value is treated as the maximum number of triangles the mesh will be able to represent at any time in its lifecycle. The actual number of triangles can vary and is defined when {@link FBTriangleMesh#xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB} is called. */
     @NativeType("uint32_t")
     public int triangleCount() { return ntriangleCount(address()); }
@@ -145,9 +144,8 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
      *
      * @return the triangle indices. The size of the array must be {@code triangleCount} elements. When the mesh is mutable ({@code ({@code flags} &amp; {@link FBTriangleMesh#XR_TRIANGLE_MESH_MUTABLE_BIT_FB TRIANGLE_MESH_MUTABLE_BIT_FB}) != 0}), the {@code indexBuffer} parameter <b>must</b> be {@code NULL} and mesh data <b>must</b> be populated separately.
      */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer indexBuffer(int capacity) { return nindexBuffer(address(), capacity); }
+    public @Nullable IntBuffer indexBuffer(int capacity) { return nindexBuffer(address(), capacity); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrTriangleMeshCreateInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -227,8 +225,7 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrTriangleMeshCreateInfoFB createSafe(long address) {
+    public static @Nullable XrTriangleMeshCreateInfoFB createSafe(long address) {
         return address == NULL ? null : new XrTriangleMeshCreateInfoFB(address, null);
     }
 
@@ -271,8 +268,7 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrTriangleMeshCreateInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrTriangleMeshCreateInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -327,11 +323,11 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
     /** Unsafe version of {@link #vertexCount}. */
     public static int nvertexCount(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertexBuffer}. */
-    @Nullable public static XrVector3f nvertexBuffer(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.VERTEXBUFFER)); }
+    public static @Nullable XrVector3f nvertexBuffer(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.VERTEXBUFFER)); }
     /** Unsafe version of {@link #triangleCount}. */
     public static int ntriangleCount(long struct) { return memGetInt(struct + XrTriangleMeshCreateInfoFB.TRIANGLECOUNT); }
     /** Unsafe version of {@link #indexBuffer(int) indexBuffer}. */
-    @Nullable public static IntBuffer nindexBuffer(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.INDEXBUFFER), capacity); }
+    public static @Nullable IntBuffer nindexBuffer(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + XrTriangleMeshCreateInfoFB.INDEXBUFFER), capacity); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrTriangleMeshCreateInfoFB.TYPE, value); }
@@ -409,9 +405,8 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
         @NativeType("uint32_t")
         public int vertexCount() { return XrTriangleMeshCreateInfoFB.nvertexCount(address()); }
         /** @return a {@link XrVector3f} view of the struct pointed to by the {@link XrTriangleMeshCreateInfoFB#vertexBuffer} field. */
-        @Nullable
         @NativeType("XrVector3f const *")
-        public XrVector3f vertexBuffer() { return XrTriangleMeshCreateInfoFB.nvertexBuffer(address()); }
+        public @Nullable XrVector3f vertexBuffer() { return XrTriangleMeshCreateInfoFB.nvertexBuffer(address()); }
         /** @return the value of the {@link XrTriangleMeshCreateInfoFB#triangleCount} field. */
         @NativeType("uint32_t")
         public int triangleCount() { return XrTriangleMeshCreateInfoFB.ntriangleCount(address()); }
@@ -420,9 +415,8 @@ public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoF
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer indexBuffer(int capacity) { return XrTriangleMeshCreateInfoFB.nindexBuffer(address(), capacity); }
+        public @Nullable IntBuffer indexBuffer(int capacity) { return XrTriangleMeshCreateInfoFB.nindexBuffer(address(), capacity); }
 
         /** Sets the specified value to the {@link XrTriangleMeshCreateInfoFB#type} field. */
         public XrTriangleMeshCreateInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrTriangleMeshCreateInfoFB.ntype(address(), value); return this; }

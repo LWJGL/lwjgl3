@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -330,7 +330,7 @@ public class LLVMOrc {
      * 
      * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
      */
-    public static void LLVMOrcExecutionSessionLookup(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcLookupKind") int K, @Nullable @NativeType("LLVMOrcCJITDylibSearchOrder") LLVMOrcCJITDylibSearchOrderElement.Buffer SearchOrder, @Nullable @NativeType("LLVMOrcCLookupSet") LLVMOrcCLookupSetElement.Buffer Symbols, @NativeType("LLVMOrcExecutionSessionLookupHandleResultFunction") LLVMOrcExecutionSessionLookupHandleResultFunctionI HandleResult, @NativeType("void *") long Ctx) {
+    public static void LLVMOrcExecutionSessionLookup(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcLookupKind") int K, @NativeType("LLVMOrcCJITDylibSearchOrder") LLVMOrcCJITDylibSearchOrderElement.@Nullable Buffer SearchOrder, @NativeType("LLVMOrcCLookupSet") LLVMOrcCLookupSetElement.@Nullable Buffer Symbols, @NativeType("LLVMOrcExecutionSessionLookupHandleResultFunction") LLVMOrcExecutionSessionLookupHandleResultFunctionI HandleResult, @NativeType("void *") long Ctx) {
         nLLVMOrcExecutionSessionLookup(ES, K, memAddressSafe(SearchOrder), remainingSafe(SearchOrder), memAddressSafe(Symbols), remainingSafe(Symbols), HandleResult.address(), Ctx);
     }
 
@@ -361,9 +361,8 @@ public class LLVMOrc {
      * 
      * <p>This string will remain valid until the entry is freed (once all {@code LLVMOrcSymbolStringPoolEntryRefs} have been released).</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMOrcSymbolStringPoolEntryStr(@NativeType("LLVMOrcSymbolStringPoolEntryRef") long S) {
+    public static @Nullable String LLVMOrcSymbolStringPoolEntryStr(@NativeType("LLVMOrcSymbolStringPoolEntryRef") long S) {
         long __result = nLLVMOrcSymbolStringPoolEntryStr(S);
         return memUTF8Safe(__result);
     }
@@ -658,9 +657,8 @@ public class LLVMOrc {
      *
      * @since 13
      */
-    @Nullable
     @NativeType("LLVMOrcCSymbolFlagsMapPairs")
-    public static LLVMOrcCSymbolFlagsMapPair.Buffer LLVMOrcMaterializationResponsibilityGetSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
+    public static LLVMOrcCSymbolFlagsMapPair.@Nullable Buffer LLVMOrcMaterializationResponsibilityGetSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer NumPairs = stack.callocPointer(1);
         try {
@@ -731,9 +729,8 @@ public class LLVMOrc {
      *
      * @since 13
      */
-    @Nullable
     @NativeType("LLVMOrcSymbolStringPoolEntryRef *")
-    public static PointerBuffer LLVMOrcMaterializationResponsibilityGetRequestedSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
+    public static @Nullable PointerBuffer LLVMOrcMaterializationResponsibilityGetRequestedSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer NumSymbols = stack.callocPointer(1);
         try {
@@ -1195,7 +1192,7 @@ public class LLVMOrc {
      * lifetime of {@code Ctx}).</p>
      */
     @NativeType("LLVMOrcDefinitionGeneratorRef")
-    public static long LLVMOrcCreateCustomCAPIDefinitionGenerator(@NativeType("LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction") LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI F, @NativeType("void *") long Ctx, @Nullable @NativeType("LLVMOrcDisposeCAPIDefinitionGeneratorFunction") LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI Dispose) {
+    public static long LLVMOrcCreateCustomCAPIDefinitionGenerator(@NativeType("LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction") LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI F, @NativeType("void *") long Ctx, @NativeType("LLVMOrcDisposeCAPIDefinitionGeneratorFunction") @Nullable LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI Dispose) {
         return nLLVMOrcCreateCustomCAPIDefinitionGenerator(F.address(), Ctx, memAddressSafe(Dispose));
     }
 
@@ -1232,7 +1229,7 @@ public class LLVMOrc {
      * passed to the {@code Filter} function is the full mangled symbol: The client is responsible for stripping the global prefix if present.</p>
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char") byte GlobalPrefx, @Nullable @NativeType("LLVMOrcSymbolPredicate") LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
+    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char") byte GlobalPrefx, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
             check(Result, 1);
         }
@@ -1264,7 +1261,7 @@ public class LLVMOrc {
      * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") ByteBuffer FileName, @NativeType("char") byte GlobalPrefix, @Nullable @NativeType("LLVMOrcSymbolPredicate") LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
+    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") ByteBuffer FileName, @NativeType("char") byte GlobalPrefix, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
             check(Result, 1);
             checkNT1(FileName);
@@ -1286,7 +1283,7 @@ public class LLVMOrc {
      * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") CharSequence FileName, @NativeType("char") byte GlobalPrefix, @Nullable @NativeType("LLVMOrcSymbolPredicate") LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
+    public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") CharSequence FileName, @NativeType("char") byte GlobalPrefix, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
             check(Result, 1);
         }
@@ -1323,7 +1320,7 @@ public class LLVMOrc {
      * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") ByteBuffer FileName, @Nullable @NativeType("char const *") ByteBuffer TargetTriple) {
+    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") ByteBuffer FileName, @NativeType("char const *") @Nullable ByteBuffer TargetTriple) {
         if (CHECKS) {
             check(Result, 1);
             checkNT1(FileName);
@@ -1343,7 +1340,7 @@ public class LLVMOrc {
      * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
      */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") CharSequence FileName, @Nullable @NativeType("char const *") CharSequence TargetTriple) {
+    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") CharSequence FileName, @NativeType("char const *") @Nullable CharSequence TargetTriple) {
         if (CHECKS) {
             check(Result, 1);
         }
@@ -1522,9 +1519,8 @@ public class LLVMOrc {
      *
      * @since 13
      */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMOrcJITTargetMachineBuilderGetTargetTriple(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB) {
+    public static @Nullable String LLVMOrcJITTargetMachineBuilderGetTargetTriple(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB) {
         long __result = nLLVMOrcJITTargetMachineBuilderGetTargetTriple(JTMB);
         return memUTF8Safe(__result);
     }

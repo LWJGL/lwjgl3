@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,7 +160,7 @@ public class FBRenderModel {
      * @param paths           a pointer to an application-allocated array that will be filled with {@link XrRenderModelPathInfoFB} values that are supported by the runtime, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0
      */
     @NativeType("XrResult")
-    public static int xrEnumerateRenderModelPathsFB(XrSession session, @NativeType("uint32_t *") IntBuffer pathCountOutput, @Nullable @NativeType("XrRenderModelPathInfoFB *") XrRenderModelPathInfoFB.Buffer paths) {
+    public static int xrEnumerateRenderModelPathsFB(XrSession session, @NativeType("uint32_t *") IntBuffer pathCountOutput, @NativeType("XrRenderModelPathInfoFB *") XrRenderModelPathInfoFB.@Nullable Buffer paths) {
         if (CHECKS) {
             check(pathCountOutput, 1);
         }

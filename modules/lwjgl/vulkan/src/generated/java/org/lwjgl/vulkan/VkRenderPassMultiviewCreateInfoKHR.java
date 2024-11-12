@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -127,8 +127,7 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassMultiviewCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderPassMultiviewCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderPassMultiviewCreateInfoKHR(address, null);
     }
 
@@ -171,8 +170,7 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassMultiviewCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassMultiviewCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

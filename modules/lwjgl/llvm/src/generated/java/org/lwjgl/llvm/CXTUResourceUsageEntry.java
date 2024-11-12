@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -85,8 +85,7 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXTUResourceUsageEntry createSafe(long address) {
+    public static @Nullable CXTUResourceUsageEntry createSafe(long address) {
         return address == NULL ? null : new CXTUResourceUsageEntry(address, null);
     }
 
@@ -101,8 +100,7 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXTUResourceUsageEntry.Buffer createSafe(long address, int capacity) {
+    public static CXTUResourceUsageEntry.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

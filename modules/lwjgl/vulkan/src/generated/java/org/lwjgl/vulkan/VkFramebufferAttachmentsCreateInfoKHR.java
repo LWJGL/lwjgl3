@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -61,14 +61,14 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
     public VkFramebufferAttachmentsCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
     @Override
-    public VkFramebufferAttachmentsCreateInfoKHR pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.Buffer value) { npAttachmentImageInfos(address(), value); return this; }
+    public VkFramebufferAttachmentsCreateInfoKHR pAttachmentImageInfos(@NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.@Nullable Buffer value) { npAttachmentImageInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkFramebufferAttachmentsCreateInfoKHR set(
         int sType,
         long pNext,
-        @Nullable VkFramebufferAttachmentImageInfo.Buffer pAttachmentImageInfos
+        VkFramebufferAttachmentImageInfo.@Nullable Buffer pAttachmentImageInfos
     ) {
         sType(sType);
         pNext(pNext);
@@ -113,8 +113,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFramebufferAttachmentsCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkFramebufferAttachmentsCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkFramebufferAttachmentsCreateInfoKHR(address, null);
     }
 
@@ -157,8 +156,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFramebufferAttachmentsCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkFramebufferAttachmentsCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -273,7 +271,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
         public VkFramebufferAttachmentsCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentsCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
         @Override
-        public VkFramebufferAttachmentsCreateInfoKHR.Buffer pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.Buffer value) { VkFramebufferAttachmentsCreateInfoKHR.npAttachmentImageInfos(address(), value); return this; }
+        public VkFramebufferAttachmentsCreateInfoKHR.Buffer pAttachmentImageInfos(@NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.@Nullable Buffer value) { VkFramebufferAttachmentsCreateInfoKHR.npAttachmentImageInfos(address(), value); return this; }
 
     }
 

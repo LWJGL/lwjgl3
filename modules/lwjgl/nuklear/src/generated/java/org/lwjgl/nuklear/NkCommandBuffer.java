@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -92,9 +92,8 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
-    @Nullable
     @NativeType("struct nk_buffer *")
-    public NkBuffer base() { return nbase(address()); }
+    public @Nullable NkBuffer base() { return nbase(address()); }
     /** @return a {@link NkRect} view of the {@code clip} field. */
     @NativeType("struct nk_rect")
     public NkRect clip() { return nclip(address()); }
@@ -121,8 +120,7 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkCommandBuffer createSafe(long address) {
+    public static @Nullable NkCommandBuffer createSafe(long address) {
         return address == NULL ? null : new NkCommandBuffer(address, null);
     }
 
@@ -137,15 +135,14 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkCommandBuffer.Buffer createSafe(long address, int capacity) {
+    public static NkCommandBuffer.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #base}. */
-    @Nullable public static NkBuffer nbase(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkCommandBuffer.BASE)); }
+    public static @Nullable NkBuffer nbase(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkCommandBuffer.BASE)); }
     /** Unsafe version of {@link #clip}. */
     public static NkRect nclip(long struct) { return NkRect.create(struct + NkCommandBuffer.CLIP); }
     /** Unsafe version of {@link #use_clipping}. */
@@ -203,9 +200,8 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
         }
 
         /** @return a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
-        @Nullable
         @NativeType("struct nk_buffer *")
-        public NkBuffer base() { return NkCommandBuffer.nbase(address()); }
+        public @Nullable NkBuffer base() { return NkCommandBuffer.nbase(address()); }
         /** @return a {@link NkRect} view of the {@code clip} field. */
         @NativeType("struct nk_rect")
         public NkRect clip() { return NkCommandBuffer.nclip(address()); }

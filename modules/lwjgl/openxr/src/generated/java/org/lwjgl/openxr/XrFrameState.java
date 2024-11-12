@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -187,8 +187,7 @@ public class XrFrameState extends Struct<XrFrameState> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameState createSafe(long address) {
+    public static @Nullable XrFrameState createSafe(long address) {
         return address == NULL ? null : new XrFrameState(address, null);
     }
 
@@ -231,8 +230,7 @@ public class XrFrameState extends Struct<XrFrameState> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameState.Buffer createSafe(long address, int capacity) {
+    public static XrFrameState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

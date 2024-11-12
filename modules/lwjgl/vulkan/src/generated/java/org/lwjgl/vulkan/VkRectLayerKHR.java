@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class VkRectLayerKHR extends Struct<VkRectLayerKHR> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRectLayerKHR createSafe(long address) {
+    public static @Nullable VkRectLayerKHR createSafe(long address) {
         return address == NULL ? null : new VkRectLayerKHR(address, null);
     }
 
@@ -205,8 +204,7 @@ public class VkRectLayerKHR extends Struct<VkRectLayerKHR> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRectLayerKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRectLayerKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

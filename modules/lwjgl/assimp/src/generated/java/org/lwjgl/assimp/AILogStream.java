@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -84,9 +84,8 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
      *
      * @return user data to be passed to the callback
      */
-    @Nullable
     @NativeType("char *")
-    public ByteBuffer user(int capacity) { return nuser(address(), capacity); }
+    public @Nullable ByteBuffer user(int capacity) { return nuser(address(), capacity); }
 
     /** Sets the specified value to the {@link #callback} field. */
     public AILogStream callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { ncallback(address(), value); return this; }
@@ -140,8 +139,7 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AILogStream createSafe(long address) {
+    public static @Nullable AILogStream createSafe(long address) {
         return address == NULL ? null : new AILogStream(address, null);
     }
 
@@ -184,8 +182,7 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AILogStream.Buffer createSafe(long address, int capacity) {
+    public static AILogStream.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -251,7 +248,7 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
     /** Unsafe version of {@link #callback}. */
     public static AILogStreamCallback ncallback(long struct) { return AILogStreamCallback.create(memGetAddress(struct + AILogStream.CALLBACK)); }
     /** Unsafe version of {@link #user(int) user}. */
-    @Nullable public static ByteBuffer nuser(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + AILogStream.USER), capacity); }
+    public static @Nullable ByteBuffer nuser(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + AILogStream.USER), capacity); }
 
     /** Unsafe version of {@link #callback(AILogStreamCallbackI) callback}. */
     public static void ncallback(long struct, AILogStreamCallbackI value) { memPutAddress(struct + AILogStream.CALLBACK, value.address()); }
@@ -318,9 +315,8 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("char *")
-        public ByteBuffer user(int capacity) { return AILogStream.nuser(address(), capacity); }
+        public @Nullable ByteBuffer user(int capacity) { return AILogStream.nuser(address(), capacity); }
 
         /** Sets the specified value to the {@link AILogStream#callback} field. */
         public AILogStream.Buffer callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { AILogStream.ncallback(address(), value); return this; }

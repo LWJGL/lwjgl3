@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,9 +119,8 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
     @NativeType("uint32_t")
     public int dynamicStateCount() { return ndynamicStateCount(address()); }
     /** a pointer to an array of {@code VkDynamicState} values specifying which pieces of pipeline state will use the values from dynamic state commands rather than from pipeline state creation information. */
-    @Nullable
     @NativeType("VkDynamicState const *")
-    public IntBuffer pDynamicStates() { return npDynamicStates(address()); }
+    public @Nullable IntBuffer pDynamicStates() { return npDynamicStates(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineDynamicStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -185,8 +184,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDynamicStateCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineDynamicStateCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineDynamicStateCreateInfo(address, null);
     }
 
@@ -229,8 +227,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDynamicStateCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineDynamicStateCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -302,7 +299,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
     /** Unsafe version of {@link #dynamicStateCount}. */
     public static int ndynamicStateCount(long struct) { return memGetInt(struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT); }
     /** Unsafe version of {@link #pDynamicStates() pDynamicStates}. */
-    @Nullable public static IntBuffer npDynamicStates(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES), ndynamicStateCount(struct)); }
+    public static @Nullable IntBuffer npDynamicStates(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES), ndynamicStateCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineDynamicStateCreateInfo.STYPE, value); }
@@ -382,9 +379,8 @@ public class VkPipelineDynamicStateCreateInfo extends Struct<VkPipelineDynamicSt
         @NativeType("uint32_t")
         public int dynamicStateCount() { return VkPipelineDynamicStateCreateInfo.ndynamicStateCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPipelineDynamicStateCreateInfo#pDynamicStates} field. */
-        @Nullable
         @NativeType("VkDynamicState const *")
-        public IntBuffer pDynamicStates() { return VkPipelineDynamicStateCreateInfo.npDynamicStates(address()); }
+        public @Nullable IntBuffer pDynamicStates() { return VkPipelineDynamicStateCreateInfo.npDynamicStates(address()); }
 
         /** Sets the specified value to the {@link VkPipelineDynamicStateCreateInfo#sType} field. */
         public VkPipelineDynamicStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineDynamicStateCreateInfo.nsType(address(), value); return this; }

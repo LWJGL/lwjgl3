@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,8 +199,7 @@ public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRCameraIntrinsics createSafe(long address) {
+    public static @Nullable OVRCameraIntrinsics createSafe(long address) {
         return address == NULL ? null : new OVRCameraIntrinsics(address, null);
     }
 
@@ -243,8 +242,7 @@ public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRCameraIntrinsics.Buffer createSafe(long address, int capacity) {
+    public static OVRCameraIntrinsics.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -120,8 +120,7 @@ public class CUIPCMemHandle extends Struct<CUIPCMemHandle> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUIPCMemHandle createSafe(long address) {
+    public static @Nullable CUIPCMemHandle createSafe(long address) {
         return address == NULL ? null : new CUIPCMemHandle(address, null);
     }
 
@@ -164,8 +163,7 @@ public class CUIPCMemHandle extends Struct<CUIPCMemHandle> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUIPCMemHandle.Buffer createSafe(long address, int capacity) {
+    public static CUIPCMemHandle.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -3802,7 +3802,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuCtxGetStreamPriorityRange(@Nullable @NativeType("int *") IntBuffer leastPriority, @Nullable @NativeType("int *") IntBuffer greatestPriority) {
+    public static int cuCtxGetStreamPriorityRange(@NativeType("int *") @Nullable IntBuffer leastPriority, @NativeType("int *") @Nullable IntBuffer greatestPriority) {
         if (CHECKS) {
             checkSafe(leastPriority, 1);
             checkSafe(greatestPriority, 1);
@@ -3945,7 +3945,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuModuleLoadDataEx(@NativeType("CUmodule *") PointerBuffer module, @NativeType("void const *") ByteBuffer image, @Nullable @NativeType("CUjit_option *") IntBuffer options, @Nullable @NativeType("void **") PointerBuffer optionValues) {
+    public static int cuModuleLoadDataEx(@NativeType("CUmodule *") PointerBuffer module, @NativeType("void const *") ByteBuffer image, @NativeType("CUjit_option *") @Nullable IntBuffer options, @NativeType("void **") @Nullable PointerBuffer optionValues) {
         if (CHECKS) {
             check(module, 1);
             checkSafe(optionValues, remainingSafe(options));
@@ -4077,7 +4077,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuModuleGetGlobal(@Nullable @NativeType("CUdeviceptr *") PointerBuffer dptr, @Nullable @NativeType("size_t *") PointerBuffer bytes, @NativeType("CUmodule") long hmod, @NativeType("char const *") ByteBuffer name) {
+    public static int cuModuleGetGlobal(@NativeType("CUdeviceptr *") @Nullable PointerBuffer dptr, @NativeType("size_t *") @Nullable PointerBuffer bytes, @NativeType("CUmodule") long hmod, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(dptr, 1);
             checkSafe(bytes, 1);
@@ -4087,7 +4087,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuModuleGetGlobal(@Nullable @NativeType("CUdeviceptr *") PointerBuffer dptr, @Nullable @NativeType("size_t *") PointerBuffer bytes, @NativeType("CUmodule") long hmod, @NativeType("char const *") CharSequence name) {
+    public static int cuModuleGetGlobal(@NativeType("CUdeviceptr *") @Nullable PointerBuffer dptr, @NativeType("size_t *") @Nullable PointerBuffer bytes, @NativeType("CUmodule") long hmod, @NativeType("char const *") CharSequence name) {
         if (CHECKS) {
             checkSafe(dptr, 1);
             checkSafe(bytes, 1);
@@ -4302,7 +4302,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLibraryLoadData(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("void const *") ByteBuffer code, @Nullable @NativeType("CUjit_option *") IntBuffer jitOptions, @Nullable @NativeType("void **") PointerBuffer jitOptionsValues, @Nullable @NativeType("CUlibraryOption *") IntBuffer libraryOptions, @Nullable @NativeType("void **") PointerBuffer libraryOptionValues) {
+    public static int cuLibraryLoadData(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("void const *") ByteBuffer code, @NativeType("CUjit_option *") @Nullable IntBuffer jitOptions, @NativeType("void **") @Nullable PointerBuffer jitOptionsValues, @NativeType("CUlibraryOption *") @Nullable IntBuffer libraryOptions, @NativeType("void **") @Nullable PointerBuffer libraryOptionValues) {
         if (CHECKS) {
             check(library, 1);
             checkSafe(jitOptionsValues, remainingSafe(jitOptions));
@@ -4322,7 +4322,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLibraryLoadFromFile(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("char const *") ByteBuffer fileName, @Nullable @NativeType("CUjit_option *") IntBuffer jitOptions, @Nullable @NativeType("void **") PointerBuffer jitOptionsValues, @Nullable @NativeType("CUlibraryOption *") IntBuffer libraryOptions, @Nullable @NativeType("void **") PointerBuffer libraryOptionValues) {
+    public static int cuLibraryLoadFromFile(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("char const *") ByteBuffer fileName, @NativeType("CUjit_option *") @Nullable IntBuffer jitOptions, @NativeType("void **") @Nullable PointerBuffer jitOptionsValues, @NativeType("CUlibraryOption *") @Nullable IntBuffer libraryOptions, @NativeType("void **") @Nullable PointerBuffer libraryOptionValues) {
         if (CHECKS) {
             check(library, 1);
             checkNT1(fileName);
@@ -4333,7 +4333,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLibraryLoadFromFile(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("char const *") CharSequence fileName, @Nullable @NativeType("CUjit_option *") IntBuffer jitOptions, @Nullable @NativeType("void **") PointerBuffer jitOptionsValues, @Nullable @NativeType("CUlibraryOption *") IntBuffer libraryOptions, @Nullable @NativeType("void **") PointerBuffer libraryOptionValues) {
+    public static int cuLibraryLoadFromFile(@NativeType("CUlibrary *") PointerBuffer library, @NativeType("char const *") CharSequence fileName, @NativeType("CUjit_option *") @Nullable IntBuffer jitOptions, @NativeType("void **") @Nullable PointerBuffer jitOptionsValues, @NativeType("CUlibraryOption *") @Nullable IntBuffer libraryOptions, @NativeType("void **") @Nullable PointerBuffer libraryOptionValues) {
         if (CHECKS) {
             check(library, 1);
             checkSafe(jitOptionsValues, remainingSafe(jitOptions));
@@ -4671,7 +4671,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuKernelGetParamInfo(@NativeType("CUkernel") long kernel, @NativeType("size_t") long paramIndex, @Nullable @NativeType("size_t *") PointerBuffer paramOffset, @Nullable @NativeType("size_t *") PointerBuffer paramSize) {
+    public static int cuKernelGetParamInfo(@NativeType("CUkernel") long kernel, @NativeType("size_t") long paramIndex, @NativeType("size_t *") @Nullable PointerBuffer paramOffset, @NativeType("size_t *") @Nullable PointerBuffer paramSize) {
         if (CHECKS) {
             checkSafe(paramOffset, 1);
             checkSafe(paramSize, 1);
@@ -4748,7 +4748,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuMemGetAddressRange(@Nullable @NativeType("CUdeviceptr *") PointerBuffer pbase, @Nullable @NativeType("size_t *") PointerBuffer psize, @NativeType("CUdeviceptr") long dptr) {
+    public static int cuMemGetAddressRange(@NativeType("CUdeviceptr *") @Nullable PointerBuffer pbase, @NativeType("size_t *") @Nullable PointerBuffer psize, @NativeType("CUdeviceptr") long dptr) {
         if (CHECKS) {
             checkSafe(pbase, 1);
             checkSafe(psize, 1);
@@ -6925,7 +6925,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuStreamBeginCaptureToGraph(@NativeType("CUstream") long hStream, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("CUstreamCaptureMode") int mode) {
+    public static int cuStreamBeginCaptureToGraph(@NativeType("CUstream") long hStream, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.@Nullable Buffer dependencyData, @NativeType("CUstreamCaptureMode") int mode) {
         if (CHECKS) {
             checkSafe(dependencyData, remainingSafe(dependencies));
         }
@@ -6997,7 +6997,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuStreamGetCaptureInfo_v3(@NativeType("CUstream") long hStream, @NativeType("CUstreamCaptureStatus *") IntBuffer captureStatus_out, @Nullable @NativeType("cuuint64_t *") LongBuffer id_out, @Nullable @NativeType("CUgraph *") PointerBuffer graph_out, @Nullable @NativeType("CUgraphNode const **") PointerBuffer dependencies_out, @Nullable @NativeType("CUgraphEdgeData const **") PointerBuffer edgeData_out, @Nullable @NativeType("size_t *") PointerBuffer numDependencies_out) {
+    public static int cuStreamGetCaptureInfo_v3(@NativeType("CUstream") long hStream, @NativeType("CUstreamCaptureStatus *") IntBuffer captureStatus_out, @NativeType("cuuint64_t *") @Nullable LongBuffer id_out, @NativeType("CUgraph *") @Nullable PointerBuffer graph_out, @NativeType("CUgraphNode const **") @Nullable PointerBuffer dependencies_out, @NativeType("CUgraphEdgeData const **") @Nullable PointerBuffer edgeData_out, @NativeType("size_t *") @Nullable PointerBuffer numDependencies_out) {
         if (CHECKS) {
             check(captureStatus_out, 1);
             checkSafe(id_out, 1);
@@ -7039,7 +7039,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuStreamGetCaptureInfo_v2(@NativeType("CUstream") long hStream, @NativeType("CUstreamCaptureStatus *") IntBuffer captureStatus_out, @Nullable @NativeType("cuuint64_t *") LongBuffer id_out, @Nullable @NativeType("CUgraph *") PointerBuffer graph_out, @Nullable @NativeType("CUgraphNode const **") PointerBuffer dependencies_out, @Nullable @NativeType("size_t *") PointerBuffer numDependencies_out) {
+    public static int cuStreamGetCaptureInfo_v2(@NativeType("CUstream") long hStream, @NativeType("CUstreamCaptureStatus *") IntBuffer captureStatus_out, @NativeType("cuuint64_t *") @Nullable LongBuffer id_out, @NativeType("CUgraph *") @Nullable PointerBuffer graph_out, @NativeType("CUgraphNode const **") @Nullable PointerBuffer dependencies_out, @NativeType("size_t *") @Nullable PointerBuffer numDependencies_out) {
         if (CHECKS) {
             check(captureStatus_out, 1);
             checkSafe(id_out, 1);
@@ -7076,7 +7076,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuStreamUpdateCaptureDependencies_v2(@NativeType("CUstream") long hStream, @NativeType("CUgraphNode *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("unsigned int") int flags) {
+    public static int cuStreamUpdateCaptureDependencies_v2(@NativeType("CUstream") long hStream, @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.@Nullable Buffer dependencyData, @NativeType("unsigned int") int flags) {
         if (CHECKS) {
             checkSafe(dependencyData, dependencies.remaining());
         }
@@ -7554,7 +7554,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuFuncGetParamInfo(@NativeType("CUfunction") long hfunc, @NativeType("size_t") long paramIndex, @NativeType("size_t *") PointerBuffer paramOffset, @Nullable @NativeType("size_t *") PointerBuffer paramSize) {
+    public static int cuFuncGetParamInfo(@NativeType("CUfunction") long hfunc, @NativeType("size_t") long paramIndex, @NativeType("size_t *") PointerBuffer paramOffset, @NativeType("size_t *") @Nullable PointerBuffer paramSize) {
         if (CHECKS) {
             check(paramOffset, 1);
             checkSafe(paramSize, 1);
@@ -7605,7 +7605,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLaunchKernel(@NativeType("CUfunction") long f, @NativeType("unsigned int") int gridDimX, @NativeType("unsigned int") int gridDimY, @NativeType("unsigned int") int gridDimZ, @NativeType("unsigned int") int blockDimX, @NativeType("unsigned int") int blockDimY, @NativeType("unsigned int") int blockDimZ, @NativeType("unsigned int") int sharedMemBytes, @NativeType("CUstream") long hStream, @Nullable @NativeType("void **") PointerBuffer kernelParams, @Nullable @NativeType("void **") PointerBuffer extra) {
+    public static int cuLaunchKernel(@NativeType("CUfunction") long f, @NativeType("unsigned int") int gridDimX, @NativeType("unsigned int") int gridDimY, @NativeType("unsigned int") int gridDimZ, @NativeType("unsigned int") int blockDimX, @NativeType("unsigned int") int blockDimY, @NativeType("unsigned int") int blockDimZ, @NativeType("unsigned int") int sharedMemBytes, @NativeType("CUstream") long hStream, @NativeType("void **") @Nullable PointerBuffer kernelParams, @NativeType("void **") @Nullable PointerBuffer extra) {
         return ncuLaunchKernel(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, memAddressSafe(kernelParams), memAddressSafe(extra));
     }
 
@@ -7621,7 +7621,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLaunchKernelEx(@NativeType("CUlaunchConfig const *") CUlaunchConfig config, @NativeType("CUfunction") long f, @Nullable @NativeType("void **") PointerBuffer kernelParams, @Nullable @NativeType("void **") PointerBuffer extra) {
+    public static int cuLaunchKernelEx(@NativeType("CUlaunchConfig const *") CUlaunchConfig config, @NativeType("CUfunction") long f, @NativeType("void **") @Nullable PointerBuffer kernelParams, @NativeType("void **") @Nullable PointerBuffer extra) {
         return ncuLaunchKernelEx(config.address(), f, memAddressSafe(kernelParams), memAddressSafe(extra));
     }
 
@@ -7637,7 +7637,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuLaunchCooperativeKernel(@NativeType("CUfunction") long f, @NativeType("unsigned int") int gridDimX, @NativeType("unsigned int") int gridDimY, @NativeType("unsigned int") int gridDimZ, @NativeType("unsigned int") int blockDimX, @NativeType("unsigned int") int blockDimY, @NativeType("unsigned int") int blockDimZ, @NativeType("unsigned int") int sharedMemBytes, @NativeType("CUstream") long hStream, @Nullable @NativeType("void **") PointerBuffer kernelParams) {
+    public static int cuLaunchCooperativeKernel(@NativeType("CUfunction") long f, @NativeType("unsigned int") int gridDimX, @NativeType("unsigned int") int gridDimY, @NativeType("unsigned int") int gridDimZ, @NativeType("unsigned int") int blockDimX, @NativeType("unsigned int") int blockDimY, @NativeType("unsigned int") int blockDimZ, @NativeType("unsigned int") int sharedMemBytes, @NativeType("CUstream") long hStream, @NativeType("void **") @Nullable PointerBuffer kernelParams) {
         return ncuLaunchCooperativeKernel(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, memAddressSafe(kernelParams));
     }
 
@@ -7817,7 +7817,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddKernelNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS const *") CUDA_KERNEL_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddKernelNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS const *") CUDA_KERNEL_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -7836,7 +7836,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddKernelNode_v2(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS_v2 const *") CUDA_KERNEL_NODE_PARAMS_v2 nodeParams) {
+    public static int cuGraphAddKernelNode_v2(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS_v2 const *") CUDA_KERNEL_NODE_PARAMS_v2 nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -7920,7 +7920,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemcpyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_MEMCPY3D const *") CUDA_MEMCPY3D copyParams, @NativeType("CUcontext") long ctx) {
+    public static int cuGraphAddMemcpyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_MEMCPY3D const *") CUDA_MEMCPY3D copyParams, @NativeType("CUcontext") long ctx) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -7973,7 +7973,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemsetNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_MEMSET_NODE_PARAMS const *") CUDA_MEMSET_NODE_PARAMS memsetParams, @NativeType("CUcontext") long ctx) {
+    public static int cuGraphAddMemsetNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_MEMSET_NODE_PARAMS const *") CUDA_MEMSET_NODE_PARAMS memsetParams, @NativeType("CUcontext") long ctx) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8026,7 +8026,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddHostNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_HOST_NODE_PARAMS const *") CUDA_HOST_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddHostNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_HOST_NODE_PARAMS const *") CUDA_HOST_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8079,7 +8079,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddChildGraphNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUgraph") long childGraph) {
+    public static int cuGraphAddChildGraphNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUgraph") long childGraph) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8117,7 +8117,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddEmptyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies) {
+    public static int cuGraphAddEmptyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8137,7 +8137,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddEventRecordNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUevent") long event) {
+    public static int cuGraphAddEventRecordNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUevent") long event) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8189,7 +8189,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddEventWaitNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUevent") long event) {
+    public static int cuGraphAddEventWaitNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUevent") long event) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8241,7 +8241,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddExternalSemaphoresSignalNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS const *") CUDA_EXT_SEM_SIGNAL_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddExternalSemaphoresSignalNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS const *") CUDA_EXT_SEM_SIGNAL_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8294,7 +8294,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddExternalSemaphoresWaitNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_EXT_SEM_WAIT_NODE_PARAMS const *") CUDA_EXT_SEM_WAIT_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddExternalSemaphoresWaitNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_EXT_SEM_WAIT_NODE_PARAMS const *") CUDA_EXT_SEM_WAIT_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8347,7 +8347,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddBatchMemOpNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @Nullable @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddBatchMemOpNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") @Nullable CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8383,7 +8383,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphBatchMemOpNodeSetParams(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
+    public static int cuGraphBatchMemOpNodeSetParams(@NativeType("CUgraphNode") long hNode, @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") @Nullable CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
         return ncuGraphBatchMemOpNodeSetParams(hNode, memAddressSafe(nodeParams));
     }
 
@@ -8401,7 +8401,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphExecBatchMemOpNodeSetParams(@NativeType("CUgraphExec") long hGraphExec, @NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
+    public static int cuGraphExecBatchMemOpNodeSetParams(@NativeType("CUgraphExec") long hGraphExec, @NativeType("CUgraphNode") long hNode, @NativeType("CUDA_BATCH_MEM_OP_NODE_PARAMS const *") @Nullable CUDA_BATCH_MEM_OP_NODE_PARAMS nodeParams) {
         return ncuGraphExecBatchMemOpNodeSetParams(hGraphExec, hNode, memAddressSafe(nodeParams));
     }
 
@@ -8417,7 +8417,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemAllocNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_MEM_ALLOC_NODE_PARAMS *") CUDA_MEM_ALLOC_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddMemAllocNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUDA_MEM_ALLOC_NODE_PARAMS *") CUDA_MEM_ALLOC_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8453,7 +8453,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemFreeNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUdeviceptr") long dptr) {
+    public static int cuGraphAddMemFreeNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUdeviceptr") long dptr) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -8600,7 +8600,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphGetNodes(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer nodes, @NativeType("size_t *") PointerBuffer numNodes) {
+    public static int cuGraphGetNodes(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") @Nullable PointerBuffer nodes, @NativeType("size_t *") PointerBuffer numNodes) {
         if (CHECKS) {
             check(numNodes, 1);
             checkSafe(nodes, numNodes.get(numNodes.position()));
@@ -8620,7 +8620,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphGetRootNodes(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer rootNodes, @NativeType("size_t *") PointerBuffer numRootNodes) {
+    public static int cuGraphGetRootNodes(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") @Nullable PointerBuffer rootNodes, @NativeType("size_t *") PointerBuffer numRootNodes) {
         if (CHECKS) {
             check(numRootNodes, 1);
             checkSafe(rootNodes, numRootNodes.get(numRootNodes.position()));
@@ -8640,7 +8640,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphGetEdges(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer from, @Nullable @NativeType("CUgraphNode *") PointerBuffer to, @NativeType("size_t *") PointerBuffer numEdges) {
+    public static int cuGraphGetEdges(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") @Nullable PointerBuffer from, @NativeType("CUgraphNode *") @Nullable PointerBuffer to, @NativeType("size_t *") PointerBuffer numEdges) {
         if (CHECKS) {
             check(numEdges, 1);
             checkSafe(from, numEdges.get(numEdges.position()));
@@ -8661,7 +8661,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphGetEdges_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer from, @Nullable @NativeType("CUgraphNode *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numEdges) {
+    public static int cuGraphGetEdges_v2(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") @Nullable PointerBuffer from, @NativeType("CUgraphNode *") @Nullable PointerBuffer to, @NativeType("CUgraphEdgeData *") CUgraphEdgeData.@Nullable Buffer edgeData, @NativeType("size_t *") PointerBuffer numEdges) {
         if (CHECKS) {
             check(numEdges, 1);
             checkSafe(from, numEdges.get(numEdges.position()));
@@ -8683,7 +8683,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphNodeGetDependencies(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("size_t *") PointerBuffer numDependencies) {
+    public static int cuGraphNodeGetDependencies(@NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNode *") @Nullable PointerBuffer dependencies, @NativeType("size_t *") PointerBuffer numDependencies) {
         if (CHECKS) {
             check(numDependencies, 1);
             checkSafe(dependencies, numDependencies.get(numDependencies.position()));
@@ -8703,7 +8703,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphNodeGetDependencies_v2(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependencies) {
+    public static int cuGraphNodeGetDependencies_v2(@NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNode *") @Nullable PointerBuffer dependencies, @NativeType("CUgraphEdgeData *") CUgraphEdgeData.@Nullable Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependencies) {
         if (CHECKS) {
             check(numDependencies, 1);
             checkSafe(dependencies, numDependencies.get(numDependencies.position()));
@@ -8724,7 +8724,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphNodeGetDependentNodes(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependentNodes, @NativeType("size_t *") PointerBuffer numDependentNodes) {
+    public static int cuGraphNodeGetDependentNodes(@NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNode *") @Nullable PointerBuffer dependentNodes, @NativeType("size_t *") PointerBuffer numDependentNodes) {
         if (CHECKS) {
             check(numDependentNodes, 1);
             checkSafe(dependentNodes, numDependentNodes.get(numDependentNodes.position()));
@@ -8744,7 +8744,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphNodeGetDependentNodes_v2(@NativeType("CUgraphNode") long hNode, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependentNodes, @Nullable @NativeType("CUgraphEdgeData *") CUgraphEdgeData.Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependentNodes) {
+    public static int cuGraphNodeGetDependentNodes_v2(@NativeType("CUgraphNode") long hNode, @NativeType("CUgraphNode *") @Nullable PointerBuffer dependentNodes, @NativeType("CUgraphEdgeData *") CUgraphEdgeData.@Nullable Buffer edgeData, @NativeType("size_t *") PointerBuffer numDependentNodes) {
         if (CHECKS) {
             check(numDependentNodes, 1);
             checkSafe(dependentNodes, numDependentNodes.get(numDependentNodes.position()));
@@ -8765,7 +8765,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddDependencies(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to) {
+    public static int cuGraphAddDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer from, @NativeType("CUgraphNode const *") @Nullable PointerBuffer to) {
         if (CHECKS) {
             checkSafe(to, remainingSafe(from));
         }
@@ -8784,7 +8784,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddDependencies_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer edgeData) {
+    public static int cuGraphAddDependencies_v2(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer from, @NativeType("CUgraphNode const *") @Nullable PointerBuffer to, @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.@Nullable Buffer edgeData) {
         if (CHECKS) {
             checkSafe(to, remainingSafe(from));
             checkSafe(edgeData, remainingSafe(from));
@@ -8804,7 +8804,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphRemoveDependencies(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to) {
+    public static int cuGraphRemoveDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer from, @NativeType("CUgraphNode const *") @Nullable PointerBuffer to) {
         if (CHECKS) {
             checkSafe(to, remainingSafe(from));
         }
@@ -8823,7 +8823,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphRemoveDependencies_v2(@NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer from, @Nullable @NativeType("CUgraphNode const *") PointerBuffer to, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer edgeData) {
+    public static int cuGraphRemoveDependencies_v2(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer from, @NativeType("CUgraphNode const *") @Nullable PointerBuffer to, @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.@Nullable Buffer edgeData) {
         if (CHECKS) {
             checkSafe(to, remainingSafe(from));
             checkSafe(edgeData, remainingSafe(from));
@@ -9363,7 +9363,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+    public static int cuGraphAddNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -9382,7 +9382,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddNode_v2(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @Nullable @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.Buffer dependencyData, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
+    public static int cuGraphAddNode_v2(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") @Nullable PointerBuffer dependencies, @NativeType("CUgraphEdgeData const *") CUgraphEdgeData.@Nullable Buffer dependencyData, @NativeType("CUgraphNodeParams *") CUgraphNodeParams nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
             checkSafe(dependencyData, remainingSafe(dependencies));
@@ -9493,7 +9493,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuOccupancyMaxPotentialBlockSize(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @Nullable @NativeType("size_t (*) (int)") CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit) {
+    public static int cuOccupancyMaxPotentialBlockSize(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @NativeType("size_t (*) (int)") @Nullable CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit) {
         if (CHECKS) {
             check(minGridSize, 1);
             check(blockSize, 1);
@@ -9513,7 +9513,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuOccupancyMaxPotentialBlockSizeWithFlags(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @Nullable @NativeType("size_t (*) (int)") CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit, @NativeType("unsigned int") int flags) {
+    public static int cuOccupancyMaxPotentialBlockSizeWithFlags(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @NativeType("size_t (*) (int)") @Nullable CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit, @NativeType("unsigned int") int flags) {
         if (CHECKS) {
             check(minGridSize, 1);
             check(blockSize, 1);
@@ -9844,7 +9844,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuTexRefGetFormat(@NativeType("CUarray_format *") IntBuffer pFormat, @Nullable @NativeType("int *") IntBuffer pNumChannels, @NativeType("CUtexref") long hTexRef) {
+    public static int cuTexRefGetFormat(@NativeType("CUarray_format *") IntBuffer pFormat, @NativeType("int *") @Nullable IntBuffer pNumChannels, @NativeType("CUtexref") long hTexRef) {
         if (CHECKS) {
             check(pFormat, 1);
             checkSafe(pNumChannels, 1);
@@ -10403,7 +10403,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGetProcAddress_v2(@NativeType("char const *") ByteBuffer symbol, @NativeType("void **") PointerBuffer pfn, int cudaVersion, @NativeType("cuuint64_t") long flags, @Nullable @NativeType("CUdriverProcAddressQueryResult *") IntBuffer symbolStatus) {
+    public static int cuGetProcAddress_v2(@NativeType("char const *") ByteBuffer symbol, @NativeType("void **") PointerBuffer pfn, int cudaVersion, @NativeType("cuuint64_t") long flags, @NativeType("CUdriverProcAddressQueryResult *") @Nullable IntBuffer symbolStatus) {
         if (CHECKS) {
             checkNT1(symbol);
             check(pfn, 1);
@@ -10413,7 +10413,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuGetProcAddress_v2(@NativeType("char const *") CharSequence symbol, @NativeType("void **") PointerBuffer pfn, int cudaVersion, @NativeType("cuuint64_t") long flags, @Nullable @NativeType("CUdriverProcAddressQueryResult *") IntBuffer symbolStatus) {
+    public static int cuGetProcAddress_v2(@NativeType("char const *") CharSequence symbol, @NativeType("void **") PointerBuffer pfn, int cudaVersion, @NativeType("cuuint64_t") long flags, @NativeType("CUdriverProcAddressQueryResult *") @Nullable IntBuffer symbolStatus) {
         if (CHECKS) {
             check(pfn, 1);
             checkSafe(symbolStatus, 1);
@@ -10439,7 +10439,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuCoredumpGetAttribute(@NativeType("CUcoredumpSettings") int attrib, @Nullable @NativeType("void *") ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
+    public static int cuCoredumpGetAttribute(@NativeType("CUcoredumpSettings") int attrib, @NativeType("void *") @Nullable ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
         if (CHECKS) {
             check(size, 1);
         }
@@ -10457,7 +10457,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuCoredumpGetAttributeGlobal(@NativeType("CUcoredumpSettings") int attrib, @Nullable @NativeType("void *") ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
+    public static int cuCoredumpGetAttributeGlobal(@NativeType("CUcoredumpSettings") int attrib, @NativeType("void *") @Nullable ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
         if (CHECKS) {
             check(size, 1);
         }
@@ -10475,7 +10475,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuCoredumpSetAttribute(@NativeType("CUcoredumpSettings") int attrib, @Nullable @NativeType("void const *") ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
+    public static int cuCoredumpSetAttribute(@NativeType("CUcoredumpSettings") int attrib, @NativeType("void const *") @Nullable ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
         if (CHECKS) {
             check(size, 1);
         }
@@ -10493,7 +10493,7 @@ public class CU {
     }
 
     @NativeType("CUresult")
-    public static int cuCoredumpSetAttributeGlobal(@NativeType("CUcoredumpSettings") int attrib, @Nullable @NativeType("void const *") ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
+    public static int cuCoredumpSetAttributeGlobal(@NativeType("CUcoredumpSettings") int attrib, @NativeType("void const *") @Nullable ByteBuffer value, @NativeType("size_t *") PointerBuffer size) {
         if (CHECKS) {
             check(size, 1);
         }

@@ -19,6 +19,6 @@
  * <li>Computing Perlin noise.</li>
  * </ul>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.stb;
 

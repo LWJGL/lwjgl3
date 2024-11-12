@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -272,8 +272,7 @@ public class AIMatrix4x4 extends Struct<AIMatrix4x4> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMatrix4x4 createSafe(long address) {
+    public static @Nullable AIMatrix4x4 createSafe(long address) {
         return address == NULL ? null : new AIMatrix4x4(address, null);
     }
 
@@ -316,8 +315,7 @@ public class AIMatrix4x4 extends Struct<AIMatrix4x4> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMatrix4x4.Buffer createSafe(long address, int capacity) {
+    public static AIMatrix4x4.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

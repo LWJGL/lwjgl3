@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.libdivide;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class LibDivideS16 extends Struct<LibDivideS16> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideS16 createSafe(long address) {
+    public static @Nullable LibDivideS16 createSafe(long address) {
         return address == NULL ? null : new LibDivideS16(address, null);
     }
 
@@ -176,8 +175,7 @@ public class LibDivideS16 extends Struct<LibDivideS16> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideS16.Buffer createSafe(long address, int capacity) {
+    public static LibDivideS16.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,8 +121,7 @@ class NkConfigurationStacks extends Struct<NkConfigurationStacks> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigurationStacks createSafe(long address) {
+    public static @Nullable NkConfigurationStacks createSafe(long address) {
         return address == NULL ? null : new NkConfigurationStacks(address, null);
     }
 

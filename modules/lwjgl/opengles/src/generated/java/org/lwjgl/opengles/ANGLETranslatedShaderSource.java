@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -42,7 +42,7 @@ public class ANGLETranslatedShaderSource {
 
     public static native void nglGetTranslatedShaderSourceANGLE(int shader, int bufsize, long length, long source);
 
-    public static void glGetTranslatedShaderSourceANGLE(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer source) {
+    public static void glGetTranslatedShaderSourceANGLE(@NativeType("GLuint") int shader, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer source) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -69,7 +69,7 @@ public class ANGLETranslatedShaderSource {
     }
 
     /** Array version of: {@link #glGetTranslatedShaderSourceANGLE GetTranslatedShaderSourceANGLE} */
-    public static void glGetTranslatedShaderSourceANGLE(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer source) {
+    public static void glGetTranslatedShaderSourceANGLE(@NativeType("GLuint") int shader, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer source) {
         long __functionAddress = GLES.getICD().glGetTranslatedShaderSourceANGLE;
         if (CHECKS) {
             check(__functionAddress);

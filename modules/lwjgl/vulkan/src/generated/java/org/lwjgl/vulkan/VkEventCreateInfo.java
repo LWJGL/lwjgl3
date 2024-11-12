@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -169,8 +169,7 @@ public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkEventCreateInfo createSafe(long address) {
+    public static @Nullable VkEventCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkEventCreateInfo(address, null);
     }
 
@@ -213,8 +212,7 @@ public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkEventCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkEventCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

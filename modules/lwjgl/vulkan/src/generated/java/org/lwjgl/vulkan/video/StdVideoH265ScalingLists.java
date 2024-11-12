@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -208,8 +208,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265ScalingLists createSafe(long address) {
+    public static @Nullable StdVideoH265ScalingLists createSafe(long address) {
         return address == NULL ? null : new StdVideoH265ScalingLists(address, null);
     }
 
@@ -252,8 +251,7 @@ public class StdVideoH265ScalingLists extends Struct<StdVideoH265ScalingLists> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265ScalingLists.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH265ScalingLists.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

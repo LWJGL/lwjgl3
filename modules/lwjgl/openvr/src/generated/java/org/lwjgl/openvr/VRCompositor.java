@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,7 +107,7 @@ public class VRCompositor {
      * start rendering.
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_WaitGetPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @Nullable @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pGamePoseArray) {
+    public static int VRCompositor_WaitGetPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.@Nullable Buffer pGamePoseArray) {
         return nVRCompositor_WaitGetPoses(pRenderPoseArray.address(), pRenderPoseArray.remaining(), memAddressSafe(pGamePoseArray), remainingSafe(pGamePoseArray));
     }
 
@@ -148,7 +148,7 @@ public class VRCompositor {
      *         {@link VR#EVRCompositorError_VRCompositorError_None}
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_GetLastPoseForTrackedDeviceIndex(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @Nullable @NativeType("TrackedDevicePose_t *") TrackedDevicePose pOutputPose, @Nullable @NativeType("TrackedDevicePose_t *") TrackedDevicePose pOutputGamePose) {
+    public static int VRCompositor_GetLastPoseForTrackedDeviceIndex(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("TrackedDevicePose_t *") @Nullable TrackedDevicePose pOutputPose, @NativeType("TrackedDevicePose_t *") @Nullable TrackedDevicePose pOutputGamePose) {
         return nVRCompositor_GetLastPoseForTrackedDeviceIndex(unDeviceIndex, memAddressSafe(pOutputPose), memAddressSafe(pOutputGamePose));
     }
 
@@ -189,7 +189,7 @@ public class VRCompositor {
      *         </ul>
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_Submit(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @Nullable @NativeType("VRTextureBounds_t const *") VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
+    public static int VRCompositor_Submit(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("VRTextureBounds_t const *") @Nullable VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
         return nVRCompositor_Submit(eEye, pTexture.address(), memAddressSafe(pBounds), nSubmitFlags);
     }
 
@@ -212,7 +212,7 @@ public class VRCompositor {
      * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_IsEgl}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved3}</td></tr></table>
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_SubmitWithArrayIndex(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("uint32_t") int unTextureArrayIndex, @Nullable @NativeType("VRTextureBounds_t const *") VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
+    public static int VRCompositor_SubmitWithArrayIndex(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("uint32_t") int unTextureArrayIndex, @NativeType("VRTextureBounds_t const *") @Nullable VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
         return nVRCompositor_SubmitWithArrayIndex(eEye, pTexture.address(), unTextureArrayIndex, memAddressSafe(pBounds), nSubmitFlags);
     }
 
@@ -705,7 +705,7 @@ public class VRCompositor {
      * separated list of-required instance extensions to enable in {@code VkCreateInstance}.
      */
     @NativeType("uint32_t")
-    public static int VRCompositor_GetVulkanInstanceExtensionsRequired(@Nullable @NativeType("char *") ByteBuffer pchValue) {
+    public static int VRCompositor_GetVulkanInstanceExtensionsRequired(@NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRCompositor_GetVulkanInstanceExtensionsRequired(memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 
@@ -742,7 +742,7 @@ public class VRCompositor {
      * separated list of required device extensions to enable in {@code VkCreateDevice}.
      */
     @NativeType("uint32_t")
-    public static int VRCompositor_GetVulkanDeviceExtensionsRequired(@NativeType("VkPhysicalDevice_T *") long pPhysicalDevice, @Nullable @NativeType("char *") ByteBuffer pchValue) {
+    public static int VRCompositor_GetVulkanDeviceExtensionsRequired(@NativeType("VkPhysicalDevice_T *") long pPhysicalDevice, @NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRCompositor_GetVulkanDeviceExtensionsRequired(pPhysicalDevice, memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 

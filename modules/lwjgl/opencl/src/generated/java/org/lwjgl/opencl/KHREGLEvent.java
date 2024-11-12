@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -57,7 +57,7 @@ public class KHREGLEvent {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_event")
-    public static long clCreateEventFromEGLSyncKHR(@NativeType("cl_context") long context, @NativeType("CLeglSyncKHR") long sync, @NativeType("CLeglDisplayKHR") long display, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateEventFromEGLSyncKHR(@NativeType("cl_context") long context, @NativeType("CLeglSyncKHR") long sync, @NativeType("CLeglDisplayKHR") long display, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -66,7 +66,7 @@ public class KHREGLEvent {
 
     /** Array version of: {@link #clCreateEventFromEGLSyncKHR CreateEventFromEGLSyncKHR} */
     @NativeType("cl_event")
-    public static long clCreateEventFromEGLSyncKHR(@NativeType("cl_context") long context, @NativeType("CLeglSyncKHR") long sync, @NativeType("CLeglDisplayKHR") long display, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateEventFromEGLSyncKHR(@NativeType("cl_context") long context, @NativeType("CLeglSyncKHR") long sync, @NativeType("CLeglDisplayKHR") long display, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateEventFromEGLSyncKHR;
         if (CHECKS) {
             check(__functionAddress);

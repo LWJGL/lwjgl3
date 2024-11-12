@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,13 +121,11 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
     /** a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer objectName() { return nobjectName(address()); }
+    public @Nullable ByteBuffer objectName() { return nobjectName(address()); }
     /** a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle. */
-    @Nullable
     @NativeType("char const *")
-    public String objectNameString() { return nobjectNameString(address()); }
+    public @Nullable String objectNameString() { return nobjectNameString(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrDebugUtilsObjectNameInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -195,8 +193,7 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDebugUtilsObjectNameInfoEXT createSafe(long address) {
+    public static @Nullable XrDebugUtilsObjectNameInfoEXT createSafe(long address) {
         return address == NULL ? null : new XrDebugUtilsObjectNameInfoEXT(address, null);
     }
 
@@ -239,8 +236,7 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDebugUtilsObjectNameInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -293,9 +289,9 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     /** Unsafe version of {@link #objectHandle}. */
     public static long nobjectHandle(long struct) { return memGetLong(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
     /** Unsafe version of {@link #objectName}. */
-    @Nullable public static ByteBuffer nobjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
+    public static @Nullable ByteBuffer nobjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
     /** Unsafe version of {@link #objectNameString}. */
-    @Nullable public static String nobjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
+    public static @Nullable String nobjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsObjectNameInfoEXT.OBJECTNAME)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrDebugUtilsObjectNameInfoEXT.TYPE, value); }
@@ -367,13 +363,11 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
         @NativeType("uint64_t")
         public long objectHandle() { return XrDebugUtilsObjectNameInfoEXT.nobjectHandle(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrDebugUtilsObjectNameInfoEXT#objectName} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer objectName() { return XrDebugUtilsObjectNameInfoEXT.nobjectName(address()); }
+        public @Nullable ByteBuffer objectName() { return XrDebugUtilsObjectNameInfoEXT.nobjectName(address()); }
         /** @return the null-terminated string pointed to by the {@link XrDebugUtilsObjectNameInfoEXT#objectName} field. */
-        @Nullable
         @NativeType("char const *")
-        public String objectNameString() { return XrDebugUtilsObjectNameInfoEXT.nobjectNameString(address()); }
+        public @Nullable String objectNameString() { return XrDebugUtilsObjectNameInfoEXT.nobjectNameString(address()); }
 
         /** Sets the specified value to the {@link XrDebugUtilsObjectNameInfoEXT#type} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrDebugUtilsObjectNameInfoEXT.ntype(address(), value); return this; }

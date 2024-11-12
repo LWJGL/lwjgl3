@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,9 +105,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     @NativeType("int32_t")
     public int slotIndex() { return nslotIndex(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoPictureResourceInfoKHR} structure describing the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">video picture resource</a> associated with the DPB slot index specified by {@code slotIndex}. */
-    @Nullable
     @NativeType("VkVideoPictureResourceInfoKHR const *")
-    public VkVideoPictureResourceInfoKHR pPictureResource() { return npPictureResource(address()); }
+    public @Nullable VkVideoPictureResourceInfoKHR pPictureResource() { return npPictureResource(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoReferenceSlotInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -181,8 +180,7 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoReferenceSlotInfoKHR createSafe(long address) {
+    public static @Nullable VkVideoReferenceSlotInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoReferenceSlotInfoKHR(address, null);
     }
 
@@ -225,8 +223,7 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoReferenceSlotInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoReferenceSlotInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,7 +274,7 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     /** Unsafe version of {@link #slotIndex}. */
     public static int nslotIndex(long struct) { return memGetInt(struct + VkVideoReferenceSlotInfoKHR.SLOTINDEX); }
     /** Unsafe version of {@link #pPictureResource}. */
-    @Nullable public static VkVideoPictureResourceInfoKHR npPictureResource(long struct) { return VkVideoPictureResourceInfoKHR.createSafe(memGetAddress(struct + VkVideoReferenceSlotInfoKHR.PPICTURERESOURCE)); }
+    public static @Nullable VkVideoPictureResourceInfoKHR npPictureResource(long struct) { return VkVideoPictureResourceInfoKHR.createSafe(memGetAddress(struct + VkVideoReferenceSlotInfoKHR.PPICTURERESOURCE)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkVideoReferenceSlotInfoKHR.STYPE, value); }
@@ -341,9 +338,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
         @NativeType("int32_t")
         public int slotIndex() { return VkVideoReferenceSlotInfoKHR.nslotIndex(address()); }
         /** @return a {@link VkVideoPictureResourceInfoKHR} view of the struct pointed to by the {@link VkVideoReferenceSlotInfoKHR#pPictureResource} field. */
-        @Nullable
         @NativeType("VkVideoPictureResourceInfoKHR const *")
-        public VkVideoPictureResourceInfoKHR pPictureResource() { return VkVideoReferenceSlotInfoKHR.npPictureResource(address()); }
+        public @Nullable VkVideoPictureResourceInfoKHR pPictureResource() { return VkVideoReferenceSlotInfoKHR.npPictureResource(address()); }
 
         /** Sets the specified value to the {@link VkVideoReferenceSlotInfoKHR#sType} field. */
         public VkVideoReferenceSlotInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoReferenceSlotInfoKHR.nsType(address(), value); return this; }

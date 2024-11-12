@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -190,8 +190,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDecompressMemoryRegionNV createSafe(long address) {
+    public static @Nullable VkDecompressMemoryRegionNV createSafe(long address) {
         return address == NULL ? null : new VkDecompressMemoryRegionNV(address, null);
     }
 
@@ -234,8 +233,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDecompressMemoryRegionNV.Buffer createSafe(long address, int capacity) {
+    public static VkDecompressMemoryRegionNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

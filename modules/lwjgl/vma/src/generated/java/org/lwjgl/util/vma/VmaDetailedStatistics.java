@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDetailedStatistics createSafe(long address) {
+    public static @Nullable VmaDetailedStatistics createSafe(long address) {
         return address == NULL ? null : new VmaDetailedStatistics(address, null);
     }
 
@@ -188,8 +187,7 @@ public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDetailedStatistics.Buffer createSafe(long address, int capacity) {
+    public static VmaDetailedStatistics.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

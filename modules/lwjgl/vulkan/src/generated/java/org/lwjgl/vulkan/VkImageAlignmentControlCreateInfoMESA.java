@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,8 +166,7 @@ public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageAlignmentControlCreateInfoMESA createSafe(long address) {
+    public static @Nullable VkImageAlignmentControlCreateInfoMESA createSafe(long address) {
         return address == NULL ? null : new VkImageAlignmentControlCreateInfoMESA(address, null);
     }
 
@@ -210,8 +209,7 @@ public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageAlignmentControlCreateInfoMESA.Buffer createSafe(long address, int capacity) {
+    public static VkImageAlignmentControlCreateInfoMESA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

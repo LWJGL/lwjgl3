@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -144,7 +144,7 @@ public class EXTDepthClampControl {
      * @param depthClampMode   determines how the clamp range is determined for each viewport.
      * @param pDepthClampRange sets the depth clamp range for all viewports if {@code depthClampMode} is set to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}.
      */
-    public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @Nullable @NativeType("VkDepthClampRangeEXT const *") VkDepthClampRangeEXT pDepthClampRange) {
+    public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @NativeType("VkDepthClampRangeEXT const *") @Nullable VkDepthClampRangeEXT pDepthClampRange) {
         nvkCmdSetDepthClampRangeEXT(commandBuffer, depthClampMode, memAddressSafe(pDepthClampRange));
     }
 

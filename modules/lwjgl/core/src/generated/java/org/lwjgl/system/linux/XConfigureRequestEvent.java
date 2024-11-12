@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -257,8 +257,7 @@ public class XConfigureRequestEvent extends Struct<XConfigureRequestEvent> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XConfigureRequestEvent createSafe(long address) {
+    public static @Nullable XConfigureRequestEvent createSafe(long address) {
         return address == NULL ? null : new XConfigureRequestEvent(address, null);
     }
 
@@ -301,8 +300,7 @@ public class XConfigureRequestEvent extends Struct<XConfigureRequestEvent> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XConfigureRequestEvent.Buffer createSafe(long address, int capacity) {
+    public static XConfigureRequestEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

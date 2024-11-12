@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIQuaternion createSafe(long address) {
+    public static @Nullable AIQuaternion createSafe(long address) {
         return address == NULL ? null : new AIQuaternion(address, null);
     }
 
@@ -196,8 +195,7 @@ public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIQuaternion.Buffer createSafe(long address, int capacity) {
+    public static AIQuaternion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

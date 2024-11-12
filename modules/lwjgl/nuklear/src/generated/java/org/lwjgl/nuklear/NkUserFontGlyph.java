@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkUserFontGlyph createSafe(long address) {
+    public static @Nullable NkUserFontGlyph createSafe(long address) {
         return address == NULL ? null : new NkUserFontGlyph(address, null);
     }
 
@@ -218,8 +217,7 @@ public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkUserFontGlyph.Buffer createSafe(long address, int capacity) {
+    public static NkUserFontGlyph.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

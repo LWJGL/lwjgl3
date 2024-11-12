@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,13 +201,11 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     @NativeType("uint32_t")
     public int indexTypeCount() { return nindexTypeCount(address()); }
     /** the used {@code VkIndexType} for the corresponding {@code uint32_t} value entry in {@code pIndexTypeValues}. */
-    @Nullable
     @NativeType("VkIndexType const *")
-    public IntBuffer pIndexTypes() { return npIndexTypes(address()); }
+    public @Nullable IntBuffer pIndexTypes() { return npIndexTypes(address()); }
     /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypeValues} field. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pIndexTypeValues() { return npIndexTypeValues(address()); }
+    public @Nullable IntBuffer pIndexTypeValues() { return npIndexTypeValues(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkIndirectCommandsLayoutTokenNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -315,8 +313,7 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectCommandsLayoutTokenNV createSafe(long address) {
+    public static @Nullable VkIndirectCommandsLayoutTokenNV createSafe(long address) {
         return address == NULL ? null : new VkIndirectCommandsLayoutTokenNV(address, null);
     }
 
@@ -359,8 +356,7 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectCommandsLayoutTokenNV.Buffer createSafe(long address, int capacity) {
+    public static VkIndirectCommandsLayoutTokenNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -431,9 +427,9 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     /** Unsafe version of {@link #indexTypeCount}. */
     public static int nindexTypeCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNV.INDEXTYPECOUNT); }
     /** Unsafe version of {@link #pIndexTypes() pIndexTypes}. */
-    @Nullable public static IntBuffer npIndexTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPES), nindexTypeCount(struct)); }
+    public static @Nullable IntBuffer npIndexTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPES), nindexTypeCount(struct)); }
     /** Unsafe version of {@link #pIndexTypeValues() pIndexTypeValues}. */
-    @Nullable public static IntBuffer npIndexTypeValues(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPEVALUES), nindexTypeCount(struct)); }
+    public static @Nullable IntBuffer npIndexTypeValues(long struct) { return memIntBufferSafe(memGetAddress(struct + VkIndirectCommandsLayoutTokenNV.PINDEXTYPEVALUES), nindexTypeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNV.STYPE, value); }
@@ -561,13 +557,11 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
         @NativeType("uint32_t")
         public int indexTypeCount() { return VkIndirectCommandsLayoutTokenNV.nindexTypeCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkIndirectCommandsLayoutTokenNV#pIndexTypes} field. */
-        @Nullable
         @NativeType("VkIndexType const *")
-        public IntBuffer pIndexTypes() { return VkIndirectCommandsLayoutTokenNV.npIndexTypes(address()); }
+        public @Nullable IntBuffer pIndexTypes() { return VkIndirectCommandsLayoutTokenNV.npIndexTypes(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypeValues} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pIndexTypeValues() { return VkIndirectCommandsLayoutTokenNV.npIndexTypeValues(address()); }
+        public @Nullable IntBuffer pIndexTypeValues() { return VkIndirectCommandsLayoutTokenNV.npIndexTypeValues(address()); }
 
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutTokenNV.nsType(address(), value); return this; }

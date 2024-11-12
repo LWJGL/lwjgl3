@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -38,7 +38,7 @@ public class KHRImage {
     }
 
     @NativeType("EGLImageKHR")
-    public static long eglCreateImageKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLenum") int target, @NativeType("EGLClientBuffer") long buffer, @Nullable @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static long eglCreateImageKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLenum") int target, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         return KHRImageBase.eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list);
     }
 
@@ -51,7 +51,7 @@ public class KHRImage {
 
     /** Array version of: {@link #eglCreateImageKHR CreateImageKHR} */
     @NativeType("EGLImageKHR")
-    public static long eglCreateImageKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLenum") int target, @NativeType("EGLClientBuffer") long buffer, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
+    public static long eglCreateImageKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLenum") int target, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         return KHRImageBase.eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list);
     }
 

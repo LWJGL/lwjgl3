@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -210,8 +210,7 @@ public class CUmemAllocationProp extends Struct<CUmemAllocationProp> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemAllocationProp createSafe(long address) {
+    public static @Nullable CUmemAllocationProp createSafe(long address) {
         return address == NULL ? null : new CUmemAllocationProp(address, null);
     }
 
@@ -254,8 +253,7 @@ public class CUmemAllocationProp extends Struct<CUmemAllocationProp> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemAllocationProp.Buffer createSafe(long address, int capacity) {
+    public static CUmemAllocationProp.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

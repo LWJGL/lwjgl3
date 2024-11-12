@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class CLMemEXTHostPtr extends Struct<CLMemEXTHostPtr> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLMemEXTHostPtr createSafe(long address) {
+    public static @Nullable CLMemEXTHostPtr createSafe(long address) {
         return address == NULL ? null : new CLMemEXTHostPtr(address, null);
     }
 
@@ -178,8 +177,7 @@ public class CLMemEXTHostPtr extends Struct<CLMemEXTHostPtr> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLMemEXTHostPtr.Buffer createSafe(long address, int capacity) {
+    public static CLMemEXTHostPtr.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

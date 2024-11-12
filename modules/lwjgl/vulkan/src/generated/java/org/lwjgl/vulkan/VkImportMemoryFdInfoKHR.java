@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -180,8 +180,7 @@ public class VkImportMemoryFdInfoKHR extends Struct<VkImportMemoryFdInfoKHR> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportMemoryFdInfoKHR createSafe(long address) {
+    public static @Nullable VkImportMemoryFdInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkImportMemoryFdInfoKHR(address, null);
     }
 
@@ -224,8 +223,7 @@ public class VkImportMemoryFdInfoKHR extends Struct<VkImportMemoryFdInfoKHR> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportMemoryFdInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkImportMemoryFdInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

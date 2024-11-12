@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -242,8 +242,7 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCapsLimits createSafe(long address) {
+    public static @Nullable BGFXCapsLimits createSafe(long address) {
         return address == NULL ? null : new BGFXCapsLimits(address, null);
     }
 
@@ -258,8 +257,7 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCapsLimits.Buffer createSafe(long address, int capacity) {
+    public static BGFXCapsLimits.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

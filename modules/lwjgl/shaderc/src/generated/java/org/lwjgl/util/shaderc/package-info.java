@@ -16,6 +16,6 @@
  * <li>increased functionality such as file #include support</li>
  * </ul>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.shaderc;
 

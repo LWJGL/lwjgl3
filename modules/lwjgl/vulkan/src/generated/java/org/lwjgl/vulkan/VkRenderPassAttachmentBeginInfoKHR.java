@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,8 +113,7 @@ public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassAttachmentBeginInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderPassAttachmentBeginInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderPassAttachmentBeginInfoKHR(address, null);
     }
 
@@ -157,8 +156,7 @@ public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassAttachmentBeginInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassAttachmentBeginInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

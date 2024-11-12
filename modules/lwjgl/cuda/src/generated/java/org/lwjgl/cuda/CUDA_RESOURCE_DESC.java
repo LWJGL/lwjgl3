@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -278,8 +278,7 @@ public class CUDA_RESOURCE_DESC extends Struct<CUDA_RESOURCE_DESC> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_RESOURCE_DESC createSafe(long address) {
+    public static @Nullable CUDA_RESOURCE_DESC createSafe(long address) {
         return address == NULL ? null : new CUDA_RESOURCE_DESC(address, null);
     }
 
@@ -322,8 +321,7 @@ public class CUDA_RESOURCE_DESC extends Struct<CUDA_RESOURCE_DESC> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_RESOURCE_DESC.Buffer createSafe(long address, int capacity) {
+    public static CUDA_RESOURCE_DESC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

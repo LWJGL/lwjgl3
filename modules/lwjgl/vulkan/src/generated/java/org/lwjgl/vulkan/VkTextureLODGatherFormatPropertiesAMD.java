@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct<VkTextureLODGa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTextureLODGatherFormatPropertiesAMD createSafe(long address) {
+    public static @Nullable VkTextureLODGatherFormatPropertiesAMD createSafe(long address) {
         return address == NULL ? null : new VkTextureLODGatherFormatPropertiesAMD(address, null);
     }
 
@@ -192,8 +191,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct<VkTextureLODGa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTextureLODGatherFormatPropertiesAMD.Buffer createSafe(long address, int capacity) {
+    public static VkTextureLODGatherFormatPropertiesAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -203,8 +203,7 @@ public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorUpdateTemplateEntry createSafe(long address) {
+    public static @Nullable VkDescriptorUpdateTemplateEntry createSafe(long address) {
         return address == NULL ? null : new VkDescriptorUpdateTemplateEntry(address, null);
     }
 
@@ -247,8 +246,7 @@ public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorUpdateTemplateEntry.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorUpdateTemplateEntry.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

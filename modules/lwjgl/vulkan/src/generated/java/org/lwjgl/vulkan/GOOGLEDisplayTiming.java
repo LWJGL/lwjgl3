@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,7 +220,7 @@ public class GOOGLEDisplayTiming {
      * @param pPresentationTimings     either {@code NULL} or a pointer to an array of {@link VkPastPresentationTimingGOOGLE} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPastPresentationTimingGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") IntBuffer pPresentationTimingCount, @Nullable @NativeType("VkPastPresentationTimingGOOGLE *") VkPastPresentationTimingGOOGLE.Buffer pPresentationTimings) {
+    public static int vkGetPastPresentationTimingGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") IntBuffer pPresentationTimingCount, @NativeType("VkPastPresentationTimingGOOGLE *") VkPastPresentationTimingGOOGLE.@Nullable Buffer pPresentationTimings) {
         if (CHECKS) {
             check(pPresentationTimingCount, 1);
             checkSafe(pPresentationTimings, pPresentationTimingCount.get(pPresentationTimingCount.position()));
@@ -230,7 +230,7 @@ public class GOOGLEDisplayTiming {
 
     /** Array version of: {@link #vkGetPastPresentationTimingGOOGLE GetPastPresentationTimingGOOGLE} */
     @NativeType("VkResult")
-    public static int vkGetPastPresentationTimingGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") int[] pPresentationTimingCount, @Nullable @NativeType("VkPastPresentationTimingGOOGLE *") VkPastPresentationTimingGOOGLE.Buffer pPresentationTimings) {
+    public static int vkGetPastPresentationTimingGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") int[] pPresentationTimingCount, @NativeType("VkPastPresentationTimingGOOGLE *") VkPastPresentationTimingGOOGLE.@Nullable Buffer pPresentationTimings) {
         long __functionAddress = device.getCapabilities().vkGetPastPresentationTimingGOOGLE;
         if (CHECKS) {
             check(__functionAddress);

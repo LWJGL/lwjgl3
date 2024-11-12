@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,7 +124,7 @@ public class KHRVulkanEnable {
      * @param buffer            a pointer to an array of characters, but <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0. The format of the output is a single space (ASCII {@code 0x20}) delimited string of extension names.
      */
     @NativeType("XrResult")
-    public static int xrGetVulkanInstanceExtensionsKHR(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetVulkanInstanceExtensionsKHR(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }
@@ -197,7 +197,7 @@ public class KHRVulkanEnable {
      * @param buffer            a pointer to an array of characters, but <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0. The format of the output is a single space (ASCII {@code 0x20}) delimited string of extension names.
      */
     @NativeType("XrResult")
-    public static int xrGetVulkanDeviceExtensionsKHR(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetVulkanDeviceExtensionsKHR(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -202,8 +202,7 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1ColorConfig createSafe(long address) {
+    public static @Nullable StdVideoAV1ColorConfig createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1ColorConfig(address, null);
     }
 
@@ -246,8 +245,7 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1ColorConfig.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1ColorConfig.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

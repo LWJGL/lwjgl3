@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,8 +166,7 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct<XrGraphicsBindingO
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGraphicsBindingOpenGLWaylandKHR createSafe(long address) {
+    public static @Nullable XrGraphicsBindingOpenGLWaylandKHR createSafe(long address) {
         return address == NULL ? null : new XrGraphicsBindingOpenGLWaylandKHR(address, null);
     }
 
@@ -210,8 +209,7 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct<XrGraphicsBindingO
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGraphicsBindingOpenGLWaylandKHR.Buffer createSafe(long address, int capacity) {
+    public static XrGraphicsBindingOpenGLWaylandKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meshoptimizer;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class MeshoptAllocate extends Callback implements MeshoptAllocat
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static MeshoptAllocate createSafe(long functionPointer) {
+    public static @Nullable MeshoptAllocate createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

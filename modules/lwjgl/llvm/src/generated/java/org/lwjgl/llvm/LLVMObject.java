@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -376,9 +376,8 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetSectionName(@NativeType("LLVMSectionIteratorRef") long SI) {
+    public static @Nullable String LLVMGetSectionName(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __result = nLLVMGetSectionName(SI);
         return memUTF8Safe(__result);
     }
@@ -406,9 +405,8 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetSectionContents(@NativeType("LLVMSectionIteratorRef") long SI) {
+    public static @Nullable String LLVMGetSectionContents(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __result = nLLVMGetSectionContents(SI);
         return memUTF8Safe(__result);
     }
@@ -496,9 +494,8 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetSymbolName(@NativeType("LLVMSymbolIteratorRef") long SI) {
+    public static @Nullable String LLVMGetSymbolName(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __result = nLLVMGetSymbolName(SI);
         return memUTF8Safe(__result);
     }
@@ -574,9 +571,8 @@ public class LLVMObject {
         return invokePP(RI, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetRelocationTypeName(@NativeType("LLVMRelocationIteratorRef") long RI) {
+    public static @Nullable String LLVMGetRelocationTypeName(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __result = nLLVMGetRelocationTypeName(RI);
         return memUTF8Safe(__result);
     }
@@ -592,9 +588,8 @@ public class LLVMObject {
         return invokePP(RI, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetRelocationValueString(@NativeType("LLVMRelocationIteratorRef") long RI) {
+    public static @Nullable String LLVMGetRelocationValueString(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __result = nLLVMGetRelocationValueString(RI);
         return memUTF8Safe(__result);
     }

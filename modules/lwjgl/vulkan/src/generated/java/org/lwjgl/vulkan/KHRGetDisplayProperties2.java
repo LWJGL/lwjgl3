@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,7 +145,7 @@ public class KHRGetDisplayProperties2 {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayProperties2KHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayProperties2KHR *") VkDisplayProperties2KHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayProperties2KHR *") VkDisplayProperties2KHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -217,7 +217,7 @@ public class KHRGetDisplayProperties2 {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayPlaneProperties2KHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPlaneProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayPlaneProperties2KHR *") VkDisplayPlaneProperties2KHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPlaneProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayPlaneProperties2KHR *") VkDisplayPlaneProperties2KHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -293,7 +293,7 @@ public class KHRGetDisplayProperties2 {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayModeProperties2KHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetDisplayModeProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayModeProperties2KHR *") VkDisplayModeProperties2KHR.Buffer pProperties) {
+    public static int vkGetDisplayModeProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayModeProperties2KHR *") VkDisplayModeProperties2KHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -366,7 +366,7 @@ public class KHRGetDisplayProperties2 {
 
     /** Array version of: {@link #vkGetPhysicalDeviceDisplayProperties2KHR GetPhysicalDeviceDisplayProperties2KHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayProperties2KHR *") VkDisplayProperties2KHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayProperties2KHR *") VkDisplayProperties2KHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceDisplayProperties2KHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -378,7 +378,7 @@ public class KHRGetDisplayProperties2 {
 
     /** Array version of: {@link #vkGetPhysicalDeviceDisplayPlaneProperties2KHR GetPhysicalDeviceDisplayPlaneProperties2KHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPlaneProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayPlaneProperties2KHR *") VkDisplayPlaneProperties2KHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPlaneProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayPlaneProperties2KHR *") VkDisplayPlaneProperties2KHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceDisplayPlaneProperties2KHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -390,7 +390,7 @@ public class KHRGetDisplayProperties2 {
 
     /** Array version of: {@link #vkGetDisplayModeProperties2KHR GetDisplayModeProperties2KHR} */
     @NativeType("VkResult")
-    public static int vkGetDisplayModeProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayModeProperties2KHR *") VkDisplayModeProperties2KHR.Buffer pProperties) {
+    public static int vkGetDisplayModeProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayModeProperties2KHR *") VkDisplayModeProperties2KHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetDisplayModeProperties2KHR;
         if (CHECKS) {
             check(__functionAddress);

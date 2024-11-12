@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -92,17 +92,14 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
     @NativeType("op_read_func")
     public OPReadFunc read() { return nread(address()); }
     /** used to seek in the stream. This may be {@code NULL} if seeking is not implemented. */
-    @Nullable
     @NativeType("op_seek_func")
-    public OPSeekFunc seek() { return nseek(address()); }
+    public @Nullable OPSeekFunc seek() { return nseek(address()); }
     /** used to return the current read position in the stream. This may be {@code NULL} if seeking is not implemented. */
-    @Nullable
     @NativeType("op_tell_func")
-    public OPTellFunc tell() { return ntell(address()); }
+    public @Nullable OPTellFunc tell() { return ntell(address()); }
     /** used to close the stream when the decoder is freed. This may be {@code NULL} to leave the stream open. */
-    @Nullable
     @NativeType("op_close_func")
-    public OPCloseFunc close$() { return nclose$(address()); }
+    public @Nullable OPCloseFunc close$() { return nclose$(address()); }
 
     /** Sets the specified value to the {@link #read} field. */
     public OpusFileCallbacks read(@NativeType("op_read_func") OPReadFuncI value) { nread(address(), value); return this; }
@@ -164,8 +161,7 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusFileCallbacks createSafe(long address) {
+    public static @Nullable OpusFileCallbacks createSafe(long address) {
         return address == NULL ? null : new OpusFileCallbacks(address, null);
     }
 
@@ -208,8 +204,7 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusFileCallbacks.Buffer createSafe(long address, int capacity) {
+    public static OpusFileCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -256,11 +251,11 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
     /** Unsafe version of {@link #read}. */
     public static OPReadFunc nread(long struct) { return OPReadFunc.create(memGetAddress(struct + OpusFileCallbacks.READ)); }
     /** Unsafe version of {@link #seek}. */
-    @Nullable public static OPSeekFunc nseek(long struct) { return OPSeekFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.SEEK)); }
+    public static @Nullable OPSeekFunc nseek(long struct) { return OPSeekFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.SEEK)); }
     /** Unsafe version of {@link #tell}. */
-    @Nullable public static OPTellFunc ntell(long struct) { return OPTellFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.TELL)); }
+    public static @Nullable OPTellFunc ntell(long struct) { return OPTellFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.TELL)); }
     /** Unsafe version of {@link #close$}. */
-    @Nullable public static OPCloseFunc nclose$(long struct) { return OPCloseFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.CLOSE)); }
+    public static @Nullable OPCloseFunc nclose$(long struct) { return OPCloseFunc.createSafe(memGetAddress(struct + OpusFileCallbacks.CLOSE)); }
 
     /** Unsafe version of {@link #read(OPReadFuncI) read}. */
     public static void nread(long struct, OPReadFuncI value) { memPutAddress(struct + OpusFileCallbacks.READ, value.address()); }
@@ -327,17 +322,14 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
         @NativeType("op_read_func")
         public OPReadFunc read() { return OpusFileCallbacks.nread(address()); }
         /** @return the value of the {@link OpusFileCallbacks#seek} field. */
-        @Nullable
         @NativeType("op_seek_func")
-        public OPSeekFunc seek() { return OpusFileCallbacks.nseek(address()); }
+        public @Nullable OPSeekFunc seek() { return OpusFileCallbacks.nseek(address()); }
         /** @return the value of the {@link OpusFileCallbacks#tell} field. */
-        @Nullable
         @NativeType("op_tell_func")
-        public OPTellFunc tell() { return OpusFileCallbacks.ntell(address()); }
+        public @Nullable OPTellFunc tell() { return OpusFileCallbacks.ntell(address()); }
         /** @return the value of the {@link OpusFileCallbacks#close$} field. */
-        @Nullable
         @NativeType("op_close_func")
-        public OPCloseFunc close$() { return OpusFileCallbacks.nclose$(address()); }
+        public @Nullable OPCloseFunc close$() { return OpusFileCallbacks.nclose$(address()); }
 
         /** Sets the specified value to the {@link OpusFileCallbacks#read} field. */
         public OpusFileCallbacks.Buffer read(@NativeType("op_read_func") OPReadFuncI value) { OpusFileCallbacks.nread(address(), value); return this; }

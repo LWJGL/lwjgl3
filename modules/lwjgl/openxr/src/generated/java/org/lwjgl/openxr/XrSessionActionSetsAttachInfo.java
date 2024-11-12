@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,8 +167,7 @@ public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAtt
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSessionActionSetsAttachInfo createSafe(long address) {
+    public static @Nullable XrSessionActionSetsAttachInfo createSafe(long address) {
         return address == NULL ? null : new XrSessionActionSetsAttachInfo(address, null);
     }
 
@@ -211,8 +210,7 @@ public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAtt
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSessionActionSetsAttachInfo.Buffer createSafe(long address, int capacity) {
+    public static XrSessionActionSetsAttachInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

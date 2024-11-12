@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -170,8 +170,7 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassShadingPipelineCreateInfoHUAWEI createSafe(long address) {
+    public static @Nullable VkSubpassShadingPipelineCreateInfoHUAWEI createSafe(long address) {
         return address == NULL ? null : new VkSubpassShadingPipelineCreateInfoHUAWEI(address, null);
     }
 
@@ -214,8 +213,7 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct<VkSubpassSh
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer createSafe(long address, int capacity) {
+    public static VkSubpassShadingPipelineCreateInfoHUAWEI.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

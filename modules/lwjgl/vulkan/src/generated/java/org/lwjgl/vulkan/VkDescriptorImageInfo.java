@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class VkDescriptorImageInfo extends Struct<VkDescriptorImageInfo> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorImageInfo createSafe(long address) {
+    public static @Nullable VkDescriptorImageInfo createSafe(long address) {
         return address == NULL ? null : new VkDescriptorImageInfo(address, null);
     }
 
@@ -218,8 +217,7 @@ public class VkDescriptorImageInfo extends Struct<VkDescriptorImageInfo> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorImageInfo.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorImageInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

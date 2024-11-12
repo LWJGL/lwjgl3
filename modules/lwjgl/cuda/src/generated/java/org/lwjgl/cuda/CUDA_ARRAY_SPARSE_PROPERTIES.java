@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -198,8 +198,7 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPE
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_ARRAY_SPARSE_PROPERTIES createSafe(long address) {
+    public static @Nullable CUDA_ARRAY_SPARSE_PROPERTIES createSafe(long address) {
         return address == NULL ? null : new CUDA_ARRAY_SPARSE_PROPERTIES(address, null);
     }
 
@@ -242,8 +241,7 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPE
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_ARRAY_SPARSE_PROPERTIES.Buffer createSafe(long address, int capacity) {
+    public static CUDA_ARRAY_SPARSE_PROPERTIES.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

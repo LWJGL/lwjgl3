@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -634,7 +634,7 @@ public class Opus {
      * @param error       one of:<br><table><tr><td>{@link #OPUS_OK OK}</td><td>{@link #OPUS_BAD_ARG BAD_ARG}</td><td>{@link #OPUS_BUFFER_TOO_SMALL BUFFER_TOO_SMALL}</td><td>{@link #OPUS_INTERNAL_ERROR INTERNAL_ERROR}</td><td>{@link #OPUS_INVALID_PACKET INVALID_PACKET}</td><td>{@link #OPUS_UNIMPLEMENTED UNIMPLEMENTED}</td><td>{@link #OPUS_INVALID_STATE INVALID_STATE}</td></tr><tr><td>{@link #OPUS_ALLOC_FAIL ALLOC_FAIL}</td></tr></table>
      */
     @NativeType("OpusEncoder *")
-    public static long opus_encoder_create(@NativeType("opus_int32") int Fs, int channels, int application, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_encoder_create(@NativeType("opus_int32") int Fs, int channels, int application, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -805,7 +805,7 @@ public class Opus {
      * @param error    one of:<br><table><tr><td>{@link #OPUS_OK OK}</td><td>{@link #OPUS_BAD_ARG BAD_ARG}</td><td>{@link #OPUS_BUFFER_TOO_SMALL BUFFER_TOO_SMALL}</td><td>{@link #OPUS_INTERNAL_ERROR INTERNAL_ERROR}</td><td>{@link #OPUS_INVALID_PACKET INVALID_PACKET}</td><td>{@link #OPUS_UNIMPLEMENTED UNIMPLEMENTED}</td><td>{@link #OPUS_INVALID_STATE INVALID_STATE}</td></tr><tr><td>{@link #OPUS_ALLOC_FAIL ALLOC_FAIL}</td></tr></table>
      */
     @NativeType("OpusDecoder *")
-    public static long opus_decoder_create(@NativeType("opus_int32") int Fs, int channels, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_decoder_create(@NativeType("opus_int32") int Fs, int channels, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -868,7 +868,7 @@ public class Opus {
      *
      * @return number of decoded samples or a negative error code
      */
-    public static int opus_decode(@NativeType("OpusDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_decode(@NativeType("OpusDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + 8));
         }
@@ -907,7 +907,7 @@ public class Opus {
      *
      * @return number of decoded samples or a negative error code
      */
-    public static int opus_decode_float(@NativeType("OpusDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_decode_float(@NativeType("OpusDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + 8));
         }
@@ -970,7 +970,7 @@ public class Opus {
      * @param error returns {@link #OPUS_OK OK} or an error code
      */
     @NativeType("OpusDREDDecoder *")
-    public static long opus_dred_decoder_create(@Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_dred_decoder_create(@NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -1050,7 +1050,7 @@ public class Opus {
      * @param error returns {@link #OPUS_OK OK} or an error code
      */
     @NativeType("OpusDRED *")
-    public static long opus_dred_alloc(@Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_dred_alloc(@NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -1101,7 +1101,7 @@ public class Opus {
      *
      * @return offset (positive) of the first decoded DRED samples, zero if no DRED is present, or an error code
      */
-    public static int opus_dred_parse(@NativeType("OpusDREDDecoder *") long dred_dec, @NativeType("OpusDRED *") long dred, @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int32") int max_dred_samples, @NativeType("opus_int32") int sampling_rate, @Nullable @NativeType("int *") IntBuffer dred_end, @NativeType("int") boolean defer_processing) {
+    public static int opus_dred_parse(@NativeType("OpusDREDDecoder *") long dred_dec, @NativeType("OpusDRED *") long dred, @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int32") int max_dred_samples, @NativeType("opus_int32") int sampling_rate, @NativeType("int *") @Nullable IntBuffer dred_end, @NativeType("int") boolean defer_processing) {
         if (CHECKS) {
             checkSafe(dred_end, 1);
         }
@@ -1215,7 +1215,7 @@ public class Opus {
      * @param size           sizes of the encapsulated frames
      * @param payload_offset returns the position of the payload within the packet (in bytes)
      */
-    public static int opus_packet_parse(@NativeType("unsigned char const *") ByteBuffer data, @Nullable @NativeType("unsigned char *") ByteBuffer out_toc, @Nullable @NativeType("unsigned char const **") PointerBuffer frames, @NativeType("opus_int16 *") ShortBuffer size, @Nullable @NativeType("int *") IntBuffer payload_offset) {
+    public static int opus_packet_parse(@NativeType("unsigned char const *") ByteBuffer data, @NativeType("unsigned char *") @Nullable ByteBuffer out_toc, @NativeType("unsigned char const **") @Nullable PointerBuffer frames, @NativeType("opus_int16 *") ShortBuffer size, @NativeType("int *") @Nullable IntBuffer payload_offset) {
         if (CHECKS) {
             checkSafe(out_toc, 1);
             checkSafe(frames, 48);
@@ -1720,9 +1720,8 @@ public class Opus {
      *
      * @return error string
      */
-    @Nullable
     @NativeType("char *")
-    public static String opus_strerror(int error) {
+    public static @Nullable String opus_strerror(int error) {
         long __result = nopus_strerror(error);
         return memASCIISafe(__result);
     }
@@ -1740,9 +1739,8 @@ public class Opus {
      * 
      * <p>Applications may look for the substring "-fixed" in the version string to determine whether they have a fixed-point or floating-point build at runtime.</p>
      */
-    @Nullable
     @NativeType("char *")
-    public static String opus_get_version_string() {
+    public static @Nullable String opus_get_version_string() {
         long __result = nopus_get_version_string();
         return memASCIISafe(__result);
     }

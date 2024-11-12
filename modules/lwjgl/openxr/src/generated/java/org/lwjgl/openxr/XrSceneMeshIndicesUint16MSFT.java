@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,9 +112,8 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct<XrSceneMeshIndicesUint1
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle. */
-    @Nullable
     @NativeType("uint16_t *")
-    public ShortBuffer indices() { return nindices(address()); }
+    public @Nullable ShortBuffer indices() { return nindices(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneMeshIndicesUint16MSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -182,8 +181,7 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct<XrSceneMeshIndicesUint1
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMeshIndicesUint16MSFT createSafe(long address) {
+    public static @Nullable XrSceneMeshIndicesUint16MSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneMeshIndicesUint16MSFT(address, null);
     }
 
@@ -226,8 +224,7 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct<XrSceneMeshIndicesUint1
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMeshIndicesUint16MSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneMeshIndicesUint16MSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -280,7 +277,7 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct<XrSceneMeshIndicesUint1
     /** Unsafe version of {@link #indexCountOutput}. */
     public static int nindexCountOutput(long struct) { return memGetInt(struct + XrSceneMeshIndicesUint16MSFT.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
-    @Nullable public static ShortBuffer nindices(long struct) { return memShortBufferSafe(memGetAddress(struct + XrSceneMeshIndicesUint16MSFT.INDICES), nindexCapacityInput(struct)); }
+    public static @Nullable ShortBuffer nindices(long struct) { return memShortBufferSafe(memGetAddress(struct + XrSceneMeshIndicesUint16MSFT.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMeshIndicesUint16MSFT.TYPE, value); }
@@ -349,9 +346,8 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct<XrSceneMeshIndicesUint1
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrSceneMeshIndicesUint16MSFT.nindexCountOutput(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@link XrSceneMeshIndicesUint16MSFT#indices} field. */
-        @Nullable
         @NativeType("uint16_t *")
-        public ShortBuffer indices() { return XrSceneMeshIndicesUint16MSFT.nindices(address()); }
+        public @Nullable ShortBuffer indices() { return XrSceneMeshIndicesUint16MSFT.nindices(address()); }
 
         /** Sets the specified value to the {@link XrSceneMeshIndicesUint16MSFT#type} field. */
         public XrSceneMeshIndicesUint16MSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMeshIndicesUint16MSFT.ntype(address(), value); return this; }

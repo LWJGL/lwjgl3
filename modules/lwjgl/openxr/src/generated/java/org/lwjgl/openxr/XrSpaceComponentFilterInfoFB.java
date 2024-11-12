@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class XrSpaceComponentFilterInfoFB extends Struct<XrSpaceComponentFilterI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceComponentFilterInfoFB createSafe(long address) {
+    public static @Nullable XrSpaceComponentFilterInfoFB createSafe(long address) {
         return address == NULL ? null : new XrSpaceComponentFilterInfoFB(address, null);
     }
 
@@ -212,8 +211,7 @@ public class XrSpaceComponentFilterInfoFB extends Struct<XrSpaceComponentFilterI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceComponentFilterInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceComponentFilterInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

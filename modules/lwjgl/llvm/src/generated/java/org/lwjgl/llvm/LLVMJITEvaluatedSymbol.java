@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMJITEvaluatedSymbol createSafe(long address) {
+    public static @Nullable LLVMJITEvaluatedSymbol createSafe(long address) {
         return address == NULL ? null : new LLVMJITEvaluatedSymbol(address, null);
     }
 
@@ -178,8 +177,7 @@ public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMJITEvaluatedSymbol.Buffer createSafe(long address, int capacity) {
+    public static LLVMJITEvaluatedSymbol.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

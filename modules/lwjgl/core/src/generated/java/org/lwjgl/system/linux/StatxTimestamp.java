@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StatxTimestamp createSafe(long address) {
+    public static @Nullable StatxTimestamp createSafe(long address) {
         return address == NULL ? null : new StatxTimestamp(address, null);
     }
 
@@ -182,8 +181,7 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StatxTimestamp.Buffer createSafe(long address, int capacity) {
+    public static StatxTimestamp.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

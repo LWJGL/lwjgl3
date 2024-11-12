@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -42,7 +42,7 @@ public class EXTEGLImageStorage {
 
     public static native void nglEGLImageTargetTexStorageEXT(int target, long image, long attrib_list);
 
-    public static void glEGLImageTargetTexStorageEXT(@NativeType("GLenum") int target, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") IntBuffer attrib_list) {
+    public static void glEGLImageTargetTexStorageEXT(@NativeType("GLenum") int target, @NativeType("GLeglImageOES") long image, @NativeType("int const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             check(image);
             checkNTSafe(attrib_list);
@@ -54,7 +54,7 @@ public class EXTEGLImageStorage {
 
     public static native void nglEGLImageTargetTextureStorageEXT(int texture, long image, long attrib_list);
 
-    public static void glEGLImageTargetTextureStorageEXT(@NativeType("GLuint") int texture, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") IntBuffer attrib_list) {
+    public static void glEGLImageTargetTextureStorageEXT(@NativeType("GLuint") int texture, @NativeType("GLeglImageOES") long image, @NativeType("int const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             check(image);
             checkNTSafe(attrib_list);
@@ -63,7 +63,7 @@ public class EXTEGLImageStorage {
     }
 
     /** Array version of: {@link #glEGLImageTargetTexStorageEXT EGLImageTargetTexStorageEXT} */
-    public static void glEGLImageTargetTexStorageEXT(@NativeType("GLenum") int target, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") int[] attrib_list) {
+    public static void glEGLImageTargetTexStorageEXT(@NativeType("GLenum") int target, @NativeType("GLeglImageOES") long image, @NativeType("int const *") int @Nullable [] attrib_list) {
         long __functionAddress = GLES.getICD().glEGLImageTargetTexStorageEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -74,7 +74,7 @@ public class EXTEGLImageStorage {
     }
 
     /** Array version of: {@link #glEGLImageTargetTextureStorageEXT EGLImageTargetTextureStorageEXT} */
-    public static void glEGLImageTargetTextureStorageEXT(@NativeType("GLuint") int texture, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") int[] attrib_list) {
+    public static void glEGLImageTargetTextureStorageEXT(@NativeType("GLuint") int texture, @NativeType("GLeglImageOES") long image, @NativeType("int const *") int @Nullable [] attrib_list) {
         long __functionAddress = GLES.getICD().glEGLImageTargetTextureStorageEXT;
         if (CHECKS) {
             check(__functionAddress);

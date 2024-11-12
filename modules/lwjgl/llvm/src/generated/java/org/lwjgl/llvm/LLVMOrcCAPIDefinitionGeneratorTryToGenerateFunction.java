@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -43,8 +43,7 @@ public abstract class LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction extend
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction createSafe(long functionPointer) {
+    public static @Nullable LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

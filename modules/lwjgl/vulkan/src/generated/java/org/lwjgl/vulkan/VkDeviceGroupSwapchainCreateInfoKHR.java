@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct<VkDeviceGroupSwa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupSwapchainCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkDeviceGroupSwapchainCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkDeviceGroupSwapchainCreateInfoKHR(address, null);
     }
 
@@ -202,8 +201,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct<VkDeviceGroupSwa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceGroupSwapchainCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

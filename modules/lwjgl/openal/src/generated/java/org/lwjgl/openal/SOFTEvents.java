@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -68,7 +68,7 @@ public class SOFTEvents {
         invokePPV(callback, userParam, __functionAddress);
     }
 
-    public static void alEventCallbackSOFT(@NativeType("ALEVENTPROCSOFT") SOFTEventProcI callback, @Nullable @NativeType("ALvoid *") ByteBuffer userParam) {
+    public static void alEventCallbackSOFT(@NativeType("ALEVENTPROCSOFT") SOFTEventProcI callback, @NativeType("ALvoid *") @Nullable ByteBuffer userParam) {
         nalEventCallbackSOFT(callback.address(), memAddressSafe(userParam));
     }
 

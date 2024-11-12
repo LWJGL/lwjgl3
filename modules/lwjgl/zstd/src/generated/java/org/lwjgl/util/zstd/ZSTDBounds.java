@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,8 +109,7 @@ public class ZSTDBounds extends Struct<ZSTDBounds> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDBounds createSafe(long address) {
+    public static @Nullable ZSTDBounds createSafe(long address) {
         return address == NULL ? null : new ZSTDBounds(address, null);
     }
 
@@ -153,8 +152,7 @@ public class ZSTDBounds extends Struct<ZSTDBounds> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDBounds.Buffer createSafe(long address, int capacity) {
+    public static ZSTDBounds.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

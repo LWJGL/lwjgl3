@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -110,8 +110,7 @@ public class GLFWVidMode extends Struct<GLFWVidMode> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWVidMode createSafe(long address) {
+    public static @Nullable GLFWVidMode createSafe(long address) {
         return address == NULL ? null : new GLFWVidMode(address, null);
     }
 
@@ -126,8 +125,7 @@ public class GLFWVidMode extends Struct<GLFWVidMode> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWVidMode.Buffer createSafe(long address, int capacity) {
+    public static GLFWVidMode.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

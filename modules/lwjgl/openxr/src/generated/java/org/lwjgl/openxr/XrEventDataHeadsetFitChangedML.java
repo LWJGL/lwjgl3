@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFit
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataHeadsetFitChangedML createSafe(long address) {
+    public static @Nullable XrEventDataHeadsetFitChangedML createSafe(long address) {
         return address == NULL ? null : new XrEventDataHeadsetFitChangedML(address, null);
     }
 
@@ -210,8 +209,7 @@ public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFit
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataHeadsetFitChangedML.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataHeadsetFitChangedML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

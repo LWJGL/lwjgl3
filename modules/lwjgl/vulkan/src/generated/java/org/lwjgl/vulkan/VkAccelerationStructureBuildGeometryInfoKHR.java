@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,13 +184,11 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     @NativeType("uint32_t")
     public int geometryCount() { return ngeometryCount(address()); }
     /** a pointer to an array of {@link VkAccelerationStructureGeometryKHR} structures. */
-    @Nullable
     @NativeType("VkAccelerationStructureGeometryKHR const *")
-    public VkAccelerationStructureGeometryKHR.Buffer pGeometries() { return npGeometries(address()); }
+    public VkAccelerationStructureGeometryKHR.@Nullable Buffer pGeometries() { return npGeometries(address()); }
     /** a pointer to an array of pointers to {@link VkAccelerationStructureGeometryKHR} structures. */
-    @Nullable
     @NativeType("VkAccelerationStructureGeometryKHR const * const *")
-    public PointerBuffer ppGeometries() { return nppGeometries(address()); }
+    public @Nullable PointerBuffer ppGeometries() { return nppGeometries(address()); }
     /** the device or host address to memory that will be used as scratch memory for the build. */
     public VkDeviceOrHostAddressKHR scratchData() { return nscratchData(address()); }
 
@@ -213,7 +211,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     /** Sets the specified value to the {@link #geometryCount} field. */
     public VkAccelerationStructureBuildGeometryInfoKHR geometryCount(@NativeType("uint32_t") int value) { ngeometryCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkAccelerationStructureGeometryKHR.Buffer} to the {@link #pGeometries} field. */
-    public VkAccelerationStructureBuildGeometryInfoKHR pGeometries(@Nullable @NativeType("VkAccelerationStructureGeometryKHR const *") VkAccelerationStructureGeometryKHR.Buffer value) { npGeometries(address(), value); return this; }
+    public VkAccelerationStructureBuildGeometryInfoKHR pGeometries(@NativeType("VkAccelerationStructureGeometryKHR const *") VkAccelerationStructureGeometryKHR.@Nullable Buffer value) { npGeometries(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppGeometries} field. */
     public VkAccelerationStructureBuildGeometryInfoKHR ppGeometries(@Nullable @NativeType("VkAccelerationStructureGeometryKHR const * const *") PointerBuffer value) { nppGeometries(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressKHR} to the {@link #scratchData} field. */
@@ -231,7 +229,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
         long srcAccelerationStructure,
         long dstAccelerationStructure,
         int geometryCount,
-        @Nullable VkAccelerationStructureGeometryKHR.Buffer pGeometries,
+        VkAccelerationStructureGeometryKHR.@Nullable Buffer pGeometries,
         @Nullable PointerBuffer ppGeometries,
         VkDeviceOrHostAddressKHR scratchData
     ) {
@@ -286,8 +284,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureBuildGeometryInfoKHR createSafe(long address) {
+    public static @Nullable VkAccelerationStructureBuildGeometryInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkAccelerationStructureBuildGeometryInfoKHR(address, null);
     }
 
@@ -330,8 +327,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureBuildGeometryInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkAccelerationStructureBuildGeometryInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -392,9 +388,9 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     /** Unsafe version of {@link #geometryCount}. */
     public static int ngeometryCount(long struct) { return memGetInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT); }
     /** Unsafe version of {@link #pGeometries}. */
-    @Nullable public static VkAccelerationStructureGeometryKHR.Buffer npGeometries(long struct) { return VkAccelerationStructureGeometryKHR.createSafe(memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES), ngeometryCount(struct)); }
+    public static VkAccelerationStructureGeometryKHR.@Nullable Buffer npGeometries(long struct) { return VkAccelerationStructureGeometryKHR.createSafe(memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES), ngeometryCount(struct)); }
     /** Unsafe version of {@link #ppGeometries() ppGeometries}. */
-    @Nullable public static PointerBuffer nppGeometries(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PPGEOMETRIES), ngeometryCount(struct)); }
+    public static @Nullable PointerBuffer nppGeometries(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PPGEOMETRIES), ngeometryCount(struct)); }
     /** Unsafe version of {@link #scratchData}. */
     public static VkDeviceOrHostAddressKHR nscratchData(long struct) { return VkDeviceOrHostAddressKHR.create(struct + VkAccelerationStructureBuildGeometryInfoKHR.SCRATCHDATA); }
 
@@ -415,7 +411,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
     /** Sets the specified value to the {@code geometryCount} field of the specified {@code struct}. */
     public static void ngeometryCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureBuildGeometryInfoKHR.GEOMETRYCOUNT, value); }
     /** Unsafe version of {@link #pGeometries(VkAccelerationStructureGeometryKHR.Buffer) pGeometries}. */
-    public static void npGeometries(long struct, @Nullable VkAccelerationStructureGeometryKHR.Buffer value) { memPutAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES, memAddressSafe(value)); }
+    public static void npGeometries(long struct, VkAccelerationStructureGeometryKHR.@Nullable Buffer value) { memPutAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PGEOMETRIES, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppGeometries(PointerBuffer) ppGeometries}. */
     public static void nppGeometries(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkAccelerationStructureBuildGeometryInfoKHR.PPGEOMETRIES, memAddressSafe(value)); }
     /** Unsafe version of {@link #scratchData(VkDeviceOrHostAddressKHR) scratchData}. */
@@ -489,13 +485,11 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
         @NativeType("uint32_t")
         public int geometryCount() { return VkAccelerationStructureBuildGeometryInfoKHR.ngeometryCount(address()); }
         /** @return a {@link VkAccelerationStructureGeometryKHR.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureBuildGeometryInfoKHR#pGeometries} field. */
-        @Nullable
         @NativeType("VkAccelerationStructureGeometryKHR const *")
-        public VkAccelerationStructureGeometryKHR.Buffer pGeometries() { return VkAccelerationStructureBuildGeometryInfoKHR.npGeometries(address()); }
+        public VkAccelerationStructureGeometryKHR.@Nullable Buffer pGeometries() { return VkAccelerationStructureBuildGeometryInfoKHR.npGeometries(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkAccelerationStructureBuildGeometryInfoKHR#ppGeometries} field. */
-        @Nullable
         @NativeType("VkAccelerationStructureGeometryKHR const * const *")
-        public PointerBuffer ppGeometries() { return VkAccelerationStructureBuildGeometryInfoKHR.nppGeometries(address()); }
+        public @Nullable PointerBuffer ppGeometries() { return VkAccelerationStructureBuildGeometryInfoKHR.nppGeometries(address()); }
         /** @return a {@link VkDeviceOrHostAddressKHR} view of the {@link VkAccelerationStructureBuildGeometryInfoKHR#scratchData} field. */
         public VkDeviceOrHostAddressKHR scratchData() { return VkAccelerationStructureBuildGeometryInfoKHR.nscratchData(address()); }
 
@@ -518,7 +512,7 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
         /** Sets the specified value to the {@link VkAccelerationStructureBuildGeometryInfoKHR#geometryCount} field. */
         public VkAccelerationStructureBuildGeometryInfoKHR.Buffer geometryCount(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildGeometryInfoKHR.ngeometryCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkAccelerationStructureGeometryKHR.Buffer} to the {@link VkAccelerationStructureBuildGeometryInfoKHR#pGeometries} field. */
-        public VkAccelerationStructureBuildGeometryInfoKHR.Buffer pGeometries(@Nullable @NativeType("VkAccelerationStructureGeometryKHR const *") VkAccelerationStructureGeometryKHR.Buffer value) { VkAccelerationStructureBuildGeometryInfoKHR.npGeometries(address(), value); return this; }
+        public VkAccelerationStructureBuildGeometryInfoKHR.Buffer pGeometries(@NativeType("VkAccelerationStructureGeometryKHR const *") VkAccelerationStructureGeometryKHR.@Nullable Buffer value) { VkAccelerationStructureBuildGeometryInfoKHR.npGeometries(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link VkAccelerationStructureBuildGeometryInfoKHR#ppGeometries} field. */
         public VkAccelerationStructureBuildGeometryInfoKHR.Buffer ppGeometries(@Nullable @NativeType("VkAccelerationStructureGeometryKHR const * const *") PointerBuffer value) { VkAccelerationStructureBuildGeometryInfoKHR.nppGeometries(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressKHR} to the {@link VkAccelerationStructureBuildGeometryInfoKHR#scratchData} field. */

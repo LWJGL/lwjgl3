@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -430,8 +430,7 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSamplerCreateInfo createSafe(long address) {
+    public static @Nullable VkSamplerCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkSamplerCreateInfo(address, null);
     }
 
@@ -474,8 +473,7 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSamplerCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkSamplerCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

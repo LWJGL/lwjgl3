@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -297,7 +297,7 @@ public class OpusEnc {
      *
      * @return error code
      */
-    public static int ope_comments_add_picture(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer filename, int picture_type, @Nullable @NativeType("char const *") ByteBuffer description) {
+    public static int ope_comments_add_picture(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer filename, int picture_type, @NativeType("char const *") @Nullable ByteBuffer description) {
         if (CHECKS) {
             checkNT1(filename);
             checkNT1Safe(description);
@@ -315,7 +315,7 @@ public class OpusEnc {
      *
      * @return error code
      */
-    public static int ope_comments_add_picture(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") CharSequence filename, int picture_type, @Nullable @NativeType("char const *") CharSequence description) {
+    public static int ope_comments_add_picture(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") CharSequence filename, int picture_type, @NativeType("char const *") @Nullable CharSequence description) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(filename, true);
@@ -353,7 +353,7 @@ public class OpusEnc {
      *
      * @return error code
      */
-    public static int ope_comments_add_picture_from_memory(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer ptr, int picture_type, @Nullable @NativeType("char const *") ByteBuffer description) {
+    public static int ope_comments_add_picture_from_memory(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer ptr, int picture_type, @NativeType("char const *") @Nullable ByteBuffer description) {
         if (CHECKS) {
             checkNT1Safe(description);
         }
@@ -370,7 +370,7 @@ public class OpusEnc {
      *
      * @return error code
      */
-    public static int ope_comments_add_picture_from_memory(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer ptr, int picture_type, @Nullable @NativeType("char const *") CharSequence description) {
+    public static int ope_comments_add_picture_from_memory(@NativeType("OggOpusComments *") long comments, @NativeType("char const *") ByteBuffer ptr, int picture_type, @NativeType("char const *") @Nullable CharSequence description) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(description, true);
@@ -405,7 +405,7 @@ public class OpusEnc {
      * @return newly-created encoder
      */
     @NativeType("OggOpusEnc *")
-    public static long ope_encoder_create_file(@NativeType("char const *") ByteBuffer path, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long ope_encoder_create_file(@NativeType("char const *") ByteBuffer path, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkNT1(path);
             checkSafe(error, 1);
@@ -426,7 +426,7 @@ public class OpusEnc {
      * @return newly-created encoder
      */
     @NativeType("OggOpusEnc *")
-    public static long ope_encoder_create_file(@NativeType("char const *") CharSequence path, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long ope_encoder_create_file(@NativeType("char const *") CharSequence path, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -467,7 +467,7 @@ public class OpusEnc {
      * @return newly-created encoder
      */
     @NativeType("OggOpusEnc *")
-    public static long ope_encoder_create_callbacks(@NativeType("OpusEncCallbacks const *") OpusEncCallbacks callbacks, @NativeType("void *") long user_data, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long ope_encoder_create_callbacks(@NativeType("OpusEncCallbacks const *") OpusEncCallbacks callbacks, @NativeType("void *") long user_data, @NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -497,7 +497,7 @@ public class OpusEnc {
      * @return newly-created encoder
      */
     @NativeType("OggOpusEnc *")
-    public static long ope_encoder_create_pull(@NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long ope_encoder_create_pull(@NativeType("OggOpusComments *") long comments, @NativeType("opus_int32") int rate, int channels, int family, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -778,9 +778,8 @@ public class OpusEnc {
      *
      * @return error string
      */
-    @Nullable
     @NativeType("char const *")
-    public static String ope_strerror(int error) {
+    public static @Nullable String ope_strerror(int error) {
         long __result = nope_strerror(error);
         return memUTF8Safe(__result);
     }
@@ -798,9 +797,8 @@ public class OpusEnc {
      *
      * @return a string describing the version of this library
      */
-    @Nullable
     @NativeType("char const *")
-    public static String ope_get_version_string() {
+    public static @Nullable String ope_get_version_string() {
         long __result = nope_get_version_string();
         return memUTF8Safe(__result);
     }

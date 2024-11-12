@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -195,8 +195,7 @@ public class XColormapEvent extends Struct<XColormapEvent> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XColormapEvent createSafe(long address) {
+    public static @Nullable XColormapEvent createSafe(long address) {
         return address == NULL ? null : new XColormapEvent(address, null);
     }
 
@@ -239,8 +238,7 @@ public class XColormapEvent extends Struct<XColormapEvent> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XColormapEvent.Buffer createSafe(long address, int capacity) {
+    public static XColormapEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

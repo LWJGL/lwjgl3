@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,9 +133,8 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values defining remapped locations for color attachments. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pColorAttachmentLocations() { return npColorAttachmentLocations(address()); }
+    public @Nullable IntBuffer pColorAttachmentLocations() { return npColorAttachmentLocations(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderingAttachmentLocationInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -199,8 +198,7 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingAttachmentLocationInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderingAttachmentLocationInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderingAttachmentLocationInfoKHR(address, null);
     }
 
@@ -243,8 +241,7 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingAttachmentLocationInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderingAttachmentLocationInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -295,7 +292,7 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingAttachmentLocationInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentLocations() pColorAttachmentLocations}. */
-    @Nullable public static IntBuffer npColorAttachmentLocations(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAttachmentLocationInfoKHR.PCOLORATTACHMENTLOCATIONS), ncolorAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorAttachmentLocations(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAttachmentLocationInfoKHR.PCOLORATTACHMENTLOCATIONS), ncolorAttachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingAttachmentLocationInfoKHR.STYPE, value); }
@@ -359,9 +356,8 @@ public class VkRenderingAttachmentLocationInfoKHR extends Struct<VkRenderingAtta
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkRenderingAttachmentLocationInfoKHR.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingAttachmentLocationInfoKHR#pColorAttachmentLocations} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pColorAttachmentLocations() { return VkRenderingAttachmentLocationInfoKHR.npColorAttachmentLocations(address()); }
+        public @Nullable IntBuffer pColorAttachmentLocations() { return VkRenderingAttachmentLocationInfoKHR.npColorAttachmentLocations(address()); }
 
         /** Sets the specified value to the {@link VkRenderingAttachmentLocationInfoKHR#sType} field. */
         public VkRenderingAttachmentLocationInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingAttachmentLocationInfoKHR.nsType(address(), value); return this; }

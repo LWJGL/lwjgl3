@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,22 +103,19 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link FT_Bitmap} view of the struct pointed to by the {@code target} field. */
-    @Nullable
     @NativeType("FT_Bitmap const *")
-    public FT_Bitmap target() { return ntarget(address()); }
+    public @Nullable FT_Bitmap target() { return ntarget(address()); }
     /**
      * @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void const *")
-    public ByteBuffer source(int capacity) { return nsource(address(), capacity); }
+    public @Nullable ByteBuffer source(int capacity) { return nsource(address(), capacity); }
     /** @return the value of the {@code flags} field. */
     public int flags() { return nflags(address()); }
     /** @return the value of the {@code gray_spans} field. */
-    @Nullable
-    public FT_SpanFunc gray_spans() { return ngray_spans(address()); }
+    public @Nullable FT_SpanFunc gray_spans() { return ngray_spans(address()); }
     /** @return the value of the {@code user} field. */
     @NativeType("void *")
     public long user() { return nuser(address()); }
@@ -195,8 +192,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Raster_Params createSafe(long address) {
+    public static @Nullable FT_Raster_Params createSafe(long address) {
         return address == NULL ? null : new FT_Raster_Params(address, null);
     }
 
@@ -239,8 +235,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Raster_Params.Buffer createSafe(long address, int capacity) {
+    public static FT_Raster_Params.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -285,14 +280,14 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #target}. */
-    @Nullable public static FT_Bitmap ntarget(long struct) { return FT_Bitmap.createSafe(memGetAddress(struct + FT_Raster_Params.TARGET)); }
+    public static @Nullable FT_Bitmap ntarget(long struct) { return FT_Bitmap.createSafe(memGetAddress(struct + FT_Raster_Params.TARGET)); }
     /** Unsafe version of {@link #source(int) source}. */
-    @Nullable public static ByteBuffer nsource(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Raster_Params.SOURCE), capacity); }
+    public static @Nullable ByteBuffer nsource(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Raster_Params.SOURCE), capacity); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + FT_Raster_Params.FLAGS); }
     /** Unsafe version of {@link #gray_spans}. */
-    @Nullable public static FT_SpanFunc ngray_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.GRAY_SPANS)); }
-    @Nullable public static FT_SpanFunc nblack_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.BLACK_SPANS)); }
+    public static @Nullable FT_SpanFunc ngray_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.GRAY_SPANS)); }
+    public static @Nullable FT_SpanFunc nblack_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.BLACK_SPANS)); }
     public static long nbit_test(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_TEST); }
     public static long nbit_set(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_SET); }
     /** Unsafe version of {@link #user}. */
@@ -360,22 +355,19 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
         }
 
         /** @return a {@link FT_Bitmap} view of the struct pointed to by the {@code target} field. */
-        @Nullable
         @NativeType("FT_Bitmap const *")
-        public FT_Bitmap target() { return FT_Raster_Params.ntarget(address()); }
+        public @Nullable FT_Bitmap target() { return FT_Raster_Params.ntarget(address()); }
         /**
          * @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void const *")
-        public ByteBuffer source(int capacity) { return FT_Raster_Params.nsource(address(), capacity); }
+        public @Nullable ByteBuffer source(int capacity) { return FT_Raster_Params.nsource(address(), capacity); }
         /** @return the value of the {@code flags} field. */
         public int flags() { return FT_Raster_Params.nflags(address()); }
         /** @return the value of the {@code gray_spans} field. */
-        @Nullable
-        public FT_SpanFunc gray_spans() { return FT_Raster_Params.ngray_spans(address()); }
+        public @Nullable FT_SpanFunc gray_spans() { return FT_Raster_Params.ngray_spans(address()); }
         /** @return the value of the {@code user} field. */
         @NativeType("void *")
         public long user() { return FT_Raster_Params.nuser(address()); }

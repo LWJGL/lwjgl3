@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,7 +104,7 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") ByteBuffer szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptProtectData(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @NativeType("LPCWSTR") @Nullable ByteBuffer szDataDescr, @NativeType("DATA_BLOB *") @Nullable DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") @Nullable CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2Safe(szDataDescr);
@@ -138,7 +138,7 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPCWSTR") CharSequence szDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptProtectData(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @NativeType("LPCWSTR") @Nullable CharSequence szDataDescr, @NativeType("DATA_BLOB *") @Nullable DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") @Nullable CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -189,7 +189,7 @@ public class Crypt32 {
      * @param dwFlags       this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean CryptProtectMemory(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
+    public static boolean CryptProtectMemory(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -233,7 +233,7 @@ public class Crypt32 {
      *                         <p>When you have finished using the {@code DATA_BLOB} structure, free its {@code pbData} member by calling the {@link WinBase#LocalFree} function.</p>
      */
     @NativeType("BOOL")
-    public static boolean CryptUnprotectData(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @Nullable @NativeType("LPWSTR *") PointerBuffer ppszDataDescr, @Nullable @NativeType("DATA_BLOB *") DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @Nullable @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
+    public static boolean CryptUnprotectData(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("DATA_BLOB *") DATA_BLOB pDataIn, @NativeType("LPWSTR *") @Nullable PointerBuffer ppszDataDescr, @NativeType("DATA_BLOB *") @Nullable DATA_BLOB pOptionalEntropy, @NativeType("PVOID") long pvReserved, @NativeType("CRYPTPROTECT_PROMPTSTRUCT *") @Nullable CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, @NativeType("DWORD") int dwFlags, @NativeType("DATA_BLOB *") DATA_BLOB pDataOut) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkSafe(ppszDataDescr, 1);
@@ -275,7 +275,7 @@ public class Crypt32 {
      * @param dwFlags       this parameter can be one of the following flags. You must specify the same flag when encrypting and decrypting the memory. One of:<br><table><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_PROCESS}</td><td>{@link #CRYPTPROTECTMEMORY_CROSS_PROCESS}</td></tr><tr><td>{@link #CRYPTPROTECTMEMORY_SAME_LOGON}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean CryptUnprotectMemory(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
+    public static boolean CryptUnprotectMemory(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPVOID") ByteBuffer pDataIn, @NativeType("DWORD") int dwFlags) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }

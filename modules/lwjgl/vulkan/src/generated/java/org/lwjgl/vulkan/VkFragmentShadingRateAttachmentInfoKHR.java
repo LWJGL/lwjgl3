@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,9 +118,8 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** {@code NULL} or a pointer to a {@link VkAttachmentReference2} structure defining the fragment shading rate attachment for this subpass. */
-    @Nullable
     @NativeType("VkAttachmentReference2 const *")
-    public VkAttachmentReference2 pFragmentShadingRateAttachment() { return npFragmentShadingRateAttachment(address()); }
+    public @Nullable VkAttachmentReference2 pFragmentShadingRateAttachment() { return npFragmentShadingRateAttachment(address()); }
     /** specifies the size of the portion of the framebuffer corresponding to each texel in {@code pFragmentShadingRateAttachment}. */
     public VkExtent2D shadingRateAttachmentTexelSize() { return nshadingRateAttachmentTexelSize(address()); }
 
@@ -188,8 +187,7 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFragmentShadingRateAttachmentInfoKHR createSafe(long address) {
+    public static @Nullable VkFragmentShadingRateAttachmentInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkFragmentShadingRateAttachmentInfoKHR(address, null);
     }
 
@@ -232,8 +230,7 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkFragmentShadingRateAttachmentInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -282,7 +279,7 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkFragmentShadingRateAttachmentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #pFragmentShadingRateAttachment}. */
-    @Nullable public static VkAttachmentReference2 npFragmentShadingRateAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkFragmentShadingRateAttachmentInfoKHR.PFRAGMENTSHADINGRATEATTACHMENT)); }
+    public static @Nullable VkAttachmentReference2 npFragmentShadingRateAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkFragmentShadingRateAttachmentInfoKHR.PFRAGMENTSHADINGRATEATTACHMENT)); }
     /** Unsafe version of {@link #shadingRateAttachmentTexelSize}. */
     public static VkExtent2D nshadingRateAttachmentTexelSize(long struct) { return VkExtent2D.create(struct + VkFragmentShadingRateAttachmentInfoKHR.SHADINGRATEATTACHMENTTEXELSIZE); }
 
@@ -345,9 +342,8 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct<VkFragmentSha
         @NativeType("void const *")
         public long pNext() { return VkFragmentShadingRateAttachmentInfoKHR.npNext(address()); }
         /** @return a {@link VkAttachmentReference2} view of the struct pointed to by the {@link VkFragmentShadingRateAttachmentInfoKHR#pFragmentShadingRateAttachment} field. */
-        @Nullable
         @NativeType("VkAttachmentReference2 const *")
-        public VkAttachmentReference2 pFragmentShadingRateAttachment() { return VkFragmentShadingRateAttachmentInfoKHR.npFragmentShadingRateAttachment(address()); }
+        public @Nullable VkAttachmentReference2 pFragmentShadingRateAttachment() { return VkFragmentShadingRateAttachmentInfoKHR.npFragmentShadingRateAttachment(address()); }
         /** @return a {@link VkExtent2D} view of the {@link VkFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field. */
         public VkExtent2D shadingRateAttachmentTexelSize() { return VkFragmentShadingRateAttachmentInfoKHR.nshadingRateAttachmentTexelSize(address()); }
 

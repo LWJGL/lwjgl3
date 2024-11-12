@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceLineRasterizationPropertiesKHR createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceLineRasterizationPropertiesKHR createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceLineRasterizationPropertiesKHR(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceLineRasterizationPropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

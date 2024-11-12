@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class NkEditState extends Struct<NkEditState> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkEditState createSafe(long address) {
+    public static @Nullable NkEditState createSafe(long address) {
         return address == NULL ? null : new NkEditState(address, null);
     }
 
@@ -160,8 +159,7 @@ public class NkEditState extends Struct<NkEditState> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkEditState.Buffer createSafe(long address, int capacity) {
+    public static NkEditState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class SpvcReflectedBuiltinResource extends Struct<SpvcReflectedBuiltinRes
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcReflectedBuiltinResource createSafe(long address) {
+    public static @Nullable SpvcReflectedBuiltinResource createSafe(long address) {
         return address == NULL ? null : new SpvcReflectedBuiltinResource(address, null);
     }
 
@@ -205,8 +204,7 @@ public class SpvcReflectedBuiltinResource extends Struct<SpvcReflectedBuiltinRes
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcReflectedBuiltinResource.Buffer createSafe(long address, int capacity) {
+    public static SpvcReflectedBuiltinResource.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

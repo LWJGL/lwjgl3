@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -78,7 +78,7 @@ public class APPLEGLSharing {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetGLContextInfoAPPLE(@NativeType("cl_context") long context, @NativeType("void *") long platform_gl_ctx, @NativeType("cl_gl_platform_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetGLContextInfoAPPLE(@NativeType("cl_context") long context, @NativeType("void *") long platform_gl_ctx, @NativeType("cl_gl_platform_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -99,7 +99,7 @@ public class APPLEGLSharing {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetGLContextInfoAPPLE(@NativeType("cl_context") long context, @NativeType("void *") long platform_gl_ctx, @NativeType("cl_gl_platform_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetGLContextInfoAPPLE(@NativeType("cl_context") long context, @NativeType("void *") long platform_gl_ctx, @NativeType("cl_gl_platform_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }

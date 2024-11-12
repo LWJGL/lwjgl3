@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -372,7 +372,7 @@ public class NVXBinaryImport {
      * <p>{@link VkAllocationCallbacks}, {@link VkCuModuleCreateInfoNVX}</p>
      */
     @NativeType("VkResult")
-    public static int vkCreateCuModuleNVX(VkDevice device, @NativeType("VkCuModuleCreateInfoNVX const *") VkCuModuleCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuModuleNVX *") LongBuffer pModule) {
+    public static int vkCreateCuModuleNVX(VkDevice device, @NativeType("VkCuModuleCreateInfoNVX const *") VkCuModuleCreateInfoNVX pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCuModuleNVX *") LongBuffer pModule) {
         if (CHECKS) {
             check(pModule, 1);
         }
@@ -433,7 +433,7 @@ public class NVXBinaryImport {
      * <p>{@link VkAllocationCallbacks}, {@link VkCuFunctionCreateInfoNVX}</p>
      */
     @NativeType("VkResult")
-    public static int vkCreateCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionCreateInfoNVX const *") VkCuFunctionCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuFunctionNVX *") LongBuffer pFunction) {
+    public static int vkCreateCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionCreateInfoNVX const *") VkCuFunctionCreateInfoNVX pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCuFunctionNVX *") LongBuffer pFunction) {
         if (CHECKS) {
             check(pFunction, 1);
         }
@@ -477,7 +477,7 @@ public class NVXBinaryImport {
      * 
      * <p>{@link VkAllocationCallbacks}</p>
      */
-    public static void vkDestroyCuModuleNVX(VkDevice device, @NativeType("VkCuModuleNVX") long module, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyCuModuleNVX(VkDevice device, @NativeType("VkCuModuleNVX") long module, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyCuModuleNVX(device, module, memAddressSafe(pAllocator));
     }
 
@@ -518,7 +518,7 @@ public class NVXBinaryImport {
      * 
      * <p>{@link VkAllocationCallbacks}</p>
      */
-    public static void vkDestroyCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionNVX") long function, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionNVX") long function, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyCuFunctionNVX(device, function, memAddressSafe(pAllocator));
     }
 
@@ -579,7 +579,7 @@ public class NVXBinaryImport {
 
     /** Array version of: {@link #vkCreateCuModuleNVX CreateCuModuleNVX} */
     @NativeType("VkResult")
-    public static int vkCreateCuModuleNVX(VkDevice device, @NativeType("VkCuModuleCreateInfoNVX const *") VkCuModuleCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuModuleNVX *") long[] pModule) {
+    public static int vkCreateCuModuleNVX(VkDevice device, @NativeType("VkCuModuleCreateInfoNVX const *") VkCuModuleCreateInfoNVX pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCuModuleNVX *") long[] pModule) {
         long __functionAddress = device.getCapabilities().vkCreateCuModuleNVX;
         if (CHECKS) {
             check(__functionAddress);
@@ -591,7 +591,7 @@ public class NVXBinaryImport {
 
     /** Array version of: {@link #vkCreateCuFunctionNVX CreateCuFunctionNVX} */
     @NativeType("VkResult")
-    public static int vkCreateCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionCreateInfoNVX const *") VkCuFunctionCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuFunctionNVX *") long[] pFunction) {
+    public static int vkCreateCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionCreateInfoNVX const *") VkCuFunctionCreateInfoNVX pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCuFunctionNVX *") long[] pFunction) {
         long __functionAddress = device.getCapabilities().vkCreateCuFunctionNVX;
         if (CHECKS) {
             check(__functionAddress);

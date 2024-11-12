@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -213,8 +213,7 @@ public class XrFacialExpressionsHTC extends Struct<XrFacialExpressionsHTC> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFacialExpressionsHTC createSafe(long address) {
+    public static @Nullable XrFacialExpressionsHTC createSafe(long address) {
         return address == NULL ? null : new XrFacialExpressionsHTC(address, null);
     }
 
@@ -257,8 +256,7 @@ public class XrFacialExpressionsHTC extends Struct<XrFacialExpressionsHTC> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFacialExpressionsHTC.Buffer createSafe(long address, int capacity) {
+    public static XrFacialExpressionsHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

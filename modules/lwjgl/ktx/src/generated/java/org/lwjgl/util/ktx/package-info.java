@@ -12,6 +12,6 @@
  * KTX library ({@code ktx_read}) and the bindings will work. The {@link org.lwjgl.system.Configuration#KTX_LIBRARY_NAME KTX_LIBRARY_NAME} option can be
  * used to change the loaded library.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.ktx;
 

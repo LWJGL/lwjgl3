@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,8 +129,7 @@ public class StdVideoEncodeH264ReferenceListsInfoFlags extends Struct<StdVideoEn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264ReferenceListsInfoFlags createSafe(long address) {
+    public static @Nullable StdVideoEncodeH264ReferenceListsInfoFlags createSafe(long address) {
         return address == NULL ? null : new StdVideoEncodeH264ReferenceListsInfoFlags(address, null);
     }
 
@@ -173,8 +172,7 @@ public class StdVideoEncodeH264ReferenceListsInfoFlags extends Struct<StdVideoEn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264ReferenceListsInfoFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoEncodeH264ReferenceListsInfoFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

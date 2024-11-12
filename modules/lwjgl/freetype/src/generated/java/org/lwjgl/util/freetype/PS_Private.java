@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -277,8 +277,7 @@ public class PS_Private extends Struct<PS_Private> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PS_Private createSafe(long address) {
+    public static @Nullable PS_Private createSafe(long address) {
         return address == NULL ? null : new PS_Private(address, null);
     }
 
@@ -293,8 +292,7 @@ public class PS_Private extends Struct<PS_Private> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PS_Private.Buffer createSafe(long address, int capacity) {
+    public static PS_Private.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -135,8 +135,7 @@ public class FSBANK_STATEDATA_WARNING extends Struct<FSBANK_STATEDATA_WARNING> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FSBANK_STATEDATA_WARNING createSafe(long address) {
+    public static @Nullable FSBANK_STATEDATA_WARNING createSafe(long address) {
         return address == NULL ? null : new FSBANK_STATEDATA_WARNING(address, null);
     }
 
@@ -179,8 +178,7 @@ public class FSBANK_STATEDATA_WARNING extends Struct<FSBANK_STATEDATA_WARNING> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FSBANK_STATEDATA_WARNING.Buffer createSafe(long address, int capacity) {
+    public static FSBANK_STATEDATA_WARNING.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

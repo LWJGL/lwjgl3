@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.msdfgen;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,8 +130,7 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenVector2 createSafe(long address) {
+    public static @Nullable MSDFGenVector2 createSafe(long address) {
         return address == NULL ? null : new MSDFGenVector2(address, null);
     }
 
@@ -174,8 +173,7 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenVector2.Buffer createSafe(long address, int capacity) {
+    public static MSDFGenVector2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

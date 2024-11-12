@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -215,8 +215,7 @@ public class VkPushDescriptorSetWithTemplateInfoKHR extends Struct<VkPushDescrip
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPushDescriptorSetWithTemplateInfoKHR createSafe(long address) {
+    public static @Nullable VkPushDescriptorSetWithTemplateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkPushDescriptorSetWithTemplateInfoKHR(address, null);
     }
 
@@ -259,8 +258,7 @@ public class VkPushDescriptorSetWithTemplateInfoKHR extends Struct<VkPushDescrip
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPushDescriptorSetWithTemplateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPushDescriptorSetWithTemplateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalFenceProperties createSafe(long address) {
+    public static @Nullable VkExternalFenceProperties createSafe(long address) {
         return address == NULL ? null : new VkExternalFenceProperties(address, null);
     }
 
@@ -215,8 +214,7 @@ public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalFenceProperties.Buffer createSafe(long address, int capacity) {
+    public static VkExternalFenceProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

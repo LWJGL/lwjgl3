@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -34,7 +34,7 @@ public class VRBlockQueue {
     }
 
     @NativeType("EBlockQueueError")
-    public static int VRBlockQueue_Create(@NativeType("PropertyContainerHandle_t *") LongBuffer pulQueueHandle, @Nullable @NativeType("char *") ByteBuffer pchPath, @NativeType("uint32_t") int unBlockDataSize, @NativeType("uint32_t") int unBlockHeaderSize, @NativeType("uint32_t") int unBlockCount, @NativeType("uint32_t") int unFlags) {
+    public static int VRBlockQueue_Create(@NativeType("PropertyContainerHandle_t *") LongBuffer pulQueueHandle, @NativeType("char *") @Nullable ByteBuffer pchPath, @NativeType("uint32_t") int unBlockDataSize, @NativeType("uint32_t") int unBlockHeaderSize, @NativeType("uint32_t") int unBlockCount, @NativeType("uint32_t") int unFlags) {
         if (CHECKS) {
             check(pulQueueHandle, 1);
             checkNT1Safe(pchPath);
@@ -53,7 +53,7 @@ public class VRBlockQueue {
     }
 
     @NativeType("EBlockQueueError")
-    public static int VRBlockQueue_Connect(@NativeType("PropertyContainerHandle_t *") LongBuffer pulQueueHandle, @Nullable @NativeType("char *") ByteBuffer pchPath) {
+    public static int VRBlockQueue_Connect(@NativeType("PropertyContainerHandle_t *") LongBuffer pulQueueHandle, @NativeType("char *") @Nullable ByteBuffer pchPath) {
         if (CHECKS) {
             check(pulQueueHandle, 1);
             checkNT1Safe(pchPath);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -106,8 +106,7 @@ public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubresourceLayout2EXT createSafe(long address) {
+    public static @Nullable VkSubresourceLayout2EXT createSafe(long address) {
         return address == NULL ? null : new VkSubresourceLayout2EXT(address, null);
     }
 
@@ -150,8 +149,7 @@ public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubresourceLayout2EXT.Buffer createSafe(long address, int capacity) {
+    public static VkSubresourceLayout2EXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

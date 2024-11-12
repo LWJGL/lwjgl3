@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -290,8 +290,7 @@ public class VkAttachmentDescription extends Struct<VkAttachmentDescription> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentDescription createSafe(long address) {
+    public static @Nullable VkAttachmentDescription createSafe(long address) {
         return address == NULL ? null : new VkAttachmentDescription(address, null);
     }
 
@@ -334,8 +333,7 @@ public class VkAttachmentDescription extends Struct<VkAttachmentDescription> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentDescription.Buffer createSafe(long address, int capacity) {
+    public static VkAttachmentDescription.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

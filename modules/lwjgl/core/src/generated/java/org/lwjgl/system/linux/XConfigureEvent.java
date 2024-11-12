@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -238,8 +238,7 @@ public class XConfigureEvent extends Struct<XConfigureEvent> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XConfigureEvent createSafe(long address) {
+    public static @Nullable XConfigureEvent createSafe(long address) {
         return address == NULL ? null : new XConfigureEvent(address, null);
     }
 
@@ -282,8 +281,7 @@ public class XConfigureEvent extends Struct<XConfigureEvent> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XConfigureEvent.Buffer createSafe(long address, int capacity) {
+    public static XConfigureEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

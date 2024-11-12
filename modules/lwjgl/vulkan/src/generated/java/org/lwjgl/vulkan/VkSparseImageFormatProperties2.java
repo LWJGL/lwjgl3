@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatPr
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageFormatProperties2 createSafe(long address) {
+    public static @Nullable VkSparseImageFormatProperties2 createSafe(long address) {
         return address == NULL ? null : new VkSparseImageFormatProperties2(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatPr
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageFormatProperties2.Buffer createSafe(long address, int capacity) {
+    public static VkSparseImageFormatProperties2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

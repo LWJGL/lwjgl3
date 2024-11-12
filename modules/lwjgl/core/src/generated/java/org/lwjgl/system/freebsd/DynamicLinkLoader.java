@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.freebsd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -60,7 +60,7 @@ public class DynamicLinkLoader {
      * @param mode     a bitfield. One or more of:<br><table><tr><td>{@link #RTLD_LAZY}</td><td>{@link #RTLD_NOW}</td><td>{@link #RTLD_BINDING_MASK}</td><td>{@link #RTLD_NOLOAD}</td><td>{@link #RTLD_DEEPBIND}</td><td>{@link #RTLD_GLOBAL}</td></tr><tr><td>{@link #RTLD_LOCAL}</td><td>{@link #RTLD_NODELETE}</td></tr></table>
      */
     @NativeType("void *")
-    public static long dlopen(@Nullable @NativeType("char const *") ByteBuffer filename, int mode) {
+    public static long dlopen(@NativeType("char const *") @Nullable ByteBuffer filename, int mode) {
         if (CHECKS) {
             checkNT1Safe(filename);
         }
@@ -75,7 +75,7 @@ public class DynamicLinkLoader {
      * @param mode     a bitfield. One or more of:<br><table><tr><td>{@link #RTLD_LAZY}</td><td>{@link #RTLD_NOW}</td><td>{@link #RTLD_BINDING_MASK}</td><td>{@link #RTLD_NOLOAD}</td><td>{@link #RTLD_DEEPBIND}</td><td>{@link #RTLD_GLOBAL}</td></tr><tr><td>{@link #RTLD_LOCAL}</td><td>{@link #RTLD_NODELETE}</td></tr></table>
      */
     @NativeType("void *")
-    public static long dlopen(@Nullable @NativeType("char const *") CharSequence filename, int mode) {
+    public static long dlopen(@NativeType("char const *") @Nullable CharSequence filename, int mode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(filename, true);
@@ -95,9 +95,8 @@ public class DynamicLinkLoader {
      * Returns a human readable string describing the most recent error that occurred from {@link #dlopen}, {@link #dlsym} or {@link #dlclose} since
      * the last call to {@code dlerror()}. It returns {@code NULL} if no errors have occurred since initialization or since it was last called.
      */
-    @Nullable
     @NativeType("char *")
-    public static String dlerror() {
+    public static @Nullable String dlerror() {
         long __result = ndlerror();
         return memUTF8Safe(__result);
     }

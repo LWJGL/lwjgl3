@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerReprojectionPlaneOverrideMSFT createSafe(long address) {
+    public static @Nullable XrCompositionLayerReprojectionPlaneOverrideMSFT createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerReprojectionPlaneOverrideMSFT(address, null);
     }
 
@@ -235,8 +234,7 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerReprojectionPlaneOverrideMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

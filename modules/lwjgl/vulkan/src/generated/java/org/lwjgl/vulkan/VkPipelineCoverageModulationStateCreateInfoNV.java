@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,9 +153,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
     @NativeType("uint32_t")
     public int coverageModulationTableCount() { return ncoverageModulationTableCount(address()); }
     /** a table of modulation factors containing a value for each number of covered samples. */
-    @Nullable
     @NativeType("float const *")
-    public FloatBuffer pCoverageModulationTable() { return npCoverageModulationTable(address()); }
+    public @Nullable FloatBuffer pCoverageModulationTable() { return npCoverageModulationTable(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCoverageModulationStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -231,8 +230,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCoverageModulationStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineCoverageModulationStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineCoverageModulationStateCreateInfoNV(address, null);
     }
 
@@ -275,8 +273,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineCoverageModulationStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -352,7 +349,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
     /** Unsafe version of {@link #coverageModulationTableCount}. */
     public static int ncoverageModulationTableCount(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT); }
     /** Unsafe version of {@link #pCoverageModulationTable() pCoverageModulationTable}. */
-    @Nullable public static FloatBuffer npCoverageModulationTable(long struct) { return memFloatBufferSafe(memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE), ncoverageModulationTableCount(struct)); }
+    public static @Nullable FloatBuffer npCoverageModulationTable(long struct) { return memFloatBufferSafe(memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE), ncoverageModulationTableCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE, value); }
@@ -431,9 +428,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct<VkPipe
         @NativeType("uint32_t")
         public int coverageModulationTableCount() { return VkPipelineCoverageModulationStateCreateInfoNV.ncoverageModulationTableCount(address()); }
         /** @return a {@link FloatBuffer} view of the data pointed to by the {@link VkPipelineCoverageModulationStateCreateInfoNV#pCoverageModulationTable} field. */
-        @Nullable
         @NativeType("float const *")
-        public FloatBuffer pCoverageModulationTable() { return VkPipelineCoverageModulationStateCreateInfoNV.npCoverageModulationTable(address()); }
+        public @Nullable FloatBuffer pCoverageModulationTable() { return VkPipelineCoverageModulationStateCreateInfoNV.npCoverageModulationTable(address()); }
 
         /** Sets the specified value to the {@link VkPipelineCoverageModulationStateCreateInfoNV#sType} field. */
         public VkPipelineCoverageModulationStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCoverageModulationStateCreateInfoNV.nsType(address(), value); return this; }

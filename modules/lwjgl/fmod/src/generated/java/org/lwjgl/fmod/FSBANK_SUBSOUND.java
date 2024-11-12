@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -196,8 +196,7 @@ public class FSBANK_SUBSOUND extends Struct<FSBANK_SUBSOUND> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FSBANK_SUBSOUND createSafe(long address) {
+    public static @Nullable FSBANK_SUBSOUND createSafe(long address) {
         return address == NULL ? null : new FSBANK_SUBSOUND(address, null);
     }
 
@@ -240,8 +239,7 @@ public class FSBANK_SUBSOUND extends Struct<FSBANK_SUBSOUND> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FSBANK_SUBSOUND.Buffer createSafe(long address, int capacity) {
+    public static FSBANK_SUBSOUND.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -236,17 +236,15 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir_input_callback **")
-    public PointerBuffer input_cb(int capacity) { return ninput_cb(address(), capacity); }
+    public @Nullable PointerBuffer input_cb(int capacity) { return ninput_cb(address(), capacity); }
     /**
      * @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer output_pixels(int capacity) { return noutput_pixels(address(), capacity); }
+    public @Nullable ByteBuffer output_pixels(int capacity) { return noutput_pixels(address(), capacity); }
     /** @return the value of the {@code output_w} field. */
     public int output_w() { return noutput_w(address()); }
     /** @return the value of the {@code output_h} field. */
@@ -264,9 +262,8 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir_output_callback **")
-    public PointerBuffer output_cb(int capacity) { return noutput_cb(address(), capacity); }
+    public @Nullable PointerBuffer output_cb(int capacity) { return noutput_cb(address(), capacity); }
     /** @return the value of the {@code input_stride_in_bytes} field. */
     public int input_stride_in_bytes() { return ninput_stride_in_bytes(address()); }
     /** @return the value of the {@code output_stride_in_bytes} field. */
@@ -311,33 +308,29 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir__kernel_callback **")
-    public PointerBuffer horizontal_filter_kernel(int capacity) { return nhorizontal_filter_kernel(address(), capacity); }
+    public @Nullable PointerBuffer horizontal_filter_kernel(int capacity) { return nhorizontal_filter_kernel(address(), capacity); }
     /**
      * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir__support_callback **")
-    public PointerBuffer horizontal_filter_support(int capacity) { return nhorizontal_filter_support(address(), capacity); }
+    public @Nullable PointerBuffer horizontal_filter_support(int capacity) { return nhorizontal_filter_support(address(), capacity); }
     /**
      * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir__kernel_callback **")
-    public PointerBuffer vertical_filter_kernel(int capacity) { return nvertical_filter_kernel(address(), capacity); }
+    public @Nullable PointerBuffer vertical_filter_kernel(int capacity) { return nvertical_filter_kernel(address(), capacity); }
     /**
      * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("stbir__support_callback **")
-    public PointerBuffer vertical_filter_support(int capacity) { return nvertical_filter_support(address(), capacity); }
+    public @Nullable PointerBuffer vertical_filter_support(int capacity) { return nvertical_filter_support(address(), capacity); }
     /** @return the value of the {@code samplers} field. */
     @NativeType("stbir__info *")
     public long samplers() { return nsamplers(address()); }
@@ -530,8 +523,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBIR_RESIZE createSafe(long address) {
+    public static @Nullable STBIR_RESIZE createSafe(long address) {
         return address == NULL ? null : new STBIR_RESIZE(address, null);
     }
 
@@ -574,8 +566,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBIR_RESIZE.Buffer createSafe(long address, int capacity) {
+    public static STBIR_RESIZE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -636,9 +627,9 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** Unsafe version of {@link #input_t1}. */
     public static double ninput_t1(long struct) { return memGetDouble(struct + STBIR_RESIZE.INPUT_T1); }
     /** Unsafe version of {@link #input_cb(int) input_cb}. */
-    @Nullable public static PointerBuffer ninput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.INPUT_CB), capacity); }
+    public static @Nullable PointerBuffer ninput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.INPUT_CB), capacity); }
     /** Unsafe version of {@link #output_pixels(int) output_pixels}. */
-    @Nullable public static ByteBuffer noutput_pixels(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_PIXELS), capacity); }
+    public static @Nullable ByteBuffer noutput_pixels(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_PIXELS), capacity); }
     /** Unsafe version of {@link #output_w}. */
     public static int noutput_w(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_W); }
     /** Unsafe version of {@link #output_h}. */
@@ -652,7 +643,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** Unsafe version of {@link #output_subh}. */
     public static int noutput_subh(long struct) { return memGetInt(struct + STBIR_RESIZE.OUTPUT_SUBH); }
     /** Unsafe version of {@link #output_cb(int) output_cb}. */
-    @Nullable public static PointerBuffer noutput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_CB), capacity); }
+    public static @Nullable PointerBuffer noutput_cb(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.OUTPUT_CB), capacity); }
     /** Unsafe version of {@link #input_stride_in_bytes}. */
     public static int ninput_stride_in_bytes(long struct) { return memGetInt(struct + STBIR_RESIZE.INPUT_STRIDE_IN_BYTES); }
     /** Unsafe version of {@link #output_stride_in_bytes}. */
@@ -682,13 +673,13 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** Unsafe version of {@link #vertical_edge}. */
     public static int nvertical_edge(long struct) { return memGetInt(struct + STBIR_RESIZE.VERTICAL_EDGE); }
     /** Unsafe version of {@link #horizontal_filter_kernel(int) horizontal_filter_kernel}. */
-    @Nullable public static PointerBuffer nhorizontal_filter_kernel(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_KERNEL), capacity); }
+    public static @Nullable PointerBuffer nhorizontal_filter_kernel(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_KERNEL), capacity); }
     /** Unsafe version of {@link #horizontal_filter_support(int) horizontal_filter_support}. */
-    @Nullable public static PointerBuffer nhorizontal_filter_support(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_SUPPORT), capacity); }
+    public static @Nullable PointerBuffer nhorizontal_filter_support(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.HORIZONTAL_FILTER_SUPPORT), capacity); }
     /** Unsafe version of {@link #vertical_filter_kernel(int) vertical_filter_kernel}. */
-    @Nullable public static PointerBuffer nvertical_filter_kernel(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.VERTICAL_FILTER_KERNEL), capacity); }
+    public static @Nullable PointerBuffer nvertical_filter_kernel(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.VERTICAL_FILTER_KERNEL), capacity); }
     /** Unsafe version of {@link #vertical_filter_support(int) vertical_filter_support}. */
-    @Nullable public static PointerBuffer nvertical_filter_support(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.VERTICAL_FILTER_SUPPORT), capacity); }
+    public static @Nullable PointerBuffer nvertical_filter_support(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + STBIR_RESIZE.VERTICAL_FILTER_SUPPORT), capacity); }
     /** Unsafe version of {@link #samplers}. */
     public static long nsamplers(long struct) { return memGetAddress(struct + STBIR_RESIZE.SAMPLERS); }
 
@@ -845,17 +836,15 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir_input_callback **")
-        public PointerBuffer input_cb(int capacity) { return STBIR_RESIZE.ninput_cb(address(), capacity); }
+        public @Nullable PointerBuffer input_cb(int capacity) { return STBIR_RESIZE.ninput_cb(address(), capacity); }
         /**
          * @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer output_pixels(int capacity) { return STBIR_RESIZE.noutput_pixels(address(), capacity); }
+        public @Nullable ByteBuffer output_pixels(int capacity) { return STBIR_RESIZE.noutput_pixels(address(), capacity); }
         /** @return the value of the {@code output_w} field. */
         public int output_w() { return STBIR_RESIZE.noutput_w(address()); }
         /** @return the value of the {@code output_h} field. */
@@ -873,9 +862,8 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir_output_callback **")
-        public PointerBuffer output_cb(int capacity) { return STBIR_RESIZE.noutput_cb(address(), capacity); }
+        public @Nullable PointerBuffer output_cb(int capacity) { return STBIR_RESIZE.noutput_cb(address(), capacity); }
         /** @return the value of the {@code input_stride_in_bytes} field. */
         public int input_stride_in_bytes() { return STBIR_RESIZE.ninput_stride_in_bytes(address()); }
         /** @return the value of the {@code output_stride_in_bytes} field. */
@@ -920,33 +908,29 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir__kernel_callback **")
-        public PointerBuffer horizontal_filter_kernel(int capacity) { return STBIR_RESIZE.nhorizontal_filter_kernel(address(), capacity); }
+        public @Nullable PointerBuffer horizontal_filter_kernel(int capacity) { return STBIR_RESIZE.nhorizontal_filter_kernel(address(), capacity); }
         /**
          * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir__support_callback **")
-        public PointerBuffer horizontal_filter_support(int capacity) { return STBIR_RESIZE.nhorizontal_filter_support(address(), capacity); }
+        public @Nullable PointerBuffer horizontal_filter_support(int capacity) { return STBIR_RESIZE.nhorizontal_filter_support(address(), capacity); }
         /**
          * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir__kernel_callback **")
-        public PointerBuffer vertical_filter_kernel(int capacity) { return STBIR_RESIZE.nvertical_filter_kernel(address(), capacity); }
+        public @Nullable PointerBuffer vertical_filter_kernel(int capacity) { return STBIR_RESIZE.nvertical_filter_kernel(address(), capacity); }
         /**
          * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("stbir__support_callback **")
-        public PointerBuffer vertical_filter_support(int capacity) { return STBIR_RESIZE.nvertical_filter_support(address(), capacity); }
+        public @Nullable PointerBuffer vertical_filter_support(int capacity) { return STBIR_RESIZE.nvertical_filter_support(address(), capacity); }
         /** @return the value of the {@code samplers} field. */
         @NativeType("stbir__info *")
         public long samplers() { return STBIR_RESIZE.nsamplers(address()); }

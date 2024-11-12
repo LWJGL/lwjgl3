@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,8 +167,7 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfo extends Struct<VkMemoryOpa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryOpaqueCaptureAddressAllocateInfo createSafe(long address) {
+    public static @Nullable VkMemoryOpaqueCaptureAddressAllocateInfo createSafe(long address) {
         return address == NULL ? null : new VkMemoryOpaqueCaptureAddressAllocateInfo(address, null);
     }
 
@@ -211,8 +210,7 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfo extends Struct<VkMemoryOpa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryOpaqueCaptureAddressAllocateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkMemoryOpaqueCaptureAddressAllocateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

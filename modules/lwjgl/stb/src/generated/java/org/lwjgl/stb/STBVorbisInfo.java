@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class STBVorbisInfo extends Struct<STBVorbisInfo> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBVorbisInfo createSafe(long address) {
+    public static @Nullable STBVorbisInfo createSafe(long address) {
         return address == NULL ? null : new STBVorbisInfo(address, null);
     }
 
@@ -176,8 +175,7 @@ public class STBVorbisInfo extends Struct<STBVorbisInfo> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBVorbisInfo.Buffer createSafe(long address, int capacity) {
+    public static STBVorbisInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

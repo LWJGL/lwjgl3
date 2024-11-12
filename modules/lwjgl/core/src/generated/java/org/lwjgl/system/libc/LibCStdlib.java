@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -35,9 +35,8 @@ public class LibCStdlib {
      *
      * @param size the number of bytes to allocate
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer malloc(@NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer malloc(@NativeType("size_t") long size) {
         long __result = nmalloc(size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -55,9 +54,8 @@ public class LibCStdlib {
      * @param nmemb the number of elements to allocate
      * @param size  the number of bytes to allocate per element
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer calloc(@NativeType("size_t") long nmemb, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer calloc(@NativeType("size_t") long nmemb, @NativeType("size_t") long size) {
         long __result = ncalloc(nmemb, size);
         return memByteBufferSafe(__result, (int)nmemb * (int)size);
     }
@@ -77,9 +75,8 @@ public class LibCStdlib {
      * @param ptr  the memory block to reallocate
      * @param size the new memory block size, in bytes
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer realloc(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer realloc(@NativeType("void *") @Nullable ByteBuffer ptr, @NativeType("size_t") long size) {
         long __result = nrealloc(memAddressSafe(ptr), size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -95,7 +92,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable ByteBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -105,7 +102,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") ShortBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable ShortBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -115,7 +112,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") IntBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable IntBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -125,7 +122,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") LongBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable LongBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -135,7 +132,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") FloatBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable FloatBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -145,7 +142,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") DoubleBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable DoubleBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -155,7 +152,7 @@ public class LibCStdlib {
      *
      * @param ptr the memory space to free
      */
-    public static void free(@Nullable @NativeType("void *") PointerBuffer ptr) {
+    public static void free(@NativeType("void *") @Nullable PointerBuffer ptr) {
         nfree(memAddressSafe(ptr));
     }
 
@@ -171,9 +168,8 @@ public class LibCStdlib {
      * @param alignment the alignment. Must be a power of two value.
      * @param size      the number of bytes to allocate. Must be a multiple of {@code alignment}.
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer aligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer aligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         long __result = naligned_alloc(alignment, size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -188,7 +184,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable ByteBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -197,7 +193,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") ShortBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable ShortBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -206,7 +202,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") IntBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable IntBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -215,7 +211,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") LongBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable LongBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -224,7 +220,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") FloatBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable FloatBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -233,7 +229,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") DoubleBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable DoubleBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 
@@ -242,7 +238,7 @@ public class LibCStdlib {
      *
      * @param ptr the aligned block of memory to free
      */
-    public static void aligned_free(@Nullable @NativeType("void *") PointerBuffer ptr) {
+    public static void aligned_free(@NativeType("void *") @Nullable PointerBuffer ptr) {
         naligned_free(memAddressSafe(ptr));
     }
 

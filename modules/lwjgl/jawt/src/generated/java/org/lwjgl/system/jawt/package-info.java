@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to the AWT native interface (jawt.h). */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.jawt;
 

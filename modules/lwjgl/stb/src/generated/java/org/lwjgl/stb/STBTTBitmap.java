@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class STBTTBitmap extends Struct<STBTTBitmap> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTBitmap createSafe(long address) {
+    public static @Nullable STBTTBitmap createSafe(long address) {
         return address == NULL ? null : new STBTTBitmap(address, null);
     }
 
@@ -202,8 +201,7 @@ public class STBTTBitmap extends Struct<STBTTBitmap> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTBitmap.Buffer createSafe(long address, int capacity) {
+    public static STBTTBitmap.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

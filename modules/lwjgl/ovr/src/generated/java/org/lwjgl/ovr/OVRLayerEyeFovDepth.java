@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -264,8 +264,7 @@ public class OVRLayerEyeFovDepth extends Struct<OVRLayerEyeFovDepth> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerEyeFovDepth createSafe(long address) {
+    public static @Nullable OVRLayerEyeFovDepth createSafe(long address) {
         return address == NULL ? null : new OVRLayerEyeFovDepth(address, null);
     }
 
@@ -308,8 +307,7 @@ public class OVRLayerEyeFovDepth extends Struct<OVRLayerEyeFovDepth> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerEyeFovDepth.Buffer createSafe(long address, int capacity) {
+    public static OVRLayerEyeFovDepth.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

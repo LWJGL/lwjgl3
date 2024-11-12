@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -147,8 +147,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct<VkDrawMeshTasksIndi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDrawMeshTasksIndirectCommandNV createSafe(long address) {
+    public static @Nullable VkDrawMeshTasksIndirectCommandNV createSafe(long address) {
         return address == NULL ? null : new VkDrawMeshTasksIndirectCommandNV(address, null);
     }
 
@@ -191,8 +190,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct<VkDrawMeshTasksIndi
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDrawMeshTasksIndirectCommandNV.Buffer createSafe(long address, int capacity) {
+    public static VkDrawMeshTasksIndirectCommandNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

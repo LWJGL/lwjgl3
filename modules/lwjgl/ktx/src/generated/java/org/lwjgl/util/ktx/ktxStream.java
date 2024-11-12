@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -250,8 +250,7 @@ public class ktxStream extends Struct<ktxStream> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxStream createSafe(long address) {
+    public static @Nullable ktxStream createSafe(long address) {
         return address == NULL ? null : new ktxStream(address, null);
     }
 
@@ -294,8 +293,7 @@ public class ktxStream extends Struct<ktxStream> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxStream.Buffer createSafe(long address, int capacity) {
+    public static ktxStream.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -209,8 +209,7 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct<CUDA_EXTERNAL_SE
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS createSafe(long address) {
+    public static @Nullable CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS createSafe(long address) {
         return address == NULL ? null : new CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS(address, null);
     }
 
@@ -253,8 +252,7 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct<CUDA_EXTERNAL_SE
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

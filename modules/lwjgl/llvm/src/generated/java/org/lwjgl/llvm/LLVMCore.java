@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1635,7 +1635,7 @@ public class LLVMCore {
      * 
      * <p>The version components are returned via the function's three output parameters or skipped if a {@code NULL} pointer was supplied.</p>
      */
-    public static void LLVMGetVersion(@Nullable @NativeType("unsigned *") IntBuffer Major, @Nullable @NativeType("unsigned *") IntBuffer Minor, @Nullable @NativeType("unsigned *") IntBuffer Patch) {
+    public static void LLVMGetVersion(@NativeType("unsigned *") @Nullable IntBuffer Major, @NativeType("unsigned *") @Nullable IntBuffer Minor, @NativeType("unsigned *") @Nullable IntBuffer Patch) {
         if (CHECKS) {
             checkSafe(Major, 1);
             checkSafe(Minor, 1);
@@ -1721,7 +1721,7 @@ public class LLVMCore {
     }
 
     /** Set the diagnostic handler for this context. */
-    public static void LLVMContextSetDiagnosticHandler(@NativeType("LLVMContextRef") long C, @Nullable @NativeType("void (*) (LLVMDiagnosticInfoRef, void *)") LLVMDiagnosticHandlerI Handler, @NativeType("void *") long DiagnosticContext) {
+    public static void LLVMContextSetDiagnosticHandler(@NativeType("LLVMContextRef") long C, @NativeType("void (*) (LLVMDiagnosticInfoRef, void *)") @Nullable LLVMDiagnosticHandlerI Handler, @NativeType("void *") long DiagnosticContext) {
         nLLVMContextSetDiagnosticHandler(C, memAddressSafe(Handler), DiagnosticContext);
     }
 
@@ -1737,9 +1737,8 @@ public class LLVMCore {
     }
 
     /** Get the diagnostic handler of this context. */
-    @Nullable
     @NativeType("void (*) (LLVMDiagnosticInfoRef, void *)")
-    public static LLVMDiagnosticHandler LLVMContextGetDiagnosticHandler(@NativeType("LLVMContextRef") long C) {
+    public static @Nullable LLVMDiagnosticHandler LLVMContextGetDiagnosticHandler(@NativeType("LLVMContextRef") long C) {
         return LLVMDiagnosticHandler.createSafe(nLLVMContextGetDiagnosticHandler(C));
     }
 
@@ -1767,7 +1766,7 @@ public class LLVMCore {
     }
 
     /** Set the yield callback function for this context. */
-    public static void LLVMContextSetYieldCallback(@NativeType("LLVMContextRef") long C, @Nullable @NativeType("void (*) (LLVMContextRef, void *)") LLVMYieldCallbackI Callback, @NativeType("void *") long OpaqueHandle) {
+    public static void LLVMContextSetYieldCallback(@NativeType("LLVMContextRef") long C, @NativeType("void (*) (LLVMContextRef, void *)") @Nullable LLVMYieldCallbackI Callback, @NativeType("void *") long OpaqueHandle) {
         nLLVMContextSetYieldCallback(C, memAddressSafe(Callback), OpaqueHandle);
     }
 
@@ -2954,9 +2953,8 @@ public class LLVMCore {
      *
      * @since 18
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetInlineAsmAsmString(@NativeType("LLVMValueRef") long InlineAsmVal) {
+    public static @Nullable String LLVMGetInlineAsmAsmString(@NativeType("LLVMValueRef") long InlineAsmVal) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer Len = stack.callocPointer(1);
@@ -2984,9 +2982,8 @@ public class LLVMCore {
      *
      * @since 18
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetInlineAsmConstraintString(@NativeType("LLVMValueRef") long InlineAsmVal) {
+    public static @Nullable String LLVMGetInlineAsmConstraintString(@NativeType("LLVMValueRef") long InlineAsmVal) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer Len = stack.callocPointer(1);
@@ -3404,9 +3401,8 @@ public class LLVMCore {
      * Return the directory of the debug location for this value, which must be an {@code llvm::Instruction}, {@code llvm::GlobalVariable}, or
      * {@code llvm::Function}.
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetDebugLocDirectory(@NativeType("LLVMValueRef") long Val) {
+    public static @Nullable String LLVMGetDebugLocDirectory(@NativeType("LLVMValueRef") long Val) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Length = stack.callocInt(1);
@@ -3433,9 +3429,8 @@ public class LLVMCore {
      * Return the filename of the debug location for this value, which must be an {@code llvm::Instruction}, {@code llvm::GlobalVariable}, or
      * {@code llvm::Function}.
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetDebugLocFilename(@NativeType("LLVMValueRef") long Val) {
+    public static @Nullable String LLVMGetDebugLocFilename(@NativeType("LLVMValueRef") long Val) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Length = stack.callocInt(1);
@@ -4169,9 +4164,8 @@ public class LLVMCore {
     }
 
     /** Obtain the name of a structure. */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetStructName(@NativeType("LLVMTypeRef") long Ty) {
+    public static @Nullable String LLVMGetStructName(@NativeType("LLVMTypeRef") long Ty) {
         long __result = nLLVMGetStructName(Ty);
         return memUTF8Safe(__result);
     }
@@ -4691,7 +4685,7 @@ public class LLVMCore {
 
     /** Create a target extension type in LLVM context. */
     @NativeType("LLVMTypeRef")
-    public static long LLVMTargetExtTypeInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Name, @Nullable @NativeType("LLVMTypeRef *") PointerBuffer TypeParams, @Nullable @NativeType("unsigned *") IntBuffer IntParams) {
+    public static long LLVMTargetExtTypeInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMTypeRef *") @Nullable PointerBuffer TypeParams, @NativeType("unsigned *") @Nullable IntBuffer IntParams) {
         if (CHECKS) {
             checkNT1(Name);
         }
@@ -4700,7 +4694,7 @@ public class LLVMCore {
 
     /** Create a target extension type in LLVM context. */
     @NativeType("LLVMTypeRef")
-    public static long LLVMTargetExtTypeInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Name, @Nullable @NativeType("LLVMTypeRef *") PointerBuffer TypeParams, @Nullable @NativeType("unsigned *") IntBuffer IntParams) {
+    public static long LLVMTargetExtTypeInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Name, @NativeType("LLVMTypeRef *") @Nullable PointerBuffer TypeParams, @NativeType("unsigned *") @Nullable IntBuffer IntParams) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(Name, true);
@@ -4724,9 +4718,8 @@ public class LLVMCore {
     }
 
     /** Obtain the name for this target extension type. */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetTargetExtTypeName(@NativeType("LLVMTypeRef") long TargetExtTy) {
+    public static @Nullable String LLVMGetTargetExtTypeName(@NativeType("LLVMTypeRef") long TargetExtTy) {
         long __result = nLLVMGetTargetExtTypeName(TargetExtTy);
         return memUTF8Safe(__result);
     }
@@ -4911,9 +4904,8 @@ public class LLVMCore {
      *
      * @since 19
      */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMPrintDbgRecordToString(@NativeType("LLVMDbgRecordRef") long Record) {
+    public static @Nullable String LLVMPrintDbgRecordToString(@NativeType("LLVMDbgRecordRef") long Record) {
         long __result = nLLVMPrintDbgRecordToString(Record);
         return memUTF8Safe(__result);
     }
@@ -8639,9 +8631,8 @@ public class LLVMCore {
      *
      * @since 8.0
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMIntrinsicGetName(@NativeType("unsigned") int ID) {
+    public static @Nullable String LLVMIntrinsicGetName(@NativeType("unsigned") int ID) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer NameLength = stack.callocPointer(1);
@@ -8668,9 +8659,8 @@ public class LLVMCore {
      *
      * @since 8.0
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMIntrinsicCopyOverloadedName(@NativeType("unsigned") int ID, @NativeType("LLVMTypeRef *") PointerBuffer ParamTypes) {
+    public static @Nullable String LLVMIntrinsicCopyOverloadedName(@NativeType("unsigned") int ID, @NativeType("LLVMTypeRef *") PointerBuffer ParamTypes) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer NameLength = stack.callocPointer(1);
@@ -8702,9 +8692,8 @@ public class LLVMCore {
      *
      * @since 13
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMIntrinsicCopyOverloadedName2(@NativeType("LLVMModuleRef") long Mod, @NativeType("unsigned") int ID, @NativeType("LLVMTypeRef *") PointerBuffer ParamTypes) {
+    public static @Nullable String LLVMIntrinsicCopyOverloadedName2(@NativeType("LLVMModuleRef") long Mod, @NativeType("unsigned") int ID, @NativeType("LLVMTypeRef *") PointerBuffer ParamTypes) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer NameLength = stack.callocPointer(1);
@@ -8775,9 +8764,8 @@ public class LLVMCore {
     }
 
     /** Obtain the name of the garbage collector to use during code generation. */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetGC(@NativeType("LLVMValueRef") long Fn) {
+    public static @Nullable String LLVMGetGC(@NativeType("LLVMValueRef") long Fn) {
         long __result = nLLVMGetGC(Fn);
         return memUTF8Safe(__result);
     }
@@ -9704,9 +9692,8 @@ public class LLVMCore {
      *
      * @since 18
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetOperandBundleTag(@NativeType("LLVMOperandBundleRef") long Bundle) {
+    public static @Nullable String LLVMGetOperandBundleTag(@NativeType("LLVMOperandBundleRef") long Bundle) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer Len = stack.callocPointer(1);
@@ -9807,9 +9794,8 @@ public class LLVMCore {
      *
      * @return string data in {@code MDString}
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMGetMDString(@NativeType("LLVMValueRef") long V) {
+    public static @Nullable String LLVMGetMDString(@NativeType("LLVMValueRef") long V) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Length = stack.callocInt(1);
@@ -15717,16 +15703,14 @@ public class LLVMCore {
         return invokePP(MemBuf, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf) {
+    public static @Nullable ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf) {
         long __result = nLLVMGetBufferStart(MemBuf);
         return memByteBufferSafe(__result, (int)LLVMGetBufferSize(MemBuf));
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf, long length) {
+    public static @Nullable ByteBuffer LLVMGetBufferStart(@NativeType("LLVMMemoryBufferRef") long MemBuf, long length) {
         long __result = nLLVMGetBufferStart(MemBuf);
         return memByteBufferSafe(__result, (int)length);
     }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPh
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceExternalMemoryHostPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceExternalMemoryHostPropertiesEXT(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPh
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

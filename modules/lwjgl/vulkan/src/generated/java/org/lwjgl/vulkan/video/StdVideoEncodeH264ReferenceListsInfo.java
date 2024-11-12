@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,13 +145,11 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     @NativeType("uint8_t")
     public byte refPicMarkingOpCount() { return nrefPicMarkingOpCount(address()); }
     /** @return a {@link StdVideoEncodeH264RefListModEntry.Buffer} view of the struct array pointed to by the {@code pRefList0ModOperations} field. */
-    @Nullable
     @NativeType("StdVideoEncodeH264RefListModEntry const *")
-    public StdVideoEncodeH264RefListModEntry.Buffer pRefList0ModOperations() { return npRefList0ModOperations(address()); }
+    public StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList0ModOperations() { return npRefList0ModOperations(address()); }
     /** @return a {@link StdVideoEncodeH264RefListModEntry.Buffer} view of the struct array pointed to by the {@code pRefList1ModOperations} field. */
-    @Nullable
     @NativeType("StdVideoEncodeH264RefListModEntry const *")
-    public StdVideoEncodeH264RefListModEntry.Buffer pRefList1ModOperations() { return npRefList1ModOperations(address()); }
+    public StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList1ModOperations() { return npRefList1ModOperations(address()); }
     /** @return a {@link StdVideoEncodeH264RefPicMarkingEntry.Buffer} view of the struct array pointed to by the {@code pRefPicMarkingOperations} field. */
     @NativeType("StdVideoEncodeH264RefPicMarkingEntry const *")
     public StdVideoEncodeH264RefPicMarkingEntry.Buffer pRefPicMarkingOperations() { return npRefPicMarkingOperations(address()); }
@@ -177,9 +175,9 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     /** Sets the specified value to the {@code refList1ModOpCount} field. */
     public StdVideoEncodeH264ReferenceListsInfo refList1ModOpCount(@NativeType("uint8_t") byte value) { nrefList1ModOpCount(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264RefListModEntry.Buffer} to the {@code pRefList0ModOperations} field. */
-    public StdVideoEncodeH264ReferenceListsInfo pRefList0ModOperations(@Nullable @NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.Buffer value) { npRefList0ModOperations(address(), value); return this; }
+    public StdVideoEncodeH264ReferenceListsInfo pRefList0ModOperations(@NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { npRefList0ModOperations(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264RefListModEntry.Buffer} to the {@code pRefList1ModOperations} field. */
-    public StdVideoEncodeH264ReferenceListsInfo pRefList1ModOperations(@Nullable @NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.Buffer value) { npRefList1ModOperations(address(), value); return this; }
+    public StdVideoEncodeH264ReferenceListsInfo pRefList1ModOperations(@NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { npRefList1ModOperations(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264RefPicMarkingEntry.Buffer} to the {@code pRefPicMarkingOperations} field. */
     public StdVideoEncodeH264ReferenceListsInfo pRefPicMarkingOperations(@NativeType("StdVideoEncodeH264RefPicMarkingEntry const *") StdVideoEncodeH264RefPicMarkingEntry.Buffer value) { npRefPicMarkingOperations(address(), value); return this; }
 
@@ -192,8 +190,8 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         ByteBuffer RefPicList1,
         byte refList0ModOpCount,
         byte refList1ModOpCount,
-        @Nullable StdVideoEncodeH264RefListModEntry.Buffer pRefList0ModOperations,
-        @Nullable StdVideoEncodeH264RefListModEntry.Buffer pRefList1ModOperations,
+        StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList0ModOperations,
+        StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList1ModOperations,
         StdVideoEncodeH264RefPicMarkingEntry.Buffer pRefPicMarkingOperations
     ) {
         flags(flags);
@@ -246,8 +244,7 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264ReferenceListsInfo createSafe(long address) {
+    public static @Nullable StdVideoEncodeH264ReferenceListsInfo createSafe(long address) {
         return address == NULL ? null : new StdVideoEncodeH264ReferenceListsInfo(address, null);
     }
 
@@ -290,8 +287,7 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264ReferenceListsInfo.Buffer createSafe(long address, int capacity) {
+    public static StdVideoEncodeH264ReferenceListsInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -364,9 +360,9 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         return memGetByte(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1 + check(index, 7) * 1);
     }
     /** Unsafe version of {@link #pRefList0ModOperations}. */
-    @Nullable public static StdVideoEncodeH264RefListModEntry.Buffer npRefList0ModOperations(long struct) { return StdVideoEncodeH264RefListModEntry.createSafe(memGetAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST0MODOPERATIONS), Byte.toUnsignedInt(nrefList0ModOpCount(struct))); }
+    public static StdVideoEncodeH264RefListModEntry.@Nullable Buffer npRefList0ModOperations(long struct) { return StdVideoEncodeH264RefListModEntry.createSafe(memGetAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST0MODOPERATIONS), Byte.toUnsignedInt(nrefList0ModOpCount(struct))); }
     /** Unsafe version of {@link #pRefList1ModOperations}. */
-    @Nullable public static StdVideoEncodeH264RefListModEntry.Buffer npRefList1ModOperations(long struct) { return StdVideoEncodeH264RefListModEntry.createSafe(memGetAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST1MODOPERATIONS), Byte.toUnsignedInt(nrefList1ModOpCount(struct))); }
+    public static StdVideoEncodeH264RefListModEntry.@Nullable Buffer npRefList1ModOperations(long struct) { return StdVideoEncodeH264RefListModEntry.createSafe(memGetAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST1MODOPERATIONS), Byte.toUnsignedInt(nrefList1ModOpCount(struct))); }
     /** Unsafe version of {@link #pRefPicMarkingOperations}. */
     public static StdVideoEncodeH264RefPicMarkingEntry.Buffer npRefPicMarkingOperations(long struct) { return StdVideoEncodeH264RefPicMarkingEntry.create(memGetAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFPICMARKINGOPERATIONS), Byte.toUnsignedInt(nrefPicMarkingOpCount(struct))); }
 
@@ -408,9 +404,9 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         memPutByte(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1 + check(index, 7) * 1, value);
     }
     /** Unsafe version of {@link #pRefList0ModOperations(StdVideoEncodeH264RefListModEntry.Buffer) pRefList0ModOperations}. */
-    public static void npRefList0ModOperations(long struct, @Nullable StdVideoEncodeH264RefListModEntry.Buffer value) { memPutAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST0MODOPERATIONS, memAddressSafe(value)); nrefList0ModOpCount(struct, value == null ? 0 : (byte)value.remaining()); }
+    public static void npRefList0ModOperations(long struct, StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { memPutAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST0MODOPERATIONS, memAddressSafe(value)); nrefList0ModOpCount(struct, value == null ? 0 : (byte)value.remaining()); }
     /** Unsafe version of {@link #pRefList1ModOperations(StdVideoEncodeH264RefListModEntry.Buffer) pRefList1ModOperations}. */
-    public static void npRefList1ModOperations(long struct, @Nullable StdVideoEncodeH264RefListModEntry.Buffer value) { memPutAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST1MODOPERATIONS, memAddressSafe(value)); nrefList1ModOpCount(struct, value == null ? 0 : (byte)value.remaining()); }
+    public static void npRefList1ModOperations(long struct, StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { memPutAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFLIST1MODOPERATIONS, memAddressSafe(value)); nrefList1ModOpCount(struct, value == null ? 0 : (byte)value.remaining()); }
     /** Unsafe version of {@link #pRefPicMarkingOperations(StdVideoEncodeH264RefPicMarkingEntry.Buffer) pRefPicMarkingOperations}. */
     public static void npRefPicMarkingOperations(long struct, StdVideoEncodeH264RefPicMarkingEntry.Buffer value) { memPutAddress(struct + StdVideoEncodeH264ReferenceListsInfo.PREFPICMARKINGOPERATIONS, value.address()); nrefPicMarkingOpCount(struct, (byte)value.remaining()); }
 
@@ -496,13 +492,11 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         @NativeType("uint8_t")
         public byte refPicMarkingOpCount() { return StdVideoEncodeH264ReferenceListsInfo.nrefPicMarkingOpCount(address()); }
         /** @return a {@link StdVideoEncodeH264RefListModEntry.Buffer} view of the struct array pointed to by the {@code pRefList0ModOperations} field. */
-        @Nullable
         @NativeType("StdVideoEncodeH264RefListModEntry const *")
-        public StdVideoEncodeH264RefListModEntry.Buffer pRefList0ModOperations() { return StdVideoEncodeH264ReferenceListsInfo.npRefList0ModOperations(address()); }
+        public StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList0ModOperations() { return StdVideoEncodeH264ReferenceListsInfo.npRefList0ModOperations(address()); }
         /** @return a {@link StdVideoEncodeH264RefListModEntry.Buffer} view of the struct array pointed to by the {@code pRefList1ModOperations} field. */
-        @Nullable
         @NativeType("StdVideoEncodeH264RefListModEntry const *")
-        public StdVideoEncodeH264RefListModEntry.Buffer pRefList1ModOperations() { return StdVideoEncodeH264ReferenceListsInfo.npRefList1ModOperations(address()); }
+        public StdVideoEncodeH264RefListModEntry.@Nullable Buffer pRefList1ModOperations() { return StdVideoEncodeH264ReferenceListsInfo.npRefList1ModOperations(address()); }
         /** @return a {@link StdVideoEncodeH264RefPicMarkingEntry.Buffer} view of the struct array pointed to by the {@code pRefPicMarkingOperations} field. */
         @NativeType("StdVideoEncodeH264RefPicMarkingEntry const *")
         public StdVideoEncodeH264RefPicMarkingEntry.Buffer pRefPicMarkingOperations() { return StdVideoEncodeH264ReferenceListsInfo.npRefPicMarkingOperations(address()); }
@@ -528,9 +522,9 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         /** Sets the specified value to the {@code refList1ModOpCount} field. */
         public StdVideoEncodeH264ReferenceListsInfo.Buffer refList1ModOpCount(@NativeType("uint8_t") byte value) { StdVideoEncodeH264ReferenceListsInfo.nrefList1ModOpCount(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264RefListModEntry.Buffer} to the {@code pRefList0ModOperations} field. */
-        public StdVideoEncodeH264ReferenceListsInfo.Buffer pRefList0ModOperations(@Nullable @NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.Buffer value) { StdVideoEncodeH264ReferenceListsInfo.npRefList0ModOperations(address(), value); return this; }
+        public StdVideoEncodeH264ReferenceListsInfo.Buffer pRefList0ModOperations(@NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { StdVideoEncodeH264ReferenceListsInfo.npRefList0ModOperations(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264RefListModEntry.Buffer} to the {@code pRefList1ModOperations} field. */
-        public StdVideoEncodeH264ReferenceListsInfo.Buffer pRefList1ModOperations(@Nullable @NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.Buffer value) { StdVideoEncodeH264ReferenceListsInfo.npRefList1ModOperations(address(), value); return this; }
+        public StdVideoEncodeH264ReferenceListsInfo.Buffer pRefList1ModOperations(@NativeType("StdVideoEncodeH264RefListModEntry const *") StdVideoEncodeH264RefListModEntry.@Nullable Buffer value) { StdVideoEncodeH264ReferenceListsInfo.npRefList1ModOperations(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264RefPicMarkingEntry.Buffer} to the {@code pRefPicMarkingOperations} field. */
         public StdVideoEncodeH264ReferenceListsInfo.Buffer pRefPicMarkingOperations(@NativeType("StdVideoEncodeH264RefPicMarkingEntry const *") StdVideoEncodeH264RefPicMarkingEntry.Buffer value) { StdVideoEncodeH264ReferenceListsInfo.npRefPicMarkingOperations(address(), value); return this; }
 

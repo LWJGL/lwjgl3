@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,8 +153,7 @@ public class CUDA_ARRAY_DESCRIPTOR extends Struct<CUDA_ARRAY_DESCRIPTOR> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_ARRAY_DESCRIPTOR createSafe(long address) {
+    public static @Nullable CUDA_ARRAY_DESCRIPTOR createSafe(long address) {
         return address == NULL ? null : new CUDA_ARRAY_DESCRIPTOR(address, null);
     }
 
@@ -197,8 +196,7 @@ public class CUDA_ARRAY_DESCRIPTOR extends Struct<CUDA_ARRAY_DESCRIPTOR> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_ARRAY_DESCRIPTOR.Buffer createSafe(long address, int capacity) {
+    public static CUDA_ARRAY_DESCRIPTOR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

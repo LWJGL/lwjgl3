@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -53,7 +53,7 @@ public class EXTSyncReuse {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglUnsignalSyncEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSync") long sync, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list) {
+    public static boolean eglUnsignalSyncEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSync") long sync, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }

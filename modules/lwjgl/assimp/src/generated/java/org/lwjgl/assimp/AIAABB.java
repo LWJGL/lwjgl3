@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class AIAABB extends Struct<AIAABB> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAABB createSafe(long address) {
+    public static @Nullable AIAABB createSafe(long address) {
         return address == NULL ? null : new AIAABB(address, null);
     }
 
@@ -180,8 +179,7 @@ public class AIAABB extends Struct<AIAABB> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAABB.Buffer createSafe(long address, int capacity) {
+    public static AIAABB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

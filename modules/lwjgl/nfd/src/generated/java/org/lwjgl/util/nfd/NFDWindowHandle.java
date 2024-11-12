@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.nfd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class NFDWindowHandle extends Struct<NFDWindowHandle> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDWindowHandle createSafe(long address) {
+    public static @Nullable NFDWindowHandle createSafe(long address) {
         return address == NULL ? null : new NFDWindowHandle(address, null);
     }
 
@@ -176,8 +175,7 @@ public class NFDWindowHandle extends Struct<NFDWindowHandle> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDWindowHandle.Buffer createSafe(long address, int capacity) {
+    public static NFDWindowHandle.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

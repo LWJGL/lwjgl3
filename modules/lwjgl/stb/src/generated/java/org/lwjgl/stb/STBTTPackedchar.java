@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,8 +206,7 @@ public class STBTTPackedchar extends Struct<STBTTPackedchar> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTPackedchar createSafe(long address) {
+    public static @Nullable STBTTPackedchar createSafe(long address) {
         return address == NULL ? null : new STBTTPackedchar(address, null);
     }
 
@@ -250,8 +249,7 @@ public class STBTTPackedchar extends Struct<STBTTPackedchar> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTPackedchar.Buffer createSafe(long address, int capacity) {
+    public static STBTTPackedchar.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

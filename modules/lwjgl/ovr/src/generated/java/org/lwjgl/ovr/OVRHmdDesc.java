@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,8 +220,7 @@ public class OVRHmdDesc extends Struct<OVRHmdDesc> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRHmdDesc createSafe(long address) {
+    public static @Nullable OVRHmdDesc createSafe(long address) {
         return address == NULL ? null : new OVRHmdDesc(address, null);
     }
 

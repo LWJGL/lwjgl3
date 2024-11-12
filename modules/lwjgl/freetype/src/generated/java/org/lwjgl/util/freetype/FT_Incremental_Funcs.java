@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -85,8 +85,7 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
     /** @return the value of the {@code free_glyph_data} field. */
     public FT_Incremental_FreeGlyphDataFunc free_glyph_data() { return nfree_glyph_data(address()); }
     /** @return the value of the {@code get_glyph_metrics} field. */
-    @Nullable
-    public FT_Incremental_GetGlyphMetricsFunc get_glyph_metrics() { return nget_glyph_metrics(address()); }
+    public @Nullable FT_Incremental_GetGlyphMetricsFunc get_glyph_metrics() { return nget_glyph_metrics(address()); }
 
     /** Sets the specified value to the {@code get_glyph_data} field. */
     public FT_Incremental_Funcs get_glyph_data(@NativeType("FT_Incremental_GetGlyphDataFunc") FT_Incremental_GetGlyphDataFuncI value) { nget_glyph_data(address(), value); return this; }
@@ -144,8 +143,7 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Incremental_Funcs createSafe(long address) {
+    public static @Nullable FT_Incremental_Funcs createSafe(long address) {
         return address == NULL ? null : new FT_Incremental_Funcs(address, null);
     }
 
@@ -188,8 +186,7 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Incremental_Funcs.Buffer createSafe(long address, int capacity) {
+    public static FT_Incremental_Funcs.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -238,7 +235,7 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
     /** Unsafe version of {@link #free_glyph_data}. */
     public static FT_Incremental_FreeGlyphDataFunc nfree_glyph_data(long struct) { return FT_Incremental_FreeGlyphDataFunc.create(memGetAddress(struct + FT_Incremental_Funcs.FREE_GLYPH_DATA)); }
     /** Unsafe version of {@link #get_glyph_metrics}. */
-    @Nullable public static FT_Incremental_GetGlyphMetricsFunc nget_glyph_metrics(long struct) { return FT_Incremental_GetGlyphMetricsFunc.createSafe(memGetAddress(struct + FT_Incremental_Funcs.GET_GLYPH_METRICS)); }
+    public static @Nullable FT_Incremental_GetGlyphMetricsFunc nget_glyph_metrics(long struct) { return FT_Incremental_GetGlyphMetricsFunc.createSafe(memGetAddress(struct + FT_Incremental_Funcs.GET_GLYPH_METRICS)); }
 
     /** Unsafe version of {@link #get_glyph_data(FT_Incremental_GetGlyphDataFuncI) get_glyph_data}. */
     public static void nget_glyph_data(long struct, FT_Incremental_GetGlyphDataFuncI value) { memPutAddress(struct + FT_Incremental_Funcs.GET_GLYPH_DATA, value.address()); }
@@ -305,8 +302,7 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
         /** @return the value of the {@code free_glyph_data} field. */
         public FT_Incremental_FreeGlyphDataFunc free_glyph_data() { return FT_Incremental_Funcs.nfree_glyph_data(address()); }
         /** @return the value of the {@code get_glyph_metrics} field. */
-        @Nullable
-        public FT_Incremental_GetGlyphMetricsFunc get_glyph_metrics() { return FT_Incremental_Funcs.nget_glyph_metrics(address()); }
+        public @Nullable FT_Incremental_GetGlyphMetricsFunc get_glyph_metrics() { return FT_Incremental_Funcs.nget_glyph_metrics(address()); }
 
         /** Sets the specified value to the {@code get_glyph_data} field. */
         public FT_Incremental_Funcs.Buffer get_glyph_data(@NativeType("FT_Incremental_GetGlyphDataFunc") FT_Incremental_GetGlyphDataFuncI value) { FT_Incremental_Funcs.nget_glyph_data(address(), value); return this; }

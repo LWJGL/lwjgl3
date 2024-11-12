@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,9 +131,8 @@ public class NanoSVG {
     public static native long nnsvgParseFromFile(long filename, long units, float dpi);
 
     /** Parses SVG file from a file, returns SVG image as paths. */
-    @Nullable
     @NativeType("NSVGimage *")
-    public static NSVGImage nsvgParseFromFile(@NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer units, float dpi) {
+    public static @Nullable NSVGImage nsvgParseFromFile(@NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer units, float dpi) {
         if (CHECKS) {
             checkNT1(filename);
             checkNT1(units);
@@ -143,9 +142,8 @@ public class NanoSVG {
     }
 
     /** Parses SVG file from a file, returns SVG image as paths. */
-    @Nullable
     @NativeType("NSVGimage *")
-    public static NSVGImage nsvgParseFromFile(@NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence units, float dpi) {
+    public static @Nullable NSVGImage nsvgParseFromFile(@NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(filename, true);
@@ -169,9 +167,8 @@ public class NanoSVG {
      * 
      * <p>Important note: changes the string.</p>
      */
-    @Nullable
     @NativeType("NSVGimage *")
-    public static NSVGImage nsvgParse(@NativeType("char *") ByteBuffer input, @NativeType("char const *") ByteBuffer units, float dpi) {
+    public static @Nullable NSVGImage nsvgParse(@NativeType("char *") ByteBuffer input, @NativeType("char const *") ByteBuffer units, float dpi) {
         if (CHECKS) {
             checkNT1(input);
             checkNT1(units);
@@ -185,9 +182,8 @@ public class NanoSVG {
      * 
      * <p>Important note: changes the string.</p>
      */
-    @Nullable
     @NativeType("NSVGimage *")
-    public static NSVGImage nsvgParse(@NativeType("char *") CharSequence input, @NativeType("char const *") CharSequence units, float dpi) {
+    public static @Nullable NSVGImage nsvgParse(@NativeType("char *") CharSequence input, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(input, true);
@@ -207,9 +203,8 @@ public class NanoSVG {
     public static native long nnsvgDuplicatePath(long p);
 
     /** Duplicates a path. */
-    @Nullable
     @NativeType("NSVGpath *")
-    public static NSVGPath nsvgDuplicatePath(@NativeType("NSVGpath *") NSVGPath p) {
+    public static @Nullable NSVGPath nsvgDuplicatePath(@NativeType("NSVGpath *") NSVGPath p) {
         long __result = nnsvgDuplicatePath(p.address());
         return NSVGPath.createSafe(__result);
     }

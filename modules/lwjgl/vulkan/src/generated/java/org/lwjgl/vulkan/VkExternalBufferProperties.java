@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkExternalBufferProperties extends Struct<VkExternalBufferPropertie
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalBufferProperties createSafe(long address) {
+    public static @Nullable VkExternalBufferProperties createSafe(long address) {
         return address == NULL ? null : new VkExternalBufferProperties(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkExternalBufferProperties extends Struct<VkExternalBufferPropertie
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalBufferProperties.Buffer createSafe(long address, int capacity) {
+    public static VkExternalBufferProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

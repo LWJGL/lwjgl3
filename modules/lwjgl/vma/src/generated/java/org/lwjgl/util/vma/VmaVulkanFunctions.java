@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -408,8 +408,7 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaVulkanFunctions createSafe(long address) {
+    public static @Nullable VmaVulkanFunctions createSafe(long address) {
         return address == NULL ? null : new VmaVulkanFunctions(address, null);
     }
 

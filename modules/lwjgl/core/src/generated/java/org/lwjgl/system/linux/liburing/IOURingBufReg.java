@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingBufReg createSafe(long address) {
+    public static @Nullable IOURingBufReg createSafe(long address) {
         return address == NULL ? null : new IOURingBufReg(address, null);
     }
 
@@ -205,8 +204,7 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingBufReg.Buffer createSafe(long address, int capacity) {
+    public static IOURingBufReg.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

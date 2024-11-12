@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.macosx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,7 +102,7 @@ public class DynamicLinkLoader {
      *             </ul>
      */
     @NativeType("void *")
-    public static long dlopen(@Nullable @NativeType("char const *") ByteBuffer path, int mode) {
+    public static long dlopen(@NativeType("char const *") @Nullable ByteBuffer path, int mode) {
         if (CHECKS) {
             checkNT1Safe(path);
         }
@@ -168,7 +168,7 @@ public class DynamicLinkLoader {
      *             </ul>
      */
     @NativeType("void *")
-    public static long dlopen(@Nullable @NativeType("char const *") CharSequence path, int mode) {
+    public static long dlopen(@NativeType("char const *") @Nullable CharSequence path, int mode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(path, true);
@@ -193,9 +193,8 @@ public class DynamicLinkLoader {
      * <p>Each call to {@code dlerror} resets its diagnostic buffer. If a program needs to keep a record of past error messages, it must store them itself.
      * Subsequent calls to {@code dlerror} in the same thread with no calls to {@link #dlopen}, {@link #dlsym}, or {@link #dlclose}, return {@code NULL}.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String dlerror() {
+    public static @Nullable String dlerror() {
         long __result = ndlerror();
         return memUTF8Safe(__result);
     }

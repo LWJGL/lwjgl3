@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -95,8 +95,7 @@ public class ktxOrientation extends Struct<ktxOrientation> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxOrientation createSafe(long address) {
+    public static @Nullable ktxOrientation createSafe(long address) {
         return address == NULL ? null : new ktxOrientation(address, null);
     }
 
@@ -111,8 +110,7 @@ public class ktxOrientation extends Struct<ktxOrientation> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxOrientation.Buffer createSafe(long address, int capacity) {
+    public static ktxOrientation.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

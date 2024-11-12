@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -195,7 +195,7 @@ public class MSFTSceneMarker {
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the data stored in the QR Code. It can be NULL if bufferCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, @NativeType("XrUuidMSFT const *") XrUuidMSFT markerId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("uint8_t *") ByteBuffer buffer) {
+    public static int xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, @NativeType("XrUuidMSFT const *") XrUuidMSFT markerId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("uint8_t *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }
@@ -282,7 +282,7 @@ public class MSFTSceneMarker {
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the string stored in the QR Code. It can be NULL if bufferCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, @NativeType("XrUuidMSFT const *") XrUuidMSFT markerId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, @NativeType("XrUuidMSFT const *") XrUuidMSFT markerId, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

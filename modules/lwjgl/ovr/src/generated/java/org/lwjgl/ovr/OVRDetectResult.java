@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,8 +118,7 @@ public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRDetectResult createSafe(long address) {
+    public static @Nullable OVRDetectResult createSafe(long address) {
         return address == NULL ? null : new OVRDetectResult(address, null);
     }
 
@@ -162,8 +161,7 @@ public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRDetectResult.Buffer createSafe(long address, int capacity) {
+    public static OVRDetectResult.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

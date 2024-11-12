@@ -23,6 +23,6 @@
  * <p>The binaries are built from source, at the corresponding commit that was used to build the bgfx library. For example, the latest Windows x64 version of
  * shaderc can be found under {@code nightly/windows/x64/bgfx-tools/}.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.bgfx;
 

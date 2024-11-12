@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct<XrSystemHandTracki
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemHandTrackingPropertiesEXT createSafe(long address) {
+    public static @Nullable XrSystemHandTrackingPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new XrSystemHandTrackingPropertiesEXT(address, null);
     }
 
@@ -196,8 +195,7 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct<XrSystemHandTracki
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemHandTrackingPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static XrSystemHandTrackingPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

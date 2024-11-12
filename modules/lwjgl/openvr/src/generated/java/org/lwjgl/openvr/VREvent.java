@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -123,8 +123,7 @@ public class VREvent extends Struct<VREvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREvent createSafe(long address) {
+    public static @Nullable VREvent createSafe(long address) {
         return address == NULL ? null : new VREvent(address, null);
     }
 
@@ -167,8 +166,7 @@ public class VREvent extends Struct<VREvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREvent.Buffer createSafe(long address, int capacity) {
+    public static VREvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

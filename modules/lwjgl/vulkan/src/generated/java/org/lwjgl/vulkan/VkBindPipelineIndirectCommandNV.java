@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -122,8 +122,7 @@ public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndire
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindPipelineIndirectCommandNV createSafe(long address) {
+    public static @Nullable VkBindPipelineIndirectCommandNV createSafe(long address) {
         return address == NULL ? null : new VkBindPipelineIndirectCommandNV(address, null);
     }
 
@@ -166,8 +165,7 @@ public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndire
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindPipelineIndirectCommandNV.Buffer createSafe(long address, int capacity) {
+    public static VkBindPipelineIndirectCommandNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

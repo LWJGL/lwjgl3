@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -810,7 +810,7 @@ public class HWLoc {
         return invokePPPI(buf, buflen, bitmap, __functionAddress);
     }
 
-    public static int hwloc_bitmap_snprintf(@Nullable @NativeType("char *") ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
+    public static int hwloc_bitmap_snprintf(@NativeType("char *") @Nullable ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
         return nhwloc_bitmap_snprintf(memAddressSafe(buf), remainingSafe(buf), bitmap);
     }
 
@@ -869,7 +869,7 @@ public class HWLoc {
         return invokePPPI(buf, buflen, bitmap, __functionAddress);
     }
 
-    public static int hwloc_bitmap_list_snprintf(@Nullable @NativeType("char *") ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
+    public static int hwloc_bitmap_list_snprintf(@NativeType("char *") @Nullable ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
         return nhwloc_bitmap_list_snprintf(memAddressSafe(buf), remainingSafe(buf), bitmap);
     }
 
@@ -928,7 +928,7 @@ public class HWLoc {
         return invokePPPI(buf, buflen, bitmap, __functionAddress);
     }
 
-    public static int hwloc_bitmap_taskset_snprintf(@Nullable @NativeType("char *") ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
+    public static int hwloc_bitmap_taskset_snprintf(@NativeType("char *") @Nullable ByteBuffer buf, @NativeType("hwloc_const_bitmap_t") long bitmap) {
         return nhwloc_bitmap_taskset_snprintf(memAddressSafe(buf), remainingSafe(buf), bitmap);
     }
 
@@ -1493,7 +1493,7 @@ public class HWLoc {
         return invokePPPI(topology, type, attrp, attrsize, __functionAddress);
     }
 
-    public static int hwloc_get_type_depth_with_attr(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type, @Nullable @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.Buffer attrp) {
+    public static int hwloc_get_type_depth_with_attr(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type, @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.@Nullable Buffer attrp) {
         return nhwloc_get_type_depth_with_attr(topology, type, memAddressSafe(attrp), remainingSafe(attrp));
     }
 
@@ -1539,9 +1539,8 @@ public class HWLoc {
         return invokePP(topology, depth, idx, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_get_obj_by_depth(@NativeType("hwloc_topology_t") long topology, int depth, @NativeType("unsigned") int idx) {
+    public static @Nullable hwloc_obj hwloc_get_obj_by_depth(@NativeType("hwloc_topology_t") long topology, int depth, @NativeType("unsigned") int idx) {
         long __result = nhwloc_get_obj_by_depth(topology, depth, idx);
         return hwloc_obj.createSafe(__result);
     }
@@ -1553,9 +1552,8 @@ public class HWLoc {
         return invokeP(type, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String hwloc_obj_type_string(@NativeType("hwloc_obj_type_t") int type) {
+    public static @Nullable String hwloc_obj_type_string(@NativeType("hwloc_obj_type_t") int type) {
         long __result = nhwloc_obj_type_string(type);
         return memASCIISafe(__result);
     }
@@ -1567,7 +1565,7 @@ public class HWLoc {
         return invokePPPNI(string, size, obj, flags, __functionAddress);
     }
 
-    public static int hwloc_obj_type_snprintf(@Nullable @NativeType("char *") ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("unsigned long") long flags) {
+    public static int hwloc_obj_type_snprintf(@NativeType("char *") @Nullable ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("unsigned long") long flags) {
         return nhwloc_obj_type_snprintf(memAddressSafe(string), remainingSafe(string), obj.address(), flags);
     }
 
@@ -1603,7 +1601,7 @@ public class HWLoc {
         return invokePPPPI(string, typep, attrp, attrsize, __functionAddress);
     }
 
-    public static int hwloc_type_sscanf(@NativeType("char const *") ByteBuffer string, @NativeType("hwloc_obj_type_t *") IntBuffer typep, @Nullable @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.Buffer attrp) {
+    public static int hwloc_type_sscanf(@NativeType("char const *") ByteBuffer string, @NativeType("hwloc_obj_type_t *") IntBuffer typep, @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.@Nullable Buffer attrp) {
         if (CHECKS) {
             checkNT1(string);
             check(typep, 1);
@@ -1611,7 +1609,7 @@ public class HWLoc {
         return nhwloc_type_sscanf(memAddress(string), memAddress(typep), memAddressSafe(attrp), remainingSafe(attrp));
     }
 
-    public static int hwloc_type_sscanf(@NativeType("char const *") CharSequence string, @NativeType("hwloc_obj_type_t *") IntBuffer typep, @Nullable @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.Buffer attrp) {
+    public static int hwloc_type_sscanf(@NativeType("char const *") CharSequence string, @NativeType("hwloc_obj_type_t *") IntBuffer typep, @NativeType("struct hwloc_obj_attr_u *") hwloc_obj_attr_u.@Nullable Buffer attrp) {
         if (CHECKS) {
             check(typep, 1);
         }
@@ -1679,14 +1677,14 @@ public class HWLoc {
         return invokePPPI(topology, obj, subtype, __functionAddress);
     }
 
-    public static int hwloc_obj_set_subtype(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj obj, @Nullable @NativeType("char const *") ByteBuffer subtype) {
+    public static int hwloc_obj_set_subtype(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") @Nullable ByteBuffer subtype) {
         if (CHECKS) {
             checkNT1Safe(subtype);
         }
         return nhwloc_obj_set_subtype(topology, obj.address(), memAddressSafe(subtype));
     }
 
-    public static int hwloc_obj_set_subtype(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj obj, @Nullable @NativeType("char const *") CharSequence subtype) {
+    public static int hwloc_obj_set_subtype(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") @Nullable CharSequence subtype) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCIISafe(subtype, true);
@@ -2006,9 +2004,8 @@ public class HWLoc {
         return invokePPP(topology, len, __functionAddress);
     }
 
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer hwloc_alloc(@NativeType("hwloc_topology_t") long topology, @NativeType("size_t") long len) {
+    public static @Nullable ByteBuffer hwloc_alloc(@NativeType("hwloc_topology_t") long topology, @NativeType("size_t") long len) {
         long __result = nhwloc_alloc(topology, len);
         return memByteBufferSafe(__result, (int)len);
     }
@@ -2024,9 +2021,8 @@ public class HWLoc {
         return invokePPPP(topology, len, set, policy, flags, __functionAddress);
     }
 
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer hwloc_alloc_membind(@NativeType("hwloc_topology_t") long topology, @NativeType("size_t") long len, @NativeType("hwloc_const_bitmap_t") long set, @NativeType("hwloc_membind_policy_t") int policy, int flags) {
+    public static @Nullable ByteBuffer hwloc_alloc_membind(@NativeType("hwloc_topology_t") long topology, @NativeType("size_t") long len, @NativeType("hwloc_const_bitmap_t") long set, @NativeType("hwloc_membind_policy_t") int policy, int flags) {
         long __result = nhwloc_alloc_membind(topology, len, set, policy, flags);
         return memByteBufferSafe(__result, (int)len);
     }
@@ -2219,9 +2215,8 @@ public class HWLoc {
         return invokePP(topology, __functionAddress);
     }
 
-    @Nullable
     @NativeType("struct hwloc_topology_support const *")
-    public static hwloc_topology_support hwloc_topology_get_support(@NativeType("hwloc_topology_t") long topology) {
+    public static @Nullable hwloc_topology_support hwloc_topology_get_support(@NativeType("hwloc_topology_t") long topology) {
         long __result = nhwloc_topology_get_support(topology);
         return hwloc_topology_support.createSafe(__result);
     }
@@ -2347,9 +2342,8 @@ public class HWLoc {
         return invokePPPP(topology, parent, name, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_topology_insert_misc_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj parent, @NativeType("char const *") ByteBuffer name) {
+    public static @Nullable hwloc_obj hwloc_topology_insert_misc_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj parent, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
         }
@@ -2357,9 +2351,8 @@ public class HWLoc {
         return hwloc_obj.createSafe(__result);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_topology_insert_misc_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj parent, @NativeType("char const *") CharSequence name) {
+    public static @Nullable hwloc_obj hwloc_topology_insert_misc_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj parent, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(name, true);
@@ -2381,9 +2374,8 @@ public class HWLoc {
         return invokePP(topology, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_topology_alloc_group_object(@NativeType("hwloc_topology_t") long topology) {
+    public static @Nullable hwloc_obj hwloc_topology_alloc_group_object(@NativeType("hwloc_topology_t") long topology) {
         long __result = nhwloc_topology_alloc_group_object(topology);
         return hwloc_obj.createSafe(__result);
     }
@@ -2412,9 +2404,8 @@ public class HWLoc {
         return invokePPP(topology, group, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_topology_insert_group_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj group) {
+    public static @Nullable hwloc_obj hwloc_topology_insert_group_object(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj group) {
         long __result = nhwloc_topology_insert_group_object(topology, group.address());
         return hwloc_obj.createSafe(__result);
     }
@@ -2539,9 +2530,8 @@ public class HWLoc {
         return invokePPPPNP(topology, src, type, subtype, nameprefix, flags, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_get_obj_with_same_locality(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj src, @NativeType("hwloc_obj_type_t") int type, @Nullable @NativeType("char const *") ByteBuffer subtype, @Nullable @NativeType("char const *") ByteBuffer nameprefix, @NativeType("unsigned long") long flags) {
+    public static @Nullable hwloc_obj hwloc_get_obj_with_same_locality(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj src, @NativeType("hwloc_obj_type_t") int type, @NativeType("char const *") @Nullable ByteBuffer subtype, @NativeType("char const *") @Nullable ByteBuffer nameprefix, @NativeType("unsigned long") long flags) {
         if (CHECKS) {
             checkNT1Safe(subtype);
             checkNT1Safe(nameprefix);
@@ -2550,9 +2540,8 @@ public class HWLoc {
         return hwloc_obj.createSafe(__result);
     }
 
-    @Nullable
     @NativeType("hwloc_obj_t")
-    public static hwloc_obj hwloc_get_obj_with_same_locality(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj src, @NativeType("hwloc_obj_type_t") int type, @Nullable @NativeType("char const *") CharSequence subtype, @Nullable @NativeType("char const *") CharSequence nameprefix, @NativeType("unsigned long") long flags) {
+    public static @Nullable hwloc_obj hwloc_get_obj_with_same_locality(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") hwloc_obj src, @NativeType("hwloc_obj_type_t") int type, @NativeType("char const *") @Nullable CharSequence subtype, @NativeType("char const *") @Nullable CharSequence nameprefix, @NativeType("unsigned long") long flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCIISafe(subtype, true);
@@ -2692,7 +2681,7 @@ public class HWLoc {
         return invokePPPNPI(topology, attribute, target_node, initiator, flags, value, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t *") LongBuffer value) {
+    public static int hwloc_memattr_get_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("struct hwloc_location *") @Nullable hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t *") LongBuffer value) {
         if (CHECKS) {
             check(value, 1);
         }
@@ -2709,7 +2698,7 @@ public class HWLoc {
         return invokePPNPPI(topology, attribute, initiator, flags, best_target, value, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_best_target(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_obj_t *") PointerBuffer best_target, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer value) {
+    public static int hwloc_memattr_get_best_target(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("struct hwloc_location *") @Nullable hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_obj_t *") PointerBuffer best_target, @NativeType("hwloc_uint64_t *") @Nullable LongBuffer value) {
         if (CHECKS) {
             check(best_target, 1);
             checkSafe(value, 1);
@@ -2727,7 +2716,7 @@ public class HWLoc {
         return invokePPNPPI(topology, attribute, target_node, flags, best_initiator, value, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_best_initiator(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("struct hwloc_location *") hwloc_location.Buffer best_initiator, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer value) {
+    public static int hwloc_memattr_get_best_initiator(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("struct hwloc_location *") hwloc_location.Buffer best_initiator, @NativeType("hwloc_uint64_t *") @Nullable LongBuffer value) {
         if (CHECKS) {
             check(best_initiator, 1);
             checkSafe(value, 1);
@@ -2745,7 +2734,7 @@ public class HWLoc {
         return invokePPNPPPI(topology, attribute, initiator, flags, nr, targets, values, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_targets(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("hwloc_obj_t *") PointerBuffer targets, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
+    public static int hwloc_memattr_get_targets(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("struct hwloc_location *") @Nullable hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("hwloc_obj_t *") PointerBuffer targets, @NativeType("hwloc_uint64_t *") @Nullable LongBuffer values) {
         if (CHECKS) {
             check(nr, 1);
             check(targets, nr.get(nr.position()));
@@ -2764,7 +2753,7 @@ public class HWLoc {
         return invokePPNPPPI(topology, attribute, target_node, flags, nr, initiators, values, __functionAddress);
     }
 
-    public static int hwloc_memattr_get_initiators(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("struct hwloc_location *") hwloc_location.Buffer initiators, @Nullable @NativeType("hwloc_uint64_t *") LongBuffer values) {
+    public static int hwloc_memattr_get_initiators(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("unsigned long") long flags, @NativeType("unsigned int *") IntBuffer nr, @NativeType("struct hwloc_location *") hwloc_location.Buffer initiators, @NativeType("hwloc_uint64_t *") @Nullable LongBuffer values) {
         if (CHECKS) {
             check(nr, 1);
             check(initiators, nr.get(nr.position()));
@@ -2849,7 +2838,7 @@ public class HWLoc {
         return invokePPPNJI(topology, attribute, target_node, initiator, flags, value, __functionAddress);
     }
 
-    public static int hwloc_memattr_set_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @Nullable @NativeType("struct hwloc_location *") hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t") long value) {
+    public static int hwloc_memattr_set_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("struct hwloc_location *") @Nullable hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t") long value) {
         return nhwloc_memattr_set_value(topology, attribute, target_node.address(), memAddressSafe(initiator), flags, value);
     }
 
@@ -2884,7 +2873,7 @@ public class HWLoc {
         return invokePPPPNI(topology, kind_index, cpuset, efficiency, infosp, flags, __functionAddress);
     }
 
-    public static int hwloc_cpukinds_get_info(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned int") int kind_index, @NativeType("hwloc_bitmap_t") long cpuset, @Nullable @NativeType("int *") IntBuffer efficiency, @NativeType("struct hwloc_infos_s **") PointerBuffer infosp, @NativeType("unsigned long") long flags) {
+    public static int hwloc_cpukinds_get_info(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned int") int kind_index, @NativeType("hwloc_bitmap_t") long cpuset, @NativeType("int *") @Nullable IntBuffer efficiency, @NativeType("struct hwloc_infos_s **") PointerBuffer infosp, @NativeType("unsigned long") long flags) {
         if (CHECKS) {
             checkSafe(efficiency, 1);
             check(infosp, 1);
@@ -2903,7 +2892,7 @@ public class HWLoc {
         return invokePPPNI(topology, cpuset, forced_efficiency, infos, flags, __functionAddress);
     }
 
-    public static int hwloc_cpukinds_register(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_bitmap_t") long cpuset, int forced_efficiency, @Nullable @NativeType("struct hwloc_infos_s *") hwloc_infos_s infos, @NativeType("unsigned long") long flags) {
+    public static int hwloc_cpukinds_register(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_bitmap_t") long cpuset, int forced_efficiency, @NativeType("struct hwloc_infos_s *") @Nullable hwloc_infos_s infos, @NativeType("unsigned long") long flags) {
         return nhwloc_cpukinds_register(topology, cpuset, forced_efficiency, memAddressSafe(infos), flags);
     }
 
@@ -3163,9 +3152,8 @@ public class HWLoc {
         return invokePPP(topology, distances, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String hwloc_distances_get_name(@NativeType("hwloc_topology_t") long topology, @NativeType("struct hwloc_distances_s *") hwloc_distances_s distances) {
+    public static @Nullable String hwloc_distances_get_name(@NativeType("hwloc_topology_t") long topology, @NativeType("struct hwloc_distances_s *") hwloc_distances_s distances) {
         long __result = nhwloc_distances_get_name(topology, distances.address());
         return memASCIISafe(__result);
     }
@@ -3209,7 +3197,7 @@ public class HWLoc {
     }
 
     @NativeType("hwloc_distances_add_handle_t")
-    public static long hwloc_distances_add_create(@NativeType("hwloc_topology_t") long topology, @Nullable @NativeType("char const *") ByteBuffer name, @NativeType("unsigned long") long kind, @NativeType("unsigned long") long flags) {
+    public static long hwloc_distances_add_create(@NativeType("hwloc_topology_t") long topology, @NativeType("char const *") @Nullable ByteBuffer name, @NativeType("unsigned long") long kind, @NativeType("unsigned long") long flags) {
         if (CHECKS) {
             checkNT1Safe(name);
         }
@@ -3217,7 +3205,7 @@ public class HWLoc {
     }
 
     @NativeType("hwloc_distances_add_handle_t")
-    public static long hwloc_distances_add_create(@NativeType("hwloc_topology_t") long topology, @Nullable @NativeType("char const *") CharSequence name, @NativeType("unsigned long") long kind, @NativeType("unsigned long") long flags) {
+    public static long hwloc_distances_add_create(@NativeType("hwloc_topology_t") long topology, @NativeType("char const *") @Nullable CharSequence name, @NativeType("unsigned long") long kind, @NativeType("unsigned long") long flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCIISafe(name, true);

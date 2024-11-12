@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class FMOD_PLUGINLIST extends Struct<FMOD_PLUGINLIST> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_PLUGINLIST createSafe(long address) {
+    public static @Nullable FMOD_PLUGINLIST createSafe(long address) {
         return address == NULL ? null : new FMOD_PLUGINLIST(address, null);
     }
 
@@ -176,8 +175,7 @@ public class FMOD_PLUGINLIST extends Struct<FMOD_PLUGINLIST> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_PLUGINLIST.Buffer createSafe(long address, int capacity) {
+    public static FMOD_PLUGINLIST.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

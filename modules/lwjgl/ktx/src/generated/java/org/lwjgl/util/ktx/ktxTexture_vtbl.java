@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -172,8 +172,7 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTexture_vtbl createSafe(long address) {
+    public static @Nullable ktxTexture_vtbl createSafe(long address) {
         return address == NULL ? null : new ktxTexture_vtbl(address, null);
     }
 
@@ -188,8 +187,7 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTexture_vtbl.Buffer createSafe(long address, int capacity) {
+    public static ktxTexture_vtbl.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

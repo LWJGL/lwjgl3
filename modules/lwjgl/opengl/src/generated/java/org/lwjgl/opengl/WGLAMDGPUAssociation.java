@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -71,7 +71,7 @@ public class WGLAMDGPUAssociation {
      * @param ids the array of returned IDs
      */
     @NativeType("UINT")
-    public static int wglGetGPUIDsAMD(@Nullable @NativeType("UINT *") IntBuffer ids) {
+    public static int wglGetGPUIDsAMD(@NativeType("UINT *") @Nullable IntBuffer ids) {
         return nwglGetGPUIDsAMD(remainingSafe(ids), memAddressSafe(ids));
     }
 
@@ -202,7 +202,7 @@ public class WGLAMDGPUAssociation {
      * @param attribList   a 0-terminated list of attributes for the context
      */
     @NativeType("HGLRC")
-    public static long wglCreateAssociatedContextAttribsAMD(@NativeType("UINT") int id, @NativeType("HGLRC") long shareContext, @Nullable @NativeType("int const *") IntBuffer attribList) {
+    public static long wglCreateAssociatedContextAttribsAMD(@NativeType("UINT") int id, @NativeType("HGLRC") long shareContext, @NativeType("int const *") @Nullable IntBuffer attribList) {
         if (CHECKS) {
             checkNTSafe(attribList);
         }
@@ -284,7 +284,7 @@ public class WGLAMDGPUAssociation {
 
     /** Array version of: {@link #wglGetGPUIDsAMD GetGPUIDsAMD} */
     @NativeType("UINT")
-    public static int wglGetGPUIDsAMD(@Nullable @NativeType("UINT *") int[] ids) {
+    public static int wglGetGPUIDsAMD(@NativeType("UINT *") int @Nullable [] ids) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetGPUIDsAMD;
         if (CHECKS) {
             check(__functionAddress);
@@ -312,7 +312,7 @@ public class WGLAMDGPUAssociation {
 
     /** Array version of: {@link #wglCreateAssociatedContextAttribsAMD CreateAssociatedContextAttribsAMD} */
     @NativeType("HGLRC")
-    public static long wglCreateAssociatedContextAttribsAMD(@NativeType("UINT") int id, @NativeType("HGLRC") long shareContext, @Nullable @NativeType("int const *") int[] attribList) {
+    public static long wglCreateAssociatedContextAttribsAMD(@NativeType("UINT") int id, @NativeType("HGLRC") long shareContext, @NativeType("int const *") int @Nullable [] attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreateAssociatedContextAttribsAMD;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class XrSessionBeginInfo extends Struct<XrSessionBeginInfo> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSessionBeginInfo createSafe(long address) {
+    public static @Nullable XrSessionBeginInfo createSafe(long address) {
         return address == NULL ? null : new XrSessionBeginInfo(address, null);
     }
 
@@ -204,8 +203,7 @@ public class XrSessionBeginInfo extends Struct<XrSessionBeginInfo> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSessionBeginInfo.Buffer createSafe(long address, int capacity) {
+    public static XrSessionBeginInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class VkBufferCopy2 extends Struct<VkBufferCopy2> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferCopy2 createSafe(long address) {
+    public static @Nullable VkBufferCopy2 createSafe(long address) {
         return address == NULL ? null : new VkBufferCopy2(address, null);
     }
 
@@ -229,8 +228,7 @@ public class VkBufferCopy2 extends Struct<VkBufferCopy2> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferCopy2.Buffer createSafe(long address, int capacity) {
+    public static VkBufferCopy2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to liburing. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.linux.liburing;
 

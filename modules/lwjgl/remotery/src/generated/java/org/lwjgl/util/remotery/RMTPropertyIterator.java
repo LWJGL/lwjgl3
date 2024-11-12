@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class RMTPropertyIterator extends Struct<RMTPropertyIterator> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTPropertyIterator createSafe(long address) {
+    public static @Nullable RMTPropertyIterator createSafe(long address) {
         return address == NULL ? null : new RMTPropertyIterator(address, null);
     }
 

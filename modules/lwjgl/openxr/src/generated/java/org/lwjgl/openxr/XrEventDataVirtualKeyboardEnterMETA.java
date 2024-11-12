@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class XrEventDataVirtualKeyboardEnterMETA extends Struct<XrEventDataVirtu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataVirtualKeyboardEnterMETA createSafe(long address) {
+    public static @Nullable XrEventDataVirtualKeyboardEnterMETA createSafe(long address) {
         return address == NULL ? null : new XrEventDataVirtualKeyboardEnterMETA(address, null);
     }
 
@@ -208,8 +207,7 @@ public class XrEventDataVirtualKeyboardEnterMETA extends Struct<XrEventDataVirtu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataVirtualKeyboardEnterMETA.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataVirtualKeyboardEnterMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

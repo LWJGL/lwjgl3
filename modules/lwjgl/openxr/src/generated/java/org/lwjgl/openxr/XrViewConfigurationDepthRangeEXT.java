@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfiguration
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrViewConfigurationDepthRangeEXT createSafe(long address) {
+    public static @Nullable XrViewConfigurationDepthRangeEXT createSafe(long address) {
         return address == NULL ? null : new XrViewConfigurationDepthRangeEXT(address, null);
     }
 
@@ -235,8 +234,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfiguration
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrViewConfigurationDepthRangeEXT.Buffer createSafe(long address, int capacity) {
+    public static XrViewConfigurationDepthRangeEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

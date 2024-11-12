@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -139,13 +139,11 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     @NativeType("bgfx_init_limits_t")
     public BGFXInitLimits limits() { return nlimits(address()); }
     /** provide application specific callback interface */
-    @Nullable
     @NativeType("bgfx_callback_interface_t *")
-    public BGFXCallbackInterface callback() { return ncallback(address()); }
+    public @Nullable BGFXCallbackInterface callback() { return ncallback(address()); }
     /** custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe. */
-    @Nullable
     @NativeType("bgfx_allocator_interface_t *")
-    public BGFXAllocatorInterface allocator() { return nallocator(address()); }
+    public @Nullable BGFXAllocatorInterface allocator() { return nallocator(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public BGFXInit type(@NativeType("bgfx_renderer_type_t") int value) { ntype(address(), value); return this; }
@@ -241,8 +239,7 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXInit createSafe(long address) {
+    public static @Nullable BGFXInit createSafe(long address) {
         return address == NULL ? null : new BGFXInit(address, null);
     }
 
@@ -297,9 +294,9 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     /** Unsafe version of {@link #limits}. */
     public static BGFXInitLimits nlimits(long struct) { return BGFXInitLimits.create(struct + BGFXInit.LIMITS); }
     /** Unsafe version of {@link #callback}. */
-    @Nullable public static BGFXCallbackInterface ncallback(long struct) { return BGFXCallbackInterface.createSafe(memGetAddress(struct + BGFXInit.CALLBACK)); }
+    public static @Nullable BGFXCallbackInterface ncallback(long struct) { return BGFXCallbackInterface.createSafe(memGetAddress(struct + BGFXInit.CALLBACK)); }
     /** Unsafe version of {@link #allocator}. */
-    @Nullable public static BGFXAllocatorInterface nallocator(long struct) { return BGFXAllocatorInterface.createSafe(memGetAddress(struct + BGFXInit.ALLOCATOR)); }
+    public static @Nullable BGFXAllocatorInterface nallocator(long struct) { return BGFXAllocatorInterface.createSafe(memGetAddress(struct + BGFXInit.ALLOCATOR)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + BGFXInit.TYPE, value); }

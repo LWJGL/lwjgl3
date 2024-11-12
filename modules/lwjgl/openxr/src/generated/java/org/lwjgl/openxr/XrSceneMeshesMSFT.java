@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,9 +105,8 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     @NativeType("uint32_t")
     public int sceneMeshCount() { return nsceneMeshCount(address()); }
     /** an array of {@link XrSceneMeshMSFT}. */
-    @Nullable
     @NativeType("XrSceneMeshMSFT *")
-    public XrSceneMeshMSFT.Buffer sceneMeshes() { return nsceneMeshes(address()); }
+    public XrSceneMeshMSFT.@Nullable Buffer sceneMeshes() { return nsceneMeshes(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneMeshesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -118,14 +117,14 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     /** Sets the specified value to the {@link #sceneMeshCount} field. */
     public XrSceneMeshesMSFT sceneMeshCount(@NativeType("uint32_t") int value) { nsceneMeshCount(address(), value); return this; }
     /** Sets the address of the specified {@link XrSceneMeshMSFT.Buffer} to the {@link #sceneMeshes} field. */
-    public XrSceneMeshesMSFT sceneMeshes(@Nullable @NativeType("XrSceneMeshMSFT *") XrSceneMeshMSFT.Buffer value) { nsceneMeshes(address(), value); return this; }
+    public XrSceneMeshesMSFT sceneMeshes(@NativeType("XrSceneMeshMSFT *") XrSceneMeshMSFT.@Nullable Buffer value) { nsceneMeshes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSceneMeshesMSFT set(
         int type,
         long next,
         int sceneMeshCount,
-        @Nullable XrSceneMeshMSFT.Buffer sceneMeshes
+        XrSceneMeshMSFT.@Nullable Buffer sceneMeshes
     ) {
         type(type);
         next(next);
@@ -171,8 +170,7 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMeshesMSFT createSafe(long address) {
+    public static @Nullable XrSceneMeshesMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneMeshesMSFT(address, null);
     }
 
@@ -215,8 +213,7 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMeshesMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneMeshesMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -267,7 +264,7 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     /** Unsafe version of {@link #sceneMeshCount}. */
     public static int nsceneMeshCount(long struct) { return memGetInt(struct + XrSceneMeshesMSFT.SCENEMESHCOUNT); }
     /** Unsafe version of {@link #sceneMeshes}. */
-    @Nullable public static XrSceneMeshMSFT.Buffer nsceneMeshes(long struct) { return XrSceneMeshMSFT.createSafe(memGetAddress(struct + XrSceneMeshesMSFT.SCENEMESHES), nsceneMeshCount(struct)); }
+    public static XrSceneMeshMSFT.@Nullable Buffer nsceneMeshes(long struct) { return XrSceneMeshMSFT.createSafe(memGetAddress(struct + XrSceneMeshesMSFT.SCENEMESHES), nsceneMeshCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMeshesMSFT.TYPE, value); }
@@ -276,7 +273,7 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
     /** Sets the specified value to the {@code sceneMeshCount} field of the specified {@code struct}. */
     public static void nsceneMeshCount(long struct, int value) { memPutInt(struct + XrSceneMeshesMSFT.SCENEMESHCOUNT, value); }
     /** Unsafe version of {@link #sceneMeshes(XrSceneMeshMSFT.Buffer) sceneMeshes}. */
-    public static void nsceneMeshes(long struct, @Nullable XrSceneMeshMSFT.Buffer value) { memPutAddress(struct + XrSceneMeshesMSFT.SCENEMESHES, memAddressSafe(value)); if (value != null) { nsceneMeshCount(struct, value.remaining()); } }
+    public static void nsceneMeshes(long struct, XrSceneMeshMSFT.@Nullable Buffer value) { memPutAddress(struct + XrSceneMeshesMSFT.SCENEMESHES, memAddressSafe(value)); if (value != null) { nsceneMeshCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -331,9 +328,8 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
         @NativeType("uint32_t")
         public int sceneMeshCount() { return XrSceneMeshesMSFT.nsceneMeshCount(address()); }
         /** @return a {@link XrSceneMeshMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneMeshesMSFT#sceneMeshes} field. */
-        @Nullable
         @NativeType("XrSceneMeshMSFT *")
-        public XrSceneMeshMSFT.Buffer sceneMeshes() { return XrSceneMeshesMSFT.nsceneMeshes(address()); }
+        public XrSceneMeshMSFT.@Nullable Buffer sceneMeshes() { return XrSceneMeshesMSFT.nsceneMeshes(address()); }
 
         /** Sets the specified value to the {@link XrSceneMeshesMSFT#type} field. */
         public XrSceneMeshesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMeshesMSFT.ntype(address(), value); return this; }
@@ -344,7 +340,7 @@ public class XrSceneMeshesMSFT extends Struct<XrSceneMeshesMSFT> implements Nati
         /** Sets the specified value to the {@link XrSceneMeshesMSFT#sceneMeshCount} field. */
         public XrSceneMeshesMSFT.Buffer sceneMeshCount(@NativeType("uint32_t") int value) { XrSceneMeshesMSFT.nsceneMeshCount(address(), value); return this; }
         /** Sets the address of the specified {@link XrSceneMeshMSFT.Buffer} to the {@link XrSceneMeshesMSFT#sceneMeshes} field. */
-        public XrSceneMeshesMSFT.Buffer sceneMeshes(@Nullable @NativeType("XrSceneMeshMSFT *") XrSceneMeshMSFT.Buffer value) { XrSceneMeshesMSFT.nsceneMeshes(address(), value); return this; }
+        public XrSceneMeshesMSFT.Buffer sceneMeshes(@NativeType("XrSceneMeshMSFT *") XrSceneMeshMSFT.@Nullable Buffer value) { XrSceneMeshesMSFT.nsceneMeshes(address(), value); return this; }
 
     }
 

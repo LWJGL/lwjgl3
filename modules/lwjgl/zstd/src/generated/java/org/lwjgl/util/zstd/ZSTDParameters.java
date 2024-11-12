@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class ZSTDParameters extends Struct<ZSTDParameters> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDParameters createSafe(long address) {
+    public static @Nullable ZSTDParameters createSafe(long address) {
         return address == NULL ? null : new ZSTDParameters(address, null);
     }
 
@@ -180,8 +179,7 @@ public class ZSTDParameters extends Struct<ZSTDParameters> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDParameters.Buffer createSafe(long address, int capacity) {
+    public static ZSTDParameters.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -183,8 +183,7 @@ public class XrMarkerSpaceCreateInfoML extends Struct<XrMarkerSpaceCreateInfoML>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrMarkerSpaceCreateInfoML createSafe(long address) {
+    public static @Nullable XrMarkerSpaceCreateInfoML createSafe(long address) {
         return address == NULL ? null : new XrMarkerSpaceCreateInfoML(address, null);
     }
 
@@ -227,8 +226,7 @@ public class XrMarkerSpaceCreateInfoML extends Struct<XrMarkerSpaceCreateInfoML>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrMarkerSpaceCreateInfoML.Buffer createSafe(long address, int capacity) {
+    public static XrMarkerSpaceCreateInfoML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

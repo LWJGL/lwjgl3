@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxDeclInfo createSafe(long address) {
+    public static @Nullable CXIdxDeclInfo createSafe(long address) {
         return address == NULL ? null : new CXIdxDeclInfo(address, null);
     }
 
@@ -222,8 +221,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxDeclInfo.Buffer createSafe(long address, int capacity) {
+    public static CXIdxDeclInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

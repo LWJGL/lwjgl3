@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class SECURITY_ATTRIBUTES extends Struct<SECURITY_ATTRIBUTES> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SECURITY_ATTRIBUTES createSafe(long address) {
+    public static @Nullable SECURITY_ATTRIBUTES createSafe(long address) {
         return address == NULL ? null : new SECURITY_ATTRIBUTES(address, null);
     }
 
@@ -196,8 +195,7 @@ public class SECURITY_ATTRIBUTES extends Struct<SECURITY_ATTRIBUTES> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SECURITY_ATTRIBUTES.Buffer createSafe(long address, int capacity) {
+    public static SECURITY_ATTRIBUTES.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

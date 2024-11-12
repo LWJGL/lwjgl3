@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,8 +145,7 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandMeshVertexMSFT createSafe(long address) {
+    public static @Nullable XrHandMeshVertexMSFT createSafe(long address) {
         return address == NULL ? null : new XrHandMeshVertexMSFT(address, null);
     }
 
@@ -189,8 +188,7 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandMeshVertexMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrHandMeshVertexMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

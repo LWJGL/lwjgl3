@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,7 +166,7 @@ public class NVCoverageReductionMode {
      * @param pCombinations     either {@code NULL} or a pointer to an array of {@link VkFramebufferMixedSamplesCombinationNV} values, indicating the supported combinations of coverage reduction mode, rasterization samples, and color, depth, stencil attachment sample counts.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pCombinationCount, @Nullable @NativeType("VkFramebufferMixedSamplesCombinationNV *") VkFramebufferMixedSamplesCombinationNV.Buffer pCombinations) {
+    public static int vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pCombinationCount, @NativeType("VkFramebufferMixedSamplesCombinationNV *") VkFramebufferMixedSamplesCombinationNV.@Nullable Buffer pCombinations) {
         if (CHECKS) {
             check(pCombinationCount, 1);
             checkSafe(pCombinations, pCombinationCount.get(pCombinationCount.position()));
@@ -176,7 +176,7 @@ public class NVCoverageReductionMode {
 
     /** Array version of: {@link #vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV GetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pCombinationCount, @Nullable @NativeType("VkFramebufferMixedSamplesCombinationNV *") VkFramebufferMixedSamplesCombinationNV.Buffer pCombinations) {
+    public static int vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pCombinationCount, @NativeType("VkFramebufferMixedSamplesCombinationNV *") VkFramebufferMixedSamplesCombinationNV.@Nullable Buffer pCombinations) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -95,8 +95,7 @@ public class FT_PaintComposite extends Struct<FT_PaintComposite> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintComposite createSafe(long address) {
+    public static @Nullable FT_PaintComposite createSafe(long address) {
         return address == NULL ? null : new FT_PaintComposite(address, null);
     }
 
@@ -111,8 +110,7 @@ public class FT_PaintComposite extends Struct<FT_PaintComposite> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintComposite.Buffer createSafe(long address, int capacity) {
+    public static FT_PaintComposite.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

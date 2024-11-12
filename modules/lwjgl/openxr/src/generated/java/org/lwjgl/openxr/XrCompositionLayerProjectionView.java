@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerProjectionView createSafe(long address) {
+    public static @Nullable XrCompositionLayerProjectionView createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerProjectionView(address, null);
     }
 
@@ -235,8 +234,7 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerProjectionView.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerProjectionView.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

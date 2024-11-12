@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,8 +153,7 @@ public class VkBlitImageCubicWeightsInfoQCOM extends Struct<VkBlitImageCubicWeig
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBlitImageCubicWeightsInfoQCOM createSafe(long address) {
+    public static @Nullable VkBlitImageCubicWeightsInfoQCOM createSafe(long address) {
         return address == NULL ? null : new VkBlitImageCubicWeightsInfoQCOM(address, null);
     }
 
@@ -197,8 +196,7 @@ public class VkBlitImageCubicWeightsInfoQCOM extends Struct<VkBlitImageCubicWeig
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBlitImageCubicWeightsInfoQCOM.Buffer createSafe(long address, int capacity) {
+    public static VkBlitImageCubicWeightsInfoQCOM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

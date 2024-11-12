@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -142,8 +142,7 @@ public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependen
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolDependenceGroup createSafe(long address) {
+    public static @Nullable LLVMOrcCSymbolDependenceGroup createSafe(long address) {
         return address == NULL ? null : new LLVMOrcCSymbolDependenceGroup(address, null);
     }
 
@@ -186,8 +185,7 @@ public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependen
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolDependenceGroup.Buffer createSafe(long address, int capacity) {
+    public static LLVMOrcCSymbolDependenceGroup.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

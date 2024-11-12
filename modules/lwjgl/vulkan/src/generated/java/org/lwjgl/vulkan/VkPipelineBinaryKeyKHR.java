@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -186,8 +186,7 @@ public class VkPipelineBinaryKeyKHR extends Struct<VkPipelineBinaryKeyKHR> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineBinaryKeyKHR createSafe(long address) {
+    public static @Nullable VkPipelineBinaryKeyKHR createSafe(long address) {
         return address == NULL ? null : new VkPipelineBinaryKeyKHR(address, null);
     }
 
@@ -230,8 +229,7 @@ public class VkPipelineBinaryKeyKHR extends Struct<VkPipelineBinaryKeyKHR> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineBinaryKeyKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineBinaryKeyKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

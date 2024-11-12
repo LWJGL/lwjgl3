@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -170,8 +170,7 @@ public class FMOD_DSP_STATE_PAN_FUNCTIONS extends Struct<FMOD_DSP_STATE_PAN_FUNC
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_STATE_PAN_FUNCTIONS createSafe(long address) {
+    public static @Nullable FMOD_DSP_STATE_PAN_FUNCTIONS createSafe(long address) {
         return address == NULL ? null : new FMOD_DSP_STATE_PAN_FUNCTIONS(address, null);
     }
 
@@ -214,8 +213,7 @@ public class FMOD_DSP_STATE_PAN_FUNCTIONS extends Struct<FMOD_DSP_STATE_PAN_FUNC
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_STATE_PAN_FUNCTIONS.Buffer createSafe(long address, int capacity) {
+    public static FMOD_DSP_STATE_PAN_FUNCTIONS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

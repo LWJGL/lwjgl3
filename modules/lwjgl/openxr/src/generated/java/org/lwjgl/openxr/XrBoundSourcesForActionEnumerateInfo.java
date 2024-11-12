@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesF
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBoundSourcesForActionEnumerateInfo createSafe(long address) {
+    public static @Nullable XrBoundSourcesForActionEnumerateInfo createSafe(long address) {
         return address == NULL ? null : new XrBoundSourcesForActionEnumerateInfo(address, null);
     }
 
@@ -203,8 +202,7 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesF
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBoundSourcesForActionEnumerateInfo.Buffer createSafe(long address, int capacity) {
+    public static XrBoundSourcesForActionEnumerateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

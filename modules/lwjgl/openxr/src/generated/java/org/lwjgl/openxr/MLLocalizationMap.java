@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -361,7 +361,7 @@ public class MLLocalizationMap {
      * @param maps           an array of {@link XrLocalizationMapML} filled in by the runtime, but <b>can</b> be {@code NULL} if {@code mapCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrQueryLocalizationMapsML(XrSession session, @Nullable @NativeType("XrLocalizationMapQueryInfoBaseHeaderML const *") XrLocalizationMapQueryInfoBaseHeaderML queryInfo, @NativeType("uint32_t *") IntBuffer mapCountOutput, @Nullable @NativeType("XrLocalizationMapML *") XrLocalizationMapML.Buffer maps) {
+    public static int xrQueryLocalizationMapsML(XrSession session, @NativeType("XrLocalizationMapQueryInfoBaseHeaderML const *") @Nullable XrLocalizationMapQueryInfoBaseHeaderML queryInfo, @NativeType("uint32_t *") IntBuffer mapCountOutput, @NativeType("XrLocalizationMapML *") XrLocalizationMapML.@Nullable Buffer maps) {
         if (CHECKS) {
             check(mapCountOutput, 1);
         }
@@ -510,7 +510,7 @@ public class MLLocalizationMap {
      * @param mapUuid    the {@link XrUuidEXT} of the newly imported localization map filled in by the runtime.
      */
     @NativeType("XrResult")
-    public static int xrImportLocalizationMapML(XrSession session, @NativeType("XrLocalizationMapImportInfoML const *") XrLocalizationMapImportInfoML importInfo, @Nullable @NativeType("XrUuidEXT *") XrUuidEXT mapUuid) {
+    public static int xrImportLocalizationMapML(XrSession session, @NativeType("XrLocalizationMapImportInfoML const *") XrLocalizationMapImportInfoML importInfo, @NativeType("XrUuidEXT *") @Nullable XrUuidEXT mapUuid) {
         return nxrImportLocalizationMapML(session, importInfo.address(), memAddressSafe(mapUuid));
     }
 
@@ -717,7 +717,7 @@ public class MLLocalizationMap {
      * @param buffer            an array of bytes filled in by the runtime.
      */
     @NativeType("XrResult")
-    public static int xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

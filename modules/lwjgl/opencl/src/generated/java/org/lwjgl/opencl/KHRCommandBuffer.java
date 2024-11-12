@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -110,7 +110,7 @@ public class KHRCommandBuffer {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_command_buffer_khr")
-    public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @Nullable @NativeType("cl_command_buffer_properties_khr const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @NativeType("cl_command_buffer_properties_khr const *") @Nullable LongBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -203,7 +203,7 @@ public class KHRCommandBuffer {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueCommandBufferKHR(@Nullable @NativeType("cl_command_queue *") PointerBuffer queues, @NativeType("cl_command_buffer_khr") long command_buffer, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCommandBufferKHR(@NativeType("cl_command_queue *") @Nullable PointerBuffer queues, @NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -250,7 +250,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             checkSafe(sync_point, 1);
             checkSafe(mutable_handle, 1);
@@ -300,7 +300,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             checkSafe(sync_point, 1);
             checkSafe(mutable_handle, 1);
@@ -350,7 +350,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(src_origin, 3);
             check(dst_origin, 3);
@@ -403,7 +403,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(dst_origin, 3);
             check(region, 3);
@@ -455,7 +455,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(src_origin, 3);
             check(dst_origin, 3);
@@ -508,7 +508,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(src_origin, 3);
             check(region, 3);
@@ -559,7 +559,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             checkSafe(sync_point, 1);
             checkSafe(mutable_handle, 1);
@@ -608,7 +608,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(fill_color, 16);
             check(origin, 3);
@@ -647,7 +647,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") IntBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") IntBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(fill_color, 16 >> 2);
             check(origin, 3);
@@ -686,7 +686,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") FloatBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") FloatBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             check(fill_color, 16 >> 2);
             check(origin, 3);
@@ -739,7 +739,7 @@ public class KHRCommandBuffer {
      *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
      */
     @NativeType("cl_int")
-    public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @Nullable @NativeType("cl_ndrange_kernel_command_properties_khr const *") LongBuffer properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @Nullable @NativeType("size_t const *") PointerBuffer global_work_offset, @Nullable @NativeType("size_t const *") PointerBuffer global_work_size, @Nullable @NativeType("size_t const *") PointerBuffer local_work_size, @Nullable @NativeType("cl_sync_point_khr const *") IntBuffer sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") IntBuffer sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_ndrange_kernel_command_properties_khr const *") @Nullable LongBuffer properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") @Nullable PointerBuffer global_work_size, @NativeType("size_t const *") @Nullable PointerBuffer local_work_size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(global_work_offset, work_dim);
@@ -776,7 +776,7 @@ public class KHRCommandBuffer {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -792,7 +792,7 @@ public class KHRCommandBuffer {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -808,7 +808,7 @@ public class KHRCommandBuffer {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -817,7 +817,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCreateCommandBufferKHR CreateCommandBufferKHR} */
     @NativeType("cl_command_buffer_khr")
-    public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @Nullable @NativeType("cl_command_buffer_properties_khr const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @NativeType("cl_command_buffer_properties_khr const *") long @Nullable [] properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandBufferKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -829,7 +829,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandBarrierWithWaitListKHR CommandBarrierWithWaitListKHR} */
     @NativeType("cl_int")
-    public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandBarrierWithWaitListKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -842,7 +842,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandCopyBufferKHR CommandCopyBufferKHR} */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -857,7 +857,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandCopyBufferRectKHR CommandCopyBufferRectKHR} */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferRectKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -875,7 +875,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandCopyBufferToImageKHR CommandCopyBufferToImageKHR} */
     @NativeType("cl_int")
-    public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferToImageKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -892,7 +892,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandCopyImageKHR CommandCopyImageKHR} */
     @NativeType("cl_int")
-    public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -910,7 +910,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandCopyImageToBufferKHR CommandCopyImageToBufferKHR} */
     @NativeType("cl_int")
-    public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageToBufferKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -927,7 +927,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandFillBufferKHR CommandFillBufferKHR} */
     @NativeType("cl_int")
-    public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillBufferKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -941,7 +941,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -958,7 +958,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") int[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") int[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -975,7 +975,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
     @NativeType("cl_int")
-    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") float[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") float[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -992,7 +992,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clCommandNDRangeKernelKHR CommandNDRangeKernelKHR} */
     @NativeType("cl_int")
-    public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @Nullable @NativeType("cl_ndrange_kernel_command_properties_khr const *") long[] properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @Nullable @NativeType("size_t const *") PointerBuffer global_work_offset, @Nullable @NativeType("size_t const *") PointerBuffer global_work_size, @Nullable @NativeType("size_t const *") PointerBuffer local_work_size, @Nullable @NativeType("cl_sync_point_khr const *") int[] sync_point_wait_list, @Nullable @NativeType("cl_sync_point_khr *") int[] sync_point, @Nullable @NativeType("cl_mutable_command_khr *") PointerBuffer mutable_handle) {
+    public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_ndrange_kernel_command_properties_khr const *") long @Nullable [] properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") @Nullable PointerBuffer global_work_size, @NativeType("size_t const *") @Nullable PointerBuffer local_work_size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandNDRangeKernelKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -1010,7 +1010,7 @@ public class KHRCommandBuffer {
 
     /** Array version of: {@link #clGetCommandBufferInfoKHR GetCommandBufferInfoKHR} */
     @NativeType("cl_int")
-    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetCommandBufferInfoKHR;
         if (CHECKS) {
             check(__functionAddress);

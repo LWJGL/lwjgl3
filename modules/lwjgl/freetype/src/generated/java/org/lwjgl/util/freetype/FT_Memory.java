@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -87,14 +87,11 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
     @NativeType("void *")
     public long user() { return nuser(address()); }
     /** @return the value of the {@code alloc} field. */
-    @Nullable
-    public FT_Alloc_Func alloc() { return nalloc(address()); }
+    public @Nullable FT_Alloc_Func alloc() { return nalloc(address()); }
     /** @return the value of the {@code free} field. */
-    @Nullable
-    public FT_Free_Func free$() { return nfree$(address()); }
+    public @Nullable FT_Free_Func free$() { return nfree$(address()); }
     /** @return the value of the {@code realloc} field. */
-    @Nullable
-    public FT_Realloc_Func realloc() { return nrealloc(address()); }
+    public @Nullable FT_Realloc_Func realloc() { return nrealloc(address()); }
 
     /** Sets the specified value to the {@code user} field. */
     public FT_Memory user(@NativeType("void *") long value) { nuser(address(), value); return this; }
@@ -156,8 +153,7 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Memory createSafe(long address) {
+    public static @Nullable FT_Memory createSafe(long address) {
         return address == NULL ? null : new FT_Memory(address, null);
     }
 
@@ -200,8 +196,7 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Memory.Buffer createSafe(long address, int capacity) {
+    public static FT_Memory.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -248,11 +243,11 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
     /** Unsafe version of {@link #user}. */
     public static long nuser(long struct) { return memGetAddress(struct + FT_Memory.USER); }
     /** Unsafe version of {@link #alloc}. */
-    @Nullable public static FT_Alloc_Func nalloc(long struct) { return FT_Alloc_Func.createSafe(memGetAddress(struct + FT_Memory.ALLOC)); }
+    public static @Nullable FT_Alloc_Func nalloc(long struct) { return FT_Alloc_Func.createSafe(memGetAddress(struct + FT_Memory.ALLOC)); }
     /** Unsafe version of {@link #free$}. */
-    @Nullable public static FT_Free_Func nfree$(long struct) { return FT_Free_Func.createSafe(memGetAddress(struct + FT_Memory.FREE)); }
+    public static @Nullable FT_Free_Func nfree$(long struct) { return FT_Free_Func.createSafe(memGetAddress(struct + FT_Memory.FREE)); }
     /** Unsafe version of {@link #realloc}. */
-    @Nullable public static FT_Realloc_Func nrealloc(long struct) { return FT_Realloc_Func.createSafe(memGetAddress(struct + FT_Memory.REALLOC)); }
+    public static @Nullable FT_Realloc_Func nrealloc(long struct) { return FT_Realloc_Func.createSafe(memGetAddress(struct + FT_Memory.REALLOC)); }
 
     /** Unsafe version of {@link #user(long) user}. */
     public static void nuser(long struct, long value) { memPutAddress(struct + FT_Memory.USER, value); }
@@ -310,14 +305,11 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
         @NativeType("void *")
         public long user() { return FT_Memory.nuser(address()); }
         /** @return the value of the {@code alloc} field. */
-        @Nullable
-        public FT_Alloc_Func alloc() { return FT_Memory.nalloc(address()); }
+        public @Nullable FT_Alloc_Func alloc() { return FT_Memory.nalloc(address()); }
         /** @return the value of the {@code free} field. */
-        @Nullable
-        public FT_Free_Func free$() { return FT_Memory.nfree$(address()); }
+        public @Nullable FT_Free_Func free$() { return FT_Memory.nfree$(address()); }
         /** @return the value of the {@code realloc} field. */
-        @Nullable
-        public FT_Realloc_Func realloc() { return FT_Memory.nrealloc(address()); }
+        public @Nullable FT_Realloc_Func realloc() { return FT_Memory.nrealloc(address()); }
 
         /** Sets the specified value to the {@code user} field. */
         public FT_Memory.Buffer user(@NativeType("void *") long value) { FT_Memory.nuser(address(), value); return this; }

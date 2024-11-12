@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lz4;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -379,7 +379,7 @@ public class LZ4 {
      *
      * @return loaded dictionary size, in bytes (note: only the last 64 KB are loaded)
      */
-    public static int LZ4_loadDict(@NativeType("LZ4_stream_t *") long streamPtr, @Nullable @NativeType("char const *") ByteBuffer dictionary) {
+    public static int LZ4_loadDict(@NativeType("LZ4_stream_t *") long streamPtr, @NativeType("char const *") @Nullable ByteBuffer dictionary) {
         if (CHECKS) {
             check(streamPtr);
         }
@@ -396,7 +396,7 @@ public class LZ4 {
      * 
      * <p>This is expected to slightly improve compression ratio. The extra-cpu cost is likely worth it if the dictionary is re-used across multiple sessions.</p>
      */
-    public static int LZ4_loadDictSlow(@NativeType("LZ4_stream_t *") long streamPtr, @Nullable @NativeType("char const *") ByteBuffer dictionary) {
+    public static int LZ4_loadDictSlow(@NativeType("LZ4_stream_t *") long streamPtr, @NativeType("char const *") @Nullable ByteBuffer dictionary) {
         if (CHECKS) {
             check(streamPtr);
         }

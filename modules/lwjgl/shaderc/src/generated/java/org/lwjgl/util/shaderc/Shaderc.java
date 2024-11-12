@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.shaderc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -691,7 +691,7 @@ public class Shaderc {
      * and {@code value} must remain valid for the duration of the call, but can be modified or deleted after this function has returned. In case of adding a
      * valueless macro, the {@code value} argument should be {@code null}.</p>
      */
-    public static void shaderc_compile_options_add_macro_definition(@NativeType("shaderc_compile_options_t") long options, @NativeType("char const *") ByteBuffer name, @Nullable @NativeType("char const *") ByteBuffer value) {
+    public static void shaderc_compile_options_add_macro_definition(@NativeType("shaderc_compile_options_t") long options, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") @Nullable ByteBuffer value) {
         nshaderc_compile_options_add_macro_definition(options, memAddress(name), name.remaining(), memAddressSafe(value), remainingSafe(value));
     }
 
@@ -704,7 +704,7 @@ public class Shaderc {
      * and {@code value} must remain valid for the duration of the call, but can be modified or deleted after this function has returned. In case of adding a
      * valueless macro, the {@code value} argument should be {@code null}.</p>
      */
-    public static void shaderc_compile_options_add_macro_definition(@NativeType("shaderc_compile_options_t") long options, @NativeType("char const *") CharSequence name, @Nullable @NativeType("char const *") CharSequence value) {
+    public static void shaderc_compile_options_add_macro_definition(@NativeType("shaderc_compile_options_t") long options, @NativeType("char const *") CharSequence name, @NativeType("char const *") @Nullable CharSequence value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int nameEncodedLength = stack.nUTF8(name, false);
@@ -787,7 +787,7 @@ public class Shaderc {
     }
 
     /** Sets includer callback functions. */
-    public static void shaderc_compile_options_set_include_callbacks(@NativeType("shaderc_compile_options_t") long options, @Nullable @NativeType("shaderc_include_resolve_fn") ShadercIncludeResolveI resolver, @Nullable @NativeType("shaderc_include_result_release_fn") ShadercIncludeResultReleaseI result_releaser, @NativeType("void *") long user_data) {
+    public static void shaderc_compile_options_set_include_callbacks(@NativeType("shaderc_compile_options_t") long options, @NativeType("shaderc_include_resolve_fn") @Nullable ShadercIncludeResolveI resolver, @NativeType("shaderc_include_result_release_fn") @Nullable ShadercIncludeResultReleaseI result_releaser, @NativeType("void *") long user_data) {
         nshaderc_compile_options_set_include_callbacks(options, memAddressSafe(resolver), memAddressSafe(result_releaser), user_data);
     }
 
@@ -1377,9 +1377,8 @@ public class Shaderc {
      * <p>When the source string is compiled into SPIR-V binary, this is guaranteed to be castable to a {@code uint32_t*}. If the result contains assembly text
      * or preprocessed source text, the pointer will point to the resulting array of characters.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static ByteBuffer shaderc_result_get_bytes(@NativeType("shaderc_compilation_result_t const") long result) {
+    public static @Nullable ByteBuffer shaderc_result_get_bytes(@NativeType("shaderc_compilation_result_t const") long result) {
         long __result = nshaderc_result_get_bytes(result);
         return memByteBufferSafe(__result, (int)shaderc_result_get_length(result));
     }
@@ -1390,9 +1389,8 @@ public class Shaderc {
      * <p>When the source string is compiled into SPIR-V binary, this is guaranteed to be castable to a {@code uint32_t*}. If the result contains assembly text
      * or preprocessed source text, the pointer will point to the resulting array of characters.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static ByteBuffer shaderc_result_get_bytes(@NativeType("shaderc_compilation_result_t const") long result, long length) {
+    public static @Nullable ByteBuffer shaderc_result_get_bytes(@NativeType("shaderc_compilation_result_t const") long result, long length) {
         long __result = nshaderc_result_get_bytes(result);
         return memByteBufferSafe(__result, (int)length);
     }
@@ -1409,9 +1407,8 @@ public class Shaderc {
     }
 
     /** Returns a null-terminated string that contains any error messages generated during the compilation. */
-    @Nullable
     @NativeType("char const *")
-    public static String shaderc_result_get_error_message(@NativeType("shaderc_compilation_result_t const") long result) {
+    public static @Nullable String shaderc_result_get_error_message(@NativeType("shaderc_compilation_result_t const") long result) {
         long __result = nshaderc_result_get_error_message(result);
         return memUTF8Safe(__result);
     }

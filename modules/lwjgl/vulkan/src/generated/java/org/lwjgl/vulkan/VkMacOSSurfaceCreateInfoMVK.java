@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,8 +176,7 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct<VkMacOSSurfaceCreateInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMacOSSurfaceCreateInfoMVK createSafe(long address) {
+    public static @Nullable VkMacOSSurfaceCreateInfoMVK createSafe(long address) {
         return address == NULL ? null : new VkMacOSSurfaceCreateInfoMVK(address, null);
     }
 
@@ -220,8 +219,7 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct<VkMacOSSurfaceCreateInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMacOSSurfaceCreateInfoMVK.Buffer createSafe(long address, int capacity) {
+    public static VkMacOSSurfaceCreateInfoMVK.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

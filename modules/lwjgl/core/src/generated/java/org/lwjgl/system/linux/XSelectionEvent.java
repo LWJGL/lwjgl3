@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -210,8 +210,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XSelectionEvent createSafe(long address) {
+    public static @Nullable XSelectionEvent createSafe(long address) {
         return address == NULL ? null : new XSelectionEvent(address, null);
     }
 
@@ -254,8 +253,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XSelectionEvent.Buffer createSafe(long address, int capacity) {
+    public static XSelectionEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

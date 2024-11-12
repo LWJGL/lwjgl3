@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class XMapEvent extends Struct<XMapEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XMapEvent createSafe(long address) {
+    public static @Nullable XMapEvent createSafe(long address) {
         return address == NULL ? null : new XMapEvent(address, null);
     }
 
@@ -229,8 +228,7 @@ public class XMapEvent extends Struct<XMapEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XMapEvent.Buffer createSafe(long address, int capacity) {
+    public static XMapEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

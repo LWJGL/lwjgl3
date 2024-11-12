@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GPU_DEVICE createSafe(long address) {
+    public static @Nullable GPU_DEVICE createSafe(long address) {
         return address == NULL ? null : new GPU_DEVICE(address, null);
     }
 
@@ -192,8 +191,7 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GPU_DEVICE.Buffer createSafe(long address, int capacity) {
+    public static GPU_DEVICE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

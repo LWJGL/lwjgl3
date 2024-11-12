@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -110,9 +110,8 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     @NativeType("uint32_t")
     public int viewFormatCount() { return nviewFormatCount(address()); }
     /** a pointer to an array of {@code VkFormat} values specifying all formats which <b>can</b> be used when creating views of this image. */
-    @Nullable
     @NativeType("VkFormat const *")
-    public IntBuffer pViewFormats() { return npViewFormats(address()); }
+    public @Nullable IntBuffer pViewFormats() { return npViewFormats(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageFormatListCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -172,8 +171,7 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageFormatListCreateInfo createSafe(long address) {
+    public static @Nullable VkImageFormatListCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkImageFormatListCreateInfo(address, null);
     }
 
@@ -216,8 +214,7 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageFormatListCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkImageFormatListCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -268,7 +265,7 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     /** Unsafe version of {@link #viewFormatCount}. */
     public static int nviewFormatCount(long struct) { return memGetInt(struct + VkImageFormatListCreateInfo.VIEWFORMATCOUNT); }
     /** Unsafe version of {@link #pViewFormats() pViewFormats}. */
-    @Nullable public static IntBuffer npViewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageFormatListCreateInfo.PVIEWFORMATS), nviewFormatCount(struct)); }
+    public static @Nullable IntBuffer npViewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageFormatListCreateInfo.PVIEWFORMATS), nviewFormatCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkImageFormatListCreateInfo.STYPE, value); }
@@ -343,9 +340,8 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
         @NativeType("uint32_t")
         public int viewFormatCount() { return VkImageFormatListCreateInfo.nviewFormatCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageFormatListCreateInfo#pViewFormats} field. */
-        @Nullable
         @NativeType("VkFormat const *")
-        public IntBuffer pViewFormats() { return VkImageFormatListCreateInfo.npViewFormats(address()); }
+        public @Nullable IntBuffer pViewFormats() { return VkImageFormatListCreateInfo.npViewFormats(address()); }
 
         /** Sets the specified value to the {@link VkImageFormatListCreateInfo#sType} field. */
         public VkImageFormatListCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageFormatListCreateInfo.nsType(address(), value); return this; }

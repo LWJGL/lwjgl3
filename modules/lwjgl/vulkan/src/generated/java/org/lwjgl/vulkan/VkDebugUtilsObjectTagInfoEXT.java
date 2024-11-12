@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -212,8 +212,7 @@ public class VkDebugUtilsObjectTagInfoEXT extends Struct<VkDebugUtilsObjectTagIn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugUtilsObjectTagInfoEXT createSafe(long address) {
+    public static @Nullable VkDebugUtilsObjectTagInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkDebugUtilsObjectTagInfoEXT(address, null);
     }
 
@@ -256,8 +255,7 @@ public class VkDebugUtilsObjectTagInfoEXT extends Struct<VkDebugUtilsObjectTagIn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugUtilsObjectTagInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDebugUtilsObjectTagInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

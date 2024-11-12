@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,9 +184,8 @@ public class Zdict {
 
     public static native long nZDICT_getErrorName(long errorCode);
 
-    @Nullable
     @NativeType("char const *")
-    public static String ZDICT_getErrorName(@NativeType("size_t") long errorCode) {
+    public static @Nullable String ZDICT_getErrorName(@NativeType("size_t") long errorCode) {
         long __result = nZDICT_getErrorName(errorCode);
         return memASCIISafe(__result);
     }

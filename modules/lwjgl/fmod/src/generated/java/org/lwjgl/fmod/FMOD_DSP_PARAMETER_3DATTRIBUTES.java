@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_PARAMETER_3DATTRIBUTES createSafe(long address) {
+    public static @Nullable FMOD_DSP_PARAMETER_3DATTRIBUTES createSafe(long address) {
         return address == NULL ? null : new FMOD_DSP_PARAMETER_3DATTRIBUTES(address, null);
     }
 
@@ -177,8 +176,7 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_PARAMETER_3DATTRIBUTES.Buffer createSafe(long address, int capacity) {
+    public static FMOD_DSP_PARAMETER_3DATTRIBUTES.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

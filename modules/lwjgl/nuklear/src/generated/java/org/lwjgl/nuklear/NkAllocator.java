@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -81,13 +81,11 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
     /** @return the value of the {@code alloc} field. */
-    @Nullable
     @NativeType("nk_plugin_alloc")
-    public NkPluginAlloc alloc() { return nalloc(address()); }
+    public @Nullable NkPluginAlloc alloc() { return nalloc(address()); }
     /** @return the value of the {@code mfree} field. */
-    @Nullable
     @NativeType("nk_plugin_free")
-    public NkPluginFree mfree() { return nmfree(address()); }
+    public @Nullable NkPluginFree mfree() { return nmfree(address()); }
 
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkAllocator userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
@@ -147,8 +145,7 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkAllocator createSafe(long address) {
+    public static @Nullable NkAllocator createSafe(long address) {
         return address == NULL ? null : new NkAllocator(address, null);
     }
 
@@ -191,8 +188,7 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkAllocator.Buffer createSafe(long address, int capacity) {
+    public static NkAllocator.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -258,9 +254,9 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkAllocator.USERDATA); }
     /** Unsafe version of {@link #alloc}. */
-    @Nullable public static NkPluginAlloc nalloc(long struct) { return NkPluginAlloc.createSafe(memGetAddress(struct + NkAllocator.ALLOC)); }
+    public static @Nullable NkPluginAlloc nalloc(long struct) { return NkPluginAlloc.createSafe(memGetAddress(struct + NkAllocator.ALLOC)); }
     /** Unsafe version of {@link #mfree}. */
-    @Nullable public static NkPluginFree nmfree(long struct) { return NkPluginFree.createSafe(memGetAddress(struct + NkAllocator.MFREE)); }
+    public static @Nullable NkPluginFree nmfree(long struct) { return NkPluginFree.createSafe(memGetAddress(struct + NkAllocator.MFREE)); }
 
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkAllocator.USERDATA, NkHandle.SIZEOF); }
@@ -316,13 +312,11 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkAllocator.nuserdata(address()); }
         /** @return the value of the {@code alloc} field. */
-        @Nullable
         @NativeType("nk_plugin_alloc")
-        public NkPluginAlloc alloc() { return NkAllocator.nalloc(address()); }
+        public @Nullable NkPluginAlloc alloc() { return NkAllocator.nalloc(address()); }
         /** @return the value of the {@code mfree} field. */
-        @Nullable
         @NativeType("nk_plugin_free")
-        public NkPluginFree mfree() { return NkAllocator.nmfree(address()); }
+        public @Nullable NkPluginFree mfree() { return NkAllocator.nmfree(address()); }
 
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkAllocator.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkAllocator.nuserdata(address(), value); return this; }

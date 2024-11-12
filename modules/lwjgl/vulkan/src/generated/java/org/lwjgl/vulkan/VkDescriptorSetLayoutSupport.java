@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class VkDescriptorSetLayoutSupport extends Struct<VkDescriptorSetLayoutSu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetLayoutSupport createSafe(long address) {
+    public static @Nullable VkDescriptorSetLayoutSupport createSafe(long address) {
         return address == NULL ? null : new VkDescriptorSetLayoutSupport(address, null);
     }
 
@@ -206,8 +205,7 @@ public class VkDescriptorSetLayoutSupport extends Struct<VkDescriptorSetLayoutSu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetLayoutSupport.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorSetLayoutSupport.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

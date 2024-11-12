@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRTextureWithPose createSafe(long address) {
+    public static @Nullable VRTextureWithPose createSafe(long address) {
         return address == NULL ? null : new VRTextureWithPose(address, null);
     }
 
@@ -203,8 +202,7 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRTextureWithPose.Buffer createSafe(long address, int capacity) {
+    public static VRTextureWithPose.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

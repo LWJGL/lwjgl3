@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -122,8 +122,7 @@ public class DistortionCoordinates extends Struct<DistortionCoordinates> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DistortionCoordinates createSafe(long address) {
+    public static @Nullable DistortionCoordinates createSafe(long address) {
         return address == NULL ? null : new DistortionCoordinates(address, null);
     }
 
@@ -166,8 +165,7 @@ public class DistortionCoordinates extends Struct<DistortionCoordinates> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DistortionCoordinates.Buffer createSafe(long address, int capacity) {
+    public static DistortionCoordinates.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

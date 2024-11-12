@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,8 +220,7 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerDepthInfoKHR createSafe(long address) {
+    public static @Nullable XrCompositionLayerDepthInfoKHR createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerDepthInfoKHR(address, null);
     }
 
@@ -264,8 +263,7 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerDepthInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerDepthInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

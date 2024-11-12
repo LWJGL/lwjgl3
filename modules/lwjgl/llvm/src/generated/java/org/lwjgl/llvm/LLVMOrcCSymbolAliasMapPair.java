@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -135,8 +135,7 @@ public class LLVMOrcCSymbolAliasMapPair extends Struct<LLVMOrcCSymbolAliasMapPai
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolAliasMapPair createSafe(long address) {
+    public static @Nullable LLVMOrcCSymbolAliasMapPair createSafe(long address) {
         return address == NULL ? null : new LLVMOrcCSymbolAliasMapPair(address, null);
     }
 
@@ -179,8 +178,7 @@ public class LLVMOrcCSymbolAliasMapPair extends Struct<LLVMOrcCSymbolAliasMapPai
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolAliasMapPair.Buffer createSafe(long address, int capacity) {
+    public static LLVMOrcCSymbolAliasMapPair.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

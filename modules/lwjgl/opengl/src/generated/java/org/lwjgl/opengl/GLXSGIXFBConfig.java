@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,9 +121,8 @@ public class GLXSGIXFBConfig {
      * @param screen      the screen number
      * @param attrib_list an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}
      */
-    @Nullable
     @NativeType("GLXFBConfigSGIX *")
-    public static PointerBuffer glXChooseFBConfigSGIX(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int const *") IntBuffer attrib_list) {
+    public static @Nullable PointerBuffer glXChooseFBConfigSGIX(@NativeType("Display *") long display, int screen, @NativeType("int const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list);
         }
@@ -199,9 +198,8 @@ public class GLXSGIXFBConfig {
      * @param display the connection to the X server
      * @param config  the {@code GLXFBConfigSGIX}
      */
-    @Nullable
     @NativeType("XVisualInfo *")
-    public static XVisualInfo glXGetVisualFromFBConfigSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config) {
+    public static @Nullable XVisualInfo glXGetVisualFromFBConfigSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config) {
         long __result = nglXGetVisualFromFBConfigSGIX(display, config);
         return XVisualInfo.createSafe(__result);
     }
@@ -243,9 +241,8 @@ public class GLXSGIXFBConfig {
     }
 
     /** Array version of: {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX} */
-    @Nullable
     @NativeType("GLXFBConfigSGIX *")
-    public static PointerBuffer glXChooseFBConfigSGIX(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int const *") int[] attrib_list) {
+    public static @Nullable PointerBuffer glXChooseFBConfigSGIX(@NativeType("Display *") long display, int screen, @NativeType("int const *") int @Nullable [] attrib_list) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXChooseFBConfigSGIX;
         if (CHECKS) {
             check(__functionAddress);

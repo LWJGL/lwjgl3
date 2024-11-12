@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -35,8 +35,7 @@ public abstract class ktxVulkanTexture_subAllocatorBindImageFuncPtr extends Call
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanTexture_subAllocatorBindImageFuncPtr createSafe(long functionPointer) {
+    public static @Nullable ktxVulkanTexture_subAllocatorBindImageFuncPtr createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

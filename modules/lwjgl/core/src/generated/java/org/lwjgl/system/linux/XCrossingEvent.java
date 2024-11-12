@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -288,8 +288,7 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XCrossingEvent createSafe(long address) {
+    public static @Nullable XCrossingEvent createSafe(long address) {
         return address == NULL ? null : new XCrossingEvent(address, null);
     }
 
@@ -332,8 +331,7 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XCrossingEvent.Buffer createSafe(long address, int capacity) {
+    public static XCrossingEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

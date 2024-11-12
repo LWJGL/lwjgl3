@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -42,8 +42,7 @@ public abstract class ZSTDSequenceProducer extends Callback implements ZSTDSeque
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ZSTDSequenceProducer createSafe(long functionPointer) {
+    public static @Nullable ZSTDSequenceProducer createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

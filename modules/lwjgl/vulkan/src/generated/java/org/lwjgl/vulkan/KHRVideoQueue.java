@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -508,7 +508,7 @@ public class KHRVideoQueue {
      * @param pVideoFormatProperties    a pointer to an array of {@link VkVideoFormatPropertiesKHR} structures in which supported image formats and capabilities are returned.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceVideoFormatInfoKHR const *") VkPhysicalDeviceVideoFormatInfoKHR pVideoFormatInfo, @NativeType("uint32_t *") IntBuffer pVideoFormatPropertyCount, @Nullable @NativeType("VkVideoFormatPropertiesKHR *") VkVideoFormatPropertiesKHR.Buffer pVideoFormatProperties) {
+    public static int vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceVideoFormatInfoKHR const *") VkPhysicalDeviceVideoFormatInfoKHR pVideoFormatInfo, @NativeType("uint32_t *") IntBuffer pVideoFormatPropertyCount, @NativeType("VkVideoFormatPropertiesKHR *") VkVideoFormatPropertiesKHR.@Nullable Buffer pVideoFormatProperties) {
         if (CHECKS) {
             check(pVideoFormatPropertyCount, 1);
             checkSafe(pVideoFormatProperties, pVideoFormatPropertyCount.get(pVideoFormatPropertyCount.position()));
@@ -601,7 +601,7 @@ public class KHRVideoQueue {
      * @param pVideoSession a pointer to a {@code VkVideoSessionKHR} handle in which the resulting video session object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionCreateInfoKHR const *") VkVideoSessionCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionKHR *") LongBuffer pVideoSession) {
+    public static int vkCreateVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionCreateInfoKHR const *") VkVideoSessionCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionKHR *") LongBuffer pVideoSession) {
         if (CHECKS) {
             check(pVideoSession, 1);
         }
@@ -663,7 +663,7 @@ public class KHRVideoQueue {
      * @param videoSession the video session to destroy.
      * @param pAllocator   controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyVideoSessionKHR(device, videoSession, memAddressSafe(pAllocator));
     }
 
@@ -730,7 +730,7 @@ public class KHRVideoQueue {
      * @param pMemoryRequirements      {@code NULL} or a pointer to an array of {@link VkVideoSessionMemoryRequirementsKHR} structures in which the memory binding requirements of the video session are returned.
      */
     @NativeType("VkResult")
-    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") IntBuffer pMemoryRequirementsCount, @Nullable @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.Buffer pMemoryRequirements) {
+    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") IntBuffer pMemoryRequirementsCount, @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.@Nullable Buffer pMemoryRequirements) {
         if (CHECKS) {
             check(pMemoryRequirementsCount, 1);
             checkSafe(pMemoryRequirements, pMemoryRequirementsCount.get(pMemoryRequirementsCount.position()));
@@ -1004,7 +1004,7 @@ public class KHRVideoQueue {
      * @param pVideoSessionParameters a pointer to a {@code VkVideoSessionParametersKHR} handle in which the resulting video session parameters object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersCreateInfoKHR const *") VkVideoSessionParametersCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionParametersKHR *") LongBuffer pVideoSessionParameters) {
+    public static int vkCreateVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersCreateInfoKHR const *") VkVideoSessionParametersCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionParametersKHR *") LongBuffer pVideoSessionParameters) {
         if (CHECKS) {
             check(pVideoSessionParameters, 1);
         }
@@ -1202,7 +1202,7 @@ public class KHRVideoQueue {
      * @param videoSessionParameters the video session parameters object to destroy.
      * @param pAllocator             controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersKHR") long videoSessionParameters, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersKHR") long videoSessionParameters, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyVideoSessionParametersKHR(device, videoSessionParameters, memAddressSafe(pAllocator));
     }
 
@@ -1478,7 +1478,7 @@ public class KHRVideoQueue {
 
     /** Array version of: {@link #vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceVideoFormatInfoKHR const *") VkPhysicalDeviceVideoFormatInfoKHR pVideoFormatInfo, @NativeType("uint32_t *") int[] pVideoFormatPropertyCount, @Nullable @NativeType("VkVideoFormatPropertiesKHR *") VkVideoFormatPropertiesKHR.Buffer pVideoFormatProperties) {
+    public static int vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceVideoFormatInfoKHR const *") VkPhysicalDeviceVideoFormatInfoKHR pVideoFormatInfo, @NativeType("uint32_t *") int[] pVideoFormatPropertyCount, @NativeType("VkVideoFormatPropertiesKHR *") VkVideoFormatPropertiesKHR.@Nullable Buffer pVideoFormatProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceVideoFormatPropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -1490,7 +1490,7 @@ public class KHRVideoQueue {
 
     /** Array version of: {@link #vkCreateVideoSessionKHR CreateVideoSessionKHR} */
     @NativeType("VkResult")
-    public static int vkCreateVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionCreateInfoKHR const *") VkVideoSessionCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionKHR *") long[] pVideoSession) {
+    public static int vkCreateVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionCreateInfoKHR const *") VkVideoSessionCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionKHR *") long[] pVideoSession) {
         long __functionAddress = device.getCapabilities().vkCreateVideoSessionKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -1502,7 +1502,7 @@ public class KHRVideoQueue {
 
     /** Array version of: {@link #vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR} */
     @NativeType("VkResult")
-    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") int[] pMemoryRequirementsCount, @Nullable @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.Buffer pMemoryRequirements) {
+    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") int[] pMemoryRequirementsCount, @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.@Nullable Buffer pMemoryRequirements) {
         long __functionAddress = device.getCapabilities().vkGetVideoSessionMemoryRequirementsKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -1514,7 +1514,7 @@ public class KHRVideoQueue {
 
     /** Array version of: {@link #vkCreateVideoSessionParametersKHR CreateVideoSessionParametersKHR} */
     @NativeType("VkResult")
-    public static int vkCreateVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersCreateInfoKHR const *") VkVideoSessionParametersCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionParametersKHR *") long[] pVideoSessionParameters) {
+    public static int vkCreateVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersCreateInfoKHR const *") VkVideoSessionParametersCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkVideoSessionParametersKHR *") long[] pVideoSessionParameters) {
         long __functionAddress = device.getCapabilities().vkCreateVideoSessionParametersKHR;
         if (CHECKS) {
             check(__functionAddress);

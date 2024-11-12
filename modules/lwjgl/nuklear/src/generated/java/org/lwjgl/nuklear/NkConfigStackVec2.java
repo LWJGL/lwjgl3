@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -89,8 +89,7 @@ class NkConfigStackVec2 extends Struct<NkConfigStackVec2> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackVec2 createSafe(long address) {
+    public static @Nullable NkConfigStackVec2 createSafe(long address) {
         return address == NULL ? null : new NkConfigStackVec2(address, null);
     }
 
@@ -105,8 +104,7 @@ class NkConfigStackVec2 extends Struct<NkConfigStackVec2> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackVec2.Buffer createSafe(long address, int capacity) {
+    public static NkConfigStackVec2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

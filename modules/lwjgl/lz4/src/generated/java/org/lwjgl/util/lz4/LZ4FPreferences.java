@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lz4;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FPreferences createSafe(long address) {
+    public static @Nullable LZ4FPreferences createSafe(long address) {
         return address == NULL ? null : new LZ4FPreferences(address, null);
     }
 
@@ -219,8 +218,7 @@ public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FPreferences.Buffer createSafe(long address, int capacity) {
+    public static LZ4FPreferences.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

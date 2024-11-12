@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -66,7 +66,7 @@ public class INTELSharingFormatQuery {
      *                            {@code image_type}. If {@code num_texture_formats} is NULL, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetSupportedGLTextureFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @Nullable @NativeType("GLenum *") IntBuffer gl_formats, @Nullable @NativeType("cl_uint *") IntBuffer num_texture_formats) {
+    public static int clGetSupportedGLTextureFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("GLenum *") @Nullable IntBuffer gl_formats, @NativeType("cl_uint *") @Nullable IntBuffer num_texture_formats) {
         if (CHECKS) {
             checkSafe(num_texture_formats, 1);
         }
@@ -106,7 +106,7 @@ public class INTELSharingFormatQuery {
      *                            If {@code num_surface_formats} is {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetSupportedVA_APIMediaSurfaceFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_uint") int plane, @Nullable @NativeType("VAImageFormat *") PointerBuffer va_api_formats, @Nullable @NativeType("cl_uint *") IntBuffer num_surface_formats) {
+    public static int clGetSupportedVA_APIMediaSurfaceFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_uint") int plane, @NativeType("VAImageFormat *") @Nullable PointerBuffer va_api_formats, @NativeType("cl_uint *") @Nullable IntBuffer num_surface_formats) {
         if (CHECKS) {
             checkSafe(num_surface_formats, 1);
         }
@@ -115,7 +115,7 @@ public class INTELSharingFormatQuery {
 
     /** Array version of: {@link #clGetSupportedGLTextureFormatsINTEL GetSupportedGLTextureFormatsINTEL} */
     @NativeType("cl_int")
-    public static int clGetSupportedGLTextureFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @Nullable @NativeType("GLenum *") int[] gl_formats, @Nullable @NativeType("cl_uint *") int[] num_texture_formats) {
+    public static int clGetSupportedGLTextureFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("GLenum *") int @Nullable [] gl_formats, @NativeType("cl_uint *") int @Nullable [] num_texture_formats) {
         long __functionAddress = CL.getICD().clGetSupportedGLTextureFormatsINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -127,7 +127,7 @@ public class INTELSharingFormatQuery {
 
     /** Array version of: {@link #clGetSupportedVA_APIMediaSurfaceFormatsINTEL GetSupportedVA_APIMediaSurfaceFormatsINTEL} */
     @NativeType("cl_int")
-    public static int clGetSupportedVA_APIMediaSurfaceFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_uint") int plane, @Nullable @NativeType("VAImageFormat *") PointerBuffer va_api_formats, @Nullable @NativeType("cl_uint *") int[] num_surface_formats) {
+    public static int clGetSupportedVA_APIMediaSurfaceFormatsINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_uint") int plane, @NativeType("VAImageFormat *") @Nullable PointerBuffer va_api_formats, @NativeType("cl_uint *") int @Nullable [] num_surface_formats) {
         long __functionAddress = CL.getICD().clGetSupportedVA_APIMediaSurfaceFormatsINTEL;
         if (CHECKS) {
             check(__functionAddress);

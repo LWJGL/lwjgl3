@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -93,9 +93,8 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("FT_Byte *")
-    public ByteBuffer p(int capacity) { return np(address(), capacity); }
+    public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
     /** @return the value of the {@code read_variable} field. */
     @NativeType("FT_Bool")
     public boolean read_variable() { return nread_variable(address()); }
@@ -124,8 +123,7 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ColorStopIterator createSafe(long address) {
+    public static @Nullable FT_ColorStopIterator createSafe(long address) {
         return address == NULL ? null : new FT_ColorStopIterator(address, null);
     }
 
@@ -168,8 +166,7 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ColorStopIterator.Buffer createSafe(long address, int capacity) {
+    public static FT_ColorStopIterator.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -218,7 +215,7 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
     /** Unsafe version of {@link #current_color_stop}. */
     public static int ncurrent_color_stop(long struct) { return memGetInt(struct + FT_ColorStopIterator.CURRENT_COLOR_STOP); }
     /** Unsafe version of {@link #p(int) p}. */
-    @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_ColorStopIterator.P), capacity); }
+    public static @Nullable ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_ColorStopIterator.P), capacity); }
     /** Unsafe version of {@link #read_variable}. */
     public static boolean nread_variable(long struct) { return memGetByte(struct + FT_ColorStopIterator.READ_VARIABLE) != 0; }
 
@@ -276,9 +273,8 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("FT_Byte *")
-        public ByteBuffer p(int capacity) { return FT_ColorStopIterator.np(address(), capacity); }
+        public @Nullable ByteBuffer p(int capacity) { return FT_ColorStopIterator.np(address(), capacity); }
         /** @return the value of the {@code read_variable} field. */
         @NativeType("FT_Bool")
         public boolean read_variable() { return FT_ColorStopIterator.nread_variable(address()); }

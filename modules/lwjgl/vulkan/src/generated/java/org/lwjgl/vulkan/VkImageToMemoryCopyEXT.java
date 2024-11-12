@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -238,8 +238,7 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageToMemoryCopyEXT createSafe(long address) {
+    public static @Nullable VkImageToMemoryCopyEXT createSafe(long address) {
         return address == NULL ? null : new VkImageToMemoryCopyEXT(address, null);
     }
 
@@ -282,8 +281,7 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageToMemoryCopyEXT.Buffer createSafe(long address, int capacity) {
+    public static VkImageToMemoryCopyEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

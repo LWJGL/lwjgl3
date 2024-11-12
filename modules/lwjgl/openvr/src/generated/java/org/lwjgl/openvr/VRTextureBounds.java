@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VRTextureBounds extends Struct<VRTextureBounds> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRTextureBounds createSafe(long address) {
+    public static @Nullable VRTextureBounds createSafe(long address) {
         return address == NULL ? null : new VRTextureBounds(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VRTextureBounds extends Struct<VRTextureBounds> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRTextureBounds.Buffer createSafe(long address, int capacity) {
+    public static VRTextureBounds.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

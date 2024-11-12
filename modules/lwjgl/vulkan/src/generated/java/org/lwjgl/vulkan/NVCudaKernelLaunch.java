@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,7 +185,7 @@ public class NVCudaKernelLaunch {
      * @param pModule     a pointer to a {@code VkCudaModuleNV} handle in which the resulting CUDA module object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleCreateInfoNV const *") VkCudaModuleCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCudaModuleNV *") LongBuffer pModule) {
+    public static int vkCreateCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleCreateInfoNV const *") VkCudaModuleCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCudaModuleNV *") LongBuffer pModule) {
         if (CHECKS) {
             check(pModule, 1);
         }
@@ -264,7 +264,7 @@ public class NVCudaKernelLaunch {
      * @param pCacheData a pointer to a buffer in which to copy the binary cache
      */
     @NativeType("VkResult")
-    public static int vkGetCudaModuleCacheNV(VkDevice device, @NativeType("VkCudaModuleNV") long module, @NativeType("size_t *") PointerBuffer pCacheSize, @Nullable @NativeType("void *") ByteBuffer pCacheData) {
+    public static int vkGetCudaModuleCacheNV(VkDevice device, @NativeType("VkCudaModuleNV") long module, @NativeType("size_t *") PointerBuffer pCacheSize, @NativeType("void *") @Nullable ByteBuffer pCacheData) {
         if (CHECKS) {
             check(pCacheSize, 1);
             checkSafe(pCacheData, pCacheSize.get(pCacheSize.position()));
@@ -331,7 +331,7 @@ public class NVCudaKernelLaunch {
      * @param pFunction   a pointer to a {@code VkCudaFunctionNV} handle in which the resulting CUDA function object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionCreateInfoNV const *") VkCudaFunctionCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCudaFunctionNV *") LongBuffer pFunction) {
+    public static int vkCreateCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionCreateInfoNV const *") VkCudaFunctionCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCudaFunctionNV *") LongBuffer pFunction) {
         if (CHECKS) {
             check(pFunction, 1);
         }
@@ -379,7 +379,7 @@ public class NVCudaKernelLaunch {
      * @param module     the handle of the CUDA module to destroy.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleNV") long module, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleNV") long module, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyCudaModuleNV(device, module, memAddressSafe(pAllocator));
     }
 
@@ -424,7 +424,7 @@ public class NVCudaKernelLaunch {
      * @param function   the handle of the CUDA function to destroy.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionNV") long function, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionNV") long function, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyCudaFunctionNV(device, function, memAddressSafe(pAllocator));
     }
 
@@ -491,7 +491,7 @@ public class NVCudaKernelLaunch {
 
     /** Array version of: {@link #vkCreateCudaModuleNV CreateCudaModuleNV} */
     @NativeType("VkResult")
-    public static int vkCreateCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleCreateInfoNV const *") VkCudaModuleCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCudaModuleNV *") long[] pModule) {
+    public static int vkCreateCudaModuleNV(VkDevice device, @NativeType("VkCudaModuleCreateInfoNV const *") VkCudaModuleCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCudaModuleNV *") long[] pModule) {
         long __functionAddress = device.getCapabilities().vkCreateCudaModuleNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -503,7 +503,7 @@ public class NVCudaKernelLaunch {
 
     /** Array version of: {@link #vkCreateCudaFunctionNV CreateCudaFunctionNV} */
     @NativeType("VkResult")
-    public static int vkCreateCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionCreateInfoNV const *") VkCudaFunctionCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCudaFunctionNV *") long[] pFunction) {
+    public static int vkCreateCudaFunctionNV(VkDevice device, @NativeType("VkCudaFunctionCreateInfoNV const *") VkCudaFunctionCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCudaFunctionNV *") long[] pFunction) {
         long __functionAddress = device.getCapabilities().vkCreateCudaFunctionNV;
         if (CHECKS) {
             check(__functionAddress);

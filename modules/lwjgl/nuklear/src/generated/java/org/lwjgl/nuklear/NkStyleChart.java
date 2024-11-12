@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -226,8 +226,7 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleChart createSafe(long address) {
+    public static @Nullable NkStyleChart createSafe(long address) {
         return address == NULL ? null : new NkStyleChart(address, null);
     }
 
@@ -270,8 +269,7 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleChart.Buffer createSafe(long address, int capacity) {
+    public static NkStyleChart.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

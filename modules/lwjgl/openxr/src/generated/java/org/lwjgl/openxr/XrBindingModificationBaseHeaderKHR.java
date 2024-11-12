@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class XrBindingModificationBaseHeaderKHR extends Struct<XrBindingModifica
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBindingModificationBaseHeaderKHR createSafe(long address) {
+    public static @Nullable XrBindingModificationBaseHeaderKHR createSafe(long address) {
         return address == NULL ? null : new XrBindingModificationBaseHeaderKHR(address, null);
     }
 
@@ -202,8 +201,7 @@ public class XrBindingModificationBaseHeaderKHR extends Struct<XrBindingModifica
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBindingModificationBaseHeaderKHR.Buffer createSafe(long address, int capacity) {
+    public static XrBindingModificationBaseHeaderKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

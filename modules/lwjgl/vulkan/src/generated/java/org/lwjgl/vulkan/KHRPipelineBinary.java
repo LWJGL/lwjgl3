@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -202,7 +202,7 @@ public class KHRPipelineBinary {
      * @param pBinaries   a pointer to a {@link VkPipelineBinaryHandlesInfoKHR} structure in which the resulting pipeline binaries are returned.
      */
     @NativeType("VkResult")
-    public static int vkCreatePipelineBinariesKHR(VkDevice device, @NativeType("VkPipelineBinaryCreateInfoKHR const *") VkPipelineBinaryCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipelineBinaryHandlesInfoKHR *") VkPipelineBinaryHandlesInfoKHR pBinaries) {
+    public static int vkCreatePipelineBinariesKHR(VkDevice device, @NativeType("VkPipelineBinaryCreateInfoKHR const *") VkPipelineBinaryCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipelineBinaryHandlesInfoKHR *") VkPipelineBinaryHandlesInfoKHR pBinaries) {
         return nvkCreatePipelineBinariesKHR(device, pCreateInfo.address(), memAddressSafe(pAllocator), pBinaries.address());
     }
 
@@ -260,7 +260,7 @@ public class KHRPipelineBinary {
      * @param pipelineBinary the handle of the pipeline binary object to destroy.
      * @param pAllocator     controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyPipelineBinaryKHR(VkDevice device, @NativeType("VkPipelineBinaryKHR") long pipelineBinary, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyPipelineBinaryKHR(VkDevice device, @NativeType("VkPipelineBinaryKHR") long pipelineBinary, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyPipelineBinaryKHR(device, pipelineBinary, memAddressSafe(pAllocator));
     }
 
@@ -333,7 +333,7 @@ public class KHRPipelineBinary {
      * @param pPipelineKey        a pointer to a {@link VkPipelineBinaryKeyKHR} structure in which the resulting key is returned.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelineKeyKHR(VkDevice device, @Nullable @NativeType("VkPipelineCreateInfoKHR const *") VkPipelineCreateInfoKHR pPipelineCreateInfo, @NativeType("VkPipelineBinaryKeyKHR *") VkPipelineBinaryKeyKHR pPipelineKey) {
+    public static int vkGetPipelineKeyKHR(VkDevice device, @NativeType("VkPipelineCreateInfoKHR const *") @Nullable VkPipelineCreateInfoKHR pPipelineCreateInfo, @NativeType("VkPipelineBinaryKeyKHR *") VkPipelineBinaryKeyKHR pPipelineKey) {
         return nvkGetPipelineKeyKHR(device, memAddressSafe(pPipelineCreateInfo), pPipelineKey.address());
     }
 
@@ -409,7 +409,7 @@ public class KHRPipelineBinary {
      * @param pPipelineBinaryData     either {@code NULL} or a pointer to a buffer.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelineBinaryDataKHR(VkDevice device, @NativeType("VkPipelineBinaryDataInfoKHR const *") VkPipelineBinaryDataInfoKHR pInfo, @NativeType("VkPipelineBinaryKeyKHR *") VkPipelineBinaryKeyKHR pPipelineBinaryKey, @NativeType("size_t *") PointerBuffer pPipelineBinaryDataSize, @Nullable @NativeType("void *") ByteBuffer pPipelineBinaryData) {
+    public static int vkGetPipelineBinaryDataKHR(VkDevice device, @NativeType("VkPipelineBinaryDataInfoKHR const *") VkPipelineBinaryDataInfoKHR pInfo, @NativeType("VkPipelineBinaryKeyKHR *") VkPipelineBinaryKeyKHR pPipelineBinaryKey, @NativeType("size_t *") PointerBuffer pPipelineBinaryDataSize, @NativeType("void *") @Nullable ByteBuffer pPipelineBinaryData) {
         if (CHECKS) {
             check(pPipelineBinaryDataSize, 1);
             checkSafe(pPipelineBinaryData, pPipelineBinaryDataSize.get(pPipelineBinaryDataSize.position()));
@@ -489,7 +489,7 @@ public class KHRPipelineBinary {
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     @NativeType("VkResult")
-    public static int vkReleaseCapturedPipelineDataKHR(VkDevice device, @NativeType("VkReleaseCapturedPipelineDataInfoKHR const *") VkReleaseCapturedPipelineDataInfoKHR pInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static int vkReleaseCapturedPipelineDataKHR(VkDevice device, @NativeType("VkReleaseCapturedPipelineDataInfoKHR const *") VkReleaseCapturedPipelineDataInfoKHR pInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         return nvkReleaseCapturedPipelineDataKHR(device, pInfo.address(), memAddressSafe(pAllocator));
     }
 

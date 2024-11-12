@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -142,8 +142,7 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBaseOutStructure createSafe(long address) {
+    public static @Nullable XrBaseOutStructure createSafe(long address) {
         return address == NULL ? null : new XrBaseOutStructure(address, null);
     }
 
@@ -186,8 +185,7 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBaseOutStructure.Buffer createSafe(long address, int capacity) {
+    public static XrBaseOutStructure.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

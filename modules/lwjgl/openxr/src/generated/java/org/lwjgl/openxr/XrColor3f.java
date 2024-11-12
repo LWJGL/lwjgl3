@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,8 +145,7 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrColor3f createSafe(long address) {
+    public static @Nullable XrColor3f createSafe(long address) {
         return address == NULL ? null : new XrColor3f(address, null);
     }
 
@@ -189,8 +188,7 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrColor3f.Buffer createSafe(long address, int capacity) {
+    public static XrColor3f.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

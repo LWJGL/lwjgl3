@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -94,7 +94,7 @@ public class KHRSemaphore {
 
     /** @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned. */
     @NativeType("cl_semaphore_khr")
-    public static long clCreateSemaphoreWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_semaphore_properties_khr const *") LongBuffer sema_props, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateSemaphoreWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_semaphore_properties_khr const *") LongBuffer sema_props, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNT(sema_props);
             checkSafe(errcode_ret, 1);
@@ -128,7 +128,7 @@ public class KHRSemaphore {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueWaitSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @Nullable @NativeType("cl_semaphore_payload_khr const *") LongBuffer sema_payload_list, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWaitSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") @Nullable LongBuffer sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -161,7 +161,7 @@ public class KHRSemaphore {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") LongBuffer sema_payload_list, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") LongBuffer sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -186,7 +186,7 @@ public class KHRSemaphore {
 
     /** @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored. */
     @NativeType("cl_int")
-    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -195,7 +195,7 @@ public class KHRSemaphore {
 
     /** @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored. */
     @NativeType("cl_int")
-    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -204,7 +204,7 @@ public class KHRSemaphore {
 
     /** @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored. */
     @NativeType("cl_int")
-    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -237,7 +237,7 @@ public class KHRSemaphore {
 
     /** Array version of: {@link #clCreateSemaphoreWithPropertiesKHR CreateSemaphoreWithPropertiesKHR} */
     @NativeType("cl_semaphore_khr")
-    public static long clCreateSemaphoreWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_semaphore_properties_khr const *") long[] sema_props, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateSemaphoreWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_semaphore_properties_khr const *") long[] sema_props, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateSemaphoreWithPropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -250,7 +250,7 @@ public class KHRSemaphore {
 
     /** Array version of: {@link #clEnqueueWaitSemaphoresKHR EnqueueWaitSemaphoresKHR} */
     @NativeType("cl_int")
-    public static int clEnqueueWaitSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @Nullable @NativeType("cl_semaphore_payload_khr const *") long[] sema_payload_list, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWaitSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") long @Nullable [] sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWaitSemaphoresKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -262,7 +262,7 @@ public class KHRSemaphore {
 
     /** Array version of: {@link #clEnqueueSignalSemaphoresKHR EnqueueSignalSemaphoresKHR} */
     @NativeType("cl_int")
-    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") long[] sema_payload_list, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") long[] sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueSignalSemaphoresKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -274,7 +274,7 @@ public class KHRSemaphore {
 
     /** Array version of: {@link #clGetSemaphoreInfoKHR GetSemaphoreInfoKHR} */
     @NativeType("cl_int")
-    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSemaphoreInfoKHR(@NativeType("cl_semaphore_khr") long sema_object, @NativeType("cl_semaphore_info_khr") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetSemaphoreInfoKHR;
         if (CHECKS) {
             check(__functionAddress);

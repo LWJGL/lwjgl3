@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libffi;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,8 +113,7 @@ public class FFIClosure extends Struct<FFIClosure> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFIClosure createSafe(long address) {
+    public static @Nullable FFIClosure createSafe(long address) {
         return address == NULL ? null : new FFIClosure(address, null);
     }
 
@@ -157,8 +156,7 @@ public class FFIClosure extends Struct<FFIClosure> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFIClosure.Buffer createSafe(long address, int capacity) {
+    public static FFIClosure.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class KEYBDINPUT extends Struct<KEYBDINPUT> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static KEYBDINPUT createSafe(long address) {
+    public static @Nullable KEYBDINPUT createSafe(long address) {
         return address == NULL ? null : new KEYBDINPUT(address, null);
     }
 
@@ -218,8 +217,7 @@ public class KEYBDINPUT extends Struct<KEYBDINPUT> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static KEYBDINPUT.Buffer createSafe(long address, int capacity) {
+    public static KEYBDINPUT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

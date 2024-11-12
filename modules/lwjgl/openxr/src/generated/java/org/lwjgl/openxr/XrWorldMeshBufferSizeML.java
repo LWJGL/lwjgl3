@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrWorldMeshBufferSizeML createSafe(long address) {
+    public static @Nullable XrWorldMeshBufferSizeML createSafe(long address) {
         return address == NULL ? null : new XrWorldMeshBufferSizeML(address, null);
     }
 
@@ -202,8 +201,7 @@ public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrWorldMeshBufferSizeML.Buffer createSafe(long address, int capacity) {
+    public static XrWorldMeshBufferSizeML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

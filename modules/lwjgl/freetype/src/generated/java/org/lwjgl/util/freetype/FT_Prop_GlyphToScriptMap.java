@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -79,9 +79,8 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("FT_UShort *")
-    public ShortBuffer map(int capacity) { return nmap(address(), capacity); }
+    public @Nullable ShortBuffer map(int capacity) { return nmap(address(), capacity); }
 
     // -----------------------------------
 
@@ -91,8 +90,7 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Prop_GlyphToScriptMap createSafe(long address) {
+    public static @Nullable FT_Prop_GlyphToScriptMap createSafe(long address) {
         return address == NULL ? null : new FT_Prop_GlyphToScriptMap(address, null);
     }
 
@@ -107,8 +105,7 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Prop_GlyphToScriptMap.Buffer createSafe(long address, int capacity) {
+    public static FT_Prop_GlyphToScriptMap.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -117,7 +114,7 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
     /** Unsafe version of {@link #face}. */
     public static FT_Face nface(long struct) { return FT_Face.create(memGetAddress(struct + FT_Prop_GlyphToScriptMap.FACE)); }
     /** Unsafe version of {@link #map(int) map}. */
-    @Nullable public static ShortBuffer nmap(long struct, int capacity) { return memShortBufferSafe(memGetAddress(struct + FT_Prop_GlyphToScriptMap.MAP), capacity); }
+    public static @Nullable ShortBuffer nmap(long struct, int capacity) { return memShortBufferSafe(memGetAddress(struct + FT_Prop_GlyphToScriptMap.MAP), capacity); }
 
     // -----------------------------------
 
@@ -169,9 +166,8 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("FT_UShort *")
-        public ShortBuffer map(int capacity) { return FT_Prop_GlyphToScriptMap.nmap(address(), capacity); }
+        public @Nullable ShortBuffer map(int capacity) { return FT_Prop_GlyphToScriptMap.nmap(address(), capacity); }
 
     }
 

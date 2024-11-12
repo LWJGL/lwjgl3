@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -696,7 +696,7 @@ public class ARBImaging {
      * @param column a buffer in which to return the filter column
      * @param span   unused
      */
-    public static void glGetSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer row, @NativeType("void *") ByteBuffer column, @Nullable @NativeType("void *") ByteBuffer span) {
+    public static void glGetSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer row, @NativeType("void *") ByteBuffer column, @NativeType("void *") @Nullable ByteBuffer span) {
         nglGetSeparableFilter(target, format, type, memAddress(row), memAddress(column), memAddressSafe(span));
     }
 
@@ -710,7 +710,7 @@ public class ARBImaging {
      * @param column a buffer in which to return the filter column
      * @param span   unused
      */
-    public static void glGetSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") long row, @NativeType("void *") long column, @Nullable @NativeType("void *") ByteBuffer span) {
+    public static void glGetSeparableFilter(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") long row, @NativeType("void *") long column, @NativeType("void *") @Nullable ByteBuffer span) {
         nglGetSeparableFilter(target, format, type, row, column, memAddressSafe(span));
     }
 

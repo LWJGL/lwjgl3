@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -236,8 +236,7 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkHostImageLayoutTransitionInfoEXT createSafe(long address) {
+    public static @Nullable VkHostImageLayoutTransitionInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkHostImageLayoutTransitionInfoEXT(address, null);
     }
 
@@ -280,8 +279,7 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkHostImageLayoutTransitionInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkHostImageLayoutTransitionInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

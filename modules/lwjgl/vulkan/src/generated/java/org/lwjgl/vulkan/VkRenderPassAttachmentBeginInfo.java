@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,9 +109,8 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
     /** a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance. */
-    @Nullable
     @NativeType("VkImageView const *")
-    public LongBuffer pAttachments() { return npAttachments(address()); }
+    public @Nullable LongBuffer pAttachments() { return npAttachments(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassAttachmentBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -171,8 +170,7 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassAttachmentBeginInfo createSafe(long address) {
+    public static @Nullable VkRenderPassAttachmentBeginInfo createSafe(long address) {
         return address == NULL ? null : new VkRenderPassAttachmentBeginInfo(address, null);
     }
 
@@ -215,8 +213,7 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassAttachmentBeginInfo.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassAttachmentBeginInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -267,7 +264,7 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     /** Unsafe version of {@link #attachmentCount}. */
     public static int nattachmentCount(long struct) { return memGetInt(struct + VkRenderPassAttachmentBeginInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments() pAttachments}. */
-    @Nullable public static LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkRenderPassAttachmentBeginInfo.PATTACHMENTS), nattachmentCount(struct)); }
+    public static @Nullable LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkRenderPassAttachmentBeginInfo.PATTACHMENTS), nattachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassAttachmentBeginInfo.STYPE, value); }
@@ -342,9 +339,8 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
         @NativeType("uint32_t")
         public int attachmentCount() { return VkRenderPassAttachmentBeginInfo.nattachmentCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkRenderPassAttachmentBeginInfo#pAttachments} field. */
-        @Nullable
         @NativeType("VkImageView const *")
-        public LongBuffer pAttachments() { return VkRenderPassAttachmentBeginInfo.npAttachments(address()); }
+        public @Nullable LongBuffer pAttachments() { return VkRenderPassAttachmentBeginInfo.npAttachments(address()); }
 
         /** Sets the specified value to the {@link VkRenderPassAttachmentBeginInfo#sType} field. */
         public VkRenderPassAttachmentBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassAttachmentBeginInfo.nsType(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class AIMeshAnim extends Struct<AIMeshAnim> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshAnim createSafe(long address) {
+    public static @Nullable AIMeshAnim createSafe(long address) {
         return address == NULL ? null : new AIMeshAnim(address, null);
     }
 
@@ -193,8 +192,7 @@ public class AIMeshAnim extends Struct<AIMeshAnim> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshAnim.Buffer createSafe(long address, int capacity) {
+    public static AIMeshAnim.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,9 +113,8 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     @NativeType("uint32_t")
     public int markerTypeCount() { return nmarkerTypeCount(address()); }
     /** an array of {@code XrSceneMarkerTypeMSFT} indicating the types of markers to return. */
-    @Nullable
     @NativeType("XrSceneMarkerTypeMSFT *")
-    public IntBuffer markerTypes() { return nmarkerTypes(address()); }
+    public @Nullable IntBuffer markerTypes() { return nmarkerTypes(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneMarkerTypeFilterMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -179,8 +178,7 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkerTypeFilterMSFT createSafe(long address) {
+    public static @Nullable XrSceneMarkerTypeFilterMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneMarkerTypeFilterMSFT(address, null);
     }
 
@@ -223,8 +221,7 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkerTypeFilterMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneMarkerTypeFilterMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -275,7 +272,7 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     /** Unsafe version of {@link #markerTypeCount}. */
     public static int nmarkerTypeCount(long struct) { return memGetInt(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPECOUNT); }
     /** Unsafe version of {@link #markerTypes() markerTypes}. */
-    @Nullable public static IntBuffer nmarkerTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPES), nmarkerTypeCount(struct)); }
+    public static @Nullable IntBuffer nmarkerTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSceneMarkerTypeFilterMSFT.MARKERTYPES), nmarkerTypeCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkerTypeFilterMSFT.TYPE, value); }
@@ -339,9 +336,8 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
         @NativeType("uint32_t")
         public int markerTypeCount() { return XrSceneMarkerTypeFilterMSFT.nmarkerTypeCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrSceneMarkerTypeFilterMSFT#markerTypes} field. */
-        @Nullable
         @NativeType("XrSceneMarkerTypeMSFT *")
-        public IntBuffer markerTypes() { return XrSceneMarkerTypeFilterMSFT.nmarkerTypes(address()); }
+        public @Nullable IntBuffer markerTypes() { return XrSceneMarkerTypeFilterMSFT.nmarkerTypes(address()); }
 
         /** Sets the specified value to the {@link XrSceneMarkerTypeFilterMSFT#type} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkerTypeFilterMSFT.ntype(address(), value); return this; }

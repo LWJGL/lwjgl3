@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,8 +117,7 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryDedicatedAllocateInfoKHR createSafe(long address) {
+    public static @Nullable VkMemoryDedicatedAllocateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkMemoryDedicatedAllocateInfoKHR(address, null);
     }
 
@@ -161,8 +160,7 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryDedicatedAllocateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkMemoryDedicatedAllocateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

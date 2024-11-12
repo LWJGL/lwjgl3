@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -182,8 +182,7 @@ public class VkDeviceImageMemoryRequirements extends Struct<VkDeviceImageMemoryR
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceImageMemoryRequirements createSafe(long address) {
+    public static @Nullable VkDeviceImageMemoryRequirements createSafe(long address) {
         return address == NULL ? null : new VkDeviceImageMemoryRequirements(address, null);
     }
 
@@ -226,8 +225,7 @@ public class VkDeviceImageMemoryRequirements extends Struct<VkDeviceImageMemoryR
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceImageMemoryRequirements.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceImageMemoryRequirements.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

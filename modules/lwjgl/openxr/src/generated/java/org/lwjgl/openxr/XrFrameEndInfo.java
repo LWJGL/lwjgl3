@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,9 +119,8 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
     /** a pointer to an array of {@link XrCompositionLayerBaseHeader} pointers. */
-    @Nullable
     @NativeType("XrCompositionLayerBaseHeader const * const *")
-    public PointerBuffer layers() { return nlayers(address()); }
+    public @Nullable PointerBuffer layers() { return nlayers(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrFrameEndInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -201,8 +200,7 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameEndInfo createSafe(long address) {
+    public static @Nullable XrFrameEndInfo createSafe(long address) {
         return address == NULL ? null : new XrFrameEndInfo(address, null);
     }
 
@@ -245,8 +243,7 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameEndInfo.Buffer createSafe(long address, int capacity) {
+    public static XrFrameEndInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -301,7 +298,7 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     /** Unsafe version of {@link #layerCount}. */
     public static int nlayerCount(long struct) { return memGetInt(struct + XrFrameEndInfo.LAYERCOUNT); }
     /** Unsafe version of {@link #layers() layers}. */
-    @Nullable public static PointerBuffer nlayers(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrFrameEndInfo.LAYERS), nlayerCount(struct)); }
+    public static @Nullable PointerBuffer nlayers(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrFrameEndInfo.LAYERS), nlayerCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrFrameEndInfo.TYPE, value); }
@@ -375,9 +372,8 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
         @NativeType("uint32_t")
         public int layerCount() { return XrFrameEndInfo.nlayerCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrFrameEndInfo#layers} field. */
-        @Nullable
         @NativeType("XrCompositionLayerBaseHeader const * const *")
-        public PointerBuffer layers() { return XrFrameEndInfo.nlayers(address()); }
+        public @Nullable PointerBuffer layers() { return XrFrameEndInfo.nlayers(address()); }
 
         /** Sets the specified value to the {@link XrFrameEndInfo#type} field. */
         public XrFrameEndInfo.Buffer type(@NativeType("XrStructureType") int value) { XrFrameEndInfo.ntype(address(), value); return this; }

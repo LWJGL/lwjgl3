@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,32 +124,28 @@ public class AINode extends Struct<AINode> implements NativeResource {
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mTransformation() { return nmTransformation(address()); }
     /** Parent node. {@code NULL} if this node is the root node. */
-    @Nullable
     @NativeType("struct aiNode *")
-    public AINode mParent() { return nmParent(address()); }
+    public @Nullable AINode mParent() { return nmParent(address()); }
     /** The number of child nodes of this node. */
     @NativeType("unsigned int")
     public int mNumChildren() { return nmNumChildren(address()); }
     /** The child nodes of this node. {@code NULL} if {@code mNumChildren} is 0. */
-    @Nullable
     @NativeType("struct aiNode **")
-    public PointerBuffer mChildren() { return nmChildren(address()); }
+    public @Nullable PointerBuffer mChildren() { return nmChildren(address()); }
     /** The number of meshes of this node. */
     @NativeType("unsigned int")
     public int mNumMeshes() { return nmNumMeshes(address()); }
     /** The meshes of this node. Each entry is an index into the mesh list of the {@link AIScene}. */
-    @Nullable
     @NativeType("unsigned int *")
-    public IntBuffer mMeshes() { return nmMeshes(address()); }
+    public @Nullable IntBuffer mMeshes() { return nmMeshes(address()); }
     /**
      * Metadata associated with this node or {@code NULL} if there is no metadata.
      * 
      * <p>Whether any metadata is generated depends on the source file format. See the importer notes page for more information on every source file format.
      * Importers that don't document any metadata don't write any.</p>
      */
-    @Nullable
     @NativeType("struct aiMetadata *")
-    public AIMetaData mMetadata() { return nmMetadata(address()); }
+    public @Nullable AIMetaData mMetadata() { return nmMetadata(address()); }
 
     /** Copies the specified {@link AIString} to the {@link #mName} field. */
     public AINode mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
@@ -223,8 +219,7 @@ public class AINode extends Struct<AINode> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AINode createSafe(long address) {
+    public static @Nullable AINode createSafe(long address) {
         return address == NULL ? null : new AINode(address, null);
     }
 
@@ -267,8 +262,7 @@ public class AINode extends Struct<AINode> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AINode.Buffer createSafe(long address, int capacity) {
+    public static AINode.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -336,17 +330,17 @@ public class AINode extends Struct<AINode> implements NativeResource {
     /** Unsafe version of {@link #mTransformation}. */
     public static AIMatrix4x4 nmTransformation(long struct) { return AIMatrix4x4.create(struct + AINode.MTRANSFORMATION); }
     /** Unsafe version of {@link #mParent}. */
-    @Nullable public static AINode nmParent(long struct) { return AINode.createSafe(memGetAddress(struct + AINode.MPARENT)); }
+    public static @Nullable AINode nmParent(long struct) { return AINode.createSafe(memGetAddress(struct + AINode.MPARENT)); }
     /** Unsafe version of {@link #mNumChildren}. */
     public static int nmNumChildren(long struct) { return memGetInt(struct + AINode.MNUMCHILDREN); }
     /** Unsafe version of {@link #mChildren() mChildren}. */
-    @Nullable public static PointerBuffer nmChildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + AINode.MCHILDREN), nmNumChildren(struct)); }
+    public static @Nullable PointerBuffer nmChildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + AINode.MCHILDREN), nmNumChildren(struct)); }
     /** Unsafe version of {@link #mNumMeshes}. */
     public static int nmNumMeshes(long struct) { return memGetInt(struct + AINode.MNUMMESHES); }
     /** Unsafe version of {@link #mMeshes() mMeshes}. */
-    @Nullable public static IntBuffer nmMeshes(long struct) { return memIntBufferSafe(memGetAddress(struct + AINode.MMESHES), nmNumMeshes(struct)); }
+    public static @Nullable IntBuffer nmMeshes(long struct) { return memIntBufferSafe(memGetAddress(struct + AINode.MMESHES), nmNumMeshes(struct)); }
     /** Unsafe version of {@link #mMetadata}. */
-    @Nullable public static AIMetaData nmMetadata(long struct) { return AIMetaData.createSafe(memGetAddress(struct + AINode.MMETADATA)); }
+    public static @Nullable AIMetaData nmMetadata(long struct) { return AIMetaData.createSafe(memGetAddress(struct + AINode.MMETADATA)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AINode.MNAME, AIString.SIZEOF); }
@@ -433,27 +427,23 @@ public class AINode extends Struct<AINode> implements NativeResource {
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mTransformation() { return AINode.nmTransformation(address()); }
         /** @return a {@link AINode} view of the struct pointed to by the {@link AINode#mParent} field. */
-        @Nullable
         @NativeType("struct aiNode *")
-        public AINode mParent() { return AINode.nmParent(address()); }
+        public @Nullable AINode mParent() { return AINode.nmParent(address()); }
         /** @return the value of the {@link AINode#mNumChildren} field. */
         @NativeType("unsigned int")
         public int mNumChildren() { return AINode.nmNumChildren(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AINode#mChildren} field. */
-        @Nullable
         @NativeType("struct aiNode **")
-        public PointerBuffer mChildren() { return AINode.nmChildren(address()); }
+        public @Nullable PointerBuffer mChildren() { return AINode.nmChildren(address()); }
         /** @return the value of the {@link AINode#mNumMeshes} field. */
         @NativeType("unsigned int")
         public int mNumMeshes() { return AINode.nmNumMeshes(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link AINode#mMeshes} field. */
-        @Nullable
         @NativeType("unsigned int *")
-        public IntBuffer mMeshes() { return AINode.nmMeshes(address()); }
+        public @Nullable IntBuffer mMeshes() { return AINode.nmMeshes(address()); }
         /** @return a {@link AIMetaData} view of the struct pointed to by the {@link AINode#mMetadata} field. */
-        @Nullable
         @NativeType("struct aiMetadata *")
-        public AIMetaData mMetadata() { return AINode.nmMetadata(address()); }
+        public @Nullable AIMetaData mMetadata() { return AINode.nmMetadata(address()); }
 
         /** Copies the specified {@link AIString} to the {@link AINode#mName} field. */
         public AINode.Buffer mName(@NativeType("struct aiString") AIString value) { AINode.nmName(address(), value); return this; }

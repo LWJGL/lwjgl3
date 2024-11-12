@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,8 +114,7 @@ public class VkExtensionProperties extends Struct<VkExtensionProperties> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExtensionProperties createSafe(long address) {
+    public static @Nullable VkExtensionProperties createSafe(long address) {
         return address == NULL ? null : new VkExtensionProperties(address, null);
     }
 
@@ -158,8 +157,7 @@ public class VkExtensionProperties extends Struct<VkExtensionProperties> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExtensionProperties.Buffer createSafe(long address, int capacity) {
+    public static VkExtensionProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

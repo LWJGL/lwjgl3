@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -247,8 +247,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerEquirectKHR createSafe(long address) {
+    public static @Nullable XrCompositionLayerEquirectKHR createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerEquirectKHR(address, null);
     }
 
@@ -296,8 +295,7 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerEquirectKHR.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerEquirectKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class VkFenceCreateInfo extends Struct<VkFenceCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFenceCreateInfo createSafe(long address) {
+    public static @Nullable VkFenceCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkFenceCreateInfo(address, null);
     }
 
@@ -209,8 +208,7 @@ public class VkFenceCreateInfo extends Struct<VkFenceCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFenceCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkFenceCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

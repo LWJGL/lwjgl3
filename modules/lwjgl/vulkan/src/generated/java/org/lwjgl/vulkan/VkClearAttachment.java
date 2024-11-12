@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class VkClearAttachment extends Struct<VkClearAttachment> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearAttachment createSafe(long address) {
+    public static @Nullable VkClearAttachment createSafe(long address) {
         return address == NULL ? null : new VkClearAttachment(address, null);
     }
 
@@ -208,8 +207,7 @@ public class VkClearAttachment extends Struct<VkClearAttachment> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearAttachment.Buffer createSafe(long address, int capacity) {
+    public static VkClearAttachment.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

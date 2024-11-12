@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -341,7 +341,7 @@ public class MSFTSpatialGraphBridge {
      * @param properties  a pointer to an {@link XrSpatialGraphNodeBindingPropertiesMSFT} output structure.
      */
     @NativeType("XrResult")
-    public static int xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, @Nullable @NativeType("XrSpatialGraphNodeBindingPropertiesGetInfoMSFT const *") XrSpatialGraphNodeBindingPropertiesGetInfoMSFT getInfo, @NativeType("XrSpatialGraphNodeBindingPropertiesMSFT *") XrSpatialGraphNodeBindingPropertiesMSFT properties) {
+    public static int xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, @NativeType("XrSpatialGraphNodeBindingPropertiesGetInfoMSFT const *") @Nullable XrSpatialGraphNodeBindingPropertiesGetInfoMSFT getInfo, @NativeType("XrSpatialGraphNodeBindingPropertiesMSFT *") XrSpatialGraphNodeBindingPropertiesMSFT properties) {
         return nxrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, memAddressSafe(getInfo), properties.address());
     }
 

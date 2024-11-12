@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,8 +179,7 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct<XrEventDataMark
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataMarkerTrackingUpdateVARJO createSafe(long address) {
+    public static @Nullable XrEventDataMarkerTrackingUpdateVARJO createSafe(long address) {
         return address == NULL ? null : new XrEventDataMarkerTrackingUpdateVARJO(address, null);
     }
 
@@ -228,8 +227,7 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct<XrEventDataMark
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataMarkerTrackingUpdateVARJO.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataMarkerTrackingUpdateVARJO.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class FT_SfntLangTag extends Struct<FT_SfntLangTag> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_SfntLangTag createSafe(long address) {
+    public static @Nullable FT_SfntLangTag createSafe(long address) {
         return address == NULL ? null : new FT_SfntLangTag(address, null);
     }
 
@@ -147,8 +146,7 @@ public class FT_SfntLangTag extends Struct<FT_SfntLangTag> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_SfntLangTag.Buffer createSafe(long address, int capacity) {
+    public static FT_SfntLangTag.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,7 +103,7 @@ public class OpusProjection {
      * @param error           returns {@link Opus#OPUS_OK OK} on success, or a negative error code on failure
      */
     @NativeType("OpusProjectionEncoder *")
-    public static long opus_projection_ambisonics_encoder_create(@NativeType("opus_int32") int Fs, int channels, int mapping_family, @NativeType("int *") IntBuffer streams, @NativeType("int *") IntBuffer coupled_streams, int application, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_projection_ambisonics_encoder_create(@NativeType("opus_int32") int Fs, int channels, int mapping_family, @NativeType("int *") IntBuffer streams, @NativeType("int *") IntBuffer coupled_streams, int application, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             check(streams, 1);
             check(coupled_streams, 1);
@@ -296,7 +296,7 @@ public class OpusProjection {
      * @param error           returns {@link Opus#OPUS_OK OK} on success, or a negative error code on failure
      */
     @NativeType("OpusProjectionDecoder *")
-    public static long opus_projection_decoder_create(@NativeType("opus_int32") int Fs, int channels, int streams, int coupled_streams, @NativeType("unsigned char *") ByteBuffer demixing_matrix, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_projection_decoder_create(@NativeType("opus_int32") int Fs, int channels, int streams, int coupled_streams, @NativeType("unsigned char *") ByteBuffer demixing_matrix, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -372,7 +372,7 @@ public class OpusProjection {
      *
      * @return number of decoded samples on success or a negative error code on failure
      */
-    public static int opus_projection_decode(@NativeType("OpusProjectionDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_projection_decode(@NativeType("OpusProjectionDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + 4 + memGetInt(st)));
         }
@@ -411,7 +411,7 @@ public class OpusProjection {
      *
      * @return number of decoded samples on success or a negative error code on failure
      */
-    public static int opus_projection_decode_float(@NativeType("OpusMSDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_projection_decode_float(@NativeType("OpusMSDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + 4 + memGetInt(st)));
         }

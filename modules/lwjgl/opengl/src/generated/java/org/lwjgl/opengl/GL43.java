@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -468,7 +468,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ByteBuffer data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -485,7 +485,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ShortBuffer data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -502,7 +502,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable IntBuffer data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -519,7 +519,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable FloatBuffer data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -545,7 +545,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ByteBuffer data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -564,7 +564,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ShortBuffer data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -583,7 +583,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable IntBuffer data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -602,7 +602,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable FloatBuffer data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -722,7 +722,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glDebugMessageControl">Reference Page</a>
      */
-    public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") IntBuffer ids, @NativeType("GLboolean") boolean enabled) {
+    public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") @Nullable IntBuffer ids, @NativeType("GLboolean") boolean enabled) {
         GL43C.glDebugMessageControl(source, type, severity, ids, enabled);
     }
 
@@ -862,7 +862,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glDebugMessageCallback">Reference Page</a>
      */
-    public static void glDebugMessageCallback(@Nullable @NativeType("GLDEBUGPROC") GLDebugMessageCallbackI callback, @NativeType("void const *") long userParam) {
+    public static void glDebugMessageCallback(@NativeType("GLDEBUGPROC") @Nullable GLDebugMessageCallbackI callback, @NativeType("void const *") long userParam) {
         GL43C.glDebugMessageCallback(callback, userParam);
     }
 
@@ -913,7 +913,7 @@ public class GL43 extends GL42 {
      * @see <a href="https://docs.gl/gl4/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") IntBuffer sources, @Nullable @NativeType("GLenum *") IntBuffer types, @Nullable @NativeType("GLuint *") IntBuffer ids, @Nullable @NativeType("GLenum *") IntBuffer severities, @Nullable @NativeType("GLsizei *") IntBuffer lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @NativeType("GLenum *") @Nullable IntBuffer sources, @NativeType("GLenum *") @Nullable IntBuffer types, @NativeType("GLuint *") @Nullable IntBuffer ids, @NativeType("GLenum *") @Nullable IntBuffer severities, @NativeType("GLsizei *") @Nullable IntBuffer lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         return GL43C.glGetDebugMessageLog(count, sources, types, ids, severities, lengths, messageLog);
     }
 
@@ -1047,7 +1047,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
-    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectLabel(identifier, name, length, label);
     }
 
@@ -1133,7 +1133,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetObjectPtrLabel">Reference Page</a>
      */
-    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectPtrLabel(ptr, length, label);
     }
 
@@ -1715,7 +1715,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
-    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
@@ -1772,7 +1772,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetProgramResource">Reference Page</a>
      */
-    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer params) {
+    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
@@ -2036,7 +2036,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short @Nullable [] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -2045,7 +2045,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int @Nullable [] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -2054,7 +2054,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
-    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+    public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float @Nullable [] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
@@ -2063,7 +2063,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short @Nullable [] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -2072,7 +2072,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int @Nullable [] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -2081,7 +2081,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
-    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+    public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float @Nullable [] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
@@ -2090,7 +2090,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glDebugMessageControl">Reference Page</a>
      */
-    public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
+    public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") int @Nullable [] ids, @NativeType("GLboolean") boolean enabled) {
         GL43C.glDebugMessageControl(source, type, severity, ids, enabled);
     }
 
@@ -2100,7 +2100,7 @@ public class GL43 extends GL42 {
      * @see <a href="https://docs.gl/gl4/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] sources, @Nullable @NativeType("GLenum *") int[] types, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLenum *") int[] severities, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @NativeType("GLenum *") int @Nullable [] sources, @NativeType("GLenum *") int @Nullable [] types, @NativeType("GLuint *") int @Nullable [] ids, @NativeType("GLenum *") int @Nullable [] severities, @NativeType("GLsizei *") int @Nullable [] lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         return GL43C.glGetDebugMessageLog(count, sources, types, ids, severities, lengths, messageLog);
     }
 
@@ -2109,7 +2109,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
-    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectLabel(identifier, name, length, label);
     }
 
@@ -2118,7 +2118,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetObjectPtrLabel">Reference Page</a>
      */
-    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectPtrLabel(ptr, length, label);
     }
 
@@ -2190,7 +2190,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
-    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
@@ -2199,7 +2199,7 @@ public class GL43 extends GL42 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetProgramResource">Reference Page</a>
      */
-    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {
+    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 

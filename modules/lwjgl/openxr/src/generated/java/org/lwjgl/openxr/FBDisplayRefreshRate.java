@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,7 +124,7 @@ public class FBDisplayRefreshRate {
      * @param displayRefreshRates           a pointer to an array of {@code float} display refresh rates, but <b>can</b> be {@code NULL} if {@code displayRefreshRateCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateDisplayRefreshRatesFB(XrSession session, @NativeType("uint32_t *") IntBuffer displayRefreshRateCountOutput, @Nullable @NativeType("float *") FloatBuffer displayRefreshRates) {
+    public static int xrEnumerateDisplayRefreshRatesFB(XrSession session, @NativeType("uint32_t *") IntBuffer displayRefreshRateCountOutput, @NativeType("float *") @Nullable FloatBuffer displayRefreshRates) {
         if (CHECKS) {
             check(displayRefreshRateCountOutput, 1);
         }

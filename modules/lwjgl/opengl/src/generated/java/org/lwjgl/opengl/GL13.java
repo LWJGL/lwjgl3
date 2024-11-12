@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -258,7 +258,7 @@ public class GL13 extends GL12 {
      * 
      * @see <a href="https://docs.gl/gl4/glCompressedTexImage3D">Reference Page</a>
      */
-    public static void glCompressedTexImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glCompressedTexImage3D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("void const *") @Nullable ByteBuffer data) {
         GL13C.glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, data);
     }
 
@@ -304,7 +304,7 @@ public class GL13 extends GL12 {
      * 
      * @see <a href="https://docs.gl/gl4/glCompressedTexImage2D">Reference Page</a>
      */
-    public static void glCompressedTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glCompressedTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("void const *") @Nullable ByteBuffer data) {
         GL13C.glCompressedTexImage2D(target, level, internalformat, width, height, border, data);
     }
 
@@ -348,7 +348,7 @@ public class GL13 extends GL12 {
      * 
      * @see <a href="https://docs.gl/gl4/glCompressedTexImage1D">Reference Page</a>
      */
-    public static void glCompressedTexImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glCompressedTexImage1D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("void const *") @Nullable ByteBuffer data) {
         GL13C.glCompressedTexImage1D(target, level, internalformat, width, border, data);
     }
 

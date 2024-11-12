@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -90,8 +90,7 @@ public class CXIdxBaseClassInfo extends Struct<CXIdxBaseClassInfo> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxBaseClassInfo createSafe(long address) {
+    public static @Nullable CXIdxBaseClassInfo createSafe(long address) {
         return address == NULL ? null : new CXIdxBaseClassInfo(address, null);
     }
 
@@ -106,8 +105,7 @@ public class CXIdxBaseClassInfo extends Struct<CXIdxBaseClassInfo> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxBaseClassInfo.Buffer createSafe(long address, int capacity) {
+    public static CXIdxBaseClassInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

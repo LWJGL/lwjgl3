@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -193,9 +193,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     @NativeType("char const *")
     public String pNameString() { return npNameString(address()); }
     /** a pointer to a {@link VkSpecializationInfo} structure, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-specialization-constants">Specialization Constants</a>, or {@code NULL}. */
-    @Nullable
     @NativeType("VkSpecializationInfo const *")
-    public VkSpecializationInfo pSpecializationInfo() { return npSpecializationInfo(address()); }
+    public @Nullable VkSpecializationInfo pSpecializationInfo() { return npSpecializationInfo(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineShaderStageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -289,8 +288,7 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineShaderStageCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineShaderStageCreateInfo(address, null);
     }
 
@@ -333,8 +331,7 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineShaderStageCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -412,7 +409,7 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     /** Unsafe version of {@link #pNameString}. */
     public static String npNameString(long struct) { return memUTF8(memGetAddress(struct + VkPipelineShaderStageCreateInfo.PNAME)); }
     /** Unsafe version of {@link #pSpecializationInfo}. */
-    @Nullable public static VkSpecializationInfo npSpecializationInfo(long struct) { return VkSpecializationInfo.createSafe(memGetAddress(struct + VkPipelineShaderStageCreateInfo.PSPECIALIZATIONINFO)); }
+    public static @Nullable VkSpecializationInfo npSpecializationInfo(long struct) { return VkSpecializationInfo.createSafe(memGetAddress(struct + VkPipelineShaderStageCreateInfo.PSPECIALIZATIONINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageCreateInfo.STYPE, value); }
@@ -510,9 +507,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
         @NativeType("char const *")
         public String pNameString() { return VkPipelineShaderStageCreateInfo.npNameString(address()); }
         /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@link VkPipelineShaderStageCreateInfo#pSpecializationInfo} field. */
-        @Nullable
         @NativeType("VkSpecializationInfo const *")
-        public VkSpecializationInfo pSpecializationInfo() { return VkPipelineShaderStageCreateInfo.npSpecializationInfo(address()); }
+        public @Nullable VkSpecializationInfo pSpecializationInfo() { return VkPipelineShaderStageCreateInfo.npSpecializationInfo(address()); }
 
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#sType} field. */
         public VkPipelineShaderStageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageCreateInfo.nsType(address(), value); return this; }

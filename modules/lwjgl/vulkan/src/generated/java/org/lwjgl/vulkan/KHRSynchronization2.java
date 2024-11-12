@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -587,7 +587,7 @@ public class KHRSynchronization2 {
      * @param fence    an <b>optional</b> handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it defines a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
-    public static int vkQueueSubmit2KHR(VkQueue queue, @Nullable @NativeType("VkSubmitInfo2 const *") VkSubmitInfo2.Buffer pSubmits, @NativeType("VkFence") long fence) {
+    public static int vkQueueSubmit2KHR(VkQueue queue, @NativeType("VkSubmitInfo2 const *") VkSubmitInfo2.@Nullable Buffer pSubmits, @NativeType("VkFence") long fence) {
         return nvkQueueSubmit2KHR(queue, remainingSafe(pSubmits), memAddressSafe(pSubmits), fence);
     }
 
@@ -743,7 +743,7 @@ public class KHRSynchronization2 {
      * @param pCheckpointDataCount a pointer to an integer related to the number of checkpoint markers available or queried, as described below.
      * @param pCheckpointData      either {@code NULL} or a pointer to an array of {@link VkCheckpointData2NV} structures.
      */
-    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") IntBuffer pCheckpointDataCount, @Nullable @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.Buffer pCheckpointData) {
+    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") IntBuffer pCheckpointDataCount, @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.@Nullable Buffer pCheckpointData) {
         if (CHECKS) {
             check(pCheckpointDataCount, 1);
             checkSafe(pCheckpointData, pCheckpointDataCount.get(pCheckpointDataCount.position()));
@@ -763,7 +763,7 @@ public class KHRSynchronization2 {
     }
 
     /** Array version of: {@link #vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV} */
-    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @Nullable @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.Buffer pCheckpointData) {
+    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.@Nullable Buffer pCheckpointData) {
         long __functionAddress = queue.getCapabilities().vkGetQueueCheckpointData2NV;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemPassthroughColorLutPropertiesMETA createSafe(long address) {
+    public static @Nullable XrSystemPassthroughColorLutPropertiesMETA createSafe(long address) {
         return address == NULL ? null : new XrSystemPassthroughColorLutPropertiesMETA(address, null);
     }
 
@@ -204,8 +203,7 @@ public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemPassthroughColorLutPropertiesMETA.Buffer createSafe(long address, int capacity) {
+    public static XrSystemPassthroughColorLutPropertiesMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

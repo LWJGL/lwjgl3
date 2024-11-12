@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -103,9 +103,8 @@ public class BGFXPlatform {
     }
 
     /** Gets internal data for interop. */
-    @Nullable
     @NativeType("bgfx_internal_data_t const *")
-    public static BGFXInternalData bgfx_get_internal_data() {
+    public static @Nullable BGFXInternalData bgfx_get_internal_data() {
         long __result = nbgfx_get_internal_data();
         return BGFXInternalData.createSafe(__result);
     }

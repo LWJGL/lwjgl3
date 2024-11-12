@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -187,8 +187,7 @@ public class CUDA_MEMSET_NODE_PARAMS_v2 extends Struct<CUDA_MEMSET_NODE_PARAMS_v
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_MEMSET_NODE_PARAMS_v2 createSafe(long address) {
+    public static @Nullable CUDA_MEMSET_NODE_PARAMS_v2 createSafe(long address) {
         return address == NULL ? null : new CUDA_MEMSET_NODE_PARAMS_v2(address, null);
     }
 
@@ -231,8 +230,7 @@ public class CUDA_MEMSET_NODE_PARAMS_v2 extends Struct<CUDA_MEMSET_NODE_PARAMS_v
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_MEMSET_NODE_PARAMS_v2.Buffer createSafe(long address, int capacity) {
+    public static CUDA_MEMSET_NODE_PARAMS_v2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

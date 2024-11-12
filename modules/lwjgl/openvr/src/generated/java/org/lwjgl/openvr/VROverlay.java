@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,7 +132,7 @@ public class VROverlay {
      * character. {@link VR#k_unVROverlayMaxKeyLength} will be enough bytes to fit the string.
      */
     @NativeType("uint32_t")
-    public static int VROverlay_GetOverlayKey(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @Nullable @NativeType("char *") ByteBuffer pchValue, @NativeType("EVROverlayError *") IntBuffer pError) {
+    public static int VROverlay_GetOverlayKey(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") @Nullable ByteBuffer pchValue, @NativeType("EVROverlayError *") IntBuffer pError) {
         if (CHECKS) {
             check(pError, 1);
         }
@@ -174,7 +174,7 @@ public class VROverlay {
      * character. {@link VR#k_unVROverlayMaxNameLength} will be enough bytes to fit the string.
      */
     @NativeType("uint32_t")
-    public static int VROverlay_GetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @Nullable @NativeType("char *") ByteBuffer pchValue, @NativeType("EVROverlayError *") IntBuffer pError) {
+    public static int VROverlay_GetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") @Nullable ByteBuffer pchValue, @NativeType("EVROverlayError *") IntBuffer pError) {
         if (CHECKS) {
             check(pError, 1);
         }
@@ -273,9 +273,8 @@ public class VROverlay {
      *
      * @param error one of:<br><table><tr><td>{@link VR#EVROverlayError_VROverlayError_None}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_UnknownOverlay}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_InvalidHandle}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_PermissionDenied}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_OverlayLimitExceeded}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_WrongVisibilityType}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_KeyTooLong}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_NameTooLong}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_KeyInUse}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_WrongTransformType}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_InvalidTrackedDevice}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_InvalidParameter}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_ThumbnailCantBeDestroyed}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_ArrayTooSmall}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_RequestFailed}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_InvalidTexture}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_UnableToLoadFile}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_KeyboardAlreadyInUse}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_NoNeighbor}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_TooManyMaskPrimitives}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_BadMaskPrimitive}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_TextureAlreadyLocked}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_TextureLockCapacityReached}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_TextureNotLocked}</td></tr><tr><td>{@link VR#EVROverlayError_VROverlayError_TimedOut}</td></tr></table>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String VROverlay_GetOverlayErrorNameFromEnum(@NativeType("EVROverlayError") int error) {
+    public static @Nullable String VROverlay_GetOverlayErrorNameFromEnum(@NativeType("EVROverlayError") int error) {
         long __result = nVROverlay_GetOverlayErrorNameFromEnum(error);
         return memASCIISafe(__result);
     }
@@ -1607,7 +1606,7 @@ public class VROverlay {
 
     /** Get the text that was entered into the text input. */
     @NativeType("uint32_t")
-    public static int VROverlay_GetKeyboardText(@Nullable @NativeType("char *") ByteBuffer pchText) {
+    public static int VROverlay_GetKeyboardText(@NativeType("char *") @Nullable ByteBuffer pchText) {
         return nVROverlay_GetKeyboardText(memAddressSafe(pchText), remainingSafe(pchText));
     }
 
@@ -1687,7 +1686,7 @@ public class VROverlay {
 
     /** Show the message overlay. This will block and return you a result. */
     @NativeType("VRMessageOverlayResponse")
-    public static int VROverlay_ShowMessageOverlay(@NativeType("char const *") ByteBuffer pchText, @NativeType("char const *") ByteBuffer pchCaption, @NativeType("char const *") ByteBuffer pchButton0Text, @Nullable @NativeType("char const *") ByteBuffer pchButton1Text, @Nullable @NativeType("char const *") ByteBuffer pchButton2Text, @Nullable @NativeType("char const *") ByteBuffer pchButton3Text) {
+    public static int VROverlay_ShowMessageOverlay(@NativeType("char const *") ByteBuffer pchText, @NativeType("char const *") ByteBuffer pchCaption, @NativeType("char const *") ByteBuffer pchButton0Text, @NativeType("char const *") @Nullable ByteBuffer pchButton1Text, @NativeType("char const *") @Nullable ByteBuffer pchButton2Text, @NativeType("char const *") @Nullable ByteBuffer pchButton3Text) {
         if (CHECKS) {
             checkNT1(pchText);
             checkNT1(pchCaption);
@@ -1701,7 +1700,7 @@ public class VROverlay {
 
     /** Show the message overlay. This will block and return you a result. */
     @NativeType("VRMessageOverlayResponse")
-    public static int VROverlay_ShowMessageOverlay(@NativeType("char const *") CharSequence pchText, @NativeType("char const *") CharSequence pchCaption, @NativeType("char const *") CharSequence pchButton0Text, @Nullable @NativeType("char const *") CharSequence pchButton1Text, @Nullable @NativeType("char const *") CharSequence pchButton2Text, @Nullable @NativeType("char const *") CharSequence pchButton3Text) {
+    public static int VROverlay_ShowMessageOverlay(@NativeType("char const *") CharSequence pchText, @NativeType("char const *") CharSequence pchCaption, @NativeType("char const *") CharSequence pchButton0Text, @NativeType("char const *") @Nullable CharSequence pchButton1Text, @NativeType("char const *") @Nullable CharSequence pchButton2Text, @NativeType("char const *") @Nullable CharSequence pchButton3Text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchText, true);

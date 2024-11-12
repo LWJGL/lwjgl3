@@ -12,6 +12,6 @@
  * being backed by a very fast decoder. It also offers a special mode for small data, called dictionary compression, and can create dictionaries from any
  * sample set.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.zstd;
 

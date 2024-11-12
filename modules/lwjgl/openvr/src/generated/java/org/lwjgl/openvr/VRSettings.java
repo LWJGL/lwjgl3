@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -32,9 +32,8 @@ public class VRSettings {
         return callP(eError, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String VRSettings_GetSettingsErrorNameFromEnum(@NativeType("EVRSettingsError") int eError) {
+    public static @Nullable String VRSettings_GetSettingsErrorNameFromEnum(@NativeType("EVRSettingsError") int eError) {
         long __result = nVRSettings_GetSettingsErrorNameFromEnum(eError);
         return memASCIISafe(__result);
     }

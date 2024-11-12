@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -299,8 +299,7 @@ public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleTab createSafe(long address) {
+    public static @Nullable NkStyleTab createSafe(long address) {
         return address == NULL ? null : new NkStyleTab(address, null);
     }
 
@@ -343,8 +342,7 @@ public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleTab.Buffer createSafe(long address, int capacity) {
+    public static NkStyleTab.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

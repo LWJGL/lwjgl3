@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,8 +104,7 @@ public class NkScroll extends Struct<NkScroll> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkScroll createSafe(long address) {
+    public static @Nullable NkScroll createSafe(long address) {
         return address == NULL ? null : new NkScroll(address, null);
     }
 
@@ -148,8 +147,7 @@ public class NkScroll extends Struct<NkScroll> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkScroll.Buffer createSafe(long address, int capacity) {
+    public static NkScroll.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,8 +131,7 @@ public class CUDA_POINTER_ATTRIBUTE_P2P_TOKENS extends Struct<CUDA_POINTER_ATTRI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_POINTER_ATTRIBUTE_P2P_TOKENS createSafe(long address) {
+    public static @Nullable CUDA_POINTER_ATTRIBUTE_P2P_TOKENS createSafe(long address) {
         return address == NULL ? null : new CUDA_POINTER_ATTRIBUTE_P2P_TOKENS(address, null);
     }
 
@@ -175,8 +174,7 @@ public class CUDA_POINTER_ATTRIBUTE_P2P_TOKENS extends Struct<CUDA_POINTER_ATTRI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_POINTER_ATTRIBUTE_P2P_TOKENS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

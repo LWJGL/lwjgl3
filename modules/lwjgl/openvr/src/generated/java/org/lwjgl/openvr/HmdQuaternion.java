@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class HmdQuaternion extends Struct<HmdQuaternion> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HmdQuaternion createSafe(long address) {
+    public static @Nullable HmdQuaternion createSafe(long address) {
         return address == NULL ? null : new HmdQuaternion(address, null);
     }
 
@@ -194,8 +193,7 @@ public class HmdQuaternion extends Struct<HmdQuaternion> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HmdQuaternion.Buffer createSafe(long address, int capacity) {
+    public static HmdQuaternion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsPropertie
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemGraphicsProperties createSafe(long address) {
+    public static @Nullable XrSystemGraphicsProperties createSafe(long address) {
         return address == NULL ? null : new XrSystemGraphicsProperties(address, null);
     }
 
@@ -192,8 +191,7 @@ public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsPropertie
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemGraphicsProperties.Buffer createSafe(long address, int capacity) {
+    public static XrSystemGraphicsProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

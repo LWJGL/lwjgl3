@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -91,17 +91,13 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code move_to} field. */
-    @Nullable
-    public FT_Outline_MoveToFunc move_to() { return nmove_to(address()); }
+    public @Nullable FT_Outline_MoveToFunc move_to() { return nmove_to(address()); }
     /** @return the value of the {@code line_to} field. */
-    @Nullable
-    public FT_Outline_LineToFunc line_to() { return nline_to(address()); }
+    public @Nullable FT_Outline_LineToFunc line_to() { return nline_to(address()); }
     /** @return the value of the {@code conic_to} field. */
-    @Nullable
-    public FT_Outline_ConicToFunc conic_to() { return nconic_to(address()); }
+    public @Nullable FT_Outline_ConicToFunc conic_to() { return nconic_to(address()); }
     /** @return the value of the {@code cubic_to} field. */
-    @Nullable
-    public FT_Outline_CubicToFunc cubic_to() { return ncubic_to(address()); }
+    public @Nullable FT_Outline_CubicToFunc cubic_to() { return ncubic_to(address()); }
     /** @return the value of the {@code shift} field. */
     public int shift() { return nshift(address()); }
     /** @return the value of the {@code delta} field. */
@@ -176,8 +172,7 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Outline_Funcs createSafe(long address) {
+    public static @Nullable FT_Outline_Funcs createSafe(long address) {
         return address == NULL ? null : new FT_Outline_Funcs(address, null);
     }
 
@@ -220,8 +215,7 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Outline_Funcs.Buffer createSafe(long address, int capacity) {
+    public static FT_Outline_Funcs.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -266,13 +260,13 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #move_to}. */
-    @Nullable public static FT_Outline_MoveToFunc nmove_to(long struct) { return FT_Outline_MoveToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.MOVE_TO)); }
+    public static @Nullable FT_Outline_MoveToFunc nmove_to(long struct) { return FT_Outline_MoveToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.MOVE_TO)); }
     /** Unsafe version of {@link #line_to}. */
-    @Nullable public static FT_Outline_LineToFunc nline_to(long struct) { return FT_Outline_LineToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.LINE_TO)); }
+    public static @Nullable FT_Outline_LineToFunc nline_to(long struct) { return FT_Outline_LineToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.LINE_TO)); }
     /** Unsafe version of {@link #conic_to}. */
-    @Nullable public static FT_Outline_ConicToFunc nconic_to(long struct) { return FT_Outline_ConicToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.CONIC_TO)); }
+    public static @Nullable FT_Outline_ConicToFunc nconic_to(long struct) { return FT_Outline_ConicToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.CONIC_TO)); }
     /** Unsafe version of {@link #cubic_to}. */
-    @Nullable public static FT_Outline_CubicToFunc ncubic_to(long struct) { return FT_Outline_CubicToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.CUBIC_TO)); }
+    public static @Nullable FT_Outline_CubicToFunc ncubic_to(long struct) { return FT_Outline_CubicToFunc.createSafe(memGetAddress(struct + FT_Outline_Funcs.CUBIC_TO)); }
     /** Unsafe version of {@link #shift}. */
     public static int nshift(long struct) { return memGetInt(struct + FT_Outline_Funcs.SHIFT); }
     /** Unsafe version of {@link #delta}. */
@@ -335,17 +329,13 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
         }
 
         /** @return the value of the {@code move_to} field. */
-        @Nullable
-        public FT_Outline_MoveToFunc move_to() { return FT_Outline_Funcs.nmove_to(address()); }
+        public @Nullable FT_Outline_MoveToFunc move_to() { return FT_Outline_Funcs.nmove_to(address()); }
         /** @return the value of the {@code line_to} field. */
-        @Nullable
-        public FT_Outline_LineToFunc line_to() { return FT_Outline_Funcs.nline_to(address()); }
+        public @Nullable FT_Outline_LineToFunc line_to() { return FT_Outline_Funcs.nline_to(address()); }
         /** @return the value of the {@code conic_to} field. */
-        @Nullable
-        public FT_Outline_ConicToFunc conic_to() { return FT_Outline_Funcs.nconic_to(address()); }
+        public @Nullable FT_Outline_ConicToFunc conic_to() { return FT_Outline_Funcs.nconic_to(address()); }
         /** @return the value of the {@code cubic_to} field. */
-        @Nullable
-        public FT_Outline_CubicToFunc cubic_to() { return FT_Outline_Funcs.ncubic_to(address()); }
+        public @Nullable FT_Outline_CubicToFunc cubic_to() { return FT_Outline_Funcs.ncubic_to(address()); }
         /** @return the value of the {@code shift} field. */
         public int shift() { return FT_Outline_Funcs.nshift(address()); }
         /** @return the value of the {@code delta} field. */

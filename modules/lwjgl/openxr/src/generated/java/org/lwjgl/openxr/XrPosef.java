@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class XrPosef extends Struct<XrPosef> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPosef createSafe(long address) {
+    public static @Nullable XrPosef createSafe(long address) {
         return address == NULL ? null : new XrPosef(address, null);
     }
 
@@ -187,8 +186,7 @@ public class XrPosef extends Struct<XrPosef> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPosef.Buffer createSafe(long address, int capacity) {
+    public static XrPosef.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

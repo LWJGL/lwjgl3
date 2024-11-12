@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -485,8 +485,7 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxBasisParams createSafe(long address) {
+    public static @Nullable ktxBasisParams createSafe(long address) {
         return address == NULL ? null : new ktxBasisParams(address, null);
     }
 
@@ -529,8 +528,7 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxBasisParams.Buffer createSafe(long address, int capacity) {
+    public static ktxBasisParams.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

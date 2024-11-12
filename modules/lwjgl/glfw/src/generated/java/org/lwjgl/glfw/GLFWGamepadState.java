@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -146,8 +146,7 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWGamepadState createSafe(long address) {
+    public static @Nullable GLFWGamepadState createSafe(long address) {
         return address == NULL ? null : new GLFWGamepadState(address, null);
     }
 
@@ -190,8 +189,7 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWGamepadState.Buffer createSafe(long address, int capacity) {
+    public static GLFWGamepadState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

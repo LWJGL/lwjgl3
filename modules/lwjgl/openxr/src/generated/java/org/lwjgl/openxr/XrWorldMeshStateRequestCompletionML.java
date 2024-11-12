@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,9 +148,8 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     @NativeType("uint32_t")
     public int meshBlockStateCountOutput() { return nmeshBlockStateCountOutput(address()); }
     /** a pointer to an array of {@link XrWorldMeshBlockStateML}. */
-    @Nullable
     @NativeType("XrWorldMeshBlockStateML *")
-    public XrWorldMeshBlockStateML.Buffer meshBlockStates() { return nmeshBlockStates(address()); }
+    public XrWorldMeshBlockStateML.@Nullable Buffer meshBlockStates() { return nmeshBlockStates(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrWorldMeshStateRequestCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -167,7 +166,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     /** Sets the specified value to the {@link #meshBlockStateCountOutput} field. */
     public XrWorldMeshStateRequestCompletionML meshBlockStateCountOutput(@NativeType("uint32_t") int value) { nmeshBlockStateCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@link #meshBlockStates} field. */
-    public XrWorldMeshStateRequestCompletionML meshBlockStates(@Nullable @NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.Buffer value) { nmeshBlockStates(address(), value); return this; }
+    public XrWorldMeshStateRequestCompletionML meshBlockStates(@NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.@Nullable Buffer value) { nmeshBlockStates(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrWorldMeshStateRequestCompletionML set(
@@ -177,7 +176,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
         long timestamp,
         int meshBlockStateCapacityInput,
         int meshBlockStateCountOutput,
-        @Nullable XrWorldMeshBlockStateML.Buffer meshBlockStates
+        XrWorldMeshBlockStateML.@Nullable Buffer meshBlockStates
     ) {
         type(type);
         next(next);
@@ -226,8 +225,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrWorldMeshStateRequestCompletionML createSafe(long address) {
+    public static @Nullable XrWorldMeshStateRequestCompletionML createSafe(long address) {
         return address == NULL ? null : new XrWorldMeshStateRequestCompletionML(address, null);
     }
 
@@ -275,8 +273,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrWorldMeshStateRequestCompletionML.Buffer createSafe(long address, int capacity) {
+    public static XrWorldMeshStateRequestCompletionML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -338,7 +335,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     /** Unsafe version of {@link #meshBlockStateCountOutput}. */
     public static int nmeshBlockStateCountOutput(long struct) { return memGetInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT); }
     /** Unsafe version of {@link #meshBlockStates}. */
-    @Nullable public static XrWorldMeshBlockStateML.Buffer nmeshBlockStates(long struct) { return XrWorldMeshBlockStateML.createSafe(memGetAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES), nmeshBlockStateCapacityInput(struct)); }
+    public static XrWorldMeshBlockStateML.@Nullable Buffer nmeshBlockStates(long struct) { return XrWorldMeshBlockStateML.createSafe(memGetAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES), nmeshBlockStateCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.TYPE, value); }
@@ -353,7 +350,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     /** Unsafe version of {@link #meshBlockStateCountOutput(int) meshBlockStateCountOutput}. */
     public static void nmeshBlockStateCountOutput(long struct, int value) { memPutInt(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATECOUNTOUTPUT, value); }
     /** Unsafe version of {@link #meshBlockStates(XrWorldMeshBlockStateML.Buffer) meshBlockStates}. */
-    public static void nmeshBlockStates(long struct, @Nullable XrWorldMeshBlockStateML.Buffer value) { memPutAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES, memAddressSafe(value)); if (value != null) { nmeshBlockStateCapacityInput(struct, value.remaining()); } }
+    public static void nmeshBlockStates(long struct, XrWorldMeshBlockStateML.@Nullable Buffer value) { memPutAddress(struct + XrWorldMeshStateRequestCompletionML.MESHBLOCKSTATES, memAddressSafe(value)); if (value != null) { nmeshBlockStateCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -417,9 +414,8 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
         @NativeType("uint32_t")
         public int meshBlockStateCountOutput() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStateCountOutput(address()); }
         /** @return a {@link XrWorldMeshBlockStateML.Buffer} view of the struct array pointed to by the {@link XrWorldMeshStateRequestCompletionML#meshBlockStates} field. */
-        @Nullable
         @NativeType("XrWorldMeshBlockStateML *")
-        public XrWorldMeshBlockStateML.Buffer meshBlockStates() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address()); }
+        public XrWorldMeshBlockStateML.@Nullable Buffer meshBlockStates() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address()); }
 
         /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#type} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshStateRequestCompletionML.ntype(address(), value); return this; }
@@ -436,7 +432,7 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
         /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#meshBlockStateCountOutput} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStateCountOutput(@NativeType("uint32_t") int value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStateCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@link XrWorldMeshStateRequestCompletionML#meshBlockStates} field. */
-        public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStates(@Nullable @NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.Buffer value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address(), value); return this; }
+        public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStates(@NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.@Nullable Buffer value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address(), value); return this; }
 
     }
 

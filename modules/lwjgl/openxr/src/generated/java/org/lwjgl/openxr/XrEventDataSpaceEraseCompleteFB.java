@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEras
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataSpaceEraseCompleteFB createSafe(long address) {
+    public static @Nullable XrEventDataSpaceEraseCompleteFB createSafe(long address) {
         return address == NULL ? null : new XrEventDataSpaceEraseCompleteFB(address, null);
     }
 
@@ -234,8 +233,7 @@ public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEras
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataSpaceEraseCompleteFB.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataSpaceEraseCompleteFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class LLVMMustPreserve extends Callback implements LLVMMustPrese
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static LLVMMustPreserve createSafe(long functionPointer) {
+    public static @Nullable LLVMMustPreserve createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

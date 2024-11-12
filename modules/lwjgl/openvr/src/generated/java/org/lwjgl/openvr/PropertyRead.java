@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -173,8 +173,7 @@ public class PropertyRead extends Struct<PropertyRead> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PropertyRead createSafe(long address) {
+    public static @Nullable PropertyRead createSafe(long address) {
         return address == NULL ? null : new PropertyRead(address, null);
     }
 
@@ -217,8 +216,7 @@ public class PropertyRead extends Struct<PropertyRead> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PropertyRead.Buffer createSafe(long address, int capacity) {
+    public static PropertyRead.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

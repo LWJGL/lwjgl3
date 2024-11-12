@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class SVG_Lib_Preset_Slot_Func extends Callback implements SVG_L
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static SVG_Lib_Preset_Slot_Func createSafe(long functionPointer) {
+    public static @Nullable SVG_Lib_Preset_Slot_Func createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,9 +116,8 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     @NativeType("uint32_t")
     public int exclusiveScissorCount() { return nexclusiveScissorCount(address()); }
     /** a pointer to an array of {@link VkRect2D} structures defining exclusive scissor rectangles. */
-    @Nullable
     @NativeType("VkRect2D const *")
-    public VkRect2D.Buffer pExclusiveScissors() { return npExclusiveScissors(address()); }
+    public VkRect2D.@Nullable Buffer pExclusiveScissors() { return npExclusiveScissors(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -129,14 +128,14 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     /** Sets the specified value to the {@link #exclusiveScissorCount} field. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV exclusiveScissorCount(@NativeType("uint32_t") int value) { nexclusiveScissorCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link #pExclusiveScissors} field. */
-    public VkPipelineViewportExclusiveScissorStateCreateInfoNV pExclusiveScissors(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { npExclusiveScissors(address(), value); return this; }
+    public VkPipelineViewportExclusiveScissorStateCreateInfoNV pExclusiveScissors(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { npExclusiveScissors(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV set(
         int sType,
         long pNext,
         int exclusiveScissorCount,
-        @Nullable VkRect2D.Buffer pExclusiveScissors
+        VkRect2D.@Nullable Buffer pExclusiveScissors
     ) {
         sType(sType);
         pNext(pNext);
@@ -182,8 +181,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportExclusiveScissorStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineViewportExclusiveScissorStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineViewportExclusiveScissorStateCreateInfoNV(address, null);
     }
 
@@ -226,8 +224,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineViewportExclusiveScissorStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -297,7 +294,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     /** Unsafe version of {@link #exclusiveScissorCount}. */
     public static int nexclusiveScissorCount(long struct) { return memGetInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT); }
     /** Unsafe version of {@link #pExclusiveScissors}. */
-    @Nullable public static VkRect2D.Buffer npExclusiveScissors(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS), nexclusiveScissorCount(struct)); }
+    public static VkRect2D.@Nullable Buffer npExclusiveScissors(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS), nexclusiveScissorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.STYPE, value); }
@@ -306,7 +303,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
     /** Sets the specified value to the {@code exclusiveScissorCount} field of the specified {@code struct}. */
     public static void nexclusiveScissorCount(long struct, int value) { memPutInt(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.EXCLUSIVESCISSORCOUNT, value); }
     /** Unsafe version of {@link #pExclusiveScissors(VkRect2D.Buffer) pExclusiveScissors}. */
-    public static void npExclusiveScissors(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS, memAddressSafe(value)); if (value != null) { nexclusiveScissorCount(struct, value.remaining()); } }
+    public static void npExclusiveScissors(long struct, VkRect2D.@Nullable Buffer value) { memPutAddress(struct + VkPipelineViewportExclusiveScissorStateCreateInfoNV.PEXCLUSIVESCISSORS, memAddressSafe(value)); if (value != null) { nexclusiveScissorCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -361,9 +358,8 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
         @NativeType("uint32_t")
         public int exclusiveScissorCount() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.nexclusiveScissorCount(address()); }
         /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pExclusiveScissors} field. */
-        @Nullable
         @NativeType("VkRect2D const *")
-        public VkRect2D.Buffer pExclusiveScissors() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address()); }
+        public VkRect2D.@Nullable Buffer pExclusiveScissors() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address()); }
 
         /** Sets the specified value to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#sType} field. */
         public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.nsType(address(), value); return this; }
@@ -374,7 +370,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<
         /** Sets the specified value to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#exclusiveScissorCount} field. */
         public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer exclusiveScissorCount(@NativeType("uint32_t") int value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.nexclusiveScissorCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pExclusiveScissors} field. */
-        public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer pExclusiveScissors(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address(), value); return this; }
+        public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer pExclusiveScissors(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address(), value); return this; }
 
     }
 

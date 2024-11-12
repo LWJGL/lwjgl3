@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActiveActionSetPrioritiesEXT createSafe(long address) {
+    public static @Nullable XrActiveActionSetPrioritiesEXT createSafe(long address) {
         return address == NULL ? null : new XrActiveActionSetPrioritiesEXT(address, null);
     }
 
@@ -218,8 +217,7 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActiveActionSetPrioritiesEXT.Buffer createSafe(long address, int capacity) {
+    public static XrActiveActionSetPrioritiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

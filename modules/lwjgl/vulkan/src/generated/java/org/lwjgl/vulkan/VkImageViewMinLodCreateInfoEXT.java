@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCrea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageViewMinLodCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkImageViewMinLodCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkImageViewMinLodCreateInfoEXT(address, null);
     }
 
@@ -218,8 +217,7 @@ public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCrea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageViewMinLodCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkImageViewMinLodCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

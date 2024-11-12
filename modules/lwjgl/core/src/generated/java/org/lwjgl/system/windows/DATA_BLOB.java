@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,8 +121,7 @@ public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DATA_BLOB createSafe(long address) {
+    public static @Nullable DATA_BLOB createSafe(long address) {
         return address == NULL ? null : new DATA_BLOB(address, null);
     }
 
@@ -165,8 +164,7 @@ public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DATA_BLOB.Buffer createSafe(long address, int capacity) {
+    public static DATA_BLOB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

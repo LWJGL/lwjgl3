@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -190,8 +190,7 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewC
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveatedViewConfigurationViewVARJO createSafe(long address) {
+    public static @Nullable XrFoveatedViewConfigurationViewVARJO createSafe(long address) {
         return address == NULL ? null : new XrFoveatedViewConfigurationViewVARJO(address, null);
     }
 
@@ -234,8 +233,7 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewC
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveatedViewConfigurationViewVARJO.Buffer createSafe(long address, int capacity) {
+    public static XrFoveatedViewConfigurationViewVARJO.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

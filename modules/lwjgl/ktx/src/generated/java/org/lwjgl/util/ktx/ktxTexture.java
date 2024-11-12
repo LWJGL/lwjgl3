@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -215,9 +215,8 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
     @NativeType("ktx_uint32_t")
     public int kvDataLen() { return nkvDataLen(address()); }
     /** pointer to the metadata, if it has been extracted in its raw form, otherwise {@code NULL} */
-    @Nullable
     @NativeType("ktx_uint8_t *")
-    public ByteBuffer kvData() { return nkvData(address()); }
+    public @Nullable ByteBuffer kvData() { return nkvData(address()); }
     /** byte length of the texture's uncompressed image data */
     @NativeType("ktx_size_t")
     public long dataSize() { return ndataSize(address()); }
@@ -249,8 +248,7 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTexture createSafe(long address) {
+    public static @Nullable ktxTexture createSafe(long address) {
         return address == NULL ? null : new ktxTexture(address, null);
     }
 
@@ -293,8 +291,7 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTexture.Buffer createSafe(long address, int capacity) {
+    public static ktxTexture.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -375,7 +372,7 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
     /** Unsafe version of {@link #kvDataLen}. */
     public static int nkvDataLen(long struct) { return memGetInt(struct + ktxTexture.KVDATALEN); }
     /** Unsafe version of {@link #kvData() kvData}. */
-    @Nullable public static ByteBuffer nkvData(long struct) { return memByteBufferSafe(memGetAddress(struct + ktxTexture.KVDATA), nkvDataLen(struct)); }
+    public static @Nullable ByteBuffer nkvData(long struct) { return memByteBufferSafe(memGetAddress(struct + ktxTexture.KVDATA), nkvDataLen(struct)); }
     /** Unsafe version of {@link #dataSize}. */
     public static long ndataSize(long struct) { return memGetAddress(struct + ktxTexture.DATASIZE); }
     /** Unsafe version of {@link #pData() pData}. */
@@ -483,9 +480,8 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
         @NativeType("ktx_uint32_t")
         public int kvDataLen() { return ktxTexture.nkvDataLen(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link ktxTexture#kvData} field. */
-        @Nullable
         @NativeType("ktx_uint8_t *")
-        public ByteBuffer kvData() { return ktxTexture.nkvData(address()); }
+        public @Nullable ByteBuffer kvData() { return ktxTexture.nkvData(address()); }
         /** @return the value of the {@link ktxTexture#dataSize} field. */
         @NativeType("ktx_size_t")
         public long dataSize() { return ktxTexture.ndataSize(address()); }

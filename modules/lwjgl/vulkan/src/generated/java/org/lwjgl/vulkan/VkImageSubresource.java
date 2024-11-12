@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class VkImageSubresource extends Struct<VkImageSubresource> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageSubresource createSafe(long address) {
+    public static @Nullable VkImageSubresource createSafe(long address) {
         return address == NULL ? null : new VkImageSubresource(address, null);
     }
 
@@ -199,8 +198,7 @@ public class VkImageSubresource extends Struct<VkImageSubresource> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageSubresource.Buffer createSafe(long address, int capacity) {
+    public static VkImageSubresource.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

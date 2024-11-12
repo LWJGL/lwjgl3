@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class VkBindMemoryStatusKHR extends Struct<VkBindMemoryStatusKHR> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindMemoryStatusKHR createSafe(long address) {
+    public static @Nullable VkBindMemoryStatusKHR createSafe(long address) {
         return address == NULL ? null : new VkBindMemoryStatusKHR(address, null);
     }
 
@@ -206,8 +205,7 @@ public class VkBindMemoryStatusKHR extends Struct<VkBindMemoryStatusKHR> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindMemoryStatusKHR.Buffer createSafe(long address, int capacity) {
+    public static VkBindMemoryStatusKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,8 +117,7 @@ public class HmdMatrix34 extends Struct<HmdMatrix34> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HmdMatrix34 createSafe(long address) {
+    public static @Nullable HmdMatrix34 createSafe(long address) {
         return address == NULL ? null : new HmdMatrix34(address, null);
     }
 
@@ -161,8 +160,7 @@ public class HmdMatrix34 extends Struct<HmdMatrix34> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HmdMatrix34.Buffer createSafe(long address, int capacity) {
+    public static HmdMatrix34.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

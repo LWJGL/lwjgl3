@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,8 +220,7 @@ public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1Quantization createSafe(long address) {
+    public static @Nullable StdVideoAV1Quantization createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1Quantization(address, null);
     }
 
@@ -264,8 +263,7 @@ public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1Quantization.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1Quantization.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

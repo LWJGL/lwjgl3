@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,7 +185,7 @@ public class KHRDisplay {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayPropertiesKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayPropertiesKHR *") VkDisplayPropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayPropertiesKHR *") VkDisplayPropertiesKHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -257,7 +257,7 @@ public class KHRDisplay {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayPlanePropertiesKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPlanePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayPlanePropertiesKHR *") VkDisplayPlanePropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPlanePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayPlanePropertiesKHR *") VkDisplayPlanePropertiesKHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -333,7 +333,7 @@ public class KHRDisplay {
      * @param pDisplays      either {@code NULL} or a pointer to an array of {@code VkDisplayKHR} handles.
      */
     @NativeType("VkResult")
-    public static int vkGetDisplayPlaneSupportedDisplaysKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int planeIndex, @NativeType("uint32_t *") IntBuffer pDisplayCount, @Nullable @NativeType("VkDisplayKHR *") LongBuffer pDisplays) {
+    public static int vkGetDisplayPlaneSupportedDisplaysKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int planeIndex, @NativeType("uint32_t *") IntBuffer pDisplayCount, @NativeType("VkDisplayKHR *") @Nullable LongBuffer pDisplays) {
         if (CHECKS) {
             check(pDisplayCount, 1);
             checkSafe(pDisplays, pDisplayCount.get(pDisplayCount.position()));
@@ -409,7 +409,7 @@ public class KHRDisplay {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkDisplayModePropertiesKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetDisplayModePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkDisplayModePropertiesKHR *") VkDisplayModePropertiesKHR.Buffer pProperties) {
+    public static int vkGetDisplayModePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkDisplayModePropertiesKHR *") VkDisplayModePropertiesKHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -486,7 +486,7 @@ public class KHRDisplay {
      * @param pMode          a pointer to a {@code VkDisplayModeKHR} handle in which the mode created is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateDisplayModeKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayModeCreateInfoKHR const *") VkDisplayModeCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDisplayModeKHR *") LongBuffer pMode) {
+    public static int vkCreateDisplayModeKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayModeCreateInfoKHR const *") VkDisplayModeCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkDisplayModeKHR *") LongBuffer pMode) {
         if (CHECKS) {
             check(pMode, 1);
         }
@@ -619,7 +619,7 @@ public class KHRDisplay {
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateDisplayPlaneSurfaceKHR(VkInstance instance, @NativeType("VkDisplaySurfaceCreateInfoKHR const *") VkDisplaySurfaceCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {
+    public static int vkCreateDisplayPlaneSurfaceKHR(VkInstance instance, @NativeType("VkDisplaySurfaceCreateInfoKHR const *") VkDisplaySurfaceCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {
         if (CHECKS) {
             check(pSurface, 1);
         }
@@ -628,7 +628,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkGetPhysicalDeviceDisplayPropertiesKHR GetPhysicalDeviceDisplayPropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayPropertiesKHR *") VkDisplayPropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayPropertiesKHR *") VkDisplayPropertiesKHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceDisplayPropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -640,7 +640,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkGetPhysicalDeviceDisplayPlanePropertiesKHR GetPhysicalDeviceDisplayPlanePropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceDisplayPlanePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayPlanePropertiesKHR *") VkDisplayPlanePropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceDisplayPlanePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayPlanePropertiesKHR *") VkDisplayPlanePropertiesKHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceDisplayPlanePropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -652,7 +652,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkGetDisplayPlaneSupportedDisplaysKHR GetDisplayPlaneSupportedDisplaysKHR} */
     @NativeType("VkResult")
-    public static int vkGetDisplayPlaneSupportedDisplaysKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int planeIndex, @NativeType("uint32_t *") int[] pDisplayCount, @Nullable @NativeType("VkDisplayKHR *") long[] pDisplays) {
+    public static int vkGetDisplayPlaneSupportedDisplaysKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int planeIndex, @NativeType("uint32_t *") int[] pDisplayCount, @NativeType("VkDisplayKHR *") long @Nullable [] pDisplays) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetDisplayPlaneSupportedDisplaysKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -664,7 +664,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkGetDisplayModePropertiesKHR GetDisplayModePropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetDisplayModePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkDisplayModePropertiesKHR *") VkDisplayModePropertiesKHR.Buffer pProperties) {
+    public static int vkGetDisplayModePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkDisplayModePropertiesKHR *") VkDisplayModePropertiesKHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetDisplayModePropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -676,7 +676,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkCreateDisplayModeKHR CreateDisplayModeKHR} */
     @NativeType("VkResult")
-    public static int vkCreateDisplayModeKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayModeCreateInfoKHR const *") VkDisplayModeCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDisplayModeKHR *") long[] pMode) {
+    public static int vkCreateDisplayModeKHR(VkPhysicalDevice physicalDevice, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayModeCreateInfoKHR const *") VkDisplayModeCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkDisplayModeKHR *") long[] pMode) {
         long __functionAddress = physicalDevice.getCapabilities().vkCreateDisplayModeKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -687,7 +687,7 @@ public class KHRDisplay {
 
     /** Array version of: {@link #vkCreateDisplayPlaneSurfaceKHR CreateDisplayPlaneSurfaceKHR} */
     @NativeType("VkResult")
-    public static int vkCreateDisplayPlaneSurfaceKHR(VkInstance instance, @NativeType("VkDisplaySurfaceCreateInfoKHR const *") VkDisplaySurfaceCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") long[] pSurface) {
+    public static int vkCreateDisplayPlaneSurfaceKHR(VkInstance instance, @NativeType("VkDisplaySurfaceCreateInfoKHR const *") VkDisplaySurfaceCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") long[] pSurface) {
         long __functionAddress = instance.getCapabilities().vkCreateDisplayPlaneSurfaceKHR;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class TT_MaxProfile extends Struct<TT_MaxProfile> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_MaxProfile createSafe(long address) {
+    public static @Nullable TT_MaxProfile createSafe(long address) {
         return address == NULL ? null : new TT_MaxProfile(address, null);
     }
 
@@ -194,8 +193,7 @@ public class TT_MaxProfile extends Struct<TT_MaxProfile> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_MaxProfile.Buffer createSafe(long address, int capacity) {
+    public static TT_MaxProfile.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

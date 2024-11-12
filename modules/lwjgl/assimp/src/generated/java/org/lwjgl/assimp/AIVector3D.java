@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -140,8 +140,7 @@ public class AIVector3D extends Struct<AIVector3D> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIVector3D createSafe(long address) {
+    public static @Nullable AIVector3D createSafe(long address) {
         return address == NULL ? null : new AIVector3D(address, null);
     }
 
@@ -184,8 +183,7 @@ public class AIVector3D extends Struct<AIVector3D> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIVector3D.Buffer createSafe(long address, int capacity) {
+    public static AIVector3D.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

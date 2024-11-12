@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFormatProperties2 createSafe(long address) {
+    public static @Nullable VkFormatProperties2 createSafe(long address) {
         return address == NULL ? null : new VkFormatProperties2(address, null);
     }
 
@@ -207,8 +206,7 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFormatProperties2.Buffer createSafe(long address, int capacity) {
+    public static VkFormatProperties2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -356,9 +356,8 @@ public class LibCString {
     public static native long nstrerror(int errnum);
 
     /** Returns string describing error number. */
-    @Nullable
     @NativeType("char *")
-    public static String strerror(int errnum) {
+    public static @Nullable String strerror(int errnum) {
         long __result = nstrerror(errnum);
         return memASCIISafe(__result);
     }

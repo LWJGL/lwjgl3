@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class VkPipelineRasterizationProvokingVertexStateCreateInfoEXT extends St
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineRasterizationProvokingVertexStateCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineRasterizationProvokingVertexStateCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(address, null);
     }
 
@@ -209,8 +208,7 @@ public class VkPipelineRasterizationProvokingVertexStateCreateInfoEXT extends St
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

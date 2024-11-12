@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,7 +104,7 @@ public class INTELVAAPIMediaSharing {
      * @param num_devices        returns the number of OpenCL devices available that correspond to {@code media_adapter}. If {@code num_devices} is {@code NULL}, this argument is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetDeviceIDsFromVA_APIMediaAdapterINTEL(@NativeType("cl_platform_id") long platform, @NativeType("cl_va_api_device_source_intel") int media_adapter_type, @NativeType("void *") long media_adapter, @NativeType("cl_va_api_device_set_intel") int media_adapter_set, @Nullable @NativeType("cl_device_id *") PointerBuffer devices, @Nullable @NativeType("cl_uint *") IntBuffer num_devices) {
+    public static int clGetDeviceIDsFromVA_APIMediaAdapterINTEL(@NativeType("cl_platform_id") long platform, @NativeType("cl_va_api_device_source_intel") int media_adapter_type, @NativeType("void *") long media_adapter, @NativeType("cl_va_api_device_set_intel") int media_adapter_set, @NativeType("cl_device_id *") @Nullable PointerBuffer devices, @NativeType("cl_uint *") @Nullable IntBuffer num_devices) {
         if (CHECKS) {
             checkSafe(num_devices, 1);
         }
@@ -133,7 +133,7 @@ public class INTELVAAPIMediaSharing {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_mem")
-    public static long clCreateFromVA_APIMediaSurfaceINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("VASurfaceID *") IntBuffer surface, @NativeType("cl_uint") int plane, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateFromVA_APIMediaSurfaceINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("VASurfaceID *") IntBuffer surface, @NativeType("cl_uint") int plane, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             check(surface, 1);
             checkSafe(errcode_ret, 1);
@@ -184,7 +184,7 @@ public class INTELVAAPIMediaSharing {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueAcquireVA_APIMediaSurfacesINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueAcquireVA_APIMediaSurfacesINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -234,7 +234,7 @@ public class INTELVAAPIMediaSharing {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueReleaseVA_APIMediaSurfacesINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReleaseVA_APIMediaSurfacesINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -243,7 +243,7 @@ public class INTELVAAPIMediaSharing {
 
     /** Array version of: {@link #clGetDeviceIDsFromVA_APIMediaAdapterINTEL GetDeviceIDsFromVA_APIMediaAdapterINTEL} */
     @NativeType("cl_int")
-    public static int clGetDeviceIDsFromVA_APIMediaAdapterINTEL(@NativeType("cl_platform_id") long platform, @NativeType("cl_va_api_device_source_intel") int media_adapter_type, @NativeType("void *") long media_adapter, @NativeType("cl_va_api_device_set_intel") int media_adapter_set, @Nullable @NativeType("cl_device_id *") PointerBuffer devices, @Nullable @NativeType("cl_uint *") int[] num_devices) {
+    public static int clGetDeviceIDsFromVA_APIMediaAdapterINTEL(@NativeType("cl_platform_id") long platform, @NativeType("cl_va_api_device_source_intel") int media_adapter_type, @NativeType("void *") long media_adapter, @NativeType("cl_va_api_device_set_intel") int media_adapter_set, @NativeType("cl_device_id *") @Nullable PointerBuffer devices, @NativeType("cl_uint *") int @Nullable [] num_devices) {
         long __functionAddress = CL.getICD().clGetDeviceIDsFromVA_APIMediaAdapterINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -256,7 +256,7 @@ public class INTELVAAPIMediaSharing {
 
     /** Array version of: {@link #clCreateFromVA_APIMediaSurfaceINTEL CreateFromVA_APIMediaSurfaceINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateFromVA_APIMediaSurfaceINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("VASurfaceID *") int[] surface, @NativeType("cl_uint") int plane, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateFromVA_APIMediaSurfaceINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("VASurfaceID *") int[] surface, @NativeType("cl_uint") int plane, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateFromVA_APIMediaSurfaceINTEL;
         if (CHECKS) {
             check(__functionAddress);

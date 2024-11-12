@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -251,8 +251,7 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct<VkAc
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureGeometryTrianglesDataKHR createSafe(long address) {
+    public static @Nullable VkAccelerationStructureGeometryTrianglesDataKHR createSafe(long address) {
         return address == NULL ? null : new VkAccelerationStructureGeometryTrianglesDataKHR(address, null);
     }
 
@@ -295,8 +294,7 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct<VkAc
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureGeometryTrianglesDataKHR.Buffer createSafe(long address, int capacity) {
+    public static VkAccelerationStructureGeometryTrianglesDataKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

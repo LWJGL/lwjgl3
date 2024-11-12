@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -35,8 +35,7 @@ public abstract class RMTMalloc extends Callback implements RMTMallocI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static RMTMalloc createSafe(long functionPointer) {
+    public static @Nullable RMTMalloc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

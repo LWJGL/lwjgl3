@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,9 +116,8 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     @NativeType("uint32_t")
     public int libraryCount() { return nlibraryCount(address()); }
     /** a pointer to an array of {@code VkPipeline} structures specifying pipeline libraries to use when creating a pipeline. */
-    @Nullable
     @NativeType("VkPipeline const *")
-    public LongBuffer pLibraries() { return npLibraries(address()); }
+    public @Nullable LongBuffer pLibraries() { return npLibraries(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineLibraryCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -178,8 +177,7 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineLibraryCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkPipelineLibraryCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkPipelineLibraryCreateInfoKHR(address, null);
     }
 
@@ -222,8 +220,7 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineLibraryCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineLibraryCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -274,7 +271,7 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     /** Unsafe version of {@link #libraryCount}. */
     public static int nlibraryCount(long struct) { return memGetInt(struct + VkPipelineLibraryCreateInfoKHR.LIBRARYCOUNT); }
     /** Unsafe version of {@link #pLibraries() pLibraries}. */
-    @Nullable public static LongBuffer npLibraries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLibraryCreateInfoKHR.PLIBRARIES), nlibraryCount(struct)); }
+    public static @Nullable LongBuffer npLibraries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLibraryCreateInfoKHR.PLIBRARIES), nlibraryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineLibraryCreateInfoKHR.STYPE, value); }
@@ -349,9 +346,8 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
         @NativeType("uint32_t")
         public int libraryCount() { return VkPipelineLibraryCreateInfoKHR.nlibraryCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPipelineLibraryCreateInfoKHR#pLibraries} field. */
-        @Nullable
         @NativeType("VkPipeline const *")
-        public LongBuffer pLibraries() { return VkPipelineLibraryCreateInfoKHR.npLibraries(address()); }
+        public @Nullable LongBuffer pLibraries() { return VkPipelineLibraryCreateInfoKHR.npLibraries(address()); }
 
         /** Sets the specified value to the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineLibraryCreateInfoKHR.nsType(address(), value); return this; }

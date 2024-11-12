@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -186,8 +186,7 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XSelectionClearEvent createSafe(long address) {
+    public static @Nullable XSelectionClearEvent createSafe(long address) {
         return address == NULL ? null : new XSelectionClearEvent(address, null);
     }
 
@@ -230,8 +229,7 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XSelectionClearEvent.Buffer createSafe(long address, int capacity) {
+    public static XSelectionClearEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

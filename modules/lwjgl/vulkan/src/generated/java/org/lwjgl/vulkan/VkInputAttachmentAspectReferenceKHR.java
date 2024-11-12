@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkInputAttachmentAspectReferenceKHR createSafe(long address) {
+    public static @Nullable VkInputAttachmentAspectReferenceKHR createSafe(long address) {
         return address == NULL ? null : new VkInputAttachmentAspectReferenceKHR(address, null);
     }
 
@@ -152,8 +151,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkInputAttachmentAspectReferenceKHR.Buffer createSafe(long address, int capacity) {
+    public static VkInputAttachmentAspectReferenceKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

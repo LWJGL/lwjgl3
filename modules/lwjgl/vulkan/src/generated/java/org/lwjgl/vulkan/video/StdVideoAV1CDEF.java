@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -198,8 +198,7 @@ public class StdVideoAV1CDEF extends Struct<StdVideoAV1CDEF> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1CDEF createSafe(long address) {
+    public static @Nullable StdVideoAV1CDEF createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1CDEF(address, null);
     }
 
@@ -242,8 +241,7 @@ public class StdVideoAV1CDEF extends Struct<StdVideoAV1CDEF> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1CDEF.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1CDEF.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

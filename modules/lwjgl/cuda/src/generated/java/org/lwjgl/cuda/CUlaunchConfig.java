@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,9 +129,8 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     @NativeType("CUstream")
     public long hStream() { return nhStream(address()); }
     /** @return a {@link CUlaunchAttribute.Buffer} view of the struct array pointed to by the {@code attrs} field. */
-    @Nullable
     @NativeType("CUlaunchAttribute *")
-    public CUlaunchAttribute.Buffer attrs() { return nattrs(address()); }
+    public CUlaunchAttribute.@Nullable Buffer attrs() { return nattrs(address()); }
     /** @return the value of the {@code numAttrs} field. */
     @NativeType("unsigned int")
     public int numAttrs() { return nnumAttrs(address()); }
@@ -153,7 +152,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     /** Sets the specified value to the {@code hStream} field. */
     public CUlaunchConfig hStream(@NativeType("CUstream") long value) { nhStream(address(), value); return this; }
     /** Sets the address of the specified {@link CUlaunchAttribute.Buffer} to the {@code attrs} field. */
-    public CUlaunchConfig attrs(@Nullable @NativeType("CUlaunchAttribute *") CUlaunchAttribute.Buffer value) { nattrs(address(), value); return this; }
+    public CUlaunchConfig attrs(@NativeType("CUlaunchAttribute *") CUlaunchAttribute.@Nullable Buffer value) { nattrs(address(), value); return this; }
     /** Sets the specified value to the {@code numAttrs} field. */
     public CUlaunchConfig numAttrs(@NativeType("unsigned int") int value) { nnumAttrs(address(), value); return this; }
 
@@ -167,7 +166,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
         int blockDimZ,
         int sharedMemBytes,
         long hStream,
-        @Nullable CUlaunchAttribute.Buffer attrs,
+        CUlaunchAttribute.@Nullable Buffer attrs,
         int numAttrs
     ) {
         gridDimX(gridDimX);
@@ -220,8 +219,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchConfig createSafe(long address) {
+    public static @Nullable CUlaunchConfig createSafe(long address) {
         return address == NULL ? null : new CUlaunchConfig(address, null);
     }
 
@@ -264,8 +262,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchConfig.Buffer createSafe(long address, int capacity) {
+    public static CUlaunchConfig.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -326,7 +323,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     /** Unsafe version of {@link #hStream}. */
     public static long nhStream(long struct) { return memGetAddress(struct + CUlaunchConfig.HSTREAM); }
     /** Unsafe version of {@link #attrs}. */
-    @Nullable public static CUlaunchAttribute.Buffer nattrs(long struct) { return CUlaunchAttribute.createSafe(memGetAddress(struct + CUlaunchConfig.ATTRS), nnumAttrs(struct)); }
+    public static CUlaunchAttribute.@Nullable Buffer nattrs(long struct) { return CUlaunchAttribute.createSafe(memGetAddress(struct + CUlaunchConfig.ATTRS), nnumAttrs(struct)); }
     /** Unsafe version of {@link #numAttrs}. */
     public static int nnumAttrs(long struct) { return memGetInt(struct + CUlaunchConfig.NUMATTRS); }
 
@@ -347,7 +344,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
     /** Unsafe version of {@link #hStream(long) hStream}. */
     public static void nhStream(long struct, long value) { memPutAddress(struct + CUlaunchConfig.HSTREAM, value); }
     /** Unsafe version of {@link #attrs(CUlaunchAttribute.Buffer) attrs}. */
-    public static void nattrs(long struct, @Nullable CUlaunchAttribute.Buffer value) { memPutAddress(struct + CUlaunchConfig.ATTRS, memAddressSafe(value)); nnumAttrs(struct, value == null ? 0 : value.remaining()); }
+    public static void nattrs(long struct, CUlaunchAttribute.@Nullable Buffer value) { memPutAddress(struct + CUlaunchConfig.ATTRS, memAddressSafe(value)); nnumAttrs(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code numAttrs} field of the specified {@code struct}. */
     public static void nnumAttrs(long struct, int value) { memPutInt(struct + CUlaunchConfig.NUMATTRS, value); }
 
@@ -419,9 +416,8 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
         @NativeType("CUstream")
         public long hStream() { return CUlaunchConfig.nhStream(address()); }
         /** @return a {@link CUlaunchAttribute.Buffer} view of the struct array pointed to by the {@code attrs} field. */
-        @Nullable
         @NativeType("CUlaunchAttribute *")
-        public CUlaunchAttribute.Buffer attrs() { return CUlaunchConfig.nattrs(address()); }
+        public CUlaunchAttribute.@Nullable Buffer attrs() { return CUlaunchConfig.nattrs(address()); }
         /** @return the value of the {@code numAttrs} field. */
         @NativeType("unsigned int")
         public int numAttrs() { return CUlaunchConfig.nnumAttrs(address()); }
@@ -443,7 +439,7 @@ public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeReso
         /** Sets the specified value to the {@code hStream} field. */
         public CUlaunchConfig.Buffer hStream(@NativeType("CUstream") long value) { CUlaunchConfig.nhStream(address(), value); return this; }
         /** Sets the address of the specified {@link CUlaunchAttribute.Buffer} to the {@code attrs} field. */
-        public CUlaunchConfig.Buffer attrs(@Nullable @NativeType("CUlaunchAttribute *") CUlaunchAttribute.Buffer value) { CUlaunchConfig.nattrs(address(), value); return this; }
+        public CUlaunchConfig.Buffer attrs(@NativeType("CUlaunchAttribute *") CUlaunchAttribute.@Nullable Buffer value) { CUlaunchConfig.nattrs(address(), value); return this; }
         /** Sets the specified value to the {@code numAttrs} field. */
         public CUlaunchConfig.Buffer numAttrs(@NativeType("unsigned int") int value) { CUlaunchConfig.nnumAttrs(address(), value); return this; }
 

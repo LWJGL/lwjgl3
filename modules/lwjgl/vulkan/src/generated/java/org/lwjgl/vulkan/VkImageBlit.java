@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -197,8 +197,7 @@ public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageBlit createSafe(long address) {
+    public static @Nullable VkImageBlit createSafe(long address) {
         return address == NULL ? null : new VkImageBlit(address, null);
     }
 
@@ -241,8 +240,7 @@ public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageBlit.Buffer createSafe(long address, int capacity) {
+    public static VkImageBlit.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

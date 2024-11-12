@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -151,8 +151,7 @@ public class XrFaceExpressionStatusFB extends Struct<XrFaceExpressionStatusFB> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceExpressionStatusFB createSafe(long address) {
+    public static @Nullable XrFaceExpressionStatusFB createSafe(long address) {
         return address == NULL ? null : new XrFaceExpressionStatusFB(address, null);
     }
 
@@ -195,8 +194,7 @@ public class XrFaceExpressionStatusFB extends Struct<XrFaceExpressionStatusFB> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceExpressionStatusFB.Buffer createSafe(long address, int capacity) {
+    public static XrFaceExpressionStatusFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

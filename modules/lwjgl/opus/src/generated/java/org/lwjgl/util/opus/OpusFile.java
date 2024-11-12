@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -344,7 +344,7 @@ public class OpusFile {
      *         <li>{@link #OP_EFAULT EFAULT} If there wasn't enough memory to store the tags</li>
      *         </ul>
      */
-    public static int opus_tags_parse(@Nullable @NativeType("OpusTags *") OpusTags _tags, @NativeType("unsigned char const *") ByteBuffer _data) {
+    public static int opus_tags_parse(@NativeType("OpusTags *") @Nullable OpusTags _tags, @NativeType("unsigned char const *") ByteBuffer _data) {
         return nopus_tags_parse(memAddressSafe(_tags), memAddress(_data), _data.remaining());
     }
 
@@ -544,7 +544,7 @@ public class OpusFile {
      *         <li>{@link #OP_EFAULT EFAULT} An internal memory allocation failed</li>
      *         </ul>
      */
-    public static int opus_tags_set_binary_suffix(@NativeType("OpusTags *") OpusTags _tags, @Nullable @NativeType("unsigned char const *") ByteBuffer _data) {
+    public static int opus_tags_set_binary_suffix(@NativeType("OpusTags *") OpusTags _tags, @NativeType("unsigned char const *") @Nullable ByteBuffer _data) {
         return nopus_tags_set_binary_suffix(_tags.address(), memAddressSafe(_data), remainingSafe(_data));
     }
 
@@ -571,9 +571,8 @@ public class OpusFile {
      *         <p>This points directly to data in the {@code OpusTags} structure. It should not be modified or freed by the application, and modifications to the
      *         structure may invalidate the pointer. {@code NULL} if no matching tag is found.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String opus_tags_query(@NativeType("OpusTags const *") OpusTags _tags, @NativeType("char const *") ByteBuffer _tag, int _count) {
+    public static @Nullable String opus_tags_query(@NativeType("OpusTags const *") OpusTags _tags, @NativeType("char const *") ByteBuffer _tag, int _count) {
         if (CHECKS) {
             checkNT1(_tag);
         }
@@ -596,9 +595,8 @@ public class OpusFile {
      *         <p>This points directly to data in the {@code OpusTags} structure. It should not be modified or freed by the application, and modifications to the
      *         structure may invalidate the pointer. {@code NULL} if no matching tag is found.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String opus_tags_query(@NativeType("OpusTags const *") OpusTags _tags, @NativeType("char const *") CharSequence _tag, int _count) {
+    public static @Nullable String opus_tags_query(@NativeType("OpusTags const *") OpusTags _tags, @NativeType("char const *") CharSequence _tag, int _count) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(_tag, true);
@@ -677,9 +675,8 @@ public class OpusFile {
      *
      * @return a pointer to the binary suffix data, or {@code NULL} if none was present
      */
-    @Nullable
     @NativeType("unsigned char const *")
-    public static ByteBuffer opus_tags_get_binary_suffix(@NativeType("OpusTags const *") OpusTags _tags) {
+    public static @Nullable ByteBuffer opus_tags_get_binary_suffix(@NativeType("OpusTags const *") OpusTags _tags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer _len = stack.callocInt(1);
         try {
@@ -1219,7 +1216,7 @@ public class OpusFile {
      *         <li>{@link #OP_EBADHEADER EBADHEADER} The ID header was not properly formatted or contained illegal values</li>
      *         </ul>
      */
-    public static int op_test(@Nullable @NativeType("OpusHead *") OpusHead _head, @NativeType("unsigned char const *") ByteBuffer _initial_data) {
+    public static int op_test(@NativeType("OpusHead *") @Nullable OpusHead _head, @NativeType("unsigned char const *") ByteBuffer _initial_data) {
         return nop_test(memAddressSafe(_head), memAddress(_initial_data), _initial_data.remaining());
     }
 
@@ -1243,7 +1240,7 @@ public class OpusFile {
      * @return a freshly opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_open_file(@NativeType("char const *") ByteBuffer _path, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_open_file(@NativeType("char const *") ByteBuffer _path, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkNT1(_path);
             checkSafe(_error, 1);
@@ -1263,7 +1260,7 @@ public class OpusFile {
      * @return a freshly opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_open_file(@NativeType("char const *") CharSequence _path, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_open_file(@NativeType("char const *") CharSequence _path, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1300,7 +1297,7 @@ public class OpusFile {
      * @return a freshly opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_open_memory(@NativeType("unsigned char const *") ByteBuffer _data, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_open_memory(@NativeType("unsigned char const *") ByteBuffer _data, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1363,7 +1360,7 @@ public class OpusFile {
      *         call returns an error.</p>
      */
     @NativeType("OggOpusFile *")
-    public static long op_open_callbacks(@NativeType("void *") long _stream, @NativeType("OpusFileCallbacks const *") OpusFileCallbacks _cb, @NativeType("unsigned char const *") ByteBuffer _initial_data, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_open_callbacks(@NativeType("void *") long _stream, @NativeType("OpusFileCallbacks const *") OpusFileCallbacks _cb, @NativeType("unsigned char const *") ByteBuffer _initial_data, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1390,7 +1387,7 @@ public class OpusFile {
      * @return a partially opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_test_file(@NativeType("char const *") ByteBuffer _path, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_test_file(@NativeType("char const *") ByteBuffer _path, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkNT1(_path);
             checkSafe(_error, 1);
@@ -1410,7 +1407,7 @@ public class OpusFile {
      * @return a partially opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_test_file(@NativeType("char const *") CharSequence _path, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_test_file(@NativeType("char const *") CharSequence _path, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1447,7 +1444,7 @@ public class OpusFile {
      * @return a partially opened {@code OggOpusFile}, or {@code NULL} on error
      */
     @NativeType("OggOpusFile *")
-    public static long op_test_memory(@NativeType("unsigned char const *") ByteBuffer _data, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_test_memory(@NativeType("unsigned char const *") ByteBuffer _data, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1507,7 +1504,7 @@ public class OpusFile {
      *         call returns an error.</p>
      */
     @NativeType("OggOpusFile *")
-    public static long op_test_callbacks(@NativeType("void *") long _stream, @NativeType("OpusFileCallbacks const *") OpusFileCallbacks _cb, @NativeType("unsigned char const *") ByteBuffer _initial_data, @Nullable @NativeType("int *") IntBuffer _error) {
+    public static long op_test_callbacks(@NativeType("void *") long _stream, @NativeType("OpusFileCallbacks const *") OpusFileCallbacks _cb, @NativeType("unsigned char const *") ByteBuffer _initial_data, @NativeType("int *") @Nullable IntBuffer _error) {
         if (CHECKS) {
             checkSafe(_error, 1);
         }
@@ -1733,9 +1730,8 @@ public class OpusFile {
      *
      * @return the contents of the ID header for the given link
      */
-    @Nullable
     @NativeType("OpusHead const *")
-    public static OpusHead op_head(@NativeType("OggOpusFile const *") long _of, int _li) {
+    public static @Nullable OpusHead op_head(@NativeType("OggOpusFile const *") long _of, int _li) {
         long __result = nop_head(_of, _li);
         return OpusHead.createSafe(__result);
     }
@@ -1763,9 +1759,8 @@ public class OpusFile {
      *
      * @return the contents of the comment header for the given link, or {@code NULL} if this is an unseekable stream that encountered an invalid link
      */
-    @Nullable
     @NativeType("OpusTags const *")
-    public static OpusTags op_tags(@NativeType("OggOpusFile const *") long _of, int _li) {
+    public static @Nullable OpusTags op_tags(@NativeType("OggOpusFile const *") long _of, int _li) {
         long __result = nop_tags(_of, _li);
         return OpusTags.createSafe(__result);
     }
@@ -2094,7 +2089,7 @@ public class OpusFile {
      *         <li>{@link #OP_EBADTIMESTAMP EBADTIMESTAMP} An unseekable stream encountered a new link with a starting timestamp that failed basic validity checks</li>
      *         </ul>
      */
-    public static int op_read(@NativeType("OggOpusFile *") long _of, @NativeType("opus_int16 *") ShortBuffer _pcm, @Nullable @NativeType("int *") IntBuffer _li) {
+    public static int op_read(@NativeType("OggOpusFile *") long _of, @NativeType("opus_int16 *") ShortBuffer _pcm, @NativeType("int *") @Nullable IntBuffer _li) {
         if (CHECKS) {
             checkSafe(_li, 1);
         }
@@ -2170,7 +2165,7 @@ public class OpusFile {
      *         <li>{@link #OP_EBADTIMESTAMP EBADTIMESTAMP} An unseekable stream encountered a new link with a starting timestamp that failed basic validity checks</li>
      *         </ul>
      */
-    public static int op_read_float(@NativeType("OggOpusFile *") long _of, @NativeType("float *") FloatBuffer _pcm, @Nullable @NativeType("int *") IntBuffer _li) {
+    public static int op_read_float(@NativeType("OggOpusFile *") long _of, @NativeType("float *") FloatBuffer _pcm, @NativeType("int *") @Nullable IntBuffer _li) {
         if (CHECKS) {
             checkSafe(_li, 1);
         }

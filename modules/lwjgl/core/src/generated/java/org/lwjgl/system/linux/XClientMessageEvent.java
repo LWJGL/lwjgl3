@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -245,8 +245,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XClientMessageEvent createSafe(long address) {
+    public static @Nullable XClientMessageEvent createSafe(long address) {
         return address == NULL ? null : new XClientMessageEvent(address, null);
     }
 
@@ -289,8 +288,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XClientMessageEvent.Buffer createSafe(long address, int capacity) {
+    public static XClientMessageEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

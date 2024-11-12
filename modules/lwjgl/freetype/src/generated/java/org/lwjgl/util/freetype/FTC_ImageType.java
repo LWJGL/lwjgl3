@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,8 +102,7 @@ public class FTC_ImageType extends Struct<FTC_ImageType> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_ImageType createSafe(long address) {
+    public static @Nullable FTC_ImageType createSafe(long address) {
         return address == NULL ? null : new FTC_ImageType(address, null);
     }
 
@@ -118,8 +117,7 @@ public class FTC_ImageType extends Struct<FTC_ImageType> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_ImageType.Buffer createSafe(long address, int capacity) {
+    public static FTC_ImageType.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

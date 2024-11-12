@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -254,8 +254,7 @@ public class VkResolveImageInfo2 extends Struct<VkResolveImageInfo2> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkResolveImageInfo2 createSafe(long address) {
+    public static @Nullable VkResolveImageInfo2 createSafe(long address) {
         return address == NULL ? null : new VkResolveImageInfo2(address, null);
     }
 
@@ -298,8 +297,7 @@ public class VkResolveImageInfo2 extends Struct<VkResolveImageInfo2> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkResolveImageInfo2.Buffer createSafe(long address, int capacity) {
+    public static VkResolveImageInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

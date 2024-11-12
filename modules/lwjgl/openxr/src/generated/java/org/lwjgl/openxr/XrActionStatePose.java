@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class XrActionStatePose extends Struct<XrActionStatePose> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionStatePose createSafe(long address) {
+    public static @Nullable XrActionStatePose createSafe(long address) {
         return address == NULL ? null : new XrActionStatePose(address, null);
     }
 
@@ -205,8 +204,7 @@ public class XrActionStatePose extends Struct<XrActionStatePose> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionStatePose.Buffer createSafe(long address, int capacity) {
+    public static XrActionStatePose.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

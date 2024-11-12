@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libffi;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -135,8 +135,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFICIF createSafe(long address) {
+    public static @Nullable FFICIF createSafe(long address) {
         return address == NULL ? null : new FFICIF(address, null);
     }
 
@@ -179,8 +178,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFICIF.Buffer createSafe(long address, int capacity) {
+    public static FFICIF.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -141,8 +141,7 @@ public class XrOffset2Df extends Struct<XrOffset2Df> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrOffset2Df createSafe(long address) {
+    public static @Nullable XrOffset2Df createSafe(long address) {
         return address == NULL ? null : new XrOffset2Df(address, null);
     }
 
@@ -185,8 +184,7 @@ public class XrOffset2Df extends Struct<XrOffset2Df> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrOffset2Df.Buffer createSafe(long address, int capacity) {
+    public static XrOffset2Df.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

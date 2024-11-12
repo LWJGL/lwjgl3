@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -49,7 +49,7 @@ public class EXTDeviceEnumeration {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
+    public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
         if (CHECKS) {
             check(num_devices, 1);
         }
@@ -58,7 +58,7 @@ public class EXTDeviceEnumeration {
 
     /** Array version of: {@link #eglQueryDevicesEXT QueryDevicesEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
+    public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
         long __functionAddress = EGL.getCapabilities().eglQueryDevicesEXT;
         if (CHECKS) {
             check(__functionAddress);

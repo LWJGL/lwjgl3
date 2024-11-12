@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -271,7 +271,7 @@ public class KHRFragmentShadingRate {
      * @param pFragmentShadingRates     either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceFragmentShadingRateKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceFragmentShadingRatesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pFragmentShadingRateCount, @Nullable @NativeType("VkPhysicalDeviceFragmentShadingRateKHR *") VkPhysicalDeviceFragmentShadingRateKHR.Buffer pFragmentShadingRates) {
+    public static int vkGetPhysicalDeviceFragmentShadingRatesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pFragmentShadingRateCount, @NativeType("VkPhysicalDeviceFragmentShadingRateKHR *") VkPhysicalDeviceFragmentShadingRateKHR.@Nullable Buffer pFragmentShadingRates) {
         if (CHECKS) {
             check(pFragmentShadingRateCount, 1);
             checkSafe(pFragmentShadingRates, pFragmentShadingRateCount.get(pFragmentShadingRateCount.position()));
@@ -366,7 +366,7 @@ public class KHRFragmentShadingRate {
 
     /** Array version of: {@link #vkGetPhysicalDeviceFragmentShadingRatesKHR GetPhysicalDeviceFragmentShadingRatesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceFragmentShadingRatesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pFragmentShadingRateCount, @Nullable @NativeType("VkPhysicalDeviceFragmentShadingRateKHR *") VkPhysicalDeviceFragmentShadingRateKHR.Buffer pFragmentShadingRates) {
+    public static int vkGetPhysicalDeviceFragmentShadingRatesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pFragmentShadingRateCount, @NativeType("VkPhysicalDeviceFragmentShadingRateKHR *") VkPhysicalDeviceFragmentShadingRateKHR.@Nullable Buffer pFragmentShadingRates) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceFragmentShadingRatesKHR;
         if (CHECKS) {
             check(__functionAddress);

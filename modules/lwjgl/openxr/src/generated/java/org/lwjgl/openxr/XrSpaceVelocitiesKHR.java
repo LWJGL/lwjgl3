@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,8 +113,7 @@ public class XrSpaceVelocitiesKHR extends XrSpaceVelocities {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceVelocitiesKHR createSafe(long address) {
+    public static @Nullable XrSpaceVelocitiesKHR createSafe(long address) {
         return address == NULL ? null : new XrSpaceVelocitiesKHR(address, null);
     }
 
@@ -157,8 +156,7 @@ public class XrSpaceVelocitiesKHR extends XrSpaceVelocities {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceVelocitiesKHR.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceVelocitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

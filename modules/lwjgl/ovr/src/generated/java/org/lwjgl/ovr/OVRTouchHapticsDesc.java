@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,8 +129,7 @@ public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTouchHapticsDesc createSafe(long address) {
+    public static @Nullable OVRTouchHapticsDesc createSafe(long address) {
         return address == NULL ? null : new OVRTouchHapticsDesc(address, null);
     }
 
@@ -173,8 +172,7 @@ public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTouchHapticsDesc.Buffer createSafe(long address, int capacity) {
+    public static OVRTouchHapticsDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

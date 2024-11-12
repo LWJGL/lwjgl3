@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -170,8 +170,7 @@ public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageOpaqueMemoryBindInfo createSafe(long address) {
+    public static @Nullable VkSparseImageOpaqueMemoryBindInfo createSafe(long address) {
         return address == NULL ? null : new VkSparseImageOpaqueMemoryBindInfo(address, null);
     }
 
@@ -214,8 +213,7 @@ public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageOpaqueMemoryBindInfo.Buffer createSafe(long address, int capacity) {
+    public static VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

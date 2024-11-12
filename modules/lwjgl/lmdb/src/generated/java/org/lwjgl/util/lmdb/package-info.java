@@ -89,6 +89,6 @@
  * being reclaimed. That's actually good anyway, because the longer we delay reclaiming old pages, the more likely it is that a string of contiguous pages
  * can be found after coalescing old pages from many old transactions together.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.lmdb;
 

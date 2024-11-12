@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -241,8 +241,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264HrdParameters createSafe(long address) {
+    public static @Nullable StdVideoH264HrdParameters createSafe(long address) {
         return address == NULL ? null : new StdVideoH264HrdParameters(address, null);
     }
 
@@ -285,8 +284,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264HrdParameters.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH264HrdParameters.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

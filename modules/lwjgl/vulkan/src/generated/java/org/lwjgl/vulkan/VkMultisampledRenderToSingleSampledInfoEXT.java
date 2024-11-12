@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct<VkMultisa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMultisampledRenderToSingleSampledInfoEXT createSafe(long address) {
+    public static @Nullable VkMultisampledRenderToSingleSampledInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkMultisampledRenderToSingleSampledInfoEXT(address, null);
     }
 
@@ -215,8 +214,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct<VkMultisa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMultisampledRenderToSingleSampledInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

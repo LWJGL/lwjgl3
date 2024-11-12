@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -3778,9 +3778,8 @@ arrow).</p></li>
     }
 
     /** Returns where the OpenVR runtime is installed. */
-    @Nullable
     @NativeType("char *")
-    public static String VR_RuntimePath() {
+    public static @Nullable String VR_RuntimePath() {
         long __result = nVR_RuntimePath();
         return memASCIISafe(__result);
     }
@@ -3845,9 +3844,8 @@ arrow).</p></li>
      *
      * @param error the error code
      */
-    @Nullable
     @NativeType("char const *")
-    public static String VR_GetVRInitErrorAsSymbol(@NativeType("EVRInitError") int error) {
+    public static @Nullable String VR_GetVRInitErrorAsSymbol(@NativeType("EVRInitError") int error) {
         long __result = nVR_GetVRInitErrorAsSymbol(error);
         return memASCIISafe(__result);
     }
@@ -3868,9 +3866,8 @@ arrow).</p></li>
      *
      * @param error the error code
      */
-    @Nullable
     @NativeType("char const *")
-    public static String VR_GetVRInitErrorAsEnglishDescription(@NativeType("EVRInitError") int error) {
+    public static @Nullable String VR_GetVRInitErrorAsEnglishDescription(@NativeType("EVRInitError") int error) {
         long __result = nVR_GetVRInitErrorAsEnglishDescription(error);
         return memASCIISafe(__result);
     }

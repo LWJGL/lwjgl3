@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class Texture extends Struct<Texture> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Texture createSafe(long address) {
+    public static @Nullable Texture createSafe(long address) {
         return address == NULL ? null : new Texture(address, null);
     }
 
@@ -188,8 +187,7 @@ public class Texture extends Struct<Texture> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Texture.Buffer createSafe(long address, int capacity) {
+    public static Texture.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

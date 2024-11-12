@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -53,7 +53,7 @@ public class KHRFenceSync {
     }
 
     @NativeType("EGLSyncKHR")
-    public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @Nullable @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         return KHRReusableSync.eglCreateSyncKHR(dpy, type, attrib_list);
     }
 
@@ -84,7 +84,7 @@ public class KHRFenceSync {
 
     /** Array version of: {@link #eglCreateSyncKHR CreateSyncKHR} */
     @NativeType("EGLSyncKHR")
-    public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
+    public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         return KHRReusableSync.eglCreateSyncKHR(dpy, type, attrib_list);
     }
 

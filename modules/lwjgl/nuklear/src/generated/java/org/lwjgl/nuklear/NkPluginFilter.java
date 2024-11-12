@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static NkPluginFilter createSafe(long functionPointer) {
+    public static @Nullable NkPluginFilter createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

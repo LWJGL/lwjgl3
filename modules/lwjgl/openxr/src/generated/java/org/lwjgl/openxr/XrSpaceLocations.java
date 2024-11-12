@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class XrSpaceLocations extends Struct<XrSpaceLocations> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceLocations createSafe(long address) {
+    public static @Nullable XrSpaceLocations createSafe(long address) {
         return address == NULL ? null : new XrSpaceLocations(address, null);
     }
 
@@ -219,8 +218,7 @@ public class XrSpaceLocations extends Struct<XrSpaceLocations> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceLocations.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceLocations.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

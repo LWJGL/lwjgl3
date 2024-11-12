@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -18,7 +18,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -72,7 +72,7 @@ public class GLFWNativeOSMesa {
      * @since version 3.3
      */
     @NativeType("int")
-    public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") IntBuffer width, @Nullable @NativeType("int *") IntBuffer height, @Nullable @NativeType("int *") IntBuffer format, @Nullable @NativeType("void **") PointerBuffer buffer) {
+    public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") @Nullable IntBuffer width, @NativeType("int *") @Nullable IntBuffer height, @NativeType("int *") @Nullable IntBuffer format, @NativeType("void **") @Nullable PointerBuffer buffer) {
         if (CHECKS) {
             checkSafe(width, 1);
             checkSafe(height, 1);
@@ -110,7 +110,7 @@ public class GLFWNativeOSMesa {
      *
      * @since version 3.3
      */
-    public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") IntBuffer width, @Nullable @NativeType("int *") IntBuffer height, @Nullable @NativeType("int *") IntBuffer bytesPerValue, @Nullable @NativeType("void **") PointerBuffer buffer) {
+    public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") @Nullable IntBuffer width, @NativeType("int *") @Nullable IntBuffer height, @NativeType("int *") @Nullable IntBuffer bytesPerValue, @NativeType("void **") @Nullable PointerBuffer buffer) {
         if (CHECKS) {
             checkSafe(width, 1);
             checkSafe(height, 1);
@@ -146,7 +146,7 @@ public class GLFWNativeOSMesa {
 
     /** Array version of: {@link #glfwGetOSMesaColorBuffer GetOSMesaColorBuffer} */
     @NativeType("int")
-    public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") int[] width, @Nullable @NativeType("int *") int[] height, @Nullable @NativeType("int *") int[] format, @Nullable @NativeType("void **") PointerBuffer buffer) {
+    public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") int @Nullable [] width, @NativeType("int *") int @Nullable [] height, @NativeType("int *") int @Nullable [] format, @NativeType("void **") @Nullable PointerBuffer buffer) {
         long __functionAddress = Functions.GetOSMesaColorBuffer;
         if (CHECKS) {
             check(window);
@@ -159,7 +159,7 @@ public class GLFWNativeOSMesa {
     }
 
     /** Array version of: {@link #glfwGetOSMesaDepthBuffer GetOSMesaDepthBuffer} */
-    public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("int *") int[] width, @Nullable @NativeType("int *") int[] height, @Nullable @NativeType("int *") int[] bytesPerValue, @Nullable @NativeType("void **") PointerBuffer buffer) {
+    public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") int @Nullable [] width, @NativeType("int *") int @Nullable [] height, @NativeType("int *") int @Nullable [] bytesPerValue, @NativeType("void **") @Nullable PointerBuffer buffer) {
         long __functionAddress = Functions.GetOSMesaDepthBuffer;
         if (CHECKS) {
             check(window);

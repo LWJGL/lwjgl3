@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1048,7 +1048,7 @@ public class Zstd {
      * <p>When {@code dict == NULL || dictSize < 8} no dictionary is used.</p>
      */
     @NativeType("size_t")
-    public static long ZSTD_compress_usingDict(@NativeType("ZSTD_CCtx *") long ctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @Nullable @NativeType("void const *") ByteBuffer dict, int compressionLevel) {
+    public static long ZSTD_compress_usingDict(@NativeType("ZSTD_CCtx *") long ctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("void const *") @Nullable ByteBuffer dict, int compressionLevel) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1068,7 +1068,7 @@ public class Zstd {
      * <p>When {@code dict == NULL || dictSize < 8} no dictionary is used.</p>
      */
     @NativeType("size_t")
-    public static long ZSTD_decompress_usingDict(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @Nullable @NativeType("void const *") ByteBuffer dict) {
+    public static long ZSTD_decompress_usingDict(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("void const *") @Nullable ByteBuffer dict) {
         if (CHECKS) {
             check(dctx);
         }
@@ -1280,7 +1280,7 @@ public class Zstd {
      * @return 0, or an error code (which can be tested with {@link #ZSTD_isError isError}).
      */
     @NativeType("size_t")
-    public static long ZSTD_CCtx_loadDictionary(@NativeType("ZSTD_CCtx *") long cctx, @Nullable @NativeType("void const *") ByteBuffer dict) {
+    public static long ZSTD_CCtx_loadDictionary(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void const *") @Nullable ByteBuffer dict) {
         if (CHECKS) {
             check(cctx);
         }
@@ -1345,7 +1345,7 @@ public class Zstd {
      * @return 0, or an error code (which can be tested with {@link #ZSTD_isError isError}).
      */
     @NativeType("size_t")
-    public static long ZSTD_CCtx_refPrefix(@NativeType("ZSTD_CCtx *") long cctx, @Nullable @NativeType("void const *") ByteBuffer prefix) {
+    public static long ZSTD_CCtx_refPrefix(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void const *") @Nullable ByteBuffer prefix) {
         if (CHECKS) {
             check(cctx);
         }
@@ -1374,7 +1374,7 @@ public class Zstd {
      * @return 0, or an error code (which can be tested with ZSTD_isError())
      */
     @NativeType("size_t")
-    public static long ZSTD_DCtx_loadDictionary(@NativeType("ZSTD_DCtx *") long dctx, @Nullable @NativeType("void const *") ByteBuffer dict) {
+    public static long ZSTD_DCtx_loadDictionary(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void const *") @Nullable ByteBuffer dict) {
         if (CHECKS) {
             check(dctx);
         }

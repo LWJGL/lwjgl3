@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -79,9 +79,8 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
-    @Nullable
     @NativeType("HmdVector2_t *")
-    public HmdVector2.Buffer pVertexData() { return npVertexData(address()); }
+    public HmdVector2.@Nullable Buffer pVertexData() { return npVertexData(address()); }
     /** @return the value of the {@code unTriangleCount} field. */
     @NativeType("uint32_t")
     public int unTriangleCount() { return nunTriangleCount(address()); }
@@ -110,8 +109,7 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HiddenAreaMesh createSafe(long address) {
+    public static @Nullable HiddenAreaMesh createSafe(long address) {
         return address == NULL ? null : new HiddenAreaMesh(address, null);
     }
 
@@ -154,8 +152,7 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HiddenAreaMesh.Buffer createSafe(long address, int capacity) {
+    public static HiddenAreaMesh.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -219,7 +216,7 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #pVertexData}. */
-    @Nullable public static HmdVector2.Buffer npVertexData(long struct) { return HmdVector2.createSafe(memGetAddress(struct + HiddenAreaMesh.PVERTEXDATA), nunTriangleCount(struct)); }
+    public static HmdVector2.@Nullable Buffer npVertexData(long struct) { return HmdVector2.createSafe(memGetAddress(struct + HiddenAreaMesh.PVERTEXDATA), nunTriangleCount(struct)); }
     /** Unsafe version of {@link #unTriangleCount}. */
     public static int nunTriangleCount(long struct) { return memGetInt(struct + HiddenAreaMesh.UNTRIANGLECOUNT); }
 
@@ -267,9 +264,8 @@ public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeReso
         }
 
         /** @return a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
-        @Nullable
         @NativeType("HmdVector2_t *")
-        public HmdVector2.Buffer pVertexData() { return HiddenAreaMesh.npVertexData(address()); }
+        public HmdVector2.@Nullable Buffer pVertexData() { return HiddenAreaMesh.npVertexData(address()); }
         /** @return the value of the {@code unTriangleCount} field. */
         @NativeType("uint32_t")
         public int unTriangleCount() { return HiddenAreaMesh.nunTriangleCount(address()); }

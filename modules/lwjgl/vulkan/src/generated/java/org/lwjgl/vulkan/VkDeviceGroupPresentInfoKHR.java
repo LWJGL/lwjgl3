@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,9 +129,8 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
     /** a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}{@code ::pSwapchains}. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }
+    public @Nullable IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }
     /** a {@code VkDeviceGroupPresentModeFlagBitsKHR} value specifying the device group present mode that will be used for this present. */
     @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
     public int mode() { return nmode(address()); }
@@ -198,8 +197,7 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupPresentInfoKHR createSafe(long address) {
+    public static @Nullable VkDeviceGroupPresentInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkDeviceGroupPresentInfoKHR(address, null);
     }
 
@@ -242,8 +240,7 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupPresentInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceGroupPresentInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -313,7 +310,7 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     /** Unsafe version of {@link #swapchainCount}. */
     public static int nswapchainCount(long struct) { return memGetInt(struct + VkDeviceGroupPresentInfoKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pDeviceMasks() pDeviceMasks}. */
-    @Nullable public static IntBuffer npDeviceMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDeviceGroupPresentInfoKHR.PDEVICEMASKS), nswapchainCount(struct)); }
+    public static @Nullable IntBuffer npDeviceMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkDeviceGroupPresentInfoKHR.PDEVICEMASKS), nswapchainCount(struct)); }
     /** Unsafe version of {@link #mode}. */
     public static int nmode(long struct) { return memGetInt(struct + VkDeviceGroupPresentInfoKHR.MODE); }
 
@@ -392,9 +389,8 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
         @NativeType("uint32_t")
         public int swapchainCount() { return VkDeviceGroupPresentInfoKHR.nswapchainCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupPresentInfoKHR#pDeviceMasks} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pDeviceMasks() { return VkDeviceGroupPresentInfoKHR.npDeviceMasks(address()); }
+        public @Nullable IntBuffer pDeviceMasks() { return VkDeviceGroupPresentInfoKHR.npDeviceMasks(address()); }
         /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#mode} field. */
         @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
         public int mode() { return VkDeviceGroupPresentInfoKHR.nmode(address()); }

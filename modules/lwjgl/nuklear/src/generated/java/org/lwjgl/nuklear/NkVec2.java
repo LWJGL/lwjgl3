@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,8 +130,7 @@ public class NkVec2 extends Struct<NkVec2> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkVec2 createSafe(long address) {
+    public static @Nullable NkVec2 createSafe(long address) {
         return address == NULL ? null : new NkVec2(address, null);
     }
 
@@ -174,8 +173,7 @@ public class NkVec2 extends Struct<NkVec2> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkVec2.Buffer createSafe(long address, int capacity) {
+    public static NkVec2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

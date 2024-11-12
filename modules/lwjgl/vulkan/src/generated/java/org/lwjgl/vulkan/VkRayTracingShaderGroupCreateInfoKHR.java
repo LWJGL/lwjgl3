@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -230,8 +230,7 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct<VkRayTracingSha
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRayTracingShaderGroupCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkRayTracingShaderGroupCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRayTracingShaderGroupCreateInfoKHR(address, null);
     }
 
@@ -274,8 +273,7 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct<VkRayTracingSha
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

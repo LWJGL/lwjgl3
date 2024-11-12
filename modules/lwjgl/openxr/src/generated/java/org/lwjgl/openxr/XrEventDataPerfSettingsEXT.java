@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class XrEventDataPerfSettingsEXT extends Struct<XrEventDataPerfSettingsEX
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataPerfSettingsEXT createSafe(long address) {
+    public static @Nullable XrEventDataPerfSettingsEXT createSafe(long address) {
         return address == NULL ? null : new XrEventDataPerfSettingsEXT(address, null);
     }
 
@@ -220,8 +219,7 @@ public class XrEventDataPerfSettingsEXT extends Struct<XrEventDataPerfSettingsEX
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataPerfSettingsEXT.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataPerfSettingsEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

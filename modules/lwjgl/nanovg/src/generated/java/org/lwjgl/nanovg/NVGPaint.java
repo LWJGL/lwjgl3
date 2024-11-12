@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,8 +199,7 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGPaint createSafe(long address) {
+    public static @Nullable NVGPaint createSafe(long address) {
         return address == NULL ? null : new NVGPaint(address, null);
     }
 
@@ -243,8 +242,7 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGPaint.Buffer createSafe(long address, int capacity) {
+    public static NVGPaint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class XrSystemForceFeedbackCurlPropertiesMNDX extends Struct<XrSystemForc
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemForceFeedbackCurlPropertiesMNDX createSafe(long address) {
+    public static @Nullable XrSystemForceFeedbackCurlPropertiesMNDX createSafe(long address) {
         return address == NULL ? null : new XrSystemForceFeedbackCurlPropertiesMNDX(address, null);
     }
 
@@ -204,8 +203,7 @@ public class XrSystemForceFeedbackCurlPropertiesMNDX extends Struct<XrSystemForc
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemForceFeedbackCurlPropertiesMNDX.Buffer createSafe(long address, int capacity) {
+    public static XrSystemForceFeedbackCurlPropertiesMNDX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

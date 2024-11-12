@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -80,9 +80,8 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("FT_Byte *")
-    public ByteBuffer p(int capacity) { return np(address(), capacity); }
+    public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
     /** @return the value of the {@code insert_root_transform} field. */
     @NativeType("FT_Bool")
     public boolean insert_root_transform() { return ninsert_root_transform(address()); }
@@ -111,8 +110,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_OpaquePaint createSafe(long address) {
+    public static @Nullable FT_OpaquePaint createSafe(long address) {
         return address == NULL ? null : new FT_OpaquePaint(address, null);
     }
 
@@ -155,8 +153,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_OpaquePaint.Buffer createSafe(long address, int capacity) {
+    public static FT_OpaquePaint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -201,7 +198,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #p(int) p}. */
-    @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_OpaquePaint.P), capacity); }
+    public static @Nullable ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_OpaquePaint.P), capacity); }
     /** Unsafe version of {@link #insert_root_transform}. */
     public static boolean ninsert_root_transform(long struct) { return memGetByte(struct + FT_OpaquePaint.INSERT_ROOT_TRANSFORM) != 0; }
 
@@ -253,9 +250,8 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("FT_Byte *")
-        public ByteBuffer p(int capacity) { return FT_OpaquePaint.np(address(), capacity); }
+        public @Nullable ByteBuffer p(int capacity) { return FT_OpaquePaint.np(address(), capacity); }
         /** @return the value of the {@code insert_root_transform} field. */
         @NativeType("FT_Bool")
         public boolean insert_root_transform() { return FT_OpaquePaint.ninsert_root_transform(address()); }

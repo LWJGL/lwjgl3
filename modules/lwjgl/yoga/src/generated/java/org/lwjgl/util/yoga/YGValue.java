@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,8 +130,7 @@ public class YGValue extends Struct<YGValue> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static YGValue createSafe(long address) {
+    public static @Nullable YGValue createSafe(long address) {
         return address == NULL ? null : new YGValue(address, null);
     }
 
@@ -174,8 +173,7 @@ public class YGValue extends Struct<YGValue> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static YGValue.Buffer createSafe(long address, int capacity) {
+    public static YGValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

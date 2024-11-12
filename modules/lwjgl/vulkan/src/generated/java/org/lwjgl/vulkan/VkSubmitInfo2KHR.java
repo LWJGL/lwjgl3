@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -69,13 +69,13 @@ public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
     public VkSubmitInfo2KHR flags(@NativeType("VkSubmitFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pWaitSemaphoreInfos} field. */
     @Override
-    public VkSubmitInfo2KHR pWaitSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { npWaitSemaphoreInfos(address(), value); return this; }
+    public VkSubmitInfo2KHR pWaitSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.@Nullable Buffer value) { npWaitSemaphoreInfos(address(), value); return this; }
     /** Sets the address of the specified {@link VkCommandBufferSubmitInfo.Buffer} to the {@code pCommandBufferInfos} field. */
     @Override
-    public VkSubmitInfo2KHR pCommandBufferInfos(@Nullable @NativeType("VkCommandBufferSubmitInfo const *") VkCommandBufferSubmitInfo.Buffer value) { npCommandBufferInfos(address(), value); return this; }
+    public VkSubmitInfo2KHR pCommandBufferInfos(@NativeType("VkCommandBufferSubmitInfo const *") VkCommandBufferSubmitInfo.@Nullable Buffer value) { npCommandBufferInfos(address(), value); return this; }
     /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pSignalSemaphoreInfos} field. */
     @Override
-    public VkSubmitInfo2KHR pSignalSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { npSignalSemaphoreInfos(address(), value); return this; }
+    public VkSubmitInfo2KHR pSignalSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.@Nullable Buffer value) { npSignalSemaphoreInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -83,9 +83,9 @@ public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
         int sType,
         long pNext,
         int flags,
-        @Nullable VkSemaphoreSubmitInfo.Buffer pWaitSemaphoreInfos,
-        @Nullable VkCommandBufferSubmitInfo.Buffer pCommandBufferInfos,
-        @Nullable VkSemaphoreSubmitInfo.Buffer pSignalSemaphoreInfos
+        VkSemaphoreSubmitInfo.@Nullable Buffer pWaitSemaphoreInfos,
+        VkCommandBufferSubmitInfo.@Nullable Buffer pCommandBufferInfos,
+        VkSemaphoreSubmitInfo.@Nullable Buffer pSignalSemaphoreInfos
     ) {
         sType(sType);
         pNext(pNext);
@@ -133,8 +133,7 @@ public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubmitInfo2KHR createSafe(long address) {
+    public static @Nullable VkSubmitInfo2KHR createSafe(long address) {
         return address == NULL ? null : new VkSubmitInfo2KHR(address, null);
     }
 
@@ -177,8 +176,7 @@ public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubmitInfo2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkSubmitInfo2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,13 +275,13 @@ public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
         public VkSubmitInfo2KHR.Buffer flags(@NativeType("VkSubmitFlags") int value) { VkSubmitInfo2KHR.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pWaitSemaphoreInfos} field. */
         @Override
-        public VkSubmitInfo2KHR.Buffer pWaitSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { VkSubmitInfo2KHR.npWaitSemaphoreInfos(address(), value); return this; }
+        public VkSubmitInfo2KHR.Buffer pWaitSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.@Nullable Buffer value) { VkSubmitInfo2KHR.npWaitSemaphoreInfos(address(), value); return this; }
         /** Sets the address of the specified {@link VkCommandBufferSubmitInfo.Buffer} to the {@code pCommandBufferInfos} field. */
         @Override
-        public VkSubmitInfo2KHR.Buffer pCommandBufferInfos(@Nullable @NativeType("VkCommandBufferSubmitInfo const *") VkCommandBufferSubmitInfo.Buffer value) { VkSubmitInfo2KHR.npCommandBufferInfos(address(), value); return this; }
+        public VkSubmitInfo2KHR.Buffer pCommandBufferInfos(@NativeType("VkCommandBufferSubmitInfo const *") VkCommandBufferSubmitInfo.@Nullable Buffer value) { VkSubmitInfo2KHR.npCommandBufferInfos(address(), value); return this; }
         /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pSignalSemaphoreInfos} field. */
         @Override
-        public VkSubmitInfo2KHR.Buffer pSignalSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { VkSubmitInfo2KHR.npSignalSemaphoreInfos(address(), value); return this; }
+        public VkSubmitInfo2KHR.Buffer pSignalSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.@Nullable Buffer value) { VkSubmitInfo2KHR.npSignalSemaphoreInfos(address(), value); return this; }
 
     }
 

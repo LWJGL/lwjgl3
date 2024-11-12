@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,8 +201,7 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkContext createSafe(long address) {
+    public static @Nullable NkContext createSafe(long address) {
         return address == NULL ? null : new NkContext(address, null);
     }
 
@@ -261,10 +260,10 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     public static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
     public static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
     public static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
-    @Nullable public static NkWindow nbegin(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.BEGIN)); }
-    @Nullable public static NkWindow nend(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.END)); }
-    @Nullable public static NkWindow nactive(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.ACTIVE)); }
-    @Nullable public static NkWindow ncurrent(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.CURRENT)); }
+    public static @Nullable NkWindow nbegin(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.BEGIN)); }
+    public static @Nullable NkWindow nend(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.END)); }
+    public static @Nullable NkWindow nactive(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.ACTIVE)); }
+    public static @Nullable NkWindow ncurrent(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.CURRENT)); }
     public static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
     public static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
     public static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }

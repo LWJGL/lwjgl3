@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class AIMeshKey extends Struct<AIMeshKey> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshKey createSafe(long address) {
+    public static @Nullable AIMeshKey createSafe(long address) {
         return address == NULL ? null : new AIMeshKey(address, null);
     }
 
@@ -180,8 +179,7 @@ public class AIMeshKey extends Struct<AIMeshKey> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshKey.Buffer createSafe(long address, int capacity) {
+    public static AIMeshKey.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

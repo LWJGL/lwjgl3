@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -473,8 +473,7 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleWindow createSafe(long address) {
+    public static @Nullable NkStyleWindow createSafe(long address) {
         return address == NULL ? null : new NkStyleWindow(address, null);
     }
 
@@ -517,8 +516,7 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleWindow.Buffer createSafe(long address, int capacity) {
+    public static NkStyleWindow.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

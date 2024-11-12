@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,8 +174,7 @@ public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoN
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCudaFunctionCreateInfoNV createSafe(long address) {
+    public static @Nullable VkCudaFunctionCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkCudaFunctionCreateInfoNV(address, null);
     }
 
@@ -218,8 +217,7 @@ public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoN
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCudaFunctionCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkCudaFunctionCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

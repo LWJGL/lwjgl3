@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -216,7 +216,7 @@ public class KHRCooperativeMatrix {
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkCooperativeMatrixPropertiesKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @Nullable @NativeType("VkCooperativeMatrixPropertiesKHR *") VkCooperativeMatrixPropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pPropertyCount, @NativeType("VkCooperativeMatrixPropertiesKHR *") VkCooperativeMatrixPropertiesKHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount.get(pPropertyCount.position()));
@@ -226,7 +226,7 @@ public class KHRCooperativeMatrix {
 
     /** Array version of: {@link #vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR GetPhysicalDeviceCooperativeMatrixPropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @Nullable @NativeType("VkCooperativeMatrixPropertiesKHR *") VkCooperativeMatrixPropertiesKHR.Buffer pProperties) {
+    public static int vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pPropertyCount, @NativeType("VkCooperativeMatrixPropertiesKHR *") VkCooperativeMatrixPropertiesKHR.@Nullable Buffer pProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);

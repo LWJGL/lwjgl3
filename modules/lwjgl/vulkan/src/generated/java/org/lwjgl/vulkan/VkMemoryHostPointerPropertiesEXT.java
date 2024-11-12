@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -157,8 +157,7 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct<VkMemoryHostPointer
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryHostPointerPropertiesEXT createSafe(long address) {
+    public static @Nullable VkMemoryHostPointerPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkMemoryHostPointerPropertiesEXT(address, null);
     }
 
@@ -201,8 +200,7 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct<VkMemoryHostPointer
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryHostPointerPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMemoryHostPointerPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

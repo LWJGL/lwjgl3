@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,8 +117,7 @@ public class NVGGlyphPosition extends Struct<NVGGlyphPosition> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGGlyphPosition createSafe(long address) {
+    public static @Nullable NVGGlyphPosition createSafe(long address) {
         return address == NULL ? null : new NVGGlyphPosition(address, null);
     }
 
@@ -161,8 +160,7 @@ public class NVGGlyphPosition extends Struct<NVGGlyphPosition> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGGlyphPosition.Buffer createSafe(long address, int capacity) {
+    public static NVGGlyphPosition.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,7 +167,7 @@ public class EXTCalibratedTimestamps {
      * @param pTimeDomains     either {@code NULL} or a pointer to an array of {@code VkTimeDomainKHR} values, indicating the supported calibrateable time domains.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pTimeDomainCount, @Nullable @NativeType("VkTimeDomainKHR *") IntBuffer pTimeDomains) {
+    public static int vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pTimeDomainCount, @NativeType("VkTimeDomainKHR *") @Nullable IntBuffer pTimeDomains) {
         if (CHECKS) {
             check(pTimeDomainCount, 1);
             checkSafe(pTimeDomains, pTimeDomainCount.get(pTimeDomainCount.position()));
@@ -209,7 +209,7 @@ public class EXTCalibratedTimestamps {
 
     /** Array version of: {@link #vkGetPhysicalDeviceCalibrateableTimeDomainsEXT GetPhysicalDeviceCalibrateableTimeDomainsEXT} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pTimeDomainCount, @Nullable @NativeType("VkTimeDomainKHR *") int[] pTimeDomains) {
+    public static int vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pTimeDomainCount, @NativeType("VkTimeDomainKHR *") int @Nullable [] pTimeDomains) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceCalibrateableTimeDomainsEXT;
         if (CHECKS) {
             check(__functionAddress);

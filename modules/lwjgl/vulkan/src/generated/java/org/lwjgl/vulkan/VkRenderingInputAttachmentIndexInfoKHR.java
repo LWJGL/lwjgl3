@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,25 +153,22 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values defining indices for color attachments to be used as input attachments. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pColorAttachmentInputIndices() { return npColorAttachmentInputIndices(address()); }
+    public @Nullable IntBuffer pColorAttachmentInputIndices() { return npColorAttachmentInputIndices(address()); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
      * @return either {@code NULL}, or a pointer to a {@code uint32_t} value defining the index for the depth attachment to be used as an input attachment.
      */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pDepthInputAttachmentIndex(int capacity) { return npDepthInputAttachmentIndex(address(), capacity); }
+    public @Nullable IntBuffer pDepthInputAttachmentIndex(int capacity) { return npDepthInputAttachmentIndex(address(), capacity); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
      * @return either {@code NULL}, or a pointer to a {@code uint32_t} value defining the index for the stencil attachment to be used as an input attachment.
      */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pStencilInputAttachmentIndex(int capacity) { return npStencilInputAttachmentIndex(address(), capacity); }
+    public @Nullable IntBuffer pStencilInputAttachmentIndex(int capacity) { return npStencilInputAttachmentIndex(address(), capacity); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderingInputAttachmentIndexInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -243,8 +240,7 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingInputAttachmentIndexInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderingInputAttachmentIndexInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderingInputAttachmentIndexInfoKHR(address, null);
     }
 
@@ -287,8 +283,7 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingInputAttachmentIndexInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderingInputAttachmentIndexInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -339,11 +334,11 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingInputAttachmentIndexInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentInputIndices() pColorAttachmentInputIndices}. */
-    @Nullable public static IntBuffer npColorAttachmentInputIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PCOLORATTACHMENTINPUTINDICES), ncolorAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorAttachmentInputIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PCOLORATTACHMENTINPUTINDICES), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pDepthInputAttachmentIndex(int) pDepthInputAttachmentIndex}. */
-    @Nullable public static IntBuffer npDepthInputAttachmentIndex(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PDEPTHINPUTATTACHMENTINDEX), capacity); }
+    public static @Nullable IntBuffer npDepthInputAttachmentIndex(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PDEPTHINPUTATTACHMENTINDEX), capacity); }
     /** Unsafe version of {@link #pStencilInputAttachmentIndex(int) pStencilInputAttachmentIndex}. */
-    @Nullable public static IntBuffer npStencilInputAttachmentIndex(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PSTENCILINPUTATTACHMENTINDEX), capacity); }
+    public static @Nullable IntBuffer npStencilInputAttachmentIndex(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkRenderingInputAttachmentIndexInfoKHR.PSTENCILINPUTATTACHMENTINDEX), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingInputAttachmentIndexInfoKHR.STYPE, value); }
@@ -411,25 +406,22 @@ public class VkRenderingInputAttachmentIndexInfoKHR extends Struct<VkRenderingIn
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkRenderingInputAttachmentIndexInfoKHR.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingInputAttachmentIndexInfoKHR#pColorAttachmentInputIndices} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pColorAttachmentInputIndices() { return VkRenderingInputAttachmentIndexInfoKHR.npColorAttachmentInputIndices(address()); }
+        public @Nullable IntBuffer pColorAttachmentInputIndices() { return VkRenderingInputAttachmentIndexInfoKHR.npColorAttachmentInputIndices(address()); }
         /**
          * @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingInputAttachmentIndexInfoKHR#pDepthInputAttachmentIndex} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pDepthInputAttachmentIndex(int capacity) { return VkRenderingInputAttachmentIndexInfoKHR.npDepthInputAttachmentIndex(address(), capacity); }
+        public @Nullable IntBuffer pDepthInputAttachmentIndex(int capacity) { return VkRenderingInputAttachmentIndexInfoKHR.npDepthInputAttachmentIndex(address(), capacity); }
         /**
          * @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingInputAttachmentIndexInfoKHR#pStencilInputAttachmentIndex} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pStencilInputAttachmentIndex(int capacity) { return VkRenderingInputAttachmentIndexInfoKHR.npStencilInputAttachmentIndex(address(), capacity); }
+        public @Nullable IntBuffer pStencilInputAttachmentIndex(int capacity) { return VkRenderingInputAttachmentIndexInfoKHR.npStencilInputAttachmentIndex(address(), capacity); }
 
         /** Sets the specified value to the {@link VkRenderingInputAttachmentIndexInfoKHR#sType} field. */
         public VkRenderingInputAttachmentIndexInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingInputAttachmentIndexInfoKHR.nsType(address(), value); return this; }

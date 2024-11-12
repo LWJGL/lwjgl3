@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -149,7 +149,7 @@ public class EXTPipelineProperties {
      * @param pPipelineProperties a pointer to a {@link VkBaseOutStructure} structure in which the pipeline properties will be written.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelinePropertiesEXT(VkDevice device, @NativeType("VkPipelineInfoEXT const *") VkPipelineInfoEXT pPipelineInfo, @Nullable @NativeType("VkBaseOutStructure *") VkBaseOutStructure pPipelineProperties) {
+    public static int vkGetPipelinePropertiesEXT(VkDevice device, @NativeType("VkPipelineInfoEXT const *") VkPipelineInfoEXT pPipelineInfo, @NativeType("VkBaseOutStructure *") @Nullable VkBaseOutStructure pPipelineProperties) {
         return nvkGetPipelinePropertiesEXT(device, pPipelineInfo.address(), memAddressSafe(pPipelineProperties));
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -180,13 +180,11 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
     /** a pointer to an array of {@code stageCount} {@link VkPipelineShaderStageCreateInfo} structures describing the set of the shader stages to be included in the execution graph pipeline. */
-    @Nullable
     @NativeType("VkPipelineShaderStageCreateInfo const *")
-    public VkPipelineShaderStageCreateInfo.Buffer pStages() { return npStages(address()); }
+    public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return npStages(address()); }
     /** a pointer to a {@link VkPipelineLibraryCreateInfoKHR} structure defining pipeline libraries to include. */
-    @Nullable
     @NativeType("VkPipelineLibraryCreateInfoKHR const *")
-    public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
+    public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
     /** the description of binding locations used by both the pipeline and descriptor sets used with the pipeline. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
@@ -214,7 +212,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     /** Sets the specified value to the {@link #stageCount} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX stageCount(@NativeType("uint32_t") int value) { nstageCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
-    public VkExecutionGraphPipelineCreateInfoAMDX pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { npStages(address(), value); return this; }
+    public VkExecutionGraphPipelineCreateInfoAMDX pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { npStages(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link #pLibraryInfo} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { npLibraryInfo(address(), value); return this; }
     /** Sets the specified value to the {@link #layout} field. */
@@ -230,7 +228,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
         long pNext,
         int flags,
         int stageCount,
-        @Nullable VkPipelineShaderStageCreateInfo.Buffer pStages,
+        VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages,
         @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo,
         long layout,
         long basePipelineHandle,
@@ -285,8 +283,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExecutionGraphPipelineCreateInfoAMDX createSafe(long address) {
+    public static @Nullable VkExecutionGraphPipelineCreateInfoAMDX createSafe(long address) {
         return address == NULL ? null : new VkExecutionGraphPipelineCreateInfoAMDX(address, null);
     }
 
@@ -329,8 +326,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExecutionGraphPipelineCreateInfoAMDX.Buffer createSafe(long address, int capacity) {
+    public static VkExecutionGraphPipelineCreateInfoAMDX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -383,9 +379,9 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     /** Unsafe version of {@link #stageCount}. */
     public static int nstageCount(long struct) { return memGetInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
-    @Nullable public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES), nstageCount(struct)); }
+    public static VkPipelineShaderStageCreateInfo.@Nullable Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pLibraryInfo}. */
-    @Nullable public static VkPipelineLibraryCreateInfoKHR npLibraryInfo(long struct) { return VkPipelineLibraryCreateInfoKHR.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PLIBRARYINFO)); }
+    public static @Nullable VkPipelineLibraryCreateInfoKHR npLibraryInfo(long struct) { return VkPipelineLibraryCreateInfoKHR.createSafe(memGetAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PLIBRARYINFO)); }
     /** Unsafe version of {@link #layout}. */
     public static long nlayout(long struct) { return memGetLong(struct + VkExecutionGraphPipelineCreateInfoAMDX.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
@@ -402,7 +398,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
     public static void nstageCount(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineCreateInfoAMDX.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
-    public static void npStages(long struct, @Nullable VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES, memAddressSafe(value)); if (value != null) { nstageCount(struct, value.remaining()); } }
+    public static void npStages(long struct, VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PSTAGES, memAddressSafe(value)); if (value != null) { nstageCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pLibraryInfo(VkPipelineLibraryCreateInfoKHR) pLibraryInfo}. */
     public static void npLibraryInfo(long struct, @Nullable VkPipelineLibraryCreateInfoKHR value) { memPutAddress(struct + VkExecutionGraphPipelineCreateInfoAMDX.PLIBRARYINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #layout(long) layout}. */
@@ -480,13 +476,11 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
         @NativeType("uint32_t")
         public int stageCount() { return VkExecutionGraphPipelineCreateInfoAMDX.nstageCount(address()); }
         /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@link VkExecutionGraphPipelineCreateInfoAMDX#pStages} field. */
-        @Nullable
         @NativeType("VkPipelineShaderStageCreateInfo const *")
-        public VkPipelineShaderStageCreateInfo.Buffer pStages() { return VkExecutionGraphPipelineCreateInfoAMDX.npStages(address()); }
+        public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return VkExecutionGraphPipelineCreateInfoAMDX.npStages(address()); }
         /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@link VkExecutionGraphPipelineCreateInfoAMDX#pLibraryInfo} field. */
-        @Nullable
         @NativeType("VkPipelineLibraryCreateInfoKHR const *")
-        public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkExecutionGraphPipelineCreateInfoAMDX.npLibraryInfo(address()); }
+        public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkExecutionGraphPipelineCreateInfoAMDX.npLibraryInfo(address()); }
         /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkExecutionGraphPipelineCreateInfoAMDX.nlayout(address()); }
@@ -514,7 +508,7 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
         /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#stageCount} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer stageCount(@NativeType("uint32_t") int value) { VkExecutionGraphPipelineCreateInfoAMDX.nstageCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkExecutionGraphPipelineCreateInfoAMDX#pStages} field. */
-        public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { VkExecutionGraphPipelineCreateInfoAMDX.npStages(address(), value); return this; }
+        public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { VkExecutionGraphPipelineCreateInfoAMDX.npStages(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link VkExecutionGraphPipelineCreateInfoAMDX#pLibraryInfo} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { VkExecutionGraphPipelineCreateInfoAMDX.npLibraryInfo(address(), value); return this; }
         /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#layout} field. */

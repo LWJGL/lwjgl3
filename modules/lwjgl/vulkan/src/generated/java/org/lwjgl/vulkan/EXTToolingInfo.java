@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,7 +162,7 @@ public class EXTToolingInfo {
      * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolProperties} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.@Nullable Buffer pToolProperties) {
         if (CHECKS) {
             check(pToolCount, 1);
             checkSafe(pToolProperties, pToolCount.get(pToolCount.position()));
@@ -172,7 +172,7 @@ public class EXTToolingInfo {
 
     /** Array version of: {@link #vkGetPhysicalDeviceToolPropertiesEXT GetPhysicalDeviceToolPropertiesEXT} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.@Nullable Buffer pToolProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceToolPropertiesEXT;
         if (CHECKS) {
             check(__functionAddress);

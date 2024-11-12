@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -198,7 +198,7 @@ public class EXTFullScreenExclusive {
      * @param pPresentModes     either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} values, indicating the supported presentation modes.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") IntBuffer pPresentModeCount, @Nullable @NativeType("VkPresentModeKHR *") IntBuffer pPresentModes) {
+    public static int vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") IntBuffer pPresentModeCount, @NativeType("VkPresentModeKHR *") @Nullable IntBuffer pPresentModes) {
         if (CHECKS) {
             check(pPresentModeCount, 1);
             checkSafe(pPresentModes, pPresentModeCount.get(pPresentModeCount.position()));
@@ -406,7 +406,7 @@ public class EXTFullScreenExclusive {
 
     /** Array version of: {@link #vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") int[] pPresentModeCount, @Nullable @NativeType("VkPresentModeKHR *") int[] pPresentModes) {
+    public static int vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") int[] pPresentModeCount, @NativeType("VkPresentModeKHR *") int @Nullable [] pPresentModes) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceSurfacePresentModes2EXT;
         if (CHECKS) {
             check(__functionAddress);

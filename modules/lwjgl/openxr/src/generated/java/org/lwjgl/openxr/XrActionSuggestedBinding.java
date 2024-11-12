@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionSuggestedBinding createSafe(long address) {
+    public static @Nullable XrActionSuggestedBinding createSafe(long address) {
         return address == NULL ? null : new XrActionSuggestedBinding(address, null);
     }
 
@@ -188,8 +187,7 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionSuggestedBinding.Buffer createSafe(long address, int capacity) {
+    public static XrActionSuggestedBinding.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

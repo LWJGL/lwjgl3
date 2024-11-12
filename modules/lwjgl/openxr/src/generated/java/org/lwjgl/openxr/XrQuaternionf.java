@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class XrQuaternionf extends Struct<XrQuaternionf> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrQuaternionf createSafe(long address) {
+    public static @Nullable XrQuaternionf createSafe(long address) {
         return address == NULL ? null : new XrQuaternionf(address, null);
     }
 
@@ -199,8 +198,7 @@ public class XrQuaternionf extends Struct<XrQuaternionf> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrQuaternionf.Buffer createSafe(long address, int capacity) {
+    public static XrQuaternionf.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

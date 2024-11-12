@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,8 +105,7 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_cache_attr_s createSafe(long address) {
+    public static @Nullable hwloc_cache_attr_s createSafe(long address) {
         return address == NULL ? null : new hwloc_cache_attr_s(address, null);
     }
 
@@ -121,8 +120,7 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_cache_attr_s.Buffer createSafe(long address, int capacity) {
+    public static hwloc_cache_attr_s.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

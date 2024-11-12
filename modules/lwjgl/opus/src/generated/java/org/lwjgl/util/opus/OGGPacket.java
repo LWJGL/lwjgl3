@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,8 +114,7 @@ public class OGGPacket extends Struct<OGGPacket> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OGGPacket createSafe(long address) {
+    public static @Nullable OGGPacket createSafe(long address) {
         return address == NULL ? null : new OGGPacket(address, null);
     }
 
@@ -130,8 +129,7 @@ public class OGGPacket extends Struct<OGGPacket> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OGGPacket.Buffer createSafe(long address, int capacity) {
+    public static OGGPacket.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

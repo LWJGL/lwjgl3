@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class IndexerCallbacks extends Struct<IndexerCallbacks> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IndexerCallbacks createSafe(long address) {
+    public static @Nullable IndexerCallbacks createSafe(long address) {
         return address == NULL ? null : new IndexerCallbacks(address, null);
     }
 
@@ -196,8 +195,7 @@ public class IndexerCallbacks extends Struct<IndexerCallbacks> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IndexerCallbacks.Buffer createSafe(long address, int capacity) {
+    public static IndexerCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

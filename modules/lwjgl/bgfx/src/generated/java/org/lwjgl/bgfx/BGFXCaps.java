@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,8 +153,7 @@ public class BGFXCaps extends Struct<BGFXCaps> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCaps createSafe(long address) {
+    public static @Nullable BGFXCaps createSafe(long address) {
         return address == NULL ? null : new BGFXCaps(address, null);
     }
 

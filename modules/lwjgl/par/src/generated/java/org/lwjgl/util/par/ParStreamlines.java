@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.par;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -82,9 +82,8 @@ public class ParStreamlines {
     public static native long nparsl_mesh_from_lines(long ctx, long spines);
 
     /** Low-level function that generates two triangles for each line segment. */
-    @Nullable
     @NativeType("parsl_mesh *")
-    public static ParSLMesh parsl_mesh_from_lines(@NativeType("parsl_context *") long ctx, @NativeType("parsl_spine_list") ParSLSpineList spines) {
+    public static @Nullable ParSLMesh parsl_mesh_from_lines(@NativeType("parsl_context *") long ctx, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {
             check(ctx);
             ParSLSpineList.validate(spines.address());
@@ -99,9 +98,8 @@ public class ParStreamlines {
     public static native long nparsl_mesh_from_streamlines(long context, long advect, int first_tick, int num_ticks, long userdata);
 
     /** High-level function that can be used to visualize a vector field. */
-    @Nullable
     @NativeType("parsl_mesh *")
-    public static ParSLMesh parsl_mesh_from_streamlines(@NativeType("parsl_context *") long context, @NativeType("parsl_advection_callback") ParSLAdvectionCallbackI advect, @NativeType("uint32_t") int first_tick, @NativeType("uint32_t") int num_ticks, @NativeType("void *") long userdata) {
+    public static @Nullable ParSLMesh parsl_mesh_from_streamlines(@NativeType("parsl_context *") long context, @NativeType("parsl_advection_callback") ParSLAdvectionCallbackI advect, @NativeType("uint32_t") int first_tick, @NativeType("uint32_t") int num_ticks, @NativeType("void *") long userdata) {
         if (CHECKS) {
             check(context);
             check(userdata);
@@ -126,9 +124,8 @@ public class ParStreamlines {
      * 
      * <p>Each spine is equivalent to an SVG path that looks like {@code M C S S S}.</p>
      */
-    @Nullable
     @NativeType("parsl_mesh *")
-    public static ParSLMesh parsl_mesh_from_curves_cubic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
+    public static @Nullable ParSLMesh parsl_mesh_from_curves_cubic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {
             check(context);
             ParSLSpineList.validate(spines.address());
@@ -152,9 +149,8 @@ public class ParStreamlines {
      * 
      * <p>Each spine is equivalent to an SVG path that looks like {@code M Q M Q M Q}.</p>
      */
-    @Nullable
     @NativeType("parsl_mesh *")
-    public static ParSLMesh parsl_mesh_from_curves_quadratic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
+    public static @Nullable ParSLMesh parsl_mesh_from_curves_quadratic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {
             check(context);
             ParSLSpineList.validate(spines.address());

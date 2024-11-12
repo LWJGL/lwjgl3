@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,17 +179,15 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer long_metrics(int capacity) { return nlong_metrics(address(), capacity); }
+    public @Nullable ByteBuffer long_metrics(int capacity) { return nlong_metrics(address(), capacity); }
     /**
      * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer short_metrics(int capacity) { return nshort_metrics(address(), capacity); }
+    public @Nullable ByteBuffer short_metrics(int capacity) { return nshort_metrics(address(), capacity); }
 
     // -----------------------------------
 
@@ -199,8 +197,7 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_HoriHeader createSafe(long address) {
+    public static @Nullable TT_HoriHeader createSafe(long address) {
         return address == NULL ? null : new TT_HoriHeader(address, null);
     }
 
@@ -215,8 +212,7 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_HoriHeader.Buffer createSafe(long address, int capacity) {
+    public static TT_HoriHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -255,9 +251,9 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
     /** Unsafe version of {@link #number_Of_HMetrics}. */
     public static short nnumber_Of_HMetrics(long struct) { return memGetShort(struct + TT_HoriHeader.NUMBER_OF_HMETRICS); }
     /** Unsafe version of {@link #long_metrics(int) long_metrics}. */
-    @Nullable public static ByteBuffer nlong_metrics(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + TT_HoriHeader.LONG_METRICS), capacity); }
+    public static @Nullable ByteBuffer nlong_metrics(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + TT_HoriHeader.LONG_METRICS), capacity); }
     /** Unsafe version of {@link #short_metrics(int) short_metrics}. */
-    @Nullable public static ByteBuffer nshort_metrics(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + TT_HoriHeader.SHORT_METRICS), capacity); }
+    public static @Nullable ByteBuffer nshort_metrics(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + TT_HoriHeader.SHORT_METRICS), capacity); }
 
     // -----------------------------------
 
@@ -352,17 +348,15 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer long_metrics(int capacity) { return TT_HoriHeader.nlong_metrics(address(), capacity); }
+        public @Nullable ByteBuffer long_metrics(int capacity) { return TT_HoriHeader.nlong_metrics(address(), capacity); }
         /**
          * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer short_metrics(int capacity) { return TT_HoriHeader.nshort_metrics(address(), capacity); }
+        public @Nullable ByteBuffer short_metrics(int capacity) { return TT_HoriHeader.nshort_metrics(address(), capacity); }
 
     }
 

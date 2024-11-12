@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -279,8 +279,7 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryAllocateInfo createSafe(long address) {
+    public static @Nullable VkMemoryAllocateInfo createSafe(long address) {
         return address == NULL ? null : new VkMemoryAllocateInfo(address, null);
     }
 
@@ -323,8 +322,7 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryAllocateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkMemoryAllocateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

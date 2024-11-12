@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to <a href="https://github.com/zeux/meshoptimizer">meshoptimizer</a>, a library that provides algorithms to help optimize meshes. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.meshoptimizer;
 

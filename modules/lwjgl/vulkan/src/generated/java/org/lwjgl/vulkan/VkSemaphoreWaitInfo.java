@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,8 +201,7 @@ public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSemaphoreWaitInfo createSafe(long address) {
+    public static @Nullable VkSemaphoreWaitInfo createSafe(long address) {
         return address == NULL ? null : new VkSemaphoreWaitInfo(address, null);
     }
 
@@ -245,8 +244,7 @@ public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSemaphoreWaitInfo.Buffer createSafe(long address, int capacity) {
+    public static VkSemaphoreWaitInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

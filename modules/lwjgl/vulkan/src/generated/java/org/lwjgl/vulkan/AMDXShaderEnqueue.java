@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,7 +206,7 @@ public class AMDXShaderEnqueue {
      * @param pPipelines    a pointer to an array of {@code VkPipeline} handles in which the resulting execution graph pipeline objects are returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateExecutionGraphPipelinesAMDX(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkExecutionGraphPipelineCreateInfoAMDX const *") VkExecutionGraphPipelineCreateInfoAMDX.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
+    public static int vkCreateExecutionGraphPipelinesAMDX(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkExecutionGraphPipelineCreateInfoAMDX const *") VkExecutionGraphPipelineCreateInfoAMDX.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
         if (CHECKS) {
             check(pPipelines, pCreateInfos.remaining());
         }
@@ -888,7 +888,7 @@ public class AMDXShaderEnqueue {
 
     /** Array version of: {@link #vkCreateExecutionGraphPipelinesAMDX CreateExecutionGraphPipelinesAMDX} */
     @NativeType("VkResult")
-    public static int vkCreateExecutionGraphPipelinesAMDX(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkExecutionGraphPipelineCreateInfoAMDX const *") VkExecutionGraphPipelineCreateInfoAMDX.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
+    public static int vkCreateExecutionGraphPipelinesAMDX(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkExecutionGraphPipelineCreateInfoAMDX const *") VkExecutionGraphPipelineCreateInfoAMDX.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
         long __functionAddress = device.getCapabilities().vkCreateExecutionGraphPipelinesAMDX;
         if (CHECKS) {
             check(__functionAddress);

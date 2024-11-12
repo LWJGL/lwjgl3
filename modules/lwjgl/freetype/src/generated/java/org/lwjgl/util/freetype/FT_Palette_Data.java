@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -90,20 +90,17 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
     @NativeType("FT_UShort")
     public short num_palettes() { return nnum_palettes(address()); }
     /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_name_ids} field. */
-    @Nullable
     @NativeType("FT_UShort const *")
-    public ShortBuffer palette_name_ids() { return npalette_name_ids(address()); }
+    public @Nullable ShortBuffer palette_name_ids() { return npalette_name_ids(address()); }
     /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_flags} field. */
-    @Nullable
     @NativeType("FT_UShort const *")
-    public ShortBuffer palette_flags() { return npalette_flags(address()); }
+    public @Nullable ShortBuffer palette_flags() { return npalette_flags(address()); }
     /** @return the value of the {@code num_palette_entries} field. */
     @NativeType("FT_UShort")
     public short num_palette_entries() { return nnum_palette_entries(address()); }
     /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_entry_name_ids} field. */
-    @Nullable
     @NativeType("FT_UShort const *")
-    public ShortBuffer palette_entry_name_ids() { return npalette_entry_name_ids(address()); }
+    public @Nullable ShortBuffer palette_entry_name_ids() { return npalette_entry_name_ids(address()); }
 
     // -----------------------------------
 
@@ -129,8 +126,7 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Palette_Data createSafe(long address) {
+    public static @Nullable FT_Palette_Data createSafe(long address) {
         return address == NULL ? null : new FT_Palette_Data(address, null);
     }
 
@@ -173,8 +169,7 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Palette_Data.Buffer createSafe(long address, int capacity) {
+    public static FT_Palette_Data.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -221,13 +216,13 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
     /** Unsafe version of {@link #num_palettes}. */
     public static short nnum_palettes(long struct) { return memGetShort(struct + FT_Palette_Data.NUM_PALETTES); }
     /** Unsafe version of {@link #palette_name_ids() palette_name_ids}. */
-    @Nullable public static ShortBuffer npalette_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_NAME_IDS), Short.toUnsignedInt(nnum_palettes(struct))); }
+    public static @Nullable ShortBuffer npalette_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_NAME_IDS), Short.toUnsignedInt(nnum_palettes(struct))); }
     /** Unsafe version of {@link #palette_flags() palette_flags}. */
-    @Nullable public static ShortBuffer npalette_flags(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_FLAGS), Short.toUnsignedInt(nnum_palettes(struct))); }
+    public static @Nullable ShortBuffer npalette_flags(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_FLAGS), Short.toUnsignedInt(nnum_palettes(struct))); }
     /** Unsafe version of {@link #num_palette_entries}. */
     public static short nnum_palette_entries(long struct) { return memGetShort(struct + FT_Palette_Data.NUM_PALETTE_ENTRIES); }
     /** Unsafe version of {@link #palette_entry_name_ids() palette_entry_name_ids}. */
-    @Nullable public static ShortBuffer npalette_entry_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_ENTRY_NAME_IDS), Short.toUnsignedInt(nnum_palette_entries(struct))); }
+    public static @Nullable ShortBuffer npalette_entry_name_ids(long struct) { return memShortBufferSafe(memGetAddress(struct + FT_Palette_Data.PALETTE_ENTRY_NAME_IDS), Short.toUnsignedInt(nnum_palette_entries(struct))); }
 
     // -----------------------------------
 
@@ -276,20 +271,17 @@ public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeRe
         @NativeType("FT_UShort")
         public short num_palettes() { return FT_Palette_Data.nnum_palettes(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_name_ids} field. */
-        @Nullable
         @NativeType("FT_UShort const *")
-        public ShortBuffer palette_name_ids() { return FT_Palette_Data.npalette_name_ids(address()); }
+        public @Nullable ShortBuffer palette_name_ids() { return FT_Palette_Data.npalette_name_ids(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_flags} field. */
-        @Nullable
         @NativeType("FT_UShort const *")
-        public ShortBuffer palette_flags() { return FT_Palette_Data.npalette_flags(address()); }
+        public @Nullable ShortBuffer palette_flags() { return FT_Palette_Data.npalette_flags(address()); }
         /** @return the value of the {@code num_palette_entries} field. */
         @NativeType("FT_UShort")
         public short num_palette_entries() { return FT_Palette_Data.nnum_palette_entries(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@code palette_entry_name_ids} field. */
-        @Nullable
         @NativeType("FT_UShort const *")
-        public ShortBuffer palette_entry_name_ids() { return FT_Palette_Data.npalette_entry_name_ids(address()); }
+        public @Nullable ShortBuffer palette_entry_name_ids() { return FT_Palette_Data.npalette_entry_name_ids(address()); }
 
     }
 

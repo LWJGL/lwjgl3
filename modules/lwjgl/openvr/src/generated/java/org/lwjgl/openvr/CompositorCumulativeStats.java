@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -247,8 +247,7 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CompositorCumulativeStats createSafe(long address) {
+    public static @Nullable CompositorCumulativeStats createSafe(long address) {
         return address == NULL ? null : new CompositorCumulativeStats(address, null);
     }
 
@@ -291,8 +290,7 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CompositorCumulativeStats.Buffer createSafe(long address, int capacity) {
+    public static CompositorCumulativeStats.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

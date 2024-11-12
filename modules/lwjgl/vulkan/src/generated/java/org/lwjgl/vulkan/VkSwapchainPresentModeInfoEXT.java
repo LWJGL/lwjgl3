@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentMode
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainPresentModeInfoEXT createSafe(long address) {
+    public static @Nullable VkSwapchainPresentModeInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkSwapchainPresentModeInfoEXT(address, null);
     }
 
@@ -229,8 +228,7 @@ public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentMode
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainPresentModeInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkSwapchainPresentModeInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

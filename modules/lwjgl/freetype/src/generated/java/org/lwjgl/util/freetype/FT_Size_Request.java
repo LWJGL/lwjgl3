@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,8 +167,7 @@ public class FT_Size_Request extends Struct<FT_Size_Request> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Size_Request createSafe(long address) {
+    public static @Nullable FT_Size_Request createSafe(long address) {
         return address == NULL ? null : new FT_Size_Request(address, null);
     }
 
@@ -211,8 +210,7 @@ public class FT_Size_Request extends Struct<FT_Size_Request> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Size_Request.Buffer createSafe(long address, int capacity) {
+    public static FT_Size_Request.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

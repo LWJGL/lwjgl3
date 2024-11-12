@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -65,7 +65,7 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
     public VkDeviceGroupRenderPassBeginInfoKHR deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
     /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pDeviceRenderAreas} field. */
     @Override
-    public VkDeviceGroupRenderPassBeginInfoKHR pDeviceRenderAreas(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { npDeviceRenderAreas(address(), value); return this; }
+    public VkDeviceGroupRenderPassBeginInfoKHR pDeviceRenderAreas(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { npDeviceRenderAreas(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -73,7 +73,7 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
         int sType,
         long pNext,
         int deviceMask,
-        @Nullable VkRect2D.Buffer pDeviceRenderAreas
+        VkRect2D.@Nullable Buffer pDeviceRenderAreas
     ) {
         sType(sType);
         pNext(pNext);
@@ -119,8 +119,7 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupRenderPassBeginInfoKHR createSafe(long address) {
+    public static @Nullable VkDeviceGroupRenderPassBeginInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkDeviceGroupRenderPassBeginInfoKHR(address, null);
     }
 
@@ -163,8 +162,7 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupRenderPassBeginInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceGroupRenderPassBeginInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -282,7 +280,7 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
         public VkDeviceGroupRenderPassBeginInfoKHR.Buffer deviceMask(@NativeType("uint32_t") int value) { VkDeviceGroupRenderPassBeginInfoKHR.ndeviceMask(address(), value); return this; }
         /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pDeviceRenderAreas} field. */
         @Override
-        public VkDeviceGroupRenderPassBeginInfoKHR.Buffer pDeviceRenderAreas(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { VkDeviceGroupRenderPassBeginInfoKHR.npDeviceRenderAreas(address(), value); return this; }
+        public VkDeviceGroupRenderPassBeginInfoKHR.Buffer pDeviceRenderAreas(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { VkDeviceGroupRenderPassBeginInfoKHR.npDeviceRenderAreas(address(), value); return this; }
 
     }
 

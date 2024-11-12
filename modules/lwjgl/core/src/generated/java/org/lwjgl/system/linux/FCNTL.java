@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -694,7 +694,7 @@ public class FCNTL {
      *
      * @return the new file descriptor, or -1 if an error occurred (in which case, {@code errno} is set appropriately).
      */
-    public static int open(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int open(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             checkNT1(pathname);
@@ -713,7 +713,7 @@ public class FCNTL {
      *
      * @return the new file descriptor, or -1 if an error occurred (in which case, {@code errno} is set appropriately).
      */
-    public static int open(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int open(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -748,7 +748,7 @@ public class FCNTL {
      *
      * @return a new file descriptor on success. On error, -1 is returned and {@code errno} is set to indicate the error.
      */
-    public static int openat(@Nullable @NativeType("int *") IntBuffer _errno, int dirfd, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int openat(@NativeType("int *") @Nullable IntBuffer _errno, int dirfd, @NativeType("char const *") ByteBuffer pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             checkNT1(pathname);
@@ -772,7 +772,7 @@ public class FCNTL {
      *
      * @return a new file descriptor on success. On error, -1 is returned and {@code errno} is set to indicate the error.
      */
-    public static int openat(@Nullable @NativeType("int *") IntBuffer _errno, int dirfd, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
+    public static int openat(@NativeType("int *") @Nullable IntBuffer _errno, int dirfd, @NativeType("char const *") CharSequence pathname, int flags, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -797,7 +797,7 @@ public class FCNTL {
      * @param _errno optionally returns the {@code errno} value after this function is called
      * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      */
-    public static int creat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, @NativeType("mode_t") int mode) {
+    public static int creat(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") ByteBuffer pathname, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             checkNT1(pathname);
@@ -811,7 +811,7 @@ public class FCNTL {
      * @param _errno optionally returns the {@code errno} value after this function is called
      * @param mode   one or more of:<br><table><tr><td>{@link #S_IRWXU}</td><td>{@link #S_IRUSR}</td><td>{@link #S_IWUSR}</td><td>{@link #S_IXUSR}</td><td>{@link #S_IRWXG}</td><td>{@link #S_IRGRP}</td><td>{@link #S_IWGRP}</td><td>{@link #S_IXGRP}</td><td>{@link #S_IRWXO}</td><td>{@link #S_IROTH}</td><td>{@link #S_IWOTH}</td></tr><tr><td>{@link #S_IXOTH}</td><td>{@link #S_ISUID}</td><td>{@link #S_ISGID}</td><td>{@link #S_ISVTX}</td></tr></table>
      */
-    public static int creat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence pathname, @NativeType("mode_t") int mode) {
+    public static int creat(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") CharSequence pathname, @NativeType("mode_t") int mode) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -846,7 +846,7 @@ public class FCNTL {
      * @param _errno optionally returns the {@code errno} value after this function is called
      * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static int fcntl(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd) {
+    public static int fcntl(@NativeType("int *") @Nullable IntBuffer _errno, int fd, int cmd) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -864,7 +864,7 @@ public class FCNTL {
      * @param _errno optionally returns the {@code errno} value after this function is called
      * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static int fcntli(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd, int arg) {
+    public static int fcntli(@NativeType("int *") @Nullable IntBuffer _errno, int fd, int cmd, int arg) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -882,7 +882,7 @@ public class FCNTL {
      * @param _errno optionally returns the {@code errno} value after this function is called
      * @param cmd    one of:<br><table><tr><td>{@link #F_DUPFD}</td><td>{@link #F_GETFD}</td><td>{@link #F_SETFD}</td><td>{@link #F_GETFL}</td><td>{@link #F_SETFL}</td><td>{@link #F_GETLK}</td><td>{@link #F_SETLK}</td><td>{@link #F_SETLKW}</td></tr><tr><td>{@link #F_SETOWN}</td><td>{@link #F_GETOWN}</td><td>{@link #F_SETSIG}</td><td>{@link #F_GETSIG}</td><td>{@link #F_SETOWN_EX}</td><td>{@link #F_GETOWN_EX}</td><td>{@link #F_OFD_GETLK}</td><td>{@link #F_OFD_SETLK}</td></tr><tr><td>{@link #F_OFD_SETLKW}</td><td>{@link #F_SETLEASE}</td><td>{@link #F_GETLEASE}</td><td>{@link #F_NOTIFY}</td><td>{@link #F_SETPIPE_SZ}</td><td>{@link #F_GETPIPE_SZ}</td><td>{@link #F_ADD_SEALS}</td><td>{@link #F_GET_SEALS}</td></tr><tr><td>{@link #F_GET_RW_HINT}</td><td>{@link #F_SET_RW_HINT}</td><td>{@link #F_GET_FILE_RW_HINT}</td><td>{@link #F_SET_FILE_RW_HINT}</td><td>{@link #F_DUPFD_CLOEXEC}</td></tr></table>
      */
-    public static int fcntlp(@Nullable @NativeType("int *") IntBuffer _errno, int fd, int cmd, @NativeType("void *") long arg) {
+    public static int fcntlp(@NativeType("int *") @Nullable IntBuffer _errno, int fd, int cmd, @NativeType("void *") long arg) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             check(arg);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -183,8 +183,7 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughStyleFB createSafe(long address) {
+    public static @Nullable XrPassthroughStyleFB createSafe(long address) {
         return address == NULL ? null : new XrPassthroughStyleFB(address, null);
     }
 
@@ -227,8 +226,7 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughStyleFB.Buffer createSafe(long address, int capacity) {
+    public static XrPassthroughStyleFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class NkRect extends Struct<NkRect> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkRect createSafe(long address) {
+    public static @Nullable NkRect createSafe(long address) {
         return address == NULL ? null : new NkRect(address, null);
     }
 
@@ -194,8 +193,7 @@ public class NkRect extends Struct<NkRect> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkRect.Buffer createSafe(long address, int capacity) {
+    public static NkRect.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

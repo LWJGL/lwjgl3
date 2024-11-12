@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,7 +103,7 @@ public class GLXSGIXPbuffer {
      * @param attrib_list an optional null-terminated list of attributes
      */
     @NativeType("GLXPbuffer")
-    public static long glXCreateGLXPbufferSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config, @NativeType("unsigned int") int width, @NativeType("unsigned int") int height, @Nullable @NativeType("int *") IntBuffer attrib_list) {
+    public static long glXCreateGLXPbufferSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config, @NativeType("unsigned int") int width, @NativeType("unsigned int") int height, @NativeType("int *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list);
         }
@@ -204,7 +204,7 @@ public class GLXSGIXPbuffer {
 
     /** Array version of: {@link #glXCreateGLXPbufferSGIX CreateGLXPbufferSGIX} */
     @NativeType("GLXPbuffer")
-    public static long glXCreateGLXPbufferSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config, @NativeType("unsigned int") int width, @NativeType("unsigned int") int height, @Nullable @NativeType("int *") int[] attrib_list) {
+    public static long glXCreateGLXPbufferSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config, @NativeType("unsigned int") int width, @NativeType("unsigned int") int height, @NativeType("int *") int @Nullable [] attrib_list) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXCreateGLXPbufferSGIX;
         if (CHECKS) {
             check(__functionAddress);

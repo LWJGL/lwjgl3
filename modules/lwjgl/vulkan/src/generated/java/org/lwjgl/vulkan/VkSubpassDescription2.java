@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -273,31 +273,26 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     @NativeType("uint32_t")
     public int inputAttachmentCount() { return ninputAttachmentCount(address()); }
     /** a pointer to an array of {@link VkAttachmentReference2} structures defining the input attachments for this subpass and their layouts. */
-    @Nullable
     @NativeType("VkAttachmentReference2 const *")
-    public VkAttachmentReference2.Buffer pInputAttachments() { return npInputAttachments(address()); }
+    public VkAttachmentReference2.@Nullable Buffer pInputAttachments() { return npInputAttachments(address()); }
     /** the number of color attachments. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code colorAttachmentCount} {@link VkAttachmentReference2} structures defining the color attachments for this subpass and their layouts. */
-    @Nullable
     @NativeType("VkAttachmentReference2 const *")
-    public VkAttachmentReference2.Buffer pColorAttachments() { return npColorAttachments(address()); }
+    public VkAttachmentReference2.@Nullable Buffer pColorAttachments() { return npColorAttachments(address()); }
     /** {@code NULL} or a pointer to an array of {@code colorAttachmentCount} {@link VkAttachmentReference2} structures defining the resolve attachments for this subpass and their layouts. */
-    @Nullable
     @NativeType("VkAttachmentReference2 const *")
-    public VkAttachmentReference2.Buffer pResolveAttachments() { return npResolveAttachments(address()); }
+    public VkAttachmentReference2.@Nullable Buffer pResolveAttachments() { return npResolveAttachments(address()); }
     /** a pointer to a {@link VkAttachmentReference2} structure specifying the depth/stencil attachment for this subpass and its layout. */
-    @Nullable
     @NativeType("VkAttachmentReference2 const *")
-    public VkAttachmentReference2 pDepthStencilAttachment() { return npDepthStencilAttachment(address()); }
+    public @Nullable VkAttachmentReference2 pDepthStencilAttachment() { return npDepthStencilAttachment(address()); }
     /** the number of preserved attachments. */
     @NativeType("uint32_t")
     public int preserveAttachmentCount() { return npreserveAttachmentCount(address()); }
     /** a pointer to an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pPreserveAttachments() { return npPreserveAttachments(address()); }
+    public @Nullable IntBuffer pPreserveAttachments() { return npPreserveAttachments(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassDescription2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -324,13 +319,13 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     /** Sets the specified value to the {@link #viewMask} field. */
     public VkSubpassDescription2 viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pInputAttachments} field. */
-    public VkSubpassDescription2 pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npInputAttachments(address(), value); return this; }
+    public VkSubpassDescription2 pInputAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npInputAttachments(address(), value); return this; }
     /** Sets the specified value to the {@link #colorAttachmentCount} field. */
     public VkSubpassDescription2 colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pColorAttachments} field. */
-    public VkSubpassDescription2 pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npColorAttachments(address(), value); return this; }
+    public VkSubpassDescription2 pColorAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npColorAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pResolveAttachments} field. */
-    public VkSubpassDescription2 pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npResolveAttachments(address(), value); return this; }
+    public VkSubpassDescription2 pResolveAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npResolveAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link #pDepthStencilAttachment} field. */
     public VkSubpassDescription2 pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { npDepthStencilAttachment(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pPreserveAttachments} field. */
@@ -343,10 +338,10 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
         int flags,
         int pipelineBindPoint,
         int viewMask,
-        @Nullable VkAttachmentReference2.Buffer pInputAttachments,
+        VkAttachmentReference2.@Nullable Buffer pInputAttachments,
         int colorAttachmentCount,
-        @Nullable VkAttachmentReference2.Buffer pColorAttachments,
-        @Nullable VkAttachmentReference2.Buffer pResolveAttachments,
+        VkAttachmentReference2.@Nullable Buffer pColorAttachments,
+        VkAttachmentReference2.@Nullable Buffer pResolveAttachments,
         @Nullable VkAttachmentReference2 pDepthStencilAttachment,
         @Nullable IntBuffer pPreserveAttachments
     ) {
@@ -401,8 +396,7 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDescription2 createSafe(long address) {
+    public static @Nullable VkSubpassDescription2 createSafe(long address) {
         return address == NULL ? null : new VkSubpassDescription2(address, null);
     }
 
@@ -445,8 +439,7 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDescription2.Buffer createSafe(long address, int capacity) {
+    public static VkSubpassDescription2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -503,19 +496,19 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     /** Unsafe version of {@link #inputAttachmentCount}. */
     public static int ninputAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pInputAttachments}. */
-    @Nullable public static VkAttachmentReference2.Buffer npInputAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS), ninputAttachmentCount(struct)); }
+    public static VkAttachmentReference2.@Nullable Buffer npInputAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS), ninputAttachmentCount(struct)); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachments}. */
-    @Nullable public static VkAttachmentReference2.Buffer npColorAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS), ncolorAttachmentCount(struct)); }
+    public static VkAttachmentReference2.@Nullable Buffer npColorAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pResolveAttachments}. */
-    @Nullable public static VkAttachmentReference2.Buffer npResolveAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PRESOLVEATTACHMENTS), ncolorAttachmentCount(struct)); }
+    public static VkAttachmentReference2.@Nullable Buffer npResolveAttachments(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PRESOLVEATTACHMENTS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pDepthStencilAttachment}. */
-    @Nullable public static VkAttachmentReference2 npDepthStencilAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PDEPTHSTENCILATTACHMENT)); }
+    public static @Nullable VkAttachmentReference2 npDepthStencilAttachment(long struct) { return VkAttachmentReference2.createSafe(memGetAddress(struct + VkSubpassDescription2.PDEPTHSTENCILATTACHMENT)); }
     /** Unsafe version of {@link #preserveAttachmentCount}. */
     public static int npreserveAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2.PRESERVEATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pPreserveAttachments() pPreserveAttachments}. */
-    @Nullable public static IntBuffer npPreserveAttachments(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSubpassDescription2.PPRESERVEATTACHMENTS), npreserveAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npPreserveAttachments(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSubpassDescription2.PPRESERVEATTACHMENTS), npreserveAttachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassDescription2.STYPE, value); }
@@ -530,13 +523,13 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
     /** Sets the specified value to the {@code inputAttachmentCount} field of the specified {@code struct}. */
     public static void ninputAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2.INPUTATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pInputAttachments(VkAttachmentReference2.Buffer) pInputAttachments}. */
-    public static void npInputAttachments(long struct, @Nullable VkAttachmentReference2.Buffer value) { memPutAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS, memAddressSafe(value)); ninputAttachmentCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npInputAttachments(long struct, VkAttachmentReference2.@Nullable Buffer value) { memPutAddress(struct + VkSubpassDescription2.PINPUTATTACHMENTS, memAddressSafe(value)); ninputAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
     public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachments(VkAttachmentReference2.Buffer) pColorAttachments}. */
-    public static void npColorAttachments(long struct, @Nullable VkAttachmentReference2.Buffer value) { memPutAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS, memAddressSafe(value)); }
+    public static void npColorAttachments(long struct, VkAttachmentReference2.@Nullable Buffer value) { memPutAddress(struct + VkSubpassDescription2.PCOLORATTACHMENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pResolveAttachments(VkAttachmentReference2.Buffer) pResolveAttachments}. */
-    public static void npResolveAttachments(long struct, @Nullable VkAttachmentReference2.Buffer value) { memPutAddress(struct + VkSubpassDescription2.PRESOLVEATTACHMENTS, memAddressSafe(value)); }
+    public static void npResolveAttachments(long struct, VkAttachmentReference2.@Nullable Buffer value) { memPutAddress(struct + VkSubpassDescription2.PRESOLVEATTACHMENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pDepthStencilAttachment(VkAttachmentReference2) pDepthStencilAttachment}. */
     public static void npDepthStencilAttachment(long struct, @Nullable VkAttachmentReference2 value) { memPutAddress(struct + VkSubpassDescription2.PDEPTHSTENCILATTACHMENT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code preserveAttachmentCount} field of the specified {@code struct}. */
@@ -623,31 +616,26 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
         @NativeType("uint32_t")
         public int inputAttachmentCount() { return VkSubpassDescription2.ninputAttachmentCount(address()); }
         /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pInputAttachments} field. */
-        @Nullable
         @NativeType("VkAttachmentReference2 const *")
-        public VkAttachmentReference2.Buffer pInputAttachments() { return VkSubpassDescription2.npInputAttachments(address()); }
+        public VkAttachmentReference2.@Nullable Buffer pInputAttachments() { return VkSubpassDescription2.npInputAttachments(address()); }
         /** @return the value of the {@link VkSubpassDescription2#colorAttachmentCount} field. */
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkSubpassDescription2.ncolorAttachmentCount(address()); }
         /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pColorAttachments} field. */
-        @Nullable
         @NativeType("VkAttachmentReference2 const *")
-        public VkAttachmentReference2.Buffer pColorAttachments() { return VkSubpassDescription2.npColorAttachments(address()); }
+        public VkAttachmentReference2.@Nullable Buffer pColorAttachments() { return VkSubpassDescription2.npColorAttachments(address()); }
         /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pResolveAttachments} field. */
-        @Nullable
         @NativeType("VkAttachmentReference2 const *")
-        public VkAttachmentReference2.Buffer pResolveAttachments() { return VkSubpassDescription2.npResolveAttachments(address()); }
+        public VkAttachmentReference2.@Nullable Buffer pResolveAttachments() { return VkSubpassDescription2.npResolveAttachments(address()); }
         /** @return a {@link VkAttachmentReference2} view of the struct pointed to by the {@link VkSubpassDescription2#pDepthStencilAttachment} field. */
-        @Nullable
         @NativeType("VkAttachmentReference2 const *")
-        public VkAttachmentReference2 pDepthStencilAttachment() { return VkSubpassDescription2.npDepthStencilAttachment(address()); }
+        public @Nullable VkAttachmentReference2 pDepthStencilAttachment() { return VkSubpassDescription2.npDepthStencilAttachment(address()); }
         /** @return the value of the {@link VkSubpassDescription2#preserveAttachmentCount} field. */
         @NativeType("uint32_t")
         public int preserveAttachmentCount() { return VkSubpassDescription2.npreserveAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSubpassDescription2#pPreserveAttachments} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pPreserveAttachments() { return VkSubpassDescription2.npPreserveAttachments(address()); }
+        public @Nullable IntBuffer pPreserveAttachments() { return VkSubpassDescription2.npPreserveAttachments(address()); }
 
         /** Sets the specified value to the {@link VkSubpassDescription2#sType} field. */
         public VkSubpassDescription2.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDescription2.nsType(address(), value); return this; }
@@ -674,13 +662,13 @@ public class VkSubpassDescription2 extends Struct<VkSubpassDescription2> impleme
         /** Sets the specified value to the {@link VkSubpassDescription2#viewMask} field. */
         public VkSubpassDescription2.Buffer viewMask(@NativeType("uint32_t") int value) { VkSubpassDescription2.nviewMask(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pInputAttachments} field. */
-        public VkSubpassDescription2.Buffer pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npInputAttachments(address(), value); return this; }
+        public VkSubpassDescription2.Buffer pInputAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2.npInputAttachments(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubpassDescription2#colorAttachmentCount} field. */
         public VkSubpassDescription2.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkSubpassDescription2.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pColorAttachments} field. */
-        public VkSubpassDescription2.Buffer pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npColorAttachments(address(), value); return this; }
+        public VkSubpassDescription2.Buffer pColorAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2.npColorAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pResolveAttachments} field. */
-        public VkSubpassDescription2.Buffer pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npResolveAttachments(address(), value); return this; }
+        public VkSubpassDescription2.Buffer pResolveAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2.npResolveAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link VkSubpassDescription2#pDepthStencilAttachment} field. */
         public VkSubpassDescription2.Buffer pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { VkSubpassDescription2.npDepthStencilAttachment(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkSubpassDescription2#pPreserveAttachments} field. */

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -230,8 +230,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct<VkAcce
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureMatrixMotionInstanceNV createSafe(long address) {
+    public static @Nullable VkAccelerationStructureMatrixMotionInstanceNV createSafe(long address) {
         return address == NULL ? null : new VkAccelerationStructureMatrixMotionInstanceNV(address, null);
     }
 
@@ -274,8 +273,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct<VkAcce
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer createSafe(long address, int capacity) {
+    public static VkAccelerationStructureMatrixMotionInstanceNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -200,8 +200,7 @@ public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAME
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_PARAMETER_DESCRIPTION createSafe(long address) {
+    public static @Nullable FMOD_STUDIO_PARAMETER_DESCRIPTION createSafe(long address) {
         return address == NULL ? null : new FMOD_STUDIO_PARAMETER_DESCRIPTION(address, null);
     }
 
@@ -244,8 +243,7 @@ public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAME
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_PARAMETER_DESCRIPTION.Buffer createSafe(long address, int capacity) {
+    public static FMOD_STUDIO_PARAMETER_DESCRIPTION.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

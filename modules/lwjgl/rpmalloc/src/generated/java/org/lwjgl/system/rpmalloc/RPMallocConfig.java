@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.rpmalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,21 +116,17 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     public int sizeof() { return SIZEOF; }
 
     /** the memory map callback function */
-    @Nullable
     @NativeType("void * (*) (size_t, size_t *)")
-    public RPMemoryMapCallback memory_map() { return nmemory_map(address()); }
+    public @Nullable RPMemoryMapCallback memory_map() { return nmemory_map(address()); }
     /** the memory unmap callback function */
-    @Nullable
     @NativeType("void (*) (void *, size_t, size_t, int)")
-    public RPMemoryUnmapCallback memory_unmap() { return nmemory_unmap(address()); }
+    public @Nullable RPMemoryUnmapCallback memory_unmap() { return nmemory_unmap(address()); }
     /** the error callback function */
-    @Nullable
     @NativeType("void (*) (char const *)")
-    public RPErrorCallback error_callback() { return nerror_callback(address()); }
+    public @Nullable RPErrorCallback error_callback() { return nerror_callback(address()); }
     /** the map fail callback function */
-    @Nullable
     @NativeType("int (*) (size_t)")
-    public RPMapFailCallback map_fail_callback() { return nmap_fail_callback(address()); }
+    public @Nullable RPMapFailCallback map_fail_callback() { return nmap_fail_callback(address()); }
     /**
      * the size of memory pages.
      * 
@@ -172,21 +168,17 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     @NativeType("int")
     public boolean enable_huge_pages() { return nenable_huge_pages(address()) != 0; }
     /** allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer page_name() { return npage_name(address()); }
+    public @Nullable ByteBuffer page_name() { return npage_name(address()); }
     /** allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
-    @Nullable
     @NativeType("char const *")
-    public String page_nameString() { return npage_nameString(address()); }
+    public @Nullable String page_nameString() { return npage_nameString(address()); }
     /** huge allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer huge_page_name() { return nhuge_page_name(address()); }
+    public @Nullable ByteBuffer huge_page_name() { return nhuge_page_name(address()); }
     /** huge allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
-    @Nullable
     @NativeType("char const *")
-    public String huge_page_nameString() { return nhuge_page_nameString(address()); }
+    public @Nullable String huge_page_nameString() { return nhuge_page_nameString(address()); }
 
     /** Sets the specified value to the {@link #memory_map} field. */
     public RPMallocConfig memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { nmemory_map(address(), value); return this; }
@@ -272,8 +264,7 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RPMallocConfig createSafe(long address) {
+    public static @Nullable RPMallocConfig createSafe(long address) {
         return address == NULL ? null : new RPMallocConfig(address, null);
     }
 
@@ -310,13 +301,13 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     // -----------------------------------
 
     /** Unsafe version of {@link #memory_map}. */
-    @Nullable public static RPMemoryMapCallback nmemory_map(long struct) { return RPMemoryMapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_MAP)); }
+    public static @Nullable RPMemoryMapCallback nmemory_map(long struct) { return RPMemoryMapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_MAP)); }
     /** Unsafe version of {@link #memory_unmap}. */
-    @Nullable public static RPMemoryUnmapCallback nmemory_unmap(long struct) { return RPMemoryUnmapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_UNMAP)); }
+    public static @Nullable RPMemoryUnmapCallback nmemory_unmap(long struct) { return RPMemoryUnmapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_UNMAP)); }
     /** Unsafe version of {@link #error_callback}. */
-    @Nullable public static RPErrorCallback nerror_callback(long struct) { return RPErrorCallback.createSafe(memGetAddress(struct + RPMallocConfig.ERROR_CALLBACK)); }
+    public static @Nullable RPErrorCallback nerror_callback(long struct) { return RPErrorCallback.createSafe(memGetAddress(struct + RPMallocConfig.ERROR_CALLBACK)); }
     /** Unsafe version of {@link #map_fail_callback}. */
-    @Nullable public static RPMapFailCallback nmap_fail_callback(long struct) { return RPMapFailCallback.createSafe(memGetAddress(struct + RPMallocConfig.MAP_FAIL_CALLBACK)); }
+    public static @Nullable RPMapFailCallback nmap_fail_callback(long struct) { return RPMapFailCallback.createSafe(memGetAddress(struct + RPMallocConfig.MAP_FAIL_CALLBACK)); }
     /** Unsafe version of {@link #page_size}. */
     public static long npage_size(long struct) { return memGetAddress(struct + RPMallocConfig.PAGE_SIZE); }
     /** Unsafe version of {@link #span_size}. */
@@ -326,13 +317,13 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     /** Unsafe version of {@link #enable_huge_pages}. */
     public static int nenable_huge_pages(long struct) { return memGetInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES); }
     /** Unsafe version of {@link #page_name}. */
-    @Nullable public static ByteBuffer npage_name(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RPMallocConfig.PAGE_NAME)); }
+    public static @Nullable ByteBuffer npage_name(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RPMallocConfig.PAGE_NAME)); }
     /** Unsafe version of {@link #page_nameString}. */
-    @Nullable public static String npage_nameString(long struct) { return memASCIISafe(memGetAddress(struct + RPMallocConfig.PAGE_NAME)); }
+    public static @Nullable String npage_nameString(long struct) { return memASCIISafe(memGetAddress(struct + RPMallocConfig.PAGE_NAME)); }
     /** Unsafe version of {@link #huge_page_name}. */
-    @Nullable public static ByteBuffer nhuge_page_name(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RPMallocConfig.HUGE_PAGE_NAME)); }
+    public static @Nullable ByteBuffer nhuge_page_name(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RPMallocConfig.HUGE_PAGE_NAME)); }
     /** Unsafe version of {@link #huge_page_nameString}. */
-    @Nullable public static String nhuge_page_nameString(long struct) { return memASCIISafe(memGetAddress(struct + RPMallocConfig.HUGE_PAGE_NAME)); }
+    public static @Nullable String nhuge_page_nameString(long struct) { return memASCIISafe(memGetAddress(struct + RPMallocConfig.HUGE_PAGE_NAME)); }
 
     /** Unsafe version of {@link #memory_map(RPMemoryMapCallbackI) memory_map}. */
     public static void nmemory_map(long struct, @Nullable RPMemoryMapCallbackI value) { memPutAddress(struct + RPMallocConfig.MEMORY_MAP, memAddressSafe(value)); }

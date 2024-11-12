@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class POINTL extends Struct<POINTL> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static POINTL createSafe(long address) {
+    public static @Nullable POINTL createSafe(long address) {
         return address == NULL ? null : new POINTL(address, null);
     }
 
@@ -177,8 +176,7 @@ public class POINTL extends Struct<POINTL> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static POINTL.Buffer createSafe(long address, int capacity) {
+    public static POINTL.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

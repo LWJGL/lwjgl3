@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -173,7 +173,7 @@ public class STBEasyFont {
      *
      * @return the number of quads
      */
-    public static int stb_easy_font_print(float x, float y, @NativeType("char *") ByteBuffer text, @Nullable @NativeType("unsigned char *") ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {
+    public static int stb_easy_font_print(float x, float y, @NativeType("char *") ByteBuffer text, @NativeType("unsigned char *") @Nullable ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {
         if (CHECKS) {
             checkNT1(text);
             checkSafe(color, 4);
@@ -212,7 +212,7 @@ public class STBEasyFont {
      *
      * @return the number of quads
      */
-    public static int stb_easy_font_print(float x, float y, @NativeType("char *") CharSequence text, @Nullable @NativeType("unsigned char *") ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {
+    public static int stb_easy_font_print(float x, float y, @NativeType("char *") CharSequence text, @NativeType("unsigned char *") @Nullable ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {
         if (CHECKS) {
             checkSafe(color, 4);
         }

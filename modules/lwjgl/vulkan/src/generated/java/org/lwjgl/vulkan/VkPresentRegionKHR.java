@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -88,19 +88,18 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
     @NativeType("uint32_t")
     public int rectangleCount() { return nrectangleCount(address()); }
     /** either {@code NULL} or a pointer to an array of {@link VkRectLayerKHR} structures. The {@link VkRectLayerKHR} structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain. The rectangles <b>must</b> be specified relative to {@link VkSurfaceCapabilitiesKHR}{@code ::currentTransform}, regardless of the swapchain’s {@code preTransform}. The presentation engine will apply the {@code preTransform} transformation to the rectangles, along with any further transformation it applies to the image content. */
-    @Nullable
     @NativeType("VkRectLayerKHR const *")
-    public VkRectLayerKHR.Buffer pRectangles() { return npRectangles(address()); }
+    public VkRectLayerKHR.@Nullable Buffer pRectangles() { return npRectangles(address()); }
 
     /** Sets the specified value to the {@link #rectangleCount} field. */
     public VkPresentRegionKHR rectangleCount(@NativeType("uint32_t") int value) { nrectangleCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@link #pRectangles} field. */
-    public VkPresentRegionKHR pRectangles(@Nullable @NativeType("VkRectLayerKHR const *") VkRectLayerKHR.Buffer value) { npRectangles(address(), value); return this; }
+    public VkPresentRegionKHR pRectangles(@NativeType("VkRectLayerKHR const *") VkRectLayerKHR.@Nullable Buffer value) { npRectangles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPresentRegionKHR set(
         int rectangleCount,
-        @Nullable VkRectLayerKHR.Buffer pRectangles
+        VkRectLayerKHR.@Nullable Buffer pRectangles
     ) {
         rectangleCount(rectangleCount);
         pRectangles(pRectangles);
@@ -144,8 +143,7 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentRegionKHR createSafe(long address) {
+    public static @Nullable VkPresentRegionKHR createSafe(long address) {
         return address == NULL ? null : new VkPresentRegionKHR(address, null);
     }
 
@@ -188,8 +186,7 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentRegionKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPresentRegionKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -255,12 +252,12 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
     /** Unsafe version of {@link #rectangleCount}. */
     public static int nrectangleCount(long struct) { return memGetInt(struct + VkPresentRegionKHR.RECTANGLECOUNT); }
     /** Unsafe version of {@link #pRectangles}. */
-    @Nullable public static VkRectLayerKHR.Buffer npRectangles(long struct) { return VkRectLayerKHR.createSafe(memGetAddress(struct + VkPresentRegionKHR.PRECTANGLES), nrectangleCount(struct)); }
+    public static VkRectLayerKHR.@Nullable Buffer npRectangles(long struct) { return VkRectLayerKHR.createSafe(memGetAddress(struct + VkPresentRegionKHR.PRECTANGLES), nrectangleCount(struct)); }
 
     /** Sets the specified value to the {@code rectangleCount} field of the specified {@code struct}. */
     public static void nrectangleCount(long struct, int value) { memPutInt(struct + VkPresentRegionKHR.RECTANGLECOUNT, value); }
     /** Unsafe version of {@link #pRectangles(VkRectLayerKHR.Buffer) pRectangles}. */
-    public static void npRectangles(long struct, @Nullable VkRectLayerKHR.Buffer value) { memPutAddress(struct + VkPresentRegionKHR.PRECTANGLES, memAddressSafe(value)); if (value != null) { nrectangleCount(struct, value.remaining()); } }
+    public static void npRectangles(long struct, VkRectLayerKHR.@Nullable Buffer value) { memPutAddress(struct + VkPresentRegionKHR.PRECTANGLES, memAddressSafe(value)); if (value != null) { nrectangleCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -309,14 +306,13 @@ public class VkPresentRegionKHR extends Struct<VkPresentRegionKHR> implements Na
         @NativeType("uint32_t")
         public int rectangleCount() { return VkPresentRegionKHR.nrectangleCount(address()); }
         /** @return a {@link VkRectLayerKHR.Buffer} view of the struct array pointed to by the {@link VkPresentRegionKHR#pRectangles} field. */
-        @Nullable
         @NativeType("VkRectLayerKHR const *")
-        public VkRectLayerKHR.Buffer pRectangles() { return VkPresentRegionKHR.npRectangles(address()); }
+        public VkRectLayerKHR.@Nullable Buffer pRectangles() { return VkPresentRegionKHR.npRectangles(address()); }
 
         /** Sets the specified value to the {@link VkPresentRegionKHR#rectangleCount} field. */
         public VkPresentRegionKHR.Buffer rectangleCount(@NativeType("uint32_t") int value) { VkPresentRegionKHR.nrectangleCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@link VkPresentRegionKHR#pRectangles} field. */
-        public VkPresentRegionKHR.Buffer pRectangles(@Nullable @NativeType("VkRectLayerKHR const *") VkRectLayerKHR.Buffer value) { VkPresentRegionKHR.npRectangles(address(), value); return this; }
+        public VkPresentRegionKHR.Buffer pRectangles(@NativeType("VkRectLayerKHR const *") VkRectLayerKHR.@Nullable Buffer value) { VkPresentRegionKHR.npRectangles(address(), value); return this; }
 
     }
 

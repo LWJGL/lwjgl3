@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -351,8 +351,7 @@ public class Statx extends Struct<Statx> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Statx createSafe(long address) {
+    public static @Nullable Statx createSafe(long address) {
         return address == NULL ? null : new Statx(address, null);
     }
 
@@ -395,8 +394,7 @@ public class Statx extends Struct<Statx> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Statx.Buffer createSafe(long address, int capacity) {
+    public static Statx.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

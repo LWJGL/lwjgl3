@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jemalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -42,8 +42,7 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ExtentMerge createSafe(long functionPointer) {
+    public static @Nullable ExtentMerge createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

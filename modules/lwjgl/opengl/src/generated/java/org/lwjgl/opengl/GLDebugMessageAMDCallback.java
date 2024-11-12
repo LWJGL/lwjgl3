@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -41,8 +41,7 @@ public abstract class GLDebugMessageAMDCallback extends Callback implements GLDe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static GLDebugMessageAMDCallback createSafe(long functionPointer) {
+    public static @Nullable GLDebugMessageAMDCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

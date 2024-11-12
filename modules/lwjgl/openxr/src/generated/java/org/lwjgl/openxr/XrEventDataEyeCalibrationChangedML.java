@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCal
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataEyeCalibrationChangedML createSafe(long address) {
+    public static @Nullable XrEventDataEyeCalibrationChangedML createSafe(long address) {
         return address == NULL ? null : new XrEventDataEyeCalibrationChangedML(address, null);
     }
 
@@ -203,8 +202,7 @@ public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCal
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataEyeCalibrationChangedML.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataEyeCalibrationChangedML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

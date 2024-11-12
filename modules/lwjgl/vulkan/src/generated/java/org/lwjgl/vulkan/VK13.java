@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -983,7 +983,7 @@ public class VK13 extends VK12 {
      * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolProperties} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.@Nullable Buffer pToolProperties) {
         if (CHECKS) {
             check(pToolCount, 1);
             checkSafe(pToolProperties, pToolCount.get(pToolCount.position()));
@@ -1063,7 +1063,7 @@ public class VK13 extends VK12 {
      * @param pPrivateDataSlot a pointer to a {@code VkPrivateDataSlot} handle in which the resulting private data slot is returned
      */
     @NativeType("VkResult")
-    public static int vkCreatePrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlotCreateInfo const *") VkPrivateDataSlotCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPrivateDataSlot *") LongBuffer pPrivateDataSlot) {
+    public static int vkCreatePrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlotCreateInfo const *") VkPrivateDataSlotCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPrivateDataSlot *") LongBuffer pPrivateDataSlot) {
         if (CHECKS) {
             check(pPrivateDataSlot, 1);
         }
@@ -1132,7 +1132,7 @@ public class VK13 extends VK12 {
      * @param privateDataSlot the private data slot to destroy.
      * @param pAllocator      controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyPrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlot") long privateDataSlot, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyPrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlot") long privateDataSlot, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyPrivateDataSlot(device, privateDataSlot, memAddressSafe(pAllocator));
     }
 
@@ -1930,7 +1930,7 @@ public class VK13 extends VK12 {
      * @param fence    an <b>optional</b> handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it defines a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
-    public static int vkQueueSubmit2(VkQueue queue, @Nullable @NativeType("VkSubmitInfo2 const *") VkSubmitInfo2.Buffer pSubmits, @NativeType("VkFence") long fence) {
+    public static int vkQueueSubmit2(VkQueue queue, @NativeType("VkSubmitInfo2 const *") VkSubmitInfo2.@Nullable Buffer pSubmits, @NativeType("VkFence") long fence) {
         return nvkQueueSubmit2(queue, remainingSafe(pSubmits), memAddressSafe(pSubmits), fence);
     }
 
@@ -3079,7 +3079,7 @@ public class VK13 extends VK12 {
      * @param pSizes        {@code NULL} or a pointer to an array of the size in bytes of vertex data bound from {@code pBuffers}.
      * @param pStrides      {@code NULL} or a pointer to an array of buffer strides.
      */
-    public static void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pSizes, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pStrides) {
+    public static void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pSizes, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pStrides) {
         if (CHECKS) {
             check(pOffsets, pBuffers.remaining());
             checkSafe(pSizes, pBuffers.remaining());
@@ -3919,7 +3919,7 @@ public class VK13 extends VK12 {
      * @param pSparseMemoryRequirementCount a pointer to an integer related to the number of sparse memory requirements available or queried, as described below.
      * @param pSparseMemoryRequirements     either {@code NULL} or a pointer to an array of {@link VkSparseImageMemoryRequirements2} structures.
      */
-    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") IntBuffer pSparseMemoryRequirementCount, @Nullable @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.Buffer pSparseMemoryRequirements) {
+    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") IntBuffer pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
         if (CHECKS) {
             check(pSparseMemoryRequirementCount, 1);
             checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount.get(pSparseMemoryRequirementCount.position()));
@@ -3929,7 +3929,7 @@ public class VK13 extends VK12 {
 
     /** Array version of: {@link #vkGetPhysicalDeviceToolProperties GetPhysicalDeviceToolProperties} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.@Nullable Buffer pToolProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceToolProperties;
         if (CHECKS) {
             check(__functionAddress);
@@ -3941,7 +3941,7 @@ public class VK13 extends VK12 {
 
     /** Array version of: {@link #vkCreatePrivateDataSlot CreatePrivateDataSlot} */
     @NativeType("VkResult")
-    public static int vkCreatePrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlotCreateInfo const *") VkPrivateDataSlotCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPrivateDataSlot *") long[] pPrivateDataSlot) {
+    public static int vkCreatePrivateDataSlot(VkDevice device, @NativeType("VkPrivateDataSlotCreateInfo const *") VkPrivateDataSlotCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPrivateDataSlot *") long[] pPrivateDataSlot) {
         long __functionAddress = device.getCapabilities().vkCreatePrivateDataSlot;
         if (CHECKS) {
             check(__functionAddress);
@@ -3972,7 +3972,7 @@ public class VK13 extends VK12 {
     }
 
     /** Array version of: {@link #vkCmdBindVertexBuffers2 CmdBindVertexBuffers2} */
-    public static void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @Nullable @NativeType("VkDeviceSize const *") long[] pSizes, @Nullable @NativeType("VkDeviceSize const *") long[] pStrides) {
+    public static void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @NativeType("VkDeviceSize const *") long @Nullable [] pSizes, @NativeType("VkDeviceSize const *") long @Nullable [] pStrides) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers2;
         if (CHECKS) {
             check(__functionAddress);
@@ -3984,7 +3984,7 @@ public class VK13 extends VK12 {
     }
 
     /** Array version of: {@link #vkGetDeviceImageSparseMemoryRequirements GetDeviceImageSparseMemoryRequirements} */
-    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") int[] pSparseMemoryRequirementCount, @Nullable @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.Buffer pSparseMemoryRequirements) {
+    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") int[] pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
         long __functionAddress = device.getCapabilities().vkGetDeviceImageSparseMemoryRequirements;
         if (CHECKS) {
             check(__functionAddress);

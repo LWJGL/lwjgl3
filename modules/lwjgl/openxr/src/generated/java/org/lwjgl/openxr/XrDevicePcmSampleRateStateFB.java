@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -157,8 +157,7 @@ public class XrDevicePcmSampleRateStateFB extends Struct<XrDevicePcmSampleRateSt
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDevicePcmSampleRateStateFB createSafe(long address) {
+    public static @Nullable XrDevicePcmSampleRateStateFB createSafe(long address) {
         return address == NULL ? null : new XrDevicePcmSampleRateStateFB(address, null);
     }
 
@@ -201,8 +200,7 @@ public class XrDevicePcmSampleRateStateFB extends Struct<XrDevicePcmSampleRateSt
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDevicePcmSampleRateStateFB.Buffer createSafe(long address, int capacity) {
+    public static XrDevicePcmSampleRateStateFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

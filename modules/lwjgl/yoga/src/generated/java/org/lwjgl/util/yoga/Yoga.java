@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -472,7 +472,7 @@ public class Yoga {
     public static native void nYGConfigSetLogger(long config, long logger);
 
     /** Set a custom log function for to use when logging diagnostics or fatal errors. */
-    public static void YGConfigSetLogger(@NativeType("YGConfigRef") long config, @Nullable @NativeType("YGLogger") YGLoggerI logger) {
+    public static void YGConfigSetLogger(@NativeType("YGConfigRef") long config, @NativeType("YGLogger") @Nullable YGLoggerI logger) {
         if (CHECKS) {
             check(config);
         }
@@ -550,7 +550,7 @@ public class Yoga {
      * Sets a callback, called during layout, to create a new mutable Yoga node if Yoga must write to it and its owner is not its parent observed during
      * layout.
      */
-    public static void YGConfigSetCloneNodeFunc(@NativeType("YGConfigRef") long config, @Nullable @NativeType("YGCloneNodeFunc") YGCloneNodeFuncI callback) {
+    public static void YGConfigSetCloneNodeFunc(@NativeType("YGConfigRef") long config, @NativeType("YGCloneNodeFunc") @Nullable YGCloneNodeFuncI callback) {
         if (CHECKS) {
             check(config);
         }
@@ -737,7 +737,7 @@ public class Yoga {
     public static native void nYGNodeSetDirtiedFunc(long node, long dirtiedFunc);
 
     /** Called when a change is made to the Yoga tree which dirties this node. */
-    public static void YGNodeSetDirtiedFunc(@NativeType("YGNodeRef") long node, @Nullable @NativeType("YGDirtiedFunc") YGDirtiedFuncI dirtiedFunc) {
+    public static void YGNodeSetDirtiedFunc(@NativeType("YGNodeRef") long node, @NativeType("YGDirtiedFunc") @Nullable YGDirtiedFuncI dirtiedFunc) {
         if (CHECKS) {
             check(node);
         }
@@ -750,8 +750,8 @@ public class Yoga {
     public static native long nYGNodeGetDirtiedFunc(long node);
 
     /** Returns a dirtied func if set. */
-    @Nullable
-    public static YGDirtiedFunc YGNodeGetDirtiedFunc(@NativeType("YGNodeConstRef") long node) {
+    @NativeType("YGDirtiedFunc")
+    public static @Nullable YGDirtiedFunc YGNodeGetDirtiedFunc(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
             check(node);
         }
@@ -947,7 +947,7 @@ public class Yoga {
      * 
      * <p>{@link #YGNodeMarkDirty NodeMarkDirty} must be set if content effecting the measurements of the node changes.</p>
      */
-    public static void YGNodeSetMeasureFunc(@NativeType("YGNodeRef") long node, @Nullable @NativeType("YGMeasureFunc") YGMeasureFuncI measureFunc) {
+    public static void YGNodeSetMeasureFunc(@NativeType("YGNodeRef") long node, @NativeType("YGMeasureFunc") @Nullable YGMeasureFuncI measureFunc) {
         if (CHECKS) {
             check(node);
         }
@@ -974,7 +974,7 @@ public class Yoga {
     public static native void nYGNodeSetBaselineFunc(long node, long baselineFunc);
 
     /** Set a custom function for determining the text baseline for use in baseline alignment. */
-    public static void YGNodeSetBaselineFunc(@NativeType("YGNodeRef") long node, @Nullable @NativeType("YGBaselineFunc") YGBaselineFuncI baselineFunc) {
+    public static void YGNodeSetBaselineFunc(@NativeType("YGNodeRef") long node, @NativeType("YGBaselineFunc") @Nullable YGBaselineFuncI baselineFunc) {
         if (CHECKS) {
             check(node);
         }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class VkImageViewAddressPropertiesNVX extends Struct<VkImageViewAddressPr
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageViewAddressPropertiesNVX createSafe(long address) {
+    public static @Nullable VkImageViewAddressPropertiesNVX createSafe(long address) {
         return address == NULL ? null : new VkImageViewAddressPropertiesNVX(address, null);
     }
 
@@ -204,8 +203,7 @@ public class VkImageViewAddressPropertiesNVX extends Struct<VkImageViewAddressPr
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageViewAddressPropertiesNVX.Buffer createSafe(long address, int capacity) {
+    public static VkImageViewAddressPropertiesNVX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class XrSystemBodyTrackingPropertiesFB extends Struct<XrSystemBodyTrackin
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemBodyTrackingPropertiesFB createSafe(long address) {
+    public static @Nullable XrSystemBodyTrackingPropertiesFB createSafe(long address) {
         return address == NULL ? null : new XrSystemBodyTrackingPropertiesFB(address, null);
     }
 
@@ -198,8 +197,7 @@ public class XrSystemBodyTrackingPropertiesFB extends Struct<XrSystemBodyTrackin
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemBodyTrackingPropertiesFB.Buffer createSafe(long address, int capacity) {
+    public static XrSystemBodyTrackingPropertiesFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

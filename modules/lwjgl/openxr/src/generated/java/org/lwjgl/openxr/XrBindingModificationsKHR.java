@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,9 +105,8 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     @NativeType("uint32_t")
     public int bindingModificationCount() { return nbindingModificationCount(address()); }
     /** a pointer to an array of pointers to binding modification structures based on {@link XrBindingModificationBaseHeaderKHR}, that define all of the application’s suggested binding modifications for the specified interaction profile. */
-    @Nullable
     @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
-    public PointerBuffer bindingModifications() { return nbindingModifications(address()); }
+    public @Nullable PointerBuffer bindingModifications() { return nbindingModifications(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrBindingModificationsKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -171,8 +170,7 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBindingModificationsKHR createSafe(long address) {
+    public static @Nullable XrBindingModificationsKHR createSafe(long address) {
         return address == NULL ? null : new XrBindingModificationsKHR(address, null);
     }
 
@@ -215,8 +213,7 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBindingModificationsKHR.Buffer createSafe(long address, int capacity) {
+    public static XrBindingModificationsKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -267,7 +264,7 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     /** Unsafe version of {@link #bindingModificationCount}. */
     public static int nbindingModificationCount(long struct) { return memGetInt(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONCOUNT); }
     /** Unsafe version of {@link #bindingModifications() bindingModifications}. */
-    @Nullable public static PointerBuffer nbindingModifications(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONS), nbindingModificationCount(struct)); }
+    public static @Nullable PointerBuffer nbindingModifications(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrBindingModificationsKHR.BINDINGMODIFICATIONS), nbindingModificationCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrBindingModificationsKHR.TYPE, value); }
@@ -331,9 +328,8 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
         @NativeType("uint32_t")
         public int bindingModificationCount() { return XrBindingModificationsKHR.nbindingModificationCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrBindingModificationsKHR#bindingModifications} field. */
-        @Nullable
         @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
-        public PointerBuffer bindingModifications() { return XrBindingModificationsKHR.nbindingModifications(address()); }
+        public @Nullable PointerBuffer bindingModifications() { return XrBindingModificationsKHR.nbindingModifications(address()); }
 
         /** Sets the specified value to the {@link XrBindingModificationsKHR#type} field. */
         public XrBindingModificationsKHR.Buffer type(@NativeType("XrStructureType") int value) { XrBindingModificationsKHR.ntype(address(), value); return this; }

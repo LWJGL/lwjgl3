@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -82,7 +82,7 @@ public class VkRenderingInfoKHR extends VkRenderingInfo {
     public VkRenderingInfoKHR viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
     /** Sets the address of the specified {@link VkRenderingAttachmentInfo.Buffer} to the {@code pColorAttachments} field. */
     @Override
-    public VkRenderingInfoKHR pColorAttachments(@Nullable @NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo.Buffer value) { npColorAttachments(address(), value); return this; }
+    public VkRenderingInfoKHR pColorAttachments(@NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo.@Nullable Buffer value) { npColorAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkRenderingAttachmentInfo} to the {@code pDepthAttachment} field. */
     @Override
     public VkRenderingInfoKHR pDepthAttachment(@Nullable @NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo value) { npDepthAttachment(address(), value); return this; }
@@ -99,7 +99,7 @@ public class VkRenderingInfoKHR extends VkRenderingInfo {
         VkRect2D renderArea,
         int layerCount,
         int viewMask,
-        @Nullable VkRenderingAttachmentInfo.Buffer pColorAttachments,
+        VkRenderingAttachmentInfo.@Nullable Buffer pColorAttachments,
         @Nullable VkRenderingAttachmentInfo pDepthAttachment,
         @Nullable VkRenderingAttachmentInfo pStencilAttachment
     ) {
@@ -152,8 +152,7 @@ public class VkRenderingInfoKHR extends VkRenderingInfo {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderingInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderingInfoKHR(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkRenderingInfoKHR extends VkRenderingInfo {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderingInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -308,7 +306,7 @@ public class VkRenderingInfoKHR extends VkRenderingInfo {
         public VkRenderingInfoKHR.Buffer viewMask(@NativeType("uint32_t") int value) { VkRenderingInfoKHR.nviewMask(address(), value); return this; }
         /** Sets the address of the specified {@link VkRenderingAttachmentInfo.Buffer} to the {@code pColorAttachments} field. */
         @Override
-        public VkRenderingInfoKHR.Buffer pColorAttachments(@Nullable @NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo.Buffer value) { VkRenderingInfoKHR.npColorAttachments(address(), value); return this; }
+        public VkRenderingInfoKHR.Buffer pColorAttachments(@NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo.@Nullable Buffer value) { VkRenderingInfoKHR.npColorAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkRenderingAttachmentInfo} to the {@code pDepthAttachment} field. */
         @Override
         public VkRenderingInfoKHR.Buffer pDepthAttachment(@Nullable @NativeType("VkRenderingAttachmentInfo const *") VkRenderingAttachmentInfo value) { VkRenderingInfoKHR.npDepthAttachment(address(), value); return this; }

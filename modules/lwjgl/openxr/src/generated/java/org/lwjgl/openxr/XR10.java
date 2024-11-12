@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -929,7 +929,7 @@ public class XR10 {
      * @param function the address of the function pointer to get.
      */
     @NativeType("XrResult")
-    public static int xrGetInstanceProcAddr(@Nullable XrInstance instance, @NativeType("char const *") ByteBuffer name, @NativeType("PFN_xrVoidFunction *") PointerBuffer function) {
+    public static int xrGetInstanceProcAddr(@NativeType("XrInstance") @Nullable XrInstance instance, @NativeType("char const *") ByteBuffer name, @NativeType("PFN_xrVoidFunction *") PointerBuffer function) {
         if (CHECKS) {
             checkNT1(name);
             check(function, 1);
@@ -1027,7 +1027,7 @@ public class XR10 {
      * @param function the address of the function pointer to get.
      */
     @NativeType("XrResult")
-    public static int xrGetInstanceProcAddr(@Nullable XrInstance instance, @NativeType("char const *") CharSequence name, @NativeType("PFN_xrVoidFunction *") PointerBuffer function) {
+    public static int xrGetInstanceProcAddr(@NativeType("XrInstance") @Nullable XrInstance instance, @NativeType("char const *") CharSequence name, @NativeType("PFN_xrVoidFunction *") PointerBuffer function) {
         if (CHECKS) {
             check(function, 1);
         }
@@ -1103,7 +1103,7 @@ public class XR10 {
      * @param properties          a pointer to an array of {@link XrApiLayerProperties} structures, but <b>can</b> be {@code NULL} if {@code propertyCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateApiLayerProperties(@NativeType("uint32_t *") IntBuffer propertyCountOutput, @Nullable @NativeType("XrApiLayerProperties *") XrApiLayerProperties.Buffer properties) {
+    public static int xrEnumerateApiLayerProperties(@NativeType("uint32_t *") IntBuffer propertyCountOutput, @NativeType("XrApiLayerProperties *") XrApiLayerProperties.@Nullable Buffer properties) {
         if (CHECKS) {
             check(propertyCountOutput, 1);
         }
@@ -1175,7 +1175,7 @@ public class XR10 {
      * @param properties          a pointer to an array of {@link XrExtensionProperties} structures, but <b>can</b> be {@code NULL} if {@code propertyCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateInstanceExtensionProperties(@Nullable @NativeType("char const *") ByteBuffer layerName, @NativeType("uint32_t *") IntBuffer propertyCountOutput, @Nullable @NativeType("XrExtensionProperties *") XrExtensionProperties.Buffer properties) {
+    public static int xrEnumerateInstanceExtensionProperties(@NativeType("char const *") @Nullable ByteBuffer layerName, @NativeType("uint32_t *") IntBuffer propertyCountOutput, @NativeType("XrExtensionProperties *") XrExtensionProperties.@Nullable Buffer properties) {
         if (CHECKS) {
             checkNT1Safe(layerName);
             check(propertyCountOutput, 1);
@@ -1236,7 +1236,7 @@ public class XR10 {
      * @param properties          a pointer to an array of {@link XrExtensionProperties} structures, but <b>can</b> be {@code NULL} if {@code propertyCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateInstanceExtensionProperties(@Nullable @NativeType("char const *") CharSequence layerName, @NativeType("uint32_t *") IntBuffer propertyCountOutput, @Nullable @NativeType("XrExtensionProperties *") XrExtensionProperties.Buffer properties) {
+    public static int xrEnumerateInstanceExtensionProperties(@NativeType("char const *") @Nullable CharSequence layerName, @NativeType("uint32_t *") IntBuffer propertyCountOutput, @NativeType("XrExtensionProperties *") XrExtensionProperties.@Nullable Buffer properties) {
         if (CHECKS) {
             check(propertyCountOutput, 1);
         }
@@ -1860,7 +1860,7 @@ public class XR10 {
      * @param environmentBlendModes           a pointer to an array of {@code XrEnvironmentBlendMode} values, but <b>can</b> be {@code NULL} if {@code environmentBlendModeCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateEnvironmentBlendModes(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer environmentBlendModeCountOutput, @Nullable @NativeType("XrEnvironmentBlendMode *") IntBuffer environmentBlendModes) {
+    public static int xrEnumerateEnvironmentBlendModes(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer environmentBlendModeCountOutput, @NativeType("XrEnvironmentBlendMode *") @Nullable IntBuffer environmentBlendModes) {
         if (CHECKS) {
             check(environmentBlendModeCountOutput, 1);
         }
@@ -2062,7 +2062,7 @@ public class XR10 {
      * @param spaces           a pointer to an application-allocated array that will be filled with the enumerant of each supported reference space. It <b>can</b> be {@code NULL} if {@code spaceCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateReferenceSpaces(XrSession session, @NativeType("uint32_t *") IntBuffer spaceCountOutput, @Nullable @NativeType("XrReferenceSpaceType *") IntBuffer spaces) {
+    public static int xrEnumerateReferenceSpaces(XrSession session, @NativeType("uint32_t *") IntBuffer spaceCountOutput, @NativeType("XrReferenceSpaceType *") @Nullable IntBuffer spaces) {
         if (CHECKS) {
             check(spaceCountOutput, 1);
         }
@@ -2513,7 +2513,7 @@ public class XR10 {
      * @param viewConfigurationTypes           a pointer to an array of {@code XrViewConfigurationType} values, but <b>can</b> be {@code NULL} if {@code viewConfigurationTypeCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateViewConfigurations(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer viewConfigurationTypeCountOutput, @Nullable @NativeType("XrViewConfigurationType *") IntBuffer viewConfigurationTypes) {
+    public static int xrEnumerateViewConfigurations(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer viewConfigurationTypeCountOutput, @NativeType("XrViewConfigurationType *") @Nullable IntBuffer viewConfigurationTypes) {
         if (CHECKS) {
             check(viewConfigurationTypeCountOutput, 1);
         }
@@ -2659,7 +2659,7 @@ public class XR10 {
      * @param views                 a pointer to an array of {@link XrViewConfigurationView} values, but <b>can</b> be {@code NULL} if {@code viewCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateViewConfigurationViews(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer viewCountOutput, @Nullable @NativeType("XrViewConfigurationView *") XrViewConfigurationView.Buffer views) {
+    public static int xrEnumerateViewConfigurationViews(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer viewCountOutput, @NativeType("XrViewConfigurationView *") XrViewConfigurationView.@Nullable Buffer views) {
         if (CHECKS) {
             check(viewCountOutput, 1);
         }
@@ -2736,7 +2736,7 @@ public class XR10 {
      * @param formats           a pointer to an array of {@code int64_t} format ids, but <b>can</b> be {@code NULL} if {@code formatCapacityInput} is 0. The format ids are specific to the specified graphics API.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateSwapchainFormats(XrSession session, @NativeType("uint32_t *") IntBuffer formatCountOutput, @Nullable @NativeType("int64_t *") LongBuffer formats) {
+    public static int xrEnumerateSwapchainFormats(XrSession session, @NativeType("uint32_t *") IntBuffer formatCountOutput, @NativeType("int64_t *") @Nullable LongBuffer formats) {
         if (CHECKS) {
             check(formatCountOutput, 1);
         }
@@ -2945,7 +2945,7 @@ public class XR10 {
      * @param images           a pointer to an array of graphics API-specific {@code XrSwapchainImage} structures, all of the same type, based on {@link XrSwapchainImageBaseHeader}. It <b>can</b> be {@code NULL} if {@code imageCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateSwapchainImages(XrSwapchain swapchain, @NativeType("uint32_t *") IntBuffer imageCountOutput, @Nullable @NativeType("XrSwapchainImageBaseHeader *") XrSwapchainImageBaseHeader.Buffer images) {
+    public static int xrEnumerateSwapchainImages(XrSwapchain swapchain, @NativeType("uint32_t *") IntBuffer imageCountOutput, @NativeType("XrSwapchainImageBaseHeader *") XrSwapchainImageBaseHeader.@Nullable Buffer images) {
         if (CHECKS) {
             check(imageCountOutput, 1);
         }
@@ -3015,7 +3015,7 @@ public class XR10 {
      * @param index       the returned image index that has been acquired.
      */
     @NativeType("XrResult")
-    public static int xrAcquireSwapchainImage(XrSwapchain swapchain, @Nullable @NativeType("XrSwapchainImageAcquireInfo const *") XrSwapchainImageAcquireInfo acquireInfo, @NativeType("uint32_t *") IntBuffer index) {
+    public static int xrAcquireSwapchainImage(XrSwapchain swapchain, @NativeType("XrSwapchainImageAcquireInfo const *") @Nullable XrSwapchainImageAcquireInfo acquireInfo, @NativeType("uint32_t *") IntBuffer index) {
         if (CHECKS) {
             check(index, 1);
         }
@@ -3153,7 +3153,7 @@ public class XR10 {
      * @param releaseInfo exists for extensibility purposes, it is {@code NULL} or a pointer to a valid {@link XrSwapchainImageReleaseInfo}.
      */
     @NativeType("XrResult")
-    public static int xrReleaseSwapchainImage(XrSwapchain swapchain, @Nullable @NativeType("XrSwapchainImageReleaseInfo const *") XrSwapchainImageReleaseInfo releaseInfo) {
+    public static int xrReleaseSwapchainImage(XrSwapchain swapchain, @NativeType("XrSwapchainImageReleaseInfo const *") @Nullable XrSwapchainImageReleaseInfo releaseInfo) {
         return nxrReleaseSwapchainImage(swapchain, memAddressSafe(releaseInfo));
     }
 
@@ -3434,7 +3434,7 @@ public class XR10 {
      * @param frameState    a pointer to a valid {@link XrFrameState}, an output parameter.
      */
     @NativeType("XrResult")
-    public static int xrWaitFrame(XrSession session, @Nullable @NativeType("XrFrameWaitInfo const *") XrFrameWaitInfo frameWaitInfo, @NativeType("XrFrameState *") XrFrameState frameState) {
+    public static int xrWaitFrame(XrSession session, @NativeType("XrFrameWaitInfo const *") @Nullable XrFrameWaitInfo frameWaitInfo, @NativeType("XrFrameState *") XrFrameState frameState) {
         return nxrWaitFrame(session, memAddressSafe(frameWaitInfo), frameState.address());
     }
 
@@ -3510,7 +3510,7 @@ public class XR10 {
      * @param frameBeginInfo exists for extensibility purposes, it is {@code NULL} or a pointer to a valid {@link XrFrameBeginInfo}.
      */
     @NativeType("XrResult")
-    public static int xrBeginFrame(XrSession session, @Nullable @NativeType("XrFrameBeginInfo const *") XrFrameBeginInfo frameBeginInfo) {
+    public static int xrBeginFrame(XrSession session, @NativeType("XrFrameBeginInfo const *") @Nullable XrFrameBeginInfo frameBeginInfo) {
         return nxrBeginFrame(session, memAddressSafe(frameBeginInfo));
     }
 
@@ -3696,7 +3696,7 @@ public class XR10 {
      * @param views           an array of {@link XrView}.
      */
     @NativeType("XrResult")
-    public static int xrLocateViews(XrSession session, @NativeType("XrViewLocateInfo const *") XrViewLocateInfo viewLocateInfo, @NativeType("XrViewState *") XrViewState viewState, @NativeType("uint32_t *") IntBuffer viewCountOutput, @Nullable @NativeType("XrView *") XrView.Buffer views) {
+    public static int xrLocateViews(XrSession session, @NativeType("XrViewLocateInfo const *") XrViewLocateInfo viewLocateInfo, @NativeType("XrViewState *") XrViewState viewState, @NativeType("uint32_t *") IntBuffer viewCountOutput, @NativeType("XrView *") XrView.@Nullable Buffer views) {
         if (CHECKS) {
             check(viewCountOutput, 1);
         }
@@ -3910,7 +3910,7 @@ public class XR10 {
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the semantic path string. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrPathToString(XrInstance instance, @NativeType("XrPath") long path, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrPathToString(XrInstance instance, @NativeType("XrPath") long path, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }
@@ -4818,7 +4818,7 @@ public class XR10 {
      * @param sources           a pointer to an application-allocated array that will be filled with the {@code XrPath} values for all bound sources. It <b>can</b> be {@code NULL} if {@code sourceCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateBoundSourcesForAction(XrSession session, @NativeType("XrBoundSourcesForActionEnumerateInfo const *") XrBoundSourcesForActionEnumerateInfo enumerateInfo, @NativeType("uint32_t *") IntBuffer sourceCountOutput, @Nullable @NativeType("XrPath *") LongBuffer sources) {
+    public static int xrEnumerateBoundSourcesForAction(XrSession session, @NativeType("XrBoundSourcesForActionEnumerateInfo const *") XrBoundSourcesForActionEnumerateInfo enumerateInfo, @NativeType("uint32_t *") IntBuffer sourceCountOutput, @NativeType("XrPath *") @Nullable LongBuffer sources) {
         if (CHECKS) {
             check(sourceCountOutput, 1);
         }
@@ -4899,7 +4899,7 @@ public class XR10 {
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the bound source name. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrGetInputSourceLocalizedName(XrSession session, @NativeType("XrInputSourceLocalizedNameGetInfo const *") XrInputSourceLocalizedNameGetInfo getInfo, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetInputSourceLocalizedName(XrSession session, @NativeType("XrInputSourceLocalizedNameGetInfo const *") XrInputSourceLocalizedNameGetInfo getInfo, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

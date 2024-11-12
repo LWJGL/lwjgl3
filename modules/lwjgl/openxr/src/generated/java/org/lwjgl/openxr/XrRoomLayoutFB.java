@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -128,9 +128,8 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     @NativeType("uint32_t")
     public int wallUuidCountOutput() { return nwallUuidCountOutput(address()); }
     /** a pointer to an array of {@link XrUuidEXT} handles, but can be {@code NULL} if {@code wallUuidCapacityInput} is 0. */
-    @Nullable
     @NativeType("XrUuidEXT *")
-    public XrUuidEXT.Buffer wallUuids() { return nwallUuids(address()); }
+    public XrUuidEXT.@Nullable Buffer wallUuids() { return nwallUuids(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrRoomLayoutFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -151,7 +150,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     /** Sets the specified value to the {@link #wallUuidCountOutput} field. */
     public XrRoomLayoutFB wallUuidCountOutput(@NativeType("uint32_t") int value) { nwallUuidCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #wallUuids} field. */
-    public XrRoomLayoutFB wallUuids(@Nullable @NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { nwallUuids(address(), value); return this; }
+    public XrRoomLayoutFB wallUuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { nwallUuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrRoomLayoutFB set(
@@ -161,7 +160,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
         XrUuidEXT ceilingUuid,
         int wallUuidCapacityInput,
         int wallUuidCountOutput,
-        @Nullable XrUuidEXT.Buffer wallUuids
+        XrUuidEXT.@Nullable Buffer wallUuids
     ) {
         type(type);
         next(next);
@@ -210,8 +209,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRoomLayoutFB createSafe(long address) {
+    public static @Nullable XrRoomLayoutFB createSafe(long address) {
         return address == NULL ? null : new XrRoomLayoutFB(address, null);
     }
 
@@ -254,8 +252,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRoomLayoutFB.Buffer createSafe(long address, int capacity) {
+    public static XrRoomLayoutFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -312,7 +309,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     /** Unsafe version of {@link #wallUuidCountOutput}. */
     public static int nwallUuidCountOutput(long struct) { return memGetInt(struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT); }
     /** Unsafe version of {@link #wallUuids}. */
-    @Nullable public static XrUuidEXT.Buffer nwallUuids(long struct) { return XrUuidEXT.createSafe(memGetAddress(struct + XrRoomLayoutFB.WALLUUIDS), nwallUuidCapacityInput(struct)); }
+    public static XrUuidEXT.@Nullable Buffer nwallUuids(long struct) { return XrUuidEXT.createSafe(memGetAddress(struct + XrRoomLayoutFB.WALLUUIDS), nwallUuidCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrRoomLayoutFB.TYPE, value); }
@@ -327,7 +324,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
     /** Unsafe version of {@link #wallUuidCountOutput(int) wallUuidCountOutput}. */
     public static void nwallUuidCountOutput(long struct, int value) { memPutInt(struct + XrRoomLayoutFB.WALLUUIDCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #wallUuids(XrUuidEXT.Buffer) wallUuids}. */
-    public static void nwallUuids(long struct, @Nullable XrUuidEXT.Buffer value) { memPutAddress(struct + XrRoomLayoutFB.WALLUUIDS, memAddressSafe(value)); if (value != null) { nwallUuidCapacityInput(struct, value.remaining()); } }
+    public static void nwallUuids(long struct, XrUuidEXT.@Nullable Buffer value) { memPutAddress(struct + XrRoomLayoutFB.WALLUUIDS, memAddressSafe(value)); if (value != null) { nwallUuidCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -389,9 +386,8 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
         @NativeType("uint32_t")
         public int wallUuidCountOutput() { return XrRoomLayoutFB.nwallUuidCountOutput(address()); }
         /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrRoomLayoutFB#wallUuids} field. */
-        @Nullable
         @NativeType("XrUuidEXT *")
-        public XrUuidEXT.Buffer wallUuids() { return XrRoomLayoutFB.nwallUuids(address()); }
+        public XrUuidEXT.@Nullable Buffer wallUuids() { return XrRoomLayoutFB.nwallUuids(address()); }
 
         /** Sets the specified value to the {@link XrRoomLayoutFB#type} field. */
         public XrRoomLayoutFB.Buffer type(@NativeType("XrStructureType") int value) { XrRoomLayoutFB.ntype(address(), value); return this; }
@@ -412,7 +408,7 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
         /** Sets the specified value to the {@link XrRoomLayoutFB#wallUuidCountOutput} field. */
         public XrRoomLayoutFB.Buffer wallUuidCountOutput(@NativeType("uint32_t") int value) { XrRoomLayoutFB.nwallUuidCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrRoomLayoutFB#wallUuids} field. */
-        public XrRoomLayoutFB.Buffer wallUuids(@Nullable @NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { XrRoomLayoutFB.nwallUuids(address(), value); return this; }
+        public XrRoomLayoutFB.Buffer wallUuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { XrRoomLayoutFB.nwallUuids(address(), value); return this; }
 
     }
 

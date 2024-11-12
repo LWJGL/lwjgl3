@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -195,8 +195,7 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XGravityEvent createSafe(long address) {
+    public static @Nullable XGravityEvent createSafe(long address) {
         return address == NULL ? null : new XGravityEvent(address, null);
     }
 
@@ -239,8 +238,7 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XGravityEvent.Buffer createSafe(long address, int capacity) {
+    public static XGravityEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

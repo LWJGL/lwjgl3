@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -961,7 +961,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterLabelByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") ByteBuffer name, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_System_GetParameterLabelByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") ByteBuffer name, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(retrieved, 1);
@@ -970,7 +970,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterLabelByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") CharSequence name, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_System_GetParameterLabelByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") CharSequence name, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -1016,7 +1016,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterLabelByID(@NativeType("FMOD_STUDIO_SYSTEM *") long system, FMOD_STUDIO_PARAMETER_ID id, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_System_GetParameterLabelByID(@NativeType("FMOD_STUDIO_SYSTEM *") long system, FMOD_STUDIO_PARAMETER_ID id, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -1053,7 +1053,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterByID(@NativeType("FMOD_STUDIO_SYSTEM *") long system, FMOD_STUDIO_PARAMETER_ID id, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_System_GetParameterByID(@NativeType("FMOD_STUDIO_SYSTEM *") long system, FMOD_STUDIO_PARAMETER_ID id, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkSafe(value, 1);
             checkSafe(finalvalue, 1);
@@ -1170,7 +1170,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") ByteBuffer name, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_System_GetParameterByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") ByteBuffer name, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(value, 1);
@@ -1180,7 +1180,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") CharSequence name, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_System_GetParameterByName(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("char const *") CharSequence name, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkSafe(value, 1);
             checkSafe(finalvalue, 1);
@@ -1299,7 +1299,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_LookupPath(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_GUID const *") FMOD_GUID id, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_System_LookupPath(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_GUID const *") FMOD_GUID id, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -1346,7 +1346,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetListenerAttributes(@NativeType("FMOD_STUDIO_SYSTEM *") long system, int index, @NativeType("FMOD_3D_ATTRIBUTES *") FMOD_3D_ATTRIBUTES attributes, @Nullable @NativeType("FMOD_VECTOR *") FMOD_VECTOR attenuationposition) {
+    public static int FMOD_Studio_System_GetListenerAttributes(@NativeType("FMOD_STUDIO_SYSTEM *") long system, int index, @NativeType("FMOD_3D_ATTRIBUTES *") FMOD_3D_ATTRIBUTES attributes, @NativeType("FMOD_VECTOR *") @Nullable FMOD_VECTOR attenuationposition) {
         return nFMOD_Studio_System_GetListenerAttributes(system, index, attributes.address(), memAddressSafe(attenuationposition));
     }
 
@@ -1361,7 +1361,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_SetListenerAttributes(@NativeType("FMOD_STUDIO_SYSTEM *") long system, int index, @NativeType("FMOD_3D_ATTRIBUTES const *") FMOD_3D_ATTRIBUTES attributes, @Nullable @NativeType("FMOD_VECTOR const *") FMOD_VECTOR attenuationposition) {
+    public static int FMOD_Studio_System_SetListenerAttributes(@NativeType("FMOD_STUDIO_SYSTEM *") long system, int index, @NativeType("FMOD_3D_ATTRIBUTES const *") FMOD_3D_ATTRIBUTES attributes, @NativeType("FMOD_VECTOR const *") @Nullable FMOD_VECTOR attenuationposition) {
         return nFMOD_Studio_System_SetListenerAttributes(system, index, attributes.address(), memAddressSafe(attenuationposition));
     }
 
@@ -1648,7 +1648,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetBankList(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_BANK **") PointerBuffer array, @Nullable @NativeType("int *") IntBuffer count) {
+    public static int FMOD_Studio_System_GetBankList(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_BANK **") PointerBuffer array, @NativeType("int *") @Nullable IntBuffer count) {
         if (CHECKS) {
             checkSafe(count, 1);
         }
@@ -1684,7 +1684,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetParameterDescriptionList(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_PARAMETER_DESCRIPTION *") FMOD_STUDIO_PARAMETER_DESCRIPTION.Buffer array, @Nullable @NativeType("int *") IntBuffer count) {
+    public static int FMOD_Studio_System_GetParameterDescriptionList(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_PARAMETER_DESCRIPTION *") FMOD_STUDIO_PARAMETER_DESCRIPTION.Buffer array, @NativeType("int *") @Nullable IntBuffer count) {
         if (CHECKS) {
             checkSafe(count, 1);
         }
@@ -1702,7 +1702,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_GetCPUUsage(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @Nullable @NativeType("FMOD_STUDIO_CPU_USAGE *") FMOD_STUDIO_CPU_USAGE usage, @Nullable @NativeType("FMOD_CPU_USAGE *") FMOD_CPU_USAGE usage_core) {
+    public static int FMOD_Studio_System_GetCPUUsage(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_CPU_USAGE *") @Nullable FMOD_STUDIO_CPU_USAGE usage, @NativeType("FMOD_CPU_USAGE *") @Nullable FMOD_CPU_USAGE usage_core) {
         return nFMOD_Studio_System_GetCPUUsage(system, memAddressSafe(usage), memAddressSafe(usage_core));
     }
 
@@ -1743,7 +1743,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_System_SetCallback(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @Nullable @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK") FMOD_STUDIO_SYSTEM_CALLBACKI callback, @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK_TYPE") int callbackmask) {
+    public static int FMOD_Studio_System_SetCallback(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK") @Nullable FMOD_STUDIO_SYSTEM_CALLBACKI callback, @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK_TYPE") int callbackmask) {
         return nFMOD_Studio_System_SetCallback(system, memAddressSafe(callback), callbackmask);
     }
 
@@ -1829,7 +1829,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetPath(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_EventDescription_GetPath(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -1943,7 +1943,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetParameterLabelByIndex(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, int index, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_EventDescription_GetParameterLabelByIndex(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, int index, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -1961,7 +1961,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetParameterLabelByName(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("char const *") ByteBuffer name, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_EventDescription_GetParameterLabelByName(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("char const *") ByteBuffer name, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(retrieved, 1);
@@ -1970,7 +1970,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetParameterLabelByName(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("char const *") CharSequence name, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_EventDescription_GetParameterLabelByName(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("char const *") CharSequence name, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -2016,7 +2016,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetParameterLabelByID(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, FMOD_STUDIO_PARAMETER_ID id, int labelindex, @Nullable @NativeType("char *") ByteBuffer label, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_EventDescription_GetParameterLabelByID(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, FMOD_STUDIO_PARAMETER_ID id, int labelindex, @NativeType("char *") @Nullable ByteBuffer label, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -2115,7 +2115,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetMinMaxDistance(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @Nullable @NativeType("float *") FloatBuffer min, @Nullable @NativeType("float *") FloatBuffer max) {
+    public static int FMOD_Studio_EventDescription_GetMinMaxDistance(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("float *") @Nullable FloatBuffer min, @NativeType("float *") @Nullable FloatBuffer max) {
         if (CHECKS) {
             checkSafe(min, 1);
             checkSafe(max, 1);
@@ -2296,7 +2296,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_GetInstanceList(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("FMOD_STUDIO_EVENTINSTANCE **") PointerBuffer array, @Nullable @NativeType("int *") IntBuffer count) {
+    public static int FMOD_Studio_EventDescription_GetInstanceList(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("FMOD_STUDIO_EVENTINSTANCE **") PointerBuffer array, @NativeType("int *") @Nullable IntBuffer count) {
         if (CHECKS) {
             checkSafe(count, 1);
         }
@@ -2365,7 +2365,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventDescription_SetCallback(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @Nullable @NativeType("FMOD_STUDIO_EVENT_CALLBACK") FMOD_STUDIO_EVENT_CALLBACKI callback, @NativeType("FMOD_STUDIO_EVENT_CALLBACK_TYPE") int callbackmask) {
+    public static int FMOD_Studio_EventDescription_SetCallback(@NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("FMOD_STUDIO_EVENT_CALLBACK") @Nullable FMOD_STUDIO_EVENT_CALLBACKI callback, @NativeType("FMOD_STUDIO_EVENT_CALLBACK_TYPE") int callbackmask) {
         return nFMOD_Studio_EventDescription_SetCallback(eventdescription, memAddressSafe(callback), callbackmask);
     }
 
@@ -2459,7 +2459,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetVolume(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @Nullable @NativeType("float *") FloatBuffer volume, @Nullable @NativeType("float *") FloatBuffer finalvolume) {
+    public static int FMOD_Studio_EventInstance_GetVolume(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("float *") @Nullable FloatBuffer volume, @NativeType("float *") @Nullable FloatBuffer finalvolume) {
         if (CHECKS) {
             checkSafe(volume, 1);
             checkSafe(finalvolume, 1);
@@ -2489,7 +2489,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetPitch(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @Nullable @NativeType("float *") FloatBuffer pitch, @Nullable @NativeType("float *") FloatBuffer finalpitch) {
+    public static int FMOD_Studio_EventInstance_GetPitch(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("float *") @Nullable FloatBuffer pitch, @NativeType("float *") @Nullable FloatBuffer finalpitch) {
         if (CHECKS) {
             checkSafe(pitch, 1);
             checkSafe(finalpitch, 1);
@@ -2752,7 +2752,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetMinMaxDistance(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @Nullable @NativeType("float *") FloatBuffer min, @Nullable @NativeType("float *") FloatBuffer max) {
+    public static int FMOD_Studio_EventInstance_GetMinMaxDistance(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("float *") @Nullable FloatBuffer min, @NativeType("float *") @Nullable FloatBuffer max) {
         if (CHECKS) {
             checkSafe(min, 1);
             checkSafe(max, 1);
@@ -2800,7 +2800,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetParameterByName(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("char const *") ByteBuffer name, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_EventInstance_GetParameterByName(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("char const *") ByteBuffer name, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(value, 1);
@@ -2810,7 +2810,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetParameterByName(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("char const *") CharSequence name, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_EventInstance_GetParameterByName(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("char const *") CharSequence name, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkSafe(value, 1);
             checkSafe(finalvalue, 1);
@@ -2918,7 +2918,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetParameterByID(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, FMOD_STUDIO_PARAMETER_ID id, @Nullable @NativeType("float *") FloatBuffer value, @Nullable @NativeType("float *") FloatBuffer finalvalue) {
+    public static int FMOD_Studio_EventInstance_GetParameterByID(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, FMOD_STUDIO_PARAMETER_ID id, @NativeType("float *") @Nullable FloatBuffer value, @NativeType("float *") @Nullable FloatBuffer finalvalue) {
         if (CHECKS) {
             checkSafe(value, 1);
             checkSafe(finalvalue, 1);
@@ -3046,7 +3046,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_SetCallback(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @Nullable @NativeType("FMOD_STUDIO_EVENT_CALLBACK") FMOD_STUDIO_EVENT_CALLBACKI callback, @NativeType("FMOD_STUDIO_EVENT_CALLBACK_TYPE") int callbackmask) {
+    public static int FMOD_Studio_EventInstance_SetCallback(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("FMOD_STUDIO_EVENT_CALLBACK") @Nullable FMOD_STUDIO_EVENT_CALLBACKI callback, @NativeType("FMOD_STUDIO_EVENT_CALLBACK_TYPE") int callbackmask) {
         return nFMOD_Studio_EventInstance_SetCallback(eventinstance, memAddressSafe(callback), callbackmask);
     }
 
@@ -3090,7 +3090,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_EventInstance_GetCPUUsage(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @Nullable @NativeType("unsigned int *") IntBuffer exclusive, @Nullable @NativeType("unsigned int *") IntBuffer inclusive) {
+    public static int FMOD_Studio_EventInstance_GetCPUUsage(@NativeType("FMOD_STUDIO_EVENTINSTANCE *") long eventinstance, @NativeType("unsigned int *") @Nullable IntBuffer exclusive, @NativeType("unsigned int *") @Nullable IntBuffer inclusive) {
         if (CHECKS) {
             checkSafe(exclusive, 1);
             checkSafe(inclusive, 1);
@@ -3151,7 +3151,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bus_GetPath(@NativeType("FMOD_STUDIO_BUS *") long bus, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_Bus_GetPath(@NativeType("FMOD_STUDIO_BUS *") long bus, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -3169,7 +3169,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bus_GetVolume(@NativeType("FMOD_STUDIO_BUS *") long bus, @Nullable @NativeType("float *") FloatBuffer volume, @Nullable @NativeType("float *") FloatBuffer finalvolume) {
+    public static int FMOD_Studio_Bus_GetVolume(@NativeType("FMOD_STUDIO_BUS *") long bus, @NativeType("float *") @Nullable FloatBuffer volume, @NativeType("float *") @Nullable FloatBuffer finalvolume) {
         if (CHECKS) {
             checkSafe(volume, 1);
             checkSafe(finalvolume, 1);
@@ -3337,7 +3337,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bus_GetCPUUsage(@NativeType("FMOD_STUDIO_BUS *") long bus, @Nullable @NativeType("unsigned int *") IntBuffer exclusive, @Nullable @NativeType("unsigned int *") IntBuffer inclusive) {
+    public static int FMOD_Studio_Bus_GetCPUUsage(@NativeType("FMOD_STUDIO_BUS *") long bus, @NativeType("unsigned int *") @Nullable IntBuffer exclusive, @NativeType("unsigned int *") @Nullable IntBuffer inclusive) {
         if (CHECKS) {
             checkSafe(exclusive, 1);
             checkSafe(inclusive, 1);
@@ -3398,7 +3398,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_VCA_GetPath(@NativeType("FMOD_STUDIO_VCA *") long vca, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_VCA_GetPath(@NativeType("FMOD_STUDIO_VCA *") long vca, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -3416,7 +3416,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_VCA_GetVolume(@NativeType("FMOD_STUDIO_VCA *") long vca, @Nullable @NativeType("float *") FloatBuffer volume, @Nullable @NativeType("float *") FloatBuffer finalvolume) {
+    public static int FMOD_Studio_VCA_GetVolume(@NativeType("FMOD_STUDIO_VCA *") long vca, @NativeType("float *") @Nullable FloatBuffer volume, @NativeType("float *") @Nullable FloatBuffer finalvolume) {
         if (CHECKS) {
             checkSafe(volume, 1);
             checkSafe(finalvolume, 1);
@@ -3473,7 +3473,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bank_GetPath(@NativeType("FMOD_STUDIO_BANK *") long bank, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_Bank_GetPath(@NativeType("FMOD_STUDIO_BANK *") long bank, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -3578,7 +3578,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bank_GetStringInfo(@NativeType("FMOD_STUDIO_BANK *") long bank, int index, @Nullable @NativeType("FMOD_GUID *") FMOD_GUID id, @Nullable @NativeType("char *") ByteBuffer path, @Nullable @NativeType("int *") IntBuffer retrieved) {
+    public static int FMOD_Studio_Bank_GetStringInfo(@NativeType("FMOD_STUDIO_BANK *") long bank, int index, @NativeType("FMOD_GUID *") @Nullable FMOD_GUID id, @NativeType("char *") @Nullable ByteBuffer path, @NativeType("int *") @Nullable IntBuffer retrieved) {
         if (CHECKS) {
             checkSafe(retrieved, 1);
         }
@@ -3614,7 +3614,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bank_GetEventList(@NativeType("FMOD_STUDIO_BANK *") long bank, @NativeType("FMOD_STUDIO_EVENTDESCRIPTION **") PointerBuffer array, @Nullable @NativeType("int *") IntBuffer count) {
+    public static int FMOD_Studio_Bank_GetEventList(@NativeType("FMOD_STUDIO_BANK *") long bank, @NativeType("FMOD_STUDIO_EVENTDESCRIPTION **") PointerBuffer array, @NativeType("int *") @Nullable IntBuffer count) {
         if (CHECKS) {
             checkSafe(count, 1);
         }
@@ -3650,7 +3650,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_Bank_GetBusList(@NativeType("FMOD_STUDIO_BANK *") long bank, @NativeType("FMOD_STUDIO_BUS **") PointerBuffer array, @Nullable @NativeType("int *") IntBuffer count) {
+    public static int FMOD_Studio_Bank_GetBusList(@NativeType("FMOD_STUDIO_BANK *") long bank, @NativeType("FMOD_STUDIO_BUS **") PointerBuffer array, @NativeType("int *") @Nullable IntBuffer count) {
         if (CHECKS) {
             checkSafe(count, 1);
         }
@@ -3968,7 +3968,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_CommandReplay_GetCurrentCommand(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @Nullable @NativeType("int *") IntBuffer commandindex, @Nullable @NativeType("float *") FloatBuffer currenttime) {
+    public static int FMOD_Studio_CommandReplay_GetCurrentCommand(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @NativeType("int *") @Nullable IntBuffer commandindex, @NativeType("float *") @Nullable FloatBuffer currenttime) {
         if (CHECKS) {
             checkSafe(commandindex, 1);
             checkSafe(currenttime, 1);
@@ -3998,7 +3998,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_CommandReplay_SetFrameCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @Nullable @NativeType("FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK") FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI callback) {
+    public static int FMOD_Studio_CommandReplay_SetFrameCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @NativeType("FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK") @Nullable FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI callback) {
         return nFMOD_Studio_CommandReplay_SetFrameCallback(replay, memAddressSafe(callback));
     }
 
@@ -4013,7 +4013,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_CommandReplay_SetLoadBankCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @Nullable @NativeType("FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK") FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI callback) {
+    public static int FMOD_Studio_CommandReplay_SetLoadBankCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @NativeType("FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK") @Nullable FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI callback) {
         return nFMOD_Studio_CommandReplay_SetLoadBankCallback(replay, memAddressSafe(callback));
     }
 
@@ -4028,7 +4028,7 @@ public class FMODStudio {
     }
 
     @NativeType("FMOD_RESULT")
-    public static int FMOD_Studio_CommandReplay_SetCreateInstanceCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @Nullable @NativeType("FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK") FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACKI callback) {
+    public static int FMOD_Studio_CommandReplay_SetCreateInstanceCallback(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, @NativeType("FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK") @Nullable FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACKI callback) {
         return nFMOD_Studio_CommandReplay_SetCreateInstanceCallback(replay, memAddressSafe(callback));
     }
 

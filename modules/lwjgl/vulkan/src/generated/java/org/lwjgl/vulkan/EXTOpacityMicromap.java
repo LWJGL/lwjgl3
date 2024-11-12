@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -450,7 +450,7 @@ public class EXTOpacityMicromap {
      * @param pMicromap   a pointer to a {@code VkMicromapEXT} handle in which the resulting micromap object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateMicromapEXT(VkDevice device, @NativeType("VkMicromapCreateInfoEXT const *") VkMicromapCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkMicromapEXT *") LongBuffer pMicromap) {
+    public static int vkCreateMicromapEXT(VkDevice device, @NativeType("VkMicromapCreateInfoEXT const *") VkMicromapCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkMicromapEXT *") LongBuffer pMicromap) {
         if (CHECKS) {
             check(pMicromap, 1);
         }
@@ -512,7 +512,7 @@ public class EXTOpacityMicromap {
      * @param micromap   the micromap to destroy.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyMicromapEXT(VkDevice device, @NativeType("VkMicromapEXT") long micromap, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyMicromapEXT(VkDevice device, @NativeType("VkMicromapEXT") long micromap, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyMicromapEXT(device, micromap, memAddressSafe(pAllocator));
     }
 
@@ -1492,7 +1492,7 @@ public class EXTOpacityMicromap {
 
     /** Array version of: {@link #vkCreateMicromapEXT CreateMicromapEXT} */
     @NativeType("VkResult")
-    public static int vkCreateMicromapEXT(VkDevice device, @NativeType("VkMicromapCreateInfoEXT const *") VkMicromapCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkMicromapEXT *") long[] pMicromap) {
+    public static int vkCreateMicromapEXT(VkDevice device, @NativeType("VkMicromapCreateInfoEXT const *") VkMicromapCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkMicromapEXT *") long[] pMicromap) {
         long __functionAddress = device.getCapabilities().vkCreateMicromapEXT;
         if (CHECKS) {
             check(__functionAddress);

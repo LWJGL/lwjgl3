@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,8 +86,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct<CXIdxObjCProtocolRefLis
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxObjCProtocolRefListInfo createSafe(long address) {
+    public static @Nullable CXIdxObjCProtocolRefListInfo createSafe(long address) {
         return address == NULL ? null : new CXIdxObjCProtocolRefListInfo(address, null);
     }
 
@@ -102,8 +101,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct<CXIdxObjCProtocolRefLis
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxObjCProtocolRefListInfo.Buffer createSafe(long address, int capacity) {
+    public static CXIdxObjCProtocolRefListInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

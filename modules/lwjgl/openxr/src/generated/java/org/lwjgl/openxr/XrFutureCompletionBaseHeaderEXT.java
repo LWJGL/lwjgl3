@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -157,8 +157,7 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFutureCompletionBaseHeaderEXT createSafe(long address) {
+    public static @Nullable XrFutureCompletionBaseHeaderEXT createSafe(long address) {
         return address == NULL ? null : new XrFutureCompletionBaseHeaderEXT(address, null);
     }
 
@@ -241,8 +240,7 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFutureCompletionBaseHeaderEXT.Buffer createSafe(long address, int capacity) {
+    public static XrFutureCompletionBaseHeaderEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

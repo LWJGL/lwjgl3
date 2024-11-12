@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -182,8 +182,7 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrApiLayerProperties createSafe(long address) {
+    public static @Nullable XrApiLayerProperties createSafe(long address) {
         return address == NULL ? null : new XrApiLayerProperties(address, null);
     }
 
@@ -226,8 +225,7 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrApiLayerProperties.Buffer createSafe(long address, int capacity) {
+    public static XrApiLayerProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

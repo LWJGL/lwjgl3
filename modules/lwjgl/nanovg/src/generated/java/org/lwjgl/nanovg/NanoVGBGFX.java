@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -122,9 +122,8 @@ public class NanoVGBGFX {
         return invokePP(_ctx, _width, _height, imageFlags, __functionAddress);
     }
 
-    @Nullable
     @NativeType("NVGLUframebuffer *")
-    public static NVGLUFramebufferBGFX nvgluCreateFramebuffer(@NativeType("NVGcontext *") long _ctx, @NativeType("int32_t") int _width, @NativeType("int32_t") int _height, @NativeType("int32_t") int imageFlags) {
+    public static @Nullable NVGLUFramebufferBGFX nvgluCreateFramebuffer(@NativeType("NVGcontext *") long _ctx, @NativeType("int32_t") int _width, @NativeType("int32_t") int _height, @NativeType("int32_t") int imageFlags) {
         long __result = nnvgluCreateFramebuffer(_ctx, _width, _height, imageFlags);
         return NVGLUFramebufferBGFX.createSafe(__result);
     }
@@ -136,7 +135,7 @@ public class NanoVGBGFX {
         invokePV(_framebuffer, __functionAddress);
     }
 
-    public static void nvgluBindFramebuffer(@Nullable @NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
+    public static void nvgluBindFramebuffer(@NativeType("NVGLUframebuffer *") @Nullable NVGLUFramebufferBGFX _framebuffer) {
         nnvgluBindFramebuffer(memAddressSafe(_framebuffer));
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,9 +165,8 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
     /** a pointer to an array of {@code attachmentCount} {@link VkAttachmentDescription} structures describing the attachments used by the render pass. */
-    @Nullable
     @NativeType("VkAttachmentDescription const *")
-    public VkAttachmentDescription.Buffer pAttachments() { return npAttachments(address()); }
+    public VkAttachmentDescription.@Nullable Buffer pAttachments() { return npAttachments(address()); }
     /** the number of subpasses to create. */
     @NativeType("uint32_t")
     public int subpassCount() { return nsubpassCount(address()); }
@@ -178,9 +177,8 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     @NativeType("uint32_t")
     public int dependencyCount() { return ndependencyCount(address()); }
     /** a pointer to an array of {@code dependencyCount} {@link VkSubpassDependency} structures describing dependencies between pairs of subpasses. */
-    @Nullable
     @NativeType("VkSubpassDependency const *")
-    public VkSubpassDependency.Buffer pDependencies() { return npDependencies(address()); }
+    public VkSubpassDependency.@Nullable Buffer pDependencies() { return npDependencies(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -201,20 +199,20 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     /** Sets the specified value to the {@link #flags} field. */
     public VkRenderPassCreateInfo flags(@NativeType("VkRenderPassCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link #pAttachments} field. */
-    public VkRenderPassCreateInfo pAttachments(@Nullable @NativeType("VkAttachmentDescription const *") VkAttachmentDescription.Buffer value) { npAttachments(address(), value); return this; }
+    public VkRenderPassCreateInfo pAttachments(@NativeType("VkAttachmentDescription const *") VkAttachmentDescription.@Nullable Buffer value) { npAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkSubpassDescription.Buffer} to the {@link #pSubpasses} field. */
     public VkRenderPassCreateInfo pSubpasses(@NativeType("VkSubpassDescription const *") VkSubpassDescription.Buffer value) { npSubpasses(address(), value); return this; }
     /** Sets the address of the specified {@link VkSubpassDependency.Buffer} to the {@link #pDependencies} field. */
-    public VkRenderPassCreateInfo pDependencies(@Nullable @NativeType("VkSubpassDependency const *") VkSubpassDependency.Buffer value) { npDependencies(address(), value); return this; }
+    public VkRenderPassCreateInfo pDependencies(@NativeType("VkSubpassDependency const *") VkSubpassDependency.@Nullable Buffer value) { npDependencies(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkRenderPassCreateInfo set(
         int sType,
         long pNext,
         int flags,
-        @Nullable VkAttachmentDescription.Buffer pAttachments,
+        VkAttachmentDescription.@Nullable Buffer pAttachments,
         VkSubpassDescription.Buffer pSubpasses,
-        @Nullable VkSubpassDependency.Buffer pDependencies
+        VkSubpassDependency.@Nullable Buffer pDependencies
     ) {
         sType(sType);
         pNext(pNext);
@@ -262,8 +260,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassCreateInfo createSafe(long address) {
+    public static @Nullable VkRenderPassCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkRenderPassCreateInfo(address, null);
     }
 
@@ -306,8 +303,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -379,7 +375,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     /** Unsafe version of {@link #attachmentCount}. */
     public static int nattachmentCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments}. */
-    @Nullable public static VkAttachmentDescription.Buffer npAttachments(long struct) { return VkAttachmentDescription.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
+    public static VkAttachmentDescription.@Nullable Buffer npAttachments(long struct) { return VkAttachmentDescription.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
     /** Unsafe version of {@link #subpassCount}. */
     public static int nsubpassCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.SUBPASSCOUNT); }
     /** Unsafe version of {@link #pSubpasses}. */
@@ -387,7 +383,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     /** Unsafe version of {@link #dependencyCount}. */
     public static int ndependencyCount(long struct) { return memGetInt(struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT); }
     /** Unsafe version of {@link #pDependencies}. */
-    @Nullable public static VkSubpassDependency.Buffer npDependencies(long struct) { return VkSubpassDependency.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES), ndependencyCount(struct)); }
+    public static VkSubpassDependency.@Nullable Buffer npDependencies(long struct) { return VkSubpassDependency.createSafe(memGetAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES), ndependencyCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.STYPE, value); }
@@ -398,7 +394,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
     public static void nattachmentCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(VkAttachmentDescription.Buffer) pAttachments}. */
-    public static void npAttachments(long struct, @Nullable VkAttachmentDescription.Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npAttachments(long struct, VkAttachmentDescription.@Nullable Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code subpassCount} field of the specified {@code struct}. */
     public static void nsubpassCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.SUBPASSCOUNT, value); }
     /** Unsafe version of {@link #pSubpasses(VkSubpassDescription.Buffer) pSubpasses}. */
@@ -406,7 +402,7 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     /** Sets the specified value to the {@code dependencyCount} field of the specified {@code struct}. */
     public static void ndependencyCount(long struct, int value) { memPutInt(struct + VkRenderPassCreateInfo.DEPENDENCYCOUNT, value); }
     /** Unsafe version of {@link #pDependencies(VkSubpassDependency.Buffer) pDependencies}. */
-    public static void npDependencies(long struct, @Nullable VkSubpassDependency.Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES, memAddressSafe(value)); ndependencyCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npDependencies(long struct, VkSubpassDependency.@Nullable Buffer value) { memPutAddress(struct + VkRenderPassCreateInfo.PDEPENDENCIES, memAddressSafe(value)); ndependencyCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -482,9 +478,8 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
         @NativeType("uint32_t")
         public int attachmentCount() { return VkRenderPassCreateInfo.nattachmentCount(address()); }
         /** @return a {@link VkAttachmentDescription.Buffer} view of the struct array pointed to by the {@link VkRenderPassCreateInfo#pAttachments} field. */
-        @Nullable
         @NativeType("VkAttachmentDescription const *")
-        public VkAttachmentDescription.Buffer pAttachments() { return VkRenderPassCreateInfo.npAttachments(address()); }
+        public VkAttachmentDescription.@Nullable Buffer pAttachments() { return VkRenderPassCreateInfo.npAttachments(address()); }
         /** @return the value of the {@link VkRenderPassCreateInfo#subpassCount} field. */
         @NativeType("uint32_t")
         public int subpassCount() { return VkRenderPassCreateInfo.nsubpassCount(address()); }
@@ -495,9 +490,8 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
         @NativeType("uint32_t")
         public int dependencyCount() { return VkRenderPassCreateInfo.ndependencyCount(address()); }
         /** @return a {@link VkSubpassDependency.Buffer} view of the struct array pointed to by the {@link VkRenderPassCreateInfo#pDependencies} field. */
-        @Nullable
         @NativeType("VkSubpassDependency const *")
-        public VkSubpassDependency.Buffer pDependencies() { return VkRenderPassCreateInfo.npDependencies(address()); }
+        public VkSubpassDependency.@Nullable Buffer pDependencies() { return VkRenderPassCreateInfo.npDependencies(address()); }
 
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#sType} field. */
         public VkRenderPassCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreateInfo.nsType(address(), value); return this; }
@@ -518,11 +512,11 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#flags} field. */
         public VkRenderPassCreateInfo.Buffer flags(@NativeType("VkRenderPassCreateFlags") int value) { VkRenderPassCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link VkRenderPassCreateInfo#pAttachments} field. */
-        public VkRenderPassCreateInfo.Buffer pAttachments(@Nullable @NativeType("VkAttachmentDescription const *") VkAttachmentDescription.Buffer value) { VkRenderPassCreateInfo.npAttachments(address(), value); return this; }
+        public VkRenderPassCreateInfo.Buffer pAttachments(@NativeType("VkAttachmentDescription const *") VkAttachmentDescription.@Nullable Buffer value) { VkRenderPassCreateInfo.npAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkSubpassDescription.Buffer} to the {@link VkRenderPassCreateInfo#pSubpasses} field. */
         public VkRenderPassCreateInfo.Buffer pSubpasses(@NativeType("VkSubpassDescription const *") VkSubpassDescription.Buffer value) { VkRenderPassCreateInfo.npSubpasses(address(), value); return this; }
         /** Sets the address of the specified {@link VkSubpassDependency.Buffer} to the {@link VkRenderPassCreateInfo#pDependencies} field. */
-        public VkRenderPassCreateInfo.Buffer pDependencies(@Nullable @NativeType("VkSubpassDependency const *") VkSubpassDependency.Buffer value) { VkRenderPassCreateInfo.npDependencies(address(), value); return this; }
+        public VkRenderPassCreateInfo.Buffer pDependencies(@NativeType("VkSubpassDependency const *") VkSubpassDependency.@Nullable Buffer value) { VkRenderPassCreateInfo.npDependencies(address(), value); return this; }
 
     }
 

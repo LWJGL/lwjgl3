@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class XrBodyJointsLocateInfoHTC extends Struct<XrBodyJointsLocateInfoHTC>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBodyJointsLocateInfoHTC createSafe(long address) {
+    public static @Nullable XrBodyJointsLocateInfoHTC createSafe(long address) {
         return address == NULL ? null : new XrBodyJointsLocateInfoHTC(address, null);
     }
 
@@ -219,8 +218,7 @@ public class XrBodyJointsLocateInfoHTC extends Struct<XrBodyJointsLocateInfoHTC>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBodyJointsLocateInfoHTC.Buffer createSafe(long address, int capacity) {
+    public static XrBodyJointsLocateInfoHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

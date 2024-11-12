@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,8 +102,7 @@ public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationG
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRefreshCycleDurationGOOGLE createSafe(long address) {
+    public static @Nullable VkRefreshCycleDurationGOOGLE createSafe(long address) {
         return address == NULL ? null : new VkRefreshCycleDurationGOOGLE(address, null);
     }
 
@@ -146,8 +145,7 @@ public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationG
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRefreshCycleDurationGOOGLE.Buffer createSafe(long address, int capacity) {
+    public static VkRefreshCycleDurationGOOGLE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

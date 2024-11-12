@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -115,9 +115,8 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     @NativeType("uint32_t")
     public int qrCodeCapacityInput() { return nqrCodeCapacityInput(address()); }
     /** an array of {@link XrSceneMarkerQRCodeMSFT} for the runtime to fill with the properties of the QR Codes. */
-    @Nullable
     @NativeType("XrSceneMarkerQRCodeMSFT *")
-    public XrSceneMarkerQRCodeMSFT.Buffer qrCodes() { return nqrCodes(address()); }
+    public XrSceneMarkerQRCodeMSFT.@Nullable Buffer qrCodes() { return nqrCodes(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneMarkerQRCodesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -128,14 +127,14 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     /** Sets the specified value to the {@link #qrCodeCapacityInput} field. */
     public XrSceneMarkerQRCodesMSFT qrCodeCapacityInput(@NativeType("uint32_t") int value) { nqrCodeCapacityInput(address(), value); return this; }
     /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@link #qrCodes} field. */
-    public XrSceneMarkerQRCodesMSFT qrCodes(@Nullable @NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.Buffer value) { nqrCodes(address(), value); return this; }
+    public XrSceneMarkerQRCodesMSFT qrCodes(@NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.@Nullable Buffer value) { nqrCodes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSceneMarkerQRCodesMSFT set(
         int type,
         long next,
         int qrCodeCapacityInput,
-        @Nullable XrSceneMarkerQRCodeMSFT.Buffer qrCodes
+        XrSceneMarkerQRCodeMSFT.@Nullable Buffer qrCodes
     ) {
         type(type);
         next(next);
@@ -181,8 +180,7 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkerQRCodesMSFT createSafe(long address) {
+    public static @Nullable XrSceneMarkerQRCodesMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneMarkerQRCodesMSFT(address, null);
     }
 
@@ -225,8 +223,7 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkerQRCodesMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneMarkerQRCodesMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,7 +274,7 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     /** Unsafe version of {@link #qrCodeCapacityInput}. */
     public static int nqrCodeCapacityInput(long struct) { return memGetInt(struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT); }
     /** Unsafe version of {@link #qrCodes}. */
-    @Nullable public static XrSceneMarkerQRCodeMSFT.Buffer nqrCodes(long struct) { return XrSceneMarkerQRCodeMSFT.createSafe(memGetAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES), nqrCodeCapacityInput(struct)); }
+    public static XrSceneMarkerQRCodeMSFT.@Nullable Buffer nqrCodes(long struct) { return XrSceneMarkerQRCodeMSFT.createSafe(memGetAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES), nqrCodeCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkerQRCodesMSFT.TYPE, value); }
@@ -286,7 +283,7 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     /** Sets the specified value to the {@code qrCodeCapacityInput} field of the specified {@code struct}. */
     public static void nqrCodeCapacityInput(long struct, int value) { memPutInt(struct + XrSceneMarkerQRCodesMSFT.QRCODECAPACITYINPUT, value); }
     /** Unsafe version of {@link #qrCodes(XrSceneMarkerQRCodeMSFT.Buffer) qrCodes}. */
-    public static void nqrCodes(long struct, @Nullable XrSceneMarkerQRCodeMSFT.Buffer value) { memPutAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES, memAddressSafe(value)); if (value != null) { nqrCodeCapacityInput(struct, value.remaining()); } }
+    public static void nqrCodes(long struct, XrSceneMarkerQRCodeMSFT.@Nullable Buffer value) { memPutAddress(struct + XrSceneMarkerQRCodesMSFT.QRCODES, memAddressSafe(value)); if (value != null) { nqrCodeCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -341,9 +338,8 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
         @NativeType("uint32_t")
         public int qrCodeCapacityInput() { return XrSceneMarkerQRCodesMSFT.nqrCodeCapacityInput(address()); }
         /** @return a {@link XrSceneMarkerQRCodeMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneMarkerQRCodesMSFT#qrCodes} field. */
-        @Nullable
         @NativeType("XrSceneMarkerQRCodeMSFT *")
-        public XrSceneMarkerQRCodeMSFT.Buffer qrCodes() { return XrSceneMarkerQRCodesMSFT.nqrCodes(address()); }
+        public XrSceneMarkerQRCodeMSFT.@Nullable Buffer qrCodes() { return XrSceneMarkerQRCodesMSFT.nqrCodes(address()); }
 
         /** Sets the specified value to the {@link XrSceneMarkerQRCodesMSFT#type} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkerQRCodesMSFT.ntype(address(), value); return this; }
@@ -354,7 +350,7 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
         /** Sets the specified value to the {@link XrSceneMarkerQRCodesMSFT#qrCodeCapacityInput} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer qrCodeCapacityInput(@NativeType("uint32_t") int value) { XrSceneMarkerQRCodesMSFT.nqrCodeCapacityInput(address(), value); return this; }
         /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@link XrSceneMarkerQRCodesMSFT#qrCodes} field. */
-        public XrSceneMarkerQRCodesMSFT.Buffer qrCodes(@Nullable @NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.Buffer value) { XrSceneMarkerQRCodesMSFT.nqrCodes(address(), value); return this; }
+        public XrSceneMarkerQRCodesMSFT.Buffer qrCodes(@NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.@Nullable Buffer value) { XrSceneMarkerQRCodesMSFT.nqrCodes(address(), value); return this; }
 
     }
 

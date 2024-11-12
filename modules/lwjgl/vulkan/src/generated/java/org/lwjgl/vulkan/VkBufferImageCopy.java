@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,8 +201,7 @@ public class VkBufferImageCopy extends Struct<VkBufferImageCopy> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferImageCopy createSafe(long address) {
+    public static @Nullable VkBufferImageCopy createSafe(long address) {
         return address == NULL ? null : new VkBufferImageCopy(address, null);
     }
 
@@ -245,8 +244,7 @@ public class VkBufferImageCopy extends Struct<VkBufferImageCopy> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferImageCopy.Buffer createSafe(long address, int capacity) {
+    public static VkBufferImageCopy.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

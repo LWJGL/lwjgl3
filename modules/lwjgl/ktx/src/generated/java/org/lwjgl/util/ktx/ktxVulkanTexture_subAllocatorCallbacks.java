@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -180,8 +180,7 @@ public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanText
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanTexture_subAllocatorCallbacks createSafe(long address) {
+    public static @Nullable ktxVulkanTexture_subAllocatorCallbacks createSafe(long address) {
         return address == NULL ? null : new ktxVulkanTexture_subAllocatorCallbacks(address, null);
     }
 
@@ -224,8 +223,7 @@ public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanText
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanTexture_subAllocatorCallbacks.Buffer createSafe(long address, int capacity) {
+    public static ktxVulkanTexture_subAllocatorCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -204,7 +204,7 @@ public class MSFTSceneUnderstandingSerialization {
      * @param buffer     a pointer to the buffer where the data should be copied.
      */
     @NativeType("XrResult")
-    public static int xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, @NativeType("XrSerializedSceneFragmentDataGetInfoMSFT const *") XrSerializedSceneFragmentDataGetInfoMSFT getInfo, @NativeType("uint32_t *") IntBuffer readOutput, @Nullable @NativeType("uint8_t *") ByteBuffer buffer) {
+    public static int xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, @NativeType("XrSerializedSceneFragmentDataGetInfoMSFT const *") XrSerializedSceneFragmentDataGetInfoMSFT getInfo, @NativeType("uint32_t *") IntBuffer readOutput, @NativeType("uint8_t *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(readOutput, 1);
         }

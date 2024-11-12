@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -245,8 +245,7 @@ public class XrPassthroughMeshTransformInfoHTC extends Struct<XrPassthroughMeshT
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughMeshTransformInfoHTC createSafe(long address) {
+    public static @Nullable XrPassthroughMeshTransformInfoHTC createSafe(long address) {
         return address == NULL ? null : new XrPassthroughMeshTransformInfoHTC(address, null);
     }
 
@@ -289,8 +288,7 @@ public class XrPassthroughMeshTransformInfoHTC extends Struct<XrPassthroughMeshT
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughMeshTransformInfoHTC.Buffer createSafe(long address, int capacity) {
+    public static XrPassthroughMeshTransformInfoHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -76,9 +76,8 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
     @NativeType("FMOD_BOOL")
     public int defaultval() { return ndefaultval(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code valuenames} field. */
-    @Nullable
     @NativeType("char const * const *")
-    public PointerBuffer valuenames() { return nvaluenames(address()); }
+    public @Nullable PointerBuffer valuenames() { return nvaluenames(address()); }
 
     /** Sets the specified value to the {@code defaultval} field. */
     public FMOD_DSP_PARAMETER_DESC_BOOL defaultval(@NativeType("FMOD_BOOL") int value) { ndefaultval(address(), value); return this; }
@@ -132,8 +131,7 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_PARAMETER_DESC_BOOL createSafe(long address) {
+    public static @Nullable FMOD_DSP_PARAMETER_DESC_BOOL createSafe(long address) {
         return address == NULL ? null : new FMOD_DSP_PARAMETER_DESC_BOOL(address, null);
     }
 
@@ -176,8 +174,7 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_PARAMETER_DESC_BOOL.Buffer createSafe(long address, int capacity) {
+    public static FMOD_DSP_PARAMETER_DESC_BOOL.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -224,7 +221,7 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
     /** Unsafe version of {@link #defaultval}. */
     public static int ndefaultval(long struct) { return memGetInt(struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL); }
     /** Unsafe version of {@link #valuenames() valuenames}. */
-    @Nullable public static PointerBuffer nvaluenames(long struct) { return memPointerBufferSafe(memGetAddress(struct + FMOD_DSP_PARAMETER_DESC_BOOL.VALUENAMES), 2); }
+    public static @Nullable PointerBuffer nvaluenames(long struct) { return memPointerBufferSafe(memGetAddress(struct + FMOD_DSP_PARAMETER_DESC_BOOL.VALUENAMES), 2); }
 
     /** Unsafe version of {@link #defaultval(int) defaultval}. */
     public static void ndefaultval(long struct, int value) { memPutInt(struct + FMOD_DSP_PARAMETER_DESC_BOOL.DEFAULTVAL, value); }
@@ -278,9 +275,8 @@ public class FMOD_DSP_PARAMETER_DESC_BOOL extends Struct<FMOD_DSP_PARAMETER_DESC
         @NativeType("FMOD_BOOL")
         public int defaultval() { return FMOD_DSP_PARAMETER_DESC_BOOL.ndefaultval(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code valuenames} field. */
-        @Nullable
         @NativeType("char const * const *")
-        public PointerBuffer valuenames() { return FMOD_DSP_PARAMETER_DESC_BOOL.nvaluenames(address()); }
+        public @Nullable PointerBuffer valuenames() { return FMOD_DSP_PARAMETER_DESC_BOOL.nvaluenames(address()); }
 
         /** Sets the specified value to the {@code defaultval} field. */
         public FMOD_DSP_PARAMETER_DESC_BOOL.Buffer defaultval(@NativeType("FMOD_BOOL") int value) { FMOD_DSP_PARAMETER_DESC_BOOL.ndefaultval(address(), value); return this; }

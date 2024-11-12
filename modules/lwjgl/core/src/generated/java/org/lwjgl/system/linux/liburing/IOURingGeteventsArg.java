@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class IOURingGeteventsArg extends Struct<IOURingGeteventsArg> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingGeteventsArg createSafe(long address) {
+    public static @Nullable IOURingGeteventsArg createSafe(long address) {
         return address == NULL ? null : new IOURingGeteventsArg(address, null);
     }
 
@@ -198,8 +197,7 @@ public class IOURingGeteventsArg extends Struct<IOURingGeteventsArg> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingGeteventsArg.Buffer createSafe(long address, int capacity) {
+    public static IOURingGeteventsArg.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

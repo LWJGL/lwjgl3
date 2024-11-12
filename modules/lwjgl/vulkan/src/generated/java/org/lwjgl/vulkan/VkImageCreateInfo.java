@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -447,9 +447,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
     /** a pointer to an array of queue families that will access this image. It is ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
+    public @Nullable IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
     /** a {@code VkImageLayout} value specifying the initial {@code VkImageLayout} of all image subresources of the image. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-layouts">Image Layouts</a>. */
     @NativeType("VkImageLayout")
     public int initialLayout() { return ninitialLayout(address()); }
@@ -602,8 +601,7 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageCreateInfo createSafe(long address) {
+    public static @Nullable VkImageCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkImageCreateInfo(address, null);
     }
 
@@ -646,8 +644,7 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkImageCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -737,7 +734,7 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     /** Unsafe version of {@link #queueFamilyIndexCount}. */
     public static int nqueueFamilyIndexCount(long struct) { return memGetInt(struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT); }
     /** Unsafe version of {@link #pQueueFamilyIndices() pQueueFamilyIndices}. */
-    @Nullable public static IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
+    public static @Nullable IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
     /** Unsafe version of {@link #initialLayout}. */
     public static int ninitialLayout(long struct) { return memGetInt(struct + VkImageCreateInfo.INITIALLAYOUT); }
 
@@ -854,9 +851,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkImageCreateInfo.nqueueFamilyIndexCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageCreateInfo#pQueueFamilyIndices} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pQueueFamilyIndices() { return VkImageCreateInfo.npQueueFamilyIndices(address()); }
+        public @Nullable IntBuffer pQueueFamilyIndices() { return VkImageCreateInfo.npQueueFamilyIndices(address()); }
         /** @return the value of the {@link VkImageCreateInfo#initialLayout} field. */
         @NativeType("VkImageLayout")
         public int initialLayout() { return VkImageCreateInfo.ninitialLayout(address()); }

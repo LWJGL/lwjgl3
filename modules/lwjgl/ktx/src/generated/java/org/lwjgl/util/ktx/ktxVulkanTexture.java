@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,8 +184,7 @@ public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanTexture createSafe(long address) {
+    public static @Nullable ktxVulkanTexture createSafe(long address) {
         return address == NULL ? null : new ktxVulkanTexture(address, null);
     }
 
@@ -228,8 +227,7 @@ public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanTexture.Buffer createSafe(long address, int capacity) {
+    public static ktxVulkanTexture.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

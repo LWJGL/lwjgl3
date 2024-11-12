@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -240,8 +240,7 @@ public class CLImageDesc extends Struct<CLImageDesc> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLImageDesc createSafe(long address) {
+    public static @Nullable CLImageDesc createSafe(long address) {
         return address == NULL ? null : new CLImageDesc(address, null);
     }
 
@@ -284,8 +283,7 @@ public class CLImageDesc extends Struct<CLImageDesc> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLImageDesc.Buffer createSafe(long address, int capacity) {
+    public static CLImageDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

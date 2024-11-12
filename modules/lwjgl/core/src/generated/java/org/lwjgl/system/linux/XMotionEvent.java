@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -272,8 +272,7 @@ public class XMotionEvent extends Struct<XMotionEvent> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XMotionEvent createSafe(long address) {
+    public static @Nullable XMotionEvent createSafe(long address) {
         return address == NULL ? null : new XMotionEvent(address, null);
     }
 
@@ -316,8 +315,7 @@ public class XMotionEvent extends Struct<XMotionEvent> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XMotionEvent.Buffer createSafe(long address, int capacity) {
+    public static XMotionEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

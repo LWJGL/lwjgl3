@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -94,20 +94,15 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     @NativeType("FT_Glyph_Format")
     public int glyph_format() { return nglyph_format(address()); }
     /** @return the value of the {@code raster_new} field. */
-    @Nullable
-    public FT_Raster_NewFunc raster_new() { return nraster_new(address()); }
+    public @Nullable FT_Raster_NewFunc raster_new() { return nraster_new(address()); }
     /** @return the value of the {@code raster_reset} field. */
-    @Nullable
-    public FT_Raster_ResetFunc raster_reset() { return nraster_reset(address()); }
+    public @Nullable FT_Raster_ResetFunc raster_reset() { return nraster_reset(address()); }
     /** @return the value of the {@code raster_set_mode} field. */
-    @Nullable
-    public FT_Raster_SetModeFunc raster_set_mode() { return nraster_set_mode(address()); }
+    public @Nullable FT_Raster_SetModeFunc raster_set_mode() { return nraster_set_mode(address()); }
     /** @return the value of the {@code raster_render} field. */
-    @Nullable
-    public FT_Raster_RenderFunc raster_render() { return nraster_render(address()); }
+    public @Nullable FT_Raster_RenderFunc raster_render() { return nraster_render(address()); }
     /** @return the value of the {@code raster_done} field. */
-    @Nullable
-    public FT_Raster_DoneFunc raster_done() { return nraster_done(address()); }
+    public @Nullable FT_Raster_DoneFunc raster_done() { return nraster_done(address()); }
 
     /** Sets the specified value to the {@code glyph_format} field. */
     public FT_Raster_Funcs glyph_format(@NativeType("FT_Glyph_Format") int value) { nglyph_format(address(), value); return this; }
@@ -177,8 +172,7 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Raster_Funcs createSafe(long address) {
+    public static @Nullable FT_Raster_Funcs createSafe(long address) {
         return address == NULL ? null : new FT_Raster_Funcs(address, null);
     }
 
@@ -221,8 +215,7 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Raster_Funcs.Buffer createSafe(long address, int capacity) {
+    public static FT_Raster_Funcs.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -269,15 +262,15 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
     /** Unsafe version of {@link #glyph_format}. */
     public static int nglyph_format(long struct) { return memGetInt(struct + FT_Raster_Funcs.GLYPH_FORMAT); }
     /** Unsafe version of {@link #raster_new}. */
-    @Nullable public static FT_Raster_NewFunc nraster_new(long struct) { return FT_Raster_NewFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_NEW)); }
+    public static @Nullable FT_Raster_NewFunc nraster_new(long struct) { return FT_Raster_NewFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_NEW)); }
     /** Unsafe version of {@link #raster_reset}. */
-    @Nullable public static FT_Raster_ResetFunc nraster_reset(long struct) { return FT_Raster_ResetFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_RESET)); }
+    public static @Nullable FT_Raster_ResetFunc nraster_reset(long struct) { return FT_Raster_ResetFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_RESET)); }
     /** Unsafe version of {@link #raster_set_mode}. */
-    @Nullable public static FT_Raster_SetModeFunc nraster_set_mode(long struct) { return FT_Raster_SetModeFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_SET_MODE)); }
+    public static @Nullable FT_Raster_SetModeFunc nraster_set_mode(long struct) { return FT_Raster_SetModeFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_SET_MODE)); }
     /** Unsafe version of {@link #raster_render}. */
-    @Nullable public static FT_Raster_RenderFunc nraster_render(long struct) { return FT_Raster_RenderFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_RENDER)); }
+    public static @Nullable FT_Raster_RenderFunc nraster_render(long struct) { return FT_Raster_RenderFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_RENDER)); }
     /** Unsafe version of {@link #raster_done}. */
-    @Nullable public static FT_Raster_DoneFunc nraster_done(long struct) { return FT_Raster_DoneFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_DONE)); }
+    public static @Nullable FT_Raster_DoneFunc nraster_done(long struct) { return FT_Raster_DoneFunc.createSafe(memGetAddress(struct + FT_Raster_Funcs.RASTER_DONE)); }
 
     /** Unsafe version of {@link #glyph_format(int) glyph_format}. */
     public static void nglyph_format(long struct, int value) { memPutInt(struct + FT_Raster_Funcs.GLYPH_FORMAT, value); }
@@ -339,20 +332,15 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
         @NativeType("FT_Glyph_Format")
         public int glyph_format() { return FT_Raster_Funcs.nglyph_format(address()); }
         /** @return the value of the {@code raster_new} field. */
-        @Nullable
-        public FT_Raster_NewFunc raster_new() { return FT_Raster_Funcs.nraster_new(address()); }
+        public @Nullable FT_Raster_NewFunc raster_new() { return FT_Raster_Funcs.nraster_new(address()); }
         /** @return the value of the {@code raster_reset} field. */
-        @Nullable
-        public FT_Raster_ResetFunc raster_reset() { return FT_Raster_Funcs.nraster_reset(address()); }
+        public @Nullable FT_Raster_ResetFunc raster_reset() { return FT_Raster_Funcs.nraster_reset(address()); }
         /** @return the value of the {@code raster_set_mode} field. */
-        @Nullable
-        public FT_Raster_SetModeFunc raster_set_mode() { return FT_Raster_Funcs.nraster_set_mode(address()); }
+        public @Nullable FT_Raster_SetModeFunc raster_set_mode() { return FT_Raster_Funcs.nraster_set_mode(address()); }
         /** @return the value of the {@code raster_render} field. */
-        @Nullable
-        public FT_Raster_RenderFunc raster_render() { return FT_Raster_Funcs.nraster_render(address()); }
+        public @Nullable FT_Raster_RenderFunc raster_render() { return FT_Raster_Funcs.nraster_render(address()); }
         /** @return the value of the {@code raster_done} field. */
-        @Nullable
-        public FT_Raster_DoneFunc raster_done() { return FT_Raster_Funcs.nraster_done(address()); }
+        public @Nullable FT_Raster_DoneFunc raster_done() { return FT_Raster_Funcs.nraster_done(address()); }
 
         /** Sets the specified value to the {@code glyph_format} field. */
         public FT_Raster_Funcs.Buffer glyph_format(@NativeType("FT_Glyph_Format") int value) { FT_Raster_Funcs.nglyph_format(address(), value); return this; }

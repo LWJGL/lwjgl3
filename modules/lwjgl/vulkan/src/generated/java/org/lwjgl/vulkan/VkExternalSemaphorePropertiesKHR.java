@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalSemaphorePropertiesKHR createSafe(long address) {
+    public static @Nullable VkExternalSemaphorePropertiesKHR createSafe(long address) {
         return address == NULL ? null : new VkExternalSemaphorePropertiesKHR(address, null);
     }
 
@@ -152,8 +151,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalSemaphorePropertiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkExternalSemaphorePropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class VkBufferMemoryRequirementsInfo2 extends Struct<VkBufferMemoryRequir
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferMemoryRequirementsInfo2 createSafe(long address) {
+    public static @Nullable VkBufferMemoryRequirementsInfo2 createSafe(long address) {
         return address == NULL ? null : new VkBufferMemoryRequirementsInfo2(address, null);
     }
 
@@ -202,8 +201,7 @@ public class VkBufferMemoryRequirementsInfo2 extends Struct<VkBufferMemoryRequir
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferMemoryRequirementsInfo2.Buffer createSafe(long address, int capacity) {
+    public static VkBufferMemoryRequirementsInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments. */
-    @Nullable
     @NativeType("VkSampleCountFlagBits const *")
-    public IntBuffer pColorAttachmentSamples() { return npColorAttachmentSamples(address()); }
+    public @Nullable IntBuffer pColorAttachmentSamples() { return npColorAttachmentSamples(address()); }
     /** a {@code VkSampleCountFlagBits} value defining the sample count of a depth/stencil attachment. */
     @NativeType("VkSampleCountFlagBits")
     public int depthStencilAttachmentSamples() { return ndepthStencilAttachmentSamples(address()); }
@@ -181,8 +180,7 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentSampleCountInfoAMD createSafe(long address) {
+    public static @Nullable VkAttachmentSampleCountInfoAMD createSafe(long address) {
         return address == NULL ? null : new VkAttachmentSampleCountInfoAMD(address, null);
     }
 
@@ -225,8 +223,7 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentSampleCountInfoAMD.Buffer createSafe(long address, int capacity) {
+    public static VkAttachmentSampleCountInfoAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,7 +274,7 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentSamples() pColorAttachmentSamples}. */
-    @Nullable public static IntBuffer npColorAttachmentSamples(long struct) { return memIntBufferSafe(memGetAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES), ncolorAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorAttachmentSamples(long struct) { return memIntBufferSafe(memGetAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthStencilAttachmentSamples}. */
     public static int ndepthStencilAttachmentSamples(long struct) { return memGetInt(struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES); }
 
@@ -345,9 +342,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkAttachmentSampleCountInfoAMD.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkAttachmentSampleCountInfoAMD#pColorAttachmentSamples} field. */
-        @Nullable
         @NativeType("VkSampleCountFlagBits const *")
-        public IntBuffer pColorAttachmentSamples() { return VkAttachmentSampleCountInfoAMD.npColorAttachmentSamples(address()); }
+        public @Nullable IntBuffer pColorAttachmentSamples() { return VkAttachmentSampleCountInfoAMD.npColorAttachmentSamples(address()); }
         /** @return the value of the {@link VkAttachmentSampleCountInfoAMD#depthStencilAttachmentSamples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int depthStencilAttachmentSamples() { return VkAttachmentSampleCountInfoAMD.ndepthStencilAttachmentSamples(address()); }

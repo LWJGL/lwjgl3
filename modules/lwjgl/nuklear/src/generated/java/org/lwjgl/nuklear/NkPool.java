@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -128,8 +128,7 @@ class NkPool extends Struct<NkPool> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkPool createSafe(long address) {
+    public static @Nullable NkPool createSafe(long address) {
         return address == NULL ? null : new NkPool(address, null);
     }
 
@@ -144,8 +143,7 @@ class NkPool extends Struct<NkPool> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkPool.Buffer createSafe(long address, int capacity) {
+    public static NkPool.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

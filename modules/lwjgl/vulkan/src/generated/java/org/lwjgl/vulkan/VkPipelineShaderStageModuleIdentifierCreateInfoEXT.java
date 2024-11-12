@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,9 +114,8 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     @NativeType("uint32_t")
     public int identifierSize() { return nidentifierSize(address()); }
     /** a pointer to a buffer of opaque data specifying an identifier. */
-    @Nullable
     @NativeType("uint8_t const *")
-    public ByteBuffer pIdentifier() { return npIdentifier(address()); }
+    public @Nullable ByteBuffer pIdentifier() { return npIdentifier(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineShaderStageModuleIdentifierCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -176,8 +175,7 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageModuleIdentifierCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineShaderStageModuleIdentifierCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineShaderStageModuleIdentifierCreateInfoEXT(address, null);
     }
 
@@ -220,8 +218,7 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageModuleIdentifierCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineShaderStageModuleIdentifierCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -272,7 +269,7 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
     /** Unsafe version of {@link #identifierSize}. */
     public static int nidentifierSize(long struct) { return memGetInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.IDENTIFIERSIZE); }
     /** Unsafe version of {@link #pIdentifier() pIdentifier}. */
-    @Nullable public static ByteBuffer npIdentifier(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PIDENTIFIER), nidentifierSize(struct)); }
+    public static @Nullable ByteBuffer npIdentifier(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.PIDENTIFIER), nidentifierSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineShaderStageModuleIdentifierCreateInfoEXT.STYPE, value); }
@@ -347,9 +344,8 @@ public class VkPipelineShaderStageModuleIdentifierCreateInfoEXT extends Struct<V
         @NativeType("uint32_t")
         public int identifierSize() { return VkPipelineShaderStageModuleIdentifierCreateInfoEXT.nidentifierSize(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT#pIdentifier} field. */
-        @Nullable
         @NativeType("uint8_t const *")
-        public ByteBuffer pIdentifier() { return VkPipelineShaderStageModuleIdentifierCreateInfoEXT.npIdentifier(address()); }
+        public @Nullable ByteBuffer pIdentifier() { return VkPipelineShaderStageModuleIdentifierCreateInfoEXT.npIdentifier(address()); }
 
         /** Sets the specified value to the {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT#sType} field. */
         public VkPipelineShaderStageModuleIdentifierCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageModuleIdentifierCreateInfoEXT.nsType(address(), value); return this; }

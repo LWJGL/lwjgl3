@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -234,8 +234,7 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocationCreateInfo createSafe(long address) {
+    public static @Nullable VmaAllocationCreateInfo createSafe(long address) {
         return address == NULL ? null : new VmaAllocationCreateInfo(address, null);
     }
 
@@ -278,8 +277,7 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocationCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VmaAllocationCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

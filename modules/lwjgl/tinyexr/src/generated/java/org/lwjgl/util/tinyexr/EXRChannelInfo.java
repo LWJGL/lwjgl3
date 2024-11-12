@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,8 +167,7 @@ public class EXRChannelInfo extends Struct<EXRChannelInfo> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRChannelInfo createSafe(long address) {
+    public static @Nullable EXRChannelInfo createSafe(long address) {
         return address == NULL ? null : new EXRChannelInfo(address, null);
     }
 
@@ -211,8 +210,7 @@ public class EXRChannelInfo extends Struct<EXRChannelInfo> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRChannelInfo.Buffer createSafe(long address, int capacity) {
+    public static EXRChannelInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

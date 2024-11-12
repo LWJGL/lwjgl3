@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.par;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,17 +114,15 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
      *
      * @return an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals
      */
-    @Nullable
     @NativeType("float *")
-    public FloatBuffer normals(int capacity) { return nnormals(address(), capacity); }
+    public @Nullable FloatBuffer normals(int capacity) { return nnormals(address(), capacity); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
      * @return an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates
      */
-    @Nullable
     @NativeType("float *")
-    public FloatBuffer tcoords(int capacity) { return ntcoords(address(), capacity); }
+    public @Nullable FloatBuffer tcoords(int capacity) { return ntcoords(address(), capacity); }
 
     // -----------------------------------
 
@@ -134,8 +132,7 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ParShapesMesh createSafe(long address) {
+    public static @Nullable ParShapesMesh createSafe(long address) {
         return address == NULL ? null : new ParShapesMesh(address, null);
     }
 
@@ -150,8 +147,7 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ParShapesMesh.Buffer createSafe(long address, int capacity) {
+    public static ParShapesMesh.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -166,9 +162,9 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
     /** Unsafe version of {@link #ntriangles}. */
     public static int nntriangles(long struct) { return memGetInt(struct + ParShapesMesh.NTRIANGLES); }
     /** Unsafe version of {@link #normals(int) normals}. */
-    @Nullable public static FloatBuffer nnormals(long struct, int capacity) { return memFloatBufferSafe(memGetAddress(struct + ParShapesMesh.NORMALS), capacity); }
+    public static @Nullable FloatBuffer nnormals(long struct, int capacity) { return memFloatBufferSafe(memGetAddress(struct + ParShapesMesh.NORMALS), capacity); }
     /** Unsafe version of {@link #tcoords(int) tcoords}. */
-    @Nullable public static FloatBuffer ntcoords(long struct, int capacity) { return memFloatBufferSafe(memGetAddress(struct + ParShapesMesh.TCOORDS), capacity); }
+    public static @Nullable FloatBuffer ntcoords(long struct, int capacity) { return memFloatBufferSafe(memGetAddress(struct + ParShapesMesh.TCOORDS), capacity); }
 
     // -----------------------------------
 
@@ -236,17 +232,15 @@ public class ParShapesMesh extends Struct<ParShapesMesh> {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("float *")
-        public FloatBuffer normals(int capacity) { return ParShapesMesh.nnormals(address(), capacity); }
+        public @Nullable FloatBuffer normals(int capacity) { return ParShapesMesh.nnormals(address(), capacity); }
         /**
          * @return a {@link FloatBuffer} view of the data pointed to by the {@link ParShapesMesh#tcoords} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("float *")
-        public FloatBuffer tcoords(int capacity) { return ParShapesMesh.ntcoords(address(), capacity); }
+        public @Nullable FloatBuffer tcoords(int capacity) { return ParShapesMesh.ntcoords(address(), capacity); }
 
     }
 

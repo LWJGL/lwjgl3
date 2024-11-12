@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -552,7 +552,7 @@ public class METAEnvironmentDepth {
      * @param images           a pointer to an array of graphics API-specific XrSwapchainImage structures, all of the same type, based on {@link XrSwapchainImageBaseHeader}. It <b>can</b> be {@code NULL} if {@code imageCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, @NativeType("uint32_t *") IntBuffer imageCountOutput, @Nullable @NativeType("XrSwapchainImageBaseHeader *") XrSwapchainImageBaseHeader.Buffer images) {
+    public static int xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, @NativeType("uint32_t *") IntBuffer imageCountOutput, @NativeType("XrSwapchainImageBaseHeader *") XrSwapchainImageBaseHeader.@Nullable Buffer images) {
         if (CHECKS) {
             check(imageCountOutput, 1);
         }

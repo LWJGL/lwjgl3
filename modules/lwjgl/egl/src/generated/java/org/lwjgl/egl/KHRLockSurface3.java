@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -68,7 +68,7 @@ public class KHRLockSurface3 {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @Nullable @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
@@ -110,7 +110,7 @@ public class KHRLockSurface3 {
 
     /** Array version of: {@link #eglLockSurfaceKHR LockSurfaceKHR} */
     @NativeType("EGLBoolean")
-    public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
+    public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglLockSurfaceKHR;
         if (CHECKS) {
             check(__functionAddress);

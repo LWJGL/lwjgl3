@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,8 +184,7 @@ public class XResizeRequestEvent extends Struct<XResizeRequestEvent> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XResizeRequestEvent createSafe(long address) {
+    public static @Nullable XResizeRequestEvent createSafe(long address) {
         return address == NULL ? null : new XResizeRequestEvent(address, null);
     }
 
@@ -228,8 +227,7 @@ public class XResizeRequestEvent extends Struct<XResizeRequestEvent> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XResizeRequestEvent.Buffer createSafe(long address, int capacity) {
+    public static XResizeRequestEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

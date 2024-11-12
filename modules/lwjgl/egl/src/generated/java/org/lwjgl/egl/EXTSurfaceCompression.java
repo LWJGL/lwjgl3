@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -91,7 +91,7 @@ public class EXTSurfaceCompression {
      * @return {@link EGL10#EGL_TRUE TRUE} on success.
      */
     @NativeType("EGLBoolean")
-    public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLint *") IntBuffer rates, @NativeType("EGLint *") IntBuffer num_rates) {
+    public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLint *") @Nullable IntBuffer rates, @NativeType("EGLint *") IntBuffer num_rates) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_rates, 1);
@@ -101,7 +101,7 @@ public class EXTSurfaceCompression {
 
     /** Array version of: {@link #eglQuerySupportedCompressionRatesEXT QuerySupportedCompressionRatesEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLint *") int[] rates, @NativeType("EGLint *") int[] num_rates) {
+    public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLint *") int @Nullable [] rates, @NativeType("EGLint *") int[] num_rates) {
         long __functionAddress = EGL.getCapabilities().eglQuerySupportedCompressionRatesEXT;
         if (CHECKS) {
             check(__functionAddress);

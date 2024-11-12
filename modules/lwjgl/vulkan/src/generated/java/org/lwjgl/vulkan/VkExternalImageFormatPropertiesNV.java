@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -122,8 +122,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct<VkExternalImageFor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalImageFormatPropertiesNV createSafe(long address) {
+    public static @Nullable VkExternalImageFormatPropertiesNV createSafe(long address) {
         return address == NULL ? null : new VkExternalImageFormatPropertiesNV(address, null);
     }
 
@@ -166,8 +165,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct<VkExternalImageFor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalImageFormatPropertiesNV.Buffer createSafe(long address, int capacity) {
+    public static VkExternalImageFormatPropertiesNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

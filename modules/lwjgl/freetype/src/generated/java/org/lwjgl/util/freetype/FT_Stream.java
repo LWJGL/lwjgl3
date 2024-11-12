@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code base} field. */
-    @Nullable
     @NativeType("unsigned char *")
-    public ByteBuffer base() { return nbase(address()); }
+    public @Nullable ByteBuffer base() { return nbase(address()); }
     /** @return the value of the {@code size} field. */
     @NativeType("unsigned long")
     public long size() { return nsize(address()); }
@@ -122,11 +121,9 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     /** @return a {@link FT_StreamDesc} view of the {@code pathname} field. */
     public FT_StreamDesc pathname() { return npathname(address()); }
     /** @return the value of the {@code read} field. */
-    @Nullable
-    public FT_Stream_IoFunc read() { return nread(address()); }
+    public @Nullable FT_Stream_IoFunc read() { return nread(address()); }
     /** @return the value of the {@code close} field. */
-    @Nullable
-    public FT_Stream_CloseFunc close$() { return nclose$(address()); }
+    public @Nullable FT_Stream_CloseFunc close$() { return nclose$(address()); }
 
     /** Sets the address of the specified {@link ByteBuffer} to the {@code base} field. */
     public FT_Stream base(@Nullable @NativeType("unsigned char *") ByteBuffer value) { nbase(address(), value); return this; }
@@ -204,8 +201,7 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Stream createSafe(long address) {
+    public static @Nullable FT_Stream createSafe(long address) {
         return address == NULL ? null : new FT_Stream(address, null);
     }
 
@@ -248,8 +244,7 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Stream.Buffer createSafe(long address, int capacity) {
+    public static FT_Stream.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -294,7 +289,7 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #base() base}. */
-    @Nullable public static ByteBuffer nbase(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.BASE), (int)nsize(struct)); }
+    public static @Nullable ByteBuffer nbase(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.BASE), (int)nsize(struct)); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetCLong(struct + FT_Stream.SIZE); }
     /** Unsafe version of {@link #pos}. */
@@ -304,12 +299,12 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     /** Unsafe version of {@link #pathname}. */
     public static FT_StreamDesc npathname(long struct) { return FT_StreamDesc.create(struct + FT_Stream.PATHNAME); }
     /** Unsafe version of {@link #read}. */
-    @Nullable public static FT_Stream_IoFunc nread(long struct) { return FT_Stream_IoFunc.createSafe(memGetAddress(struct + FT_Stream.READ)); }
+    public static @Nullable FT_Stream_IoFunc nread(long struct) { return FT_Stream_IoFunc.createSafe(memGetAddress(struct + FT_Stream.READ)); }
     /** Unsafe version of {@link #close$}. */
-    @Nullable public static FT_Stream_CloseFunc nclose$(long struct) { return FT_Stream_CloseFunc.createSafe(memGetAddress(struct + FT_Stream.CLOSE)); }
-    @Nullable public static FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Stream.MEMORY)); }
-    @Nullable public static ByteBuffer ncursor(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.CURSOR), capacity); }
-    @Nullable public static ByteBuffer nlimit$(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.LIMIT), capacity); }
+    public static @Nullable FT_Stream_CloseFunc nclose$(long struct) { return FT_Stream_CloseFunc.createSafe(memGetAddress(struct + FT_Stream.CLOSE)); }
+    public static @Nullable FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Stream.MEMORY)); }
+    public static @Nullable ByteBuffer ncursor(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.CURSOR), capacity); }
+    public static @Nullable ByteBuffer nlimit$(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.LIMIT), capacity); }
 
     /** Unsafe version of {@link #base(ByteBuffer) base}. */
     public static void nbase(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.BASE, memAddressSafe(value)); nsize(struct, value == null ? 0 : value.remaining()); }
@@ -373,9 +368,8 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
         }
 
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code base} field. */
-        @Nullable
         @NativeType("unsigned char *")
-        public ByteBuffer base() { return FT_Stream.nbase(address()); }
+        public @Nullable ByteBuffer base() { return FT_Stream.nbase(address()); }
         /** @return the value of the {@code size} field. */
         @NativeType("unsigned long")
         public long size() { return FT_Stream.nsize(address()); }
@@ -387,11 +381,9 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
         /** @return a {@link FT_StreamDesc} view of the {@code pathname} field. */
         public FT_StreamDesc pathname() { return FT_Stream.npathname(address()); }
         /** @return the value of the {@code read} field. */
-        @Nullable
-        public FT_Stream_IoFunc read() { return FT_Stream.nread(address()); }
+        public @Nullable FT_Stream_IoFunc read() { return FT_Stream.nread(address()); }
         /** @return the value of the {@code close} field. */
-        @Nullable
-        public FT_Stream_CloseFunc close$() { return FT_Stream.nclose$(address()); }
+        public @Nullable FT_Stream_CloseFunc close$() { return FT_Stream.nclose$(address()); }
 
         /** Sets the address of the specified {@link ByteBuffer} to the {@code base} field. */
         public FT_Stream.Buffer base(@Nullable @NativeType("unsigned char *") ByteBuffer value) { FT_Stream.nbase(address(), value); return this; }

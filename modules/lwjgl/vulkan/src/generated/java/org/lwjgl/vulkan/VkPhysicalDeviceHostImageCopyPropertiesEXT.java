@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,16 +129,14 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     @NativeType("uint32_t")
     public int copySrcLayoutCount() { return ncopySrcLayoutCount(address()); }
     /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations from images are returned. */
-    @Nullable
     @NativeType("VkImageLayout *")
-    public IntBuffer pCopySrcLayouts() { return npCopySrcLayouts(address()); }
+    public @Nullable IntBuffer pCopySrcLayouts() { return npCopySrcLayouts(address()); }
     /** an integer related to the number of image layouts for host copies to images available or queried, as described below. */
     @NativeType("uint32_t")
     public int copyDstLayoutCount() { return ncopyDstLayoutCount(address()); }
     /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations to images are returned. */
-    @Nullable
     @NativeType("VkImageLayout *")
-    public IntBuffer pCopyDstLayouts() { return npCopyDstLayouts(address()); }
+    public @Nullable IntBuffer pCopyDstLayouts() { return npCopyDstLayouts(address()); }
     /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the implementation’s swizzling layout of images created with {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer optimalTilingLayoutUUID() { return noptimalTilingLayoutUUID(address()); }
@@ -229,8 +227,7 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceHostImageCopyPropertiesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceHostImageCopyPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceHostImageCopyPropertiesEXT(address, null);
     }
 
@@ -273,8 +270,7 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceHostImageCopyPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceHostImageCopyPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -325,11 +321,11 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
     /** Unsafe version of {@link #copySrcLayoutCount}. */
     public static int ncopySrcLayoutCount(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYSRCLAYOUTCOUNT); }
     /** Unsafe version of {@link #pCopySrcLayouts() pCopySrcLayouts}. */
-    @Nullable public static IntBuffer npCopySrcLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYSRCLAYOUTS), ncopySrcLayoutCount(struct)); }
+    public static @Nullable IntBuffer npCopySrcLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYSRCLAYOUTS), ncopySrcLayoutCount(struct)); }
     /** Unsafe version of {@link #copyDstLayoutCount}. */
     public static int ncopyDstLayoutCount(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.COPYDSTLAYOUTCOUNT); }
     /** Unsafe version of {@link #pCopyDstLayouts() pCopyDstLayouts}. */
-    @Nullable public static IntBuffer npCopyDstLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYDSTLAYOUTS), ncopyDstLayoutCount(struct)); }
+    public static @Nullable IntBuffer npCopyDstLayouts(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.PCOPYDSTLAYOUTS), ncopyDstLayoutCount(struct)); }
     /** Unsafe version of {@link #optimalTilingLayoutUUID}. */
     public static ByteBuffer noptimalTilingLayoutUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceHostImageCopyPropertiesEXT.OPTIMALTILINGLAYOUTUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #optimalTilingLayoutUUID(int) optimalTilingLayoutUUID}. */
@@ -416,16 +412,14 @@ public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends Struct<VkPhysica
         @NativeType("uint32_t")
         public int copySrcLayoutCount() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.ncopySrcLayoutCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceHostImageCopyPropertiesEXT#pCopySrcLayouts} field. */
-        @Nullable
         @NativeType("VkImageLayout *")
-        public IntBuffer pCopySrcLayouts() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.npCopySrcLayouts(address()); }
+        public @Nullable IntBuffer pCopySrcLayouts() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.npCopySrcLayouts(address()); }
         /** @return the value of the {@link VkPhysicalDeviceHostImageCopyPropertiesEXT#copyDstLayoutCount} field. */
         @NativeType("uint32_t")
         public int copyDstLayoutCount() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.ncopyDstLayoutCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceHostImageCopyPropertiesEXT#pCopyDstLayouts} field. */
-        @Nullable
         @NativeType("VkImageLayout *")
-        public IntBuffer pCopyDstLayouts() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.npCopyDstLayouts(address()); }
+        public @Nullable IntBuffer pCopyDstLayouts() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.npCopyDstLayouts(address()); }
         /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceHostImageCopyPropertiesEXT#optimalTilingLayoutUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer optimalTilingLayoutUUID() { return VkPhysicalDeviceHostImageCopyPropertiesEXT.noptimalTilingLayoutUUID(address()); }

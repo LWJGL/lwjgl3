@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -98,8 +98,7 @@ public class VREventKeyboard extends Struct<VREventKeyboard> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventKeyboard createSafe(long address) {
+    public static @Nullable VREventKeyboard createSafe(long address) {
         return address == NULL ? null : new VREventKeyboard(address, null);
     }
 
@@ -114,8 +113,7 @@ public class VREventKeyboard extends Struct<VREventKeyboard> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventKeyboard.Buffer createSafe(long address, int capacity) {
+    public static VREventKeyboard.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

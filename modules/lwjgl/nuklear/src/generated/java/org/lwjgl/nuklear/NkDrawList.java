@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -139,17 +139,14 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     @NativeType("struct nk_convert_config")
     public NkConvertConfig config() { return nconfig(address()); }
     /** @return a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
-    @Nullable
     @NativeType("struct nk_buffer *")
-    public NkBuffer buffer() { return nbuffer(address()); }
+    public @Nullable NkBuffer buffer() { return nbuffer(address()); }
     /** @return a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
-    @Nullable
     @NativeType("struct nk_buffer *")
-    public NkBuffer vertices() { return nvertices(address()); }
+    public @Nullable NkBuffer vertices() { return nvertices(address()); }
     /** @return a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
-    @Nullable
     @NativeType("struct nk_buffer *")
-    public NkBuffer elements() { return nelements(address()); }
+    public @Nullable NkBuffer elements() { return nelements(address()); }
     /** @return the value of the {@code element_count} field. */
     @NativeType("unsigned int")
     public int element_count() { return nelement_count(address()); }
@@ -202,8 +199,7 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawList createSafe(long address) {
+    public static @Nullable NkDrawList createSafe(long address) {
         return address == NULL ? null : new NkDrawList(address, null);
     }
 
@@ -246,8 +242,7 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawList.Buffer createSafe(long address, int capacity) {
+    public static NkDrawList.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -321,11 +316,11 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     /** Unsafe version of {@link #config}. */
     public static NkConvertConfig nconfig(long struct) { return NkConvertConfig.create(struct + NkDrawList.CONFIG); }
     /** Unsafe version of {@link #buffer}. */
-    @Nullable public static NkBuffer nbuffer(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.BUFFER)); }
+    public static @Nullable NkBuffer nbuffer(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.BUFFER)); }
     /** Unsafe version of {@link #vertices}. */
-    @Nullable public static NkBuffer nvertices(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.VERTICES)); }
+    public static @Nullable NkBuffer nvertices(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.VERTICES)); }
     /** Unsafe version of {@link #elements}. */
-    @Nullable public static NkBuffer nelements(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.ELEMENTS)); }
+    public static @Nullable NkBuffer nelements(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.ELEMENTS)); }
     /** Unsafe version of {@link #element_count}. */
     public static int nelement_count(long struct) { return memGetInt(struct + NkDrawList.ELEMENT_COUNT); }
     /** Unsafe version of {@link #vertex_count}. */
@@ -401,17 +396,14 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
         @NativeType("struct nk_convert_config")
         public NkConvertConfig config() { return NkDrawList.nconfig(address()); }
         /** @return a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
-        @Nullable
         @NativeType("struct nk_buffer *")
-        public NkBuffer buffer() { return NkDrawList.nbuffer(address()); }
+        public @Nullable NkBuffer buffer() { return NkDrawList.nbuffer(address()); }
         /** @return a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
-        @Nullable
         @NativeType("struct nk_buffer *")
-        public NkBuffer vertices() { return NkDrawList.nvertices(address()); }
+        public @Nullable NkBuffer vertices() { return NkDrawList.nvertices(address()); }
         /** @return a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
-        @Nullable
         @NativeType("struct nk_buffer *")
-        public NkBuffer elements() { return NkDrawList.nelements(address()); }
+        public @Nullable NkBuffer elements() { return NkDrawList.nelements(address()); }
         /** @return the value of the {@code element_count} field. */
         @NativeType("unsigned int")
         public int element_count() { return NkDrawList.nelement_count(address()); }

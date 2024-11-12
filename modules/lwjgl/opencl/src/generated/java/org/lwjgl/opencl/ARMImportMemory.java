@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -74,7 +74,7 @@ public class ARMImportMemory {
 
     /** @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned. */
     @NativeType("cl_mem")
-    public static long clImportMemoryARM(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @Nullable @NativeType("cl_import_properties_arm const *") PointerBuffer properties, @NativeType("void *") ByteBuffer memory, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clImportMemoryARM(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_import_properties_arm const *") @Nullable PointerBuffer properties, @NativeType("void *") ByteBuffer memory, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -84,7 +84,7 @@ public class ARMImportMemory {
 
     /** Array version of: {@link #clImportMemoryARM ImportMemoryARM} */
     @NativeType("cl_mem")
-    public static long clImportMemoryARM(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @Nullable @NativeType("cl_import_properties_arm const *") PointerBuffer properties, @NativeType("void *") ByteBuffer memory, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clImportMemoryARM(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_import_properties_arm const *") @Nullable PointerBuffer properties, @NativeType("void *") ByteBuffer memory, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clImportMemoryARM;
         if (CHECKS) {
             check(__functionAddress);

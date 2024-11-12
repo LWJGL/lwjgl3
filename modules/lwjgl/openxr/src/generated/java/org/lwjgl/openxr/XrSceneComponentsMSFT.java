@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,9 +112,8 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     @NativeType("uint32_t")
     public int componentCountOutput() { return ncomponentCountOutput(address()); }
     /** an array of {@link XrSceneComponentMSFT}. */
-    @Nullable
     @NativeType("XrSceneComponentMSFT *")
-    public XrSceneComponentMSFT.Buffer components() { return ncomponents(address()); }
+    public XrSceneComponentMSFT.@Nullable Buffer components() { return ncomponents(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneComponentsMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -137,7 +136,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     /** Sets the specified value to the {@link #componentCountOutput} field. */
     public XrSceneComponentsMSFT componentCountOutput(@NativeType("uint32_t") int value) { ncomponentCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrSceneComponentMSFT.Buffer} to the {@link #components} field. */
-    public XrSceneComponentsMSFT components(@Nullable @NativeType("XrSceneComponentMSFT *") XrSceneComponentMSFT.Buffer value) { ncomponents(address(), value); return this; }
+    public XrSceneComponentsMSFT components(@NativeType("XrSceneComponentMSFT *") XrSceneComponentMSFT.@Nullable Buffer value) { ncomponents(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSceneComponentsMSFT set(
@@ -145,7 +144,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
         long next,
         int componentCapacityInput,
         int componentCountOutput,
-        @Nullable XrSceneComponentMSFT.Buffer components
+        XrSceneComponentMSFT.@Nullable Buffer components
     ) {
         type(type);
         next(next);
@@ -192,8 +191,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneComponentsMSFT createSafe(long address) {
+    public static @Nullable XrSceneComponentsMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneComponentsMSFT(address, null);
     }
 
@@ -236,8 +234,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneComponentsMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneComponentsMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -290,7 +287,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     /** Unsafe version of {@link #componentCountOutput}. */
     public static int ncomponentCountOutput(long struct) { return memGetInt(struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT); }
     /** Unsafe version of {@link #components}. */
-    @Nullable public static XrSceneComponentMSFT.Buffer ncomponents(long struct) { return XrSceneComponentMSFT.createSafe(memGetAddress(struct + XrSceneComponentsMSFT.COMPONENTS), ncomponentCapacityInput(struct)); }
+    public static XrSceneComponentMSFT.@Nullable Buffer ncomponents(long struct) { return XrSceneComponentMSFT.createSafe(memGetAddress(struct + XrSceneComponentsMSFT.COMPONENTS), ncomponentCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneComponentsMSFT.TYPE, value); }
@@ -301,7 +298,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
     /** Unsafe version of {@link #componentCountOutput(int) componentCountOutput}. */
     public static void ncomponentCountOutput(long struct, int value) { memPutInt(struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #components(XrSceneComponentMSFT.Buffer) components}. */
-    public static void ncomponents(long struct, @Nullable XrSceneComponentMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentsMSFT.COMPONENTS, memAddressSafe(value)); if (value != null) { ncomponentCapacityInput(struct, value.remaining()); } }
+    public static void ncomponents(long struct, XrSceneComponentMSFT.@Nullable Buffer value) { memPutAddress(struct + XrSceneComponentsMSFT.COMPONENTS, memAddressSafe(value)); if (value != null) { ncomponentCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -359,9 +356,8 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
         @NativeType("uint32_t")
         public int componentCountOutput() { return XrSceneComponentsMSFT.ncomponentCountOutput(address()); }
         /** @return a {@link XrSceneComponentMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneComponentsMSFT#components} field. */
-        @Nullable
         @NativeType("XrSceneComponentMSFT *")
-        public XrSceneComponentMSFT.Buffer components() { return XrSceneComponentsMSFT.ncomponents(address()); }
+        public XrSceneComponentMSFT.@Nullable Buffer components() { return XrSceneComponentsMSFT.ncomponents(address()); }
 
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#type} field. */
         public XrSceneComponentsMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneComponentsMSFT.ntype(address(), value); return this; }
@@ -384,7 +380,7 @@ public class XrSceneComponentsMSFT extends Struct<XrSceneComponentsMSFT> impleme
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#componentCountOutput} field. */
         public XrSceneComponentsMSFT.Buffer componentCountOutput(@NativeType("uint32_t") int value) { XrSceneComponentsMSFT.ncomponentCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrSceneComponentMSFT.Buffer} to the {@link XrSceneComponentsMSFT#components} field. */
-        public XrSceneComponentsMSFT.Buffer components(@Nullable @NativeType("XrSceneComponentMSFT *") XrSceneComponentMSFT.Buffer value) { XrSceneComponentsMSFT.ncomponents(address(), value); return this; }
+        public XrSceneComponentsMSFT.Buffer components(@NativeType("XrSceneComponentMSFT *") XrSceneComponentMSFT.@Nullable Buffer value) { XrSceneComponentsMSFT.ncomponents(address(), value); return this; }
 
     }
 

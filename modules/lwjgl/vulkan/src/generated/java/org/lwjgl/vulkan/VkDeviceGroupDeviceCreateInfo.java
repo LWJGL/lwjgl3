@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,9 +114,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
     @NativeType("uint32_t")
     public int physicalDeviceCount() { return nphysicalDeviceCount(address()); }
     /** a pointer to an array of physical device handles belonging to the same device group. */
-    @Nullable
     @NativeType("VkPhysicalDevice const *")
-    public PointerBuffer pPhysicalDevices() { return npPhysicalDevices(address()); }
+    public @Nullable PointerBuffer pPhysicalDevices() { return npPhysicalDevices(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupDeviceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -176,8 +175,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupDeviceCreateInfo createSafe(long address) {
+    public static @Nullable VkDeviceGroupDeviceCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkDeviceGroupDeviceCreateInfo(address, null);
     }
 
@@ -220,8 +218,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceGroupDeviceCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceGroupDeviceCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -291,7 +288,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
     /** Unsafe version of {@link #physicalDeviceCount}. */
     public static int nphysicalDeviceCount(long struct) { return memGetInt(struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT); }
     /** Unsafe version of {@link #pPhysicalDevices() pPhysicalDevices}. */
-    @Nullable public static PointerBuffer npPhysicalDevices(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES), nphysicalDeviceCount(struct)); }
+    public static @Nullable PointerBuffer npPhysicalDevices(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES), nphysicalDeviceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupDeviceCreateInfo.STYPE, value); }
@@ -366,9 +363,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct<VkDeviceGroupDeviceCre
         @NativeType("uint32_t")
         public int physicalDeviceCount() { return VkDeviceGroupDeviceCreateInfo.nphysicalDeviceCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceGroupDeviceCreateInfo#pPhysicalDevices} field. */
-        @Nullable
         @NativeType("VkPhysicalDevice const *")
-        public PointerBuffer pPhysicalDevices() { return VkDeviceGroupDeviceCreateInfo.npPhysicalDevices(address()); }
+        public @Nullable PointerBuffer pPhysicalDevices() { return VkDeviceGroupDeviceCreateInfo.npPhysicalDevices(address()); }
 
         /** Sets the specified value to the {@link VkDeviceGroupDeviceCreateInfo#sType} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupDeviceCreateInfo.nsType(address(), value); return this; }

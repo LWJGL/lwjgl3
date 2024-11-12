@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -90,8 +90,7 @@ public class XTimeCoord extends Struct<XTimeCoord> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XTimeCoord createSafe(long address) {
+    public static @Nullable XTimeCoord createSafe(long address) {
         return address == NULL ? null : new XTimeCoord(address, null);
     }
 
@@ -106,8 +105,7 @@ public class XTimeCoord extends Struct<XTimeCoord> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XTimeCoord.Buffer createSafe(long address, int capacity) {
+    public static XTimeCoord.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

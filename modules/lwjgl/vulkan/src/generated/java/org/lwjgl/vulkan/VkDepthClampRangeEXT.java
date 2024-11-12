@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDepthClampRangeEXT createSafe(long address) {
+    public static @Nullable VkDepthClampRangeEXT createSafe(long address) {
         return address == NULL ? null : new VkDepthClampRangeEXT(address, null);
     }
 
@@ -187,8 +186,7 @@ public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDepthClampRangeEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDepthClampRangeEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

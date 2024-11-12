@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -140,8 +140,7 @@ public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerHeader createSafe(long address) {
+    public static @Nullable OVRLayerHeader createSafe(long address) {
         return address == NULL ? null : new OVRLayerHeader(address, null);
     }
 
@@ -184,8 +183,7 @@ public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerHeader.Buffer createSafe(long address, int capacity) {
+    public static OVRLayerHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

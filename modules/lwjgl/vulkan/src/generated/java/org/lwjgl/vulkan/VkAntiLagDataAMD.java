@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -115,9 +115,8 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     @NativeType("uint32_t")
     public int maxFPS() { return nmaxFPS(address()); }
     /** a pointer to a {@link VkAntiLagPresentationInfoAMD} structure containing information about the application stage. */
-    @Nullable
     @NativeType("VkAntiLagPresentationInfoAMD const *")
-    public VkAntiLagPresentationInfoAMD pPresentationInfo() { return npPresentationInfo(address()); }
+    public @Nullable VkAntiLagPresentationInfoAMD pPresentationInfo() { return npPresentationInfo(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAntiLagDataAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -185,8 +184,7 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAntiLagDataAMD createSafe(long address) {
+    public static @Nullable VkAntiLagDataAMD createSafe(long address) {
         return address == NULL ? null : new VkAntiLagDataAMD(address, null);
     }
 
@@ -229,8 +227,7 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAntiLagDataAMD.Buffer createSafe(long address, int capacity) {
+    public static VkAntiLagDataAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -283,7 +280,7 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     /** Unsafe version of {@link #maxFPS}. */
     public static int nmaxFPS(long struct) { return memGetInt(struct + VkAntiLagDataAMD.MAXFPS); }
     /** Unsafe version of {@link #pPresentationInfo}. */
-    @Nullable public static VkAntiLagPresentationInfoAMD npPresentationInfo(long struct) { return VkAntiLagPresentationInfoAMD.createSafe(memGetAddress(struct + VkAntiLagDataAMD.PPRESENTATIONINFO)); }
+    public static @Nullable VkAntiLagPresentationInfoAMD npPresentationInfo(long struct) { return VkAntiLagPresentationInfoAMD.createSafe(memGetAddress(struct + VkAntiLagDataAMD.PPRESENTATIONINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkAntiLagDataAMD.STYPE, value); }
@@ -352,9 +349,8 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
         @NativeType("uint32_t")
         public int maxFPS() { return VkAntiLagDataAMD.nmaxFPS(address()); }
         /** @return a {@link VkAntiLagPresentationInfoAMD} view of the struct pointed to by the {@link VkAntiLagDataAMD#pPresentationInfo} field. */
-        @Nullable
         @NativeType("VkAntiLagPresentationInfoAMD const *")
-        public VkAntiLagPresentationInfoAMD pPresentationInfo() { return VkAntiLagDataAMD.npPresentationInfo(address()); }
+        public @Nullable VkAntiLagPresentationInfoAMD pPresentationInfo() { return VkAntiLagDataAMD.npPresentationInfo(address()); }
 
         /** Sets the specified value to the {@link VkAntiLagDataAMD#sType} field. */
         public VkAntiLagDataAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkAntiLagDataAMD.nsType(address(), value); return this; }

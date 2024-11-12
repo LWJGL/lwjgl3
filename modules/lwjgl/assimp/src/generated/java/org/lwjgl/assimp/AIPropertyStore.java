@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,8 +114,7 @@ public class AIPropertyStore extends Struct<AIPropertyStore> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIPropertyStore createSafe(long address) {
+    public static @Nullable AIPropertyStore createSafe(long address) {
         return address == NULL ? null : new AIPropertyStore(address, null);
     }
 
@@ -158,8 +157,7 @@ public class AIPropertyStore extends Struct<AIPropertyStore> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIPropertyStore.Buffer createSafe(long address, int capacity) {
+    public static AIPropertyStore.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

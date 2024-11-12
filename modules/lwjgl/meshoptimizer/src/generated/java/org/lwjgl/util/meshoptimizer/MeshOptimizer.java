@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meshoptimizer;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -387,7 +387,7 @@ public class MeshOptimizer {
      * @param indices     can be {@code NULL} if the input is unindexed
      */
     @NativeType("size_t")
-    public static long meshopt_generateVertexRemap(@NativeType("unsigned int *") IntBuffer destination, @Nullable @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+    public static long meshopt_generateVertexRemap(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") @Nullable IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
         if (CHECKS) {
             check(destination, vertex_count);
             checkSafe(indices, index_count);
@@ -417,7 +417,7 @@ public class MeshOptimizer {
      * @param indices     can be {@code NULL} if the input is unindexed
      */
     @NativeType("size_t")
-    public static long meshopt_generateVertexRemapMulti(@NativeType("unsigned int *") IntBuffer destination, @Nullable @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("struct meshopt_Stream const *") MeshoptStream.Buffer streams) {
+    public static long meshopt_generateVertexRemapMulti(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") @Nullable IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("struct meshopt_Stream const *") MeshoptStream.Buffer streams) {
         if (CHECKS) {
             check(destination, vertex_count);
             Struct.validate(streams.address(), streams.remaining(), MeshoptStream.SIZEOF, MeshoptStream::validate);
@@ -455,7 +455,7 @@ public class MeshOptimizer {
      * @param destination must contain enough space for the resulting index buffer ({@code index_count} elements)
      * @param indices     can be {@code NULL} if the input is unindexed
      */
-    public static void meshopt_remapIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @Nullable @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("unsigned int const *") IntBuffer remap) {
+    public static void meshopt_remapIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") @Nullable IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("unsigned int const *") IntBuffer remap) {
         if (CHECKS) {
             check(destination, index_count);
             checkSafe(indices, index_count);
@@ -1063,7 +1063,7 @@ public class MeshOptimizer {
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")
-    public static long meshopt_simplify(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
+    public static long meshopt_simplify(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @NativeType("float *") @Nullable FloatBuffer result_error) {
         if (CHECKS) {
             check(destination, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
@@ -1099,7 +1099,7 @@ public class MeshOptimizer {
      * @param result_error      can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")
-    public static long meshopt_simplifyWithAttributes(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @Nullable @NativeType("unsigned char const *") ByteBuffer vertex_lock, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
+    public static long meshopt_simplifyWithAttributes(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @NativeType("unsigned char const *") @Nullable ByteBuffer vertex_lock, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @NativeType("float *") @Nullable FloatBuffer result_error) {
         if (CHECKS) {
             check(destination, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
@@ -1128,7 +1128,7 @@ public class MeshOptimizer {
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")
-    public static long meshopt_simplifySloppy(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @Nullable @NativeType("float *") FloatBuffer result_error) {
+    public static long meshopt_simplifySloppy(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @NativeType("float *") @Nullable FloatBuffer result_error) {
         if (CHECKS) {
             check(destination, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
@@ -1154,7 +1154,7 @@ public class MeshOptimizer {
      * @param vertex_colors    can be {@code NULL}; when it's not {@code NULL}, it should have {@code float3} color in the first 12 bytes of each vertex
      */
     @NativeType("size_t")
-    public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @Nullable @NativeType("float const *") FloatBuffer vertex_colors, @NativeType("size_t") long vertex_colors_stride, float color_weight, @NativeType("size_t") long target_vertex_count) {
+    public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") @Nullable FloatBuffer vertex_colors, @NativeType("size_t") long vertex_colors_stride, float color_weight, @NativeType("size_t") long target_vertex_count) {
         if (CHECKS) {
             check(destination, target_vertex_count);
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));

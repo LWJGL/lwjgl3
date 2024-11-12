@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,8 +220,7 @@ public class VkViewport extends Struct<VkViewport> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkViewport createSafe(long address) {
+    public static @Nullable VkViewport createSafe(long address) {
         return address == NULL ? null : new VkViewport(address, null);
     }
 
@@ -264,8 +263,7 @@ public class VkViewport extends Struct<VkViewport> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkViewport.Buffer createSafe(long address, int capacity) {
+    public static VkViewport.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

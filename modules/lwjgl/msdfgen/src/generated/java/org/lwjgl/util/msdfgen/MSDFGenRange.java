@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.msdfgen;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,8 +130,7 @@ public class MSDFGenRange extends Struct<MSDFGenRange> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenRange createSafe(long address) {
+    public static @Nullable MSDFGenRange createSafe(long address) {
         return address == NULL ? null : new MSDFGenRange(address, null);
     }
 
@@ -174,8 +173,7 @@ public class MSDFGenRange extends Struct<MSDFGenRange> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenRange.Buffer createSafe(long address, int capacity) {
+    public static MSDFGenRange.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

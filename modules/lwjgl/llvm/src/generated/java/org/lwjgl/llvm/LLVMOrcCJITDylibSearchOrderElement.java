@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct<LLVMOrcCJITDylibS
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCJITDylibSearchOrderElement createSafe(long address) {
+    public static @Nullable LLVMOrcCJITDylibSearchOrderElement createSafe(long address) {
         return address == NULL ? null : new LLVMOrcCJITDylibSearchOrderElement(address, null);
     }
 
@@ -178,8 +177,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct<LLVMOrcCJITDylibS
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCJITDylibSearchOrderElement.Buffer createSafe(long address, int capacity) {
+    public static LLVMOrcCJITDylibSearchOrderElement.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

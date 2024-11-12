@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,16 +113,14 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     @NativeType("uint32_t")
     public int attachmentInitialSampleLocationsCount() { return nattachmentInitialSampleLocationsCount(address()); }
     /** a pointer to an array of {@code attachmentInitialSampleLocationsCount} {@link VkAttachmentSampleLocationsEXT} structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it. */
-    @Nullable
     @NativeType("VkAttachmentSampleLocationsEXT const *")
-    public VkAttachmentSampleLocationsEXT.Buffer pAttachmentInitialSampleLocations() { return npAttachmentInitialSampleLocations(address()); }
+    public VkAttachmentSampleLocationsEXT.@Nullable Buffer pAttachmentInitialSampleLocations() { return npAttachmentInitialSampleLocations(address()); }
     /** the number of elements in the {@code pPostSubpassSampleLocations} array. */
     @NativeType("uint32_t")
     public int postSubpassSampleLocationsCount() { return npostSubpassSampleLocationsCount(address()); }
     /** a pointer to an array of {@code postSubpassSampleLocationsCount} {@link VkSubpassSampleLocationsEXT} structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::variableSampleLocations} is {@link VK10#VK_FALSE FALSE}, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is {@link VK10#VK_TRUE TRUE}, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}. */
-    @Nullable
     @NativeType("VkSubpassSampleLocationsEXT const *")
-    public VkSubpassSampleLocationsEXT.Buffer pPostSubpassSampleLocations() { return npPostSubpassSampleLocations(address()); }
+    public VkSubpassSampleLocationsEXT.@Nullable Buffer pPostSubpassSampleLocations() { return npPostSubpassSampleLocations(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -131,16 +129,16 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link #pAttachmentInitialSampleLocations} field. */
-    public VkRenderPassSampleLocationsBeginInfoEXT pAttachmentInitialSampleLocations(@Nullable @NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.Buffer value) { npAttachmentInitialSampleLocations(address(), value); return this; }
+    public VkRenderPassSampleLocationsBeginInfoEXT pAttachmentInitialSampleLocations(@NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.@Nullable Buffer value) { npAttachmentInitialSampleLocations(address(), value); return this; }
     /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@link #pPostSubpassSampleLocations} field. */
-    public VkRenderPassSampleLocationsBeginInfoEXT pPostSubpassSampleLocations(@Nullable @NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.Buffer value) { npPostSubpassSampleLocations(address(), value); return this; }
+    public VkRenderPassSampleLocationsBeginInfoEXT pPostSubpassSampleLocations(@NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.@Nullable Buffer value) { npPostSubpassSampleLocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkRenderPassSampleLocationsBeginInfoEXT set(
         int sType,
         long pNext,
-        @Nullable VkAttachmentSampleLocationsEXT.Buffer pAttachmentInitialSampleLocations,
-        @Nullable VkSubpassSampleLocationsEXT.Buffer pPostSubpassSampleLocations
+        VkAttachmentSampleLocationsEXT.@Nullable Buffer pAttachmentInitialSampleLocations,
+        VkSubpassSampleLocationsEXT.@Nullable Buffer pPostSubpassSampleLocations
     ) {
         sType(sType);
         pNext(pNext);
@@ -186,8 +184,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassSampleLocationsBeginInfoEXT createSafe(long address) {
+    public static @Nullable VkRenderPassSampleLocationsBeginInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkRenderPassSampleLocationsBeginInfoEXT(address, null);
     }
 
@@ -230,8 +227,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassSampleLocationsBeginInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassSampleLocationsBeginInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -301,11 +297,11 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     /** Unsafe version of {@link #attachmentInitialSampleLocationsCount}. */
     public static int nattachmentInitialSampleLocationsCount(long struct) { return memGetInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pAttachmentInitialSampleLocations}. */
-    @Nullable public static VkAttachmentSampleLocationsEXT.Buffer npAttachmentInitialSampleLocations(long struct) { return VkAttachmentSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS), nattachmentInitialSampleLocationsCount(struct)); }
+    public static VkAttachmentSampleLocationsEXT.@Nullable Buffer npAttachmentInitialSampleLocations(long struct) { return VkAttachmentSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS), nattachmentInitialSampleLocationsCount(struct)); }
     /** Unsafe version of {@link #postSubpassSampleLocationsCount}. */
     public static int npostSubpassSampleLocationsCount(long struct) { return memGetInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pPostSubpassSampleLocations}. */
-    @Nullable public static VkSubpassSampleLocationsEXT.Buffer npPostSubpassSampleLocations(long struct) { return VkSubpassSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS), npostSubpassSampleLocationsCount(struct)); }
+    public static VkSubpassSampleLocationsEXT.@Nullable Buffer npPostSubpassSampleLocations(long struct) { return VkSubpassSampleLocationsEXT.createSafe(memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS), npostSubpassSampleLocationsCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.STYPE, value); }
@@ -314,11 +310,11 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
     /** Sets the specified value to the {@code attachmentInitialSampleLocationsCount} field of the specified {@code struct}. */
     public static void nattachmentInitialSampleLocationsCount(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.ATTACHMENTINITIALSAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pAttachmentInitialSampleLocations(VkAttachmentSampleLocationsEXT.Buffer) pAttachmentInitialSampleLocations}. */
-    public static void npAttachmentInitialSampleLocations(long struct, @Nullable VkAttachmentSampleLocationsEXT.Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS, memAddressSafe(value)); nattachmentInitialSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npAttachmentInitialSampleLocations(long struct, VkAttachmentSampleLocationsEXT.@Nullable Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS, memAddressSafe(value)); nattachmentInitialSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code postSubpassSampleLocationsCount} field of the specified {@code struct}. */
     public static void npostSubpassSampleLocationsCount(long struct, int value) { memPutInt(struct + VkRenderPassSampleLocationsBeginInfoEXT.POSTSUBPASSSAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pPostSubpassSampleLocations(VkSubpassSampleLocationsEXT.Buffer) pPostSubpassSampleLocations}. */
-    public static void npPostSubpassSampleLocations(long struct, @Nullable VkSubpassSampleLocationsEXT.Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS, memAddressSafe(value)); npostSubpassSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npPostSubpassSampleLocations(long struct, VkSubpassSampleLocationsEXT.@Nullable Buffer value) { memPutAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS, memAddressSafe(value)); npostSubpassSampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -393,16 +389,14 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
         @NativeType("uint32_t")
         public int attachmentInitialSampleLocationsCount() { return VkRenderPassSampleLocationsBeginInfoEXT.nattachmentInitialSampleLocationsCount(address()); }
         /** @return a {@link VkAttachmentSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@link VkRenderPassSampleLocationsBeginInfoEXT#pAttachmentInitialSampleLocations} field. */
-        @Nullable
         @NativeType("VkAttachmentSampleLocationsEXT const *")
-        public VkAttachmentSampleLocationsEXT.Buffer pAttachmentInitialSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address()); }
+        public VkAttachmentSampleLocationsEXT.@Nullable Buffer pAttachmentInitialSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address()); }
         /** @return the value of the {@link VkRenderPassSampleLocationsBeginInfoEXT#postSubpassSampleLocationsCount} field. */
         @NativeType("uint32_t")
         public int postSubpassSampleLocationsCount() { return VkRenderPassSampleLocationsBeginInfoEXT.npostSubpassSampleLocationsCount(address()); }
         /** @return a {@link VkSubpassSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@link VkRenderPassSampleLocationsBeginInfoEXT#pPostSubpassSampleLocations} field. */
-        @Nullable
         @NativeType("VkSubpassSampleLocationsEXT const *")
-        public VkSubpassSampleLocationsEXT.Buffer pPostSubpassSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address()); }
+        public VkSubpassSampleLocationsEXT.@Nullable Buffer pPostSubpassSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address()); }
 
         /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#sType} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassSampleLocationsBeginInfoEXT.nsType(address(), value); return this; }
@@ -411,9 +405,9 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPass
         /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pNext} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassSampleLocationsBeginInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pAttachmentInitialSampleLocations} field. */
-        public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pAttachmentInitialSampleLocations(@Nullable @NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address(), value); return this; }
+        public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pAttachmentInitialSampleLocations(@NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.@Nullable Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address(), value); return this; }
         /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pPostSubpassSampleLocations} field. */
-        public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pPostSubpassSampleLocations(@Nullable @NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address(), value); return this; }
+        public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pPostSubpassSampleLocations(@NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.@Nullable Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address(), value); return this; }
 
     }
 

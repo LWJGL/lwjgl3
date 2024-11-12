@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1126,7 +1126,7 @@ public class User32 {
      * @param lpwcx         a {@link WNDCLASSEX} structure. You must fill the structure with the appropriate class attributes before passing it to the function.
      */
     @NativeType("ATOM")
-    public static short RegisterClassEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("WNDCLASSEX const *") WNDCLASSEX lpwcx) {
+    public static short RegisterClassEx(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("WNDCLASSEX const *") WNDCLASSEX lpwcx) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1155,7 +1155,7 @@ public class User32 {
      * @param hInstance     a handle to the instance of the module that created the class
      */
     @NativeType("BOOL")
-    public static boolean UnregisterClass(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") ByteBuffer lpClassName, @NativeType("HINSTANCE") long hInstance) {
+    public static boolean UnregisterClass(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") ByteBuffer lpClassName, @NativeType("HINSTANCE") long hInstance) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2(lpClassName);
@@ -1174,7 +1174,7 @@ public class User32 {
      * @param hInstance     a handle to the instance of the module that created the class
      */
     @NativeType("BOOL")
-    public static boolean UnregisterClass(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") CharSequence lpClassName, @NativeType("HINSTANCE") long hInstance) {
+    public static boolean UnregisterClass(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") CharSequence lpClassName, @NativeType("HINSTANCE") long hInstance) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1218,7 +1218,7 @@ public class User32 {
      *                      of the {@link #WM_CREATE} message.
      */
     @NativeType("HWND")
-    public static long CreateWindowEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") ByteBuffer lpClassName, @Nullable @NativeType("LPCTSTR") ByteBuffer lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
+    public static long CreateWindowEx(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @NativeType("LPCTSTR") @Nullable ByteBuffer lpClassName, @NativeType("LPCTSTR") @Nullable ByteBuffer lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2Safe(lpClassName);
@@ -1246,7 +1246,7 @@ public class User32 {
      *                      of the {@link #WM_CREATE} message.
      */
     @NativeType("HWND")
-    public static long CreateWindowEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") CharSequence lpClassName, @Nullable @NativeType("LPCTSTR") CharSequence lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
+    public static long CreateWindowEx(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("DWORD") int dwExStyle, @NativeType("LPCTSTR") @Nullable CharSequence lpClassName, @NativeType("LPCTSTR") @Nullable CharSequence lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1288,7 +1288,7 @@ public class User32 {
      * @param hWnd          a handle to the window to be destroyed
      */
     @NativeType("BOOL")
-    public static boolean DestroyWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
+    public static boolean DestroyWindow(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1408,7 +1408,7 @@ public class User32 {
      * @param uFlags          the window sizing and positioning flags. One or more of:<br><table><tr><td>{@link #SWP_NOSIZE}</td><td>{@link #SWP_NOMOVE}</td><td>{@link #SWP_NOZORDER}</td><td>{@link #SWP_NOREDRAW}</td><td>{@link #SWP_NOACTIVATE}</td></tr><tr><td>{@link #SWP_FRAMECHANGED}</td><td>{@link #SWP_SHOWWINDOW}</td><td>{@link #SWP_HIDEWINDOW}</td><td>{@link #SWP_NOCOPYBITS}</td><td>{@link #SWP_NOOWNERZORDER}</td></tr><tr><td>{@link #SWP_NOSENDCHANGING}</td><td>{@link #SWP_DRAWFRAME}</td><td>{@link #SWP_NOREPOSITION}</td><td>{@link #SWP_DEFERERASE}</td><td>{@link #SWP_ASYNCWINDOWPOS}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean SetWindowPos(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("HWND") long hWndInsertAfter, int X, int Y, int cx, int cy, @NativeType("UINT") int uFlags) {
+    public static boolean SetWindowPos(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("HWND") long hWndInsertAfter, int X, int Y, int cx, int cy, @NativeType("UINT") int uFlags) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1438,7 +1438,7 @@ public class User32 {
      * @param lpString      the new title or control text
      */
     @NativeType("BOOL")
-    public static boolean SetWindowText(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") ByteBuffer lpString) {
+    public static boolean SetWindowText(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") ByteBuffer lpString) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2(lpString);
@@ -1455,7 +1455,7 @@ public class User32 {
      * @param lpString      the new title or control text
      */
     @NativeType("BOOL")
-    public static boolean SetWindowText(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") CharSequence lpString) {
+    public static boolean SetWindowText(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPCTSTR") CharSequence lpString) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1498,7 +1498,7 @@ public class User32 {
      * @param wMsgFilterMax the integer value of the highest message value to be retrieved
      */
     @NativeType("BOOL")
-    public static boolean GetMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPMSG") MSG lpMsg, @NativeType("HWND") long hWnd, @NativeType("UINT") int wMsgFilterMin, @NativeType("UINT") int wMsgFilterMax) {
+    public static boolean GetMessage(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPMSG") MSG lpMsg, @NativeType("HWND") long hWnd, @NativeType("UINT") int wMsgFilterMin, @NativeType("UINT") int wMsgFilterMax) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1572,7 +1572,7 @@ public class User32 {
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      */
     @NativeType("BOOL")
-    public static boolean WaitMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError) {
+    public static boolean WaitMessage(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1625,7 +1625,7 @@ public class User32 {
      * @param lParam        additional message-specific information
      */
     @NativeType("BOOL")
-    public static boolean PostMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
+    public static boolean PostMessage(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1662,7 +1662,7 @@ public class User32 {
      * @param lParam        additional message-specific information
      */
     @NativeType("BOOL")
-    public static boolean SendMessage(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
+    public static boolean SendMessage(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1693,7 +1693,7 @@ public class User32 {
      * @param dwExStyle     the extended window style of the window whose required size is to be calculated
      */
     @NativeType("BOOL")
-    public static boolean AdjustWindowRectEx(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPRECT") RECT lpRect, @NativeType("DWORD") int dwStyle, @NativeType("BOOL") boolean bMenu, @NativeType("DWORD") int dwExStyle) {
+    public static boolean AdjustWindowRectEx(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPRECT") RECT lpRect, @NativeType("DWORD") int dwStyle, @NativeType("BOOL") boolean bMenu, @NativeType("DWORD") int dwExStyle) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1723,7 +1723,7 @@ public class User32 {
      * @param lpRect        a pointer to a {@link RECT} structure that receives the screen coordinates of the upper-left and lower-right corners of the window
      */
     @NativeType("BOOL")
-    public static boolean GetWindowRect(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPRECT") RECT lpRect) {
+    public static boolean GetWindowRect(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("LPRECT") RECT lpRect) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1759,7 +1759,7 @@ public class User32 {
      *                      window uncovered as a result of moving a child window.
      */
     @NativeType("BOOL")
-    public static boolean MoveWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int X, int Y, int nWidth, int nHeight, @NativeType("BOOL") boolean bRepaint) {
+    public static boolean MoveWindow(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int X, int Y, int nWidth, int nHeight, @NativeType("BOOL") boolean bRepaint) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1791,7 +1791,7 @@ public class User32 {
      *                      {@code lpwndpl->length} is not set correctly.</p>
      */
     @NativeType("BOOL")
-    public static boolean GetWindowPlacement(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT *") WINDOWPLACEMENT lpwndpl) {
+    public static boolean GetWindowPlacement(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT *") WINDOWPLACEMENT lpwndpl) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1823,7 +1823,7 @@ public class User32 {
      *                      {@code SetWindowPlacement} fails if the length member is not set correctly.</p>
      */
     @NativeType("BOOL")
-    public static boolean SetWindowPlacement(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT const *") WINDOWPLACEMENT lpwndpl) {
+    public static boolean SetWindowPlacement(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("WINDOWPLACEMENT const *") WINDOWPLACEMENT lpwndpl) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1921,7 +1921,7 @@ public class User32 {
      * @return the previous value at the given {@code index}
      */
     @NativeType("LONG_PTR")
-    public static long SetWindowLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
+    public static long SetWindowLongPtr(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1951,7 +1951,7 @@ public class User32 {
      *                      of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
      */
     @NativeType("LONG_PTR")
-    public static long GetWindowLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
+    public static long GetWindowLongPtr(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -1988,7 +1988,7 @@ public class User32 {
      *         <p>If the function fails, the return value is zero. To get extended error information, call {@link WinBase#GetLastError}.</p>
      */
     @NativeType("LONG_PTR")
-    public static long SetClassLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
+    public static long SetClassLongPtr(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2020,7 +2020,7 @@ public class User32 {
      *                      structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
      */
     @NativeType("LONG_PTR")
-    public static long GetClassLongPtr(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
+    public static long GetClassLongPtr(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, int nIndex) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2052,7 +2052,7 @@ public class User32 {
      * @param dwFlags       an action to be taken. One or more of:<br><table><tr><td>{@link #LWA_COLORKEY}</td><td>{@link #LWA_ALPHA}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean SetLayeredWindowAttributes(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hwnd, @NativeType("COLORREF") int crKey, @NativeType("BYTE") byte bAlpha, @NativeType("DWORD") int dwFlags) {
+    public static boolean SetLayeredWindowAttributes(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hwnd, @NativeType("COLORREF") int crKey, @NativeType("BYTE") byte bAlpha, @NativeType("DWORD") int dwFlags) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2079,7 +2079,7 @@ public class User32 {
      * @param iconName      the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
      */
     @NativeType("HICON")
-    public static long LoadIcon(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer iconName) {
+    public static long LoadIcon(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer iconName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2(iconName);
@@ -2096,7 +2096,7 @@ public class User32 {
      * @param iconName      the name of the icon resource to be loaded or one of:<br><table><tr><td>{@link #IDI_APPLICATION}</td><td>{@link #IDI_HAND}</td><td>{@link #IDI_QUESTION}</td><td>{@link #IDI_EXCLAMATION}</td><td>{@link #IDI_ASTERISK}</td><td>{@link #IDI_WINLOGO}</td></tr><tr><td>{@link #IDI_SHIELD}</td><td>{@link #IDI_WARNING}</td><td>{@link #IDI_ERROR}</td><td>{@link #IDI_INFORMATION}</td></tr></table>
      */
     @NativeType("HICON")
-    public static long LoadIcon(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence iconName) {
+    public static long LoadIcon(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence iconName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2129,7 +2129,7 @@ public class User32 {
      * @param cursorName    the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
      */
     @NativeType("HCURSOR")
-    public static long LoadCursor(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer cursorName) {
+    public static long LoadCursor(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") ByteBuffer cursorName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2(cursorName);
@@ -2145,7 +2145,7 @@ public class User32 {
      * @param cursorName    the name of the cursor resource to be loaded or one of:<br><table><tr><td>{@link #IDC_ARROW}</td><td>{@link #IDC_IBEAM}</td><td>{@link #IDC_WAIT}</td><td>{@link #IDC_CROSS}</td><td>{@link #IDC_UPARROW}</td><td>{@link #IDC_SIZE}</td><td>{@link #IDC_ICON}</td><td>{@link #IDC_SIZENWSE}</td></tr><tr><td>{@link #IDC_SIZENESW}</td><td>{@link #IDC_SIZEWE}</td><td>{@link #IDC_SIZENS}</td><td>{@link #IDC_SIZEALL}</td><td>{@link #IDC_NO}</td><td>{@link #IDC_HAND}</td><td>{@link #IDC_APPSTARTING}</td><td>{@link #IDC_HELP}</td></tr></table>
      */
     @NativeType("HCURSOR")
-    public static long LoadCursor(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence cursorName) {
+    public static long LoadCursor(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence cursorName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2235,7 +2235,7 @@ public class User32 {
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean RegisterTouchWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("ULONG") int ulFlags) {
+    public static boolean RegisterTouchWindow(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd, @NativeType("ULONG") int ulFlags) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2266,7 +2266,7 @@ public class User32 {
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean UnregisterTouchWindow(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
+    public static boolean UnregisterTouchWindow(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HWND") long hWnd) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2295,7 +2295,7 @@ public class User32 {
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean IsTouchWindow(@NativeType("HWND") long hWnd, @Nullable @NativeType("PULONG") IntBuffer pulFlags) {
+    public static boolean IsTouchWindow(@NativeType("HWND") long hWnd, @NativeType("PULONG") @Nullable IntBuffer pulFlags) {
         if (CHECKS) {
             checkSafe(pulFlags, 1);
         }
@@ -2343,7 +2343,7 @@ public class User32 {
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean GetTouchInputInfo(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput, @NativeType("PTOUCHINPUT") TOUCHINPUT.Buffer pInputs, int cbSize) {
+    public static boolean GetTouchInputInfo(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput, @NativeType("PTOUCHINPUT") TOUCHINPUT.Buffer pInputs, int cbSize) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2376,7 +2376,7 @@ public class User32 {
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
-    public static boolean CloseTouchInputHandle(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput) {
+    public static boolean CloseTouchInputHandle(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HTOUCHINPUT") long hTouchInput) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -2451,7 +2451,7 @@ public class User32 {
      *                        and SetupAPI monitor devices.
      */
     @NativeType("BOOL")
-    public static boolean EnumDisplayDevices(@Nullable @NativeType("LPCTSTR") ByteBuffer lpDevice, @NativeType("DWORD") int iDevNum, @NativeType("PDISPLAY_DEVICE") DISPLAY_DEVICE lpDisplayDevice, @NativeType("DWORD") int dwFlags) {
+    public static boolean EnumDisplayDevices(@NativeType("LPCTSTR") @Nullable ByteBuffer lpDevice, @NativeType("DWORD") int iDevNum, @NativeType("PDISPLAY_DEVICE") DISPLAY_DEVICE lpDisplayDevice, @NativeType("DWORD") int dwFlags) {
         if (CHECKS) {
             checkNT2Safe(lpDevice);
         }
@@ -2476,7 +2476,7 @@ public class User32 {
      *                        and SetupAPI monitor devices.
      */
     @NativeType("BOOL")
-    public static boolean EnumDisplayDevices(@Nullable @NativeType("LPCTSTR") CharSequence lpDevice, @NativeType("DWORD") int iDevNum, @NativeType("PDISPLAY_DEVICE") DISPLAY_DEVICE lpDisplayDevice, @NativeType("DWORD") int dwFlags) {
+    public static boolean EnumDisplayDevices(@NativeType("LPCTSTR") @Nullable CharSequence lpDevice, @NativeType("DWORD") int iDevNum, @NativeType("PDISPLAY_DEVICE") DISPLAY_DEVICE lpDisplayDevice, @NativeType("DWORD") int dwFlags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16Safe(lpDevice, true);
@@ -2523,7 +2523,7 @@ public class User32 {
      * @param dwFlags        this parameter can be one of:<br><table><tr><td>{@link #EDS_RAWMODE}</td><td>{@link #EDS_ROTATEDMODE}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean EnumDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") ByteBuffer lpszDeviceName, @NativeType("DWORD") int iModeNum, @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("DWORD") int dwFlags) {
+    public static boolean EnumDisplaySettingsEx(@NativeType("LPCTSTR") @Nullable ByteBuffer lpszDeviceName, @NativeType("DWORD") int iModeNum, @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("DWORD") int dwFlags) {
         if (CHECKS) {
             checkNT2Safe(lpszDeviceName);
         }
@@ -2558,7 +2558,7 @@ public class User32 {
      * @param dwFlags        this parameter can be one of:<br><table><tr><td>{@link #EDS_RAWMODE}</td><td>{@link #EDS_ROTATEDMODE}</td></tr></table>
      */
     @NativeType("BOOL")
-    public static boolean EnumDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") CharSequence lpszDeviceName, @NativeType("DWORD") int iModeNum, @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("DWORD") int dwFlags) {
+    public static boolean EnumDisplaySettingsEx(@NativeType("LPCTSTR") @Nullable CharSequence lpszDeviceName, @NativeType("DWORD") int iModeNum, @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("DWORD") int dwFlags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16Safe(lpszDeviceName, true);
@@ -2598,7 +2598,7 @@ public class User32 {
      * @return one of the following values: {@link #DISP_CHANGE_SUCCESSFUL} {@link #DISP_CHANGE_RESTART} {@link #DISP_CHANGE_FAILED} {@link #DISP_CHANGE_BADMODE} {@link #DISP_CHANGE_NOTUPDATED} {@link #DISP_CHANGE_BADFLAGS} {@link #DISP_CHANGE_BADPARAM} {@link #DISP_CHANGE_BADDUALVIEW}
      */
     @NativeType("LONG")
-    public static int ChangeDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") ByteBuffer lpszDeviceName, @Nullable @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("HWND") long hwnd, @NativeType("DWORD") int dwflags, @NativeType("LPVOID") long lParam) {
+    public static int ChangeDisplaySettingsEx(@NativeType("LPCTSTR") @Nullable ByteBuffer lpszDeviceName, @NativeType("DEVMODE *") @Nullable DEVMODE lpDevMode, @NativeType("HWND") long hwnd, @NativeType("DWORD") int dwflags, @NativeType("LPVOID") long lParam) {
         if (CHECKS) {
             checkNT2Safe(lpszDeviceName);
         }
@@ -2626,7 +2626,7 @@ public class User32 {
      * @return one of the following values: {@link #DISP_CHANGE_SUCCESSFUL} {@link #DISP_CHANGE_RESTART} {@link #DISP_CHANGE_FAILED} {@link #DISP_CHANGE_BADMODE} {@link #DISP_CHANGE_NOTUPDATED} {@link #DISP_CHANGE_BADFLAGS} {@link #DISP_CHANGE_BADPARAM} {@link #DISP_CHANGE_BADDUALVIEW}
      */
     @NativeType("LONG")
-    public static int ChangeDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") CharSequence lpszDeviceName, @Nullable @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("HWND") long hwnd, @NativeType("DWORD") int dwflags, @NativeType("LPVOID") long lParam) {
+    public static int ChangeDisplaySettingsEx(@NativeType("LPCTSTR") @Nullable CharSequence lpszDeviceName, @NativeType("DEVMODE *") @Nullable DEVMODE lpDevMode, @NativeType("HWND") long hwnd, @NativeType("DWORD") int dwflags, @NativeType("LPVOID") long lParam) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF16Safe(lpszDeviceName, true);
@@ -2686,7 +2686,7 @@ public class User32 {
      *             parameter is {@code NULL}, the cursor is free to move anywhere on the screen.
      */
     @NativeType("BOOL")
-    public static boolean ClipCursor(@Nullable @NativeType("RECT const *") RECT rect) {
+    public static boolean ClipCursor(@NativeType("RECT const *") @Nullable RECT rect) {
         return nClipCursor(memAddressSafe(rect)) != 0;
     }
 
@@ -3014,7 +3014,7 @@ public class User32 {
 
     /** Array version of: {@link #IsTouchWindow} */
     @NativeType("BOOL")
-    public static boolean IsTouchWindow(@NativeType("HWND") long hWnd, @Nullable @NativeType("PULONG") int[] pulFlags) {
+    public static boolean IsTouchWindow(@NativeType("HWND") long hWnd, @NativeType("PULONG") int @Nullable [] pulFlags) {
         long __functionAddress = Functions.IsTouchWindow;
         if (CHECKS) {
             check(__functionAddress);

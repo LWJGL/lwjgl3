@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,8 +130,7 @@ public class CUmemLocation extends Struct<CUmemLocation> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemLocation createSafe(long address) {
+    public static @Nullable CUmemLocation createSafe(long address) {
         return address == NULL ? null : new CUmemLocation(address, null);
     }
 
@@ -174,8 +173,7 @@ public class CUmemLocation extends Struct<CUmemLocation> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemLocation.Buffer createSafe(long address, int capacity) {
+    public static CUmemLocation.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

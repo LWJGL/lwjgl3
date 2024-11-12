@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class LLVMJITSymbolFlags extends Struct<LLVMJITSymbolFlags> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMJITSymbolFlags createSafe(long address) {
+    public static @Nullable LLVMJITSymbolFlags createSafe(long address) {
         return address == NULL ? null : new LLVMJITSymbolFlags(address, null);
     }
 
@@ -177,8 +176,7 @@ public class LLVMJITSymbolFlags extends Struct<LLVMJITSymbolFlags> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMJITSymbolFlags.Buffer createSafe(long address, int capacity) {
+    public static LLVMJITSymbolFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -70,7 +70,7 @@ public class KHRCreateCommandQueue {
      *         </ul>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties_khr const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateCommandQueueWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties_khr const *") @Nullable LongBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -80,7 +80,7 @@ public class KHRCreateCommandQueue {
 
     /** Array version of: {@link #clCreateCommandQueueWithPropertiesKHR CreateCommandQueueWithPropertiesKHR} */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties_khr const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateCommandQueueWithPropertiesKHR(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties_khr const *") long @Nullable [] properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueueWithPropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -115,9 +115,8 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     @NativeType("uint32_t")
     public int sceneMarkerCapacityInput() { return nsceneMarkerCapacityInput(address()); }
     /** an array of {@link XrSceneMarkerMSFT} to fill with the properties of the markers. */
-    @Nullable
     @NativeType("XrSceneMarkerMSFT *")
-    public XrSceneMarkerMSFT.Buffer sceneMarkers() { return nsceneMarkers(address()); }
+    public XrSceneMarkerMSFT.@Nullable Buffer sceneMarkers() { return nsceneMarkers(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSceneMarkersMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -128,14 +127,14 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     /** Sets the specified value to the {@link #sceneMarkerCapacityInput} field. */
     public XrSceneMarkersMSFT sceneMarkerCapacityInput(@NativeType("uint32_t") int value) { nsceneMarkerCapacityInput(address(), value); return this; }
     /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@link #sceneMarkers} field. */
-    public XrSceneMarkersMSFT sceneMarkers(@Nullable @NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.Buffer value) { nsceneMarkers(address(), value); return this; }
+    public XrSceneMarkersMSFT sceneMarkers(@NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.@Nullable Buffer value) { nsceneMarkers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSceneMarkersMSFT set(
         int type,
         long next,
         int sceneMarkerCapacityInput,
-        @Nullable XrSceneMarkerMSFT.Buffer sceneMarkers
+        XrSceneMarkerMSFT.@Nullable Buffer sceneMarkers
     ) {
         type(type);
         next(next);
@@ -181,8 +180,7 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkersMSFT createSafe(long address) {
+    public static @Nullable XrSceneMarkersMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneMarkersMSFT(address, null);
     }
 
@@ -225,8 +223,7 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneMarkersMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneMarkersMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,7 +274,7 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     /** Unsafe version of {@link #sceneMarkerCapacityInput}. */
     public static int nsceneMarkerCapacityInput(long struct) { return memGetInt(struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT); }
     /** Unsafe version of {@link #sceneMarkers}. */
-    @Nullable public static XrSceneMarkerMSFT.Buffer nsceneMarkers(long struct) { return XrSceneMarkerMSFT.createSafe(memGetAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS), nsceneMarkerCapacityInput(struct)); }
+    public static XrSceneMarkerMSFT.@Nullable Buffer nsceneMarkers(long struct) { return XrSceneMarkerMSFT.createSafe(memGetAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS), nsceneMarkerCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSceneMarkersMSFT.TYPE, value); }
@@ -286,7 +283,7 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     /** Sets the specified value to the {@code sceneMarkerCapacityInput} field of the specified {@code struct}. */
     public static void nsceneMarkerCapacityInput(long struct, int value) { memPutInt(struct + XrSceneMarkersMSFT.SCENEMARKERCAPACITYINPUT, value); }
     /** Unsafe version of {@link #sceneMarkers(XrSceneMarkerMSFT.Buffer) sceneMarkers}. */
-    public static void nsceneMarkers(long struct, @Nullable XrSceneMarkerMSFT.Buffer value) { memPutAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS, memAddressSafe(value)); if (value != null) { nsceneMarkerCapacityInput(struct, value.remaining()); } }
+    public static void nsceneMarkers(long struct, XrSceneMarkerMSFT.@Nullable Buffer value) { memPutAddress(struct + XrSceneMarkersMSFT.SCENEMARKERS, memAddressSafe(value)); if (value != null) { nsceneMarkerCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -341,9 +338,8 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
         @NativeType("uint32_t")
         public int sceneMarkerCapacityInput() { return XrSceneMarkersMSFT.nsceneMarkerCapacityInput(address()); }
         /** @return a {@link XrSceneMarkerMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneMarkersMSFT#sceneMarkers} field. */
-        @Nullable
         @NativeType("XrSceneMarkerMSFT *")
-        public XrSceneMarkerMSFT.Buffer sceneMarkers() { return XrSceneMarkersMSFT.nsceneMarkers(address()); }
+        public XrSceneMarkerMSFT.@Nullable Buffer sceneMarkers() { return XrSceneMarkersMSFT.nsceneMarkers(address()); }
 
         /** Sets the specified value to the {@link XrSceneMarkersMSFT#type} field. */
         public XrSceneMarkersMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkersMSFT.ntype(address(), value); return this; }
@@ -354,7 +350,7 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
         /** Sets the specified value to the {@link XrSceneMarkersMSFT#sceneMarkerCapacityInput} field. */
         public XrSceneMarkersMSFT.Buffer sceneMarkerCapacityInput(@NativeType("uint32_t") int value) { XrSceneMarkersMSFT.nsceneMarkerCapacityInput(address(), value); return this; }
         /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@link XrSceneMarkersMSFT#sceneMarkers} field. */
-        public XrSceneMarkersMSFT.Buffer sceneMarkers(@Nullable @NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.Buffer value) { XrSceneMarkersMSFT.nsceneMarkers(address(), value); return this; }
+        public XrSceneMarkersMSFT.Buffer sceneMarkers(@NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.@Nullable Buffer value) { XrSceneMarkersMSFT.nsceneMarkers(address(), value); return this; }
 
     }
 

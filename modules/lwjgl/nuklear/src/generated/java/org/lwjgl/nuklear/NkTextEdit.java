@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,9 +134,8 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     @NativeType("struct nk_str")
     public NkStr string() { return nstring(address()); }
     /** @return the value of the {@code filter} field. */
-    @Nullable
     @NativeType("nk_plugin_filter")
-    public NkPluginFilter filter() { return nfilter(address()); }
+    public @Nullable NkPluginFilter filter() { return nfilter(address()); }
     /** @return a {@link NkVec2} view of the {@code scrollbar} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 scrollbar() { return nscrollbar(address()); }
@@ -194,8 +193,7 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkTextEdit createSafe(long address) {
+    public static @Nullable NkTextEdit createSafe(long address) {
         return address == NULL ? null : new NkTextEdit(address, null);
     }
 
@@ -238,8 +236,7 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkTextEdit.Buffer createSafe(long address, int capacity) {
+    public static NkTextEdit.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -307,7 +304,7 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     /** Unsafe version of {@link #string}. */
     public static NkStr nstring(long struct) { return NkStr.create(struct + NkTextEdit.STRING); }
     /** Unsafe version of {@link #filter}. */
-    @Nullable public static NkPluginFilter nfilter(long struct) { return NkPluginFilter.createSafe(memGetAddress(struct + NkTextEdit.FILTER)); }
+    public static @Nullable NkPluginFilter nfilter(long struct) { return NkPluginFilter.createSafe(memGetAddress(struct + NkTextEdit.FILTER)); }
     /** Unsafe version of {@link #scrollbar}. */
     public static NkVec2 nscrollbar(long struct) { return NkVec2.create(struct + NkTextEdit.SCROLLBAR); }
     /** Unsafe version of {@link #cursor}. */
@@ -383,9 +380,8 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
         @NativeType("struct nk_str")
         public NkStr string() { return NkTextEdit.nstring(address()); }
         /** @return the value of the {@code filter} field. */
-        @Nullable
         @NativeType("nk_plugin_filter")
-        public NkPluginFilter filter() { return NkTextEdit.nfilter(address()); }
+        public @Nullable NkPluginFilter filter() { return NkTextEdit.nfilter(address()); }
         /** @return a {@link NkVec2} view of the {@code scrollbar} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 scrollbar() { return NkTextEdit.nscrollbar(address()); }

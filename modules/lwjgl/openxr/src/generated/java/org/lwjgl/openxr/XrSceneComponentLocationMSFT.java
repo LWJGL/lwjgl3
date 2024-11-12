@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,8 +145,7 @@ public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocatio
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneComponentLocationMSFT createSafe(long address) {
+    public static @Nullable XrSceneComponentLocationMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneComponentLocationMSFT(address, null);
     }
 
@@ -189,8 +188,7 @@ public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocatio
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneComponentLocationMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneComponentLocationMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

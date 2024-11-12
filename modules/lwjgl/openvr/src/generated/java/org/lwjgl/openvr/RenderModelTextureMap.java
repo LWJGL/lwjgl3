@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class RenderModelTextureMap extends Struct<RenderModelTextureMap> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModelTextureMap createSafe(long address) {
+    public static @Nullable RenderModelTextureMap createSafe(long address) {
         return address == NULL ? null : new RenderModelTextureMap(address, null);
     }
 
@@ -176,8 +175,7 @@ public class RenderModelTextureMap extends Struct<RenderModelTextureMap> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModelTextureMap.Buffer createSafe(long address, int capacity) {
+    public static RenderModelTextureMap.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

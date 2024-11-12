@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -99,8 +99,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRExtensionProperties createSafe(long address) {
+    public static @Nullable OVRExtensionProperties createSafe(long address) {
         return address == NULL ? null : new OVRExtensionProperties(address, null);
     }
 
@@ -115,8 +114,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRExtensionProperties.Buffer createSafe(long address, int capacity) {
+    public static OVRExtensionProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

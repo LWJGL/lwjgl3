@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -213,8 +213,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugMarkerObjectTagInfoEXT createSafe(long address) {
+    public static @Nullable VkDebugMarkerObjectTagInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkDebugMarkerObjectTagInfoEXT(address, null);
     }
 
@@ -257,8 +256,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugMarkerObjectTagInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDebugMarkerObjectTagInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

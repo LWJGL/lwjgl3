@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -146,8 +146,7 @@ public class STBIIOCallbacks extends Struct<STBIIOCallbacks> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBIIOCallbacks createSafe(long address) {
+    public static @Nullable STBIIOCallbacks createSafe(long address) {
         return address == NULL ? null : new STBIIOCallbacks(address, null);
     }
 
@@ -190,8 +189,7 @@ public class STBIIOCallbacks extends Struct<STBIIOCallbacks> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBIIOCallbacks.Buffer createSafe(long address, int capacity) {
+    public static STBIIOCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

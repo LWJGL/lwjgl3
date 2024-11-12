@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -141,8 +141,7 @@ public class NkMouse extends Struct<NkMouse> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMouse createSafe(long address) {
+    public static @Nullable NkMouse createSafe(long address) {
         return address == NULL ? null : new NkMouse(address, null);
     }
 
@@ -157,8 +156,7 @@ public class NkMouse extends Struct<NkMouse> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMouse.Buffer createSafe(long address, int capacity) {
+    public static NkMouse.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

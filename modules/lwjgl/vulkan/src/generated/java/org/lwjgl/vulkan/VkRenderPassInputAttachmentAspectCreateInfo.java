@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -172,8 +172,7 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct<VkRender
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassInputAttachmentAspectCreateInfo createSafe(long address) {
+    public static @Nullable VkRenderPassInputAttachmentAspectCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkRenderPassInputAttachmentAspectCreateInfo(address, null);
     }
 
@@ -216,8 +215,7 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct<VkRender
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassInputAttachmentAspectCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassInputAttachmentAspectCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

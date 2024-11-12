@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -187,8 +187,7 @@ public class XrHapticAmplitudeEnvelopeVibrationFB extends Struct<XrHapticAmplitu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHapticAmplitudeEnvelopeVibrationFB createSafe(long address) {
+    public static @Nullable XrHapticAmplitudeEnvelopeVibrationFB createSafe(long address) {
         return address == NULL ? null : new XrHapticAmplitudeEnvelopeVibrationFB(address, null);
     }
 
@@ -236,8 +235,7 @@ public class XrHapticAmplitudeEnvelopeVibrationFB extends Struct<XrHapticAmplitu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHapticAmplitudeEnvelopeVibrationFB.Buffer createSafe(long address, int capacity) {
+    public static XrHapticAmplitudeEnvelopeVibrationFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

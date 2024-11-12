@@ -11,6 +11,6 @@
  * using AMD Tootle, developers can optimize their models for pixel overdraw as well as vertex cache performance. This can provide significant performance
  * improvements in pixel limited situations, with no penalty in vertex-limited scenarios, and no runtime cost.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.tootle;
 

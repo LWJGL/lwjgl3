@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -253,8 +253,7 @@ public class AIImporterDesc extends Struct<AIImporterDesc> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIImporterDesc createSafe(long address) {
+    public static @Nullable AIImporterDesc createSafe(long address) {
         return address == NULL ? null : new AIImporterDesc(address, null);
     }
 
@@ -297,8 +296,7 @@ public class AIImporterDesc extends Struct<AIImporterDesc> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIImporterDesc.Buffer createSafe(long address, int capacity) {
+    public static AIImporterDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

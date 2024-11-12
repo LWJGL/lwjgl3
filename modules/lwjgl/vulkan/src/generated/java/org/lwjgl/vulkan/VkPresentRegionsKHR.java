@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -110,9 +110,8 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
     /** {@code NULL} or a pointer to an array of {@link VkPresentRegionKHR} elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the {@link VkPresentInfoKHR}{@code ::pSwapchains} array. */
-    @Nullable
     @NativeType("VkPresentRegionKHR const *")
-    public VkPresentRegionKHR.Buffer pRegions() { return npRegions(address()); }
+    public VkPresentRegionKHR.@Nullable Buffer pRegions() { return npRegions(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPresentRegionsKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -123,14 +122,14 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     /** Sets the specified value to the {@link #swapchainCount} field. */
     public VkPresentRegionsKHR swapchainCount(@NativeType("uint32_t") int value) { nswapchainCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkPresentRegionKHR.Buffer} to the {@link #pRegions} field. */
-    public VkPresentRegionsKHR pRegions(@Nullable @NativeType("VkPresentRegionKHR const *") VkPresentRegionKHR.Buffer value) { npRegions(address(), value); return this; }
+    public VkPresentRegionsKHR pRegions(@NativeType("VkPresentRegionKHR const *") VkPresentRegionKHR.@Nullable Buffer value) { npRegions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPresentRegionsKHR set(
         int sType,
         long pNext,
         int swapchainCount,
-        @Nullable VkPresentRegionKHR.Buffer pRegions
+        VkPresentRegionKHR.@Nullable Buffer pRegions
     ) {
         sType(sType);
         pNext(pNext);
@@ -176,8 +175,7 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentRegionsKHR createSafe(long address) {
+    public static @Nullable VkPresentRegionsKHR createSafe(long address) {
         return address == NULL ? null : new VkPresentRegionsKHR(address, null);
     }
 
@@ -220,8 +218,7 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentRegionsKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPresentRegionsKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -291,7 +288,7 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     /** Unsafe version of {@link #swapchainCount}. */
     public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
-    @Nullable public static VkPresentRegionKHR.Buffer npRegions(long struct) { return VkPresentRegionKHR.createSafe(memGetAddress(struct + VkPresentRegionsKHR.PREGIONS), nswapchainCount(struct)); }
+    public static VkPresentRegionKHR.@Nullable Buffer npRegions(long struct) { return VkPresentRegionKHR.createSafe(memGetAddress(struct + VkPresentRegionsKHR.PREGIONS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.STYPE, value); }
@@ -300,7 +297,7 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
     public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkPresentRegionKHR.Buffer) pRegions}. */
-    public static void npRegions(long struct, @Nullable VkPresentRegionKHR.Buffer value) { memPutAddress(struct + VkPresentRegionsKHR.PREGIONS, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
+    public static void npRegions(long struct, VkPresentRegionKHR.@Nullable Buffer value) { memPutAddress(struct + VkPresentRegionsKHR.PREGIONS, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -355,9 +352,8 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
         @NativeType("uint32_t")
         public int swapchainCount() { return VkPresentRegionsKHR.nswapchainCount(address()); }
         /** @return a {@link VkPresentRegionKHR.Buffer} view of the struct array pointed to by the {@link VkPresentRegionsKHR#pRegions} field. */
-        @Nullable
         @NativeType("VkPresentRegionKHR const *")
-        public VkPresentRegionKHR.Buffer pRegions() { return VkPresentRegionsKHR.npRegions(address()); }
+        public VkPresentRegionKHR.@Nullable Buffer pRegions() { return VkPresentRegionsKHR.npRegions(address()); }
 
         /** Sets the specified value to the {@link VkPresentRegionsKHR#sType} field. */
         public VkPresentRegionsKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentRegionsKHR.nsType(address(), value); return this; }
@@ -368,7 +364,7 @@ public class VkPresentRegionsKHR extends Struct<VkPresentRegionsKHR> implements 
         /** Sets the specified value to the {@link VkPresentRegionsKHR#swapchainCount} field. */
         public VkPresentRegionsKHR.Buffer swapchainCount(@NativeType("uint32_t") int value) { VkPresentRegionsKHR.nswapchainCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkPresentRegionKHR.Buffer} to the {@link VkPresentRegionsKHR#pRegions} field. */
-        public VkPresentRegionsKHR.Buffer pRegions(@Nullable @NativeType("VkPresentRegionKHR const *") VkPresentRegionKHR.Buffer value) { VkPresentRegionsKHR.npRegions(address(), value); return this; }
+        public VkPresentRegionsKHR.Buffer pRegions(@NativeType("VkPresentRegionKHR const *") VkPresentRegionKHR.@Nullable Buffer value) { VkPresentRegionsKHR.npRegions(address(), value); return this; }
 
     }
 

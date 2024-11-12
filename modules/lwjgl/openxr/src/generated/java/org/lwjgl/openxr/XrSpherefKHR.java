@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,8 +105,7 @@ public class XrSpherefKHR extends XrSpheref {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpherefKHR createSafe(long address) {
+    public static @Nullable XrSpherefKHR createSafe(long address) {
         return address == NULL ? null : new XrSpherefKHR(address, null);
     }
 
@@ -149,8 +148,7 @@ public class XrSpherefKHR extends XrSpheref {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpherefKHR.Buffer createSafe(long address, int capacity) {
+    public static XrSpherefKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

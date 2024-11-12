@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,8 +116,7 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifier
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDrmFormatModifierPropertiesEXT createSafe(long address) {
+    public static @Nullable VkDrmFormatModifierPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkDrmFormatModifierPropertiesEXT(address, null);
     }
 
@@ -132,8 +131,7 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifier
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDrmFormatModifierPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDrmFormatModifierPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

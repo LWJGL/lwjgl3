@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -202,8 +202,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOCQRingOffsets createSafe(long address) {
+    public static @Nullable IOCQRingOffsets createSafe(long address) {
         return address == NULL ? null : new IOCQRingOffsets(address, null);
     }
 
@@ -246,8 +245,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOCQRingOffsets.Buffer createSafe(long address, int capacity) {
+    public static IOCQRingOffsets.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

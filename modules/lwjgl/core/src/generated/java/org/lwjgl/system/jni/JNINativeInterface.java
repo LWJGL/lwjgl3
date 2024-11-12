@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jni;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,17 +129,15 @@ public class JNINativeInterface {
     // --- [ ToReflectedMethod ] ---
 
     /** Unsafe version of: {@link #ToReflectedMethod} */
-    @Nullable
-    public static native Method nToReflectedMethod(Class<?> cls, long methodID, boolean isStatic);
+    public static native @Nullable Method nToReflectedMethod(Class<?> cls, long methodID, boolean isStatic);
 
     /**
      * Converts a method ID derived from {@code cls} to a {@link Method} or {@link Constructor} object.
      *
      * @param isStatic must be set to {@link #JNI_TRUE TRUE} if the method ID refers to a static field, and # FALSE otherwise
      */
-    @Nullable
     @NativeType("jobject")
-    public static Method ToReflectedMethod(@NativeType("jclass") Class<?> cls, @NativeType("jmethodID") long methodID, @NativeType("jboolean") boolean isStatic) {
+    public static @Nullable Method ToReflectedMethod(@NativeType("jclass") Class<?> cls, @NativeType("jmethodID") long methodID, @NativeType("jboolean") boolean isStatic) {
         if (CHECKS) {
             check(methodID);
         }
@@ -149,17 +147,15 @@ public class JNINativeInterface {
     // --- [ ToReflectedField ] ---
 
     /** Unsafe version of: {@link #ToReflectedField} */
-    @Nullable
-    public static native Field nToReflectedField(Class<?> cls, long fieldID, boolean isStatic);
+    public static native @Nullable Field nToReflectedField(Class<?> cls, long fieldID, boolean isStatic);
 
     /**
      * Converts a field ID derived from {@code cls} to a {@link Field} object.
      *
      * @param isStatic must be set to {@link #JNI_TRUE TRUE} if {@code fieldID} refers to a static field, and {@link #JNI_FALSE FALSE} otherwise
      */
-    @Nullable
     @NativeType("jobject")
-    public static Field ToReflectedField(@NativeType("jclass") Class<?> cls, @NativeType("jfieldID") long fieldID, @NativeType("jboolean") boolean isStatic) {
+    public static @Nullable Field ToReflectedField(@NativeType("jclass") Class<?> cls, @NativeType("jfieldID") long fieldID, @NativeType("jboolean") boolean isStatic) {
         if (CHECKS) {
             check(fieldID);
         }
@@ -213,9 +209,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jboolean *")
-    public static ByteBuffer GetBooleanArrayElements(@NativeType("jbooleanArray") byte[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable ByteBuffer GetBooleanArrayElements(@NativeType("jbooleanArray") byte[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -270,9 +265,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jbyte *")
-    public static ByteBuffer GetByteArrayElements(@NativeType("jbyteArray") byte[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable ByteBuffer GetByteArrayElements(@NativeType("jbyteArray") byte[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -327,9 +321,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jchar *")
-    public static ShortBuffer GetCharArrayElements(@NativeType("jcharArray") char[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable ShortBuffer GetCharArrayElements(@NativeType("jcharArray") char[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -384,9 +377,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jshort *")
-    public static ShortBuffer GetShortArrayElements(@NativeType("jshortArray") short[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable ShortBuffer GetShortArrayElements(@NativeType("jshortArray") short[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -441,9 +433,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jint *")
-    public static IntBuffer GetIntArrayElements(@NativeType("jintArray") int[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable IntBuffer GetIntArrayElements(@NativeType("jintArray") int[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -498,9 +489,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jlong *")
-    public static LongBuffer GetLongArrayElements(@NativeType("jlongArray") long[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable LongBuffer GetLongArrayElements(@NativeType("jlongArray") long[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -555,9 +545,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jfloat *")
-    public static FloatBuffer GetFloatArrayElements(@NativeType("jfloatArray") float[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable FloatBuffer GetFloatArrayElements(@NativeType("jfloatArray") float[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -612,9 +601,8 @@ public class JNINativeInterface {
      *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
-    @Nullable
     @NativeType("jdouble *")
-    public static DoubleBuffer GetDoubleArrayElements(@NativeType("jdoubleArray") double[] array, @Nullable @NativeType("jboolean *") ByteBuffer isCopy) {
+    public static @Nullable DoubleBuffer GetDoubleArrayElements(@NativeType("jdoubleArray") double[] array, @NativeType("jboolean *") @Nullable ByteBuffer isCopy) {
         if (CHECKS) {
             checkSafe(isCopy, 1);
         }
@@ -1082,8 +1070,7 @@ public class JNINativeInterface {
     // --- [ NewDirectByteBuffer ] ---
 
     /** Unsafe version of: {@link #NewDirectByteBuffer} */
-    @Nullable
-    public static native ByteBuffer nNewDirectByteBuffer(long address, long capacity);
+    public static native @Nullable ByteBuffer nNewDirectByteBuffer(long address, long capacity);
 
     /**
      * Allocates and returns a direct {@code java.nio.ByteBuffer} referring to the block of memory starting at the memory address address and extending
@@ -1099,9 +1086,8 @@ public class JNINativeInterface {
      * @return a local reference to the newly-instantiated {@code java.nio.ByteBuffer} object. Returns {@code NULL} if an exception occurs, or if JNI access to direct
      *         buffers is not supported by this virtual machine.
      */
-    @Nullable
     @NativeType("jobject")
-    public static ByteBuffer NewDirectByteBuffer(@NativeType("void *") long address, @NativeType("jlong") long capacity) {
+    public static @Nullable ByteBuffer NewDirectByteBuffer(@NativeType("void *") long address, @NativeType("jlong") long capacity) {
         if (CHECKS) {
             check(address);
         }

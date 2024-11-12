@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -100,12 +100,12 @@ public class EXTWindowRectangles {
      * @param mode the rectangle mode. One of:<br><table><tr><td>{@link #GL_INCLUSIVE_EXT INCLUSIVE_EXT}</td><td>{@link #GL_EXCLUSIVE_EXT EXCLUSIVE_EXT}</td></tr></table>
      * @param box  an array of {@code 4*count} window rectangle coordinates
      */
-    public static void glWindowRectanglesEXT(@NativeType("GLenum") int mode, @Nullable @NativeType("GLint const *") IntBuffer box) {
+    public static void glWindowRectanglesEXT(@NativeType("GLenum") int mode, @NativeType("GLint const *") @Nullable IntBuffer box) {
         nglWindowRectanglesEXT(mode, remainingSafe(box) >> 2, memAddressSafe(box));
     }
 
     /** Array version of: {@link #glWindowRectanglesEXT WindowRectanglesEXT} */
-    public static void glWindowRectanglesEXT(@NativeType("GLenum") int mode, @Nullable @NativeType("GLint const *") int[] box) {
+    public static void glWindowRectanglesEXT(@NativeType("GLenum") int mode, @NativeType("GLint const *") int @Nullable [] box) {
         long __functionAddress = GL.getICD().glWindowRectanglesEXT;
         if (CHECKS) {
             check(__functionAddress);

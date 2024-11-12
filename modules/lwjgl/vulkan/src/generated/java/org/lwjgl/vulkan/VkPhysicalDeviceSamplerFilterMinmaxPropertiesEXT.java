@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,8 +107,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends VkPhysical
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(address, null);
     }
 
@@ -151,8 +150,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends VkPhysical
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

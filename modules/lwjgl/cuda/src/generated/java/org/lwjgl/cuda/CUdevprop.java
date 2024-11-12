@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,8 +220,7 @@ public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUdevprop createSafe(long address) {
+    public static @Nullable CUdevprop createSafe(long address) {
         return address == NULL ? null : new CUdevprop(address, null);
     }
 
@@ -264,8 +263,7 @@ public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUdevprop.Buffer createSafe(long address, int capacity) {
+    public static CUdevprop.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

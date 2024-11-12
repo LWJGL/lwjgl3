@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -182,8 +182,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDirectDriverLoadingListLUNARG createSafe(long address) {
+    public static @Nullable VkDirectDriverLoadingListLUNARG createSafe(long address) {
         return address == NULL ? null : new VkDirectDriverLoadingListLUNARG(address, null);
     }
 
@@ -226,8 +225,7 @@ public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadin
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDirectDriverLoadingListLUNARG.Buffer createSafe(long address, int capacity) {
+    public static VkDirectDriverLoadingListLUNARG.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -41,8 +41,7 @@ public abstract class PFNKTXITERCB extends Callback implements PFNKTXITERCBI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static PFNKTXITERCB createSafe(long functionPointer) {
+    public static @Nullable PFNKTXITERCB createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

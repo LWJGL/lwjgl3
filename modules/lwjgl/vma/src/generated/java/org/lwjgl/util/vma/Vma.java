@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -2750,7 +2750,7 @@ public class Vma {
      * <p>{@code pName} can be either null or pointer to a null-terminated string with new name for the pool. Function makes internal copy of the string, so it
      * can be changed or freed immediately after this call.</p>
      */
-    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @Nullable @NativeType("char const *") ByteBuffer pName) {
+    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("char const *") @Nullable ByteBuffer pName) {
         if (CHECKS) {
             check(allocator);
             check(pool);
@@ -2765,7 +2765,7 @@ public class Vma {
      * <p>{@code pName} can be either null or pointer to a null-terminated string with new name for the pool. Function makes internal copy of the string, so it
      * can be changed or freed immediately after this call.</p>
      */
-    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @Nullable @NativeType("char const *") CharSequence pName) {
+    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("char const *") @Nullable CharSequence pName) {
         if (CHECKS) {
             check(allocator);
             check(pool);
@@ -2796,7 +2796,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaAllocateMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaAllocateMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
@@ -2833,7 +2833,7 @@ public class Vma {
      * @param pAllocationInfo       pointer to array that will be filled with parameters of created allocations. Optional.
      */
     @NativeType("VkResult")
-    public static int vmaAllocateMemoryPages(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocations, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo.Buffer pAllocationInfo) {
+    public static int vmaAllocateMemoryPages(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocations, @NativeType("VmaAllocationInfo *") VmaAllocationInfo.@Nullable Buffer pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             checkSafe(pAllocationInfo, pAllocations.remaining());
@@ -2860,7 +2860,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaAllocateMemoryForBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBuffer") long buffer, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaAllocateMemoryForBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBuffer") long buffer, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
@@ -2886,7 +2886,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaAllocateMemoryForImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImage") long image, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaAllocateMemoryForImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImage") long image, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
@@ -3009,7 +3009,7 @@ public class Vma {
      *              <p>The function makes local copy of the string and sets it as allocation's {@code pName}. String passed as {@code pName} doesn't need to be valid for
      *              whole lifetime of the allocation - you can free it after this call. String previously pointed by allocation's {@code pName} is freed from memory.</p>
      */
-    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @Nullable @NativeType("char const *") ByteBuffer pName) {
+    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("char const *") @Nullable ByteBuffer pName) {
         if (CHECKS) {
             check(allocator);
             check(allocation);
@@ -3026,7 +3026,7 @@ public class Vma {
      *              <p>The function makes local copy of the string and sets it as allocation's {@code pName}. String passed as {@code pName} doesn't need to be valid for
      *              whole lifetime of the allocation - you can free it after this call. String previously pointed by allocation's {@code pName} is freed from memory.</p>
      */
-    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @Nullable @NativeType("char const *") CharSequence pName) {
+    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("char const *") @Nullable CharSequence pName) {
         if (CHECKS) {
             check(allocator);
             check(allocation);
@@ -3203,7 +3203,7 @@ public class Vma {
      * @param sizes   If not null, it must point to an array of sizes of regions to flush in respective allocations. Null means `VK_WHOLE_SIZE` for all allocations.
      */
     @NativeType("VkResult")
-    public static int vmaFlushAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @Nullable @NativeType("VkDeviceSize const *") LongBuffer offsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer sizes) {
+    public static int vmaFlushAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @NativeType("VkDeviceSize const *") @Nullable LongBuffer offsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer sizes) {
         if (CHECKS) {
             check(allocator);
             checkSafe(offsets, allocations.remaining());
@@ -3230,7 +3230,7 @@ public class Vma {
      *                allocations.
      */
     @NativeType("VkResult")
-    public static int vmaInvalidateAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @Nullable @NativeType("VkDeviceSize const *") LongBuffer offsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer sizes) {
+    public static int vmaInvalidateAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @NativeType("VkDeviceSize const *") @Nullable LongBuffer offsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer sizes) {
         if (CHECKS) {
             check(allocator);
             checkSafe(offsets, allocations.remaining());
@@ -3377,7 +3377,7 @@ public class Vma {
      * @param context   context object that has been created by {@link #vmaBeginDefragmentation BeginDefragmentation}
      * @param pStats    optional stats for the defragmentation. Can be null.
      */
-    public static void vmaEndDefragmentation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pStats) {
+    public static void vmaEndDefragmentation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @NativeType("VmaDefragmentationStats *") @Nullable VmaDefragmentationStats pStats) {
         if (CHECKS) {
             check(allocator);
             check(context);
@@ -3578,7 +3578,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaCreateBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaCreateBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pBuffer, 1);
@@ -3602,7 +3602,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaCreateBufferWithAlignment(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkDeviceSize") long minAlignment, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaCreateBufferWithAlignment(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkDeviceSize") long minAlignment, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pBuffer, 1);
@@ -3720,7 +3720,7 @@ public class Vma {
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
-    public static int vmaCreateImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkImage *") LongBuffer pImage, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
+    public static int vmaCreateImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkImage *") LongBuffer pImage, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pImage, 1);
@@ -3867,7 +3867,7 @@ public class Vma {
      * @param pOffset      returned offset of the new allocation. Optional, can be null.
      */
     @NativeType("VkResult")
-    public static int vmaVirtualAllocate(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaVirtualAllocationCreateInfo const *") VmaVirtualAllocationCreateInfo pCreateInfo, @NativeType("VmaVirtualAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VkDeviceSize *") LongBuffer pOffset) {
+    public static int vmaVirtualAllocate(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaVirtualAllocationCreateInfo const *") VmaVirtualAllocationCreateInfo pCreateInfo, @NativeType("VmaVirtualAllocation *") PointerBuffer pAllocation, @NativeType("VkDeviceSize *") @Nullable LongBuffer pOffset) {
         if (CHECKS) {
             check(virtualBlock);
             check(pAllocation, 1);

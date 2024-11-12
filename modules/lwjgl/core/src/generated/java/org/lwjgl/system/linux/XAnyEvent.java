@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,8 +166,7 @@ public class XAnyEvent extends Struct<XAnyEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XAnyEvent createSafe(long address) {
+    public static @Nullable XAnyEvent createSafe(long address) {
         return address == NULL ? null : new XAnyEvent(address, null);
     }
 
@@ -210,8 +209,7 @@ public class XAnyEvent extends Struct<XAnyEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XAnyEvent.Buffer createSafe(long address, int capacity) {
+    public static XAnyEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

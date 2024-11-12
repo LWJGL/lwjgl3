@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -126,8 +126,7 @@ public class RenderModel extends Struct<RenderModel> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModel createSafe(long address) {
+    public static @Nullable RenderModel createSafe(long address) {
         return address == NULL ? null : new RenderModel(address, null);
     }
 
@@ -170,8 +169,7 @@ public class RenderModel extends Struct<RenderModel> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModel.Buffer createSafe(long address, int capacity) {
+    public static RenderModel.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

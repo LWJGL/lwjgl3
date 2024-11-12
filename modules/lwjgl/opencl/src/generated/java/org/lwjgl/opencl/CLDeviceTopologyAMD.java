@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class CLDeviceTopologyAMD extends Struct<CLDeviceTopologyAMD> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLDeviceTopologyAMD createSafe(long address) {
+    public static @Nullable CLDeviceTopologyAMD createSafe(long address) {
         return address == NULL ? null : new CLDeviceTopologyAMD(address, null);
     }
 
@@ -196,8 +195,7 @@ public class CLDeviceTopologyAMD extends Struct<CLDeviceTopologyAMD> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLDeviceTopologyAMD.Buffer createSafe(long address, int capacity) {
+    public static CLDeviceTopologyAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

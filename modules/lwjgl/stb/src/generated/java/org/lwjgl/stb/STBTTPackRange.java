@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -101,9 +101,8 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
     /** if non-zero, then the chars are continuous, and this is the first codepoint */
     public int first_unicode_codepoint_in_range() { return nfirst_unicode_codepoint_in_range(address()); }
     /** if non-zero, then this is an array of unicode codepoints */
-    @Nullable
     @NativeType("int *")
-    public IntBuffer array_of_unicode_codepoints() { return narray_of_unicode_codepoints(address()); }
+    public @Nullable IntBuffer array_of_unicode_codepoints() { return narray_of_unicode_codepoints(address()); }
     /** the number of codepoints in the range */
     public int num_chars() { return nnum_chars(address()); }
     /** output */
@@ -188,8 +187,7 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTPackRange createSafe(long address) {
+    public static @Nullable STBTTPackRange createSafe(long address) {
         return address == NULL ? null : new STBTTPackRange(address, null);
     }
 
@@ -232,8 +230,7 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTPackRange.Buffer createSafe(long address, int capacity) {
+    public static STBTTPackRange.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -301,7 +298,7 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
     /** Unsafe version of {@link #first_unicode_codepoint_in_range}. */
     public static int nfirst_unicode_codepoint_in_range(long struct) { return memGetInt(struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE); }
     /** Unsafe version of {@link #array_of_unicode_codepoints() array_of_unicode_codepoints}. */
-    @Nullable public static IntBuffer narray_of_unicode_codepoints(long struct) { return memIntBufferSafe(memGetAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS), nnum_chars(struct)); }
+    public static @Nullable IntBuffer narray_of_unicode_codepoints(long struct) { return memIntBufferSafe(memGetAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS), nnum_chars(struct)); }
     /** Unsafe version of {@link #num_chars}. */
     public static int nnum_chars(long struct) { return memGetInt(struct + STBTTPackRange.NUM_CHARS); }
     /** Unsafe version of {@link #chardata_for_range}. */
@@ -383,9 +380,8 @@ public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeReso
         /** @return the value of the {@link STBTTPackRange#first_unicode_codepoint_in_range} field. */
         public int first_unicode_codepoint_in_range() { return STBTTPackRange.nfirst_unicode_codepoint_in_range(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link STBTTPackRange#array_of_unicode_codepoints} field. */
-        @Nullable
         @NativeType("int *")
-        public IntBuffer array_of_unicode_codepoints() { return STBTTPackRange.narray_of_unicode_codepoints(address()); }
+        public @Nullable IntBuffer array_of_unicode_codepoints() { return STBTTPackRange.narray_of_unicode_codepoints(address()); }
         /** @return the value of the {@link STBTTPackRange#num_chars} field. */
         public int num_chars() { return STBTTPackRange.nnum_chars(address()); }
         /** @return a {@link STBTTPackedchar.Buffer} view of the struct array pointed to by the {@link STBTTPackRange#chardata_for_range} field. */

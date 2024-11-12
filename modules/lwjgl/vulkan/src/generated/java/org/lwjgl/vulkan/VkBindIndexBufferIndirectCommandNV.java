@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBuffer
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindIndexBufferIndirectCommandNV createSafe(long address) {
+    public static @Nullable VkBindIndexBufferIndirectCommandNV createSafe(long address) {
         return address == NULL ? null : new VkBindIndexBufferIndirectCommandNV(address, null);
     }
 
@@ -202,8 +201,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBuffer
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindIndexBufferIndirectCommandNV.Buffer createSafe(long address, int capacity) {
+    public static VkBindIndexBufferIndirectCommandNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

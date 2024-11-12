@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class MONITORINFOEX extends Struct<MONITORINFOEX> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MONITORINFOEX createSafe(long address) {
+    public static @Nullable MONITORINFOEX createSafe(long address) {
         return address == NULL ? null : new MONITORINFOEX(address, null);
     }
 
@@ -199,8 +198,7 @@ public class MONITORINFOEX extends Struct<MONITORINFOEX> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MONITORINFOEX.Buffer createSafe(long address, int capacity) {
+    public static MONITORINFOEX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

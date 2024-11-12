@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class OVRTrackingState extends Struct<OVRTrackingState> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTrackingState createSafe(long address) {
+    public static @Nullable OVRTrackingState createSafe(long address) {
         return address == NULL ? null : new OVRTrackingState(address, null);
     }
 
@@ -194,8 +193,7 @@ public class OVRTrackingState extends Struct<OVRTrackingState> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTrackingState.Buffer createSafe(long address, int capacity) {
+    public static OVRTrackingState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

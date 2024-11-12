@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingRestriction createSafe(long address) {
+    public static @Nullable IOURingRestriction createSafe(long address) {
         return address == NULL ? null : new IOURingRestriction(address, null);
     }
 
@@ -196,8 +195,7 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingRestriction.Buffer createSafe(long address, int capacity) {
+    public static IOURingRestriction.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

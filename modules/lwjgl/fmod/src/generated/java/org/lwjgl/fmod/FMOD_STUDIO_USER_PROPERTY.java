@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -110,13 +110,11 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
     /** @return the value of the {@code floatvalue} field. */
     public float floatvalue() { return nfloatvalue(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code stringvalue} field. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer stringvalue() { return nstringvalue(address()); }
+    public @Nullable ByteBuffer stringvalue() { return nstringvalue(address()); }
     /** @return the null-terminated string pointed to by the {@code stringvalue} field. */
-    @Nullable
     @NativeType("char const *")
-    public String stringvalueString() { return nstringvalueString(address()); }
+    public @Nullable String stringvalueString() { return nstringvalueString(address()); }
 
     /** Sets the address of the specified encoded string to the {@code name} field. */
     public FMOD_STUDIO_USER_PROPERTY name(@NativeType("char const *") ByteBuffer value) { nname(address(), value); return this; }
@@ -167,8 +165,7 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_USER_PROPERTY createSafe(long address) {
+    public static @Nullable FMOD_STUDIO_USER_PROPERTY createSafe(long address) {
         return address == NULL ? null : new FMOD_STUDIO_USER_PROPERTY(address, null);
     }
 
@@ -211,8 +208,7 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_USER_PROPERTY.Buffer createSafe(long address, int capacity) {
+    public static FMOD_STUDIO_USER_PROPERTY.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -269,9 +265,9 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
     /** Unsafe version of {@link #floatvalue}. */
     public static float nfloatvalue(long struct) { return memGetFloat(struct + FMOD_STUDIO_USER_PROPERTY.FLOATVALUE); }
     /** Unsafe version of {@link #stringvalue}. */
-    @Nullable public static ByteBuffer nstringvalue(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.STRINGVALUE)); }
+    public static @Nullable ByteBuffer nstringvalue(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.STRINGVALUE)); }
     /** Unsafe version of {@link #stringvalueString}. */
-    @Nullable public static String nstringvalueString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.STRINGVALUE)); }
+    public static @Nullable String nstringvalueString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_STUDIO_USER_PROPERTY.STRINGVALUE)); }
 
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
@@ -361,13 +357,11 @@ public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY>
         /** @return the value of the {@code floatvalue} field. */
         public float floatvalue() { return FMOD_STUDIO_USER_PROPERTY.nfloatvalue(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code stringvalue} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer stringvalue() { return FMOD_STUDIO_USER_PROPERTY.nstringvalue(address()); }
+        public @Nullable ByteBuffer stringvalue() { return FMOD_STUDIO_USER_PROPERTY.nstringvalue(address()); }
         /** @return the null-terminated string pointed to by the {@code stringvalue} field. */
-        @Nullable
         @NativeType("char const *")
-        public String stringvalueString() { return FMOD_STUDIO_USER_PROPERTY.nstringvalueString(address()); }
+        public @Nullable String stringvalueString() { return FMOD_STUDIO_USER_PROPERTY.nstringvalueString(address()); }
 
         /** Sets the address of the specified encoded string to the {@code name} field. */
         public FMOD_STUDIO_USER_PROPERTY.Buffer name(@NativeType("char const *") ByteBuffer value) { FMOD_STUDIO_USER_PROPERTY.nname(address(), value); return this; }

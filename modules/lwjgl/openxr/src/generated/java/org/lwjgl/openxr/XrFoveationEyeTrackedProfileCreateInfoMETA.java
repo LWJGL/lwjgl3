@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class XrFoveationEyeTrackedProfileCreateInfoMETA extends Struct<XrFoveati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationEyeTrackedProfileCreateInfoMETA createSafe(long address) {
+    public static @Nullable XrFoveationEyeTrackedProfileCreateInfoMETA createSafe(long address) {
         return address == NULL ? null : new XrFoveationEyeTrackedProfileCreateInfoMETA(address, null);
     }
 
@@ -203,8 +202,7 @@ public class XrFoveationEyeTrackedProfileCreateInfoMETA extends Struct<XrFoveati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationEyeTrackedProfileCreateInfoMETA.Buffer createSafe(long address, int capacity) {
+    public static XrFoveationEyeTrackedProfileCreateInfoMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

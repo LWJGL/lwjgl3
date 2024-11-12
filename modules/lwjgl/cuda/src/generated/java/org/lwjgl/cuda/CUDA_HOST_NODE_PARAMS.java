@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class CUDA_HOST_NODE_PARAMS extends Struct<CUDA_HOST_NODE_PARAMS> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_HOST_NODE_PARAMS createSafe(long address) {
+    public static @Nullable CUDA_HOST_NODE_PARAMS createSafe(long address) {
         return address == NULL ? null : new CUDA_HOST_NODE_PARAMS(address, null);
     }
 
@@ -176,8 +175,7 @@ public class CUDA_HOST_NODE_PARAMS extends Struct<CUDA_HOST_NODE_PARAMS> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_HOST_NODE_PARAMS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_HOST_NODE_PARAMS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

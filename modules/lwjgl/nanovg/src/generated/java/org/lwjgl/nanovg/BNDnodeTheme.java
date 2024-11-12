@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,8 +199,7 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BNDnodeTheme createSafe(long address) {
+    public static @Nullable BNDnodeTheme createSafe(long address) {
         return address == NULL ? null : new BNDnodeTheme(address, null);
     }
 
@@ -243,8 +242,7 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BNDnodeTheme.Buffer createSafe(long address, int capacity) {
+    public static BNDnodeTheme.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

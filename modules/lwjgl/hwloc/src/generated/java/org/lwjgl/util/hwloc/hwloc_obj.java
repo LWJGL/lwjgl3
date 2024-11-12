@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,13 +206,11 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     @NativeType("unsigned")
     public int os_index() { return nos_index(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
-    @Nullable
     @NativeType("char *")
-    public ByteBuffer name() { return nname(address()); }
+    public @Nullable ByteBuffer name() { return nname(address()); }
     /** @return the null-terminated string pointed to by the {@code name} field. */
-    @Nullable
     @NativeType("char *")
-    public String nameString() { return nnameString(address()); }
+    public @Nullable String nameString() { return nnameString(address()); }
     /** @return the value of the {@code total_memory} field. */
     @NativeType("hwloc_uint64_t")
     public long total_memory() { return ntotal_memory(address()); }
@@ -225,43 +223,35 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     @NativeType("unsigned")
     public int logical_index() { return nlogical_index(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code next_cousin} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj next_cousin() { return nnext_cousin(address()); }
+    public @Nullable hwloc_obj next_cousin() { return nnext_cousin(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code prev_cousin} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj prev_cousin() { return nprev_cousin(address()); }
+    public @Nullable hwloc_obj prev_cousin() { return nprev_cousin(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code parent} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj parent() { return nparent(address()); }
+    public @Nullable hwloc_obj parent() { return nparent(address()); }
     /** @return the value of the {@code sibling_rank} field. */
     @NativeType("unsigned")
     public int sibling_rank() { return nsibling_rank(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code next_sibling} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj next_sibling() { return nnext_sibling(address()); }
+    public @Nullable hwloc_obj next_sibling() { return nnext_sibling(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code prev_sibling} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj prev_sibling() { return nprev_sibling(address()); }
+    public @Nullable hwloc_obj prev_sibling() { return nprev_sibling(address()); }
     /** @return the value of the {@code arity} field. */
     @NativeType("unsigned")
     public int arity() { return narity(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code children} field. */
-    @Nullable
     @NativeType("struct hwloc_obj **")
-    public PointerBuffer children() { return nchildren(address()); }
+    public @Nullable PointerBuffer children() { return nchildren(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code first_child} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj first_child() { return nfirst_child(address()); }
+    public @Nullable hwloc_obj first_child() { return nfirst_child(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code last_child} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj last_child() { return nlast_child(address()); }
+    public @Nullable hwloc_obj last_child() { return nlast_child(address()); }
     /** @return the value of the {@code symmetric_subtree} field. */
     @NativeType("int")
     public boolean symmetric_subtree() { return nsymmetric_subtree(address()) != 0; }
@@ -269,23 +259,20 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     @NativeType("unsigned")
     public int memory_arity() { return nmemory_arity(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code memory_first_child} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj memory_first_child() { return nmemory_first_child(address()); }
+    public @Nullable hwloc_obj memory_first_child() { return nmemory_first_child(address()); }
     /** @return the value of the {@code io_arity} field. */
     @NativeType("unsigned")
     public int io_arity() { return nio_arity(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code io_first_child} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj io_first_child() { return nio_first_child(address()); }
+    public @Nullable hwloc_obj io_first_child() { return nio_first_child(address()); }
     /** @return the value of the {@code misc_arity} field. */
     @NativeType("unsigned")
     public int misc_arity() { return nmisc_arity(address()); }
     /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code misc_first_child} field. */
-    @Nullable
     @NativeType("struct hwloc_obj *")
-    public hwloc_obj misc_first_child() { return nmisc_first_child(address()); }
+    public @Nullable hwloc_obj misc_first_child() { return nmisc_first_child(address()); }
     /** @return the value of the {@code cpuset} field. */
     @NativeType("hwloc_cpuset_t")
     public long cpuset() { return ncpuset(address()); }
@@ -347,8 +334,7 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_obj createSafe(long address) {
+    public static @Nullable hwloc_obj createSafe(long address) {
         return address == NULL ? null : new hwloc_obj(address, null);
     }
 
@@ -391,8 +377,7 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_obj.Buffer createSafe(long address, int capacity) {
+    public static hwloc_obj.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -445,9 +430,9 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #os_index}. */
     public static int nos_index(long struct) { return memGetInt(struct + hwloc_obj.OS_INDEX); }
     /** Unsafe version of {@link #name}. */
-    @Nullable public static ByteBuffer nname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + hwloc_obj.NAME)); }
+    public static @Nullable ByteBuffer nname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + hwloc_obj.NAME)); }
     /** Unsafe version of {@link #nameString}. */
-    @Nullable public static String nnameString(long struct) { return memASCIISafe(memGetAddress(struct + hwloc_obj.NAME)); }
+    public static @Nullable String nnameString(long struct) { return memASCIISafe(memGetAddress(struct + hwloc_obj.NAME)); }
     /** Unsafe version of {@link #total_memory}. */
     public static long ntotal_memory(long struct) { return memGetLong(struct + hwloc_obj.TOTAL_MEMORY); }
     /** Unsafe version of {@link #attr}. */
@@ -457,39 +442,39 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
     /** Unsafe version of {@link #logical_index}. */
     public static int nlogical_index(long struct) { return memGetInt(struct + hwloc_obj.LOGICAL_INDEX); }
     /** Unsafe version of {@link #next_cousin}. */
-    @Nullable public static hwloc_obj nnext_cousin(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_COUSIN)); }
+    public static @Nullable hwloc_obj nnext_cousin(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_COUSIN)); }
     /** Unsafe version of {@link #prev_cousin}. */
-    @Nullable public static hwloc_obj nprev_cousin(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PREV_COUSIN)); }
+    public static @Nullable hwloc_obj nprev_cousin(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PREV_COUSIN)); }
     /** Unsafe version of {@link #parent}. */
-    @Nullable public static hwloc_obj nparent(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PARENT)); }
+    public static @Nullable hwloc_obj nparent(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PARENT)); }
     /** Unsafe version of {@link #sibling_rank}. */
     public static int nsibling_rank(long struct) { return memGetInt(struct + hwloc_obj.SIBLING_RANK); }
     /** Unsafe version of {@link #next_sibling}. */
-    @Nullable public static hwloc_obj nnext_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_SIBLING)); }
+    public static @Nullable hwloc_obj nnext_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.NEXT_SIBLING)); }
     /** Unsafe version of {@link #prev_sibling}. */
-    @Nullable public static hwloc_obj nprev_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PREV_SIBLING)); }
+    public static @Nullable hwloc_obj nprev_sibling(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.PREV_SIBLING)); }
     /** Unsafe version of {@link #arity}. */
     public static int narity(long struct) { return memGetInt(struct + hwloc_obj.ARITY); }
     /** Unsafe version of {@link #children() children}. */
-    @Nullable public static PointerBuffer nchildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + hwloc_obj.CHILDREN), narity(struct)); }
+    public static @Nullable PointerBuffer nchildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + hwloc_obj.CHILDREN), narity(struct)); }
     /** Unsafe version of {@link #first_child}. */
-    @Nullable public static hwloc_obj nfirst_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.FIRST_CHILD)); }
+    public static @Nullable hwloc_obj nfirst_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.FIRST_CHILD)); }
     /** Unsafe version of {@link #last_child}. */
-    @Nullable public static hwloc_obj nlast_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.LAST_CHILD)); }
+    public static @Nullable hwloc_obj nlast_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.LAST_CHILD)); }
     /** Unsafe version of {@link #symmetric_subtree}. */
     public static int nsymmetric_subtree(long struct) { return memGetInt(struct + hwloc_obj.SYMMETRIC_SUBTREE); }
     /** Unsafe version of {@link #memory_arity}. */
     public static int nmemory_arity(long struct) { return memGetInt(struct + hwloc_obj.MEMORY_ARITY); }
     /** Unsafe version of {@link #memory_first_child}. */
-    @Nullable public static hwloc_obj nmemory_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MEMORY_FIRST_CHILD)); }
+    public static @Nullable hwloc_obj nmemory_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MEMORY_FIRST_CHILD)); }
     /** Unsafe version of {@link #io_arity}. */
     public static int nio_arity(long struct) { return memGetInt(struct + hwloc_obj.IO_ARITY); }
     /** Unsafe version of {@link #io_first_child}. */
-    @Nullable public static hwloc_obj nio_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.IO_FIRST_CHILD)); }
+    public static @Nullable hwloc_obj nio_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.IO_FIRST_CHILD)); }
     /** Unsafe version of {@link #misc_arity}. */
     public static int nmisc_arity(long struct) { return memGetInt(struct + hwloc_obj.MISC_ARITY); }
     /** Unsafe version of {@link #misc_first_child}. */
-    @Nullable public static hwloc_obj nmisc_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MISC_FIRST_CHILD)); }
+    public static @Nullable hwloc_obj nmisc_first_child(long struct) { return hwloc_obj.createSafe(memGetAddress(struct + hwloc_obj.MISC_FIRST_CHILD)); }
     /** Unsafe version of {@link #cpuset}. */
     public static long ncpuset(long struct) { return memGetAddress(struct + hwloc_obj.CPUSET); }
     /** Unsafe version of {@link #complete_cpuset}. */
@@ -564,13 +549,11 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         @NativeType("unsigned")
         public int os_index() { return hwloc_obj.nos_index(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
-        @Nullable
         @NativeType("char *")
-        public ByteBuffer name() { return hwloc_obj.nname(address()); }
+        public @Nullable ByteBuffer name() { return hwloc_obj.nname(address()); }
         /** @return the null-terminated string pointed to by the {@code name} field. */
-        @Nullable
         @NativeType("char *")
-        public String nameString() { return hwloc_obj.nnameString(address()); }
+        public @Nullable String nameString() { return hwloc_obj.nnameString(address()); }
         /** @return the value of the {@code total_memory} field. */
         @NativeType("hwloc_uint64_t")
         public long total_memory() { return hwloc_obj.ntotal_memory(address()); }
@@ -583,43 +566,35 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         @NativeType("unsigned")
         public int logical_index() { return hwloc_obj.nlogical_index(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code next_cousin} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj next_cousin() { return hwloc_obj.nnext_cousin(address()); }
+        public @Nullable hwloc_obj next_cousin() { return hwloc_obj.nnext_cousin(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code prev_cousin} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj prev_cousin() { return hwloc_obj.nprev_cousin(address()); }
+        public @Nullable hwloc_obj prev_cousin() { return hwloc_obj.nprev_cousin(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code parent} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj parent() { return hwloc_obj.nparent(address()); }
+        public @Nullable hwloc_obj parent() { return hwloc_obj.nparent(address()); }
         /** @return the value of the {@code sibling_rank} field. */
         @NativeType("unsigned")
         public int sibling_rank() { return hwloc_obj.nsibling_rank(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code next_sibling} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj next_sibling() { return hwloc_obj.nnext_sibling(address()); }
+        public @Nullable hwloc_obj next_sibling() { return hwloc_obj.nnext_sibling(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code prev_sibling} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj prev_sibling() { return hwloc_obj.nprev_sibling(address()); }
+        public @Nullable hwloc_obj prev_sibling() { return hwloc_obj.nprev_sibling(address()); }
         /** @return the value of the {@code arity} field. */
         @NativeType("unsigned")
         public int arity() { return hwloc_obj.narity(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code children} field. */
-        @Nullable
         @NativeType("struct hwloc_obj **")
-        public PointerBuffer children() { return hwloc_obj.nchildren(address()); }
+        public @Nullable PointerBuffer children() { return hwloc_obj.nchildren(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code first_child} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj first_child() { return hwloc_obj.nfirst_child(address()); }
+        public @Nullable hwloc_obj first_child() { return hwloc_obj.nfirst_child(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code last_child} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj last_child() { return hwloc_obj.nlast_child(address()); }
+        public @Nullable hwloc_obj last_child() { return hwloc_obj.nlast_child(address()); }
         /** @return the value of the {@code symmetric_subtree} field. */
         @NativeType("int")
         public boolean symmetric_subtree() { return hwloc_obj.nsymmetric_subtree(address()) != 0; }
@@ -627,23 +602,20 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         @NativeType("unsigned")
         public int memory_arity() { return hwloc_obj.nmemory_arity(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code memory_first_child} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj memory_first_child() { return hwloc_obj.nmemory_first_child(address()); }
+        public @Nullable hwloc_obj memory_first_child() { return hwloc_obj.nmemory_first_child(address()); }
         /** @return the value of the {@code io_arity} field. */
         @NativeType("unsigned")
         public int io_arity() { return hwloc_obj.nio_arity(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code io_first_child} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj io_first_child() { return hwloc_obj.nio_first_child(address()); }
+        public @Nullable hwloc_obj io_first_child() { return hwloc_obj.nio_first_child(address()); }
         /** @return the value of the {@code misc_arity} field. */
         @NativeType("unsigned")
         public int misc_arity() { return hwloc_obj.nmisc_arity(address()); }
         /** @return a {@link hwloc_obj} view of the struct pointed to by the {@code misc_first_child} field. */
-        @Nullable
         @NativeType("struct hwloc_obj *")
-        public hwloc_obj misc_first_child() { return hwloc_obj.nmisc_first_child(address()); }
+        public @Nullable hwloc_obj misc_first_child() { return hwloc_obj.nmisc_first_child(address()); }
         /** @return the value of the {@code cpuset} field. */
         @NativeType("hwloc_cpuset_t")
         public long cpuset() { return hwloc_obj.ncpuset(address()); }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -146,16 +146,14 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
     @NativeType("uint32_t")
     public int orientationCount() { return norientationCount(address()); }
     /** an array of {@code XrPlaneDetectorOrientationEXT}. If this field is null no orientation filtering is applied. If any orientations are present only planes with any of the orientation listed are returned. */
-    @Nullable
     @NativeType("XrPlaneDetectorOrientationEXT const *")
-    public IntBuffer orientations() { return norientations(address()); }
+    public @Nullable IntBuffer orientations() { return norientations(address()); }
     /** the number of elements in the {@code semanticTypes}. */
     @NativeType("uint32_t")
     public int semanticTypeCount() { return nsemanticTypeCount(address()); }
     /** an array of {@code XrPlaneDetectorSemanticTypeEXT}. If this field is null no semantic type filtering is applied. If any semantic types are present only planes with matching semantic types are returned. */
-    @Nullable
     @NativeType("XrPlaneDetectorSemanticTypeEXT const *")
-    public IntBuffer semanticTypes() { return nsemanticTypes(address()); }
+    public @Nullable IntBuffer semanticTypes() { return nsemanticTypes(address()); }
     /** the maximum number of planes the runtime <b>may</b> return. This number <b>must</b> be larger than 0. If the number is 0 the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. */
     @NativeType("uint32_t")
     public int maxPlanes() { return nmaxPlanes(address()); }
@@ -264,8 +262,7 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPlaneDetectorBeginInfoEXT createSafe(long address) {
+    public static @Nullable XrPlaneDetectorBeginInfoEXT createSafe(long address) {
         return address == NULL ? null : new XrPlaneDetectorBeginInfoEXT(address, null);
     }
 
@@ -308,8 +305,7 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPlaneDetectorBeginInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static XrPlaneDetectorBeginInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -364,11 +360,11 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
     /** Unsafe version of {@link #orientationCount}. */
     public static int norientationCount(long struct) { return memGetInt(struct + XrPlaneDetectorBeginInfoEXT.ORIENTATIONCOUNT); }
     /** Unsafe version of {@link #orientations() orientations}. */
-    @Nullable public static IntBuffer norientations(long struct) { return memIntBufferSafe(memGetAddress(struct + XrPlaneDetectorBeginInfoEXT.ORIENTATIONS), norientationCount(struct)); }
+    public static @Nullable IntBuffer norientations(long struct) { return memIntBufferSafe(memGetAddress(struct + XrPlaneDetectorBeginInfoEXT.ORIENTATIONS), norientationCount(struct)); }
     /** Unsafe version of {@link #semanticTypeCount}. */
     public static int nsemanticTypeCount(long struct) { return memGetInt(struct + XrPlaneDetectorBeginInfoEXT.SEMANTICTYPECOUNT); }
     /** Unsafe version of {@link #semanticTypes() semanticTypes}. */
-    @Nullable public static IntBuffer nsemanticTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + XrPlaneDetectorBeginInfoEXT.SEMANTICTYPES), nsemanticTypeCount(struct)); }
+    public static @Nullable IntBuffer nsemanticTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + XrPlaneDetectorBeginInfoEXT.SEMANTICTYPES), nsemanticTypeCount(struct)); }
     /** Unsafe version of {@link #maxPlanes}. */
     public static int nmaxPlanes(long struct) { return memGetInt(struct + XrPlaneDetectorBeginInfoEXT.MAXPLANES); }
     /** Unsafe version of {@link #minArea}. */
@@ -471,16 +467,14 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
         @NativeType("uint32_t")
         public int orientationCount() { return XrPlaneDetectorBeginInfoEXT.norientationCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrPlaneDetectorBeginInfoEXT#orientations} field. */
-        @Nullable
         @NativeType("XrPlaneDetectorOrientationEXT const *")
-        public IntBuffer orientations() { return XrPlaneDetectorBeginInfoEXT.norientations(address()); }
+        public @Nullable IntBuffer orientations() { return XrPlaneDetectorBeginInfoEXT.norientations(address()); }
         /** @return the value of the {@link XrPlaneDetectorBeginInfoEXT#semanticTypeCount} field. */
         @NativeType("uint32_t")
         public int semanticTypeCount() { return XrPlaneDetectorBeginInfoEXT.nsemanticTypeCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrPlaneDetectorBeginInfoEXT#semanticTypes} field. */
-        @Nullable
         @NativeType("XrPlaneDetectorSemanticTypeEXT const *")
-        public IntBuffer semanticTypes() { return XrPlaneDetectorBeginInfoEXT.nsemanticTypes(address()); }
+        public @Nullable IntBuffer semanticTypes() { return XrPlaneDetectorBeginInfoEXT.nsemanticTypes(address()); }
         /** @return the value of the {@link XrPlaneDetectorBeginInfoEXT#maxPlanes} field. */
         @NativeType("uint32_t")
         public int maxPlanes() { return XrPlaneDetectorBeginInfoEXT.nmaxPlanes(address()); }

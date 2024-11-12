@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,8 +161,7 @@ public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandJointLocationEXT createSafe(long address) {
+    public static @Nullable XrHandJointLocationEXT createSafe(long address) {
         return address == NULL ? null : new XrHandJointLocationEXT(address, null);
     }
 
@@ -205,8 +204,7 @@ public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandJointLocationEXT.Buffer createSafe(long address, int capacity) {
+    public static XrHandJointLocationEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

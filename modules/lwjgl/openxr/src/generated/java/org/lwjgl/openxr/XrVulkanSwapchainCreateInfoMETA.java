@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -173,8 +173,7 @@ public class XrVulkanSwapchainCreateInfoMETA extends Struct<XrVulkanSwapchainCre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVulkanSwapchainCreateInfoMETA createSafe(long address) {
+    public static @Nullable XrVulkanSwapchainCreateInfoMETA createSafe(long address) {
         return address == NULL ? null : new XrVulkanSwapchainCreateInfoMETA(address, null);
     }
 
@@ -217,8 +216,7 @@ public class XrVulkanSwapchainCreateInfoMETA extends Struct<XrVulkanSwapchainCre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVulkanSwapchainCreateInfoMETA.Buffer createSafe(long address, int capacity) {
+    public static XrVulkanSwapchainCreateInfoMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

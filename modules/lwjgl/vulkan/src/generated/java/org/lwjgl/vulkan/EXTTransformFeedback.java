@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -219,7 +219,7 @@ public class EXTTransformFeedback {
      * @param pOffsets      a pointer to an array of buffer offsets.
      * @param pSizes        {@code NULL} or a pointer to an array of {@code VkDeviceSize} buffer sizes, specifying the maximum number of bytes to capture to the corresponding transform feedback buffer. If {@code pSizes} is {@code NULL}, or the value of the {@code pSizes} array element is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, then the maximum number of bytes captured will be the size of the corresponding buffer minus the buffer offset.
      */
-    public static void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pSizes) {
+    public static void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pSizes) {
         if (CHECKS) {
             check(pOffsets, pBuffers.remaining());
             checkSafe(pSizes, pBuffers.remaining());
@@ -309,7 +309,7 @@ public class EXTTransformFeedback {
      * @param pCounterBuffers       {@code NULL} or a pointer to an array of {@code VkBuffer} handles to counter buffers. Each buffer contains a 4 byte integer value representing the byte offset from the start of the corresponding transform feedback buffer from where to start capturing vertex data. If the byte offset stored to the counter buffer location was done using {@link #vkCmdEndTransformFeedbackEXT CmdEndTransformFeedbackEXT} it can be used to resume transform feedback from the previous location. If {@code pCounterBuffers} is {@code NULL}, then transform feedback will start capturing vertex data to byte offset zero in all bound transform feedback buffers. For each element of {@code pCounterBuffers} that is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, transform feedback will start capturing vertex data to byte zero in the corresponding bound transform feedback buffer.
      * @param pCounterBufferOffsets {@code NULL} or a pointer to an array of {@code VkDeviceSize} values specifying offsets within each of the {@code pCounterBuffers} where the counter values were previously written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. This data is the number of bytes captured by the previous transform feedback to this buffer. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.
      */
-    public static void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @Nullable @NativeType("VkBuffer const *") LongBuffer pCounterBuffers, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pCounterBufferOffsets) {
+    public static void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @NativeType("VkBuffer const *") @Nullable LongBuffer pCounterBuffers, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pCounterBufferOffsets) {
         if (CHECKS) {
             checkSafe(pCounterBufferOffsets, remainingSafe(pCounterBuffers));
         }
@@ -390,7 +390,7 @@ public class EXTTransformFeedback {
      * @param pCounterBuffers       {@code NULL} or a pointer to an array of {@code VkBuffer} handles to counter buffers. The counter buffers are used to record the current byte positions of each transform feedback buffer where the next vertex output data would be captured. This <b>can</b> be used by a subsequent {@link #vkCmdBeginTransformFeedbackEXT CmdBeginTransformFeedbackEXT} call to resume transform feedback capture from this position. It can also be used by {@link #vkCmdDrawIndirectByteCountEXT CmdDrawIndirectByteCountEXT} to determine the vertex count of the draw call.
      * @param pCounterBufferOffsets {@code NULL} or a pointer to an array of {@code VkDeviceSize} values specifying offsets within each of the {@code pCounterBuffers} where the counter values can be written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. The data stored at this location is the byte offset from the start of the transform feedback buffer binding where the next vertex data would be written. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.
      */
-    public static void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @Nullable @NativeType("VkBuffer const *") LongBuffer pCounterBuffers, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pCounterBufferOffsets) {
+    public static void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @NativeType("VkBuffer const *") @Nullable LongBuffer pCounterBuffers, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pCounterBufferOffsets) {
         if (CHECKS) {
             checkSafe(pCounterBufferOffsets, remainingSafe(pCounterBuffers));
         }
@@ -1074,7 +1074,7 @@ public class EXTTransformFeedback {
     }
 
     /** Array version of: {@link #vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT} */
-    public static void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @Nullable @NativeType("VkDeviceSize const *") long[] pSizes) {
+    public static void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @NativeType("VkDeviceSize const *") long @Nullable [] pSizes) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindTransformFeedbackBuffersEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -1085,7 +1085,7 @@ public class EXTTransformFeedback {
     }
 
     /** Array version of: {@link #vkCmdBeginTransformFeedbackEXT CmdBeginTransformFeedbackEXT} */
-    public static void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @Nullable @NativeType("VkBuffer const *") long[] pCounterBuffers, @Nullable @NativeType("VkDeviceSize const *") long[] pCounterBufferOffsets) {
+    public static void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @NativeType("VkBuffer const *") long @Nullable [] pCounterBuffers, @NativeType("VkDeviceSize const *") long @Nullable [] pCounterBufferOffsets) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginTransformFeedbackEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -1095,7 +1095,7 @@ public class EXTTransformFeedback {
     }
 
     /** Array version of: {@link #vkCmdEndTransformFeedbackEXT CmdEndTransformFeedbackEXT} */
-    public static void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @Nullable @NativeType("VkBuffer const *") long[] pCounterBuffers, @Nullable @NativeType("VkDeviceSize const *") long[] pCounterBufferOffsets) {
+    public static void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstCounterBuffer, @NativeType("VkBuffer const *") long @Nullable [] pCounterBuffers, @NativeType("VkDeviceSize const *") long @Nullable [] pCounterBufferOffsets) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdEndTransformFeedbackEXT;
         if (CHECKS) {
             check(__functionAddress);

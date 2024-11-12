@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,8 +119,7 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSetStateFlagsIndirectCommandNV createSafe(long address) {
+    public static @Nullable VkSetStateFlagsIndirectCommandNV createSafe(long address) {
         return address == NULL ? null : new VkSetStateFlagsIndirectCommandNV(address, null);
     }
 
@@ -163,8 +162,7 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndi
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSetStateFlagsIndirectCommandNV.Buffer createSafe(long address, int capacity) {
+    public static VkSetStateFlagsIndirectCommandNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

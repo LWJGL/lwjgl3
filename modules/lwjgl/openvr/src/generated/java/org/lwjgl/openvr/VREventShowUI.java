@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -79,8 +79,7 @@ public class VREventShowUI extends Struct<VREventShowUI> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventShowUI createSafe(long address) {
+    public static @Nullable VREventShowUI createSafe(long address) {
         return address == NULL ? null : new VREventShowUI(address, null);
     }
 
@@ -95,8 +94,7 @@ public class VREventShowUI extends Struct<VREventShowUI> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventShowUI.Buffer createSafe(long address, int capacity) {
+    public static VREventShowUI.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

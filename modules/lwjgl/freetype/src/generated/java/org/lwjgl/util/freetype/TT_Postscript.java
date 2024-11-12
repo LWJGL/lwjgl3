@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class TT_Postscript extends Struct<TT_Postscript> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_Postscript createSafe(long address) {
+    public static @Nullable TT_Postscript createSafe(long address) {
         return address == NULL ? null : new TT_Postscript(address, null);
     }
 
@@ -152,8 +151,7 @@ public class TT_Postscript extends Struct<TT_Postscript> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_Postscript.Buffer createSafe(long address, int capacity) {
+    public static TT_Postscript.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

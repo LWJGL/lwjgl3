@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,8 +131,7 @@ public class CUlaunchMemSyncDomainMap extends Struct<CUlaunchMemSyncDomainMap> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchMemSyncDomainMap createSafe(long address) {
+    public static @Nullable CUlaunchMemSyncDomainMap createSafe(long address) {
         return address == NULL ? null : new CUlaunchMemSyncDomainMap(address, null);
     }
 
@@ -175,8 +174,7 @@ public class CUlaunchMemSyncDomainMap extends Struct<CUlaunchMemSyncDomainMap> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchMemSyncDomainMap.Buffer createSafe(long address, int capacity) {
+    public static CUlaunchMemSyncDomainMap.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

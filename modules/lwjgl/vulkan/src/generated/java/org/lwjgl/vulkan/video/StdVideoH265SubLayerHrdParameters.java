@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -187,8 +187,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265SubLayerHrdParameters createSafe(long address) {
+    public static @Nullable StdVideoH265SubLayerHrdParameters createSafe(long address) {
         return address == NULL ? null : new StdVideoH265SubLayerHrdParameters(address, null);
     }
 
@@ -231,8 +230,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265SubLayerHrdParameters.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH265SubLayerHrdParameters.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

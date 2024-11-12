@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,8 +109,7 @@ public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceFormatKHR createSafe(long address) {
+    public static @Nullable VkSurfaceFormatKHR createSafe(long address) {
         return address == NULL ? null : new VkSurfaceFormatKHR(address, null);
     }
 
@@ -153,8 +152,7 @@ public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceFormatKHR.Buffer createSafe(long address, int capacity) {
+    public static VkSurfaceFormatKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

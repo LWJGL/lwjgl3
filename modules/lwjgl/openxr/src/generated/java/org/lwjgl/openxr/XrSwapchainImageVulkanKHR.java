@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainImageVulkanKHR createSafe(long address) {
+    public static @Nullable XrSwapchainImageVulkanKHR createSafe(long address) {
         return address == NULL ? null : new XrSwapchainImageVulkanKHR(address, null);
     }
 
@@ -220,8 +219,7 @@ public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainImageVulkanKHR.Buffer createSafe(long address, int capacity) {
+    public static XrSwapchainImageVulkanKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

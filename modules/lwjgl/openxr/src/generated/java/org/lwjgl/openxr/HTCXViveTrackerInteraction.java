@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -161,7 +161,7 @@ public class HTCXViveTrackerInteraction {
      * @param paths           a pointer to an array of {@link XrViveTrackerPathsHTCX} VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateViveTrackerPathsHTCX(XrInstance instance, @NativeType("uint32_t *") IntBuffer pathCountOutput, @Nullable @NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX.Buffer paths) {
+    public static int xrEnumerateViveTrackerPathsHTCX(XrInstance instance, @NativeType("uint32_t *") IntBuffer pathCountOutput, @NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX.@Nullable Buffer paths) {
         if (CHECKS) {
             check(pathCountOutput, 1);
         }

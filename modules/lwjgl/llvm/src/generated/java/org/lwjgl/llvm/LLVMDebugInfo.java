@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -981,7 +981,7 @@ public class LLVMDebugInfo {
      * @param Elements       renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedModuleFromAlias(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long ImportedEntity, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+    public static long LLVMDIBuilderCreateImportedModuleFromAlias(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long ImportedEntity, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("LLVMMetadataRef *") @Nullable PointerBuffer Elements) {
         return nLLVMDIBuilderCreateImportedModuleFromAlias(Builder, Scope, ImportedEntity, File, Line, memAddressSafe(Elements), remainingSafe(Elements));
     }
 
@@ -1014,7 +1014,7 @@ public class LLVMDebugInfo {
      * @param Elements renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedModuleFromModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long M, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+    public static long LLVMDIBuilderCreateImportedModuleFromModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long M, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("LLVMMetadataRef *") @Nullable PointerBuffer Elements) {
         return nLLVMDIBuilderCreateImportedModuleFromModule(Builder, Scope, M, File, Line, memAddressSafe(Elements), remainingSafe(Elements));
     }
 
@@ -1049,7 +1049,7 @@ public class LLVMDebugInfo {
      * @param Elements renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") ByteBuffer Name, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMMetadataRef *") @Nullable PointerBuffer Elements) {
         return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, memAddress(Name), Name.remaining(), memAddressSafe(Elements), remainingSafe(Elements));
     }
 
@@ -1065,7 +1065,7 @@ public class LLVMDebugInfo {
      * @param Elements renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") CharSequence Name, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef *") @Nullable PointerBuffer Elements) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int NameEncodedLength = stack.nUTF8(Name, false);
@@ -1216,9 +1216,8 @@ public class LLVMDebugInfo {
      *
      * @since 9
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMDIFileGetDirectory(@NativeType("LLVMMetadataRef") long File) {
+    public static @Nullable String LLVMDIFileGetDirectory(@NativeType("LLVMMetadataRef") long File) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Len = stack.callocInt(1);
@@ -1254,9 +1253,8 @@ public class LLVMDebugInfo {
      *
      * @since 9
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMDIFileGetFilename(@NativeType("LLVMMetadataRef") long File) {
+    public static @Nullable String LLVMDIFileGetFilename(@NativeType("LLVMMetadataRef") long File) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Len = stack.callocInt(1);
@@ -1292,9 +1290,8 @@ public class LLVMDebugInfo {
      *
      * @since 9
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMDIFileGetSource(@NativeType("LLVMMetadataRef") long File) {
+    public static @Nullable String LLVMDIFileGetSource(@NativeType("LLVMMetadataRef") long File) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer Len = stack.callocInt(1);
@@ -2615,9 +2612,8 @@ public class LLVMDebugInfo {
      *
      * @param DType the DIType
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMDITypeGetName(@NativeType("LLVMMetadataRef") long DType) {
+    public static @Nullable String LLVMDITypeGetName(@NativeType("LLVMMetadataRef") long DType) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer Length = stack.callocPointer(1);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -45,7 +45,7 @@ public class WinBase {
      *         <p>If the function fails, the return value is equal to a handle to the local memory object. To get extended error information, call {@link #GetLastError}.</p>
      */
     @NativeType("HLOCAL")
-    public static long LocalFree(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HLOCAL") long hMem) {
+    public static long LocalFree(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HLOCAL") long hMem) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             check(hMem);
@@ -82,7 +82,7 @@ public class WinBase {
      *                      <p>If this parameter is {@code NULL}, {@code GetModuleHandle} returns a handle to the file used to create the calling process (.exe file).</p>
      */
     @NativeType("HMODULE")
-    public static long GetModuleHandle(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @Nullable @NativeType("LPCTSTR") ByteBuffer moduleName) {
+    public static long GetModuleHandle(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") @Nullable ByteBuffer moduleName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2Safe(moduleName);
@@ -102,7 +102,7 @@ public class WinBase {
      *                      <p>If this parameter is {@code NULL}, {@code GetModuleHandle} returns a handle to the file used to create the calling process (.exe file).</p>
      */
     @NativeType("HMODULE")
-    public static long GetModuleHandle(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @Nullable @NativeType("LPCTSTR") CharSequence moduleName) {
+    public static long GetModuleHandle(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") @Nullable CharSequence moduleName) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -152,7 +152,7 @@ public class WinBase {
      *         <p>If the function fails, the return value is 0 (zero). To get extended error information, call {@link #GetLastError}.</p>
      */
     @NativeType("DWORD")
-    public static int GetModuleFileName(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HMODULE") long hModule, @NativeType("LPTSTR") ByteBuffer lpFilename) {
+    public static int GetModuleFileName(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HMODULE") long hModule, @NativeType("LPTSTR") ByteBuffer lpFilename) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -177,7 +177,7 @@ public class WinBase {
      *         <p>If the function fails, the return value is 0 (zero). To get extended error information, call {@link #GetLastError}.</p>
      */
     @NativeType("DWORD")
-    public static String GetModuleFileName(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HMODULE") long hModule, @NativeType("DWORD") int nSize) {
+    public static String GetModuleFileName(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HMODULE") long hModule, @NativeType("DWORD") int nSize) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -215,7 +215,7 @@ public class WinBase {
      *                      string.</p>
      */
     @NativeType("HMODULE")
-    public static long LoadLibrary(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") ByteBuffer name) {
+    public static long LoadLibrary(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT2(name);
@@ -242,7 +242,7 @@ public class WinBase {
      *                      string.</p>
      */
     @NativeType("HMODULE")
-    public static long LoadLibrary(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCTSTR") CharSequence name) {
+    public static long LoadLibrary(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCTSTR") CharSequence name) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -270,7 +270,7 @@ public class WinBase {
      *                      high-order word must be zero.
      */
     @NativeType("FARPROC")
-    public static long GetProcAddress(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HMODULE") long handle, @NativeType("LPCSTR") ByteBuffer name) {
+    public static long GetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HMODULE") long handle, @NativeType("LPCSTR") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             check(handle);
@@ -288,7 +288,7 @@ public class WinBase {
      *                      high-order word must be zero.
      */
     @NativeType("FARPROC")
-    public static long GetProcAddress(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HMODULE") long handle, @NativeType("LPCSTR") CharSequence name) {
+    public static long GetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HMODULE") long handle, @NativeType("LPCSTR") CharSequence name) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             check(handle);
@@ -316,7 +316,7 @@ public class WinBase {
      * @param handle        a handle to the loaded library module
      */
     @NativeType("BOOL")
-    public static boolean FreeLibrary(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HMODULE") long handle) {
+    public static boolean FreeLibrary(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HMODULE") long handle) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             check(handle);

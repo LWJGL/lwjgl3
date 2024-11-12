@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkProtectedSubmitInfo createSafe(long address) {
+    public static @Nullable VkProtectedSubmitInfo createSafe(long address) {
         return address == NULL ? null : new VkProtectedSubmitInfo(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkProtectedSubmitInfo.Buffer createSafe(long address, int capacity) {
+    public static VkProtectedSubmitInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

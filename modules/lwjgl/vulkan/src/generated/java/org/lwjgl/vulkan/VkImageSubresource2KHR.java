@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageSubresource2KHR createSafe(long address) {
+    public static @Nullable VkImageSubresource2KHR createSafe(long address) {
         return address == NULL ? null : new VkImageSubresource2KHR(address, null);
     }
 
@@ -203,8 +202,7 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageSubresource2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkImageSubresource2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

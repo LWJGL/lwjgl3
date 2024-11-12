@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class VkExportMemoryAllocateInfo extends Struct<VkExportMemoryAllocateInf
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportMemoryAllocateInfo createSafe(long address) {
+    public static @Nullable VkExportMemoryAllocateInfo createSafe(long address) {
         return address == NULL ? null : new VkExportMemoryAllocateInfo(address, null);
     }
 
@@ -203,8 +202,7 @@ public class VkExportMemoryAllocateInfo extends Struct<VkExportMemoryAllocateInf
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportMemoryAllocateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkExportMemoryAllocateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

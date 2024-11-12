@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -78,7 +78,7 @@ public class IMGGenerateMipmap {
      *                           {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueGenerateMipmapIMG(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("cl_mipmap_filter_mode_img") int mipmap_filter_mode, @Nullable @NativeType("size_t const *") PointerBuffer array_region, @Nullable @NativeType("size_t const *") PointerBuffer mip_region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueGenerateMipmapIMG(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("cl_mipmap_filter_mode_img") int mipmap_filter_mode, @NativeType("size_t const *") @Nullable PointerBuffer array_region, @NativeType("size_t const *") @Nullable PointerBuffer mip_region, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(array_region, 2);
             checkSafe(mip_region, 2);

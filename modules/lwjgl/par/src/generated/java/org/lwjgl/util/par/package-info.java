@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to the <a href="https://github.com/prideout/par">par</a> library. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.par;
 

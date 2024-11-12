@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -141,8 +141,7 @@ public class VkSampleLocationEXT extends Struct<VkSampleLocationEXT> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSampleLocationEXT createSafe(long address) {
+    public static @Nullable VkSampleLocationEXT createSafe(long address) {
         return address == NULL ? null : new VkSampleLocationEXT(address, null);
     }
 
@@ -185,8 +184,7 @@ public class VkSampleLocationEXT extends Struct<VkSampleLocationEXT> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSampleLocationEXT.Buffer createSafe(long address, int capacity) {
+    public static VkSampleLocationEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

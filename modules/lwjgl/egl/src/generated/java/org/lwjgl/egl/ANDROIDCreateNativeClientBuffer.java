@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -62,7 +62,7 @@ public class ANDROIDCreateNativeClientBuffer {
      *                    the last attribute specified in the list must be {@link EGL10#EGL_NONE NONE}.
      */
     @NativeType("EGLClientBuffer")
-    public static long eglCreateNativeClientBufferANDROID(@Nullable @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static long eglCreateNativeClientBufferANDROID(@NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
@@ -71,7 +71,7 @@ public class ANDROIDCreateNativeClientBuffer {
 
     /** Array version of: {@link #eglCreateNativeClientBufferANDROID CreateNativeClientBufferANDROID} */
     @NativeType("EGLClientBuffer")
-    public static long eglCreateNativeClientBufferANDROID(@Nullable @NativeType("EGLint const *") int[] attrib_list) {
+    public static long eglCreateNativeClientBufferANDROID(@NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateNativeClientBufferANDROID;
         if (CHECKS) {
             check(__functionAddress);

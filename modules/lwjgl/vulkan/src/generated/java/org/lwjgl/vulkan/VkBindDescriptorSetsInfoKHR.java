@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,9 +171,8 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
     @NativeType("uint32_t")
     public int dynamicOffsetCount() { return ndynamicOffsetCount(address()); }
     /** a pointer to an array of {@code uint32_t} values specifying dynamic offsets. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pDynamicOffsets() { return npDynamicOffsets(address()); }
+    public @Nullable IntBuffer pDynamicOffsets() { return npDynamicOffsets(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindDescriptorSetsInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -255,8 +254,7 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindDescriptorSetsInfoKHR createSafe(long address) {
+    public static @Nullable VkBindDescriptorSetsInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkBindDescriptorSetsInfoKHR(address, null);
     }
 
@@ -299,8 +297,7 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindDescriptorSetsInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkBindDescriptorSetsInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -361,7 +358,7 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
     /** Unsafe version of {@link #dynamicOffsetCount}. */
     public static int ndynamicOffsetCount(long struct) { return memGetInt(struct + VkBindDescriptorSetsInfoKHR.DYNAMICOFFSETCOUNT); }
     /** Unsafe version of {@link #pDynamicOffsets() pDynamicOffsets}. */
-    @Nullable public static IntBuffer npDynamicOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindDescriptorSetsInfoKHR.PDYNAMICOFFSETS), ndynamicOffsetCount(struct)); }
+    public static @Nullable IntBuffer npDynamicOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindDescriptorSetsInfoKHR.PDYNAMICOFFSETS), ndynamicOffsetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkBindDescriptorSetsInfoKHR.STYPE, value); }
@@ -459,9 +456,8 @@ public class VkBindDescriptorSetsInfoKHR extends Struct<VkBindDescriptorSetsInfo
         @NativeType("uint32_t")
         public int dynamicOffsetCount() { return VkBindDescriptorSetsInfoKHR.ndynamicOffsetCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindDescriptorSetsInfoKHR#pDynamicOffsets} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pDynamicOffsets() { return VkBindDescriptorSetsInfoKHR.npDynamicOffsets(address()); }
+        public @Nullable IntBuffer pDynamicOffsets() { return VkBindDescriptorSetsInfoKHR.npDynamicOffsets(address()); }
 
         /** Sets the specified value to the {@link VkBindDescriptorSetsInfoKHR#sType} field. */
         public VkBindDescriptorSetsInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindDescriptorSetsInfoKHR.nsType(address(), value); return this; }

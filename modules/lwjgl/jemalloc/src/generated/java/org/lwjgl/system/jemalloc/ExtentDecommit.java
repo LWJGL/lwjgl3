@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jemalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -41,8 +41,7 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ExtentDecommit createSafe(long functionPointer) {
+    public static @Nullable ExtentDecommit createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

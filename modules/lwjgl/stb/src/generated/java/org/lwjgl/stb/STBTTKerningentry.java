@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class STBTTKerningentry extends Struct<STBTTKerningentry> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTKerningentry createSafe(long address) {
+    public static @Nullable STBTTKerningentry createSafe(long address) {
         return address == NULL ? null : new STBTTKerningentry(address, null);
     }
 
@@ -152,8 +151,7 @@ public class STBTTKerningentry extends Struct<STBTTKerningentry> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTKerningentry.Buffer createSafe(long address, int capacity) {
+    public static STBTTKerningentry.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

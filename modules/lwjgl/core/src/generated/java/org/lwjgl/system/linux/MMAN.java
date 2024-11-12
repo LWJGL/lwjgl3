@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -237,7 +237,7 @@ public class MMAN {
      * @return on success, returns a pointer to the mapped area. On error, the value {@link #MAP_FAILED} is returned, and {@code errno} is set to indicate the error.
      */
     @NativeType("void *")
-    public static long mmap(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("void *") long addr, @NativeType("size_t") long length, int prot, int flags, int fd, @NativeType("off_t") long offset) {
+    public static long mmap(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("void *") long addr, @NativeType("size_t") long length, int prot, int flags, int fd, @NativeType("off_t") long offset) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -263,7 +263,7 @@ public class MMAN {
      *
      * @return on success, returns 0. On failure, it returns -1, and {@code errno} is set to indicate the error (probably to {@code EINVAL}).
      */
-    public static int munmap(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("void *") ByteBuffer addr) {
+    public static int munmap(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("void *") ByteBuffer addr) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }

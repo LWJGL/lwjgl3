@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class hwloc_location extends Struct<hwloc_location> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_location createSafe(long address) {
+    public static @Nullable hwloc_location createSafe(long address) {
         return address == NULL ? null : new hwloc_location(address, null);
     }
 
@@ -147,8 +146,7 @@ public class hwloc_location extends Struct<hwloc_location> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_location.Buffer createSafe(long address, int capacity) {
+    public static hwloc_location.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

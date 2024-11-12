@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,9 +116,8 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** a pointer to an array of {@link XrVector2f}, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0. */
-    @Nullable
     @NativeType("XrVector2f *")
-    public XrVector2f.Buffer vertices() { return nvertices(address()); }
+    public XrVector2f.@Nullable Buffer vertices() { return nvertices(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrBoundary2DFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -131,7 +130,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     /** Sets the specified value to the {@link #vertexCountOutput} field. */
     public XrBoundary2DFB vertexCountOutput(@NativeType("uint32_t") int value) { nvertexCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@link #vertices} field. */
-    public XrBoundary2DFB vertices(@Nullable @NativeType("XrVector2f *") XrVector2f.Buffer value) { nvertices(address(), value); return this; }
+    public XrBoundary2DFB vertices(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { nvertices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrBoundary2DFB set(
@@ -139,7 +138,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
         long next,
         int vertexCapacityInput,
         int vertexCountOutput,
-        @Nullable XrVector2f.Buffer vertices
+        XrVector2f.@Nullable Buffer vertices
     ) {
         type(type);
         next(next);
@@ -186,8 +185,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBoundary2DFB createSafe(long address) {
+    public static @Nullable XrBoundary2DFB createSafe(long address) {
         return address == NULL ? null : new XrBoundary2DFB(address, null);
     }
 
@@ -230,8 +228,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrBoundary2DFB.Buffer createSafe(long address, int capacity) {
+    public static XrBoundary2DFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -284,7 +281,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     /** Unsafe version of {@link #vertexCountOutput}. */
     public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
-    @Nullable public static XrVector2f.Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrBoundary2DFB.VERTICES), nvertexCapacityInput(struct)); }
+    public static XrVector2f.@Nullable Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrBoundary2DFB.VERTICES), nvertexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrBoundary2DFB.TYPE, value); }
@@ -295,7 +292,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
     public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrBoundary2DFB.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrVector2f.Buffer) vertices}. */
-    public static void nvertices(long struct, @Nullable XrVector2f.Buffer value) { memPutAddress(struct + XrBoundary2DFB.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
+    public static void nvertices(long struct, XrVector2f.@Nullable Buffer value) { memPutAddress(struct + XrBoundary2DFB.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -353,9 +350,8 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrBoundary2DFB.nvertexCountOutput(address()); }
         /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@link XrBoundary2DFB#vertices} field. */
-        @Nullable
         @NativeType("XrVector2f *")
-        public XrVector2f.Buffer vertices() { return XrBoundary2DFB.nvertices(address()); }
+        public XrVector2f.@Nullable Buffer vertices() { return XrBoundary2DFB.nvertices(address()); }
 
         /** Sets the specified value to the {@link XrBoundary2DFB#type} field. */
         public XrBoundary2DFB.Buffer type(@NativeType("XrStructureType") int value) { XrBoundary2DFB.ntype(address(), value); return this; }
@@ -368,7 +364,7 @@ public class XrBoundary2DFB extends Struct<XrBoundary2DFB> implements NativeReso
         /** Sets the specified value to the {@link XrBoundary2DFB#vertexCountOutput} field. */
         public XrBoundary2DFB.Buffer vertexCountOutput(@NativeType("uint32_t") int value) { XrBoundary2DFB.nvertexCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@link XrBoundary2DFB#vertices} field. */
-        public XrBoundary2DFB.Buffer vertices(@Nullable @NativeType("XrVector2f *") XrVector2f.Buffer value) { XrBoundary2DFB.nvertices(address(), value); return this; }
+        public XrBoundary2DFB.Buffer vertices(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { XrBoundary2DFB.nvertices(address(), value); return this; }
 
     }
 

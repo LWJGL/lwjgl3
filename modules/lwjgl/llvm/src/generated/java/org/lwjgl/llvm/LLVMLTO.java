@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -247,9 +247,8 @@ public class LLVMLTO {
     }
 
     /** Returns the last error string or {@code NULL} if last operation was successful. */
-    @Nullable
     @NativeType("char const *")
-    public static String lto_get_error_message() {
+    public static @Nullable String lto_get_error_message() {
         long __result = nlto_get_error_message();
         return memUTF8Safe(__result);
     }
@@ -621,9 +620,8 @@ public class LLVMLTO {
     }
 
     /** Returns triple string which the object module was compiled under. */
-    @Nullable
     @NativeType("char const *")
-    public static String lto_module_get_target_triple(@NativeType("lto_module_t") long mod) {
+    public static @Nullable String lto_module_get_target_triple(@NativeType("lto_module_t") long mod) {
         long __result = nlto_module_get_target_triple(mod);
         return memUTF8Safe(__result);
     }
@@ -683,9 +681,8 @@ public class LLVMLTO {
     }
 
     /** Returns the name of the ith symbol in the object module. */
-    @Nullable
     @NativeType("char const *")
-    public static String lto_module_get_symbol_name(@NativeType("lto_module_t") long mod, @NativeType("unsigned int") int index) {
+    public static @Nullable String lto_module_get_symbol_name(@NativeType("lto_module_t") long mod, @NativeType("unsigned int") int index) {
         long __result = nlto_module_get_symbol_name(mod, index);
         return memUTF8Safe(__result);
     }
@@ -718,9 +715,8 @@ public class LLVMLTO {
      * 
      * <p>The linker options may consist of multiple flags. It is the linker's responsibility to split the flags using a platform-specific mechanism.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String lto_module_get_linkeropts(@NativeType("lto_module_t") long mod) {
+    public static @Nullable String lto_module_get_linkeropts(@NativeType("lto_module_t") long mod) {
         long __result = nlto_module_get_linkeropts(mod);
         return memUTF8Safe(__result);
     }
@@ -1063,9 +1059,8 @@ public class LLVMLTO {
      * will be freed when {@link #lto_codegen_dispose codegen_dispose} is called, or {@code lto_codegen_compile()} is called again. On failure, returns {@code NULL} (check
      * {@link #lto_get_error_message get_error_message} for details).</p>
      */
-    @Nullable
     @NativeType("void const *")
-    public static ByteBuffer lto_codegen_compile(@NativeType("lto_code_gen_t") long cg) {
+    public static @Nullable ByteBuffer lto_codegen_compile(@NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer length = stack.callocPointer(1);
         try {
@@ -1131,9 +1126,8 @@ public class LLVMLTO {
      * will be freed when {@link #lto_codegen_dispose codegen_dispose} is called, or {@code lto_codegen_compile_optimized()} is called again. On failure, returns {@code NULL} (check
      * {@link #lto_get_error_message get_error_message} for details).</p>
      */
-    @Nullable
     @NativeType("void const *")
-    public static ByteBuffer lto_codegen_compile_optimized(@NativeType("lto_code_gen_t") long cg) {
+    public static @Nullable ByteBuffer lto_codegen_compile_optimized(@NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer length = stack.callocPointer(1);
         try {
@@ -1371,9 +1365,8 @@ public class LLVMLTO {
      *
      * @since 10, {@code LTO_API_VERSION=24}
      */
-    @Nullable
     @NativeType("char const *")
-    public static String lto_input_get_dependent_library(@NativeType("lto_input_t") long input, @NativeType("size_t") long index) {
+    public static @Nullable String lto_input_get_dependent_library(@NativeType("lto_input_t") long input, @NativeType("size_t") long index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer size = stack.callocPointer(1);
@@ -1400,9 +1393,8 @@ public class LLVMLTO {
      *
      * @since 10, {@code LTO_API_VERSION=25}
      */
-    @Nullable
     @NativeType("char const * const *")
-    public static PointerBuffer lto_runtime_lib_symbols_list() {
+    public static @Nullable PointerBuffer lto_runtime_lib_symbols_list() {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer size = stack.callocPointer(1);
         try {
@@ -1564,9 +1556,8 @@ public class LLVMLTO {
      * 
      * <p>Client should use {@link #thinlto_module_get_num_object_files} to get the number of available objects.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String thinlto_module_get_object_file(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int index) {
+    public static @Nullable String thinlto_module_get_object_file(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int index) {
         long __result = nthinlto_module_get_object_file(cg, index);
         return memUTF8Safe(__result);
     }

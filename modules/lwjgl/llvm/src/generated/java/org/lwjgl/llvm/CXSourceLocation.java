@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -111,8 +111,7 @@ public class CXSourceLocation extends Struct<CXSourceLocation> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXSourceLocation createSafe(long address) {
+    public static @Nullable CXSourceLocation createSafe(long address) {
         return address == NULL ? null : new CXSourceLocation(address, null);
     }
 
@@ -155,8 +154,7 @@ public class CXSourceLocation extends Struct<CXSourceLocation> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXSourceLocation.Buffer createSafe(long address, int capacity) {
+    public static CXSourceLocation.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

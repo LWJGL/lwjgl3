@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -82,8 +82,7 @@ public class MLCoordinateFrameUID extends Struct<MLCoordinateFrameUID> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MLCoordinateFrameUID createSafe(long address) {
+    public static @Nullable MLCoordinateFrameUID createSafe(long address) {
         return address == NULL ? null : new MLCoordinateFrameUID(address, null);
     }
 
@@ -98,8 +97,7 @@ public class MLCoordinateFrameUID extends Struct<MLCoordinateFrameUID> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MLCoordinateFrameUID.Buffer createSafe(long address, int capacity) {
+    public static MLCoordinateFrameUID.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

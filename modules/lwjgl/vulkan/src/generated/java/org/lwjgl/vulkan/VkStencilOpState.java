@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,8 +201,7 @@ public class VkStencilOpState extends Struct<VkStencilOpState> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkStencilOpState createSafe(long address) {
+    public static @Nullable VkStencilOpState createSafe(long address) {
         return address == NULL ? null : new VkStencilOpState(address, null);
     }
 
@@ -245,8 +244,7 @@ public class VkStencilOpState extends Struct<VkStencilOpState> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkStencilOpState.Buffer createSafe(long address, int capacity) {
+    public static VkStencilOpState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

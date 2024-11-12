@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialAnchorsDeleteInfoML createSafe(long address) {
+    public static @Nullable XrSpatialAnchorsDeleteInfoML createSafe(long address) {
         return address == NULL ? null : new XrSpatialAnchorsDeleteInfoML(address, null);
     }
 
@@ -212,8 +211,7 @@ public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialAnchorsDeleteInfoML.Buffer createSafe(long address, int capacity) {
+    public static XrSpatialAnchorsDeleteInfoML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

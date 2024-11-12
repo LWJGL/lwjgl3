@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -90,7 +90,7 @@ public class WGLARBPbuffer {
      * @param attribList  a 0-terminated list of attributes {type, value} pairs containing integer attribute values
      */
     @NativeType("HPBUFFERARB")
-    public static long wglCreatePbufferARB(@NativeType("HDC") long hdc, int pixelFormat, int width, int height, @Nullable @NativeType("int const *") IntBuffer attribList) {
+    public static long wglCreatePbufferARB(@NativeType("HDC") long hdc, int pixelFormat, int width, int height, @NativeType("int const *") @Nullable IntBuffer attribList) {
         if (CHECKS) {
             checkNTSafe(attribList);
         }
@@ -181,7 +181,7 @@ public class WGLARBPbuffer {
 
     /** Array version of: {@link #wglCreatePbufferARB CreatePbufferARB} */
     @NativeType("HPBUFFERARB")
-    public static long wglCreatePbufferARB(@NativeType("HDC") long hdc, int pixelFormat, int width, int height, @Nullable @NativeType("int const *") int[] attribList) {
+    public static long wglCreatePbufferARB(@NativeType("HDC") long hdc, int pixelFormat, int width, int height, @NativeType("int const *") int @Nullable [] attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreatePbufferARB;
         if (CHECKS) {
             check(__functionAddress);

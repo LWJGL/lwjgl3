@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -55,9 +55,8 @@ public class EXTDeviceBase {
         return EXTDeviceQuery.neglQueryDeviceStringEXT(device, name);
     }
 
-    @Nullable
     @NativeType("char *")
-    public static String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
+    public static @Nullable String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
         return EXTDeviceQuery.eglQueryDeviceStringEXT(device, name);
     }
 
@@ -79,13 +78,13 @@ public class EXTDeviceBase {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
+    public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
         return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);
     }
 
     /** Array version of: {@link #eglQueryDevicesEXT QueryDevicesEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
+    public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
         return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);
     }
 

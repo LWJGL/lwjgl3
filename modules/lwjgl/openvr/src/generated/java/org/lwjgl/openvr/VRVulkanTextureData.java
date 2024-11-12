@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -226,8 +226,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRVulkanTextureData createSafe(long address) {
+    public static @Nullable VRVulkanTextureData createSafe(long address) {
         return address == NULL ? null : new VRVulkanTextureData(address, null);
     }
 
@@ -270,8 +269,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRVulkanTextureData.Buffer createSafe(long address, int capacity) {
+    public static VRVulkanTextureData.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

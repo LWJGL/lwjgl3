@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -52,7 +52,7 @@ public class SOFTReopenDevice {
      * @param attribs    an attribute list to configure the device with, with the same attribute list that would be passed to {@link ALC10#alcCreateContext CreateContext}.
      */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") @Nullable ByteBuffer deviceName, @NativeType("ALCint const *") @Nullable IntBuffer attribs) {
         if (CHECKS) {
             checkNT1Safe(deviceName);
             checkNTSafe(attribs);
@@ -69,7 +69,7 @@ public class SOFTReopenDevice {
      * @param attribs    an attribute list to configure the device with, with the same attribute list that would be passed to {@link ALC10#alcCreateContext CreateContext}.
      */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") @Nullable CharSequence deviceName, @NativeType("ALCint const *") @Nullable IntBuffer attribs) {
         if (CHECKS) {
             checkNTSafe(attribs);
         }
@@ -85,7 +85,7 @@ public class SOFTReopenDevice {
 
     /** Array version of: {@link #alcReopenDeviceSOFT ReopenDeviceSOFT} */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") @Nullable ByteBuffer deviceName, @NativeType("ALCint const *") int @Nullable [] attribs) {
 		long __functionAddress = ALC.getICD().alcReopenDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);
@@ -98,7 +98,7 @@ public class SOFTReopenDevice {
 
     /** Array version of: {@link #alcReopenDeviceSOFT ReopenDeviceSOFT} */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") @Nullable CharSequence deviceName, @NativeType("ALCint const *") int @Nullable [] attribs) {
 		long __functionAddress = ALC.getICD().alcReopenDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);

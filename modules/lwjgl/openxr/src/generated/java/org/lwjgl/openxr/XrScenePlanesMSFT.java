@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,9 +105,8 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     @NativeType("uint32_t")
     public int scenePlaneCount() { return nscenePlaneCount(address()); }
     /** an array of {@link XrScenePlaneMSFT}. */
-    @Nullable
     @NativeType("XrScenePlaneMSFT *")
-    public XrScenePlaneMSFT.Buffer scenePlanes() { return nscenePlanes(address()); }
+    public XrScenePlaneMSFT.@Nullable Buffer scenePlanes() { return nscenePlanes(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrScenePlanesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -118,14 +117,14 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     /** Sets the specified value to the {@link #scenePlaneCount} field. */
     public XrScenePlanesMSFT scenePlaneCount(@NativeType("uint32_t") int value) { nscenePlaneCount(address(), value); return this; }
     /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@link #scenePlanes} field. */
-    public XrScenePlanesMSFT scenePlanes(@Nullable @NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.Buffer value) { nscenePlanes(address(), value); return this; }
+    public XrScenePlanesMSFT scenePlanes(@NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.@Nullable Buffer value) { nscenePlanes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrScenePlanesMSFT set(
         int type,
         long next,
         int scenePlaneCount,
-        @Nullable XrScenePlaneMSFT.Buffer scenePlanes
+        XrScenePlaneMSFT.@Nullable Buffer scenePlanes
     ) {
         type(type);
         next(next);
@@ -171,8 +170,7 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrScenePlanesMSFT createSafe(long address) {
+    public static @Nullable XrScenePlanesMSFT createSafe(long address) {
         return address == NULL ? null : new XrScenePlanesMSFT(address, null);
     }
 
@@ -215,8 +213,7 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrScenePlanesMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrScenePlanesMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -267,7 +264,7 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     /** Unsafe version of {@link #scenePlaneCount}. */
     public static int nscenePlaneCount(long struct) { return memGetInt(struct + XrScenePlanesMSFT.SCENEPLANECOUNT); }
     /** Unsafe version of {@link #scenePlanes}. */
-    @Nullable public static XrScenePlaneMSFT.Buffer nscenePlanes(long struct) { return XrScenePlaneMSFT.createSafe(memGetAddress(struct + XrScenePlanesMSFT.SCENEPLANES), nscenePlaneCount(struct)); }
+    public static XrScenePlaneMSFT.@Nullable Buffer nscenePlanes(long struct) { return XrScenePlaneMSFT.createSafe(memGetAddress(struct + XrScenePlanesMSFT.SCENEPLANES), nscenePlaneCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrScenePlanesMSFT.TYPE, value); }
@@ -276,7 +273,7 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     /** Sets the specified value to the {@code scenePlaneCount} field of the specified {@code struct}. */
     public static void nscenePlaneCount(long struct, int value) { memPutInt(struct + XrScenePlanesMSFT.SCENEPLANECOUNT, value); }
     /** Unsafe version of {@link #scenePlanes(XrScenePlaneMSFT.Buffer) scenePlanes}. */
-    public static void nscenePlanes(long struct, @Nullable XrScenePlaneMSFT.Buffer value) { memPutAddress(struct + XrScenePlanesMSFT.SCENEPLANES, memAddressSafe(value)); if (value != null) { nscenePlaneCount(struct, value.remaining()); } }
+    public static void nscenePlanes(long struct, XrScenePlaneMSFT.@Nullable Buffer value) { memPutAddress(struct + XrScenePlanesMSFT.SCENEPLANES, memAddressSafe(value)); if (value != null) { nscenePlaneCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -331,9 +328,8 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
         @NativeType("uint32_t")
         public int scenePlaneCount() { return XrScenePlanesMSFT.nscenePlaneCount(address()); }
         /** @return a {@link XrScenePlaneMSFT.Buffer} view of the struct array pointed to by the {@link XrScenePlanesMSFT#scenePlanes} field. */
-        @Nullable
         @NativeType("XrScenePlaneMSFT *")
-        public XrScenePlaneMSFT.Buffer scenePlanes() { return XrScenePlanesMSFT.nscenePlanes(address()); }
+        public XrScenePlaneMSFT.@Nullable Buffer scenePlanes() { return XrScenePlanesMSFT.nscenePlanes(address()); }
 
         /** Sets the specified value to the {@link XrScenePlanesMSFT#type} field. */
         public XrScenePlanesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrScenePlanesMSFT.ntype(address(), value); return this; }
@@ -344,7 +340,7 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
         /** Sets the specified value to the {@link XrScenePlanesMSFT#scenePlaneCount} field. */
         public XrScenePlanesMSFT.Buffer scenePlaneCount(@NativeType("uint32_t") int value) { XrScenePlanesMSFT.nscenePlaneCount(address(), value); return this; }
         /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@link XrScenePlanesMSFT#scenePlanes} field. */
-        public XrScenePlanesMSFT.Buffer scenePlanes(@Nullable @NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.Buffer value) { XrScenePlanesMSFT.nscenePlanes(address(), value); return this; }
+        public XrScenePlanesMSFT.Buffer scenePlanes(@NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.@Nullable Buffer value) { XrScenePlanesMSFT.nscenePlanes(address(), value); return this; }
 
     }
 

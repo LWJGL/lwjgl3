@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,21 +171,17 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     @NativeType("rmtPropertyValue")
     public RMTPropertyValue defaultValue() { return ndefaultValue(address()); }
     /** parent link specifically placed after default value so that variadic macro can initialise it */
-    @Nullable
     @NativeType("rmtProperty *")
-    public RMTProperty parent() { return nparent(address()); }
+    public @Nullable RMTProperty parent() { return nparent(address()); }
     /** links within the property tree */
-    @Nullable
     @NativeType("rmtProperty *")
-    public RMTProperty firstChild() { return nfirstChild(address()); }
+    public @Nullable RMTProperty firstChild() { return nfirstChild(address()); }
     /** links within the property tree */
-    @Nullable
     @NativeType("rmtProperty *")
-    public RMTProperty lastChild() { return nlastChild(address()); }
+    public @Nullable RMTProperty lastChild() { return nlastChild(address()); }
     /** links within the property tree */
-    @Nullable
     @NativeType("rmtProperty *")
-    public RMTProperty nextSibling() { return nnextSibling(address()); }
+    public @Nullable RMTProperty nextSibling() { return nnextSibling(address()); }
     /** hash for efficient sending of properties to the viewer */
     @NativeType("rmtU32")
     public int nameHash() { return nnameHash(address()); }
@@ -309,8 +305,7 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTProperty createSafe(long address) {
+    public static @Nullable RMTProperty createSafe(long address) {
         return address == NULL ? null : new RMTProperty(address, null);
     }
 
@@ -353,8 +348,7 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTProperty.Buffer createSafe(long address, int capacity) {
+    public static RMTProperty.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -423,13 +417,13 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** Unsafe version of {@link #defaultValue}. */
     public static RMTPropertyValue ndefaultValue(long struct) { return RMTPropertyValue.create(struct + RMTProperty.DEFAULTVALUE); }
     /** Unsafe version of {@link #parent}. */
-    @Nullable public static RMTProperty nparent(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.PARENT)); }
+    public static @Nullable RMTProperty nparent(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.PARENT)); }
     /** Unsafe version of {@link #firstChild}. */
-    @Nullable public static RMTProperty nfirstChild(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.FIRSTCHILD)); }
+    public static @Nullable RMTProperty nfirstChild(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.FIRSTCHILD)); }
     /** Unsafe version of {@link #lastChild}. */
-    @Nullable public static RMTProperty nlastChild(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.LASTCHILD)); }
+    public static @Nullable RMTProperty nlastChild(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.LASTCHILD)); }
     /** Unsafe version of {@link #nextSibling}. */
-    @Nullable public static RMTProperty nnextSibling(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.NEXTSIBLING)); }
+    public static @Nullable RMTProperty nnextSibling(long struct) { return RMTProperty.createSafe(memGetAddress(struct + RMTProperty.NEXTSIBLING)); }
     /** Unsafe version of {@link #nameHash}. */
     public static int nnameHash(long struct) { return memGetInt(struct + RMTProperty.NAMEHASH); }
     /** Unsafe version of {@link #uniqueID}. */
@@ -564,21 +558,17 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
         @NativeType("rmtPropertyValue")
         public RMTPropertyValue defaultValue() { return RMTProperty.ndefaultValue(address()); }
         /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#parent} field. */
-        @Nullable
         @NativeType("rmtProperty *")
-        public RMTProperty parent() { return RMTProperty.nparent(address()); }
+        public @Nullable RMTProperty parent() { return RMTProperty.nparent(address()); }
         /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#firstChild} field. */
-        @Nullable
         @NativeType("rmtProperty *")
-        public RMTProperty firstChild() { return RMTProperty.nfirstChild(address()); }
+        public @Nullable RMTProperty firstChild() { return RMTProperty.nfirstChild(address()); }
         /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#lastChild} field. */
-        @Nullable
         @NativeType("rmtProperty *")
-        public RMTProperty lastChild() { return RMTProperty.nlastChild(address()); }
+        public @Nullable RMTProperty lastChild() { return RMTProperty.nlastChild(address()); }
         /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#nextSibling} field. */
-        @Nullable
         @NativeType("rmtProperty *")
-        public RMTProperty nextSibling() { return RMTProperty.nnextSibling(address()); }
+        public @Nullable RMTProperty nextSibling() { return RMTProperty.nnextSibling(address()); }
         /** @return the value of the {@link RMTProperty#nameHash} field. */
         @NativeType("rmtU32")
         public int nameHash() { return RMTProperty.nnameHash(address()); }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainPresentBarrierCreateInfoNV createSafe(long address) {
+    public static @Nullable VkSwapchainPresentBarrierCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkSwapchainPresentBarrierCreateInfoNV(address, null);
     }
 
@@ -200,8 +199,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainPresentBarrierCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkSwapchainPresentBarrierCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -177,8 +177,7 @@ public class VkPhysicalDeviceTexelBufferAlignmentProperties extends Struct<VkPhy
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceTexelBufferAlignmentProperties createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceTexelBufferAlignmentProperties createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceTexelBufferAlignmentProperties(address, null);
     }
 
@@ -221,8 +220,7 @@ public class VkPhysicalDeviceTexelBufferAlignmentProperties extends Struct<VkPhy
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceTexelBufferAlignmentProperties.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceTexelBufferAlignmentProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

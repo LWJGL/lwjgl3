@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkOpaqueCaptureDescriptorDataCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkOpaqueCaptureDescriptorDataCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkOpaqueCaptureDescriptorDataCreateInfoEXT(address, null);
     }
 
@@ -202,8 +201,7 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkOpaqueCaptureDescriptorDataCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkOpaqueCaptureDescriptorDataCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

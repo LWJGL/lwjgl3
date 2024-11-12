@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -52,7 +52,7 @@ public class EXTDevicePersistentID {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDeviceBinaryEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name, @Nullable @NativeType("void *") ByteBuffer value, @NativeType("EGLint *") IntBuffer size) {
+    public static boolean eglQueryDeviceBinaryEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name, @NativeType("void *") @Nullable ByteBuffer value, @NativeType("EGLint *") IntBuffer size) {
         if (CHECKS) {
             check(size, 1);
         }
@@ -61,7 +61,7 @@ public class EXTDevicePersistentID {
 
     /** Array version of: {@link #eglQueryDeviceBinaryEXT QueryDeviceBinaryEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglQueryDeviceBinaryEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name, @Nullable @NativeType("void *") ByteBuffer value, @NativeType("EGLint *") int[] size) {
+    public static boolean eglQueryDeviceBinaryEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name, @NativeType("void *") @Nullable ByteBuffer value, @NativeType("EGLint *") int[] size) {
         long __functionAddress = EGL.getCapabilities().eglQueryDeviceBinaryEXT;
         if (CHECKS) {
             check(__functionAddress);

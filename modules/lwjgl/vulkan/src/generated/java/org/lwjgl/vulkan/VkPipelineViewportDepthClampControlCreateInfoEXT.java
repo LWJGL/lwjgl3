@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,9 +114,8 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     @NativeType("VkDepthClampModeEXT")
     public int depthClampMode() { return ndepthClampMode(address()); }
     /** sets the depth clamp range for all viewports if {@code depthClampMode} is set to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}. */
-    @Nullable
     @NativeType("VkDepthClampRangeEXT const *")
-    public VkDepthClampRangeEXT pDepthClampRange() { return npDepthClampRange(address()); }
+    public @Nullable VkDepthClampRangeEXT pDepthClampRange() { return npDepthClampRange(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -180,8 +179,7 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportDepthClampControlCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineViewportDepthClampControlCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineViewportDepthClampControlCreateInfoEXT(address, null);
     }
 
@@ -224,8 +222,7 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineViewportDepthClampControlCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -276,7 +273,7 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     /** Unsafe version of {@link #depthClampMode}. */
     public static int ndepthClampMode(long struct) { return memGetInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.DEPTHCLAMPMODE); }
     /** Unsafe version of {@link #pDepthClampRange}. */
-    @Nullable public static VkDepthClampRangeEXT npDepthClampRange(long struct) { return VkDepthClampRangeEXT.createSafe(memGetAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PDEPTHCLAMPRANGE)); }
+    public static @Nullable VkDepthClampRangeEXT npDepthClampRange(long struct) { return VkDepthClampRangeEXT.createSafe(memGetAddress(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.PDEPTHCLAMPRANGE)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportDepthClampControlCreateInfoEXT.STYPE, value); }
@@ -340,9 +337,8 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
         @NativeType("VkDepthClampModeEXT")
         public int depthClampMode() { return VkPipelineViewportDepthClampControlCreateInfoEXT.ndepthClampMode(address()); }
         /** @return a {@link VkDepthClampRangeEXT} view of the struct pointed to by the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#pDepthClampRange} field. */
-        @Nullable
         @NativeType("VkDepthClampRangeEXT const *")
-        public VkDepthClampRangeEXT pDepthClampRange() { return VkPipelineViewportDepthClampControlCreateInfoEXT.npDepthClampRange(address()); }
+        public @Nullable VkDepthClampRangeEXT pDepthClampRange() { return VkPipelineViewportDepthClampControlCreateInfoEXT.npDepthClampRange(address()); }
 
         /** Sets the specified value to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#sType} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportDepthClampControlCreateInfoEXT.nsType(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -93,13 +93,11 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
     @NativeType("BDF_PropertyType")
     public int type() { return ntype(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code u.atom} field. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer u_atom() { return nu_atom(address()); }
+    public @Nullable ByteBuffer u_atom() { return nu_atom(address()); }
     /** @return the null-terminated string pointed to by the {@code u.atom} field. */
-    @Nullable
     @NativeType("char const *")
-    public String u_atomString() { return nu_atomString(address()); }
+    public @Nullable String u_atomString() { return nu_atomString(address()); }
     /** @return the value of the {@code u.integer} field. */
     @NativeType("FT_Int32")
     public int u_integer() { return nu_integer(address()); }
@@ -131,8 +129,7 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BDF_Property createSafe(long address) {
+    public static @Nullable BDF_Property createSafe(long address) {
         return address == NULL ? null : new BDF_Property(address, null);
     }
 
@@ -175,8 +172,7 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BDF_Property.Buffer createSafe(long address, int capacity) {
+    public static BDF_Property.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -223,9 +219,9 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + BDF_Property.TYPE); }
     /** Unsafe version of {@link #u_atom}. */
-    @Nullable public static ByteBuffer nu_atom(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + BDF_Property.U_ATOM)); }
+    public static @Nullable ByteBuffer nu_atom(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + BDF_Property.U_ATOM)); }
     /** Unsafe version of {@link #u_atomString}. */
-    @Nullable public static String nu_atomString(long struct) { return memASCIISafe(memGetAddress(struct + BDF_Property.U_ATOM)); }
+    public static @Nullable String nu_atomString(long struct) { return memASCIISafe(memGetAddress(struct + BDF_Property.U_ATOM)); }
     /** Unsafe version of {@link #u_integer}. */
     public static int nu_integer(long struct) { return memGetInt(struct + BDF_Property.U_INTEGER); }
     /** Unsafe version of {@link #u_cardinal}. */
@@ -278,13 +274,11 @@ public class BDF_Property extends Struct<BDF_Property> implements NativeResource
         @NativeType("BDF_PropertyType")
         public int type() { return BDF_Property.ntype(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code u.atom} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer u_atom() { return BDF_Property.nu_atom(address()); }
+        public @Nullable ByteBuffer u_atom() { return BDF_Property.nu_atom(address()); }
         /** @return the null-terminated string pointed to by the {@code u.atom} field. */
-        @Nullable
         @NativeType("char const *")
-        public String u_atomString() { return BDF_Property.nu_atomString(address()); }
+        public @Nullable String u_atomString() { return BDF_Property.nu_atomString(address()); }
         /** @return the value of the {@code u.integer} field. */
         @NativeType("FT_Int32")
         public int u_integer() { return BDF_Property.nu_integer(address()); }
