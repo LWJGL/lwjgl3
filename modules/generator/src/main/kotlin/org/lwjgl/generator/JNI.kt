@@ -59,7 +59,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 """
             )}
             """
-		javaImport("javax.annotation.*")
+		javaImport("org.jspecify.annotations.*")
     }
 
     override fun PrintWriter.generateJava() {
@@ -90,7 +90,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             print("${t}public static native ${it.returnType.nativeMethodType} ${it.signature}(")
             if (it.arguments.isNotEmpty())
                 print(it.arguments.asSequence()
-                    .mapIndexed { i, param -> if (param is ArrayType<*>) "@Nullable ${param.mapping.primitive}[] param$i" else "${param.nativeMethodType} param$i" }
+                    .mapIndexed { i, param -> if (param is ArrayType<*>) "${param.mapping.primitive} @Nullable [] param$i" else "${param.nativeMethodType} param$i" }
                     .joinToString(", ", postfix = ", "))
             println("long $FUNCTION_ADDRESS);")
         }

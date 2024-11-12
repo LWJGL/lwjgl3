@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.util.function.*;
 import java.util.regex.*;
 

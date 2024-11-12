@@ -4,10 +4,8 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
-
-import javax.annotation.*;
-import java.nio.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;

@@ -4,7 +4,7 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 /** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer {
@@ -17,8 +17,7 @@ public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer
      *
      * @return the library path, or {@code null} if the path is not available.
      */
-    @Nullable
-    String getPath();
+    @Nullable String getPath();
 
     abstract class Default extends Pointer.Default implements SharedLibrary {
 
@@ -49,8 +48,9 @@ public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer
             return library.getName();
         }
 
-        @Nullable
-        @Override public String getPath() {
+
+        @Override
+        public @Nullable String getPath() {
             return library.getPath();
         }
 

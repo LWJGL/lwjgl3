@@ -4,10 +4,9 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 
-import javax.annotation.*;
-import javax.annotation.concurrent.*;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
@@ -36,9 +35,7 @@ final class SharedLibraryLoader {
 
     private static final Lock EXTRACT_PATH_LOCK = new ReentrantLock();
 
-    @GuardedBy("EXTRACT_PATH_LOCK")
-    @Nullable
-    private static Path extractPath;
+    private static @Nullable Path extractPath;
 
     private static HashSet<Path> extractPaths = new HashSet<>(4);
 

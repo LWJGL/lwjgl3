@@ -4,10 +4,10 @@
  */
 package org.lwjgl.openxr;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.util.*;
 
 import static java.lang.Math.*;
@@ -24,11 +24,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class XR {
 
-    @Nullable
-    private static FunctionProvider functionProvider;
+    private static @Nullable FunctionProvider functionProvider;
 
-    @Nullable
-    private static GlobalCommands globalCommands;
+    private static @Nullable GlobalCommands globalCommands;
 
     static {
         if (!Configuration.OPENXR_EXPLICIT_INIT.get(false)) {

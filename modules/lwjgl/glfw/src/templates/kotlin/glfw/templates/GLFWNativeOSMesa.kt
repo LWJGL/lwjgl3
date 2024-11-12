@@ -10,7 +10,7 @@ import opengl.*
 
 val GLFWNativeOSMesa = "GLFWNativeOSMesa".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
-        "javax.annotation.*",
+        "org.jspecify.annotations.*",
         "org.lwjgl.opengl.GL",
         "static org.lwjgl.system.MemoryUtil.*"
     )

@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 
-import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -65,11 +65,11 @@ public final class Checks {
     private Checks() {
     }
 
-    public static int lengthSafe(@Nullable short[] array)             { return array == null ? 0 : array.length;}
-    public static int lengthSafe(@Nullable int[] array)               { return array == null ? 0 : array.length;}
-    public static int lengthSafe(@Nullable long[] array)              { return array == null ? 0 : array.length; }
-    public static int lengthSafe(@Nullable float[] array)             { return array == null ? 0 : array.length;}
-    public static int lengthSafe(@Nullable double[] array)            { return array == null ? 0 : array.length;}
+    public static int lengthSafe(short @Nullable [] array)            { return array == null ? 0 : array.length; }
+    public static int lengthSafe(int @Nullable [] array)              { return array == null ? 0 : array.length; }
+    public static int lengthSafe(long @Nullable [] array)             { return array == null ? 0 : array.length; }
+    public static int lengthSafe(float @Nullable [] array)            { return array == null ? 0 : array.length; }
+    public static int lengthSafe(double @Nullable [] array)           { return array == null ? 0 : array.length; }
     public static int remainingSafe(@Nullable Buffer buffer)          { return buffer == null ? 0 : buffer.remaining(); }
     public static int remainingSafe(@Nullable CustomBuffer<?> buffer) { return buffer == null ? 0 : buffer.remaining(); }
 
@@ -269,25 +269,25 @@ public final class Checks {
         assertNT(buf.get(buf.limit() - 1) == terminator);
     }
 
-    public static void checkNTSafe(@Nullable int[] buf) {
+    public static void checkNTSafe(int @Nullable [] buf) {
         if (buf != null) {
             checkBuffer(buf.length, 1);
             assertNT(buf[buf.length - 1] == 0);
         }
     }
-    public static void checkNTSafe(@Nullable int[] buf, int terminator) {
+    public static void checkNTSafe(int @Nullable [] buf, int terminator) {
         if (buf != null) {
             checkBuffer(buf.length, 1);
             assertNT(buf[buf.length - 1] == terminator);
         }
     }
-    public static void checkNTSafe(@Nullable long[] buf) {
+    public static void checkNTSafe(long @Nullable [] buf) {
         if (buf != null) {
             checkBuffer(buf.length, 1);
             assertNT(buf[buf.length - 1] == NULL);
         }
     }
-    public static void checkNTSafe(@Nullable float[] buf) {
+    public static void checkNTSafe(float @Nullable [] buf) {
         if (buf != null) {
             checkBuffer(buf.length, 1);
             assertNT(buf[buf.length - 1] == 0.0f);
@@ -466,27 +466,27 @@ public final class Checks {
         checkBuffer(buf.remaining(), (int)size);
     }
 
-    public static void checkSafe(@Nullable short[] buf, int size) {
+    public static void checkSafe(short @Nullable [] buf, int size) {
         if (buf != null) {
             checkBuffer(buf.length, size);
         }
     }
-    public static void checkSafe(@Nullable int[] buf, int size) {
+    public static void checkSafe(int @Nullable [] buf, int size) {
         if (buf != null) {
             checkBuffer(buf.length, size);
         }
     }
-    public static void checkSafe(@Nullable long[] buf, int size) {
+    public static void checkSafe(long @Nullable [] buf, int size) {
         if (buf != null) {
             checkBuffer(buf.length, size);
         }
     }
-    public static void checkSafe(@Nullable float[] buf, int size) {
+    public static void checkSafe(float @Nullable [] buf, int size) {
         if (buf != null) {
             checkBuffer(buf.length, size);
         }
     }
-    public static void checkSafe(@Nullable double[] buf, int size) {
+    public static void checkSafe(double @Nullable [] buf, int size) {
         if (buf != null) {
             checkBuffer(buf.length, size);
         }

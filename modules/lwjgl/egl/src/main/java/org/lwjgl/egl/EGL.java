@@ -4,9 +4,9 @@
  */
 package org.lwjgl.egl;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -37,11 +37,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class EGL {
 
-    @Nullable
-    private static FunctionProvider functionProvider;
+    private static @Nullable FunctionProvider functionProvider;
 
-    @Nullable
-    private static EGLCapabilities caps;
+    private static @Nullable EGLCapabilities caps;
 
     static {
         if (!Configuration.EGL_EXPLICIT_INIT.get(false)) {

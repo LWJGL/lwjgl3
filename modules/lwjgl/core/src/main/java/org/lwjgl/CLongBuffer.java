@@ -4,9 +4,9 @@
  */
 package org.lwjgl;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.CheckIntrinsics.*;

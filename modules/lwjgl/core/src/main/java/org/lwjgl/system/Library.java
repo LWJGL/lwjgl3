@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 
-import javax.annotation.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
@@ -346,8 +346,7 @@ public final class Library {
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
     }
 
-    @Nullable
-    private static SharedLibrary loadNativeFromSystem(String libName) {
+    private static @Nullable SharedLibrary loadNativeFromSystem(String libName) {
         SharedLibrary lib;
         try {
             lib = apiCreateLibrary(libName);
@@ -362,8 +361,7 @@ public final class Library {
         return lib;
     }
 
-    @Nullable
-    private static SharedLibrary loadNativeFromLibraryPath(Class<?> context, String module, String libName, boolean bundledWithLWJGL) {
+    private static @Nullable SharedLibrary loadNativeFromLibraryPath(Class<?> context, String module, String libName, boolean bundledWithLWJGL) {
         String paths = Configuration.LIBRARY_PATH.get();
         if (paths == null) {
             return null;
@@ -371,8 +369,7 @@ public final class Library {
         return loadNative(context, module, libName, bundledWithLWJGL, Configuration.LIBRARY_PATH.getProperty(), paths);
     }
 
-    @Nullable
-    private static SharedLibrary loadNative(Class<?> context, String module, String libName, boolean bundledWithLWJGL, String property, String paths) {
+    private static @Nullable SharedLibrary loadNative(Class<?> context, String module, String libName, boolean bundledWithLWJGL, String property, String paths) {
         Path libFile = findFile(paths, module, libName, bundledWithLWJGL);
         if (libFile == null) {
             apiLogMore(libName + " not found in " + property + "=" + paths);
@@ -451,8 +448,7 @@ public final class Library {
         return Platform.mapLibraryPathBundled(module.replace('.', '/') + "/" + resource);
     }
 
-    @Nullable
-    static URL findResource(Class<?> context, String module, String resource, boolean bundledWithLWJGL) {
+    static @Nullable URL findResource(Class<?> context, String module, String resource, boolean bundledWithLWJGL) {
         URL url = null;
         if (bundledWithLWJGL) {
             String bundledResource = getBundledPath(module, resource);
@@ -463,8 +459,7 @@ public final class Library {
         return url == null ? context.getClassLoader().getResource(resource) : url;
     }
 
-    @Nullable
-    static String getRegularFilePath(URL url) {
+    static @Nullable String getRegularFilePath(URL url) {
         if (url.getProtocol().equals("file")) {
             try {
                 Path path = Paths.get(url.toURI());
@@ -477,8 +472,7 @@ public final class Library {
         return null;
     }
 
-    @Nullable
-    static Path findFile(String path, String module, String file, boolean bundledWithLWJGL) {
+    static @Nullable Path findFile(String path, String module, String file, boolean bundledWithLWJGL) {
         if (bundledWithLWJGL) {
             String bundledFile = getBundledPath(module, file);
             if (!bundledFile.equals(file)) {
@@ -491,8 +485,7 @@ public final class Library {
         return findFile(path, file);
     }
 
-    @Nullable
-    private static Path findFile(String path, String file) {
+    private static @Nullable Path findFile(String path, String file) {
         for (String directory : PATH_SEPARATOR.split(path)) {
             Path p = Paths.get(directory, file);
             if (Files.isReadable(p)) {

@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 import java.util.*;
 
@@ -24,8 +25,7 @@ public abstract class Struct<SELF extends Struct<SELF>> extends Pointer.Default 
     }
 
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
-    @Nullable
-    protected ByteBuffer container;
+    protected @Nullable ByteBuffer container;
 
     /**
      * Creates a struct instance at the specified address.
@@ -118,13 +118,11 @@ public abstract class Struct<SELF extends Struct<SELF>> extends Pointer.Default 
         return ByteBuffer.allocateDirect(elements * elementSize).order(ByteOrder.nativeOrder());
     }
 
-    @Nullable
-    protected static <T extends Struct<T>> ByteBuffer __getContainer(T struct) {
+    protected static <T extends Struct<T>> @Nullable ByteBuffer __getContainer(T struct) {
         return struct.container;
     }
 
-    @Nullable
-    protected static ByteBuffer __getContainer(StructBuffer<?, ?> struct) {
+    protected static @Nullable ByteBuffer __getContainer(StructBuffer<?, ?> struct) {
         return struct.container;
     }
 

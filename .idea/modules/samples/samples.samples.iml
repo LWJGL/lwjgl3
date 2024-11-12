@@ -12,7 +12,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
     <orderEntry type="library" scope="TEST" name="JOML" level="project" />
-    <orderEntry type="library" scope="TEST" name="jsr305" level="project" />
+    <orderEntry type="library" scope="TEST" name="JSpecify" level="project" />
     <orderEntry type="library" name="JMH" level="project" />
     <orderEntry type="module-library" scope="RUNTIME">
       <library>

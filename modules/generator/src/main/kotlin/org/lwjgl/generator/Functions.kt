@@ -193,8 +193,10 @@ class Func(
                 it.javaMethodType
         }
 
-    private val ReturnValue.nativeMethodType
-        get() = if (this.isStructValue) "void" else this.nativeType.nativeMethodType
+    private fun ReturnValue.nativeMethodType(nullable: Boolean): String =
+        if (this.isStructValue) "void" else this.nativeType.nativeMethodType.let {
+            if (nullable) it.nullable else it
+        }
 
     private val ReturnValue.jniFunctionType
         get() = if (this.isStructValue) "void" else this.nativeType.jniFunctionType
@@ -230,13 +232,11 @@ class Func(
                 javaMethodType
         ).let {
             if (annotate) {
-                nativeType.annotate(it).let { annotatedType ->
-                    if (nativeType.isReference && has(nullable)) {
-                        "@Nullable $annotatedType"
-                    } else {
-                        annotatedType
-                    }
-                }
+                nativeType.annotate(if (nativeType.isReference && has(nullable)) {
+                    it.nullable
+                } else {
+                    it
+                })
             } else {
                 it
             }
@@ -684,11 +684,7 @@ class Func(
 
         printUnsafeJavadoc(constantMacro, nativeOnly)
 
-        if (returns.nativeType is JObjectType && returnsNull) {
-            println("$t@Nullable")
-        }
-
-        val retType = returns.nativeMethodType
+        val retType = returns.nativeMethodType(nullable = returns.nativeType is JObjectType && returnsNull)
 
         if (nativeOnly) {
             val retTypeAnnotation = returns.nativeType.annotation(retType)
@@ -746,10 +742,7 @@ class Func(
         println()
 
         printUnsafeJavadoc(constantMacro)
-        if (returns.nativeType is JObjectType && returnsNull) {
-            println("$t@Nullable")
-        }
-        print("$t${if (constantMacro) "private " else accessModifier}static ${returns.nativeMethodType} n$name(")
+        print("$t${if (constantMacro) "private " else accessModifier}static ${returns.nativeMethodType(nullable = returns.nativeType is JObjectType && returnsNull)} n$name(")
         printList(getNativeParams()) {
             if (it.isFunctionProvider)
                 it.asJavaMethodParam(false)
@@ -765,7 +758,7 @@ class Func(
 
         if (hasReuse) {
             print("$t$t")
-            if (returns.nativeMethodType != "void") {
+            if (returns.nativeMethodType(nullable = false) != "void") {
                 print("return ")
             }
             print("${get<Reuse>().source.className}.n$name(")
@@ -933,11 +926,9 @@ class Func(
 
         // Method signature
 
-        if (returns.nativeType.isReference && returnsNull) {
-            println("$t@Nullable")
+        val retType = returns.javaMethodType.let {
+            if (returns.nativeType.isReference && returnsNull) it.nullable else it
         }
-
-        val retType = returns.javaMethodType
 
         val retTypeAnnotation = returns.nativeType.annotation(retType)
         if (retTypeAnnotation != null) {
@@ -1119,7 +1110,7 @@ class Func(
         if (hasFinally) {
             if (code.javaFinally.any { TRY_FINALLY_RESULT_REFERENCE.containsMatchIn(it.code) }) {
                 val returnsObject = returns.nativeType is WrappedPointerType
-                val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType
+                val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType(nullable = true)
 
                 println("$t${t}$returnType $RESULT = ${if (returnsObject) "null" else "NULL"};") // TODO: support more types if necessary
             }
@@ -1151,7 +1142,7 @@ class Func(
         printParams: PrintWriter.() -> Unit
     ) {
         val returnsObject = returns.nativeType is WrappedPointerType
-        val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType
+        val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType(nullable = false)
 
         if (hasFinally)
             print(t)
@@ -1542,7 +1533,7 @@ class Func(
             generateAlternativeMethod(stripPostfix(), transforms)
     }
 
-    private fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, Transform>, original: String, annotate: Boolean): String? {
+    private fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, Transform>, original: String, annotate: Boolean, nullable: Boolean): String? {
         val transform = transforms[this]
         return (
             if (transform == null)
@@ -1555,7 +1546,10 @@ class Func(
                 it
             else {
                 val space = it.lastIndexOf(' ')
-                "${nativeType.annotate(it.substring(0, space))} ${it.substring(space + 1)}"
+                val type = it.substring(startIndex = 0, endIndex = space)
+                    .let { if (nullable) it.nullable else it }
+
+                "${nativeType.annotate(type)} ${it.substring(space + 1)}"
             }
         }
     }
@@ -1596,10 +1590,11 @@ class Func(
 
         // Method signature
 
-        val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType, false)!!
-
-        if ((returns.nativeType.isReference && returnsNull) || (transforms[returns].let { it is FunctionTransform<*> && it.forceNullable }) ) {
-            println("$t@Nullable")
+        val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType, false, nullable = false)!!.let {
+            if ((returns.nativeType.isReference && returnsNull) || (transforms[returns].let { it is FunctionTransform<*> && it.forceNullable }))
+                it.nullable
+            else
+                it
         }
 
         val retTypeAnnotation = returns.nativeType.annotation(retType)
@@ -1609,18 +1604,12 @@ class Func(
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getNativeParams(withAutoSizeResultParams = false)) { param ->
-            param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true).let {
-                if (
-                    it != null && param.nativeType.isReference && param.has(nullable) &&
-                    transforms[param] !is SingleValueTransform &&
-                    transforms[param] !is SingleValueStructTransform &&
-                    transforms[param] !is RawPointerTransform
-                ) {
-                    "@Nullable $it"
-                } else {
-                    it
-                }
-            }
+            val isNullable = param.nativeType.isReference && param.has(nullable)
+                && transforms[param] !is SingleValueTransform
+                && transforms[param] !is SingleValueStructTransform
+                && transforms[param] !is RawPointerTransform
+
+            param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true, isNullable)
         }
         // Update Reuse delegation if the code below changes
         when (val returnTransform = transforms[returns]) {
@@ -1668,7 +1657,7 @@ class Func(
             }
             print("${get<Reuse>().source.className}.$name(")
             printList(getNativeParams(withAutoSizeResultParams = false)) {
-                it.transformDeclarationOrElse(transforms, it.name, false).let { name ->
+                it.transformDeclarationOrElse(transforms, it.name, false, false).let { name ->
                     name?.substring(name.lastIndexOf(' ') + 1)
                 }
             }

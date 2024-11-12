@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.MemoryUtil.*;
 
-import javax.annotation.*;
 import java.io.*;
 import java.util.function.*;
 
@@ -687,8 +687,7 @@ public class Configuration<T> {
 
     private final String property;
 
-    @Nullable
-    private volatile T state;
+    private volatile @Nullable T state;
 
     Configuration(String property, StateInit<? extends T> init) {
         this.property = property;
@@ -713,8 +712,7 @@ public class Configuration<T> {
      *
      * <p>If the option value has not been set, null will be returned.</p>
      */
-    @Nullable
-    public T get() {
+    public @Nullable T get() {
         return state;
     }
 

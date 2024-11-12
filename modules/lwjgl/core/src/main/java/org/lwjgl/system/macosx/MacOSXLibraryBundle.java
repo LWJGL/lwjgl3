@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system.macosx;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.Checks.*;
@@ -63,8 +63,8 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
         }
     }
 
-    @Nullable
-    @Override public String getPath() {
+    @Override
+    public @Nullable String getPath() {
         return null;
     }
 

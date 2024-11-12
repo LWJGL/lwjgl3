@@ -4,11 +4,10 @@
  */
 package org.lwjgl.opencl;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
-import org.lwjgl.system.macosx.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -34,11 +33,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class CL {
 
-    @Nullable
-    private static FunctionProviderLocal functionProvider;
+    private static @Nullable FunctionProviderLocal functionProvider;
 
-    @Nullable
-    private static CLCapabilities icd;
+    private static @Nullable CLCapabilities icd;
 
     static {
         if (!Configuration.OPENCL_EXPLICIT_INIT.get(false)) {

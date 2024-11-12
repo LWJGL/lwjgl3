@@ -4,10 +4,10 @@
  */
 package org.lwjgl.util.yoga;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -29,18 +29,14 @@ class YogaNode {
 
     private final long weakGlobalRef;
 
-    @Nullable
-    private YGMeasureFunc  measureFunc;
-    @Nullable
-    private YGBaselineFunc baselineFunc;
+    private @Nullable YGMeasureFunc  measureFunc;
+    private @Nullable YGBaselineFunc baselineFunc;
 
     private final List<YogaNode> children;
 
-    @Nullable
-    private YogaNode owner;
+    private @Nullable YogaNode owner;
 
-    @Nullable
-    private Object data;
+    private @Nullable Object data;
 
     YogaNode() {
         this(YGNodeNew());
@@ -124,8 +120,7 @@ class YogaNode {
         return (int)YGNodeGetChildCount(node);
     }
 
-    @Nullable
-    public YogaNode getOwner() {
+    public @Nullable YogaNode getOwner() {
         long owner = YGNodeGetOwner(node);
         return owner == NULL ? null : create(owner);
     }

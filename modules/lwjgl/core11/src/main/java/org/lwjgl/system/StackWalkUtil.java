@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.util.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -65,8 +66,7 @@ final class StackWalkUtil {
         return false;
     }
 
-    @Nullable
-    static Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
+    static @Nullable Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
         StackWalker.StackFrame pushed = (StackWalker.StackFrame)pushedObj;
 
         return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(s -> {

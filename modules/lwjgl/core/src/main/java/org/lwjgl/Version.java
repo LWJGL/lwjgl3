@@ -4,7 +4,8 @@
  */
 package org.lwjgl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -68,8 +69,7 @@ public final class Version {
         return build;
     }
 
-    @Nullable
-    static String findImplementationFromManifest() {
+    static @Nullable String findImplementationFromManifest() {
         ClassLoader classLoader = Version.class.getClassLoader();
 
         URL url = classLoader.getResource("org/lwjgl/Version.class");
@@ -99,8 +99,7 @@ public final class Version {
         return null;
     }
 
-    @Nullable
-    private static String readImplementationFromManifest(URL url) {
+    private static @Nullable String readImplementationFromManifest(URL url) {
         try (InputStream stream = url.openStream()) {
             Attributes attribs = new Manifest(stream).getMainAttributes();
 

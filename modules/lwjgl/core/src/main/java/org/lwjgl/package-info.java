@@ -18,5 +18,7 @@
  *
  * @see <a href="https://www.lwjgl.org/">www.lwjgl.org</a>
  */
-@org.lwjgl.system.NonnullDefault
+@NullMarked
 package org.lwjgl;
+
+import org.jspecify.annotations.*;

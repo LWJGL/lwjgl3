@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.util.*;
 
 /**
@@ -57,8 +58,7 @@ final class StackWalkUtil {
         return false;
     }
 
-    @Nullable
-    static Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
+    static @Nullable Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
         for (int i = 3; i < stackTrace.length; i++) {

@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.net.*;
 import java.nio.channels.*;
 import java.nio.file.*;
@@ -140,8 +141,7 @@ public final class LibraryResource {
         throw new IllegalStateException("Failed to locate library resource: " + name);
     }
 
-    @Nullable
-    private static Path loadFromLibraryPath(String module, String libName, boolean bundledWithLWJGL) {
+    private static @Nullable Path loadFromLibraryPath(String module, String libName, boolean bundledWithLWJGL) {
         String paths = Configuration.LIBRARY_PATH.get();
         if (paths == null) {
             return null;
@@ -149,8 +149,7 @@ public final class LibraryResource {
         return load(module, libName, bundledWithLWJGL, Configuration.LIBRARY_PATH.getProperty(), paths);
     }
 
-    @Nullable
-    private static Path load(String module, String name, boolean bundledWithLWJGL, String property, String paths) {
+    private static @Nullable Path load(String module, String name, boolean bundledWithLWJGL, String property, String paths) {
         Path resource = Library.findFile(paths, module, name, bundledWithLWJGL);
         if (resource == null) {
             apiLogMore(name + " not found in " + property + "=" + paths);

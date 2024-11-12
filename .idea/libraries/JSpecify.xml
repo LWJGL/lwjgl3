@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="JSpecify">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/jspecify.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/jspecify-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
