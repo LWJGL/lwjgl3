@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class NVRTC {
         return callP(result, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String nvrtcGetErrorString(@NativeType("nvrtcResult") int result) {
+    public static @Nullable String nvrtcGetErrorString(@NativeType("nvrtcResult") int result) {
         long __result = nnvrtcGetErrorString(result);
         return memASCIISafe(__result);
     }
@@ -172,7 +171,7 @@ public class NVRTC {
     }
 
     @NativeType("nvrtcResult")
-    public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") ByteBuffer src, @Nullable @NativeType("char const *") ByteBuffer name, @Nullable @NativeType("char const * const *") PointerBuffer headers, @Nullable @NativeType("char const * const *") PointerBuffer includeNames) {
+    public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") ByteBuffer src, @NativeType("char const *") @Nullable ByteBuffer name, @NativeType("char const * const *") @Nullable PointerBuffer headers, @NativeType("char const * const *") @Nullable PointerBuffer includeNames) {
         if (CHECKS) {
             check(prog, 1);
             checkNT1(src);
@@ -183,7 +182,7 @@ public class NVRTC {
     }
 
     @NativeType("nvrtcResult")
-    public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") CharSequence src, @Nullable @NativeType("char const *") CharSequence name, @Nullable @NativeType("char const * const *") PointerBuffer headers, @Nullable @NativeType("char const * const *") PointerBuffer includeNames) {
+    public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") CharSequence src, @NativeType("char const *") @Nullable CharSequence name, @NativeType("char const * const *") @Nullable PointerBuffer headers, @NativeType("char const * const *") @Nullable PointerBuffer includeNames) {
         if (CHECKS) {
             check(prog, 1);
             checkSafe(includeNames, remainingSafe(headers));
@@ -226,7 +225,7 @@ public class NVRTC {
     }
 
     @NativeType("nvrtcResult")
-    public static int nvrtcCompileProgram(@NativeType("nvrtcProgram") long prog, @Nullable @NativeType("char const * const *") PointerBuffer options) {
+    public static int nvrtcCompileProgram(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const *") @Nullable PointerBuffer options) {
         return nnvrtcCompileProgram(prog, remainingSafe(options), memAddressSafe(options));
     }
 

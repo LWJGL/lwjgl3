@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -43,7 +43,7 @@ public class UNISTD {
     public static native int nclose(long _errno, int fd);
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static int close(@Nullable @NativeType("int *") IntBuffer _errno, int fd) {
+    public static int close(@NativeType("int *") @Nullable IntBuffer _errno, int fd) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -56,7 +56,7 @@ public class UNISTD {
     public static native long nsysconf(long _errno, int name);
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static long sysconf(@Nullable @NativeType("int *") IntBuffer _errno, int name) {
+    public static long sysconf(@NativeType("int *") @Nullable IntBuffer _errno, int name) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -70,7 +70,7 @@ public class UNISTD {
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long read(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("void *") ByteBuffer buf) {
+    public static long read(@NativeType("int *") @Nullable IntBuffer _errno, int fd, @NativeType("void *") ByteBuffer buf) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }

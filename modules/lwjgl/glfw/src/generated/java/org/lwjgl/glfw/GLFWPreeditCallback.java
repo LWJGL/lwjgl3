@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -46,8 +46,7 @@ public abstract class GLFWPreeditCallback extends Callback implements GLFWPreedi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static GLFWPreeditCallback createSafe(long functionPointer) {
+    public static @Nullable GLFWPreeditCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

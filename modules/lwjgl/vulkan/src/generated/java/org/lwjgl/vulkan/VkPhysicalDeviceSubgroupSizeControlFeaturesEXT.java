@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,8 +117,7 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends VkPhysicalDe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceSubgroupSizeControlFeaturesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceSubgroupSizeControlFeaturesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceSubgroupSizeControlFeaturesEXT(address, null);
     }
 
@@ -161,8 +160,7 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends VkPhysicalDe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

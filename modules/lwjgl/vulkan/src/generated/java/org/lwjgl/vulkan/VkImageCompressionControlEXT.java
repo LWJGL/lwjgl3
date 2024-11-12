@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,9 +121,8 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     @NativeType("uint32_t")
     public int compressionControlPlaneCount() { return ncompressionControlPlaneCount(address()); }
     /** {@code NULL} or a pointer to an array of {@code VkImageCompressionFixedRateFlagsEXT} bitfields describing allowed fixed-rate compression rates of each image plane. It is ignored if {@code flags} does not include {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT}. */
-    @Nullable
     @NativeType("VkImageCompressionFixedRateFlagsEXT *")
-    public IntBuffer pFixedRateFlags() { return npFixedRateFlags(address()); }
+    public @Nullable IntBuffer pFixedRateFlags() { return npFixedRateFlags(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageCompressionControlEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -191,8 +190,7 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageCompressionControlEXT createSafe(long address) {
+    public static @Nullable VkImageCompressionControlEXT createSafe(long address) {
         return address == NULL ? null : new VkImageCompressionControlEXT(address, null);
     }
 
@@ -235,8 +233,7 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageCompressionControlEXT.Buffer createSafe(long address, int capacity) {
+    public static VkImageCompressionControlEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -289,7 +286,7 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     /** Unsafe version of {@link #compressionControlPlaneCount}. */
     public static int ncompressionControlPlaneCount(long struct) { return memGetInt(struct + VkImageCompressionControlEXT.COMPRESSIONCONTROLPLANECOUNT); }
     /** Unsafe version of {@link #pFixedRateFlags() pFixedRateFlags}. */
-    @Nullable public static IntBuffer npFixedRateFlags(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCompressionControlEXT.PFIXEDRATEFLAGS), ncompressionControlPlaneCount(struct)); }
+    public static @Nullable IntBuffer npFixedRateFlags(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCompressionControlEXT.PFIXEDRATEFLAGS), ncompressionControlPlaneCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkImageCompressionControlEXT.STYPE, value); }
@@ -358,9 +355,8 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
         @NativeType("uint32_t")
         public int compressionControlPlaneCount() { return VkImageCompressionControlEXT.ncompressionControlPlaneCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageCompressionControlEXT#pFixedRateFlags} field. */
-        @Nullable
         @NativeType("VkImageCompressionFixedRateFlagsEXT *")
-        public IntBuffer pFixedRateFlags() { return VkImageCompressionControlEXT.npFixedRateFlags(address()); }
+        public @Nullable IntBuffer pFixedRateFlags() { return VkImageCompressionControlEXT.npFixedRateFlags(address()); }
 
         /** Sets the specified value to the {@link VkImageCompressionControlEXT#sType} field. */
         public VkImageCompressionControlEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCompressionControlEXT.nsType(address(), value); return this; }

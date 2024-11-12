@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -662,7 +662,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_color_palette_get_colors(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int palette_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer color_count, @Nullable @NativeType("hb_color_t *") IntBuffer colors) {
+    public static int hb_ot_color_palette_get_colors(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int palette_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer color_count, @NativeType("hb_color_t *") @Nullable IntBuffer colors) {
         if (CHECKS) {
             checkSafe(color_count, 1);
             if (color_count != null) { checkSafe(colors, color_count.get(color_count.position())); }
@@ -693,7 +693,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_color_glyph_get_layers(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer layer_count, @Nullable @NativeType("hb_ot_color_layer_t *") hb_ot_color_layer_t.Buffer layers) {
+    public static int hb_ot_color_glyph_get_layers(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer layer_count, @NativeType("hb_ot_color_layer_t *") hb_ot_color_layer_t.@Nullable Buffer layers) {
         if (CHECKS) {
             checkSafe(layer_count, 1);
             if (layer_count != null) { checkSafe(layers, layer_count.get(layer_count.position())); }
@@ -765,7 +765,7 @@ public class OpenType {
         invokePPPPPV(script, language, script_count, script_tags, language_count, language_tags, __functionAddress);
     }
 
-    public static void hb_ot_tags_from_script_and_language(@NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @Nullable @NativeType("unsigned int *") IntBuffer script_count, @Nullable @NativeType("hb_tag_t *") IntBuffer script_tags, @Nullable @NativeType("unsigned int *") IntBuffer language_count, @Nullable @NativeType("hb_tag_t *") IntBuffer language_tags) {
+    public static void hb_ot_tags_from_script_and_language(@NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("unsigned int *") @Nullable IntBuffer script_count, @NativeType("hb_tag_t *") @Nullable IntBuffer script_tags, @NativeType("unsigned int *") @Nullable IntBuffer language_count, @NativeType("hb_tag_t *") @Nullable IntBuffer language_tags) {
         if (CHECKS) {
             checkSafe(script_count, 1);
             if (script_count != null) { checkSafe(script_tags, script_count.get(script_count.position())); }
@@ -798,7 +798,7 @@ public class OpenType {
         invokePPV(script_tag, language_tag, script, language, __functionAddress);
     }
 
-    public static void hb_ot_tags_to_script_and_language(@NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @Nullable @NativeType("hb_script_t *") IntBuffer script, @Nullable @NativeType("hb_language_t *") PointerBuffer language) {
+    public static void hb_ot_tags_to_script_and_language(@NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @NativeType("hb_script_t *") @Nullable IntBuffer script, @NativeType("hb_language_t *") @Nullable PointerBuffer language) {
         if (CHECKS) {
             checkSafe(script, 1);
             checkSafe(language, 1);
@@ -853,7 +853,7 @@ public class OpenType {
 
     /** Not that useful. Provides list of attach points for a glyph that a client may want to cache */
     @NativeType("unsigned int")
-    public static int hb_ot_layout_get_attach_points(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer point_count, @Nullable @NativeType("unsigned int *") IntBuffer point_array) {
+    public static int hb_ot_layout_get_attach_points(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer point_count, @NativeType("unsigned int *") @Nullable IntBuffer point_array) {
         if (CHECKS) {
             checkSafe(point_count, 1);
             if (point_count != null) { checkSafe(point_array, point_count.get(point_count.position())); }
@@ -874,7 +874,7 @@ public class OpenType {
 
     /** Ligature caret positions */
     @NativeType("unsigned int")
-    public static int hb_ot_layout_get_ligature_carets(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer caret_count, @Nullable @NativeType("hb_position_t *") IntBuffer caret_array) {
+    public static int hb_ot_layout_get_ligature_carets(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer caret_count, @NativeType("hb_position_t *") @Nullable IntBuffer caret_array) {
         if (CHECKS) {
             checkSafe(caret_count, 1);
             if (caret_count != null) { checkSafe(caret_array, caret_count.get(caret_count.position())); }
@@ -893,7 +893,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_table_get_script_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer script_count, @Nullable @NativeType("hb_tag_t *") IntBuffer script_tags) {
+    public static int hb_ot_layout_table_get_script_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer script_count, @NativeType("hb_tag_t *") @Nullable IntBuffer script_tags) {
         if (CHECKS) {
             checkSafe(script_count, 1);
             if (script_count != null) { checkSafe(script_tags, script_count.get(script_count.position())); }
@@ -930,7 +930,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_table_select_script(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("hb_tag_t const *") IntBuffer script_tags, @NativeType("unsigned int *") IntBuffer script_index, @Nullable @NativeType("hb_tag_t *") IntBuffer chosen_script) {
+    public static boolean hb_ot_layout_table_select_script(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("hb_tag_t const *") IntBuffer script_tags, @NativeType("unsigned int *") IntBuffer script_index, @NativeType("hb_tag_t *") @Nullable IntBuffer chosen_script) {
         if (CHECKS) {
             check(script_index, 1);
             checkSafe(chosen_script, 1);
@@ -949,7 +949,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_table_get_feature_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer feature_count, @Nullable @NativeType("hb_tag_t *") IntBuffer feature_tags) {
+    public static int hb_ot_layout_table_get_feature_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer feature_count, @NativeType("hb_tag_t *") @Nullable IntBuffer feature_tags) {
         if (CHECKS) {
             checkSafe(feature_count, 1);
             if (feature_count != null) { checkSafe(feature_tags, feature_count.get(feature_count.position())); }
@@ -968,7 +968,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_script_get_language_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer language_count, @Nullable @NativeType("hb_tag_t *") IntBuffer language_tags) {
+    public static int hb_ot_layout_script_get_language_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer language_count, @NativeType("hb_tag_t *") @Nullable IntBuffer language_tags) {
         if (CHECKS) {
             checkSafe(language_count, 1);
             if (language_count != null) { checkSafe(language_tags, language_count.get(language_count.position())); }
@@ -987,7 +987,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_script_select_language(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("hb_tag_t const *") IntBuffer language_tags, @Nullable @NativeType("unsigned int *") IntBuffer language_index) {
+    public static boolean hb_ot_layout_script_select_language(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("hb_tag_t const *") IntBuffer language_tags, @NativeType("unsigned int *") @Nullable IntBuffer language_index) {
         if (CHECKS) {
             checkSafe(language_index, 1);
         }
@@ -1005,7 +1005,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_language_get_required_feature_index(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @Nullable @NativeType("unsigned int *") IntBuffer feature_index) {
+    public static boolean hb_ot_layout_language_get_required_feature_index(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int *") @Nullable IntBuffer feature_index) {
         if (CHECKS) {
             checkSafe(feature_index, 1);
         }
@@ -1023,7 +1023,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_language_get_required_feature(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @Nullable @NativeType("unsigned int *") IntBuffer feature_index, @Nullable @NativeType("hb_tag_t *") IntBuffer feature_tag) {
+    public static boolean hb_ot_layout_language_get_required_feature(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int *") @Nullable IntBuffer feature_index, @NativeType("hb_tag_t *") @Nullable IntBuffer feature_tag) {
         if (CHECKS) {
             checkSafe(feature_index, 1);
             checkSafe(feature_tag, 1);
@@ -1042,7 +1042,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_language_get_feature_indexes(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer feature_count, @Nullable @NativeType("unsigned int *") IntBuffer feature_indexes) {
+    public static int hb_ot_layout_language_get_feature_indexes(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer feature_count, @NativeType("unsigned int *") @Nullable IntBuffer feature_indexes) {
         if (CHECKS) {
             checkSafe(feature_count, 1);
             if (feature_count != null) { checkSafe(feature_indexes, feature_count.get(feature_count.position())); }
@@ -1061,7 +1061,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_language_get_feature_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer feature_count, @Nullable @NativeType("hb_tag_t *") IntBuffer feature_tags) {
+    public static int hb_ot_layout_language_get_feature_tags(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer feature_count, @NativeType("hb_tag_t *") @Nullable IntBuffer feature_tags) {
         if (CHECKS) {
             checkSafe(feature_count, 1);
             if (feature_count != null) { checkSafe(feature_tags, feature_count.get(feature_count.position())); }
@@ -1080,7 +1080,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_language_find_feature(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("hb_tag_t") int feature_tag, @Nullable @NativeType("unsigned int *") IntBuffer feature_index) {
+    public static boolean hb_ot_layout_language_find_feature(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int script_index, @NativeType("unsigned int") int language_index, @NativeType("hb_tag_t") int feature_tag, @NativeType("unsigned int *") @Nullable IntBuffer feature_index) {
         if (CHECKS) {
             checkSafe(feature_index, 1);
         }
@@ -1098,7 +1098,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_feature_get_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer lookup_count, @Nullable @NativeType("unsigned int *") IntBuffer lookup_indexes) {
+    public static int hb_ot_layout_feature_get_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer lookup_count, @NativeType("unsigned int *") @Nullable IntBuffer lookup_indexes) {
         if (CHECKS) {
             checkSafe(lookup_count, 1);
             if (lookup_count != null) { checkSafe(lookup_indexes, lookup_count.get(lookup_count.position())); }
@@ -1128,7 +1128,7 @@ public class OpenType {
         invokePPPPPV(face, table_tag, scripts, languages, features, feature_indexes, __functionAddress);
     }
 
-    public static void hb_ot_layout_collect_features(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @Nullable @NativeType("hb_tag_t const *") IntBuffer scripts, @Nullable @NativeType("hb_tag_t const *") IntBuffer languages, @Nullable @NativeType("hb_tag_t const *") IntBuffer features, @NativeType("hb_set_t *") long feature_indexes) {
+    public static void hb_ot_layout_collect_features(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("hb_tag_t const *") @Nullable IntBuffer scripts, @NativeType("hb_tag_t const *") @Nullable IntBuffer languages, @NativeType("hb_tag_t const *") @Nullable IntBuffer features, @NativeType("hb_set_t *") long feature_indexes) {
         if (CHECKS) {
             checkNTSafe(scripts);
             checkNTSafe(languages);
@@ -1159,7 +1159,7 @@ public class OpenType {
         invokePPPPPV(face, table_tag, scripts, languages, features, lookup_indexes, __functionAddress);
     }
 
-    public static void hb_ot_layout_collect_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @Nullable @NativeType("hb_tag_t const *") IntBuffer scripts, @Nullable @NativeType("hb_tag_t const *") IntBuffer languages, @Nullable @NativeType("hb_tag_t const *") IntBuffer features, @NativeType("hb_set_t *") long lookup_indexes) {
+    public static void hb_ot_layout_collect_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("hb_tag_t const *") @Nullable IntBuffer scripts, @NativeType("hb_tag_t const *") @Nullable IntBuffer languages, @NativeType("hb_tag_t const *") @Nullable IntBuffer features, @NativeType("hb_set_t *") long lookup_indexes) {
         if (CHECKS) {
             checkNTSafe(scripts);
             checkNTSafe(languages);
@@ -1207,7 +1207,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_feature_with_variations_get_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int variations_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer lookup_count, @Nullable @NativeType("unsigned int *") IntBuffer lookup_indexes) {
+    public static int hb_ot_layout_feature_with_variations_get_lookups(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int variations_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer lookup_count, @NativeType("unsigned int *") @Nullable IntBuffer lookup_indexes) {
         if (CHECKS) {
             checkSafe(lookup_count, 1);
             if (lookup_count != null) { checkSafe(lookup_indexes, lookup_count.get(lookup_count.position())); }
@@ -1238,7 +1238,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_lookup_get_glyph_alternates(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int lookup_index, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer alternate_count, @Nullable @NativeType("hb_codepoint_t *") IntBuffer alternate_glyphs) {
+    public static int hb_ot_layout_lookup_get_glyph_alternates(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int lookup_index, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer alternate_count, @NativeType("hb_codepoint_t *") @Nullable IntBuffer alternate_glyphs) {
         if (CHECKS) {
             checkSafe(alternate_count, 1);
             if (alternate_count != null) { checkSafe(alternate_glyphs, alternate_count.get(alternate_count.position())); }
@@ -1306,7 +1306,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_get_size_params(@NativeType("hb_face_t *") long face, @Nullable @NativeType("unsigned int *") IntBuffer design_size, @Nullable @NativeType("unsigned int *") IntBuffer subfamily_id, @Nullable @NativeType("hb_ot_name_id_t *") IntBuffer subfamily_name_id, @Nullable @NativeType("unsigned int *") IntBuffer range_start, @Nullable @NativeType("unsigned int *") IntBuffer range_end) {
+    public static boolean hb_ot_layout_get_size_params(@NativeType("hb_face_t *") long face, @NativeType("unsigned int *") @Nullable IntBuffer design_size, @NativeType("unsigned int *") @Nullable IntBuffer subfamily_id, @NativeType("hb_ot_name_id_t *") @Nullable IntBuffer subfamily_name_id, @NativeType("unsigned int *") @Nullable IntBuffer range_start, @NativeType("unsigned int *") @Nullable IntBuffer range_end) {
         if (CHECKS) {
             checkSafe(design_size, 1);
             checkSafe(subfamily_id, 1);
@@ -1339,7 +1339,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_feature_get_name_ids(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @Nullable @NativeType("hb_ot_name_id_t *") IntBuffer label_id, @Nullable @NativeType("hb_ot_name_id_t *") IntBuffer tooltip_id, @Nullable @NativeType("hb_ot_name_id_t *") IntBuffer sample_id, @Nullable @NativeType("unsigned int *") IntBuffer num_named_parameters, @Nullable @NativeType("hb_ot_name_id_t *") IntBuffer first_param_id) {
+    public static boolean hb_ot_layout_feature_get_name_ids(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("hb_ot_name_id_t *") @Nullable IntBuffer label_id, @NativeType("hb_ot_name_id_t *") @Nullable IntBuffer tooltip_id, @NativeType("hb_ot_name_id_t *") @Nullable IntBuffer sample_id, @NativeType("unsigned int *") @Nullable IntBuffer num_named_parameters, @NativeType("hb_ot_name_id_t *") @Nullable IntBuffer first_param_id) {
         if (CHECKS) {
             checkSafe(label_id, 1);
             checkSafe(tooltip_id, 1);
@@ -1361,7 +1361,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_layout_feature_get_characters(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer char_count, @Nullable @NativeType("hb_codepoint_t *") IntBuffer characters) {
+    public static int hb_ot_layout_feature_get_characters(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int table_tag, @NativeType("unsigned int") int feature_index, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer char_count, @NativeType("hb_codepoint_t *") @Nullable IntBuffer characters) {
         if (CHECKS) {
             checkSafe(char_count, 1);
             if (char_count != null) { checkSafe(characters, char_count.get(char_count.position())); }
@@ -1419,7 +1419,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_layout_get_baseline(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @Nullable @NativeType("hb_position_t *") IntBuffer coord) {
+    public static boolean hb_ot_layout_get_baseline(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
         if (CHECKS) {
             checkSafe(coord, 1);
         }
@@ -1438,7 +1438,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_ot_layout_get_baseline2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @Nullable @NativeType("hb_position_t *") IntBuffer coord) {
+    public static boolean hb_ot_ot_layout_get_baseline2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
         if (CHECKS) {
             checkSafe(coord, 1);
         }
@@ -1455,7 +1455,7 @@ public class OpenType {
         invokePPV(font, baseline_tag, direction, script_tag, language_tag, coord, __functionAddress);
     }
 
-    public static void hb_ot_layout_get_baseline_with_fallback(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @Nullable @NativeType("hb_position_t *") IntBuffer coord) {
+    public static void hb_ot_layout_get_baseline_with_fallback(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
         if (CHECKS) {
             checkSafe(coord, 1);
         }
@@ -1473,7 +1473,7 @@ public class OpenType {
         invokePPPV(font, baseline_tag, direction, script, language, coord, __functionAddress);
     }
 
-    public static void hb_ot_layout_get_baseline_with_fallback2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @Nullable @NativeType("hb_position_t *") IntBuffer coord) {
+    public static void hb_ot_layout_get_baseline_with_fallback2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
         if (CHECKS) {
             checkSafe(coord, 1);
         }
@@ -1558,7 +1558,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_math_get_glyph_kernings(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_ot_math_kern_t") int kern, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer entries_count, @Nullable @NativeType("hb_ot_math_kern_entry_t *") hb_ot_math_kern_entry_t.Buffer kern_entries) {
+    public static int hb_ot_math_get_glyph_kernings(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_ot_math_kern_t") int kern, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer entries_count, @NativeType("hb_ot_math_kern_entry_t *") hb_ot_math_kern_entry_t.@Nullable Buffer kern_entries) {
         if (CHECKS) {
             checkSafe(entries_count, 1);
             if (entries_count != null) { checkSafe(kern_entries, entries_count.get(entries_count.position())); }
@@ -1577,7 +1577,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_math_get_glyph_variants(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_direction_t") int direction, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer variants_count, @Nullable @NativeType("hb_ot_math_glyph_variant_t *") hb_ot_math_glyph_variant_t.Buffer variants) {
+    public static int hb_ot_math_get_glyph_variants(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_direction_t") int direction, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer variants_count, @NativeType("hb_ot_math_glyph_variant_t *") hb_ot_math_glyph_variant_t.@Nullable Buffer variants) {
         if (CHECKS) {
             checkSafe(variants_count, 1);
             if (variants_count != null) { checkSafe(variants, variants_count.get(variants_count.position())); }
@@ -1607,7 +1607,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_math_get_glyph_assembly(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_direction_t") int direction, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer parts_count, @Nullable @NativeType("hb_ot_math_glyph_part_t *") hb_ot_math_glyph_part_t.Buffer parts, @Nullable @NativeType("hb_position_t *") IntBuffer italics_correction) {
+    public static int hb_ot_math_get_glyph_assembly(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_direction_t") int direction, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer parts_count, @NativeType("hb_ot_math_glyph_part_t *") hb_ot_math_glyph_part_t.@Nullable Buffer parts, @NativeType("hb_position_t *") @Nullable IntBuffer italics_correction) {
         if (CHECKS) {
             checkSafe(parts_count, 1);
             if (parts_count != null) { checkSafe(parts, parts_count.get(parts_count.position())); }
@@ -1627,7 +1627,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_meta_get_entry_tags(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer entries_count, @Nullable @NativeType("hb_ot_meta_tag_t *") IntBuffer entries) {
+    public static int hb_ot_meta_get_entry_tags(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer entries_count, @NativeType("hb_ot_meta_tag_t *") @Nullable IntBuffer entries) {
         if (CHECKS) {
             checkSafe(entries_count, 1);
             if (entries_count != null) { checkSafe(entries, entries_count.get(entries_count.position())); }
@@ -1657,7 +1657,7 @@ public class OpenType {
     }
 
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_metrics_get_position(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_metrics_tag_t") int metrics_tag, @Nullable @NativeType("hb_position_t *") IntBuffer position) {
+    public static boolean hb_ot_metrics_get_position(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_metrics_tag_t") int metrics_tag, @NativeType("hb_position_t *") @Nullable IntBuffer position) {
         if (CHECKS) {
             checkSafe(position, 1);
         }
@@ -1674,7 +1674,7 @@ public class OpenType {
         invokePPV(font, metrics_tag, position, __functionAddress);
     }
 
-    public static void hb_ot_metrics_get_position_with_fallback(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_metrics_tag_t") int metrics_tag, @Nullable @NativeType("hb_position_t *") IntBuffer position) {
+    public static void hb_ot_metrics_get_position_with_fallback(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_metrics_tag_t") int metrics_tag, @NativeType("hb_position_t *") @Nullable IntBuffer position) {
         if (CHECKS) {
             checkSafe(position, 1);
         }
@@ -1723,9 +1723,8 @@ public class OpenType {
         return invokePPP(face, num_entries, __functionAddress);
     }
 
-    @Nullable
     @NativeType("hb_ot_name_entry_t const *")
-    public static hb_ot_name_entry_t.Buffer hb_ot_name_list_names(@NativeType("hb_face_t *") long face) {
+    public static hb_ot_name_entry_t.@Nullable Buffer hb_ot_name_list_names(@NativeType("hb_face_t *") long face) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer num_entries = stack.callocInt(1);
         try {
@@ -1748,7 +1747,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_name_get_utf8(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @Nullable @NativeType("unsigned int *") IntBuffer text_size, @Nullable @NativeType("char *") ByteBuffer text) {
+    public static int hb_ot_name_get_utf8(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @NativeType("unsigned int *") @Nullable IntBuffer text_size, @NativeType("char *") @Nullable ByteBuffer text) {
         if (CHECKS) {
             checkSafe(text_size, 1);
             if (text_size != null) { checkSafe(text, text_size.get(text_size.position())); }
@@ -1768,7 +1767,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_name_get_utf16(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @Nullable @NativeType("unsigned int *") IntBuffer text_size, @Nullable @NativeType("uint16_t *") ShortBuffer text) {
+    public static int hb_ot_name_get_utf16(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @NativeType("unsigned int *") @Nullable IntBuffer text_size, @NativeType("uint16_t *") @Nullable ShortBuffer text) {
         if (CHECKS) {
             checkSafe(text_size, 1);
             if (text_size != null) { checkSafe(text, text_size.get(text_size.position())); }
@@ -1788,7 +1787,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_name_get_utf32(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @Nullable @NativeType("unsigned int *") IntBuffer text_size, @Nullable @NativeType("uint32_t *") IntBuffer text) {
+    public static int hb_ot_name_get_utf32(@NativeType("hb_face_t *") long face, @NativeType("hb_ot_name_id_t") int name_id, @NativeType("hb_language_t") long language, @NativeType("unsigned int *") @Nullable IntBuffer text_size, @NativeType("uint32_t *") @Nullable IntBuffer text) {
         if (CHECKS) {
             checkSafe(text_size, 1);
             if (text_size != null) { checkSafe(text, text_size.get(text_size.position())); }
@@ -1808,7 +1807,7 @@ public class OpenType {
         invokePPPPV(font, buffer, features, num_features, glyphs, __functionAddress);
     }
 
-    public static void hb_ot_shape_glyphs_closure(@NativeType("hb_font_t *") long font, @NativeType("hb_buffer_t *") long buffer, @Nullable @NativeType("hb_feature_t const *") hb_feature_t.Buffer features, @NativeType("hb_set_t *") long glyphs) {
+    public static void hb_ot_shape_glyphs_closure(@NativeType("hb_font_t *") long font, @NativeType("hb_buffer_t *") long buffer, @NativeType("hb_feature_t const *") hb_feature_t.@Nullable Buffer features, @NativeType("hb_set_t *") long glyphs) {
         nhb_ot_shape_glyphs_closure(font, buffer, memAddressSafe(features), remainingSafe(features), glyphs);
     }
 
@@ -1856,7 +1855,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_var_get_axis_infos(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer axes_count, @Nullable @NativeType("hb_ot_var_axis_info_t *") hb_ot_var_axis_info_t.Buffer axes_array) {
+    public static int hb_ot_var_get_axis_infos(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer axes_count, @NativeType("hb_ot_var_axis_info_t *") hb_ot_var_axis_info_t.@Nullable Buffer axes_array) {
         if (CHECKS) {
             checkSafe(axes_count, 1);
             if (axes_count != null) { checkSafe(axes_array, axes_count.get(axes_count.position())); }
@@ -1924,7 +1923,7 @@ public class OpenType {
     }
 
     @NativeType("unsigned int")
-    public static int hb_ot_var_named_instance_get_design_coords(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int instance_index, @Nullable @NativeType("unsigned int *") IntBuffer coords_length, @Nullable @NativeType("float *") FloatBuffer coords) {
+    public static int hb_ot_var_named_instance_get_design_coords(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int instance_index, @NativeType("unsigned int *") @Nullable IntBuffer coords_length, @NativeType("float *") @Nullable FloatBuffer coords) {
         if (CHECKS) {
             checkSafe(coords_length, 1);
             if (coords_length != null) { checkSafe(coords, coords_length.get(coords_length.position())); }

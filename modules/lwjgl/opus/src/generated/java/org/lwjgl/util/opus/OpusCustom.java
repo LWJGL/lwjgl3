@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,7 +86,7 @@ public class OpusCustom {
      * @param error      returned error code (if {@code NULL}, no error will be returned)
      */
     @NativeType("OpusCustomMode *")
-    public static long opus_custom_mode_create(@NativeType("opus_int32") int Fs, int frame_size, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_custom_mode_create(@NativeType("opus_int32") int Fs, int frame_size, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -174,7 +174,7 @@ public class OpusCustom {
      * @return newly created encoder state
      */
     @NativeType("OpusCustomEncoder *")
-    public static long opus_custom_encoder_create(@NativeType("OpusCustomMode const *") long mode, int channels, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_custom_encoder_create(@NativeType("OpusCustomMode const *") long mode, int channels, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -343,7 +343,7 @@ public class OpusCustom {
      * @return newly created decoder state
      */
     @NativeType("OpusCustomDecoder *")
-    public static long opus_custom_decoder_create(@NativeType("OpusCustomMode const *") long mode, int channels, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_custom_decoder_create(@NativeType("OpusCustomMode const *") long mode, int channels, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -390,7 +390,7 @@ public class OpusCustom {
      *
      * @return number of decoded samples, or a negative error code
      */
-    public static int opus_custom_decode_float(@NativeType("OpusCustomDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size) {
+    public static int opus_custom_decode_float(@NativeType("OpusCustomDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4)));
         }
@@ -422,7 +422,7 @@ public class OpusCustom {
      *
      * @return number of decoded samples, or a negative error code
      */
-    public static int opus_custom_decode(@NativeType("OpusCustomDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size) {
+    public static int opus_custom_decode(@NativeType("OpusCustomDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4)));
         }

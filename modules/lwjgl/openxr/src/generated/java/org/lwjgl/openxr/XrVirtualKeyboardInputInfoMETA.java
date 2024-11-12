@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -115,9 +115,8 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     @NativeType("XrVirtualKeyboardInputSourceMETA")
     public int inputSource() { return ninputSource(address()); }
     /** an {@code XrSpace} previously created by a function such as {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}. */
-    @Nullable
     @NativeType("XrSpace")
-    public long inputSpace() { return ninputSpace(address()); }
+    public @Nullable long inputSpace() { return ninputSpace(address()); }
     /** an {@link XrPosef} defining the position and orientation of the input’s source pose within the natural reference frame of the input space. */
     public XrPosef inputPoseInSpace() { return ninputPoseInSpace(address()); }
     /** a bitmask of {@code XrVirtualKeyboardInputStateFlagsMETA} describing the button or pinch state of the {@code inputSource}. */
@@ -196,8 +195,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVirtualKeyboardInputInfoMETA createSafe(long address) {
+    public static @Nullable XrVirtualKeyboardInputInfoMETA createSafe(long address) {
         return address == NULL ? null : new XrVirtualKeyboardInputInfoMETA(address, null);
     }
 
@@ -240,8 +238,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVirtualKeyboardInputInfoMETA.Buffer createSafe(long address, int capacity) {
+    public static XrVirtualKeyboardInputInfoMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -364,9 +361,8 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
         @NativeType("XrVirtualKeyboardInputSourceMETA")
         public int inputSource() { return XrVirtualKeyboardInputInfoMETA.ninputSource(address()); }
         /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#inputSpace} field. */
-        @Nullable
         @NativeType("XrSpace")
-        public long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
+        public @Nullable long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
         /** @return a {@link XrPosef} view of the {@link XrVirtualKeyboardInputInfoMETA#inputPoseInSpace} field. */
         public XrPosef inputPoseInSpace() { return XrVirtualKeyboardInputInfoMETA.ninputPoseInSpace(address()); }
         /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#inputState} field. */

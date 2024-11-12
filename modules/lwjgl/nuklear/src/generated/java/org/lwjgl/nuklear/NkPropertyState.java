@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class NkPropertyState extends Struct<NkPropertyState> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkPropertyState createSafe(long address) {
+    public static @Nullable NkPropertyState createSafe(long address) {
         return address == NULL ? null : new NkPropertyState(address, null);
     }
 
@@ -164,8 +163,7 @@ public class NkPropertyState extends Struct<NkPropertyState> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkPropertyState.Buffer createSafe(long address, int capacity) {
+    public static NkPropertyState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

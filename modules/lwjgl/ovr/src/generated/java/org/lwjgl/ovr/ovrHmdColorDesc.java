@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,8 +118,7 @@ public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ovrHmdColorDesc createSafe(long address) {
+    public static @Nullable ovrHmdColorDesc createSafe(long address) {
         return address == NULL ? null : new ovrHmdColorDesc(address, null);
     }
 
@@ -162,8 +161,7 @@ public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ovrHmdColorDesc.Buffer createSafe(long address, int capacity) {
+    public static ovrHmdColorDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -884,7 +884,7 @@ public class EXTDebugUtils {
      * @param pMessenger  a pointer to a {@code VkDebugUtilsMessengerEXT} handle in which the created object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerCreateInfoEXT const *") VkDebugUtilsMessengerCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDebugUtilsMessengerEXT *") LongBuffer pMessenger) {
+    public static int vkCreateDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerCreateInfoEXT const *") VkDebugUtilsMessengerCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkDebugUtilsMessengerEXT *") LongBuffer pMessenger) {
         if (CHECKS) {
             check(pMessenger, 1);
         }
@@ -947,7 +947,7 @@ public class EXTDebugUtils {
      * @param messenger  the {@code VkDebugUtilsMessengerEXT} object to destroy. {@code messenger} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@code vkDestroyDebugUtilsMessengerEXT} <b>must</b> not be called when a callback is active.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerEXT") long messenger, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerEXT") long messenger, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyDebugUtilsMessengerEXT(instance, messenger, memAddressSafe(pAllocator));
     }
 
@@ -1012,7 +1012,7 @@ public class EXTDebugUtils {
 
     /** Array version of: {@link #vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT} */
     @NativeType("VkResult")
-    public static int vkCreateDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerCreateInfoEXT const *") VkDebugUtilsMessengerCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDebugUtilsMessengerEXT *") long[] pMessenger) {
+    public static int vkCreateDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerCreateInfoEXT const *") VkDebugUtilsMessengerCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkDebugUtilsMessengerEXT *") long[] pMessenger) {
         long __functionAddress = instance.getCapabilities().vkCreateDebugUtilsMessengerEXT;
         if (CHECKS) {
             check(__functionAddress);

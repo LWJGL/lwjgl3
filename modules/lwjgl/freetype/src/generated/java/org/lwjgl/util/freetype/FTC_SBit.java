@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class FTC_SBit extends Struct<FTC_SBit> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_SBit createSafe(long address) {
+    public static @Nullable FTC_SBit createSafe(long address) {
         return address == NULL ? null : new FTC_SBit(address, null);
     }
 
@@ -164,8 +163,7 @@ public class FTC_SBit extends Struct<FTC_SBit> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_SBit.Buffer createSafe(long address, int capacity) {
+    public static FTC_SBit.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

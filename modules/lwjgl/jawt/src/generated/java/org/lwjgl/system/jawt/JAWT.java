@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jawt;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -169,8 +169,7 @@ public class JAWT extends Struct<JAWT> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static JAWT createSafe(long address) {
+    public static @Nullable JAWT createSafe(long address) {
         return address == NULL ? null : new JAWT(address, null);
     }
 

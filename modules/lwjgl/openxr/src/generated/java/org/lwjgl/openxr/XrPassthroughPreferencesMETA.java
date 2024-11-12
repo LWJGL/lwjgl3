@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class XrPassthroughPreferencesMETA extends Struct<XrPassthroughPreference
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughPreferencesMETA createSafe(long address) {
+    public static @Nullable XrPassthroughPreferencesMETA createSafe(long address) {
         return address == NULL ? null : new XrPassthroughPreferencesMETA(address, null);
     }
 
@@ -204,8 +203,7 @@ public class XrPassthroughPreferencesMETA extends Struct<XrPassthroughPreference
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughPreferencesMETA.Buffer createSafe(long address, int capacity) {
+    public static XrPassthroughPreferencesMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

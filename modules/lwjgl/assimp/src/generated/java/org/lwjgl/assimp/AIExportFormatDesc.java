@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class AIExportFormatDesc extends Struct<AIExportFormatDesc> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIExportFormatDesc createSafe(long address) {
+    public static @Nullable AIExportFormatDesc createSafe(long address) {
         return address == NULL ? null : new AIExportFormatDesc(address, null);
     }
 
@@ -206,8 +205,7 @@ public class AIExportFormatDesc extends Struct<AIExportFormatDesc> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIExportFormatDesc.Buffer createSafe(long address, int capacity) {
+    public static AIExportFormatDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

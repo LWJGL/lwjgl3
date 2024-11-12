@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -157,8 +157,7 @@ public class VkAndroidHardwareBufferFormatResolvePropertiesANDROID extends Struc
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAndroidHardwareBufferFormatResolvePropertiesANDROID createSafe(long address) {
+    public static @Nullable VkAndroidHardwareBufferFormatResolvePropertiesANDROID createSafe(long address) {
         return address == NULL ? null : new VkAndroidHardwareBufferFormatResolvePropertiesANDROID(address, null);
     }
 
@@ -201,8 +200,7 @@ public class VkAndroidHardwareBufferFormatResolvePropertiesANDROID extends Struc
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAndroidHardwareBufferFormatResolvePropertiesANDROID.Buffer createSafe(long address, int capacity) {
+    public static VkAndroidHardwareBufferFormatResolvePropertiesANDROID.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

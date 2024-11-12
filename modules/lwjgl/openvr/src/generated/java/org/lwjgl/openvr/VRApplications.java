@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,7 +158,7 @@ public class VRApplications {
      * at least {@link VR#k_unMaxApplicationKeyLength} in order to fit the key.
      */
     @NativeType("EVRApplicationError")
-    public static int VRApplications_GetApplicationKeyByIndex(@NativeType("uint32_t") int unApplicationIndex, @Nullable @NativeType("char *") ByteBuffer pchAppKeyBuffer) {
+    public static int VRApplications_GetApplicationKeyByIndex(@NativeType("uint32_t") int unApplicationIndex, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         return nVRApplications_GetApplicationKeyByIndex(unApplicationIndex, memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
     }
 
@@ -175,7 +175,7 @@ public class VRApplications {
 
     /** Returns the key of the application for the specified Process Id. The buffer should be at least {@link VR#k_unMaxApplicationKeyLength} in order to fit the key. */
     @NativeType("EVRApplicationError")
-    public static int VRApplications_GetApplicationKeyByProcessId(@NativeType("uint32_t") int unProcessId, @Nullable @NativeType("char *") ByteBuffer pchAppKeyBuffer) {
+    public static int VRApplications_GetApplicationKeyByProcessId(@NativeType("uint32_t") int unProcessId, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         return nVRApplications_GetApplicationKeyByProcessId(unProcessId, memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
     }
 
@@ -461,9 +461,8 @@ public class VRApplications {
      *
      * @param error one of:<br><table><tr><td>{@link VR#EVRApplicationError_VRApplicationError_None}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_AppKeyAlreadyExists}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NoManifest}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NoApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidIndex}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_UnknownApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_IPCFailed}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyRunning}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidManifest}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_LaunchFailed}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyStarting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_LaunchInProgress}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_OldApplicationQuitting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_TransitionAborted}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_IsTemplate}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_SteamVRIsExiting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_BufferTooSmall}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_PropertyNotSet}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_UnknownProperty}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidParameter}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NotImplemented}</td></tr></table>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String VRApplications_GetApplicationsErrorNameFromEnum(@NativeType("EVRApplicationError") int error) {
+    public static @Nullable String VRApplications_GetApplicationsErrorNameFromEnum(@NativeType("EVRApplicationError") int error) {
         long __result = nVRApplications_GetApplicationsErrorNameFromEnum(error);
         return memASCIISafe(__result);
     }
@@ -485,7 +484,7 @@ public class VRApplications {
      * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
      */
     @NativeType("uint32_t")
-    public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @Nullable @NativeType("char *") ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
+    public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("char *") @Nullable ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
             checkNT1(pchAppKey);
             check(peError, 1);
@@ -499,7 +498,7 @@ public class VRApplications {
      * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
      */
     @NativeType("uint32_t")
-    public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @Nullable @NativeType("char *") ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
+    public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("char *") @Nullable ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
             check(peError, 1);
         }
@@ -762,7 +761,7 @@ public class VRApplications {
 
     /** Return the app key that will open this mime type. */
     @NativeType("bool")
-    public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeyBuffer) {
+    public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         if (CHECKS) {
             checkNT1(pchMimeType);
         }
@@ -771,7 +770,7 @@ public class VRApplications {
 
     /** Return the app key that will open this mime type. */
     @NativeType("bool")
-    public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeyBuffer) {
+    public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchMimeType, true);
@@ -795,7 +794,7 @@ public class VRApplications {
 
     /** Get the list of supported mime types for this application, comma-delimited. */
     @NativeType("bool")
-    public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") ByteBuffer pchAppKey, @Nullable @NativeType("char *") ByteBuffer pchMimeTypesBuffer) {
+    public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("char *") @Nullable ByteBuffer pchMimeTypesBuffer) {
         if (CHECKS) {
             checkNT1(pchAppKey);
         }
@@ -804,7 +803,7 @@ public class VRApplications {
 
     /** Get the list of supported mime types for this application, comma-delimited. */
     @NativeType("bool")
-    public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") CharSequence pchAppKey, @Nullable @NativeType("char *") ByteBuffer pchMimeTypesBuffer) {
+    public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") CharSequence pchAppKey, @NativeType("char *") @Nullable ByteBuffer pchMimeTypesBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchAppKey, true);
@@ -828,7 +827,7 @@ public class VRApplications {
 
     /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
     @NativeType("uint32_t")
-    public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeysThatSupportBuffer) {
+    public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeysThatSupportBuffer) {
         if (CHECKS) {
             checkNT1(pchMimeType);
         }
@@ -837,7 +836,7 @@ public class VRApplications {
 
     /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
     @NativeType("uint32_t")
-    public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeysThatSupportBuffer) {
+    public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeysThatSupportBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchMimeType, true);
@@ -876,7 +875,7 @@ public class VRApplications {
 
     /** Get the args list from an app launch that had the process already running, you call this when you get a {@link VR#EVREventType_VREvent_ApplicationMimeTypeLoad}. */
     @NativeType("uint32_t")
-    public static int VRApplications_GetApplicationLaunchArguments(@NativeType("uint32_t") int unHandle, @Nullable @NativeType("char *") ByteBuffer pchArgs) {
+    public static int VRApplications_GetApplicationLaunchArguments(@NativeType("uint32_t") int unHandle, @NativeType("char *") @Nullable ByteBuffer pchArgs) {
         return nVRApplications_GetApplicationLaunchArguments(unHandle, memAddressSafe(pchArgs), remainingSafe(pchArgs));
     }
 
@@ -997,9 +996,8 @@ public class VRApplications {
      *
      * @param state one of:<br><table><tr><td>{@link VR#EVRSceneApplicationState_None}</td><td>{@link VR#EVRSceneApplicationState_Starting}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Quitting}</td><td>{@link VR#EVRSceneApplicationState_Running}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Waiting}</td></tr></table>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String VRApplications_GetSceneApplicationStateNameFromEnum(@NativeType("EVRSceneApplicationState") int state) {
+    public static @Nullable String VRApplications_GetSceneApplicationStateNameFromEnum(@NativeType("EVRSceneApplicationState") int state) {
         long __result = nVRApplications_GetSceneApplicationStateNameFromEnum(state);
         return memASCIISafe(__result);
     }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -202,8 +202,7 @@ public class VkExportMetalTextureInfoEXT extends Struct<VkExportMetalTextureInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportMetalTextureInfoEXT createSafe(long address) {
+    public static @Nullable VkExportMetalTextureInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkExportMetalTextureInfoEXT(address, null);
     }
 
@@ -246,8 +245,7 @@ public class VkExportMetalTextureInfoEXT extends Struct<VkExportMetalTextureInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportMetalTextureInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkExportMetalTextureInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

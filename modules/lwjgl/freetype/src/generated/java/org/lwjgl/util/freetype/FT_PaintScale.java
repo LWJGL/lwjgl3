@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class FT_PaintScale extends Struct<FT_PaintScale> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintScale createSafe(long address) {
+    public static @Nullable FT_PaintScale createSafe(long address) {
         return address == NULL ? null : new FT_PaintScale(address, null);
     }
 
@@ -124,8 +123,7 @@ public class FT_PaintScale extends Struct<FT_PaintScale> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintScale.Buffer createSafe(long address, int capacity) {
+    public static FT_PaintScale.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

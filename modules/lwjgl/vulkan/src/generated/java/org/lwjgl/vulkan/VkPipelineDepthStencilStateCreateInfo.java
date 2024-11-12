@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -269,8 +269,7 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct<VkPipelineDept
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDepthStencilStateCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineDepthStencilStateCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineDepthStencilStateCreateInfo(address, null);
     }
 
@@ -313,8 +312,7 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct<VkPipelineDept
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDepthStencilStateCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineDepthStencilStateCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

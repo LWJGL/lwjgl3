@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -181,8 +181,7 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEyeGazesFB createSafe(long address) {
+    public static @Nullable XrEyeGazesFB createSafe(long address) {
         return address == NULL ? null : new XrEyeGazesFB(address, null);
     }
 
@@ -225,8 +224,7 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEyeGazesFB.Buffer createSafe(long address, int capacity) {
+    public static XrEyeGazesFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

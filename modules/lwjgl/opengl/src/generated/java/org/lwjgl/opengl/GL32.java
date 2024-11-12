@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -821,7 +821,7 @@ public class GL32 extends GL31 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
-    public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer values) {
+    public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer values) {
         GL32C.glGetSynciv(sync, pname, length, values);
     }
 
@@ -835,7 +835,7 @@ public class GL32 extends GL31 {
      * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
     @NativeType("void")
-    public static int glGetSynci(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length) {
+    public static int glGetSynci(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") @Nullable IntBuffer length) {
         return GL32C.glGetSynci(sync, pname, length);
     }
 
@@ -889,7 +889,7 @@ public class GL32 extends GL31 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetSync">Reference Page</a>
      */
-    public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] values) {
+    public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] values) {
         GL32C.glGetSynciv(sync, pname, length, values);
     }
 

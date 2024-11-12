@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -189,8 +189,7 @@ public class XrSpatialAnchorCreateInfoHTC extends Struct<XrSpatialAnchorCreateIn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialAnchorCreateInfoHTC createSafe(long address) {
+    public static @Nullable XrSpatialAnchorCreateInfoHTC createSafe(long address) {
         return address == NULL ? null : new XrSpatialAnchorCreateInfoHTC(address, null);
     }
 
@@ -233,8 +232,7 @@ public class XrSpatialAnchorCreateInfoHTC extends Struct<XrSpatialAnchorCreateIn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialAnchorCreateInfoHTC.Buffer createSafe(long address, int capacity) {
+    public static XrSpatialAnchorCreateInfoHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

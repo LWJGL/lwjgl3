@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class EpollEvent extends Struct<EpollEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EpollEvent createSafe(long address) {
+    public static @Nullable EpollEvent createSafe(long address) {
         return address == NULL ? null : new EpollEvent(address, null);
     }
 
@@ -178,8 +177,7 @@ public class EpollEvent extends Struct<EpollEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EpollEvent.Buffer createSafe(long address, int capacity) {
+    public static EpollEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

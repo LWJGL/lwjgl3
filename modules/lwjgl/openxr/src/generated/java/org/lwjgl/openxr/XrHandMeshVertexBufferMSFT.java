@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,9 +119,8 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** an array of {@link XrHandMeshVertexMSFT} filled in by the runtime, specifying the vertices of the hand mesh including the position and normal vector in the hand mesh space. */
-    @Nullable
     @NativeType("XrHandMeshVertexMSFT *")
-    public XrHandMeshVertexMSFT.Buffer vertices() { return nvertices(address()); }
+    public XrHandMeshVertexMSFT.@Nullable Buffer vertices() { return nvertices(address()); }
 
     /** Sets the specified value to the {@link #vertexUpdateTime} field. */
     public XrHandMeshVertexBufferMSFT vertexUpdateTime(@NativeType("XrTime") long value) { nvertexUpdateTime(address(), value); return this; }
@@ -130,14 +129,14 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     /** Sets the specified value to the {@link #vertexCountOutput} field. */
     public XrHandMeshVertexBufferMSFT vertexCountOutput(@NativeType("uint32_t") int value) { nvertexCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@link #vertices} field. */
-    public XrHandMeshVertexBufferMSFT vertices(@Nullable @NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.Buffer value) { nvertices(address(), value); return this; }
+    public XrHandMeshVertexBufferMSFT vertices(@NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.@Nullable Buffer value) { nvertices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrHandMeshVertexBufferMSFT set(
         long vertexUpdateTime,
         int vertexCapacityInput,
         int vertexCountOutput,
-        @Nullable XrHandMeshVertexMSFT.Buffer vertices
+        XrHandMeshVertexMSFT.@Nullable Buffer vertices
     ) {
         vertexUpdateTime(vertexUpdateTime);
         vertexCapacityInput(vertexCapacityInput);
@@ -183,8 +182,7 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandMeshVertexBufferMSFT createSafe(long address) {
+    public static @Nullable XrHandMeshVertexBufferMSFT createSafe(long address) {
         return address == NULL ? null : new XrHandMeshVertexBufferMSFT(address, null);
     }
 
@@ -227,8 +225,7 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandMeshVertexBufferMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrHandMeshVertexBufferMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -279,7 +276,7 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     /** Unsafe version of {@link #vertexCountOutput}. */
     public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
-    @Nullable public static XrHandMeshVertexMSFT.Buffer nvertices(long struct) { return XrHandMeshVertexMSFT.createSafe(memGetAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES), nvertexCapacityInput(struct)); }
+    public static XrHandMeshVertexMSFT.@Nullable Buffer nvertices(long struct) { return XrHandMeshVertexMSFT.createSafe(memGetAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES), nvertexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #vertexUpdateTime(long) vertexUpdateTime}. */
     public static void nvertexUpdateTime(long struct, long value) { memPutLong(struct + XrHandMeshVertexBufferMSFT.VERTEXUPDATETIME, value); }
@@ -288,7 +285,7 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
     public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrHandMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrHandMeshVertexMSFT.Buffer) vertices}. */
-    public static void nvertices(long struct, @Nullable XrHandMeshVertexMSFT.Buffer value) { memPutAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
+    public static void nvertices(long struct, XrHandMeshVertexMSFT.@Nullable Buffer value) { memPutAddress(struct + XrHandMeshVertexBufferMSFT.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -343,9 +340,8 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrHandMeshVertexBufferMSFT.nvertexCountOutput(address()); }
         /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@link XrHandMeshVertexBufferMSFT#vertices} field. */
-        @Nullable
         @NativeType("XrHandMeshVertexMSFT *")
-        public XrHandMeshVertexMSFT.Buffer vertices() { return XrHandMeshVertexBufferMSFT.nvertices(address()); }
+        public XrHandMeshVertexMSFT.@Nullable Buffer vertices() { return XrHandMeshVertexBufferMSFT.nvertices(address()); }
 
         /** Sets the specified value to the {@link XrHandMeshVertexBufferMSFT#vertexUpdateTime} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertexUpdateTime(@NativeType("XrTime") long value) { XrHandMeshVertexBufferMSFT.nvertexUpdateTime(address(), value); return this; }
@@ -354,7 +350,7 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
         /** Sets the specified value to the {@link XrHandMeshVertexBufferMSFT#vertexCountOutput} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertexCountOutput(@NativeType("uint32_t") int value) { XrHandMeshVertexBufferMSFT.nvertexCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@link XrHandMeshVertexBufferMSFT#vertices} field. */
-        public XrHandMeshVertexBufferMSFT.Buffer vertices(@Nullable @NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.Buffer value) { XrHandMeshVertexBufferMSFT.nvertices(address(), value); return this; }
+        public XrHandMeshVertexBufferMSFT.Buffer vertices(@NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.@Nullable Buffer value) { XrHandMeshVertexBufferMSFT.nvertices(address(), value); return this; }
 
     }
 

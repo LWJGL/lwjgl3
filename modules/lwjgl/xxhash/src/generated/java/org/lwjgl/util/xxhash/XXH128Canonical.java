@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.xxhash;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class XXH128Canonical extends Struct<XXH128Canonical> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XXH128Canonical createSafe(long address) {
+    public static @Nullable XXH128Canonical createSafe(long address) {
         return address == NULL ? null : new XXH128Canonical(address, null);
     }
 
@@ -147,8 +146,7 @@ public class XXH128Canonical extends Struct<XXH128Canonical> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XXH128Canonical.Buffer createSafe(long address, int capacity) {
+    public static XXH128Canonical.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

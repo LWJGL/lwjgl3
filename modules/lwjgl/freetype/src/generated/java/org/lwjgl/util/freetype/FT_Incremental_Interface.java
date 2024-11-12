@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -135,8 +135,7 @@ public class FT_Incremental_Interface extends Struct<FT_Incremental_Interface> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Incremental_Interface createSafe(long address) {
+    public static @Nullable FT_Incremental_Interface createSafe(long address) {
         return address == NULL ? null : new FT_Incremental_Interface(address, null);
     }
 
@@ -179,8 +178,7 @@ public class FT_Incremental_Interface extends Struct<FT_Incremental_Interface> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Incremental_Interface.Buffer createSafe(long address, int capacity) {
+    public static FT_Incremental_Interface.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

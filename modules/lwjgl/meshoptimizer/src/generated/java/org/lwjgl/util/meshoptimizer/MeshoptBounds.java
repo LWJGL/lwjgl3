@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meshoptimizer;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -147,8 +147,7 @@ public class MeshoptBounds extends Struct<MeshoptBounds> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptBounds createSafe(long address) {
+    public static @Nullable MeshoptBounds createSafe(long address) {
         return address == NULL ? null : new MeshoptBounds(address, null);
     }
 
@@ -191,8 +190,7 @@ public class MeshoptBounds extends Struct<MeshoptBounds> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptBounds.Buffer createSafe(long address, int capacity) {
+    public static MeshoptBounds.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

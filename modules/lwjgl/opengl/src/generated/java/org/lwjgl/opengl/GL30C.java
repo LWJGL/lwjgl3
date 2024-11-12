@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -491,9 +491,8 @@ public class GL30C extends GL21C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetStringi">Reference Page</a>
      */
-    @Nullable
     @NativeType("GLubyte const *")
-    public static String glGetStringi(@NativeType("GLenum") int name, @NativeType("GLuint") int index) {
+    public static @Nullable String glGetStringi(@NativeType("GLenum") int name, @NativeType("GLuint") int index) {
         long __result = nglGetStringi(name, index);
         return memUTF8Safe(__result);
     }
@@ -1384,9 +1383,8 @@ public class GL30C extends GL21C {
      * 
      * @see <a href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
+    public static @Nullable ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
         long __result = nglMapBufferRange(target, offset, length, access);
         return memByteBufferSafe(__result, (int)length);
     }
@@ -1408,9 +1406,8 @@ public class GL30C extends GL21C {
      * 
      * @see <a href="https://docs.gl/gl4/glMapBufferRange">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
         long __result = nglMapBufferRange(target, offset, length, access);
         return apiGetMappedBuffer(old_buffer, __result, (int)length);
     }
@@ -2289,7 +2286,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetTransformFeedbackVarying">Reference Page</a>
      */
-    public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLsizei *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLsizei *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(length, 1);
             check(size, 1);
@@ -2867,7 +2864,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetTransformFeedbackVarying">Reference Page</a>
      */
-    public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLsizei *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLsizei *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetTransformFeedbackVarying;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class XrFrameWaitInfo extends Struct<XrFrameWaitInfo> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameWaitInfo createSafe(long address) {
+    public static @Nullable XrFrameWaitInfo createSafe(long address) {
         return address == NULL ? null : new XrFrameWaitInfo(address, null);
     }
 
@@ -194,8 +193,7 @@ public class XrFrameWaitInfo extends Struct<XrFrameWaitInfo> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrameWaitInfo.Buffer createSafe(long address, int capacity) {
+    public static XrFrameWaitInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

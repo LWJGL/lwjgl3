@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lz4;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class LZ4FFrameInfo extends Struct<LZ4FFrameInfo> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FFrameInfo createSafe(long address) {
+    public static @Nullable LZ4FFrameInfo createSafe(long address) {
         return address == NULL ? null : new LZ4FFrameInfo(address, null);
     }
 
@@ -235,8 +234,7 @@ public class LZ4FFrameInfo extends Struct<LZ4FFrameInfo> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FFrameInfo.Buffer createSafe(long address, int capacity) {
+    public static LZ4FFrameInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

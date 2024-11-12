@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -190,8 +190,7 @@ public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocaliza
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataLocalizationChangedML createSafe(long address) {
+    public static @Nullable XrEventDataLocalizationChangedML createSafe(long address) {
         return address == NULL ? null : new XrEventDataLocalizationChangedML(address, null);
     }
 
@@ -239,8 +238,7 @@ public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocaliza
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataLocalizationChangedML.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataLocalizationChangedML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

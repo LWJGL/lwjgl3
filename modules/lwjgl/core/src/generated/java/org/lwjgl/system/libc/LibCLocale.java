@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,9 +86,8 @@ public class LibCLocale {
      *         <p>A copy of the returned string along with the category used in this call to {@code setlocale} may be used later in the program to restore the locale
      *         back to the state at the end of this call.</p>
      */
-    @Nullable
     @NativeType("char *")
-    public static String setlocale(int category, @NativeType("char const *") ByteBuffer locale) {
+    public static @Nullable String setlocale(int category, @NativeType("char const *") ByteBuffer locale) {
         if (CHECKS) {
             checkNT1(locale);
         }
@@ -111,9 +110,8 @@ public class LibCLocale {
      *         <p>A copy of the returned string along with the category used in this call to {@code setlocale} may be used later in the program to restore the locale
      *         back to the state at the end of this call.</p>
      */
-    @Nullable
     @NativeType("char *")
-    public static String setlocale(int category, @NativeType("char const *") CharSequence locale) {
+    public static @Nullable String setlocale(int category, @NativeType("char const *") CharSequence locale) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(locale, true);

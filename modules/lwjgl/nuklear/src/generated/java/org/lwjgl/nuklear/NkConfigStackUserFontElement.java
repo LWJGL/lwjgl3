@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -91,8 +91,7 @@ class NkConfigStackUserFontElement extends Struct<NkConfigStackUserFontElement> 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackUserFontElement createSafe(long address) {
+    public static @Nullable NkConfigStackUserFontElement createSafe(long address) {
         return address == NULL ? null : new NkConfigStackUserFontElement(address, null);
     }
 
@@ -107,8 +106,7 @@ class NkConfigStackUserFontElement extends Struct<NkConfigStackUserFontElement> 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackUserFontElement.Buffer createSafe(long address, int capacity) {
+    public static NkConfigStackUserFontElement.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

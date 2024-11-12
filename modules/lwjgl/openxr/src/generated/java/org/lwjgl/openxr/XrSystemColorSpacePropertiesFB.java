@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class XrSystemColorSpacePropertiesFB extends Struct<XrSystemColorSpacePro
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemColorSpacePropertiesFB createSafe(long address) {
+    public static @Nullable XrSystemColorSpacePropertiesFB createSafe(long address) {
         return address == NULL ? null : new XrSystemColorSpacePropertiesFB(address, null);
     }
 
@@ -194,8 +193,7 @@ public class XrSystemColorSpacePropertiesFB extends Struct<XrSystemColorSpacePro
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemColorSpacePropertiesFB.Buffer createSafe(long address, int capacity) {
+    public static XrSystemColorSpacePropertiesFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

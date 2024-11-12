@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class VkQueueFamilyProperties extends Struct<VkQueueFamilyProperties> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkQueueFamilyProperties createSafe(long address) {
+    public static @Nullable VkQueueFamilyProperties createSafe(long address) {
         return address == NULL ? null : new VkQueueFamilyProperties(address, null);
     }
 
@@ -198,8 +197,7 @@ public class VkQueueFamilyProperties extends Struct<VkQueueFamilyProperties> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkQueueFamilyProperties.Buffer createSafe(long address, int capacity) {
+    public static VkQueueFamilyProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

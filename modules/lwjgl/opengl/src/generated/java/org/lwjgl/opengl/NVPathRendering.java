@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1086,7 +1086,7 @@ public class NVPathRendering {
     public static native boolean nglPointAlongPathNV(int path, int startSegment, int numSegments, float distance, long x, long y, long tangentX, long tangentY);
 
     @NativeType("GLboolean")
-    public static boolean glPointAlongPathNV(@NativeType("GLuint") int path, @NativeType("GLsizei") int startSegment, @NativeType("GLsizei") int numSegments, @NativeType("GLfloat") float distance, @Nullable @NativeType("GLfloat *") FloatBuffer x, @Nullable @NativeType("GLfloat *") FloatBuffer y, @Nullable @NativeType("GLfloat *") FloatBuffer tangentX, @Nullable @NativeType("GLfloat *") FloatBuffer tangentY) {
+    public static boolean glPointAlongPathNV(@NativeType("GLuint") int path, @NativeType("GLsizei") int startSegment, @NativeType("GLsizei") int numSegments, @NativeType("GLfloat") float distance, @NativeType("GLfloat *") @Nullable FloatBuffer x, @NativeType("GLfloat *") @Nullable FloatBuffer y, @NativeType("GLfloat *") @Nullable FloatBuffer tangentX, @NativeType("GLfloat *") @Nullable FloatBuffer tangentY) {
         if (CHECKS) {
             checkSafe(x, 1);
             checkSafe(y, 1);
@@ -1178,7 +1178,7 @@ public class NVPathRendering {
 
     public static native void nglGetProgramResourcefvNV(int program, int programInterface, int index, int propCount, long props, int bufSize, long length, long params);
 
-    public static void glGetProgramResourcefvNV(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLfloat *") FloatBuffer params) {
+    public static void glGetProgramResourcefvNV(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLfloat *") FloatBuffer params) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -1532,7 +1532,7 @@ public class NVPathRendering {
 
     /** Array version of: {@link #glPointAlongPathNV PointAlongPathNV} */
     @NativeType("GLboolean")
-    public static boolean glPointAlongPathNV(@NativeType("GLuint") int path, @NativeType("GLsizei") int startSegment, @NativeType("GLsizei") int numSegments, @NativeType("GLfloat") float distance, @Nullable @NativeType("GLfloat *") float[] x, @Nullable @NativeType("GLfloat *") float[] y, @Nullable @NativeType("GLfloat *") float[] tangentX, @Nullable @NativeType("GLfloat *") float[] tangentY) {
+    public static boolean glPointAlongPathNV(@NativeType("GLuint") int path, @NativeType("GLsizei") int startSegment, @NativeType("GLsizei") int numSegments, @NativeType("GLfloat") float distance, @NativeType("GLfloat *") float @Nullable [] x, @NativeType("GLfloat *") float @Nullable [] y, @NativeType("GLfloat *") float @Nullable [] tangentX, @NativeType("GLfloat *") float @Nullable [] tangentY) {
         long __functionAddress = GL.getICD().glPointAlongPathNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -1605,7 +1605,7 @@ public class NVPathRendering {
     }
 
     /** Array version of: {@link #glGetProgramResourcefvNV GetProgramResourcefvNV} */
-    public static void glGetProgramResourcefvNV(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLfloat *") float[] params) {
+    public static void glGetProgramResourcefvNV(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetProgramResourcefvNV;
         if (CHECKS) {
             check(__functionAddress);

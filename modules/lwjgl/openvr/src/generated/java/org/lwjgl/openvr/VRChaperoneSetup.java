@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,7 +116,7 @@ public class VRChaperoneSetup {
 
     /** Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified from the working copy. */
     @NativeType("bool")
-    public static boolean VRChaperoneSetup_GetWorkingCollisionBoundsInfo(@Nullable @NativeType("HmdQuad_t *") HmdQuad.Buffer pQuadsBuffer, @NativeType("uint32_t *") IntBuffer punQuadsCount) {
+    public static boolean VRChaperoneSetup_GetWorkingCollisionBoundsInfo(@NativeType("HmdQuad_t *") HmdQuad.@Nullable Buffer pQuadsBuffer, @NativeType("uint32_t *") IntBuffer punQuadsCount) {
         if (CHECKS) {
             check(punQuadsCount, 1);
             checkSafe(pQuadsBuffer, punQuadsCount.get(punQuadsCount.position()));
@@ -137,7 +137,7 @@ public class VRChaperoneSetup {
 
     /** Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified. */
     @NativeType("bool")
-    public static boolean VRChaperoneSetup_GetLiveCollisionBoundsInfo(@Nullable @NativeType("HmdQuad_t *") HmdQuad.Buffer pQuadsBuffer, @NativeType("uint32_t *") IntBuffer punQuadsCount) {
+    public static boolean VRChaperoneSetup_GetLiveCollisionBoundsInfo(@NativeType("HmdQuad_t *") HmdQuad.@Nullable Buffer pQuadsBuffer, @NativeType("uint32_t *") IntBuffer punQuadsCount) {
         if (CHECKS) {
             check(punQuadsCount, 1);
             checkSafe(pQuadsBuffer, punQuadsCount.get(punQuadsCount.position()));
@@ -301,7 +301,7 @@ public class VRChaperoneSetup {
     }
 
     @NativeType("bool")
-    public static boolean VRChaperoneSetup_ExportLiveToBuffer(@Nullable @NativeType("char *") ByteBuffer pBuffer, @NativeType("uint32_t *") IntBuffer pnBufferLength) {
+    public static boolean VRChaperoneSetup_ExportLiveToBuffer(@NativeType("char *") @Nullable ByteBuffer pBuffer, @NativeType("uint32_t *") IntBuffer pnBufferLength) {
         if (CHECKS) {
             check(pnBufferLength, 1);
             checkSafe(pBuffer, pnBufferLength.get(pnBufferLength.position()));

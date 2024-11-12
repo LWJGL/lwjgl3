@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,9 +114,8 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     @NativeType("uint32_t")
     public int requestedDataSourceCount() { return nrequestedDataSourceCount(address()); }
     /** an array of {@code XrHandTrackingDataSourceEXT} that the application accepts. */
-    @Nullable
     @NativeType("XrHandTrackingDataSourceEXT *")
-    public IntBuffer requestedDataSources() { return nrequestedDataSources(address()); }
+    public @Nullable IntBuffer requestedDataSources() { return nrequestedDataSources(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrHandTrackingDataSourceInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -176,8 +175,7 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandTrackingDataSourceInfoEXT createSafe(long address) {
+    public static @Nullable XrHandTrackingDataSourceInfoEXT createSafe(long address) {
         return address == NULL ? null : new XrHandTrackingDataSourceInfoEXT(address, null);
     }
 
@@ -220,8 +218,7 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandTrackingDataSourceInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static XrHandTrackingDataSourceInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -272,7 +269,7 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     /** Unsafe version of {@link #requestedDataSourceCount}. */
     public static int nrequestedDataSourceCount(long struct) { return memGetInt(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCECOUNT); }
     /** Unsafe version of {@link #requestedDataSources() requestedDataSources}. */
-    @Nullable public static IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
+    public static @Nullable IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingDataSourceInfoEXT.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceInfoEXT.TYPE, value); }
@@ -347,9 +344,8 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
         @NativeType("uint32_t")
         public int requestedDataSourceCount() { return XrHandTrackingDataSourceInfoEXT.nrequestedDataSourceCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrHandTrackingDataSourceInfoEXT#requestedDataSources} field. */
-        @Nullable
         @NativeType("XrHandTrackingDataSourceEXT *")
-        public IntBuffer requestedDataSources() { return XrHandTrackingDataSourceInfoEXT.nrequestedDataSources(address()); }
+        public @Nullable IntBuffer requestedDataSources() { return XrHandTrackingDataSourceInfoEXT.nrequestedDataSources(address()); }
 
         /** Sets the specified value to the {@link XrHandTrackingDataSourceInfoEXT#type} field. */
         public XrHandTrackingDataSourceInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrHandTrackingDataSourceInfoEXT.ntype(address(), value); return this; }

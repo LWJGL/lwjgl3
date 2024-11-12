@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,8 +176,7 @@ public class VkMemoryBarrier extends Struct<VkMemoryBarrier> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryBarrier createSafe(long address) {
+    public static @Nullable VkMemoryBarrier createSafe(long address) {
         return address == NULL ? null : new VkMemoryBarrier(address, null);
     }
 
@@ -220,8 +219,7 @@ public class VkMemoryBarrier extends Struct<VkMemoryBarrier> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMemoryBarrier.Buffer createSafe(long address, int capacity) {
+    public static VkMemoryBarrier.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

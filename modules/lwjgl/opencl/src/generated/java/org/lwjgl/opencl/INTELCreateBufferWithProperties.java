@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -71,7 +71,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("size_t") long size, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("size_t") long size, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -107,7 +107,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -143,7 +143,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ShortBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -179,7 +179,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") IntBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -215,7 +215,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") FloatBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -251,7 +251,7 @@ public class INTELCreateBufferWithProperties {
      *         </ul>
      */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") DoubleBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") DoubleBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -261,7 +261,7 @@ public class INTELCreateBufferWithProperties {
 
     /** Array version of: {@link #clCreateBufferWithPropertiesINTEL CreateBufferWithPropertiesINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBufferWithPropertiesINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -274,7 +274,7 @@ public class INTELCreateBufferWithProperties {
 
     /** Array version of: {@link #clCreateBufferWithPropertiesINTEL CreateBufferWithPropertiesINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") short[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBufferWithPropertiesINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -287,7 +287,7 @@ public class INTELCreateBufferWithProperties {
 
     /** Array version of: {@link #clCreateBufferWithPropertiesINTEL CreateBufferWithPropertiesINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") int[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBufferWithPropertiesINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -300,7 +300,7 @@ public class INTELCreateBufferWithProperties {
 
     /** Array version of: {@link #clCreateBufferWithPropertiesINTEL CreateBufferWithPropertiesINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") float[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBufferWithPropertiesINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -313,7 +313,7 @@ public class INTELCreateBufferWithProperties {
 
     /** Array version of: {@link #clCreateBufferWithPropertiesINTEL CreateBufferWithPropertiesINTEL} */
     @NativeType("cl_mem")
-    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") double[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBufferWithPropertiesINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("void *") double[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBufferWithPropertiesINTEL;
         if (CHECKS) {
             check(__functionAddress);

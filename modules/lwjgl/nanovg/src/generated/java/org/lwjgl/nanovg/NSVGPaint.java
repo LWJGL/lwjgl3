@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -97,8 +97,7 @@ public class NSVGPaint extends Struct<NSVGPaint> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGPaint createSafe(long address) {
+    public static @Nullable NSVGPaint createSafe(long address) {
         return address == NULL ? null : new NSVGPaint(address, null);
     }
 
@@ -113,8 +112,7 @@ public class NSVGPaint extends Struct<NSVGPaint> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGPaint.Buffer createSafe(long address, int capacity) {
+    public static NSVGPaint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

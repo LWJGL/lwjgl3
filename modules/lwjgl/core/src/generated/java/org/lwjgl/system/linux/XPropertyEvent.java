@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -198,8 +198,7 @@ public class XPropertyEvent extends Struct<XPropertyEvent> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XPropertyEvent createSafe(long address) {
+    public static @Nullable XPropertyEvent createSafe(long address) {
         return address == NULL ? null : new XPropertyEvent(address, null);
     }
 
@@ -242,8 +241,7 @@ public class XPropertyEvent extends Struct<XPropertyEvent> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XPropertyEvent.Buffer createSafe(long address, int capacity) {
+    public static XPropertyEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

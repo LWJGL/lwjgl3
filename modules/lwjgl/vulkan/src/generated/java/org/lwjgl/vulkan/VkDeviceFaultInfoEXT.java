@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,13 +134,11 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
     /** {@code NULL} or a pointer to an array of {@link VkDeviceFaultAddressInfoEXT} structures describing either memory accesses which <b>may</b> have caused a page fault, or describing active instruction pointers at the time of the fault. If not {@code NULL}, each element of {@code pAddressInfos} describes the a bounded region of GPU virtual address space containing either the GPU virtual address accessed, or the value of an active instruction pointer. */
-    @Nullable
     @NativeType("VkDeviceFaultAddressInfoEXT *")
-    public VkDeviceFaultAddressInfoEXT pAddressInfos() { return npAddressInfos(address()); }
+    public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return npAddressInfos(address()); }
     /** {@code NULL} or a pointer to an array of {@link VkDeviceFaultVendorInfoEXT} structures describing vendor-specific fault information. */
-    @Nullable
     @NativeType("VkDeviceFaultVendorInfoEXT *")
-    public VkDeviceFaultVendorInfoEXT pVendorInfos() { return npVendorInfos(address()); }
+    public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return npVendorInfos(address()); }
     /** {@code NULL} or a pointer to {@code vendorBinarySize} number of bytes of data, which will be populated with a vendor-specific binary crash dump, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vendor-binary-crash-dumps">Vendor Binary Crash Dumps</a>. */
     @NativeType("void *")
     public long pVendorBinaryData() { return npVendorBinaryData(address()); }
@@ -199,8 +197,7 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultInfoEXT createSafe(long address) {
+    public static @Nullable VkDeviceFaultInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkDeviceFaultInfoEXT(address, null);
     }
 
@@ -243,8 +240,7 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceFaultInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -297,9 +293,9 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkDeviceFaultInfoEXT.DESCRIPTION); }
     /** Unsafe version of {@link #pAddressInfos}. */
-    @Nullable public static VkDeviceFaultAddressInfoEXT npAddressInfos(long struct) { return VkDeviceFaultAddressInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS)); }
+    public static @Nullable VkDeviceFaultAddressInfoEXT npAddressInfos(long struct) { return VkDeviceFaultAddressInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS)); }
     /** Unsafe version of {@link #pVendorInfos}. */
-    @Nullable public static VkDeviceFaultVendorInfoEXT npVendorInfos(long struct) { return VkDeviceFaultVendorInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS)); }
+    public static @Nullable VkDeviceFaultVendorInfoEXT npVendorInfos(long struct) { return VkDeviceFaultVendorInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS)); }
     /** Unsafe version of {@link #pVendorBinaryData}. */
     public static long npVendorBinaryData(long struct) { return memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA); }
 
@@ -364,13 +360,11 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkDeviceFaultInfoEXT.ndescriptionString(address()); }
         /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@link VkDeviceFaultInfoEXT#pAddressInfos} field. */
-        @Nullable
         @NativeType("VkDeviceFaultAddressInfoEXT *")
-        public VkDeviceFaultAddressInfoEXT pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
+        public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
         /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@link VkDeviceFaultInfoEXT#pVendorInfos} field. */
-        @Nullable
         @NativeType("VkDeviceFaultVendorInfoEXT *")
-        public VkDeviceFaultVendorInfoEXT pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
+        public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
         /** @return the value of the {@link VkDeviceFaultInfoEXT#pVendorBinaryData} field. */
         @NativeType("void *")
         public long pVendorBinaryData() { return VkDeviceFaultInfoEXT.npVendorBinaryData(address()); }

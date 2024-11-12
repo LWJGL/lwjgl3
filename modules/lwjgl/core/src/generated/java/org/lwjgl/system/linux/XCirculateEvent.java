@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class XCirculateEvent extends Struct<XCirculateEvent> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XCirculateEvent createSafe(long address) {
+    public static @Nullable XCirculateEvent createSafe(long address) {
         return address == NULL ? null : new XCirculateEvent(address, null);
     }
 
@@ -229,8 +228,7 @@ public class XCirculateEvent extends Struct<XCirculateEvent> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XCirculateEvent.Buffer createSafe(long address, int capacity) {
+    public static XCirculateEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

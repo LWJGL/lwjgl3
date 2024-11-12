@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -45,7 +45,7 @@ public class VRNotifications {
      * @param style one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
      */
     @NativeType("EVRNotificationError")
-    public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") ByteBuffer pchText, @NativeType("EVRNotificationStyle") int style, @Nullable @NativeType("NotificationBitmap_t const *") NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
+    public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") ByteBuffer pchText, @NativeType("EVRNotificationStyle") int style, @NativeType("NotificationBitmap_t const *") @Nullable NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
         if (CHECKS) {
             checkNT1(pchText);
             check(pNotificationId, 1);
@@ -64,7 +64,7 @@ public class VRNotifications {
      * @param style one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
      */
     @NativeType("EVRNotificationError")
-    public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") CharSequence pchText, @NativeType("EVRNotificationStyle") int style, @Nullable @NativeType("NotificationBitmap_t const *") NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
+    public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") CharSequence pchText, @NativeType("EVRNotificationStyle") int style, @NativeType("NotificationBitmap_t const *") @Nullable NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
         if (CHECKS) {
             check(pNotificationId, 1);
         }

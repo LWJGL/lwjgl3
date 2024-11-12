@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lmdb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -35,8 +35,7 @@ public abstract class MDBCmpFunc extends Callback implements MDBCmpFuncI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static MDBCmpFunc createSafe(long functionPointer) {
+    public static @Nullable MDBCmpFunc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

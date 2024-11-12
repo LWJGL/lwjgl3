@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -48,8 +48,7 @@ public abstract class VkInternalFreeNotification extends Callback implements VkI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static VkInternalFreeNotification createSafe(long functionPointer) {
+    public static @Nullable VkInternalFreeNotification createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

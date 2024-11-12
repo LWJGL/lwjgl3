@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -78,11 +78,9 @@ public class FT_ListNode extends Struct<FT_ListNode> {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code prev} field. */
-    @Nullable
-    public FT_ListNode prev() { return nprev(address()); }
+    public @Nullable FT_ListNode prev() { return nprev(address()); }
     /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code next} field. */
-    @Nullable
-    public FT_ListNode next() { return nnext(address()); }
+    public @Nullable FT_ListNode next() { return nnext(address()); }
     /**
      * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
      *
@@ -99,8 +97,7 @@ public class FT_ListNode extends Struct<FT_ListNode> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ListNode createSafe(long address) {
+    public static @Nullable FT_ListNode createSafe(long address) {
         return address == NULL ? null : new FT_ListNode(address, null);
     }
 
@@ -115,17 +112,16 @@ public class FT_ListNode extends Struct<FT_ListNode> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ListNode.Buffer createSafe(long address, int capacity) {
+    public static FT_ListNode.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #prev}. */
-    @Nullable public static FT_ListNode nprev(long struct) { return FT_ListNode.createSafe(memGetAddress(struct + FT_ListNode.PREV)); }
+    public static @Nullable FT_ListNode nprev(long struct) { return FT_ListNode.createSafe(memGetAddress(struct + FT_ListNode.PREV)); }
     /** Unsafe version of {@link #next}. */
-    @Nullable public static FT_ListNode nnext(long struct) { return FT_ListNode.createSafe(memGetAddress(struct + FT_ListNode.NEXT)); }
+    public static @Nullable FT_ListNode nnext(long struct) { return FT_ListNode.createSafe(memGetAddress(struct + FT_ListNode.NEXT)); }
     /** Unsafe version of {@link #data(int) data}. */
     public static ByteBuffer ndata(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + FT_ListNode.DATA), capacity); }
 
@@ -173,11 +169,9 @@ public class FT_ListNode extends Struct<FT_ListNode> {
         }
 
         /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code prev} field. */
-        @Nullable
-        public FT_ListNode prev() { return FT_ListNode.nprev(address()); }
+        public @Nullable FT_ListNode prev() { return FT_ListNode.nprev(address()); }
         /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code next} field. */
-        @Nullable
-        public FT_ListNode next() { return FT_ListNode.nnext(address()); }
+        public @Nullable FT_ListNode next() { return FT_ListNode.nnext(address()); }
         /**
          * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
          *

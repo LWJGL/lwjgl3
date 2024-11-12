@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -212,13 +212,11 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     @NativeType("uint32_t")
     public int usageCountsCount() { return nusageCountsCount(address()); }
     /** a pointer to an array of {@link VkMicromapUsageEXT} structures. */
-    @Nullable
     @NativeType("VkMicromapUsageEXT const *")
-    public VkMicromapUsageEXT.Buffer pUsageCounts() { return npUsageCounts(address()); }
+    public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return npUsageCounts(address()); }
     /** a pointer to an array of pointers to {@link VkMicromapUsageEXT} structures. */
-    @Nullable
     @NativeType("VkMicromapUsageEXT const * const *")
-    public PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
+    public @Nullable PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
     /** the handle to the micromap object to include in this geometry. */
     @NativeType("VkMicromapEXT")
     public long micromap() { return nmicromap(address()); }
@@ -264,7 +262,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     /** Sets the specified value to the {@link #usageCountsCount} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV usageCountsCount(@NativeType("uint32_t") int value) { nusageCountsCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link #pUsageCounts} field. */
-    public VkAccelerationStructureTrianglesDisplacementMicromapNV pUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.Buffer value) { npUsageCounts(address(), value); return this; }
+    public VkAccelerationStructureTrianglesDisplacementMicromapNV pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { npUsageCounts(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppUsageCounts} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { nppUsageCounts(address(), value); return this; }
     /** Sets the specified value to the {@link #micromap} field. */
@@ -287,7 +285,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
         long indexStride,
         int baseTriangle,
         int usageCountsCount,
-        @Nullable VkMicromapUsageEXT.Buffer pUsageCounts,
+        VkMicromapUsageEXT.@Nullable Buffer pUsageCounts,
         @Nullable PointerBuffer ppUsageCounts,
         long micromap
     ) {
@@ -349,8 +347,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureTrianglesDisplacementMicromapNV createSafe(long address) {
+    public static @Nullable VkAccelerationStructureTrianglesDisplacementMicromapNV createSafe(long address) {
         return address == NULL ? null : new VkAccelerationStructureTrianglesDisplacementMicromapNV(address, null);
     }
 
@@ -393,8 +390,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer createSafe(long address, int capacity) {
+    public static VkAccelerationStructureTrianglesDisplacementMicromapNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -469,9 +465,9 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     /** Unsafe version of {@link #usageCountsCount}. */
     public static int nusageCountsCount(long struct) { return memGetInt(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.USAGECOUNTSCOUNT); }
     /** Unsafe version of {@link #pUsageCounts}. */
-    @Nullable public static VkMicromapUsageEXT.Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PUSAGECOUNTS), nusageCountsCount(struct)); }
+    public static VkMicromapUsageEXT.@Nullable Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #ppUsageCounts() ppUsageCounts}. */
-    @Nullable public static PointerBuffer nppUsageCounts(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PPUSAGECOUNTS), nusageCountsCount(struct)); }
+    public static @Nullable PointerBuffer nppUsageCounts(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PPUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #micromap}. */
     public static long nmicromap(long struct) { return memGetLong(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.MICROMAP); }
 
@@ -506,7 +502,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     /** Sets the specified value to the {@code usageCountsCount} field of the specified {@code struct}. */
     public static void nusageCountsCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.USAGECOUNTSCOUNT, value); }
     /** Unsafe version of {@link #pUsageCounts(VkMicromapUsageEXT.Buffer) pUsageCounts}. */
-    public static void npUsageCounts(long struct, @Nullable VkMicromapUsageEXT.Buffer value) { memPutAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PUSAGECOUNTS, memAddressSafe(value)); }
+    public static void npUsageCounts(long struct, VkMicromapUsageEXT.@Nullable Buffer value) { memPutAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppUsageCounts(PointerBuffer) ppUsageCounts}. */
     public static void nppUsageCounts(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkAccelerationStructureTrianglesDisplacementMicromapNV.PPUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #micromap(long) micromap}. */
@@ -597,13 +593,11 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
         @NativeType("uint32_t")
         public int usageCountsCount() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nusageCountsCount(address()); }
         /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pUsageCounts} field. */
-        @Nullable
         @NativeType("VkMicromapUsageEXT const *")
-        public VkMicromapUsageEXT.Buffer pUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address()); }
+        public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#ppUsageCounts} field. */
-        @Nullable
         @NativeType("VkMicromapUsageEXT const * const *")
-        public PointerBuffer ppUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nppUsageCounts(address()); }
+        public @Nullable PointerBuffer ppUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nppUsageCounts(address()); }
         /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#micromap} field. */
         @NativeType("VkMicromapEXT")
         public long micromap() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nmicromap(address()); }
@@ -649,7 +643,7 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
         /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#usageCountsCount} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer usageCountsCount(@NativeType("uint32_t") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nusageCountsCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pUsageCounts} field. */
-        public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer pUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.Buffer value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address(), value); return this; }
+        public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#ppUsageCounts} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nppUsageCounts(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#micromap} field. */

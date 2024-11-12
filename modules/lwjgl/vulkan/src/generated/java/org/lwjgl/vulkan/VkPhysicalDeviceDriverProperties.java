@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -188,8 +188,7 @@ public class VkPhysicalDeviceDriverProperties extends Struct<VkPhysicalDeviceDri
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceDriverProperties createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceDriverProperties createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceDriverProperties(address, null);
     }
 
@@ -232,8 +231,7 @@ public class VkPhysicalDeviceDriverProperties extends Struct<VkPhysicalDeviceDri
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceDriverProperties.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceDriverProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,9 +121,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     @NativeType("uint32_t")
     public int viewportCount() { return nviewportCount(address()); }
     /** a pointer to an array of {@link VkShadingRatePaletteNV} structures defining the palette for each viewport. If the shading rate palette state is dynamic, this member is ignored. */
-    @Nullable
     @NativeType("VkShadingRatePaletteNV const *")
-    public VkShadingRatePaletteNV.Buffer pShadingRatePalettes() { return npShadingRatePalettes(address()); }
+    public VkShadingRatePaletteNV.@Nullable Buffer pShadingRatePalettes() { return npShadingRatePalettes(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -136,7 +135,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     /** Sets the specified value to the {@link #viewportCount} field. */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV viewportCount(@NativeType("uint32_t") int value) { nviewportCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkShadingRatePaletteNV.Buffer} to the {@link #pShadingRatePalettes} field. */
-    public VkPipelineViewportShadingRateImageStateCreateInfoNV pShadingRatePalettes(@Nullable @NativeType("VkShadingRatePaletteNV const *") VkShadingRatePaletteNV.Buffer value) { npShadingRatePalettes(address(), value); return this; }
+    public VkPipelineViewportShadingRateImageStateCreateInfoNV pShadingRatePalettes(@NativeType("VkShadingRatePaletteNV const *") VkShadingRatePaletteNV.@Nullable Buffer value) { npShadingRatePalettes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV set(
@@ -144,7 +143,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
         long pNext,
         boolean shadingRateImageEnable,
         int viewportCount,
-        @Nullable VkShadingRatePaletteNV.Buffer pShadingRatePalettes
+        VkShadingRatePaletteNV.@Nullable Buffer pShadingRatePalettes
     ) {
         sType(sType);
         pNext(pNext);
@@ -191,8 +190,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportShadingRateImageStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineViewportShadingRateImageStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineViewportShadingRateImageStateCreateInfoNV(address, null);
     }
 
@@ -235,8 +233,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineViewportShadingRateImageStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -308,7 +305,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     /** Unsafe version of {@link #viewportCount}. */
     public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pShadingRatePalettes}. */
-    @Nullable public static VkShadingRatePaletteNV.Buffer npShadingRatePalettes(long struct) { return VkShadingRatePaletteNV.createSafe(memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES), nviewportCount(struct)); }
+    public static VkShadingRatePaletteNV.@Nullable Buffer npShadingRatePalettes(long struct) { return VkShadingRatePaletteNV.createSafe(memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE, value); }
@@ -319,7 +316,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
     public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pShadingRatePalettes(VkShadingRatePaletteNV.Buffer) pShadingRatePalettes}. */
-    public static void npShadingRatePalettes(long struct, @Nullable VkShadingRatePaletteNV.Buffer value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
+    public static void npShadingRatePalettes(long struct, VkShadingRatePaletteNV.@Nullable Buffer value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -377,9 +374,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
         @NativeType("uint32_t")
         public int viewportCount() { return VkPipelineViewportShadingRateImageStateCreateInfoNV.nviewportCount(address()); }
         /** @return a {@link VkShadingRatePaletteNV.Buffer} view of the struct array pointed to by the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#pShadingRatePalettes} field. */
-        @Nullable
         @NativeType("VkShadingRatePaletteNV const *")
-        public VkShadingRatePaletteNV.Buffer pShadingRatePalettes() { return VkPipelineViewportShadingRateImageStateCreateInfoNV.npShadingRatePalettes(address()); }
+        public VkShadingRatePaletteNV.@Nullable Buffer pShadingRatePalettes() { return VkPipelineViewportShadingRateImageStateCreateInfoNV.npShadingRatePalettes(address()); }
 
         /** Sets the specified value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#sType} field. */
         public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.nsType(address(), value); return this; }
@@ -392,7 +388,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<
         /** Sets the specified value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#viewportCount} field. */
         public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer viewportCount(@NativeType("uint32_t") int value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.nviewportCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkShadingRatePaletteNV.Buffer} to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#pShadingRatePalettes} field. */
-        public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer pShadingRatePalettes(@Nullable @NativeType("VkShadingRatePaletteNV const *") VkShadingRatePaletteNV.Buffer value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.npShadingRatePalettes(address(), value); return this; }
+        public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer pShadingRatePalettes(@NativeType("VkShadingRatePaletteNV const *") VkShadingRatePaletteNV.@Nullable Buffer value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.npShadingRatePalettes(address(), value); return this; }
 
     }
 

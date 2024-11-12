@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -94,8 +94,7 @@ public class CXVersion extends Struct<CXVersion> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXVersion createSafe(long address) {
+    public static @Nullable CXVersion createSafe(long address) {
         return address == NULL ? null : new CXVersion(address, null);
     }
 
@@ -110,8 +109,7 @@ public class CXVersion extends Struct<CXVersion> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXVersion.Buffer createSafe(long address, int capacity) {
+    public static CXVersion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

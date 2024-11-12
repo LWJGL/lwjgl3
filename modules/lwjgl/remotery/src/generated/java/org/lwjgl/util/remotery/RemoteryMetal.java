@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -43,7 +43,7 @@ public class RemoteryMetal {
 
     public static native void nrmt_BeginMetalSample(long name, long hash_cache);
 
-    public static void rmt_BeginMetalSample(@NativeType("rmtPStr") ByteBuffer name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginMetalSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(hash_cache, 1);
@@ -51,7 +51,7 @@ public class RemoteryMetal {
         nrmt_BeginMetalSample(memAddress(name), memAddressSafe(hash_cache));
     }
 
-    public static void rmt_BeginMetalSample(@NativeType("rmtPStr") CharSequence name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginMetalSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);
         }

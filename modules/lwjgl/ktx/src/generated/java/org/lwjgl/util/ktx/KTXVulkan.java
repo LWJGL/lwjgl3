@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -58,7 +58,7 @@ public class KTXVulkan {
         callPPPV(This, device, pAllocator, __functionAddress);
     }
 
-    public static void ktxVulkanTexture_Destruct(@NativeType("ktxVulkanTexture *") ktxVulkanTexture This, VkDevice device, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void ktxVulkanTexture_Destruct(@NativeType("ktxVulkanTexture *") ktxVulkanTexture This, VkDevice device, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nktxVulkanTexture_Destruct(This.address(), device.address(), memAddressSafe(pAllocator));
     }
 
@@ -72,9 +72,8 @@ public class KTXVulkan {
         return callPPPPJPPP(instance, physicalDevice, device, queue, cmdPool, pAllocator, pFunctions, __functionAddress);
     }
 
-    @Nullable
     @NativeType("ktxVulkanDeviceInfo *")
-    public static ktxVulkanDeviceInfo ktxVulkanDeviceInfo_CreateEx(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("ktxVulkanFunctions const *") ktxVulkanFunctions pFunctions) {
+    public static @Nullable ktxVulkanDeviceInfo ktxVulkanDeviceInfo_CreateEx(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("ktxVulkanFunctions const *") ktxVulkanFunctions pFunctions) {
         long __result = nktxVulkanDeviceInfo_CreateEx(instance.address(), physicalDevice.address(), device.address(), queue.address(), cmdPool, memAddressSafe(pAllocator), pFunctions.address());
         return ktxVulkanDeviceInfo.createSafe(__result);
     }
@@ -86,9 +85,8 @@ public class KTXVulkan {
         return callPPPJPP(physicalDevice, device, queue, cmdPool, pAllocator, __functionAddress);
     }
 
-    @Nullable
     @NativeType("ktxVulkanDeviceInfo *")
-    public static ktxVulkanDeviceInfo ktxVulkanDeviceInfo_Create(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static @Nullable ktxVulkanDeviceInfo ktxVulkanDeviceInfo_Create(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         long __result = nktxVulkanDeviceInfo_Create(physicalDevice.address(), device.address(), queue.address(), cmdPool, memAddressSafe(pAllocator));
         return ktxVulkanDeviceInfo.createSafe(__result);
     }
@@ -101,7 +99,7 @@ public class KTXVulkan {
     }
 
     @NativeType("KTX_error_code")
-    public static int ktxVulkanDeviceInfo_Construct(@NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo This, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static int ktxVulkanDeviceInfo_Construct(@NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo This, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         return nktxVulkanDeviceInfo_Construct(This.address(), physicalDevice.address(), device.address(), queue.address(), cmdPool, memAddressSafe(pAllocator));
     }
 
@@ -116,7 +114,7 @@ public class KTXVulkan {
     }
 
     @NativeType("KTX_error_code")
-    public static int ktxVulkanDeviceInfo_ConstructEx(@NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo This, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("ktxVulkanFunctions const *") ktxVulkanFunctions pFunctions) {
+    public static int ktxVulkanDeviceInfo_ConstructEx(@NativeType("ktxVulkanDeviceInfo *") ktxVulkanDeviceInfo This, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, @NativeType("VkCommandPool") long cmdPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("ktxVulkanFunctions const *") ktxVulkanFunctions pFunctions) {
         return nktxVulkanDeviceInfo_ConstructEx(This.address(), instance.address(), physicalDevice.address(), device.address(), queue.address(), cmdPool, memAddressSafe(pAllocator), pFunctions.address());
     }
 

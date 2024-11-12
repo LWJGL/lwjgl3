@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PS_FontInfo createSafe(long address) {
+    public static @Nullable PS_FontInfo createSafe(long address) {
         return address == NULL ? null : new PS_FontInfo(address, null);
     }
 
@@ -168,8 +167,7 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PS_FontInfo.Buffer createSafe(long address, int capacity) {
+    public static PS_FontInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

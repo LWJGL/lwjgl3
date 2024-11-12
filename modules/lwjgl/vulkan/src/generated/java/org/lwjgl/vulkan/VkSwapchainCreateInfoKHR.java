@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -239,9 +239,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
     /** a pointer to an array of queue family indices having access to the images(s) of the swapchain when {@code imageSharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
+    public @Nullable IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
     /** a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform, relative to the presentation engine’s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR}, the presentation engine will transform the image content as part of the presentation operation. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int preTransform() { return npreTransform(address()); }
@@ -430,8 +429,7 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkSwapchainCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkSwapchainCreateInfoKHR(address, null);
     }
 
@@ -474,8 +472,7 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSwapchainCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkSwapchainCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -563,7 +560,7 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     /** Unsafe version of {@link #queueFamilyIndexCount}. */
     public static int nqueueFamilyIndexCount(long struct) { return memGetInt(struct + VkSwapchainCreateInfoKHR.QUEUEFAMILYINDEXCOUNT); }
     /** Unsafe version of {@link #pQueueFamilyIndices() pQueueFamilyIndices}. */
-    @Nullable public static IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSwapchainCreateInfoKHR.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
+    public static @Nullable IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSwapchainCreateInfoKHR.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
     /** Unsafe version of {@link #preTransform}. */
     public static int npreTransform(long struct) { return memGetInt(struct + VkSwapchainCreateInfoKHR.PRETRANSFORM); }
     /** Unsafe version of {@link #compositeAlpha}. */
@@ -691,9 +688,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkSwapchainCreateInfoKHR.nqueueFamilyIndexCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSwapchainCreateInfoKHR#pQueueFamilyIndices} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pQueueFamilyIndices() { return VkSwapchainCreateInfoKHR.npQueueFamilyIndices(address()); }
+        public @Nullable IntBuffer pQueueFamilyIndices() { return VkSwapchainCreateInfoKHR.npQueueFamilyIndices(address()); }
         /** @return the value of the {@link VkSwapchainCreateInfoKHR#preTransform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int preTransform() { return VkSwapchainCreateInfoKHR.npreTransform(address()); }

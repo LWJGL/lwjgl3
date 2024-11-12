@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,8 +199,7 @@ public class OpusPictureTag extends Struct<OpusPictureTag> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusPictureTag createSafe(long address) {
+    public static @Nullable OpusPictureTag createSafe(long address) {
         return address == NULL ? null : new OpusPictureTag(address, null);
     }
 
@@ -243,8 +242,7 @@ public class OpusPictureTag extends Struct<OpusPictureTag> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusPictureTag.Buffer createSafe(long address, int capacity) {
+    public static OpusPictureTag.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

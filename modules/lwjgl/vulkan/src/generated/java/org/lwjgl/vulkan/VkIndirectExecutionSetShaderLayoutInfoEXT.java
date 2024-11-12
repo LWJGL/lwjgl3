@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,9 +109,8 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     @NativeType("uint32_t")
     public int setLayoutCount() { return nsetLayoutCount(address()); }
     /** a pointer to an array containing {@code VkDescriptorSetLayout} objects used by the shader stage. */
-    @Nullable
     @NativeType("VkDescriptorSetLayout const *")
-    public LongBuffer pSetLayouts() { return npSetLayouts(address()); }
+    public @Nullable LongBuffer pSetLayouts() { return npSetLayouts(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkIndirectExecutionSetShaderLayoutInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -175,8 +174,7 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectExecutionSetShaderLayoutInfoEXT createSafe(long address) {
+    public static @Nullable VkIndirectExecutionSetShaderLayoutInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkIndirectExecutionSetShaderLayoutInfoEXT(address, null);
     }
 
@@ -219,8 +217,7 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkIndirectExecutionSetShaderLayoutInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -271,7 +268,7 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     /** Unsafe version of {@link #setLayoutCount}. */
     public static int nsetLayoutCount(long struct) { return memGetInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.SETLAYOUTCOUNT); }
     /** Unsafe version of {@link #pSetLayouts() pSetLayouts}. */
-    @Nullable public static LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PSETLAYOUTS), nsetLayoutCount(struct)); }
+    public static @Nullable LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.PSETLAYOUTS), nsetLayoutCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectExecutionSetShaderLayoutInfoEXT.STYPE, value); }
@@ -335,9 +332,8 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
         @NativeType("uint32_t")
         public int setLayoutCount() { return VkIndirectExecutionSetShaderLayoutInfoEXT.nsetLayoutCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkIndirectExecutionSetShaderLayoutInfoEXT#pSetLayouts} field. */
-        @Nullable
         @NativeType("VkDescriptorSetLayout const *")
-        public LongBuffer pSetLayouts() { return VkIndirectExecutionSetShaderLayoutInfoEXT.npSetLayouts(address()); }
+        public @Nullable LongBuffer pSetLayouts() { return VkIndirectExecutionSetShaderLayoutInfoEXT.npSetLayouts(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectExecutionSetShaderLayoutInfoEXT.nsType(address(), value); return this; }

@@ -15,6 +15,6 @@
  * application will be independent of any DBMS from which it accesses data. Users of the application can add software components called drivers, which
  * interface between an application and a specific DBMS.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.odbc;
 

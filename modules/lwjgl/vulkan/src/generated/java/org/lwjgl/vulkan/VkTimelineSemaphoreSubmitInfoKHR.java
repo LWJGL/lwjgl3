@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,8 +129,7 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTimelineSemaphoreSubmitInfoKHR createSafe(long address) {
+    public static @Nullable VkTimelineSemaphoreSubmitInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkTimelineSemaphoreSubmitInfoKHR(address, null);
     }
 
@@ -173,8 +172,7 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTimelineSemaphoreSubmitInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkTimelineSemaphoreSubmitInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to <a href="https://github.com/Chlumsky/msdfgen">msdfgen</a>, a multi-channel signed distance field generator library. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.msdfgen;
 

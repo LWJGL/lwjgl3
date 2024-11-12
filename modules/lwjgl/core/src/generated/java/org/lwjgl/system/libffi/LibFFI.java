@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libffi;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -479,7 +479,7 @@ public class LibFFI {
      *         parameter is invalid.</p>
      */
     @NativeType("ffi_status")
-    public static int ffi_prep_cif(@NativeType("ffi_cif *") FFICIF cif, @NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType rtype, @Nullable @NativeType("ffi_type **") PointerBuffer atypes) {
+    public static int ffi_prep_cif(@NativeType("ffi_cif *") FFICIF cif, @NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType rtype, @NativeType("ffi_type **") @Nullable PointerBuffer atypes) {
         return nffi_prep_cif(cif.address(), abi, remainingSafe(atypes), rtype.address(), memAddressSafe(atypes));
     }
 
@@ -548,7 +548,7 @@ public class LibFFI {
      *                {@code short}, then the entry in {@code avalues} should point to an object declared as {@code short}; but if the return type is {@code short}, then
      *                {@code rvalue} should point to an object declared as a larger type - usually {@code ffi_arg}.</p>
      */
-    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @Nullable @NativeType("void *") ByteBuffer rvalue, @Nullable @NativeType("void **") PointerBuffer avalues) {
+    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalues) {
         if (CHECKS) {
             check(fn);
         }
@@ -572,7 +572,7 @@ public class LibFFI {
      *         {@code FFI_STRUCT} types are valid here.
      */
     @NativeType("ffi_status")
-    public static int ffi_get_struct_offsets(@NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType struct_type, @Nullable @NativeType("size_t *") PointerBuffer offsets) {
+    public static int ffi_get_struct_offsets(@NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType struct_type, @NativeType("size_t *") @Nullable PointerBuffer offsets) {
         return nffi_get_struct_offsets(abi, struct_type.address(), memAddressSafe(offsets));
     }
 
@@ -591,9 +591,8 @@ public class LibFFI {
      *
      * @return a pointer to the writable address
      */
-    @Nullable
     @NativeType("ffi_closure *")
-    public static FFIClosure ffi_closure_alloc(@NativeType("size_t") long size, @NativeType("void **") PointerBuffer code) {
+    public static @Nullable FFIClosure ffi_closure_alloc(@NativeType("size_t") long size, @NativeType("void **") PointerBuffer code) {
         if (CHECKS) {
             check(code, 1);
         }

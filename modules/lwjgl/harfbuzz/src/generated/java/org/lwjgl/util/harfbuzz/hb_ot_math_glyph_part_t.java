@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class hb_ot_math_glyph_part_t extends Struct<hb_ot_math_glyph_part_t> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_ot_math_glyph_part_t createSafe(long address) {
+    public static @Nullable hb_ot_math_glyph_part_t createSafe(long address) {
         return address == NULL ? null : new hb_ot_math_glyph_part_t(address, null);
     }
 
@@ -212,8 +211,7 @@ public class hb_ot_math_glyph_part_t extends Struct<hb_ot_math_glyph_part_t> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_ot_math_glyph_part_t.Buffer createSafe(long address, int capacity) {
+    public static hb_ot_math_glyph_part_t.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -321,8 +321,7 @@ public class VkSRTDataNV extends Struct<VkSRTDataNV> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSRTDataNV createSafe(long address) {
+    public static @Nullable VkSRTDataNV createSafe(long address) {
         return address == NULL ? null : new VkSRTDataNV(address, null);
     }
 
@@ -365,8 +364,7 @@ public class VkSRTDataNV extends Struct<VkSRTDataNV> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSRTDataNV.Buffer createSafe(long address, int capacity) {
+    public static VkSRTDataNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

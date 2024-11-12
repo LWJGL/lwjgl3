@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -177,8 +177,7 @@ public class STBRPRect extends Struct<STBRPRect> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBRPRect createSafe(long address) {
+    public static @Nullable STBRPRect createSafe(long address) {
         return address == NULL ? null : new STBRPRect(address, null);
     }
 
@@ -221,8 +220,7 @@ public class STBRPRect extends Struct<STBRPRect> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBRPRect.Buffer createSafe(long address, int capacity) {
+    public static STBRPRect.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

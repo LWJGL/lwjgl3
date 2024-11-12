@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -237,30 +237,23 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** @return the value of the {@code inclusionlistnum} field. */
     public int inclusionlistnum() { return ninclusionlistnum(address()); }
     /** @return the value of the {@code pcmreadcallback} field. */
-    @Nullable
-    public FMOD_SOUND_PCMREAD_CALLBACK pcmreadcallback() { return npcmreadcallback(address()); }
+    public @Nullable FMOD_SOUND_PCMREAD_CALLBACK pcmreadcallback() { return npcmreadcallback(address()); }
     /** @return the value of the {@code pcmsetposcallback} field. */
-    @Nullable
-    public FMOD_SOUND_PCMSETPOS_CALLBACK pcmsetposcallback() { return npcmsetposcallback(address()); }
+    public @Nullable FMOD_SOUND_PCMSETPOS_CALLBACK pcmsetposcallback() { return npcmsetposcallback(address()); }
     /** @return the value of the {@code nonblockcallback} field. */
-    @Nullable
-    public FMOD_SOUND_NONBLOCK_CALLBACK nonblockcallback() { return nnonblockcallback(address()); }
+    public @Nullable FMOD_SOUND_NONBLOCK_CALLBACK nonblockcallback() { return nnonblockcallback(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code dlsname} field. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer dlsname() { return ndlsname(address()); }
+    public @Nullable ByteBuffer dlsname() { return ndlsname(address()); }
     /** @return the null-terminated string pointed to by the {@code dlsname} field. */
-    @Nullable
     @NativeType("char const *")
-    public String dlsnameString() { return ndlsnameString(address()); }
+    public @Nullable String dlsnameString() { return ndlsnameString(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code encryptionkey} field. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer encryptionkey() { return nencryptionkey(address()); }
+    public @Nullable ByteBuffer encryptionkey() { return nencryptionkey(address()); }
     /** @return the null-terminated string pointed to by the {@code encryptionkey} field. */
-    @Nullable
     @NativeType("char const *")
-    public String encryptionkeyString() { return nencryptionkeyString(address()); }
+    public @Nullable String encryptionkeyString() { return nencryptionkeyString(address()); }
     /** @return the value of the {@code maxpolyphony} field. */
     public int maxpolyphony() { return nmaxpolyphony(address()); }
     /** @return the value of the {@code userdata} field. */
@@ -270,23 +263,17 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     @NativeType("FMOD_SOUND_TYPE")
     public int suggestedsoundtype() { return nsuggestedsoundtype(address()); }
     /** @return the value of the {@code fileuseropen} field. */
-    @Nullable
-    public FMOD_FILE_OPEN_CALLBACK fileuseropen() { return nfileuseropen(address()); }
+    public @Nullable FMOD_FILE_OPEN_CALLBACK fileuseropen() { return nfileuseropen(address()); }
     /** @return the value of the {@code fileuserclose} field. */
-    @Nullable
-    public FMOD_FILE_CLOSE_CALLBACK fileuserclose() { return nfileuserclose(address()); }
+    public @Nullable FMOD_FILE_CLOSE_CALLBACK fileuserclose() { return nfileuserclose(address()); }
     /** @return the value of the {@code fileuserread} field. */
-    @Nullable
-    public FMOD_FILE_READ_CALLBACK fileuserread() { return nfileuserread(address()); }
+    public @Nullable FMOD_FILE_READ_CALLBACK fileuserread() { return nfileuserread(address()); }
     /** @return the value of the {@code fileuserseek} field. */
-    @Nullable
-    public FMOD_FILE_SEEK_CALLBACK fileuserseek() { return nfileuserseek(address()); }
+    public @Nullable FMOD_FILE_SEEK_CALLBACK fileuserseek() { return nfileuserseek(address()); }
     /** @return the value of the {@code fileuserasyncread} field. */
-    @Nullable
-    public FMOD_FILE_ASYNCREAD_CALLBACK fileuserasyncread() { return nfileuserasyncread(address()); }
+    public @Nullable FMOD_FILE_ASYNCREAD_CALLBACK fileuserasyncread() { return nfileuserasyncread(address()); }
     /** @return the value of the {@code fileuserasynccancel} field. */
-    @Nullable
-    public FMOD_FILE_ASYNCCANCEL_CALLBACK fileuserasynccancel() { return nfileuserasynccancel(address()); }
+    public @Nullable FMOD_FILE_ASYNCCANCEL_CALLBACK fileuserasynccancel() { return nfileuserasynccancel(address()); }
     /** @return the value of the {@code fileuserdata} field. */
     @NativeType("void *")
     public long fileuserdata() { return nfileuserdata(address()); }
@@ -315,9 +302,8 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** @return the value of the {@code nonblockthreadid} field. */
     public int nonblockthreadid() { return nnonblockthreadid(address()); }
     /** @return a {@link FMOD_GUID} view of the struct pointed to by the {@code fsbguid} field. */
-    @Nullable
     @NativeType("FMOD_GUID *")
-    public FMOD_GUID fsbguid() { return nfsbguid(address()); }
+    public @Nullable FMOD_GUID fsbguid() { return nfsbguid(address()); }
 
     /** Sets the specified value to the {@code cbsize} field. */
     public FMOD_CREATESOUNDEXINFO cbsize(int value) { ncbsize(address(), value); return this; }
@@ -503,8 +489,7 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CREATESOUNDEXINFO createSafe(long address) {
+    public static @Nullable FMOD_CREATESOUNDEXINFO createSafe(long address) {
         return address == NULL ? null : new FMOD_CREATESOUNDEXINFO(address, null);
     }
 
@@ -547,8 +532,7 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CREATESOUNDEXINFO.Buffer createSafe(long address, int capacity) {
+    public static FMOD_CREATESOUNDEXINFO.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -615,19 +599,19 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #inclusionlistnum}. */
     public static int ninclusionlistnum(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.INCLUSIONLISTNUM); }
     /** Unsafe version of {@link #pcmreadcallback}. */
-    @Nullable public static FMOD_SOUND_PCMREAD_CALLBACK npcmreadcallback(long struct) { return FMOD_SOUND_PCMREAD_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.PCMREADCALLBACK)); }
+    public static @Nullable FMOD_SOUND_PCMREAD_CALLBACK npcmreadcallback(long struct) { return FMOD_SOUND_PCMREAD_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.PCMREADCALLBACK)); }
     /** Unsafe version of {@link #pcmsetposcallback}. */
-    @Nullable public static FMOD_SOUND_PCMSETPOS_CALLBACK npcmsetposcallback(long struct) { return FMOD_SOUND_PCMSETPOS_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.PCMSETPOSCALLBACK)); }
+    public static @Nullable FMOD_SOUND_PCMSETPOS_CALLBACK npcmsetposcallback(long struct) { return FMOD_SOUND_PCMSETPOS_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.PCMSETPOSCALLBACK)); }
     /** Unsafe version of {@link #nonblockcallback}. */
-    @Nullable public static FMOD_SOUND_NONBLOCK_CALLBACK nnonblockcallback(long struct) { return FMOD_SOUND_NONBLOCK_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.NONBLOCKCALLBACK)); }
+    public static @Nullable FMOD_SOUND_NONBLOCK_CALLBACK nnonblockcallback(long struct) { return FMOD_SOUND_NONBLOCK_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.NONBLOCKCALLBACK)); }
     /** Unsafe version of {@link #dlsname}. */
-    @Nullable public static ByteBuffer ndlsname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.DLSNAME)); }
+    public static @Nullable ByteBuffer ndlsname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.DLSNAME)); }
     /** Unsafe version of {@link #dlsnameString}. */
-    @Nullable public static String ndlsnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.DLSNAME)); }
+    public static @Nullable String ndlsnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.DLSNAME)); }
     /** Unsafe version of {@link #encryptionkey}. */
-    @Nullable public static ByteBuffer nencryptionkey(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY)); }
+    public static @Nullable ByteBuffer nencryptionkey(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY)); }
     /** Unsafe version of {@link #encryptionkeyString}. */
-    @Nullable public static String nencryptionkeyString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY)); }
+    public static @Nullable String nencryptionkeyString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.ENCRYPTIONKEY)); }
     /** Unsafe version of {@link #maxpolyphony}. */
     public static int nmaxpolyphony(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.MAXPOLYPHONY); }
     /** Unsafe version of {@link #userdata}. */
@@ -635,17 +619,17 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #suggestedsoundtype}. */
     public static int nsuggestedsoundtype(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.SUGGESTEDSOUNDTYPE); }
     /** Unsafe version of {@link #fileuseropen}. */
-    @Nullable public static FMOD_FILE_OPEN_CALLBACK nfileuseropen(long struct) { return FMOD_FILE_OPEN_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSEROPEN)); }
+    public static @Nullable FMOD_FILE_OPEN_CALLBACK nfileuseropen(long struct) { return FMOD_FILE_OPEN_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSEROPEN)); }
     /** Unsafe version of {@link #fileuserclose}. */
-    @Nullable public static FMOD_FILE_CLOSE_CALLBACK nfileuserclose(long struct) { return FMOD_FILE_CLOSE_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERCLOSE)); }
+    public static @Nullable FMOD_FILE_CLOSE_CALLBACK nfileuserclose(long struct) { return FMOD_FILE_CLOSE_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERCLOSE)); }
     /** Unsafe version of {@link #fileuserread}. */
-    @Nullable public static FMOD_FILE_READ_CALLBACK nfileuserread(long struct) { return FMOD_FILE_READ_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERREAD)); }
+    public static @Nullable FMOD_FILE_READ_CALLBACK nfileuserread(long struct) { return FMOD_FILE_READ_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERREAD)); }
     /** Unsafe version of {@link #fileuserseek}. */
-    @Nullable public static FMOD_FILE_SEEK_CALLBACK nfileuserseek(long struct) { return FMOD_FILE_SEEK_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERSEEK)); }
+    public static @Nullable FMOD_FILE_SEEK_CALLBACK nfileuserseek(long struct) { return FMOD_FILE_SEEK_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERSEEK)); }
     /** Unsafe version of {@link #fileuserasyncread}. */
-    @Nullable public static FMOD_FILE_ASYNCREAD_CALLBACK nfileuserasyncread(long struct) { return FMOD_FILE_ASYNCREAD_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERASYNCREAD)); }
+    public static @Nullable FMOD_FILE_ASYNCREAD_CALLBACK nfileuserasyncread(long struct) { return FMOD_FILE_ASYNCREAD_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERASYNCREAD)); }
     /** Unsafe version of {@link #fileuserasynccancel}. */
-    @Nullable public static FMOD_FILE_ASYNCCANCEL_CALLBACK nfileuserasynccancel(long struct) { return FMOD_FILE_ASYNCCANCEL_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERASYNCCANCEL)); }
+    public static @Nullable FMOD_FILE_ASYNCCANCEL_CALLBACK nfileuserasynccancel(long struct) { return FMOD_FILE_ASYNCCANCEL_CALLBACK.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERASYNCCANCEL)); }
     /** Unsafe version of {@link #fileuserdata}. */
     public static long nfileuserdata(long struct) { return memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FILEUSERDATA); }
     /** Unsafe version of {@link #filebuffersize}. */
@@ -667,7 +651,7 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
     /** Unsafe version of {@link #nonblockthreadid}. */
     public static int nnonblockthreadid(long struct) { return memGetInt(struct + FMOD_CREATESOUNDEXINFO.NONBLOCKTHREADID); }
     /** Unsafe version of {@link #fsbguid}. */
-    @Nullable public static FMOD_GUID nfsbguid(long struct) { return FMOD_GUID.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FSBGUID)); }
+    public static @Nullable FMOD_GUID nfsbguid(long struct) { return FMOD_GUID.createSafe(memGetAddress(struct + FMOD_CREATESOUNDEXINFO.FSBGUID)); }
 
     /** Unsafe version of {@link #cbsize(int) cbsize}. */
     public static void ncbsize(long struct, int value) { memPutInt(struct + FMOD_CREATESOUNDEXINFO.CBSIZE, value); }
@@ -828,30 +812,23 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
         /** @return the value of the {@code inclusionlistnum} field. */
         public int inclusionlistnum() { return FMOD_CREATESOUNDEXINFO.ninclusionlistnum(address()); }
         /** @return the value of the {@code pcmreadcallback} field. */
-        @Nullable
-        public FMOD_SOUND_PCMREAD_CALLBACK pcmreadcallback() { return FMOD_CREATESOUNDEXINFO.npcmreadcallback(address()); }
+        public @Nullable FMOD_SOUND_PCMREAD_CALLBACK pcmreadcallback() { return FMOD_CREATESOUNDEXINFO.npcmreadcallback(address()); }
         /** @return the value of the {@code pcmsetposcallback} field. */
-        @Nullable
-        public FMOD_SOUND_PCMSETPOS_CALLBACK pcmsetposcallback() { return FMOD_CREATESOUNDEXINFO.npcmsetposcallback(address()); }
+        public @Nullable FMOD_SOUND_PCMSETPOS_CALLBACK pcmsetposcallback() { return FMOD_CREATESOUNDEXINFO.npcmsetposcallback(address()); }
         /** @return the value of the {@code nonblockcallback} field. */
-        @Nullable
-        public FMOD_SOUND_NONBLOCK_CALLBACK nonblockcallback() { return FMOD_CREATESOUNDEXINFO.nnonblockcallback(address()); }
+        public @Nullable FMOD_SOUND_NONBLOCK_CALLBACK nonblockcallback() { return FMOD_CREATESOUNDEXINFO.nnonblockcallback(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code dlsname} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer dlsname() { return FMOD_CREATESOUNDEXINFO.ndlsname(address()); }
+        public @Nullable ByteBuffer dlsname() { return FMOD_CREATESOUNDEXINFO.ndlsname(address()); }
         /** @return the null-terminated string pointed to by the {@code dlsname} field. */
-        @Nullable
         @NativeType("char const *")
-        public String dlsnameString() { return FMOD_CREATESOUNDEXINFO.ndlsnameString(address()); }
+        public @Nullable String dlsnameString() { return FMOD_CREATESOUNDEXINFO.ndlsnameString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code encryptionkey} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer encryptionkey() { return FMOD_CREATESOUNDEXINFO.nencryptionkey(address()); }
+        public @Nullable ByteBuffer encryptionkey() { return FMOD_CREATESOUNDEXINFO.nencryptionkey(address()); }
         /** @return the null-terminated string pointed to by the {@code encryptionkey} field. */
-        @Nullable
         @NativeType("char const *")
-        public String encryptionkeyString() { return FMOD_CREATESOUNDEXINFO.nencryptionkeyString(address()); }
+        public @Nullable String encryptionkeyString() { return FMOD_CREATESOUNDEXINFO.nencryptionkeyString(address()); }
         /** @return the value of the {@code maxpolyphony} field. */
         public int maxpolyphony() { return FMOD_CREATESOUNDEXINFO.nmaxpolyphony(address()); }
         /** @return the value of the {@code userdata} field. */
@@ -861,23 +838,17 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
         @NativeType("FMOD_SOUND_TYPE")
         public int suggestedsoundtype() { return FMOD_CREATESOUNDEXINFO.nsuggestedsoundtype(address()); }
         /** @return the value of the {@code fileuseropen} field. */
-        @Nullable
-        public FMOD_FILE_OPEN_CALLBACK fileuseropen() { return FMOD_CREATESOUNDEXINFO.nfileuseropen(address()); }
+        public @Nullable FMOD_FILE_OPEN_CALLBACK fileuseropen() { return FMOD_CREATESOUNDEXINFO.nfileuseropen(address()); }
         /** @return the value of the {@code fileuserclose} field. */
-        @Nullable
-        public FMOD_FILE_CLOSE_CALLBACK fileuserclose() { return FMOD_CREATESOUNDEXINFO.nfileuserclose(address()); }
+        public @Nullable FMOD_FILE_CLOSE_CALLBACK fileuserclose() { return FMOD_CREATESOUNDEXINFO.nfileuserclose(address()); }
         /** @return the value of the {@code fileuserread} field. */
-        @Nullable
-        public FMOD_FILE_READ_CALLBACK fileuserread() { return FMOD_CREATESOUNDEXINFO.nfileuserread(address()); }
+        public @Nullable FMOD_FILE_READ_CALLBACK fileuserread() { return FMOD_CREATESOUNDEXINFO.nfileuserread(address()); }
         /** @return the value of the {@code fileuserseek} field. */
-        @Nullable
-        public FMOD_FILE_SEEK_CALLBACK fileuserseek() { return FMOD_CREATESOUNDEXINFO.nfileuserseek(address()); }
+        public @Nullable FMOD_FILE_SEEK_CALLBACK fileuserseek() { return FMOD_CREATESOUNDEXINFO.nfileuserseek(address()); }
         /** @return the value of the {@code fileuserasyncread} field. */
-        @Nullable
-        public FMOD_FILE_ASYNCREAD_CALLBACK fileuserasyncread() { return FMOD_CREATESOUNDEXINFO.nfileuserasyncread(address()); }
+        public @Nullable FMOD_FILE_ASYNCREAD_CALLBACK fileuserasyncread() { return FMOD_CREATESOUNDEXINFO.nfileuserasyncread(address()); }
         /** @return the value of the {@code fileuserasynccancel} field. */
-        @Nullable
-        public FMOD_FILE_ASYNCCANCEL_CALLBACK fileuserasynccancel() { return FMOD_CREATESOUNDEXINFO.nfileuserasynccancel(address()); }
+        public @Nullable FMOD_FILE_ASYNCCANCEL_CALLBACK fileuserasynccancel() { return FMOD_CREATESOUNDEXINFO.nfileuserasynccancel(address()); }
         /** @return the value of the {@code fileuserdata} field. */
         @NativeType("void *")
         public long fileuserdata() { return FMOD_CREATESOUNDEXINFO.nfileuserdata(address()); }
@@ -906,9 +877,8 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
         /** @return the value of the {@code nonblockthreadid} field. */
         public int nonblockthreadid() { return FMOD_CREATESOUNDEXINFO.nnonblockthreadid(address()); }
         /** @return a {@link FMOD_GUID} view of the struct pointed to by the {@code fsbguid} field. */
-        @Nullable
         @NativeType("FMOD_GUID *")
-        public FMOD_GUID fsbguid() { return FMOD_CREATESOUNDEXINFO.nfsbguid(address()); }
+        public @Nullable FMOD_GUID fsbguid() { return FMOD_CREATESOUNDEXINFO.nfsbguid(address()); }
 
         /** Sets the specified value to the {@code cbsize} field. */
         public FMOD_CREATESOUNDEXINFO.Buffer cbsize(int value) { FMOD_CREATESOUNDEXINFO.ncbsize(address(), value); return this; }

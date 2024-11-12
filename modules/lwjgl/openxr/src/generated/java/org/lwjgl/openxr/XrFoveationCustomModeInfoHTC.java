@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -172,8 +172,7 @@ public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeIn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationCustomModeInfoHTC createSafe(long address) {
+    public static @Nullable XrFoveationCustomModeInfoHTC createSafe(long address) {
         return address == NULL ? null : new XrFoveationCustomModeInfoHTC(address, null);
     }
 
@@ -216,8 +215,7 @@ public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeIn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationCustomModeInfoHTC.Buffer createSafe(long address, int capacity) {
+    public static XrFoveationCustomModeInfoHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

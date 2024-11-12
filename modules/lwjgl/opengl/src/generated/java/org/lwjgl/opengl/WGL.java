@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,7 +108,7 @@ public class WGL {
      * @param hdc           handle to a device context for which the function creates a suitable OpenGL rendering context
      */
     @NativeType("HGLRC")
-    public static long wglCreateContext(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
+    public static long wglCreateContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -141,7 +141,7 @@ public class WGL {
      *                      structure.
      */
     @NativeType("HGLRC")
-    public static long wglCreateLayerContext(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int layerPlane) {
+    public static long wglCreateLayerContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, int layerPlane) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -173,7 +173,7 @@ public class WGL {
      *                      passed to the {@link GL11#glPushAttrib PushAttrib} function. You can use {@link GL11#GL_ALL_ATTRIB_BITS ALL_ATTRIB_BITS} to copy all the rendering state information.
      */
     @NativeType("BOOL")
-    public static boolean wglCopyContext(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HGLRC") long src, @NativeType("HGLRC") long dst, @NativeType("UINT") int mask) {
+    public static boolean wglCopyContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long src, @NativeType("HGLRC") long dst, @NativeType("UINT") int mask) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -201,7 +201,7 @@ public class WGL {
      * @param context       handle to an OpenGL rendering context that the function will delete
      */
     @NativeType("BOOL")
-    public static boolean wglDeleteContext(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HGLRC") long context) {
+    public static boolean wglDeleteContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long context) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -225,7 +225,7 @@ public class WGL {
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      */
     @NativeType("HGLRC")
-    public static long wglGetCurrentContext(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError) {
+    public static long wglGetCurrentContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -260,7 +260,7 @@ public class WGL {
      *                      corresponding function implemented by OpenGL.
      */
     @NativeType("PROC")
-    public static long wglGetProcAddress(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCSTR") ByteBuffer proc) {
+    public static long wglGetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCSTR") ByteBuffer proc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
             checkNT1(proc);
@@ -276,7 +276,7 @@ public class WGL {
      *                      corresponding function implemented by OpenGL.
      */
     @NativeType("PROC")
-    public static long wglGetProcAddress(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("LPCSTR") CharSequence proc) {
+    public static long wglGetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCSTR") CharSequence proc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -312,7 +312,7 @@ public class WGL {
      *                      this case, {@code hdc} is ignored.
      */
     @NativeType("BOOL")
-    public static boolean wglMakeCurrent(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("HGLRC") long hglrc) {
+    public static boolean wglMakeCurrent(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("HGLRC") long hglrc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -343,7 +343,7 @@ public class WGL {
      *                      when {@code wglShareLists} is called.
      */
     @NativeType("BOOL")
-    public static boolean wglShareLists(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HGLRC") long hglrc1, @NativeType("HGLRC") long hglrc2) {
+    public static boolean wglShareLists(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long hglrc1, @NativeType("HGLRC") long hglrc2) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }

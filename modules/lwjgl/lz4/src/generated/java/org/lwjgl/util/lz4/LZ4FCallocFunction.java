@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lz4;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -35,8 +35,7 @@ public abstract class LZ4FCallocFunction extends Callback implements LZ4FCallocF
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static LZ4FCallocFunction createSafe(long functionPointer) {
+    public static @Nullable LZ4FCallocFunction createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

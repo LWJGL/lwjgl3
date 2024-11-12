@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends VkCommandBufferI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferInheritanceRenderingInfoKHR createSafe(long address) {
+    public static @Nullable VkCommandBufferInheritanceRenderingInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkCommandBufferInheritanceRenderingInfoKHR(address, null);
     }
 
@@ -187,8 +186,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends VkCommandBufferI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferInheritanceRenderingInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkCommandBufferInheritanceRenderingInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

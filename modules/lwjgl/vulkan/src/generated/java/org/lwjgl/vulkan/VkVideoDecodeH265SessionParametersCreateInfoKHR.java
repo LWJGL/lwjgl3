@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,9 +117,8 @@ public class VkVideoDecodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     @NativeType("uint32_t")
     public int maxStdPPSCount() { return nmaxStdPPSCount(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoDecodeH265SessionParametersAddInfoKHR} structure specifying H.265 parameters to add upon object creation. */
-    @Nullable
     @NativeType("VkVideoDecodeH265SessionParametersAddInfoKHR const *")
-    public VkVideoDecodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return npParametersAddInfo(address()); }
+    public @Nullable VkVideoDecodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return npParametersAddInfo(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265SessionParametersCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -191,8 +190,7 @@ public class VkVideoDecodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoDecodeH265SessionParametersCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkVideoDecodeH265SessionParametersCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoDecodeH265SessionParametersCreateInfoKHR(address, null);
     }
 
@@ -235,8 +233,7 @@ public class VkVideoDecodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoDecodeH265SessionParametersCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoDecodeH265SessionParametersCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -291,7 +288,7 @@ public class VkVideoDecodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     /** Unsafe version of {@link #maxStdPPSCount}. */
     public static int nmaxStdPPSCount(long struct) { return memGetInt(struct + VkVideoDecodeH265SessionParametersCreateInfoKHR.MAXSTDPPSCOUNT); }
     /** Unsafe version of {@link #pParametersAddInfo}. */
-    @Nullable public static VkVideoDecodeH265SessionParametersAddInfoKHR npParametersAddInfo(long struct) { return VkVideoDecodeH265SessionParametersAddInfoKHR.createSafe(memGetAddress(struct + VkVideoDecodeH265SessionParametersCreateInfoKHR.PPARAMETERSADDINFO)); }
+    public static @Nullable VkVideoDecodeH265SessionParametersAddInfoKHR npParametersAddInfo(long struct) { return VkVideoDecodeH265SessionParametersAddInfoKHR.createSafe(memGetAddress(struct + VkVideoDecodeH265SessionParametersCreateInfoKHR.PPARAMETERSADDINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkVideoDecodeH265SessionParametersCreateInfoKHR.STYPE, value); }
@@ -377,9 +374,8 @@ public class VkVideoDecodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
         @NativeType("uint32_t")
         public int maxStdPPSCount() { return VkVideoDecodeH265SessionParametersCreateInfoKHR.nmaxStdPPSCount(address()); }
         /** @return a {@link VkVideoDecodeH265SessionParametersAddInfoKHR} view of the struct pointed to by the {@link VkVideoDecodeH265SessionParametersCreateInfoKHR#pParametersAddInfo} field. */
-        @Nullable
         @NativeType("VkVideoDecodeH265SessionParametersAddInfoKHR const *")
-        public VkVideoDecodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return VkVideoDecodeH265SessionParametersCreateInfoKHR.npParametersAddInfo(address()); }
+        public @Nullable VkVideoDecodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return VkVideoDecodeH265SessionParametersCreateInfoKHR.npParametersAddInfo(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH265SessionParametersCreateInfoKHR#sType} field. */
         public VkVideoDecodeH265SessionParametersCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265SessionParametersCreateInfoKHR.nsType(address(), value); return this; }

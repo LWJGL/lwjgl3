@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -177,9 +177,8 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     @NativeType("uint32_t")
     public int setLayoutCount() { return nsetLayoutCount(address()); }
     /** a pointer to an array of {@code VkDescriptorSetLayout} objects. */
-    @Nullable
     @NativeType("VkDescriptorSetLayout const *")
-    public LongBuffer pSetLayouts() { return npSetLayouts(address()); }
+    public @Nullable LongBuffer pSetLayouts() { return npSetLayouts(address()); }
     /** the number of push constant ranges included in the pipeline layout. */
     @NativeType("uint32_t")
     public int pushConstantRangeCount() { return npushConstantRangeCount(address()); }
@@ -191,9 +190,8 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
      * <p>Push constants represent a high speed path to modify constant data in pipelines that is expected to outperform memory-backed resource updates.</p>
      * </div>
      */
-    @Nullable
     @NativeType("VkPushConstantRange const *")
-    public VkPushConstantRange.Buffer pPushConstantRanges() { return npPushConstantRanges(address()); }
+    public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return npPushConstantRanges(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineLayoutCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -208,7 +206,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pSetLayouts} field. */
     public VkPipelineLayoutCreateInfo pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { npSetLayouts(address(), value); return this; }
     /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link #pPushConstantRanges} field. */
-    public VkPipelineLayoutCreateInfo pPushConstantRanges(@Nullable @NativeType("VkPushConstantRange const *") VkPushConstantRange.Buffer value) { npPushConstantRanges(address(), value); return this; }
+    public VkPipelineLayoutCreateInfo pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { npPushConstantRanges(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineLayoutCreateInfo set(
@@ -217,7 +215,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
         int flags,
         int setLayoutCount,
         @Nullable LongBuffer pSetLayouts,
-        @Nullable VkPushConstantRange.Buffer pPushConstantRanges
+        VkPushConstantRange.@Nullable Buffer pPushConstantRanges
     ) {
         sType(sType);
         pNext(pNext);
@@ -265,8 +263,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineLayoutCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineLayoutCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineLayoutCreateInfo(address, null);
     }
 
@@ -309,8 +306,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineLayoutCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineLayoutCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -382,11 +378,11 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     /** Unsafe version of {@link #setLayoutCount}. */
     public static int nsetLayoutCount(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.SETLAYOUTCOUNT); }
     /** Unsafe version of {@link #pSetLayouts() pSetLayouts}. */
-    @Nullable public static LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PSETLAYOUTS), nsetLayoutCount(struct)); }
+    public static @Nullable LongBuffer npSetLayouts(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PSETLAYOUTS), nsetLayoutCount(struct)); }
     /** Unsafe version of {@link #pushConstantRangeCount}. */
     public static int npushConstantRangeCount(long struct) { return memGetInt(struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT); }
     /** Unsafe version of {@link #pPushConstantRanges}. */
-    @Nullable public static VkPushConstantRange.Buffer npPushConstantRanges(long struct) { return VkPushConstantRange.createSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES), npushConstantRangeCount(struct)); }
+    public static VkPushConstantRange.@Nullable Buffer npPushConstantRanges(long struct) { return VkPushConstantRange.createSafe(memGetAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES), npushConstantRangeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.STYPE, value); }
@@ -401,7 +397,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
     /** Sets the specified value to the {@code pushConstantRangeCount} field of the specified {@code struct}. */
     public static void npushConstantRangeCount(long struct, int value) { memPutInt(struct + VkPipelineLayoutCreateInfo.PUSHCONSTANTRANGECOUNT, value); }
     /** Unsafe version of {@link #pPushConstantRanges(VkPushConstantRange.Buffer) pPushConstantRanges}. */
-    public static void npPushConstantRanges(long struct, @Nullable VkPushConstantRange.Buffer value) { memPutAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES, memAddressSafe(value)); npushConstantRangeCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npPushConstantRanges(long struct, VkPushConstantRange.@Nullable Buffer value) { memPutAddress(struct + VkPipelineLayoutCreateInfo.PPUSHCONSTANTRANGES, memAddressSafe(value)); npushConstantRangeCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -470,16 +466,14 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
         @NativeType("uint32_t")
         public int setLayoutCount() { return VkPipelineLayoutCreateInfo.nsetLayoutCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPipelineLayoutCreateInfo#pSetLayouts} field. */
-        @Nullable
         @NativeType("VkDescriptorSetLayout const *")
-        public LongBuffer pSetLayouts() { return VkPipelineLayoutCreateInfo.npSetLayouts(address()); }
+        public @Nullable LongBuffer pSetLayouts() { return VkPipelineLayoutCreateInfo.npSetLayouts(address()); }
         /** @return the value of the {@link VkPipelineLayoutCreateInfo#pushConstantRangeCount} field. */
         @NativeType("uint32_t")
         public int pushConstantRangeCount() { return VkPipelineLayoutCreateInfo.npushConstantRangeCount(address()); }
         /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@link VkPipelineLayoutCreateInfo#pPushConstantRanges} field. */
-        @Nullable
         @NativeType("VkPushConstantRange const *")
-        public VkPushConstantRange.Buffer pPushConstantRanges() { return VkPipelineLayoutCreateInfo.npPushConstantRanges(address()); }
+        public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return VkPipelineLayoutCreateInfo.npPushConstantRanges(address()); }
 
         /** Sets the specified value to the {@link VkPipelineLayoutCreateInfo#sType} field. */
         public VkPipelineLayoutCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineLayoutCreateInfo.nsType(address(), value); return this; }
@@ -494,7 +488,7 @@ public class VkPipelineLayoutCreateInfo extends Struct<VkPipelineLayoutCreateInf
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkPipelineLayoutCreateInfo#pSetLayouts} field. */
         public VkPipelineLayoutCreateInfo.Buffer pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { VkPipelineLayoutCreateInfo.npSetLayouts(address(), value); return this; }
         /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link VkPipelineLayoutCreateInfo#pPushConstantRanges} field. */
-        public VkPipelineLayoutCreateInfo.Buffer pPushConstantRanges(@Nullable @NativeType("VkPushConstantRange const *") VkPushConstantRange.Buffer value) { VkPipelineLayoutCreateInfo.npPushConstantRanges(address(), value); return this; }
+        public VkPipelineLayoutCreateInfo.Buffer pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { VkPipelineLayoutCreateInfo.npPushConstantRanges(address(), value); return this; }
 
     }
 

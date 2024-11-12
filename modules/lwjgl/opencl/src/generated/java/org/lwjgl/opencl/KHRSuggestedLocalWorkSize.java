@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -62,7 +62,7 @@ public class KHRSuggestedLocalWorkSize {
      *                           there is no global ID offset.
      */
     @NativeType("cl_int")
-    public static int clGetKernelSuggestedLocalWorkSizeKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @Nullable @NativeType("size_t const *") PointerBuffer global_work_offset, @NativeType("size_t const *") PointerBuffer global_work_size, @NativeType("size_t *") PointerBuffer suggested_local_work_size) {
+    public static int clGetKernelSuggestedLocalWorkSizeKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") PointerBuffer global_work_size, @NativeType("size_t *") PointerBuffer suggested_local_work_size) {
         if (CHECKS) {
             check(suggested_local_work_size, global_work_size.remaining());
             checkSafe(global_work_offset, global_work_size.remaining());

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,9 +102,8 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link NkFont} view of the struct pointed to by the {@code next} field. */
-    @Nullable
     @NativeType("struct nk_font *")
-    public NkFont next() { return nnext(address()); }
+    public @Nullable NkFont next() { return nnext(address()); }
     /** @return a {@link NkUserFont} view of the {@code handle} field. */
     @NativeType("struct nk_user_font")
     public NkUserFont handle() { return nhandle(address()); }
@@ -114,13 +113,11 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     /** @return the value of the {@code scale} field. */
     public float scale() { return nscale(address()); }
     /** @return a {@link NkFontGlyph} view of the struct pointed to by the {@code glyphs} field. */
-    @Nullable
     @NativeType("struct nk_font_glyph *")
-    public NkFontGlyph glyphs() { return nglyphs(address()); }
+    public @Nullable NkFontGlyph glyphs() { return nglyphs(address()); }
     /** @return a {@link NkFontGlyph} view of the struct pointed to by the {@code fallback} field. */
-    @Nullable
     @NativeType("struct nk_font_glyph const *")
-    public NkFontGlyph fallback() { return nfallback(address()); }
+    public @Nullable NkFontGlyph fallback() { return nfallback(address()); }
     /** @return the value of the {@code fallback_codepoint} field. */
     @NativeType("nk_rune")
     public int fallback_codepoint() { return nfallback_codepoint(address()); }
@@ -128,9 +125,8 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
     /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code config} field. */
-    @Nullable
     @NativeType("struct nk_font_config *")
-    public NkFontConfig config() { return nconfig(address()); }
+    public @Nullable NkFontConfig config() { return nconfig(address()); }
 
     /** Sets the address of the specified {@link NkFont} to the {@code next} field. */
     public NkFont next(@Nullable @NativeType("struct nk_font *") NkFont value) { nnext(address(), value); return this; }
@@ -218,8 +214,7 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkFont createSafe(long address) {
+    public static @Nullable NkFont createSafe(long address) {
         return address == NULL ? null : new NkFont(address, null);
     }
 
@@ -262,8 +257,7 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkFont.Buffer createSafe(long address, int capacity) {
+    public static NkFont.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -308,7 +302,7 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #next}. */
-    @Nullable public static NkFont nnext(long struct) { return NkFont.createSafe(memGetAddress(struct + NkFont.NEXT)); }
+    public static @Nullable NkFont nnext(long struct) { return NkFont.createSafe(memGetAddress(struct + NkFont.NEXT)); }
     /** Unsafe version of {@link #handle}. */
     public static NkUserFont nhandle(long struct) { return NkUserFont.create(struct + NkFont.HANDLE); }
     /** Unsafe version of {@link #info}. */
@@ -316,15 +310,15 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
     /** Unsafe version of {@link #scale}. */
     public static float nscale(long struct) { return memGetFloat(struct + NkFont.SCALE); }
     /** Unsafe version of {@link #glyphs}. */
-    @Nullable public static NkFontGlyph nglyphs(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.GLYPHS)); }
+    public static @Nullable NkFontGlyph nglyphs(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.GLYPHS)); }
     /** Unsafe version of {@link #fallback}. */
-    @Nullable public static NkFontGlyph nfallback(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.FALLBACK)); }
+    public static @Nullable NkFontGlyph nfallback(long struct) { return NkFontGlyph.createSafe(memGetAddress(struct + NkFont.FALLBACK)); }
     /** Unsafe version of {@link #fallback_codepoint}. */
     public static int nfallback_codepoint(long struct) { return memGetInt(struct + NkFont.FALLBACK_CODEPOINT); }
     /** Unsafe version of {@link #texture}. */
     public static NkHandle ntexture(long struct) { return NkHandle.create(struct + NkFont.TEXTURE); }
     /** Unsafe version of {@link #config}. */
-    @Nullable public static NkFontConfig nconfig(long struct) { return NkFontConfig.createSafe(memGetAddress(struct + NkFont.CONFIG)); }
+    public static @Nullable NkFontConfig nconfig(long struct) { return NkFontConfig.createSafe(memGetAddress(struct + NkFont.CONFIG)); }
 
     /** Unsafe version of {@link #next(NkFont) next}. */
     public static void nnext(long struct, @Nullable NkFont value) { memPutAddress(struct + NkFont.NEXT, memAddressSafe(value)); }
@@ -389,9 +383,8 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
         }
 
         /** @return a {@link NkFont} view of the struct pointed to by the {@code next} field. */
-        @Nullable
         @NativeType("struct nk_font *")
-        public NkFont next() { return NkFont.nnext(address()); }
+        public @Nullable NkFont next() { return NkFont.nnext(address()); }
         /** @return a {@link NkUserFont} view of the {@code handle} field. */
         @NativeType("struct nk_user_font")
         public NkUserFont handle() { return NkFont.nhandle(address()); }
@@ -401,13 +394,11 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
         /** @return the value of the {@code scale} field. */
         public float scale() { return NkFont.nscale(address()); }
         /** @return a {@link NkFontGlyph} view of the struct pointed to by the {@code glyphs} field. */
-        @Nullable
         @NativeType("struct nk_font_glyph *")
-        public NkFontGlyph glyphs() { return NkFont.nglyphs(address()); }
+        public @Nullable NkFontGlyph glyphs() { return NkFont.nglyphs(address()); }
         /** @return a {@link NkFontGlyph} view of the struct pointed to by the {@code fallback} field. */
-        @Nullable
         @NativeType("struct nk_font_glyph const *")
-        public NkFontGlyph fallback() { return NkFont.nfallback(address()); }
+        public @Nullable NkFontGlyph fallback() { return NkFont.nfallback(address()); }
         /** @return the value of the {@code fallback_codepoint} field. */
         @NativeType("nk_rune")
         public int fallback_codepoint() { return NkFont.nfallback_codepoint(address()); }
@@ -415,9 +406,8 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
         @NativeType("nk_handle")
         public NkHandle texture() { return NkFont.ntexture(address()); }
         /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code config} field. */
-        @Nullable
         @NativeType("struct nk_font_config *")
-        public NkFontConfig config() { return NkFont.nconfig(address()); }
+        public @Nullable NkFontConfig config() { return NkFont.nconfig(address()); }
 
         /** Sets the address of the specified {@link NkFont} to the {@code next} field. */
         public NkFont.Buffer next(@Nullable @NativeType("struct nk_font *") NkFont value) { NkFont.nnext(address(), value); return this; }

@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to the Java Native Interface (JNI). */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.jni;
 

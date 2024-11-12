@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -127,8 +127,7 @@ public class FT_SVG_Document extends Struct<FT_SVG_Document> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_SVG_Document createSafe(long address) {
+    public static @Nullable FT_SVG_Document createSafe(long address) {
         return address == NULL ? null : new FT_SVG_Document(address, null);
     }
 
@@ -143,8 +142,7 @@ public class FT_SVG_Document extends Struct<FT_SVG_Document> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_SVG_Document.Buffer createSafe(long address, int capacity) {
+    public static FT_SVG_Document.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -40,7 +40,7 @@ public class VRResources {
      * @return the size in bytes of the buffer required to hold the specified resource
      */
     @NativeType("uint32_t")
-    public static int VRResources_LoadSharedResource(@NativeType("char const *") ByteBuffer pchResourceName, @Nullable @NativeType("char *") ByteBuffer pchBuffer) {
+    public static int VRResources_LoadSharedResource(@NativeType("char const *") ByteBuffer pchResourceName, @NativeType("char *") @Nullable ByteBuffer pchBuffer) {
         if (CHECKS) {
             checkNT1(pchResourceName);
         }
@@ -53,7 +53,7 @@ public class VRResources {
      * @return the size in bytes of the buffer required to hold the specified resource
      */
     @NativeType("uint32_t")
-    public static int VRResources_LoadSharedResource(@NativeType("char const *") CharSequence pchResourceName, @Nullable @NativeType("char *") ByteBuffer pchBuffer) {
+    public static int VRResources_LoadSharedResource(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char *") @Nullable ByteBuffer pchBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchResourceName, true);
@@ -99,7 +99,7 @@ public class VRResources {
      * those and returns the actual physical path. {@code pchResourceTypeDirectory} is the subdirectory of resources to look in.
      */
     @NativeType("uint32_t")
-    public static int VRResources_GetResourceFullPath(@NativeType("char const *") ByteBuffer pchResourceName, @NativeType("char const *") ByteBuffer pchResourceTypeDirectory, @Nullable @NativeType("char *") ByteBuffer pchPathBuffer) {
+    public static int VRResources_GetResourceFullPath(@NativeType("char const *") ByteBuffer pchResourceName, @NativeType("char const *") ByteBuffer pchResourceTypeDirectory, @NativeType("char *") @Nullable ByteBuffer pchPathBuffer) {
         if (CHECKS) {
             checkNT1(pchResourceName);
             checkNT1(pchResourceTypeDirectory);
@@ -112,7 +112,7 @@ public class VRResources {
      * those and returns the actual physical path. {@code pchResourceTypeDirectory} is the subdirectory of resources to look in.
      */
     @NativeType("uint32_t")
-    public static int VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @Nullable @NativeType("char *") ByteBuffer pchPathBuffer) {
+    public static int VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @NativeType("char *") @Nullable ByteBuffer pchPathBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchResourceName, true);

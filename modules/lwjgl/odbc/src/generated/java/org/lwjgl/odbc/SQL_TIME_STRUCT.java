@@ -5,7 +5,7 @@
  */
 package org.lwjgl.odbc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -142,8 +142,7 @@ public class SQL_TIME_STRUCT extends Struct<SQL_TIME_STRUCT> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SQL_TIME_STRUCT createSafe(long address) {
+    public static @Nullable SQL_TIME_STRUCT createSafe(long address) {
         return address == NULL ? null : new SQL_TIME_STRUCT(address, null);
     }
 
@@ -186,8 +185,7 @@ public class SQL_TIME_STRUCT extends Struct<SQL_TIME_STRUCT> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SQL_TIME_STRUCT.Buffer createSafe(long address, int capacity) {
+    public static SQL_TIME_STRUCT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

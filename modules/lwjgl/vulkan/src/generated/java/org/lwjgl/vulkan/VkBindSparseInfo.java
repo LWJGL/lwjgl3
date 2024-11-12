@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,37 +154,32 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     @NativeType("uint32_t")
     public int waitSemaphoreCount() { return nwaitSemaphoreCount(address()); }
     /** a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a>. */
-    @Nullable
     @NativeType("VkSemaphore const *")
-    public LongBuffer pWaitSemaphores() { return npWaitSemaphores(address()); }
+    public @Nullable LongBuffer pWaitSemaphores() { return npWaitSemaphores(address()); }
     /** the number of sparse buffer bindings to perform in the batch. */
     @NativeType("uint32_t")
     public int bufferBindCount() { return nbufferBindCount(address()); }
     /** a pointer to an array of {@link VkSparseBufferMemoryBindInfo} structures. */
-    @Nullable
     @NativeType("VkSparseBufferMemoryBindInfo const *")
-    public VkSparseBufferMemoryBindInfo.Buffer pBufferBinds() { return npBufferBinds(address()); }
+    public VkSparseBufferMemoryBindInfo.@Nullable Buffer pBufferBinds() { return npBufferBinds(address()); }
     /** the number of opaque sparse image bindings to perform. */
     @NativeType("uint32_t")
     public int imageOpaqueBindCount() { return nimageOpaqueBindCount(address()); }
     /** a pointer to an array of {@link VkSparseImageOpaqueMemoryBindInfo} structures, indicating opaque sparse image bindings to perform. */
-    @Nullable
     @NativeType("VkSparseImageOpaqueMemoryBindInfo const *")
-    public VkSparseImageOpaqueMemoryBindInfo.Buffer pImageOpaqueBinds() { return npImageOpaqueBinds(address()); }
+    public VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer pImageOpaqueBinds() { return npImageOpaqueBinds(address()); }
     /** the number of sparse image bindings to perform. */
     @NativeType("uint32_t")
     public int imageBindCount() { return nimageBindCount(address()); }
     /** a pointer to an array of {@link VkSparseImageMemoryBindInfo} structures, indicating sparse image bindings to perform. */
-    @Nullable
     @NativeType("VkSparseImageMemoryBindInfo const *")
-    public VkSparseImageMemoryBindInfo.Buffer pImageBinds() { return npImageBinds(address()); }
+    public VkSparseImageMemoryBindInfo.@Nullable Buffer pImageBinds() { return npImageBinds(address()); }
     /** the number of semaphores to be signaled once the sparse binding operations specified by the structure have completed execution. */
     @NativeType("uint32_t")
     public int signalSemaphoreCount() { return nsignalSemaphoreCount(address()); }
     /** a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to be signaled are provided, they define a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a>. */
-    @Nullable
     @NativeType("VkSemaphore const *")
-    public LongBuffer pSignalSemaphores() { return npSignalSemaphores(address()); }
+    public @Nullable LongBuffer pSignalSemaphores() { return npSignalSemaphores(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindSparseInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -205,11 +200,11 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
     public VkBindSparseInfo pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link #pBufferBinds} field. */
-    public VkBindSparseInfo pBufferBinds(@Nullable @NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.Buffer value) { npBufferBinds(address(), value); return this; }
+    public VkBindSparseInfo pBufferBinds(@NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.@Nullable Buffer value) { npBufferBinds(address(), value); return this; }
     /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@link #pImageOpaqueBinds} field. */
-    public VkBindSparseInfo pImageOpaqueBinds(@Nullable @NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.Buffer value) { npImageOpaqueBinds(address(), value); return this; }
+    public VkBindSparseInfo pImageOpaqueBinds(@NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer value) { npImageOpaqueBinds(address(), value); return this; }
     /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@link #pImageBinds} field. */
-    public VkBindSparseInfo pImageBinds(@Nullable @NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.Buffer value) { npImageBinds(address(), value); return this; }
+    public VkBindSparseInfo pImageBinds(@NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.@Nullable Buffer value) { npImageBinds(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pSignalSemaphores} field. */
     public VkBindSparseInfo pSignalSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npSignalSemaphores(address(), value); return this; }
 
@@ -218,9 +213,9 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
         int sType,
         long pNext,
         @Nullable LongBuffer pWaitSemaphores,
-        @Nullable VkSparseBufferMemoryBindInfo.Buffer pBufferBinds,
-        @Nullable VkSparseImageOpaqueMemoryBindInfo.Buffer pImageOpaqueBinds,
-        @Nullable VkSparseImageMemoryBindInfo.Buffer pImageBinds,
+        VkSparseBufferMemoryBindInfo.@Nullable Buffer pBufferBinds,
+        VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer pImageOpaqueBinds,
+        VkSparseImageMemoryBindInfo.@Nullable Buffer pImageBinds,
         @Nullable LongBuffer pSignalSemaphores
     ) {
         sType(sType);
@@ -270,8 +265,7 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindSparseInfo createSafe(long address) {
+    public static @Nullable VkBindSparseInfo createSafe(long address) {
         return address == NULL ? null : new VkBindSparseInfo(address, null);
     }
 
@@ -314,8 +308,7 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindSparseInfo.Buffer createSafe(long address, int capacity) {
+    public static VkBindSparseInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -385,23 +378,23 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     /** Unsafe version of {@link #waitSemaphoreCount}. */
     public static int nwaitSemaphoreCount(long struct) { return memGetInt(struct + VkBindSparseInfo.WAITSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphores() pWaitSemaphores}. */
-    @Nullable public static LongBuffer npWaitSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PWAITSEMAPHORES), nwaitSemaphoreCount(struct)); }
+    public static @Nullable LongBuffer npWaitSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PWAITSEMAPHORES), nwaitSemaphoreCount(struct)); }
     /** Unsafe version of {@link #bufferBindCount}. */
     public static int nbufferBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.BUFFERBINDCOUNT); }
     /** Unsafe version of {@link #pBufferBinds}. */
-    @Nullable public static VkSparseBufferMemoryBindInfo.Buffer npBufferBinds(long struct) { return VkSparseBufferMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PBUFFERBINDS), nbufferBindCount(struct)); }
+    public static VkSparseBufferMemoryBindInfo.@Nullable Buffer npBufferBinds(long struct) { return VkSparseBufferMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PBUFFERBINDS), nbufferBindCount(struct)); }
     /** Unsafe version of {@link #imageOpaqueBindCount}. */
     public static int nimageOpaqueBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT); }
     /** Unsafe version of {@link #pImageOpaqueBinds}. */
-    @Nullable public static VkSparseImageOpaqueMemoryBindInfo.Buffer npImageOpaqueBinds(long struct) { return VkSparseImageOpaqueMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS), nimageOpaqueBindCount(struct)); }
+    public static VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer npImageOpaqueBinds(long struct) { return VkSparseImageOpaqueMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS), nimageOpaqueBindCount(struct)); }
     /** Unsafe version of {@link #imageBindCount}. */
     public static int nimageBindCount(long struct) { return memGetInt(struct + VkBindSparseInfo.IMAGEBINDCOUNT); }
     /** Unsafe version of {@link #pImageBinds}. */
-    @Nullable public static VkSparseImageMemoryBindInfo.Buffer npImageBinds(long struct) { return VkSparseImageMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEBINDS), nimageBindCount(struct)); }
+    public static VkSparseImageMemoryBindInfo.@Nullable Buffer npImageBinds(long struct) { return VkSparseImageMemoryBindInfo.createSafe(memGetAddress(struct + VkBindSparseInfo.PIMAGEBINDS), nimageBindCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreCount}. */
     public static int nsignalSemaphoreCount(long struct) { return memGetInt(struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT); }
     /** Unsafe version of {@link #pSignalSemaphores() pSignalSemaphores}. */
-    @Nullable public static LongBuffer npSignalSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PSIGNALSEMAPHORES), nsignalSemaphoreCount(struct)); }
+    public static @Nullable LongBuffer npSignalSemaphores(long struct) { return memLongBufferSafe(memGetAddress(struct + VkBindSparseInfo.PSIGNALSEMAPHORES), nsignalSemaphoreCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkBindSparseInfo.STYPE, value); }
@@ -414,15 +407,15 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     /** Sets the specified value to the {@code bufferBindCount} field of the specified {@code struct}. */
     public static void nbufferBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.BUFFERBINDCOUNT, value); }
     /** Unsafe version of {@link #pBufferBinds(VkSparseBufferMemoryBindInfo.Buffer) pBufferBinds}. */
-    public static void npBufferBinds(long struct, @Nullable VkSparseBufferMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PBUFFERBINDS, memAddressSafe(value)); nbufferBindCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npBufferBinds(long struct, VkSparseBufferMemoryBindInfo.@Nullable Buffer value) { memPutAddress(struct + VkBindSparseInfo.PBUFFERBINDS, memAddressSafe(value)); nbufferBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code imageOpaqueBindCount} field of the specified {@code struct}. */
     public static void nimageOpaqueBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.IMAGEOPAQUEBINDCOUNT, value); }
     /** Unsafe version of {@link #pImageOpaqueBinds(VkSparseImageOpaqueMemoryBindInfo.Buffer) pImageOpaqueBinds}. */
-    public static void npImageOpaqueBinds(long struct, @Nullable VkSparseImageOpaqueMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS, memAddressSafe(value)); nimageOpaqueBindCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npImageOpaqueBinds(long struct, VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS, memAddressSafe(value)); nimageOpaqueBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code imageBindCount} field of the specified {@code struct}. */
     public static void nimageBindCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.IMAGEBINDCOUNT, value); }
     /** Unsafe version of {@link #pImageBinds(VkSparseImageMemoryBindInfo.Buffer) pImageBinds}. */
-    public static void npImageBinds(long struct, @Nullable VkSparseImageMemoryBindInfo.Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEBINDS, memAddressSafe(value)); nimageBindCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npImageBinds(long struct, VkSparseImageMemoryBindInfo.@Nullable Buffer value) { memPutAddress(struct + VkBindSparseInfo.PIMAGEBINDS, memAddressSafe(value)); nimageBindCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code signalSemaphoreCount} field of the specified {@code struct}. */
     public static void nsignalSemaphoreCount(long struct, int value) { memPutInt(struct + VkBindSparseInfo.SIGNALSEMAPHORECOUNT, value); }
     /** Unsafe version of {@link #pSignalSemaphores(LongBuffer) pSignalSemaphores}. */
@@ -513,37 +506,32 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
         @NativeType("uint32_t")
         public int waitSemaphoreCount() { return VkBindSparseInfo.nwaitSemaphoreCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkBindSparseInfo#pWaitSemaphores} field. */
-        @Nullable
         @NativeType("VkSemaphore const *")
-        public LongBuffer pWaitSemaphores() { return VkBindSparseInfo.npWaitSemaphores(address()); }
+        public @Nullable LongBuffer pWaitSemaphores() { return VkBindSparseInfo.npWaitSemaphores(address()); }
         /** @return the value of the {@link VkBindSparseInfo#bufferBindCount} field. */
         @NativeType("uint32_t")
         public int bufferBindCount() { return VkBindSparseInfo.nbufferBindCount(address()); }
         /** @return a {@link VkSparseBufferMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pBufferBinds} field. */
-        @Nullable
         @NativeType("VkSparseBufferMemoryBindInfo const *")
-        public VkSparseBufferMemoryBindInfo.Buffer pBufferBinds() { return VkBindSparseInfo.npBufferBinds(address()); }
+        public VkSparseBufferMemoryBindInfo.@Nullable Buffer pBufferBinds() { return VkBindSparseInfo.npBufferBinds(address()); }
         /** @return the value of the {@link VkBindSparseInfo#imageOpaqueBindCount} field. */
         @NativeType("uint32_t")
         public int imageOpaqueBindCount() { return VkBindSparseInfo.nimageOpaqueBindCount(address()); }
         /** @return a {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pImageOpaqueBinds} field. */
-        @Nullable
         @NativeType("VkSparseImageOpaqueMemoryBindInfo const *")
-        public VkSparseImageOpaqueMemoryBindInfo.Buffer pImageOpaqueBinds() { return VkBindSparseInfo.npImageOpaqueBinds(address()); }
+        public VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer pImageOpaqueBinds() { return VkBindSparseInfo.npImageOpaqueBinds(address()); }
         /** @return the value of the {@link VkBindSparseInfo#imageBindCount} field. */
         @NativeType("uint32_t")
         public int imageBindCount() { return VkBindSparseInfo.nimageBindCount(address()); }
         /** @return a {@link VkSparseImageMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pImageBinds} field. */
-        @Nullable
         @NativeType("VkSparseImageMemoryBindInfo const *")
-        public VkSparseImageMemoryBindInfo.Buffer pImageBinds() { return VkBindSparseInfo.npImageBinds(address()); }
+        public VkSparseImageMemoryBindInfo.@Nullable Buffer pImageBinds() { return VkBindSparseInfo.npImageBinds(address()); }
         /** @return the value of the {@link VkBindSparseInfo#signalSemaphoreCount} field. */
         @NativeType("uint32_t")
         public int signalSemaphoreCount() { return VkBindSparseInfo.nsignalSemaphoreCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkBindSparseInfo#pSignalSemaphores} field. */
-        @Nullable
         @NativeType("VkSemaphore const *")
-        public LongBuffer pSignalSemaphores() { return VkBindSparseInfo.npSignalSemaphores(address()); }
+        public @Nullable LongBuffer pSignalSemaphores() { return VkBindSparseInfo.npSignalSemaphores(address()); }
 
         /** Sets the specified value to the {@link VkBindSparseInfo#sType} field. */
         public VkBindSparseInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindSparseInfo.nsType(address(), value); return this; }
@@ -564,11 +552,11 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pWaitSemaphores} field. */
         public VkBindSparseInfo.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkBindSparseInfo.npWaitSemaphores(address(), value); return this; }
         /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pBufferBinds} field. */
-        public VkBindSparseInfo.Buffer pBufferBinds(@Nullable @NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.Buffer value) { VkBindSparseInfo.npBufferBinds(address(), value); return this; }
+        public VkBindSparseInfo.Buffer pBufferBinds(@NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.@Nullable Buffer value) { VkBindSparseInfo.npBufferBinds(address(), value); return this; }
         /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pImageOpaqueBinds} field. */
-        public VkBindSparseInfo.Buffer pImageOpaqueBinds(@Nullable @NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.Buffer value) { VkBindSparseInfo.npImageOpaqueBinds(address(), value); return this; }
+        public VkBindSparseInfo.Buffer pImageOpaqueBinds(@NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.@Nullable Buffer value) { VkBindSparseInfo.npImageOpaqueBinds(address(), value); return this; }
         /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pImageBinds} field. */
-        public VkBindSparseInfo.Buffer pImageBinds(@Nullable @NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.Buffer value) { VkBindSparseInfo.npImageBinds(address(), value); return this; }
+        public VkBindSparseInfo.Buffer pImageBinds(@NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.@Nullable Buffer value) { VkBindSparseInfo.npImageBinds(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pSignalSemaphores} field. */
         public VkBindSparseInfo.Buffer pSignalSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkBindSparseInfo.npSignalSemaphores(address(), value); return this; }
 

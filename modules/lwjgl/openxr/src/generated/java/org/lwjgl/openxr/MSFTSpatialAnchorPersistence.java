@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -315,7 +315,7 @@ public class MSFTSpatialAnchorPersistence {
      * @param spatialAnchorNames           a pointer to an array of {@link XrSpatialAnchorPersistenceNameMSFT} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("uint32_t *") IntBuffer spatialAnchorNameCountOutput, @Nullable @NativeType("XrSpatialAnchorPersistenceNameMSFT *") XrSpatialAnchorPersistenceNameMSFT.Buffer spatialAnchorNames) {
+    public static int xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("uint32_t *") IntBuffer spatialAnchorNameCountOutput, @NativeType("XrSpatialAnchorPersistenceNameMSFT *") XrSpatialAnchorPersistenceNameMSFT.@Nullable Buffer spatialAnchorNames) {
         if (CHECKS) {
             check(spatialAnchorNameCountOutput, 1);
         }

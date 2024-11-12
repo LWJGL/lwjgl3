@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,9 +121,8 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
     /** a pointer to an array of per target attachment boolean values specifying whether color writes are enabled for the given attachment. */
-    @Nullable
     @NativeType("VkBool32 const *")
-    public IntBuffer pColorWriteEnables() { return npColorWriteEnables(address()); }
+    public @Nullable IntBuffer pColorWriteEnables() { return npColorWriteEnables(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorWriteCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -183,8 +182,7 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineColorWriteCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineColorWriteCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineColorWriteCreateInfoEXT(address, null);
     }
 
@@ -227,8 +225,7 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineColorWriteCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineColorWriteCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -279,7 +276,7 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
     /** Unsafe version of {@link #attachmentCount}. */
     public static int nattachmentCount(long struct) { return memGetInt(struct + VkPipelineColorWriteCreateInfoEXT.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorWriteEnables() pColorWriteEnables}. */
-    @Nullable public static IntBuffer npColorWriteEnables(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineColorWriteCreateInfoEXT.PCOLORWRITEENABLES), nattachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorWriteEnables(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineColorWriteCreateInfoEXT.PCOLORWRITEENABLES), nattachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineColorWriteCreateInfoEXT.STYPE, value); }
@@ -354,9 +351,8 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct<VkPipelineColorWri
         @NativeType("uint32_t")
         public int attachmentCount() { return VkPipelineColorWriteCreateInfoEXT.nattachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPipelineColorWriteCreateInfoEXT#pColorWriteEnables} field. */
-        @Nullable
         @NativeType("VkBool32 const *")
-        public IntBuffer pColorWriteEnables() { return VkPipelineColorWriteCreateInfoEXT.npColorWriteEnables(address()); }
+        public @Nullable IntBuffer pColorWriteEnables() { return VkPipelineColorWriteCreateInfoEXT.npColorWriteEnables(address()); }
 
         /** Sets the specified value to the {@link VkPipelineColorWriteCreateInfoEXT#sType} field. */
         public VkPipelineColorWriteCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorWriteCreateInfoEXT.nsType(address(), value); return this; }

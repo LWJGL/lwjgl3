@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRViewScaleDesc createSafe(long address) {
+    public static @Nullable OVRViewScaleDesc createSafe(long address) {
         return address == NULL ? null : new OVRViewScaleDesc(address, null);
     }
 
@@ -199,8 +198,7 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRViewScaleDesc.Buffer createSafe(long address, int capacity) {
+    public static OVRViewScaleDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

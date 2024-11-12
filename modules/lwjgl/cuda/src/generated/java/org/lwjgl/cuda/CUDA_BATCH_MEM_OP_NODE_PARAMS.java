@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -88,9 +88,8 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     @NativeType("unsigned int")
     public int count() { return ncount(address()); }
     /** @return a {@link CUstreamBatchMemOpParams.Buffer} view of the struct array pointed to by the {@code paramArray} field. */
-    @Nullable
     @NativeType("CUstreamBatchMemOpParams *")
-    public CUstreamBatchMemOpParams.Buffer paramArray() { return nparamArray(address()); }
+    public CUstreamBatchMemOpParams.@Nullable Buffer paramArray() { return nparamArray(address()); }
     /** @return the value of the {@code flags} field. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
@@ -100,7 +99,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     /** Sets the specified value to the {@code count} field. */
     public CUDA_BATCH_MEM_OP_NODE_PARAMS count(@NativeType("unsigned int") int value) { ncount(address(), value); return this; }
     /** Sets the address of the specified {@link CUstreamBatchMemOpParams.Buffer} to the {@code paramArray} field. */
-    public CUDA_BATCH_MEM_OP_NODE_PARAMS paramArray(@Nullable @NativeType("CUstreamBatchMemOpParams *") CUstreamBatchMemOpParams.Buffer value) { nparamArray(address(), value); return this; }
+    public CUDA_BATCH_MEM_OP_NODE_PARAMS paramArray(@NativeType("CUstreamBatchMemOpParams *") CUstreamBatchMemOpParams.@Nullable Buffer value) { nparamArray(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public CUDA_BATCH_MEM_OP_NODE_PARAMS flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
 
@@ -108,7 +107,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     public CUDA_BATCH_MEM_OP_NODE_PARAMS set(
         long ctx,
         int count,
-        @Nullable CUstreamBatchMemOpParams.Buffer paramArray,
+        CUstreamBatchMemOpParams.@Nullable Buffer paramArray,
         int flags
     ) {
         ctx(ctx);
@@ -155,8 +154,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_BATCH_MEM_OP_NODE_PARAMS createSafe(long address) {
+    public static @Nullable CUDA_BATCH_MEM_OP_NODE_PARAMS createSafe(long address) {
         return address == NULL ? null : new CUDA_BATCH_MEM_OP_NODE_PARAMS(address, null);
     }
 
@@ -199,8 +197,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_BATCH_MEM_OP_NODE_PARAMS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_BATCH_MEM_OP_NODE_PARAMS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -249,7 +246,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     /** Unsafe version of {@link #count}. */
     public static int ncount(long struct) { return memGetInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT); }
     /** Unsafe version of {@link #paramArray}. */
-    @Nullable public static CUstreamBatchMemOpParams.Buffer nparamArray(long struct) { return CUstreamBatchMemOpParams.createSafe(memGetAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY), ncount(struct)); }
+    public static CUstreamBatchMemOpParams.@Nullable Buffer nparamArray(long struct) { return CUstreamBatchMemOpParams.createSafe(memGetAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY), ncount(struct)); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS); }
 
@@ -258,7 +255,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
     /** Sets the specified value to the {@code count} field of the specified {@code struct}. */
     public static void ncount(long struct, int value) { memPutInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.COUNT, value); }
     /** Unsafe version of {@link #paramArray(CUstreamBatchMemOpParams.Buffer) paramArray}. */
-    public static void nparamArray(long struct, @Nullable CUstreamBatchMemOpParams.Buffer value) { memPutAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY, memAddressSafe(value)); ncount(struct, value == null ? 0 : value.remaining()); }
+    public static void nparamArray(long struct, CUstreamBatchMemOpParams.@Nullable Buffer value) { memPutAddress(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.PARAMARRAY, memAddressSafe(value)); ncount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + CUDA_BATCH_MEM_OP_NODE_PARAMS.FLAGS, value); }
 
@@ -321,9 +318,8 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
         @NativeType("unsigned int")
         public int count() { return CUDA_BATCH_MEM_OP_NODE_PARAMS.ncount(address()); }
         /** @return a {@link CUstreamBatchMemOpParams.Buffer} view of the struct array pointed to by the {@code paramArray} field. */
-        @Nullable
         @NativeType("CUstreamBatchMemOpParams *")
-        public CUstreamBatchMemOpParams.Buffer paramArray() { return CUDA_BATCH_MEM_OP_NODE_PARAMS.nparamArray(address()); }
+        public CUstreamBatchMemOpParams.@Nullable Buffer paramArray() { return CUDA_BATCH_MEM_OP_NODE_PARAMS.nparamArray(address()); }
         /** @return the value of the {@code flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_BATCH_MEM_OP_NODE_PARAMS.nflags(address()); }
@@ -333,7 +329,7 @@ public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE
         /** Sets the specified value to the {@code count} field. */
         public CUDA_BATCH_MEM_OP_NODE_PARAMS.Buffer count(@NativeType("unsigned int") int value) { CUDA_BATCH_MEM_OP_NODE_PARAMS.ncount(address(), value); return this; }
         /** Sets the address of the specified {@link CUstreamBatchMemOpParams.Buffer} to the {@code paramArray} field. */
-        public CUDA_BATCH_MEM_OP_NODE_PARAMS.Buffer paramArray(@Nullable @NativeType("CUstreamBatchMemOpParams *") CUstreamBatchMemOpParams.Buffer value) { CUDA_BATCH_MEM_OP_NODE_PARAMS.nparamArray(address(), value); return this; }
+        public CUDA_BATCH_MEM_OP_NODE_PARAMS.Buffer paramArray(@NativeType("CUstreamBatchMemOpParams *") CUstreamBatchMemOpParams.@Nullable Buffer value) { CUDA_BATCH_MEM_OP_NODE_PARAMS.nparamArray(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public CUDA_BATCH_MEM_OP_NODE_PARAMS.Buffer flags(@NativeType("unsigned int") int value) { CUDA_BATCH_MEM_OP_NODE_PARAMS.nflags(address(), value); return this; }
 

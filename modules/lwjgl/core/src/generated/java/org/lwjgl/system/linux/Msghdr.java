@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Msghdr createSafe(long address) {
+    public static @Nullable Msghdr createSafe(long address) {
         return address == NULL ? null : new Msghdr(address, null);
     }
 
@@ -219,8 +218,7 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Msghdr.Buffer createSafe(long address, int capacity) {
+    public static Msghdr.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

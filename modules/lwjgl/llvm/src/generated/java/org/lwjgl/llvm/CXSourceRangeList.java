@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -87,8 +87,7 @@ public class CXSourceRangeList extends Struct<CXSourceRangeList> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXSourceRangeList createSafe(long address) {
+    public static @Nullable CXSourceRangeList createSafe(long address) {
         return address == NULL ? null : new CXSourceRangeList(address, null);
     }
 
@@ -103,8 +102,7 @@ public class CXSourceRangeList extends Struct<CXSourceRangeList> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXSourceRangeList.Buffer createSafe(long address, int capacity) {
+    public static CXSourceRangeList.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

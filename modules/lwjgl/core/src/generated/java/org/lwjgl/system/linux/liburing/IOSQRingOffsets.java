@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -204,8 +204,7 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOSQRingOffsets createSafe(long address) {
+    public static @Nullable IOSQRingOffsets createSafe(long address) {
         return address == NULL ? null : new IOSQRingOffsets(address, null);
     }
 
@@ -248,8 +247,7 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOSQRingOffsets.Buffer createSafe(long address, int capacity) {
+    public static IOSQRingOffsets.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -464,8 +464,7 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct<VkPhysicalDeviceV
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceVulkan13Properties createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceVulkan13Properties createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceVulkan13Properties(address, null);
     }
 
@@ -508,8 +507,7 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct<VkPhysicalDeviceV
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceVulkan13Properties.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceVulkan13Properties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

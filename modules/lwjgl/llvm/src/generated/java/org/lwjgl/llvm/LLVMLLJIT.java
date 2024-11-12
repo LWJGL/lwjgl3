@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -211,9 +211,8 @@ public class LLVMLLJIT {
     }
 
     /** Return the target triple for this {@code LLJIT} instance. This string is owned by the {@code LLJIT} instance and should not be freed by the client. */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMOrcLLJITGetTripleString(@NativeType("LLVMOrcLLJITRef") long J) {
+    public static @Nullable String LLVMOrcLLJITGetTripleString(@NativeType("LLVMOrcLLJITRef") long J) {
         long __result = nLLVMOrcLLJITGetTripleString(J);
         return memUTF8Safe(__result);
     }
@@ -464,9 +463,8 @@ public class LLVMLLJIT {
      *
      * @since 12
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMOrcLLJITGetDataLayoutStr(@NativeType("LLVMOrcLLJITRef") long J) {
+    public static @Nullable String LLVMOrcLLJITGetDataLayoutStr(@NativeType("LLVMOrcLLJITRef") long J) {
         long __result = nLLVMOrcLLJITGetDataLayoutStr(J);
         return memUTF8Safe(__result);
     }

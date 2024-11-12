@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -875,7 +875,7 @@ public class ZstdX {
      * @return number of bytes written or a ZSTD error
      */
     @NativeType("size_t")
-    public static long ZSTD_readSkippableFrame(@NativeType("void *") ByteBuffer dst, @Nullable @NativeType("unsigned *") IntBuffer magicVariant, @NativeType("void const *") ByteBuffer src) {
+    public static long ZSTD_readSkippableFrame(@NativeType("void *") ByteBuffer dst, @NativeType("unsigned *") @Nullable IntBuffer magicVariant, @NativeType("void const *") ByteBuffer src) {
         if (CHECKS) {
             checkSafe(magicVariant, 1);
         }
@@ -1786,7 +1786,7 @@ public class ZstdX {
      * 
      * <p>The user is strongly encouraged to read the full API documentation before calling this function.</p>
      */
-    public static void ZSTD_registerSequenceProducer(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") long sequenceProducerState, @Nullable @NativeType("ZSTD_sequenceProducer_F") ZSTDSequenceProducerI sequenceProducer) {
+    public static void ZSTD_registerSequenceProducer(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") long sequenceProducerState, @NativeType("ZSTD_sequenceProducer_F") @Nullable ZSTDSequenceProducerI sequenceProducer) {
         if (CHECKS) {
             check(cctx);
         }
@@ -1809,7 +1809,7 @@ public class ZstdX {
      * 
      * <p>See {@code tests/zstreamtest.c} for example usage.</p>
      */
-    public static void ZSTD_CCtxParams_registerSequenceProducer(@NativeType("ZSTD_CCtx_params *") long params, @NativeType("void *") long sequenceProducerState, @Nullable @NativeType("ZSTD_sequenceProducer_F") ZSTDSequenceProducerI sequenceProducer) {
+    public static void ZSTD_CCtxParams_registerSequenceProducer(@NativeType("ZSTD_CCtx_params *") long params, @NativeType("void *") long sequenceProducerState, @NativeType("ZSTD_sequenceProducer_F") @Nullable ZSTDSequenceProducerI sequenceProducer) {
         if (CHECKS) {
             check(params);
         }

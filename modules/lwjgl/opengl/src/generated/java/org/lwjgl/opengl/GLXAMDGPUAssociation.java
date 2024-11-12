@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,7 +148,7 @@ public class GLXAMDGPUAssociation {
 
     /** Queries the IDs for available GPUs. */
     @NativeType("unsigned int")
-    public static int glXGetGPUIDsAMD(@Nullable @NativeType("unsigned int *") IntBuffer ids) {
+    public static int glXGetGPUIDsAMD(@NativeType("unsigned int *") @Nullable IntBuffer ids) {
         return nglXGetGPUIDsAMD(remainingSafe(ids), memAddressSafe(ids));
     }
 
@@ -202,7 +202,7 @@ public class GLXAMDGPUAssociation {
 
     /** Array version of: {@link #glXGetGPUIDsAMD GetGPUIDsAMD} */
     @NativeType("unsigned int")
-    public static int glXGetGPUIDsAMD(@Nullable @NativeType("unsigned int *") int[] ids) {
+    public static int glXGetGPUIDsAMD(@NativeType("unsigned int *") int @Nullable [] ids) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetGPUIDsAMD;
         if (CHECKS) {
             check(__functionAddress);

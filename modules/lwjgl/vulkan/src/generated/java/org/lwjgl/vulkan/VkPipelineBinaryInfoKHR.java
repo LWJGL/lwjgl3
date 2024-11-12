@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,9 +118,8 @@ public class VkPipelineBinaryInfoKHR extends Struct<VkPipelineBinaryInfoKHR> imp
     @NativeType("uint32_t")
     public int binaryCount() { return nbinaryCount(address()); }
     /** a pointer to an array of {@code VkPipelineBinaryKHR} handles. */
-    @Nullable
     @NativeType("VkPipelineBinaryKHR const *")
-    public LongBuffer pPipelineBinaries() { return npPipelineBinaries(address()); }
+    public @Nullable LongBuffer pPipelineBinaries() { return npPipelineBinaries(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineBinaryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -180,8 +179,7 @@ public class VkPipelineBinaryInfoKHR extends Struct<VkPipelineBinaryInfoKHR> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineBinaryInfoKHR createSafe(long address) {
+    public static @Nullable VkPipelineBinaryInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkPipelineBinaryInfoKHR(address, null);
     }
 
@@ -224,8 +222,7 @@ public class VkPipelineBinaryInfoKHR extends Struct<VkPipelineBinaryInfoKHR> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineBinaryInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineBinaryInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -276,7 +273,7 @@ public class VkPipelineBinaryInfoKHR extends Struct<VkPipelineBinaryInfoKHR> imp
     /** Unsafe version of {@link #binaryCount}. */
     public static int nbinaryCount(long struct) { return memGetInt(struct + VkPipelineBinaryInfoKHR.BINARYCOUNT); }
     /** Unsafe version of {@link #pPipelineBinaries() pPipelineBinaries}. */
-    @Nullable public static LongBuffer npPipelineBinaries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineBinaryInfoKHR.PPIPELINEBINARIES), nbinaryCount(struct)); }
+    public static @Nullable LongBuffer npPipelineBinaries(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPipelineBinaryInfoKHR.PPIPELINEBINARIES), nbinaryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineBinaryInfoKHR.STYPE, value); }
@@ -351,9 +348,8 @@ public class VkPipelineBinaryInfoKHR extends Struct<VkPipelineBinaryInfoKHR> imp
         @NativeType("uint32_t")
         public int binaryCount() { return VkPipelineBinaryInfoKHR.nbinaryCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPipelineBinaryInfoKHR#pPipelineBinaries} field. */
-        @Nullable
         @NativeType("VkPipelineBinaryKHR const *")
-        public LongBuffer pPipelineBinaries() { return VkPipelineBinaryInfoKHR.npPipelineBinaries(address()); }
+        public @Nullable LongBuffer pPipelineBinaries() { return VkPipelineBinaryInfoKHR.npPipelineBinaries(address()); }
 
         /** Sets the specified value to the {@link VkPipelineBinaryInfoKHR#sType} field. */
         public VkPipelineBinaryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineBinaryInfoKHR.nsType(address(), value); return this; }

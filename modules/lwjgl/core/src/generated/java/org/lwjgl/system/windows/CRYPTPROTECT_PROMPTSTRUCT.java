@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct<CRYPTPROTECT_PROMPTSTRUCT>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CRYPTPROTECT_PROMPTSTRUCT createSafe(long address) {
+    public static @Nullable CRYPTPROTECT_PROMPTSTRUCT createSafe(long address) {
         return address == NULL ? null : new CRYPTPROTECT_PROMPTSTRUCT(address, null);
     }
 

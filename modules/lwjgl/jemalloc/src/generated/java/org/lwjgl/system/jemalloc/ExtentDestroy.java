@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jemalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -40,8 +40,7 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ExtentDestroy createSafe(long functionPointer) {
+    public static @Nullable ExtentDestroy createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

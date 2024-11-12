@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -697,7 +697,7 @@ public class METAVirtualKeyboard {
      * @param textureIds           the array of texture IDs that need to be updated.
      */
     @NativeType("XrResult")
-    public static int xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, @NativeType("uint32_t *") IntBuffer textureIdCountOutput, @Nullable @NativeType("uint64_t *") LongBuffer textureIds) {
+    public static int xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, @NativeType("uint32_t *") IntBuffer textureIdCountOutput, @NativeType("uint64_t *") @Nullable LongBuffer textureIds) {
         if (CHECKS) {
             check(textureIdCountOutput, 1);
         }

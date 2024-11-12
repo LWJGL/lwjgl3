@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -127,9 +127,8 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     @NativeType("uint32_t")
     public int customSampleOrderCount() { return ncustomSampleOrderCount(address()); }
     /** a pointer to an array of {@code customSampleOrderCount} {@link VkCoarseSampleOrderCustomNV} structures, each structure specifying the coverage sample order for a single combination of fragment area and coverage sample count. */
-    @Nullable
     @NativeType("VkCoarseSampleOrderCustomNV const *")
-    public VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders() { return npCustomSampleOrders(address()); }
+    public VkCoarseSampleOrderCustomNV.@Nullable Buffer pCustomSampleOrders() { return npCustomSampleOrders(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -140,14 +139,14 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     /** Sets the specified value to the {@link #sampleOrderType} field. */
     public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV sampleOrderType(@NativeType("VkCoarseSampleOrderTypeNV") int value) { nsampleOrderType(address(), value); return this; }
     /** Sets the address of the specified {@link VkCoarseSampleOrderCustomNV.Buffer} to the {@link #pCustomSampleOrders} field. */
-    public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV pCustomSampleOrders(@Nullable @NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.Buffer value) { npCustomSampleOrders(address(), value); return this; }
+    public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV pCustomSampleOrders(@NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.@Nullable Buffer value) { npCustomSampleOrders(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV set(
         int sType,
         long pNext,
         int sampleOrderType,
-        @Nullable VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders
+        VkCoarseSampleOrderCustomNV.@Nullable Buffer pCustomSampleOrders
     ) {
         sType(sType);
         pNext(pNext);
@@ -193,8 +192,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineViewportCoarseSampleOrderStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineViewportCoarseSampleOrderStateCreateInfoNV(address, null);
     }
 
@@ -237,8 +235,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -310,7 +307,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     /** Unsafe version of {@link #customSampleOrderCount}. */
     public static int ncustomSampleOrderCount(long struct) { return memGetInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT); }
     /** Unsafe version of {@link #pCustomSampleOrders}. */
-    @Nullable public static VkCoarseSampleOrderCustomNV.Buffer npCustomSampleOrders(long struct) { return VkCoarseSampleOrderCustomNV.createSafe(memGetAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS), ncustomSampleOrderCount(struct)); }
+    public static VkCoarseSampleOrderCustomNV.@Nullable Buffer npCustomSampleOrders(long struct) { return VkCoarseSampleOrderCustomNV.createSafe(memGetAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS), ncustomSampleOrderCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.STYPE, value); }
@@ -321,7 +318,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     /** Sets the specified value to the {@code customSampleOrderCount} field of the specified {@code struct}. */
     public static void ncustomSampleOrderCount(long struct, int value) { memPutInt(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.CUSTOMSAMPLEORDERCOUNT, value); }
     /** Unsafe version of {@link #pCustomSampleOrders(VkCoarseSampleOrderCustomNV.Buffer) pCustomSampleOrders}. */
-    public static void npCustomSampleOrders(long struct, @Nullable VkCoarseSampleOrderCustomNV.Buffer value) { memPutAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS, memAddressSafe(value)); ncustomSampleOrderCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npCustomSampleOrders(long struct, VkCoarseSampleOrderCustomNV.@Nullable Buffer value) { memPutAddress(struct + VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.PCUSTOMSAMPLEORDERS, memAddressSafe(value)); ncustomSampleOrderCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -393,9 +390,8 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
         @NativeType("uint32_t")
         public int customSampleOrderCount() { return VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.ncustomSampleOrderCount(address()); }
         /** @return a {@link VkCoarseSampleOrderCustomNV.Buffer} view of the struct array pointed to by the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#pCustomSampleOrders} field. */
-        @Nullable
         @NativeType("VkCoarseSampleOrderCustomNV const *")
-        public VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders() { return VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.npCustomSampleOrders(address()); }
+        public VkCoarseSampleOrderCustomNV.@Nullable Buffer pCustomSampleOrders() { return VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.npCustomSampleOrders(address()); }
 
         /** Sets the specified value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#sType} field. */
         public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.nsType(address(), value); return this; }
@@ -406,7 +402,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
         /** Sets the specified value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#sampleOrderType} field. */
         public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer sampleOrderType(@NativeType("VkCoarseSampleOrderTypeNV") int value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.nsampleOrderType(address(), value); return this; }
         /** Sets the address of the specified {@link VkCoarseSampleOrderCustomNV.Buffer} to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#pCustomSampleOrders} field. */
-        public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer pCustomSampleOrders(@Nullable @NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.Buffer value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.npCustomSampleOrders(address(), value); return this; }
+        public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer pCustomSampleOrders(@NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.@Nullable Buffer value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.npCustomSampleOrders(address(), value); return this; }
 
     }
 

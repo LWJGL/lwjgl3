@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -125,9 +125,8 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
     @NativeType("uint32_t")
     public int requestedDataSourceCount() { return nrequestedDataSourceCount(address()); }
     /** an array of {@code XrFaceTrackingDataSource2FB} that the application accepts. The order of values in the array has no significance. */
-    @Nullable
     @NativeType("XrFaceTrackingDataSource2FB *")
-    public IntBuffer requestedDataSources() { return nrequestedDataSources(address()); }
+    public @Nullable IntBuffer requestedDataSources() { return nrequestedDataSources(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrFaceTrackerCreateInfo2FB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -195,8 +194,7 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceTrackerCreateInfo2FB createSafe(long address) {
+    public static @Nullable XrFaceTrackerCreateInfo2FB createSafe(long address) {
         return address == NULL ? null : new XrFaceTrackerCreateInfo2FB(address, null);
     }
 
@@ -239,8 +237,7 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceTrackerCreateInfo2FB.Buffer createSafe(long address, int capacity) {
+    public static XrFaceTrackerCreateInfo2FB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -293,7 +290,7 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
     /** Unsafe version of {@link #requestedDataSourceCount}. */
     public static int nrequestedDataSourceCount(long struct) { return memGetInt(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCECOUNT); }
     /** Unsafe version of {@link #requestedDataSources() requestedDataSources}. */
-    @Nullable public static IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
+    public static @Nullable IntBuffer nrequestedDataSources(long struct) { return memIntBufferSafe(memGetAddress(struct + XrFaceTrackerCreateInfo2FB.REQUESTEDDATASOURCES), nrequestedDataSourceCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrFaceTrackerCreateInfo2FB.TYPE, value); }
@@ -362,9 +359,8 @@ public class XrFaceTrackerCreateInfo2FB extends Struct<XrFaceTrackerCreateInfo2F
         @NativeType("uint32_t")
         public int requestedDataSourceCount() { return XrFaceTrackerCreateInfo2FB.nrequestedDataSourceCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrFaceTrackerCreateInfo2FB#requestedDataSources} field. */
-        @Nullable
         @NativeType("XrFaceTrackingDataSource2FB *")
-        public IntBuffer requestedDataSources() { return XrFaceTrackerCreateInfo2FB.nrequestedDataSources(address()); }
+        public @Nullable IntBuffer requestedDataSources() { return XrFaceTrackerCreateInfo2FB.nrequestedDataSources(address()); }
 
         /** Sets the specified value to the {@link XrFaceTrackerCreateInfo2FB#type} field. */
         public XrFaceTrackerCreateInfo2FB.Buffer type(@NativeType("XrStructureType") int value) { XrFaceTrackerCreateInfo2FB.ntype(address(), value); return this; }

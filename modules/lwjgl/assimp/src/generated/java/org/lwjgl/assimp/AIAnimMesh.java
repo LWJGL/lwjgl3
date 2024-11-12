@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,35 +116,29 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
      * host mesh must be non-{@code NULL} as well - animation meshes may neither add or nor remove vertex components (if a replacement array is {@code NULL} and the
      * corresponding source array is not, the source data is taken instead).
      */
-    @Nullable
     @NativeType("struct aiVector3D *")
-    public AIVector3D.Buffer mVertices() { return nmVertices(address()); }
+    public AIVector3D.@Nullable Buffer mVertices() { return nmVertices(address()); }
     /** Replacement for {@link AIMesh}{@code ::mNormals}. */
-    @Nullable
     @NativeType("struct aiVector3D *")
-    public AIVector3D.Buffer mNormals() { return nmNormals(address()); }
+    public AIVector3D.@Nullable Buffer mNormals() { return nmNormals(address()); }
     /** Replacement for {@link AIMesh}{@code ::mTangents}. */
-    @Nullable
     @NativeType("struct aiVector3D *")
-    public AIVector3D.Buffer mTangents() { return nmTangents(address()); }
+    public AIVector3D.@Nullable Buffer mTangents() { return nmTangents(address()); }
     /** Replacement for {@link AIMesh}{@code ::mBitangents}. */
-    @Nullable
     @NativeType("struct aiVector3D *")
-    public AIVector3D.Buffer mBitangents() { return nmBitangents(address()); }
+    public AIVector3D.@Nullable Buffer mBitangents() { return nmBitangents(address()); }
     /** Replacement for {@link AIMesh}{@code ::mColors} */
     @NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]")
     public PointerBuffer mColors() { return nmColors(address()); }
     /** Replacement for {@link AIMesh}{@code ::mColors} */
-    @Nullable
     @NativeType("struct aiColor4D *")
-    public AIColor4D.Buffer mColors(int index) { return nmColors(address(), index); }
+    public AIColor4D.@Nullable Buffer mColors(int index) { return nmColors(address(), index); }
     /** Replacement for {@link AIMesh}{@code ::mTextureCoords} */
     @NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public PointerBuffer mTextureCoords() { return nmTextureCoords(address()); }
     /** Replacement for {@link AIMesh}{@code ::mTextureCoords} */
-    @Nullable
     @NativeType("struct aiVector3D *")
-    public AIVector3D.Buffer mTextureCoords(int index) { return nmTextureCoords(address(), index); }
+    public AIVector3D.@Nullable Buffer mTextureCoords(int index) { return nmTextureCoords(address(), index); }
     /**
      * The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays.
      * 
@@ -161,25 +155,25 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIAnimMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mVertices} field. */
-    public AIAnimMesh mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmVertices(address(), value); return this; }
+    public AIAnimMesh mVertices(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmVertices(address(), value); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mNormals} field. */
-    public AIAnimMesh mNormals(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmNormals(address(), value); return this; }
+    public AIAnimMesh mNormals(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmNormals(address(), value); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mTangents} field. */
-    public AIAnimMesh mTangents(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmTangents(address(), value); return this; }
+    public AIAnimMesh mTangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmTangents(address(), value); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mBitangents} field. */
-    public AIAnimMesh mBitangents(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmBitangents(address(), value); return this; }
+    public AIAnimMesh mBitangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmBitangents(address(), value); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@link #mColors} field. */
     public AIAnimMesh mColors(@NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { nmColors(address(), value); return this; }
     /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@link #mColors} field. */
-    public AIAnimMesh mColors(int index, @Nullable @NativeType("struct aiColor4D *") AIColor4D.Buffer value) { nmColors(address(), index, value); return this; }
+    public AIAnimMesh mColors(int index, @NativeType("struct aiColor4D *") AIColor4D.@Nullable Buffer value) { nmColors(address(), index, value); return this; }
     /** Passes the element at {@code index} of the {@link #mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIAnimMesh mColors(int index, java.util.function.Consumer<AIColor4D.Buffer> consumer) { consumer.accept(mColors(index)); return this; }
+    public AIAnimMesh mColors(int index, java.util.function.Consumer<AIColor4D.@Nullable Buffer> consumer) { consumer.accept(mColors(index)); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@link #mTextureCoords} field. */
     public AIAnimMesh mTextureCoords(@NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { nmTextureCoords(address(), value); return this; }
     /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@link #mTextureCoords} field. */
-    public AIAnimMesh mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmTextureCoords(address(), index, value); return this; }
+    public AIAnimMesh mTextureCoords(int index, @NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmTextureCoords(address(), index, value); return this; }
     /** Passes the element at {@code index} of the {@link #mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIAnimMesh mTextureCoords(int index, java.util.function.Consumer<AIVector3D.Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
+    public AIAnimMesh mTextureCoords(int index, java.util.function.Consumer<AIVector3D.@Nullable Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
     /** Sets the specified value to the {@link #mNumVertices} field. */
     public AIAnimMesh mNumVertices(@NativeType("unsigned int") int value) { nmNumVertices(address(), value); return this; }
     /** Sets the specified value to the {@link #mWeight} field. */
@@ -188,10 +182,10 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     /** Initializes this struct with the specified values. */
     public AIAnimMesh set(
         AIString mName,
-        @Nullable AIVector3D.Buffer mVertices,
-        @Nullable AIVector3D.Buffer mNormals,
-        @Nullable AIVector3D.Buffer mTangents,
-        @Nullable AIVector3D.Buffer mBitangents,
+        AIVector3D.@Nullable Buffer mVertices,
+        AIVector3D.@Nullable Buffer mNormals,
+        AIVector3D.@Nullable Buffer mTangents,
+        AIVector3D.@Nullable Buffer mBitangents,
         PointerBuffer mColors,
         PointerBuffer mTextureCoords,
         int mNumVertices,
@@ -246,8 +240,7 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAnimMesh createSafe(long address) {
+    public static @Nullable AIAnimMesh createSafe(long address) {
         return address == NULL ? null : new AIAnimMesh(address, null);
     }
 
@@ -290,8 +283,7 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAnimMesh.Buffer createSafe(long address, int capacity) {
+    public static AIAnimMesh.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -357,23 +349,23 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIAnimMesh.MNAME); }
     /** Unsafe version of {@link #mVertices}. */
-    @Nullable public static AIVector3D.Buffer nmVertices(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MVERTICES), nmNumVertices(struct)); }
+    public static AIVector3D.@Nullable Buffer nmVertices(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MVERTICES), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mNormals}. */
-    @Nullable public static AIVector3D.Buffer nmNormals(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MNORMALS), nmNumVertices(struct)); }
+    public static AIVector3D.@Nullable Buffer nmNormals(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MNORMALS), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mTangents}. */
-    @Nullable public static AIVector3D.Buffer nmTangents(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MTANGENTS), nmNumVertices(struct)); }
+    public static AIVector3D.@Nullable Buffer nmTangents(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MTANGENTS), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mBitangents}. */
-    @Nullable public static AIVector3D.Buffer nmBitangents(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MBITANGENTS), nmNumVertices(struct)); }
+    public static AIVector3D.@Nullable Buffer nmBitangents(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MBITANGENTS), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mColors}. */
     public static PointerBuffer nmColors(long struct) { return memPointerBuffer(struct + AIAnimMesh.MCOLORS, Assimp.AI_MAX_NUMBER_OF_COLOR_SETS); }
     /** Unsafe version of {@link #mColors(int) mColors}. */
-    @Nullable public static AIColor4D.Buffer nmColors(long struct, int index) {
+    public static AIColor4D.@Nullable Buffer nmColors(long struct, int index) {
         return AIColor4D.createSafe(memGetAddress(struct + AIAnimMesh.MCOLORS + check(index, Assimp.AI_MAX_NUMBER_OF_COLOR_SETS) * POINTER_SIZE), nmNumVertices(struct));
     }
     /** Unsafe version of {@link #mTextureCoords}. */
     public static PointerBuffer nmTextureCoords(long struct) { return memPointerBuffer(struct + AIAnimMesh.MTEXTURECOORDS, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS); }
     /** Unsafe version of {@link #mTextureCoords(int) mTextureCoords}. */
-    @Nullable public static AIVector3D.Buffer nmTextureCoords(long struct, int index) {
+    public static AIVector3D.@Nullable Buffer nmTextureCoords(long struct, int index) {
         return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MTEXTURECOORDS + check(index, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS) * POINTER_SIZE), nmNumVertices(struct));
     }
     /** Unsafe version of {@link #mNumVertices}. */
@@ -384,20 +376,20 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimMesh.MNAME, AIString.SIZEOF); }
     /** Unsafe version of {@link #mVertices(AIVector3D.Buffer) mVertices}. */
-    public static void nmVertices(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MVERTICES, memAddressSafe(value)); }
+    public static void nmVertices(long struct, AIVector3D.@Nullable Buffer value) { memPutAddress(struct + AIAnimMesh.MVERTICES, memAddressSafe(value)); }
     /** Unsafe version of {@link #mNormals(AIVector3D.Buffer) mNormals}. */
-    public static void nmNormals(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MNORMALS, memAddressSafe(value)); }
+    public static void nmNormals(long struct, AIVector3D.@Nullable Buffer value) { memPutAddress(struct + AIAnimMesh.MNORMALS, memAddressSafe(value)); }
     /** Unsafe version of {@link #mTangents(AIVector3D.Buffer) mTangents}. */
-    public static void nmTangents(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MTANGENTS, memAddressSafe(value)); }
+    public static void nmTangents(long struct, AIVector3D.@Nullable Buffer value) { memPutAddress(struct + AIAnimMesh.MTANGENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #mBitangents(AIVector3D.Buffer) mBitangents}. */
-    public static void nmBitangents(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MBITANGENTS, memAddressSafe(value)); }
+    public static void nmBitangents(long struct, AIVector3D.@Nullable Buffer value) { memPutAddress(struct + AIAnimMesh.MBITANGENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #mColors(PointerBuffer) mColors}. */
     public static void nmColors(long struct, PointerBuffer value) {
         if (CHECKS) { checkGT(value, Assimp.AI_MAX_NUMBER_OF_COLOR_SETS); }
         memCopy(memAddress(value), struct + AIAnimMesh.MCOLORS, value.remaining() * POINTER_SIZE);
     }
     /** Unsafe version of {@link #mColors(int, AIColor4D.Buffer) mColors}. */
-    public static void nmColors(long struct, int index, @Nullable AIColor4D.Buffer value) {
+    public static void nmColors(long struct, int index, AIColor4D.@Nullable Buffer value) {
         memPutAddress(struct + AIAnimMesh.MCOLORS + check(index, Assimp.AI_MAX_NUMBER_OF_COLOR_SETS) * POINTER_SIZE, memAddressSafe(value));
     }
     /** Unsafe version of {@link #mTextureCoords(PointerBuffer) mTextureCoords}. */
@@ -406,7 +398,7 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         memCopy(memAddress(value), struct + AIAnimMesh.MTEXTURECOORDS, value.remaining() * POINTER_SIZE);
     }
     /** Unsafe version of {@link #mTextureCoords(int, AIVector3D.Buffer) mTextureCoords}. */
-    public static void nmTextureCoords(long struct, int index, @Nullable AIVector3D.Buffer value) {
+    public static void nmTextureCoords(long struct, int index, AIVector3D.@Nullable Buffer value) {
         memPutAddress(struct + AIAnimMesh.MTEXTURECOORDS + check(index, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS) * POINTER_SIZE, memAddressSafe(value));
     }
     /** Sets the specified value to the {@code mNumVertices} field of the specified {@code struct}. */
@@ -461,35 +453,29 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         @NativeType("struct aiString")
         public AIString mName() { return AIAnimMesh.nmName(address()); }
         /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIAnimMesh#mVertices} field. */
-        @Nullable
         @NativeType("struct aiVector3D *")
-        public AIVector3D.Buffer mVertices() { return AIAnimMesh.nmVertices(address()); }
+        public AIVector3D.@Nullable Buffer mVertices() { return AIAnimMesh.nmVertices(address()); }
         /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIAnimMesh#mNormals} field. */
-        @Nullable
         @NativeType("struct aiVector3D *")
-        public AIVector3D.Buffer mNormals() { return AIAnimMesh.nmNormals(address()); }
+        public AIVector3D.@Nullable Buffer mNormals() { return AIAnimMesh.nmNormals(address()); }
         /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIAnimMesh#mTangents} field. */
-        @Nullable
         @NativeType("struct aiVector3D *")
-        public AIVector3D.Buffer mTangents() { return AIAnimMesh.nmTangents(address()); }
+        public AIVector3D.@Nullable Buffer mTangents() { return AIAnimMesh.nmTangents(address()); }
         /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIAnimMesh#mBitangents} field. */
-        @Nullable
         @NativeType("struct aiVector3D *")
-        public AIVector3D.Buffer mBitangents() { return AIAnimMesh.nmBitangents(address()); }
+        public AIVector3D.@Nullable Buffer mBitangents() { return AIAnimMesh.nmBitangents(address()); }
         /** @return a {@link PointerBuffer} view of the {@link AIAnimMesh#mColors} field. */
         @NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]")
         public PointerBuffer mColors() { return AIAnimMesh.nmColors(address()); }
         /** @return a {@link AIColor4D} view of the pointer at the specified index of the {@link AIAnimMesh#mColors} field. */
-        @Nullable
         @NativeType("struct aiColor4D *")
-        public AIColor4D.Buffer mColors(int index) { return AIAnimMesh.nmColors(address(), index); }
+        public AIColor4D.@Nullable Buffer mColors(int index) { return AIAnimMesh.nmColors(address(), index); }
         /** @return a {@link PointerBuffer} view of the {@link AIAnimMesh#mTextureCoords} field. */
         @NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]")
         public PointerBuffer mTextureCoords() { return AIAnimMesh.nmTextureCoords(address()); }
         /** @return a {@link AIVector3D} view of the pointer at the specified index of the {@link AIAnimMesh#mTextureCoords} field. */
-        @Nullable
         @NativeType("struct aiVector3D *")
-        public AIVector3D.Buffer mTextureCoords(int index) { return AIAnimMesh.nmTextureCoords(address(), index); }
+        public AIVector3D.@Nullable Buffer mTextureCoords(int index) { return AIAnimMesh.nmTextureCoords(address(), index); }
         /** @return the value of the {@link AIAnimMesh#mNumVertices} field. */
         @NativeType("unsigned int")
         public int mNumVertices() { return AIAnimMesh.nmNumVertices(address()); }
@@ -501,25 +487,25 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         /** Passes the {@link AIAnimMesh#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIAnimMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIAnimMesh#mVertices} field. */
-        public AIAnimMesh.Buffer mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmVertices(address(), value); return this; }
+        public AIAnimMesh.Buffer mVertices(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIAnimMesh.nmVertices(address(), value); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIAnimMesh#mNormals} field. */
-        public AIAnimMesh.Buffer mNormals(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmNormals(address(), value); return this; }
+        public AIAnimMesh.Buffer mNormals(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIAnimMesh.nmNormals(address(), value); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIAnimMesh#mTangents} field. */
-        public AIAnimMesh.Buffer mTangents(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmTangents(address(), value); return this; }
+        public AIAnimMesh.Buffer mTangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIAnimMesh.nmTangents(address(), value); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIAnimMesh#mBitangents} field. */
-        public AIAnimMesh.Buffer mBitangents(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmBitangents(address(), value); return this; }
+        public AIAnimMesh.Buffer mBitangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIAnimMesh.nmBitangents(address(), value); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@link AIAnimMesh#mColors} field. */
         public AIAnimMesh.Buffer mColors(@NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { AIAnimMesh.nmColors(address(), value); return this; }
         /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@link AIAnimMesh#mColors} field. */
-        public AIAnimMesh.Buffer mColors(int index, @Nullable @NativeType("struct aiColor4D *") AIColor4D.Buffer value) { AIAnimMesh.nmColors(address(), index, value); return this; }
+        public AIAnimMesh.Buffer mColors(int index, @NativeType("struct aiColor4D *") AIColor4D.@Nullable Buffer value) { AIAnimMesh.nmColors(address(), index, value); return this; }
         /** Passes the element at {@code index} of the {@link AIAnimMesh#mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIAnimMesh.Buffer mColors(int index, java.util.function.Consumer<AIColor4D.Buffer> consumer) { consumer.accept(mColors(index)); return this; }
+        public AIAnimMesh.Buffer mColors(int index, java.util.function.Consumer<AIColor4D.@Nullable Buffer> consumer) { consumer.accept(mColors(index)); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@link AIAnimMesh#mTextureCoords} field. */
         public AIAnimMesh.Buffer mTextureCoords(@NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { AIAnimMesh.nmTextureCoords(address(), value); return this; }
         /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@link AIAnimMesh#mTextureCoords} field. */
-        public AIAnimMesh.Buffer mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmTextureCoords(address(), index, value); return this; }
+        public AIAnimMesh.Buffer mTextureCoords(int index, @NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIAnimMesh.nmTextureCoords(address(), index, value); return this; }
         /** Passes the element at {@code index} of the {@link AIAnimMesh#mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIAnimMesh.Buffer mTextureCoords(int index, java.util.function.Consumer<AIVector3D.Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
+        public AIAnimMesh.Buffer mTextureCoords(int index, java.util.function.Consumer<AIVector3D.@Nullable Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
         /** Sets the specified value to the {@link AIAnimMesh#mNumVertices} field. */
         public AIAnimMesh.Buffer mNumVertices(@NativeType("unsigned int") int value) { AIAnimMesh.nmNumVertices(address(), value); return this; }
         /** Sets the specified value to the {@link AIAnimMesh#mWeight} field. */

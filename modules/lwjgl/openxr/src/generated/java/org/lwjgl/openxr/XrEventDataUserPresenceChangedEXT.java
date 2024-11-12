@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -186,8 +186,7 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataUserPresenceChangedEXT createSafe(long address) {
+    public static @Nullable XrEventDataUserPresenceChangedEXT createSafe(long address) {
         return address == NULL ? null : new XrEventDataUserPresenceChangedEXT(address, null);
     }
 
@@ -230,8 +229,7 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataUserPresenceChangedEXT.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataUserPresenceChangedEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

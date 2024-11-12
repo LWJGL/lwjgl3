@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
     @NativeType("struct aiString")
     public AIString name() { return nname(address()); }
     /** Pointer to the next blob in the chain or NULL if there is none. */
-    @Nullable
     @NativeType("struct aiExportDataBlob *")
-    public AIExportDataBlob next() { return nnext(address()); }
+    public @Nullable AIExportDataBlob next() { return nnext(address()); }
 
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #data} field. */
     public AIExportDataBlob data(@NativeType("void *") ByteBuffer value) { ndata(address(), value); return this; }
@@ -170,8 +169,7 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIExportDataBlob createSafe(long address) {
+    public static @Nullable AIExportDataBlob createSafe(long address) {
         return address == NULL ? null : new AIExportDataBlob(address, null);
     }
 
@@ -214,8 +212,7 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIExportDataBlob.Buffer createSafe(long address, int capacity) {
+    public static AIExportDataBlob.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -285,7 +282,7 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
     /** Unsafe version of {@link #name}. */
     public static AIString nname(long struct) { return AIString.create(struct + AIExportDataBlob.NAME); }
     /** Unsafe version of {@link #next}. */
-    @Nullable public static AIExportDataBlob nnext(long struct) { return AIExportDataBlob.createSafe(memGetAddress(struct + AIExportDataBlob.NEXT)); }
+    public static @Nullable AIExportDataBlob nnext(long struct) { return AIExportDataBlob.createSafe(memGetAddress(struct + AIExportDataBlob.NEXT)); }
 
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
     public static void nsize(long struct, long value) { memPutAddress(struct + AIExportDataBlob.SIZE, value); }
@@ -358,9 +355,8 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
         @NativeType("struct aiString")
         public AIString name() { return AIExportDataBlob.nname(address()); }
         /** @return a {@link AIExportDataBlob} view of the struct pointed to by the {@link AIExportDataBlob#next} field. */
-        @Nullable
         @NativeType("struct aiExportDataBlob *")
-        public AIExportDataBlob next() { return AIExportDataBlob.nnext(address()); }
+        public @Nullable AIExportDataBlob next() { return AIExportDataBlob.nnext(address()); }
 
         /** Sets the address of the specified {@link ByteBuffer} to the {@link AIExportDataBlob#data} field. */
         public AIExportDataBlob.Buffer data(@NativeType("void *") ByteBuffer value) { AIExportDataBlob.ndata(address(), value); return this; }

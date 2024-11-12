@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,8 +206,7 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct<VkImportMemoryWin32
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportMemoryWin32HandleInfoKHR createSafe(long address) {
+    public static @Nullable VkImportMemoryWin32HandleInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkImportMemoryWin32HandleInfoKHR(address, null);
     }
 
@@ -250,8 +249,7 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct<VkImportMemoryWin32
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportMemoryWin32HandleInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkImportMemoryWin32HandleInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

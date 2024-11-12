@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -240,8 +240,7 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemProperties createSafe(long address) {
+    public static @Nullable XrSystemProperties createSafe(long address) {
         return address == NULL ? null : new XrSystemProperties(address, null);
     }
 
@@ -284,8 +283,7 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemProperties.Buffer createSafe(long address, int capacity) {
+    public static XrSystemProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

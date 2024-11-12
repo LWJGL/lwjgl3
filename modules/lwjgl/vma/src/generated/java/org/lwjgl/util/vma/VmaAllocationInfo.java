@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,9 +160,8 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
      * <p>Another way to set custom name is to pass it in {@link VmaAllocationCreateInfo}{@code ::pUserData} with additional flag
      * {@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} set (DEPRECATED).</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer pName() { return npName(address()); }
+    public @Nullable ByteBuffer pName() { return npName(address()); }
     /**
      * Custom allocation name that was set with {@link Vma#vmaSetAllocationName SetAllocationName}.
      * 
@@ -171,9 +170,8 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
      * <p>Another way to set custom name is to pass it in {@link VmaAllocationCreateInfo}{@code ::pUserData} with additional flag
      * {@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} set (DEPRECATED).</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public String pNameString() { return npNameString(address()); }
+    public @Nullable String pNameString() { return npNameString(address()); }
 
     // -----------------------------------
 
@@ -199,8 +197,7 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocationInfo createSafe(long address) {
+    public static @Nullable VmaAllocationInfo createSafe(long address) {
         return address == NULL ? null : new VmaAllocationInfo(address, null);
     }
 
@@ -243,8 +240,7 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocationInfo.Buffer createSafe(long address, int capacity) {
+    public static VmaAllocationInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -320,9 +316,9 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaAllocationInfo.PUSERDATA); }
     /** Unsafe version of {@link #pName}. */
-    @Nullable public static ByteBuffer npName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VmaAllocationInfo.PNAME)); }
+    public static @Nullable ByteBuffer npName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VmaAllocationInfo.PNAME)); }
     /** Unsafe version of {@link #pNameString}. */
-    @Nullable public static String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VmaAllocationInfo.PNAME)); }
+    public static @Nullable String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VmaAllocationInfo.PNAME)); }
 
     // -----------------------------------
 
@@ -386,13 +382,11 @@ public class VmaAllocationInfo extends Struct<VmaAllocationInfo> implements Nati
         @NativeType("void *")
         public long pUserData() { return VmaAllocationInfo.npUserData(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VmaAllocationInfo#pName} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer pName() { return VmaAllocationInfo.npName(address()); }
+        public @Nullable ByteBuffer pName() { return VmaAllocationInfo.npName(address()); }
         /** @return the null-terminated string pointed to by the {@link VmaAllocationInfo#pName} field. */
-        @Nullable
         @NativeType("char const *")
-        public String pNameString() { return VmaAllocationInfo.npNameString(address()); }
+        public @Nullable String pNameString() { return VmaAllocationInfo.npNameString(address()); }
 
     }
 

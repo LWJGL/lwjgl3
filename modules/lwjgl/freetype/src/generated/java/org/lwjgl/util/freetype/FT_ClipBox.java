@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -115,8 +115,7 @@ public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ClipBox createSafe(long address) {
+    public static @Nullable FT_ClipBox createSafe(long address) {
         return address == NULL ? null : new FT_ClipBox(address, null);
     }
 
@@ -159,8 +158,7 @@ public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ClipBox.Buffer createSafe(long address, int capacity) {
+    public static FT_ClipBox.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

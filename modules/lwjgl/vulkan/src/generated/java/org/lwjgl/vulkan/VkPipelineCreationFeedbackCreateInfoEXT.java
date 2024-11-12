@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -65,7 +65,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
     public VkPipelineCreationFeedbackCreateInfoEXT pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { npPipelineCreationFeedback(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@code pPipelineStageCreationFeedbacks} field. */
     @Override
-    public VkPipelineCreationFeedbackCreateInfoEXT pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
+    public VkPipelineCreationFeedbackCreateInfoEXT pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.@Nullable Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -73,7 +73,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
         int sType,
         long pNext,
         VkPipelineCreationFeedback pPipelineCreationFeedback,
-        @Nullable VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks
+        VkPipelineCreationFeedback.@Nullable Buffer pPipelineStageCreationFeedbacks
     ) {
         sType(sType);
         pNext(pNext);
@@ -119,8 +119,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCreationFeedbackCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineCreationFeedbackCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineCreationFeedbackCreateInfoEXT(address, null);
     }
 
@@ -163,8 +162,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCreationFeedbackCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineCreationFeedbackCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -282,7 +280,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
         public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineCreationFeedback(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@code pPipelineStageCreationFeedbacks} field. */
         @Override
-        public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineStageCreationFeedbacks(address(), value); return this; }
+        public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.@Nullable Buffer value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     }
 

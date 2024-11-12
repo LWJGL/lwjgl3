@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -53,7 +53,7 @@ public class Socket {
      *
      * @return a file descriptor for the new socket, or -1 for errors
      */
-    public static int socket(@Nullable @NativeType("int *") IntBuffer _errno, int __domain, int __type, int __protocol) {
+    public static int socket(@NativeType("int *") @Nullable IntBuffer _errno, int __domain, int __type, int __protocol) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }

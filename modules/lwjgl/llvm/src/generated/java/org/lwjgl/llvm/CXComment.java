@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,8 +105,7 @@ public class CXComment extends Struct<CXComment> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXComment createSafe(long address) {
+    public static @Nullable CXComment createSafe(long address) {
         return address == NULL ? null : new CXComment(address, null);
     }
 
@@ -149,8 +148,7 @@ public class CXComment extends Struct<CXComment> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXComment.Buffer createSafe(long address, int capacity) {
+    public static CXComment.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

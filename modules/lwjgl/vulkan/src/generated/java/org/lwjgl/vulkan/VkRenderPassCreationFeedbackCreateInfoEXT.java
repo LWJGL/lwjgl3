@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class VkRenderPassCreationFeedbackCreateInfoEXT extends Struct<VkRenderPa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassCreationFeedbackCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkRenderPassCreationFeedbackCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkRenderPassCreationFeedbackCreateInfoEXT(address, null);
     }
 
@@ -202,8 +201,7 @@ public class VkRenderPassCreationFeedbackCreateInfoEXT extends Struct<VkRenderPa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassCreationFeedbackCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassCreationFeedbackCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

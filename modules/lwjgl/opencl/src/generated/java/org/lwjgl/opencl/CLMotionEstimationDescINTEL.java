@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescIN
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLMotionEstimationDescINTEL createSafe(long address) {
+    public static @Nullable CLMotionEstimationDescINTEL createSafe(long address) {
         return address == NULL ? null : new CLMotionEstimationDescINTEL(address, null);
     }
 
@@ -204,8 +203,7 @@ public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescIN
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLMotionEstimationDescINTEL.Buffer createSafe(long address, int capacity) {
+    public static CLMotionEstimationDescINTEL.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

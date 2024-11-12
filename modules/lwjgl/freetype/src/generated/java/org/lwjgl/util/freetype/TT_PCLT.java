@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -188,8 +188,7 @@ public class TT_PCLT extends Struct<TT_PCLT> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_PCLT createSafe(long address) {
+    public static @Nullable TT_PCLT createSafe(long address) {
         return address == NULL ? null : new TT_PCLT(address, null);
     }
 
@@ -204,8 +203,7 @@ public class TT_PCLT extends Struct<TT_PCLT> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_PCLT.Buffer createSafe(long address, int capacity) {
+    public static TT_PCLT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

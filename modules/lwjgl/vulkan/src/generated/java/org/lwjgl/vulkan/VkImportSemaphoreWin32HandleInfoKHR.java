@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -245,8 +245,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct<VkImportSemaphor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportSemaphoreWin32HandleInfoKHR createSafe(long address) {
+    public static @Nullable VkImportSemaphoreWin32HandleInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkImportSemaphoreWin32HandleInfoKHR(address, null);
     }
 
@@ -289,8 +288,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct<VkImportSemaphor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportSemaphoreWin32HandleInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkImportSemaphoreWin32HandleInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

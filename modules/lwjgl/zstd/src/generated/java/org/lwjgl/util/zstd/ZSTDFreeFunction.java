@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ZSTDFreeFunction createSafe(long functionPointer) {
+    public static @Nullable ZSTDFreeFunction createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

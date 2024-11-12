@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,9 +199,8 @@ public class INTELUnifiedSharedMemory {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clHostMemAllocINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static @Nullable ByteBuffer clHostMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -256,9 +255,8 @@ public class INTELUnifiedSharedMemory {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clDeviceMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static @Nullable ByteBuffer clDeviceMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -325,9 +323,8 @@ public class INTELUnifiedSharedMemory {
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clSharedMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_mem_properties_intel const *") LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static @Nullable ByteBuffer clSharedMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_mem_properties_intel const *") @Nullable LongBuffer properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -375,7 +372,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clMemFreeINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static int clMemFreeINTEL(@NativeType("cl_context") long context, @NativeType("void *") @Nullable ByteBuffer ptr) {
         return nclMemFreeINTEL(context, memAddressSafe(ptr));
     }
 
@@ -410,7 +407,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clMemBlockingFreeINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static int clMemBlockingFreeINTEL(@NativeType("cl_context") long context, @NativeType("void *") @Nullable ByteBuffer ptr) {
         return nclMemBlockingFreeINTEL(context, memAddressSafe(ptr));
     }
 
@@ -455,7 +452,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -487,7 +484,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -519,7 +516,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -815,7 +812,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clEnqueueMemFillINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer pattern, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueMemFillINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer pattern, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -881,7 +878,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clEnqueueMemcpyINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer src_ptr, @NativeType("size_t") long size, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueMemcpyINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer src_ptr, @NativeType("size_t") long size, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(dst_ptr, size);
             check(src_ptr, size);
@@ -942,7 +939,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clEnqueueMigrateMemINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_migration_flags") long flags, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueMigrateMemINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_migration_flags") long flags, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1001,7 +998,7 @@ public class INTELUnifiedSharedMemory {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clEnqueueMemAdviseINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_advice_intel") long advice, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueMemAdviseINTEL(@NativeType("cl_command_queue") long command_queue, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_advice_intel") long advice, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1009,9 +1006,8 @@ public class INTELUnifiedSharedMemory {
     }
 
     /** Array version of: {@link #clHostMemAllocINTEL HostMemAllocINTEL} */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clHostMemAllocINTEL(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static @Nullable ByteBuffer clHostMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clHostMemAllocINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -1024,9 +1020,8 @@ public class INTELUnifiedSharedMemory {
     }
 
     /** Array version of: {@link #clDeviceMemAllocINTEL DeviceMemAllocINTEL} */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clDeviceMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static @Nullable ByteBuffer clDeviceMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clDeviceMemAllocINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -1040,9 +1035,8 @@ public class INTELUnifiedSharedMemory {
     }
 
     /** Array version of: {@link #clSharedMemAllocINTEL SharedMemAllocINTEL} */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clSharedMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_mem_properties_intel const *") long[] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static @Nullable ByteBuffer clSharedMemAllocINTEL(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_mem_properties_intel const *") long @Nullable [] properties, @NativeType("size_t") long size, @NativeType("cl_uint") int alignment, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clSharedMemAllocINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -1056,7 +1050,7 @@ public class INTELUnifiedSharedMemory {
 
     /** Array version of: {@link #clGetMemAllocInfoINTEL GetMemAllocInfoINTEL} */
     @NativeType("cl_int")
-    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemAllocInfoINTEL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_mem_info_intel") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetMemAllocInfoINTEL;
         if (CHECKS) {
             check(__functionAddress);

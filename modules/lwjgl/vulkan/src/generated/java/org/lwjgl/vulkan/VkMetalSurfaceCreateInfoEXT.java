@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
      *
      * @return a reference to a {@code CAMetalLayer} object representing a renderable surface.
      */
-    @Nullable
     @NativeType("CAMetalLayer const *")
-    public PointerBuffer pLayer(int capacity) { return npLayer(address(), capacity); }
+    public @Nullable PointerBuffer pLayer(int capacity) { return npLayer(address(), capacity); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMetalSurfaceCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -174,8 +173,7 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMetalSurfaceCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkMetalSurfaceCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkMetalSurfaceCreateInfoEXT(address, null);
     }
 
@@ -218,8 +216,7 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMetalSurfaceCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMetalSurfaceCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -289,7 +286,7 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + VkMetalSurfaceCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #pLayer(int) pLayer}. */
-    @Nullable public static PointerBuffer npLayer(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + VkMetalSurfaceCreateInfoEXT.PLAYER), capacity); }
+    public static @Nullable PointerBuffer npLayer(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + VkMetalSurfaceCreateInfoEXT.PLAYER), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkMetalSurfaceCreateInfoEXT.STYPE, value); }
@@ -357,9 +354,8 @@ public class VkMetalSurfaceCreateInfoEXT extends Struct<VkMetalSurfaceCreateInfo
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("CAMetalLayer const *")
-        public PointerBuffer pLayer(int capacity) { return VkMetalSurfaceCreateInfoEXT.npLayer(address(), capacity); }
+        public @Nullable PointerBuffer pLayer(int capacity) { return VkMetalSurfaceCreateInfoEXT.npLayer(address(), capacity); }
 
         /** Sets the specified value to the {@link VkMetalSurfaceCreateInfoEXT#sType} field. */
         public VkMetalSurfaceCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMetalSurfaceCreateInfoEXT.nsType(address(), value); return this; }

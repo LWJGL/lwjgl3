@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,7 +185,7 @@ public class ARBShadingLanguageInclude {
      * @param length an array {@code count} values with the number of characters in each string (the string length). If an element in {@code length} is negative, its
      *               accompanying string is null-terminated. If {@code length} is {@code NULL}, all strings in the {@code path} argument are considered null-terminated.
      */
-    public static void glCompileShaderIncludeARB(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer path, @Nullable @NativeType("GLint const *") IntBuffer length) {
+    public static void glCompileShaderIncludeARB(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer path, @NativeType("GLint const *") @Nullable IntBuffer length) {
         if (CHECKS) {
             checkSafe(length, path.remaining());
         }
@@ -248,7 +248,7 @@ public class ARBShadingLanguageInclude {
      *                  returned.
      * @param string    a buffer in which to place the returned string
      */
-    public static void glGetNamedStringARB(@NativeType("GLchar const *") ByteBuffer name, @Nullable @NativeType("GLint *") IntBuffer stringlen, @NativeType("GLchar *") ByteBuffer string) {
+    public static void glGetNamedStringARB(@NativeType("GLchar const *") ByteBuffer name, @NativeType("GLint *") @Nullable IntBuffer stringlen, @NativeType("GLchar *") ByteBuffer string) {
         if (CHECKS) {
             checkSafe(stringlen, 1);
         }
@@ -263,7 +263,7 @@ public class ARBShadingLanguageInclude {
      *                  returned.
      * @param string    a buffer in which to place the returned string
      */
-    public static void glGetNamedStringARB(@NativeType("GLchar const *") CharSequence name, @Nullable @NativeType("GLint *") IntBuffer stringlen, @NativeType("GLchar *") ByteBuffer string) {
+    public static void glGetNamedStringARB(@NativeType("GLchar const *") CharSequence name, @NativeType("GLint *") @Nullable IntBuffer stringlen, @NativeType("GLchar *") ByteBuffer string) {
         if (CHECKS) {
             checkSafe(stringlen, 1);
         }
@@ -373,7 +373,7 @@ public class ARBShadingLanguageInclude {
     }
 
     /** Array version of: {@link #glCompileShaderIncludeARB CompileShaderIncludeARB} */
-    public static void glCompileShaderIncludeARB(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer path, @Nullable @NativeType("GLint const *") int[] length) {
+    public static void glCompileShaderIncludeARB(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer path, @NativeType("GLint const *") int @Nullable [] length) {
         long __functionAddress = GL.getICD().glCompileShaderIncludeARB;
         if (CHECKS) {
             check(__functionAddress);
@@ -383,7 +383,7 @@ public class ARBShadingLanguageInclude {
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
-    public static void glGetNamedStringARB(@NativeType("GLchar const *") ByteBuffer name, @Nullable @NativeType("GLint *") int[] stringlen, @NativeType("GLchar *") ByteBuffer string) {
+    public static void glGetNamedStringARB(@NativeType("GLchar const *") ByteBuffer name, @NativeType("GLint *") int @Nullable [] stringlen, @NativeType("GLchar *") ByteBuffer string) {
         long __functionAddress = GL.getICD().glGetNamedStringARB;
         if (CHECKS) {
             check(__functionAddress);
@@ -393,7 +393,7 @@ public class ARBShadingLanguageInclude {
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
-    public static void glGetNamedStringARB(@NativeType("GLchar const *") CharSequence name, @Nullable @NativeType("GLint *") int[] stringlen, @NativeType("GLchar *") ByteBuffer string) {
+    public static void glGetNamedStringARB(@NativeType("GLchar const *") CharSequence name, @NativeType("GLint *") int @Nullable [] stringlen, @NativeType("GLchar *") ByteBuffer string) {
         long __functionAddress = GL.getICD().glGetNamedStringARB;
         if (CHECKS) {
             check(__functionAddress);

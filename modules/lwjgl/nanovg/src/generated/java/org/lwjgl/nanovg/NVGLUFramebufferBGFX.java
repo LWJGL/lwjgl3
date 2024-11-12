@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -101,8 +101,7 @@ public class NVGLUFramebufferBGFX extends Struct<NVGLUFramebufferBGFX> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGLUFramebufferBGFX createSafe(long address) {
+    public static @Nullable NVGLUFramebufferBGFX createSafe(long address) {
         return address == NULL ? null : new NVGLUFramebufferBGFX(address, null);
     }
 
@@ -117,8 +116,7 @@ public class NVGLUFramebufferBGFX extends Struct<NVGLUFramebufferBGFX> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGLUFramebufferBGFX.Buffer createSafe(long address, int capacity) {
+    public static NVGLUFramebufferBGFX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class XrColor3fKHR extends XrColor3f {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrColor3fKHR createSafe(long address) {
+    public static @Nullable XrColor3fKHR createSafe(long address) {
         return address == NULL ? null : new XrColor3fKHR(address, null);
     }
 
@@ -152,8 +151,7 @@ public class XrColor3fKHR extends XrColor3f {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrColor3fKHR.Buffer createSafe(long address, int capacity) {
+    public static XrColor3fKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

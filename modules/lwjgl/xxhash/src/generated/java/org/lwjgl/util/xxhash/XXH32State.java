@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.xxhash;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -141,8 +141,7 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XXH32State createSafe(long address) {
+    public static @Nullable XXH32State createSafe(long address) {
         return address == NULL ? null : new XXH32State(address, null);
     }
 
@@ -185,8 +184,7 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XXH32State.Buffer createSafe(long address, int capacity) {
+    public static XXH32State.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

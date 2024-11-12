@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -556,7 +556,7 @@ public class EXTMultiDraw {
      * @param firstInstance the instance ID of the first instance in each draw.
      * @param stride        the byte stride between consecutive elements of {@code pVertexInfo}.
      */
-    public static void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, @Nullable @NativeType("VkMultiDrawInfoEXT const *") VkMultiDrawInfoEXT.Buffer pVertexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride) {
+    public static void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, @NativeType("VkMultiDrawInfoEXT const *") VkMultiDrawInfoEXT.@Nullable Buffer pVertexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride) {
         nvkCmdDrawMultiEXT(commandBuffer, remainingSafe(pVertexInfo), memAddressSafe(pVertexInfo), instanceCount, firstInstance, stride);
     }
 
@@ -1039,12 +1039,12 @@ public class EXTMultiDraw {
      * @param stride        the byte stride between consecutive elements of {@code pIndexInfo}.
      * @param pVertexOffset {@code NULL} or a pointer to the value added to the vertex index before indexing into the vertex buffer. When specified, {@link VkMultiDrawIndexedInfoEXT}{@code ::offset} is ignored.
      */
-    public static void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, @Nullable @NativeType("VkMultiDrawIndexedInfoEXT const *") VkMultiDrawIndexedInfoEXT.Buffer pIndexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride, @Nullable @NativeType("int32_t const *") IntBuffer pVertexOffset) {
+    public static void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, @NativeType("VkMultiDrawIndexedInfoEXT const *") VkMultiDrawIndexedInfoEXT.@Nullable Buffer pIndexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride, @NativeType("int32_t const *") @Nullable IntBuffer pVertexOffset) {
         nvkCmdDrawMultiIndexedEXT(commandBuffer, remainingSafe(pIndexInfo), memAddressSafe(pIndexInfo), instanceCount, firstInstance, stride, memAddressSafe(pVertexOffset));
     }
 
     /** Array version of: {@link #vkCmdDrawMultiIndexedEXT CmdDrawMultiIndexedEXT} */
-    public static void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, @Nullable @NativeType("VkMultiDrawIndexedInfoEXT const *") VkMultiDrawIndexedInfoEXT.Buffer pIndexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride, @Nullable @NativeType("int32_t const *") int[] pVertexOffset) {
+    public static void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, @NativeType("VkMultiDrawIndexedInfoEXT const *") VkMultiDrawIndexedInfoEXT.@Nullable Buffer pIndexInfo, @NativeType("uint32_t") int instanceCount, @NativeType("uint32_t") int firstInstance, @NativeType("uint32_t") int stride, @NativeType("int32_t const *") int @Nullable [] pVertexOffset) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdDrawMultiIndexedEXT;
         if (CHECKS) {
             check(__functionAddress);

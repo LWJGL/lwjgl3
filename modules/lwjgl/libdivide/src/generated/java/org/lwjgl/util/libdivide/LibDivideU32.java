@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.libdivide;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class LibDivideU32 extends Struct<LibDivideU32> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideU32 createSafe(long address) {
+    public static @Nullable LibDivideU32 createSafe(long address) {
         return address == NULL ? null : new LibDivideU32(address, null);
     }
 
@@ -176,8 +175,7 @@ public class LibDivideU32 extends Struct<LibDivideU32> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideU32.Buffer createSafe(long address, int capacity) {
+    public static LibDivideU32.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

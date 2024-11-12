@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -303,7 +303,7 @@ public class GL46C extends GL45C {
      * 
      * @see <a href="https://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
-    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @Nullable @NativeType("GLuint const *") IntBuffer pConstantIndex, @Nullable @NativeType("GLuint const *") IntBuffer pConstantValue) {
+    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @NativeType("GLuint const *") @Nullable IntBuffer pConstantIndex, @NativeType("GLuint const *") @Nullable IntBuffer pConstantValue) {
         if (CHECKS) {
             checkNT1(pEntryPoint);
             checkSafe(pConstantValue, remainingSafe(pConstantIndex));
@@ -343,7 +343,7 @@ public class GL46C extends GL45C {
      * 
      * @see <a href="https://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
-    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @Nullable @NativeType("GLuint const *") IntBuffer pConstantIndex, @Nullable @NativeType("GLuint const *") IntBuffer pConstantValue) {
+    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @NativeType("GLuint const *") @Nullable IntBuffer pConstantIndex, @NativeType("GLuint const *") @Nullable IntBuffer pConstantValue) {
         if (CHECKS) {
             checkSafe(pConstantValue, remainingSafe(pConstantIndex));
         }
@@ -390,7 +390,7 @@ public class GL46C extends GL45C {
      * 
      * @see <a href="https://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
-    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @Nullable @NativeType("GLuint const *") int[] pConstantIndex, @Nullable @NativeType("GLuint const *") int[] pConstantValue) {
+    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @NativeType("GLuint const *") int @Nullable [] pConstantIndex, @NativeType("GLuint const *") int @Nullable [] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShader;
         if (CHECKS) {
             check(__functionAddress);
@@ -405,7 +405,7 @@ public class GL46C extends GL45C {
      * 
      * @see <a href="https://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
-    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @Nullable @NativeType("GLuint const *") int[] pConstantIndex, @Nullable @NativeType("GLuint const *") int[] pConstantValue) {
+    public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @NativeType("GLuint const *") int @Nullable [] pConstantIndex, @NativeType("GLuint const *") int @Nullable [] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShader;
         if (CHECKS) {
             check(__functionAddress);

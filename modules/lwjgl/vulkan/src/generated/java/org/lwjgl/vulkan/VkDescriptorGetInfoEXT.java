@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -198,8 +198,7 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorGetInfoEXT createSafe(long address) {
+    public static @Nullable VkDescriptorGetInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkDescriptorGetInfoEXT(address, null);
     }
 
@@ -242,8 +241,7 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorGetInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorGetInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

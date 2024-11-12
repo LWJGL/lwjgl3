@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -659,7 +659,7 @@ public class AAT {
     }
 
     @NativeType("unsigned int")
-    public static int hb_att_layout_get_feature_types(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer feature_count, @Nullable @NativeType("hb_aat_layout_feature_type_t *") IntBuffer features) {
+    public static int hb_att_layout_get_feature_types(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer feature_count, @NativeType("hb_aat_layout_feature_type_t *") @Nullable IntBuffer features) {
         if (CHECKS) {
             checkSafe(feature_count, 1);
             if (feature_count != null) { checkSafe(features, feature_count.get(feature_count.position())); }
@@ -689,7 +689,7 @@ public class AAT {
     }
 
     @NativeType("unsigned int")
-    public static int hb_att_layout_feature_type_get_selector_infos(@NativeType("hb_face_t *") long face, @NativeType("hb_aat_layout_feature_type_t") int feature_type, @NativeType("unsigned int") int start_offset, @Nullable @NativeType("unsigned int *") IntBuffer selector_count, @Nullable @NativeType("hb_aat_layout_feature_selector_info_t *") hb_aat_layout_feature_selector_info_t.Buffer selectors, @Nullable @NativeType("unsigned int *") IntBuffer default_index) {
+    public static int hb_att_layout_feature_type_get_selector_infos(@NativeType("hb_face_t *") long face, @NativeType("hb_aat_layout_feature_type_t") int feature_type, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") @Nullable IntBuffer selector_count, @NativeType("hb_aat_layout_feature_selector_info_t *") hb_aat_layout_feature_selector_info_t.@Nullable Buffer selectors, @NativeType("unsigned int *") @Nullable IntBuffer default_index) {
         if (CHECKS) {
             checkSafe(selector_count, 1);
             if (selector_count != null) { checkSafe(selectors, selector_count.get(selector_count.position())); }

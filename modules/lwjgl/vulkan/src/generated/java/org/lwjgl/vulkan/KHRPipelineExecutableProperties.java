@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -207,7 +207,7 @@ public class KHRPipelineExecutableProperties {
      * @param pProperties      either {@code NULL} or a pointer to an array of {@link VkPipelineExecutablePropertiesKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutablePropertiesKHR(VkDevice device, @NativeType("VkPipelineInfoKHR const *") VkPipelineInfoKHR pPipelineInfo, @NativeType("uint32_t *") IntBuffer pExecutableCount, @Nullable @NativeType("VkPipelineExecutablePropertiesKHR *") VkPipelineExecutablePropertiesKHR.Buffer pProperties) {
+    public static int vkGetPipelineExecutablePropertiesKHR(VkDevice device, @NativeType("VkPipelineInfoKHR const *") VkPipelineInfoKHR pPipelineInfo, @NativeType("uint32_t *") IntBuffer pExecutableCount, @NativeType("VkPipelineExecutablePropertiesKHR *") VkPipelineExecutablePropertiesKHR.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pExecutableCount, 1);
             checkSafe(pProperties, pExecutableCount.get(pExecutableCount.position()));
@@ -290,7 +290,7 @@ public class KHRPipelineExecutableProperties {
      * @param pStatistics     either {@code NULL} or a pointer to an array of {@link VkPipelineExecutableStatisticKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutableStatisticsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") IntBuffer pStatisticCount, @Nullable @NativeType("VkPipelineExecutableStatisticKHR *") VkPipelineExecutableStatisticKHR.Buffer pStatistics) {
+    public static int vkGetPipelineExecutableStatisticsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") IntBuffer pStatisticCount, @NativeType("VkPipelineExecutableStatisticKHR *") VkPipelineExecutableStatisticKHR.@Nullable Buffer pStatistics) {
         if (CHECKS) {
             check(pStatisticCount, 1);
             checkSafe(pStatistics, pStatisticCount.get(pStatisticCount.position()));
@@ -375,7 +375,7 @@ public class KHRPipelineExecutableProperties {
      * @param pInternalRepresentations     either {@code NULL} or a pointer to an array of {@link VkPipelineExecutableInternalRepresentationKHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") IntBuffer pInternalRepresentationCount, @Nullable @NativeType("VkPipelineExecutableInternalRepresentationKHR *") VkPipelineExecutableInternalRepresentationKHR.Buffer pInternalRepresentations) {
+    public static int vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") IntBuffer pInternalRepresentationCount, @NativeType("VkPipelineExecutableInternalRepresentationKHR *") VkPipelineExecutableInternalRepresentationKHR.@Nullable Buffer pInternalRepresentations) {
         if (CHECKS) {
             check(pInternalRepresentationCount, 1);
             checkSafe(pInternalRepresentations, pInternalRepresentationCount.get(pInternalRepresentationCount.position()));
@@ -385,7 +385,7 @@ public class KHRPipelineExecutableProperties {
 
     /** Array version of: {@link #vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR} */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutablePropertiesKHR(VkDevice device, @NativeType("VkPipelineInfoKHR const *") VkPipelineInfoKHR pPipelineInfo, @NativeType("uint32_t *") int[] pExecutableCount, @Nullable @NativeType("VkPipelineExecutablePropertiesKHR *") VkPipelineExecutablePropertiesKHR.Buffer pProperties) {
+    public static int vkGetPipelineExecutablePropertiesKHR(VkDevice device, @NativeType("VkPipelineInfoKHR const *") VkPipelineInfoKHR pPipelineInfo, @NativeType("uint32_t *") int[] pExecutableCount, @NativeType("VkPipelineExecutablePropertiesKHR *") VkPipelineExecutablePropertiesKHR.@Nullable Buffer pProperties) {
         long __functionAddress = device.getCapabilities().vkGetPipelineExecutablePropertiesKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -397,7 +397,7 @@ public class KHRPipelineExecutableProperties {
 
     /** Array version of: {@link #vkGetPipelineExecutableStatisticsKHR GetPipelineExecutableStatisticsKHR} */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutableStatisticsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") int[] pStatisticCount, @Nullable @NativeType("VkPipelineExecutableStatisticKHR *") VkPipelineExecutableStatisticKHR.Buffer pStatistics) {
+    public static int vkGetPipelineExecutableStatisticsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") int[] pStatisticCount, @NativeType("VkPipelineExecutableStatisticKHR *") VkPipelineExecutableStatisticKHR.@Nullable Buffer pStatistics) {
         long __functionAddress = device.getCapabilities().vkGetPipelineExecutableStatisticsKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -409,7 +409,7 @@ public class KHRPipelineExecutableProperties {
 
     /** Array version of: {@link #vkGetPipelineExecutableInternalRepresentationsKHR GetPipelineExecutableInternalRepresentationsKHR} */
     @NativeType("VkResult")
-    public static int vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") int[] pInternalRepresentationCount, @Nullable @NativeType("VkPipelineExecutableInternalRepresentationKHR *") VkPipelineExecutableInternalRepresentationKHR.Buffer pInternalRepresentations) {
+    public static int vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, @NativeType("VkPipelineExecutableInfoKHR const *") VkPipelineExecutableInfoKHR pExecutableInfo, @NativeType("uint32_t *") int[] pInternalRepresentationCount, @NativeType("VkPipelineExecutableInternalRepresentationKHR *") VkPipelineExecutableInternalRepresentationKHR.@Nullable Buffer pInternalRepresentations) {
         long __functionAddress = device.getCapabilities().vkGetPipelineExecutableInternalRepresentationsKHR;
         if (CHECKS) {
             check(__functionAddress);

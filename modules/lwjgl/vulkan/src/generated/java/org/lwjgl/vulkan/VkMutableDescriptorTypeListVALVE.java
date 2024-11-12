@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -88,8 +88,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeListVALVE createSafe(long address) {
+    public static @Nullable VkMutableDescriptorTypeListVALVE createSafe(long address) {
         return address == NULL ? null : new VkMutableDescriptorTypeListVALVE(address, null);
     }
 
@@ -132,8 +131,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeListVALVE.Buffer createSafe(long address, int capacity) {
+    public static VkMutableDescriptorTypeListVALVE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

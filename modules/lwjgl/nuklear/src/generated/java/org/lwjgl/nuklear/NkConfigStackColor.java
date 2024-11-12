@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -89,8 +89,7 @@ class NkConfigStackColor extends Struct<NkConfigStackColor> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackColor createSafe(long address) {
+    public static @Nullable NkConfigStackColor createSafe(long address) {
         return address == NULL ? null : new NkConfigStackColor(address, null);
     }
 
@@ -105,8 +104,7 @@ class NkConfigStackColor extends Struct<NkConfigStackColor> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackColor.Buffer createSafe(long address, int capacity) {
+    public static NkConfigStackColor.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

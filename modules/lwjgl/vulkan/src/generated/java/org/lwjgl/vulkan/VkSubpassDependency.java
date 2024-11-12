@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -267,8 +267,7 @@ public class VkSubpassDependency extends Struct<VkSubpassDependency> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDependency createSafe(long address) {
+    public static @Nullable VkSubpassDependency createSafe(long address) {
         return address == NULL ? null : new VkSubpassDependency(address, null);
     }
 
@@ -311,8 +310,7 @@ public class VkSubpassDependency extends Struct<VkSubpassDependency> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDependency.Buffer createSafe(long address, int capacity) {
+    public static VkSubpassDependency.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

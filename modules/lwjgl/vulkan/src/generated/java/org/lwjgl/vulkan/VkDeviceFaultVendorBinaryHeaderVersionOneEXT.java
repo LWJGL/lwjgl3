@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -259,8 +259,7 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultVendorBinaryHeaderVersionOneEXT createSafe(long address) {
+    public static @Nullable VkDeviceFaultVendorBinaryHeaderVersionOneEXT createSafe(long address) {
         return address == NULL ? null : new VkDeviceFaultVendorBinaryHeaderVersionOneEXT(address, null);
     }
 
@@ -303,8 +302,7 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceFaultVendorBinaryHeaderVersionOneEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

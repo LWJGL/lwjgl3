@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to standard C library APIs. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.libc;
 

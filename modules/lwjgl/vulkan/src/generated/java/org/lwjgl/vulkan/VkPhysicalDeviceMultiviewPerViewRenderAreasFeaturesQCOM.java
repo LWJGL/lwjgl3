@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM(address, null);
     }
 
@@ -200,8 +199,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

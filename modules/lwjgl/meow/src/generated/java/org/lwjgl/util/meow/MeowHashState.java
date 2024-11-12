@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meow;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -82,8 +82,7 @@ public class MeowHashState extends Struct<MeowHashState> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeowHashState createSafe(long address) {
+    public static @Nullable MeowHashState createSafe(long address) {
         return address == NULL ? null : new MeowHashState(address, null);
     }
 
@@ -126,8 +125,7 @@ public class MeowHashState extends Struct<MeowHashState> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeowHashState.Buffer createSafe(long address, int capacity) {
+    public static MeowHashState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

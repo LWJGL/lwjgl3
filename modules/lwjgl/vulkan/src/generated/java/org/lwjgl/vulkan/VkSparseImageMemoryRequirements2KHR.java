@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -106,8 +106,7 @@ public class VkSparseImageMemoryRequirements2KHR extends VkSparseImageMemoryRequ
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageMemoryRequirements2KHR createSafe(long address) {
+    public static @Nullable VkSparseImageMemoryRequirements2KHR createSafe(long address) {
         return address == NULL ? null : new VkSparseImageMemoryRequirements2KHR(address, null);
     }
 
@@ -150,8 +149,7 @@ public class VkSparseImageMemoryRequirements2KHR extends VkSparseImageMemoryRequ
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseImageMemoryRequirements2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkSparseImageMemoryRequirements2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -9,6 +9,6 @@
  * 
  * <p>tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.tinyexr;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class EXRBox2i extends Struct<EXRBox2i> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRBox2i createSafe(long address) {
+    public static @Nullable EXRBox2i createSafe(long address) {
         return address == NULL ? null : new EXRBox2i(address, null);
     }
 
@@ -193,8 +192,7 @@ public class EXRBox2i extends Struct<EXRBox2i> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRBox2i.Buffer createSafe(long address, int capacity) {
+    public static EXRBox2i.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -217,8 +217,7 @@ public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XVisualInfo createSafe(long address) {
+    public static @Nullable XVisualInfo createSafe(long address) {
         return address == NULL ? null : new XVisualInfo(address, null);
     }
 
@@ -261,8 +260,7 @@ public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XVisualInfo.Buffer createSafe(long address, int capacity) {
+    public static XVisualInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

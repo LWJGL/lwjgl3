@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -88,8 +88,7 @@ public class BGFXInternalData extends Struct<BGFXInternalData> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXInternalData createSafe(long address) {
+    public static @Nullable BGFXInternalData createSafe(long address) {
         return address == NULL ? null : new BGFXInternalData(address, null);
     }
 

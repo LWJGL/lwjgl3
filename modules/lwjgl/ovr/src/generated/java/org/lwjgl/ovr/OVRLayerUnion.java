@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -193,8 +193,7 @@ public class OVRLayerUnion extends Struct<OVRLayerUnion> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerUnion createSafe(long address) {
+    public static @Nullable OVRLayerUnion createSafe(long address) {
         return address == NULL ? null : new OVRLayerUnion(address, null);
     }
 
@@ -237,8 +236,7 @@ public class OVRLayerUnion extends Struct<OVRLayerUnion> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerUnion.Buffer createSafe(long address, int capacity) {
+    public static OVRLayerUnion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -91,13 +91,11 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     /** max height of the font */
     public float height() { return nheight(address()); }
     /** font string width in pixel callback */
-    @Nullable
     @NativeType("nk_text_width_f")
-    public NkTextWidthCallback width() { return nwidth(address()); }
+    public @Nullable NkTextWidthCallback width() { return nwidth(address()); }
     /** font glyph callback to query drawing info */
-    @Nullable
     @NativeType("nk_query_font_glyph_f")
-    public NkQueryFontGlyphCallback query() { return nquery(address()); }
+    public @Nullable NkQueryFontGlyphCallback query() { return nquery(address()); }
     /** texture handle to the used font atlas or texture */
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
@@ -170,8 +168,7 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkUserFont createSafe(long address) {
+    public static @Nullable NkUserFont createSafe(long address) {
         return address == NULL ? null : new NkUserFont(address, null);
     }
 
@@ -214,8 +211,7 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkUserFont.Buffer createSafe(long address, int capacity) {
+    public static NkUserFont.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -283,9 +279,9 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     /** Unsafe version of {@link #height}. */
     public static float nheight(long struct) { return memGetFloat(struct + NkUserFont.HEIGHT); }
     /** Unsafe version of {@link #width}. */
-    @Nullable public static NkTextWidthCallback nwidth(long struct) { return NkTextWidthCallback.createSafe(memGetAddress(struct + NkUserFont.WIDTH)); }
+    public static @Nullable NkTextWidthCallback nwidth(long struct) { return NkTextWidthCallback.createSafe(memGetAddress(struct + NkUserFont.WIDTH)); }
     /** Unsafe version of {@link #query}. */
-    @Nullable public static NkQueryFontGlyphCallback nquery(long struct) { return NkQueryFontGlyphCallback.createSafe(memGetAddress(struct + NkUserFont.QUERY)); }
+    public static @Nullable NkQueryFontGlyphCallback nquery(long struct) { return NkQueryFontGlyphCallback.createSafe(memGetAddress(struct + NkUserFont.QUERY)); }
     /** Unsafe version of {@link #texture}. */
     public static NkHandle ntexture(long struct) { return NkHandle.create(struct + NkUserFont.TEXTURE); }
 
@@ -349,13 +345,11 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
         /** @return the value of the {@link NkUserFont#height} field. */
         public float height() { return NkUserFont.nheight(address()); }
         /** @return the value of the {@link NkUserFont#width} field. */
-        @Nullable
         @NativeType("nk_text_width_f")
-        public NkTextWidthCallback width() { return NkUserFont.nwidth(address()); }
+        public @Nullable NkTextWidthCallback width() { return NkUserFont.nwidth(address()); }
         /** @return the value of the {@link NkUserFont#query} field. */
-        @Nullable
         @NativeType("nk_query_font_glyph_f")
-        public NkQueryFontGlyphCallback query() { return NkUserFont.nquery(address()); }
+        public @Nullable NkQueryFontGlyphCallback query() { return NkUserFont.nquery(address()); }
         /** @return a {@link NkHandle} view of the {@link NkUserFont#texture} field. */
         @NativeType("nk_handle")
         public NkHandle texture() { return NkUserFont.ntexture(address()); }

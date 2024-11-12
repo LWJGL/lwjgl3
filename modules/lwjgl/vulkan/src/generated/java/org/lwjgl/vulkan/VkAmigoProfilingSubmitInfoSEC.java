@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class VkAmigoProfilingSubmitInfoSEC extends Struct<VkAmigoProfilingSubmit
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAmigoProfilingSubmitInfoSEC createSafe(long address) {
+    public static @Nullable VkAmigoProfilingSubmitInfoSEC createSafe(long address) {
         return address == NULL ? null : new VkAmigoProfilingSubmitInfoSEC(address, null);
     }
 
@@ -207,8 +206,7 @@ public class VkAmigoProfilingSubmitInfoSEC extends Struct<VkAmigoProfilingSubmit
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAmigoProfilingSubmitInfoSEC.Buffer createSafe(long address, int capacity) {
+    public static VkAmigoProfilingSubmitInfoSEC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class XrExtent3DfEXT extends XrExtent3Df {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExtent3DfEXT createSafe(long address) {
+    public static @Nullable XrExtent3DfEXT createSafe(long address) {
         return address == NULL ? null : new XrExtent3DfEXT(address, null);
     }
 
@@ -152,8 +151,7 @@ public class XrExtent3DfEXT extends XrExtent3Df {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExtent3DfEXT.Buffer createSafe(long address, int capacity) {
+    public static XrExtent3DfEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

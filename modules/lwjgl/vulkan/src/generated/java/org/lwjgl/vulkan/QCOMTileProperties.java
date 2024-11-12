@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -151,7 +151,7 @@ public class QCOMTileProperties {
      * @param pProperties      either {@code NULL} or a pointer to an array of {@link VkTilePropertiesQCOM} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetFramebufferTilePropertiesQCOM(VkDevice device, @NativeType("VkFramebuffer") long framebuffer, @NativeType("uint32_t *") IntBuffer pPropertiesCount, @Nullable @NativeType("VkTilePropertiesQCOM *") VkTilePropertiesQCOM.Buffer pProperties) {
+    public static int vkGetFramebufferTilePropertiesQCOM(VkDevice device, @NativeType("VkFramebuffer") long framebuffer, @NativeType("uint32_t *") IntBuffer pPropertiesCount, @NativeType("VkTilePropertiesQCOM *") VkTilePropertiesQCOM.@Nullable Buffer pProperties) {
         if (CHECKS) {
             check(pPropertiesCount, 1);
             checkSafe(pProperties, pPropertiesCount.get(pPropertiesCount.position()));
@@ -216,7 +216,7 @@ public class QCOMTileProperties {
 
     /** Array version of: {@link #vkGetFramebufferTilePropertiesQCOM GetFramebufferTilePropertiesQCOM} */
     @NativeType("VkResult")
-    public static int vkGetFramebufferTilePropertiesQCOM(VkDevice device, @NativeType("VkFramebuffer") long framebuffer, @NativeType("uint32_t *") int[] pPropertiesCount, @Nullable @NativeType("VkTilePropertiesQCOM *") VkTilePropertiesQCOM.Buffer pProperties) {
+    public static int vkGetFramebufferTilePropertiesQCOM(VkDevice device, @NativeType("VkFramebuffer") long framebuffer, @NativeType("uint32_t *") int[] pPropertiesCount, @NativeType("VkTilePropertiesQCOM *") VkTilePropertiesQCOM.@Nullable Buffer pProperties) {
         long __functionAddress = device.getCapabilities().vkGetFramebufferTilePropertiesQCOM;
         if (CHECKS) {
             check(__functionAddress);

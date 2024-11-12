@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,9 +154,8 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
      *
      * @return a pointer to an array of {@code VkSampleMask} values used in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.
      */
-    @Nullable
     @NativeType("VkSampleMask const *")
-    public IntBuffer pSampleMask(int capacity) { return npSampleMask(address(), capacity); }
+    public @Nullable IntBuffer pSampleMask(int capacity) { return npSampleMask(address(), capacity); }
     /** controls whether a temporary coverage value is generated based on the alpha component of the fragment’s first color output as specified in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section. */
     @NativeType("VkBool32")
     public boolean alphaToCoverageEnable() { return nalphaToCoverageEnable(address()) != 0; }
@@ -254,8 +253,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineMultisampleStateCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineMultisampleStateCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineMultisampleStateCreateInfo(address, null);
     }
 
@@ -298,8 +296,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineMultisampleStateCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineMultisampleStateCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -375,7 +372,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
     /** Unsafe version of {@link #minSampleShading}. */
     public static float nminSampleShading(long struct) { return memGetFloat(struct + VkPipelineMultisampleStateCreateInfo.MINSAMPLESHADING); }
     /** Unsafe version of {@link #pSampleMask(int) pSampleMask}. */
-    @Nullable public static IntBuffer npSampleMask(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkPipelineMultisampleStateCreateInfo.PSAMPLEMASK), capacity); }
+    public static @Nullable IntBuffer npSampleMask(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VkPipelineMultisampleStateCreateInfo.PSAMPLEMASK), capacity); }
     /** Unsafe version of {@link #alphaToCoverageEnable}. */
     public static int nalphaToCoverageEnable(long struct) { return memGetInt(struct + VkPipelineMultisampleStateCreateInfo.ALPHATOCOVERAGEENABLE); }
     /** Unsafe version of {@link #alphaToOneEnable}. */
@@ -465,9 +462,8 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("VkSampleMask const *")
-        public IntBuffer pSampleMask(int capacity) { return VkPipelineMultisampleStateCreateInfo.npSampleMask(address(), capacity); }
+        public @Nullable IntBuffer pSampleMask(int capacity) { return VkPipelineMultisampleStateCreateInfo.npSampleMask(address(), capacity); }
         /** @return the value of the {@link VkPipelineMultisampleStateCreateInfo#alphaToCoverageEnable} field. */
         @NativeType("VkBool32")
         public boolean alphaToCoverageEnable() { return VkPipelineMultisampleStateCreateInfo.nalphaToCoverageEnable(address()) != 0; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class UIVec2 extends Struct<UIVec2> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static UIVec2 createSafe(long address) {
+    public static @Nullable UIVec2 createSafe(long address) {
         return address == NULL ? null : new UIVec2(address, null);
     }
 
@@ -187,8 +186,7 @@ public class UIVec2 extends Struct<UIVec2> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static UIVec2.Buffer createSafe(long address, int capacity) {
+    public static UIVec2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

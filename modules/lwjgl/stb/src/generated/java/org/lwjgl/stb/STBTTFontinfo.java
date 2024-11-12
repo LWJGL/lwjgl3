@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -83,8 +83,7 @@ public class STBTTFontinfo extends Struct<STBTTFontinfo> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTFontinfo createSafe(long address) {
+    public static @Nullable STBTTFontinfo createSafe(long address) {
         return address == NULL ? null : new STBTTFontinfo(address, null);
     }
 
@@ -127,8 +126,7 @@ public class STBTTFontinfo extends Struct<STBTTFontinfo> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTFontinfo.Buffer createSafe(long address, int capacity) {
+    public static STBTTFontinfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

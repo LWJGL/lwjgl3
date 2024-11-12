@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -407,7 +407,7 @@ public class NVShadingRateImage {
      * @param sampleOrderType     specifies the mechanism used to order coverage samples in fragments larger than one pixel.
      * @param pCustomSampleOrders a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures, each structure specifying the coverage sample order for a single combination of fragment area and coverage sample count.
      */
-    public static void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, @NativeType("VkCoarseSampleOrderTypeNV") int sampleOrderType, @Nullable @NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders) {
+    public static void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, @NativeType("VkCoarseSampleOrderTypeNV") int sampleOrderType, @NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.@Nullable Buffer pCustomSampleOrders) {
         nvkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, remainingSafe(pCustomSampleOrders), memAddressSafe(pCustomSampleOrders));
     }
 

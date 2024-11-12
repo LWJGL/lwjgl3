@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,21 +134,17 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** a {@code NULL} terminated string that identifies the message in a unique way. If the callback is triggered by a validation layer, this string corresponds the Valid Usage ID (VUID) that can be used to jump to the appropriate location in the OpenXR specification. This value <b>may</b> be {@code NULL} if no unique message identifier is associated with the message. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer messageId() { return nmessageId(address()); }
+    public @Nullable ByteBuffer messageId() { return nmessageId(address()); }
     /** a {@code NULL} terminated string that identifies the message in a unique way. If the callback is triggered by a validation layer, this string corresponds the Valid Usage ID (VUID) that can be used to jump to the appropriate location in the OpenXR specification. This value <b>may</b> be {@code NULL} if no unique message identifier is associated with the message. */
-    @Nullable
     @NativeType("char const *")
-    public String messageIdString() { return nmessageIdString(address()); }
+    public @Nullable String messageIdString() { return nmessageIdString(address()); }
     /** a {@code NULL} terminated string that identifies the OpenXR function that was executing at the time the message callback was triggered. This value <b>may</b> be {@code NULL} in cases where it is difficult to determine the originating OpenXR function. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer functionName() { return nfunctionName(address()); }
+    public @Nullable ByteBuffer functionName() { return nfunctionName(address()); }
     /** a {@code NULL} terminated string that identifies the OpenXR function that was executing at the time the message callback was triggered. This value <b>may</b> be {@code NULL} in cases where it is difficult to determine the originating OpenXR function. */
-    @Nullable
     @NativeType("char const *")
-    public String functionNameString() { return nfunctionNameString(address()); }
+    public @Nullable String functionNameString() { return nfunctionNameString(address()); }
     /** a {@code NULL} terminated string detailing the trigger conditions. */
     @NativeType("char const *")
     public ByteBuffer message() { return nmessage(address()); }
@@ -159,16 +155,14 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     @NativeType("uint32_t")
     public int objectCount() { return nobjectCount(address()); }
     /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsObjectNameInfoEXT} objects related to the detected issue. The array is roughly in order of importance, but the 0th element is always guaranteed to be the most important object for this message. */
-    @Nullable
     @NativeType("XrDebugUtilsObjectNameInfoEXT *")
-    public XrDebugUtilsObjectNameInfoEXT.Buffer objects() { return nobjects(address()); }
+    public XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer objects() { return nobjects(address()); }
     /** a count of items contained in the {@code sessionLabels} array. This may be 0. */
     @NativeType("uint32_t")
     public int sessionLabelCount() { return nsessionLabelCount(address()); }
     /** {@code NULL} or a pointer to an array of {@link XrDebugUtilsLabelEXT} active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#ext_debug_utils-session-labels">Session Labels</a> for more information. */
-    @Nullable
     @NativeType("XrDebugUtilsLabelEXT *")
-    public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return nsessionLabels(address()); }
+    public XrDebugUtilsLabelEXT.@Nullable Buffer sessionLabels() { return nsessionLabels(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrDebugUtilsMessengerCallbackDataEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -185,11 +179,11 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** Sets the specified value to the {@link #objectCount} field. */
     public XrDebugUtilsMessengerCallbackDataEXT objectCount(@NativeType("uint32_t") int value) { nobjectCount(address(), value); return this; }
     /** Sets the address of the specified {@link XrDebugUtilsObjectNameInfoEXT.Buffer} to the {@link #objects} field. */
-    public XrDebugUtilsMessengerCallbackDataEXT objects(@Nullable @NativeType("XrDebugUtilsObjectNameInfoEXT *") XrDebugUtilsObjectNameInfoEXT.Buffer value) { nobjects(address(), value); return this; }
+    public XrDebugUtilsMessengerCallbackDataEXT objects(@NativeType("XrDebugUtilsObjectNameInfoEXT *") XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer value) { nobjects(address(), value); return this; }
     /** Sets the specified value to the {@link #sessionLabelCount} field. */
     public XrDebugUtilsMessengerCallbackDataEXT sessionLabelCount(@NativeType("uint32_t") int value) { nsessionLabelCount(address(), value); return this; }
     /** Sets the address of the specified {@link XrDebugUtilsLabelEXT.Buffer} to the {@link #sessionLabels} field. */
-    public XrDebugUtilsMessengerCallbackDataEXT sessionLabels(@Nullable @NativeType("XrDebugUtilsLabelEXT *") XrDebugUtilsLabelEXT.Buffer value) { nsessionLabels(address(), value); return this; }
+    public XrDebugUtilsMessengerCallbackDataEXT sessionLabels(@NativeType("XrDebugUtilsLabelEXT *") XrDebugUtilsLabelEXT.@Nullable Buffer value) { nsessionLabels(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrDebugUtilsMessengerCallbackDataEXT set(
@@ -199,9 +193,9 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
         @Nullable ByteBuffer functionName,
         ByteBuffer message,
         int objectCount,
-        @Nullable XrDebugUtilsObjectNameInfoEXT.Buffer objects,
+        XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer objects,
         int sessionLabelCount,
-        @Nullable XrDebugUtilsLabelEXT.Buffer sessionLabels
+        XrDebugUtilsLabelEXT.@Nullable Buffer sessionLabels
     ) {
         type(type);
         next(next);
@@ -252,8 +246,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDebugUtilsMessengerCallbackDataEXT createSafe(long address) {
+    public static @Nullable XrDebugUtilsMessengerCallbackDataEXT createSafe(long address) {
         return address == NULL ? null : new XrDebugUtilsMessengerCallbackDataEXT(address, null);
     }
 
@@ -296,8 +289,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrDebugUtilsMessengerCallbackDataEXT.Buffer createSafe(long address, int capacity) {
+    public static XrDebugUtilsMessengerCallbackDataEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -346,13 +338,13 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT); }
     /** Unsafe version of {@link #messageId}. */
-    @Nullable public static ByteBuffer nmessageId(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGEID)); }
+    public static @Nullable ByteBuffer nmessageId(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGEID)); }
     /** Unsafe version of {@link #messageIdString}. */
-    @Nullable public static String nmessageIdString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGEID)); }
+    public static @Nullable String nmessageIdString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGEID)); }
     /** Unsafe version of {@link #functionName}. */
-    @Nullable public static ByteBuffer nfunctionName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.FUNCTIONNAME)); }
+    public static @Nullable ByteBuffer nfunctionName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.FUNCTIONNAME)); }
     /** Unsafe version of {@link #functionNameString}. */
-    @Nullable public static String nfunctionNameString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.FUNCTIONNAME)); }
+    public static @Nullable String nfunctionNameString(long struct) { return memUTF8Safe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.FUNCTIONNAME)); }
     /** Unsafe version of {@link #message}. */
     public static ByteBuffer nmessage(long struct) { return memByteBufferNT1(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGE)); }
     /** Unsafe version of {@link #messageString}. */
@@ -360,11 +352,11 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** Unsafe version of {@link #objectCount}. */
     public static int nobjectCount(long struct) { return memGetInt(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT); }
     /** Unsafe version of {@link #objects}. */
-    @Nullable public static XrDebugUtilsObjectNameInfoEXT.Buffer nobjects(long struct) { return XrDebugUtilsObjectNameInfoEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS), nobjectCount(struct)); }
+    public static XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer nobjects(long struct) { return XrDebugUtilsObjectNameInfoEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS), nobjectCount(struct)); }
     /** Unsafe version of {@link #sessionLabelCount}. */
     public static int nsessionLabelCount(long struct) { return memGetInt(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT); }
     /** Unsafe version of {@link #sessionLabels}. */
-    @Nullable public static XrDebugUtilsLabelEXT.Buffer nsessionLabels(long struct) { return XrDebugUtilsLabelEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS), nsessionLabelCount(struct)); }
+    public static XrDebugUtilsLabelEXT.@Nullable Buffer nsessionLabels(long struct) { return XrDebugUtilsLabelEXT.createSafe(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS), nsessionLabelCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE, value); }
@@ -388,11 +380,11 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
     /** Sets the specified value to the {@code objectCount} field of the specified {@code struct}. */
     public static void nobjectCount(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTCOUNT, value); }
     /** Unsafe version of {@link #objects(XrDebugUtilsObjectNameInfoEXT.Buffer) objects}. */
-    public static void nobjects(long struct, @Nullable XrDebugUtilsObjectNameInfoEXT.Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS, memAddressSafe(value)); if (value != null) { nobjectCount(struct, value.remaining()); } }
+    public static void nobjects(long struct, XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.OBJECTS, memAddressSafe(value)); if (value != null) { nobjectCount(struct, value.remaining()); } }
     /** Sets the specified value to the {@code sessionLabelCount} field of the specified {@code struct}. */
     public static void nsessionLabelCount(long struct, int value) { memPutInt(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELCOUNT, value); }
     /** Unsafe version of {@link #sessionLabels(XrDebugUtilsLabelEXT.Buffer) sessionLabels}. */
-    public static void nsessionLabels(long struct, @Nullable XrDebugUtilsLabelEXT.Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS, memAddressSafe(value)); if (value != null) { nsessionLabelCount(struct, value.remaining()); } }
+    public static void nsessionLabels(long struct, XrDebugUtilsLabelEXT.@Nullable Buffer value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.SESSIONLABELS, memAddressSafe(value)); if (value != null) { nsessionLabelCount(struct, value.remaining()); } }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -453,21 +445,17 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
         @NativeType("void const *")
         public long next() { return XrDebugUtilsMessengerCallbackDataEXT.nnext(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#messageId} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer messageId() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageId(address()); }
+        public @Nullable ByteBuffer messageId() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageId(address()); }
         /** @return the null-terminated string pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#messageId} field. */
-        @Nullable
         @NativeType("char const *")
-        public String messageIdString() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageIdString(address()); }
+        public @Nullable String messageIdString() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageIdString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#functionName} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer functionName() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionName(address()); }
+        public @Nullable ByteBuffer functionName() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionName(address()); }
         /** @return the null-terminated string pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#functionName} field. */
-        @Nullable
         @NativeType("char const *")
-        public String functionNameString() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionNameString(address()); }
+        public @Nullable String functionNameString() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionNameString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#message} field. */
         @NativeType("char const *")
         public ByteBuffer message() { return XrDebugUtilsMessengerCallbackDataEXT.nmessage(address()); }
@@ -478,16 +466,14 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
         @NativeType("uint32_t")
         public int objectCount() { return XrDebugUtilsMessengerCallbackDataEXT.nobjectCount(address()); }
         /** @return a {@link XrDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#objects} field. */
-        @Nullable
         @NativeType("XrDebugUtilsObjectNameInfoEXT *")
-        public XrDebugUtilsObjectNameInfoEXT.Buffer objects() { return XrDebugUtilsMessengerCallbackDataEXT.nobjects(address()); }
+        public XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer objects() { return XrDebugUtilsMessengerCallbackDataEXT.nobjects(address()); }
         /** @return the value of the {@link XrDebugUtilsMessengerCallbackDataEXT#sessionLabelCount} field. */
         @NativeType("uint32_t")
         public int sessionLabelCount() { return XrDebugUtilsMessengerCallbackDataEXT.nsessionLabelCount(address()); }
         /** @return a {@link XrDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@link XrDebugUtilsMessengerCallbackDataEXT#sessionLabels} field. */
-        @Nullable
         @NativeType("XrDebugUtilsLabelEXT *")
-        public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return XrDebugUtilsMessengerCallbackDataEXT.nsessionLabels(address()); }
+        public XrDebugUtilsLabelEXT.@Nullable Buffer sessionLabels() { return XrDebugUtilsMessengerCallbackDataEXT.nsessionLabels(address()); }
 
         /** Sets the specified value to the {@link XrDebugUtilsMessengerCallbackDataEXT#type} field. */
         public XrDebugUtilsMessengerCallbackDataEXT.Buffer type(@NativeType("XrStructureType") int value) { XrDebugUtilsMessengerCallbackDataEXT.ntype(address(), value); return this; }
@@ -504,11 +490,11 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMes
         /** Sets the specified value to the {@link XrDebugUtilsMessengerCallbackDataEXT#objectCount} field. */
         public XrDebugUtilsMessengerCallbackDataEXT.Buffer objectCount(@NativeType("uint32_t") int value) { XrDebugUtilsMessengerCallbackDataEXT.nobjectCount(address(), value); return this; }
         /** Sets the address of the specified {@link XrDebugUtilsObjectNameInfoEXT.Buffer} to the {@link XrDebugUtilsMessengerCallbackDataEXT#objects} field. */
-        public XrDebugUtilsMessengerCallbackDataEXT.Buffer objects(@Nullable @NativeType("XrDebugUtilsObjectNameInfoEXT *") XrDebugUtilsObjectNameInfoEXT.Buffer value) { XrDebugUtilsMessengerCallbackDataEXT.nobjects(address(), value); return this; }
+        public XrDebugUtilsMessengerCallbackDataEXT.Buffer objects(@NativeType("XrDebugUtilsObjectNameInfoEXT *") XrDebugUtilsObjectNameInfoEXT.@Nullable Buffer value) { XrDebugUtilsMessengerCallbackDataEXT.nobjects(address(), value); return this; }
         /** Sets the specified value to the {@link XrDebugUtilsMessengerCallbackDataEXT#sessionLabelCount} field. */
         public XrDebugUtilsMessengerCallbackDataEXT.Buffer sessionLabelCount(@NativeType("uint32_t") int value) { XrDebugUtilsMessengerCallbackDataEXT.nsessionLabelCount(address(), value); return this; }
         /** Sets the address of the specified {@link XrDebugUtilsLabelEXT.Buffer} to the {@link XrDebugUtilsMessengerCallbackDataEXT#sessionLabels} field. */
-        public XrDebugUtilsMessengerCallbackDataEXT.Buffer sessionLabels(@Nullable @NativeType("XrDebugUtilsLabelEXT *") XrDebugUtilsLabelEXT.Buffer value) { XrDebugUtilsMessengerCallbackDataEXT.nsessionLabels(address(), value); return this; }
+        public XrDebugUtilsMessengerCallbackDataEXT.Buffer sessionLabels(@NativeType("XrDebugUtilsLabelEXT *") XrDebugUtilsLabelEXT.@Nullable Buffer value) { XrDebugUtilsMessengerCallbackDataEXT.nsessionLabels(address(), value); return this; }
 
     }
 

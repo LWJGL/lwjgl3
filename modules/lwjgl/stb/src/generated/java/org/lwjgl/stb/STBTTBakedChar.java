@@ -5,7 +5,7 @@
  */
 package org.lwjgl.stb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class STBTTBakedChar extends Struct<STBTTBakedChar> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTBakedChar createSafe(long address) {
+    public static @Nullable STBTTBakedChar createSafe(long address) {
         return address == NULL ? null : new STBTTBakedChar(address, null);
     }
 
@@ -182,8 +181,7 @@ public class STBTTBakedChar extends Struct<STBTTBakedChar> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static STBTTBakedChar.Buffer createSafe(long address, int capacity) {
+    public static STBTTBakedChar.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

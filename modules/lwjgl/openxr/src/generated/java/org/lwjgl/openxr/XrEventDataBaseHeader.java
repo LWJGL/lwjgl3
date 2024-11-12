@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -150,8 +150,7 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataBaseHeader createSafe(long address) {
+    public static @Nullable XrEventDataBaseHeader createSafe(long address) {
         return address == NULL ? null : new XrEventDataBaseHeader(address, null);
     }
 
@@ -304,8 +303,7 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEventDataBaseHeader.Buffer createSafe(long address, int capacity) {
+    public static XrEventDataBaseHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

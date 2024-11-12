@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -62,8 +62,7 @@ public abstract class XrDebugUtilsMessengerCallbackEXT extends Callback implemen
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static XrDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) {
+    public static @Nullable XrDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

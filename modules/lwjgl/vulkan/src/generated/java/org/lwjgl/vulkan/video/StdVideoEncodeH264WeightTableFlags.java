@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,8 +153,7 @@ public class StdVideoEncodeH264WeightTableFlags extends Struct<StdVideoEncodeH26
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264WeightTableFlags createSafe(long address) {
+    public static @Nullable StdVideoEncodeH264WeightTableFlags createSafe(long address) {
         return address == NULL ? null : new StdVideoEncodeH264WeightTableFlags(address, null);
     }
 
@@ -197,8 +196,7 @@ public class StdVideoEncodeH264WeightTableFlags extends Struct<StdVideoEncodeH26
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH264WeightTableFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoEncodeH264WeightTableFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

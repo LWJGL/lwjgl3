@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class VRControllerAxis extends Struct<VRControllerAxis> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRControllerAxis createSafe(long address) {
+    public static @Nullable VRControllerAxis createSafe(long address) {
         return address == NULL ? null : new VRControllerAxis(address, null);
     }
 
@@ -176,8 +175,7 @@ public class VRControllerAxis extends Struct<VRControllerAxis> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRControllerAxis.Buffer createSafe(long address, int capacity) {
+    public static VRControllerAxis.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

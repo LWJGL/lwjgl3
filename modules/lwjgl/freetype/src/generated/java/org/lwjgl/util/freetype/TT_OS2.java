@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -353,8 +353,7 @@ public class TT_OS2 extends Struct<TT_OS2> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_OS2 createSafe(long address) {
+    public static @Nullable TT_OS2 createSafe(long address) {
         return address == NULL ? null : new TT_OS2(address, null);
     }
 
@@ -369,8 +368,7 @@ public class TT_OS2 extends Struct<TT_OS2> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_OS2.Buffer createSafe(long address, int capacity) {
+    public static TT_OS2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

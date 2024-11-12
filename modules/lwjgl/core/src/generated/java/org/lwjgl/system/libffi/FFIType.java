@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.libffi;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -97,9 +97,8 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
      *
      * @return a null-terminated array of pointers to {@code ffi_type} objects. There is one element per field of the struct.
      */
-    @Nullable
     @NativeType("ffi_type *")
-    public PointerBuffer elements(int capacity) { return nelements(address(), capacity); }
+    public @Nullable PointerBuffer elements(int capacity) { return nelements(address(), capacity); }
 
     /** Sets the specified value to the {@link #size} field. */
     public FFIType size(@NativeType("size_t") long value) { nsize(address(), value); return this; }
@@ -161,8 +160,7 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFIType createSafe(long address) {
+    public static @Nullable FFIType createSafe(long address) {
         return address == NULL ? null : new FFIType(address, null);
     }
 
@@ -205,8 +203,7 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FFIType.Buffer createSafe(long address, int capacity) {
+    public static FFIType.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -257,7 +254,7 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static short ntype(long struct) { return memGetShort(struct + FFIType.TYPE); }
     /** Unsafe version of {@link #elements(int) elements}. */
-    @Nullable public static PointerBuffer nelements(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + FFIType.ELEMENTS), capacity); }
+    public static @Nullable PointerBuffer nelements(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + FFIType.ELEMENTS), capacity); }
 
     /** Unsafe version of {@link #size(long) size}. */
     public static void nsize(long struct, long value) { memPutAddress(struct + FFIType.SIZE, value); }
@@ -325,9 +322,8 @@ public class FFIType extends Struct<FFIType> implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("ffi_type *")
-        public PointerBuffer elements(int capacity) { return FFIType.nelements(address(), capacity); }
+        public @Nullable PointerBuffer elements(int capacity) { return FFIType.nelements(address(), capacity); }
 
         /** Sets the specified value to the {@link FFIType#size} field. */
         public FFIType.Buffer size(@NativeType("size_t") long value) { FFIType.nsize(address(), value); return this; }

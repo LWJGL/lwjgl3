@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,23 +118,20 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
     @NativeType("unsigned int")
     public int mNumChannels() { return nmNumChannels(address()); }
     /** The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size. */
-    @Nullable
     @NativeType("struct aiNodeAnim **")
-    public PointerBuffer mChannels() { return nmChannels(address()); }
+    public @Nullable PointerBuffer mChannels() { return nmChannels(address()); }
     /** The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation. */
     @NativeType("unsigned int")
     public int mNumMeshChannels() { return nmNumMeshChannels(address()); }
     /** The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size. */
-    @Nullable
     @NativeType("struct aiMeshAnim **")
-    public PointerBuffer mMeshChannels() { return nmMeshChannels(address()); }
+    public @Nullable PointerBuffer mMeshChannels() { return nmMeshChannels(address()); }
     /** the number of mesh animation channels. Each channel affects a single mesh and defines morphing animation. */
     @NativeType("unsigned int")
     public int mNumMorphMeshChannels() { return nmNumMorphMeshChannels(address()); }
     /** the morph mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMorphMeshChannels} in size. */
-    @Nullable
     @NativeType("struct aiMeshMorphAnim **")
-    public PointerBuffer mMorphMeshChannels() { return nmMorphMeshChannels(address()); }
+    public @Nullable PointerBuffer mMorphMeshChannels() { return nmMorphMeshChannels(address()); }
 
     /** Copies the specified {@link AIString} to the {@link #mName} field. */
     public AIAnimation mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
@@ -206,8 +203,7 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAnimation createSafe(long address) {
+    public static @Nullable AIAnimation createSafe(long address) {
         return address == NULL ? null : new AIAnimation(address, null);
     }
 
@@ -250,8 +246,7 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIAnimation.Buffer createSafe(long address, int capacity) {
+    public static AIAnimation.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -323,15 +318,15 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
     /** Unsafe version of {@link #mNumChannels}. */
     public static int nmNumChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMCHANNELS); }
     /** Unsafe version of {@link #mChannels() mChannels}. */
-    @Nullable public static PointerBuffer nmChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
+    public static @Nullable PointerBuffer nmChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
     /** Unsafe version of {@link #mNumMeshChannels}. */
     public static int nmNumMeshChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMMESHCHANNELS); }
     /** Unsafe version of {@link #mMeshChannels() mMeshChannels}. */
-    @Nullable public static PointerBuffer nmMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
+    public static @Nullable PointerBuffer nmMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
     /** Unsafe version of {@link #mNumMorphMeshChannels}. */
     public static int nmNumMorphMeshChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMMORPHMESHCHANNELS); }
     /** Unsafe version of {@link #mMorphMeshChannels() mMorphMeshChannels}. */
-    @Nullable public static PointerBuffer nmMorphMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMORPHMESHCHANNELS), nmNumMorphMeshChannels(struct)); }
+    public static @Nullable PointerBuffer nmMorphMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMORPHMESHCHANNELS), nmNumMorphMeshChannels(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimation.MNAME, AIString.SIZEOF); }
@@ -423,23 +418,20 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
         @NativeType("unsigned int")
         public int mNumChannels() { return AIAnimation.nmNumChannels(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mChannels} field. */
-        @Nullable
         @NativeType("struct aiNodeAnim **")
-        public PointerBuffer mChannels() { return AIAnimation.nmChannels(address()); }
+        public @Nullable PointerBuffer mChannels() { return AIAnimation.nmChannels(address()); }
         /** @return the value of the {@link AIAnimation#mNumMeshChannels} field. */
         @NativeType("unsigned int")
         public int mNumMeshChannels() { return AIAnimation.nmNumMeshChannels(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mMeshChannels} field. */
-        @Nullable
         @NativeType("struct aiMeshAnim **")
-        public PointerBuffer mMeshChannels() { return AIAnimation.nmMeshChannels(address()); }
+        public @Nullable PointerBuffer mMeshChannels() { return AIAnimation.nmMeshChannels(address()); }
         /** @return the value of the {@link AIAnimation#mNumMorphMeshChannels} field. */
         @NativeType("unsigned int")
         public int mNumMorphMeshChannels() { return AIAnimation.nmNumMorphMeshChannels(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mMorphMeshChannels} field. */
-        @Nullable
         @NativeType("struct aiMeshMorphAnim **")
-        public PointerBuffer mMorphMeshChannels() { return AIAnimation.nmMorphMeshChannels(address()); }
+        public @Nullable PointerBuffer mMorphMeshChannels() { return AIAnimation.nmMorphMeshChannels(address()); }
 
         /** Copies the specified {@link AIString} to the {@link AIAnimation#mName} field. */
         public AIAnimation.Buffer mName(@NativeType("struct aiString") AIString value) { AIAnimation.nmName(address(), value); return this; }

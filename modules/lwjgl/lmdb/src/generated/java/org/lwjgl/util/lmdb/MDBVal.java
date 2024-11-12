@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lmdb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -85,9 +85,8 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
     @NativeType("size_t")
     public long mv_size() { return nmv_size(address()); }
     /** Address of the data item. */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer mv_data() { return nmv_data(address()); }
+    public @Nullable ByteBuffer mv_data() { return nmv_data(address()); }
 
     /** Sets the specified value to the {@link #mv_size} field. */
     public MDBVal mv_size(@NativeType("size_t") long value) { nmv_size(address(), value); return this; }
@@ -141,8 +140,7 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MDBVal createSafe(long address) {
+    public static @Nullable MDBVal createSafe(long address) {
         return address == NULL ? null : new MDBVal(address, null);
     }
 
@@ -185,8 +183,7 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MDBVal.Buffer createSafe(long address, int capacity) {
+    public static MDBVal.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -252,7 +249,7 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
     /** Unsafe version of {@link #mv_size}. */
     public static long nmv_size(long struct) { return memGetAddress(struct + MDBVal.MV_SIZE); }
     /** Unsafe version of {@link #mv_data() mv_data}. */
-    @Nullable public static ByteBuffer nmv_data(long struct) { return memByteBufferSafe(memGetAddress(struct + MDBVal.MV_DATA), (int)nmv_size(struct)); }
+    public static @Nullable ByteBuffer nmv_data(long struct) { return memByteBufferSafe(memGetAddress(struct + MDBVal.MV_DATA), (int)nmv_size(struct)); }
 
     /** Sets the specified value to the {@code mv_size} field of the specified {@code struct}. */
     public static void nmv_size(long struct, long value) { memPutAddress(struct + MDBVal.MV_SIZE, value); }
@@ -306,9 +303,8 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
         @NativeType("size_t")
         public long mv_size() { return MDBVal.nmv_size(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link MDBVal#mv_data} field. */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer mv_data() { return MDBVal.nmv_data(address()); }
+        public @Nullable ByteBuffer mv_data() { return MDBVal.nmv_data(address()); }
 
         /** Sets the specified value to the {@link MDBVal#mv_size} field. */
         public MDBVal.Buffer mv_size(@NativeType("size_t") long value) { MDBVal.nmv_size(address(), value); return this; }

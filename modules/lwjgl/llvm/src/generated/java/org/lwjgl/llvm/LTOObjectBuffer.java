@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,8 +105,7 @@ public class LTOObjectBuffer extends Struct<LTOObjectBuffer> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LTOObjectBuffer createSafe(long address) {
+    public static @Nullable LTOObjectBuffer createSafe(long address) {
         return address == NULL ? null : new LTOObjectBuffer(address, null);
     }
 
@@ -149,8 +148,7 @@ public class LTOObjectBuffer extends Struct<LTOObjectBuffer> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LTOObjectBuffer.Buffer createSafe(long address, int capacity) {
+    public static LTOObjectBuffer.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

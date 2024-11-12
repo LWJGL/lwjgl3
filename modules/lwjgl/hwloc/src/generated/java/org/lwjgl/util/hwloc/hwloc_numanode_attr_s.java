@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -81,9 +81,8 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     @NativeType("unsigned")
     public int page_types_len() { return npage_types_len(address()); }
     /** @return a {@link hwloc_memory_page_type_s.Buffer} view of the struct array pointed to by the {@code page_types} field. */
-    @Nullable
     @NativeType("hwloc_memory_page_type_s *")
-    public hwloc_memory_page_type_s.Buffer page_types() { return npage_types(address()); }
+    public hwloc_memory_page_type_s.@Nullable Buffer page_types() { return npage_types(address()); }
 
     // -----------------------------------
 
@@ -93,8 +92,7 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_numanode_attr_s createSafe(long address) {
+    public static @Nullable hwloc_numanode_attr_s createSafe(long address) {
         return address == NULL ? null : new hwloc_numanode_attr_s(address, null);
     }
 
@@ -109,8 +107,7 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_numanode_attr_s.Buffer createSafe(long address, int capacity) {
+    public static hwloc_numanode_attr_s.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -121,7 +118,7 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     /** Unsafe version of {@link #page_types_len}. */
     public static int npage_types_len(long struct) { return memGetInt(struct + hwloc_numanode_attr_s.PAGE_TYPES_LEN); }
     /** Unsafe version of {@link #page_types}. */
-    @Nullable public static hwloc_memory_page_type_s.Buffer npage_types(long struct) { return hwloc_memory_page_type_s.createSafe(memGetAddress(struct + hwloc_numanode_attr_s.PAGE_TYPES), npage_types_len(struct)); }
+    public static hwloc_memory_page_type_s.@Nullable Buffer npage_types(long struct) { return hwloc_memory_page_type_s.createSafe(memGetAddress(struct + hwloc_numanode_attr_s.PAGE_TYPES), npage_types_len(struct)); }
 
     // -----------------------------------
 
@@ -173,9 +170,8 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
         @NativeType("unsigned")
         public int page_types_len() { return hwloc_numanode_attr_s.npage_types_len(address()); }
         /** @return a {@link hwloc_memory_page_type_s.Buffer} view of the struct array pointed to by the {@code page_types} field. */
-        @Nullable
         @NativeType("hwloc_memory_page_type_s *")
-        public hwloc_memory_page_type_s.Buffer page_types() { return hwloc_numanode_attr_s.npage_types(address()); }
+        public hwloc_memory_page_type_s.@Nullable Buffer page_types() { return hwloc_numanode_attr_s.npage_types(address()); }
 
     }
 

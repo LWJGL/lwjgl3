@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportSemaphoreCreateInfo createSafe(long address) {
+    public static @Nullable VkExportSemaphoreCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkExportSemaphoreCreateInfo(address, null);
     }
 
@@ -203,8 +202,7 @@ public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateI
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExportSemaphoreCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkExportSemaphoreCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

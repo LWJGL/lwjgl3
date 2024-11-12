@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class VkImageMemoryBarrier2KHR extends VkImageMemoryBarrier2 {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageMemoryBarrier2KHR createSafe(long address) {
+    public static @Nullable VkImageMemoryBarrier2KHR createSafe(long address) {
         return address == NULL ? null : new VkImageMemoryBarrier2KHR(address, null);
     }
 
@@ -212,8 +211,7 @@ public class VkImageMemoryBarrier2KHR extends VkImageMemoryBarrier2 {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageMemoryBarrier2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkImageMemoryBarrier2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCaptur
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkReleaseCapturedPipelineDataInfoKHR createSafe(long address) {
+    public static @Nullable VkReleaseCapturedPipelineDataInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkReleaseCapturedPipelineDataInfoKHR(address, null);
     }
 
@@ -209,8 +208,7 @@ public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCaptur
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkReleaseCapturedPipelineDataInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkReleaseCapturedPipelineDataInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class Compositor_BenchmarkResults extends Struct<Compositor_BenchmarkResu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Compositor_BenchmarkResults createSafe(long address) {
+    public static @Nullable Compositor_BenchmarkResults createSafe(long address) {
         return address == NULL ? null : new Compositor_BenchmarkResults(address, null);
     }
 
@@ -147,8 +146,7 @@ public class Compositor_BenchmarkResults extends Struct<Compositor_BenchmarkResu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static Compositor_BenchmarkResults.Buffer createSafe(long address, int capacity) {
+    public static Compositor_BenchmarkResults.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

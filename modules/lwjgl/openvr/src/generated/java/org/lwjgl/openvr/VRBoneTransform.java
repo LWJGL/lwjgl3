@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -106,8 +106,7 @@ public class VRBoneTransform extends Struct<VRBoneTransform> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRBoneTransform createSafe(long address) {
+    public static @Nullable VRBoneTransform createSafe(long address) {
         return address == NULL ? null : new VRBoneTransform(address, null);
     }
 
@@ -150,8 +149,7 @@ public class VRBoneTransform extends Struct<VRBoneTransform> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRBoneTransform.Buffer createSafe(long address, int capacity) {
+    public static VRBoneTransform.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

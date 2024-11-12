@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -123,7 +123,7 @@ public class KHRCreateRenderpass2 {
      * @param pRenderPass a pointer to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
+    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
         if (CHECKS) {
             check(pRenderPass, 1);
         }
@@ -197,7 +197,7 @@ public class KHRCreateRenderpass2 {
 
     /** Array version of: {@link #vkCreateRenderPass2KHR CreateRenderPass2KHR} */
     @NativeType("VkResult")
-    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
+    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
         long __functionAddress = device.getCapabilities().vkCreateRenderPass2KHR;
         if (CHECKS) {
             check(__functionAddress);

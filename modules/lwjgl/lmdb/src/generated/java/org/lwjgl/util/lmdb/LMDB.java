@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lmdb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -362,9 +362,8 @@ public class LMDB {
      *
      * @return the library version as a string
      */
-    @Nullable
     @NativeType("char *")
-    public static String mdb_version(@Nullable @NativeType("int *") IntBuffer major, @Nullable @NativeType("int *") IntBuffer minor, @Nullable @NativeType("int *") IntBuffer patch) {
+    public static @Nullable String mdb_version(@NativeType("int *") @Nullable IntBuffer major, @NativeType("int *") @Nullable IntBuffer minor, @NativeType("int *") @Nullable IntBuffer patch) {
         if (CHECKS) {
             checkSafe(major, 1);
             checkSafe(minor, 1);
@@ -1345,7 +1344,7 @@ public class LMDB {
      *         <li>{@link #MDB_DBS_FULL DBS_FULL} - too many databases have been opened. See {@link #mdb_env_set_maxdbs env_set_maxdbs}.</li>
      *         </ul>
      */
-    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @Nullable @NativeType("char const *") ByteBuffer name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") IntBuffer dbi) {
+    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @NativeType("char const *") @Nullable ByteBuffer name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") IntBuffer dbi) {
         if (CHECKS) {
             check(txn);
             checkNT1Safe(name);
@@ -1410,7 +1409,7 @@ public class LMDB {
      *         <li>{@link #MDB_DBS_FULL DBS_FULL} - too many databases have been opened. See {@link #mdb_env_set_maxdbs env_set_maxdbs}.</li>
      *         </ul>
      */
-    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @Nullable @NativeType("char const *") CharSequence name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") IntBuffer dbi) {
+    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @NativeType("char const *") @Nullable CharSequence name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") IntBuffer dbi) {
         if (CHECKS) {
             check(txn);
             check(dbi, 1);
@@ -1707,7 +1706,7 @@ public class LMDB {
      * @param key  the key to delete from the database
      * @param data the data to delete
      */
-    public static int mdb_del(@NativeType("MDB_txn *") long txn, @NativeType("MDB_dbi") int dbi, @NativeType("MDB_val *") MDBVal key, @Nullable @NativeType("MDB_val *") MDBVal data) {
+    public static int mdb_del(@NativeType("MDB_txn *") long txn, @NativeType("MDB_dbi") int dbi, @NativeType("MDB_val *") MDBVal key, @NativeType("MDB_val *") @Nullable MDBVal data) {
         if (CHECKS) {
             check(txn);
         }
@@ -2034,9 +2033,8 @@ public class LMDB {
     public static native long nmdb_version(int[] major, int[] minor, int[] patch);
 
     /** Array version of: {@link #mdb_version version} */
-    @Nullable
     @NativeType("char *")
-    public static String mdb_version(@Nullable @NativeType("int *") int[] major, @Nullable @NativeType("int *") int[] minor, @Nullable @NativeType("int *") int[] patch) {
+    public static @Nullable String mdb_version(@NativeType("int *") int @Nullable [] major, @NativeType("int *") int @Nullable [] minor, @NativeType("int *") int @Nullable [] patch) {
         if (CHECKS) {
             checkSafe(major, 1);
             checkSafe(minor, 1);
@@ -2074,7 +2072,7 @@ public class LMDB {
     public static native int nmdb_dbi_open(long txn, long name, int flags, int[] dbi);
 
     /** Array version of: {@link #mdb_dbi_open dbi_open} */
-    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @Nullable @NativeType("char const *") ByteBuffer name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") int[] dbi) {
+    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @NativeType("char const *") @Nullable ByteBuffer name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") int[] dbi) {
         if (CHECKS) {
             check(txn);
             checkNT1Safe(name);
@@ -2084,7 +2082,7 @@ public class LMDB {
     }
 
     /** Array version of: {@link #mdb_dbi_open dbi_open} */
-    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @Nullable @NativeType("char const *") CharSequence name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") int[] dbi) {
+    public static int mdb_dbi_open(@NativeType("MDB_txn *") long txn, @NativeType("char const *") @Nullable CharSequence name, @NativeType("unsigned int") int flags, @NativeType("MDB_dbi *") int[] dbi) {
         if (CHECKS) {
             check(txn);
             check(dbi, 1);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -78,8 +78,7 @@ public class hwloc_topology_diff_obj_attr_generic_s extends Struct<hwloc_topolog
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_topology_diff_obj_attr_generic_s createSafe(long address) {
+    public static @Nullable hwloc_topology_diff_obj_attr_generic_s createSafe(long address) {
         return address == NULL ? null : new hwloc_topology_diff_obj_attr_generic_s(address, null);
     }
 
@@ -94,8 +93,7 @@ public class hwloc_topology_diff_obj_attr_generic_s extends Struct<hwloc_topolog
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_topology_diff_obj_attr_generic_s.Buffer createSafe(long address, int capacity) {
+    public static hwloc_topology_diff_obj_attr_generic_s.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

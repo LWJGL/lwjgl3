@@ -15,6 +15,6 @@
  * processing. This feature set is augmented by various post processing tools, including frequently-needed operations such as computing normal and tangent
  * vectors.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.assimp;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class ZSTDFrameProgression extends Struct<ZSTDFrameProgression> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDFrameProgression createSafe(long address) {
+    public static @Nullable ZSTDFrameProgression createSafe(long address) {
         return address == NULL ? null : new ZSTDFrameProgression(address, null);
     }
 
@@ -176,8 +175,7 @@ public class ZSTDFrameProgression extends Struct<ZSTDFrameProgression> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDFrameProgression.Buffer createSafe(long address, int capacity) {
+    public static ZSTDFrameProgression.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

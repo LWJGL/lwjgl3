@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -106,9 +106,8 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
      *
      * @return font codepoint ranges as pairs of (from/to) and 0 as last element
      */
-    @Nullable
     @NativeType("nk_rune const *")
-    public IntBuffer ranges(int capacity) { return nranges(address(), capacity); }
+    public @Nullable IntBuffer ranges(int capacity) { return nranges(address(), capacity); }
 
     /** Sets the specified value to the {@link #height} field. */
     public NkBakedFont height(float value) { nheight(address(), value); return this; }
@@ -178,8 +177,7 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkBakedFont createSafe(long address) {
+    public static @Nullable NkBakedFont createSafe(long address) {
         return address == NULL ? null : new NkBakedFont(address, null);
     }
 
@@ -222,8 +220,7 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkBakedFont.Buffer createSafe(long address, int capacity) {
+    public static NkBakedFont.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -278,7 +275,7 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
     /** Unsafe version of {@link #glyph_count}. */
     public static int nglyph_count(long struct) { return memGetInt(struct + NkBakedFont.GLYPH_COUNT); }
     /** Unsafe version of {@link #ranges(int) ranges}. */
-    @Nullable public static IntBuffer nranges(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + NkBakedFont.RANGES), capacity); }
+    public static @Nullable IntBuffer nranges(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + NkBakedFont.RANGES), capacity); }
 
     /** Unsafe version of {@link #height(float) height}. */
     public static void nheight(long struct, float value) { memPutFloat(struct + NkBakedFont.HEIGHT, value); }
@@ -353,9 +350,8 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("nk_rune const *")
-        public IntBuffer ranges(int capacity) { return NkBakedFont.nranges(address(), capacity); }
+        public @Nullable IntBuffer ranges(int capacity) { return NkBakedFont.nranges(address(), capacity); }
 
         /** Sets the specified value to the {@link NkBakedFont#height} field. */
         public NkBakedFont.Buffer height(float value) { NkBakedFont.nheight(address(), value); return this; }

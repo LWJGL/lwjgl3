@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,8 +113,7 @@ public class VkImageFormatListCreateInfoKHR extends VkImageFormatListCreateInfo 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageFormatListCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkImageFormatListCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkImageFormatListCreateInfoKHR(address, null);
     }
 
@@ -157,8 +156,7 @@ public class VkImageFormatListCreateInfoKHR extends VkImageFormatListCreateInfo 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageFormatListCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkImageFormatListCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

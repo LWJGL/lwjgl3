@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,7 +184,7 @@ public class ARBProgramInterfaceQuery {
      * @param length           a variable which will receive the length of the resource name
      * @param name             a character array into which will be written the name of the resource
      */
-    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
@@ -235,7 +235,7 @@ public class ARBProgramInterfaceQuery {
      * @param length           a variable which will receive the number of values returned
      * @param params           an array that will receive the property values
      */
-    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer params) {
+    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
@@ -307,12 +307,12 @@ public class ARBProgramInterfaceQuery {
     }
 
     /** Array version of: {@link #glGetProgramResourceName GetProgramResourceName} */
-    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
     /** Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv} */
-    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {
+    public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 

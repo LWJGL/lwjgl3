@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,8 +179,7 @@ public class DeepImage extends Struct<DeepImage> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DeepImage createSafe(long address) {
+    public static @Nullable DeepImage createSafe(long address) {
         return address == NULL ? null : new DeepImage(address, null);
     }
 
@@ -223,8 +222,7 @@ public class DeepImage extends Struct<DeepImage> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DeepImage.Buffer createSafe(long address, int capacity) {
+    public static DeepImage.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

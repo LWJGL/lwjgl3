@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class AIFileSeek extends Callback implements AIFileSeekI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static AIFileSeek createSafe(long functionPointer) {
+    public static @Nullable AIFileSeek createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

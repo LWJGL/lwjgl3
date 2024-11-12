@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class XrVector3f extends Struct<XrVector3f> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVector3f createSafe(long address) {
+    public static @Nullable XrVector3f createSafe(long address) {
         return address == NULL ? null : new XrVector3f(address, null);
     }
 
@@ -193,8 +192,7 @@ public class XrVector3f extends Struct<XrVector3f> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVector3f.Buffer createSafe(long address, int capacity) {
+    public static XrVector3f.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -187,9 +187,8 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
     /** a pointer to an array of queue families that will access this buffer. It is ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
+    public @Nullable IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -287,8 +286,7 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferCreateInfo createSafe(long address) {
+    public static @Nullable VkBufferCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkBufferCreateInfo(address, null);
     }
 
@@ -331,8 +329,7 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBufferCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkBufferCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -410,7 +407,7 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
     /** Unsafe version of {@link #queueFamilyIndexCount}. */
     public static int nqueueFamilyIndexCount(long struct) { return memGetInt(struct + VkBufferCreateInfo.QUEUEFAMILYINDEXCOUNT); }
     /** Unsafe version of {@link #pQueueFamilyIndices() pQueueFamilyIndices}. */
-    @Nullable public static IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBufferCreateInfo.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
+    public static @Nullable IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBufferCreateInfo.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkBufferCreateInfo.STYPE, value); }
@@ -494,9 +491,8 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkBufferCreateInfo.nqueueFamilyIndexCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBufferCreateInfo#pQueueFamilyIndices} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pQueueFamilyIndices() { return VkBufferCreateInfo.npQueueFamilyIndices(address()); }
+        public @Nullable IntBuffer pQueueFamilyIndices() { return VkBufferCreateInfo.npQueueFamilyIndices(address()); }
 
         /** Sets the specified value to the {@link VkBufferCreateInfo#sType} field. */
         public VkBufferCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferCreateInfo.nsType(address(), value); return this; }

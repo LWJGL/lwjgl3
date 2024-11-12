@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -246,8 +246,7 @@ public class AICamera extends Struct<AICamera> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AICamera createSafe(long address) {
+    public static @Nullable AICamera createSafe(long address) {
         return address == NULL ? null : new AICamera(address, null);
     }
 
@@ -290,8 +289,7 @@ public class AICamera extends Struct<AICamera> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AICamera.Buffer createSafe(long address, int capacity) {
+    public static AICamera.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

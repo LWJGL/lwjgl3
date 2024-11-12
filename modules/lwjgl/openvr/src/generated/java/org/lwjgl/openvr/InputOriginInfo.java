@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -114,8 +114,7 @@ public class InputOriginInfo extends Struct<InputOriginInfo> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static InputOriginInfo createSafe(long address) {
+    public static @Nullable InputOriginInfo createSafe(long address) {
         return address == NULL ? null : new InputOriginInfo(address, null);
     }
 
@@ -158,8 +157,7 @@ public class InputOriginInfo extends Struct<InputOriginInfo> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static InputOriginInfo.Buffer createSafe(long address, int capacity) {
+    public static InputOriginInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

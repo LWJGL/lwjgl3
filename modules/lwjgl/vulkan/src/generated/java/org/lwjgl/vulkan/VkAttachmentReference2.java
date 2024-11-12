@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -205,8 +205,7 @@ public class VkAttachmentReference2 extends Struct<VkAttachmentReference2> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentReference2 createSafe(long address) {
+    public static @Nullable VkAttachmentReference2 createSafe(long address) {
         return address == NULL ? null : new VkAttachmentReference2(address, null);
     }
 
@@ -249,8 +248,7 @@ public class VkAttachmentReference2 extends Struct<VkAttachmentReference2> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentReference2.Buffer createSafe(long address, int capacity) {
+    public static VkAttachmentReference2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

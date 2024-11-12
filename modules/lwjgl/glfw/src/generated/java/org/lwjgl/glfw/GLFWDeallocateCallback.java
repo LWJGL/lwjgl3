@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -61,8 +61,7 @@ public abstract class GLFWDeallocateCallback extends Callback implements GLFWDea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static GLFWDeallocateCallback createSafe(long functionPointer) {
+    public static @Nullable GLFWDeallocateCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

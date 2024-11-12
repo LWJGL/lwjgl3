@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.macosx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static EnumerationMutationHandler createSafe(long functionPointer) {
+    public static @Nullable EnumerationMutationHandler createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

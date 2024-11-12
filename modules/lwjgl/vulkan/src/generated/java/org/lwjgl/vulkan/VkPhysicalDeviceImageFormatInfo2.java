@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -241,8 +241,7 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceImageFormatInfo2 createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceImageFormatInfo2 createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceImageFormatInfo2(address, null);
     }
 
@@ -285,8 +284,7 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceImageFormatInfo2.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceImageFormatInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.odbc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,8 +131,7 @@ public class DBDATETIME extends Struct<DBDATETIME> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DBDATETIME createSafe(long address) {
+    public static @Nullable DBDATETIME createSafe(long address) {
         return address == NULL ? null : new DBDATETIME(address, null);
     }
 
@@ -175,8 +174,7 @@ public class DBDATETIME extends Struct<DBDATETIME> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DBDATETIME.Buffer createSafe(long address, int capacity) {
+    public static DBDATETIME.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

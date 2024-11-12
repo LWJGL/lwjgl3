@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.shaderc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,8 +176,7 @@ public class ShadercIncludeResult extends Struct<ShadercIncludeResult> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ShadercIncludeResult createSafe(long address) {
+    public static @Nullable ShadercIncludeResult createSafe(long address) {
         return address == NULL ? null : new ShadercIncludeResult(address, null);
     }
 
@@ -220,8 +219,7 @@ public class ShadercIncludeResult extends Struct<ShadercIncludeResult> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ShadercIncludeResult.Buffer createSafe(long address, int capacity) {
+    public static ShadercIncludeResult.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

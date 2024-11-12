@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -975,7 +975,7 @@ public class EXTDeviceGeneratedCommands {
      * @param pIndirectCommandsLayout a pointer to a {@code VkIndirectCommandsLayoutEXT} handle in which the resulting indirect command layout is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoEXT const *") VkIndirectCommandsLayoutCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutEXT *") LongBuffer pIndirectCommandsLayout) {
+    public static int vkCreateIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoEXT const *") VkIndirectCommandsLayoutCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutEXT *") LongBuffer pIndirectCommandsLayout) {
         if (CHECKS) {
             check(pIndirectCommandsLayout, 1);
         }
@@ -1037,7 +1037,7 @@ public class EXTDeviceGeneratedCommands {
      * @param indirectCommandsLayout the layout to destroy.
      * @param pAllocator             controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutEXT") long indirectCommandsLayout, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutEXT") long indirectCommandsLayout, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyIndirectCommandsLayoutEXT(device, indirectCommandsLayout, memAddressSafe(pAllocator));
     }
 
@@ -1105,7 +1105,7 @@ public class EXTDeviceGeneratedCommands {
      * @param pIndirectExecutionSet a pointer to a {@code VkIndirectExecutionSetEXT} handle in which the resulting indirect execution set is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetCreateInfoEXT const *") VkIndirectExecutionSetCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectExecutionSetEXT *") LongBuffer pIndirectExecutionSet) {
+    public static int vkCreateIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetCreateInfoEXT const *") VkIndirectExecutionSetCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectExecutionSetEXT *") LongBuffer pIndirectExecutionSet) {
         if (CHECKS) {
             check(pIndirectExecutionSet, 1);
         }
@@ -1165,7 +1165,7 @@ public class EXTDeviceGeneratedCommands {
      * @param indirectExecutionSet the indirect execution set to destroy.
      * @param pAllocator           controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetEXT") long indirectExecutionSet, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetEXT") long indirectExecutionSet, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyIndirectExecutionSetEXT(device, indirectExecutionSet, memAddressSafe(pAllocator));
     }
 
@@ -1314,7 +1314,7 @@ public class EXTDeviceGeneratedCommands {
 
     /** Array version of: {@link #vkCreateIndirectCommandsLayoutEXT CreateIndirectCommandsLayoutEXT} */
     @NativeType("VkResult")
-    public static int vkCreateIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoEXT const *") VkIndirectCommandsLayoutCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutEXT *") long[] pIndirectCommandsLayout) {
+    public static int vkCreateIndirectCommandsLayoutEXT(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoEXT const *") VkIndirectCommandsLayoutCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutEXT *") long[] pIndirectCommandsLayout) {
         long __functionAddress = device.getCapabilities().vkCreateIndirectCommandsLayoutEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -1326,7 +1326,7 @@ public class EXTDeviceGeneratedCommands {
 
     /** Array version of: {@link #vkCreateIndirectExecutionSetEXT CreateIndirectExecutionSetEXT} */
     @NativeType("VkResult")
-    public static int vkCreateIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetCreateInfoEXT const *") VkIndirectExecutionSetCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectExecutionSetEXT *") long[] pIndirectExecutionSet) {
+    public static int vkCreateIndirectExecutionSetEXT(VkDevice device, @NativeType("VkIndirectExecutionSetCreateInfoEXT const *") VkIndirectExecutionSetCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectExecutionSetEXT *") long[] pIndirectExecutionSet) {
         long __functionAddress = device.getCapabilities().vkCreateIndirectExecutionSetEXT;
         if (CHECKS) {
             check(__functionAddress);

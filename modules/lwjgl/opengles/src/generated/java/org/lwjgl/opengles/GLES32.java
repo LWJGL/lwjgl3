@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -627,7 +627,7 @@ public class GLES32 extends GLES31 {
      * 
      * @see <a href="https://docs.gl/es3/glDebugMessageCallback">Reference Page</a>
      */
-    public static void glDebugMessageCallback(@Nullable @NativeType("GLDEBUGPROC") GLDebugMessageCallbackI callback, @NativeType("void const *") long userParam) {
+    public static void glDebugMessageCallback(@NativeType("GLDEBUGPROC") @Nullable GLDebugMessageCallbackI callback, @NativeType("void const *") long userParam) {
         nglDebugMessageCallback(memAddressSafe(callback), userParam);
     }
 
@@ -675,7 +675,7 @@ public class GLES32 extends GLES31 {
      * @see <a href="https://docs.gl/es3/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") IntBuffer sources, @Nullable @NativeType("GLenum *") IntBuffer types, @Nullable @NativeType("GLuint *") IntBuffer ids, @Nullable @NativeType("GLenum *") IntBuffer severities, @Nullable @NativeType("GLsizei *") IntBuffer lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @NativeType("GLenum *") @Nullable IntBuffer sources, @NativeType("GLenum *") @Nullable IntBuffer types, @NativeType("GLuint *") @Nullable IntBuffer ids, @NativeType("GLenum *") @Nullable IntBuffer severities, @NativeType("GLsizei *") @Nullable IntBuffer lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         if (CHECKS) {
             checkSafe(sources, count);
             checkSafe(types, count);
@@ -850,7 +850,7 @@ public class GLES32 extends GLES31 {
      * 
      * @see <a href="https://docs.gl/es3/glGetObjectLabel">Reference Page</a>
      */
-    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -956,7 +956,7 @@ public class GLES32 extends GLES31 {
      * 
      * @see <a href="https://docs.gl/es3/glGetObjectPtrLabel">Reference Page</a>
      */
-    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
         if (CHECKS) {
             check(ptr);
             checkSafe(length, 1);
@@ -1654,7 +1654,7 @@ public class GLES32 extends GLES31 {
      * @see <a href="https://docs.gl/es3/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] sources, @Nullable @NativeType("GLenum *") int[] types, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLenum *") int[] severities, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @NativeType("GLenum *") int @Nullable [] sources, @NativeType("GLenum *") int @Nullable [] types, @NativeType("GLuint *") int @Nullable [] ids, @NativeType("GLenum *") int @Nullable [] severities, @NativeType("GLsizei *") int @Nullable [] lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         long __functionAddress = GLES.getICD().glGetDebugMessageLog;
         if (CHECKS) {
             check(__functionAddress);
@@ -1672,7 +1672,7 @@ public class GLES32 extends GLES31 {
      * 
      * @see <a href="https://docs.gl/es3/glGetObjectLabel">Reference Page</a>
      */
-    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer label) {
         long __functionAddress = GLES.getICD().glGetObjectLabel;
         if (CHECKS) {
             check(__functionAddress);
@@ -1686,7 +1686,7 @@ public class GLES32 extends GLES31 {
      * 
      * @see <a href="https://docs.gl/es3/glGetObjectPtrLabel">Reference Page</a>
      */
-    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
+    public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer label) {
         long __functionAddress = GLES.getICD().glGetObjectPtrLabel;
         if (CHECKS) {
             check(__functionAddress);

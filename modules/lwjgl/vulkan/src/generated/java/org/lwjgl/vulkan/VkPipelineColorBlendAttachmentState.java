@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -231,8 +231,7 @@ public class VkPipelineColorBlendAttachmentState extends Struct<VkPipelineColorB
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineColorBlendAttachmentState createSafe(long address) {
+    public static @Nullable VkPipelineColorBlendAttachmentState createSafe(long address) {
         return address == NULL ? null : new VkPipelineColorBlendAttachmentState(address, null);
     }
 
@@ -275,8 +274,7 @@ public class VkPipelineColorBlendAttachmentState extends Struct<VkPipelineColorB
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineColorBlendAttachmentState.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineColorBlendAttachmentState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

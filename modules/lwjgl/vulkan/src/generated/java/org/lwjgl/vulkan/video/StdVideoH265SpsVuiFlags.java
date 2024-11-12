@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -256,8 +256,7 @@ public class StdVideoH265SpsVuiFlags extends Struct<StdVideoH265SpsVuiFlags> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265SpsVuiFlags createSafe(long address) {
+    public static @Nullable StdVideoH265SpsVuiFlags createSafe(long address) {
         return address == NULL ? null : new StdVideoH265SpsVuiFlags(address, null);
     }
 
@@ -300,8 +299,7 @@ public class StdVideoH265SpsVuiFlags extends Struct<StdVideoH265SpsVuiFlags> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH265SpsVuiFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH265SpsVuiFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

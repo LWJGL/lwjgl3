@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -120,8 +120,7 @@ public class NkHandle extends Struct<NkHandle> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkHandle createSafe(long address) {
+    public static @Nullable NkHandle createSafe(long address) {
         return address == NULL ? null : new NkHandle(address, null);
     }
 
@@ -164,8 +163,7 @@ public class NkHandle extends Struct<NkHandle> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkHandle.Buffer createSafe(long address, int capacity) {
+    public static NkHandle.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

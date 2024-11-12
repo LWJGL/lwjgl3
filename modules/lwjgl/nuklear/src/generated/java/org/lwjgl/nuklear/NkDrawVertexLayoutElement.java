@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class NkDrawVertexLayoutElement extends Struct<NkDrawVertexLayoutElement>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawVertexLayoutElement createSafe(long address) {
+    public static @Nullable NkDrawVertexLayoutElement createSafe(long address) {
         return address == NULL ? null : new NkDrawVertexLayoutElement(address, null);
     }
 
@@ -187,8 +186,7 @@ public class NkDrawVertexLayoutElement extends Struct<NkDrawVertexLayoutElement>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawVertexLayoutElement.Buffer createSafe(long address, int capacity) {
+    public static NkDrawVertexLayoutElement.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

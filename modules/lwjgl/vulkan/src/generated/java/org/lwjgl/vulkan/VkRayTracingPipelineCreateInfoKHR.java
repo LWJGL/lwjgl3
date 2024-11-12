@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,31 +220,26 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
     /** a pointer to an array of {@code stageCount} {@link VkPipelineShaderStageCreateInfo} structures describing the set of the shader stages to be included in the ray tracing pipeline. */
-    @Nullable
     @NativeType("VkPipelineShaderStageCreateInfo const *")
-    public VkPipelineShaderStageCreateInfo.Buffer pStages() { return npStages(address()); }
+    public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return npStages(address()); }
     /** the number of entries in the {@code pGroups} array. */
     @NativeType("uint32_t")
     public int groupCount() { return ngroupCount(address()); }
     /** a pointer to an array of {@code groupCount} {@link VkRayTracingShaderGroupCreateInfoKHR} structures describing the set of the shader stages to be included in each shader group in the ray tracing pipeline. */
-    @Nullable
     @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *")
-    public VkRayTracingShaderGroupCreateInfoKHR.Buffer pGroups() { return npGroups(address()); }
+    public VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer pGroups() { return npGroups(address()); }
     /** the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-tracing-recursion-depth">maximum recursion depth</a> of shaders executed by this pipeline. */
     @NativeType("uint32_t")
     public int maxPipelineRayRecursionDepth() { return nmaxPipelineRayRecursionDepth(address()); }
     /** a pointer to a {@link VkPipelineLibraryCreateInfoKHR} structure defining pipeline libraries to include. */
-    @Nullable
     @NativeType("VkPipelineLibraryCreateInfoKHR const *")
-    public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
+    public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
     /** a pointer to a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} structure defining additional information when using pipeline libraries. */
-    @Nullable
     @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *")
-    public VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return npLibraryInterface(address()); }
+    public @Nullable VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return npLibraryInterface(address()); }
     /** a pointer to a {@link VkPipelineDynamicStateCreateInfo} structure, and is used to indicate which properties of the pipeline state object are dynamic and <b>can</b> be changed independently of the pipeline state. This <b>can</b> be {@code NULL}, which means no state in the pipeline is considered dynamic. */
-    @Nullable
     @NativeType("VkPipelineDynamicStateCreateInfo const *")
-    public VkPipelineDynamicStateCreateInfo pDynamicState() { return npDynamicState(address()); }
+    public @Nullable VkPipelineDynamicStateCreateInfo pDynamicState() { return npDynamicState(address()); }
     /** the description of binding locations used by both the pipeline and descriptor sets used with the pipeline. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
@@ -274,9 +269,9 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     /** Sets the specified value to the {@link #flags} field. */
     public VkRayTracingPipelineCreateInfoKHR flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
-    public VkRayTracingPipelineCreateInfoKHR pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { npStages(address(), value); return this; }
+    public VkRayTracingPipelineCreateInfoKHR pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { npStages(address(), value); return this; }
     /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@link #pGroups} field. */
-    public VkRayTracingPipelineCreateInfoKHR pGroups(@Nullable @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.Buffer value) { npGroups(address(), value); return this; }
+    public VkRayTracingPipelineCreateInfoKHR pGroups(@NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer value) { npGroups(address(), value); return this; }
     /** Sets the specified value to the {@link #maxPipelineRayRecursionDepth} field. */
     public VkRayTracingPipelineCreateInfoKHR maxPipelineRayRecursionDepth(@NativeType("uint32_t") int value) { nmaxPipelineRayRecursionDepth(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link #pLibraryInfo} field. */
@@ -297,8 +292,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
         int sType,
         long pNext,
         int flags,
-        @Nullable VkPipelineShaderStageCreateInfo.Buffer pStages,
-        @Nullable VkRayTracingShaderGroupCreateInfoKHR.Buffer pGroups,
+        VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages,
+        VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer pGroups,
         int maxPipelineRayRecursionDepth,
         @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo,
         @Nullable VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface,
@@ -359,8 +354,7 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRayTracingPipelineCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkRayTracingPipelineCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRayTracingPipelineCreateInfoKHR(address, null);
     }
 
@@ -403,8 +397,7 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRayTracingPipelineCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRayTracingPipelineCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -457,19 +450,19 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     /** Unsafe version of {@link #stageCount}. */
     public static int nstageCount(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoKHR.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
-    @Nullable public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PSTAGES), nstageCount(struct)); }
+    public static VkPipelineShaderStageCreateInfo.@Nullable Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #groupCount}. */
     public static int ngroupCount(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoKHR.GROUPCOUNT); }
     /** Unsafe version of {@link #pGroups}. */
-    @Nullable public static VkRayTracingShaderGroupCreateInfoKHR.Buffer npGroups(long struct) { return VkRayTracingShaderGroupCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PGROUPS), ngroupCount(struct)); }
+    public static VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer npGroups(long struct) { return VkRayTracingShaderGroupCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PGROUPS), ngroupCount(struct)); }
     /** Unsafe version of {@link #maxPipelineRayRecursionDepth}. */
     public static int nmaxPipelineRayRecursionDepth(long struct) { return memGetInt(struct + VkRayTracingPipelineCreateInfoKHR.MAXPIPELINERAYRECURSIONDEPTH); }
     /** Unsafe version of {@link #pLibraryInfo}. */
-    @Nullable public static VkPipelineLibraryCreateInfoKHR npLibraryInfo(long struct) { return VkPipelineLibraryCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PLIBRARYINFO)); }
+    public static @Nullable VkPipelineLibraryCreateInfoKHR npLibraryInfo(long struct) { return VkPipelineLibraryCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PLIBRARYINFO)); }
     /** Unsafe version of {@link #pLibraryInterface}. */
-    @Nullable public static VkRayTracingPipelineInterfaceCreateInfoKHR npLibraryInterface(long struct) { return VkRayTracingPipelineInterfaceCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PLIBRARYINTERFACE)); }
+    public static @Nullable VkRayTracingPipelineInterfaceCreateInfoKHR npLibraryInterface(long struct) { return VkRayTracingPipelineInterfaceCreateInfoKHR.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PLIBRARYINTERFACE)); }
     /** Unsafe version of {@link #pDynamicState}. */
-    @Nullable public static VkPipelineDynamicStateCreateInfo npDynamicState(long struct) { return VkPipelineDynamicStateCreateInfo.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PDYNAMICSTATE)); }
+    public static @Nullable VkPipelineDynamicStateCreateInfo npDynamicState(long struct) { return VkPipelineDynamicStateCreateInfo.createSafe(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PDYNAMICSTATE)); }
     /** Unsafe version of {@link #layout}. */
     public static long nlayout(long struct) { return memGetLong(struct + VkRayTracingPipelineCreateInfoKHR.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
@@ -486,11 +479,11 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
     public static void nstageCount(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoKHR.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
-    public static void npStages(long struct, @Nullable VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoKHR.PSTAGES, memAddressSafe(value)); nstageCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npStages(long struct, VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoKHR.PSTAGES, memAddressSafe(value)); nstageCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code groupCount} field of the specified {@code struct}. */
     public static void ngroupCount(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoKHR.GROUPCOUNT, value); }
     /** Unsafe version of {@link #pGroups(VkRayTracingShaderGroupCreateInfoKHR.Buffer) pGroups}. */
-    public static void npGroups(long struct, @Nullable VkRayTracingShaderGroupCreateInfoKHR.Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoKHR.PGROUPS, memAddressSafe(value)); ngroupCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npGroups(long struct, VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer value) { memPutAddress(struct + VkRayTracingPipelineCreateInfoKHR.PGROUPS, memAddressSafe(value)); ngroupCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #maxPipelineRayRecursionDepth(int) maxPipelineRayRecursionDepth}. */
     public static void nmaxPipelineRayRecursionDepth(long struct, int value) { memPutInt(struct + VkRayTracingPipelineCreateInfoKHR.MAXPIPELINERAYRECURSIONDEPTH, value); }
     /** Unsafe version of {@link #pLibraryInfo(VkPipelineLibraryCreateInfoKHR) pLibraryInfo}. */
@@ -587,31 +580,26 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
         @NativeType("uint32_t")
         public int stageCount() { return VkRayTracingPipelineCreateInfoKHR.nstageCount(address()); }
         /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pStages} field. */
-        @Nullable
         @NativeType("VkPipelineShaderStageCreateInfo const *")
-        public VkPipelineShaderStageCreateInfo.Buffer pStages() { return VkRayTracingPipelineCreateInfoKHR.npStages(address()); }
+        public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return VkRayTracingPipelineCreateInfoKHR.npStages(address()); }
         /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#groupCount} field. */
         @NativeType("uint32_t")
         public int groupCount() { return VkRayTracingPipelineCreateInfoKHR.ngroupCount(address()); }
         /** @return a {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} view of the struct array pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pGroups} field. */
-        @Nullable
         @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *")
-        public VkRayTracingShaderGroupCreateInfoKHR.Buffer pGroups() { return VkRayTracingPipelineCreateInfoKHR.npGroups(address()); }
+        public VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer pGroups() { return VkRayTracingPipelineCreateInfoKHR.npGroups(address()); }
         /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#maxPipelineRayRecursionDepth} field. */
         @NativeType("uint32_t")
         public int maxPipelineRayRecursionDepth() { return VkRayTracingPipelineCreateInfoKHR.nmaxPipelineRayRecursionDepth(address()); }
         /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInfo} field. */
-        @Nullable
         @NativeType("VkPipelineLibraryCreateInfoKHR const *")
-        public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInfo(address()); }
+        public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInfo(address()); }
         /** @return a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInterface} field. */
-        @Nullable
         @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *")
-        public VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInterface(address()); }
+        public @Nullable VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInterface(address()); }
         /** @return a {@link VkPipelineDynamicStateCreateInfo} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pDynamicState} field. */
-        @Nullable
         @NativeType("VkPipelineDynamicStateCreateInfo const *")
-        public VkPipelineDynamicStateCreateInfo pDynamicState() { return VkRayTracingPipelineCreateInfoKHR.npDynamicState(address()); }
+        public @Nullable VkPipelineDynamicStateCreateInfo pDynamicState() { return VkRayTracingPipelineCreateInfoKHR.npDynamicState(address()); }
         /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkRayTracingPipelineCreateInfoKHR.nlayout(address()); }
@@ -641,9 +629,9 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#flags} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkRayTracingPipelineCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkRayTracingPipelineCreateInfoKHR#pStages} field. */
-        public VkRayTracingPipelineCreateInfoKHR.Buffer pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { VkRayTracingPipelineCreateInfoKHR.npStages(address(), value); return this; }
+        public VkRayTracingPipelineCreateInfoKHR.Buffer pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { VkRayTracingPipelineCreateInfoKHR.npStages(address(), value); return this; }
         /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@link VkRayTracingPipelineCreateInfoKHR#pGroups} field. */
-        public VkRayTracingPipelineCreateInfoKHR.Buffer pGroups(@Nullable @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.Buffer value) { VkRayTracingPipelineCreateInfoKHR.npGroups(address(), value); return this; }
+        public VkRayTracingPipelineCreateInfoKHR.Buffer pGroups(@NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.@Nullable Buffer value) { VkRayTracingPipelineCreateInfoKHR.npGroups(address(), value); return this; }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#maxPipelineRayRecursionDepth} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer maxPipelineRayRecursionDepth(@NativeType("uint32_t") int value) { VkRayTracingPipelineCreateInfoKHR.nmaxPipelineRayRecursionDepth(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInfo} field. */

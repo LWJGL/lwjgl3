@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -147,9 +147,8 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     @NativeType("uint32_t")
     public int geometryCount() { return ngeometryCount(address()); }
     /** a pointer to an array of {@code geometryCount} {@link VkGeometryNV} structures containing the scene data being passed into the acceleration structure. */
-    @Nullable
     @NativeType("VkGeometryNV const *")
-    public VkGeometryNV.Buffer pGeometries() { return npGeometries(address()); }
+    public VkGeometryNV.@Nullable Buffer pGeometries() { return npGeometries(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -164,7 +163,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     /** Sets the specified value to the {@link #instanceCount} field. */
     public VkAccelerationStructureInfoNV instanceCount(@NativeType("uint32_t") int value) { ninstanceCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@link #pGeometries} field. */
-    public VkAccelerationStructureInfoNV pGeometries(@Nullable @NativeType("VkGeometryNV const *") VkGeometryNV.Buffer value) { npGeometries(address(), value); return this; }
+    public VkAccelerationStructureInfoNV pGeometries(@NativeType("VkGeometryNV const *") VkGeometryNV.@Nullable Buffer value) { npGeometries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkAccelerationStructureInfoNV set(
@@ -173,7 +172,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
         int type,
         int flags,
         int instanceCount,
-        @Nullable VkGeometryNV.Buffer pGeometries
+        VkGeometryNV.@Nullable Buffer pGeometries
     ) {
         sType(sType);
         pNext(pNext);
@@ -221,8 +220,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureInfoNV createSafe(long address) {
+    public static @Nullable VkAccelerationStructureInfoNV createSafe(long address) {
         return address == NULL ? null : new VkAccelerationStructureInfoNV(address, null);
     }
 
@@ -265,8 +263,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAccelerationStructureInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkAccelerationStructureInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -342,7 +339,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     /** Unsafe version of {@link #geometryCount}. */
     public static int ngeometryCount(long struct) { return memGetInt(struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT); }
     /** Unsafe version of {@link #pGeometries}. */
-    @Nullable public static VkGeometryNV.Buffer npGeometries(long struct) { return VkGeometryNV.createSafe(memGetAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES), ngeometryCount(struct)); }
+    public static VkGeometryNV.@Nullable Buffer npGeometries(long struct) { return VkGeometryNV.createSafe(memGetAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES), ngeometryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.STYPE, value); }
@@ -357,7 +354,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
     /** Sets the specified value to the {@code geometryCount} field of the specified {@code struct}. */
     public static void ngeometryCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureInfoNV.GEOMETRYCOUNT, value); }
     /** Unsafe version of {@link #pGeometries(VkGeometryNV.Buffer) pGeometries}. */
-    public static void npGeometries(long struct, @Nullable VkGeometryNV.Buffer value) { memPutAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES, memAddressSafe(value)); ngeometryCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npGeometries(long struct, VkGeometryNV.@Nullable Buffer value) { memPutAddress(struct + VkAccelerationStructureInfoNV.PGEOMETRIES, memAddressSafe(value)); ngeometryCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -432,9 +429,8 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
         @NativeType("uint32_t")
         public int geometryCount() { return VkAccelerationStructureInfoNV.ngeometryCount(address()); }
         /** @return a {@link VkGeometryNV.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureInfoNV#pGeometries} field. */
-        @Nullable
         @NativeType("VkGeometryNV const *")
-        public VkGeometryNV.Buffer pGeometries() { return VkAccelerationStructureInfoNV.npGeometries(address()); }
+        public VkGeometryNV.@Nullable Buffer pGeometries() { return VkAccelerationStructureInfoNV.npGeometries(address()); }
 
         /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#sType} field. */
         public VkAccelerationStructureInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureInfoNV.nsType(address(), value); return this; }
@@ -449,7 +445,7 @@ public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructur
         /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#instanceCount} field. */
         public VkAccelerationStructureInfoNV.Buffer instanceCount(@NativeType("uint32_t") int value) { VkAccelerationStructureInfoNV.ninstanceCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@link VkAccelerationStructureInfoNV#pGeometries} field. */
-        public VkAccelerationStructureInfoNV.Buffer pGeometries(@Nullable @NativeType("VkGeometryNV const *") VkGeometryNV.Buffer value) { VkAccelerationStructureInfoNV.npGeometries(address(), value); return this; }
+        public VkAccelerationStructureInfoNV.Buffer pGeometries(@NativeType("VkGeometryNV const *") VkGeometryNV.@Nullable Buffer value) { VkAccelerationStructureInfoNV.npGeometries(address(), value); return this; }
 
     }
 

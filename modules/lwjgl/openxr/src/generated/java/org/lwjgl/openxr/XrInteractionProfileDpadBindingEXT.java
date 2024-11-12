@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,13 +178,11 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     @NativeType("XrBool32")
     public boolean isSticky() { return nisSticky(address()) != 0; }
     /** the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is {@code NULL}, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
-    @Nullable
     @NativeType("XrHapticBaseHeader const *")
-    public XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
+    public @Nullable XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
     /** the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
-    @Nullable
     @NativeType("XrHapticBaseHeader const *")
-    public XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
+    public @Nullable XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrInteractionProfileDpadBindingEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -276,8 +274,7 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInteractionProfileDpadBindingEXT createSafe(long address) {
+    public static @Nullable XrInteractionProfileDpadBindingEXT createSafe(long address) {
         return address == NULL ? null : new XrInteractionProfileDpadBindingEXT(address, null);
     }
 
@@ -325,8 +322,7 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInteractionProfileDpadBindingEXT.Buffer createSafe(long address, int capacity) {
+    public static XrInteractionProfileDpadBindingEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -394,9 +390,9 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     /** Unsafe version of {@link #isSticky}. */
     public static int nisSticky(long struct) { return memGetInt(struct + XrInteractionProfileDpadBindingEXT.ISSTICKY); }
     /** Unsafe version of {@link #onHaptic}. */
-    @Nullable public static XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.ONHAPTIC)); }
+    public static @Nullable XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.ONHAPTIC)); }
     /** Unsafe version of {@link #offHaptic}. */
-    @Nullable public static XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.OFFHAPTIC)); }
+    public static @Nullable XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileDpadBindingEXT.OFFHAPTIC)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrInteractionProfileDpadBindingEXT.TYPE, value); }
@@ -497,13 +493,11 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
         @NativeType("XrBool32")
         public boolean isSticky() { return XrInteractionProfileDpadBindingEXT.nisSticky(address()) != 0; }
         /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileDpadBindingEXT#onHaptic} field. */
-        @Nullable
         @NativeType("XrHapticBaseHeader const *")
-        public XrHapticBaseHeader onHaptic() { return XrInteractionProfileDpadBindingEXT.nonHaptic(address()); }
+        public @Nullable XrHapticBaseHeader onHaptic() { return XrInteractionProfileDpadBindingEXT.nonHaptic(address()); }
         /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileDpadBindingEXT#offHaptic} field. */
-        @Nullable
         @NativeType("XrHapticBaseHeader const *")
-        public XrHapticBaseHeader offHaptic() { return XrInteractionProfileDpadBindingEXT.noffHaptic(address()); }
+        public @Nullable XrHapticBaseHeader offHaptic() { return XrInteractionProfileDpadBindingEXT.noffHaptic(address()); }
 
         /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#type} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer type(@NativeType("XrStructureType") int value) { XrInteractionProfileDpadBindingEXT.ntype(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,16 +112,14 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
     @NativeType("uint32_t")
     public int waitSemaphoreValueCount() { return nwaitSemaphoreValueCount(address()); }
     /** a pointer to an array of {@code waitSemaphoreValueCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for. */
-    @Nullable
     @NativeType("uint64_t const *")
-    public LongBuffer pWaitSemaphoreValues() { return npWaitSemaphoreValues(address()); }
+    public @Nullable LongBuffer pWaitSemaphoreValues() { return npWaitSemaphoreValues(address()); }
     /** the number of semaphore signal values specified in {@code pSignalSemaphoreValues}. */
     @NativeType("uint32_t")
     public int signalSemaphoreValueCount() { return nsignalSemaphoreValueCount(address()); }
     /** a pointer to an array {@code signalSemaphoreValueCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled. */
-    @Nullable
     @NativeType("uint64_t const *")
-    public LongBuffer pSignalSemaphoreValues() { return npSignalSemaphoreValues(address()); }
+    public @Nullable LongBuffer pSignalSemaphoreValues() { return npSignalSemaphoreValues(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkTimelineSemaphoreSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -193,8 +191,7 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTimelineSemaphoreSubmitInfo createSafe(long address) {
+    public static @Nullable VkTimelineSemaphoreSubmitInfo createSafe(long address) {
         return address == NULL ? null : new VkTimelineSemaphoreSubmitInfo(address, null);
     }
 
@@ -237,8 +234,7 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTimelineSemaphoreSubmitInfo.Buffer createSafe(long address, int capacity) {
+    public static VkTimelineSemaphoreSubmitInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -289,11 +285,11 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
     /** Unsafe version of {@link #waitSemaphoreValueCount}. */
     public static int nwaitSemaphoreValueCount(long struct) { return memGetInt(struct + VkTimelineSemaphoreSubmitInfo.WAITSEMAPHOREVALUECOUNT); }
     /** Unsafe version of {@link #pWaitSemaphoreValues() pWaitSemaphoreValues}. */
-    @Nullable public static LongBuffer npWaitSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PWAITSEMAPHOREVALUES), nwaitSemaphoreValueCount(struct)); }
+    public static @Nullable LongBuffer npWaitSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PWAITSEMAPHOREVALUES), nwaitSemaphoreValueCount(struct)); }
     /** Unsafe version of {@link #signalSemaphoreValueCount}. */
     public static int nsignalSemaphoreValueCount(long struct) { return memGetInt(struct + VkTimelineSemaphoreSubmitInfo.SIGNALSEMAPHOREVALUECOUNT); }
     /** Unsafe version of {@link #pSignalSemaphoreValues() pSignalSemaphoreValues}. */
-    @Nullable public static LongBuffer npSignalSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PSIGNALSEMAPHOREVALUES), nsignalSemaphoreValueCount(struct)); }
+    public static @Nullable LongBuffer npSignalSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfo.PSIGNALSEMAPHOREVALUES), nsignalSemaphoreValueCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkTimelineSemaphoreSubmitInfo.STYPE, value); }
@@ -361,16 +357,14 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct<VkTimelineSemaphoreSub
         @NativeType("uint32_t")
         public int waitSemaphoreValueCount() { return VkTimelineSemaphoreSubmitInfo.nwaitSemaphoreValueCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkTimelineSemaphoreSubmitInfo#pWaitSemaphoreValues} field. */
-        @Nullable
         @NativeType("uint64_t const *")
-        public LongBuffer pWaitSemaphoreValues() { return VkTimelineSemaphoreSubmitInfo.npWaitSemaphoreValues(address()); }
+        public @Nullable LongBuffer pWaitSemaphoreValues() { return VkTimelineSemaphoreSubmitInfo.npWaitSemaphoreValues(address()); }
         /** @return the value of the {@link VkTimelineSemaphoreSubmitInfo#signalSemaphoreValueCount} field. */
         @NativeType("uint32_t")
         public int signalSemaphoreValueCount() { return VkTimelineSemaphoreSubmitInfo.nsignalSemaphoreValueCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkTimelineSemaphoreSubmitInfo#pSignalSemaphoreValues} field. */
-        @Nullable
         @NativeType("uint64_t const *")
-        public LongBuffer pSignalSemaphoreValues() { return VkTimelineSemaphoreSubmitInfo.npSignalSemaphoreValues(address()); }
+        public @Nullable LongBuffer pSignalSemaphoreValues() { return VkTimelineSemaphoreSubmitInfo.npSignalSemaphoreValues(address()); }
 
         /** Sets the specified value to the {@link VkTimelineSemaphoreSubmitInfo#sType} field. */
         public VkTimelineSemaphoreSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkTimelineSemaphoreSubmitInfo.nsType(address(), value); return this; }

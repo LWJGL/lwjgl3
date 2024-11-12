@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,17 +119,15 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
      * 
      * <p>You must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this.</p>
      */
-    @Nullable
     @NativeType("struct aiNode *")
-    public AINode mArmature() { return nmArmature(address()); }
+    public @Nullable AINode mArmature() { return nmArmature(address()); }
     /**
      * The bone node in the scene - used for skeleton conversion.
      * 
      * <p>You must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this.</p>
      */
-    @Nullable
     @NativeType("struct aiNode *")
-    public AINode mNode() { return nmNode(address()); }
+    public @Nullable AINode mNode() { return nmNode(address()); }
     /** the number of weights */
     @NativeType("unsigned int")
     public int mNumnWeights() { return nmNumnWeights(address()); }
@@ -233,8 +231,7 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AISkeletonBone createSafe(long address) {
+    public static @Nullable AISkeletonBone createSafe(long address) {
         return address == NULL ? null : new AISkeletonBone(address, null);
     }
 
@@ -277,8 +274,7 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AISkeletonBone.Buffer createSafe(long address, int capacity) {
+    public static AISkeletonBone.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -325,9 +321,9 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     /** Unsafe version of {@link #mParent}. */
     public static int nmParent(long struct) { return memGetInt(struct + AISkeletonBone.MPARENT); }
     /** Unsafe version of {@link #mArmature}. */
-    @Nullable public static AINode nmArmature(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MARMATURE)); }
+    public static @Nullable AINode nmArmature(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MARMATURE)); }
     /** Unsafe version of {@link #mNode}. */
-    @Nullable public static AINode nmNode(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MNODE)); }
+    public static @Nullable AINode nmNode(long struct) { return AINode.createSafe(memGetAddress(struct + AISkeletonBone.MNODE)); }
     /** Unsafe version of {@link #mNumnWeights}. */
     public static int nmNumnWeights(long struct) { return memGetInt(struct + AISkeletonBone.MNUMNWEIGHTS); }
     /** Unsafe version of {@link #mMeshId}. */
@@ -423,13 +419,11 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
         /** @return the value of the {@link AISkeletonBone#mParent} field. */
         public int mParent() { return AISkeletonBone.nmParent(address()); }
         /** @return a {@link AINode} view of the struct pointed to by the {@link AISkeletonBone#mArmature} field. */
-        @Nullable
         @NativeType("struct aiNode *")
-        public AINode mArmature() { return AISkeletonBone.nmArmature(address()); }
+        public @Nullable AINode mArmature() { return AISkeletonBone.nmArmature(address()); }
         /** @return a {@link AINode} view of the struct pointed to by the {@link AISkeletonBone#mNode} field. */
-        @Nullable
         @NativeType("struct aiNode *")
-        public AINode mNode() { return AISkeletonBone.nmNode(address()); }
+        public @Nullable AINode mNode() { return AISkeletonBone.nmNode(address()); }
         /** @return the value of the {@link AISkeletonBone#mNumnWeights} field. */
         @NativeType("unsigned int")
         public int mNumnWeights() { return AISkeletonBone.nmNumnWeights(address()); }

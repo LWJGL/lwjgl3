@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class XrHapticBaseHeader extends Struct<XrHapticBaseHeader> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHapticBaseHeader createSafe(long address) {
+    public static @Nullable XrHapticBaseHeader createSafe(long address) {
         return address == NULL ? null : new XrHapticBaseHeader(address, null);
     }
 
@@ -203,8 +202,7 @@ public class XrHapticBaseHeader extends Struct<XrHapticBaseHeader> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHapticBaseHeader.Buffer createSafe(long address, int capacity) {
+    public static XrHapticBaseHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

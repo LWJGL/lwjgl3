@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
     @NativeType("uint32_t")
     public int accelerationStructureCount() { return naccelerationStructureCount(address()); }
     /** a pointer to an array of {@code VkAccelerationStructureKHR} structures specifying the acceleration structures to update. */
-    @Nullable
     @NativeType("VkAccelerationStructureKHR const *")
-    public LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }
+    public @Nullable LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -174,8 +173,7 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWriteDescriptorSetAccelerationStructureKHR createSafe(long address) {
+    public static @Nullable VkWriteDescriptorSetAccelerationStructureKHR createSafe(long address) {
         return address == NULL ? null : new VkWriteDescriptorSetAccelerationStructureKHR(address, null);
     }
 
@@ -218,8 +216,7 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWriteDescriptorSetAccelerationStructureKHR.Buffer createSafe(long address, int capacity) {
+    public static VkWriteDescriptorSetAccelerationStructureKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -270,7 +267,7 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
     /** Unsafe version of {@link #accelerationStructureCount}. */
     public static int naccelerationStructureCount(long struct) { return memGetInt(struct + VkWriteDescriptorSetAccelerationStructureKHR.ACCELERATIONSTRUCTURECOUNT); }
     /** Unsafe version of {@link #pAccelerationStructures() pAccelerationStructures}. */
-    @Nullable public static LongBuffer npAccelerationStructures(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSetAccelerationStructureKHR.PACCELERATIONSTRUCTURES), naccelerationStructureCount(struct)); }
+    public static @Nullable LongBuffer npAccelerationStructures(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSetAccelerationStructureKHR.PACCELERATIONSTRUCTURES), naccelerationStructureCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSetAccelerationStructureKHR.STYPE, value); }
@@ -334,9 +331,8 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
         @NativeType("uint32_t")
         public int accelerationStructureCount() { return VkWriteDescriptorSetAccelerationStructureKHR.naccelerationStructureCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWriteDescriptorSetAccelerationStructureKHR#pAccelerationStructures} field. */
-        @Nullable
         @NativeType("VkAccelerationStructureKHR const *")
-        public LongBuffer pAccelerationStructures() { return VkWriteDescriptorSetAccelerationStructureKHR.npAccelerationStructures(address()); }
+        public @Nullable LongBuffer pAccelerationStructures() { return VkWriteDescriptorSetAccelerationStructureKHR.npAccelerationStructures(address()); }
 
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetAccelerationStructureKHR.nsType(address(), value); return this; }

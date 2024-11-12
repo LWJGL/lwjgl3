@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,8 +179,7 @@ public class VkDeviceFaultCountsEXT extends Struct<VkDeviceFaultCountsEXT> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultCountsEXT createSafe(long address) {
+    public static @Nullable VkDeviceFaultCountsEXT createSafe(long address) {
         return address == NULL ? null : new VkDeviceFaultCountsEXT(address, null);
     }
 
@@ -223,8 +222,7 @@ public class VkDeviceFaultCountsEXT extends Struct<VkDeviceFaultCountsEXT> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceFaultCountsEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceFaultCountsEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

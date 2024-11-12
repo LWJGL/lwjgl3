@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -101,9 +101,8 @@ public class OVRInitParams extends Struct<OVRInitParams> implements NativeResour
      * user-supplied log callback function, which may be called at any time asynchronously from multiple threads until {@link OVR#ovr_Shutdown Shutdown} completes. Use {@code NULL}
      * to specify no log callback.
      */
-    @Nullable
     @NativeType("ovrLogCallback")
-    public OVRLogCallback LogCallback() { return nLogCallback(address()); }
+    public @Nullable OVRLogCallback LogCallback() { return nLogCallback(address()); }
     /**
      * user-supplied data which is passed as-is to {@code LogCallback}. Typically this is used to store an application-specific pointer which is read in the
      * callback function.
@@ -178,8 +177,7 @@ public class OVRInitParams extends Struct<OVRInitParams> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRInitParams createSafe(long address) {
+    public static @Nullable OVRInitParams createSafe(long address) {
         return address == NULL ? null : new OVRInitParams(address, null);
     }
 
@@ -220,7 +218,7 @@ public class OVRInitParams extends Struct<OVRInitParams> implements NativeResour
     /** Unsafe version of {@link #RequestedMinorVersion}. */
     public static int nRequestedMinorVersion(long struct) { return memGetInt(struct + OVRInitParams.REQUESTEDMINORVERSION); }
     /** Unsafe version of {@link #LogCallback}. */
-    @Nullable public static OVRLogCallback nLogCallback(long struct) { return OVRLogCallback.createSafe(memGetAddress(struct + OVRInitParams.LOGCALLBACK)); }
+    public static @Nullable OVRLogCallback nLogCallback(long struct) { return OVRLogCallback.createSafe(memGetAddress(struct + OVRInitParams.LOGCALLBACK)); }
     /** Unsafe version of {@link #UserData}. */
     public static long nUserData(long struct) { return memGetAddress(struct + OVRInitParams.USERDATA); }
     /** Unsafe version of {@link #ConnectionTimeoutMS}. */

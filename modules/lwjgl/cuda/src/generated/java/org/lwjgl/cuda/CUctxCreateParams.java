@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -77,19 +77,17 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link CUexecAffinityParam.Buffer} view of the struct array pointed to by the {@code execAffinityParams} field. */
-    @Nullable
     @NativeType("CUexecAffinityParam *")
-    public CUexecAffinityParam.Buffer execAffinityParams() { return nexecAffinityParams(address()); }
+    public CUexecAffinityParam.@Nullable Buffer execAffinityParams() { return nexecAffinityParams(address()); }
     /** @return the value of the {@code numExecAffinityParams} field. */
     @NativeType("unsigned int")
     public int numExecAffinityParams() { return nnumExecAffinityParams(address()); }
     /** @return a {@link CUctxCigParam} view of the struct pointed to by the {@code cigParams} field. */
-    @Nullable
     @NativeType("CUctxCigParam *")
-    public CUctxCigParam cigParams() { return ncigParams(address()); }
+    public @Nullable CUctxCigParam cigParams() { return ncigParams(address()); }
 
     /** Sets the address of the specified {@link CUexecAffinityParam.Buffer} to the {@code execAffinityParams} field. */
-    public CUctxCreateParams execAffinityParams(@Nullable @NativeType("CUexecAffinityParam *") CUexecAffinityParam.Buffer value) { nexecAffinityParams(address(), value); return this; }
+    public CUctxCreateParams execAffinityParams(@NativeType("CUexecAffinityParam *") CUexecAffinityParam.@Nullable Buffer value) { nexecAffinityParams(address(), value); return this; }
     /** Sets the specified value to the {@code numExecAffinityParams} field. */
     public CUctxCreateParams numExecAffinityParams(@NativeType("unsigned int") int value) { nnumExecAffinityParams(address(), value); return this; }
     /** Sets the address of the specified {@link CUctxCigParam} to the {@code cigParams} field. */
@@ -97,7 +95,7 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
 
     /** Initializes this struct with the specified values. */
     public CUctxCreateParams set(
-        @Nullable CUexecAffinityParam.Buffer execAffinityParams,
+        CUexecAffinityParam.@Nullable Buffer execAffinityParams,
         int numExecAffinityParams,
         @Nullable CUctxCigParam cigParams
     ) {
@@ -144,8 +142,7 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUctxCreateParams createSafe(long address) {
+    public static @Nullable CUctxCreateParams createSafe(long address) {
         return address == NULL ? null : new CUctxCreateParams(address, null);
     }
 
@@ -188,8 +185,7 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUctxCreateParams.Buffer createSafe(long address, int capacity) {
+    public static CUctxCreateParams.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -234,14 +230,14 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #execAffinityParams}. */
-    @Nullable public static CUexecAffinityParam.Buffer nexecAffinityParams(long struct) { return CUexecAffinityParam.createSafe(memGetAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS), nnumExecAffinityParams(struct)); }
+    public static CUexecAffinityParam.@Nullable Buffer nexecAffinityParams(long struct) { return CUexecAffinityParam.createSafe(memGetAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS), nnumExecAffinityParams(struct)); }
     /** Unsafe version of {@link #numExecAffinityParams}. */
     public static int nnumExecAffinityParams(long struct) { return memGetInt(struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS); }
     /** Unsafe version of {@link #cigParams}. */
-    @Nullable public static CUctxCigParam ncigParams(long struct) { return CUctxCigParam.createSafe(memGetAddress(struct + CUctxCreateParams.CIGPARAMS)); }
+    public static @Nullable CUctxCigParam ncigParams(long struct) { return CUctxCigParam.createSafe(memGetAddress(struct + CUctxCreateParams.CIGPARAMS)); }
 
     /** Unsafe version of {@link #execAffinityParams(CUexecAffinityParam.Buffer) execAffinityParams}. */
-    public static void nexecAffinityParams(long struct, @Nullable CUexecAffinityParam.Buffer value) { memPutAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS, memAddressSafe(value)); nnumExecAffinityParams(struct, value == null ? 0 : value.remaining()); }
+    public static void nexecAffinityParams(long struct, CUexecAffinityParam.@Nullable Buffer value) { memPutAddress(struct + CUctxCreateParams.EXECAFFINITYPARAMS, memAddressSafe(value)); nnumExecAffinityParams(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code numExecAffinityParams} field of the specified {@code struct}. */
     public static void nnumExecAffinityParams(long struct, int value) { memPutInt(struct + CUctxCreateParams.NUMEXECAFFINITYPARAMS, value); }
     /** Unsafe version of {@link #cigParams(CUctxCigParam) cigParams}. */
@@ -291,19 +287,17 @@ public class CUctxCreateParams extends Struct<CUctxCreateParams> implements Nati
         }
 
         /** @return a {@link CUexecAffinityParam.Buffer} view of the struct array pointed to by the {@code execAffinityParams} field. */
-        @Nullable
         @NativeType("CUexecAffinityParam *")
-        public CUexecAffinityParam.Buffer execAffinityParams() { return CUctxCreateParams.nexecAffinityParams(address()); }
+        public CUexecAffinityParam.@Nullable Buffer execAffinityParams() { return CUctxCreateParams.nexecAffinityParams(address()); }
         /** @return the value of the {@code numExecAffinityParams} field. */
         @NativeType("unsigned int")
         public int numExecAffinityParams() { return CUctxCreateParams.nnumExecAffinityParams(address()); }
         /** @return a {@link CUctxCigParam} view of the struct pointed to by the {@code cigParams} field. */
-        @Nullable
         @NativeType("CUctxCigParam *")
-        public CUctxCigParam cigParams() { return CUctxCreateParams.ncigParams(address()); }
+        public @Nullable CUctxCigParam cigParams() { return CUctxCreateParams.ncigParams(address()); }
 
         /** Sets the address of the specified {@link CUexecAffinityParam.Buffer} to the {@code execAffinityParams} field. */
-        public CUctxCreateParams.Buffer execAffinityParams(@Nullable @NativeType("CUexecAffinityParam *") CUexecAffinityParam.Buffer value) { CUctxCreateParams.nexecAffinityParams(address(), value); return this; }
+        public CUctxCreateParams.Buffer execAffinityParams(@NativeType("CUexecAffinityParam *") CUexecAffinityParam.@Nullable Buffer value) { CUctxCreateParams.nexecAffinityParams(address(), value); return this; }
         /** Sets the specified value to the {@code numExecAffinityParams} field. */
         public CUctxCreateParams.Buffer numExecAffinityParams(@NativeType("unsigned int") int value) { CUctxCreateParams.nnumExecAffinityParams(address(), value); return this; }
         /** Sets the address of the specified {@link CUctxCigParam} to the {@code cigParams} field. */

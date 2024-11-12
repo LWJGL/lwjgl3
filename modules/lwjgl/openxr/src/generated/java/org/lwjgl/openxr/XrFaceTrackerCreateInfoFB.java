@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct<XrFaceTrackerCreateInfoFB>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceTrackerCreateInfoFB createSafe(long address) {
+    public static @Nullable XrFaceTrackerCreateInfoFB createSafe(long address) {
         return address == NULL ? null : new XrFaceTrackerCreateInfoFB(address, null);
     }
 
@@ -207,8 +206,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct<XrFaceTrackerCreateInfoFB>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceTrackerCreateInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrFaceTrackerCreateInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

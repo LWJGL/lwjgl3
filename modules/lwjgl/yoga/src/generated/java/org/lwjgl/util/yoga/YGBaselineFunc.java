@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static YGBaselineFunc createSafe(long functionPointer) {
+    public static @Nullable YGBaselineFunc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -106,8 +106,7 @@ public class OVRGraphicsLuid extends Struct<OVRGraphicsLuid> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRGraphicsLuid createSafe(long address) {
+    public static @Nullable OVRGraphicsLuid createSafe(long address) {
         return address == NULL ? null : new OVRGraphicsLuid(address, null);
     }
 
@@ -150,8 +149,7 @@ public class OVRGraphicsLuid extends Struct<OVRGraphicsLuid> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRGraphicsLuid.Buffer createSafe(long address, int capacity) {
+    public static OVRGraphicsLuid.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

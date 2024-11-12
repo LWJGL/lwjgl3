@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -31,9 +31,8 @@ public class WGLNVVertexArrayRange {
         return callP(size, readfreq, writefreq, priority, __functionAddress);
     }
 
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer wglAllocateMemoryNV(@NativeType("GLsizei") int size, @NativeType("GLfloat") float readfreq, @NativeType("GLfloat") float writefreq, @NativeType("GLfloat") float priority) {
+    public static @Nullable ByteBuffer wglAllocateMemoryNV(@NativeType("GLsizei") int size, @NativeType("GLfloat") float readfreq, @NativeType("GLfloat") float writefreq, @NativeType("GLfloat") float priority) {
         long __result = nwglAllocateMemoryNV(size, readfreq, writefreq, priority);
         return memByteBufferSafe(__result, size);
     }

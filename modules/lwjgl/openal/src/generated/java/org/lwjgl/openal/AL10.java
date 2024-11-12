@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -336,9 +336,8 @@ public class AL10 {
      *
      * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_VENDOR VENDOR}</td><td>{@link #AL_VERSION VERSION}</td><td>{@link #AL_RENDERER RENDERER}</td><td>{@link #AL_EXTENSIONS EXTENSIONS}</td></tr></table>
      */
-    @Nullable
     @NativeType("ALchar const *")
-    public static String alGetString(@NativeType("ALenum") int paramName) {
+    public static @Nullable String alGetString(@NativeType("ALenum") int paramName) {
         long __result = nalGetString(paramName);
         return memUTF8Safe(__result);
     }

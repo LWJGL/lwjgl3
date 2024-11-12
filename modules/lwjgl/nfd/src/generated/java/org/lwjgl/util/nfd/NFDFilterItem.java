@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.nfd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -139,8 +139,7 @@ public class NFDFilterItem extends Struct<NFDFilterItem> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDFilterItem createSafe(long address) {
+    public static @Nullable NFDFilterItem createSafe(long address) {
         return address == NULL ? null : new NFDFilterItem(address, null);
     }
 
@@ -183,8 +182,7 @@ public class NFDFilterItem extends Struct<NFDFilterItem> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDFilterItem.Buffer createSafe(long address, int capacity) {
+    public static NFDFilterItem.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

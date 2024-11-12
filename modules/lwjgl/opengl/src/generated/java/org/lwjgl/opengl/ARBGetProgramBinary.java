@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -66,7 +66,7 @@ public class ARBGetProgramBinary {
      * @param binaryFormat a variable to receive a token indicating the format of the binary data returned by the GL
      * @param binary       an array into which the GL will return {@code program}'s binary representation
      */
-    public static void glGetProgramBinary(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLenum *") IntBuffer binaryFormat, @NativeType("void *") ByteBuffer binary) {
+    public static void glGetProgramBinary(@NativeType("GLuint") int program, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLenum *") IntBuffer binaryFormat, @NativeType("void *") ByteBuffer binary) {
         GL41C.glGetProgramBinary(program, length, binaryFormat, binary);
     }
 
@@ -106,7 +106,7 @@ public class ARBGetProgramBinary {
     }
 
     /** Array version of: {@link #glGetProgramBinary GetProgramBinary} */
-    public static void glGetProgramBinary(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {
+    public static void glGetProgramBinary(@NativeType("GLuint") int program, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {
         GL41C.glGetProgramBinary(program, length, binaryFormat, binary);
     }
 

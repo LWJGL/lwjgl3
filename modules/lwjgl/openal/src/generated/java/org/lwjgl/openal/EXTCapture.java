@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -52,7 +52,7 @@ public class EXTCapture {
      * @param samples    the number of sample frames to buffer in the AL
      */
     @NativeType("ALCdevice *")
-    public static long alcCaptureOpenDevice(@Nullable @NativeType("ALCchar const *") ByteBuffer deviceName, @NativeType("ALCuint") int frequency, @NativeType("ALCenum") int format, @NativeType("ALCsizei") int samples) {
+    public static long alcCaptureOpenDevice(@NativeType("ALCchar const *") @Nullable ByteBuffer deviceName, @NativeType("ALCuint") int frequency, @NativeType("ALCenum") int format, @NativeType("ALCsizei") int samples) {
         return ALC11.alcCaptureOpenDevice(deviceName, frequency, format, samples);
     }
 
@@ -68,7 +68,7 @@ public class EXTCapture {
      * @param samples    the number of sample frames to buffer in the AL
      */
     @NativeType("ALCdevice *")
-    public static long alcCaptureOpenDevice(@Nullable @NativeType("ALCchar const *") CharSequence deviceName, @NativeType("ALCuint") int frequency, @NativeType("ALCenum") int format, @NativeType("ALCsizei") int samples) {
+    public static long alcCaptureOpenDevice(@NativeType("ALCchar const *") @Nullable CharSequence deviceName, @NativeType("ALCuint") int frequency, @NativeType("ALCenum") int format, @NativeType("ALCsizei") int samples) {
         return ALC11.alcCaptureOpenDevice(deviceName, frequency, format, samples);
     }
 

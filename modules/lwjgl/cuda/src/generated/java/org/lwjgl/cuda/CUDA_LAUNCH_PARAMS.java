@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -137,9 +137,8 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void **")
-    public PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
+    public @Nullable PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
 
     /** Sets the specified value to the {@code function} field. */
     public CUDA_LAUNCH_PARAMS function(@NativeType("CUfunction") long value) { nfunction(address(), value); return this; }
@@ -225,8 +224,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_LAUNCH_PARAMS createSafe(long address) {
+    public static @Nullable CUDA_LAUNCH_PARAMS createSafe(long address) {
         return address == NULL ? null : new CUDA_LAUNCH_PARAMS(address, null);
     }
 
@@ -269,8 +267,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_LAUNCH_PARAMS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_LAUNCH_PARAMS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -352,7 +349,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     /** Unsafe version of {@link #hStream}. */
     public static long nhStream(long struct) { return memGetAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
-    @Nullable public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS), capacity); }
+    public static @Nullable PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS), capacity); }
 
     /** Unsafe version of {@link #function(long) function}. */
     public static void nfunction(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.FUNCTION, check(value)); }
@@ -459,9 +456,8 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void **")
-        public PointerBuffer kernelParams(int capacity) { return CUDA_LAUNCH_PARAMS.nkernelParams(address(), capacity); }
+        public @Nullable PointerBuffer kernelParams(int capacity) { return CUDA_LAUNCH_PARAMS.nkernelParams(address(), capacity); }
 
         /** Sets the specified value to the {@code function} field. */
         public CUDA_LAUNCH_PARAMS.Buffer function(@NativeType("CUfunction") long value) { CUDA_LAUNCH_PARAMS.nfunction(address(), value); return this; }

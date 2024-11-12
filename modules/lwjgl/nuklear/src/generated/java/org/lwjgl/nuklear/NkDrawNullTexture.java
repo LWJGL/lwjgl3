@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class NkDrawNullTexture extends Struct<NkDrawNullTexture> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawNullTexture createSafe(long address) {
+    public static @Nullable NkDrawNullTexture createSafe(long address) {
         return address == NULL ? null : new NkDrawNullTexture(address, null);
     }
 
@@ -180,8 +179,7 @@ public class NkDrawNullTexture extends Struct<NkDrawNullTexture> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkDrawNullTexture.Buffer createSafe(long address, int capacity) {
+    public static NkDrawNullTexture.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

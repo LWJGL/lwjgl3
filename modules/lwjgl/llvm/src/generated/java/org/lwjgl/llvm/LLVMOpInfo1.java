@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,8 +158,7 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOpInfo1 createSafe(long address) {
+    public static @Nullable LLVMOpInfo1 createSafe(long address) {
         return address == NULL ? null : new LLVMOpInfo1(address, null);
     }
 
@@ -202,8 +201,7 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOpInfo1.Buffer createSafe(long address, int capacity) {
+    public static LLVMOpInfo1.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DISPLAY_DEVICE createSafe(long address) {
+    public static @Nullable DISPLAY_DEVICE createSafe(long address) {
         return address == NULL ? null : new DISPLAY_DEVICE(address, null);
     }
 
@@ -208,8 +207,7 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static DISPLAY_DEVICE.Buffer createSafe(long address, int capacity) {
+    public static DISPLAY_DEVICE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

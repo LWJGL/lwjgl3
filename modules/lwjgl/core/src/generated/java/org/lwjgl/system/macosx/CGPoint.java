@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.macosx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class CGPoint extends Struct<CGPoint> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CGPoint createSafe(long address) {
+    public static @Nullable CGPoint createSafe(long address) {
         return address == NULL ? null : new CGPoint(address, null);
     }
 
@@ -177,8 +176,7 @@ public class CGPoint extends Struct<CGPoint> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CGPoint.Buffer createSafe(long address, int capacity) {
+    public static CGPoint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

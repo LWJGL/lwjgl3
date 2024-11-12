@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -207,8 +207,7 @@ public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerP
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerPassthroughHTC createSafe(long address) {
+    public static @Nullable XrCompositionLayerPassthroughHTC createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerPassthroughHTC(address, null);
     }
 
@@ -256,8 +255,7 @@ public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerP
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerPassthroughHTC.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerPassthroughHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

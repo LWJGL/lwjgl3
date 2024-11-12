@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -126,9 +126,8 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     @NativeType("uint32_t")
     public int fragmentDensityOffsetCount() { return nfragmentDensityOffsetCount(address()); }
     /** a pointer to an array of {@link VkOffset2D} structs, each of which describes the offset per layer. */
-    @Nullable
     @NativeType("VkOffset2D const *")
-    public VkOffset2D.Buffer pFragmentDensityOffsets() { return npFragmentDensityOffsets(address()); }
+    public VkOffset2D.@Nullable Buffer pFragmentDensityOffsets() { return npFragmentDensityOffsets(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassFragmentDensityMapOffsetEndInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -137,13 +136,13 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassFragmentDensityMapOffsetEndInfoQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkOffset2D.Buffer} to the {@link #pFragmentDensityOffsets} field. */
-    public VkSubpassFragmentDensityMapOffsetEndInfoQCOM pFragmentDensityOffsets(@Nullable @NativeType("VkOffset2D const *") VkOffset2D.Buffer value) { npFragmentDensityOffsets(address(), value); return this; }
+    public VkSubpassFragmentDensityMapOffsetEndInfoQCOM pFragmentDensityOffsets(@NativeType("VkOffset2D const *") VkOffset2D.@Nullable Buffer value) { npFragmentDensityOffsets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSubpassFragmentDensityMapOffsetEndInfoQCOM set(
         int sType,
         long pNext,
-        @Nullable VkOffset2D.Buffer pFragmentDensityOffsets
+        VkOffset2D.@Nullable Buffer pFragmentDensityOffsets
     ) {
         sType(sType);
         pNext(pNext);
@@ -188,8 +187,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM createSafe(long address) {
+    public static @Nullable VkSubpassFragmentDensityMapOffsetEndInfoQCOM createSafe(long address) {
         return address == NULL ? null : new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(address, null);
     }
 
@@ -232,8 +230,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer createSafe(long address, int capacity) {
+    public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -284,7 +281,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     /** Unsafe version of {@link #fragmentDensityOffsetCount}. */
     public static int nfragmentDensityOffsetCount(long struct) { return memGetInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT); }
     /** Unsafe version of {@link #pFragmentDensityOffsets}. */
-    @Nullable public static VkOffset2D.Buffer npFragmentDensityOffsets(long struct) { return VkOffset2D.createSafe(memGetAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS), nfragmentDensityOffsetCount(struct)); }
+    public static VkOffset2D.@Nullable Buffer npFragmentDensityOffsets(long struct) { return VkOffset2D.createSafe(memGetAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS), nfragmentDensityOffsetCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.STYPE, value); }
@@ -293,7 +290,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
     /** Sets the specified value to the {@code fragmentDensityOffsetCount} field of the specified {@code struct}. */
     public static void nfragmentDensityOffsetCount(long struct, int value) { memPutInt(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.FRAGMENTDENSITYOFFSETCOUNT, value); }
     /** Unsafe version of {@link #pFragmentDensityOffsets(VkOffset2D.Buffer) pFragmentDensityOffsets}. */
-    public static void npFragmentDensityOffsets(long struct, @Nullable VkOffset2D.Buffer value) { memPutAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS, memAddressSafe(value)); nfragmentDensityOffsetCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npFragmentDensityOffsets(long struct, VkOffset2D.@Nullable Buffer value) { memPutAddress(struct + VkSubpassFragmentDensityMapOffsetEndInfoQCOM.PFRAGMENTDENSITYOFFSETS, memAddressSafe(value)); nfragmentDensityOffsetCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -359,9 +356,8 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
         @NativeType("uint32_t")
         public int fragmentDensityOffsetCount() { return VkSubpassFragmentDensityMapOffsetEndInfoQCOM.nfragmentDensityOffsetCount(address()); }
         /** @return a {@link VkOffset2D.Buffer} view of the struct array pointed to by the {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#pFragmentDensityOffsets} field. */
-        @Nullable
         @NativeType("VkOffset2D const *")
-        public VkOffset2D.Buffer pFragmentDensityOffsets() { return VkSubpassFragmentDensityMapOffsetEndInfoQCOM.npFragmentDensityOffsets(address()); }
+        public VkOffset2D.@Nullable Buffer pFragmentDensityOffsets() { return VkSubpassFragmentDensityMapOffsetEndInfoQCOM.npFragmentDensityOffsets(address()); }
 
         /** Sets the specified value to the {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#sType} field. */
         public VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassFragmentDensityMapOffsetEndInfoQCOM.nsType(address(), value); return this; }
@@ -370,7 +366,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpa
         /** Sets the specified value to the {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#pNext} field. */
         public VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer pNext(@NativeType("void const *") long value) { VkSubpassFragmentDensityMapOffsetEndInfoQCOM.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkOffset2D.Buffer} to the {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#pFragmentDensityOffsets} field. */
-        public VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer pFragmentDensityOffsets(@Nullable @NativeType("VkOffset2D const *") VkOffset2D.Buffer value) { VkSubpassFragmentDensityMapOffsetEndInfoQCOM.npFragmentDensityOffsets(address(), value); return this; }
+        public VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer pFragmentDensityOffsets(@NativeType("VkOffset2D const *") VkOffset2D.@Nullable Buffer value) { VkSubpassFragmentDensityMapOffsetEndInfoQCOM.npFragmentDensityOffsets(address(), value); return this; }
 
     }
 

@@ -57,6 +57,6 @@
  * <li>JSON dump: Obtain a string in JSON format with detailed map of internal state, including list of allocations and gaps between them.</li>
  * </ul>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.vma;
 

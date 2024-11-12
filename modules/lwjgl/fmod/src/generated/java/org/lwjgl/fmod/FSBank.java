@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -220,7 +220,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_MemoryInit(@Nullable @NativeType("FSBANK_MEMORY_ALLOC_CALLBACK") FSBANK_MEMORY_ALLOC_CALLBACKI userAlloc, @Nullable @NativeType("FSBANK_MEMORY_REALLOC_CALLBACK") FSBANK_MEMORY_REALLOC_CALLBACKI userRealloc, @Nullable @NativeType("FSBANK_MEMORY_FREE_CALLBACK") FSBANK_MEMORY_FREE_CALLBACKI userFree) {
+    public static int FSBank_MemoryInit(@NativeType("FSBANK_MEMORY_ALLOC_CALLBACK") @Nullable FSBANK_MEMORY_ALLOC_CALLBACKI userAlloc, @NativeType("FSBANK_MEMORY_REALLOC_CALLBACK") @Nullable FSBANK_MEMORY_REALLOC_CALLBACKI userRealloc, @NativeType("FSBANK_MEMORY_FREE_CALLBACK") @Nullable FSBANK_MEMORY_FREE_CALLBACKI userFree) {
         return nFSBank_MemoryInit(memAddressSafe(userAlloc), memAddressSafe(userRealloc), memAddressSafe(userFree));
     }
 
@@ -232,7 +232,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_Init(@NativeType("FSBANK_FSBVERSION") int version, @NativeType("FSBANK_INITFLAGS") int flags, @NativeType("unsigned int") int numSimultaneousJobs, @Nullable @NativeType("char const *") ByteBuffer cacheDirectory) {
+    public static int FSBank_Init(@NativeType("FSBANK_FSBVERSION") int version, @NativeType("FSBANK_INITFLAGS") int flags, @NativeType("unsigned int") int numSimultaneousJobs, @NativeType("char const *") @Nullable ByteBuffer cacheDirectory) {
         if (CHECKS) {
             checkNT1Safe(cacheDirectory);
         }
@@ -240,7 +240,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_Init(@NativeType("FSBANK_FSBVERSION") int version, @NativeType("FSBANK_INITFLAGS") int flags, @NativeType("unsigned int") int numSimultaneousJobs, @Nullable @NativeType("char const *") CharSequence cacheDirectory) {
+    public static int FSBank_Init(@NativeType("FSBANK_FSBVERSION") int version, @NativeType("FSBANK_INITFLAGS") int flags, @NativeType("unsigned int") int numSimultaneousJobs, @NativeType("char const *") @Nullable CharSequence cacheDirectory) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(cacheDirectory, true);
@@ -270,7 +270,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_Build(@NativeType("FSBANK_SUBSOUND const *") FSBANK_SUBSOUND subSounds, @NativeType("unsigned int") int numSubSounds, @NativeType("FSBANK_FORMAT") int encodeFormat, @NativeType("FSBANK_BUILDFLAGS") int buildFlags, @NativeType("unsigned int") int quality, @Nullable @NativeType("char const *") ByteBuffer encryptKey, @Nullable @NativeType("char const *") ByteBuffer outputFileName) {
+    public static int FSBank_Build(@NativeType("FSBANK_SUBSOUND const *") FSBANK_SUBSOUND subSounds, @NativeType("unsigned int") int numSubSounds, @NativeType("FSBANK_FORMAT") int encodeFormat, @NativeType("FSBANK_BUILDFLAGS") int buildFlags, @NativeType("unsigned int") int quality, @NativeType("char const *") @Nullable ByteBuffer encryptKey, @NativeType("char const *") @Nullable ByteBuffer outputFileName) {
         if (CHECKS) {
             checkNT1Safe(encryptKey);
             checkNT1Safe(outputFileName);
@@ -279,7 +279,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_Build(@NativeType("FSBANK_SUBSOUND const *") FSBANK_SUBSOUND subSounds, @NativeType("unsigned int") int numSubSounds, @NativeType("FSBANK_FORMAT") int encodeFormat, @NativeType("FSBANK_BUILDFLAGS") int buildFlags, @NativeType("unsigned int") int quality, @Nullable @NativeType("char const *") CharSequence encryptKey, @Nullable @NativeType("char const *") CharSequence outputFileName) {
+    public static int FSBank_Build(@NativeType("FSBANK_SUBSOUND const *") FSBANK_SUBSOUND subSounds, @NativeType("unsigned int") int numSubSounds, @NativeType("FSBANK_FORMAT") int encodeFormat, @NativeType("FSBANK_BUILDFLAGS") int buildFlags, @NativeType("unsigned int") int quality, @NativeType("char const *") @Nullable CharSequence encryptKey, @NativeType("char const *") @Nullable CharSequence outputFileName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(encryptKey, true);
@@ -351,7 +351,7 @@ public class FSBank {
     }
 
     @NativeType("FSBANK_RESULT")
-    public static int FSBank_MemoryGetStats(@Nullable @NativeType("unsigned int *") IntBuffer currentAllocated, @Nullable @NativeType("unsigned int *") IntBuffer maximumAllocated) {
+    public static int FSBank_MemoryGetStats(@NativeType("unsigned int *") @Nullable IntBuffer currentAllocated, @NativeType("unsigned int *") @Nullable IntBuffer maximumAllocated) {
         if (CHECKS) {
             checkSafe(currentAllocated, 1);
             checkSafe(maximumAllocated, 1);

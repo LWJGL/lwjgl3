@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jemalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -41,8 +41,7 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static ExtentPurge createSafe(long functionPointer) {
+    public static @Nullable ExtentPurge createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

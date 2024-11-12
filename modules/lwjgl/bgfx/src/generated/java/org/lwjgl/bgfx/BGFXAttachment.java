@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class BGFXAttachment extends Struct<BGFXAttachment> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXAttachment createSafe(long address) {
+    public static @Nullable BGFXAttachment createSafe(long address) {
         return address == NULL ? null : new BGFXAttachment(address, null);
     }
 
@@ -222,8 +221,7 @@ public class BGFXAttachment extends Struct<BGFXAttachment> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXAttachment.Buffer createSafe(long address, int capacity) {
+    public static BGFXAttachment.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

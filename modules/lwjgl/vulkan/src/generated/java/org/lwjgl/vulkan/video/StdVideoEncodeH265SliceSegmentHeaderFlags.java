@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -212,8 +212,7 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH265SliceSegmentHeaderFlags createSafe(long address) {
+    public static @Nullable StdVideoEncodeH265SliceSegmentHeaderFlags createSafe(long address) {
         return address == NULL ? null : new StdVideoEncodeH265SliceSegmentHeaderFlags(address, null);
     }
 
@@ -256,8 +255,7 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

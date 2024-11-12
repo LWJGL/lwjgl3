@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class FTC_Face_Requester extends Callback implements FTC_Face_Re
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static FTC_Face_Requester createSafe(long functionPointer) {
+    public static @Nullable FTC_Face_Requester createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

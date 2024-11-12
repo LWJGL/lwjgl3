@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,13 +107,11 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** the shader name to use when creating a node in an execution graph. If {@code pName} is {@code NULL}, the name of the entry point specified in SPIR-V is used as the shader name. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer pName() { return npName(address()); }
+    public @Nullable ByteBuffer pName() { return npName(address()); }
     /** the shader name to use when creating a node in an execution graph. If {@code pName} is {@code NULL}, the name of the entry point specified in SPIR-V is used as the shader name. */
-    @Nullable
     @NativeType("char const *")
-    public String pNameString() { return npNameString(address()); }
+    public @Nullable String pNameString() { return npNameString(address()); }
     /** the shader index to use when creating a node in an execution graph. If {@code index} is {@link AMDXShaderEnqueue#VK_SHADER_INDEX_UNUSED_AMDX SHADER_INDEX_UNUSED_AMDX} then the original index is used, either as specified by the {@code ShaderIndexAMDX} execution mode, or 0 if that too is not specified. */
     @NativeType("uint32_t")
     public int index() { return nindex(address()); }
@@ -180,8 +178,7 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageNodeCreateInfoAMDX createSafe(long address) {
+    public static @Nullable VkPipelineShaderStageNodeCreateInfoAMDX createSafe(long address) {
         return address == NULL ? null : new VkPipelineShaderStageNodeCreateInfoAMDX(address, null);
     }
 
@@ -224,8 +221,7 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineShaderStageNodeCreateInfoAMDX.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineShaderStageNodeCreateInfoAMDX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -274,9 +270,9 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNEXT); }
     /** Unsafe version of {@link #pName}. */
-    @Nullable public static ByteBuffer npName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME)); }
+    public static @Nullable ByteBuffer npName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME)); }
     /** Unsafe version of {@link #pNameString}. */
-    @Nullable public static String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME)); }
+    public static @Nullable String npNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkPipelineShaderStageNodeCreateInfoAMDX.PNAME)); }
     /** Unsafe version of {@link #index}. */
     public static int nindex(long struct) { return memGetInt(struct + VkPipelineShaderStageNodeCreateInfoAMDX.INDEX); }
 
@@ -342,13 +338,11 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
         @NativeType("void const *")
         public long pNext() { return VkPipelineShaderStageNodeCreateInfoAMDX.npNext(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pName} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer pName() { return VkPipelineShaderStageNodeCreateInfoAMDX.npName(address()); }
+        public @Nullable ByteBuffer pName() { return VkPipelineShaderStageNodeCreateInfoAMDX.npName(address()); }
         /** @return the null-terminated string pointed to by the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pName} field. */
-        @Nullable
         @NativeType("char const *")
-        public String pNameString() { return VkPipelineShaderStageNodeCreateInfoAMDX.npNameString(address()); }
+        public @Nullable String pNameString() { return VkPipelineShaderStageNodeCreateInfoAMDX.npNameString(address()); }
         /** @return the value of the {@link VkPipelineShaderStageNodeCreateInfoAMDX#index} field. */
         @NativeType("uint32_t")
         public int index() { return VkPipelineShaderStageNodeCreateInfoAMDX.nindex(address()); }

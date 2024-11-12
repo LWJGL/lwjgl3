@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -140,8 +140,7 @@ public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingProbeOp createSafe(long address) {
+    public static @Nullable IOURingProbeOp createSafe(long address) {
         return address == NULL ? null : new IOURingProbeOp(address, null);
     }
 
@@ -184,8 +183,7 @@ public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingProbeOp.Buffer createSafe(long address, int capacity) {
+    public static IOURingProbeOp.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

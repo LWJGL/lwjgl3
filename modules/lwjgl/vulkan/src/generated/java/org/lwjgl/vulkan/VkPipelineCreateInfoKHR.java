@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -151,8 +151,7 @@ public class VkPipelineCreateInfoKHR extends Struct<VkPipelineCreateInfoKHR> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkPipelineCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkPipelineCreateInfoKHR(address, null);
     }
 
@@ -195,8 +194,7 @@ public class VkPipelineCreateInfoKHR extends Struct<VkPipelineCreateInfoKHR> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

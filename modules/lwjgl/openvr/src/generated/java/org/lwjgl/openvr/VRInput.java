@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -543,7 +543,7 @@ public class VRInput {
      * @param eMotionRange one of:<br><table><tr><td>{@link VR#EVRSkeletalMotionRange_VRSkeletalMotionRange_WithController}</td></tr><tr><td>{@link VR#EVRSkeletalMotionRange_VRSkeletalMotionRange_WithoutController}</td></tr></table>
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetSkeletalBoneDataCompressed(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalMotionRange") int eMotionRange, @Nullable @NativeType("void *") ByteBuffer pvCompressedData, @Nullable @NativeType("uint32_t *") IntBuffer punRequiredCompressedSize) {
+    public static int VRInput_GetSkeletalBoneDataCompressed(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalMotionRange") int eMotionRange, @NativeType("void *") @Nullable ByteBuffer pvCompressedData, @NativeType("uint32_t *") @Nullable IntBuffer punRequiredCompressedSize) {
         if (CHECKS) {
             checkSafe(punRequiredCompressedSize, 1);
         }

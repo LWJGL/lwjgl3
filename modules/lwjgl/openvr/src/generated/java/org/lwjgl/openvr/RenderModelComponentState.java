@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -113,8 +113,7 @@ public class RenderModelComponentState extends Struct<RenderModelComponentState>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModelComponentState createSafe(long address) {
+    public static @Nullable RenderModelComponentState createSafe(long address) {
         return address == NULL ? null : new RenderModelComponentState(address, null);
     }
 
@@ -157,8 +156,7 @@ public class RenderModelComponentState extends Struct<RenderModelComponentState>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RenderModelComponentState.Buffer createSafe(long address, int capacity) {
+    public static RenderModelComponentState.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

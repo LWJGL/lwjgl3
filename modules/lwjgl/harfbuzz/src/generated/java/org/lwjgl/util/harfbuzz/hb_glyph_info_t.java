@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_glyph_info_t createSafe(long address) {
+    public static @Nullable hb_glyph_info_t createSafe(long address) {
         return address == NULL ? null : new hb_glyph_info_t(address, null);
     }
 
@@ -203,8 +202,7 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_glyph_info_t.Buffer createSafe(long address, int capacity) {
+    public static hb_glyph_info_t.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

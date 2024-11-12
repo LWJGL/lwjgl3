@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -79,8 +79,7 @@ public class VREventAudioMuteControl extends Struct<VREventAudioMuteControl> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventAudioMuteControl createSafe(long address) {
+    public static @Nullable VREventAudioMuteControl createSafe(long address) {
         return address == NULL ? null : new VREventAudioMuteControl(address, null);
     }
 
@@ -95,8 +94,7 @@ public class VREventAudioMuteControl extends Struct<VREventAudioMuteControl> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventAudioMuteControl.Buffer createSafe(long address, int capacity) {
+    public static VREventAudioMuteControl.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

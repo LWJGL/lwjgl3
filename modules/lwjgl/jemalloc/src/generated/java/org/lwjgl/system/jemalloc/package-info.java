@@ -28,6 +28,6 @@
  * <p>Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
  * <a href="https://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.jemalloc;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class VkDispatchIndirectCommand extends Struct<VkDispatchIndirectCommand>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDispatchIndirectCommand createSafe(long address) {
+    public static @Nullable VkDispatchIndirectCommand createSafe(long address) {
         return address == NULL ? null : new VkDispatchIndirectCommand(address, null);
     }
 
@@ -204,8 +203,7 @@ public class VkDispatchIndirectCommand extends Struct<VkDispatchIndirectCommand>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDispatchIndirectCommand.Buffer createSafe(long address, int capacity) {
+    public static VkDispatchIndirectCommand.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

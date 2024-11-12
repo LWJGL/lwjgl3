@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -91,8 +91,7 @@ public class NSVGImage extends Struct<NSVGImage> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGImage createSafe(long address) {
+    public static @Nullable NSVGImage createSafe(long address) {
         return address == NULL ? null : new NSVGImage(address, null);
     }
 
@@ -107,8 +106,7 @@ public class NSVGImage extends Struct<NSVGImage> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGImage.Buffer createSafe(long address, int capacity) {
+    public static NSVGImage.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

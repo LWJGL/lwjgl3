@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -148,8 +148,7 @@ public class VkExtent3D extends Struct<VkExtent3D> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExtent3D createSafe(long address) {
+    public static @Nullable VkExtent3D createSafe(long address) {
         return address == NULL ? null : new VkExtent3D(address, null);
     }
 
@@ -192,8 +191,7 @@ public class VkExtent3D extends Struct<VkExtent3D> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExtent3D.Buffer createSafe(long address, int capacity) {
+    public static VkExtent3D.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

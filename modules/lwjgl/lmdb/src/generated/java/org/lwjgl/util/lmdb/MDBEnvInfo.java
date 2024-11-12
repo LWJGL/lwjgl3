@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lmdb;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class MDBEnvInfo extends Struct<MDBEnvInfo> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MDBEnvInfo createSafe(long address) {
+    public static @Nullable MDBEnvInfo createSafe(long address) {
         return address == NULL ? null : new MDBEnvInfo(address, null);
     }
 
@@ -178,8 +177,7 @@ public class MDBEnvInfo extends Struct<MDBEnvInfo> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MDBEnvInfo.Buffer createSafe(long address, int capacity) {
+    public static MDBEnvInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

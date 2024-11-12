@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -182,8 +182,7 @@ public class XKeymapEvent extends Struct<XKeymapEvent> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XKeymapEvent createSafe(long address) {
+    public static @Nullable XKeymapEvent createSafe(long address) {
         return address == NULL ? null : new XKeymapEvent(address, null);
     }
 
@@ -226,8 +225,7 @@ public class XKeymapEvent extends Struct<XKeymapEvent> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XKeymapEvent.Buffer createSafe(long address, int capacity) {
+    public static XKeymapEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

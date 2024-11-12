@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -151,8 +151,7 @@ public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZDICTParams createSafe(long address) {
+    public static @Nullable ZDICTParams createSafe(long address) {
         return address == NULL ? null : new ZDICTParams(address, null);
     }
 
@@ -195,8 +194,7 @@ public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZDICTParams.Buffer createSafe(long address, int capacity) {
+    public static ZDICTParams.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

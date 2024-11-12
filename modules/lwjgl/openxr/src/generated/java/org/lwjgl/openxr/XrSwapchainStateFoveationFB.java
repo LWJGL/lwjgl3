@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class XrSwapchainStateFoveationFB extends Struct<XrSwapchainStateFoveatio
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainStateFoveationFB createSafe(long address) {
+    public static @Nullable XrSwapchainStateFoveationFB createSafe(long address) {
         return address == NULL ? null : new XrSwapchainStateFoveationFB(address, null);
     }
 
@@ -217,8 +216,7 @@ public class XrSwapchainStateFoveationFB extends Struct<XrSwapchainStateFoveatio
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainStateFoveationFB.Buffer createSafe(long address, int capacity) {
+    public static XrSwapchainStateFoveationFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

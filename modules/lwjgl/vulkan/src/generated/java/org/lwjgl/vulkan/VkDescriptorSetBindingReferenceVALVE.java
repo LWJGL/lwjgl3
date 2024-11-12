@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -169,8 +169,7 @@ public class VkDescriptorSetBindingReferenceVALVE extends Struct<VkDescriptorSet
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetBindingReferenceVALVE createSafe(long address) {
+    public static @Nullable VkDescriptorSetBindingReferenceVALVE createSafe(long address) {
         return address == NULL ? null : new VkDescriptorSetBindingReferenceVALVE(address, null);
     }
 
@@ -213,8 +212,7 @@ public class VkDescriptorSetBindingReferenceVALVE extends Struct<VkDescriptorSet
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorSetBindingReferenceVALVE.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorSetBindingReferenceVALVE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

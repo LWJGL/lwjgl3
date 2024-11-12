@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -221,8 +221,7 @@ public class XrGraphicsBindingVulkanKHR extends Struct<XrGraphicsBindingVulkanKH
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGraphicsBindingVulkanKHR createSafe(long address) {
+    public static @Nullable XrGraphicsBindingVulkanKHR createSafe(long address) {
         return address == NULL ? null : new XrGraphicsBindingVulkanKHR(address, null);
     }
 
@@ -265,8 +264,7 @@ public class XrGraphicsBindingVulkanKHR extends Struct<XrGraphicsBindingVulkanKH
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGraphicsBindingVulkanKHR.Buffer createSafe(long address, int capacity) {
+    public static XrGraphicsBindingVulkanKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -258,8 +258,7 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1SequenceHeader createSafe(long address) {
+    public static @Nullable StdVideoAV1SequenceHeader createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1SequenceHeader(address, null);
     }
 
@@ -302,8 +301,7 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1SequenceHeader.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1SequenceHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

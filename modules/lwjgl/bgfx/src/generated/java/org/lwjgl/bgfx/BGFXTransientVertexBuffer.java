@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class BGFXTransientVertexBuffer extends Struct<BGFXTransientVertexBuffer>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXTransientVertexBuffer createSafe(long address) {
+    public static @Nullable BGFXTransientVertexBuffer createSafe(long address) {
         return address == NULL ? null : new BGFXTransientVertexBuffer(address, null);
     }
 
@@ -219,8 +218,7 @@ public class BGFXTransientVertexBuffer extends Struct<BGFXTransientVertexBuffer>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXTransientVertexBuffer.Buffer createSafe(long address, int capacity) {
+    public static BGFXTransientVertexBuffer.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

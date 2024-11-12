@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshMorphKey createSafe(long address) {
+    public static @Nullable AIMeshMorphKey createSafe(long address) {
         return address == NULL ? null : new AIMeshMorphKey(address, null);
     }
 
@@ -200,8 +199,7 @@ public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMeshMorphKey.Buffer createSafe(long address, int capacity) {
+    public static AIMeshMorphKey.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

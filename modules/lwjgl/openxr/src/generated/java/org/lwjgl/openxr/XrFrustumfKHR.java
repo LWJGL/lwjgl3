@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -120,8 +120,7 @@ public class XrFrustumfKHR extends XrFrustumf {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrustumfKHR createSafe(long address) {
+    public static @Nullable XrFrustumfKHR createSafe(long address) {
         return address == NULL ? null : new XrFrustumfKHR(address, null);
     }
 
@@ -164,8 +163,7 @@ public class XrFrustumfKHR extends XrFrustumf {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFrustumfKHR.Buffer createSafe(long address, int capacity) {
+    public static XrFrustumfKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class GLFWImage extends Struct<GLFWImage> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWImage createSafe(long address) {
+    public static @Nullable GLFWImage createSafe(long address) {
         return address == NULL ? null : new GLFWImage(address, null);
     }
 
@@ -196,8 +195,7 @@ public class GLFWImage extends Struct<GLFWImage> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static GLFWImage.Buffer createSafe(long address, int capacity) {
+    public static GLFWImage.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

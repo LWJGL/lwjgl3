@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,23 +144,20 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
     @NativeType("uint32_t")
     public int subpassCount() { return nsubpassCount(address()); }
     /** a pointer to an array of {@code subpassCount} view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pViewMasks() { return npViewMasks(address()); }
+    public @Nullable IntBuffer pViewMasks() { return npViewMasks(address()); }
     /** zero or the number of dependencies in the render pass. */
     @NativeType("uint32_t")
     public int dependencyCount() { return ndependencyCount(address()); }
     /** a pointer to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency’s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on. */
-    @Nullable
     @NativeType("int32_t const *")
-    public IntBuffer pViewOffsets() { return npViewOffsets(address()); }
+    public @Nullable IntBuffer pViewOffsets() { return npViewOffsets(address()); }
     /** zero or the number of correlation masks. */
     @NativeType("uint32_t")
     public int correlationMaskCount() { return ncorrelationMaskCount(address()); }
     /** a pointer to an array of {@code correlationMaskCount} view masks indicating sets of views that <b>may</b> be more efficient to render concurrently. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pCorrelationMasks() { return npCorrelationMasks(address()); }
+    public @Nullable IntBuffer pCorrelationMasks() { return npCorrelationMasks(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassMultiviewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -228,8 +225,7 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassMultiviewCreateInfo createSafe(long address) {
+    public static @Nullable VkRenderPassMultiviewCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkRenderPassMultiviewCreateInfo(address, null);
     }
 
@@ -272,8 +268,7 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassMultiviewCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassMultiviewCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -343,15 +338,15 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
     /** Unsafe version of {@link #subpassCount}. */
     public static int nsubpassCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.SUBPASSCOUNT); }
     /** Unsafe version of {@link #pViewMasks() pViewMasks}. */
-    @Nullable public static IntBuffer npViewMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWMASKS), nsubpassCount(struct)); }
+    public static @Nullable IntBuffer npViewMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWMASKS), nsubpassCount(struct)); }
     /** Unsafe version of {@link #dependencyCount}. */
     public static int ndependencyCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.DEPENDENCYCOUNT); }
     /** Unsafe version of {@link #pViewOffsets() pViewOffsets}. */
-    @Nullable public static IntBuffer npViewOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWOFFSETS), ndependencyCount(struct)); }
+    public static @Nullable IntBuffer npViewOffsets(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PVIEWOFFSETS), ndependencyCount(struct)); }
     /** Unsafe version of {@link #correlationMaskCount}. */
     public static int ncorrelationMaskCount(long struct) { return memGetInt(struct + VkRenderPassMultiviewCreateInfo.CORRELATIONMASKCOUNT); }
     /** Unsafe version of {@link #pCorrelationMasks() pCorrelationMasks}. */
-    @Nullable public static IntBuffer npCorrelationMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PCORRELATIONMASKS), ncorrelationMaskCount(struct)); }
+    public static @Nullable IntBuffer npCorrelationMasks(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderPassMultiviewCreateInfo.PCORRELATIONMASKS), ncorrelationMaskCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassMultiviewCreateInfo.STYPE, value); }
@@ -440,23 +435,20 @@ public class VkRenderPassMultiviewCreateInfo extends Struct<VkRenderPassMultivie
         @NativeType("uint32_t")
         public int subpassCount() { return VkRenderPassMultiviewCreateInfo.nsubpassCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderPassMultiviewCreateInfo#pViewMasks} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pViewMasks() { return VkRenderPassMultiviewCreateInfo.npViewMasks(address()); }
+        public @Nullable IntBuffer pViewMasks() { return VkRenderPassMultiviewCreateInfo.npViewMasks(address()); }
         /** @return the value of the {@link VkRenderPassMultiviewCreateInfo#dependencyCount} field. */
         @NativeType("uint32_t")
         public int dependencyCount() { return VkRenderPassMultiviewCreateInfo.ndependencyCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderPassMultiviewCreateInfo#pViewOffsets} field. */
-        @Nullable
         @NativeType("int32_t const *")
-        public IntBuffer pViewOffsets() { return VkRenderPassMultiviewCreateInfo.npViewOffsets(address()); }
+        public @Nullable IntBuffer pViewOffsets() { return VkRenderPassMultiviewCreateInfo.npViewOffsets(address()); }
         /** @return the value of the {@link VkRenderPassMultiviewCreateInfo#correlationMaskCount} field. */
         @NativeType("uint32_t")
         public int correlationMaskCount() { return VkRenderPassMultiviewCreateInfo.ncorrelationMaskCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderPassMultiviewCreateInfo#pCorrelationMasks} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pCorrelationMasks() { return VkRenderPassMultiviewCreateInfo.npCorrelationMasks(address()); }
+        public @Nullable IntBuffer pCorrelationMasks() { return VkRenderPassMultiviewCreateInfo.npCorrelationMasks(address()); }
 
         /** Sets the specified value to the {@link VkRenderPassMultiviewCreateInfo#sType} field. */
         public VkRenderPassMultiviewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassMultiviewCreateInfo.nsType(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,8 +143,7 @@ public class IOURingNAPI extends Struct<IOURingNAPI> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingNAPI createSafe(long address) {
+    public static @Nullable IOURingNAPI createSafe(long address) {
         return address == NULL ? null : new IOURingNAPI(address, null);
     }
 
@@ -187,8 +186,7 @@ public class IOURingNAPI extends Struct<IOURingNAPI> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingNAPI.Buffer createSafe(long address, int capacity) {
+    public static IOURingNAPI.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

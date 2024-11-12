@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -273,8 +273,7 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaPoolCreateInfo createSafe(long address) {
+    public static @Nullable VmaPoolCreateInfo createSafe(long address) {
         return address == NULL ? null : new VmaPoolCreateInfo(address, null);
     }
 
@@ -317,8 +316,7 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaPoolCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VmaPoolCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

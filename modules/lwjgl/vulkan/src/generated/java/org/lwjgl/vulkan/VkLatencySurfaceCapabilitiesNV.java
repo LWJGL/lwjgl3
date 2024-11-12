@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,9 +103,8 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     @NativeType("uint32_t")
     public int presentModeCount() { return npresentModeCount(address()); }
     /** list of presentation modes optimized for use with low latency mode with {@code presentModeCount} entries. */
-    @Nullable
     @NativeType("VkPresentModeKHR *")
-    public IntBuffer pPresentModes() { return npPresentModes(address()); }
+    public @Nullable IntBuffer pPresentModes() { return npPresentModes(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkLatencySurfaceCapabilitiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -169,8 +168,7 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLatencySurfaceCapabilitiesNV createSafe(long address) {
+    public static @Nullable VkLatencySurfaceCapabilitiesNV createSafe(long address) {
         return address == NULL ? null : new VkLatencySurfaceCapabilitiesNV(address, null);
     }
 
@@ -213,8 +211,7 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLatencySurfaceCapabilitiesNV.Buffer createSafe(long address, int capacity) {
+    public static VkLatencySurfaceCapabilitiesNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -265,7 +262,7 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     /** Unsafe version of {@link #presentModeCount}. */
     public static int npresentModeCount(long struct) { return memGetInt(struct + VkLatencySurfaceCapabilitiesNV.PRESENTMODECOUNT); }
     /** Unsafe version of {@link #pPresentModes() pPresentModes}. */
-    @Nullable public static IntBuffer npPresentModes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkLatencySurfaceCapabilitiesNV.PPRESENTMODES), npresentModeCount(struct)); }
+    public static @Nullable IntBuffer npPresentModes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkLatencySurfaceCapabilitiesNV.PPRESENTMODES), npresentModeCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkLatencySurfaceCapabilitiesNV.STYPE, value); }
@@ -329,9 +326,8 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
         @NativeType("uint32_t")
         public int presentModeCount() { return VkLatencySurfaceCapabilitiesNV.npresentModeCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkLatencySurfaceCapabilitiesNV#pPresentModes} field. */
-        @Nullable
         @NativeType("VkPresentModeKHR *")
-        public IntBuffer pPresentModes() { return VkLatencySurfaceCapabilitiesNV.npPresentModes(address()); }
+        public @Nullable IntBuffer pPresentModes() { return VkLatencySurfaceCapabilitiesNV.npPresentModes(address()); }
 
         /** Sets the specified value to the {@link VkLatencySurfaceCapabilitiesNV#sType} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkLatencySurfaceCapabilitiesNV.nsType(address(), value); return this; }

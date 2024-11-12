@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -217,8 +217,7 @@ public class OVRTextureSwapChainDesc extends Struct<OVRTextureSwapChainDesc> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTextureSwapChainDesc createSafe(long address) {
+    public static @Nullable OVRTextureSwapChainDesc createSafe(long address) {
         return address == NULL ? null : new OVRTextureSwapChainDesc(address, null);
     }
 
@@ -261,8 +260,7 @@ public class OVRTextureSwapChainDesc extends Struct<OVRTextureSwapChainDesc> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTextureSwapChainDesc.Buffer createSafe(long address, int capacity) {
+    public static OVRTextureSwapChainDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

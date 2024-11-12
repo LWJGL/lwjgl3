@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class XrPlaneDetectorGetInfoEXT extends Struct<XrPlaneDetectorGetInfoEXT>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPlaneDetectorGetInfoEXT createSafe(long address) {
+    public static @Nullable XrPlaneDetectorGetInfoEXT createSafe(long address) {
         return address == NULL ? null : new XrPlaneDetectorGetInfoEXT(address, null);
     }
 
@@ -215,8 +214,7 @@ public class XrPlaneDetectorGetInfoEXT extends Struct<XrPlaneDetectorGetInfoEXT>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPlaneDetectorGetInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static XrPlaneDetectorGetInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -12,6 +12,6 @@
  * <p>The <a href="https://www.khronos.org/registry/OpenGL/index_es.php">Khronos OpenGL ES registry</a> is a useful online resource that contains the OpenGL ES and OpenGL
  * ES Shading Language specifications, as well as specifications of OpenGL ES extensions. The <a href="https://www.khronos.org/registry/OpenGL-Refpages/">OpenGL ES Reference Pages</a> is another convenient source of documentation.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.opengles;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -197,9 +197,8 @@ public class GLFWNativeX11 {
      *
      * @since version 3.3
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glfwGetX11SelectionString() {
+    public static @Nullable String glfwGetX11SelectionString() {
         long __result = nglfwGetX11SelectionString();
         return memUTF8Safe(__result);
     }

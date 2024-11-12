@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -39,8 +39,7 @@ public abstract class CLReportLiveObjectsAlteraCallback extends Callback impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static CLReportLiveObjectsAlteraCallback createSafe(long functionPointer) {
+    public static @Nullable CLReportLiveObjectsAlteraCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

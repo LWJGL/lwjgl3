@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -238,8 +238,7 @@ public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTextureLayoutOctilinear createSafe(long address) {
+    public static @Nullable OVRTextureLayoutOctilinear createSafe(long address) {
         return address == NULL ? null : new OVRTextureLayoutOctilinear(address, null);
     }
 
@@ -282,8 +281,7 @@ public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTextureLayoutOctilinear.Buffer createSafe(long address, int capacity) {
+    public static OVRTextureLayoutOctilinear.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

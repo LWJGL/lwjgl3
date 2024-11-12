@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -74,7 +74,7 @@ public class ALC10 {
      * @param deviceSpecifier the requested device or device configuration
      */
     @NativeType("ALCdevice *")
-    public static long alcOpenDevice(@Nullable @NativeType("ALCchar const *") ByteBuffer deviceSpecifier) {
+    public static long alcOpenDevice(@NativeType("ALCchar const *") @Nullable ByteBuffer deviceSpecifier) {
         if (CHECKS) {
             checkNT1Safe(deviceSpecifier);
         }
@@ -90,7 +90,7 @@ public class ALC10 {
      * @param deviceSpecifier the requested device or device configuration
      */
     @NativeType("ALCdevice *")
-    public static long alcOpenDevice(@Nullable @NativeType("ALCchar const *") CharSequence deviceSpecifier) {
+    public static long alcOpenDevice(@NativeType("ALCchar const *") @Nullable CharSequence deviceSpecifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(deviceSpecifier, true);
@@ -138,7 +138,7 @@ public class ALC10 {
      * @param attrList     null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values. One of:<br><table><tr><td>{@link #ALC_FREQUENCY FREQUENCY}</td><td>{@link #ALC_REFRESH REFRESH}</td><td>{@link #ALC_SYNC SYNC}</td><td>{@link ALC11#ALC_MONO_SOURCES MONO_SOURCES}</td><td>{@link ALC11#ALC_STEREO_SOURCES STEREO_SOURCES}</td></tr></table>
      */
     @NativeType("ALCcontext *")
-    public static long alcCreateContext(@NativeType("ALCdevice const *") long deviceHandle, @Nullable @NativeType("ALCint const *") IntBuffer attrList) {
+    public static long alcCreateContext(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALCint const *") @Nullable IntBuffer attrList) {
         if (CHECKS) {
             checkNTSafe(attrList);
         }
@@ -427,9 +427,8 @@ public class ALC10 {
      * @param deviceHandle the device to query
      * @param token        the information to query. One of:<br><table><tr><td>{@link #ALC_DEFAULT_DEVICE_SPECIFIER DEFAULT_DEVICE_SPECIFIER}</td><td>{@link #ALC_DEVICE_SPECIFIER DEVICE_SPECIFIER}</td><td>{@link #ALC_EXTENSIONS EXTENSIONS}</td></tr><tr><td>{@link ALC11#ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER CAPTURE_DEFAULT_DEVICE_SPECIFIER}</td><td>{@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER CAPTURE_DEVICE_SPECIFIER}</td></tr></table>
      */
-    @Nullable
     @NativeType("ALCchar const *")
-    public static String alcGetString(@NativeType("ALCdevice *") long deviceHandle, @NativeType("ALCenum") int token) {
+    public static @Nullable String alcGetString(@NativeType("ALCdevice *") long deviceHandle, @NativeType("ALCenum") int token) {
         long __result = nalcGetString(deviceHandle, token);
         return memUTF8Safe(__result);
     }
@@ -478,7 +477,7 @@ public class ALC10 {
 
     /** Array version of: {@link #alcCreateContext CreateContext} */
     @NativeType("ALCcontext *")
-    public static long alcCreateContext(@NativeType("ALCdevice const *") long deviceHandle, @Nullable @NativeType("ALCint const *") int[] attrList) {
+    public static long alcCreateContext(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALCint const *") int @Nullable [] attrList) {
 		long __functionAddress = ALC.getICD().alcCreateContext;
         if (CHECKS) {
             check(deviceHandle);

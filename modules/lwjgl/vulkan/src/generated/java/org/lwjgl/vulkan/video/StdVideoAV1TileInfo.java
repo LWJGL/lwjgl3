@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -214,8 +214,7 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1TileInfo createSafe(long address) {
+    public static @Nullable StdVideoAV1TileInfo createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1TileInfo(address, null);
     }
 
@@ -258,8 +257,7 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1TileInfo.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1TileInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

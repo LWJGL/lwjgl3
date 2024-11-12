@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -3148,7 +3148,7 @@ public class FreeType {
         invokePPPV(face, matrix, delta, __functionAddress);
     }
 
-    public static void FT_Set_Transform(FT_Face face, @Nullable @NativeType("FT_Matrix *") FT_Matrix matrix, @Nullable @NativeType("FT_Vector *") FT_Vector delta) {
+    public static void FT_Set_Transform(FT_Face face, @NativeType("FT_Matrix *") @Nullable FT_Matrix matrix, @NativeType("FT_Vector *") @Nullable FT_Vector delta) {
         nFT_Set_Transform(face.address(), memAddressSafe(matrix), memAddressSafe(delta));
     }
 
@@ -3159,7 +3159,7 @@ public class FreeType {
         invokePPPV(face, matrix, delta, __functionAddress);
     }
 
-    public static void FT_Get_Transform(FT_Face face, @Nullable @NativeType("FT_Matrix *") FT_Matrix matrix, @Nullable @NativeType("FT_Vector *") FT_Vector delta) {
+    public static void FT_Get_Transform(FT_Face face, @NativeType("FT_Matrix *") @Nullable FT_Matrix matrix, @NativeType("FT_Vector *") @Nullable FT_Vector delta) {
         nFT_Get_Transform(face.address(), memAddressSafe(matrix), memAddressSafe(delta));
     }
 
@@ -3340,9 +3340,8 @@ public class FreeType {
         return invokePP(face, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String FT_Get_Postscript_Name(FT_Face face) {
+    public static @Nullable String FT_Get_Postscript_Name(FT_Face face) {
         long __result = nFT_Get_Postscript_Name(face.address());
         return memASCIISafe(__result);
     }
@@ -3766,7 +3765,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FTC_Manager_New(@NativeType("FT_Library") long library, @NativeType("FT_UInt") int max_faces, @NativeType("FT_UInt") int max_sizes, @NativeType("FT_ULong") long max_bytes, @NativeType("FTC_Face_Requester") FTC_Face_RequesterI requester, @Nullable @NativeType("FT_Pointer") ByteBuffer req_data, @NativeType("FTC_Manager *") PointerBuffer amanager) {
+    public static int FTC_Manager_New(@NativeType("FT_Library") long library, @NativeType("FT_UInt") int max_faces, @NativeType("FT_UInt") int max_sizes, @NativeType("FT_ULong") long max_bytes, @NativeType("FTC_Face_Requester") FTC_Face_RequesterI requester, @NativeType("FT_Pointer") @Nullable ByteBuffer req_data, @NativeType("FTC_Manager *") PointerBuffer amanager) {
         if (CHECKS) {
             check(amanager, 1);
         }
@@ -3911,7 +3910,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FTC_ImageCache_Lookup(@NativeType("FTC_ImageCache") long cache, FTC_ImageType type, @NativeType("FT_UInt") int gindex, @NativeType("FT_Glyph *") PointerBuffer aglyph, @Nullable @NativeType("FTC_Node *") PointerBuffer anode) {
+    public static int FTC_ImageCache_Lookup(@NativeType("FTC_ImageCache") long cache, FTC_ImageType type, @NativeType("FT_UInt") int gindex, @NativeType("FT_Glyph *") PointerBuffer aglyph, @NativeType("FTC_Node *") @Nullable PointerBuffer anode) {
         if (CHECKS) {
             check(aglyph, 1);
             checkSafe(anode, 1);
@@ -3930,7 +3929,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FTC_ImageCache_LookupScaler(@NativeType("FTC_ImageCache") long cache, FTC_Scaler scaler, @NativeType("FT_ULong") long load_flags, @NativeType("FT_UInt") int gindex, @NativeType("FT_Glyph *") PointerBuffer aglyph, @Nullable @NativeType("FTC_Node *") PointerBuffer anode) {
+    public static int FTC_ImageCache_LookupScaler(@NativeType("FTC_ImageCache") long cache, FTC_Scaler scaler, @NativeType("FT_ULong") long load_flags, @NativeType("FT_UInt") int gindex, @NativeType("FT_Glyph *") PointerBuffer aglyph, @NativeType("FTC_Node *") @Nullable PointerBuffer anode) {
         if (CHECKS) {
             check(aglyph, 1);
             checkSafe(anode, 1);
@@ -3967,7 +3966,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FTC_SBitCache_Lookup(@NativeType("FTC_SBitCache") long cache, FTC_ImageType type, @NativeType("FT_UInt") int gindex, @NativeType("FTC_SBit *") PointerBuffer sbit, @Nullable @NativeType("FTC_Node *") PointerBuffer anode) {
+    public static int FTC_SBitCache_Lookup(@NativeType("FTC_SBitCache") long cache, FTC_ImageType type, @NativeType("FT_UInt") int gindex, @NativeType("FTC_SBit *") PointerBuffer sbit, @NativeType("FTC_Node *") @Nullable PointerBuffer anode) {
         if (CHECKS) {
             check(sbit, 1);
             checkSafe(anode, 1);
@@ -3986,7 +3985,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FTC_SBitCache_LookupScaler(@NativeType("FTC_SBitCache") long cache, FTC_Scaler scaler, @NativeType("FT_ULong") long load_flags, @NativeType("FT_UInt") int gindex, @NativeType("FTC_SBit *") PointerBuffer sbit, @Nullable @NativeType("FTC_Node *") PointerBuffer anode) {
+    public static int FTC_SBitCache_LookupScaler(@NativeType("FTC_SBitCache") long cache, FTC_Scaler scaler, @NativeType("FT_ULong") long load_flags, @NativeType("FT_UInt") int gindex, @NativeType("FTC_SBit *") PointerBuffer sbit, @NativeType("FTC_Node *") @Nullable PointerBuffer anode) {
         if (CHECKS) {
             check(sbit, 1);
             checkSafe(anode, 1);
@@ -4061,7 +4060,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Palette_Select(FT_Face face, @NativeType("FT_UShort") short palette_index, @Nullable @NativeType("FT_Color **") PointerBuffer apalette) {
+    public static int FT_Palette_Select(FT_Face face, @NativeType("FT_UShort") short palette_index, @NativeType("FT_Color **") @Nullable PointerBuffer apalette) {
         if (CHECKS) {
             checkSafe(apalette, 1);
         }
@@ -4198,9 +4197,8 @@ public class FreeType {
         return invokeP(error_code, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String FT_Error_String(@NativeType("FT_Error") int error_code) {
+    public static @Nullable String FT_Error_String(@NativeType("FT_Error") int error_code) {
         long __result = nFT_Error_String(error_code);
         return memASCIISafe(__result);
     }
@@ -4212,9 +4210,8 @@ public class FreeType {
         return invokePP(face, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char const *")
-    public static String FT_Get_Font_Format(FT_Face face) {
+    public static @Nullable String FT_Get_Font_Format(FT_Face face) {
         long __result = nFT_Get_Font_Format(face.address());
         return memASCIISafe(__result);
     }
@@ -4287,7 +4284,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Glyph_Transform(FT_Glyph glyph, @Nullable @NativeType("FT_Matrix const *") FT_Matrix matrix, @Nullable @NativeType("FT_Vector const *") FT_Vector delta) {
+    public static int FT_Glyph_Transform(FT_Glyph glyph, @NativeType("FT_Matrix const *") @Nullable FT_Matrix matrix, @NativeType("FT_Vector const *") @Nullable FT_Vector delta) {
         return nFT_Glyph_Transform(glyph.address(), memAddressSafe(matrix), memAddressSafe(delta));
     }
 
@@ -4310,7 +4307,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Glyph_To_Bitmap(@NativeType("FT_Glyph *") PointerBuffer the_glyph, @NativeType("FT_Render_Mode") int render_mode, @Nullable @NativeType("FT_Vector const *") FT_Vector origin, @NativeType("FT_Bool") boolean destroy) {
+    public static int FT_Glyph_To_Bitmap(@NativeType("FT_Glyph *") PointerBuffer the_glyph, @NativeType("FT_Render_Mode") int render_mode, @NativeType("FT_Vector const *") @Nullable FT_Vector origin, @NativeType("FT_Bool") boolean destroy) {
         if (CHECKS) {
             check(the_glyph, 1);
         }
@@ -4324,7 +4321,7 @@ public class FreeType {
         invokePV(glyph, __functionAddress);
     }
 
-    public static void FT_Done_Glyph(@Nullable FT_Glyph glyph) {
+    public static void FT_Done_Glyph(@NativeType("FT_Glyph") @Nullable FT_Glyph glyph) {
         nFT_Done_Glyph(memAddressSafe(glyph));
     }
 
@@ -4485,8 +4482,8 @@ public class FreeType {
         return invokePPP(list, data, __functionAddress);
     }
 
-    @Nullable
-    public static FT_ListNode FT_List_Find(FT_List list, @NativeType("void *") long data) {
+    @NativeType("FT_ListNode")
+    public static @Nullable FT_ListNode FT_List_Find(FT_List list, @NativeType("void *") long data) {
         long __result = nFT_List_Find(list.address(), data);
         return FT_ListNode.createSafe(__result);
     }
@@ -4554,7 +4551,7 @@ public class FreeType {
         invokePPPPV(list, destroy, memory, user, __functionAddress);
     }
 
-    public static void FT_List_Finalize(FT_List list, @Nullable @NativeType("FT_List_Destructor") FT_List_DestructorI destroy, FT_Memory memory, @NativeType("void *") long user) {
+    public static void FT_List_Finalize(FT_List list, @NativeType("FT_List_Destructor") @Nullable FT_List_DestructorI destroy, FT_Memory memory, @NativeType("void *") long user) {
         nFT_List_Finalize(list.address(), memAddressSafe(destroy), memory.address(), user);
     }
 
@@ -4706,7 +4703,7 @@ public class FreeType {
 
     /** @return : FreeType error code.  0~means success. */
     @NativeType("FT_Error")
-    public static int FT_Set_MM_WeightVector(FT_Face face, @Nullable @NativeType("FT_Fixed *") CLongBuffer weightvector) {
+    public static int FT_Set_MM_WeightVector(FT_Face face, @NativeType("FT_Fixed *") @Nullable CLongBuffer weightvector) {
         return nFT_Set_MM_WeightVector(face.address(), remainingSafe(weightvector), memAddressSafe(weightvector));
     }
 
@@ -4949,7 +4946,7 @@ public class FreeType {
         invokePPV(library, hook_index, debug_hook, __functionAddress);
     }
 
-    public static void FT_Set_Debug_Hook(@NativeType("FT_Library") long library, @NativeType("FT_UInt") int hook_index, @Nullable @NativeType("FT_DebugHook_Func") FT_DebugHook_FuncI debug_hook) {
+    public static void FT_Set_Debug_Hook(@NativeType("FT_Library") long library, @NativeType("FT_UInt") int hook_index, @NativeType("FT_DebugHook_Func") @Nullable FT_DebugHook_FuncI debug_hook) {
         nFT_Set_Debug_Hook(library, hook_index, memAddressSafe(debug_hook));
     }
 
@@ -5188,7 +5185,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Get_PFR_Metrics(FT_Face face, @Nullable @NativeType("FT_UInt *") IntBuffer aoutline_resolution, @Nullable @NativeType("FT_UInt *") IntBuffer ametrics_resolution, @Nullable @NativeType("FT_Fixed *") CLongBuffer ametrics_x_scale, @Nullable @NativeType("FT_Fixed *") CLongBuffer ametrics_y_scale) {
+    public static int FT_Get_PFR_Metrics(FT_Face face, @NativeType("FT_UInt *") @Nullable IntBuffer aoutline_resolution, @NativeType("FT_UInt *") @Nullable IntBuffer ametrics_resolution, @NativeType("FT_Fixed *") @Nullable CLongBuffer ametrics_x_scale, @NativeType("FT_Fixed *") @Nullable CLongBuffer ametrics_y_scale) {
         if (CHECKS) {
             checkSafe(aoutline_resolution, 1);
             checkSafe(ametrics_resolution, 1);
@@ -5778,7 +5775,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Long")
-    public static long FT_Get_PS_Font_Value(FT_Face face, @NativeType("PS_Dict_Keys") int key, @NativeType("FT_UInt") int idx, @Nullable @NativeType("void *") ByteBuffer value) {
+    public static long FT_Get_PS_Font_Value(FT_Face face, @NativeType("PS_Dict_Keys") int key, @NativeType("FT_UInt") int idx, @NativeType("void *") @Nullable ByteBuffer value) {
         return nFT_Get_PS_Font_Value(face.address(), key, idx, memAddressSafe(value), remainingSafe(value));
     }
 
@@ -5802,7 +5799,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Load_Sfnt_Table(FT_Face face, @NativeType("FT_ULong") long tag, @NativeType("FT_Long") long offset, @Nullable @NativeType("FT_Byte *") ByteBuffer buffer, @Nullable @NativeType("FT_ULong *") CLongBuffer length) {
+    public static int FT_Load_Sfnt_Table(FT_Face face, @NativeType("FT_ULong") long tag, @NativeType("FT_Long") long offset, @NativeType("FT_Byte *") @Nullable ByteBuffer buffer, @NativeType("FT_ULong *") @Nullable CLongBuffer length) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -5817,7 +5814,7 @@ public class FreeType {
     }
 
     @NativeType("FT_Error")
-    public static int FT_Sfnt_Table_Info(FT_Face face, @NativeType("FT_UInt") int table_index, @Nullable @NativeType("FT_ULong *") CLongBuffer tag, @Nullable @NativeType("FT_ULong *") CLongBuffer length) {
+    public static int FT_Sfnt_Table_Info(FT_Face face, @NativeType("FT_UInt") int table_index, @NativeType("FT_ULong *") @Nullable CLongBuffer tag, @NativeType("FT_ULong *") @Nullable CLongBuffer length) {
         if (CHECKS) {
             checkSafe(length, 1);
         }

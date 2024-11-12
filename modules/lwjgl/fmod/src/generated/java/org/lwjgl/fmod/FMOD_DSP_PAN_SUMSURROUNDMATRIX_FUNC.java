@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -44,8 +44,7 @@ public abstract class FMOD_DSP_PAN_SUMSURROUNDMATRIX_FUNC extends Callback imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_PAN_SUMSURROUNDMATRIX_FUNC createSafe(long functionPointer) {
+    public static @Nullable FMOD_DSP_PAN_SUMSURROUNDMATRIX_FUNC createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

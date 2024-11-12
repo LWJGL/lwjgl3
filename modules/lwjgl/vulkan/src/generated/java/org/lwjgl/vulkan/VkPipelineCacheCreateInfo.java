@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,9 +121,8 @@ public class VkPipelineCacheCreateInfo extends Struct<VkPipelineCacheCreateInfo>
     @NativeType("size_t")
     public long initialDataSize() { return ninitialDataSize(address()); }
     /** a pointer to previously retrieved pipeline cache data. If the pipeline cache data is incompatible (as defined below) with the device, the pipeline cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored. */
-    @Nullable
     @NativeType("void const *")
-    public ByteBuffer pInitialData() { return npInitialData(address()); }
+    public @Nullable ByteBuffer pInitialData() { return npInitialData(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCacheCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -187,8 +186,7 @@ public class VkPipelineCacheCreateInfo extends Struct<VkPipelineCacheCreateInfo>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCacheCreateInfo createSafe(long address) {
+    public static @Nullable VkPipelineCacheCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkPipelineCacheCreateInfo(address, null);
     }
 
@@ -231,8 +229,7 @@ public class VkPipelineCacheCreateInfo extends Struct<VkPipelineCacheCreateInfo>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCacheCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineCacheCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -304,7 +301,7 @@ public class VkPipelineCacheCreateInfo extends Struct<VkPipelineCacheCreateInfo>
     /** Unsafe version of {@link #initialDataSize}. */
     public static long ninitialDataSize(long struct) { return memGetAddress(struct + VkPipelineCacheCreateInfo.INITIALDATASIZE); }
     /** Unsafe version of {@link #pInitialData() pInitialData}. */
-    @Nullable public static ByteBuffer npInitialData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineCacheCreateInfo.PINITIALDATA), (int)ninitialDataSize(struct)); }
+    public static @Nullable ByteBuffer npInitialData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkPipelineCacheCreateInfo.PINITIALDATA), (int)ninitialDataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCacheCreateInfo.STYPE, value); }
@@ -384,9 +381,8 @@ public class VkPipelineCacheCreateInfo extends Struct<VkPipelineCacheCreateInfo>
         @NativeType("size_t")
         public long initialDataSize() { return VkPipelineCacheCreateInfo.ninitialDataSize(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPipelineCacheCreateInfo#pInitialData} field. */
-        @Nullable
         @NativeType("void const *")
-        public ByteBuffer pInitialData() { return VkPipelineCacheCreateInfo.npInitialData(address()); }
+        public @Nullable ByteBuffer pInitialData() { return VkPipelineCacheCreateInfo.npInitialData(address()); }
 
         /** Sets the specified value to the {@link VkPipelineCacheCreateInfo#sType} field. */
         public VkPipelineCacheCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCacheCreateInfo.nsType(address(), value); return this; }

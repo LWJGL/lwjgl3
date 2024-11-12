@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -105,8 +105,7 @@ public class FT_PaintRadialGradient extends Struct<FT_PaintRadialGradient> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintRadialGradient createSafe(long address) {
+    public static @Nullable FT_PaintRadialGradient createSafe(long address) {
         return address == NULL ? null : new FT_PaintRadialGradient(address, null);
     }
 
@@ -121,8 +120,7 @@ public class FT_PaintRadialGradient extends Struct<FT_PaintRadialGradient> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_PaintRadialGradient.Buffer createSafe(long address, int capacity) {
+    public static FT_PaintRadialGradient.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -486,7 +486,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ByteBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
@@ -520,7 +520,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ShortBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
@@ -554,7 +554,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable IntBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
@@ -588,7 +588,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable FloatBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
@@ -622,7 +622,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable DoubleBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
@@ -646,7 +646,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ByteBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
@@ -665,7 +665,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable ShortBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
@@ -684,7 +684,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable IntBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
@@ -703,7 +703,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable FloatBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
@@ -722,7 +722,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") @Nullable DoubleBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
@@ -757,7 +757,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
-    public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers) {
+    public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer buffers) {
         nglBindBuffersBase(target, first, remainingSafe(buffers), memAddressSafe(buffers));
     }
 
@@ -800,7 +800,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
-    public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
+    public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer buffers, @NativeType("GLintptr const *") @Nullable PointerBuffer offsets, @NativeType("GLsizeiptr const *") @Nullable PointerBuffer sizes) {
         if (CHECKS) {
             checkSafe(offsets, remainingSafe(buffers));
             checkSafe(sizes, remainingSafe(buffers));
@@ -858,7 +858,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
-    public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
+    public static void glBindTextures(@NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer textures) {
         nglBindTextures(first, remainingSafe(textures), memAddressSafe(textures));
     }
 
@@ -896,7 +896,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
-    public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer samplers) {
+    public static void glBindSamplers(@NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer samplers) {
         nglBindSamplers(first, remainingSafe(samplers), memAddressSafe(samplers));
     }
 
@@ -945,7 +945,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
-    public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
+    public static void glBindImageTextures(@NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer textures) {
         nglBindImageTextures(first, remainingSafe(textures), memAddressSafe(textures));
     }
 
@@ -990,7 +990,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
-    public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") IntBuffer strides) {
+    public static void glBindVertexBuffers(@NativeType("GLuint") int first, @NativeType("GLuint const *") @Nullable IntBuffer buffers, @NativeType("GLintptr const *") @Nullable PointerBuffer offsets, @NativeType("GLsizei const *") @Nullable IntBuffer strides) {
         if (CHECKS) {
             checkSafe(offsets, remainingSafe(buffers));
             checkSafe(strides, remainingSafe(buffers));
@@ -1055,7 +1055,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1068,7 +1068,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1081,7 +1081,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1094,7 +1094,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
-    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1107,7 +1107,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1120,7 +1120,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1133,7 +1133,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1146,7 +1146,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
-    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double @Nullable [] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
         if (CHECKS) {
             check(__functionAddress);
@@ -1159,7 +1159,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
-    public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers) {
+    public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] buffers) {
         long __functionAddress = GL.getICD().glBindBuffersBase;
         if (CHECKS) {
             check(__functionAddress);
@@ -1172,7 +1172,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
-    public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
+    public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] buffers, @NativeType("GLintptr const *") @Nullable PointerBuffer offsets, @NativeType("GLsizeiptr const *") @Nullable PointerBuffer sizes) {
         long __functionAddress = GL.getICD().glBindBuffersRange;
         if (CHECKS) {
             check(__functionAddress);
@@ -1187,7 +1187,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
-    public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
+    public static void glBindTextures(@NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] textures) {
         long __functionAddress = GL.getICD().glBindTextures;
         if (CHECKS) {
             check(__functionAddress);
@@ -1200,7 +1200,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
-    public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] samplers) {
+    public static void glBindSamplers(@NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] samplers) {
         long __functionAddress = GL.getICD().glBindSamplers;
         if (CHECKS) {
             check(__functionAddress);
@@ -1213,7 +1213,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
-    public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
+    public static void glBindImageTextures(@NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] textures) {
         long __functionAddress = GL.getICD().glBindImageTextures;
         if (CHECKS) {
             check(__functionAddress);
@@ -1226,7 +1226,7 @@ public class GL44C extends GL43C {
      * 
      * @see <a href="https://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
-    public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
+    public static void glBindVertexBuffers(@NativeType("GLuint") int first, @NativeType("GLuint const *") int @Nullable [] buffers, @NativeType("GLintptr const *") @Nullable PointerBuffer offsets, @NativeType("GLsizei const *") int @Nullable [] strides) {
         long __functionAddress = GL.getICD().glBindVertexBuffers;
         if (CHECKS) {
             check(__functionAddress);

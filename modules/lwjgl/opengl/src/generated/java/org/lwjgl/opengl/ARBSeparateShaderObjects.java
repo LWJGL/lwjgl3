@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1379,7 +1379,7 @@ public class ARBSeparateShaderObjects {
      * @param length   a variable into which will be written the number of characters written into {@code infoLog}
      * @param infoLog  an array of characters into which will be written the info log for {@code pipeline}
      */
-    public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
+    public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
         GL41C.glGetProgramPipelineInfoLog(pipeline, length, infoLog);
     }
 
@@ -1590,7 +1590,7 @@ public class ARBSeparateShaderObjects {
     }
 
     /** Array version of: {@link #glGetProgramPipelineInfoLog GetProgramPipelineInfoLog} */
-    public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
+    public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         GL41C.glGetProgramPipelineInfoLog(pipeline, length, infoLog);
     }
 

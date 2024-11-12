@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -93,8 +93,7 @@ public class CXIdxCXXClassDeclInfo extends Struct<CXIdxCXXClassDeclInfo> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxCXXClassDeclInfo createSafe(long address) {
+    public static @Nullable CXIdxCXXClassDeclInfo createSafe(long address) {
         return address == NULL ? null : new CXIdxCXXClassDeclInfo(address, null);
     }
 
@@ -109,8 +108,7 @@ public class CXIdxCXXClassDeclInfo extends Struct<CXIdxCXXClassDeclInfo> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxCXXClassDeclInfo.Buffer createSafe(long address, int capacity) {
+    public static CXIdxCXXClassDeclInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

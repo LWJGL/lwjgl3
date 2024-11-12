@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -173,8 +173,7 @@ public class VkAttachmentDescriptionStencilLayout extends Struct<VkAttachmentDes
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentDescriptionStencilLayout createSafe(long address) {
+    public static @Nullable VkAttachmentDescriptionStencilLayout createSafe(long address) {
         return address == NULL ? null : new VkAttachmentDescriptionStencilLayout(address, null);
     }
 
@@ -217,8 +216,7 @@ public class VkAttachmentDescriptionStencilLayout extends Struct<VkAttachmentDes
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkAttachmentDescriptionStencilLayout.Buffer createSafe(long address, int capacity) {
+    public static VkAttachmentDescriptionStencilLayout.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

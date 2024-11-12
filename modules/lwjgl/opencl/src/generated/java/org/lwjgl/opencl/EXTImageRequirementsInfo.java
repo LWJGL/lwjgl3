@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -60,7 +60,7 @@ public class EXTImageRequirementsInfo {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @NativeType("cl_mem_properties const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(param_value_size_ret, 1);
@@ -73,7 +73,7 @@ public class EXTImageRequirementsInfo {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @NativeType("cl_mem_properties const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(param_value_size_ret, 1);
@@ -86,7 +86,7 @@ public class EXTImageRequirementsInfo {
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
      */
     @NativeType("cl_int")
-    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @NativeType("cl_mem_properties const *") @Nullable LongBuffer properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(param_value_size_ret, 1);
@@ -96,7 +96,7 @@ public class EXTImageRequirementsInfo {
 
     /** Array version of: {@link #clGetImageRequirementsInfoEXT GetImageRequirementsInfoEXT} */
     @NativeType("cl_int")
-    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @NativeType("cl_mem_properties const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetImageRequirementsInfoEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -109,7 +109,7 @@ public class EXTImageRequirementsInfo {
 
     /** Array version of: {@link #clGetImageRequirementsInfoEXT GetImageRequirementsInfoEXT} */
     @NativeType("cl_int")
-    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @Nullable @NativeType("cl_mem_properties const *") long[] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageRequirementsInfoEXT(@NativeType("cl_context") long context, @NativeType("cl_mem_properties const *") long @Nullable [] properties, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("cl_image_desc const *") CLImageDesc image_desc, @NativeType("cl_image_requirements_info_ext") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetImageRequirementsInfoEXT;
         if (CHECKS) {
             check(__functionAddress);

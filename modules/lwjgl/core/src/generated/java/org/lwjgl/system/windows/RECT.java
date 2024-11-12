@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class RECT extends Struct<RECT> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RECT createSafe(long address) {
+    public static @Nullable RECT createSafe(long address) {
         return address == NULL ? null : new RECT(address, null);
     }
 
@@ -199,8 +198,7 @@ public class RECT extends Struct<RECT> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RECT.Buffer createSafe(long address, int capacity) {
+    public static RECT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

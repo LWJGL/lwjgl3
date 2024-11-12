@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -260,8 +260,7 @@ public class VkVideoEncodeH265PictureInfoKHR extends Struct<VkVideoEncodeH265Pic
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeH265PictureInfoKHR createSafe(long address) {
+    public static @Nullable VkVideoEncodeH265PictureInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoEncodeH265PictureInfoKHR(address, null);
     }
 
@@ -304,8 +303,7 @@ public class VkVideoEncodeH265PictureInfoKHR extends Struct<VkVideoEncodeH265Pic
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeH265PictureInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoEncodeH265PictureInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

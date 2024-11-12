@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDevice
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceQueueShaderCoreControlCreateInfoARM createSafe(long address) {
+    public static @Nullable VkDeviceQueueShaderCoreControlCreateInfoARM createSafe(long address) {
         return address == NULL ? null : new VkDeviceQueueShaderCoreControlCreateInfoARM(address, null);
     }
 
@@ -206,8 +205,7 @@ public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDevice
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceQueueShaderCoreControlCreateInfoARM.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceQueueShaderCoreControlCreateInfoARM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

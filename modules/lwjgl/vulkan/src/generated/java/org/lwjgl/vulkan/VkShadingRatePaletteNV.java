@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkShadingRatePaletteNV createSafe(long address) {
+    public static @Nullable VkShadingRatePaletteNV createSafe(long address) {
         return address == NULL ? null : new VkShadingRatePaletteNV(address, null);
     }
 
@@ -182,8 +181,7 @@ public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkShadingRatePaletteNV.Buffer createSafe(long address, int capacity) {
+    public static VkShadingRatePaletteNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

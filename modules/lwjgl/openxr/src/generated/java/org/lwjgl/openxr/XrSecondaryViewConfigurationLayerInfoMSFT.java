@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -202,8 +202,7 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct<XrSecondar
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSecondaryViewConfigurationLayerInfoMSFT createSafe(long address) {
+    public static @Nullable XrSecondaryViewConfigurationLayerInfoMSFT createSafe(long address) {
         return address == NULL ? null : new XrSecondaryViewConfigurationLayerInfoMSFT(address, null);
     }
 
@@ -246,8 +245,7 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct<XrSecondar
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSecondaryViewConfigurationLayerInfoMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSecondaryViewConfigurationLayerInfoMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

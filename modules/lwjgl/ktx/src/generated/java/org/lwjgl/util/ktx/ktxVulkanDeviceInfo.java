@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -141,9 +141,8 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     @NativeType("VkCommandPool")
     public long cmdPool() { return ncmdPool(address()); }
     /** pointer to the allocator to use for the command buffer and created images */
-    @Nullable
     @NativeType("VkAllocationCallbacks const *")
-    public VkAllocationCallbacks pAllocator() { return npAllocator(address()); }
+    public @Nullable VkAllocationCallbacks pAllocator() { return npAllocator(address()); }
     /** memory properties of the Vulkan physical device */
     public VkPhysicalDeviceMemoryProperties deviceMemoryProperties() { return ndeviceMemoryProperties(address()); }
     /** the functions needed to operate functions */
@@ -231,8 +230,7 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanDeviceInfo createSafe(long address) {
+    public static @Nullable ktxVulkanDeviceInfo createSafe(long address) {
         return address == NULL ? null : new ktxVulkanDeviceInfo(address, null);
     }
 
@@ -275,8 +273,7 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanDeviceInfo.Buffer createSafe(long address, int capacity) {
+    public static ktxVulkanDeviceInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -333,7 +330,7 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
     /** Unsafe version of {@link #cmdPool}. */
     public static long ncmdPool(long struct) { return memGetLong(struct + ktxVulkanDeviceInfo.CMDPOOL); }
     /** Unsafe version of {@link #pAllocator}. */
-    @Nullable public static VkAllocationCallbacks npAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + ktxVulkanDeviceInfo.PALLOCATOR)); }
+    public static @Nullable VkAllocationCallbacks npAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + ktxVulkanDeviceInfo.PALLOCATOR)); }
     /** Unsafe version of {@link #deviceMemoryProperties}. */
     public static VkPhysicalDeviceMemoryProperties ndeviceMemoryProperties(long struct) { return VkPhysicalDeviceMemoryProperties.create(struct + ktxVulkanDeviceInfo.DEVICEMEMORYPROPERTIES); }
     /** Unsafe version of {@link #vkFuncs}. */
@@ -434,9 +431,8 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
         @NativeType("VkCommandPool")
         public long cmdPool() { return ktxVulkanDeviceInfo.ncmdPool(address()); }
         /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@link ktxVulkanDeviceInfo#pAllocator} field. */
-        @Nullable
         @NativeType("VkAllocationCallbacks const *")
-        public VkAllocationCallbacks pAllocator() { return ktxVulkanDeviceInfo.npAllocator(address()); }
+        public @Nullable VkAllocationCallbacks pAllocator() { return ktxVulkanDeviceInfo.npAllocator(address()); }
         /** @return a {@link VkPhysicalDeviceMemoryProperties} view of the {@link ktxVulkanDeviceInfo#deviceMemoryProperties} field. */
         public VkPhysicalDeviceMemoryProperties deviceMemoryProperties() { return ktxVulkanDeviceInfo.ndeviceMemoryProperties(address()); }
         /** @return a {@link ktxVulkanFunctions} view of the {@link ktxVulkanDeviceInfo#vkFuncs} field. */

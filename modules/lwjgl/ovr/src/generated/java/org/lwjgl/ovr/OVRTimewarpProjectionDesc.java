@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,8 +112,7 @@ public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTimewarpProjectionDesc createSafe(long address) {
+    public static @Nullable OVRTimewarpProjectionDesc createSafe(long address) {
         return address == NULL ? null : new OVRTimewarpProjectionDesc(address, null);
     }
 
@@ -156,8 +155,7 @@ public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRTimewarpProjectionDesc.Buffer createSafe(long address, int capacity) {
+    public static OVRTimewarpProjectionDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

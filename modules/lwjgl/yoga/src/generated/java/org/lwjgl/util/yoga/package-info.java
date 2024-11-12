@@ -38,6 +38,6 @@
  * float w = layout.dimensions(YGDimensionWidth);
  * float h = layout.dimensions(YGDimensionHeight);</code></pre>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.yoga;
 

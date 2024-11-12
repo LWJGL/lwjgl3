@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -620,7 +620,7 @@ public class ARBRobustness {
      * @param columnBufSize the maximum number of bytes to write into {@code column}
      * @param column        a buffer in which to return the filter column
      */
-    public static void glGetnSeparableFilterARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int rowBufSize, @NativeType("void *") long row, @NativeType("GLsizei") int columnBufSize, @NativeType("void *") long column, @Nullable @NativeType("void *") ByteBuffer span) {
+    public static void glGetnSeparableFilterARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("GLsizei") int rowBufSize, @NativeType("void *") long row, @NativeType("GLsizei") int columnBufSize, @NativeType("void *") long column, @NativeType("void *") @Nullable ByteBuffer span) {
         nglGetnSeparableFilterARB(target, format, type, rowBufSize, row, columnBufSize, column, memAddressSafe(span));
     }
 
@@ -633,7 +633,7 @@ public class ARBRobustness {
      * @param row    a buffer in which to return the filter row
      * @param column a buffer in which to return the filter column
      */
-    public static void glGetnSeparableFilterARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer row, @NativeType("void *") ByteBuffer column, @Nullable @NativeType("void *") ByteBuffer span) {
+    public static void glGetnSeparableFilterARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") ByteBuffer row, @NativeType("void *") ByteBuffer column, @NativeType("void *") @Nullable ByteBuffer span) {
         nglGetnSeparableFilterARB(target, format, type, row.remaining(), memAddress(row), column.remaining(), memAddress(column), memAddressSafe(span));
     }
 

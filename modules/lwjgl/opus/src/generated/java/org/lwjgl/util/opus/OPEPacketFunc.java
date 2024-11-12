@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -39,8 +39,7 @@ public abstract class OPEPacketFunc extends Callback implements OPEPacketFuncI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static OPEPacketFunc createSafe(long functionPointer) {
+    public static @Nullable OPEPacketFunc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

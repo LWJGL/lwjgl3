@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -46,7 +46,7 @@ public class VRDriverManager {
 
     /** @return the length of the number of bytes necessary to hold this string including the trailing null */
     @NativeType("uint32_t")
-    public static int VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @Nullable @NativeType("char *") ByteBuffer pchValue) {
+    public static int VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRDriverManager_GetDriverName(nDriver, memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 

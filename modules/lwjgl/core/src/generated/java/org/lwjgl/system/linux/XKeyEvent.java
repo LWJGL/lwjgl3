@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -272,8 +272,7 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XKeyEvent createSafe(long address) {
+    public static @Nullable XKeyEvent createSafe(long address) {
         return address == NULL ? null : new XKeyEvent(address, null);
     }
 
@@ -316,8 +315,7 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XKeyEvent.Buffer createSafe(long address, int capacity) {
+    public static XKeyEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -74,9 +74,8 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** starting address */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer iov_base() { return niov_base(address()); }
+    public @Nullable ByteBuffer iov_base() { return niov_base(address()); }
     /** number of bytes to transfer */
     @NativeType("size_t")
     public long iov_len() { return niov_len(address()); }
@@ -133,8 +132,7 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOVec createSafe(long address) {
+    public static @Nullable IOVec createSafe(long address) {
         return address == NULL ? null : new IOVec(address, null);
     }
 
@@ -177,8 +175,7 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOVec.Buffer createSafe(long address, int capacity) {
+    public static IOVec.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -223,7 +220,7 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #iov_base() iov_base}. */
-    @Nullable public static ByteBuffer niov_base(long struct) { return memByteBufferSafe(memGetAddress(struct + IOVec.IOV_BASE), (int)niov_len(struct)); }
+    public static @Nullable ByteBuffer niov_base(long struct) { return memByteBufferSafe(memGetAddress(struct + IOVec.IOV_BASE), (int)niov_len(struct)); }
     /** Unsafe version of {@link #iov_len}. */
     public static long niov_len(long struct) { return memGetAddress(struct + IOVec.IOV_LEN); }
 
@@ -276,9 +273,8 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
         }
 
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link IOVec#iov_base} field. */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer iov_base() { return IOVec.niov_base(address()); }
+        public @Nullable ByteBuffer iov_base() { return IOVec.niov_base(address()); }
         /** @return the value of the {@link IOVec#iov_len} field. */
         @NativeType("size_t")
         public long iov_len() { return IOVec.niov_len(address()); }

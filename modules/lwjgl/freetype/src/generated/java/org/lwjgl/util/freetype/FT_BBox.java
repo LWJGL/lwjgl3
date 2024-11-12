@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -155,8 +155,7 @@ public class FT_BBox extends Struct<FT_BBox> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_BBox createSafe(long address) {
+    public static @Nullable FT_BBox createSafe(long address) {
         return address == NULL ? null : new FT_BBox(address, null);
     }
 
@@ -199,8 +198,7 @@ public class FT_BBox extends Struct<FT_BBox> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_BBox.Buffer createSafe(long address, int capacity) {
+    public static FT_BBox.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

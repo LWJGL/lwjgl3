@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -465,7 +465,7 @@ public class X11 {
      *                     {@code display_name} is {@code NULL}, it defaults to the value of the DISPLAY environment variable.
      */
     @NativeType("Display *")
-    public static long XOpenDisplay(@Nullable @NativeType("char const *") ByteBuffer display_name) {
+    public static long XOpenDisplay(@NativeType("char const *") @Nullable ByteBuffer display_name) {
         if (CHECKS) {
             checkNT1Safe(display_name);
         }
@@ -484,7 +484,7 @@ public class X11 {
      *                     {@code display_name} is {@code NULL}, it defaults to the value of the DISPLAY environment variable.
      */
     @NativeType("Display *")
-    public static long XOpenDisplay(@Nullable @NativeType("char const *") CharSequence display_name) {
+    public static long XOpenDisplay(@NativeType("char const *") @Nullable CharSequence display_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCIISafe(display_name, true);
@@ -769,9 +769,8 @@ public class X11 {
      *
      * @param display the connection to the X server
      */
-    @Nullable
     @NativeType("XTimeCoord *")
-    public static XTimeCoord.Buffer XGetMotionEvents(@NativeType("Display *") long display, @NativeType("Window") long w, @NativeType("Time") long start, @NativeType("Time") long stop) {
+    public static XTimeCoord.@Nullable Buffer XGetMotionEvents(@NativeType("Display *") long display, @NativeType("Window") long w, @NativeType("Time") long start, @NativeType("Time") long stop) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer nevents_return = stack.callocInt(1);
         try {

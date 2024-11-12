@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExtensionProperties createSafe(long address) {
+    public static @Nullable XrExtensionProperties createSafe(long address) {
         return address == NULL ? null : new XrExtensionProperties(address, null);
     }
 
@@ -209,8 +208,7 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExtensionProperties.Buffer createSafe(long address, int capacity) {
+    public static XrExtensionProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

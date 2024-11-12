@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -809,7 +809,7 @@ public class ARBVertexShader {
      * @param type       the data type of the attribute variable
      * @param name       a null terminated string containing the name of the attribute variable
      */
-    public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(length, 1);
             check(size, 1);
@@ -1224,7 +1224,7 @@ public class ARBVertexShader {
     }
 
     /** Array version of: {@link #glGetActiveAttribARB GetActiveAttribARB} */
-    public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
+    public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetActiveAttribARB;
         if (CHECKS) {
             check(__functionAddress);

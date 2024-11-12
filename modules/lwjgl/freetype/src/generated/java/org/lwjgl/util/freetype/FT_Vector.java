@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class FT_Vector extends Struct<FT_Vector> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Vector createSafe(long address) {
+    public static @Nullable FT_Vector createSafe(long address) {
         return address == NULL ? null : new FT_Vector(address, null);
     }
 
@@ -177,8 +176,7 @@ public class FT_Vector extends Struct<FT_Vector> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Vector.Buffer createSafe(long address, int capacity) {
+    public static FT_Vector.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

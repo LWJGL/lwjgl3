@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class NkMemoryStatus extends Struct<NkMemoryStatus> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMemoryStatus createSafe(long address) {
+    public static @Nullable NkMemoryStatus createSafe(long address) {
         return address == NULL ? null : new NkMemoryStatus(address, null);
     }
 
@@ -176,8 +175,7 @@ public class NkMemoryStatus extends Struct<NkMemoryStatus> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMemoryStatus.Buffer createSafe(long address, int capacity) {
+    public static NkMemoryStatus.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

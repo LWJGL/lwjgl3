@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -54,7 +54,7 @@ public class UIO {
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long readv(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
+    public static long readv(@NativeType("int *") @Nullable IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -68,7 +68,7 @@ public class UIO {
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long writev(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
+    public static long writev(@NativeType("int *") @Nullable IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -82,7 +82,7 @@ public class UIO {
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long preadv(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
+    public static long preadv(@NativeType("int *") @Nullable IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -96,7 +96,7 @@ public class UIO {
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
     @NativeType("ssize_t")
-    public static long pwritev(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
+    public static long pwritev(@NativeType("int *") @Nullable IntBuffer _errno, int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -114,7 +114,7 @@ public class UIO {
      * @param _errno optionally returns the {@code errno} value after this function is called
      */
     @NativeType("ssize_t")
-    public static long process_vm_readv(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
+    public static long process_vm_readv(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -132,7 +132,7 @@ public class UIO {
      * @param _errno optionally returns the {@code errno} value after this function is called
      */
     @NativeType("ssize_t")
-    public static long process_vm_writev(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
+    public static long process_vm_writev(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("pid_t") int __pid, @NativeType("struct iovec const *") IOVec __lvec, @NativeType("unsigned long int") long __liovcnt, @NativeType("struct iovec const *") IOVec __rvec, @NativeType("unsigned long int") long __riovcnt, @NativeType("unsigned long int") long __flags) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }

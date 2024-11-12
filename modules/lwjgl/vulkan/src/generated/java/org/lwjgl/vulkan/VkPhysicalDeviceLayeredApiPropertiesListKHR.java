@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -111,9 +111,8 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     @NativeType("uint32_t")
     public int layeredApiCount() { return nlayeredApiCount(address()); }
     /** a pointer to an array of {@link VkPhysicalDeviceLayeredApiPropertiesKHR} in which information regarding the layered implementations underneath the Vulkan physical device are returned. */
-    @Nullable
     @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *")
-    public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer pLayeredApis() { return npLayeredApis(address()); }
+    public VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer pLayeredApis() { return npLayeredApis(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -124,14 +123,14 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     /** Sets the specified value to the {@link #layeredApiCount} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR layeredApiCount(@NativeType("uint32_t") int value) { nlayeredApiCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@link #pLayeredApis} field. */
-    public VkPhysicalDeviceLayeredApiPropertiesListKHR pLayeredApis(@Nullable @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer value) { npLayeredApis(address(), value); return this; }
+    public VkPhysicalDeviceLayeredApiPropertiesListKHR pLayeredApis(@NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer value) { npLayeredApis(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR set(
         int sType,
         long pNext,
         int layeredApiCount,
-        @Nullable VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer pLayeredApis
+        VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer pLayeredApis
     ) {
         sType(sType);
         pNext(pNext);
@@ -177,8 +176,7 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceLayeredApiPropertiesListKHR createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceLayeredApiPropertiesListKHR createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceLayeredApiPropertiesListKHR(address, null);
     }
 
@@ -221,8 +219,7 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceLayeredApiPropertiesListKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -273,7 +270,7 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     /** Unsafe version of {@link #layeredApiCount}. */
     public static int nlayeredApiCount(long struct) { return memGetInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT); }
     /** Unsafe version of {@link #pLayeredApis}. */
-    @Nullable public static VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer npLayeredApis(long struct) { return VkPhysicalDeviceLayeredApiPropertiesKHR.createSafe(memGetAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS), nlayeredApiCount(struct)); }
+    public static VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer npLayeredApis(long struct) { return VkPhysicalDeviceLayeredApiPropertiesKHR.createSafe(memGetAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS), nlayeredApiCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.STYPE, value); }
@@ -282,7 +279,7 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     /** Sets the specified value to the {@code layeredApiCount} field of the specified {@code struct}. */
     public static void nlayeredApiCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.LAYEREDAPICOUNT, value); }
     /** Unsafe version of {@link #pLayeredApis(VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer) pLayeredApis}. */
-    public static void npLayeredApis(long struct, @Nullable VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS, memAddressSafe(value)); if (value != null) { nlayeredApiCount(struct, value.remaining()); } }
+    public static void npLayeredApis(long struct, VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer value) { memPutAddress(struct + VkPhysicalDeviceLayeredApiPropertiesListKHR.PLAYEREDAPIS, memAddressSafe(value)); if (value != null) { nlayeredApiCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -337,9 +334,8 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
         @NativeType("uint32_t")
         public int layeredApiCount() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.nlayeredApiCount(address()); }
         /** @return a {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} view of the struct array pointed to by the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pLayeredApis} field. */
-        @Nullable
         @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *")
-        public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer pLayeredApis() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address()); }
+        public VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer pLayeredApis() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address()); }
 
         /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#sType} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.nsType(address(), value); return this; }
@@ -350,7 +346,7 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
         /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#layeredApiCount} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer layeredApiCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.nlayeredApiCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pLayeredApis} field. */
-        public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer pLayeredApis(@Nullable @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address(), value); return this; }
+        public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer pLayeredApis(@NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address(), value); return this; }
 
     }
 

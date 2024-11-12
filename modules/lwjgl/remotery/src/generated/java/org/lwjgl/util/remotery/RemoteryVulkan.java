@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -54,7 +54,7 @@ public class RemoteryVulkan {
 
     public static native void nrmt_BeginVulkanSample(long bind, long command_buffer, long name, long hash_cache);
 
-    public static void rmt_BeginVulkanSample(@NativeType("rmtVulkanBind *") RMTVulkanBind bind, @NativeType("VkCommandBuffer") long command_buffer, @NativeType("rmtPStr") ByteBuffer name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginVulkanSample(@NativeType("rmtVulkanBind *") RMTVulkanBind bind, @NativeType("VkCommandBuffer") long command_buffer, @NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             check(command_buffer);
             checkNT1(name);
@@ -63,7 +63,7 @@ public class RemoteryVulkan {
         nrmt_BeginVulkanSample(bind.address(), command_buffer, memAddress(name), memAddressSafe(hash_cache));
     }
 
-    public static void rmt_BeginVulkanSample(@NativeType("rmtVulkanBind *") RMTVulkanBind bind, @NativeType("VkCommandBuffer") long command_buffer, @NativeType("rmtPStr") CharSequence name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginVulkanSample(@NativeType("rmtVulkanBind *") RMTVulkanBind bind, @NativeType("VkCommandBuffer") long command_buffer, @NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             check(command_buffer);
             checkSafe(hash_cache, 1);

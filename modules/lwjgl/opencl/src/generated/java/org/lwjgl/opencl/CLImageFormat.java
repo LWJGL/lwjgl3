@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -137,8 +137,7 @@ public class CLImageFormat extends Struct<CLImageFormat> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLImageFormat createSafe(long address) {
+    public static @Nullable CLImageFormat createSafe(long address) {
         return address == NULL ? null : new CLImageFormat(address, null);
     }
 
@@ -181,8 +180,7 @@ public class CLImageFormat extends Struct<CLImageFormat> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CLImageFormat.Buffer createSafe(long address, int capacity) {
+    public static CLImageFormat.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -69,13 +69,13 @@ public class VkDependencyInfoKHR extends VkDependencyInfo {
     public VkDependencyInfoKHR dependencyFlags(@NativeType("VkDependencyFlags") int value) { ndependencyFlags(address(), value); return this; }
     /** Sets the address of the specified {@link VkMemoryBarrier2.Buffer} to the {@code pMemoryBarriers} field. */
     @Override
-    public VkDependencyInfoKHR pMemoryBarriers(@Nullable @NativeType("VkMemoryBarrier2 const *") VkMemoryBarrier2.Buffer value) { npMemoryBarriers(address(), value); return this; }
+    public VkDependencyInfoKHR pMemoryBarriers(@NativeType("VkMemoryBarrier2 const *") VkMemoryBarrier2.@Nullable Buffer value) { npMemoryBarriers(address(), value); return this; }
     /** Sets the address of the specified {@link VkBufferMemoryBarrier2.Buffer} to the {@code pBufferMemoryBarriers} field. */
     @Override
-    public VkDependencyInfoKHR pBufferMemoryBarriers(@Nullable @NativeType("VkBufferMemoryBarrier2 const *") VkBufferMemoryBarrier2.Buffer value) { npBufferMemoryBarriers(address(), value); return this; }
+    public VkDependencyInfoKHR pBufferMemoryBarriers(@NativeType("VkBufferMemoryBarrier2 const *") VkBufferMemoryBarrier2.@Nullable Buffer value) { npBufferMemoryBarriers(address(), value); return this; }
     /** Sets the address of the specified {@link VkImageMemoryBarrier2.Buffer} to the {@code pImageMemoryBarriers} field. */
     @Override
-    public VkDependencyInfoKHR pImageMemoryBarriers(@Nullable @NativeType("VkImageMemoryBarrier2 const *") VkImageMemoryBarrier2.Buffer value) { npImageMemoryBarriers(address(), value); return this; }
+    public VkDependencyInfoKHR pImageMemoryBarriers(@NativeType("VkImageMemoryBarrier2 const *") VkImageMemoryBarrier2.@Nullable Buffer value) { npImageMemoryBarriers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -83,9 +83,9 @@ public class VkDependencyInfoKHR extends VkDependencyInfo {
         int sType,
         long pNext,
         int dependencyFlags,
-        @Nullable VkMemoryBarrier2.Buffer pMemoryBarriers,
-        @Nullable VkBufferMemoryBarrier2.Buffer pBufferMemoryBarriers,
-        @Nullable VkImageMemoryBarrier2.Buffer pImageMemoryBarriers
+        VkMemoryBarrier2.@Nullable Buffer pMemoryBarriers,
+        VkBufferMemoryBarrier2.@Nullable Buffer pBufferMemoryBarriers,
+        VkImageMemoryBarrier2.@Nullable Buffer pImageMemoryBarriers
     ) {
         sType(sType);
         pNext(pNext);
@@ -133,8 +133,7 @@ public class VkDependencyInfoKHR extends VkDependencyInfo {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDependencyInfoKHR createSafe(long address) {
+    public static @Nullable VkDependencyInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkDependencyInfoKHR(address, null);
     }
 
@@ -177,8 +176,7 @@ public class VkDependencyInfoKHR extends VkDependencyInfo {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDependencyInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDependencyInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -277,13 +275,13 @@ public class VkDependencyInfoKHR extends VkDependencyInfo {
         public VkDependencyInfoKHR.Buffer dependencyFlags(@NativeType("VkDependencyFlags") int value) { VkDependencyInfoKHR.ndependencyFlags(address(), value); return this; }
         /** Sets the address of the specified {@link VkMemoryBarrier2.Buffer} to the {@code pMemoryBarriers} field. */
         @Override
-        public VkDependencyInfoKHR.Buffer pMemoryBarriers(@Nullable @NativeType("VkMemoryBarrier2 const *") VkMemoryBarrier2.Buffer value) { VkDependencyInfoKHR.npMemoryBarriers(address(), value); return this; }
+        public VkDependencyInfoKHR.Buffer pMemoryBarriers(@NativeType("VkMemoryBarrier2 const *") VkMemoryBarrier2.@Nullable Buffer value) { VkDependencyInfoKHR.npMemoryBarriers(address(), value); return this; }
         /** Sets the address of the specified {@link VkBufferMemoryBarrier2.Buffer} to the {@code pBufferMemoryBarriers} field. */
         @Override
-        public VkDependencyInfoKHR.Buffer pBufferMemoryBarriers(@Nullable @NativeType("VkBufferMemoryBarrier2 const *") VkBufferMemoryBarrier2.Buffer value) { VkDependencyInfoKHR.npBufferMemoryBarriers(address(), value); return this; }
+        public VkDependencyInfoKHR.Buffer pBufferMemoryBarriers(@NativeType("VkBufferMemoryBarrier2 const *") VkBufferMemoryBarrier2.@Nullable Buffer value) { VkDependencyInfoKHR.npBufferMemoryBarriers(address(), value); return this; }
         /** Sets the address of the specified {@link VkImageMemoryBarrier2.Buffer} to the {@code pImageMemoryBarriers} field. */
         @Override
-        public VkDependencyInfoKHR.Buffer pImageMemoryBarriers(@Nullable @NativeType("VkImageMemoryBarrier2 const *") VkImageMemoryBarrier2.Buffer value) { VkDependencyInfoKHR.npImageMemoryBarriers(address(), value); return this; }
+        public VkDependencyInfoKHR.Buffer pImageMemoryBarriers(@NativeType("VkImageMemoryBarrier2 const *") VkImageMemoryBarrier2.@Nullable Buffer value) { VkDependencyInfoKHR.npImageMemoryBarriers(address(), value); return this; }
 
     }
 

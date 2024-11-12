@@ -21,6 +21,6 @@
  * options. For example, setting {@link org.lwjgl.system.Configuration#FMOD_LIBRARY_NAME FMOD_LIBRARY_NAME} to "fmodL" will load the logging version of
  * the FMOD core library.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.fmod;
 

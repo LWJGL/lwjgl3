@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -337,8 +337,7 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_ADVANCEDSETTINGS createSafe(long address) {
+    public static @Nullable FMOD_ADVANCEDSETTINGS createSafe(long address) {
         return address == NULL ? null : new FMOD_ADVANCEDSETTINGS(address, null);
     }
 
@@ -381,8 +380,7 @@ public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_ADVANCEDSETTINGS.Buffer createSafe(long address, int capacity) {
+    public static FMOD_ADVANCEDSETTINGS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

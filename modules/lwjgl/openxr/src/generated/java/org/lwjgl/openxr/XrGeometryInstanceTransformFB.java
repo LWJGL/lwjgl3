@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,8 +206,7 @@ public class XrGeometryInstanceTransformFB extends Struct<XrGeometryInstanceTran
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGeometryInstanceTransformFB createSafe(long address) {
+    public static @Nullable XrGeometryInstanceTransformFB createSafe(long address) {
         return address == NULL ? null : new XrGeometryInstanceTransformFB(address, null);
     }
 
@@ -250,8 +249,7 @@ public class XrGeometryInstanceTransformFB extends Struct<XrGeometryInstanceTran
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGeometryInstanceTransformFB.Buffer createSafe(long address, int capacity) {
+    public static XrGeometryInstanceTransformFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

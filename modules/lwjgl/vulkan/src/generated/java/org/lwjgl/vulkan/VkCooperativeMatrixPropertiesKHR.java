@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -217,8 +217,7 @@ public class VkCooperativeMatrixPropertiesKHR extends Struct<VkCooperativeMatrix
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCooperativeMatrixPropertiesKHR createSafe(long address) {
+    public static @Nullable VkCooperativeMatrixPropertiesKHR createSafe(long address) {
         return address == NULL ? null : new VkCooperativeMatrixPropertiesKHR(address, null);
     }
 
@@ -261,8 +260,7 @@ public class VkCooperativeMatrixPropertiesKHR extends Struct<VkCooperativeMatrix
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCooperativeMatrixPropertiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkCooperativeMatrixPropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

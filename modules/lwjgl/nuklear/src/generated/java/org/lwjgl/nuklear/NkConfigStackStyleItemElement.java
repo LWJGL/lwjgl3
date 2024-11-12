@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,8 +86,7 @@ class NkConfigStackStyleItemElement extends Struct<NkConfigStackStyleItemElement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackStyleItemElement createSafe(long address) {
+    public static @Nullable NkConfigStackStyleItemElement createSafe(long address) {
         return address == NULL ? null : new NkConfigStackStyleItemElement(address, null);
     }
 
@@ -102,8 +101,7 @@ class NkConfigStackStyleItemElement extends Struct<NkConfigStackStyleItemElement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConfigStackStyleItemElement.Buffer createSafe(long address, int capacity) {
+    public static NkConfigStackStyleItemElement.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

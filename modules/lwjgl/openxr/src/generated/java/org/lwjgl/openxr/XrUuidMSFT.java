@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,8 +129,7 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrUuidMSFT createSafe(long address) {
+    public static @Nullable XrUuidMSFT createSafe(long address) {
         return address == NULL ? null : new XrUuidMSFT(address, null);
     }
 
@@ -173,8 +172,7 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrUuidMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrUuidMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

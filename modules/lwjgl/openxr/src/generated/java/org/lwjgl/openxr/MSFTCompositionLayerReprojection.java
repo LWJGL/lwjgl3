@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -147,7 +147,7 @@ public class MSFTCompositionLayerReprojection {
      * @param modes                 a pointer to an application-allocated array that will be filled with the {@code XrReprojectionModeMSFT} values that are supported by the runtime. It <b>can</b> be {@code NULL} if {@code modeCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateReprojectionModesMSFT(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer modeCountOutput, @Nullable @NativeType("XrReprojectionModeMSFT *") IntBuffer modes) {
+    public static int xrEnumerateReprojectionModesMSFT(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("XrViewConfigurationType") int viewConfigurationType, @NativeType("uint32_t *") IntBuffer modeCountOutput, @NativeType("XrReprojectionModeMSFT *") @Nullable IntBuffer modes) {
         if (CHECKS) {
             check(modeCountOutput, 1);
         }

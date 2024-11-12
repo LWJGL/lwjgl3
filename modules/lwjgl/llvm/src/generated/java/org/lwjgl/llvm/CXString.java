@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,8 +112,7 @@ public class CXString extends Struct<CXString> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXString createSafe(long address) {
+    public static @Nullable CXString createSafe(long address) {
         return address == NULL ? null : new CXString(address, null);
     }
 
@@ -156,8 +155,7 @@ public class CXString extends Struct<CXString> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXString.Buffer createSafe(long address, int capacity) {
+    public static CXString.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

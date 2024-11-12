@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -215,7 +215,7 @@ public class EXTDeviceFault {
      * @param pFaultInfo   {@code NULL} or a pointer to a {@link VkDeviceFaultInfoEXT} structure in which fault information is returned.
      */
     @NativeType("VkResult")
-    public static int vkGetDeviceFaultInfoEXT(VkDevice device, @NativeType("VkDeviceFaultCountsEXT *") VkDeviceFaultCountsEXT pFaultCounts, @Nullable @NativeType("VkDeviceFaultInfoEXT *") VkDeviceFaultInfoEXT pFaultInfo) {
+    public static int vkGetDeviceFaultInfoEXT(VkDevice device, @NativeType("VkDeviceFaultCountsEXT *") VkDeviceFaultCountsEXT pFaultCounts, @NativeType("VkDeviceFaultInfoEXT *") @Nullable VkDeviceFaultInfoEXT pFaultInfo) {
         return nvkGetDeviceFaultInfoEXT(device, pFaultCounts.address(), memAddressSafe(pFaultInfo));
     }
 

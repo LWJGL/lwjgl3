@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jawt;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -111,8 +111,7 @@ public class JAWTDrawingSurfaceInfo extends Struct<JAWTDrawingSurfaceInfo> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static JAWTDrawingSurfaceInfo createSafe(long address) {
+    public static @Nullable JAWTDrawingSurfaceInfo createSafe(long address) {
         return address == NULL ? null : new JAWTDrawingSurfaceInfo(address, null);
     }
 
@@ -127,8 +126,7 @@ public class JAWTDrawingSurfaceInfo extends Struct<JAWTDrawingSurfaceInfo> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static JAWTDrawingSurfaceInfo.Buffer createSafe(long address, int capacity) {
+    public static JAWTDrawingSurfaceInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

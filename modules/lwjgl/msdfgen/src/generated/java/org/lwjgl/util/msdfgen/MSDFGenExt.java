@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.msdfgen;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -68,9 +68,8 @@ public class MSDFGenExt {
      *
      * @return a pointer to the current FreeType load callback function
      */
-    @Nullable
     @NativeType("void * (*) (char const *)")
-    public static MSDFGenFTLoadCallback msdf_ft_get_load_callback() {
+    public static @Nullable MSDFGenFTLoadCallback msdf_ft_get_load_callback() {
         return MSDFGenFTLoadCallback.createSafe(nmsdf_ft_get_load_callback());
     }
 

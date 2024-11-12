@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -92,7 +92,7 @@ public class EGL12 extends EGL11 {
 
     /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferFromClientBuffer.xhtml">Reference Page</a> */
     @NativeType("EGLSurface")
-    public static long eglCreatePbufferFromClientBuffer(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int buftype, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static long eglCreatePbufferFromClientBuffer(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int buftype, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLConfig") long config, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
@@ -129,7 +129,7 @@ public class EGL12 extends EGL11 {
      * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferFromClientBuffer.xhtml">Reference Page</a>
      */
     @NativeType("EGLSurface")
-    public static long eglCreatePbufferFromClientBuffer(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int buftype, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
+    public static long eglCreatePbufferFromClientBuffer(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int buftype, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLConfig") long config, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreatePbufferFromClientBuffer;
         if (CHECKS) {
             check(__functionAddress);

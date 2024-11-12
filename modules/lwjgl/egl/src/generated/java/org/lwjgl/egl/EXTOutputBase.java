@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -60,7 +60,7 @@ public class EXTOutputBase {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglGetOutputLayersEXT(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLOutputLayerEXT *") PointerBuffer layers, @NativeType("EGLint *") IntBuffer num_layers) {
+    public static boolean eglGetOutputLayersEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLOutputLayerEXT *") @Nullable PointerBuffer layers, @NativeType("EGLint *") IntBuffer num_layers) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_layers, 1);
@@ -80,7 +80,7 @@ public class EXTOutputBase {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglGetOutputPortsEXT(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLOutputPortEXT *") PointerBuffer ports, @NativeType("EGLint *") IntBuffer num_ports) {
+    public static boolean eglGetOutputPortsEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLOutputPortEXT *") @Nullable PointerBuffer ports, @NativeType("EGLint *") IntBuffer num_ports) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_ports, 1);
@@ -133,9 +133,8 @@ public class EXTOutputBase {
         return callPPP(dpy, layer, name, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char *")
-    public static String eglQueryOutputLayerStringEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLOutputLayerEXT") long layer, @NativeType("EGLint") int name) {
+    public static @Nullable String eglQueryOutputLayerStringEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLOutputLayerEXT") long layer, @NativeType("EGLint") int name) {
         long __result = neglQueryOutputLayerStringEXT(dpy, layer, name);
         return memASCIISafe(__result);
     }
@@ -185,16 +184,15 @@ public class EXTOutputBase {
         return callPPP(dpy, port, name, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char *")
-    public static String eglQueryOutputPortStringEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLOutputPortEXT") long port, @NativeType("EGLint") int name) {
+    public static @Nullable String eglQueryOutputPortStringEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLOutputPortEXT") long port, @NativeType("EGLint") int name) {
         long __result = neglQueryOutputPortStringEXT(dpy, port, name);
         return memASCIISafe(__result);
     }
 
     /** Array version of: {@link #eglGetOutputLayersEXT GetOutputLayersEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglGetOutputLayersEXT(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLOutputLayerEXT *") PointerBuffer layers, @NativeType("EGLint *") int[] num_layers) {
+    public static boolean eglGetOutputLayersEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLOutputLayerEXT *") @Nullable PointerBuffer layers, @NativeType("EGLint *") int[] num_layers) {
         long __functionAddress = EGL.getCapabilities().eglGetOutputLayersEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -207,7 +205,7 @@ public class EXTOutputBase {
 
     /** Array version of: {@link #eglGetOutputPortsEXT GetOutputPortsEXT} */
     @NativeType("EGLBoolean")
-    public static boolean eglGetOutputPortsEXT(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list, @Nullable @NativeType("EGLOutputPortEXT *") PointerBuffer ports, @NativeType("EGLint *") int[] num_ports) {
+    public static boolean eglGetOutputPortsEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLOutputPortEXT *") @Nullable PointerBuffer ports, @NativeType("EGLint *") int[] num_ports) {
         long __functionAddress = EGL.getCapabilities().eglGetOutputPortsEXT;
         if (CHECKS) {
             check(__functionAddress);

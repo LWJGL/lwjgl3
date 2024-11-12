@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -95,8 +95,7 @@ public class CXIdxContainerInfo extends Struct<CXIdxContainerInfo> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxContainerInfo createSafe(long address) {
+    public static @Nullable CXIdxContainerInfo createSafe(long address) {
         return address == NULL ? null : new CXIdxContainerInfo(address, null);
     }
 
@@ -139,8 +138,7 @@ public class CXIdxContainerInfo extends Struct<CXIdxContainerInfo> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIdxContainerInfo.Buffer createSafe(long address, int capacity) {
+    public static CXIdxContainerInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

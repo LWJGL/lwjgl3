@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -142,9 +142,8 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void const *")
-    public ByteBuffer srcHost(int capacity) { return nsrcHost(address(), capacity); }
+    public @Nullable ByteBuffer srcHost(int capacity) { return nsrcHost(address(), capacity); }
     /** @return the value of the {@code srcDevice} field. */
     @NativeType("CUdeviceptr")
     public long srcDevice() { return nsrcDevice(address()); }
@@ -168,9 +167,8 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer dstHost(int capacity) { return ndstHost(address(), capacity); }
+    public @Nullable ByteBuffer dstHost(int capacity) { return ndstHost(address(), capacity); }
     /** @return the value of the {@code dstDevice} field. */
     @NativeType("CUdeviceptr")
     public long dstDevice() { return ndstDevice(address()); }
@@ -295,8 +293,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_MEMCPY2D createSafe(long address) {
+    public static @Nullable CUDA_MEMCPY2D createSafe(long address) {
         return address == NULL ? null : new CUDA_MEMCPY2D(address, null);
     }
 
@@ -339,8 +336,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_MEMCPY2D.Buffer createSafe(long address, int capacity) {
+    public static CUDA_MEMCPY2D.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -410,7 +406,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #srcMemoryType}. */
     public static int nsrcMemoryType(long struct) { return memGetInt(struct + CUDA_MEMCPY2D.SRCMEMORYTYPE); }
     /** Unsafe version of {@link #srcHost(int) srcHost}. */
-    @Nullable public static ByteBuffer nsrcHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.SRCHOST), capacity); }
+    public static @Nullable ByteBuffer nsrcHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.SRCHOST), capacity); }
     /** Unsafe version of {@link #srcDevice}. */
     public static long nsrcDevice(long struct) { return memGetAddress(struct + CUDA_MEMCPY2D.SRCDEVICE); }
     /** Unsafe version of {@link #srcArray}. */
@@ -424,7 +420,7 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
     /** Unsafe version of {@link #dstMemoryType}. */
     public static int ndstMemoryType(long struct) { return memGetInt(struct + CUDA_MEMCPY2D.DSTMEMORYTYPE); }
     /** Unsafe version of {@link #dstHost(int) dstHost}. */
-    @Nullable public static ByteBuffer ndstHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.DSTHOST), capacity); }
+    public static @Nullable ByteBuffer ndstHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY2D.DSTHOST), capacity); }
     /** Unsafe version of {@link #dstDevice}. */
     public static long ndstDevice(long struct) { return memGetAddress(struct + CUDA_MEMCPY2D.DSTDEVICE); }
     /** Unsafe version of {@link #dstArray}. */
@@ -526,9 +522,8 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void const *")
-        public ByteBuffer srcHost(int capacity) { return CUDA_MEMCPY2D.nsrcHost(address(), capacity); }
+        public @Nullable ByteBuffer srcHost(int capacity) { return CUDA_MEMCPY2D.nsrcHost(address(), capacity); }
         /** @return the value of the {@code srcDevice} field. */
         @NativeType("CUdeviceptr")
         public long srcDevice() { return CUDA_MEMCPY2D.nsrcDevice(address()); }
@@ -552,9 +547,8 @@ public class CUDA_MEMCPY2D extends Struct<CUDA_MEMCPY2D> implements NativeResour
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer dstHost(int capacity) { return CUDA_MEMCPY2D.ndstHost(address(), capacity); }
+        public @Nullable ByteBuffer dstHost(int capacity) { return CUDA_MEMCPY2D.ndstHost(address(), capacity); }
         /** @return the value of the {@code dstDevice} field. */
         @NativeType("CUdeviceptr")
         public long dstDevice() { return CUDA_MEMCPY2D.ndstDevice(address()); }

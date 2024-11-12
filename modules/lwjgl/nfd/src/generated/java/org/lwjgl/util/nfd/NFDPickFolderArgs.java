@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.nfd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -75,13 +75,11 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultPath} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public ByteBuffer defaultPath() { return ndefaultPath(address()); }
+    public @Nullable ByteBuffer defaultPath() { return ndefaultPath(address()); }
     /** @return the null-terminated string pointed to by the {@code defaultPath} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public String defaultPathString() { return ndefaultPathString(address()); }
+    public @Nullable String defaultPathString() { return ndefaultPathString(address()); }
     /** @return a {@link NFDWindowHandle} view of the {@code parentWindow} field. */
     @NativeType("nfdwindowhandle_t")
     public NFDWindowHandle parentWindow() { return nparentWindow(address()); }
@@ -140,8 +138,7 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDPickFolderArgs createSafe(long address) {
+    public static @Nullable NFDPickFolderArgs createSafe(long address) {
         return address == NULL ? null : new NFDPickFolderArgs(address, null);
     }
 
@@ -184,8 +181,7 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDPickFolderArgs.Buffer createSafe(long address, int capacity) {
+    public static NFDPickFolderArgs.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -230,9 +226,9 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #defaultPath}. */
-    @Nullable public static ByteBuffer ndefaultPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDPickFolderArgs.DEFAULTPATH)); }
+    public static @Nullable ByteBuffer ndefaultPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDPickFolderArgs.DEFAULTPATH)); }
     /** Unsafe version of {@link #defaultPathString}. */
-    @Nullable public static String ndefaultPathString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDPickFolderArgs.DEFAULTPATH)); }
+    public static @Nullable String ndefaultPathString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDPickFolderArgs.DEFAULTPATH)); }
     /** Unsafe version of {@link #parentWindow}. */
     public static NFDWindowHandle nparentWindow(long struct) { return NFDWindowHandle.create(struct + NFDPickFolderArgs.PARENTWINDOW); }
 
@@ -288,13 +284,11 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
         }
 
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultPath} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public ByteBuffer defaultPath() { return NFDPickFolderArgs.ndefaultPath(address()); }
+        public @Nullable ByteBuffer defaultPath() { return NFDPickFolderArgs.ndefaultPath(address()); }
         /** @return the null-terminated string pointed to by the {@code defaultPath} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public String defaultPathString() { return NFDPickFolderArgs.ndefaultPathString(address()); }
+        public @Nullable String defaultPathString() { return NFDPickFolderArgs.ndefaultPathString(address()); }
         /** @return a {@link NFDWindowHandle} view of the {@code parentWindow} field. */
         @NativeType("nfdwindowhandle_t")
         public NFDWindowHandle parentWindow() { return NFDPickFolderArgs.nparentWindow(address()); }

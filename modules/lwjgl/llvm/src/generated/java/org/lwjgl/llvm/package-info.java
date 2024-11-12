@@ -16,6 +16,6 @@
  * <p>LWJGL does not currently include pre-built LLVM/Clang binaries. The user must download or build LLVM separately and use
  * {@link org.lwjgl.system.Configuration Configuration} to point LWJGL to the appropriate binaries.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.llvm;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCopyMemoryToAccelerationStructureInfoKHR createSafe(long address) {
+    public static @Nullable VkCopyMemoryToAccelerationStructureInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkCopyMemoryToAccelerationStructureInfoKHR(address, null);
     }
 
@@ -235,8 +234,7 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCopyMemoryToAccelerationStructureInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkCopyMemoryToAccelerationStructureInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

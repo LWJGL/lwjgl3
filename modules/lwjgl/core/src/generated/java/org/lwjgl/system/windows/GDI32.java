@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,7 +171,7 @@ public class GDI32 {
      * @param hdc                   the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}
      * @param pixelFormatDescriptor a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format
      */
-    public static int ChoosePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+    public static int ChoosePixelFormat(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -206,7 +206,7 @@ public class GDI32 {
      *                              the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is {@code NULL}, the function writes no data to the
      *                              structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
      */
-    public static int DescribePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @NativeType("UINT") int bytes, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+    public static int DescribePixelFormat(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @NativeType("UINT") int bytes, @NativeType("LPPIXELFORMATDESCRIPTOR") @Nullable PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -225,7 +225,7 @@ public class GDI32 {
      *                              the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is {@code NULL}, the function writes no data to the
      *                              structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
      */
-    public static int DescribePixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("LPPIXELFORMATDESCRIPTOR") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+    public static int DescribePixelFormat(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @NativeType("LPPIXELFORMATDESCRIPTOR") @Nullable PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -252,7 +252,7 @@ public class GDI32 {
      * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
      * @param hdc           the device context of the currently selected pixel format index returned by the function
      */
-    public static int GetPixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
+    public static int GetPixelFormat(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -283,7 +283,7 @@ public class GDI32 {
      *                              to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
      */
     @NativeType("BOOL")
-    public static boolean SetPixelFormat(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @Nullable @NativeType("PIXELFORMATDESCRIPTOR const *") PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
+    public static boolean SetPixelFormat(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, int pixelFormat, @NativeType("PIXELFORMATDESCRIPTOR const *") @Nullable PIXELFORMATDESCRIPTOR pixelFormatDescriptor) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }
@@ -312,7 +312,7 @@ public class GDI32 {
      *                      front and back buffers.
      */
     @NativeType("BOOL")
-    public static boolean SwapBuffers(@Nullable @NativeType("DWORD *") IntBuffer _GetLastError, @NativeType("HDC") long dc) {
+    public static boolean SwapBuffers(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long dc) {
         if (CHECKS) {
             checkSafe(_GetLastError, 1);
         }

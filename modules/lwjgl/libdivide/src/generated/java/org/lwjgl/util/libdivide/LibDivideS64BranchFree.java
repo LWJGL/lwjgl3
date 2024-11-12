@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.libdivide;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class LibDivideS64BranchFree extends Struct<LibDivideS64BranchFree> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideS64BranchFree createSafe(long address) {
+    public static @Nullable LibDivideS64BranchFree createSafe(long address) {
         return address == NULL ? null : new LibDivideS64BranchFree(address, null);
     }
 
@@ -176,8 +175,7 @@ public class LibDivideS64BranchFree extends Struct<LibDivideS64BranchFree> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideS64BranchFree.Buffer createSafe(long address, int capacity) {
+    public static LibDivideS64BranchFree.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -103,8 +103,7 @@ public class RMTSampleIterator extends Struct<RMTSampleIterator> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTSampleIterator createSafe(long address) {
+    public static @Nullable RMTSampleIterator createSafe(long address) {
         return address == NULL ? null : new RMTSampleIterator(address, null);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -82,7 +82,7 @@ public class KHRDebug {
     }
 
     @NativeType("EGLint")
-    public static int eglDebugMessageControlKHR(@NativeType("EGLDEBUGPROCKHR") EGLDebugMessageKHRCallbackI callback, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list) {
+    public static int eglDebugMessageControlKHR(@NativeType("EGLDEBUGPROCKHR") EGLDebugMessageKHRCallbackI callback, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }

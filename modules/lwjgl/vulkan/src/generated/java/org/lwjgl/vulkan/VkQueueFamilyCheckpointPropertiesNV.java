@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct<VkQueueFamilyChe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkQueueFamilyCheckpointPropertiesNV createSafe(long address) {
+    public static @Nullable VkQueueFamilyCheckpointPropertiesNV createSafe(long address) {
         return address == NULL ? null : new VkQueueFamilyCheckpointPropertiesNV(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct<VkQueueFamilyChe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkQueueFamilyCheckpointPropertiesNV.Buffer createSafe(long address, int capacity) {
+    public static VkQueueFamilyCheckpointPropertiesNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

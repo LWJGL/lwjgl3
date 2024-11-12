@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,7 +184,7 @@ public class NVDeviceDiagnosticCheckpoints {
      * @param pCheckpointDataCount a pointer to an integer related to the number of checkpoint markers available or queried, as described below.
      * @param pCheckpointData      either {@code NULL} or a pointer to an array of {@link VkCheckpointDataNV} structures.
      */
-    public static void vkGetQueueCheckpointDataNV(VkQueue queue, @NativeType("uint32_t *") IntBuffer pCheckpointDataCount, @Nullable @NativeType("VkCheckpointDataNV *") VkCheckpointDataNV.Buffer pCheckpointData) {
+    public static void vkGetQueueCheckpointDataNV(VkQueue queue, @NativeType("uint32_t *") IntBuffer pCheckpointDataCount, @NativeType("VkCheckpointDataNV *") VkCheckpointDataNV.@Nullable Buffer pCheckpointData) {
         if (CHECKS) {
             check(pCheckpointDataCount, 1);
             checkSafe(pCheckpointData, pCheckpointDataCount.get(pCheckpointDataCount.position()));
@@ -193,7 +193,7 @@ public class NVDeviceDiagnosticCheckpoints {
     }
 
     /** Array version of: {@link #vkGetQueueCheckpointDataNV GetQueueCheckpointDataNV} */
-    public static void vkGetQueueCheckpointDataNV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @Nullable @NativeType("VkCheckpointDataNV *") VkCheckpointDataNV.Buffer pCheckpointData) {
+    public static void vkGetQueueCheckpointDataNV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @NativeType("VkCheckpointDataNV *") VkCheckpointDataNV.@Nullable Buffer pCheckpointData) {
         long __functionAddress = queue.getCapabilities().vkGetQueueCheckpointDataNV;
         if (CHECKS) {
             check(__functionAddress);

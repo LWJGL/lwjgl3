@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,16 +171,14 @@ public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements Nati
     @NativeType("size_t")
     public long paramCount() { return nparamCount(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pParams} field. */
-    @Nullable
     @NativeType("void const * const *")
-    public PointerBuffer pParams() { return npParams(address()); }
+    public @Nullable PointerBuffer pParams() { return npParams(address()); }
     /** @return the value of the {@code extraCount} field. */
     @NativeType("size_t")
     public long extraCount() { return nextraCount(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pExtras} field. */
-    @Nullable
     @NativeType("void const * const *")
-    public PointerBuffer pExtras() { return npExtras(address()); }
+    public @Nullable PointerBuffer pExtras() { return npExtras(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkCuLaunchInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -276,8 +274,7 @@ public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCuLaunchInfoNVX createSafe(long address) {
+    public static @Nullable VkCuLaunchInfoNVX createSafe(long address) {
         return address == NULL ? null : new VkCuLaunchInfoNVX(address, null);
     }
 
@@ -320,8 +317,7 @@ public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCuLaunchInfoNVX.Buffer createSafe(long address, int capacity) {
+    public static VkCuLaunchInfoNVX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -388,11 +384,11 @@ public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements Nati
     /** Unsafe version of {@link #paramCount}. */
     public static long nparamCount(long struct) { return memGetAddress(struct + VkCuLaunchInfoNVX.PARAMCOUNT); }
     /** Unsafe version of {@link #pParams() pParams}. */
-    @Nullable public static PointerBuffer npParams(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkCuLaunchInfoNVX.PPARAMS), (int)nparamCount(struct)); }
+    public static @Nullable PointerBuffer npParams(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkCuLaunchInfoNVX.PPARAMS), (int)nparamCount(struct)); }
     /** Unsafe version of {@link #extraCount}. */
     public static long nextraCount(long struct) { return memGetAddress(struct + VkCuLaunchInfoNVX.EXTRACOUNT); }
     /** Unsafe version of {@link #pExtras() pExtras}. */
-    @Nullable public static PointerBuffer npExtras(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkCuLaunchInfoNVX.PEXTRAS), (int)nextraCount(struct)); }
+    public static @Nullable PointerBuffer npExtras(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkCuLaunchInfoNVX.PEXTRAS), (int)nextraCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkCuLaunchInfoNVX.STYPE, value); }
@@ -514,16 +510,14 @@ public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements Nati
         @NativeType("size_t")
         public long paramCount() { return VkCuLaunchInfoNVX.nparamCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pParams} field. */
-        @Nullable
         @NativeType("void const * const *")
-        public PointerBuffer pParams() { return VkCuLaunchInfoNVX.npParams(address()); }
+        public @Nullable PointerBuffer pParams() { return VkCuLaunchInfoNVX.npParams(address()); }
         /** @return the value of the {@code extraCount} field. */
         @NativeType("size_t")
         public long extraCount() { return VkCuLaunchInfoNVX.nextraCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pExtras} field. */
-        @Nullable
         @NativeType("void const * const *")
-        public PointerBuffer pExtras() { return VkCuLaunchInfoNVX.npExtras(address()); }
+        public @Nullable PointerBuffer pExtras() { return VkCuLaunchInfoNVX.npExtras(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkCuLaunchInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkCuLaunchInfoNVX.nsType(address(), value); return this; }

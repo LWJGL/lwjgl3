@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -188,8 +188,7 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XErrorEvent createSafe(long address) {
+    public static @Nullable XErrorEvent createSafe(long address) {
         return address == NULL ? null : new XErrorEvent(address, null);
     }
 
@@ -232,8 +231,7 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XErrorEvent.Buffer createSafe(long address, int capacity) {
+    public static XErrorEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

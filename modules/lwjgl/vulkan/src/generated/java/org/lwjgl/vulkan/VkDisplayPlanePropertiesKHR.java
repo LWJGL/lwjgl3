@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,8 +109,7 @@ public class VkDisplayPlanePropertiesKHR extends Struct<VkDisplayPlaneProperties
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDisplayPlanePropertiesKHR createSafe(long address) {
+    public static @Nullable VkDisplayPlanePropertiesKHR createSafe(long address) {
         return address == NULL ? null : new VkDisplayPlanePropertiesKHR(address, null);
     }
 
@@ -153,8 +152,7 @@ public class VkDisplayPlanePropertiesKHR extends Struct<VkDisplayPlaneProperties
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDisplayPlanePropertiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDisplayPlanePropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

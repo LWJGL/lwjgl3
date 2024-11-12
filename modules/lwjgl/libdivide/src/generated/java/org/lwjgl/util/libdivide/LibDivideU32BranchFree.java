@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.libdivide;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class LibDivideU32BranchFree extends Struct<LibDivideU32BranchFree> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideU32BranchFree createSafe(long address) {
+    public static @Nullable LibDivideU32BranchFree createSafe(long address) {
         return address == NULL ? null : new LibDivideU32BranchFree(address, null);
     }
 
@@ -176,8 +175,7 @@ public class LibDivideU32BranchFree extends Struct<LibDivideU32BranchFree> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LibDivideU32BranchFree.Buffer createSafe(long address, int capacity) {
+    public static LibDivideU32BranchFree.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

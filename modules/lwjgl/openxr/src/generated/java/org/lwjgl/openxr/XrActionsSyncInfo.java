@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,9 +104,8 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     @NativeType("uint32_t")
     public int countActiveActionSets() { return ncountActiveActionSets(address()); }
     /** {@code NULL} or a pointer to an array of one or more {@link XrActiveActionSet} structures that should be synchronized. */
-    @Nullable
     @NativeType("XrActiveActionSet const *")
-    public XrActiveActionSet.Buffer activeActionSets() { return nactiveActionSets(address()); }
+    public XrActiveActionSet.@Nullable Buffer activeActionSets() { return nactiveActionSets(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrActionsSyncInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -119,14 +118,14 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     /** Sets the specified value to the {@link #countActiveActionSets} field. */
     public XrActionsSyncInfo countActiveActionSets(@NativeType("uint32_t") int value) { ncountActiveActionSets(address(), value); return this; }
     /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link #activeActionSets} field. */
-    public XrActionsSyncInfo activeActionSets(@Nullable @NativeType("XrActiveActionSet const *") XrActiveActionSet.Buffer value) { nactiveActionSets(address(), value); return this; }
+    public XrActionsSyncInfo activeActionSets(@NativeType("XrActiveActionSet const *") XrActiveActionSet.@Nullable Buffer value) { nactiveActionSets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrActionsSyncInfo set(
         int type,
         long next,
         int countActiveActionSets,
-        @Nullable XrActiveActionSet.Buffer activeActionSets
+        XrActiveActionSet.@Nullable Buffer activeActionSets
     ) {
         type(type);
         next(next);
@@ -172,8 +171,7 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionsSyncInfo createSafe(long address) {
+    public static @Nullable XrActionsSyncInfo createSafe(long address) {
         return address == NULL ? null : new XrActionsSyncInfo(address, null);
     }
 
@@ -216,8 +214,7 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrActionsSyncInfo.Buffer createSafe(long address, int capacity) {
+    public static XrActionsSyncInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -268,7 +265,7 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     /** Unsafe version of {@link #countActiveActionSets}. */
     public static int ncountActiveActionSets(long struct) { return memGetInt(struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS); }
     /** Unsafe version of {@link #activeActionSets}. */
-    @Nullable public static XrActiveActionSet.Buffer nactiveActionSets(long struct) { return XrActiveActionSet.createSafe(memGetAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS), ncountActiveActionSets(struct)); }
+    public static XrActiveActionSet.@Nullable Buffer nactiveActionSets(long struct) { return XrActiveActionSet.createSafe(memGetAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS), ncountActiveActionSets(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrActionsSyncInfo.TYPE, value); }
@@ -277,7 +274,7 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     /** Sets the specified value to the {@code countActiveActionSets} field of the specified {@code struct}. */
     public static void ncountActiveActionSets(long struct, int value) { memPutInt(struct + XrActionsSyncInfo.COUNTACTIVEACTIONSETS, value); }
     /** Unsafe version of {@link #activeActionSets(XrActiveActionSet.Buffer) activeActionSets}. */
-    public static void nactiveActionSets(long struct, @Nullable XrActiveActionSet.Buffer value) { memPutAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS, memAddressSafe(value)); if (value != null) { ncountActiveActionSets(struct, value.remaining()); } }
+    public static void nactiveActionSets(long struct, XrActiveActionSet.@Nullable Buffer value) { memPutAddress(struct + XrActionsSyncInfo.ACTIVEACTIONSETS, memAddressSafe(value)); if (value != null) { ncountActiveActionSets(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -332,9 +329,8 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
         @NativeType("uint32_t")
         public int countActiveActionSets() { return XrActionsSyncInfo.ncountActiveActionSets(address()); }
         /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@link XrActionsSyncInfo#activeActionSets} field. */
-        @Nullable
         @NativeType("XrActiveActionSet const *")
-        public XrActiveActionSet.Buffer activeActionSets() { return XrActionsSyncInfo.nactiveActionSets(address()); }
+        public XrActiveActionSet.@Nullable Buffer activeActionSets() { return XrActionsSyncInfo.nactiveActionSets(address()); }
 
         /** Sets the specified value to the {@link XrActionsSyncInfo#type} field. */
         public XrActionsSyncInfo.Buffer type(@NativeType("XrStructureType") int value) { XrActionsSyncInfo.ntype(address(), value); return this; }
@@ -347,7 +343,7 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
         /** Sets the specified value to the {@link XrActionsSyncInfo#countActiveActionSets} field. */
         public XrActionsSyncInfo.Buffer countActiveActionSets(@NativeType("uint32_t") int value) { XrActionsSyncInfo.ncountActiveActionSets(address(), value); return this; }
         /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link XrActionsSyncInfo#activeActionSets} field. */
-        public XrActionsSyncInfo.Buffer activeActionSets(@Nullable @NativeType("XrActiveActionSet const *") XrActiveActionSet.Buffer value) { XrActionsSyncInfo.nactiveActionSets(address(), value); return this; }
+        public XrActionsSyncInfo.Buffer activeActionSets(@NativeType("XrActiveActionSet const *") XrActiveActionSet.@Nullable Buffer value) { XrActionsSyncInfo.nactiveActionSets(address(), value); return this; }
 
     }
 

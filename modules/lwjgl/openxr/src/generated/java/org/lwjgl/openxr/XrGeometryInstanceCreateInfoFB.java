@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -221,8 +221,7 @@ public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCre
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGeometryInstanceCreateInfoFB createSafe(long address) {
+    public static @Nullable XrGeometryInstanceCreateInfoFB createSafe(long address) {
         return address == NULL ? null : new XrGeometryInstanceCreateInfoFB(address, null);
     }
 
@@ -265,8 +264,7 @@ public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCre
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrGeometryInstanceCreateInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrGeometryInstanceCreateInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

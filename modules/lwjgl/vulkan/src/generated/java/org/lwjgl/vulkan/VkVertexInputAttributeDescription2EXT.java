@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -200,8 +200,7 @@ public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputA
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVertexInputAttributeDescription2EXT createSafe(long address) {
+    public static @Nullable VkVertexInputAttributeDescription2EXT createSafe(long address) {
         return address == NULL ? null : new VkVertexInputAttributeDescription2EXT(address, null);
     }
 
@@ -244,8 +243,7 @@ public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputA
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVertexInputAttributeDescription2EXT.Buffer createSafe(long address, int capacity) {
+    public static VkVertexInputAttributeDescription2EXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

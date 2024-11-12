@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -200,9 +200,8 @@ public class GLX {
      * @return a pointer to an {@code XVisualInfo} structure describing the visual that best matches the specified attributes. If no matching visual exists, {@code NULL} is
      *         returned.
      */
-    @Nullable
     @NativeType("XVisualInfo *")
-    public static XVisualInfo glXChooseVisual(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int *") IntBuffer attrib_list) {
+    public static @Nullable XVisualInfo glXChooseVisual(@NativeType("Display *") long display, int screen, @NativeType("int *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list);
         }
@@ -468,9 +467,8 @@ public class GLX {
     }
 
     /** Array version of: {@link #glXChooseVisual ChooseVisual} */
-    @Nullable
     @NativeType("XVisualInfo *")
-    public static XVisualInfo glXChooseVisual(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int *") int[] attrib_list) {
+    public static @Nullable XVisualInfo glXChooseVisual(@NativeType("Display *") long display, int screen, @NativeType("int *") int @Nullable [] attrib_list) {
         long __functionAddress = Functions.ChooseVisual;
         if (CHECKS) {
             check(display);

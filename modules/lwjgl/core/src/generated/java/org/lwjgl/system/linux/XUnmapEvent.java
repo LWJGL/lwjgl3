@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XUnmapEvent createSafe(long address) {
+    public static @Nullable XUnmapEvent createSafe(long address) {
         return address == NULL ? null : new XUnmapEvent(address, null);
     }
 
@@ -229,8 +228,7 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XUnmapEvent.Buffer createSafe(long address, int capacity) {
+    public static XUnmapEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

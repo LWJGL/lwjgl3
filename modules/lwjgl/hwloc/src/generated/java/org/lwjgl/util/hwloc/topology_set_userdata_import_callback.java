@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -40,8 +40,7 @@ public abstract class topology_set_userdata_import_callback extends Callback imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static topology_set_userdata_import_callback createSafe(long functionPointer) {
+    public static @Nullable topology_set_userdata_import_callback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

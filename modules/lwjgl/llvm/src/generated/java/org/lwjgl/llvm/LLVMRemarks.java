@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -96,9 +96,8 @@ public class LLVMRemarks {
     }
 
     /** Returns the buffer holding the string. */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMRemarkStringGetData(@NativeType("LLVMRemarkStringRef") long String) {
+    public static @Nullable String LLVMRemarkStringGetData(@NativeType("LLVMRemarkStringRef") long String) {
         long __result = nLLVMRemarkStringGetData(String);
         return memUTF8Safe(__result);
     }
@@ -454,9 +453,8 @@ public class LLVMRemarks {
      * 
      * <p>The memory of the string is bound to the lifetime of {@code Parser}. If {@link #LLVMRemarkParserDispose RemarkParserDispose} is called, the memory of the string will be released.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String LLVMRemarkParserGetErrorMessage(@NativeType("LLVMRemarkParserRef") long Parser) {
+    public static @Nullable String LLVMRemarkParserGetErrorMessage(@NativeType("LLVMRemarkParserRef") long Parser) {
         long __result = nLLVMRemarkParserGetErrorMessage(Parser);
         return memUTF8Safe(__result);
     }

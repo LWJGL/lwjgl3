@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,7 +179,7 @@ public class ARBDebugOutput {
      * @param ids      the message IDs to enable or disable
      * @param enabled  whether to enable or disable the references subset of messages
      */
-    public static void glDebugMessageControlARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") IntBuffer ids, @NativeType("GLboolean") boolean enabled) {
+    public static void glDebugMessageControlARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") @Nullable IntBuffer ids, @NativeType("GLboolean") boolean enabled) {
         nglDebugMessageControlARB(source, type, severity, remainingSafe(ids), memAddressSafe(ids), enabled);
     }
 
@@ -312,7 +312,7 @@ public class ARBDebugOutput {
      * @param callback  a callback function that will be called when a debug message is generated
      * @param userParam a user supplied pointer that will be passed on each invocation of {@code callback}
      */
-    public static void glDebugMessageCallbackARB(@Nullable @NativeType("GLDEBUGPROCARB") GLDebugMessageARBCallbackI callback, @NativeType("void const *") long userParam) {
+    public static void glDebugMessageCallbackARB(@NativeType("GLDEBUGPROCARB") @Nullable GLDebugMessageARBCallbackI callback, @NativeType("void const *") long userParam) {
         nglDebugMessageCallbackARB(memAddressSafe(callback), userParam);
     }
 
@@ -355,7 +355,7 @@ public class ARBDebugOutput {
      * @param messageLog a buffer in which to place the returned messages
      */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLogARB(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") IntBuffer sources, @Nullable @NativeType("GLenum *") IntBuffer types, @Nullable @NativeType("GLuint *") IntBuffer ids, @Nullable @NativeType("GLenum *") IntBuffer severities, @Nullable @NativeType("GLsizei *") IntBuffer lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLogARB(@NativeType("GLuint") int count, @NativeType("GLenum *") @Nullable IntBuffer sources, @NativeType("GLenum *") @Nullable IntBuffer types, @NativeType("GLuint *") @Nullable IntBuffer ids, @NativeType("GLenum *") @Nullable IntBuffer severities, @NativeType("GLsizei *") @Nullable IntBuffer lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         if (CHECKS) {
             checkSafe(sources, count);
             checkSafe(types, count);
@@ -367,7 +367,7 @@ public class ARBDebugOutput {
     }
 
     /** Array version of: {@link #glDebugMessageControlARB DebugMessageControlARB} */
-    public static void glDebugMessageControlARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
+    public static void glDebugMessageControlARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") int @Nullable [] ids, @NativeType("GLboolean") boolean enabled) {
         long __functionAddress = GL.getICD().glDebugMessageControlARB;
         if (CHECKS) {
             check(__functionAddress);
@@ -377,7 +377,7 @@ public class ARBDebugOutput {
 
     /** Array version of: {@link #glGetDebugMessageLogARB GetDebugMessageLogARB} */
     @NativeType("GLuint")
-    public static int glGetDebugMessageLogARB(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] sources, @Nullable @NativeType("GLenum *") int[] types, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLenum *") int[] severities, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
+    public static int glGetDebugMessageLogARB(@NativeType("GLuint") int count, @NativeType("GLenum *") int @Nullable [] sources, @NativeType("GLenum *") int @Nullable [] types, @NativeType("GLuint *") int @Nullable [] ids, @NativeType("GLenum *") int @Nullable [] severities, @NativeType("GLsizei *") int @Nullable [] lengths, @NativeType("GLchar *") @Nullable ByteBuffer messageLog) {
         long __functionAddress = GL.getICD().glGetDebugMessageLogARB;
         if (CHECKS) {
             check(__functionAddress);

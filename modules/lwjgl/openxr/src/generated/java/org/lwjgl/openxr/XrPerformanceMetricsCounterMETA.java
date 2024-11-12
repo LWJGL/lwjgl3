@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -196,8 +196,7 @@ public class XrPerformanceMetricsCounterMETA extends Struct<XrPerformanceMetrics
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPerformanceMetricsCounterMETA createSafe(long address) {
+    public static @Nullable XrPerformanceMetricsCounterMETA createSafe(long address) {
         return address == NULL ? null : new XrPerformanceMetricsCounterMETA(address, null);
     }
 
@@ -240,8 +239,7 @@ public class XrPerformanceMetricsCounterMETA extends Struct<XrPerformanceMetrics
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPerformanceMetricsCounterMETA.Buffer createSafe(long address, int capacity) {
+    public static XrPerformanceMetricsCounterMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

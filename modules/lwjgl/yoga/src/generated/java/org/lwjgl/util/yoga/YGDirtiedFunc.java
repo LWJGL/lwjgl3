@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -34,8 +34,7 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static YGDirtiedFunc createSafe(long functionPointer) {
+    public static @Nullable YGDirtiedFunc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

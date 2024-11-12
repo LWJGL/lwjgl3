@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct<SpvcHLSLResourceBindi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcHLSLResourceBindingMapping createSafe(long address) {
+    public static @Nullable SpvcHLSLResourceBindingMapping createSafe(long address) {
         return address == NULL ? null : new SpvcHLSLResourceBindingMapping(address, null);
     }
 
@@ -176,8 +175,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct<SpvcHLSLResourceBindi
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcHLSLResourceBindingMapping.Buffer createSafe(long address, int capacity) {
+    public static SpvcHLSLResourceBindingMapping.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to SSE macros. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.util.simd;
 

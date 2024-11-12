@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -182,8 +182,7 @@ public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePres
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfacePresentScalingCapabilitiesEXT createSafe(long address) {
+    public static @Nullable VkSurfacePresentScalingCapabilitiesEXT createSafe(long address) {
         return address == NULL ? null : new VkSurfacePresentScalingCapabilitiesEXT(address, null);
     }
 
@@ -226,8 +225,7 @@ public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePres
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfacePresentScalingCapabilitiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkSurfacePresentScalingCapabilitiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

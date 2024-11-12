@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -52,7 +52,7 @@ public class AMDPerformanceMonitor {
 
     public static native void nglGetPerfMonitorGroupsAMD(long numGroups, int groupsSize, long groups);
 
-    public static void glGetPerfMonitorGroupsAMD(@Nullable @NativeType("GLint *") IntBuffer numGroups, @Nullable @NativeType("GLuint *") IntBuffer groups) {
+    public static void glGetPerfMonitorGroupsAMD(@NativeType("GLint *") @Nullable IntBuffer numGroups, @NativeType("GLuint *") @Nullable IntBuffer groups) {
         if (CHECKS) {
             checkSafe(numGroups, 1);
         }
@@ -86,7 +86,7 @@ public class AMDPerformanceMonitor {
 
     public static native void nglGetPerfMonitorCounterStringAMD(int group, int counter, int bufSize, long length, long counterString);
 
-    public static void glGetPerfMonitorCounterStringAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @Nullable @NativeType("GLsizei *") IntBuffer length, @Nullable @NativeType("GLchar *") ByteBuffer counterString) {
+    public static void glGetPerfMonitorCounterStringAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") @Nullable ByteBuffer counterString) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -176,7 +176,7 @@ public class AMDPerformanceMonitor {
 
     public static native void nglGetPerfMonitorCounterDataAMD(int monitor, int pname, int dataSize, long data, long bytesWritten);
 
-    public static void glGetPerfMonitorCounterDataAMD(@NativeType("GLuint") int monitor, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer data, @Nullable @NativeType("GLint *") IntBuffer bytesWritten) {
+    public static void glGetPerfMonitorCounterDataAMD(@NativeType("GLuint") int monitor, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer data, @NativeType("GLint *") @Nullable IntBuffer bytesWritten) {
         if (CHECKS) {
             checkSafe(bytesWritten, 1);
         }
@@ -184,7 +184,7 @@ public class AMDPerformanceMonitor {
     }
 
     /** Array version of: {@link #glGetPerfMonitorGroupsAMD GetPerfMonitorGroupsAMD} */
-    public static void glGetPerfMonitorGroupsAMD(@Nullable @NativeType("GLint *") int[] numGroups, @Nullable @NativeType("GLuint *") int[] groups) {
+    public static void glGetPerfMonitorGroupsAMD(@NativeType("GLint *") int @Nullable [] numGroups, @NativeType("GLuint *") int @Nullable [] groups) {
         long __functionAddress = GLES.getICD().glGetPerfMonitorGroupsAMD;
         if (CHECKS) {
             check(__functionAddress);
@@ -215,7 +215,7 @@ public class AMDPerformanceMonitor {
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterStringAMD GetPerfMonitorCounterStringAMD} */
-    public static void glGetPerfMonitorCounterStringAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @Nullable @NativeType("GLsizei *") int[] length, @Nullable @NativeType("GLchar *") ByteBuffer counterString) {
+    public static void glGetPerfMonitorCounterStringAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") @Nullable ByteBuffer counterString) {
         long __functionAddress = GLES.getICD().glGetPerfMonitorCounterStringAMD;
         if (CHECKS) {
             check(__functionAddress);
@@ -272,7 +272,7 @@ public class AMDPerformanceMonitor {
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterDataAMD GetPerfMonitorCounterDataAMD} */
-    public static void glGetPerfMonitorCounterDataAMD(@NativeType("GLuint") int monitor, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] data, @Nullable @NativeType("GLint *") int[] bytesWritten) {
+    public static void glGetPerfMonitorCounterDataAMD(@NativeType("GLuint") int monitor, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] data, @NativeType("GLint *") int @Nullable [] bytesWritten) {
         long __functionAddress = GLES.getICD().glGetPerfMonitorCounterDataAMD;
         if (CHECKS) {
             check(__functionAddress);

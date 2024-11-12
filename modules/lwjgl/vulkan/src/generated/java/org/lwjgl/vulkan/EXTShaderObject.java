@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -623,7 +623,7 @@ public class EXTShaderObject {
      * @param pShaders     a pointer to an array of {@code VkShaderEXT} handles in which the resulting shader objects are returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateShadersEXT(VkDevice device, @NativeType("VkShaderCreateInfoEXT const *") VkShaderCreateInfoEXT.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkShaderEXT *") LongBuffer pShaders) {
+    public static int vkCreateShadersEXT(VkDevice device, @NativeType("VkShaderCreateInfoEXT const *") VkShaderCreateInfoEXT.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkShaderEXT *") LongBuffer pShaders) {
         if (CHECKS) {
             check(pShaders, pCreateInfos.remaining());
         }
@@ -690,7 +690,7 @@ public class EXTShaderObject {
      * @param shader     the handle of the shader object to destroy.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyShaderEXT(VkDevice device, @NativeType("VkShaderEXT") long shader, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyShaderEXT(VkDevice device, @NativeType("VkShaderEXT") long shader, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyShaderEXT(device, shader, memAddressSafe(pAllocator));
     }
 
@@ -774,7 +774,7 @@ public class EXTShaderObject {
      * @param pData     either {@code NULL} or a pointer to a buffer.
      */
     @NativeType("VkResult")
-    public static int vkGetShaderBinaryDataEXT(VkDevice device, @NativeType("VkShaderEXT") long shader, @NativeType("size_t *") PointerBuffer pDataSize, @Nullable @NativeType("void *") ByteBuffer pData) {
+    public static int vkGetShaderBinaryDataEXT(VkDevice device, @NativeType("VkShaderEXT") long shader, @NativeType("size_t *") PointerBuffer pDataSize, @NativeType("void *") @Nullable ByteBuffer pData) {
         if (CHECKS) {
             check(pDataSize, 1);
             checkSafe(pData, pDataSize.get(pDataSize.position()));
@@ -999,7 +999,7 @@ public class EXTShaderObject {
      * @param pSizes        {@code NULL} or a pointer to an array of the size in bytes of vertex data bound from {@code pBuffers}.
      * @param pStrides      {@code NULL} or a pointer to an array of buffer strides.
      */
-    public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pSizes, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pStrides) {
+    public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pSizes, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pStrides) {
         if (CHECKS) {
             check(pOffsets, pBuffers.remaining());
             checkSafe(pSizes, pBuffers.remaining());
@@ -1189,7 +1189,7 @@ public class EXTShaderObject {
      * @param pVertexBindingDescriptions   a pointer to an array of {@link VkVertexInputBindingDescription2EXT} structures.
      * @param pVertexAttributeDescriptions a pointer to an array of {@link VkVertexInputAttributeDescription2EXT} structures.
      */
-    public static void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, @Nullable @NativeType("VkVertexInputBindingDescription2EXT const *") VkVertexInputBindingDescription2EXT.Buffer pVertexBindingDescriptions, @Nullable @NativeType("VkVertexInputAttributeDescription2EXT const *") VkVertexInputAttributeDescription2EXT.Buffer pVertexAttributeDescriptions) {
+    public static void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, @NativeType("VkVertexInputBindingDescription2EXT const *") VkVertexInputBindingDescription2EXT.@Nullable Buffer pVertexBindingDescriptions, @NativeType("VkVertexInputAttributeDescription2EXT const *") VkVertexInputAttributeDescription2EXT.@Nullable Buffer pVertexAttributeDescriptions) {
         nvkCmdSetVertexInputEXT(commandBuffer, remainingSafe(pVertexBindingDescriptions), memAddressSafe(pVertexBindingDescriptions), remainingSafe(pVertexAttributeDescriptions), memAddressSafe(pVertexAttributeDescriptions));
     }
 
@@ -3555,13 +3555,13 @@ public class EXTShaderObject {
      * @param depthClampMode   determines how the clamp range is determined for each viewport.
      * @param pDepthClampRange sets the depth clamp range for all viewports if {@code depthClampMode} is set to {@link #VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}.
      */
-    public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @Nullable @NativeType("VkDepthClampRangeEXT const *") VkDepthClampRangeEXT pDepthClampRange) {
+    public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @NativeType("VkDepthClampRangeEXT const *") @Nullable VkDepthClampRangeEXT pDepthClampRange) {
         nvkCmdSetDepthClampRangeEXT(commandBuffer, depthClampMode, memAddressSafe(pDepthClampRange));
     }
 
     /** Array version of: {@link #vkCreateShadersEXT CreateShadersEXT} */
     @NativeType("VkResult")
-    public static int vkCreateShadersEXT(VkDevice device, @NativeType("VkShaderCreateInfoEXT const *") VkShaderCreateInfoEXT.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkShaderEXT *") long[] pShaders) {
+    public static int vkCreateShadersEXT(VkDevice device, @NativeType("VkShaderCreateInfoEXT const *") VkShaderCreateInfoEXT.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkShaderEXT *") long[] pShaders) {
         long __functionAddress = device.getCapabilities().vkCreateShadersEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -3582,7 +3582,7 @@ public class EXTShaderObject {
     }
 
     /** Array version of: {@link #vkCmdBindVertexBuffers2EXT CmdBindVertexBuffers2EXT} */
-    public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @Nullable @NativeType("VkDeviceSize const *") long[] pSizes, @Nullable @NativeType("VkDeviceSize const *") long[] pStrides) {
+    public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @NativeType("VkDeviceSize const *") long @Nullable [] pSizes, @NativeType("VkDeviceSize const *") long @Nullable [] pStrides) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers2EXT;
         if (CHECKS) {
             check(__functionAddress);

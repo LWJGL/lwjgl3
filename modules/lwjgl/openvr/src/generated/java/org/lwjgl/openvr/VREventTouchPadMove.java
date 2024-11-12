@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -112,8 +112,7 @@ public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventTouchPadMove createSafe(long address) {
+    public static @Nullable VREventTouchPadMove createSafe(long address) {
         return address == NULL ? null : new VREventTouchPadMove(address, null);
     }
 
@@ -128,8 +127,7 @@ public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventTouchPadMove.Buffer createSafe(long address, int capacity) {
+    public static VREventTouchPadMove.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

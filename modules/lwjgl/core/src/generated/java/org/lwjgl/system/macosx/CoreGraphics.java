@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.macosx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -715,7 +715,7 @@ public class CoreGraphics {
      * <p>When you call this function with a {@code NULL} string or a maximum string length of 0, the function still returns the actual count of Unicode characters in
      * the event.</p>
      */
-    public static void CGEventKeyboardGetUnicodeString(@NativeType("CGEventRef") long event, @Nullable @NativeType("UniCharCount *") CLongBuffer actualStringLength, @Nullable @NativeType("UniChar *") ShortBuffer unicodeString) {
+    public static void CGEventKeyboardGetUnicodeString(@NativeType("CGEventRef") long event, @NativeType("UniCharCount *") @Nullable CLongBuffer actualStringLength, @NativeType("UniChar *") @Nullable ShortBuffer unicodeString) {
         if (CHECKS) {
             checkSafe(actualStringLength, 1);
         }
@@ -966,7 +966,7 @@ public class CoreGraphics {
      * This allows a monitoring tool to evaluate the best and worst case latency over time and under various operating conditions.</p>
      */
     @NativeType("CGError")
-    public static int CGGetEventTapList(@Nullable @NativeType("CGEventTapInformation *") CGEventTapInformation.Buffer tapList, @Nullable @NativeType("uint32_t *") IntBuffer eventTapCount) {
+    public static int CGGetEventTapList(@NativeType("CGEventTapInformation *") CGEventTapInformation.@Nullable Buffer tapList, @NativeType("uint32_t *") @Nullable IntBuffer eventTapCount) {
         if (CHECKS) {
             checkSafe(eventTapCount, 1);
         }
@@ -974,7 +974,7 @@ public class CoreGraphics {
     }
 
     /** Array version of: {@link #CGEventKeyboardGetUnicodeString EventKeyboardGetUnicodeString} */
-    public static void CGEventKeyboardGetUnicodeString(@NativeType("CGEventRef") long event, @Nullable @NativeType("UniCharCount *") CLongBuffer actualStringLength, @Nullable @NativeType("UniChar *") short[] unicodeString) {
+    public static void CGEventKeyboardGetUnicodeString(@NativeType("CGEventRef") long event, @NativeType("UniCharCount *") @Nullable CLongBuffer actualStringLength, @NativeType("UniChar *") short @Nullable [] unicodeString) {
         long __functionAddress = Functions.EventKeyboardGetUnicodeString;
         if (CHECKS) {
             checkSafe(actualStringLength, 1);
@@ -990,7 +990,7 @@ public class CoreGraphics {
 
     /** Array version of: {@link #CGGetEventTapList GetEventTapList} */
     @NativeType("CGError")
-    public static int CGGetEventTapList(@Nullable @NativeType("CGEventTapInformation *") CGEventTapInformation.Buffer tapList, @Nullable @NativeType("uint32_t *") int[] eventTapCount) {
+    public static int CGGetEventTapList(@NativeType("CGEventTapInformation *") CGEventTapInformation.@Nullable Buffer tapList, @NativeType("uint32_t *") int @Nullable [] eventTapCount) {
         long __functionAddress = Functions.GetEventTapList;
         if (CHECKS) {
             checkSafe(eventTapCount, 1);

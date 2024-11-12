@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -297,8 +297,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleWindowHeader createSafe(long address) {
+    public static @Nullable NkStyleWindowHeader createSafe(long address) {
         return address == NULL ? null : new NkStyleWindowHeader(address, null);
     }
 
@@ -341,8 +340,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleWindowHeader.Buffer createSafe(long address, int capacity) {
+    public static NkStyleWindowHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

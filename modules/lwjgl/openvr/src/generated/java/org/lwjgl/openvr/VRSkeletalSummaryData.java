@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -127,8 +127,7 @@ public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRSkeletalSummaryData createSafe(long address) {
+    public static @Nullable VRSkeletalSummaryData createSafe(long address) {
         return address == NULL ? null : new VRSkeletalSummaryData(address, null);
     }
 
@@ -171,8 +170,7 @@ public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VRSkeletalSummaryData.Buffer createSafe(long address, int capacity) {
+    public static VRSkeletalSummaryData.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

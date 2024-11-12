@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -188,8 +188,7 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceSaveInfoFB createSafe(long address) {
+    public static @Nullable XrSpaceSaveInfoFB createSafe(long address) {
         return address == NULL ? null : new XrSpaceSaveInfoFB(address, null);
     }
 
@@ -232,8 +231,7 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceSaveInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceSaveInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

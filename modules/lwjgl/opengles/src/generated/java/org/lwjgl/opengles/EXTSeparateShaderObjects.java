@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,7 +164,7 @@ public class EXTSeparateShaderObjects {
 
     public static native void nglGetProgramPipelineInfoLogEXT(int pipeline, int bufSize, long length, long infoLog);
 
-    public static void glGetProgramPipelineInfoLogEXT(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
+    public static void glGetProgramPipelineInfoLogEXT(@NativeType("GLuint") int pipeline, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -465,7 +465,7 @@ public class EXTSeparateShaderObjects {
     }
 
     /** Array version of: {@link #glGetProgramPipelineInfoLogEXT GetProgramPipelineInfoLogEXT} */
-    public static void glGetProgramPipelineInfoLogEXT(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
+    public static void glGetProgramPipelineInfoLogEXT(@NativeType("GLuint") int pipeline, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         long __functionAddress = GLES.getICD().glGetProgramPipelineInfoLogEXT;
         if (CHECKS) {
             check(__functionAddress);

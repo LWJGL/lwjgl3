@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,13 +129,11 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     @NativeType("VkDeviceSize")
     public long preferredLargeHeapBlockSize() { return npreferredLargeHeapBlockSize(address()); }
     /** custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations. Optional. */
-    @Nullable
     @NativeType("VkAllocationCallbacks const *")
-    public VkAllocationCallbacks pAllocationCallbacks() { return npAllocationCallbacks(address()); }
+    public @Nullable VkAllocationCallbacks pAllocationCallbacks() { return npAllocationCallbacks(address()); }
     /** informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional. */
-    @Nullable
     @NativeType("VmaDeviceMemoryCallbacks const *")
-    public VmaDeviceMemoryCallbacks pDeviceMemoryCallbacks() { return npDeviceMemoryCallbacks(address()); }
+    public @Nullable VmaDeviceMemoryCallbacks pDeviceMemoryCallbacks() { return npDeviceMemoryCallbacks(address()); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
@@ -159,9 +157,8 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
      *         allocations with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} result when memory capacity is exceeded. It may return success and just silently migrate some
      *         device memory blocks to system RAM. This driver behavior can also be controlled using {@code VK_AMD_memory_overallocation_behavior} extension.</p>
      */
-    @Nullable
     @NativeType("VkDeviceSize const *")
-    public LongBuffer pHeapSizeLimit(int capacity) { return npHeapSizeLimit(address(), capacity); }
+    public @Nullable LongBuffer pHeapSizeLimit(int capacity) { return npHeapSizeLimit(address(), capacity); }
     /** pointers to Vulkan functions */
     @NativeType("VmaVulkanFunctions const *")
     public VmaVulkanFunctions pVulkanFunctions() { return npVulkanFunctions(address()); }
@@ -194,9 +191,8 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
      *         <p>Any of the elements may be equal to 0, which means not to use {@code VkExportMemoryAllocateInfoKHR} on this memory type. This is also the default in
      *         case of {@code pTypeExternalMemoryHandleTypes = NULL}.</p>
      */
-    @Nullable
     @NativeType("VkExternalMemoryHandleTypeFlagsKHR const *")
-    public IntBuffer pTypeExternalMemoryHandleTypes(int capacity) { return npTypeExternalMemoryHandleTypes(address(), capacity); }
+    public @Nullable IntBuffer pTypeExternalMemoryHandleTypes(int capacity) { return npTypeExternalMemoryHandleTypes(address(), capacity); }
 
     /** Sets the specified value to the {@link #flags} field. */
     public VmaAllocatorCreateInfo flags(@NativeType("VmaAllocatorCreateFlags") int value) { nflags(address(), value); return this; }
@@ -286,8 +282,7 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocatorCreateInfo createSafe(long address) {
+    public static @Nullable VmaAllocatorCreateInfo createSafe(long address) {
         return address == NULL ? null : new VmaAllocatorCreateInfo(address, null);
     }
 
@@ -332,11 +327,11 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     /** Unsafe version of {@link #preferredLargeHeapBlockSize}. */
     public static long npreferredLargeHeapBlockSize(long struct) { return memGetLong(struct + VmaAllocatorCreateInfo.PREFERREDLARGEHEAPBLOCKSIZE); }
     /** Unsafe version of {@link #pAllocationCallbacks}. */
-    @Nullable public static VkAllocationCallbacks npAllocationCallbacks(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PALLOCATIONCALLBACKS)); }
+    public static @Nullable VkAllocationCallbacks npAllocationCallbacks(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PALLOCATIONCALLBACKS)); }
     /** Unsafe version of {@link #pDeviceMemoryCallbacks}. */
-    @Nullable public static VmaDeviceMemoryCallbacks npDeviceMemoryCallbacks(long struct) { return VmaDeviceMemoryCallbacks.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PDEVICEMEMORYCALLBACKS)); }
+    public static @Nullable VmaDeviceMemoryCallbacks npDeviceMemoryCallbacks(long struct) { return VmaDeviceMemoryCallbacks.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PDEVICEMEMORYCALLBACKS)); }
     /** Unsafe version of {@link #pHeapSizeLimit(int) pHeapSizeLimit}. */
-    @Nullable public static LongBuffer npHeapSizeLimit(long struct, int capacity) { return memLongBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PHEAPSIZELIMIT), capacity); }
+    public static @Nullable LongBuffer npHeapSizeLimit(long struct, int capacity) { return memLongBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PHEAPSIZELIMIT), capacity); }
     /** Unsafe version of {@link #pVulkanFunctions}. */
     public static VmaVulkanFunctions npVulkanFunctions(long struct) { return VmaVulkanFunctions.create(memGetAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS)); }
     /** Unsafe version of {@link #instance}. */
@@ -344,7 +339,7 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     /** Unsafe version of {@link #vulkanApiVersion}. */
     public static int nvulkanApiVersion(long struct) { return memGetInt(struct + VmaAllocatorCreateInfo.VULKANAPIVERSION); }
     /** Unsafe version of {@link #pTypeExternalMemoryHandleTypes(int) pTypeExternalMemoryHandleTypes}. */
-    @Nullable public static IntBuffer npTypeExternalMemoryHandleTypes(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES), capacity); }
+    public static @Nullable IntBuffer npTypeExternalMemoryHandleTypes(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES), capacity); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + VmaAllocatorCreateInfo.FLAGS, value); }

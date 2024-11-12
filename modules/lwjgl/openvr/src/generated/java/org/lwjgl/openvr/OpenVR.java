@@ -9,7 +9,7 @@ import org.lwjgl.system.*;
 import java.util.Set;
 import java.nio.*;
 import java.util.function.*;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.lwjgl.*;
 
 import static org.lwjgl.openvr.VR.*;
@@ -19,29 +19,29 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The OpenVR function tables. */
 public final class OpenVR {
 
-    @Nullable public static IVRSystem VRSystem;
-    @Nullable public static IVRChaperone VRChaperone;
-    @Nullable public static IVRChaperoneSetup VRChaperoneSetup;
-    @Nullable public static IVRCompositor VRCompositor;
-    @Nullable public static IVRHeadsetView VRHeadsetView;
-    @Nullable public static IVROverlay VROverlay;
-    @Nullable public static IVROverlayView VROverlayView;
-    @Nullable public static IVRResources VRResources;
-    @Nullable public static IVRRenderModels VRRenderModels;
-    @Nullable public static IVRExtendedDisplay VRExtendedDisplay;
-    @Nullable public static IVRSettings VRSettings;
-    @Nullable public static IVRApplications VRApplications;
-    @Nullable public static IVRTrackedCamera VRTrackedCamera;
-    @Nullable public static IVRScreenshots VRScreenshots;
-    @Nullable public static IVRDriverManager VRDriverManager;
-    @Nullable public static IVRInput VRInput;
-    @Nullable public static IVRIOBuffer VRIOBuffer;
-    @Nullable public static IVRSpatialAnchors VRSpatialAnchors;
-    @Nullable public static IVRDebug VRDebug;
-    @Nullable public static IVRNotifications VRNotifications;
-    @Nullable public static IVRProperties VRProperties;
-    @Nullable public static IVRPaths VRPaths;
-    @Nullable public static IVRBlockQueue VRBlockQueue;
+    public static @Nullable IVRSystem VRSystem;
+    public static @Nullable IVRChaperone VRChaperone;
+    public static @Nullable IVRChaperoneSetup VRChaperoneSetup;
+    public static @Nullable IVRCompositor VRCompositor;
+    public static @Nullable IVRHeadsetView VRHeadsetView;
+    public static @Nullable IVROverlay VROverlay;
+    public static @Nullable IVROverlayView VROverlayView;
+    public static @Nullable IVRResources VRResources;
+    public static @Nullable IVRRenderModels VRRenderModels;
+    public static @Nullable IVRExtendedDisplay VRExtendedDisplay;
+    public static @Nullable IVRSettings VRSettings;
+    public static @Nullable IVRApplications VRApplications;
+    public static @Nullable IVRTrackedCamera VRTrackedCamera;
+    public static @Nullable IVRScreenshots VRScreenshots;
+    public static @Nullable IVRDriverManager VRDriverManager;
+    public static @Nullable IVRInput VRInput;
+    public static @Nullable IVRIOBuffer VRIOBuffer;
+    public static @Nullable IVRSpatialAnchors VRSpatialAnchors;
+    public static @Nullable IVRDebug VRDebug;
+    public static @Nullable IVRNotifications VRNotifications;
+    public static @Nullable IVRProperties VRProperties;
+    public static @Nullable IVRPaths VRPaths;
+    public static @Nullable IVRBlockQueue VRBlockQueue;
 
     private static int token;
 
@@ -85,8 +85,7 @@ public final class OpenVR {
         VRBlockQueue = getGenericInterface(IVRBlockQueue_Version, IVRBlockQueue::new);
     }
 
-    @Nullable
-    private static <T> T getGenericInterface(String interfaceNameVersion, LongFunction<T> supplier) {
+    private static <T> @Nullable T getGenericInterface(String interfaceNameVersion, LongFunction<T> supplier) {
         try (MemoryStack stack = stackPush()) {
             IntBuffer peError = stack.mallocInt(1);
             long ivr = VR_GetGenericInterface("FnTable:" + interfaceNameVersion, peError);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthIm
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEnvironmentDepthImageViewMETA createSafe(long address) {
+    public static @Nullable XrEnvironmentDepthImageViewMETA createSafe(long address) {
         return address == NULL ? null : new XrEnvironmentDepthImageViewMETA(address, null);
     }
 
@@ -215,8 +214,7 @@ public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthIm
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrEnvironmentDepthImageViewMETA.Buffer createSafe(long address, int capacity) {
+    public static XrEnvironmentDepthImageViewMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

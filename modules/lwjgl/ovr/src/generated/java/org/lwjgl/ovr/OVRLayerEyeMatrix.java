@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -252,8 +252,7 @@ public class OVRLayerEyeMatrix extends Struct<OVRLayerEyeMatrix> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerEyeMatrix createSafe(long address) {
+    public static @Nullable OVRLayerEyeMatrix createSafe(long address) {
         return address == NULL ? null : new OVRLayerEyeMatrix(address, null);
     }
 
@@ -296,8 +295,7 @@ public class OVRLayerEyeMatrix extends Struct<OVRLayerEyeMatrix> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRLayerEyeMatrix.Buffer createSafe(long address, int capacity) {
+    public static OVRLayerEyeMatrix.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

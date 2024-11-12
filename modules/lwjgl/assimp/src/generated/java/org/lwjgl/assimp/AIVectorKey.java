@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -146,8 +146,7 @@ public class AIVectorKey extends Struct<AIVectorKey> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIVectorKey createSafe(long address) {
+    public static @Nullable AIVectorKey createSafe(long address) {
         return address == NULL ? null : new AIVectorKey(address, null);
     }
 
@@ -190,8 +189,7 @@ public class AIVectorKey extends Struct<AIVectorKey> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIVectorKey.Buffer createSafe(long address, int capacity) {
+    public static AIVectorKey.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

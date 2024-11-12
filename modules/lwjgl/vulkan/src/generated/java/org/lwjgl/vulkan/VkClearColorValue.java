@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -163,8 +163,7 @@ public class VkClearColorValue extends Struct<VkClearColorValue> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearColorValue createSafe(long address) {
+    public static @Nullable VkClearColorValue createSafe(long address) {
         return address == NULL ? null : new VkClearColorValue(address, null);
     }
 
@@ -207,8 +206,7 @@ public class VkClearColorValue extends Struct<VkClearColorValue> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkClearColorValue.Buffer createSafe(long address, int capacity) {
+    public static VkClearColorValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

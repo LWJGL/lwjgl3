@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -89,9 +89,8 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("FT_Byte *")
-    public ByteBuffer p(int capacity) { return np(address(), capacity); }
+    public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
 
     // -----------------------------------
 
@@ -117,8 +116,7 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_LayerIterator createSafe(long address) {
+    public static @Nullable FT_LayerIterator createSafe(long address) {
         return address == NULL ? null : new FT_LayerIterator(address, null);
     }
 
@@ -161,8 +159,7 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_LayerIterator.Buffer createSafe(long address, int capacity) {
+    public static FT_LayerIterator.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -211,7 +208,7 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
     /** Unsafe version of {@link #layer}. */
     public static int nlayer(long struct) { return memGetInt(struct + FT_LayerIterator.LAYER); }
     /** Unsafe version of {@link #p(int) p}. */
-    @Nullable public static ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_LayerIterator.P), capacity); }
+    public static @Nullable ByteBuffer np(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_LayerIterator.P), capacity); }
 
     // -----------------------------------
 
@@ -267,9 +264,8 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("FT_Byte *")
-        public ByteBuffer p(int capacity) { return FT_LayerIterator.np(address(), capacity); }
+        public @Nullable ByteBuffer p(int capacity) { return FT_LayerIterator.np(address(), capacity); }
 
     }
 

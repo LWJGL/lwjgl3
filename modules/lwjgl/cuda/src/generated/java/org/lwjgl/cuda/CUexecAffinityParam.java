@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -127,8 +127,7 @@ public class CUexecAffinityParam extends Struct<CUexecAffinityParam> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUexecAffinityParam createSafe(long address) {
+    public static @Nullable CUexecAffinityParam createSafe(long address) {
         return address == NULL ? null : new CUexecAffinityParam(address, null);
     }
 
@@ -171,8 +170,7 @@ public class CUexecAffinityParam extends Struct<CUexecAffinityParam> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUexecAffinityParam.Buffer createSafe(long address, int capacity) {
+    public static CUexecAffinityParam.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

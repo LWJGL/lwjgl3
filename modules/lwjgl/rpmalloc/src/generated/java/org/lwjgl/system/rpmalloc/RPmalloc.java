@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.rpmalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -104,7 +104,7 @@ public class RPmalloc {
      * @param config an optional {@link RPMallocConfig} instance
      */
     @NativeType("int")
-    public static boolean rpmalloc_initialize_config(@Nullable @NativeType("rpmalloc_config_t const *") RPMallocConfig config) {
+    public static boolean rpmalloc_initialize_config(@NativeType("rpmalloc_config_t const *") @Nullable RPMallocConfig config) {
         return nrpmalloc_initialize_config(memAddressSafe(config)) != 0;
     }
 
@@ -186,9 +186,8 @@ public class RPmalloc {
     public static native long nrpmalloc(long size);
 
     /** Allocates a memory block of at least the given size. */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc(@NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmalloc(@NativeType("size_t") long size) {
         long __result = nrpmalloc(size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -199,37 +198,37 @@ public class RPmalloc {
     public static native void nrpfree(long ptr);
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable ByteBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") ShortBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable ShortBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") IntBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable IntBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") LongBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable LongBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") FloatBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable FloatBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") DoubleBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable DoubleBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
     /** Frees the given memory block. */
-    public static void rpfree(@Nullable @NativeType("void *") PointerBuffer ptr) {
+    public static void rpfree(@NativeType("void *") @Nullable PointerBuffer ptr) {
         nrpfree(memAddressSafe(ptr));
     }
 
@@ -239,9 +238,8 @@ public class RPmalloc {
     public static native long nrpcalloc(long num, long size);
 
     /** Allocates a memory block of at least the given size and zero initializes it. */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpcalloc(@NativeType("size_t") long num, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpcalloc(@NativeType("size_t") long num, @NativeType("size_t") long size) {
         long __result = nrpcalloc(num, size);
         return memByteBufferSafe(__result, (int)num * (int)size);
     }
@@ -252,9 +250,8 @@ public class RPmalloc {
     public static native long nrprealloc(long ptr, long size);
 
     /** Reallocates the given block to at least the given size. */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rprealloc(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rprealloc(@NativeType("void *") @Nullable ByteBuffer ptr, @NativeType("size_t") long size) {
         long __result = nrprealloc(memAddressSafe(ptr), size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -272,9 +269,8 @@ public class RPmalloc {
      *
      * @param flags {@link #RPMALLOC_NO_PRESERVE MALLOC_NO_PRESERVE} {@link #RPMALLOC_GROW_OR_FAIL MALLOC_GROW_OR_FAIL}
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpaligned_realloc(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
+    public static @Nullable ByteBuffer rpaligned_realloc(@NativeType("void *") @Nullable ByteBuffer ptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
         long __result = nrpaligned_realloc(memAddressSafe(ptr), alignment, size, remainingSafe(ptr), flags);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -290,9 +286,8 @@ public class RPmalloc {
      * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
      * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpaligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpaligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         long __result = nrpaligned_alloc(alignment, size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -308,9 +303,8 @@ public class RPmalloc {
      * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
      * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpaligned_calloc(@NativeType("size_t") long alignment, @NativeType("size_t") long num, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpaligned_calloc(@NativeType("size_t") long alignment, @NativeType("size_t") long num, @NativeType("size_t") long size) {
         long __result = nrpaligned_calloc(alignment, num, size);
         return memByteBufferSafe(__result, (int)num * (int)size);
     }
@@ -326,9 +320,8 @@ public class RPmalloc {
      * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
      * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmemalign(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmemalign(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         long __result = nrpmemalign(alignment, size);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -424,9 +417,8 @@ public class RPmalloc {
     public static native long nrpmalloc_heap_alloc(long heap, long size);
 
     /** Allocates a memory block of at least the given size using the given heap. */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_alloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmalloc_heap_alloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(heap);
         }
@@ -445,9 +437,8 @@ public class RPmalloc {
      * <p>The returned block will have the requested alignment. Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be
      * less than memory page size. A caveat of rpmalloc internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_aligned_alloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmalloc_heap_aligned_alloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(heap);
         }
@@ -461,9 +452,8 @@ public class RPmalloc {
     public static native long nrpmalloc_heap_calloc(long heap, long num, long size);
 
     /** Allocates a memory block of at least the given size using the given heap and zero initializes it. */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_calloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long num, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmalloc_heap_calloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long num, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(heap);
         }
@@ -485,9 +475,8 @@ public class RPmalloc {
      *
      * @param num '
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_aligned_calloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long alignment, @NativeType("size_t") long num, @NativeType("size_t") long size) {
+    public static @Nullable ByteBuffer rpmalloc_heap_aligned_calloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long alignment, @NativeType("size_t") long num, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(heap);
         }
@@ -507,9 +496,8 @@ public class RPmalloc {
      *
      * @param flags {@link #RPMALLOC_NO_PRESERVE MALLOC_NO_PRESERVE} {@link #RPMALLOC_GROW_OR_FAIL MALLOC_GROW_OR_FAIL}
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_realloc(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
+    public static @Nullable ByteBuffer rpmalloc_heap_realloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable ByteBuffer ptr, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
         if (CHECKS) {
             check(heap);
         }
@@ -531,9 +519,8 @@ public class RPmalloc {
      *
      * @param flags {@link #RPMALLOC_NO_PRESERVE MALLOC_NO_PRESERVE} {@link #RPMALLOC_GROW_OR_FAIL MALLOC_GROW_OR_FAIL}
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer rpmalloc_heap_aligned_realloc(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
+    public static @Nullable ByteBuffer rpmalloc_heap_aligned_realloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable ByteBuffer ptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
         if (CHECKS) {
             check(heap);
         }
@@ -551,7 +538,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable ByteBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -563,7 +550,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") ShortBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable ShortBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -575,7 +562,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") IntBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable IntBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -587,7 +574,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") LongBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable LongBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -599,7 +586,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") FloatBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable FloatBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -611,7 +598,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") DoubleBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable DoubleBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -623,7 +610,7 @@ public class RPmalloc {
      * 
      * <p>The memory block MUST be allocated by the same heap given to this function.</p>
      */
-    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @Nullable @NativeType("void *") PointerBuffer ptr) {
+    public static void rpmalloc_heap_free(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("void *") @Nullable PointerBuffer ptr) {
         if (CHECKS) {
             check(heap);
         }
@@ -660,43 +647,43 @@ public class RPmalloc {
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") ByteBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable ByteBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") ShortBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable ShortBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") IntBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable IntBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") LongBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable LongBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") FloatBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable FloatBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") DoubleBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable DoubleBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
     /** Returns which heap the given pointer is allocated on. */
     @NativeType("rpmalloc_heap_t *")
-    public static long rpmalloc_get_heap_for_ptr(@Nullable @NativeType("void *") PointerBuffer ptr) {
+    public static long rpmalloc_get_heap_for_ptr(@NativeType("void *") @Nullable PointerBuffer ptr) {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 

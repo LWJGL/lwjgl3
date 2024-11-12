@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -146,8 +146,7 @@ public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIQuatKey createSafe(long address) {
+    public static @Nullable AIQuatKey createSafe(long address) {
         return address == NULL ? null : new AIQuatKey(address, null);
     }
 
@@ -190,8 +189,7 @@ public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIQuatKey.Buffer createSafe(long address, int capacity) {
+    public static AIQuatKey.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -226,8 +226,7 @@ public class VkSurfaceCapabilities2EXT extends Struct<VkSurfaceCapabilities2EXT>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceCapabilities2EXT createSafe(long address) {
+    public static @Nullable VkSurfaceCapabilities2EXT createSafe(long address) {
         return address == NULL ? null : new VkSurfaceCapabilities2EXT(address, null);
     }
 
@@ -270,8 +269,7 @@ public class VkSurfaceCapabilities2EXT extends Struct<VkSurfaceCapabilities2EXT>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceCapabilities2EXT.Buffer createSafe(long address, int capacity) {
+    public static VkSurfaceCapabilities2EXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

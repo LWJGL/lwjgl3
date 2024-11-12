@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -173,8 +173,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFu
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceFullScreenExclusiveWin32InfoEXT createSafe(long address) {
+    public static @Nullable VkSurfaceFullScreenExclusiveWin32InfoEXT createSafe(long address) {
         return address == NULL ? null : new VkSurfaceFullScreenExclusiveWin32InfoEXT(address, null);
     }
 
@@ -217,8 +216,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFu
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkSurfaceFullScreenExclusiveWin32InfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

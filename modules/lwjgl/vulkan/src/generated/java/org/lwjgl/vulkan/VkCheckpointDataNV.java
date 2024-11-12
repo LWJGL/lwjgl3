@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class VkCheckpointDataNV extends Struct<VkCheckpointDataNV> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCheckpointDataNV createSafe(long address) {
+    public static @Nullable VkCheckpointDataNV createSafe(long address) {
         return address == NULL ? null : new VkCheckpointDataNV(address, null);
     }
 
@@ -208,8 +207,7 @@ public class VkCheckpointDataNV extends Struct<VkCheckpointDataNV> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCheckpointDataNV.Buffer createSafe(long address, int capacity) {
+    public static VkCheckpointDataNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

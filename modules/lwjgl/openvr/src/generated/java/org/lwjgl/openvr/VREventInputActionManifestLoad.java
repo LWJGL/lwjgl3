@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -100,8 +100,7 @@ public class VREventInputActionManifestLoad extends Struct<VREventInputActionMan
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventInputActionManifestLoad createSafe(long address) {
+    public static @Nullable VREventInputActionManifestLoad createSafe(long address) {
         return address == NULL ? null : new VREventInputActionManifestLoad(address, null);
     }
 
@@ -116,8 +115,7 @@ public class VREventInputActionManifestLoad extends Struct<VREventInputActionMan
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VREventInputActionManifestLoad.Buffer createSafe(long address, int capacity) {
+    public static VREventInputActionManifestLoad.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

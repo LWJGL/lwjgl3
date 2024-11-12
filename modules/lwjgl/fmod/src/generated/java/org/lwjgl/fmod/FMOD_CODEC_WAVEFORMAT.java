@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -119,13 +119,11 @@ public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> impleme
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer name() { return nname(address()); }
+    public @Nullable ByteBuffer name() { return nname(address()); }
     /** @return the null-terminated string pointed to by the {@code name} field. */
-    @Nullable
     @NativeType("char const *")
-    public String nameString() { return nnameString(address()); }
+    public @Nullable String nameString() { return nnameString(address()); }
     /** @return the value of the {@code format} field. */
     @NativeType("FMOD_SOUND_FORMAT")
     public int format() { return nformat(address()); }
@@ -254,8 +252,7 @@ public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CODEC_WAVEFORMAT createSafe(long address) {
+    public static @Nullable FMOD_CODEC_WAVEFORMAT createSafe(long address) {
         return address == NULL ? null : new FMOD_CODEC_WAVEFORMAT(address, null);
     }
 
@@ -298,8 +295,7 @@ public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CODEC_WAVEFORMAT.Buffer createSafe(long address, int capacity) {
+    public static FMOD_CODEC_WAVEFORMAT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -344,9 +340,9 @@ public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> impleme
     // -----------------------------------
 
     /** Unsafe version of {@link #name}. */
-    @Nullable public static ByteBuffer nname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CODEC_WAVEFORMAT.NAME)); }
+    public static @Nullable ByteBuffer nname(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + FMOD_CODEC_WAVEFORMAT.NAME)); }
     /** Unsafe version of {@link #nameString}. */
-    @Nullable public static String nnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CODEC_WAVEFORMAT.NAME)); }
+    public static @Nullable String nnameString(long struct) { return memUTF8Safe(memGetAddress(struct + FMOD_CODEC_WAVEFORMAT.NAME)); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return memGetInt(struct + FMOD_CODEC_WAVEFORMAT.FORMAT); }
     /** Unsafe version of {@link #channels}. */
@@ -446,13 +442,11 @@ public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> impleme
         }
 
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer name() { return FMOD_CODEC_WAVEFORMAT.nname(address()); }
+        public @Nullable ByteBuffer name() { return FMOD_CODEC_WAVEFORMAT.nname(address()); }
         /** @return the null-terminated string pointed to by the {@code name} field. */
-        @Nullable
         @NativeType("char const *")
-        public String nameString() { return FMOD_CODEC_WAVEFORMAT.nnameString(address()); }
+        public @Nullable String nameString() { return FMOD_CODEC_WAVEFORMAT.nnameString(address()); }
         /** @return the value of the {@code format} field. */
         @NativeType("FMOD_SOUND_FORMAT")
         public int format() { return FMOD_CODEC_WAVEFORMAT.nformat(address()); }

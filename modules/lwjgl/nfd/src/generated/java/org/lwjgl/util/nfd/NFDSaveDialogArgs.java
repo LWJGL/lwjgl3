@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.nfd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -87,34 +87,29 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link NFDFilterItem.Buffer} view of the struct array pointed to by the {@code filterList} field. */
-    @Nullable
     @NativeType("nfdfilteritem_t const *")
-    public NFDFilterItem.Buffer filterList() { return nfilterList(address()); }
+    public NFDFilterItem.@Nullable Buffer filterList() { return nfilterList(address()); }
     /** @return the value of the {@code filterCount} field. */
     @NativeType("nfdfiltersize_t")
     public int filterCount() { return nfilterCount(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultPath} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public ByteBuffer defaultPath() { return ndefaultPath(address()); }
+    public @Nullable ByteBuffer defaultPath() { return ndefaultPath(address()); }
     /** @return the null-terminated string pointed to by the {@code defaultPath} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public String defaultPathString() { return ndefaultPathString(address()); }
+    public @Nullable String defaultPathString() { return ndefaultPathString(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultName} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public ByteBuffer defaultName() { return ndefaultName(address()); }
+    public @Nullable ByteBuffer defaultName() { return ndefaultName(address()); }
     /** @return the null-terminated string pointed to by the {@code defaultName} field. */
-    @Nullable
     @NativeType("nfdchar_t const *")
-    public String defaultNameString() { return ndefaultNameString(address()); }
+    public @Nullable String defaultNameString() { return ndefaultNameString(address()); }
     /** @return a {@link NFDWindowHandle} view of the {@code parentWindow} field. */
     @NativeType("nfdwindowhandle_t")
     public NFDWindowHandle parentWindow() { return nparentWindow(address()); }
 
     /** Sets the address of the specified {@link NFDFilterItem.Buffer} to the {@code filterList} field. */
-    public NFDSaveDialogArgs filterList(@Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer value) { nfilterList(address(), value); return this; }
+    public NFDSaveDialogArgs filterList(@NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer value) { nfilterList(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code defaultPath} field. */
     public NFDSaveDialogArgs defaultPath(@Nullable @NativeType("nfdchar_t const *") ByteBuffer value) { ndefaultPath(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code defaultName} field. */
@@ -126,7 +121,7 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
 
     /** Initializes this struct with the specified values. */
     public NFDSaveDialogArgs set(
-        @Nullable NFDFilterItem.Buffer filterList,
+        NFDFilterItem.@Nullable Buffer filterList,
         @Nullable ByteBuffer defaultPath,
         @Nullable ByteBuffer defaultName,
         NFDWindowHandle parentWindow
@@ -175,8 +170,7 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDSaveDialogArgs createSafe(long address) {
+    public static @Nullable NFDSaveDialogArgs createSafe(long address) {
         return address == NULL ? null : new NFDSaveDialogArgs(address, null);
     }
 
@@ -219,8 +213,7 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NFDSaveDialogArgs.Buffer createSafe(long address, int capacity) {
+    public static NFDSaveDialogArgs.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -265,22 +258,22 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
     // -----------------------------------
 
     /** Unsafe version of {@link #filterList}. */
-    @Nullable public static NFDFilterItem.Buffer nfilterList(long struct) { return NFDFilterItem.createSafe(memGetAddress(struct + NFDSaveDialogArgs.FILTERLIST), nfilterCount(struct)); }
+    public static NFDFilterItem.@Nullable Buffer nfilterList(long struct) { return NFDFilterItem.createSafe(memGetAddress(struct + NFDSaveDialogArgs.FILTERLIST), nfilterCount(struct)); }
     /** Unsafe version of {@link #filterCount}. */
     public static int nfilterCount(long struct) { return memGetInt(struct + NFDSaveDialogArgs.FILTERCOUNT); }
     /** Unsafe version of {@link #defaultPath}. */
-    @Nullable public static ByteBuffer ndefaultPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTPATH)); }
+    public static @Nullable ByteBuffer ndefaultPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTPATH)); }
     /** Unsafe version of {@link #defaultPathString}. */
-    @Nullable public static String ndefaultPathString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTPATH)); }
+    public static @Nullable String ndefaultPathString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTPATH)); }
     /** Unsafe version of {@link #defaultName}. */
-    @Nullable public static ByteBuffer ndefaultName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTNAME)); }
+    public static @Nullable ByteBuffer ndefaultName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTNAME)); }
     /** Unsafe version of {@link #defaultNameString}. */
-    @Nullable public static String ndefaultNameString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTNAME)); }
+    public static @Nullable String ndefaultNameString(long struct) { return memUTF8Safe(memGetAddress(struct + NFDSaveDialogArgs.DEFAULTNAME)); }
     /** Unsafe version of {@link #parentWindow}. */
     public static NFDWindowHandle nparentWindow(long struct) { return NFDWindowHandle.create(struct + NFDSaveDialogArgs.PARENTWINDOW); }
 
     /** Unsafe version of {@link #filterList(NFDFilterItem.Buffer) filterList}. */
-    public static void nfilterList(long struct, @Nullable NFDFilterItem.Buffer value) { memPutAddress(struct + NFDSaveDialogArgs.FILTERLIST, memAddressSafe(value)); nfilterCount(struct, value == null ? 0 : value.remaining()); }
+    public static void nfilterList(long struct, NFDFilterItem.@Nullable Buffer value) { memPutAddress(struct + NFDSaveDialogArgs.FILTERLIST, memAddressSafe(value)); nfilterCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code filterCount} field of the specified {@code struct}. */
     public static void nfilterCount(long struct, int value) { memPutInt(struct + NFDSaveDialogArgs.FILTERCOUNT, value); }
     /** Unsafe version of {@link #defaultPath(ByteBuffer) defaultPath}. */
@@ -354,34 +347,29 @@ public class NFDSaveDialogArgs extends Struct<NFDSaveDialogArgs> implements Nati
         }
 
         /** @return a {@link NFDFilterItem.Buffer} view of the struct array pointed to by the {@code filterList} field. */
-        @Nullable
         @NativeType("nfdfilteritem_t const *")
-        public NFDFilterItem.Buffer filterList() { return NFDSaveDialogArgs.nfilterList(address()); }
+        public NFDFilterItem.@Nullable Buffer filterList() { return NFDSaveDialogArgs.nfilterList(address()); }
         /** @return the value of the {@code filterCount} field. */
         @NativeType("nfdfiltersize_t")
         public int filterCount() { return NFDSaveDialogArgs.nfilterCount(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultPath} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public ByteBuffer defaultPath() { return NFDSaveDialogArgs.ndefaultPath(address()); }
+        public @Nullable ByteBuffer defaultPath() { return NFDSaveDialogArgs.ndefaultPath(address()); }
         /** @return the null-terminated string pointed to by the {@code defaultPath} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public String defaultPathString() { return NFDSaveDialogArgs.ndefaultPathString(address()); }
+        public @Nullable String defaultPathString() { return NFDSaveDialogArgs.ndefaultPathString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code defaultName} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public ByteBuffer defaultName() { return NFDSaveDialogArgs.ndefaultName(address()); }
+        public @Nullable ByteBuffer defaultName() { return NFDSaveDialogArgs.ndefaultName(address()); }
         /** @return the null-terminated string pointed to by the {@code defaultName} field. */
-        @Nullable
         @NativeType("nfdchar_t const *")
-        public String defaultNameString() { return NFDSaveDialogArgs.ndefaultNameString(address()); }
+        public @Nullable String defaultNameString() { return NFDSaveDialogArgs.ndefaultNameString(address()); }
         /** @return a {@link NFDWindowHandle} view of the {@code parentWindow} field. */
         @NativeType("nfdwindowhandle_t")
         public NFDWindowHandle parentWindow() { return NFDSaveDialogArgs.nparentWindow(address()); }
 
         /** Sets the address of the specified {@link NFDFilterItem.Buffer} to the {@code filterList} field. */
-        public NFDSaveDialogArgs.Buffer filterList(@Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer value) { NFDSaveDialogArgs.nfilterList(address(), value); return this; }
+        public NFDSaveDialogArgs.Buffer filterList(@NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer value) { NFDSaveDialogArgs.nfilterList(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code defaultPath} field. */
         public NFDSaveDialogArgs.Buffer defaultPath(@Nullable @NativeType("nfdchar_t const *") ByteBuffer value) { NFDSaveDialogArgs.ndefaultPath(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code defaultName} field. */

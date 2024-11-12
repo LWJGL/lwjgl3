@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,8 +86,7 @@ public class FT_Prop_IncreaseXHeight extends Struct<FT_Prop_IncreaseXHeight> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Prop_IncreaseXHeight createSafe(long address) {
+    public static @Nullable FT_Prop_IncreaseXHeight createSafe(long address) {
         return address == NULL ? null : new FT_Prop_IncreaseXHeight(address, null);
     }
 
@@ -102,8 +101,7 @@ public class FT_Prop_IncreaseXHeight extends Struct<FT_Prop_IncreaseXHeight> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_Prop_IncreaseXHeight.Buffer createSafe(long address, int capacity) {
+    public static FT_Prop_IncreaseXHeight.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

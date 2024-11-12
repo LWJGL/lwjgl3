@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -204,7 +204,7 @@ public class MSFTControllerModel {
      * @param buffer            a pointer to an application-allocated array of the model for the device that will be filled with the {@code uint8_t} values by the runtime. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrLoadControllerModelMSFT(XrSession session, @NativeType("XrControllerModelKeyMSFT") long modelKey, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("uint8_t *") ByteBuffer buffer) {
+    public static int xrLoadControllerModelMSFT(XrSession session, @NativeType("XrControllerModelKeyMSFT") long modelKey, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("uint8_t *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

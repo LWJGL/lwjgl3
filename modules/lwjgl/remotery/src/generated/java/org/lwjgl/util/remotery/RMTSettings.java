@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,20 +191,17 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     @NativeType("void *")
     public long mm_context() { return nmm_context(address()); }
     /** callback pointer for receiving input from the Remotery console */
-    @Nullable
     @NativeType("rmtInputHandlerPtr")
-    public RMTInputHandler input_handler() { return ninput_handler(address()); }
+    public @Nullable RMTInputHandler input_handler() { return ninput_handler(address()); }
     /** callback pointer for traversing the sample tree graph */
-    @Nullable
     @NativeType("rmtSampleTreeHandlerPtr")
-    public RMTSampleTreeHandler sampletree_handler() { return nsampletree_handler(address()); }
+    public @Nullable RMTSampleTreeHandler sampletree_handler() { return nsampletree_handler(address()); }
     /** @return the value of the {@code sampletree_context} field. */
     @NativeType("void *")
     public long sampletree_context() { return nsampletree_context(address()); }
     /** callback pointer for traversing the property graph */
-    @Nullable
     @NativeType("rmtPropertyHandlerPtr")
-    public RMTPropertyHandler snapshot_callback() { return nsnapshot_callback(address()); }
+    public @Nullable RMTPropertyHandler snapshot_callback() { return nsnapshot_callback(address()); }
     /** @return the value of the {@code snapshot_context} field. */
     @NativeType("void *")
     public long snapshot_context() { return nsnapshot_context(address()); }
@@ -212,13 +209,11 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     @NativeType("void *")
     public long input_handler_context() { return ninput_handler_context(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logPath} field. */
-    @Nullable
     @NativeType("rmtPStr")
-    public ByteBuffer logPath() { return nlogPath(address()); }
+    public @Nullable ByteBuffer logPath() { return nlogPath(address()); }
     /** @return the null-terminated string pointed to by the {@code logPath} field. */
-    @Nullable
     @NativeType("rmtPStr")
-    public String logPathString() { return nlogPathString(address()); }
+    public @Nullable String logPathString() { return nlogPathString(address()); }
 
     /** Sets the specified value to the {@link #port} field. */
     public RMTSettings port(@NativeType("rmtU16") short value) { nport(address(), value); return this; }
@@ -336,8 +331,7 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTSettings createSafe(long address) {
+    public static @Nullable RMTSettings createSafe(long address) {
         return address == NULL ? null : new RMTSettings(address, null);
     }
 
@@ -396,21 +390,21 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     /** Unsafe version of {@link #mm_context}. */
     public static long nmm_context(long struct) { return memGetAddress(struct + RMTSettings.MM_CONTEXT); }
     /** Unsafe version of {@link #input_handler}. */
-    @Nullable public static RMTInputHandler ninput_handler(long struct) { return RMTInputHandler.createSafe(memGetAddress(struct + RMTSettings.INPUT_HANDLER)); }
+    public static @Nullable RMTInputHandler ninput_handler(long struct) { return RMTInputHandler.createSafe(memGetAddress(struct + RMTSettings.INPUT_HANDLER)); }
     /** Unsafe version of {@link #sampletree_handler}. */
-    @Nullable public static RMTSampleTreeHandler nsampletree_handler(long struct) { return RMTSampleTreeHandler.createSafe(memGetAddress(struct + RMTSettings.SAMPLETREE_HANDLER)); }
+    public static @Nullable RMTSampleTreeHandler nsampletree_handler(long struct) { return RMTSampleTreeHandler.createSafe(memGetAddress(struct + RMTSettings.SAMPLETREE_HANDLER)); }
     /** Unsafe version of {@link #sampletree_context}. */
     public static long nsampletree_context(long struct) { return memGetAddress(struct + RMTSettings.SAMPLETREE_CONTEXT); }
     /** Unsafe version of {@link #snapshot_callback}. */
-    @Nullable public static RMTPropertyHandler nsnapshot_callback(long struct) { return RMTPropertyHandler.createSafe(memGetAddress(struct + RMTSettings.SNAPSHOT_CALLBACK)); }
+    public static @Nullable RMTPropertyHandler nsnapshot_callback(long struct) { return RMTPropertyHandler.createSafe(memGetAddress(struct + RMTSettings.SNAPSHOT_CALLBACK)); }
     /** Unsafe version of {@link #snapshot_context}. */
     public static long nsnapshot_context(long struct) { return memGetAddress(struct + RMTSettings.SNAPSHOT_CONTEXT); }
     /** Unsafe version of {@link #input_handler_context}. */
     public static long ninput_handler_context(long struct) { return memGetAddress(struct + RMTSettings.INPUT_HANDLER_CONTEXT); }
     /** Unsafe version of {@link #logPath}. */
-    @Nullable public static ByteBuffer nlogPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RMTSettings.LOGPATH)); }
+    public static @Nullable ByteBuffer nlogPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + RMTSettings.LOGPATH)); }
     /** Unsafe version of {@link #logPathString}. */
-    @Nullable public static String nlogPathString(long struct) { return memUTF8Safe(memGetAddress(struct + RMTSettings.LOGPATH)); }
+    public static @Nullable String nlogPathString(long struct) { return memUTF8Safe(memGetAddress(struct + RMTSettings.LOGPATH)); }
 
     /** Unsafe version of {@link #port(short) port}. */
     public static void nport(long struct, short value) { memPutShort(struct + RMTSettings.PORT, value); }

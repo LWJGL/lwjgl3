@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,9 +107,8 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     @NativeType("uint32_t")
     public int timingCount() { return ntimingCount(address()); }
     /** either {@code NULL} or a pointer to an array of {@link VkLatencyTimingsFrameReportNV} structures. */
-    @Nullable
     @NativeType("VkLatencyTimingsFrameReportNV *")
-    public VkLatencyTimingsFrameReportNV.Buffer pTimings() { return npTimings(address()); }
+    public VkLatencyTimingsFrameReportNV.@Nullable Buffer pTimings() { return npTimings(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGetLatencyMarkerInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -120,14 +119,14 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     /** Sets the specified value to the {@link #timingCount} field. */
     public VkGetLatencyMarkerInfoNV timingCount(@NativeType("uint32_t") int value) { ntimingCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@link #pTimings} field. */
-    public VkGetLatencyMarkerInfoNV pTimings(@Nullable @NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.Buffer value) { npTimings(address(), value); return this; }
+    public VkGetLatencyMarkerInfoNV pTimings(@NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.@Nullable Buffer value) { npTimings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkGetLatencyMarkerInfoNV set(
         int sType,
         long pNext,
         int timingCount,
-        @Nullable VkLatencyTimingsFrameReportNV.Buffer pTimings
+        VkLatencyTimingsFrameReportNV.@Nullable Buffer pTimings
     ) {
         sType(sType);
         pNext(pNext);
@@ -173,8 +172,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkGetLatencyMarkerInfoNV createSafe(long address) {
+    public static @Nullable VkGetLatencyMarkerInfoNV createSafe(long address) {
         return address == NULL ? null : new VkGetLatencyMarkerInfoNV(address, null);
     }
 
@@ -217,8 +215,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkGetLatencyMarkerInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkGetLatencyMarkerInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -269,7 +266,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     /** Unsafe version of {@link #timingCount}. */
     public static int ntimingCount(long struct) { return memGetInt(struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT); }
     /** Unsafe version of {@link #pTimings}. */
-    @Nullable public static VkLatencyTimingsFrameReportNV.Buffer npTimings(long struct) { return VkLatencyTimingsFrameReportNV.createSafe(memGetAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS), ntimingCount(struct)); }
+    public static VkLatencyTimingsFrameReportNV.@Nullable Buffer npTimings(long struct) { return VkLatencyTimingsFrameReportNV.createSafe(memGetAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS), ntimingCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkGetLatencyMarkerInfoNV.STYPE, value); }
@@ -278,7 +275,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     /** Sets the specified value to the {@code timingCount} field of the specified {@code struct}. */
     public static void ntimingCount(long struct, int value) { memPutInt(struct + VkGetLatencyMarkerInfoNV.TIMINGCOUNT, value); }
     /** Unsafe version of {@link #pTimings(VkLatencyTimingsFrameReportNV.Buffer) pTimings}. */
-    public static void npTimings(long struct, @Nullable VkLatencyTimingsFrameReportNV.Buffer value) { memPutAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS, memAddressSafe(value)); if (value != null) { ntimingCount(struct, value.remaining()); } }
+    public static void npTimings(long struct, VkLatencyTimingsFrameReportNV.@Nullable Buffer value) { memPutAddress(struct + VkGetLatencyMarkerInfoNV.PTIMINGS, memAddressSafe(value)); if (value != null) { ntimingCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -333,9 +330,8 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
         @NativeType("uint32_t")
         public int timingCount() { return VkGetLatencyMarkerInfoNV.ntimingCount(address()); }
         /** @return a {@link VkLatencyTimingsFrameReportNV.Buffer} view of the struct array pointed to by the {@link VkGetLatencyMarkerInfoNV#pTimings} field. */
-        @Nullable
         @NativeType("VkLatencyTimingsFrameReportNV *")
-        public VkLatencyTimingsFrameReportNV.Buffer pTimings() { return VkGetLatencyMarkerInfoNV.npTimings(address()); }
+        public VkLatencyTimingsFrameReportNV.@Nullable Buffer pTimings() { return VkGetLatencyMarkerInfoNV.npTimings(address()); }
 
         /** Sets the specified value to the {@link VkGetLatencyMarkerInfoNV#sType} field. */
         public VkGetLatencyMarkerInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGetLatencyMarkerInfoNV.nsType(address(), value); return this; }
@@ -346,7 +342,7 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
         /** Sets the specified value to the {@link VkGetLatencyMarkerInfoNV#timingCount} field. */
         public VkGetLatencyMarkerInfoNV.Buffer timingCount(@NativeType("uint32_t") int value) { VkGetLatencyMarkerInfoNV.ntimingCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@link VkGetLatencyMarkerInfoNV#pTimings} field. */
-        public VkGetLatencyMarkerInfoNV.Buffer pTimings(@Nullable @NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.Buffer value) { VkGetLatencyMarkerInfoNV.npTimings(address(), value); return this; }
+        public VkGetLatencyMarkerInfoNV.Buffer pTimings(@NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.@Nullable Buffer value) { VkGetLatencyMarkerInfoNV.npTimings(address(), value); return this; }
 
     }
 

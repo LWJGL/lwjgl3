@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -172,7 +172,7 @@ public class METAPerformanceMetrics {
      * @param counterPaths           an array of {@code XrPath} filled in by the runtime which contains all the available performance metrics counters, but <b>can</b> be {@code NULL} if {@code counterPathCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, @NativeType("uint32_t *") IntBuffer counterPathCountOutput, @Nullable @NativeType("XrPath *") LongBuffer counterPaths) {
+    public static int xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, @NativeType("uint32_t *") IntBuffer counterPathCountOutput, @NativeType("XrPath *") @Nullable LongBuffer counterPaths) {
         if (CHECKS) {
             check(counterPathCountOutput, 1);
         }

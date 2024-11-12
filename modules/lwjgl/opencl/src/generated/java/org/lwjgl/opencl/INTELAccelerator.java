@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -107,7 +107,7 @@ public class INTELAccelerator {
      *         </ul>
      */
     @NativeType("cl_accelerator_intel")
-    public static long clCreateAcceleratorINTEL(@NativeType("cl_context") long context, @NativeType("cl_accelerator_type_intel") int accelerator_type, @NativeType("void const *") ByteBuffer descriptor, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateAcceleratorINTEL(@NativeType("cl_context") long context, @NativeType("cl_accelerator_type_intel") int accelerator_type, @NativeType("void const *") ByteBuffer descriptor, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -200,7 +200,7 @@ public class INTELAccelerator {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -226,7 +226,7 @@ public class INTELAccelerator {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -252,7 +252,7 @@ public class INTELAccelerator {
      *         </ul>
      */
     @NativeType("cl_int")
-    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -261,7 +261,7 @@ public class INTELAccelerator {
 
     /** Array version of: {@link #clCreateAcceleratorINTEL CreateAcceleratorINTEL} */
     @NativeType("cl_accelerator_intel")
-    public static long clCreateAcceleratorINTEL(@NativeType("cl_context") long context, @NativeType("cl_accelerator_type_intel") int accelerator_type, @NativeType("void const *") ByteBuffer descriptor, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateAcceleratorINTEL(@NativeType("cl_context") long context, @NativeType("cl_accelerator_type_intel") int accelerator_type, @NativeType("void const *") ByteBuffer descriptor, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateAcceleratorINTEL;
         if (CHECKS) {
             check(__functionAddress);
@@ -273,7 +273,7 @@ public class INTELAccelerator {
 
     /** Array version of: {@link #clGetAcceleratorInfoINTEL GetAcceleratorInfoINTEL} */
     @NativeType("cl_int")
-    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetAcceleratorInfoINTEL(@NativeType("cl_accelerator_intel") long accelerator, @NativeType("cl_accelerator_info_intel") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetAcceleratorInfoINTEL;
         if (CHECKS) {
             check(__functionAddress);

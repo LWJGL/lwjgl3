@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -191,8 +191,7 @@ public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMappedMemoryRange createSafe(long address) {
+    public static @Nullable VkMappedMemoryRange createSafe(long address) {
         return address == NULL ? null : new VkMappedMemoryRange(address, null);
     }
 
@@ -235,8 +234,7 @@ public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMappedMemoryRange.Buffer createSafe(long address, int capacity) {
+    public static VkMappedMemoryRange.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

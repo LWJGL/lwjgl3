@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,9 +129,8 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
      * 
      * <p>Libclang does not create the directory at the specified path in the file system. Therefore it must exist, or storing PCH files will fail.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer PreambleStoragePath() { return nPreambleStoragePath(address()); }
+    public @Nullable ByteBuffer PreambleStoragePath() { return nPreambleStoragePath(address()); }
     /**
      * the path to a directory, in which to store temporary PCH files.
      * 
@@ -142,25 +141,22 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
      * 
      * <p>Libclang does not create the directory at the specified path in the file system. Therefore it must exist, or storing PCH files will fail.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public String PreambleStoragePathString() { return nPreambleStoragePathString(address()); }
+    public @Nullable String PreambleStoragePathString() { return nPreambleStoragePathString(address()); }
     /**
      * specifies a path which will contain log files for certain libclang invocations.
      * 
      * <p>A null value implies that libclang invocations are not logged.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer InvocationEmissionPath() { return nInvocationEmissionPath(address()); }
+    public @Nullable ByteBuffer InvocationEmissionPath() { return nInvocationEmissionPath(address()); }
     /**
      * specifies a path which will contain log files for certain libclang invocations.
      * 
      * <p>A null value implies that libclang invocations are not logged.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public String InvocationEmissionPathString() { return nInvocationEmissionPathString(address()); }
+    public @Nullable String InvocationEmissionPathString() { return nInvocationEmissionPathString(address()); }
 
     /** Sets the specified value to the {@link #Size} field. */
     public CXIndexOptions Size(@NativeType("unsigned") int value) { nSize(address(), value); return this; }
@@ -240,8 +236,7 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIndexOptions createSafe(long address) {
+    public static @Nullable CXIndexOptions createSafe(long address) {
         return address == NULL ? null : new CXIndexOptions(address, null);
     }
 
@@ -284,8 +279,7 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXIndexOptions.Buffer createSafe(long address, int capacity) {
+    public static CXIndexOptions.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -344,13 +338,13 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     public static int nStorePreamblesInMemory(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     public static int nReserved(long struct) { return (nbitfield0(struct) & 0x00_00_FF_F8) >>> 3; }
     /** Unsafe version of {@link #PreambleStoragePath}. */
-    @Nullable public static ByteBuffer nPreambleStoragePath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + CXIndexOptions.PREAMBLESTORAGEPATH)); }
+    public static @Nullable ByteBuffer nPreambleStoragePath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + CXIndexOptions.PREAMBLESTORAGEPATH)); }
     /** Unsafe version of {@link #PreambleStoragePathString}. */
-    @Nullable public static String nPreambleStoragePathString(long struct) { return memUTF8Safe(memGetAddress(struct + CXIndexOptions.PREAMBLESTORAGEPATH)); }
+    public static @Nullable String nPreambleStoragePathString(long struct) { return memUTF8Safe(memGetAddress(struct + CXIndexOptions.PREAMBLESTORAGEPATH)); }
     /** Unsafe version of {@link #InvocationEmissionPath}. */
-    @Nullable public static ByteBuffer nInvocationEmissionPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + CXIndexOptions.INVOCATIONEMISSIONPATH)); }
+    public static @Nullable ByteBuffer nInvocationEmissionPath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + CXIndexOptions.INVOCATIONEMISSIONPATH)); }
     /** Unsafe version of {@link #InvocationEmissionPathString}. */
-    @Nullable public static String nInvocationEmissionPathString(long struct) { return memUTF8Safe(memGetAddress(struct + CXIndexOptions.INVOCATIONEMISSIONPATH)); }
+    public static @Nullable String nInvocationEmissionPathString(long struct) { return memUTF8Safe(memGetAddress(struct + CXIndexOptions.INVOCATIONEMISSIONPATH)); }
 
     /** Unsafe version of {@link #Size(int) Size}. */
     public static void nSize(long struct, int value) { memPutInt(struct + CXIndexOptions.SIZE, value); }
@@ -439,21 +433,17 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
         @NativeType("unsigned")
         public boolean StorePreamblesInMemory() { return CXIndexOptions.nStorePreamblesInMemory(address()) != 0; }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXIndexOptions#PreambleStoragePath} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer PreambleStoragePath() { return CXIndexOptions.nPreambleStoragePath(address()); }
+        public @Nullable ByteBuffer PreambleStoragePath() { return CXIndexOptions.nPreambleStoragePath(address()); }
         /** @return the null-terminated string pointed to by the {@link CXIndexOptions#PreambleStoragePath} field. */
-        @Nullable
         @NativeType("char const *")
-        public String PreambleStoragePathString() { return CXIndexOptions.nPreambleStoragePathString(address()); }
+        public @Nullable String PreambleStoragePathString() { return CXIndexOptions.nPreambleStoragePathString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXIndexOptions#InvocationEmissionPath} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer InvocationEmissionPath() { return CXIndexOptions.nInvocationEmissionPath(address()); }
+        public @Nullable ByteBuffer InvocationEmissionPath() { return CXIndexOptions.nInvocationEmissionPath(address()); }
         /** @return the null-terminated string pointed to by the {@link CXIndexOptions#InvocationEmissionPath} field. */
-        @Nullable
         @NativeType("char const *")
-        public String InvocationEmissionPathString() { return CXIndexOptions.nInvocationEmissionPathString(address()); }
+        public @Nullable String InvocationEmissionPathString() { return CXIndexOptions.nInvocationEmissionPathString(address()); }
 
         /** Sets the specified value to the {@link CXIndexOptions#Size} field. */
         public CXIndexOptions.Buffer Size(@NativeType("unsigned") int value) { CXIndexOptions.nSize(address(), value); return this; }

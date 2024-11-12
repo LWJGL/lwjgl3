@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -243,13 +243,11 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
     /** @return the value of the {@code draw_begin} field. */
-    @Nullable
     @NativeType("nk_draw_begin")
-    public NkDrawBeginCallback draw_begin() { return ndraw_begin(address()); }
+    public @Nullable NkDrawBeginCallback draw_begin() { return ndraw_begin(address()); }
     /** @return the value of the {@code draw_end} field. */
-    @Nullable
     @NativeType("nk_draw_end")
-    public NkDrawEndCallback draw_end() { return ndraw_end(address()); }
+    public @Nullable NkDrawEndCallback draw_end() { return ndraw_end(address()); }
 
     /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
     public NkStyleSlider normal(@NativeType("struct nk_style_item") NkStyleItem value) { nnormal(address(), value); return this; }
@@ -437,8 +435,7 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleSlider createSafe(long address) {
+    public static @Nullable NkStyleSlider createSafe(long address) {
         return address == NULL ? null : new NkStyleSlider(address, null);
     }
 
@@ -481,8 +478,7 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleSlider.Buffer createSafe(long address, int capacity) {
+    public static NkStyleSlider.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -596,9 +592,9 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleSlider.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
-    @Nullable public static NkDrawBeginCallback ndraw_begin(long struct) { return NkDrawBeginCallback.createSafe(memGetAddress(struct + NkStyleSlider.DRAW_BEGIN)); }
+    public static @Nullable NkDrawBeginCallback ndraw_begin(long struct) { return NkDrawBeginCallback.createSafe(memGetAddress(struct + NkStyleSlider.DRAW_BEGIN)); }
     /** Unsafe version of {@link #draw_end}. */
-    @Nullable public static NkDrawEndCallback ndraw_end(long struct) { return NkDrawEndCallback.createSafe(memGetAddress(struct + NkStyleSlider.DRAW_END)); }
+    public static @Nullable NkDrawEndCallback ndraw_end(long struct) { return NkDrawEndCallback.createSafe(memGetAddress(struct + NkStyleSlider.DRAW_END)); }
 
     /** Unsafe version of {@link #normal(NkStyleItem) normal}. */
     public static void nnormal(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleSlider.NORMAL, NkStyleItem.SIZEOF); }
@@ -768,13 +764,11 @@ public class NkStyleSlider extends Struct<NkStyleSlider> implements NativeResour
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkStyleSlider.nuserdata(address()); }
         /** @return the value of the {@code draw_begin} field. */
-        @Nullable
         @NativeType("nk_draw_begin")
-        public NkDrawBeginCallback draw_begin() { return NkStyleSlider.ndraw_begin(address()); }
+        public @Nullable NkDrawBeginCallback draw_begin() { return NkStyleSlider.ndraw_begin(address()); }
         /** @return the value of the {@code draw_end} field. */
-        @Nullable
         @NativeType("nk_draw_end")
-        public NkDrawEndCallback draw_end() { return NkStyleSlider.ndraw_end(address()); }
+        public @Nullable NkDrawEndCallback draw_end() { return NkStyleSlider.ndraw_end(address()); }
 
         /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
         public NkStyleSlider.Buffer normal(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleSlider.nnormal(address(), value); return this; }

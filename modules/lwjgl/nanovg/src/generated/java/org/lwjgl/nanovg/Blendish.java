@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1110,9 +1110,8 @@ public class Blendish {
     public static native long nbndGetTheme();
 
     /** Returns the currently set theme. */
-    @Nullable
     @NativeType("BNDtheme const *")
-    public static BNDtheme bndGetTheme() {
+    public static @Nullable BNDtheme bndGetTheme() {
         long __result = nbndGetTheme();
         return BNDtheme.createSafe(__result);
     }
@@ -1148,7 +1147,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1164,7 +1163,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1193,7 +1192,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndToolButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndToolButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1211,7 +1210,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndToolButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndToolButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1240,7 +1239,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndRadioButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndRadioButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1258,7 +1257,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndRadioButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndRadioButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1284,7 +1283,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param text   if not {@code NULL}, text will be printed to the widget
      */
-    public static int bndTextFieldTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") ByteBuffer text, int px, int py) {
+    public static int bndTextFieldTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable ByteBuffer text, int px, int py) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(text);
@@ -1299,7 +1298,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param text   if not {@code NULL}, text will be printed to the widget
      */
-    public static int bndTextFieldTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") CharSequence text, int px, int py) {
+    public static int bndTextFieldTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable CharSequence text, int px, int py) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1331,7 +1330,7 @@ public class Blendish {
      * @param cend   must be &ge; {@code cbegin} and &le; {@code strlen(text)} and denotes the end of the caret. If {@code cend} &lt; {@code cbegin}, then no caret will
      *               be drawn.
      */
-    public static void bndTextField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer text, int cbegin, int cend) {
+    public static void bndTextField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer text, int cbegin, int cend) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(text);
@@ -1352,7 +1351,7 @@ public class Blendish {
      * @param cend   must be &ge; {@code cbegin} and &le; {@code strlen(text)} and denotes the end of the caret. If {@code cend} &lt; {@code cbegin}, then no caret will
      *               be drawn.
      */
-    public static void bndTextField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence text, int cbegin, int cend) {
+    public static void bndTextField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence text, int cbegin, int cend) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1379,7 +1378,7 @@ public class Blendish {
      * @param state the current UI state. One of:<br><table><tr><td>{@link #BND_DEFAULT DEFAULT}</td><td>{@link #BND_HOVER HOVER}</td><td>{@link #BND_ACTIVE ACTIVE}</td></tr></table>
      * @param label if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndOptionButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndOptionButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1395,7 +1394,7 @@ public class Blendish {
      * @param state the current UI state. One of:<br><table><tr><td>{@link #BND_DEFAULT DEFAULT}</td><td>{@link #BND_HOVER HOVER}</td><td>{@link #BND_ACTIVE ACTIVE}</td></tr></table>
      * @param label if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndOptionButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndOptionButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1424,7 +1423,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndChoiceButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndChoiceButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1442,7 +1441,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndChoiceButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndChoiceButton(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1490,7 +1489,7 @@ public class Blendish {
      * @param label if not {@code NULL}, a label will be added to the widget
      * @param value if not {@code NULL}, a value will be added to the widget along with a ":" separator
      */
-    public static void bndNumberField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, @Nullable @NativeType("char const *") ByteBuffer label, @Nullable @NativeType("char const *") ByteBuffer value) {
+    public static void bndNumberField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, @NativeType("char const *") @Nullable ByteBuffer label, @NativeType("char const *") @Nullable ByteBuffer value) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1509,7 +1508,7 @@ public class Blendish {
      * @param label if not {@code NULL}, a label will be added to the widget
      * @param value if not {@code NULL}, a value will be added to the widget along with a ":" separator
      */
-    public static void bndNumberField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, @Nullable @NativeType("char const *") CharSequence label, @Nullable @NativeType("char const *") CharSequence value) {
+    public static void bndNumberField(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, @NativeType("char const *") @Nullable CharSequence label, @NativeType("char const *") @Nullable CharSequence value) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1541,7 +1540,7 @@ public class Blendish {
      * @param label    if not {@code NULL}, a label will be added to the widget
      * @param value    if not {@code NULL}, a value will be added to the widget along with a ":" separator
      */
-    public static void bndSlider(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, float progress, @Nullable @NativeType("char const *") ByteBuffer label, @Nullable @NativeType("char const *") ByteBuffer value) {
+    public static void bndSlider(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, float progress, @NativeType("char const *") @Nullable ByteBuffer label, @NativeType("char const *") @Nullable ByteBuffer value) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1561,7 +1560,7 @@ public class Blendish {
      * @param label    if not {@code NULL}, a label will be added to the widget
      * @param value    if not {@code NULL}, a value will be added to the widget along with a ":" separator
      */
-    public static void bndSlider(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, float progress, @Nullable @NativeType("char const *") CharSequence label, @Nullable @NativeType("char const *") CharSequence value) {
+    public static void bndSlider(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int flags, @NativeType("BNDwidgetState") int state, float progress, @NativeType("char const *") @Nullable CharSequence label, @NativeType("char const *") @Nullable CharSequence value) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1630,7 +1629,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndMenuLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndMenuLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1646,7 +1645,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndMenuLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndMenuLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1674,7 +1673,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndMenuItem(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndMenuItem(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1691,7 +1690,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be added to the widget
      * @param label  if not {@code NULL}, a label will be added to the widget
      */
-    public static void bndMenuItem(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndMenuItem(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1798,7 +1797,7 @@ public class Blendish {
      * @param label      if not {@code NULL}, a label will be added to the widget
      * @param titleColor provides the base color for the title bar
      */
-    public static void bndNodeBackground(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") ByteBuffer label, @NativeType("NVGcolor") NVGColor titleColor) {
+    public static void bndNodeBackground(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable ByteBuffer label, @NativeType("NVGcolor") NVGColor titleColor) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1815,7 +1814,7 @@ public class Blendish {
      * @param label      if not {@code NULL}, a label will be added to the widget
      * @param titleColor provides the base color for the title bar
      */
-    public static void bndNodeBackground(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @Nullable @NativeType("char const *") CharSequence label, @NativeType("NVGcolor") NVGColor titleColor) {
+    public static void bndNodeBackground(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, @NativeType("BNDwidgetState") int state, int iconid, @NativeType("char const *") @Nullable CharSequence label, @NativeType("NVGcolor") NVGColor titleColor) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1875,7 +1874,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static float bndLabelWidth(@NativeType("NVGcontext *") long ctx, int iconid, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static float bndLabelWidth(@NativeType("NVGcontext *") long ctx, int iconid, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1888,7 +1887,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static float bndLabelWidth(@NativeType("NVGcontext *") long ctx, int iconid, @Nullable @NativeType("char const *") CharSequence label) {
+    public static float bndLabelWidth(@NativeType("NVGcontext *") long ctx, int iconid, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1912,7 +1911,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static float bndLabelHeight(@NativeType("NVGcontext *") long ctx, int iconid, @Nullable @NativeType("char const *") ByteBuffer label, float width) {
+    public static float bndLabelHeight(@NativeType("NVGcontext *") long ctx, int iconid, @NativeType("char const *") @Nullable ByteBuffer label, float width) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -1925,7 +1924,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static float bndLabelHeight(@NativeType("NVGcontext *") long ctx, int iconid, @Nullable @NativeType("char const *") CharSequence label, float width) {
+    public static float bndLabelHeight(@NativeType("NVGcontext *") long ctx, int iconid, @NativeType("char const *") @Nullable CharSequence label, float width) {
         if (CHECKS) {
             check(ctx);
         }
@@ -2193,7 +2192,7 @@ public class Blendish {
      * @param label  if not {@code NULL}, it will be drawn with the specified {@code alignment}, {@code fontsize} and {@code color}
      * @param value  if not {@code NULL}, {@code label} and {@code value} will be drawn with a ":" separator inbetween
      */
-    public static void bndIconLabelValue(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, int align, float fontsize, @Nullable @NativeType("char const *") ByteBuffer label, @Nullable @NativeType("char const *") ByteBuffer value) {
+    public static void bndIconLabelValue(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, int align, float fontsize, @NativeType("char const *") @Nullable ByteBuffer label, @NativeType("char const *") @Nullable ByteBuffer value) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -2212,7 +2211,7 @@ public class Blendish {
      * @param label  if not {@code NULL}, it will be drawn with the specified {@code alignment}, {@code fontsize} and {@code color}
      * @param value  if not {@code NULL}, {@code label} and {@code value} will be drawn with a ":" separator inbetween
      */
-    public static void bndIconLabelValue(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, int align, float fontsize, @Nullable @NativeType("char const *") CharSequence label, @Nullable @NativeType("char const *") CharSequence value) {
+    public static void bndIconLabelValue(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, int align, float fontsize, @NativeType("char const *") @Nullable CharSequence label, @NativeType("char const *") @Nullable CharSequence value) {
         if (CHECKS) {
             check(ctx);
         }
@@ -2241,7 +2240,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be drawn
      * @param label  if not {@code NULL}, it will be drawn with the specified {@code alignment}, {@code fontsize} and {@code color}
      */
-    public static void bndNodeIconLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, @NativeType("NVGcolor") NVGColor shadowColor, int align, float fontsize, @Nullable @NativeType("char const *") ByteBuffer label) {
+    public static void bndNodeIconLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, @NativeType("NVGcolor") NVGColor shadowColor, int align, float fontsize, @NativeType("char const *") @Nullable ByteBuffer label) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -2257,7 +2256,7 @@ public class Blendish {
      * @param iconid if &ge; 0, an icon will be drawn
      * @param label  if not {@code NULL}, it will be drawn with the specified {@code alignment}, {@code fontsize} and {@code color}
      */
-    public static void bndNodeIconLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, @NativeType("NVGcolor") NVGColor shadowColor, int align, float fontsize, @Nullable @NativeType("char const *") CharSequence label) {
+    public static void bndNodeIconLabel(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, @NativeType("NVGcolor") NVGColor shadowColor, int align, float fontsize, @NativeType("char const *") @Nullable CharSequence label) {
         if (CHECKS) {
             check(ctx);
         }
@@ -2281,7 +2280,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static int bndIconLabelTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, float fontsize, @Nullable @NativeType("char const *") ByteBuffer label, int px, int py) {
+    public static int bndIconLabelTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, float fontsize, @NativeType("char const *") @Nullable ByteBuffer label, int px, int py) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -2294,7 +2293,7 @@ public class Blendish {
      *
      * @param ctx the NanoVG context
      */
-    public static int bndIconLabelTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, float fontsize, @Nullable @NativeType("char const *") CharSequence label, int px, int py) {
+    public static int bndIconLabelTextPosition(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, float fontsize, @NativeType("char const *") @Nullable CharSequence label, int px, int py) {
         if (CHECKS) {
             check(ctx);
         }
@@ -2323,7 +2322,7 @@ public class Blendish {
      * @param cend   must be &ge; {@code cbegin} and &le; {@code strlen(text)} and denotes the end of the caret. If {@code cend} &lt; {@code cbegin}, then no caret will
      *               be drawn.
      */
-    public static void bndIconLabelCaret(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, float fontsize, @Nullable @NativeType("char const *") ByteBuffer label, @NativeType("NVGcolor") NVGColor caretcolor, int cbegin, int cend) {
+    public static void bndIconLabelCaret(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, float fontsize, @NativeType("char const *") @Nullable ByteBuffer label, @NativeType("NVGcolor") NVGColor caretcolor, int cbegin, int cend) {
         if (CHECKS) {
             check(ctx);
             checkNT1Safe(label);
@@ -2341,7 +2340,7 @@ public class Blendish {
      * @param cend   must be &ge; {@code cbegin} and &le; {@code strlen(text)} and denotes the end of the caret. If {@code cend} &lt; {@code cbegin}, then no caret will
      *               be drawn.
      */
-    public static void bndIconLabelCaret(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, float fontsize, @Nullable @NativeType("char const *") CharSequence label, @NativeType("NVGcolor") NVGColor caretcolor, int cbegin, int cend) {
+    public static void bndIconLabelCaret(@NativeType("NVGcontext *") long ctx, float x, float y, float w, float h, int iconid, @NativeType("NVGcolor") NVGColor color, float fontsize, @NativeType("char const *") @Nullable CharSequence label, @NativeType("NVGcolor") NVGColor caretcolor, int cbegin, int cend) {
         if (CHECKS) {
             check(ctx);
         }

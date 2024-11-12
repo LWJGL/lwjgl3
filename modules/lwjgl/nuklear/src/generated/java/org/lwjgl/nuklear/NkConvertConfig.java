@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -226,8 +226,7 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConvertConfig createSafe(long address) {
+    public static @Nullable NkConvertConfig createSafe(long address) {
         return address == NULL ? null : new NkConvertConfig(address, null);
     }
 
@@ -270,8 +269,7 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkConvertConfig.Buffer createSafe(long address, int capacity) {
+    public static NkConvertConfig.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -147,8 +147,7 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDFrameHeader createSafe(long address) {
+    public static @Nullable ZSTDFrameHeader createSafe(long address) {
         return address == NULL ? null : new ZSTDFrameHeader(address, null);
     }
 
@@ -191,8 +190,7 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDFrameHeader.Buffer createSafe(long address, int capacity) {
+    public static ZSTDFrameHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

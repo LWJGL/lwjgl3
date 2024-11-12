@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -120,9 +120,8 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
     @NativeType("size_t")
     public long initialDataSize() { return ninitialDataSize(address()); }
     /** a pointer to previously retrieved validation cache data. If the validation cache data is incompatible (as defined below) with the device, the validation cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored. */
-    @Nullable
     @NativeType("void const *")
-    public ByteBuffer pInitialData() { return npInitialData(address()); }
+    public @Nullable ByteBuffer pInitialData() { return npInitialData(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkValidationCacheCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -186,8 +185,7 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkValidationCacheCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkValidationCacheCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkValidationCacheCreateInfoEXT(address, null);
     }
 
@@ -230,8 +228,7 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkValidationCacheCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkValidationCacheCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -303,7 +300,7 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
     /** Unsafe version of {@link #initialDataSize}. */
     public static long ninitialDataSize(long struct) { return memGetAddress(struct + VkValidationCacheCreateInfoEXT.INITIALDATASIZE); }
     /** Unsafe version of {@link #pInitialData() pInitialData}. */
-    @Nullable public static ByteBuffer npInitialData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkValidationCacheCreateInfoEXT.PINITIALDATA), (int)ninitialDataSize(struct)); }
+    public static @Nullable ByteBuffer npInitialData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkValidationCacheCreateInfoEXT.PINITIALDATA), (int)ninitialDataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkValidationCacheCreateInfoEXT.STYPE, value); }
@@ -383,9 +380,8 @@ public class VkValidationCacheCreateInfoEXT extends Struct<VkValidationCacheCrea
         @NativeType("size_t")
         public long initialDataSize() { return VkValidationCacheCreateInfoEXT.ninitialDataSize(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkValidationCacheCreateInfoEXT#pInitialData} field. */
-        @Nullable
         @NativeType("void const *")
-        public ByteBuffer pInitialData() { return VkValidationCacheCreateInfoEXT.npInitialData(address()); }
+        public @Nullable ByteBuffer pInitialData() { return VkValidationCacheCreateInfoEXT.npInitialData(address()); }
 
         /** Sets the specified value to the {@link VkValidationCacheCreateInfoEXT#sType} field. */
         public VkValidationCacheCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkValidationCacheCreateInfoEXT.nsType(address(), value); return this; }

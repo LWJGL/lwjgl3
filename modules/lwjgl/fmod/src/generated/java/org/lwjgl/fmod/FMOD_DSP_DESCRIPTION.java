@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -186,65 +186,49 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     /** @return the value of the {@code numoutputbuffers} field. */
     public int numoutputbuffers() { return nnumoutputbuffers(address()); }
     /** @return the value of the {@code create} field. */
-    @Nullable
-    public FMOD_DSP_CREATE_CALLBACK create$() { return ncreate$(address()); }
+    public @Nullable FMOD_DSP_CREATE_CALLBACK create$() { return ncreate$(address()); }
     /** @return the value of the {@code release} field. */
-    @Nullable
-    public FMOD_DSP_RELEASE_CALLBACK release() { return nrelease(address()); }
+    public @Nullable FMOD_DSP_RELEASE_CALLBACK release() { return nrelease(address()); }
     /** @return the value of the {@code reset} field. */
     public FMOD_DSP_RESET_CALLBACK reset$() { return nreset$(address()); }
     /** @return the value of the {@code read} field. */
-    @Nullable
-    public FMOD_DSP_READ_CALLBACK read() { return nread(address()); }
+    public @Nullable FMOD_DSP_READ_CALLBACK read() { return nread(address()); }
     /** @return the value of the {@code process} field. */
-    @Nullable
-    public FMOD_DSP_PROCESS_CALLBACK process() { return nprocess(address()); }
+    public @Nullable FMOD_DSP_PROCESS_CALLBACK process() { return nprocess(address()); }
     /** @return the value of the {@code setposition} field. */
-    @Nullable
-    public FMOD_DSP_SETPOSITION_CALLBACK setposition() { return nsetposition(address()); }
+    public @Nullable FMOD_DSP_SETPOSITION_CALLBACK setposition() { return nsetposition(address()); }
     /** @return the value of the {@code numparameters} field. */
     public int numparameters() { return nnumparameters(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code paramdesc} field. */
     @NativeType("FMOD_DSP_PARAMETER_DESC **")
     public PointerBuffer paramdesc() { return nparamdesc(address()); }
     /** @return the value of the {@code setparameterfloat} field. */
-    @Nullable
-    public FMOD_DSP_SETPARAM_FLOAT_CALLBACK setparameterfloat() { return nsetparameterfloat(address()); }
+    public @Nullable FMOD_DSP_SETPARAM_FLOAT_CALLBACK setparameterfloat() { return nsetparameterfloat(address()); }
     /** @return the value of the {@code setparameterint} field. */
-    @Nullable
-    public FMOD_DSP_SETPARAM_INT_CALLBACK setparameterint() { return nsetparameterint(address()); }
+    public @Nullable FMOD_DSP_SETPARAM_INT_CALLBACK setparameterint() { return nsetparameterint(address()); }
     /** @return the value of the {@code setparameterbool} field. */
-    @Nullable
-    public FMOD_DSP_SETPARAM_BOOL_CALLBACK setparameterbool() { return nsetparameterbool(address()); }
+    public @Nullable FMOD_DSP_SETPARAM_BOOL_CALLBACK setparameterbool() { return nsetparameterbool(address()); }
     /** @return the value of the {@code setparameterdata} field. */
-    @Nullable
-    public FMOD_DSP_SETPARAM_DATA_CALLBACK setparameterdata() { return nsetparameterdata(address()); }
+    public @Nullable FMOD_DSP_SETPARAM_DATA_CALLBACK setparameterdata() { return nsetparameterdata(address()); }
     /** @return the value of the {@code getparameterfloat} field. */
-    @Nullable
-    public FMOD_DSP_GETPARAM_FLOAT_CALLBACK getparameterfloat() { return ngetparameterfloat(address()); }
+    public @Nullable FMOD_DSP_GETPARAM_FLOAT_CALLBACK getparameterfloat() { return ngetparameterfloat(address()); }
     /** @return the value of the {@code getparameterint} field. */
-    @Nullable
-    public FMOD_DSP_GETPARAM_INT_CALLBACK getparameterint() { return ngetparameterint(address()); }
+    public @Nullable FMOD_DSP_GETPARAM_INT_CALLBACK getparameterint() { return ngetparameterint(address()); }
     /** @return the value of the {@code getparameterbool} field. */
-    @Nullable
-    public FMOD_DSP_GETPARAM_BOOL_CALLBACK getparameterbool() { return ngetparameterbool(address()); }
+    public @Nullable FMOD_DSP_GETPARAM_BOOL_CALLBACK getparameterbool() { return ngetparameterbool(address()); }
     /** @return the value of the {@code getparameterdata} field. */
-    @Nullable
-    public FMOD_DSP_GETPARAM_DATA_CALLBACK getparameterdata() { return ngetparameterdata(address()); }
+    public @Nullable FMOD_DSP_GETPARAM_DATA_CALLBACK getparameterdata() { return ngetparameterdata(address()); }
     /** @return the value of the {@code shouldiprocess} field. */
     public FMOD_DSP_SHOULDIPROCESS_CALLBACK shouldiprocess() { return nshouldiprocess(address()); }
     /** @return the value of the {@code userdata} field. */
     @NativeType("void *")
     public long userdata() { return nuserdata(address()); }
     /** @return the value of the {@code sys_register} field. */
-    @Nullable
-    public FMOD_DSP_SYSTEM_REGISTER_CALLBACK sys_register() { return nsys_register(address()); }
+    public @Nullable FMOD_DSP_SYSTEM_REGISTER_CALLBACK sys_register() { return nsys_register(address()); }
     /** @return the value of the {@code sys_deregister} field. */
-    @Nullable
-    public FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK sys_deregister() { return nsys_deregister(address()); }
+    public @Nullable FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK sys_deregister() { return nsys_deregister(address()); }
     /** @return the value of the {@code sys_mix} field. */
-    @Nullable
-    public FMOD_DSP_SYSTEM_MIX_CALLBACK sys_mix() { return nsys_mix(address()); }
+    public @Nullable FMOD_DSP_SYSTEM_MIX_CALLBACK sys_mix() { return nsys_mix(address()); }
 
     /** Sets the specified value to the {@code pluginsdkversion} field. */
     public FMOD_DSP_DESCRIPTION pluginsdkversion(@NativeType("unsigned int") int value) { npluginsdkversion(address(), value); return this; }
@@ -392,8 +376,7 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_DESCRIPTION createSafe(long address) {
+    public static @Nullable FMOD_DSP_DESCRIPTION createSafe(long address) {
         return address == NULL ? null : new FMOD_DSP_DESCRIPTION(address, null);
     }
 
@@ -436,8 +419,7 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_DSP_DESCRIPTION.Buffer createSafe(long address, int capacity) {
+    public static FMOD_DSP_DESCRIPTION.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -496,47 +478,47 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
     /** Unsafe version of {@link #numoutputbuffers}. */
     public static int nnumoutputbuffers(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.NUMOUTPUTBUFFERS); }
     /** Unsafe version of {@link #create$}. */
-    @Nullable public static FMOD_DSP_CREATE_CALLBACK ncreate$(long struct) { return FMOD_DSP_CREATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.CREATE)); }
+    public static @Nullable FMOD_DSP_CREATE_CALLBACK ncreate$(long struct) { return FMOD_DSP_CREATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.CREATE)); }
     /** Unsafe version of {@link #release}. */
-    @Nullable public static FMOD_DSP_RELEASE_CALLBACK nrelease(long struct) { return FMOD_DSP_RELEASE_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.RELEASE)); }
+    public static @Nullable FMOD_DSP_RELEASE_CALLBACK nrelease(long struct) { return FMOD_DSP_RELEASE_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.RELEASE)); }
     /** Unsafe version of {@link #reset$}. */
     public static FMOD_DSP_RESET_CALLBACK nreset$(long struct) { return FMOD_DSP_RESET_CALLBACK.create(memGetAddress(struct + FMOD_DSP_DESCRIPTION.RESET)); }
     /** Unsafe version of {@link #read}. */
-    @Nullable public static FMOD_DSP_READ_CALLBACK nread(long struct) { return FMOD_DSP_READ_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.READ)); }
+    public static @Nullable FMOD_DSP_READ_CALLBACK nread(long struct) { return FMOD_DSP_READ_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.READ)); }
     /** Unsafe version of {@link #process}. */
-    @Nullable public static FMOD_DSP_PROCESS_CALLBACK nprocess(long struct) { return FMOD_DSP_PROCESS_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.PROCESS)); }
+    public static @Nullable FMOD_DSP_PROCESS_CALLBACK nprocess(long struct) { return FMOD_DSP_PROCESS_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.PROCESS)); }
     /** Unsafe version of {@link #setposition}. */
-    @Nullable public static FMOD_DSP_SETPOSITION_CALLBACK nsetposition(long struct) { return FMOD_DSP_SETPOSITION_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPOSITION)); }
+    public static @Nullable FMOD_DSP_SETPOSITION_CALLBACK nsetposition(long struct) { return FMOD_DSP_SETPOSITION_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPOSITION)); }
     /** Unsafe version of {@link #numparameters}. */
     public static int nnumparameters(long struct) { return memGetInt(struct + FMOD_DSP_DESCRIPTION.NUMPARAMETERS); }
     /** Unsafe version of {@link #paramdesc() paramdesc}. */
     public static PointerBuffer nparamdesc(long struct) { return memPointerBuffer(memGetAddress(struct + FMOD_DSP_DESCRIPTION.PARAMDESC), nnumparameters(struct)); }
     /** Unsafe version of {@link #setparameterfloat}. */
-    @Nullable public static FMOD_DSP_SETPARAM_FLOAT_CALLBACK nsetparameterfloat(long struct) { return FMOD_DSP_SETPARAM_FLOAT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERFLOAT)); }
+    public static @Nullable FMOD_DSP_SETPARAM_FLOAT_CALLBACK nsetparameterfloat(long struct) { return FMOD_DSP_SETPARAM_FLOAT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERFLOAT)); }
     /** Unsafe version of {@link #setparameterint}. */
-    @Nullable public static FMOD_DSP_SETPARAM_INT_CALLBACK nsetparameterint(long struct) { return FMOD_DSP_SETPARAM_INT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERINT)); }
+    public static @Nullable FMOD_DSP_SETPARAM_INT_CALLBACK nsetparameterint(long struct) { return FMOD_DSP_SETPARAM_INT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERINT)); }
     /** Unsafe version of {@link #setparameterbool}. */
-    @Nullable public static FMOD_DSP_SETPARAM_BOOL_CALLBACK nsetparameterbool(long struct) { return FMOD_DSP_SETPARAM_BOOL_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERBOOL)); }
+    public static @Nullable FMOD_DSP_SETPARAM_BOOL_CALLBACK nsetparameterbool(long struct) { return FMOD_DSP_SETPARAM_BOOL_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERBOOL)); }
     /** Unsafe version of {@link #setparameterdata}. */
-    @Nullable public static FMOD_DSP_SETPARAM_DATA_CALLBACK nsetparameterdata(long struct) { return FMOD_DSP_SETPARAM_DATA_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERDATA)); }
+    public static @Nullable FMOD_DSP_SETPARAM_DATA_CALLBACK nsetparameterdata(long struct) { return FMOD_DSP_SETPARAM_DATA_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SETPARAMETERDATA)); }
     /** Unsafe version of {@link #getparameterfloat}. */
-    @Nullable public static FMOD_DSP_GETPARAM_FLOAT_CALLBACK ngetparameterfloat(long struct) { return FMOD_DSP_GETPARAM_FLOAT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERFLOAT)); }
+    public static @Nullable FMOD_DSP_GETPARAM_FLOAT_CALLBACK ngetparameterfloat(long struct) { return FMOD_DSP_GETPARAM_FLOAT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERFLOAT)); }
     /** Unsafe version of {@link #getparameterint}. */
-    @Nullable public static FMOD_DSP_GETPARAM_INT_CALLBACK ngetparameterint(long struct) { return FMOD_DSP_GETPARAM_INT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERINT)); }
+    public static @Nullable FMOD_DSP_GETPARAM_INT_CALLBACK ngetparameterint(long struct) { return FMOD_DSP_GETPARAM_INT_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERINT)); }
     /** Unsafe version of {@link #getparameterbool}. */
-    @Nullable public static FMOD_DSP_GETPARAM_BOOL_CALLBACK ngetparameterbool(long struct) { return FMOD_DSP_GETPARAM_BOOL_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERBOOL)); }
+    public static @Nullable FMOD_DSP_GETPARAM_BOOL_CALLBACK ngetparameterbool(long struct) { return FMOD_DSP_GETPARAM_BOOL_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERBOOL)); }
     /** Unsafe version of {@link #getparameterdata}. */
-    @Nullable public static FMOD_DSP_GETPARAM_DATA_CALLBACK ngetparameterdata(long struct) { return FMOD_DSP_GETPARAM_DATA_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERDATA)); }
+    public static @Nullable FMOD_DSP_GETPARAM_DATA_CALLBACK ngetparameterdata(long struct) { return FMOD_DSP_GETPARAM_DATA_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.GETPARAMETERDATA)); }
     /** Unsafe version of {@link #shouldiprocess}. */
     public static FMOD_DSP_SHOULDIPROCESS_CALLBACK nshouldiprocess(long struct) { return FMOD_DSP_SHOULDIPROCESS_CALLBACK.create(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SHOULDIPROCESS)); }
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + FMOD_DSP_DESCRIPTION.USERDATA); }
     /** Unsafe version of {@link #sys_register}. */
-    @Nullable public static FMOD_DSP_SYSTEM_REGISTER_CALLBACK nsys_register(long struct) { return FMOD_DSP_SYSTEM_REGISTER_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_REGISTER)); }
+    public static @Nullable FMOD_DSP_SYSTEM_REGISTER_CALLBACK nsys_register(long struct) { return FMOD_DSP_SYSTEM_REGISTER_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_REGISTER)); }
     /** Unsafe version of {@link #sys_deregister}. */
-    @Nullable public static FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK nsys_deregister(long struct) { return FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_DEREGISTER)); }
+    public static @Nullable FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK nsys_deregister(long struct) { return FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_DEREGISTER)); }
     /** Unsafe version of {@link #sys_mix}. */
-    @Nullable public static FMOD_DSP_SYSTEM_MIX_CALLBACK nsys_mix(long struct) { return FMOD_DSP_SYSTEM_MIX_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_MIX)); }
+    public static @Nullable FMOD_DSP_SYSTEM_MIX_CALLBACK nsys_mix(long struct) { return FMOD_DSP_SYSTEM_MIX_CALLBACK.createSafe(memGetAddress(struct + FMOD_DSP_DESCRIPTION.SYS_MIX)); }
 
     /** Unsafe version of {@link #pluginsdkversion(int) pluginsdkversion}. */
     public static void npluginsdkversion(long struct, int value) { memPutInt(struct + FMOD_DSP_DESCRIPTION.PLUGINSDKVERSION, value); }
@@ -669,65 +651,49 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
         /** @return the value of the {@code numoutputbuffers} field. */
         public int numoutputbuffers() { return FMOD_DSP_DESCRIPTION.nnumoutputbuffers(address()); }
         /** @return the value of the {@code create} field. */
-        @Nullable
-        public FMOD_DSP_CREATE_CALLBACK create$() { return FMOD_DSP_DESCRIPTION.ncreate$(address()); }
+        public @Nullable FMOD_DSP_CREATE_CALLBACK create$() { return FMOD_DSP_DESCRIPTION.ncreate$(address()); }
         /** @return the value of the {@code release} field. */
-        @Nullable
-        public FMOD_DSP_RELEASE_CALLBACK release() { return FMOD_DSP_DESCRIPTION.nrelease(address()); }
+        public @Nullable FMOD_DSP_RELEASE_CALLBACK release() { return FMOD_DSP_DESCRIPTION.nrelease(address()); }
         /** @return the value of the {@code reset} field. */
         public FMOD_DSP_RESET_CALLBACK reset$() { return FMOD_DSP_DESCRIPTION.nreset$(address()); }
         /** @return the value of the {@code read} field. */
-        @Nullable
-        public FMOD_DSP_READ_CALLBACK read() { return FMOD_DSP_DESCRIPTION.nread(address()); }
+        public @Nullable FMOD_DSP_READ_CALLBACK read() { return FMOD_DSP_DESCRIPTION.nread(address()); }
         /** @return the value of the {@code process} field. */
-        @Nullable
-        public FMOD_DSP_PROCESS_CALLBACK process() { return FMOD_DSP_DESCRIPTION.nprocess(address()); }
+        public @Nullable FMOD_DSP_PROCESS_CALLBACK process() { return FMOD_DSP_DESCRIPTION.nprocess(address()); }
         /** @return the value of the {@code setposition} field. */
-        @Nullable
-        public FMOD_DSP_SETPOSITION_CALLBACK setposition() { return FMOD_DSP_DESCRIPTION.nsetposition(address()); }
+        public @Nullable FMOD_DSP_SETPOSITION_CALLBACK setposition() { return FMOD_DSP_DESCRIPTION.nsetposition(address()); }
         /** @return the value of the {@code numparameters} field. */
         public int numparameters() { return FMOD_DSP_DESCRIPTION.nnumparameters(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code paramdesc} field. */
         @NativeType("FMOD_DSP_PARAMETER_DESC **")
         public PointerBuffer paramdesc() { return FMOD_DSP_DESCRIPTION.nparamdesc(address()); }
         /** @return the value of the {@code setparameterfloat} field. */
-        @Nullable
-        public FMOD_DSP_SETPARAM_FLOAT_CALLBACK setparameterfloat() { return FMOD_DSP_DESCRIPTION.nsetparameterfloat(address()); }
+        public @Nullable FMOD_DSP_SETPARAM_FLOAT_CALLBACK setparameterfloat() { return FMOD_DSP_DESCRIPTION.nsetparameterfloat(address()); }
         /** @return the value of the {@code setparameterint} field. */
-        @Nullable
-        public FMOD_DSP_SETPARAM_INT_CALLBACK setparameterint() { return FMOD_DSP_DESCRIPTION.nsetparameterint(address()); }
+        public @Nullable FMOD_DSP_SETPARAM_INT_CALLBACK setparameterint() { return FMOD_DSP_DESCRIPTION.nsetparameterint(address()); }
         /** @return the value of the {@code setparameterbool} field. */
-        @Nullable
-        public FMOD_DSP_SETPARAM_BOOL_CALLBACK setparameterbool() { return FMOD_DSP_DESCRIPTION.nsetparameterbool(address()); }
+        public @Nullable FMOD_DSP_SETPARAM_BOOL_CALLBACK setparameterbool() { return FMOD_DSP_DESCRIPTION.nsetparameterbool(address()); }
         /** @return the value of the {@code setparameterdata} field. */
-        @Nullable
-        public FMOD_DSP_SETPARAM_DATA_CALLBACK setparameterdata() { return FMOD_DSP_DESCRIPTION.nsetparameterdata(address()); }
+        public @Nullable FMOD_DSP_SETPARAM_DATA_CALLBACK setparameterdata() { return FMOD_DSP_DESCRIPTION.nsetparameterdata(address()); }
         /** @return the value of the {@code getparameterfloat} field. */
-        @Nullable
-        public FMOD_DSP_GETPARAM_FLOAT_CALLBACK getparameterfloat() { return FMOD_DSP_DESCRIPTION.ngetparameterfloat(address()); }
+        public @Nullable FMOD_DSP_GETPARAM_FLOAT_CALLBACK getparameterfloat() { return FMOD_DSP_DESCRIPTION.ngetparameterfloat(address()); }
         /** @return the value of the {@code getparameterint} field. */
-        @Nullable
-        public FMOD_DSP_GETPARAM_INT_CALLBACK getparameterint() { return FMOD_DSP_DESCRIPTION.ngetparameterint(address()); }
+        public @Nullable FMOD_DSP_GETPARAM_INT_CALLBACK getparameterint() { return FMOD_DSP_DESCRIPTION.ngetparameterint(address()); }
         /** @return the value of the {@code getparameterbool} field. */
-        @Nullable
-        public FMOD_DSP_GETPARAM_BOOL_CALLBACK getparameterbool() { return FMOD_DSP_DESCRIPTION.ngetparameterbool(address()); }
+        public @Nullable FMOD_DSP_GETPARAM_BOOL_CALLBACK getparameterbool() { return FMOD_DSP_DESCRIPTION.ngetparameterbool(address()); }
         /** @return the value of the {@code getparameterdata} field. */
-        @Nullable
-        public FMOD_DSP_GETPARAM_DATA_CALLBACK getparameterdata() { return FMOD_DSP_DESCRIPTION.ngetparameterdata(address()); }
+        public @Nullable FMOD_DSP_GETPARAM_DATA_CALLBACK getparameterdata() { return FMOD_DSP_DESCRIPTION.ngetparameterdata(address()); }
         /** @return the value of the {@code shouldiprocess} field. */
         public FMOD_DSP_SHOULDIPROCESS_CALLBACK shouldiprocess() { return FMOD_DSP_DESCRIPTION.nshouldiprocess(address()); }
         /** @return the value of the {@code userdata} field. */
         @NativeType("void *")
         public long userdata() { return FMOD_DSP_DESCRIPTION.nuserdata(address()); }
         /** @return the value of the {@code sys_register} field. */
-        @Nullable
-        public FMOD_DSP_SYSTEM_REGISTER_CALLBACK sys_register() { return FMOD_DSP_DESCRIPTION.nsys_register(address()); }
+        public @Nullable FMOD_DSP_SYSTEM_REGISTER_CALLBACK sys_register() { return FMOD_DSP_DESCRIPTION.nsys_register(address()); }
         /** @return the value of the {@code sys_deregister} field. */
-        @Nullable
-        public FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK sys_deregister() { return FMOD_DSP_DESCRIPTION.nsys_deregister(address()); }
+        public @Nullable FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK sys_deregister() { return FMOD_DSP_DESCRIPTION.nsys_deregister(address()); }
         /** @return the value of the {@code sys_mix} field. */
-        @Nullable
-        public FMOD_DSP_SYSTEM_MIX_CALLBACK sys_mix() { return FMOD_DSP_DESCRIPTION.nsys_mix(address()); }
+        public @Nullable FMOD_DSP_SYSTEM_MIX_CALLBACK sys_mix() { return FMOD_DSP_DESCRIPTION.nsys_mix(address()); }
 
         /** Sets the specified value to the {@code pluginsdkversion} field. */
         public FMOD_DSP_DESCRIPTION.Buffer pluginsdkversion(@NativeType("unsigned int") int value) { FMOD_DSP_DESCRIPTION.npluginsdkversion(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,9 +132,8 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     @NativeType("VkInstanceCreateInfo const *")
     public VkInstanceCreateInfo vulkanCreateInfo() { return nvulkanCreateInfo(address()); }
     /** the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAllocationCallbacks.html">{@code VkAllocationCallbacks} as specified by Vulkan</a>. */
-    @Nullable
     @NativeType("VkAllocationCallbacks const *")
-    public VkAllocationCallbacks vulkanAllocator() { return nvulkanAllocator(address()); }
+    public @Nullable VkAllocationCallbacks vulkanAllocator() { return nvulkanAllocator(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrVulkanInstanceCreateInfoKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -210,8 +209,7 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVulkanInstanceCreateInfoKHR createSafe(long address) {
+    public static @Nullable XrVulkanInstanceCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new XrVulkanInstanceCreateInfoKHR(address, null);
     }
 
@@ -254,8 +252,7 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrVulkanInstanceCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static XrVulkanInstanceCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -312,7 +309,7 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
     /** Unsafe version of {@link #vulkanCreateInfo}. */
     public static VkInstanceCreateInfo nvulkanCreateInfo(long struct) { return VkInstanceCreateInfo.create(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.VULKANCREATEINFO)); }
     /** Unsafe version of {@link #vulkanAllocator}. */
-    @Nullable public static VkAllocationCallbacks nvulkanAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.VULKANALLOCATOR)); }
+    public static @Nullable VkAllocationCallbacks nvulkanAllocator(long struct) { return VkAllocationCallbacks.createSafe(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.VULKANALLOCATOR)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrVulkanInstanceCreateInfoKHR.TYPE, value); }
@@ -403,9 +400,8 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreate
         @NativeType("VkInstanceCreateInfo const *")
         public VkInstanceCreateInfo vulkanCreateInfo() { return XrVulkanInstanceCreateInfoKHR.nvulkanCreateInfo(address()); }
         /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@link XrVulkanInstanceCreateInfoKHR#vulkanAllocator} field. */
-        @Nullable
         @NativeType("VkAllocationCallbacks const *")
-        public VkAllocationCallbacks vulkanAllocator() { return XrVulkanInstanceCreateInfoKHR.nvulkanAllocator(address()); }
+        public @Nullable VkAllocationCallbacks vulkanAllocator() { return XrVulkanInstanceCreateInfoKHR.nvulkanAllocator(address()); }
 
         /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#type} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer type(@NativeType("XrStructureType") int value) { XrVulkanInstanceCreateInfoKHR.ntype(address(), value); return this; }

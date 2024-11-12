@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -130,9 +130,8 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     @NativeType("uint32_t")
     public int discardRectangleCount() { return ndiscardRectangleCount(address()); }
     /** a pointer to an array of {@link VkRect2D} structures defining discard rectangles. */
-    @Nullable
     @NativeType("VkRect2D const *")
-    public VkRect2D.Buffer pDiscardRectangles() { return npDiscardRectangles(address()); }
+    public VkRect2D.@Nullable Buffer pDiscardRectangles() { return npDiscardRectangles(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineDiscardRectangleStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -147,7 +146,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     /** Sets the specified value to the {@link #discardRectangleCount} field. */
     public VkPipelineDiscardRectangleStateCreateInfoEXT discardRectangleCount(@NativeType("uint32_t") int value) { ndiscardRectangleCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link #pDiscardRectangles} field. */
-    public VkPipelineDiscardRectangleStateCreateInfoEXT pDiscardRectangles(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { npDiscardRectangles(address(), value); return this; }
+    public VkPipelineDiscardRectangleStateCreateInfoEXT pDiscardRectangles(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { npDiscardRectangles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineDiscardRectangleStateCreateInfoEXT set(
@@ -156,7 +155,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
         int flags,
         int discardRectangleMode,
         int discardRectangleCount,
-        @Nullable VkRect2D.Buffer pDiscardRectangles
+        VkRect2D.@Nullable Buffer pDiscardRectangles
     ) {
         sType(sType);
         pNext(pNext);
@@ -204,8 +203,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDiscardRectangleStateCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkPipelineDiscardRectangleStateCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkPipelineDiscardRectangleStateCreateInfoEXT(address, null);
     }
 
@@ -248,8 +246,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineDiscardRectangleStateCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -323,7 +320,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     /** Unsafe version of {@link #discardRectangleCount}. */
     public static int ndiscardRectangleCount(long struct) { return memGetInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT); }
     /** Unsafe version of {@link #pDiscardRectangles}. */
-    @Nullable public static VkRect2D.Buffer npDiscardRectangles(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES), ndiscardRectangleCount(struct)); }
+    public static VkRect2D.@Nullable Buffer npDiscardRectangles(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES), ndiscardRectangleCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.STYPE, value); }
@@ -336,7 +333,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
     /** Sets the specified value to the {@code discardRectangleCount} field of the specified {@code struct}. */
     public static void ndiscardRectangleCount(long struct, int value) { memPutInt(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.DISCARDRECTANGLECOUNT, value); }
     /** Unsafe version of {@link #pDiscardRectangles(VkRect2D.Buffer) pDiscardRectangles}. */
-    public static void npDiscardRectangles(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES, memAddressSafe(value)); if (value != null) { ndiscardRectangleCount(struct, value.remaining()); } }
+    public static void npDiscardRectangles(long struct, VkRect2D.@Nullable Buffer value) { memPutAddress(struct + VkPipelineDiscardRectangleStateCreateInfoEXT.PDISCARDRECTANGLES, memAddressSafe(value)); if (value != null) { ndiscardRectangleCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -397,9 +394,8 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
         @NativeType("uint32_t")
         public int discardRectangleCount() { return VkPipelineDiscardRectangleStateCreateInfoEXT.ndiscardRectangleCount(address()); }
         /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#pDiscardRectangles} field. */
-        @Nullable
         @NativeType("VkRect2D const *")
-        public VkRect2D.Buffer pDiscardRectangles() { return VkPipelineDiscardRectangleStateCreateInfoEXT.npDiscardRectangles(address()); }
+        public VkRect2D.@Nullable Buffer pDiscardRectangles() { return VkPipelineDiscardRectangleStateCreateInfoEXT.npDiscardRectangles(address()); }
 
         /** Sets the specified value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#sType} field. */
         public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineDiscardRectangleStateCreateInfoEXT.nsType(address(), value); return this; }
@@ -414,7 +410,7 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct<VkPipel
         /** Sets the specified value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#discardRectangleCount} field. */
         public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer discardRectangleCount(@NativeType("uint32_t") int value) { VkPipelineDiscardRectangleStateCreateInfoEXT.ndiscardRectangleCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#pDiscardRectangles} field. */
-        public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer pDiscardRectangles(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { VkPipelineDiscardRectangleStateCreateInfoEXT.npDiscardRectangles(address(), value); return this; }
+        public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer pDiscardRectangles(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { VkPipelineDiscardRectangleStateCreateInfoEXT.npDiscardRectangles(address(), value); return this; }
 
     }
 

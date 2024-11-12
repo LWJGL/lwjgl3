@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT extends Struct<V
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(address, null);
     }
 
@@ -206,8 +205,7 @@ public class VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT extends Struct<V
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

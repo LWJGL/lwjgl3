@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,8 +116,7 @@ public class FTC_Scaler extends Struct<FTC_Scaler> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_Scaler createSafe(long address) {
+    public static @Nullable FTC_Scaler createSafe(long address) {
         return address == NULL ? null : new FTC_Scaler(address, null);
     }
 
@@ -132,8 +131,7 @@ public class FTC_Scaler extends Struct<FTC_Scaler> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FTC_Scaler.Buffer createSafe(long address, int capacity) {
+    public static FTC_Scaler.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

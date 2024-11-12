@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(address, null);
     }
 
@@ -200,8 +199,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -111,8 +111,7 @@ public class VkPhysicalDeviceExternalSemaphoreInfoKHR extends VkPhysicalDeviceEx
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceExternalSemaphoreInfoKHR createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceExternalSemaphoreInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceExternalSemaphoreInfoKHR(address, null);
     }
 
@@ -155,8 +154,7 @@ public class VkPhysicalDeviceExternalSemaphoreInfoKHR extends VkPhysicalDeviceEx
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceExternalSemaphoreInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceExternalSemaphoreInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

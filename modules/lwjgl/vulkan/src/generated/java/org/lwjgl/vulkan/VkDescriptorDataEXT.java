@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,29 +149,23 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     @NativeType("VkDescriptorImageInfo const *")
     public VkDescriptorImageInfo pInputAttachmentImage() { return npInputAttachmentImage(address()); }
     /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorImageInfo const *")
-    public VkDescriptorImageInfo pSampledImage() { return npSampledImage(address()); }
+    public @Nullable VkDescriptorImageInfo pSampledImage() { return npSampledImage(address()); }
     /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorImageInfo const *")
-    public VkDescriptorImageInfo pStorageImage() { return npStorageImage(address()); }
+    public @Nullable VkDescriptorImageInfo pStorageImage() { return npStorageImage(address()); }
     /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorAddressInfoEXT const *")
-    public VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return npUniformTexelBuffer(address()); }
+    public @Nullable VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return npUniformTexelBuffer(address()); }
     /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorAddressInfoEXT const *")
-    public VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return npStorageTexelBuffer(address()); }
+    public @Nullable VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return npStorageTexelBuffer(address()); }
     /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorAddressInfoEXT const *")
-    public VkDescriptorAddressInfoEXT pUniformBuffer() { return npUniformBuffer(address()); }
+    public @Nullable VkDescriptorAddressInfoEXT pUniformBuffer() { return npUniformBuffer(address()); }
     /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} descriptor. */
-    @Nullable
     @NativeType("VkDescriptorAddressInfoEXT const *")
-    public VkDescriptorAddressInfoEXT pStorageBuffer() { return npStorageBuffer(address()); }
+    public @Nullable VkDescriptorAddressInfoEXT pStorageBuffer() { return npStorageBuffer(address()); }
     /** the address of a {@code VkAccelerationStructureKHR} specifying the parameters of a {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} descriptor , or a {@code VkAccelerationStructureNV} handle specifying the parameters of a {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} descriptor. */
     @NativeType("VkDeviceAddress")
     public long accelerationStructure() { return naccelerationStructure(address()); }
@@ -233,8 +227,7 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorDataEXT createSafe(long address) {
+    public static @Nullable VkDescriptorDataEXT createSafe(long address) {
         return address == NULL ? null : new VkDescriptorDataEXT(address, null);
     }
 
@@ -277,8 +270,7 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorDataEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorDataEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -329,17 +321,17 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     /** Unsafe version of {@link #pInputAttachmentImage}. */
     public static VkDescriptorImageInfo npInputAttachmentImage(long struct) { return VkDescriptorImageInfo.create(memGetAddress(struct + VkDescriptorDataEXT.PINPUTATTACHMENTIMAGE)); }
     /** Unsafe version of {@link #pSampledImage}. */
-    @Nullable public static VkDescriptorImageInfo npSampledImage(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSAMPLEDIMAGE)); }
+    public static @Nullable VkDescriptorImageInfo npSampledImage(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSAMPLEDIMAGE)); }
     /** Unsafe version of {@link #pStorageImage}. */
-    @Nullable public static VkDescriptorImageInfo npStorageImage(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGEIMAGE)); }
+    public static @Nullable VkDescriptorImageInfo npStorageImage(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGEIMAGE)); }
     /** Unsafe version of {@link #pUniformTexelBuffer}. */
-    @Nullable public static VkDescriptorAddressInfoEXT npUniformTexelBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PUNIFORMTEXELBUFFER)); }
+    public static @Nullable VkDescriptorAddressInfoEXT npUniformTexelBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PUNIFORMTEXELBUFFER)); }
     /** Unsafe version of {@link #pStorageTexelBuffer}. */
-    @Nullable public static VkDescriptorAddressInfoEXT npStorageTexelBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGETEXELBUFFER)); }
+    public static @Nullable VkDescriptorAddressInfoEXT npStorageTexelBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGETEXELBUFFER)); }
     /** Unsafe version of {@link #pUniformBuffer}. */
-    @Nullable public static VkDescriptorAddressInfoEXT npUniformBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PUNIFORMBUFFER)); }
+    public static @Nullable VkDescriptorAddressInfoEXT npUniformBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PUNIFORMBUFFER)); }
     /** Unsafe version of {@link #pStorageBuffer}. */
-    @Nullable public static VkDescriptorAddressInfoEXT npStorageBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGEBUFFER)); }
+    public static @Nullable VkDescriptorAddressInfoEXT npStorageBuffer(long struct) { return VkDescriptorAddressInfoEXT.createSafe(memGetAddress(struct + VkDescriptorDataEXT.PSTORAGEBUFFER)); }
     /** Unsafe version of {@link #accelerationStructure}. */
     public static long naccelerationStructure(long struct) { return memGetLong(struct + VkDescriptorDataEXT.ACCELERATIONSTRUCTURE); }
 
@@ -421,29 +413,23 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
         @NativeType("VkDescriptorImageInfo const *")
         public VkDescriptorImageInfo pInputAttachmentImage() { return VkDescriptorDataEXT.npInputAttachmentImage(address()); }
         /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pSampledImage} field. */
-        @Nullable
         @NativeType("VkDescriptorImageInfo const *")
-        public VkDescriptorImageInfo pSampledImage() { return VkDescriptorDataEXT.npSampledImage(address()); }
+        public @Nullable VkDescriptorImageInfo pSampledImage() { return VkDescriptorDataEXT.npSampledImage(address()); }
         /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageImage} field. */
-        @Nullable
         @NativeType("VkDescriptorImageInfo const *")
-        public VkDescriptorImageInfo pStorageImage() { return VkDescriptorDataEXT.npStorageImage(address()); }
+        public @Nullable VkDescriptorImageInfo pStorageImage() { return VkDescriptorDataEXT.npStorageImage(address()); }
         /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pUniformTexelBuffer} field. */
-        @Nullable
         @NativeType("VkDescriptorAddressInfoEXT const *")
-        public VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return VkDescriptorDataEXT.npUniformTexelBuffer(address()); }
+        public @Nullable VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return VkDescriptorDataEXT.npUniformTexelBuffer(address()); }
         /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageTexelBuffer} field. */
-        @Nullable
         @NativeType("VkDescriptorAddressInfoEXT const *")
-        public VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return VkDescriptorDataEXT.npStorageTexelBuffer(address()); }
+        public @Nullable VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return VkDescriptorDataEXT.npStorageTexelBuffer(address()); }
         /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pUniformBuffer} field. */
-        @Nullable
         @NativeType("VkDescriptorAddressInfoEXT const *")
-        public VkDescriptorAddressInfoEXT pUniformBuffer() { return VkDescriptorDataEXT.npUniformBuffer(address()); }
+        public @Nullable VkDescriptorAddressInfoEXT pUniformBuffer() { return VkDescriptorDataEXT.npUniformBuffer(address()); }
         /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageBuffer} field. */
-        @Nullable
         @NativeType("VkDescriptorAddressInfoEXT const *")
-        public VkDescriptorAddressInfoEXT pStorageBuffer() { return VkDescriptorDataEXT.npStorageBuffer(address()); }
+        public @Nullable VkDescriptorAddressInfoEXT pStorageBuffer() { return VkDescriptorDataEXT.npStorageBuffer(address()); }
         /** @return the value of the {@link VkDescriptorDataEXT#accelerationStructure} field. */
         @NativeType("VkDeviceAddress")
         public long accelerationStructure() { return VkDescriptorDataEXT.naccelerationStructure(address()); }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.lz4;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class LZ4FCompressOptions extends Struct<LZ4FCompressOptions> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FCompressOptions createSafe(long address) {
+    public static @Nullable LZ4FCompressOptions createSafe(long address) {
         return address == NULL ? null : new LZ4FCompressOptions(address, null);
     }
 
@@ -182,8 +181,7 @@ public class LZ4FCompressOptions extends Struct<LZ4FCompressOptions> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LZ4FCompressOptions.Buffer createSafe(long address, int capacity) {
+    public static LZ4FCompressOptions.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

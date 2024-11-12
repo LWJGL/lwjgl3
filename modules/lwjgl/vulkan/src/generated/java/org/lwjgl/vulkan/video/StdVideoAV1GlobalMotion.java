@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1GlobalMotion createSafe(long address) {
+    public static @Nullable StdVideoAV1GlobalMotion createSafe(long address) {
         return address == NULL ? null : new StdVideoAV1GlobalMotion(address, null);
     }
 
@@ -188,8 +187,7 @@ public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoAV1GlobalMotion.Buffer createSafe(long address, int capacity) {
+    public static StdVideoAV1GlobalMotion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,17 +133,15 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void **")
-    public PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
+    public @Nullable PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
     /**
      * @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @Nullable
     @NativeType("void **")
-    public PointerBuffer extra(int capacity) { return nextra(address(), capacity); }
+    public @Nullable PointerBuffer extra(int capacity) { return nextra(address(), capacity); }
 
     /** Sets the specified value to the {@code func} field. */
     public CUDA_KERNEL_NODE_PARAMS func(@NativeType("CUfunction") long value) { nfunc(address(), value); return this; }
@@ -229,8 +227,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_KERNEL_NODE_PARAMS createSafe(long address) {
+    public static @Nullable CUDA_KERNEL_NODE_PARAMS createSafe(long address) {
         return address == NULL ? null : new CUDA_KERNEL_NODE_PARAMS(address, null);
     }
 
@@ -273,8 +270,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUDA_KERNEL_NODE_PARAMS.Buffer createSafe(long address, int capacity) {
+    public static CUDA_KERNEL_NODE_PARAMS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -354,9 +350,9 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
     /** Unsafe version of {@link #sharedMemBytes}. */
     public static int nsharedMemBytes(long struct) { return memGetInt(struct + CUDA_KERNEL_NODE_PARAMS.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
-    @Nullable public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS), capacity); }
+    public static @Nullable PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS), capacity); }
     /** Unsafe version of {@link #extra(int) extra}. */
-    @Nullable public static PointerBuffer nextra(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA), capacity); }
+    public static @Nullable PointerBuffer nextra(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA), capacity); }
 
     /** Unsafe version of {@link #func(long) func}. */
     public static void nfunc(long struct, long value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.FUNC, value); }
@@ -451,17 +447,15 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void **")
-        public PointerBuffer kernelParams(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), capacity); }
+        public @Nullable PointerBuffer kernelParams(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), capacity); }
         /**
          * @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void **")
-        public PointerBuffer extra(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nextra(address(), capacity); }
+        public @Nullable PointerBuffer extra(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nextra(address(), capacity); }
 
         /** Sets the specified value to the {@code func} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer func(@NativeType("CUfunction") long value) { CUDA_KERNEL_NODE_PARAMS.nfunc(address(), value); return this; }

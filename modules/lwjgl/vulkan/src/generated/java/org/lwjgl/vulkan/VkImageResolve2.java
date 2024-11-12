@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -216,8 +216,7 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageResolve2 createSafe(long address) {
+    public static @Nullable VkImageResolve2 createSafe(long address) {
         return address == NULL ? null : new VkImageResolve2(address, null);
     }
 
@@ -260,8 +259,7 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImageResolve2.Buffer createSafe(long address, int capacity) {
+    public static VkImageResolve2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

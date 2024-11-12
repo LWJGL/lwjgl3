@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -140,8 +140,7 @@ public class InputBindingInfo extends Struct<InputBindingInfo> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static InputBindingInfo createSafe(long address) {
+    public static @Nullable InputBindingInfo createSafe(long address) {
         return address == NULL ? null : new InputBindingInfo(address, null);
     }
 
@@ -184,8 +183,7 @@ public class InputBindingInfo extends Struct<InputBindingInfo> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static InputBindingInfo.Buffer createSafe(long address, int capacity) {
+    public static InputBindingInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

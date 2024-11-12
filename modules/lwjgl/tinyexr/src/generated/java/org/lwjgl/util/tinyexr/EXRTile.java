@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,8 +185,7 @@ public class EXRTile extends Struct<EXRTile> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRTile createSafe(long address) {
+    public static @Nullable EXRTile createSafe(long address) {
         return address == NULL ? null : new EXRTile(address, null);
     }
 
@@ -229,8 +228,7 @@ public class EXRTile extends Struct<EXRTile> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRTile.Buffer createSafe(long address, int capacity) {
+    public static EXRTile.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

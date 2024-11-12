@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -134,8 +134,7 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusEncCallbacks createSafe(long address) {
+    public static @Nullable OpusEncCallbacks createSafe(long address) {
         return address == NULL ? null : new OpusEncCallbacks(address, null);
     }
 
@@ -178,8 +177,7 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OpusEncCallbacks.Buffer createSafe(long address, int capacity) {
+    public static OpusEncCallbacks.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

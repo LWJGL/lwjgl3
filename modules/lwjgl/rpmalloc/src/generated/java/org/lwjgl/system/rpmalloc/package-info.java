@@ -8,6 +8,6 @@
  * Contains bindings to the <a href="https://github.com/mjansson/rpmalloc">rpmalloc</a> library. rpmalloc is a public domain cross platform lock free
  * thread caching 16-byte aligned memory allocator implemented in C.
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.rpmalloc;
 

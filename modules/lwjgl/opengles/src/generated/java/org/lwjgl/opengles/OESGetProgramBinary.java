@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -53,7 +53,7 @@ public class OESGetProgramBinary {
 
     public static native void nglGetProgramBinaryOES(int program, int bufSize, long length, long binaryFormat, long binary);
 
-    public static void glGetProgramBinaryOES(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLenum *") IntBuffer binaryFormat, @NativeType("void *") ByteBuffer binary) {
+    public static void glGetProgramBinaryOES(@NativeType("GLuint") int program, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLenum *") IntBuffer binaryFormat, @NativeType("void *") ByteBuffer binary) {
         if (CHECKS) {
             checkSafe(length, 1);
             check(binaryFormat, 1);
@@ -70,7 +70,7 @@ public class OESGetProgramBinary {
     }
 
     /** Array version of: {@link #glGetProgramBinaryOES GetProgramBinaryOES} */
-    public static void glGetProgramBinaryOES(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {
+    public static void glGetProgramBinaryOES(@NativeType("GLuint") int program, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {
         long __functionAddress = GLES.getICD().glGetProgramBinaryOES;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -30,7 +30,7 @@ public class Stat {
     public static native int nstat(long _errno, long __file, long __buf);
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static int stat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") ByteBuffer __file, @NativeType("struct stat *") long __buf) {
+    public static int stat(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") ByteBuffer __file, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             checkNT1(__file);
@@ -40,7 +40,7 @@ public class Stat {
     }
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static int stat(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("char const *") CharSequence __file, @NativeType("struct stat *") long __buf) {
+    public static int stat(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("char const *") CharSequence __file, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             check(__buf);
@@ -61,7 +61,7 @@ public class Stat {
     public static native int nfstat(long _errno, int __fd, long __buf);
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static int fstat(@Nullable @NativeType("int *") IntBuffer _errno, int __fd, @NativeType("struct stat *") long __buf) {
+    public static int fstat(@NativeType("int *") @Nullable IntBuffer _errno, int __fd, @NativeType("struct stat *") long __buf) {
         if (CHECKS) {
             checkSafe(_errno, 1);
             check(__buf);

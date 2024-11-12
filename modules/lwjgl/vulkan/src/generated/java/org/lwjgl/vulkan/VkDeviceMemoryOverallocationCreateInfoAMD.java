@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,8 +153,7 @@ public class VkDeviceMemoryOverallocationCreateInfoAMD extends Struct<VkDeviceMe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceMemoryOverallocationCreateInfoAMD createSafe(long address) {
+    public static @Nullable VkDeviceMemoryOverallocationCreateInfoAMD createSafe(long address) {
         return address == NULL ? null : new VkDeviceMemoryOverallocationCreateInfoAMD(address, null);
     }
 
@@ -197,8 +196,7 @@ public class VkDeviceMemoryOverallocationCreateInfoAMD extends Struct<VkDeviceMe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceMemoryOverallocationCreateInfoAMD.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceMemoryOverallocationCreateInfoAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

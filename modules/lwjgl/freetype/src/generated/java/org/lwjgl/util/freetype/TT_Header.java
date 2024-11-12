@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -200,8 +200,7 @@ public class TT_Header extends Struct<TT_Header> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_Header createSafe(long address) {
+    public static @Nullable TT_Header createSafe(long address) {
         return address == NULL ? null : new TT_Header(address, null);
     }
 
@@ -216,8 +215,7 @@ public class TT_Header extends Struct<TT_Header> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static TT_Header.Buffer createSafe(long address, int capacity) {
+    public static TT_Header.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

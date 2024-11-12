@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,9 +129,8 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** a pointer to an array of {@link XrVector3f}, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0. The vertices are defined in the coordinate frame of {@code XrSpace} to which this struct is associated. */
-    @Nullable
     @NativeType("XrVector3f *")
-    public XrVector3f.Buffer vertices() { return nvertices(address()); }
+    public XrVector3f.@Nullable Buffer vertices() { return nvertices(address()); }
     /** an input parameter for the application to specify the capacity of the {@code indices} array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
@@ -139,9 +138,8 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** a pointer to an array of {@code uint32_t}, but <b>can</b> be {@code NULL} if {@code indexCapacityInput} is 0. Each element refers to a vertex in {@code vertices}. */
-    @Nullable
     @NativeType("uint32_t *")
-    public IntBuffer indices() { return nindices(address()); }
+    public @Nullable IntBuffer indices() { return nindices(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSpaceTriangleMeshMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -197,8 +195,7 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceTriangleMeshMETA createSafe(long address) {
+    public static @Nullable XrSpaceTriangleMeshMETA createSafe(long address) {
         return address == NULL ? null : new XrSpaceTriangleMeshMETA(address, null);
     }
 
@@ -241,8 +238,7 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceTriangleMeshMETA.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceTriangleMeshMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -295,13 +291,13 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     /** Unsafe version of {@link #vertexCountOutput}. */
     public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertices}. */
-    @Nullable public static XrVector3f.Buffer nvertices(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.VERTICES), nvertexCapacityInput(struct)); }
+    public static XrVector3f.@Nullable Buffer nvertices(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.VERTICES), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #indexCapacityInput}. */
     public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
     public static int nindexCountOutput(long struct) { return memGetInt(struct + XrSpaceTriangleMeshMETA.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
-    @Nullable public static IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.INDICES), nindexCapacityInput(struct)); }
+    public static @Nullable IntBuffer nindices(long struct) { return memIntBufferSafe(memGetAddress(struct + XrSpaceTriangleMeshMETA.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceTriangleMeshMETA.TYPE, value); }
@@ -364,9 +360,8 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrSpaceTriangleMeshMETA.nvertexCountOutput(address()); }
         /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@link XrSpaceTriangleMeshMETA#vertices} field. */
-        @Nullable
         @NativeType("XrVector3f *")
-        public XrVector3f.Buffer vertices() { return XrSpaceTriangleMeshMETA.nvertices(address()); }
+        public XrVector3f.@Nullable Buffer vertices() { return XrSpaceTriangleMeshMETA.nvertices(address()); }
         /** @return the value of the {@link XrSpaceTriangleMeshMETA#indexCapacityInput} field. */
         @NativeType("uint32_t")
         public int indexCapacityInput() { return XrSpaceTriangleMeshMETA.nindexCapacityInput(address()); }
@@ -374,9 +369,8 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrSpaceTriangleMeshMETA.nindexCountOutput(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrSpaceTriangleMeshMETA#indices} field. */
-        @Nullable
         @NativeType("uint32_t *")
-        public IntBuffer indices() { return XrSpaceTriangleMeshMETA.nindices(address()); }
+        public @Nullable IntBuffer indices() { return XrSpaceTriangleMeshMETA.nindices(address()); }
 
         /** Sets the specified value to the {@link XrSpaceTriangleMeshMETA#type} field. */
         public XrSpaceTriangleMeshMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceTriangleMeshMETA.ntype(address(), value); return this; }

@@ -36,6 +36,6 @@
  * <li>Should use the Core Profile hierarchy to avoid deprecated symbols. Auto-complete lists in an IDE will also be cleaner.</li>
  * </ul>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.opengl;
 

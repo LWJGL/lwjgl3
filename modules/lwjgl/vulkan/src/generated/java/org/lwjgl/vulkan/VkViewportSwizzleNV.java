@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class VkViewportSwizzleNV extends Struct<VkViewportSwizzleNV> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkViewportSwizzleNV createSafe(long address) {
+    public static @Nullable VkViewportSwizzleNV createSafe(long address) {
         return address == NULL ? null : new VkViewportSwizzleNV(address, null);
     }
 
@@ -212,8 +211,7 @@ public class VkViewportSwizzleNV extends Struct<VkViewportSwizzleNV> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkViewportSwizzleNV.Buffer createSafe(long address, int capacity) {
+    public static VkViewportSwizzleNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

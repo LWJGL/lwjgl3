@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -431,7 +431,7 @@ public class NVRayTracing {
      * @param pAccelerationStructure a pointer to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoNV const *") VkAccelerationStructureCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureNV *") LongBuffer pAccelerationStructure) {
+    public static int vkCreateAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoNV const *") VkAccelerationStructureCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureNV *") LongBuffer pAccelerationStructure) {
         if (CHECKS) {
             check(pAccelerationStructure, 1);
         }
@@ -493,7 +493,7 @@ public class NVRayTracing {
      * @param accelerationStructure the acceleration structure to destroy.
      * @param pAllocator            controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureNV") long accelerationStructure, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureNV") long accelerationStructure, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyAccelerationStructureNV(device, accelerationStructure, memAddressSafe(pAllocator));
     }
 
@@ -1059,7 +1059,7 @@ public class NVRayTracing {
      * @param pPipelines    a pointer to an array in which the resulting ray tracing pipeline objects are returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateRayTracingPipelinesNV(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkRayTracingPipelineCreateInfoNV const *") VkRayTracingPipelineCreateInfoNV.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
+    public static int vkCreateRayTracingPipelinesNV(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkRayTracingPipelineCreateInfoNV const *") VkRayTracingPipelineCreateInfoNV.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
         if (CHECKS) {
             check(pPipelines, pCreateInfos.remaining());
         }
@@ -1363,7 +1363,7 @@ public class NVRayTracing {
 
     /** Array version of: {@link #vkCreateAccelerationStructureNV CreateAccelerationStructureNV} */
     @NativeType("VkResult")
-    public static int vkCreateAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoNV const *") VkAccelerationStructureCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureNV *") long[] pAccelerationStructure) {
+    public static int vkCreateAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoNV const *") VkAccelerationStructureCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureNV *") long[] pAccelerationStructure) {
         long __functionAddress = device.getCapabilities().vkCreateAccelerationStructureNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -1375,7 +1375,7 @@ public class NVRayTracing {
 
     /** Array version of: {@link #vkCreateRayTracingPipelinesNV CreateRayTracingPipelinesNV} */
     @NativeType("VkResult")
-    public static int vkCreateRayTracingPipelinesNV(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkRayTracingPipelineCreateInfoNV const *") VkRayTracingPipelineCreateInfoNV.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
+    public static int vkCreateRayTracingPipelinesNV(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkRayTracingPipelineCreateInfoNV const *") VkRayTracingPipelineCreateInfoNV.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
         long __functionAddress = device.getCapabilities().vkCreateRayTracingPipelinesNV;
         if (CHECKS) {
             check(__functionAddress);

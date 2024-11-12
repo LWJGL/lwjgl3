@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct<XrPassthroughColor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughColorMapMonoToMonoFB createSafe(long address) {
+    public static @Nullable XrPassthroughColorMapMonoToMonoFB createSafe(long address) {
         return address == NULL ? null : new XrPassthroughColorMapMonoToMonoFB(address, null);
     }
 
@@ -212,8 +211,7 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct<XrPassthroughColor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughColorMapMonoToMonoFB.Buffer createSafe(long address, int capacity) {
+    public static XrPassthroughColorMapMonoToMonoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

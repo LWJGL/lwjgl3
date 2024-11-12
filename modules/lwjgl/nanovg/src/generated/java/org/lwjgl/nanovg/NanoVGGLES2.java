@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -141,9 +141,8 @@ public class NanoVGGLES2 {
      * @param h          the framebuffer height
      * @param imageFlags the image flags
      */
-    @Nullable
     @NativeType("NVGLUframebuffer *")
-    public static NVGLUFramebuffer nvgluCreateFramebuffer(@NativeType("NVGcontext *") long ctx, int w, int h, int imageFlags) {
+    public static @Nullable NVGLUFramebuffer nvgluCreateFramebuffer(@NativeType("NVGcontext *") long ctx, int w, int h, int imageFlags) {
         if (CHECKS) {
             check(ctx);
         }
@@ -162,7 +161,7 @@ public class NanoVGGLES2 {
      * @param ctx the NanoVG context
      * @param fb  the framebuffer to bind
      */
-    public static void nvgluBindFramebuffer(@NativeType("NVGcontext *") long ctx, @Nullable @NativeType("NVGLUframebuffer *") NVGLUFramebuffer fb) {
+    public static void nvgluBindFramebuffer(@NativeType("NVGcontext *") long ctx, @NativeType("NVGLUframebuffer *") @Nullable NVGLUFramebuffer fb) {
         if (CHECKS) {
             check(ctx);
         }

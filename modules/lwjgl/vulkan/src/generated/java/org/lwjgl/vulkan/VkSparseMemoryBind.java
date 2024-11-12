@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -208,8 +208,7 @@ public class VkSparseMemoryBind extends Struct<VkSparseMemoryBind> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseMemoryBind createSafe(long address) {
+    public static @Nullable VkSparseMemoryBind createSafe(long address) {
         return address == NULL ? null : new VkSparseMemoryBind(address, null);
     }
 
@@ -252,8 +251,7 @@ public class VkSparseMemoryBind extends Struct<VkSparseMemoryBind> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSparseMemoryBind.Buffer createSafe(long address, int capacity) {
+    public static VkSparseMemoryBind.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

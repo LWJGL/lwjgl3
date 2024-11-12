@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneFrustumBoundMSFT createSafe(long address) {
+    public static @Nullable XrSceneFrustumBoundMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneFrustumBoundMSFT(address, null);
     }
 
@@ -203,8 +202,7 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneFrustumBoundMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneFrustumBoundMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

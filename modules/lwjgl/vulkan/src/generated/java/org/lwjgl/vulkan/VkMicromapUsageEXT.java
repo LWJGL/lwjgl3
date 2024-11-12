@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class VkMicromapUsageEXT extends Struct<VkMicromapUsageEXT> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMicromapUsageEXT createSafe(long address) {
+    public static @Nullable VkMicromapUsageEXT createSafe(long address) {
         return address == NULL ? null : new VkMicromapUsageEXT(address, null);
     }
 
@@ -204,8 +203,7 @@ public class VkMicromapUsageEXT extends Struct<VkMicromapUsageEXT> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMicromapUsageEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMicromapUsageEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

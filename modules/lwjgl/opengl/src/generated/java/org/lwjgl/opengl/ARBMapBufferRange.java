@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -68,9 +68,8 @@ public class ARBMapBufferRange {
      * @param length the length of the range to be mapped
      * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30C#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30C#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30C#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30C#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
+    public static @Nullable ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
         return GL30C.glMapBufferRange(target, offset, length, access);
     }
 
@@ -89,9 +88,8 @@ public class ARBMapBufferRange {
      * @param length the length of the range to be mapped
      * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30C#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30C#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30C#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30C#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
         return GL30C.glMapBufferRange(target, offset, length, access, old_buffer);
     }
 

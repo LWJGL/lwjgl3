@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -181,8 +181,7 @@ public class VkWriteIndirectExecutionSetShaderEXT extends Struct<VkWriteIndirect
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWriteIndirectExecutionSetShaderEXT createSafe(long address) {
+    public static @Nullable VkWriteIndirectExecutionSetShaderEXT createSafe(long address) {
         return address == NULL ? null : new VkWriteIndirectExecutionSetShaderEXT(address, null);
     }
 
@@ -225,8 +224,7 @@ public class VkWriteIndirectExecutionSetShaderEXT extends Struct<VkWriteIndirect
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWriteIndirectExecutionSetShaderEXT.Buffer createSafe(long address, int capacity) {
+    public static VkWriteIndirectExecutionSetShaderEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

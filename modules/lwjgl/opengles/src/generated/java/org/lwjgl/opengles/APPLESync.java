@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengles;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,7 +156,7 @@ public class APPLESync {
 
     public static native void nglGetSyncivAPPLE(long sync, int pname, int bufSize, long length, long values);
 
-    public static void glGetSyncivAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer values) {
+    public static void glGetSyncivAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer values) {
         if (CHECKS) {
             check(sync);
             checkSafe(length, 1);
@@ -165,7 +165,7 @@ public class APPLESync {
     }
 
     @NativeType("void")
-    public static int glGetSynciAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length) {
+    public static int glGetSynciAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") @Nullable IntBuffer length) {
         if (CHECKS) {
             check(sync);
             checkSafe(length, 1);
@@ -191,7 +191,7 @@ public class APPLESync {
     }
 
     /** Array version of: {@link #glGetSyncivAPPLE GetSyncivAPPLE} */
-    public static void glGetSyncivAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] values) {
+    public static void glGetSyncivAPPLE(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] values) {
         long __functionAddress = GLES.getICD().glGetSyncivAPPLE;
         if (CHECKS) {
             check(__functionAddress);

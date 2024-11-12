@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -185,7 +185,7 @@ public class FBColorSpace {
      * @param colorSpaces           a pointer to an array of {@code XrColorSpaceFB} color spaces, but <b>can</b> be {@code NULL} if {@code colorSpaceCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateColorSpacesFB(XrSession session, @NativeType("uint32_t *") IntBuffer colorSpaceCountOutput, @Nullable @NativeType("XrColorSpaceFB *") IntBuffer colorSpaces) {
+    public static int xrEnumerateColorSpacesFB(XrSession session, @NativeType("uint32_t *") IntBuffer colorSpaceCountOutput, @NativeType("XrColorSpaceFB *") @Nullable IntBuffer colorSpaces) {
         if (CHECKS) {
             check(colorSpaceCountOutput, 1);
         }

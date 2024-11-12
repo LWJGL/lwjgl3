@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -166,8 +166,7 @@ public class EGLClientPixmapHI extends Struct<EGLClientPixmapHI> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EGLClientPixmapHI createSafe(long address) {
+    public static @Nullable EGLClientPixmapHI createSafe(long address) {
         return address == NULL ? null : new EGLClientPixmapHI(address, null);
     }
 
@@ -210,8 +209,7 @@ public class EGLClientPixmapHI extends Struct<EGLClientPixmapHI> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EGLClientPixmapHI.Buffer createSafe(long address, int capacity) {
+    public static EGLClientPixmapHI.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

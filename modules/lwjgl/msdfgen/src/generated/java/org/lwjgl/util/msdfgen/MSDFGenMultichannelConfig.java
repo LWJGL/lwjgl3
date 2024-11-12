@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.msdfgen;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenMultichannelConfig createSafe(long address) {
+    public static @Nullable MSDFGenMultichannelConfig createSafe(long address) {
         return address == NULL ? null : new MSDFGenMultichannelConfig(address, null);
     }
 
@@ -204,8 +203,7 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MSDFGenMultichannelConfig.Buffer createSafe(long address, int capacity) {
+    public static MSDFGenMultichannelConfig.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

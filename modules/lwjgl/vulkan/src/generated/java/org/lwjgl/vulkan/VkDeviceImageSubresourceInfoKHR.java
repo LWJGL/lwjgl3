@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,8 +184,7 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceImageSubresourceInfoKHR createSafe(long address) {
+    public static @Nullable VkDeviceImageSubresourceInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkDeviceImageSubresourceInfoKHR(address, null);
     }
 
@@ -228,8 +227,7 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceImageSubresourceInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceImageSubresourceInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

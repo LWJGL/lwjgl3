@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -188,8 +188,7 @@ public class XrPassthroughBrightnessContrastSaturationFB extends Struct<XrPassth
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughBrightnessContrastSaturationFB createSafe(long address) {
+    public static @Nullable XrPassthroughBrightnessContrastSaturationFB createSafe(long address) {
         return address == NULL ? null : new XrPassthroughBrightnessContrastSaturationFB(address, null);
     }
 
@@ -232,8 +231,7 @@ public class XrPassthroughBrightnessContrastSaturationFB extends Struct<XrPassth
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrPassthroughBrightnessContrastSaturationFB.Buffer createSafe(long address, int capacity) {
+    public static XrPassthroughBrightnessContrastSaturationFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

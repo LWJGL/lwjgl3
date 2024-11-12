@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -726,7 +726,7 @@ public class MLMarkerUnderstanding {
      * @param markers           a pointer to an array of {@code XrMarkerML} atoms, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrGetMarkersML(XrMarkerDetectorML markerDetector, @NativeType("uint32_t *") IntBuffer markerCountOutput, @Nullable @NativeType("XrMarkerML *") LongBuffer markers) {
+    public static int xrGetMarkersML(XrMarkerDetectorML markerDetector, @NativeType("uint32_t *") IntBuffer markerCountOutput, @NativeType("XrMarkerML *") @Nullable LongBuffer markers) {
         if (CHECKS) {
             check(markerCountOutput, 1);
         }
@@ -1044,7 +1044,7 @@ public class MLMarkerUnderstanding {
      * @param buffer            a pointer to an application-allocated buffer that <b>should</b> be filled with the QR code’s contents. It <b>can</b> be NULL if bufferCapacityInput is 0.
      */
     @NativeType("XrResult")
-    public static int xrGetMarkerStringML(XrMarkerDetectorML markerDetector, @NativeType("XrMarkerML") long marker, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @Nullable @NativeType("char *") ByteBuffer buffer) {
+    public static int xrGetMarkerStringML(XrMarkerDetectorML markerDetector, @NativeType("XrMarkerML") long marker, @NativeType("uint32_t *") IntBuffer bufferCountOutput, @NativeType("char *") @Nullable ByteBuffer buffer) {
         if (CHECKS) {
             check(bufferCountOutput, 1);
         }

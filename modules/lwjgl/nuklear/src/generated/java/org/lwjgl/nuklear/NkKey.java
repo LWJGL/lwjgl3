@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,8 +86,7 @@ public class NkKey extends Struct<NkKey> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkKey createSafe(long address) {
+    public static @Nullable NkKey createSafe(long address) {
         return address == NULL ? null : new NkKey(address, null);
     }
 
@@ -102,8 +101,7 @@ public class NkKey extends Struct<NkKey> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkKey.Buffer createSafe(long address, int capacity) {
+    public static NkKey.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

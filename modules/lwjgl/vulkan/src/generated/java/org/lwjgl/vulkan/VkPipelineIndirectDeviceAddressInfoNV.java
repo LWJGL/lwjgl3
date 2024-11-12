@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class VkPipelineIndirectDeviceAddressInfoNV extends Struct<VkPipelineIndi
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineIndirectDeviceAddressInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineIndirectDeviceAddressInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineIndirectDeviceAddressInfoNV(address, null);
     }
 
@@ -222,8 +221,7 @@ public class VkPipelineIndirectDeviceAddressInfoNV extends Struct<VkPipelineIndi
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineIndirectDeviceAddressInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineIndirectDeviceAddressInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

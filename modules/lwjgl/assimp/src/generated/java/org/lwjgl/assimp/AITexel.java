@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,8 +102,7 @@ public class AITexel extends Struct<AITexel> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AITexel createSafe(long address) {
+    public static @Nullable AITexel createSafe(long address) {
         return address == NULL ? null : new AITexel(address, null);
     }
 
@@ -118,8 +117,7 @@ public class AITexel extends Struct<AITexel> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AITexel.Buffer createSafe(long address, int capacity) {
+    public static AITexel.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

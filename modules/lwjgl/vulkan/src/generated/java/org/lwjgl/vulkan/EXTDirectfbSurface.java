@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,7 +121,7 @@ public class EXTDirectfbSurface {
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {
+    public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {
         if (CHECKS) {
             check(pSurface, 1);
         }
@@ -176,7 +176,7 @@ public class EXTDirectfbSurface {
 
     /** Array version of: {@link #vkCreateDirectFBSurfaceEXT CreateDirectFBSurfaceEXT} */
     @NativeType("VkResult")
-    public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") long[] pSurface) {
+    public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") long[] pSurface) {
         long __functionAddress = instance.getCapabilities().vkCreateDirectFBSurfaceEXT;
         if (CHECKS) {
             check(__functionAddress);

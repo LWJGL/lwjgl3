@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -79,16 +79,16 @@ public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
     public VkSubpassDescription2KHR viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pInputAttachments} field. */
     @Override
-    public VkSubpassDescription2KHR pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npInputAttachments(address(), value); return this; }
+    public VkSubpassDescription2KHR pInputAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npInputAttachments(address(), value); return this; }
     /** Sets the specified value to the {@code colorAttachmentCount} field. */
     @Override
     public VkSubpassDescription2KHR colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pColorAttachments} field. */
     @Override
-    public VkSubpassDescription2KHR pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npColorAttachments(address(), value); return this; }
+    public VkSubpassDescription2KHR pColorAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npColorAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pResolveAttachments} field. */
     @Override
-    public VkSubpassDescription2KHR pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npResolveAttachments(address(), value); return this; }
+    public VkSubpassDescription2KHR pResolveAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { npResolveAttachments(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilAttachment} field. */
     @Override
     public VkSubpassDescription2KHR pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { npDepthStencilAttachment(address(), value); return this; }
@@ -104,10 +104,10 @@ public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
         int flags,
         int pipelineBindPoint,
         int viewMask,
-        @Nullable VkAttachmentReference2.Buffer pInputAttachments,
+        VkAttachmentReference2.@Nullable Buffer pInputAttachments,
         int colorAttachmentCount,
-        @Nullable VkAttachmentReference2.Buffer pColorAttachments,
-        @Nullable VkAttachmentReference2.Buffer pResolveAttachments,
+        VkAttachmentReference2.@Nullable Buffer pColorAttachments,
+        VkAttachmentReference2.@Nullable Buffer pResolveAttachments,
         @Nullable VkAttachmentReference2 pDepthStencilAttachment,
         @Nullable IntBuffer pPreserveAttachments
     ) {
@@ -162,8 +162,7 @@ public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDescription2KHR createSafe(long address) {
+    public static @Nullable VkSubpassDescription2KHR createSafe(long address) {
         return address == NULL ? null : new VkSubpassDescription2KHR(address, null);
     }
 
@@ -206,8 +205,7 @@ public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSubpassDescription2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkSubpassDescription2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -331,16 +329,16 @@ public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
         public VkSubpassDescription2KHR.Buffer viewMask(@NativeType("uint32_t") int value) { VkSubpassDescription2KHR.nviewMask(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pInputAttachments} field. */
         @Override
-        public VkSubpassDescription2KHR.Buffer pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2KHR.npInputAttachments(address(), value); return this; }
+        public VkSubpassDescription2KHR.Buffer pInputAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2KHR.npInputAttachments(address(), value); return this; }
         /** Sets the specified value to the {@code colorAttachmentCount} field. */
         @Override
         public VkSubpassDescription2KHR.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkSubpassDescription2KHR.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pColorAttachments} field. */
         @Override
-        public VkSubpassDescription2KHR.Buffer pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2KHR.npColorAttachments(address(), value); return this; }
+        public VkSubpassDescription2KHR.Buffer pColorAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2KHR.npColorAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pResolveAttachments} field. */
         @Override
-        public VkSubpassDescription2KHR.Buffer pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2KHR.npResolveAttachments(address(), value); return this; }
+        public VkSubpassDescription2KHR.Buffer pResolveAttachments(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.@Nullable Buffer value) { VkSubpassDescription2KHR.npResolveAttachments(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilAttachment} field. */
         @Override
         public VkSubpassDescription2KHR.Buffer pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { VkSubpassDescription2KHR.npDepthStencilAttachment(address(), value); return this; }

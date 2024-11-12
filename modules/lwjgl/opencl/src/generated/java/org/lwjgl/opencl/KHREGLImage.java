@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -63,7 +63,7 @@ public class KHREGLImage {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_mem")
-    public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @Nullable @NativeType("cl_egl_image_properties_khr const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @NativeType("cl_egl_image_properties_khr const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -103,7 +103,7 @@ public class KHREGLImage {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueAcquireEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueAcquireEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -142,7 +142,7 @@ public class KHREGLImage {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -163,7 +163,7 @@ public class KHREGLImage {
      *                        {@code event_wait_list} array.
      */
     @NativeType("cl_int")
-    public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") long mem_object, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") long mem_object, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -178,7 +178,7 @@ public class KHREGLImage {
 
     /** Array version of: {@link #clCreateFromEGLImageKHR CreateFromEGLImageKHR} */
     @NativeType("cl_mem")
-    public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @Nullable @NativeType("cl_egl_image_properties_khr const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @NativeType("cl_egl_image_properties_khr const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateFromEGLImageKHR;
         if (CHECKS) {
             check(__functionAddress);

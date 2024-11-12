@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -365,8 +365,7 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleCombo createSafe(long address) {
+    public static @Nullable NkStyleCombo createSafe(long address) {
         return address == NULL ? null : new NkStyleCombo(address, null);
     }
 
@@ -409,8 +408,7 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkStyleCombo.Buffer createSafe(long address, int capacity) {
+    public static NkStyleCombo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

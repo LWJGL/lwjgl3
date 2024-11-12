@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,7 +143,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -284,7 +284,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -371,7 +371,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -458,7 +458,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -545,7 +545,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -632,7 +632,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -736,7 +736,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -823,7 +823,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -910,7 +910,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -997,7 +997,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -1084,7 +1084,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(buffer_origin, 3);
             check(host_origin, 3);
@@ -1182,7 +1182,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueCopyBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t *") PointerBuffer src_origin, @NativeType("size_t *") PointerBuffer dst_origin, @NativeType("size_t *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCopyBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t *") PointerBuffer src_origin, @NativeType("size_t *") PointerBuffer dst_origin, @NativeType("size_t *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(src_origin, 3);
             check(dst_origin, 3);
@@ -1225,7 +1225,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a>
      */
     @NativeType("cl_event")
-    public static long clCreateUserEvent(@NativeType("cl_context") long context, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateUserEvent(@NativeType("cl_context") long context, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1358,7 +1358,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateSubBuffer;
         if (CHECKS) {
             check(__functionAddress);
@@ -1374,7 +1374,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1395,7 +1395,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1416,7 +1416,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1437,7 +1437,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1458,7 +1458,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1479,7 +1479,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1500,7 +1500,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1521,7 +1521,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -1542,7 +1542,7 @@ public class CL11 extends CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a>
      */
     @NativeType("cl_event")
-    public static long clCreateUserEvent(@NativeType("cl_context") long context, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateUserEvent(@NativeType("cl_context") long context, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateUserEvent;
         if (CHECKS) {
             check(__functionAddress);

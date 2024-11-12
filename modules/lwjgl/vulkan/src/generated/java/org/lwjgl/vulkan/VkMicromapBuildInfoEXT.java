@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,13 +175,11 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     @NativeType("uint32_t")
     public int usageCountsCount() { return nusageCountsCount(address()); }
     /** a pointer to an array of {@link VkMicromapUsageEXT} structures. */
-    @Nullable
     @NativeType("VkMicromapUsageEXT const *")
-    public VkMicromapUsageEXT.Buffer pUsageCounts() { return npUsageCounts(address()); }
+    public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return npUsageCounts(address()); }
     /** a pointer to an array of pointers to {@link VkMicromapUsageEXT} structures. */
-    @Nullable
     @NativeType("VkMicromapUsageEXT const * const *")
-    public PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
+    public @Nullable PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
     /** the device or host address to memory which contains the data for the micromap. */
     public VkDeviceOrHostAddressConstKHR data() { return ndata(address()); }
     /** the device or host address to memory that will be used as scratch memory for the build. */
@@ -209,7 +207,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     /** Sets the specified value to the {@link #usageCountsCount} field. */
     public VkMicromapBuildInfoEXT usageCountsCount(@NativeType("uint32_t") int value) { nusageCountsCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link #pUsageCounts} field. */
-    public VkMicromapBuildInfoEXT pUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.Buffer value) { npUsageCounts(address(), value); return this; }
+    public VkMicromapBuildInfoEXT pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { npUsageCounts(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppUsageCounts} field. */
     public VkMicromapBuildInfoEXT ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { nppUsageCounts(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #data} field. */
@@ -236,7 +234,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
         int mode,
         long dstMicromap,
         int usageCountsCount,
-        @Nullable VkMicromapUsageEXT.Buffer pUsageCounts,
+        VkMicromapUsageEXT.@Nullable Buffer pUsageCounts,
         @Nullable PointerBuffer ppUsageCounts,
         VkDeviceOrHostAddressConstKHR data,
         VkDeviceOrHostAddressKHR scratchData,
@@ -296,8 +294,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMicromapBuildInfoEXT createSafe(long address) {
+    public static @Nullable VkMicromapBuildInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkMicromapBuildInfoEXT(address, null);
     }
 
@@ -340,8 +337,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMicromapBuildInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMicromapBuildInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -400,9 +396,9 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     /** Unsafe version of {@link #usageCountsCount}. */
     public static int nusageCountsCount(long struct) { return memGetInt(struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT); }
     /** Unsafe version of {@link #pUsageCounts}. */
-    @Nullable public static VkMicromapUsageEXT.Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS), nusageCountsCount(struct)); }
+    public static VkMicromapUsageEXT.@Nullable Buffer npUsageCounts(long struct) { return VkMicromapUsageEXT.createSafe(memGetAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #ppUsageCounts() ppUsageCounts}. */
-    @Nullable public static PointerBuffer nppUsageCounts(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkMicromapBuildInfoEXT.PPUSAGECOUNTS), nusageCountsCount(struct)); }
+    public static @Nullable PointerBuffer nppUsageCounts(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkMicromapBuildInfoEXT.PPUSAGECOUNTS), nusageCountsCount(struct)); }
     /** Unsafe version of {@link #data}. */
     public static VkDeviceOrHostAddressConstKHR ndata(long struct) { return VkDeviceOrHostAddressConstKHR.create(struct + VkMicromapBuildInfoEXT.DATA); }
     /** Unsafe version of {@link #scratchData}. */
@@ -427,7 +423,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
     /** Sets the specified value to the {@code usageCountsCount} field of the specified {@code struct}. */
     public static void nusageCountsCount(long struct, int value) { memPutInt(struct + VkMicromapBuildInfoEXT.USAGECOUNTSCOUNT, value); }
     /** Unsafe version of {@link #pUsageCounts(VkMicromapUsageEXT.Buffer) pUsageCounts}. */
-    public static void npUsageCounts(long struct, @Nullable VkMicromapUsageEXT.Buffer value) { memPutAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS, memAddressSafe(value)); }
+    public static void npUsageCounts(long struct, VkMicromapUsageEXT.@Nullable Buffer value) { memPutAddress(struct + VkMicromapBuildInfoEXT.PUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #ppUsageCounts(PointerBuffer) ppUsageCounts}. */
     public static void nppUsageCounts(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkMicromapBuildInfoEXT.PPUSAGECOUNTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #data(VkDeviceOrHostAddressConstKHR) data}. */
@@ -504,13 +500,11 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
         @NativeType("uint32_t")
         public int usageCountsCount() { return VkMicromapBuildInfoEXT.nusageCountsCount(address()); }
         /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@link VkMicromapBuildInfoEXT#pUsageCounts} field. */
-        @Nullable
         @NativeType("VkMicromapUsageEXT const *")
-        public VkMicromapUsageEXT.Buffer pUsageCounts() { return VkMicromapBuildInfoEXT.npUsageCounts(address()); }
+        public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return VkMicromapBuildInfoEXT.npUsageCounts(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkMicromapBuildInfoEXT#ppUsageCounts} field. */
-        @Nullable
         @NativeType("VkMicromapUsageEXT const * const *")
-        public PointerBuffer ppUsageCounts() { return VkMicromapBuildInfoEXT.nppUsageCounts(address()); }
+        public @Nullable PointerBuffer ppUsageCounts() { return VkMicromapBuildInfoEXT.nppUsageCounts(address()); }
         /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkMicromapBuildInfoEXT#data} field. */
         public VkDeviceOrHostAddressConstKHR data() { return VkMicromapBuildInfoEXT.ndata(address()); }
         /** @return a {@link VkDeviceOrHostAddressKHR} view of the {@link VkMicromapBuildInfoEXT#scratchData} field. */
@@ -538,7 +532,7 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
         /** Sets the specified value to the {@link VkMicromapBuildInfoEXT#usageCountsCount} field. */
         public VkMicromapBuildInfoEXT.Buffer usageCountsCount(@NativeType("uint32_t") int value) { VkMicromapBuildInfoEXT.nusageCountsCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link VkMicromapBuildInfoEXT#pUsageCounts} field. */
-        public VkMicromapBuildInfoEXT.Buffer pUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.Buffer value) { VkMicromapBuildInfoEXT.npUsageCounts(address(), value); return this; }
+        public VkMicromapBuildInfoEXT.Buffer pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { VkMicromapBuildInfoEXT.npUsageCounts(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link VkMicromapBuildInfoEXT#ppUsageCounts} field. */
         public VkMicromapBuildInfoEXT.Buffer ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { VkMicromapBuildInfoEXT.nppUsageCounts(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkMicromapBuildInfoEXT#data} field. */

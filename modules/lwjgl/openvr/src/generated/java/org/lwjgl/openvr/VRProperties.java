@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openvr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -59,9 +59,8 @@ public class VRProperties {
         return callP(error, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char *")
-    public static String VRProperties_GetPropErrorNameFromEnum(@NativeType("ETrackedPropertyError") int error) {
+    public static @Nullable String VRProperties_GetPropErrorNameFromEnum(@NativeType("ETrackedPropertyError") int error) {
         long __result = nVRProperties_GetPropErrorNameFromEnum(error);
         return memASCIISafe(__result);
     }

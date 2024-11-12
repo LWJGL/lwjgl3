@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -450,7 +450,7 @@ public class NVOpticalFlow {
      * @param pImageFormatProperties      a pointer to an array of {@link VkOpticalFlowImageFormatPropertiesNV} structures in which supported formats and image parameters are returned.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, @NativeType("VkOpticalFlowImageFormatInfoNV const *") VkOpticalFlowImageFormatInfoNV pOpticalFlowImageFormatInfo, @NativeType("uint32_t *") IntBuffer pFormatCount, @Nullable @NativeType("VkOpticalFlowImageFormatPropertiesNV *") VkOpticalFlowImageFormatPropertiesNV.Buffer pImageFormatProperties) {
+    public static int vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, @NativeType("VkOpticalFlowImageFormatInfoNV const *") VkOpticalFlowImageFormatInfoNV pOpticalFlowImageFormatInfo, @NativeType("uint32_t *") IntBuffer pFormatCount, @NativeType("VkOpticalFlowImageFormatPropertiesNV *") VkOpticalFlowImageFormatPropertiesNV.@Nullable Buffer pImageFormatProperties) {
         if (CHECKS) {
             check(pFormatCount, 1);
             checkSafe(pImageFormatProperties, pFormatCount.get(pFormatCount.position()));
@@ -516,7 +516,7 @@ public class NVOpticalFlow {
      * @param pSession    a pointer to a {@code VkOpticalFlowSessionNV} handle specifying the optical flow session object which will be created by this function when it returns {@link VK10#VK_SUCCESS SUCCESS}
      */
     @NativeType("VkResult")
-    public static int vkCreateOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionCreateInfoNV const *") VkOpticalFlowSessionCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkOpticalFlowSessionNV *") LongBuffer pSession) {
+    public static int vkCreateOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionCreateInfoNV const *") VkOpticalFlowSessionCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkOpticalFlowSessionNV *") LongBuffer pSession) {
         if (CHECKS) {
             check(pSession, 1);
         }
@@ -564,7 +564,7 @@ public class NVOpticalFlow {
      * @param session    the optical flow session to be destroyed.
      * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionNV") long session, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionNV") long session, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyOpticalFlowSessionNV(device, session, memAddressSafe(pAllocator));
     }
 
@@ -692,7 +692,7 @@ public class NVOpticalFlow {
 
     /** Array version of: {@link #vkGetPhysicalDeviceOpticalFlowImageFormatsNV GetPhysicalDeviceOpticalFlowImageFormatsNV} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, @NativeType("VkOpticalFlowImageFormatInfoNV const *") VkOpticalFlowImageFormatInfoNV pOpticalFlowImageFormatInfo, @NativeType("uint32_t *") int[] pFormatCount, @Nullable @NativeType("VkOpticalFlowImageFormatPropertiesNV *") VkOpticalFlowImageFormatPropertiesNV.Buffer pImageFormatProperties) {
+    public static int vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, @NativeType("VkOpticalFlowImageFormatInfoNV const *") VkOpticalFlowImageFormatInfoNV pOpticalFlowImageFormatInfo, @NativeType("uint32_t *") int[] pFormatCount, @NativeType("VkOpticalFlowImageFormatPropertiesNV *") VkOpticalFlowImageFormatPropertiesNV.@Nullable Buffer pImageFormatProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceOpticalFlowImageFormatsNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -704,7 +704,7 @@ public class NVOpticalFlow {
 
     /** Array version of: {@link #vkCreateOpticalFlowSessionNV CreateOpticalFlowSessionNV} */
     @NativeType("VkResult")
-    public static int vkCreateOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionCreateInfoNV const *") VkOpticalFlowSessionCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkOpticalFlowSessionNV *") long[] pSession) {
+    public static int vkCreateOpticalFlowSessionNV(VkDevice device, @NativeType("VkOpticalFlowSessionCreateInfoNV const *") VkOpticalFlowSessionCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkOpticalFlowSessionNV *") long[] pSession) {
         long __functionAddress = device.getCapabilities().vkCreateOpticalFlowSessionNV;
         if (CHECKS) {
             check(__functionAddress);

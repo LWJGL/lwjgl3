@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class VkComponentMapping extends Struct<VkComponentMapping> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkComponentMapping createSafe(long address) {
+    public static @Nullable VkComponentMapping createSafe(long address) {
         return address == NULL ? null : new VkComponentMapping(address, null);
     }
 
@@ -212,8 +211,7 @@ public class VkComponentMapping extends Struct<VkComponentMapping> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkComponentMapping.Buffer createSafe(long address, int capacity) {
+    public static VkComponentMapping.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

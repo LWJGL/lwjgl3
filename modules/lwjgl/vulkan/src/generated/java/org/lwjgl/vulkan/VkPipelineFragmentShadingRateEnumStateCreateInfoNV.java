@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -186,8 +186,7 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct<V
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineFragmentShadingRateEnumStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineFragmentShadingRateEnumStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineFragmentShadingRateEnumStateCreateInfoNV(address, null);
     }
 
@@ -230,8 +229,7 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct<V
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineFragmentShadingRateEnumStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineFragmentShadingRateEnumStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

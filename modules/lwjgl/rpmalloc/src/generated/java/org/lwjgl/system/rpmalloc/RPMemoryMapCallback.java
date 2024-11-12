@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.rpmalloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static RPMemoryMapCallback createSafe(long functionPointer) {
+    public static @Nullable RPMemoryMapCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

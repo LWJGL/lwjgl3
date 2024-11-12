@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -509,7 +509,7 @@ public class KHRAccelerationStructure {
      * @param pAccelerationStructure a pointer to a {@code VkAccelerationStructureKHR} handle in which the resulting acceleration structure object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoKHR const *") VkAccelerationStructureCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureKHR *") LongBuffer pAccelerationStructure) {
+    public static int vkCreateAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoKHR const *") VkAccelerationStructureCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureKHR *") LongBuffer pAccelerationStructure) {
         if (CHECKS) {
             check(pAccelerationStructure, 1);
         }
@@ -572,7 +572,7 @@ public class KHRAccelerationStructure {
      * @param accelerationStructure the acceleration structure to destroy.
      * @param pAllocator            controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureKHR") long accelerationStructure, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureKHR") long accelerationStructure, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyAccelerationStructureKHR(device, accelerationStructure, memAddressSafe(pAllocator));
     }
 
@@ -1947,7 +1947,7 @@ public class KHRAccelerationStructure {
      * @param pMaxPrimitiveCounts a pointer to an array of {@code pBuildInfo→geometryCount} {@code uint32_t} values defining the number of primitives built into each geometry.
      * @param pSizeInfo           a pointer to a {@link VkAccelerationStructureBuildSizesInfoKHR} structure which returns the size required for an acceleration structure and the sizes required for the scratch buffers, given the build parameters.
      */
-    public static void vkGetAccelerationStructureBuildSizesKHR(VkDevice device, @NativeType("VkAccelerationStructureBuildTypeKHR") int buildType, @NativeType("VkAccelerationStructureBuildGeometryInfoKHR const *") VkAccelerationStructureBuildGeometryInfoKHR pBuildInfo, @Nullable @NativeType("uint32_t const *") IntBuffer pMaxPrimitiveCounts, @NativeType("VkAccelerationStructureBuildSizesInfoKHR *") VkAccelerationStructureBuildSizesInfoKHR pSizeInfo) {
+    public static void vkGetAccelerationStructureBuildSizesKHR(VkDevice device, @NativeType("VkAccelerationStructureBuildTypeKHR") int buildType, @NativeType("VkAccelerationStructureBuildGeometryInfoKHR const *") VkAccelerationStructureBuildGeometryInfoKHR pBuildInfo, @NativeType("uint32_t const *") @Nullable IntBuffer pMaxPrimitiveCounts, @NativeType("VkAccelerationStructureBuildSizesInfoKHR *") VkAccelerationStructureBuildSizesInfoKHR pSizeInfo) {
         if (CHECKS) {
             checkSafe(pMaxPrimitiveCounts, pBuildInfo.geometryCount());
         }
@@ -1956,7 +1956,7 @@ public class KHRAccelerationStructure {
 
     /** Array version of: {@link #vkCreateAccelerationStructureKHR CreateAccelerationStructureKHR} */
     @NativeType("VkResult")
-    public static int vkCreateAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoKHR const *") VkAccelerationStructureCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureKHR *") long[] pAccelerationStructure) {
+    public static int vkCreateAccelerationStructureKHR(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoKHR const *") VkAccelerationStructureCreateInfoKHR pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureKHR *") long[] pAccelerationStructure) {
         long __functionAddress = device.getCapabilities().vkCreateAccelerationStructureKHR;
         if (CHECKS) {
             check(__functionAddress);
@@ -2008,7 +2008,7 @@ public class KHRAccelerationStructure {
     }
 
     /** Array version of: {@link #vkGetAccelerationStructureBuildSizesKHR GetAccelerationStructureBuildSizesKHR} */
-    public static void vkGetAccelerationStructureBuildSizesKHR(VkDevice device, @NativeType("VkAccelerationStructureBuildTypeKHR") int buildType, @NativeType("VkAccelerationStructureBuildGeometryInfoKHR const *") VkAccelerationStructureBuildGeometryInfoKHR pBuildInfo, @Nullable @NativeType("uint32_t const *") int[] pMaxPrimitiveCounts, @NativeType("VkAccelerationStructureBuildSizesInfoKHR *") VkAccelerationStructureBuildSizesInfoKHR pSizeInfo) {
+    public static void vkGetAccelerationStructureBuildSizesKHR(VkDevice device, @NativeType("VkAccelerationStructureBuildTypeKHR") int buildType, @NativeType("VkAccelerationStructureBuildGeometryInfoKHR const *") VkAccelerationStructureBuildGeometryInfoKHR pBuildInfo, @NativeType("uint32_t const *") int @Nullable [] pMaxPrimitiveCounts, @NativeType("VkAccelerationStructureBuildSizesInfoKHR *") VkAccelerationStructureBuildSizesInfoKHR pSizeInfo) {
         long __functionAddress = device.getCapabilities().vkGetAccelerationStructureBuildSizesKHR;
         if (CHECKS) {
             check(__functionAddress);

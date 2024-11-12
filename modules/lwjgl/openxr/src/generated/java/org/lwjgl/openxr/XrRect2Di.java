@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,8 +145,7 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRect2Di createSafe(long address) {
+    public static @Nullable XrRect2Di createSafe(long address) {
         return address == NULL ? null : new XrRect2Di(address, null);
     }
 
@@ -189,8 +188,7 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRect2Di.Buffer createSafe(long address, int capacity) {
+    public static XrRect2Di.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -211,8 +211,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeCapabilitiesKHR createSafe(long address) {
+    public static @Nullable VkVideoEncodeCapabilitiesKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoEncodeCapabilitiesKHR(address, null);
     }
 
@@ -255,8 +254,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoEncodeCapabilitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

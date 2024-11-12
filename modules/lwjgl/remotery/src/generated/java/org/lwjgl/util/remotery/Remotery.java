@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -281,9 +281,8 @@ public class Remotery {
     public static native long nrmt_GetLastErrorMessage();
 
     /** Gets the last error message issued on the calling thread */
-    @Nullable
     @NativeType("rmtPStr")
-    public static String rmt_GetLastErrorMessage() {
+    public static @Nullable String rmt_GetLastErrorMessage() {
         long __result = nrmt_GetLastErrorMessage();
         return memUTF8Safe(__result);
     }
@@ -298,9 +297,8 @@ public class Remotery {
      * 
      * <p>This can be done before or after Remotery is initialised, however some fields are only referenced on initialisation.</p>
      */
-    @Nullable
     @NativeType("rmtSettings *")
-    public static RMTSettings rmt_Settings() {
+    public static @Nullable RMTSettings rmt_Settings() {
         long __result = nrmt_Settings();
         return RMTSettings.createSafe(__result);
     }
@@ -418,7 +416,7 @@ public class Remotery {
      *                   
      *                   <p>If {@code NULL} then this call becomes more expensive, as it has to recalculate the hash of the name.</p>
      */
-    public static void rmt_BeginCPUSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32") int flags, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginCPUSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32") int flags, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(hash_cache, 1);
@@ -435,7 +433,7 @@ public class Remotery {
      *                   
      *                   <p>If {@code NULL} then this call becomes more expensive, as it has to recalculate the hash of the name.</p>
      */
-    public static void rmt_BeginCPUSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32") int flags, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginCPUSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32") int flags, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);
         }
@@ -497,9 +495,8 @@ public class Remotery {
 
     public static native long nrmt_SampleTreeGetThreadName(long sample_tree);
 
-    @Nullable
     @NativeType("char const *")
-    public static String rmt_SampleTreeGetThreadName(@NativeType("rmtSampleTree *") long sample_tree) {
+    public static @Nullable String rmt_SampleTreeGetThreadName(@NativeType("rmtSampleTree *") long sample_tree) {
         if (CHECKS) {
             check(sample_tree);
         }
@@ -525,9 +522,8 @@ public class Remotery {
     public static native long nrmt_SampleGetName(long sample);
 
     /** Should only called from within the sample tree callback, when the internal string lookup table is valid (i.e. on the main Remotery thread). */
-    @Nullable
     @NativeType("char const *")
-    public static String rmt_SampleGetName(@NativeType("rmtSample *") long sample) {
+    public static @Nullable String rmt_SampleGetName(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
             check(sample);
         }
@@ -625,7 +621,7 @@ public class Remotery {
 
     public static native void nrmt_PropertyIterateChildren(long iter, long sample);
 
-    public static void rmt_PropertyIterateChildren(@NativeType("rmtPropertyIterator *") RMTPropertyIterator iter, @Nullable @NativeType("rmtProperty *") RMTProperty sample) {
+    public static void rmt_PropertyIterateChildren(@NativeType("rmtPropertyIterator *") RMTPropertyIterator iter, @NativeType("rmtProperty *") @Nullable RMTProperty sample) {
         nrmt_PropertyIterateChildren(iter.address(), memAddressSafe(sample));
     }
 
@@ -651,9 +647,8 @@ public class Remotery {
 
     public static native long nrmt_PropertyGetName(long property);
 
-    @Nullable
     @NativeType("char const *")
-    public static String rmt_PropertyGetName(@NativeType("rmtProperty *") RMTProperty property) {
+    public static @Nullable String rmt_PropertyGetName(@NativeType("rmtProperty *") RMTProperty property) {
         long __result = nrmt_PropertyGetName(property.address());
         return memUTF8Safe(__result);
     }
@@ -662,9 +657,8 @@ public class Remotery {
 
     public static native long nrmt_PropertyGetDescription(long property);
 
-    @Nullable
     @NativeType("char const *")
-    public static String rmt_PropertyGetDescription(@NativeType("rmtProperty *") RMTProperty property) {
+    public static @Nullable String rmt_PropertyGetDescription(@NativeType("rmtProperty *") RMTProperty property) {
         long __result = nrmt_PropertyGetDescription(property.address());
         return memUTF8Safe(__result);
     }

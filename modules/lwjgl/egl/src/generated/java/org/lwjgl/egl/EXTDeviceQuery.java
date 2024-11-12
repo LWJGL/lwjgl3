@@ -5,7 +5,7 @@
  */
 package org.lwjgl.egl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.*;
 
@@ -67,9 +67,8 @@ public class EXTDeviceQuery {
         return callPP(device, name, __functionAddress);
     }
 
-    @Nullable
     @NativeType("char *")
-    public static String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
+    public static @Nullable String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
         long __result = neglQueryDeviceStringEXT(device, name);
         return memASCIISafe(__result);
     }

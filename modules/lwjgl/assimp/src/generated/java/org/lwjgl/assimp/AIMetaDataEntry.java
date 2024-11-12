@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -137,8 +137,7 @@ public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMetaDataEntry createSafe(long address) {
+    public static @Nullable AIMetaDataEntry createSafe(long address) {
         return address == NULL ? null : new AIMetaDataEntry(address, null);
     }
 
@@ -181,8 +180,7 @@ public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIMetaDataEntry.Buffer createSafe(long address, int capacity) {
+    public static AIMetaDataEntry.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

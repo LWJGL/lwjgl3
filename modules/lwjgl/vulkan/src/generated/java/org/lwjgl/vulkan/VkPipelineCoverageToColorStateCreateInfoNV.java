@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -189,8 +189,7 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct<VkPipelin
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCoverageToColorStateCreateInfoNV createSafe(long address) {
+    public static @Nullable VkPipelineCoverageToColorStateCreateInfoNV createSafe(long address) {
         return address == NULL ? null : new VkPipelineCoverageToColorStateCreateInfoNV(address, null);
     }
 
@@ -233,8 +232,7 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct<VkPipelin
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPipelineCoverageToColorStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
+    public static VkPipelineCoverageToColorStateCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

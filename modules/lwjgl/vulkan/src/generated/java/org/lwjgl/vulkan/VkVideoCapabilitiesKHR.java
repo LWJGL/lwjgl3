@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -227,8 +227,7 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoCapabilitiesKHR createSafe(long address) {
+    public static @Nullable VkVideoCapabilitiesKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoCapabilitiesKHR(address, null);
     }
 
@@ -271,8 +270,7 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoCapabilitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

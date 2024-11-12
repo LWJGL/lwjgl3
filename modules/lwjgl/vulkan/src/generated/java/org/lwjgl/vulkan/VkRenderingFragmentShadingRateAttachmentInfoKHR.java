@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -200,8 +200,7 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingFragmentShadingRateAttachmentInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderingFragmentShadingRateAttachmentInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderingFragmentShadingRateAttachmentInfoKHR(address, null);
     }
 
@@ -244,8 +243,7 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderingFragmentShadingRateAttachmentInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -229,9 +229,8 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
      * 
      * <p>If {@code pOffsetForRefFrame} has {@code nullptr} value, then {@code num_ref_frames_in_pic_order_cnt_cycle} must also be "0".</p>
      */
-    @Nullable
     @NativeType("int32_t const *")
-    public IntBuffer pOffsetForRefFrame() { return npOffsetForRefFrame(address()); }
+    public @Nullable IntBuffer pOffsetForRefFrame() { return npOffsetForRefFrame(address()); }
     /** must be a valid pointer if scaling_matrix_present_flag is set */
     @NativeType("StdVideoH264ScalingLists const *")
     public StdVideoH264ScalingLists pScalingLists() { return npScalingLists(address()); }
@@ -377,8 +376,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264SequenceParameterSet createSafe(long address) {
+    public static @Nullable StdVideoH264SequenceParameterSet createSafe(long address) {
         return address == NULL ? null : new StdVideoH264SequenceParameterSet(address, null);
     }
 
@@ -421,8 +419,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264SequenceParameterSet.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH264SequenceParameterSet.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -509,7 +506,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public static int nframe_crop_bottom_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET); }
     public static int nreserved2(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.RESERVED2); }
     /** Unsafe version of {@link #pOffsetForRefFrame() pOffsetForRefFrame}. */
-    @Nullable public static IntBuffer npOffsetForRefFrame(long struct) { return memIntBufferSafe(memGetAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME), Byte.toUnsignedInt(nnum_ref_frames_in_pic_order_cnt_cycle(struct))); }
+    public static @Nullable IntBuffer npOffsetForRefFrame(long struct) { return memIntBufferSafe(memGetAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME), Byte.toUnsignedInt(nnum_ref_frames_in_pic_order_cnt_cycle(struct))); }
     /** Unsafe version of {@link #pScalingLists}. */
     public static StdVideoH264ScalingLists npScalingLists(long struct) { return StdVideoH264ScalingLists.create(memGetAddress(struct + StdVideoH264SequenceParameterSet.PSCALINGLISTS)); }
     /** Unsafe version of {@link #pSequenceParameterSetVui}. */
@@ -679,9 +676,8 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
         @NativeType("uint32_t")
         public int frame_crop_bottom_offset() { return StdVideoH264SequenceParameterSet.nframe_crop_bottom_offset(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link StdVideoH264SequenceParameterSet#pOffsetForRefFrame} field. */
-        @Nullable
         @NativeType("int32_t const *")
-        public IntBuffer pOffsetForRefFrame() { return StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address()); }
+        public @Nullable IntBuffer pOffsetForRefFrame() { return StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address()); }
         /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSet#pScalingLists} field. */
         @NativeType("StdVideoH264ScalingLists const *")
         public StdVideoH264ScalingLists pScalingLists() { return StdVideoH264SequenceParameterSet.npScalingLists(address()); }

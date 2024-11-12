@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class OVRMirrorTextureDesc extends Struct<OVRMirrorTextureDesc> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRMirrorTextureDesc createSafe(long address) {
+    public static @Nullable OVRMirrorTextureDesc createSafe(long address) {
         return address == NULL ? null : new OVRMirrorTextureDesc(address, null);
     }
 
@@ -198,8 +197,7 @@ public class OVRMirrorTextureDesc extends Struct<OVRMirrorTextureDesc> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRMirrorTextureDesc.Buffer createSafe(long address, int capacity) {
+    public static OVRMirrorTextureDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

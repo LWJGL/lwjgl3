@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.vma;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,19 +108,18 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
      * 
      * <p>Then, after {@code vmaEndDefragmentationPass()} the allocation will be freed.</p>
      */
-    @Nullable
     @NativeType("VmaDefragmentationMove *")
-    public VmaDefragmentationMove.Buffer pMoves() { return npMoves(address()); }
+    public VmaDefragmentationMove.@Nullable Buffer pMoves() { return npMoves(address()); }
 
     /** Sets the specified value to the {@link #moveCount} field. */
     public VmaDefragmentationPassMoveInfo moveCount(@NativeType("uint32_t") int value) { nmoveCount(address(), value); return this; }
     /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link #pMoves} field. */
-    public VmaDefragmentationPassMoveInfo pMoves(@Nullable @NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.Buffer value) { npMoves(address(), value); return this; }
+    public VmaDefragmentationPassMoveInfo pMoves(@NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.@Nullable Buffer value) { npMoves(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaDefragmentationPassMoveInfo set(
         int moveCount,
-        @Nullable VmaDefragmentationMove.Buffer pMoves
+        VmaDefragmentationMove.@Nullable Buffer pMoves
     ) {
         moveCount(moveCount);
         pMoves(pMoves);
@@ -164,8 +163,7 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDefragmentationPassMoveInfo createSafe(long address) {
+    public static @Nullable VmaDefragmentationPassMoveInfo createSafe(long address) {
         return address == NULL ? null : new VmaDefragmentationPassMoveInfo(address, null);
     }
 
@@ -208,8 +206,7 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaDefragmentationPassMoveInfo.Buffer createSafe(long address, int capacity) {
+    public static VmaDefragmentationPassMoveInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -256,12 +253,12 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
     /** Unsafe version of {@link #moveCount}. */
     public static int nmoveCount(long struct) { return memGetInt(struct + VmaDefragmentationPassMoveInfo.MOVECOUNT); }
     /** Unsafe version of {@link #pMoves}. */
-    @Nullable public static VmaDefragmentationMove.Buffer npMoves(long struct) { return VmaDefragmentationMove.createSafe(memGetAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES), nmoveCount(struct)); }
+    public static VmaDefragmentationMove.@Nullable Buffer npMoves(long struct) { return VmaDefragmentationMove.createSafe(memGetAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES), nmoveCount(struct)); }
 
     /** Sets the specified value to the {@code moveCount} field of the specified {@code struct}. */
     public static void nmoveCount(long struct, int value) { memPutInt(struct + VmaDefragmentationPassMoveInfo.MOVECOUNT, value); }
     /** Unsafe version of {@link #pMoves(VmaDefragmentationMove.Buffer) pMoves}. */
-    public static void npMoves(long struct, @Nullable VmaDefragmentationMove.Buffer value) { memPutAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES, memAddressSafe(value)); nmoveCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npMoves(long struct, VmaDefragmentationMove.@Nullable Buffer value) { memPutAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES, memAddressSafe(value)); nmoveCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -323,14 +320,13 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
         @NativeType("uint32_t")
         public int moveCount() { return VmaDefragmentationPassMoveInfo.nmoveCount(address()); }
         /** @return a {@link VmaDefragmentationMove.Buffer} view of the struct array pointed to by the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
-        @Nullable
         @NativeType("VmaDefragmentationMove *")
-        public VmaDefragmentationMove.Buffer pMoves() { return VmaDefragmentationPassMoveInfo.npMoves(address()); }
+        public VmaDefragmentationMove.@Nullable Buffer pMoves() { return VmaDefragmentationPassMoveInfo.npMoves(address()); }
 
         /** Sets the specified value to the {@link VmaDefragmentationPassMoveInfo#moveCount} field. */
         public VmaDefragmentationPassMoveInfo.Buffer moveCount(@NativeType("uint32_t") int value) { VmaDefragmentationPassMoveInfo.nmoveCount(address(), value); return this; }
         /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
-        public VmaDefragmentationPassMoveInfo.Buffer pMoves(@Nullable @NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.Buffer value) { VmaDefragmentationPassMoveInfo.npMoves(address(), value); return this; }
+        public VmaDefragmentationPassMoveInfo.Buffer pMoves(@NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.@Nullable Buffer value) { VmaDefragmentationPassMoveInfo.npMoves(address(), value); return this; }
 
     }
 

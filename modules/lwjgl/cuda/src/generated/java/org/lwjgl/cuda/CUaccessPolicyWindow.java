@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class CUaccessPolicyWindow extends Struct<CUaccessPolicyWindow> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUaccessPolicyWindow createSafe(long address) {
+    public static @Nullable CUaccessPolicyWindow createSafe(long address) {
         return address == NULL ? null : new CUaccessPolicyWindow(address, null);
     }
 
@@ -208,8 +207,7 @@ public class CUaccessPolicyWindow extends Struct<CUaccessPolicyWindow> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUaccessPolicyWindow.Buffer createSafe(long address, int capacity) {
+    public static CUaccessPolicyWindow.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

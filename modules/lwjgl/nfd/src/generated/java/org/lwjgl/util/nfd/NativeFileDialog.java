@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.nfd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,7 +176,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+    public static int NFD_OpenDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             checkNT1Safe(defaultPath);
@@ -193,7 +193,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+    public static int NFD_OpenDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             if (filterList != null) { Struct.validate(filterList.address(), remainingSafe(filterList), NFDFilterItem.SIZEOF, NFDFilterItem::validate); }
@@ -244,7 +244,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             checkNT1Safe(defaultPath);
@@ -261,7 +261,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             if (filterList != null) { Struct.validate(filterList.address(), remainingSafe(filterList), NFDFilterItem.SIZEOF, NFDFilterItem::validate); }
@@ -312,7 +312,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_SaveDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultName) {
+    public static int NFD_SaveDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultPath, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultName) {
         if (CHECKS) {
             check(outPath, 1);
             checkNT1Safe(defaultPath);
@@ -330,7 +330,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_SaveDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultName) {
+    public static int NFD_SaveDialog(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdfilteritem_t const *") NFDFilterItem.@Nullable Buffer filterList, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultPath, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultName) {
         if (CHECKS) {
             check(outPath, 1);
             if (filterList != null) { Struct.validate(filterList.address(), remainingSafe(filterList), NFDFilterItem.SIZEOF, NFDFilterItem::validate); }
@@ -379,7 +379,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_PickFolder(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+    public static int NFD_PickFolder(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             checkNT1Safe(defaultPath);
@@ -395,7 +395,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_PickFolder(@NativeType("nfdchar_t **") PointerBuffer outPath, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+    public static int NFD_PickFolder(@NativeType("nfdchar_t **") PointerBuffer outPath, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
         }
@@ -440,7 +440,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @NativeType("nfdchar_t const *") @Nullable ByteBuffer defaultPath) {
         if (CHECKS) {
             check(outPaths, 1);
             checkNT1Safe(defaultPath);
@@ -456,7 +456,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+    public static int NFD_PickFolderMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPaths, @NativeType("nfdchar_t const *") @Nullable CharSequence defaultPath) {
         if (CHECKS) {
             check(outPaths, 1);
         }
@@ -499,9 +499,8 @@ public class NativeFileDialog {
      * <p>Returns the last error that was set, or {@code NULL} if there is no error. The memory is owned by NFD and should not be freed by user code. This is
      * <b>always</b> ASCII printable characters, so it can be interpreted as UTF-8 without any conversion.</p>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String NFD_GetError() {
+    public static @Nullable String NFD_GetError() {
         long __result = nNFD_GetError();
         return memUTF8Safe(__result);
     }

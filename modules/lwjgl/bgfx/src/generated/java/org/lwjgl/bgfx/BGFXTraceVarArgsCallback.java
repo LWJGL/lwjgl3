@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -42,8 +42,7 @@ public abstract class BGFXTraceVarArgsCallback extends Callback implements BGFXT
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static BGFXTraceVarArgsCallback createSafe(long functionPointer) {
+    public static @Nullable BGFXTraceVarArgsCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

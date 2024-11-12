@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -157,9 +157,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
      * The root node of the hierarchy. There will always be at least the root node if the import was successful (and no special flags have been set). Presence
      * of further nodes depends on the format and content of the imported file.
      */
-    @Nullable
     @NativeType("struct aiNode *")
-    public AINode mRootNode() { return nmRootNode(address()); }
+    public @Nullable AINode mRootNode() { return nmRootNode(address()); }
     /** The number of meshes in the scene. */
     @NativeType("unsigned int")
     public int mNumMeshes() { return nmNumMeshes(address()); }
@@ -167,9 +166,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
      * The array of meshes. Use the indices given in the {@link AINode} structure to access this array. The array is {@code mNumMeshes} in size. If the
      * {@link Assimp#AI_SCENE_FLAGS_INCOMPLETE} flag is not set there will always be at least ONE material.
      */
-    @Nullable
     @NativeType("struct aiMesh **")
-    public PointerBuffer mMeshes() { return nmMeshes(address()); }
+    public @Nullable PointerBuffer mMeshes() { return nmMeshes(address()); }
     /** The number of materials in the scene. */
     @NativeType("unsigned int")
     public int mNumMaterials() { return nmNumMaterials(address()); }
@@ -177,16 +175,14 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
      * The array of materials. Use the index given in each {@link AIMesh} structure to access this array. The array is {@code mNumMaterials} in size. If the
      * {@link Assimp#AI_SCENE_FLAGS_INCOMPLETE} flag is not set there will always be at least ONE material.
      */
-    @Nullable
     @NativeType("struct aiMaterial **")
-    public PointerBuffer mMaterials() { return nmMaterials(address()); }
+    public @Nullable PointerBuffer mMaterials() { return nmMaterials(address()); }
     /** The number of animations in the scene. */
     @NativeType("unsigned int")
     public int mNumAnimations() { return nmNumAnimations(address()); }
     /** The array of animations. All animations imported from the given file are listed here. The array is {@code mNumAnimations} in size. */
-    @Nullable
     @NativeType("struct aiAnimation **")
-    public PointerBuffer mAnimations() { return nmAnimations(address()); }
+    public @Nullable PointerBuffer mAnimations() { return nmAnimations(address()); }
     /** The number of textures embedded into the file */
     @NativeType("unsigned int")
     public int mNumTextures() { return nmNumTextures(address()); }
@@ -194,16 +190,14 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
      * The array of embedded textures. Not many file formats embed their textures into the file. An example is Quake's MDL format (which is also used by some
      * GameStudio versions)
      */
-    @Nullable
     @NativeType("struct aiTexture **")
-    public PointerBuffer mTextures() { return nmTextures(address()); }
+    public @Nullable PointerBuffer mTextures() { return nmTextures(address()); }
     /** The number of light sources in the scene. Light sources are fully optional, in most cases this attribute will be 0 */
     @NativeType("unsigned int")
     public int mNumLights() { return nmNumLights(address()); }
     /** The array of light sources. All light sources imported from the given file are listed here. The array is {@code mNumLights} in size. */
-    @Nullable
     @NativeType("struct aiLight **")
-    public PointerBuffer mLights() { return nmLights(address()); }
+    public @Nullable PointerBuffer mLights() { return nmLights(address()); }
     /** The number of cameras in the scene. Cameras are fully optional, in most cases this attribute will be 0 */
     @NativeType("unsigned int")
     public int mNumCameras() { return nmNumCameras(address()); }
@@ -211,18 +205,16 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
      * The array of cameras. All cameras imported from the given file are listed here. The array is {@code mNumCameras} in size. The first camera in the array
      * (if existing) is the default camera view into the scene.
      */
-    @Nullable
     @NativeType("struct aiCamera **")
-    public PointerBuffer mCameras() { return nmCameras(address()); }
+    public @Nullable PointerBuffer mCameras() { return nmCameras(address()); }
     /**
      * The global metadata assigned to the scene itself.
      * 
      * <p>This data contains global metadata which belongs to the scene like unit-conversions, versions, vendors or other model-specific data. This can be used
      * to store format-specific metadata as well.</p>
      */
-    @Nullable
     @NativeType("struct aiMetadata *")
-    public AIMetaData mMetaData() { return nmMetaData(address()); }
+    public @Nullable AIMetaData mMetaData() { return nmMetaData(address()); }
     /** The name of the scene itself. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
@@ -230,9 +222,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     @NativeType("unsigned int")
     public int mNumSkeletons() { return nmNumSkeletons(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field. */
-    @Nullable
     @NativeType("struct aiSkeleton **")
-    public PointerBuffer mSkeletons() { return nmSkeletons(address()); }
+    public @Nullable PointerBuffer mSkeletons() { return nmSkeletons(address()); }
 
     /** Sets the specified value to the {@link #mFlags} field. */
     public AIScene mFlags(@NativeType("unsigned int") int value) { nmFlags(address(), value); return this; }
@@ -324,8 +315,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIScene createSafe(long address) {
+    public static @Nullable AIScene createSafe(long address) {
         return address == NULL ? null : new AIScene(address, null);
     }
 
@@ -368,8 +358,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIScene.Buffer createSafe(long address, int capacity) {
+    public static AIScene.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -435,39 +424,39 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     /** Unsafe version of {@link #mFlags}. */
     public static int nmFlags(long struct) { return memGetInt(struct + AIScene.MFLAGS); }
     /** Unsafe version of {@link #mRootNode}. */
-    @Nullable public static AINode nmRootNode(long struct) { return AINode.createSafe(memGetAddress(struct + AIScene.MROOTNODE)); }
+    public static @Nullable AINode nmRootNode(long struct) { return AINode.createSafe(memGetAddress(struct + AIScene.MROOTNODE)); }
     /** Unsafe version of {@link #mNumMeshes}. */
     public static int nmNumMeshes(long struct) { return memGetInt(struct + AIScene.MNUMMESHES); }
     /** Unsafe version of {@link #mMeshes() mMeshes}. */
-    @Nullable public static PointerBuffer nmMeshes(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MMESHES), nmNumMeshes(struct)); }
+    public static @Nullable PointerBuffer nmMeshes(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MMESHES), nmNumMeshes(struct)); }
     /** Unsafe version of {@link #mNumMaterials}. */
     public static int nmNumMaterials(long struct) { return memGetInt(struct + AIScene.MNUMMATERIALS); }
     /** Unsafe version of {@link #mMaterials() mMaterials}. */
-    @Nullable public static PointerBuffer nmMaterials(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MMATERIALS), nmNumMaterials(struct)); }
+    public static @Nullable PointerBuffer nmMaterials(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MMATERIALS), nmNumMaterials(struct)); }
     /** Unsafe version of {@link #mNumAnimations}. */
     public static int nmNumAnimations(long struct) { return memGetInt(struct + AIScene.MNUMANIMATIONS); }
     /** Unsafe version of {@link #mAnimations() mAnimations}. */
-    @Nullable public static PointerBuffer nmAnimations(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MANIMATIONS), nmNumAnimations(struct)); }
+    public static @Nullable PointerBuffer nmAnimations(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MANIMATIONS), nmNumAnimations(struct)); }
     /** Unsafe version of {@link #mNumTextures}. */
     public static int nmNumTextures(long struct) { return memGetInt(struct + AIScene.MNUMTEXTURES); }
     /** Unsafe version of {@link #mTextures() mTextures}. */
-    @Nullable public static PointerBuffer nmTextures(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MTEXTURES), nmNumTextures(struct)); }
+    public static @Nullable PointerBuffer nmTextures(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MTEXTURES), nmNumTextures(struct)); }
     /** Unsafe version of {@link #mNumLights}. */
     public static int nmNumLights(long struct) { return memGetInt(struct + AIScene.MNUMLIGHTS); }
     /** Unsafe version of {@link #mLights() mLights}. */
-    @Nullable public static PointerBuffer nmLights(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MLIGHTS), nmNumLights(struct)); }
+    public static @Nullable PointerBuffer nmLights(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MLIGHTS), nmNumLights(struct)); }
     /** Unsafe version of {@link #mNumCameras}. */
     public static int nmNumCameras(long struct) { return memGetInt(struct + AIScene.MNUMCAMERAS); }
     /** Unsafe version of {@link #mCameras() mCameras}. */
-    @Nullable public static PointerBuffer nmCameras(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MCAMERAS), nmNumCameras(struct)); }
+    public static @Nullable PointerBuffer nmCameras(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MCAMERAS), nmNumCameras(struct)); }
     /** Unsafe version of {@link #mMetaData}. */
-    @Nullable public static AIMetaData nmMetaData(long struct) { return AIMetaData.createSafe(memGetAddress(struct + AIScene.MMETADATA)); }
+    public static @Nullable AIMetaData nmMetaData(long struct) { return AIMetaData.createSafe(memGetAddress(struct + AIScene.MMETADATA)); }
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIScene.MNAME); }
     /** Unsafe version of {@link #mNumSkeletons}. */
     public static int nmNumSkeletons(long struct) { return memGetInt(struct + AIScene.MNUMSKELETONS); }
     /** Unsafe version of {@link #mSkeletons() mSkeletons}. */
-    @Nullable public static PointerBuffer nmSkeletons(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MSKELETONS), nmNumSkeletons(struct)); }
+    public static @Nullable PointerBuffer nmSkeletons(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MSKELETONS), nmNumSkeletons(struct)); }
     public static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
 
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
@@ -592,55 +581,47 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
         @NativeType("unsigned int")
         public int mFlags() { return AIScene.nmFlags(address()); }
         /** @return a {@link AINode} view of the struct pointed to by the {@link AIScene#mRootNode} field. */
-        @Nullable
         @NativeType("struct aiNode *")
-        public AINode mRootNode() { return AIScene.nmRootNode(address()); }
+        public @Nullable AINode mRootNode() { return AIScene.nmRootNode(address()); }
         /** @return the value of the {@link AIScene#mNumMeshes} field. */
         @NativeType("unsigned int")
         public int mNumMeshes() { return AIScene.nmNumMeshes(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mMeshes} field. */
-        @Nullable
         @NativeType("struct aiMesh **")
-        public PointerBuffer mMeshes() { return AIScene.nmMeshes(address()); }
+        public @Nullable PointerBuffer mMeshes() { return AIScene.nmMeshes(address()); }
         /** @return the value of the {@link AIScene#mNumMaterials} field. */
         @NativeType("unsigned int")
         public int mNumMaterials() { return AIScene.nmNumMaterials(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mMaterials} field. */
-        @Nullable
         @NativeType("struct aiMaterial **")
-        public PointerBuffer mMaterials() { return AIScene.nmMaterials(address()); }
+        public @Nullable PointerBuffer mMaterials() { return AIScene.nmMaterials(address()); }
         /** @return the value of the {@link AIScene#mNumAnimations} field. */
         @NativeType("unsigned int")
         public int mNumAnimations() { return AIScene.nmNumAnimations(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mAnimations} field. */
-        @Nullable
         @NativeType("struct aiAnimation **")
-        public PointerBuffer mAnimations() { return AIScene.nmAnimations(address()); }
+        public @Nullable PointerBuffer mAnimations() { return AIScene.nmAnimations(address()); }
         /** @return the value of the {@link AIScene#mNumTextures} field. */
         @NativeType("unsigned int")
         public int mNumTextures() { return AIScene.nmNumTextures(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mTextures} field. */
-        @Nullable
         @NativeType("struct aiTexture **")
-        public PointerBuffer mTextures() { return AIScene.nmTextures(address()); }
+        public @Nullable PointerBuffer mTextures() { return AIScene.nmTextures(address()); }
         /** @return the value of the {@link AIScene#mNumLights} field. */
         @NativeType("unsigned int")
         public int mNumLights() { return AIScene.nmNumLights(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mLights} field. */
-        @Nullable
         @NativeType("struct aiLight **")
-        public PointerBuffer mLights() { return AIScene.nmLights(address()); }
+        public @Nullable PointerBuffer mLights() { return AIScene.nmLights(address()); }
         /** @return the value of the {@link AIScene#mNumCameras} field. */
         @NativeType("unsigned int")
         public int mNumCameras() { return AIScene.nmNumCameras(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIScene#mCameras} field. */
-        @Nullable
         @NativeType("struct aiCamera **")
-        public PointerBuffer mCameras() { return AIScene.nmCameras(address()); }
+        public @Nullable PointerBuffer mCameras() { return AIScene.nmCameras(address()); }
         /** @return a {@link AIMetaData} view of the struct pointed to by the {@link AIScene#mMetaData} field. */
-        @Nullable
         @NativeType("struct aiMetadata *")
-        public AIMetaData mMetaData() { return AIScene.nmMetaData(address()); }
+        public @Nullable AIMetaData mMetaData() { return AIScene.nmMetaData(address()); }
         /** @return a {@link AIString} view of the {@link AIScene#mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIScene.nmName(address()); }
@@ -648,9 +629,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
         @NativeType("unsigned int")
         public int mNumSkeletons() { return AIScene.nmNumSkeletons(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field. */
-        @Nullable
         @NativeType("struct aiSkeleton **")
-        public PointerBuffer mSkeletons() { return AIScene.nmSkeletons(address()); }
+        public @Nullable PointerBuffer mSkeletons() { return AIScene.nmSkeletons(address()); }
 
         /** Sets the specified value to the {@link AIScene#mFlags} field. */
         public AIScene.Buffer mFlags(@NativeType("unsigned int") int value) { AIScene.nmFlags(address(), value); return this; }

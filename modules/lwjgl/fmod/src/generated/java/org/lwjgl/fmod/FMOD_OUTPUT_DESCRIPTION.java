@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -169,44 +169,31 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     /** @return the value of the {@code init} field. */
     public FMOD_OUTPUT_INIT_CALLBACK init() { return ninit(address()); }
     /** @return the value of the {@code start} field. */
-    @Nullable
-    public FMOD_OUTPUT_START_CALLBACK start() { return nstart(address()); }
+    public @Nullable FMOD_OUTPUT_START_CALLBACK start() { return nstart(address()); }
     /** @return the value of the {@code stop} field. */
-    @Nullable
-    public FMOD_OUTPUT_STOP_CALLBACK stop() { return nstop(address()); }
+    public @Nullable FMOD_OUTPUT_STOP_CALLBACK stop() { return nstop(address()); }
     /** @return the value of the {@code close} field. */
-    @Nullable
-    public FMOD_OUTPUT_CLOSE_CALLBACK close$() { return nclose$(address()); }
+    public @Nullable FMOD_OUTPUT_CLOSE_CALLBACK close$() { return nclose$(address()); }
     /** @return the value of the {@code update} field. */
-    @Nullable
-    public FMOD_OUTPUT_UPDATE_CALLBACK update() { return nupdate(address()); }
+    public @Nullable FMOD_OUTPUT_UPDATE_CALLBACK update() { return nupdate(address()); }
     /** @return the value of the {@code gethandle} field. */
-    @Nullable
-    public FMOD_OUTPUT_GETHANDLE_CALLBACK gethandle() { return ngethandle(address()); }
+    public @Nullable FMOD_OUTPUT_GETHANDLE_CALLBACK gethandle() { return ngethandle(address()); }
     /** @return the value of the {@code mixer} field. */
-    @Nullable
-    public FMOD_OUTPUT_MIXER_CALLBACK mixer() { return nmixer(address()); }
+    public @Nullable FMOD_OUTPUT_MIXER_CALLBACK mixer() { return nmixer(address()); }
     /** @return the value of the {@code object3dgetinfo} field. */
-    @Nullable
-    public FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK object3dgetinfo() { return nobject3dgetinfo(address()); }
+    public @Nullable FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK object3dgetinfo() { return nobject3dgetinfo(address()); }
     /** @return the value of the {@code object3dalloc} field. */
-    @Nullable
-    public FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK object3dalloc() { return nobject3dalloc(address()); }
+    public @Nullable FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK object3dalloc() { return nobject3dalloc(address()); }
     /** @return the value of the {@code object3dfree} field. */
-    @Nullable
-    public FMOD_OUTPUT_OBJECT3DFREE_CALLBACK object3dfree() { return nobject3dfree(address()); }
+    public @Nullable FMOD_OUTPUT_OBJECT3DFREE_CALLBACK object3dfree() { return nobject3dfree(address()); }
     /** @return the value of the {@code object3dupdate} field. */
-    @Nullable
-    public FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK object3dupdate() { return nobject3dupdate(address()); }
+    public @Nullable FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK object3dupdate() { return nobject3dupdate(address()); }
     /** @return the value of the {@code openport} field. */
-    @Nullable
-    public FMOD_OUTPUT_OPENPORT_CALLBACK openport() { return nopenport(address()); }
+    public @Nullable FMOD_OUTPUT_OPENPORT_CALLBACK openport() { return nopenport(address()); }
     /** @return the value of the {@code closeport} field. */
-    @Nullable
-    public FMOD_OUTPUT_CLOSEPORT_CALLBACK closeport() { return ncloseport(address()); }
+    public @Nullable FMOD_OUTPUT_CLOSEPORT_CALLBACK closeport() { return ncloseport(address()); }
     /** @return the value of the {@code devicelistchanged} field. */
-    @Nullable
-    public FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK devicelistchanged() { return ndevicelistchanged(address()); }
+    public @Nullable FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK devicelistchanged() { return ndevicelistchanged(address()); }
 
     /** Sets the specified value to the {@code apiversion} field. */
     public FMOD_OUTPUT_DESCRIPTION apiversion(@NativeType("unsigned int") int value) { napiversion(address(), value); return this; }
@@ -332,8 +319,7 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_OUTPUT_DESCRIPTION createSafe(long address) {
+    public static @Nullable FMOD_OUTPUT_DESCRIPTION createSafe(long address) {
         return address == NULL ? null : new FMOD_OUTPUT_DESCRIPTION(address, null);
     }
 
@@ -376,8 +362,7 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_OUTPUT_DESCRIPTION.Buffer createSafe(long address, int capacity) {
+    public static FMOD_OUTPUT_DESCRIPTION.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -438,31 +423,31 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
     /** Unsafe version of {@link #init}. */
     public static FMOD_OUTPUT_INIT_CALLBACK ninit(long struct) { return FMOD_OUTPUT_INIT_CALLBACK.create(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.INIT)); }
     /** Unsafe version of {@link #start}. */
-    @Nullable public static FMOD_OUTPUT_START_CALLBACK nstart(long struct) { return FMOD_OUTPUT_START_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.START)); }
+    public static @Nullable FMOD_OUTPUT_START_CALLBACK nstart(long struct) { return FMOD_OUTPUT_START_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.START)); }
     /** Unsafe version of {@link #stop}. */
-    @Nullable public static FMOD_OUTPUT_STOP_CALLBACK nstop(long struct) { return FMOD_OUTPUT_STOP_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.STOP)); }
+    public static @Nullable FMOD_OUTPUT_STOP_CALLBACK nstop(long struct) { return FMOD_OUTPUT_STOP_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.STOP)); }
     /** Unsafe version of {@link #close$}. */
-    @Nullable public static FMOD_OUTPUT_CLOSE_CALLBACK nclose$(long struct) { return FMOD_OUTPUT_CLOSE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.CLOSE)); }
+    public static @Nullable FMOD_OUTPUT_CLOSE_CALLBACK nclose$(long struct) { return FMOD_OUTPUT_CLOSE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.CLOSE)); }
     /** Unsafe version of {@link #update}. */
-    @Nullable public static FMOD_OUTPUT_UPDATE_CALLBACK nupdate(long struct) { return FMOD_OUTPUT_UPDATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.UPDATE)); }
+    public static @Nullable FMOD_OUTPUT_UPDATE_CALLBACK nupdate(long struct) { return FMOD_OUTPUT_UPDATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.UPDATE)); }
     /** Unsafe version of {@link #gethandle}. */
-    @Nullable public static FMOD_OUTPUT_GETHANDLE_CALLBACK ngethandle(long struct) { return FMOD_OUTPUT_GETHANDLE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.GETHANDLE)); }
+    public static @Nullable FMOD_OUTPUT_GETHANDLE_CALLBACK ngethandle(long struct) { return FMOD_OUTPUT_GETHANDLE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.GETHANDLE)); }
     /** Unsafe version of {@link #mixer}. */
-    @Nullable public static FMOD_OUTPUT_MIXER_CALLBACK nmixer(long struct) { return FMOD_OUTPUT_MIXER_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.MIXER)); }
+    public static @Nullable FMOD_OUTPUT_MIXER_CALLBACK nmixer(long struct) { return FMOD_OUTPUT_MIXER_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.MIXER)); }
     /** Unsafe version of {@link #object3dgetinfo}. */
-    @Nullable public static FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK nobject3dgetinfo(long struct) { return FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DGETINFO)); }
+    public static @Nullable FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK nobject3dgetinfo(long struct) { return FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DGETINFO)); }
     /** Unsafe version of {@link #object3dalloc}. */
-    @Nullable public static FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK nobject3dalloc(long struct) { return FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DALLOC)); }
+    public static @Nullable FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK nobject3dalloc(long struct) { return FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DALLOC)); }
     /** Unsafe version of {@link #object3dfree}. */
-    @Nullable public static FMOD_OUTPUT_OBJECT3DFREE_CALLBACK nobject3dfree(long struct) { return FMOD_OUTPUT_OBJECT3DFREE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DFREE)); }
+    public static @Nullable FMOD_OUTPUT_OBJECT3DFREE_CALLBACK nobject3dfree(long struct) { return FMOD_OUTPUT_OBJECT3DFREE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DFREE)); }
     /** Unsafe version of {@link #object3dupdate}. */
-    @Nullable public static FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK nobject3dupdate(long struct) { return FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DUPDATE)); }
+    public static @Nullable FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK nobject3dupdate(long struct) { return FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OBJECT3DUPDATE)); }
     /** Unsafe version of {@link #openport}. */
-    @Nullable public static FMOD_OUTPUT_OPENPORT_CALLBACK nopenport(long struct) { return FMOD_OUTPUT_OPENPORT_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OPENPORT)); }
+    public static @Nullable FMOD_OUTPUT_OPENPORT_CALLBACK nopenport(long struct) { return FMOD_OUTPUT_OPENPORT_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.OPENPORT)); }
     /** Unsafe version of {@link #closeport}. */
-    @Nullable public static FMOD_OUTPUT_CLOSEPORT_CALLBACK ncloseport(long struct) { return FMOD_OUTPUT_CLOSEPORT_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.CLOSEPORT)); }
+    public static @Nullable FMOD_OUTPUT_CLOSEPORT_CALLBACK ncloseport(long struct) { return FMOD_OUTPUT_CLOSEPORT_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.CLOSEPORT)); }
     /** Unsafe version of {@link #devicelistchanged}. */
-    @Nullable public static FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK ndevicelistchanged(long struct) { return FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.DEVICELISTCHANGED)); }
+    public static @Nullable FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK ndevicelistchanged(long struct) { return FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK.createSafe(memGetAddress(struct + FMOD_OUTPUT_DESCRIPTION.DEVICELISTCHANGED)); }
 
     /** Unsafe version of {@link #apiversion(int) apiversion}. */
     public static void napiversion(long struct, int value) { memPutInt(struct + FMOD_OUTPUT_DESCRIPTION.APIVERSION, value); }
@@ -585,44 +570,31 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
         /** @return the value of the {@code init} field. */
         public FMOD_OUTPUT_INIT_CALLBACK init() { return FMOD_OUTPUT_DESCRIPTION.ninit(address()); }
         /** @return the value of the {@code start} field. */
-        @Nullable
-        public FMOD_OUTPUT_START_CALLBACK start() { return FMOD_OUTPUT_DESCRIPTION.nstart(address()); }
+        public @Nullable FMOD_OUTPUT_START_CALLBACK start() { return FMOD_OUTPUT_DESCRIPTION.nstart(address()); }
         /** @return the value of the {@code stop} field. */
-        @Nullable
-        public FMOD_OUTPUT_STOP_CALLBACK stop() { return FMOD_OUTPUT_DESCRIPTION.nstop(address()); }
+        public @Nullable FMOD_OUTPUT_STOP_CALLBACK stop() { return FMOD_OUTPUT_DESCRIPTION.nstop(address()); }
         /** @return the value of the {@code close} field. */
-        @Nullable
-        public FMOD_OUTPUT_CLOSE_CALLBACK close$() { return FMOD_OUTPUT_DESCRIPTION.nclose$(address()); }
+        public @Nullable FMOD_OUTPUT_CLOSE_CALLBACK close$() { return FMOD_OUTPUT_DESCRIPTION.nclose$(address()); }
         /** @return the value of the {@code update} field. */
-        @Nullable
-        public FMOD_OUTPUT_UPDATE_CALLBACK update() { return FMOD_OUTPUT_DESCRIPTION.nupdate(address()); }
+        public @Nullable FMOD_OUTPUT_UPDATE_CALLBACK update() { return FMOD_OUTPUT_DESCRIPTION.nupdate(address()); }
         /** @return the value of the {@code gethandle} field. */
-        @Nullable
-        public FMOD_OUTPUT_GETHANDLE_CALLBACK gethandle() { return FMOD_OUTPUT_DESCRIPTION.ngethandle(address()); }
+        public @Nullable FMOD_OUTPUT_GETHANDLE_CALLBACK gethandle() { return FMOD_OUTPUT_DESCRIPTION.ngethandle(address()); }
         /** @return the value of the {@code mixer} field. */
-        @Nullable
-        public FMOD_OUTPUT_MIXER_CALLBACK mixer() { return FMOD_OUTPUT_DESCRIPTION.nmixer(address()); }
+        public @Nullable FMOD_OUTPUT_MIXER_CALLBACK mixer() { return FMOD_OUTPUT_DESCRIPTION.nmixer(address()); }
         /** @return the value of the {@code object3dgetinfo} field. */
-        @Nullable
-        public FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK object3dgetinfo() { return FMOD_OUTPUT_DESCRIPTION.nobject3dgetinfo(address()); }
+        public @Nullable FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK object3dgetinfo() { return FMOD_OUTPUT_DESCRIPTION.nobject3dgetinfo(address()); }
         /** @return the value of the {@code object3dalloc} field. */
-        @Nullable
-        public FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK object3dalloc() { return FMOD_OUTPUT_DESCRIPTION.nobject3dalloc(address()); }
+        public @Nullable FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK object3dalloc() { return FMOD_OUTPUT_DESCRIPTION.nobject3dalloc(address()); }
         /** @return the value of the {@code object3dfree} field. */
-        @Nullable
-        public FMOD_OUTPUT_OBJECT3DFREE_CALLBACK object3dfree() { return FMOD_OUTPUT_DESCRIPTION.nobject3dfree(address()); }
+        public @Nullable FMOD_OUTPUT_OBJECT3DFREE_CALLBACK object3dfree() { return FMOD_OUTPUT_DESCRIPTION.nobject3dfree(address()); }
         /** @return the value of the {@code object3dupdate} field. */
-        @Nullable
-        public FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK object3dupdate() { return FMOD_OUTPUT_DESCRIPTION.nobject3dupdate(address()); }
+        public @Nullable FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACK object3dupdate() { return FMOD_OUTPUT_DESCRIPTION.nobject3dupdate(address()); }
         /** @return the value of the {@code openport} field. */
-        @Nullable
-        public FMOD_OUTPUT_OPENPORT_CALLBACK openport() { return FMOD_OUTPUT_DESCRIPTION.nopenport(address()); }
+        public @Nullable FMOD_OUTPUT_OPENPORT_CALLBACK openport() { return FMOD_OUTPUT_DESCRIPTION.nopenport(address()); }
         /** @return the value of the {@code closeport} field. */
-        @Nullable
-        public FMOD_OUTPUT_CLOSEPORT_CALLBACK closeport() { return FMOD_OUTPUT_DESCRIPTION.ncloseport(address()); }
+        public @Nullable FMOD_OUTPUT_CLOSEPORT_CALLBACK closeport() { return FMOD_OUTPUT_DESCRIPTION.ncloseport(address()); }
         /** @return the value of the {@code devicelistchanged} field. */
-        @Nullable
-        public FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK devicelistchanged() { return FMOD_OUTPUT_DESCRIPTION.ndevicelistchanged(address()); }
+        public @Nullable FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK devicelistchanged() { return FMOD_OUTPUT_DESCRIPTION.ndevicelistchanged(address()); }
 
         /** Sets the specified value to the {@code apiversion} field. */
         public FMOD_OUTPUT_DESCRIPTION.Buffer apiversion(@NativeType("unsigned int") int value) { FMOD_OUTPUT_DESCRIPTION.napiversion(address(), value); return this; }

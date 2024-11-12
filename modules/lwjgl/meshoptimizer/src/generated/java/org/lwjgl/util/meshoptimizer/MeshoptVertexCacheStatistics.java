@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.meshoptimizer;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,8 +116,7 @@ public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptVertexCacheStatistics createSafe(long address) {
+    public static @Nullable MeshoptVertexCacheStatistics createSafe(long address) {
         return address == NULL ? null : new MeshoptVertexCacheStatistics(address, null);
     }
 
@@ -160,8 +159,7 @@ public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static MeshoptVertexCacheStatistics.Buffer createSafe(long address, int capacity) {
+    public static MeshoptVertexCacheStatistics.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

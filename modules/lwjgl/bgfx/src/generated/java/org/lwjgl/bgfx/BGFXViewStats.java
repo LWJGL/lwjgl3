@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -126,8 +126,7 @@ public class BGFXViewStats extends Struct<BGFXViewStats> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXViewStats createSafe(long address) {
+    public static @Nullable BGFXViewStats createSafe(long address) {
         return address == NULL ? null : new BGFXViewStats(address, null);
     }
 
@@ -142,8 +141,7 @@ public class BGFXViewStats extends Struct<BGFXViewStats> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXViewStats.Buffer createSafe(long address, int capacity) {
+    public static BGFXViewStats.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

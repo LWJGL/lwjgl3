@@ -5,7 +5,7 @@
  */
 package org.lwjgl.ovr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRPoseStatef createSafe(long address) {
+    public static @Nullable OVRPoseStatef createSafe(long address) {
         return address == NULL ? null : new OVRPoseStatef(address, null);
     }
 
@@ -182,8 +181,7 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRPoseStatef.Buffer createSafe(long address, int capacity) {
+    public static OVRPoseStatef.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.hwloc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -86,9 +86,8 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
     @NativeType("hwloc_topology_diff_type_t")
     public int type() { return ntype(address()); }
     /** @return a {@link hwloc_topology_diff_u} view of the struct pointed to by the {@code next} field. */
-    @Nullable
     @NativeType("struct hwloc_topology_diff_u *")
-    public hwloc_topology_diff_u next() { return nnext(address()); }
+    public @Nullable hwloc_topology_diff_u next() { return nnext(address()); }
     /** @return the value of the {@code obj_depth} field. */
     public int obj_depth() { return nobj_depth(address()); }
     /** @return the value of the {@code obj_index} field. */
@@ -106,8 +105,7 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_topology_diff_obj_attr_s createSafe(long address) {
+    public static @Nullable hwloc_topology_diff_obj_attr_s createSafe(long address) {
         return address == NULL ? null : new hwloc_topology_diff_obj_attr_s(address, null);
     }
 
@@ -122,8 +120,7 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hwloc_topology_diff_obj_attr_s.Buffer createSafe(long address, int capacity) {
+    public static hwloc_topology_diff_obj_attr_s.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -132,7 +129,7 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_s.TYPE); }
     /** Unsafe version of {@link #next}. */
-    @Nullable public static hwloc_topology_diff_u nnext(long struct) { return hwloc_topology_diff_u.createSafe(memGetAddress(struct + hwloc_topology_diff_obj_attr_s.NEXT)); }
+    public static @Nullable hwloc_topology_diff_u nnext(long struct) { return hwloc_topology_diff_u.createSafe(memGetAddress(struct + hwloc_topology_diff_obj_attr_s.NEXT)); }
     /** Unsafe version of {@link #obj_depth}. */
     public static int nobj_depth(long struct) { return memGetInt(struct + hwloc_topology_diff_obj_attr_s.OBJ_DEPTH); }
     /** Unsafe version of {@link #obj_index}. */
@@ -187,9 +184,8 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
         @NativeType("hwloc_topology_diff_type_t")
         public int type() { return hwloc_topology_diff_obj_attr_s.ntype(address()); }
         /** @return a {@link hwloc_topology_diff_u} view of the struct pointed to by the {@code next} field. */
-        @Nullable
         @NativeType("struct hwloc_topology_diff_u *")
-        public hwloc_topology_diff_u next() { return hwloc_topology_diff_obj_attr_s.nnext(address()); }
+        public @Nullable hwloc_topology_diff_u next() { return hwloc_topology_diff_obj_attr_s.nnext(address()); }
         /** @return the value of the {@code obj_depth} field. */
         public int obj_depth() { return hwloc_topology_diff_obj_attr_s.nobj_depth(address()); }
         /** @return the value of the {@code obj_index} field. */

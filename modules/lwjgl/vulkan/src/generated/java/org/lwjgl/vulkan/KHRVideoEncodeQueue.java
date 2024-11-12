@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -555,7 +555,7 @@ public class KHRVideoEncodeQueue {
      * @param pData                       either {@code NULL} or a pointer to a buffer to write the encoded parameter data to.
      */
     @NativeType("VkResult")
-    public static int vkGetEncodedVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoEncodeSessionParametersGetInfoKHR const *") VkVideoEncodeSessionParametersGetInfoKHR pVideoSessionParametersInfo, @Nullable @NativeType("VkVideoEncodeSessionParametersFeedbackInfoKHR *") VkVideoEncodeSessionParametersFeedbackInfoKHR pFeedbackInfo, @NativeType("size_t *") PointerBuffer pDataSize, @Nullable @NativeType("void *") ByteBuffer pData) {
+    public static int vkGetEncodedVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoEncodeSessionParametersGetInfoKHR const *") VkVideoEncodeSessionParametersGetInfoKHR pVideoSessionParametersInfo, @NativeType("VkVideoEncodeSessionParametersFeedbackInfoKHR *") @Nullable VkVideoEncodeSessionParametersFeedbackInfoKHR pFeedbackInfo, @NativeType("size_t *") PointerBuffer pDataSize, @NativeType("void *") @Nullable ByteBuffer pData) {
         if (CHECKS) {
             check(pDataSize, 1);
             checkSafe(pData, pDataSize.get(pDataSize.position()));

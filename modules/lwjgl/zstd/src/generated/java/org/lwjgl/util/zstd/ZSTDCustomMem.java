@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.zstd;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDCustomMem createSafe(long address) {
+    public static @Nullable ZSTDCustomMem createSafe(long address) {
         return address == NULL ? null : new ZSTDCustomMem(address, null);
     }
 
@@ -188,8 +187,7 @@ public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ZSTDCustomMem.Buffer createSafe(long address, int capacity) {
+    public static ZSTDCustomMem.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

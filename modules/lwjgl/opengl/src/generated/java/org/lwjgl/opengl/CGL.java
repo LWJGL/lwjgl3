@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1478,9 +1478,8 @@ public class CGL {
      *
      * @param error the CGL result code constant returned from a CGL function. One of:<br><table><tr><td>{@link #kCGLNoError NoError}</td><td>{@link #kCGLBadAttribute BadAttribute}</td><td>{@link #kCGLBadProperty BadProperty}</td><td>{@link #kCGLBadPixelFormat BadPixelFormat}</td><td>{@link #kCGLBadRendererInfo BadRendererInfo}</td><td>{@link #kCGLBadContext BadContext}</td><td>{@link #kCGLBadDrawable BadDrawable}</td></tr><tr><td>{@link #kCGLBadDisplay BadDisplay}</td><td>{@link #kCGLBadState BadState}</td><td>{@link #kCGLBadValue BadValue}</td><td>{@link #kCGLBadMatch BadMatch}</td><td>{@link #kCGLBadEnumeration BadEnumeration}</td><td>{@link #kCGLBadOffScreen BadOffScreen}</td><td>{@link #kCGLBadFullScreen BadFullScreen}</td></tr><tr><td>{@link #kCGLBadWindow BadWindow}</td><td>{@link #kCGLBadAddress BadAddress}</td><td>{@link #kCGLBadCodeModule BadCodeModule}</td><td>{@link #kCGLBadAlloc BadAlloc}</td><td>{@link #kCGLBadConnection BadConnection}</td></tr></table>
      */
-    @Nullable
     @NativeType("char const *")
-    public static String CGLErrorString(@NativeType("CGLError") int error) {
+    public static @Nullable String CGLErrorString(@NativeType("CGLError") int error) {
         long __result = nCGLErrorString(error);
         return memASCIISafe(__result);
     }

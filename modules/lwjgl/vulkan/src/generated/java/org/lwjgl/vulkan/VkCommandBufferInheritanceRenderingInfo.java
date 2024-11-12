@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -153,9 +153,8 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code VkFormat} values defining the format of color attachments. */
-    @Nullable
     @NativeType("VkFormat const *")
-    public IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
+    public @Nullable IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
     /** a {@code VkFormat} value defining the format of the depth attachment. */
     @NativeType("VkFormat")
     public int depthAttachmentFormat() { return ndepthAttachmentFormat(address()); }
@@ -244,8 +243,7 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferInheritanceRenderingInfo createSafe(long address) {
+    public static @Nullable VkCommandBufferInheritanceRenderingInfo createSafe(long address) {
         return address == NULL ? null : new VkCommandBufferInheritanceRenderingInfo(address, null);
     }
 
@@ -288,8 +286,7 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferInheritanceRenderingInfo.Buffer createSafe(long address, int capacity) {
+    public static VkCommandBufferInheritanceRenderingInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -344,7 +341,7 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
-    @Nullable public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfo.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfo.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthAttachmentFormat}. */
     public static int ndepthAttachmentFormat(long struct) { return memGetInt(struct + VkCommandBufferInheritanceRenderingInfo.DEPTHATTACHMENTFORMAT); }
     /** Unsafe version of {@link #stencilAttachmentFormat}. */
@@ -441,9 +438,8 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkCommandBufferInheritanceRenderingInfo.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkCommandBufferInheritanceRenderingInfo#pColorAttachmentFormats} field. */
-        @Nullable
         @NativeType("VkFormat const *")
-        public IntBuffer pColorAttachmentFormats() { return VkCommandBufferInheritanceRenderingInfo.npColorAttachmentFormats(address()); }
+        public @Nullable IntBuffer pColorAttachmentFormats() { return VkCommandBufferInheritanceRenderingInfo.npColorAttachmentFormats(address()); }
         /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#depthAttachmentFormat} field. */
         @NativeType("VkFormat")
         public int depthAttachmentFormat() { return VkCommandBufferInheritanceRenderingInfo.ndepthAttachmentFormat(address()); }

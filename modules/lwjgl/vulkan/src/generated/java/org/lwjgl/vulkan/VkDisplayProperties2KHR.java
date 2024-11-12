@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkDisplayProperties2KHR extends Struct<VkDisplayProperties2KHR> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDisplayProperties2KHR createSafe(long address) {
+    public static @Nullable VkDisplayProperties2KHR createSafe(long address) {
         return address == NULL ? null : new VkDisplayProperties2KHR(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkDisplayProperties2KHR extends Struct<VkDisplayProperties2KHR> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDisplayProperties2KHR.Buffer createSafe(long address, int capacity) {
+    public static VkDisplayProperties2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

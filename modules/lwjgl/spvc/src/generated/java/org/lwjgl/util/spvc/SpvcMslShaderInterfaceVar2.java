@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class SpvcMslShaderInterfaceVar2 extends Struct<SpvcMslShaderInterfaceVar
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcMslShaderInterfaceVar2 createSafe(long address) {
+    public static @Nullable SpvcMslShaderInterfaceVar2 createSafe(long address) {
         return address == NULL ? null : new SpvcMslShaderInterfaceVar2(address, null);
     }
 
@@ -209,8 +208,7 @@ public class SpvcMslShaderInterfaceVar2 extends Struct<SpvcMslShaderInterfaceVar
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcMslShaderInterfaceVar2.Buffer createSafe(long address, int capacity) {
+    public static SpvcMslShaderInterfaceVar2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

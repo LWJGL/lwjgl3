@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class XrLocalizationMapImportInfoML extends Struct<XrLocalizationMapImpor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrLocalizationMapImportInfoML createSafe(long address) {
+    public static @Nullable XrLocalizationMapImportInfoML createSafe(long address) {
         return address == NULL ? null : new XrLocalizationMapImportInfoML(address, null);
     }
 
@@ -212,8 +211,7 @@ public class XrLocalizationMapImportInfoML extends Struct<XrLocalizationMapImpor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrLocalizationMapImportInfoML.Buffer createSafe(long address, int capacity) {
+    public static XrLocalizationMapImportInfoML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

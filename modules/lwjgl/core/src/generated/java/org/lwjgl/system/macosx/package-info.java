@@ -5,6 +5,6 @@
  */
 
 /** Contains bindings to native APIs specific to the macOS operating system. */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.system.macosx;
 

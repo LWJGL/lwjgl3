@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,9 +132,8 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
      *
      * @return a pointer to an array of {@code valueCount} values of the type indicated by {@code type} to configure the layer setting.
      */
-    @Nullable
     @NativeType("void const *")
-    public ByteBuffer pValues(int capacity) { return npValues(address(), capacity); }
+    public @Nullable ByteBuffer pValues(int capacity) { return npValues(address(), capacity); }
 
     /** Sets the address of the specified encoded string to the {@link #pLayerName} field. */
     public VkLayerSettingEXT pLayerName(@NativeType("char const *") ByteBuffer value) { npLayerName(address(), value); return this; }
@@ -200,8 +199,7 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLayerSettingEXT createSafe(long address) {
+    public static @Nullable VkLayerSettingEXT createSafe(long address) {
         return address == NULL ? null : new VkLayerSettingEXT(address, null);
     }
 
@@ -244,8 +242,7 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLayerSettingEXT.Buffer createSafe(long address, int capacity) {
+    public static VkLayerSettingEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -302,7 +299,7 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     /** Unsafe version of {@link #valueCount}. */
     public static int nvalueCount(long struct) { return memGetInt(struct + VkLayerSettingEXT.VALUECOUNT); }
     /** Unsafe version of {@link #pValues(int) pValues}. */
-    @Nullable public static ByteBuffer npValues(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + VkLayerSettingEXT.PVALUES), capacity); }
+    public static @Nullable ByteBuffer npValues(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + VkLayerSettingEXT.PVALUES), capacity); }
 
     /** Unsafe version of {@link #pLayerName(ByteBuffer) pLayerName}. */
     public static void npLayerName(long struct, ByteBuffer value) {
@@ -397,9 +394,8 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("void const *")
-        public ByteBuffer pValues(int capacity) { return VkLayerSettingEXT.npValues(address(), capacity); }
+        public @Nullable ByteBuffer pValues(int capacity) { return VkLayerSettingEXT.npValues(address(), capacity); }
 
         /** Sets the address of the specified encoded string to the {@link VkLayerSettingEXT#pLayerName} field. */
         public VkLayerSettingEXT.Buffer pLayerName(@NativeType("char const *") ByteBuffer value) { VkLayerSettingEXT.npLayerName(address(), value); return this; }

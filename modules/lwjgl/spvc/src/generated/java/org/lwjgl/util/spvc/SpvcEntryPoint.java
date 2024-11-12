@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -136,8 +136,7 @@ public class SpvcEntryPoint extends Struct<SpvcEntryPoint> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcEntryPoint createSafe(long address) {
+    public static @Nullable SpvcEntryPoint createSafe(long address) {
         return address == NULL ? null : new SpvcEntryPoint(address, null);
     }
 
@@ -180,8 +179,7 @@ public class SpvcEntryPoint extends Struct<SpvcEntryPoint> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcEntryPoint.Buffer createSafe(long address, int capacity) {
+    public static SpvcEntryPoint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -126,8 +126,7 @@ public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddress
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceOrHostAddressConstAMDX createSafe(long address) {
+    public static @Nullable VkDeviceOrHostAddressConstAMDX createSafe(long address) {
         return address == NULL ? null : new VkDeviceOrHostAddressConstAMDX(address, null);
     }
 
@@ -170,8 +169,7 @@ public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddress
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDeviceOrHostAddressConstAMDX.Buffer createSafe(long address, int capacity) {
+    public static VkDeviceOrHostAddressConstAMDX.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

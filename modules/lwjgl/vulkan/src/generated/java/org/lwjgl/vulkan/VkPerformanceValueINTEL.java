@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,8 +108,7 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPerformanceValueINTEL createSafe(long address) {
+    public static @Nullable VkPerformanceValueINTEL createSafe(long address) {
         return address == NULL ? null : new VkPerformanceValueINTEL(address, null);
     }
 
@@ -152,8 +151,7 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPerformanceValueINTEL.Buffer createSafe(long address, int capacity) {
+    public static VkPerformanceValueINTEL.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

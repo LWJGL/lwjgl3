@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,16 +129,14 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     @NativeType("uint32_t")
     public int enabledApiLayerCount() { return nenabledApiLayerCount(address()); }
     /** a pointer to an array of {@code enabledApiLayerCount} strings containing the names of API layers to enable for the created instance. See the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#instance-api-layers-and-extensions">API Layers and Extensions</a> section for further details. */
-    @Nullable
     @NativeType("char const * const *")
-    public PointerBuffer enabledApiLayerNames() { return nenabledApiLayerNames(address()); }
+    public @Nullable PointerBuffer enabledApiLayerNames() { return nenabledApiLayerNames(address()); }
     /** the number of global extensions to enable. */
     @NativeType("uint32_t")
     public int enabledExtensionCount() { return nenabledExtensionCount(address()); }
     /** a pointer to an array of {@code enabledExtensionCount} strings containing the names of extensions to enable. */
-    @Nullable
     @NativeType("char const * const *")
-    public PointerBuffer enabledExtensionNames() { return nenabledExtensionNames(address()); }
+    public @Nullable PointerBuffer enabledExtensionNames() { return nenabledExtensionNames(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrInstanceCreateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -214,8 +212,7 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInstanceCreateInfo createSafe(long address) {
+    public static @Nullable XrInstanceCreateInfo createSafe(long address) {
         return address == NULL ? null : new XrInstanceCreateInfo(address, null);
     }
 
@@ -258,8 +255,7 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInstanceCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static XrInstanceCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -314,11 +310,11 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
     /** Unsafe version of {@link #enabledApiLayerCount}. */
     public static int nenabledApiLayerCount(long struct) { return memGetInt(struct + XrInstanceCreateInfo.ENABLEDAPILAYERCOUNT); }
     /** Unsafe version of {@link #enabledApiLayerNames() enabledApiLayerNames}. */
-    @Nullable public static PointerBuffer nenabledApiLayerNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDAPILAYERNAMES), nenabledApiLayerCount(struct)); }
+    public static @Nullable PointerBuffer nenabledApiLayerNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDAPILAYERNAMES), nenabledApiLayerCount(struct)); }
     /** Unsafe version of {@link #enabledExtensionCount}. */
     public static int nenabledExtensionCount(long struct) { return memGetInt(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONCOUNT); }
     /** Unsafe version of {@link #enabledExtensionNames() enabledExtensionNames}. */
-    @Nullable public static PointerBuffer nenabledExtensionNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONNAMES), nenabledExtensionCount(struct)); }
+    public static @Nullable PointerBuffer nenabledExtensionNames(long struct) { return memPointerBufferSafe(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDEXTENSIONNAMES), nenabledExtensionCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrInstanceCreateInfo.TYPE, value); }
@@ -409,16 +405,14 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
         @NativeType("uint32_t")
         public int enabledApiLayerCount() { return XrInstanceCreateInfo.nenabledApiLayerCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrInstanceCreateInfo#enabledApiLayerNames} field. */
-        @Nullable
         @NativeType("char const * const *")
-        public PointerBuffer enabledApiLayerNames() { return XrInstanceCreateInfo.nenabledApiLayerNames(address()); }
+        public @Nullable PointerBuffer enabledApiLayerNames() { return XrInstanceCreateInfo.nenabledApiLayerNames(address()); }
         /** @return the value of the {@link XrInstanceCreateInfo#enabledExtensionCount} field. */
         @NativeType("uint32_t")
         public int enabledExtensionCount() { return XrInstanceCreateInfo.nenabledExtensionCount(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrInstanceCreateInfo#enabledExtensionNames} field. */
-        @Nullable
         @NativeType("char const * const *")
-        public PointerBuffer enabledExtensionNames() { return XrInstanceCreateInfo.nenabledExtensionNames(address()); }
+        public @Nullable PointerBuffer enabledExtensionNames() { return XrInstanceCreateInfo.nenabledExtensionNames(address()); }
 
         /** Sets the specified value to the {@link XrInstanceCreateInfo#type} field. */
         public XrInstanceCreateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrInstanceCreateInfo.ntype(address(), value); return this; }

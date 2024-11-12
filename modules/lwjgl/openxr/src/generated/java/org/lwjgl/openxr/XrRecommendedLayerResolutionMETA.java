@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,8 +164,7 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRecommendedLayerResolutionMETA createSafe(long address) {
+    public static @Nullable XrRecommendedLayerResolutionMETA createSafe(long address) {
         return address == NULL ? null : new XrRecommendedLayerResolutionMETA(address, null);
     }
 
@@ -208,8 +207,7 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRecommendedLayerResolutionMETA.Buffer createSafe(long address, int capacity) {
+    public static XrRecommendedLayerResolutionMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

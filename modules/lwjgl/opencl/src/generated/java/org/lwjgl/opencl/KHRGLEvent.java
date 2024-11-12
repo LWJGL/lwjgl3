@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -55,7 +55,7 @@ public class KHRGLEvent {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_event")
-    public static long clCreateEventFromGLsyncKHR(@NativeType("cl_context") long context, @NativeType("GLsync") long sync, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateEventFromGLsyncKHR(@NativeType("cl_context") long context, @NativeType("GLsync") long sync, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -64,7 +64,7 @@ public class KHRGLEvent {
 
     /** Array version of: {@link #clCreateEventFromGLsyncKHR CreateEventFromGLsyncKHR} */
     @NativeType("cl_event")
-    public static long clCreateEventFromGLsyncKHR(@NativeType("cl_context") long context, @NativeType("GLsync") long sync, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateEventFromGLsyncKHR(@NativeType("cl_context") long context, @NativeType("GLsync") long sync, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateEventFromGLsyncKHR;
         if (CHECKS) {
             check(__functionAddress);

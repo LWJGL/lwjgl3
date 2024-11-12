@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -227,8 +227,7 @@ public class VkImportFenceFdInfoKHR extends Struct<VkImportFenceFdInfoKHR> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportFenceFdInfoKHR createSafe(long address) {
+    public static @Nullable VkImportFenceFdInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkImportFenceFdInfoKHR(address, null);
     }
 
@@ -271,8 +270,7 @@ public class VkImportFenceFdInfoKHR extends Struct<VkImportFenceFdInfoKHR> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImportFenceFdInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkImportFenceFdInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

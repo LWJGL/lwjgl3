@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -175,8 +175,7 @@ public class VkExternalMemoryAcquireUnmodifiedEXT extends Struct<VkExternalMemor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalMemoryAcquireUnmodifiedEXT createSafe(long address) {
+    public static @Nullable VkExternalMemoryAcquireUnmodifiedEXT createSafe(long address) {
         return address == NULL ? null : new VkExternalMemoryAcquireUnmodifiedEXT(address, null);
     }
 
@@ -219,8 +218,7 @@ public class VkExternalMemoryAcquireUnmodifiedEXT extends Struct<VkExternalMemor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkExternalMemoryAcquireUnmodifiedEXT.Buffer createSafe(long address, int capacity) {
+    public static VkExternalMemoryAcquireUnmodifiedEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

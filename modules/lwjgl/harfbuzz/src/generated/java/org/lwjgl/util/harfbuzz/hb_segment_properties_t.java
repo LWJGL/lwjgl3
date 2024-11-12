@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_segment_properties_t createSafe(long address) {
+    public static @Nullable hb_segment_properties_t createSafe(long address) {
         return address == NULL ? null : new hb_segment_properties_t(address, null);
     }
 
@@ -198,8 +197,7 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static hb_segment_properties_t.Buffer createSafe(long address, int capacity) {
+    public static hb_segment_properties_t.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,9 +117,8 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
     /** {@code NULL} or a pointer to an array of {@code uint64_t} with {@code swapchainCount} entries. If not {@code NULL}, each non-zero value in {@code pPresentIds} specifies the present id to be associated with the presentation of the swapchain with the same index in the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} call. */
-    @Nullable
     @NativeType("uint64_t const *")
-    public LongBuffer pPresentIds() { return npPresentIds(address()); }
+    public @Nullable LongBuffer pPresentIds() { return npPresentIds(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPresentIdKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -183,8 +182,7 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentIdKHR createSafe(long address) {
+    public static @Nullable VkPresentIdKHR createSafe(long address) {
         return address == NULL ? null : new VkPresentIdKHR(address, null);
     }
 
@@ -227,8 +225,7 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPresentIdKHR.Buffer createSafe(long address, int capacity) {
+    public static VkPresentIdKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -279,7 +276,7 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     /** Unsafe version of {@link #swapchainCount}. */
     public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentIdKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pPresentIds() pPresentIds}. */
-    @Nullable public static LongBuffer npPresentIds(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPresentIdKHR.PPRESENTIDS), nswapchainCount(struct)); }
+    public static @Nullable LongBuffer npPresentIds(long struct) { return memLongBufferSafe(memGetAddress(struct + VkPresentIdKHR.PPRESENTIDS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPresentIdKHR.STYPE, value); }
@@ -343,9 +340,8 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
         @NativeType("uint32_t")
         public int swapchainCount() { return VkPresentIdKHR.nswapchainCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPresentIdKHR#pPresentIds} field. */
-        @Nullable
         @NativeType("uint64_t const *")
-        public LongBuffer pPresentIds() { return VkPresentIdKHR.npPresentIds(address()); }
+        public @Nullable LongBuffer pPresentIds() { return VkPresentIdKHR.npPresentIds(address()); }
 
         /** Sets the specified value to the {@link VkPresentIdKHR#sType} field. */
         public VkPresentIdKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentIdKHR.nsType(address(), value); return this; }

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.glfw;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -59,9 +59,8 @@ public class GLFWNativeWin32 {
      *
      * @since version 3.1
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glfwGetWin32Adapter(@NativeType("GLFWmonitor *") long monitor) {
+    public static @Nullable String glfwGetWin32Adapter(@NativeType("GLFWmonitor *") long monitor) {
         long __result = nglfwGetWin32Adapter(monitor);
         return memUTF8Safe(__result);
     }
@@ -90,9 +89,8 @@ public class GLFWNativeWin32 {
      *
      * @since version 3.1
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glfwGetWin32Monitor(@NativeType("GLFWmonitor *") long monitor) {
+    public static @Nullable String glfwGetWin32Monitor(@NativeType("GLFWmonitor *") long monitor) {
         long __result = nglfwGetWin32Monitor(monitor);
         return memUTF8Safe(__result);
     }

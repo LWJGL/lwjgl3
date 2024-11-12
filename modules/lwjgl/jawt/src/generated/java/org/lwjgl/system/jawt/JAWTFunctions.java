@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jawt;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -166,9 +166,8 @@ public class JAWTFunctions {
      *
      * @return {@code NULL} if an error has occurred.
      */
-    @Nullable
     @NativeType("JAWT_DrawingSurfaceInfo *")
-    public static JAWTDrawingSurfaceInfo JAWT_DrawingSurface_GetDrawingSurfaceInfo(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
+    public static @Nullable JAWTDrawingSurfaceInfo JAWT_DrawingSurface_GetDrawingSurfaceInfo(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
         long __result = nJAWT_DrawingSurface_GetDrawingSurfaceInfo(ds.address(), __functionAddress);
         return JAWTDrawingSurfaceInfo.createSafe(__result);
     }
@@ -228,9 +227,8 @@ public class JAWTFunctions {
      *
      * @return {@code NULL} if an error has occurred
      */
-    @Nullable
     @NativeType("JAWT_DrawingSurface *")
-    public static JAWTDrawingSurface JAWT_GetDrawingSurface(@NativeType("jobject") Object target, @NativeType("void *") long __functionAddress) {
+    public static @Nullable JAWTDrawingSurface JAWT_GetDrawingSurface(@NativeType("jobject") Object target, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -295,8 +293,7 @@ public class JAWTFunctions {
     // --- [ JAWT_GetComponent ] ---
 
     /** Unsafe version of: {@link #JAWT_GetComponent GetComponent} */
-    @Nullable
-    public static native Component nJAWT_GetComponent(long platformInfo, long __functionAddress);
+    public static native @Nullable Component nJAWT_GetComponent(long platformInfo, long __functionAddress);
 
     /**
      * Returns a reference to a {@link Component} from a native platform handle. On Windows, this corresponds to an {@code HWND}; on Solaris and Linux, this is a
@@ -307,9 +304,8 @@ public class JAWTFunctions {
      * @param platformInfo      the native platform handle
      * @param __functionAddress the function address
      */
-    @Nullable
     @NativeType("jobject")
-    public static Component JAWT_GetComponent(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
+    public static @Nullable Component JAWT_GetComponent(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(platformInfo);
             check(__functionAddress);
@@ -320,8 +316,7 @@ public class JAWTFunctions {
     // --- [ JAWT_CreateEmbeddedFrame ] ---
 
     /** Unsafe version of: {@link #JAWT_CreateEmbeddedFrame CreateEmbeddedFrame} */
-    @Nullable
-    public static native Frame nJAWT_CreateEmbeddedFrame(long platformInfo, long __functionAddress);
+    public static native @Nullable Frame nJAWT_CreateEmbeddedFrame(long platformInfo, long __functionAddress);
 
     /**
      * Creates a {@link Frame} placed in a native container. Container is referenced by the native platform handle. For example on Windows this corresponds to an
@@ -334,9 +329,8 @@ public class JAWTFunctions {
      *
      * @since Java 9
      */
-    @Nullable
     @NativeType("jobject")
-    public static Frame JAWT_CreateEmbeddedFrame(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
+    public static @Nullable Frame JAWT_CreateEmbeddedFrame(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(platformInfo);
             check(__functionAddress);

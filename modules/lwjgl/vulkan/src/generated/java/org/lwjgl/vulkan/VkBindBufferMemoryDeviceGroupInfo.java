@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,9 +117,8 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     @NativeType("uint32_t")
     public int deviceIndexCount() { return ndeviceIndexCount(address()); }
     /** a pointer to an array of device indices. */
-    @Nullable
     @NativeType("uint32_t const *")
-    public IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
+    public @Nullable IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindBufferMemoryDeviceGroupInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -179,8 +178,7 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindBufferMemoryDeviceGroupInfo createSafe(long address) {
+    public static @Nullable VkBindBufferMemoryDeviceGroupInfo createSafe(long address) {
         return address == NULL ? null : new VkBindBufferMemoryDeviceGroupInfo(address, null);
     }
 
@@ -223,8 +221,7 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkBindBufferMemoryDeviceGroupInfo.Buffer createSafe(long address, int capacity) {
+    public static VkBindBufferMemoryDeviceGroupInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -294,7 +291,7 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     /** Unsafe version of {@link #deviceIndexCount}. */
     public static int ndeviceIndexCount(long struct) { return memGetInt(struct + VkBindBufferMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
     /** Unsafe version of {@link #pDeviceIndices() pDeviceIndices}. */
-    @Nullable public static IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PDEVICEINDICES), ndeviceIndexCount(struct)); }
+    public static @Nullable IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindBufferMemoryDeviceGroupInfo.PDEVICEINDICES), ndeviceIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkBindBufferMemoryDeviceGroupInfo.STYPE, value); }
@@ -369,9 +366,8 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
         @NativeType("uint32_t")
         public int deviceIndexCount() { return VkBindBufferMemoryDeviceGroupInfo.ndeviceIndexCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindBufferMemoryDeviceGroupInfo#pDeviceIndices} field. */
-        @Nullable
         @NativeType("uint32_t const *")
-        public IntBuffer pDeviceIndices() { return VkBindBufferMemoryDeviceGroupInfo.npDeviceIndices(address()); }
+        public @Nullable IntBuffer pDeviceIndices() { return VkBindBufferMemoryDeviceGroupInfo.npDeviceIndices(address()); }
 
         /** Sets the specified value to the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryDeviceGroupInfo.nsType(address(), value); return this; }

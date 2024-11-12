@@ -13,6 +13,6 @@
  * 
  * <p><b>macOS</b>: LWJGL bundles <a href="https://moltengl.com/moltenvk/">MoltenVK</a>, which emulates Vulkan over Metal.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.vulkan;
 

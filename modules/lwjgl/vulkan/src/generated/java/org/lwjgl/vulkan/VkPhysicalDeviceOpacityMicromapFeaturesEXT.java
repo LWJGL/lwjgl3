@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -178,8 +178,7 @@ public class VkPhysicalDeviceOpacityMicromapFeaturesEXT extends Struct<VkPhysica
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceOpacityMicromapFeaturesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceOpacityMicromapFeaturesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceOpacityMicromapFeaturesEXT(address, null);
     }
 
@@ -222,8 +221,7 @@ public class VkPhysicalDeviceOpacityMicromapFeaturesEXT extends Struct<VkPhysica
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceOpacityMicromapFeaturesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceOpacityMicromapFeaturesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

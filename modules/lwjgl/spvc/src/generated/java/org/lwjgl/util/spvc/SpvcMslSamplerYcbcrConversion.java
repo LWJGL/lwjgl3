@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -217,8 +217,7 @@ public class SpvcMslSamplerYcbcrConversion extends Struct<SpvcMslSamplerYcbcrCon
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcMslSamplerYcbcrConversion createSafe(long address) {
+    public static @Nullable SpvcMslSamplerYcbcrConversion createSafe(long address) {
         return address == NULL ? null : new SpvcMslSamplerYcbcrConversion(address, null);
     }
 
@@ -261,8 +260,7 @@ public class SpvcMslSamplerYcbcrConversion extends Struct<SpvcMslSamplerYcbcrCon
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcMslSamplerYcbcrConversion.Buffer createSafe(long address, int capacity) {
+    public static SpvcMslSamplerYcbcrConversion.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

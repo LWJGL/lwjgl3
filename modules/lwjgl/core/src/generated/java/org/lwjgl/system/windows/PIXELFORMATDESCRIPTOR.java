@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -406,8 +406,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct<PIXELFORMATDESCRIPTOR> impleme
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PIXELFORMATDESCRIPTOR createSafe(long address) {
+    public static @Nullable PIXELFORMATDESCRIPTOR createSafe(long address) {
         return address == NULL ? null : new PIXELFORMATDESCRIPTOR(address, null);
     }
 
@@ -450,8 +449,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct<PIXELFORMATDESCRIPTOR> impleme
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static PIXELFORMATDESCRIPTOR.Buffer createSafe(long address, int capacity) {
+    public static PIXELFORMATDESCRIPTOR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

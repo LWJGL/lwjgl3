@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -174,17 +174,14 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     @NativeType("uint32_t")
     public int jointCountOutput() { return njointCountOutput(address()); }
     /** an array of poses that matches what is returned by {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} which describes the hand skeleton’s bind pose. */
-    @Nullable
     @NativeType("XrPosef *")
-    public XrPosef.Buffer jointBindPoses() { return njointBindPoses(address()); }
+    public XrPosef.@Nullable Buffer jointBindPoses() { return njointBindPoses(address()); }
     /** an array of joint radii at bind pose. */
-    @Nullable
     @NativeType("float *")
-    public FloatBuffer jointRadii() { return njointRadii(address()); }
+    public @Nullable FloatBuffer jointRadii() { return njointRadii(address()); }
     /** an array of joint parents to define a bone hierarchy for the hand skeleton. */
-    @Nullable
     @NativeType("XrHandJointEXT *")
-    public IntBuffer jointParents() { return njointParents(address()); }
+    public @Nullable IntBuffer jointParents() { return njointParents(address()); }
     /** the capacity of the vertex data arrays in this structure, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
@@ -192,25 +189,20 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** an array of 3D vertex positions. */
-    @Nullable
     @NativeType("XrVector3f *")
-    public XrVector3f.Buffer vertexPositions() { return nvertexPositions(address()); }
+    public XrVector3f.@Nullable Buffer vertexPositions() { return nvertexPositions(address()); }
     /** an array of 3D vertex normals. */
-    @Nullable
     @NativeType("XrVector3f *")
-    public XrVector3f.Buffer vertexNormals() { return nvertexNormals(address()); }
+    public XrVector3f.@Nullable Buffer vertexNormals() { return nvertexNormals(address()); }
     /** an array of texture coordinates for this vertex. */
-    @Nullable
     @NativeType("XrVector2f *")
-    public XrVector2f.Buffer vertexUVs() { return nvertexUVs(address()); }
+    public XrVector2f.@Nullable Buffer vertexUVs() { return nvertexUVs(address()); }
     /** an array of bone blend indices. */
-    @Nullable
     @NativeType("XrVector4sFB *")
-    public XrVector4sFB.Buffer vertexBlendIndices() { return nvertexBlendIndices(address()); }
+    public XrVector4sFB.@Nullable Buffer vertexBlendIndices() { return nvertexBlendIndices(address()); }
     /** an array of bone blend weights. */
-    @Nullable
     @NativeType("XrVector4f *")
-    public XrVector4f.Buffer vertexBlendWeights() { return nvertexBlendWeights(address()); }
+    public XrVector4f.@Nullable Buffer vertexBlendWeights() { return nvertexBlendWeights(address()); }
     /** the capacity of the index data arrays in this structure, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
@@ -218,9 +210,8 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** an array of triangle indices. */
-    @Nullable
     @NativeType("int16_t *")
-    public ShortBuffer indices() { return nindices(address()); }
+    public @Nullable ShortBuffer indices() { return nindices(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrHandTrackingMeshFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -233,7 +224,7 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Sets the specified value to the {@link #jointCountOutput} field. */
     public XrHandTrackingMeshFB jointCountOutput(@NativeType("uint32_t") int value) { njointCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrPosef.Buffer} to the {@link #jointBindPoses} field. */
-    public XrHandTrackingMeshFB jointBindPoses(@Nullable @NativeType("XrPosef *") XrPosef.Buffer value) { njointBindPoses(address(), value); return this; }
+    public XrHandTrackingMeshFB jointBindPoses(@NativeType("XrPosef *") XrPosef.@Nullable Buffer value) { njointBindPoses(address(), value); return this; }
     /** Sets the address of the specified {@link FloatBuffer} to the {@link #jointRadii} field. */
     public XrHandTrackingMeshFB jointRadii(@Nullable @NativeType("float *") FloatBuffer value) { njointRadii(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #jointParents} field. */
@@ -243,15 +234,15 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Sets the specified value to the {@link #vertexCountOutput} field. */
     public XrHandTrackingMeshFB vertexCountOutput(@NativeType("uint32_t") int value) { nvertexCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector3f.Buffer} to the {@link #vertexPositions} field. */
-    public XrHandTrackingMeshFB vertexPositions(@Nullable @NativeType("XrVector3f *") XrVector3f.Buffer value) { nvertexPositions(address(), value); return this; }
+    public XrHandTrackingMeshFB vertexPositions(@NativeType("XrVector3f *") XrVector3f.@Nullable Buffer value) { nvertexPositions(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector3f.Buffer} to the {@link #vertexNormals} field. */
-    public XrHandTrackingMeshFB vertexNormals(@Nullable @NativeType("XrVector3f *") XrVector3f.Buffer value) { nvertexNormals(address(), value); return this; }
+    public XrHandTrackingMeshFB vertexNormals(@NativeType("XrVector3f *") XrVector3f.@Nullable Buffer value) { nvertexNormals(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@link #vertexUVs} field. */
-    public XrHandTrackingMeshFB vertexUVs(@Nullable @NativeType("XrVector2f *") XrVector2f.Buffer value) { nvertexUVs(address(), value); return this; }
+    public XrHandTrackingMeshFB vertexUVs(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { nvertexUVs(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector4sFB.Buffer} to the {@link #vertexBlendIndices} field. */
-    public XrHandTrackingMeshFB vertexBlendIndices(@Nullable @NativeType("XrVector4sFB *") XrVector4sFB.Buffer value) { nvertexBlendIndices(address(), value); return this; }
+    public XrHandTrackingMeshFB vertexBlendIndices(@NativeType("XrVector4sFB *") XrVector4sFB.@Nullable Buffer value) { nvertexBlendIndices(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector4f.Buffer} to the {@link #vertexBlendWeights} field. */
-    public XrHandTrackingMeshFB vertexBlendWeights(@Nullable @NativeType("XrVector4f *") XrVector4f.Buffer value) { nvertexBlendWeights(address(), value); return this; }
+    public XrHandTrackingMeshFB vertexBlendWeights(@NativeType("XrVector4f *") XrVector4f.@Nullable Buffer value) { nvertexBlendWeights(address(), value); return this; }
     /** Sets the specified value to the {@link #indexCapacityInput} field. */
     public XrHandTrackingMeshFB indexCapacityInput(@NativeType("uint32_t") int value) { nindexCapacityInput(address(), value); return this; }
     /** Sets the specified value to the {@link #indexCountOutput} field. */
@@ -265,16 +256,16 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         long next,
         int jointCapacityInput,
         int jointCountOutput,
-        @Nullable XrPosef.Buffer jointBindPoses,
+        XrPosef.@Nullable Buffer jointBindPoses,
         @Nullable FloatBuffer jointRadii,
         @Nullable IntBuffer jointParents,
         int vertexCapacityInput,
         int vertexCountOutput,
-        @Nullable XrVector3f.Buffer vertexPositions,
-        @Nullable XrVector3f.Buffer vertexNormals,
-        @Nullable XrVector2f.Buffer vertexUVs,
-        @Nullable XrVector4sFB.Buffer vertexBlendIndices,
-        @Nullable XrVector4f.Buffer vertexBlendWeights,
+        XrVector3f.@Nullable Buffer vertexPositions,
+        XrVector3f.@Nullable Buffer vertexNormals,
+        XrVector2f.@Nullable Buffer vertexUVs,
+        XrVector4sFB.@Nullable Buffer vertexBlendIndices,
+        XrVector4f.@Nullable Buffer vertexBlendWeights,
         int indexCapacityInput,
         int indexCountOutput,
         @Nullable ShortBuffer indices
@@ -336,8 +327,7 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandTrackingMeshFB createSafe(long address) {
+    public static @Nullable XrHandTrackingMeshFB createSafe(long address) {
         return address == NULL ? null : new XrHandTrackingMeshFB(address, null);
     }
 
@@ -380,8 +370,7 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandTrackingMeshFB.Buffer createSafe(long address, int capacity) {
+    public static XrHandTrackingMeshFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -434,31 +423,31 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #jointCountOutput}. */
     public static int njointCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT); }
     /** Unsafe version of {@link #jointBindPoses}. */
-    @Nullable public static XrPosef.Buffer njointBindPoses(long struct) { return XrPosef.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES), njointCapacityInput(struct)); }
+    public static XrPosef.@Nullable Buffer njointBindPoses(long struct) { return XrPosef.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES), njointCapacityInput(struct)); }
     /** Unsafe version of {@link #jointRadii() jointRadii}. */
-    @Nullable public static FloatBuffer njointRadii(long struct) { return memFloatBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTRADII), njointCapacityInput(struct)); }
+    public static @Nullable FloatBuffer njointRadii(long struct) { return memFloatBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTRADII), njointCapacityInput(struct)); }
     /** Unsafe version of {@link #jointParents() jointParents}. */
-    @Nullable public static IntBuffer njointParents(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTPARENTS), njointCapacityInput(struct)); }
+    public static @Nullable IntBuffer njointParents(long struct) { return memIntBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.JOINTPARENTS), njointCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
     public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.VERTEXCAPACITYINPUT); }
     /** Unsafe version of {@link #vertexCountOutput}. */
     public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #vertexPositions}. */
-    @Nullable public static XrVector3f.Buffer nvertexPositions(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS), nvertexCapacityInput(struct)); }
+    public static XrVector3f.@Nullable Buffer nvertexPositions(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexNormals}. */
-    @Nullable public static XrVector3f.Buffer nvertexNormals(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXNORMALS), nvertexCapacityInput(struct)); }
+    public static XrVector3f.@Nullable Buffer nvertexNormals(long struct) { return XrVector3f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXNORMALS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexUVs}. */
-    @Nullable public static XrVector2f.Buffer nvertexUVs(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXUVS), nvertexCapacityInput(struct)); }
+    public static XrVector2f.@Nullable Buffer nvertexUVs(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXUVS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexBlendIndices}. */
-    @Nullable public static XrVector4sFB.Buffer nvertexBlendIndices(long struct) { return XrVector4sFB.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDINDICES), nvertexCapacityInput(struct)); }
+    public static XrVector4sFB.@Nullable Buffer nvertexBlendIndices(long struct) { return XrVector4sFB.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDINDICES), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #vertexBlendWeights}. */
-    @Nullable public static XrVector4f.Buffer nvertexBlendWeights(long struct) { return XrVector4f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS), nvertexCapacityInput(struct)); }
+    public static XrVector4f.@Nullable Buffer nvertexBlendWeights(long struct) { return XrVector4f.createSafe(memGetAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS), nvertexCapacityInput(struct)); }
     /** Unsafe version of {@link #indexCapacityInput}. */
     public static int nindexCapacityInput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT); }
     /** Unsafe version of {@link #indexCountOutput}. */
     public static int nindexCountOutput(long struct) { return memGetInt(struct + XrHandTrackingMeshFB.INDEXCOUNTOUTPUT); }
     /** Unsafe version of {@link #indices() indices}. */
-    @Nullable public static ShortBuffer nindices(long struct) { return memShortBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.INDICES), nindexCapacityInput(struct)); }
+    public static @Nullable ShortBuffer nindices(long struct) { return memShortBufferSafe(memGetAddress(struct + XrHandTrackingMeshFB.INDICES), nindexCapacityInput(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.TYPE, value); }
@@ -469,7 +458,7 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #jointCountOutput(int) jointCountOutput}. */
     public static void njointCountOutput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.JOINTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #jointBindPoses(XrPosef.Buffer) jointBindPoses}. */
-    public static void njointBindPoses(long struct, @Nullable XrPosef.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES, memAddressSafe(value)); }
+    public static void njointBindPoses(long struct, XrPosef.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES, memAddressSafe(value)); }
     /** Unsafe version of {@link #jointRadii(FloatBuffer) jointRadii}. */
     public static void njointRadii(long struct, @Nullable FloatBuffer value) { memPutAddress(struct + XrHandTrackingMeshFB.JOINTRADII, memAddressSafe(value)); }
     /** Unsafe version of {@link #jointParents(IntBuffer) jointParents}. */
@@ -479,15 +468,15 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
     public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertexPositions(XrVector3f.Buffer) vertexPositions}. */
-    public static void nvertexPositions(long struct, @Nullable XrVector3f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS, memAddressSafe(value)); }
+    public static void nvertexPositions(long struct, XrVector3f.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXPOSITIONS, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertexNormals(XrVector3f.Buffer) vertexNormals}. */
-    public static void nvertexNormals(long struct, @Nullable XrVector3f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXNORMALS, memAddressSafe(value)); }
+    public static void nvertexNormals(long struct, XrVector3f.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXNORMALS, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertexUVs(XrVector2f.Buffer) vertexUVs}. */
-    public static void nvertexUVs(long struct, @Nullable XrVector2f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXUVS, memAddressSafe(value)); }
+    public static void nvertexUVs(long struct, XrVector2f.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXUVS, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertexBlendIndices(XrVector4sFB.Buffer) vertexBlendIndices}. */
-    public static void nvertexBlendIndices(long struct, @Nullable XrVector4sFB.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDINDICES, memAddressSafe(value)); }
+    public static void nvertexBlendIndices(long struct, XrVector4sFB.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDINDICES, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertexBlendWeights(XrVector4f.Buffer) vertexBlendWeights}. */
-    public static void nvertexBlendWeights(long struct, @Nullable XrVector4f.Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS, memAddressSafe(value)); }
+    public static void nvertexBlendWeights(long struct, XrVector4f.@Nullable Buffer value) { memPutAddress(struct + XrHandTrackingMeshFB.VERTEXBLENDWEIGHTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
     public static void nindexCapacityInput(long struct, int value) { memPutInt(struct + XrHandTrackingMeshFB.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
@@ -551,17 +540,14 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         @NativeType("uint32_t")
         public int jointCountOutput() { return XrHandTrackingMeshFB.njointCountOutput(address()); }
         /** @return a {@link XrPosef.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#jointBindPoses} field. */
-        @Nullable
         @NativeType("XrPosef *")
-        public XrPosef.Buffer jointBindPoses() { return XrHandTrackingMeshFB.njointBindPoses(address()); }
+        public XrPosef.@Nullable Buffer jointBindPoses() { return XrHandTrackingMeshFB.njointBindPoses(address()); }
         /** @return a {@link FloatBuffer} view of the data pointed to by the {@link XrHandTrackingMeshFB#jointRadii} field. */
-        @Nullable
         @NativeType("float *")
-        public FloatBuffer jointRadii() { return XrHandTrackingMeshFB.njointRadii(address()); }
+        public @Nullable FloatBuffer jointRadii() { return XrHandTrackingMeshFB.njointRadii(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrHandTrackingMeshFB#jointParents} field. */
-        @Nullable
         @NativeType("XrHandJointEXT *")
-        public IntBuffer jointParents() { return XrHandTrackingMeshFB.njointParents(address()); }
+        public @Nullable IntBuffer jointParents() { return XrHandTrackingMeshFB.njointParents(address()); }
         /** @return the value of the {@link XrHandTrackingMeshFB#vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrHandTrackingMeshFB.nvertexCapacityInput(address()); }
@@ -569,25 +555,20 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrHandTrackingMeshFB.nvertexCountOutput(address()); }
         /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#vertexPositions} field. */
-        @Nullable
         @NativeType("XrVector3f *")
-        public XrVector3f.Buffer vertexPositions() { return XrHandTrackingMeshFB.nvertexPositions(address()); }
+        public XrVector3f.@Nullable Buffer vertexPositions() { return XrHandTrackingMeshFB.nvertexPositions(address()); }
         /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#vertexNormals} field. */
-        @Nullable
         @NativeType("XrVector3f *")
-        public XrVector3f.Buffer vertexNormals() { return XrHandTrackingMeshFB.nvertexNormals(address()); }
+        public XrVector3f.@Nullable Buffer vertexNormals() { return XrHandTrackingMeshFB.nvertexNormals(address()); }
         /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#vertexUVs} field. */
-        @Nullable
         @NativeType("XrVector2f *")
-        public XrVector2f.Buffer vertexUVs() { return XrHandTrackingMeshFB.nvertexUVs(address()); }
+        public XrVector2f.@Nullable Buffer vertexUVs() { return XrHandTrackingMeshFB.nvertexUVs(address()); }
         /** @return a {@link XrVector4sFB.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#vertexBlendIndices} field. */
-        @Nullable
         @NativeType("XrVector4sFB *")
-        public XrVector4sFB.Buffer vertexBlendIndices() { return XrHandTrackingMeshFB.nvertexBlendIndices(address()); }
+        public XrVector4sFB.@Nullable Buffer vertexBlendIndices() { return XrHandTrackingMeshFB.nvertexBlendIndices(address()); }
         /** @return a {@link XrVector4f.Buffer} view of the struct array pointed to by the {@link XrHandTrackingMeshFB#vertexBlendWeights} field. */
-        @Nullable
         @NativeType("XrVector4f *")
-        public XrVector4f.Buffer vertexBlendWeights() { return XrHandTrackingMeshFB.nvertexBlendWeights(address()); }
+        public XrVector4f.@Nullable Buffer vertexBlendWeights() { return XrHandTrackingMeshFB.nvertexBlendWeights(address()); }
         /** @return the value of the {@link XrHandTrackingMeshFB#indexCapacityInput} field. */
         @NativeType("uint32_t")
         public int indexCapacityInput() { return XrHandTrackingMeshFB.nindexCapacityInput(address()); }
@@ -595,9 +576,8 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrHandTrackingMeshFB.nindexCountOutput(address()); }
         /** @return a {@link ShortBuffer} view of the data pointed to by the {@link XrHandTrackingMeshFB#indices} field. */
-        @Nullable
         @NativeType("int16_t *")
-        public ShortBuffer indices() { return XrHandTrackingMeshFB.nindices(address()); }
+        public @Nullable ShortBuffer indices() { return XrHandTrackingMeshFB.nindices(address()); }
 
         /** Sets the specified value to the {@link XrHandTrackingMeshFB#type} field. */
         public XrHandTrackingMeshFB.Buffer type(@NativeType("XrStructureType") int value) { XrHandTrackingMeshFB.ntype(address(), value); return this; }
@@ -610,7 +590,7 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         /** Sets the specified value to the {@link XrHandTrackingMeshFB#jointCountOutput} field. */
         public XrHandTrackingMeshFB.Buffer jointCountOutput(@NativeType("uint32_t") int value) { XrHandTrackingMeshFB.njointCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrPosef.Buffer} to the {@link XrHandTrackingMeshFB#jointBindPoses} field. */
-        public XrHandTrackingMeshFB.Buffer jointBindPoses(@Nullable @NativeType("XrPosef *") XrPosef.Buffer value) { XrHandTrackingMeshFB.njointBindPoses(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer jointBindPoses(@NativeType("XrPosef *") XrPosef.@Nullable Buffer value) { XrHandTrackingMeshFB.njointBindPoses(address(), value); return this; }
         /** Sets the address of the specified {@link FloatBuffer} to the {@link XrHandTrackingMeshFB#jointRadii} field. */
         public XrHandTrackingMeshFB.Buffer jointRadii(@Nullable @NativeType("float *") FloatBuffer value) { XrHandTrackingMeshFB.njointRadii(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link XrHandTrackingMeshFB#jointParents} field. */
@@ -620,15 +600,15 @@ public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implement
         /** Sets the specified value to the {@link XrHandTrackingMeshFB#vertexCountOutput} field. */
         public XrHandTrackingMeshFB.Buffer vertexCountOutput(@NativeType("uint32_t") int value) { XrHandTrackingMeshFB.nvertexCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector3f.Buffer} to the {@link XrHandTrackingMeshFB#vertexPositions} field. */
-        public XrHandTrackingMeshFB.Buffer vertexPositions(@Nullable @NativeType("XrVector3f *") XrVector3f.Buffer value) { XrHandTrackingMeshFB.nvertexPositions(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer vertexPositions(@NativeType("XrVector3f *") XrVector3f.@Nullable Buffer value) { XrHandTrackingMeshFB.nvertexPositions(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector3f.Buffer} to the {@link XrHandTrackingMeshFB#vertexNormals} field. */
-        public XrHandTrackingMeshFB.Buffer vertexNormals(@Nullable @NativeType("XrVector3f *") XrVector3f.Buffer value) { XrHandTrackingMeshFB.nvertexNormals(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer vertexNormals(@NativeType("XrVector3f *") XrVector3f.@Nullable Buffer value) { XrHandTrackingMeshFB.nvertexNormals(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@link XrHandTrackingMeshFB#vertexUVs} field. */
-        public XrHandTrackingMeshFB.Buffer vertexUVs(@Nullable @NativeType("XrVector2f *") XrVector2f.Buffer value) { XrHandTrackingMeshFB.nvertexUVs(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer vertexUVs(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { XrHandTrackingMeshFB.nvertexUVs(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector4sFB.Buffer} to the {@link XrHandTrackingMeshFB#vertexBlendIndices} field. */
-        public XrHandTrackingMeshFB.Buffer vertexBlendIndices(@Nullable @NativeType("XrVector4sFB *") XrVector4sFB.Buffer value) { XrHandTrackingMeshFB.nvertexBlendIndices(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer vertexBlendIndices(@NativeType("XrVector4sFB *") XrVector4sFB.@Nullable Buffer value) { XrHandTrackingMeshFB.nvertexBlendIndices(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector4f.Buffer} to the {@link XrHandTrackingMeshFB#vertexBlendWeights} field. */
-        public XrHandTrackingMeshFB.Buffer vertexBlendWeights(@Nullable @NativeType("XrVector4f *") XrVector4f.Buffer value) { XrHandTrackingMeshFB.nvertexBlendWeights(address(), value); return this; }
+        public XrHandTrackingMeshFB.Buffer vertexBlendWeights(@NativeType("XrVector4f *") XrVector4f.@Nullable Buffer value) { XrHandTrackingMeshFB.nvertexBlendWeights(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandTrackingMeshFB#indexCapacityInput} field. */
         public XrHandTrackingMeshFB.Buffer indexCapacityInput(@NativeType("uint32_t") int value) { XrHandTrackingMeshFB.nindexCapacityInput(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandTrackingMeshFB#indexCountOutput} field. */

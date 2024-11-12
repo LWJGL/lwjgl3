@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -195,8 +195,7 @@ public class FMOD_ASYNCREADINFO extends Struct<FMOD_ASYNCREADINFO> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_ASYNCREADINFO createSafe(long address) {
+    public static @Nullable FMOD_ASYNCREADINFO createSafe(long address) {
         return address == NULL ? null : new FMOD_ASYNCREADINFO(address, null);
     }
 
@@ -239,8 +238,7 @@ public class FMOD_ASYNCREADINFO extends Struct<FMOD_ASYNCREADINFO> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_ASYNCREADINFO.Buffer createSafe(long address, int capacity) {
+    public static FMOD_ASYNCREADINFO.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

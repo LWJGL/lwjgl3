@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -190,8 +190,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct<VkWin32SurfaceCreateInfo
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWin32SurfaceCreateInfoKHR createSafe(long address) {
+    public static @Nullable VkWin32SurfaceCreateInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkWin32SurfaceCreateInfoKHR(address, null);
     }
 
@@ -234,8 +233,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct<VkWin32SurfaceCreateInfo
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkWin32SurfaceCreateInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkWin32SurfaceCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

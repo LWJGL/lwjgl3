@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(address, null);
     }
 
@@ -200,8 +199,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

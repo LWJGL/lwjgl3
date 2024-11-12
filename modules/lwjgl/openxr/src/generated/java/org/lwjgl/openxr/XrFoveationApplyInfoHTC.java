@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -201,8 +201,7 @@ public class XrFoveationApplyInfoHTC extends Struct<XrFoveationApplyInfoHTC> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationApplyInfoHTC createSafe(long address) {
+    public static @Nullable XrFoveationApplyInfoHTC createSafe(long address) {
         return address == NULL ? null : new XrFoveationApplyInfoHTC(address, null);
     }
 
@@ -245,8 +244,7 @@ public class XrFoveationApplyInfoHTC extends Struct<XrFoveationApplyInfoHTC> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFoveationApplyInfoHTC.Buffer createSafe(long address, int capacity) {
+    public static XrFoveationApplyInfoHTC.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

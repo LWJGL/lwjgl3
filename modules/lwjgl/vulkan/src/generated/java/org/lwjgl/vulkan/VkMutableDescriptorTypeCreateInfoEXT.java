@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -108,9 +108,8 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     @NativeType("uint32_t")
     public int mutableDescriptorTypeListCount() { return nmutableDescriptorTypeListCount(address()); }
     /** a pointer to an array of {@link VkMutableDescriptorTypeListEXT} structures. */
-    @Nullable
     @NativeType("VkMutableDescriptorTypeListEXT const *")
-    public VkMutableDescriptorTypeListEXT.Buffer pMutableDescriptorTypeLists() { return npMutableDescriptorTypeLists(address()); }
+    public VkMutableDescriptorTypeListEXT.@Nullable Buffer pMutableDescriptorTypeLists() { return npMutableDescriptorTypeLists(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMutableDescriptorTypeCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -119,13 +118,13 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMutableDescriptorTypeCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkMutableDescriptorTypeListEXT.Buffer} to the {@link #pMutableDescriptorTypeLists} field. */
-    public VkMutableDescriptorTypeCreateInfoEXT pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.Buffer value) { npMutableDescriptorTypeLists(address(), value); return this; }
+    public VkMutableDescriptorTypeCreateInfoEXT pMutableDescriptorTypeLists(@NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.@Nullable Buffer value) { npMutableDescriptorTypeLists(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkMutableDescriptorTypeCreateInfoEXT set(
         int sType,
         long pNext,
-        @Nullable VkMutableDescriptorTypeListEXT.Buffer pMutableDescriptorTypeLists
+        VkMutableDescriptorTypeListEXT.@Nullable Buffer pMutableDescriptorTypeLists
     ) {
         sType(sType);
         pNext(pNext);
@@ -170,8 +169,7 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkMutableDescriptorTypeCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkMutableDescriptorTypeCreateInfoEXT(address, null);
     }
 
@@ -214,8 +212,7 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkMutableDescriptorTypeCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -266,7 +263,7 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     /** Unsafe version of {@link #mutableDescriptorTypeListCount}. */
     public static int nmutableDescriptorTypeListCount(long struct) { return memGetInt(struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT); }
     /** Unsafe version of {@link #pMutableDescriptorTypeLists}. */
-    @Nullable public static VkMutableDescriptorTypeListEXT.Buffer npMutableDescriptorTypeLists(long struct) { return VkMutableDescriptorTypeListEXT.createSafe(memGetAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS), nmutableDescriptorTypeListCount(struct)); }
+    public static VkMutableDescriptorTypeListEXT.@Nullable Buffer npMutableDescriptorTypeLists(long struct) { return VkMutableDescriptorTypeListEXT.createSafe(memGetAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS), nmutableDescriptorTypeListCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkMutableDescriptorTypeCreateInfoEXT.STYPE, value); }
@@ -275,7 +272,7 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
     /** Sets the specified value to the {@code mutableDescriptorTypeListCount} field of the specified {@code struct}. */
     public static void nmutableDescriptorTypeListCount(long struct, int value) { memPutInt(struct + VkMutableDescriptorTypeCreateInfoEXT.MUTABLEDESCRIPTORTYPELISTCOUNT, value); }
     /** Unsafe version of {@link #pMutableDescriptorTypeLists(VkMutableDescriptorTypeListEXT.Buffer) pMutableDescriptorTypeLists}. */
-    public static void npMutableDescriptorTypeLists(long struct, @Nullable VkMutableDescriptorTypeListEXT.Buffer value) { memPutAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS, memAddressSafe(value)); nmutableDescriptorTypeListCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npMutableDescriptorTypeLists(long struct, VkMutableDescriptorTypeListEXT.@Nullable Buffer value) { memPutAddress(struct + VkMutableDescriptorTypeCreateInfoEXT.PMUTABLEDESCRIPTORTYPELISTS, memAddressSafe(value)); nmutableDescriptorTypeListCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -344,9 +341,8 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
         @NativeType("uint32_t")
         public int mutableDescriptorTypeListCount() { return VkMutableDescriptorTypeCreateInfoEXT.nmutableDescriptorTypeListCount(address()); }
         /** @return a {@link VkMutableDescriptorTypeListEXT.Buffer} view of the struct array pointed to by the {@link VkMutableDescriptorTypeCreateInfoEXT#pMutableDescriptorTypeLists} field. */
-        @Nullable
         @NativeType("VkMutableDescriptorTypeListEXT const *")
-        public VkMutableDescriptorTypeListEXT.Buffer pMutableDescriptorTypeLists() { return VkMutableDescriptorTypeCreateInfoEXT.npMutableDescriptorTypeLists(address()); }
+        public VkMutableDescriptorTypeListEXT.@Nullable Buffer pMutableDescriptorTypeLists() { return VkMutableDescriptorTypeCreateInfoEXT.npMutableDescriptorTypeLists(address()); }
 
         /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoEXT#sType} field. */
         public VkMutableDescriptorTypeCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMutableDescriptorTypeCreateInfoEXT.nsType(address(), value); return this; }
@@ -355,7 +351,7 @@ public class VkMutableDescriptorTypeCreateInfoEXT extends Struct<VkMutableDescri
         /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoEXT#pNext} field. */
         public VkMutableDescriptorTypeCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkMutableDescriptorTypeCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkMutableDescriptorTypeListEXT.Buffer} to the {@link VkMutableDescriptorTypeCreateInfoEXT#pMutableDescriptorTypeLists} field. */
-        public VkMutableDescriptorTypeCreateInfoEXT.Buffer pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.Buffer value) { VkMutableDescriptorTypeCreateInfoEXT.npMutableDescriptorTypeLists(address(), value); return this; }
+        public VkMutableDescriptorTypeCreateInfoEXT.Buffer pMutableDescriptorTypeLists(@NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.@Nullable Buffer value) { VkMutableDescriptorTypeCreateInfoEXT.npMutableDescriptorTypeLists(address(), value); return this; }
 
     }
 

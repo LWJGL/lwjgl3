@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,8 +124,7 @@ public class BGFXMemory extends Struct<BGFXMemory> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXMemory createSafe(long address) {
+    public static @Nullable BGFXMemory createSafe(long address) {
         return address == NULL ? null : new BGFXMemory(address, null);
     }
 
@@ -168,8 +167,7 @@ public class BGFXMemory extends Struct<BGFXMemory> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXMemory.Buffer createSafe(long address, int capacity) {
+    public static BGFXMemory.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

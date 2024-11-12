@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.windows;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -144,8 +144,7 @@ public class HARDWAREINPUT extends Struct<HARDWAREINPUT> implements NativeResour
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HARDWAREINPUT createSafe(long address) {
+    public static @Nullable HARDWAREINPUT createSafe(long address) {
         return address == NULL ? null : new HARDWAREINPUT(address, null);
     }
 
@@ -188,8 +187,7 @@ public class HARDWAREINPUT extends Struct<HARDWAREINPUT> implements NativeResour
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static HARDWAREINPUT.Buffer createSafe(long address, int capacity) {
+    public static HARDWAREINPUT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

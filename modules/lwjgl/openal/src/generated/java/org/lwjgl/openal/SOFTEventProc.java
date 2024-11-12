@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openal;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -39,8 +39,7 @@ public abstract class SOFTEventProc extends Callback implements SOFTEventProcI {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static SOFTEventProc createSafe(long functionPointer) {
+    public static @Nullable SOFTEventProc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

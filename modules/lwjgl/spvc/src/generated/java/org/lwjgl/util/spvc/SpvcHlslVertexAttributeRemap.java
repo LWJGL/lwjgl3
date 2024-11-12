@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.spvc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -138,8 +138,7 @@ public class SpvcHlslVertexAttributeRemap extends Struct<SpvcHlslVertexAttribute
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcHlslVertexAttributeRemap createSafe(long address) {
+    public static @Nullable SpvcHlslVertexAttributeRemap createSafe(long address) {
         return address == NULL ? null : new SpvcHlslVertexAttributeRemap(address, null);
     }
 
@@ -182,8 +181,7 @@ public class SpvcHlslVertexAttributeRemap extends Struct<SpvcHlslVertexAttribute
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SpvcHlslVertexAttributeRemap.Buffer createSafe(long address, int capacity) {
+    public static SpvcHlslVertexAttributeRemap.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

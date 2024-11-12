@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -129,13 +129,11 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
     /** NULL or a pointer to a valid structure based on {@link XrSpaceFilterInfoBaseHeaderFB}. */
-    @Nullable
     @NativeType("XrSpaceFilterInfoBaseHeaderFB const *")
-    public XrSpaceFilterInfoBaseHeaderFB filter() { return nfilter(address()); }
+    public @Nullable XrSpaceFilterInfoBaseHeaderFB filter() { return nfilter(address()); }
     /** NULL or a pointer to a valid structure based on {@link XrSpaceFilterInfoBaseHeaderFB}. */
-    @Nullable
     @NativeType("XrSpaceFilterInfoBaseHeaderFB const *")
-    public XrSpaceFilterInfoBaseHeaderFB excludeFilter() { return nexcludeFilter(address()); }
+    public @Nullable XrSpaceFilterInfoBaseHeaderFB excludeFilter() { return nexcludeFilter(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSpaceQueryInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -211,8 +209,7 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceQueryInfoFB createSafe(long address) {
+    public static @Nullable XrSpaceQueryInfoFB createSafe(long address) {
         return address == NULL ? null : new XrSpaceQueryInfoFB(address, null);
     }
 
@@ -260,8 +257,7 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceQueryInfoFB.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceQueryInfoFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -321,9 +317,9 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
     /** Unsafe version of {@link #timeout}. */
     public static long ntimeout(long struct) { return memGetLong(struct + XrSpaceQueryInfoFB.TIMEOUT); }
     /** Unsafe version of {@link #filter}. */
-    @Nullable public static XrSpaceFilterInfoBaseHeaderFB nfilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.FILTER)); }
+    public static @Nullable XrSpaceFilterInfoBaseHeaderFB nfilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.FILTER)); }
     /** Unsafe version of {@link #excludeFilter}. */
-    @Nullable public static XrSpaceFilterInfoBaseHeaderFB nexcludeFilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.EXCLUDEFILTER)); }
+    public static @Nullable XrSpaceFilterInfoBaseHeaderFB nexcludeFilter(long struct) { return XrSpaceFilterInfoBaseHeaderFB.createSafe(memGetAddress(struct + XrSpaceQueryInfoFB.EXCLUDEFILTER)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSpaceQueryInfoFB.TYPE, value); }
@@ -399,13 +395,11 @@ public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements Na
         @NativeType("XrDuration")
         public long timeout() { return XrSpaceQueryInfoFB.ntimeout(address()); }
         /** @return a {@link XrSpaceFilterInfoBaseHeaderFB} view of the struct pointed to by the {@link XrSpaceQueryInfoFB#filter} field. */
-        @Nullable
         @NativeType("XrSpaceFilterInfoBaseHeaderFB const *")
-        public XrSpaceFilterInfoBaseHeaderFB filter() { return XrSpaceQueryInfoFB.nfilter(address()); }
+        public @Nullable XrSpaceFilterInfoBaseHeaderFB filter() { return XrSpaceQueryInfoFB.nfilter(address()); }
         /** @return a {@link XrSpaceFilterInfoBaseHeaderFB} view of the struct pointed to by the {@link XrSpaceQueryInfoFB#excludeFilter} field. */
-        @Nullable
         @NativeType("XrSpaceFilterInfoBaseHeaderFB const *")
-        public XrSpaceFilterInfoBaseHeaderFB excludeFilter() { return XrSpaceQueryInfoFB.nexcludeFilter(address()); }
+        public @Nullable XrSpaceFilterInfoBaseHeaderFB excludeFilter() { return XrSpaceQueryInfoFB.nexcludeFilter(address()); }
 
         /** Sets the specified value to the {@link XrSpaceQueryInfoFB#type} field. */
         public XrSpaceQueryInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceQueryInfoFB.ntype(address(), value); return this; }

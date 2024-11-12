@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -217,8 +217,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeRateControlLayerInfoKHR createSafe(long address) {
+    public static @Nullable VkVideoEncodeRateControlLayerInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkVideoEncodeRateControlLayerInfoKHR(address, null);
     }
 
@@ -261,8 +260,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkVideoEncodeRateControlLayerInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkVideoEncodeRateControlLayerInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

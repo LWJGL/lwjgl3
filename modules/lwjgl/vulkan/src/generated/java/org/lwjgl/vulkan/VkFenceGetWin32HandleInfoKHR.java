@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -184,8 +184,7 @@ public class VkFenceGetWin32HandleInfoKHR extends Struct<VkFenceGetWin32HandleIn
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFenceGetWin32HandleInfoKHR createSafe(long address) {
+    public static @Nullable VkFenceGetWin32HandleInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkFenceGetWin32HandleInfoKHR(address, null);
     }
 
@@ -228,8 +227,7 @@ public class VkFenceGetWin32HandleInfoKHR extends Struct<VkFenceGetWin32HandleIn
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFenceGetWin32HandleInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkFenceGetWin32HandleInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

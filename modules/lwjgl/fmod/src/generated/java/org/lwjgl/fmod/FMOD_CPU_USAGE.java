@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -169,8 +169,7 @@ public class FMOD_CPU_USAGE extends Struct<FMOD_CPU_USAGE> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CPU_USAGE createSafe(long address) {
+    public static @Nullable FMOD_CPU_USAGE createSafe(long address) {
         return address == NULL ? null : new FMOD_CPU_USAGE(address, null);
     }
 
@@ -213,8 +212,7 @@ public class FMOD_CPU_USAGE extends Struct<FMOD_CPU_USAGE> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_CPU_USAGE.Buffer createSafe(long address, int capacity) {
+    public static FMOD_CPU_USAGE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

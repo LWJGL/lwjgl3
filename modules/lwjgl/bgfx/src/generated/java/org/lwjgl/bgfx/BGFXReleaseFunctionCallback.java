@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -37,8 +37,7 @@ public abstract class BGFXReleaseFunctionCallback extends Callback implements BG
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static BGFXReleaseFunctionCallback createSafe(long functionPointer) {
+    public static @Nullable BGFXReleaseFunctionCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

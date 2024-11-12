@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -402,7 +402,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties const *") @Nullable LongBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -451,7 +451,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @NativeType("cl_pipe_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -496,7 +496,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -524,7 +524,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -592,9 +592,8 @@ public class CL20 extends CL12 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clSVMAlloc(@NativeType("cl_context") long context, @NativeType("cl_svm_mem_flags") long flags, @NativeType("size_t") long size, @NativeType("unsigned int") int alignment) {
+    public static @Nullable ByteBuffer clSVMAlloc(@NativeType("cl_context") long context, @NativeType("cl_svm_mem_flags") long flags, @NativeType("size_t") long size, @NativeType("unsigned int") int alignment) {
         long __result = nclSVMAlloc(context, flags, size, alignment);
         return memByteBufferSafe(__result, (int)size);
     }
@@ -684,7 +683,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueSVMFree(@NativeType("cl_command_queue") long command_queue, @NativeType("void **") PointerBuffer svm_pointers, @Nullable @NativeType("void (*) (cl_command_queue, cl_uint, void **, void *)") CLSVMFreeCallbackI pfn_free_func, @NativeType("void *") long user_data, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSVMFree(@NativeType("cl_command_queue") long command_queue, @NativeType("void **") PointerBuffer svm_pointers, @NativeType("void (*) (cl_command_queue, cl_uint, void **, void *)") @Nullable CLSVMFreeCallbackI pfn_free_func, @NativeType("void *") long user_data, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -753,7 +752,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueSVMMemcpy(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_copy, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer src_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSVMMemcpy(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_copy, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer src_ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(dst_ptr, src_ptr.remaining());
             checkSafe(event, 1);
@@ -818,7 +817,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueSVMMemFill(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @NativeType("void const *") ByteBuffer pattern, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSVMMemFill(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @NativeType("void const *") ByteBuffer pattern, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -884,7 +883,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueSVMMap(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("void *") ByteBuffer svm_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSVMMap(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("void *") ByteBuffer svm_ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -937,7 +936,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueSVMUnmap(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueSVMUnmap(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1197,7 +1196,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") LongBuffer sampler_properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @NativeType("cl_sampler_properties const *") @Nullable LongBuffer sampler_properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(sampler_properties);
             checkSafe(errcode_ret, 1);
@@ -1211,7 +1210,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties const *") long @Nullable [] properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueueWithProperties;
         if (CHECKS) {
             check(__functionAddress);
@@ -1229,7 +1228,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @NativeType("cl_pipe_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreatePipe;
         if (CHECKS) {
             check(__functionAddress);
@@ -1246,7 +1245,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetPipeInfo;
         if (CHECKS) {
             check(__functionAddress);
@@ -1277,7 +1276,7 @@ public class CL20 extends CL12 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") long[] sampler_properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @NativeType("cl_sampler_properties const *") long @Nullable [] sampler_properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateSamplerWithProperties;
         if (CHECKS) {
             check(__functionAddress);

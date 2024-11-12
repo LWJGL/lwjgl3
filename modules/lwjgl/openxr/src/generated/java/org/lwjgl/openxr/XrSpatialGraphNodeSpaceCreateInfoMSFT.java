@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -190,8 +190,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct<XrSpatialGraph
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialGraphNodeSpaceCreateInfoMSFT createSafe(long address) {
+    public static @Nullable XrSpatialGraphNodeSpaceCreateInfoMSFT createSafe(long address) {
         return address == NULL ? null : new XrSpatialGraphNodeSpaceCreateInfoMSFT(address, null);
     }
 
@@ -234,8 +233,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct<XrSpatialGraph
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpatialGraphNodeSpaceCreateInfoMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSpatialGraphNodeSpaceCreateInfoMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

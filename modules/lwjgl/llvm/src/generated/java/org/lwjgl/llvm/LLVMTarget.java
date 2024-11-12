@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -164,9 +164,8 @@ public class LLVMTarget {
      * Converts target data to a target layout string. The string must be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. See the constructor
      * {@code llvm::DataLayout::DataLayout}.
      */
-    @Nullable
     @NativeType("char *")
-    public static String LLVMCopyStringRepOfTargetData(@NativeType("LLVMTargetDataRef") long TD) {
+    public static @Nullable String LLVMCopyStringRepOfTargetData(@NativeType("LLVMTargetDataRef") long TD) {
         long __result = nLLVMCopyStringRepOfTargetData(TD);
         return memUTF8Safe(__result);
     }

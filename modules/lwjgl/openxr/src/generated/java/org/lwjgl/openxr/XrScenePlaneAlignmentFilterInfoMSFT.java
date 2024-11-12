@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -109,9 +109,8 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
     @NativeType("uint32_t")
     public int alignmentCount() { return nalignmentCount(address()); }
     /** an array of {@code XrScenePlaneAlignmentTypeMSFT} to filter by. */
-    @Nullable
     @NativeType("XrScenePlaneAlignmentTypeMSFT const *")
-    public IntBuffer alignments() { return nalignments(address()); }
+    public @Nullable IntBuffer alignments() { return nalignments(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrScenePlaneAlignmentFilterInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -175,8 +174,7 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrScenePlaneAlignmentFilterInfoMSFT createSafe(long address) {
+    public static @Nullable XrScenePlaneAlignmentFilterInfoMSFT createSafe(long address) {
         return address == NULL ? null : new XrScenePlaneAlignmentFilterInfoMSFT(address, null);
     }
 
@@ -219,8 +217,7 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrScenePlaneAlignmentFilterInfoMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrScenePlaneAlignmentFilterInfoMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -271,7 +268,7 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
     /** Unsafe version of {@link #alignmentCount}. */
     public static int nalignmentCount(long struct) { return memGetInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTCOUNT); }
     /** Unsafe version of {@link #alignments() alignments}. */
-    @Nullable public static IntBuffer nalignments(long struct) { return memIntBufferSafe(memGetAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTS), nalignmentCount(struct)); }
+    public static @Nullable IntBuffer nalignments(long struct) { return memIntBufferSafe(memGetAddress(struct + XrScenePlaneAlignmentFilterInfoMSFT.ALIGNMENTS), nalignmentCount(struct)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrScenePlaneAlignmentFilterInfoMSFT.TYPE, value); }
@@ -335,9 +332,8 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct<XrScenePlaneAlig
         @NativeType("uint32_t")
         public int alignmentCount() { return XrScenePlaneAlignmentFilterInfoMSFT.nalignmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrScenePlaneAlignmentFilterInfoMSFT#alignments} field. */
-        @Nullable
         @NativeType("XrScenePlaneAlignmentTypeMSFT const *")
-        public IntBuffer alignments() { return XrScenePlaneAlignmentFilterInfoMSFT.nalignments(address()); }
+        public @Nullable IntBuffer alignments() { return XrScenePlaneAlignmentFilterInfoMSFT.nalignments(address()); }
 
         /** Sets the specified value to the {@link XrScenePlaneAlignmentFilterInfoMSFT#type} field. */
         public XrScenePlaneAlignmentFilterInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrScenePlaneAlignmentFilterInfoMSFT.ntype(address(), value); return this; }

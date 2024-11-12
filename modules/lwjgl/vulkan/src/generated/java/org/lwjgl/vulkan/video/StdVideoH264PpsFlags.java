@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan.video;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,8 +176,7 @@ public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264PpsFlags createSafe(long address) {
+    public static @Nullable StdVideoH264PpsFlags createSafe(long address) {
         return address == NULL ? null : new StdVideoH264PpsFlags(address, null);
     }
 
@@ -220,8 +219,7 @@ public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static StdVideoH264PpsFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoH264PpsFlags.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

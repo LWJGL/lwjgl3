@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -206,9 +206,8 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** number of {@code EXRAttribute} in the {@code custom_attributes} array */
     public int num_custom_attributes() { return nnum_custom_attributes(address()); }
     /** custom attributes (excludes required attributes, e.g. `channels`, `compression`, etc) */
-    @Nullable
     @NativeType("EXRAttribute *")
-    public EXRAttribute.Buffer custom_attributes() { return ncustom_attributes(address()); }
+    public EXRAttribute.@Nullable Buffer custom_attributes() { return ncustom_attributes(address()); }
     /** @return a {@link EXRChannelInfo.Buffer} view of the struct array pointed to by the {@code channels} field. */
     @NativeType("EXRChannelInfo *")
     public EXRChannelInfo.Buffer channels() { return nchannels(address()); }
@@ -278,7 +277,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** Sets the specified value to the {@link #num_custom_attributes} field. */
     public EXRHeader num_custom_attributes(int value) { nnum_custom_attributes(address(), value); return this; }
     /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@link #custom_attributes} field. */
-    public EXRHeader custom_attributes(@Nullable @NativeType("EXRAttribute *") EXRAttribute.Buffer value) { ncustom_attributes(address(), value); return this; }
+    public EXRHeader custom_attributes(@NativeType("EXRAttribute *") EXRAttribute.@Nullable Buffer value) { ncustom_attributes(address(), value); return this; }
     /** Sets the address of the specified {@link EXRChannelInfo.Buffer} to the {@code channels} field. */
     public EXRHeader channels(@NativeType("EXRChannelInfo *") EXRChannelInfo.Buffer value) { nchannels(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pixel_types} field. */
@@ -311,7 +310,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         boolean multipart,
         int header_len,
         int num_custom_attributes,
-        @Nullable EXRAttribute.Buffer custom_attributes,
+        EXRAttribute.@Nullable Buffer custom_attributes,
         EXRChannelInfo.Buffer channels,
         IntBuffer pixel_types,
         int num_channels,
@@ -383,8 +382,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRHeader createSafe(long address) {
+    public static @Nullable EXRHeader createSafe(long address) {
         return address == NULL ? null : new EXRHeader(address, null);
     }
 
@@ -427,8 +425,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRHeader.Buffer createSafe(long address, int capacity) {
+    public static EXRHeader.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -530,7 +527,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** Unsafe version of {@link #num_custom_attributes}. */
     public static int nnum_custom_attributes(long struct) { return memGetInt(struct + EXRHeader.NUM_CUSTOM_ATTRIBUTES); }
     /** Unsafe version of {@link #custom_attributes}. */
-    @Nullable public static EXRAttribute.Buffer ncustom_attributes(long struct) { return EXRAttribute.createSafe(memGetAddress(struct + EXRHeader.CUSTOM_ATTRIBUTES), nnum_custom_attributes(struct)); }
+    public static EXRAttribute.@Nullable Buffer ncustom_attributes(long struct) { return EXRAttribute.createSafe(memGetAddress(struct + EXRHeader.CUSTOM_ATTRIBUTES), nnum_custom_attributes(struct)); }
     /** Unsafe version of {@link #channels}. */
     public static EXRChannelInfo.Buffer nchannels(long struct) { return EXRChannelInfo.create(memGetAddress(struct + EXRHeader.CHANNELS), nnum_channels(struct)); }
     /** Unsafe version of {@link #pixel_types() pixel_types}. */
@@ -588,7 +585,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** Sets the specified value to the {@code num_custom_attributes} field of the specified {@code struct}. */
     public static void nnum_custom_attributes(long struct, int value) { memPutInt(struct + EXRHeader.NUM_CUSTOM_ATTRIBUTES, value); }
     /** Unsafe version of {@link #custom_attributes(EXRAttribute.Buffer) custom_attributes}. */
-    public static void ncustom_attributes(long struct, @Nullable EXRAttribute.Buffer value) { memPutAddress(struct + EXRHeader.CUSTOM_ATTRIBUTES, memAddressSafe(value)); nnum_custom_attributes(struct, value == null ? 0 : value.remaining()); }
+    public static void ncustom_attributes(long struct, EXRAttribute.@Nullable Buffer value) { memPutAddress(struct + EXRHeader.CUSTOM_ATTRIBUTES, memAddressSafe(value)); nnum_custom_attributes(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #channels(EXRChannelInfo.Buffer) channels}. */
     public static void nchannels(long struct, EXRChannelInfo.Buffer value) { memPutAddress(struct + EXRHeader.CHANNELS, value.address()); }
     /** Unsafe version of {@link #pixel_types(IntBuffer) pixel_types}. */
@@ -710,9 +707,8 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         /** @return the value of the {@link EXRHeader#num_custom_attributes} field. */
         public int num_custom_attributes() { return EXRHeader.nnum_custom_attributes(address()); }
         /** @return a {@link EXRAttribute.Buffer} view of the struct array pointed to by the {@link EXRHeader#custom_attributes} field. */
-        @Nullable
         @NativeType("EXRAttribute *")
-        public EXRAttribute.Buffer custom_attributes() { return EXRHeader.ncustom_attributes(address()); }
+        public EXRAttribute.@Nullable Buffer custom_attributes() { return EXRHeader.ncustom_attributes(address()); }
         /** @return a {@link EXRChannelInfo.Buffer} view of the struct array pointed to by the {@code channels} field. */
         @NativeType("EXRChannelInfo *")
         public EXRChannelInfo.Buffer channels() { return EXRHeader.nchannels(address()); }
@@ -774,7 +770,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         /** Sets the specified value to the {@link EXRHeader#num_custom_attributes} field. */
         public EXRHeader.Buffer num_custom_attributes(int value) { EXRHeader.nnum_custom_attributes(address(), value); return this; }
         /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@link EXRHeader#custom_attributes} field. */
-        public EXRHeader.Buffer custom_attributes(@Nullable @NativeType("EXRAttribute *") EXRAttribute.Buffer value) { EXRHeader.ncustom_attributes(address(), value); return this; }
+        public EXRHeader.Buffer custom_attributes(@NativeType("EXRAttribute *") EXRAttribute.@Nullable Buffer value) { EXRHeader.ncustom_attributes(address(), value); return this; }
         /** Sets the address of the specified {@link EXRChannelInfo.Buffer} to the {@code channels} field. */
         public EXRHeader.Buffer channels(@NativeType("EXRChannelInfo *") EXRChannelInfo.Buffer value) { EXRHeader.nchannels(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link EXRHeader#pixel_types} field. */

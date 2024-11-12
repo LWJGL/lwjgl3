@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -87,8 +87,7 @@ public class FT_ColorIndex extends Struct<FT_ColorIndex> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ColorIndex createSafe(long address) {
+    public static @Nullable FT_ColorIndex createSafe(long address) {
         return address == NULL ? null : new FT_ColorIndex(address, null);
     }
 
@@ -103,8 +102,7 @@ public class FT_ColorIndex extends Struct<FT_ColorIndex> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FT_ColorIndex.Buffer createSafe(long address, int capacity) {
+    public static FT_ColorIndex.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

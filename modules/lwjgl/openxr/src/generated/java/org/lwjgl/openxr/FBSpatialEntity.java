@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -332,7 +332,7 @@ public class FBSpatialEntity {
      * @param componentTypes           a pointer to an array of {@code XrSpaceComponentTypeFB} values, but <b>can</b> be {@code NULL} if {@code componentTypeCapacityInput} is 0.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateSpaceSupportedComponentsFB(XrSpace space, @NativeType("uint32_t *") IntBuffer componentTypeCountOutput, @Nullable @NativeType("XrSpaceComponentTypeFB *") IntBuffer componentTypes) {
+    public static int xrEnumerateSpaceSupportedComponentsFB(XrSpace space, @NativeType("uint32_t *") IntBuffer componentTypeCountOutput, @NativeType("XrSpaceComponentTypeFB *") @Nullable IntBuffer componentTypes) {
         if (CHECKS) {
             check(componentTypeCountOutput, 1);
         }

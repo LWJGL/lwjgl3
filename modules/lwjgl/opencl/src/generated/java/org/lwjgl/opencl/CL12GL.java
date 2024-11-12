@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -92,7 +92,7 @@ public class CL12GL extends CL10GL {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLTexture.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateFromGLTexture(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateFromGLTexture(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -105,7 +105,7 @@ public class CL12GL extends CL10GL {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLTexture.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateFromGLTexture(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateFromGLTexture(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateFromGLTexture;
         if (CHECKS) {
             check(__functionAddress);

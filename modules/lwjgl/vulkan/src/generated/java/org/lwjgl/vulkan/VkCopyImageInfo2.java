@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -295,8 +295,7 @@ public class VkCopyImageInfo2 extends Struct<VkCopyImageInfo2> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCopyImageInfo2 createSafe(long address) {
+    public static @Nullable VkCopyImageInfo2 createSafe(long address) {
         return address == NULL ? null : new VkCopyImageInfo2(address, null);
     }
 
@@ -339,8 +338,7 @@ public class VkCopyImageInfo2 extends Struct<VkCopyImageInfo2> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCopyImageInfo2.Buffer createSafe(long address, int capacity) {
+    public static VkCopyImageInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

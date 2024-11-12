@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,8 +131,7 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXPlatformAvailability createSafe(long address) {
+    public static @Nullable CXPlatformAvailability createSafe(long address) {
         return address == NULL ? null : new CXPlatformAvailability(address, null);
     }
 
@@ -175,8 +174,7 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXPlatformAvailability.Buffer createSafe(long address, int capacity) {
+    public static CXPlatformAvailability.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

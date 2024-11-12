@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -199,9 +199,8 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
     /** a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in a render pass instance. If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, this parameter is ignored. */
-    @Nullable
     @NativeType("VkImageView const *")
-    public LongBuffer pAttachments() { return npAttachments(address()); }
+    public @Nullable LongBuffer pAttachments() { return npAttachments(address()); }
     /** {@code width}, {@code height} and {@code layers} define the dimensions of the framebuffer. If the render pass uses multiview, then {@code layers} <b>must</b> be one and each attachment requires a number of layers that is greater than the maximum bit index set in the view mask in the subpasses in which it is used. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
@@ -298,8 +297,7 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFramebufferCreateInfo createSafe(long address) {
+    public static @Nullable VkFramebufferCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkFramebufferCreateInfo(address, null);
     }
 
@@ -342,8 +340,7 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkFramebufferCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkFramebufferCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -417,7 +414,7 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     /** Unsafe version of {@link #attachmentCount}. */
     public static int nattachmentCount(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pAttachments() pAttachments}. */
-    @Nullable public static LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
+    public static @Nullable LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS), nattachmentCount(struct)); }
     /** Unsafe version of {@link #width}. */
     public static int nwidth(long struct) { return memGetInt(struct + VkFramebufferCreateInfo.WIDTH); }
     /** Unsafe version of {@link #height}. */
@@ -503,9 +500,8 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
         @NativeType("uint32_t")
         public int attachmentCount() { return VkFramebufferCreateInfo.nattachmentCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkFramebufferCreateInfo#pAttachments} field. */
-        @Nullable
         @NativeType("VkImageView const *")
-        public LongBuffer pAttachments() { return VkFramebufferCreateInfo.npAttachments(address()); }
+        public @Nullable LongBuffer pAttachments() { return VkFramebufferCreateInfo.npAttachments(address()); }
         /** @return the value of the {@link VkFramebufferCreateInfo#width} field. */
         @NativeType("uint32_t")
         public int width() { return VkFramebufferCreateInfo.nwidth(address()); }

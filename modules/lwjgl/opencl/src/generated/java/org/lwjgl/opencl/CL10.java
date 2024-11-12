@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -398,7 +398,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPlatformIDs.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPlatformIDs(@Nullable @NativeType("cl_platform_id *") PointerBuffer platforms, @Nullable @NativeType("cl_uint *") IntBuffer num_platforms) {
+    public static int clGetPlatformIDs(@NativeType("cl_platform_id *") @Nullable PointerBuffer platforms, @NativeType("cl_uint *") @Nullable IntBuffer num_platforms) {
         if (CHECKS) {
             checkSafe(num_platforms, 1);
         }
@@ -440,7 +440,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPlatformInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -467,7 +467,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPlatformInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -512,7 +512,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceIDs.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceIDs(@NativeType("cl_platform_id") long platform, @NativeType("cl_device_type") long device_type, @Nullable @NativeType("cl_device_id *") PointerBuffer devices, @Nullable @NativeType("cl_uint *") IntBuffer num_devices) {
+    public static int clGetDeviceIDs(@NativeType("cl_platform_id") long platform, @NativeType("cl_device_type") long device_type, @NativeType("cl_device_id *") @Nullable PointerBuffer devices, @NativeType("cl_uint *") @Nullable IntBuffer num_devices) {
         if (CHECKS) {
             checkSafe(num_devices, 1);
         }
@@ -557,7 +557,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -587,7 +587,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -617,7 +617,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -647,7 +647,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -701,7 +701,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateContext.html">Reference Page</a>
      */
     @NativeType("cl_context")
-    public static long clCreateContext(@Nullable @NativeType("cl_context_properties const *") PointerBuffer properties, @NativeType("cl_device_id const *") PointerBuffer devices, @Nullable @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateContext(@NativeType("cl_context_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_device_id const *") PointerBuffer devices, @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") @Nullable CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -743,7 +743,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateContext.html">Reference Page</a>
      */
     @NativeType("cl_context")
-    public static long clCreateContext(@Nullable @NativeType("cl_context_properties const *") PointerBuffer properties, @NativeType("cl_device_id const *") long device, @Nullable @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateContext(@NativeType("cl_context_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_device_id const *") long device, @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") @Nullable CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -778,7 +778,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateContextFromType.html">Reference Page</a>
      */
     @NativeType("cl_context")
-    public static long clCreateContextFromType(@Nullable @NativeType("cl_context_properties const *") PointerBuffer properties, @NativeType("cl_device_type") long device_type, @Nullable @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateContextFromType(@NativeType("cl_context_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_device_type") long device_type, @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") @Nullable CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -881,7 +881,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetContextInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -909,7 +909,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetContextInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -937,7 +937,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetContextInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -985,7 +985,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clCreateCommandQueue.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.2</em>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueue(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_command_queue_properties") long properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateCommandQueue(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_command_queue_properties") long properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1089,7 +1089,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -1117,7 +1117,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -1145,7 +1145,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -1173,7 +1173,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -1230,7 +1230,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("size_t") long size, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("size_t") long size, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1273,7 +1273,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1316,7 +1316,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ShortBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1359,7 +1359,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") IntBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1402,7 +1402,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") FloatBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1445,7 +1445,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") DoubleBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") DoubleBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -1529,7 +1529,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1596,7 +1596,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1663,7 +1663,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1730,7 +1730,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1797,7 +1797,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1880,7 +1880,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -1946,7 +1946,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -2012,7 +2012,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -2078,7 +2078,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -2144,7 +2144,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -2214,7 +2214,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueCopyBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCopyBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -2304,9 +2304,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapBuffer.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t") long offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret, @Nullable ByteBuffer old_buffer) {
         if (CHECKS) {
             checkSafe(event, 1);
             checkSafe(errcode_ret, 1);
@@ -2365,7 +2364,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") @Nullable ByteBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2411,7 +2410,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") @Nullable ShortBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2457,7 +2456,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") @Nullable IntBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2503,7 +2502,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") @Nullable FloatBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2567,7 +2566,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") @Nullable ByteBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2620,7 +2619,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") ShortBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") @Nullable ShortBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2673,7 +2672,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") IntBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") @Nullable IntBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2726,7 +2725,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") FloatBuffer host_ptr, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") @Nullable FloatBuffer host_ptr, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -2780,7 +2779,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSupportedImageFormats.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSupportedImageFormats(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @Nullable @NativeType("cl_image_format *") CLImageFormat.Buffer image_formats, @Nullable @NativeType("cl_uint *") IntBuffer num_image_formats) {
+    public static int clGetSupportedImageFormats(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_image_format *") CLImageFormat.@Nullable Buffer image_formats, @NativeType("cl_uint *") @Nullable IntBuffer num_image_formats) {
         if (CHECKS) {
             checkSafe(num_image_formats, 1);
         }
@@ -2885,7 +2884,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -2976,7 +2975,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3067,7 +3066,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3158,7 +3157,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3249,7 +3248,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3356,7 +3355,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3447,7 +3446,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3538,7 +3537,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") IntBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3629,7 +3628,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3720,7 +3719,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -3818,7 +3817,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueCopyImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCopyImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(src_origin, 3);
             check(dst_origin, 3);
@@ -3905,7 +3904,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyImageToBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueCopyImageToBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCopyImageToBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(src_origin, 3);
             check(region, 3);
@@ -3987,7 +3986,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyBufferToImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueCopyBufferToImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueCopyBufferToImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             check(dst_origin, 3);
             check(region, 3);
@@ -4099,9 +4098,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapImage.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @Nullable @NativeType("size_t *") PointerBuffer image_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @NativeType("size_t *") @Nullable PointerBuffer image_slice_pitch, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret, @Nullable ByteBuffer old_buffer) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -4202,9 +4200,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapImage.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @Nullable @NativeType("size_t *") PointerBuffer image_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret, long length, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @NativeType("size_t *") @Nullable PointerBuffer image_slice_pitch, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret, long length, @Nullable ByteBuffer old_buffer) {
         if (CHECKS) {
             check(origin, 3);
             check(region, 3);
@@ -4253,7 +4250,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetImageInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4281,7 +4278,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetImageInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4309,7 +4306,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetImageInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4427,7 +4424,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueUnmapMemObject.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueUnmapMemObject(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long memobj, @NativeType("void *") ByteBuffer mapped_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueUnmapMemObject(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long memobj, @NativeType("void *") ByteBuffer mapped_ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -4470,7 +4467,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4498,7 +4495,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4526,7 +4523,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4554,7 +4551,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4601,7 +4598,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clCreateSampler.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.2</em>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSampler(@NativeType("cl_context") long context, @NativeType("cl_bool") boolean normalized_coords, @NativeType("cl_addressing_mode") int addressing_mode, @NativeType("cl_filter_mode") int filter_mode, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateSampler(@NativeType("cl_context") long context, @NativeType("cl_bool") boolean normalized_coords, @NativeType("cl_addressing_mode") int addressing_mode, @NativeType("cl_filter_mode") int filter_mode, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -4697,7 +4694,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4725,7 +4722,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4753,7 +4750,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -4800,7 +4797,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithSource.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") PointerBuffer strings, @Nullable @NativeType("size_t const *") PointerBuffer lengths, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") PointerBuffer strings, @NativeType("size_t const *") @Nullable PointerBuffer lengths, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(lengths, strings.remaining());
             checkSafe(errcode_ret, 1);
@@ -4830,7 +4827,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithSource.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") CharSequence[] strings, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") CharSequence[] strings, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -4866,7 +4863,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithSource.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") CharSequence string, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") CharSequence string, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -4949,7 +4946,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithBinary.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("size_t const *") PointerBuffer lengths, @NativeType("cl_uchar const **") PointerBuffer binaries, @Nullable @NativeType("cl_int *") IntBuffer binary_status, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("size_t const *") PointerBuffer lengths, @NativeType("cl_uchar const **") PointerBuffer binaries, @NativeType("cl_int *") @Nullable IntBuffer binary_status, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             check(device_list, binaries.remaining());
             check(lengths, binaries.remaining());
@@ -5011,7 +5008,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithBinary.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_uchar const **") ByteBuffer[] binaries, @Nullable @NativeType("cl_int *") IntBuffer binary_status, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_uchar const **") ByteBuffer[] binaries, @NativeType("cl_int *") @Nullable IntBuffer binary_status, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             check(device_list, binaries.length);
             checkSafe(binary_status, binaries.length);
@@ -5075,7 +5072,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithBinary.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_uchar const **") ByteBuffer binary, @Nullable @NativeType("cl_int *") IntBuffer binary_status, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_uchar const **") ByteBuffer binary, @NativeType("cl_int *") @Nullable IntBuffer binary_status, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             check(device_list, 1);
             checkSafe(binary_status, 1);
@@ -5206,7 +5203,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clBuildProgram.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clBuildProgram(@NativeType("cl_program") long program, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") ByteBuffer options, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static int clBuildProgram(@NativeType("cl_program") long program, @NativeType("cl_device_id const *") @Nullable PointerBuffer device_list, @NativeType("cl_char const *") ByteBuffer options, @NativeType("void (*) (cl_program, void *)") @Nullable CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         if (CHECKS) {
             checkNT1(options);
         }
@@ -5261,7 +5258,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clBuildProgram.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clBuildProgram(@NativeType("cl_program") long program, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static int clBuildProgram(@NativeType("cl_program") long program, @NativeType("cl_device_id const *") @Nullable PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @NativeType("void (*) (cl_program, void *)") @Nullable CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(options, true);
@@ -5317,7 +5314,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clBuildProgram.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clBuildProgram(@NativeType("cl_program") long program, @NativeType("cl_device_id const *") long device, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static int clBuildProgram(@NativeType("cl_program") long program, @NativeType("cl_device_id const *") long device, @NativeType("cl_char const *") CharSequence options, @NativeType("void (*) (cl_program, void *)") @Nullable CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(options, true);
@@ -5385,7 +5382,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5415,7 +5412,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5445,7 +5442,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5491,7 +5488,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramBuildInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5521,7 +5518,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramBuildInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5551,7 +5548,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramBuildInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -5604,7 +5601,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
-    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") ByteBuffer kernel_name, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") ByteBuffer kernel_name, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNT1(kernel_name);
             checkSafe(errcode_ret, 1);
@@ -5647,7 +5644,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
-    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") CharSequence kernel_name, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") CharSequence kernel_name, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -5700,7 +5697,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernelsInProgram.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clCreateKernelsInProgram(@NativeType("cl_program") long program, @Nullable @NativeType("cl_kernel *") PointerBuffer kernels, @Nullable @NativeType("cl_uint *") IntBuffer num_kernels_ret) {
+    public static int clCreateKernelsInProgram(@NativeType("cl_program") long program, @NativeType("cl_kernel *") @Nullable PointerBuffer kernels, @NativeType("cl_uint *") @Nullable IntBuffer num_kernels_ret) {
         if (CHECKS) {
             checkSafe(num_kernels_ret, 1);
         }
@@ -7687,7 +7684,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7715,7 +7712,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7743,7 +7740,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7793,7 +7790,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7827,7 +7824,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7861,7 +7858,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7895,7 +7892,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -7999,7 +7996,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueNDRangeKernel.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueNDRangeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @Nullable @NativeType("size_t const *") PointerBuffer global_work_offset, @Nullable @NativeType("size_t const *") PointerBuffer global_work_size, @Nullable @NativeType("size_t const *") PointerBuffer local_work_size, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueNDRangeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") @Nullable PointerBuffer global_work_size, @NativeType("size_t const *") @Nullable PointerBuffer local_work_size, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(global_work_offset, work_dim);
             checkSafe(global_work_size, work_dim);
@@ -8046,7 +8043,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clEnqueueTask.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.2</em>
      */
     @NativeType("cl_int")
-    public static int clEnqueueTask(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueTask(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_kernel") long kernel, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -8120,7 +8117,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueNativeKernel.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueNativeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("void (*) (void *)") CLNativeKernelI user_func, @Nullable @NativeType("void *") ByteBuffer args, @Nullable @NativeType("cl_mem const *") PointerBuffer mem_list, @Nullable @NativeType("void const **") PointerBuffer args_mem_loc, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueNativeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("void (*) (void *)") CLNativeKernelI user_func, @NativeType("void *") @Nullable ByteBuffer args, @NativeType("cl_mem const *") @Nullable PointerBuffer mem_list, @NativeType("void const **") @Nullable PointerBuffer args_mem_loc, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(args_mem_loc, remainingSafe(mem_list));
             checkSafe(event, 1);
@@ -8169,7 +8166,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueNativeKernel.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueNativeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("void (*) (void *)") CLNativeKernelI user_func, @Nullable @NativeType("void *") ByteBuffer args, @NativeType("cl_mem const *") long memobj, @NativeType("void const **") long memobj_loc, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueNativeKernel(@NativeType("cl_command_queue") long command_queue, @NativeType("void (*) (void *)") CLNativeKernelI user_func, @NativeType("void *") @Nullable ByteBuffer args, @NativeType("cl_mem const *") long memobj, @NativeType("void const **") long memobj_loc, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -8288,7 +8285,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -8321,7 +8318,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -8354,7 +8351,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -8458,7 +8455,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clEnqueueMarker.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_int")
-    public static int clEnqueueMarker(@NativeType("cl_command_queue") long command_queue, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueMarker(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
             checkSafe(event, 1);
         }
@@ -8598,7 +8595,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventProfilingInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -8628,7 +8625,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventProfilingInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @Nullable @NativeType("void *") LongBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @NativeType("void *") @Nullable LongBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
             checkSafe(param_value_size_ret, 1);
         }
@@ -8760,7 +8757,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPlatformIDs.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPlatformIDs(@Nullable @NativeType("cl_platform_id *") PointerBuffer platforms, @Nullable @NativeType("cl_uint *") int[] num_platforms) {
+    public static int clGetPlatformIDs(@NativeType("cl_platform_id *") @Nullable PointerBuffer platforms, @NativeType("cl_uint *") int @Nullable [] num_platforms) {
         long __functionAddress = CL.getICD().clGetPlatformIDs;
         if (CHECKS) {
             checkSafe(num_platforms, 1);
@@ -8774,7 +8771,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPlatformInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetPlatformInfo(@NativeType("cl_platform_id") long platform, @NativeType("cl_platform_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetPlatformInfo;
         if (CHECKS) {
             check(platform);
@@ -8789,7 +8786,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceIDs.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceIDs(@NativeType("cl_platform_id") long platform, @NativeType("cl_device_type") long device_type, @Nullable @NativeType("cl_device_id *") PointerBuffer devices, @Nullable @NativeType("cl_uint *") int[] num_devices) {
+    public static int clGetDeviceIDs(@NativeType("cl_platform_id") long platform, @NativeType("cl_device_type") long device_type, @NativeType("cl_device_id *") @Nullable PointerBuffer devices, @NativeType("cl_uint *") int @Nullable [] num_devices) {
         long __functionAddress = CL.getICD().clGetDeviceIDs;
         if (CHECKS) {
             checkSafe(num_devices, 1);
@@ -8803,7 +8800,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetDeviceInfo;
         if (CHECKS) {
             check(device);
@@ -8818,7 +8815,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetDeviceInfo(@NativeType("cl_device_id") long device, @NativeType("cl_device_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetDeviceInfo;
         if (CHECKS) {
             check(device);
@@ -8833,7 +8830,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateContext.html">Reference Page</a>
      */
     @NativeType("cl_context")
-    public static long clCreateContext(@Nullable @NativeType("cl_context_properties const *") PointerBuffer properties, @NativeType("cl_device_id const *") PointerBuffer devices, @Nullable @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateContext(@NativeType("cl_context_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_device_id const *") PointerBuffer devices, @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") @Nullable CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateContext;
         if (CHECKS) {
             checkNTSafe(properties);
@@ -8848,7 +8845,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateContextFromType.html">Reference Page</a>
      */
     @NativeType("cl_context")
-    public static long clCreateContextFromType(@Nullable @NativeType("cl_context_properties const *") PointerBuffer properties, @NativeType("cl_device_type") long device_type, @Nullable @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateContextFromType(@NativeType("cl_context_properties const *") @Nullable PointerBuffer properties, @NativeType("cl_device_type") long device_type, @NativeType("void (*) (cl_char const *, void const *, size_t, void *)") @Nullable CLContextCallbackI pfn_notify, @NativeType("void *") long user_data, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateContextFromType;
         if (CHECKS) {
             checkNTSafe(properties);
@@ -8863,7 +8860,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetContextInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetContextInfo(@NativeType("cl_context") long context, @NativeType("cl_context_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetContextInfo;
         if (CHECKS) {
             check(context);
@@ -8878,7 +8875,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clCreateCommandQueue.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.2</em>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueue(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_command_queue_properties") long properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateCommandQueue(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_command_queue_properties") long properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueue;
         if (CHECKS) {
             check(context);
@@ -8894,7 +8891,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetCommandQueueInfo;
         if (CHECKS) {
             check(command_queue);
@@ -8909,7 +8906,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetCommandQueueInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetCommandQueueInfo(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_command_queue_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetCommandQueueInfo;
         if (CHECKS) {
             check(command_queue);
@@ -8924,7 +8921,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") ByteBuffer host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBuffer;
         if (CHECKS) {
             check(context);
@@ -8939,7 +8936,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") short[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBuffer;
         if (CHECKS) {
             check(context);
@@ -8954,7 +8951,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") int[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBuffer;
         if (CHECKS) {
             check(context);
@@ -8969,7 +8966,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") float[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBuffer;
         if (CHECKS) {
             check(context);
@@ -8984,7 +8981,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") double[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("void *") double[] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateBuffer;
         if (CHECKS) {
             check(context);
@@ -8999,7 +8996,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBuffer;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9016,7 +9013,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBuffer;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9033,7 +9030,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBuffer;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9050,7 +9047,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t") long offset, @NativeType("void *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBuffer;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9067,7 +9064,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBuffer;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9084,7 +9081,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBuffer;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9101,7 +9098,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBuffer;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9118,7 +9115,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBuffer.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t") long offset, @NativeType("void const *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBuffer;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9134,9 +9131,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapBuffer.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t") long offset, @NativeType("size_t") long size, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") int[] errcode_ret, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapBuffer(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") int @Nullable [] errcode_ret, @Nullable ByteBuffer old_buffer) {
         long __functionAddress = CL.getICD().clEnqueueMapBuffer;
         if (CHECKS) {
             check(command_queue);
@@ -9154,7 +9150,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") @Nullable ByteBuffer host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage2D;
         if (CHECKS) {
             check(context);
@@ -9169,7 +9165,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") short @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage2D;
         if (CHECKS) {
             check(context);
@@ -9184,7 +9180,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") int @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage2D;
         if (CHECKS) {
             check(context);
@@ -9199,7 +9195,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @Nullable @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_row_pitch, @NativeType("void *") float @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage2D;
         if (CHECKS) {
             check(context);
@@ -9214,7 +9210,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") ByteBuffer host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") @Nullable ByteBuffer host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage3D;
         if (CHECKS) {
             check(context);
@@ -9229,7 +9225,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") short[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") short @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage3D;
         if (CHECKS) {
             check(context);
@@ -9244,7 +9240,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") int[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") int @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage3D;
         if (CHECKS) {
             check(context);
@@ -9259,7 +9255,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
-    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @Nullable @NativeType("void *") float[] host_ptr, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateImage3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_image_format const *") CLImageFormat image_format, @NativeType("size_t") long image_width, @NativeType("size_t") long image_height, @NativeType("size_t") long image_depth, @NativeType("size_t") long image_row_pitch, @NativeType("size_t") long image_slice_pitch, @NativeType("void *") float @Nullable [] host_ptr, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateImage3D;
         if (CHECKS) {
             check(context);
@@ -9274,7 +9270,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSupportedImageFormats.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSupportedImageFormats(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @Nullable @NativeType("cl_image_format *") CLImageFormat.Buffer image_formats, @Nullable @NativeType("cl_uint *") int[] num_image_formats) {
+    public static int clGetSupportedImageFormats(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_mem_object_type") int image_type, @NativeType("cl_image_format *") CLImageFormat.@Nullable Buffer image_formats, @NativeType("cl_uint *") int @Nullable [] num_image_formats) {
         long __functionAddress = CL.getICD().clGetSupportedImageFormats;
         if (CHECKS) {
             check(context);
@@ -9289,7 +9285,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadImage;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9308,7 +9304,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadImage;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9327,7 +9323,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadImage;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9346,7 +9342,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long row_pitch, @NativeType("size_t") long slice_pitch, @NativeType("void *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadImage;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9365,7 +9361,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") short[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteImage;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9384,7 +9380,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") int[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteImage;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9403,7 +9399,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") float[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteImage;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9422,7 +9418,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteImage.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long input_row_pitch, @NativeType("size_t") long input_slice_pitch, @NativeType("void const *") double[] ptr, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteImage;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
@@ -9440,9 +9436,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapImage.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @Nullable @NativeType("size_t *") PointerBuffer image_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") int[] errcode_ret, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @NativeType("size_t *") @Nullable PointerBuffer image_slice_pitch, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") int @Nullable [] errcode_ret, @Nullable ByteBuffer old_buffer) {
         long __functionAddress = CL.getICD().clEnqueueMapImage;
         if (CHECKS) {
             check(command_queue);
@@ -9464,9 +9459,8 @@ public class CL10 {
      * 
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueMapImage.html">Reference Page</a>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @Nullable @NativeType("size_t *") PointerBuffer image_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event, @Nullable @NativeType("cl_int *") int[] errcode_ret, long length, @Nullable ByteBuffer old_buffer) {
+    public static @Nullable ByteBuffer clEnqueueMapImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t *") PointerBuffer image_row_pitch, @NativeType("size_t *") @Nullable PointerBuffer image_slice_pitch, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event, @NativeType("cl_int *") int @Nullable [] errcode_ret, long length, @Nullable ByteBuffer old_buffer) {
         long __functionAddress = CL.getICD().clEnqueueMapImage;
         if (CHECKS) {
             check(command_queue);
@@ -9488,7 +9482,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetImageInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetImageInfo(@NativeType("cl_mem") long image, @NativeType("cl_image_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetImageInfo;
         if (CHECKS) {
             check(image);
@@ -9503,7 +9497,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetMemObjectInfo;
         if (CHECKS) {
             check(memobj);
@@ -9518,7 +9512,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetMemObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetMemObjectInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_mem_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetMemObjectInfo;
         if (CHECKS) {
             check(memobj);
@@ -9533,7 +9527,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clCreateSampler.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.2</em>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSampler(@NativeType("cl_context") long context, @NativeType("cl_bool") boolean normalized_coords, @NativeType("cl_addressing_mode") int addressing_mode, @NativeType("cl_filter_mode") int filter_mode, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateSampler(@NativeType("cl_context") long context, @NativeType("cl_bool") boolean normalized_coords, @NativeType("cl_addressing_mode") int addressing_mode, @NativeType("cl_filter_mode") int filter_mode, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateSampler;
         if (CHECKS) {
             check(context);
@@ -9548,7 +9542,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetSamplerInfo(@NativeType("cl_sampler") long sampler, @NativeType("cl_sampler_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetSamplerInfo;
         if (CHECKS) {
             check(sampler);
@@ -9563,7 +9557,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithSource.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") PointerBuffer strings, @Nullable @NativeType("size_t const *") PointerBuffer lengths, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateProgramWithSource(@NativeType("cl_context") long context, @NativeType("cl_char const **") PointerBuffer strings, @NativeType("size_t const *") @Nullable PointerBuffer lengths, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateProgramWithSource;
         if (CHECKS) {
             check(context);
@@ -9579,7 +9573,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithBinary.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("size_t const *") PointerBuffer lengths, @NativeType("cl_uchar const **") PointerBuffer binaries, @Nullable @NativeType("cl_int *") int[] binary_status, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateProgramWithBinary(@NativeType("cl_context") long context, @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("size_t const *") PointerBuffer lengths, @NativeType("cl_uchar const **") PointerBuffer binaries, @NativeType("cl_int *") int @Nullable [] binary_status, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateProgramWithBinary;
         if (CHECKS) {
             check(context);
@@ -9597,7 +9591,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramInfo(@NativeType("cl_program") long program, @NativeType("cl_program_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetProgramInfo;
         if (CHECKS) {
             check(program);
@@ -9612,7 +9606,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetProgramBuildInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetProgramBuildInfo(@NativeType("cl_program") long program, @NativeType("cl_device_id") long device, @NativeType("cl_program_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetProgramBuildInfo;
         if (CHECKS) {
             check(program);
@@ -9628,7 +9622,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
-    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") ByteBuffer kernel_name, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") ByteBuffer kernel_name, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateKernel;
         if (CHECKS) {
             check(program);
@@ -9644,7 +9638,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
-    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") CharSequence kernel_name, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateKernel(@NativeType("cl_program") long program, @NativeType("cl_char const *") CharSequence kernel_name, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateKernel;
         if (CHECKS) {
             check(program);
@@ -9666,7 +9660,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateKernelsInProgram.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clCreateKernelsInProgram(@NativeType("cl_program") long program, @Nullable @NativeType("cl_kernel *") PointerBuffer kernels, @Nullable @NativeType("cl_uint *") int[] num_kernels_ret) {
+    public static int clCreateKernelsInProgram(@NativeType("cl_program") long program, @NativeType("cl_kernel *") @Nullable PointerBuffer kernels, @NativeType("cl_uint *") int @Nullable [] num_kernels_ret) {
         long __functionAddress = CL.getICD().clCreateKernelsInProgram;
         if (CHECKS) {
             check(program);
@@ -9751,7 +9745,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetKernelInfo;
         if (CHECKS) {
             check(kernel);
@@ -9766,7 +9760,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetKernelWorkGroupInfo;
         if (CHECKS) {
             check(kernel);
@@ -9782,7 +9776,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelWorkGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetKernelWorkGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_work_group_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetKernelWorkGroupInfo;
         if (CHECKS) {
             check(kernel);
@@ -9798,7 +9792,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventInfo(@NativeType("cl_event") long event, @NativeType("cl_event_info") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetEventInfo;
         if (CHECKS) {
             check(event);
@@ -9813,7 +9807,7 @@ public class CL10 {
      * @see <a href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetEventProfilingInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @Nullable @NativeType("void *") long[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
+    public static int clGetEventProfilingInfo(@NativeType("cl_event") long event, @NativeType("cl_profiling_info") int param_name, @NativeType("void *") long @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetEventProfilingInfo;
         if (CHECKS) {
             check(event);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -145,8 +145,7 @@ public class XrSpaceQueryInfoBaseHeaderFB extends Struct<XrSpaceQueryInfoBaseHea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceQueryInfoBaseHeaderFB createSafe(long address) {
+    public static @Nullable XrSpaceQueryInfoBaseHeaderFB createSafe(long address) {
         return address == NULL ? null : new XrSpaceQueryInfoBaseHeaderFB(address, null);
     }
 
@@ -194,8 +193,7 @@ public class XrSpaceQueryInfoBaseHeaderFB extends Struct<XrSpaceQueryInfoBaseHea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSpaceQueryInfoBaseHeaderFB.Buffer createSafe(long address, int capacity) {
+    public static XrSpaceQueryInfoBaseHeaderFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

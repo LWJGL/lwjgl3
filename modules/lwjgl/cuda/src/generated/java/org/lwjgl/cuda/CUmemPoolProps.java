@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemPoolProps createSafe(long address) {
+    public static @Nullable CUmemPoolProps createSafe(long address) {
         return address == NULL ? null : new CUmemPoolProps(address, null);
     }
 
@@ -215,8 +214,7 @@ public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemPoolProps.Buffer createSafe(long address, int capacity) {
+    public static CUmemPoolProps.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.opus;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -158,7 +158,7 @@ public class OpusMultistream {
      * @param error           returns {@link Opus#OPUS_OK OK} on success, or a negative error code on failure
      */
     @NativeType("OpusMSEncoder *")
-    public static long opus_multistream_encoder_create(@NativeType("opus_int32") int Fs, int streams, int coupled_streams, @NativeType("unsigned char const *") ByteBuffer mapping, int application, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_multistream_encoder_create(@NativeType("opus_int32") int Fs, int streams, int coupled_streams, @NativeType("unsigned char const *") ByteBuffer mapping, int application, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -173,7 +173,7 @@ public class OpusMultistream {
     }
 
     @NativeType("OpusMSEncoder *")
-    public static long opus_multistream_surround_encoder_create(@NativeType("opus_int32") int Fs, int mapping_family, @NativeType("int *") IntBuffer streams, @NativeType("int *") IntBuffer coupled_streams, @NativeType("unsigned char *") ByteBuffer mapping, int application, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_multistream_surround_encoder_create(@NativeType("opus_int32") int Fs, int mapping_family, @NativeType("int *") IntBuffer streams, @NativeType("int *") IntBuffer coupled_streams, @NativeType("unsigned char *") ByteBuffer mapping, int application, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             check(streams, 1);
             check(coupled_streams, 1);
@@ -383,7 +383,7 @@ public class OpusMultistream {
      * @param error           returns {@link Opus#OPUS_OK OK} on success, or a negative error code on failure
      */
     @NativeType("OpusMSDecoder *")
-    public static long opus_multistream_decoder_create(@NativeType("opus_int32") int Fs, int streams, int coupled_streams, @NativeType("unsigned char const *") ByteBuffer mapping, @Nullable @NativeType("int *") IntBuffer error) {
+    public static long opus_multistream_decoder_create(@NativeType("opus_int32") int Fs, int streams, int coupled_streams, @NativeType("unsigned char const *") ByteBuffer mapping, @NativeType("int *") @Nullable IntBuffer error) {
         if (CHECKS) {
             checkSafe(error, 1);
         }
@@ -458,7 +458,7 @@ public class OpusMultistream {
      *
      * @return number of decoded samples on success or a negative error code on failure
      */
-    public static int opus_multistream_decode(@NativeType("OpusMSDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_multistream_decode(@NativeType("OpusMSDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st));
         }
@@ -497,7 +497,7 @@ public class OpusMultistream {
      *
      * @return number of decoded samples on success or a negative error code on failure
      */
-    public static int opus_multistream_decode_float(@NativeType("OpusMSDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_multistream_decode_float(@NativeType("OpusMSDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st));
         }

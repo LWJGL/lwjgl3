@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -197,8 +197,7 @@ public class VkShaderModuleCreateInfo extends Struct<VkShaderModuleCreateInfo> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkShaderModuleCreateInfo createSafe(long address) {
+    public static @Nullable VkShaderModuleCreateInfo createSafe(long address) {
         return address == NULL ? null : new VkShaderModuleCreateInfo(address, null);
     }
 
@@ -241,8 +240,7 @@ public class VkShaderModuleCreateInfo extends Struct<VkShaderModuleCreateInfo> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkShaderModuleCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static VkShaderModuleCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

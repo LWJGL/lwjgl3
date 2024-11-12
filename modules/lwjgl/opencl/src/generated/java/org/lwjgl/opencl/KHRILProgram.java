@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opencl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -78,7 +78,7 @@ public class KHRILProgram {
      * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      */
     @NativeType("cl_program")
-    public static long clCreateProgramWithILKHR(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateProgramWithILKHR(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
             checkSafe(errcode_ret, 1);
         }
@@ -87,7 +87,7 @@ public class KHRILProgram {
 
     /** Array version of: {@link #clCreateProgramWithILKHR CreateProgramWithILKHR} */
     @NativeType("cl_program")
-    public static long clCreateProgramWithILKHR(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateProgramWithILKHR(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateProgramWithILKHR;
         if (CHECKS) {
             check(__functionAddress);

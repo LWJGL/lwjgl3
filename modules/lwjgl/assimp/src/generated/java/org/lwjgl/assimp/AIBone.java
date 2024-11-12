@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -189,8 +189,7 @@ public class AIBone extends Struct<AIBone> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIBone createSafe(long address) {
+    public static @Nullable AIBone createSafe(long address) {
         return address == NULL ? null : new AIBone(address, null);
     }
 
@@ -233,8 +232,7 @@ public class AIBone extends Struct<AIBone> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIBone.Buffer createSafe(long address, int capacity) {
+    public static AIBone.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

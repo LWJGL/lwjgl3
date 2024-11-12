@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -125,13 +125,11 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct<VkDebugUtilsObjectName
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
     /** either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}. */
-    @Nullable
     @NativeType("char const *")
-    public ByteBuffer pObjectName() { return npObjectName(address()); }
+    public @Nullable ByteBuffer pObjectName() { return npObjectName(address()); }
     /** either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}. */
-    @Nullable
     @NativeType("char const *")
-    public String pObjectNameString() { return npObjectNameString(address()); }
+    public @Nullable String pObjectNameString() { return npObjectNameString(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsObjectNameInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -199,8 +197,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct<VkDebugUtilsObjectName
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugUtilsObjectNameInfoEXT createSafe(long address) {
+    public static @Nullable VkDebugUtilsObjectNameInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkDebugUtilsObjectNameInfoEXT(address, null);
     }
 
@@ -243,8 +240,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct<VkDebugUtilsObjectName
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDebugUtilsObjectNameInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkDebugUtilsObjectNameInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -316,9 +312,9 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct<VkDebugUtilsObjectName
     /** Unsafe version of {@link #objectHandle}. */
     public static long nobjectHandle(long struct) { return memGetLong(struct + VkDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
     /** Unsafe version of {@link #pObjectName}. */
-    @Nullable public static ByteBuffer npObjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
+    public static @Nullable ByteBuffer npObjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
     /** Unsafe version of {@link #pObjectNameString}. */
-    @Nullable public static String npObjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
+    public static @Nullable String npObjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkDebugUtilsObjectNameInfoEXT.STYPE, value); }
@@ -390,13 +386,11 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct<VkDebugUtilsObjectName
         @NativeType("uint64_t")
         public long objectHandle() { return VkDebugUtilsObjectNameInfoEXT.nobjectHandle(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugUtilsObjectNameInfoEXT#pObjectName} field. */
-        @Nullable
         @NativeType("char const *")
-        public ByteBuffer pObjectName() { return VkDebugUtilsObjectNameInfoEXT.npObjectName(address()); }
+        public @Nullable ByteBuffer pObjectName() { return VkDebugUtilsObjectNameInfoEXT.npObjectName(address()); }
         /** @return the null-terminated string pointed to by the {@link VkDebugUtilsObjectNameInfoEXT#pObjectName} field. */
-        @Nullable
         @NativeType("char const *")
-        public String pObjectNameString() { return VkDebugUtilsObjectNameInfoEXT.npObjectNameString(address()); }
+        public @Nullable String pObjectNameString() { return VkDebugUtilsObjectNameInfoEXT.npObjectNameString(address()); }
 
         /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#sType} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsObjectNameInfoEXT.nsType(address(), value); return this; }

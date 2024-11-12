@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -927,7 +927,7 @@ public class NVDeviceGeneratedCommands {
      * @param pIndirectCommandsLayout a pointer to a {@code VkIndirectCommandsLayoutNV} handle in which the resulting indirect command layout is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoNV const *") VkIndirectCommandsLayoutCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutNV *") LongBuffer pIndirectCommandsLayout) {
+    public static int vkCreateIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoNV const *") VkIndirectCommandsLayoutCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutNV *") LongBuffer pIndirectCommandsLayout) {
         if (CHECKS) {
             check(pIndirectCommandsLayout, 1);
         }
@@ -990,13 +990,13 @@ public class NVDeviceGeneratedCommands {
      * @param indirectCommandsLayout the layout to destroy.
      * @param pAllocator             controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
-    public static void vkDestroyIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutNV") long indirectCommandsLayout, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
+    public static void vkDestroyIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutNV") long indirectCommandsLayout, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyIndirectCommandsLayoutNV(device, indirectCommandsLayout, memAddressSafe(pAllocator));
     }
 
     /** Array version of: {@link #vkCreateIndirectCommandsLayoutNV CreateIndirectCommandsLayoutNV} */
     @NativeType("VkResult")
-    public static int vkCreateIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoNV const *") VkIndirectCommandsLayoutCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutNV *") long[] pIndirectCommandsLayout) {
+    public static int vkCreateIndirectCommandsLayoutNV(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoNV const *") VkIndirectCommandsLayoutCreateInfoNV pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutNV *") long[] pIndirectCommandsLayout) {
         long __functionAddress = device.getCapabilities().vkCreateIndirectCommandsLayoutNV;
         if (CHECKS) {
             check(__functionAddress);

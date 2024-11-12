@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -131,8 +131,7 @@ public class VkLayerProperties extends Struct<VkLayerProperties> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLayerProperties createSafe(long address) {
+    public static @Nullable VkLayerProperties createSafe(long address) {
         return address == NULL ? null : new VkLayerProperties(address, null);
     }
 
@@ -175,8 +174,7 @@ public class VkLayerProperties extends Struct<VkLayerProperties> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkLayerProperties.Buffer createSafe(long address, int capacity) {
+    public static VkLayerProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

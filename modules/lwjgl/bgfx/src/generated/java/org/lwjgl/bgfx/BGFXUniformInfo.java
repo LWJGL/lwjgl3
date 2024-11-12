@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class BGFXUniformInfo extends Struct<BGFXUniformInfo> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXUniformInfo createSafe(long address) {
+    public static @Nullable BGFXUniformInfo createSafe(long address) {
         return address == NULL ? null : new BGFXUniformInfo(address, null);
     }
 
@@ -193,8 +192,7 @@ public class BGFXUniformInfo extends Struct<BGFXUniformInfo> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXUniformInfo.Buffer createSafe(long address, int capacity) {
+    public static BGFXUniformInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -44,9 +44,8 @@ public class GLX11 extends GLX {
      * @param display the connection to the X server
      * @param screen  the screen number
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glXQueryExtensionsString(@NativeType("Display *") long display, int screen) {
+    public static @Nullable String glXQueryExtensionsString(@NativeType("Display *") long display, int screen) {
         long __result = nglXQueryExtensionsString(display, screen);
         return memASCIISafe(__result);
     }
@@ -69,9 +68,8 @@ public class GLX11 extends GLX {
      * @param display the connection to the X server
      * @param name    the string to query
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glXGetClientString(@NativeType("Display *") long display, int name) {
+    public static @Nullable String glXGetClientString(@NativeType("Display *") long display, int name) {
         long __result = nglXGetClientString(display, name);
         return memASCIISafe(__result);
     }
@@ -95,9 +93,8 @@ public class GLX11 extends GLX {
      * @param screen  the screen number
      * @param name    the string to query
      */
-    @Nullable
     @NativeType("char const *")
-    public static String glXQueryServerString(@NativeType("Display *") long display, int screen, int name) {
+    public static @Nullable String glXQueryServerString(@NativeType("Display *") long display, int screen, int name) {
         long __result = nglXQueryServerString(display, screen, name);
         return memASCIISafe(__result);
     }

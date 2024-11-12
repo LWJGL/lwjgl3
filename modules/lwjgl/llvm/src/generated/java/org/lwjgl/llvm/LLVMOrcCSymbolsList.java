@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,8 +121,7 @@ public class LLVMOrcCSymbolsList extends Struct<LLVMOrcCSymbolsList> implements 
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolsList createSafe(long address) {
+    public static @Nullable LLVMOrcCSymbolsList createSafe(long address) {
         return address == NULL ? null : new LLVMOrcCSymbolsList(address, null);
     }
 
@@ -165,8 +164,7 @@ public class LLVMOrcCSymbolsList extends Struct<LLVMOrcCSymbolsList> implements 
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static LLVMOrcCSymbolsList.Buffer createSafe(long address, int capacity) {
+    public static LLVMOrcCSymbolsList.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

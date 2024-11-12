@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -128,8 +128,7 @@ public class VkTransformMatrixKHR extends Struct<VkTransformMatrixKHR> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTransformMatrixKHR createSafe(long address) {
+    public static @Nullable VkTransformMatrixKHR createSafe(long address) {
         return address == NULL ? null : new VkTransformMatrixKHR(address, null);
     }
 
@@ -172,8 +171,7 @@ public class VkTransformMatrixKHR extends Struct<VkTransformMatrixKHR> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkTransformMatrixKHR.Buffer createSafe(long address, int capacity) {
+    public static VkTransformMatrixKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

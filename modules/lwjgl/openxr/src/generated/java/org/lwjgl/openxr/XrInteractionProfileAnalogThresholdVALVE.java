@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -143,13 +143,11 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     /** the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be false if it was previous true. */
     public float offThreshold() { return noffThreshold(address()); }
     /** the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
-    @Nullable
     @NativeType("XrHapticBaseHeader const *")
-    public XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
+    public @Nullable XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
     /** the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
-    @Nullable
     @NativeType("XrHapticBaseHeader const *")
-    public XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
+    public @Nullable XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
 
     /** Sets the specified value to the {@link #type} field. */
     public XrInteractionProfileAnalogThresholdVALVE type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -229,8 +227,7 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInteractionProfileAnalogThresholdVALVE createSafe(long address) {
+    public static @Nullable XrInteractionProfileAnalogThresholdVALVE createSafe(long address) {
         return address == NULL ? null : new XrInteractionProfileAnalogThresholdVALVE(address, null);
     }
 
@@ -278,8 +275,7 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrInteractionProfileAnalogThresholdVALVE.Buffer createSafe(long address, int capacity) {
+    public static XrInteractionProfileAnalogThresholdVALVE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -341,9 +337,9 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     /** Unsafe version of {@link #offThreshold}. */
     public static float noffThreshold(long struct) { return memGetFloat(struct + XrInteractionProfileAnalogThresholdVALVE.OFFTHRESHOLD); }
     /** Unsafe version of {@link #onHaptic}. */
-    @Nullable public static XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ONHAPTIC)); }
+    public static @Nullable XrHapticBaseHeader nonHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ONHAPTIC)); }
     /** Unsafe version of {@link #offHaptic}. */
-    @Nullable public static XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.OFFHAPTIC)); }
+    public static @Nullable XrHapticBaseHeader noffHaptic(long struct) { return XrHapticBaseHeader.createSafe(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.OFFHAPTIC)); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrInteractionProfileAnalogThresholdVALVE.TYPE, value); }
@@ -431,13 +427,11 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
         /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#offThreshold} field. */
         public float offThreshold() { return XrInteractionProfileAnalogThresholdVALVE.noffThreshold(address()); }
         /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileAnalogThresholdVALVE#onHaptic} field. */
-        @Nullable
         @NativeType("XrHapticBaseHeader const *")
-        public XrHapticBaseHeader onHaptic() { return XrInteractionProfileAnalogThresholdVALVE.nonHaptic(address()); }
+        public @Nullable XrHapticBaseHeader onHaptic() { return XrInteractionProfileAnalogThresholdVALVE.nonHaptic(address()); }
         /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileAnalogThresholdVALVE#offHaptic} field. */
-        @Nullable
         @NativeType("XrHapticBaseHeader const *")
-        public XrHapticBaseHeader offHaptic() { return XrInteractionProfileAnalogThresholdVALVE.noffHaptic(address()); }
+        public @Nullable XrHapticBaseHeader offHaptic() { return XrInteractionProfileAnalogThresholdVALVE.noffHaptic(address()); }
 
         /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#type} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer type(@NativeType("XrStructureType") int value) { XrInteractionProfileAnalogThresholdVALVE.ntype(address(), value); return this; }

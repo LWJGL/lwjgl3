@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class IOURingRSRCUpdate2 extends Struct<IOURingRSRCUpdate2> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingRSRCUpdate2 createSafe(long address) {
+    public static @Nullable IOURingRSRCUpdate2 createSafe(long address) {
         return address == NULL ? null : new IOURingRSRCUpdate2(address, null);
     }
 
@@ -206,8 +205,7 @@ public class IOURingRSRCUpdate2 extends Struct<IOURingRSRCUpdate2> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingRSRCUpdate2.Buffer createSafe(long address, int capacity) {
+    public static IOURingRSRCUpdate2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

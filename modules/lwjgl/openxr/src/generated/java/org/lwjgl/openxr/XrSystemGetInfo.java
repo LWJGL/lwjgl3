@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -162,8 +162,7 @@ public class XrSystemGetInfo extends Struct<XrSystemGetInfo> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemGetInfo createSafe(long address) {
+    public static @Nullable XrSystemGetInfo createSafe(long address) {
         return address == NULL ? null : new XrSystemGetInfo(address, null);
     }
 
@@ -206,8 +205,7 @@ public class XrSystemGetInfo extends Struct<XrSystemGetInfo> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSystemGetInfo.Buffer createSafe(long address, int capacity) {
+    public static XrSystemGetInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

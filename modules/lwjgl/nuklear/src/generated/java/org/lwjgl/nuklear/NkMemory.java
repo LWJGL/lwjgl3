@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -72,9 +72,8 @@ public class NkMemory extends Struct<NkMemory> {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
-    @Nullable
     @NativeType("void *")
-    public ByteBuffer ptr() { return nptr(address()); }
+    public @Nullable ByteBuffer ptr() { return nptr(address()); }
     /** @return the value of the {@code size} field. */
     @NativeType("nk_size")
     public long size() { return nsize(address()); }
@@ -87,8 +86,7 @@ public class NkMemory extends Struct<NkMemory> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMemory createSafe(long address) {
+    public static @Nullable NkMemory createSafe(long address) {
         return address == NULL ? null : new NkMemory(address, null);
     }
 
@@ -103,15 +101,14 @@ public class NkMemory extends Struct<NkMemory> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkMemory.Buffer createSafe(long address, int capacity) {
+    public static NkMemory.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #ptr() ptr}. */
-    @Nullable public static ByteBuffer nptr(long struct) { return memByteBufferSafe(memGetAddress(struct + NkMemory.PTR), (int)nsize(struct)); }
+    public static @Nullable ByteBuffer nptr(long struct) { return memByteBufferSafe(memGetAddress(struct + NkMemory.PTR), (int)nsize(struct)); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetAddress(struct + NkMemory.SIZE); }
 
@@ -159,9 +156,8 @@ public class NkMemory extends Struct<NkMemory> {
         }
 
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
-        @Nullable
         @NativeType("void *")
-        public ByteBuffer ptr() { return NkMemory.nptr(address()); }
+        public @Nullable ByteBuffer ptr() { return NkMemory.nptr(address()); }
         /** @return the value of the {@code size} field. */
         @NativeType("nk_size")
         public long size() { return NkMemory.nsize(address()); }

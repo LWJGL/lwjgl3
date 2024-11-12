@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -40,9 +40,8 @@ public class LibURing {
      * 
      * <p>The caller is responsible for freeing it.</p>
      */
-    @Nullable
     @NativeType("struct io_uring_probe *")
-    public static IOURingProbe io_uring_get_probe_ring(@NativeType("struct io_uring *") IOURing ring) {
+    public static @Nullable IOURingProbe io_uring_get_probe_ring(@NativeType("struct io_uring *") IOURing ring) {
         long __result = nio_uring_get_probe_ring(ring.address());
         return IOURingProbe.createSafe(__result);
     }
@@ -59,9 +58,8 @@ public class LibURing {
      * 
      * <p>Note: Earlier versions of the Linux kernel (&le; 5.5) do not support probe. If the kernel doesn't support probe, this function will return {@code NULL}.</p>
      */
-    @Nullable
     @NativeType("struct io_uring_probe *")
-    public static IOURingProbe io_uring_get_probe() {
+    public static @Nullable IOURingProbe io_uring_get_probe() {
         long __result = nio_uring_get_probe();
         return IOURingProbe.createSafe(__result);
     }
@@ -203,7 +201,7 @@ public class LibURing {
      *
      * @return 0 on success and the {@code cqe_ptr} param is filled in. On failure it returns {@code -errno}.
      */
-    public static int io_uring_wait_cqes(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @Nullable @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("sigset_t *") long sigmask) {
+    public static int io_uring_wait_cqes(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @NativeType("struct __kernel_timespec *") @Nullable KernelTimespec ts, @NativeType("sigset_t *") long sigmask) {
         return nio_uring_wait_cqes(ring.address(), memAddress(cqe_ptr), cqe_ptr.remaining(), memAddressSafe(ts), sigmask);
     }
 
@@ -221,7 +219,7 @@ public class LibURing {
      *
      * @return 0 on success and the {@code cqe_ptr} param is filled in. On failure it returns {@code -errno}.
      */
-    public static int io_uring_wait_cqe_timeout(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @Nullable @NativeType("struct __kernel_timespec *") KernelTimespec ts) {
+    public static int io_uring_wait_cqe_timeout(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @NativeType("struct __kernel_timespec *") @Nullable KernelTimespec ts) {
         if (CHECKS) {
             check(cqe_ptr, 1);
         }
@@ -277,7 +275,7 @@ public class LibURing {
      *
      * @return the number of submitted submission queue entries on success. On failure it returns {@code -errno}.
      */
-    public static int io_uring_submit_and_wait_timeout(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @Nullable @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("sigset_t *") long sigmask) {
+    public static int io_uring_submit_and_wait_timeout(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, @NativeType("struct __kernel_timespec *") @Nullable KernelTimespec ts, @NativeType("sigset_t *") long sigmask) {
         return nio_uring_submit_and_wait_timeout(ring.address(), memAddress(cqe_ptr), cqe_ptr.remaining(), memAddressSafe(ts), sigmask);
     }
 
@@ -808,9 +806,8 @@ public class LibURing {
     public static native long nio_uring_setup_buf_ring(long ring, int nentries, int bgid, int flags, long ret);
 
     /** @since version 2.4 */
-    @Nullable
     @NativeType("struct io_uring_buf_ring *")
-    public static IOURingBufRing io_uring_setup_buf_ring(@NativeType("struct io_uring *") IOURing ring, @NativeType("unsigned int") int nentries, int bgid, @NativeType("unsigned int") int flags, @NativeType("int *") IntBuffer ret) {
+    public static @Nullable IOURingBufRing io_uring_setup_buf_ring(@NativeType("struct io_uring *") IOURing ring, @NativeType("unsigned int") int nentries, int bgid, @NativeType("unsigned int") int flags, @NativeType("int *") IntBuffer ret) {
         if (CHECKS) {
             check(ret, 1);
         }
@@ -1565,9 +1562,8 @@ public class LibURing {
 
     public static native long nio_uring_recvmsg_validate(long buf, int buf_len, long msgh);
 
-    @Nullable
     @NativeType("struct io_uring_recvmsg_out *")
-    public static IOURingRecvmsgOut io_uring_recvmsg_validate(@NativeType("void *") ByteBuffer buf, @NativeType("struct msghdr *") Msghdr msgh) {
+    public static @Nullable IOURingRecvmsgOut io_uring_recvmsg_validate(@NativeType("void *") ByteBuffer buf, @NativeType("struct msghdr *") Msghdr msgh) {
         long __result = nio_uring_recvmsg_validate(memAddress(buf), buf.remaining(), msgh.address());
         return IOURingRecvmsgOut.createSafe(__result);
     }
@@ -1585,9 +1581,8 @@ public class LibURing {
 
     public static native long nio_uring_recvmsg_cmsg_firsthdr(long o, long msgh);
 
-    @Nullable
     @NativeType("struct cmsghdr *")
-    public static CMsghdr io_uring_recvmsg_cmsg_firsthdr(@NativeType("struct io_uring_recvmsg_out *") IOURingRecvmsgOut o, @NativeType("struct msghdr *") Msghdr msgh) {
+    public static @Nullable CMsghdr io_uring_recvmsg_cmsg_firsthdr(@NativeType("struct io_uring_recvmsg_out *") IOURingRecvmsgOut o, @NativeType("struct msghdr *") Msghdr msgh) {
         long __result = nio_uring_recvmsg_cmsg_firsthdr(o.address(), msgh.address());
         return CMsghdr.createSafe(__result);
     }
@@ -1596,9 +1591,8 @@ public class LibURing {
 
     public static native long nio_uring_recvmsg_cmsg_nexthdr(long o, long msgh, long cmsg);
 
-    @Nullable
     @NativeType("struct cmsghdr *")
-    public static CMsghdr io_uring_recvmsg_cmsg_nexthdr(@NativeType("struct io_uring_recvmsg_out *") IOURingRecvmsgOut o, @NativeType("struct msghdr *") Msghdr msgh, @NativeType("struct cmsghdr *") CMsghdr cmsg) {
+    public static @Nullable CMsghdr io_uring_recvmsg_cmsg_nexthdr(@NativeType("struct io_uring_recvmsg_out *") IOURingRecvmsgOut o, @NativeType("struct msghdr *") Msghdr msgh, @NativeType("struct cmsghdr *") CMsghdr cmsg) {
         long __result = nio_uring_recvmsg_cmsg_nexthdr(o.address(), msgh.address(), cmsg.address());
         return CMsghdr.createSafe(__result);
     }
@@ -2378,9 +2372,8 @@ public class LibURing {
      *
      * @return a pointer to the next submission queue event on success and {@code NULL} on failure
      */
-    @Nullable
     @NativeType("struct io_uring_sqe *")
-    public static IOURingSQE io_uring_get_sqe(@NativeType("struct io_uring *") IOURing ring) {
+    public static @Nullable IOURingSQE io_uring_get_sqe(@NativeType("struct io_uring *") IOURing ring) {
         long __result = nio_uring_get_sqe(ring.address());
         return IOURingSQE.createSafe(__result);
     }

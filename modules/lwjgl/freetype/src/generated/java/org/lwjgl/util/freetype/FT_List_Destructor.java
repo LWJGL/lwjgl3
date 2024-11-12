@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.freetype;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -36,8 +36,7 @@ public abstract class FT_List_Destructor extends Callback implements FT_List_Des
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static FT_List_Destructor createSafe(long functionPointer) {
+    public static @Nullable FT_List_Destructor createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -419,9 +419,8 @@ public class OUI {
      * 
      * <p>The memory of the pointer is managed by the UI context and released upon the next call to {@link #uiBeginLayout BeginLayout}.</p>
      */
-    @Nullable
     @NativeType("void *")
-    public static ByteBuffer uiAllocHandle(int item, @NativeType("unsigned int") int size) {
+    public static @Nullable ByteBuffer uiAllocHandle(int item, @NativeType("unsigned int") int size) {
         long __result = nuiAllocHandle(item, size);
         return memByteBufferSafe(__result, size);
     }
@@ -610,9 +609,8 @@ public class OUI {
     public static native long nuiGetHandler();
 
     /** Returns the handler callback as passed to {@link #uiSetHandler SetHandler} */
-    @Nullable
     @NativeType("UIhandler")
-    public static UIHandler uiGetHandler() {
+    public static @Nullable UIHandler uiGetHandler() {
         return UIHandler.createSafe(nuiGetHandler());
     }
 

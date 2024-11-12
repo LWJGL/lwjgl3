@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -139,8 +139,7 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRect2D createSafe(long address) {
+    public static @Nullable VkRect2D createSafe(long address) {
         return address == NULL ? null : new VkRect2D(address, null);
     }
 
@@ -183,8 +182,7 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRect2D.Buffer createSafe(long address, int capacity) {
+    public static VkRect2D.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

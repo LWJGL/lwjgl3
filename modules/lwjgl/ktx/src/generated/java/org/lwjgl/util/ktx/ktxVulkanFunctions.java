@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -446,8 +446,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanFunctions createSafe(long address) {
+    public static @Nullable ktxVulkanFunctions createSafe(long address) {
         return address == NULL ? null : new ktxVulkanFunctions(address, null);
     }
 
@@ -490,8 +489,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxVulkanFunctions.Buffer createSafe(long address, int capacity) {
+    public static ktxVulkanFunctions.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

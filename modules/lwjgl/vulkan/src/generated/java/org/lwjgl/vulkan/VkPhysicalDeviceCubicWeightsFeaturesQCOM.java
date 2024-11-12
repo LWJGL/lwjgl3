@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -156,8 +156,7 @@ public class VkPhysicalDeviceCubicWeightsFeaturesQCOM extends Struct<VkPhysicalD
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceCubicWeightsFeaturesQCOM createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceCubicWeightsFeaturesQCOM createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceCubicWeightsFeaturesQCOM(address, null);
     }
 
@@ -200,8 +199,7 @@ public class VkPhysicalDeviceCubicWeightsFeaturesQCOM extends Struct<VkPhysicalD
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceCubicWeightsFeaturesQCOM.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceCubicWeightsFeaturesQCOM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

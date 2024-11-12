@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -121,8 +121,7 @@ public class CUstreamAttrValue extends Struct<CUstreamAttrValue> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUstreamAttrValue createSafe(long address) {
+    public static @Nullable CUstreamAttrValue createSafe(long address) {
         return address == NULL ? null : new CUstreamAttrValue(address, null);
     }
 
@@ -165,8 +164,7 @@ public class CUstreamAttrValue extends Struct<CUstreamAttrValue> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUstreamAttrValue.Buffer createSafe(long address, int capacity) {
+    public static CUstreamAttrValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

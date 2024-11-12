@@ -5,7 +5,7 @@
  */
 package org.lwjgl.bgfx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -122,25 +122,20 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     public int sizeof() { return SIZEOF; }
 
     /** the fatal error callback */
-    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)")
-    public BGFXFatalCallback fatal() { return nfatal(address()); }
+    public @Nullable BGFXFatalCallback fatal() { return nfatal(address()); }
     /** the debug message callback */
-    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)")
-    public BGFXTraceVarArgsCallback trace_vargs() { return ntrace_vargs(address()); }
+    public @Nullable BGFXTraceVarArgsCallback trace_vargs() { return ntrace_vargs(address()); }
     /** the profiler begin callback */
-    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
-    public BGFXProfilerBegin profiler_begin() { return nprofiler_begin(address()); }
+    public @Nullable BGFXProfilerBegin profiler_begin() { return nprofiler_begin(address()); }
     /** the profiler begin literal callback */
-    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
-    public BGFXProfilerBeginLiteral profiler_begin_literal() { return nprofiler_begin_literal(address()); }
+    public @Nullable BGFXProfilerBeginLiteral profiler_begin_literal() { return nprofiler_begin_literal(address()); }
     /** the profiler end callback */
-    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *)")
-    public BGFXProfilerEnd profiler_end() { return nprofiler_end(address()); }
+    public @Nullable BGFXProfilerEnd profiler_end() { return nprofiler_end(address()); }
     /** the cache read size callback */
     @NativeType("uint32_t (*) (bgfx_callback_interface_t *, uint64_t)")
     public BGFXCacheReadSizeCallback cache_read_size() { return ncache_read_size(address()); }
@@ -255,8 +250,7 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCallbackVtbl createSafe(long address) {
+    public static @Nullable BGFXCallbackVtbl createSafe(long address) {
         return address == NULL ? null : new BGFXCallbackVtbl(address, null);
     }
 
@@ -293,15 +287,15 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     // -----------------------------------
 
     /** Unsafe version of {@link #fatal}. */
-    @Nullable public static BGFXFatalCallback nfatal(long struct) { return BGFXFatalCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.FATAL)); }
+    public static @Nullable BGFXFatalCallback nfatal(long struct) { return BGFXFatalCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.FATAL)); }
     /** Unsafe version of {@link #trace_vargs}. */
-    @Nullable public static BGFXTraceVarArgsCallback ntrace_vargs(long struct) { return BGFXTraceVarArgsCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.TRACE_VARGS)); }
+    public static @Nullable BGFXTraceVarArgsCallback ntrace_vargs(long struct) { return BGFXTraceVarArgsCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.TRACE_VARGS)); }
     /** Unsafe version of {@link #profiler_begin}. */
-    @Nullable public static BGFXProfilerBegin nprofiler_begin(long struct) { return BGFXProfilerBegin.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN)); }
+    public static @Nullable BGFXProfilerBegin nprofiler_begin(long struct) { return BGFXProfilerBegin.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN)); }
     /** Unsafe version of {@link #profiler_begin_literal}. */
-    @Nullable public static BGFXProfilerBeginLiteral nprofiler_begin_literal(long struct) { return BGFXProfilerBeginLiteral.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL)); }
+    public static @Nullable BGFXProfilerBeginLiteral nprofiler_begin_literal(long struct) { return BGFXProfilerBeginLiteral.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL)); }
     /** Unsafe version of {@link #profiler_end}. */
-    @Nullable public static BGFXProfilerEnd nprofiler_end(long struct) { return BGFXProfilerEnd.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_END)); }
+    public static @Nullable BGFXProfilerEnd nprofiler_end(long struct) { return BGFXProfilerEnd.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_END)); }
     /** Unsafe version of {@link #cache_read_size}. */
     public static BGFXCacheReadSizeCallback ncache_read_size(long struct) { return BGFXCacheReadSizeCallback.create(memGetAddress(struct + BGFXCallbackVtbl.CACHE_READ_SIZE)); }
     /** Unsafe version of {@link #cache_read}. */

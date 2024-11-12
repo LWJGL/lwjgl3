@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -177,8 +177,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerColorScaleBiasKHR createSafe(long address) {
+    public static @Nullable XrCompositionLayerColorScaleBiasKHR createSafe(long address) {
         return address == NULL ? null : new XrCompositionLayerColorScaleBiasKHR(address, null);
     }
 
@@ -221,8 +220,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrCompositionLayerColorScaleBiasKHR.Buffer createSafe(long address, int capacity) {
+    public static XrCompositionLayerColorScaleBiasKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -124,8 +124,7 @@ public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements Nati
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneObjectMSFT createSafe(long address) {
+    public static @Nullable XrSceneObjectMSFT createSafe(long address) {
         return address == NULL ? null : new XrSceneObjectMSFT(address, null);
     }
 
@@ -168,8 +167,7 @@ public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements Nati
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSceneObjectMSFT.Buffer createSafe(long address, int capacity) {
+    public static XrSceneObjectMSFT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

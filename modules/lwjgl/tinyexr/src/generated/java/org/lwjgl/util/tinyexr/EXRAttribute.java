@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.tinyexr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -96,9 +96,8 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     @NativeType("char[256]")
     public String typeString() { return ntypeString(address()); }
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
-    @Nullable
     @NativeType("unsigned char *")
-    public ByteBuffer value() { return nvalue(address()); }
+    public @Nullable ByteBuffer value() { return nvalue(address()); }
     /** @return the value of the {@code size} field. */
     public int size() { return nsize(address()); }
 
@@ -158,8 +157,7 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRAttribute createSafe(long address) {
+    public static @Nullable EXRAttribute createSafe(long address) {
         return address == NULL ? null : new EXRAttribute(address, null);
     }
 
@@ -202,8 +200,7 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static EXRAttribute.Buffer createSafe(long address, int capacity) {
+    public static EXRAttribute.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -275,7 +272,7 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
     /** Unsafe version of {@link #typeString}. */
     public static String ntypeString(long struct) { return memASCII(struct + EXRAttribute.TYPE); }
     /** Unsafe version of {@link #value() value}. */
-    @Nullable public static ByteBuffer nvalue(long struct) { return memByteBufferSafe(memGetAddress(struct + EXRAttribute.VALUE), nsize(struct)); }
+    public static @Nullable ByteBuffer nvalue(long struct) { return memByteBufferSafe(memGetAddress(struct + EXRAttribute.VALUE), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
     public static int nsize(long struct) { return memGetInt(struct + EXRAttribute.SIZE); }
 
@@ -367,9 +364,8 @@ public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource
         @NativeType("char[256]")
         public String typeString() { return EXRAttribute.ntypeString(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
-        @Nullable
         @NativeType("unsigned char *")
-        public ByteBuffer value() { return EXRAttribute.nvalue(address()); }
+        public @Nullable ByteBuffer value() { return EXRAttribute.nvalue(address()); }
         /** @return the value of the {@code size} field. */
         public int size() { return EXRAttribute.nsize(address()); }
 

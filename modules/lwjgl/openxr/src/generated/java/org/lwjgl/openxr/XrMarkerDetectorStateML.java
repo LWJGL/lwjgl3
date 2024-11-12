@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -154,8 +154,7 @@ public class XrMarkerDetectorStateML extends Struct<XrMarkerDetectorStateML> imp
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrMarkerDetectorStateML createSafe(long address) {
+    public static @Nullable XrMarkerDetectorStateML createSafe(long address) {
         return address == NULL ? null : new XrMarkerDetectorStateML(address, null);
     }
 
@@ -198,8 +197,7 @@ public class XrMarkerDetectorStateML extends Struct<XrMarkerDetectorStateML> imp
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrMarkerDetectorStateML.Buffer createSafe(long address, int capacity) {
+    public static XrMarkerDetectorStateML.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

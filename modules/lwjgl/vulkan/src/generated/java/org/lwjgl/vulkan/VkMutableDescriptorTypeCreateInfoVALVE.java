@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -61,14 +61,14 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends VkMutableDescriptorT
     public VkMutableDescriptorTypeCreateInfoVALVE pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkMutableDescriptorTypeListEXT.Buffer} to the {@code pMutableDescriptorTypeLists} field. */
     @Override
-    public VkMutableDescriptorTypeCreateInfoVALVE pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.Buffer value) { npMutableDescriptorTypeLists(address(), value); return this; }
+    public VkMutableDescriptorTypeCreateInfoVALVE pMutableDescriptorTypeLists(@NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.@Nullable Buffer value) { npMutableDescriptorTypeLists(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkMutableDescriptorTypeCreateInfoVALVE set(
         int sType,
         long pNext,
-        @Nullable VkMutableDescriptorTypeListEXT.Buffer pMutableDescriptorTypeLists
+        VkMutableDescriptorTypeListEXT.@Nullable Buffer pMutableDescriptorTypeLists
     ) {
         sType(sType);
         pNext(pNext);
@@ -113,8 +113,7 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends VkMutableDescriptorT
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeCreateInfoVALVE createSafe(long address) {
+    public static @Nullable VkMutableDescriptorTypeCreateInfoVALVE createSafe(long address) {
         return address == NULL ? null : new VkMutableDescriptorTypeCreateInfoVALVE(address, null);
     }
 
@@ -157,8 +156,7 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends VkMutableDescriptorT
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkMutableDescriptorTypeCreateInfoVALVE.Buffer createSafe(long address, int capacity) {
+    public static VkMutableDescriptorTypeCreateInfoVALVE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -254,7 +252,7 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends VkMutableDescriptorT
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pNext(@NativeType("void const *") long value) { VkMutableDescriptorTypeCreateInfoVALVE.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkMutableDescriptorTypeListEXT.Buffer} to the {@code pMutableDescriptorTypeLists} field. */
         @Override
-        public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.Buffer value) { VkMutableDescriptorTypeCreateInfoVALVE.npMutableDescriptorTypeLists(address(), value); return this; }
+        public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pMutableDescriptorTypeLists(@NativeType("VkMutableDescriptorTypeListEXT const *") VkMutableDescriptorTypeListEXT.@Nullable Buffer value) { VkMutableDescriptorTypeCreateInfoVALVE.npMutableDescriptorTypeLists(address(), value); return this; }
 
     }
 

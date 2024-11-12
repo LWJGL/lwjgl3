@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -234,8 +234,7 @@ public class XGraphicsExposeEvent extends Struct<XGraphicsExposeEvent> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XGraphicsExposeEvent createSafe(long address) {
+    public static @Nullable XGraphicsExposeEvent createSafe(long address) {
         return address == NULL ? null : new XGraphicsExposeEvent(address, null);
     }
 
@@ -278,8 +277,7 @@ public class XGraphicsExposeEvent extends Struct<XGraphicsExposeEvent> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XGraphicsExposeEvent.Buffer createSafe(long address, int capacity) {
+    public static XGraphicsExposeEvent.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

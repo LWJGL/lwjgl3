@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -165,8 +165,7 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingSyncCancelReg createSafe(long address) {
+    public static @Nullable IOURingSyncCancelReg createSafe(long address) {
         return address == NULL ? null : new IOURingSyncCancelReg(address, null);
     }
 
@@ -209,8 +208,7 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingSyncCancelReg.Buffer createSafe(long address, int capacity) {
+    public static IOURingSyncCancelReg.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

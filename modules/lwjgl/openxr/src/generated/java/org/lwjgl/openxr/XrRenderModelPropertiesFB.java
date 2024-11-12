@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -219,8 +219,7 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRenderModelPropertiesFB createSafe(long address) {
+    public static @Nullable XrRenderModelPropertiesFB createSafe(long address) {
         return address == NULL ? null : new XrRenderModelPropertiesFB(address, null);
     }
 
@@ -263,8 +262,7 @@ public class XrRenderModelPropertiesFB extends Struct<XrRenderModelPropertiesFB>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrRenderModelPropertiesFB.Buffer createSafe(long address, int capacity) {
+    public static XrRenderModelPropertiesFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

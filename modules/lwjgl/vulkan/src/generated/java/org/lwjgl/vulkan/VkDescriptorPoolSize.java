@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorPoolSize createSafe(long address) {
+    public static @Nullable VkDescriptorPoolSize createSafe(long address) {
         return address == NULL ? null : new VkDescriptorPoolSize(address, null);
     }
 
@@ -203,8 +202,7 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkDescriptorPoolSize.Buffer createSafe(long address, int capacity) {
+    public static VkDescriptorPoolSize.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

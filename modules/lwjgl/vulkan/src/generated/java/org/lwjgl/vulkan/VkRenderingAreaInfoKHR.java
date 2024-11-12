@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -118,9 +118,8 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
     /** a pointer to an array of {@code VkFormat} values defining the format of color attachments used in the render pass instance. */
-    @Nullable
     @NativeType("VkFormat const *")
-    public IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
+    public @Nullable IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
     /** a {@code VkFormat} value defining the format of the depth attachment used in the render pass instance. */
     @NativeType("VkFormat")
     public int depthAttachmentFormat() { return ndepthAttachmentFormat(address()); }
@@ -202,8 +201,7 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingAreaInfoKHR createSafe(long address) {
+    public static @Nullable VkRenderingAreaInfoKHR createSafe(long address) {
         return address == NULL ? null : new VkRenderingAreaInfoKHR(address, null);
     }
 
@@ -246,8 +244,7 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderingAreaInfoKHR.Buffer createSafe(long address, int capacity) {
+    public static VkRenderingAreaInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -300,7 +297,7 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
-    @Nullable public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
+    public static @Nullable IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthAttachmentFormat}. */
     public static int ndepthAttachmentFormat(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT); }
     /** Unsafe version of {@link #stencilAttachmentFormat}. */
@@ -377,9 +374,8 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkRenderingAreaInfoKHR.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingAreaInfoKHR#pColorAttachmentFormats} field. */
-        @Nullable
         @NativeType("VkFormat const *")
-        public IntBuffer pColorAttachmentFormats() { return VkRenderingAreaInfoKHR.npColorAttachmentFormats(address()); }
+        public @Nullable IntBuffer pColorAttachmentFormats() { return VkRenderingAreaInfoKHR.npColorAttachmentFormats(address()); }
         /** @return the value of the {@link VkRenderingAreaInfoKHR#depthAttachmentFormat} field. */
         @NativeType("VkFormat")
         public int depthAttachmentFormat() { return VkRenderingAreaInfoKHR.ndepthAttachmentFormat(address()); }

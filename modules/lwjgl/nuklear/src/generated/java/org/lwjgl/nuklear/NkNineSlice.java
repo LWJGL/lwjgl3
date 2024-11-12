@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nuklear;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -167,8 +167,7 @@ public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkNineSlice createSafe(long address) {
+    public static @Nullable NkNineSlice createSafe(long address) {
         return address == NULL ? null : new NkNineSlice(address, null);
     }
 
@@ -211,8 +210,7 @@ public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NkNineSlice.Buffer createSafe(long address, int capacity) {
+    public static NkNineSlice.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

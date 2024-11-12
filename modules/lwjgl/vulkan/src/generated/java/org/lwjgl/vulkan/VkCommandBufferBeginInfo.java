@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -117,9 +117,8 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
     @NativeType("VkCommandBufferUsageFlags")
     public int flags() { return nflags(address()); }
     /** a pointer to a {@link VkCommandBufferInheritanceInfo} structure, used if {@code commandBuffer} is a secondary command buffer. If this is a primary command buffer, then this value is ignored. */
-    @Nullable
     @NativeType("VkCommandBufferInheritanceInfo const *")
-    public VkCommandBufferInheritanceInfo pInheritanceInfo() { return npInheritanceInfo(address()); }
+    public @Nullable VkCommandBufferInheritanceInfo pInheritanceInfo() { return npInheritanceInfo(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -187,8 +186,7 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferBeginInfo createSafe(long address) {
+    public static @Nullable VkCommandBufferBeginInfo createSafe(long address) {
         return address == NULL ? null : new VkCommandBufferBeginInfo(address, null);
     }
 
@@ -231,8 +229,7 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkCommandBufferBeginInfo.Buffer createSafe(long address, int capacity) {
+    public static VkCommandBufferBeginInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -302,7 +299,7 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + VkCommandBufferBeginInfo.FLAGS); }
     /** Unsafe version of {@link #pInheritanceInfo}. */
-    @Nullable public static VkCommandBufferInheritanceInfo npInheritanceInfo(long struct) { return VkCommandBufferInheritanceInfo.createSafe(memGetAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO)); }
+    public static @Nullable VkCommandBufferInheritanceInfo npInheritanceInfo(long struct) { return VkCommandBufferInheritanceInfo.createSafe(memGetAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferBeginInfo.STYPE, value); }
@@ -366,9 +363,8 @@ public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> i
         @NativeType("VkCommandBufferUsageFlags")
         public int flags() { return VkCommandBufferBeginInfo.nflags(address()); }
         /** @return a {@link VkCommandBufferInheritanceInfo} view of the struct pointed to by the {@link VkCommandBufferBeginInfo#pInheritanceInfo} field. */
-        @Nullable
         @NativeType("VkCommandBufferInheritanceInfo const *")
-        public VkCommandBufferInheritanceInfo pInheritanceInfo() { return VkCommandBufferBeginInfo.npInheritanceInfo(address()); }
+        public @Nullable VkCommandBufferInheritanceInfo pInheritanceInfo() { return VkCommandBufferBeginInfo.npInheritanceInfo(address()); }
 
         /** Sets the specified value to the {@link VkCommandBufferBeginInfo#sType} field. */
         public VkCommandBufferBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferBeginInfo.nsType(address(), value); return this; }

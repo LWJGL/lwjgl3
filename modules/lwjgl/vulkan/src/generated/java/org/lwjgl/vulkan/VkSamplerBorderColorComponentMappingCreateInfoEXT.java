@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -179,8 +179,7 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSamplerBorderColorComponentMappingCreateInfoEXT createSafe(long address) {
+    public static @Nullable VkSamplerBorderColorComponentMappingCreateInfoEXT createSafe(long address) {
         return address == NULL ? null : new VkSamplerBorderColorComponentMappingCreateInfoEXT(address, null);
     }
 
@@ -223,8 +222,7 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+    public static VkSamplerBorderColorComponentMappingCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

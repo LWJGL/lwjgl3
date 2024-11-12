@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -265,8 +265,7 @@ public class XrFaceExpressionWeights2FB extends Struct<XrFaceExpressionWeights2F
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceExpressionWeights2FB createSafe(long address) {
+    public static @Nullable XrFaceExpressionWeights2FB createSafe(long address) {
         return address == NULL ? null : new XrFaceExpressionWeights2FB(address, null);
     }
 
@@ -309,8 +308,7 @@ public class XrFaceExpressionWeights2FB extends Struct<XrFaceExpressionWeights2F
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrFaceExpressionWeights2FB.Buffer createSafe(long address, int capacity) {
+    public static XrFaceExpressionWeights2FB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

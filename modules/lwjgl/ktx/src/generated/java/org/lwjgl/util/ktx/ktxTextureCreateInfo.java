@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.ktx;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -125,9 +125,8 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
      *
      * @return pointer to DFD. Used only when creating a {@code ktxTexture2} and only if {@code vkFormat} is {@code VK_FORMAT_UNDEFINED}.
      */
-    @Nullable
     @NativeType("ktx_uint32_t *")
-    public IntBuffer pDfd(int capacity) { return npDfd(address(), capacity); }
+    public @Nullable IntBuffer pDfd(int capacity) { return npDfd(address(), capacity); }
     /** width of the base level of the texture */
     @NativeType("ktx_uint32_t")
     public int baseWidth() { return nbaseWidth(address()); }
@@ -248,8 +247,7 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTextureCreateInfo createSafe(long address) {
+    public static @Nullable ktxTextureCreateInfo createSafe(long address) {
         return address == NULL ? null : new ktxTextureCreateInfo(address, null);
     }
 
@@ -292,8 +290,7 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static ktxTextureCreateInfo.Buffer createSafe(long address, int capacity) {
+    public static ktxTextureCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
@@ -342,7 +339,7 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
     /** Unsafe version of {@link #vkFormat}. */
     public static int nvkFormat(long struct) { return memGetInt(struct + ktxTextureCreateInfo.VKFORMAT); }
     /** Unsafe version of {@link #pDfd(int) pDfd}. */
-    @Nullable public static IntBuffer npDfd(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + ktxTextureCreateInfo.PDFD), capacity); }
+    public static @Nullable IntBuffer npDfd(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + ktxTextureCreateInfo.PDFD), capacity); }
     /** Unsafe version of {@link #baseWidth}. */
     public static int nbaseWidth(long struct) { return memGetInt(struct + ktxTextureCreateInfo.BASEWIDTH); }
     /** Unsafe version of {@link #baseHeight}. */
@@ -441,9 +438,8 @@ public class ktxTextureCreateInfo extends Struct<ktxTextureCreateInfo> implement
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @Nullable
         @NativeType("ktx_uint32_t *")
-        public IntBuffer pDfd(int capacity) { return ktxTextureCreateInfo.npDfd(address(), capacity); }
+        public @Nullable IntBuffer pDfd(int capacity) { return ktxTextureCreateInfo.npDfd(address(), capacity); }
         /** @return the value of the {@link ktxTextureCreateInfo#baseWidth} field. */
         @NativeType("ktx_uint32_t")
         public int baseWidth() { return ktxTextureCreateInfo.nbaseWidth(address()); }

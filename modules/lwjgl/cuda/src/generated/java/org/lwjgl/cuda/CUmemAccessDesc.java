@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -132,8 +132,7 @@ public class CUmemAccessDesc extends Struct<CUmemAccessDesc> implements NativeRe
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemAccessDesc createSafe(long address) {
+    public static @Nullable CUmemAccessDesc createSafe(long address) {
         return address == NULL ? null : new CUmemAccessDesc(address, null);
     }
 
@@ -176,8 +175,7 @@ public class CUmemAccessDesc extends Struct<CUmemAccessDesc> implements NativeRe
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUmemAccessDesc.Buffer createSafe(long address, int capacity) {
+    public static CUmemAccessDesc.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

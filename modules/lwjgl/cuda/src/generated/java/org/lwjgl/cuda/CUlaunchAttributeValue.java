@@ -5,7 +5,7 @@
  */
 package org.lwjgl.cuda;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -252,8 +252,7 @@ public class CUlaunchAttributeValue extends Struct<CUlaunchAttributeValue> imple
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchAttributeValue createSafe(long address) {
+    public static @Nullable CUlaunchAttributeValue createSafe(long address) {
         return address == NULL ? null : new CUlaunchAttributeValue(address, null);
     }
 
@@ -296,8 +295,7 @@ public class CUlaunchAttributeValue extends Struct<CUlaunchAttributeValue> imple
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CUlaunchAttributeValue.Buffer createSafe(long address, int capacity) {
+    public static CUlaunchAttributeValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

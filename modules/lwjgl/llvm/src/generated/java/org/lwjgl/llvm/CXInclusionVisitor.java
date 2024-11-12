@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -39,8 +39,7 @@ public abstract class CXInclusionVisitor extends Callback implements CXInclusion
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static CXInclusionVisitor createSafe(long functionPointer) {
+    public static @Nullable CXInclusionVisitor createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

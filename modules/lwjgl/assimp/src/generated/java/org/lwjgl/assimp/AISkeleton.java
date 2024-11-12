@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AISkeleton createSafe(long address) {
+    public static @Nullable AISkeleton createSafe(long address) {
         return address == NULL ? null : new AISkeleton(address, null);
     }
 
@@ -204,8 +203,7 @@ public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AISkeleton.Buffer createSafe(long address, int capacity) {
+    public static AISkeleton.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

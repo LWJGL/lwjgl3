@@ -20,6 +20,6 @@
  * value {@code "glfw_async"}. This will instruct LWJGL to load an alternative GLFW build that dispatches Cocoa calls to the main thread in blocking mode.
  * The other window toolkit must be initialized (e.g. with AWT's {@code Toolkit.getDefaultToolkit()}) before {@link org.lwjgl.glfw.GLFW#glfwInit Init} is called.</p>
  */
-@org.lwjgl.system.NonnullDefault
+@org.jspecify.annotations.NullMarked
 package org.lwjgl.glfw;
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.assimp;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -125,8 +125,7 @@ public class AIString extends Struct<AIString> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIString createSafe(long address) {
+    public static @Nullable AIString createSafe(long address) {
         return address == NULL ? null : new AIString(address, null);
     }
 
@@ -169,8 +168,7 @@ public class AIString extends Struct<AIString> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static AIString.Buffer createSafe(long address, int capacity) {
+    public static AIString.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

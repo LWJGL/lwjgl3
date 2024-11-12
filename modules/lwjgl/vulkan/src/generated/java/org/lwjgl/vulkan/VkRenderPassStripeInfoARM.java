@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -171,8 +171,7 @@ public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM>
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassStripeInfoARM createSafe(long address) {
+    public static @Nullable VkRenderPassStripeInfoARM createSafe(long address) {
         return address == NULL ? null : new VkRenderPassStripeInfoARM(address, null);
     }
 
@@ -215,8 +214,7 @@ public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM>
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkRenderPassStripeInfoARM.Buffer createSafe(long address, int capacity) {
+    public static VkRenderPassStripeInfoARM.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

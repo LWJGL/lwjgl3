@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -159,8 +159,7 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGColor createSafe(long address) {
+    public static @Nullable NVGColor createSafe(long address) {
         return address == NULL ? null : new NVGColor(address, null);
     }
 
@@ -203,8 +202,7 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NVGColor.Buffer createSafe(long address, int capacity) {
+    public static NVGColor.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

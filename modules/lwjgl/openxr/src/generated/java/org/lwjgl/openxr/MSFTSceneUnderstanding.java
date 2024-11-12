@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -377,7 +377,7 @@ public class MSFTSceneUnderstanding {
      * @param features           an array of {@code XrSceneComputeFeatureMSFT}.
      */
     @NativeType("XrResult")
-    public static int xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer featureCountOutput, @Nullable @NativeType("XrSceneComputeFeatureMSFT *") IntBuffer features) {
+    public static int xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, @NativeType("XrSystemId") long systemId, @NativeType("uint32_t *") IntBuffer featureCountOutput, @NativeType("XrSceneComputeFeatureMSFT *") @Nullable IntBuffer features) {
         if (CHECKS) {
             check(featureCountOutput, 1);
         }
@@ -447,7 +447,7 @@ public class MSFTSceneUnderstanding {
      * @param sceneObserver the returned {@code XrSceneObserverMSFT} handle.
      */
     @NativeType("XrResult")
-    public static int xrCreateSceneObserverMSFT(XrSession session, @Nullable @NativeType("XrSceneObserverCreateInfoMSFT const *") XrSceneObserverCreateInfoMSFT createInfo, @NativeType("XrSceneObserverMSFT *") PointerBuffer sceneObserver) {
+    public static int xrCreateSceneObserverMSFT(XrSession session, @NativeType("XrSceneObserverCreateInfoMSFT const *") @Nullable XrSceneObserverCreateInfoMSFT createInfo, @NativeType("XrSceneObserverMSFT *") PointerBuffer sceneObserver) {
         if (CHECKS) {
             check(sceneObserver, 1);
         }
@@ -577,7 +577,7 @@ public class MSFTSceneUnderstanding {
      * @param scene         the returned {@code XrSceneMSFT} handle.
      */
     @NativeType("XrResult")
-    public static int xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, @Nullable @NativeType("XrSceneCreateInfoMSFT const *") XrSceneCreateInfoMSFT createInfo, @NativeType("XrSceneMSFT *") PointerBuffer scene) {
+    public static int xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, @NativeType("XrSceneCreateInfoMSFT const *") @Nullable XrSceneCreateInfoMSFT createInfo, @NativeType("XrSceneMSFT *") PointerBuffer scene) {
         if (CHECKS) {
             check(scene, 1);
         }

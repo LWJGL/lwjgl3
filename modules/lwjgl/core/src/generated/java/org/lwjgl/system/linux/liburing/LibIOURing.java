@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -1800,7 +1800,7 @@ public class LibIOURing {
      *         
      *         <p>On error, {@code -1} is returned and {@code errno} is set appropriately.</p>
      */
-    public static int io_uring_setup(@Nullable @NativeType("int *") IntBuffer _errno, @NativeType("unsigned") int entries, @NativeType("struct io_uring_params *") IOURingParams p) {
+    public static int io_uring_setup(@NativeType("int *") @Nullable IntBuffer _errno, @NativeType("unsigned") int entries, @NativeType("struct io_uring_params *") IOURingParams p) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -1825,7 +1825,7 @@ public class LibIOURing {
      *
      * @return on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly.
      */
-    public static int io_uring_register(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int opcode, @NativeType("void *") long arg, @NativeType("unsigned") int nr_args) {
+    public static int io_uring_register(@NativeType("int *") @Nullable IntBuffer _errno, int fd, @NativeType("unsigned") int opcode, @NativeType("void *") long arg, @NativeType("unsigned") int nr_args) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -1838,7 +1838,7 @@ public class LibIOURing {
     public static native int nio_uring_enter2(long _errno, int fd, int to_submit, int min_complete, int flags, long sig, int sz);
 
     /** @param _errno optionally returns the {@code errno} value after this function is called */
-    public static int io_uring_enter2(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig, int sz) {
+    public static int io_uring_enter2(@NativeType("int *") @Nullable IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig, int sz) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }
@@ -1898,7 +1898,7 @@ public class LibIOURing {
      *         <p>Errors that occur not on behalf of a submission queue entry are returned via the system call directly. On such an error, -1 is returned and
      *         {@code errno} is set appropriately.</p>
      */
-    public static int io_uring_enter(@Nullable @NativeType("int *") IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig) {
+    public static int io_uring_enter(@NativeType("int *") @Nullable IntBuffer _errno, int fd, @NativeType("unsigned") int to_submit, @NativeType("unsigned") int min_complete, @NativeType("unsigned") int flags, @NativeType("sigset_t *") long sig) {
         if (CHECKS) {
             checkSafe(_errno, 1);
         }

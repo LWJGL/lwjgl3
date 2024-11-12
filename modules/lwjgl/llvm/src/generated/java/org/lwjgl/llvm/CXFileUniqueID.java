@@ -5,7 +5,7 @@
  */
 package org.lwjgl.llvm;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -102,8 +102,7 @@ public class CXFileUniqueID extends Struct<CXFileUniqueID> implements NativeReso
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXFileUniqueID createSafe(long address) {
+    public static @Nullable CXFileUniqueID createSafe(long address) {
         return address == NULL ? null : new CXFileUniqueID(address, null);
     }
 
@@ -146,8 +145,7 @@ public class CXFileUniqueID extends Struct<CXFileUniqueID> implements NativeReso
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static CXFileUniqueID.Buffer createSafe(long address, int capacity) {
+    public static CXFileUniqueID.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

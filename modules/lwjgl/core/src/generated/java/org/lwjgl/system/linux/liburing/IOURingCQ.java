@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.linux.liburing;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -256,8 +256,7 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingCQ createSafe(long address) {
+    public static @Nullable IOURingCQ createSafe(long address) {
         return address == NULL ? null : new IOURingCQ(address, null);
     }
 
@@ -300,8 +299,7 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static IOURingCQ.Buffer createSafe(long address, int capacity) {
+    public static IOURingCQ.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

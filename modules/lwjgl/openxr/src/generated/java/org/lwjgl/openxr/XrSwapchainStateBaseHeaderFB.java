@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -149,8 +149,7 @@ public class XrSwapchainStateBaseHeaderFB extends Struct<XrSwapchainStateBaseHea
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainStateBaseHeaderFB createSafe(long address) {
+    public static @Nullable XrSwapchainStateBaseHeaderFB createSafe(long address) {
         return address == NULL ? null : new XrSwapchainStateBaseHeaderFB(address, null);
     }
 
@@ -208,8 +207,7 @@ public class XrSwapchainStateBaseHeaderFB extends Struct<XrSwapchainStateBaseHea
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrSwapchainStateBaseHeaderFB.Buffer createSafe(long address, int capacity) {
+    public static XrSwapchainStateBaseHeaderFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

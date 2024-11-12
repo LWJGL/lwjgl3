@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -160,8 +160,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct<VkImagePlaneMemor
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImagePlaneMemoryRequirementsInfo createSafe(long address) {
+    public static @Nullable VkImagePlaneMemoryRequirementsInfo createSafe(long address) {
         return address == NULL ? null : new VkImagePlaneMemoryRequirementsInfo(address, null);
     }
 
@@ -204,8 +203,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct<VkImagePlaneMemor
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkImagePlaneMemoryRequirementsInfo.Buffer createSafe(long address, int capacity) {
+    public static VkImagePlaneMemoryRequirementsInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

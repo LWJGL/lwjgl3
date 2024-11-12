@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -234,7 +234,7 @@ public class KHRGetSurfaceCapabilities2 {
      * @param pSurfaceFormats     either {@code NULL} or a pointer to an array of {@link VkSurfaceFormat2KHR} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") IntBuffer pSurfaceFormatCount, @Nullable @NativeType("VkSurfaceFormat2KHR *") VkSurfaceFormat2KHR.Buffer pSurfaceFormats) {
+    public static int vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") IntBuffer pSurfaceFormatCount, @NativeType("VkSurfaceFormat2KHR *") VkSurfaceFormat2KHR.@Nullable Buffer pSurfaceFormats) {
         if (CHECKS) {
             check(pSurfaceFormatCount, 1);
             checkSafe(pSurfaceFormats, pSurfaceFormatCount.get(pSurfaceFormatCount.position()));
@@ -244,7 +244,7 @@ public class KHRGetSurfaceCapabilities2 {
 
     /** Array version of: {@link #vkGetPhysicalDeviceSurfaceFormats2KHR GetPhysicalDeviceSurfaceFormats2KHR} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") int[] pSurfaceFormatCount, @Nullable @NativeType("VkSurfaceFormat2KHR *") VkSurfaceFormat2KHR.Buffer pSurfaceFormats) {
+    public static int vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("uint32_t *") int[] pSurfaceFormatCount, @NativeType("VkSurfaceFormat2KHR *") VkSurfaceFormat2KHR.@Nullable Buffer pSurfaceFormats) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceSurfaceFormats2KHR;
         if (CHECKS) {
             check(__functionAddress);

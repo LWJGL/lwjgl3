@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -176,8 +176,7 @@ public class XrExternalCameraIntrinsicsOCULUS extends Struct<XrExternalCameraInt
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExternalCameraIntrinsicsOCULUS createSafe(long address) {
+    public static @Nullable XrExternalCameraIntrinsicsOCULUS createSafe(long address) {
         return address == NULL ? null : new XrExternalCameraIntrinsicsOCULUS(address, null);
     }
 
@@ -220,8 +219,7 @@ public class XrExternalCameraIntrinsicsOCULUS extends Struct<XrExternalCameraInt
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrExternalCameraIntrinsicsOCULUS.Buffer createSafe(long address, int capacity) {
+    public static XrExternalCameraIntrinsicsOCULUS.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

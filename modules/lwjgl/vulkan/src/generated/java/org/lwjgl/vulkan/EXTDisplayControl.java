@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -248,7 +248,7 @@ public class EXTDisplayControl {
      * @param pFence           a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
-    public static int vkRegisterDeviceEventEXT(VkDevice device, @NativeType("VkDeviceEventInfoEXT const *") VkDeviceEventInfoEXT pDeviceEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
+    public static int vkRegisterDeviceEventEXT(VkDevice device, @NativeType("VkDeviceEventInfoEXT const *") VkDeviceEventInfoEXT pDeviceEventInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
         if (CHECKS) {
             check(pFence, 1);
         }
@@ -316,7 +316,7 @@ public class EXTDisplayControl {
      * @param pFence            a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
-    public static int vkRegisterDisplayEventEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayEventInfoEXT const *") VkDisplayEventInfoEXT pDisplayEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
+    public static int vkRegisterDisplayEventEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayEventInfoEXT const *") VkDisplayEventInfoEXT pDisplayEventInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
         if (CHECKS) {
             check(pFence, 1);
         }
@@ -398,7 +398,7 @@ public class EXTDisplayControl {
 
     /** Array version of: {@link #vkRegisterDeviceEventEXT RegisterDeviceEventEXT} */
     @NativeType("VkResult")
-    public static int vkRegisterDeviceEventEXT(VkDevice device, @NativeType("VkDeviceEventInfoEXT const *") VkDeviceEventInfoEXT pDeviceEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") long[] pFence) {
+    public static int vkRegisterDeviceEventEXT(VkDevice device, @NativeType("VkDeviceEventInfoEXT const *") VkDeviceEventInfoEXT pDeviceEventInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFence *") long[] pFence) {
         long __functionAddress = device.getCapabilities().vkRegisterDeviceEventEXT;
         if (CHECKS) {
             check(__functionAddress);
@@ -409,7 +409,7 @@ public class EXTDisplayControl {
 
     /** Array version of: {@link #vkRegisterDisplayEventEXT RegisterDisplayEventEXT} */
     @NativeType("VkResult")
-    public static int vkRegisterDisplayEventEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayEventInfoEXT const *") VkDisplayEventInfoEXT pDisplayEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") long[] pFence) {
+    public static int vkRegisterDisplayEventEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayEventInfoEXT const *") VkDisplayEventInfoEXT pDisplayEventInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFence *") long[] pFence) {
         long __functionAddress = device.getCapabilities().vkRegisterDisplayEventEXT;
         if (CHECKS) {
             check(__functionAddress);

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -168,8 +168,7 @@ public class RMTPropertyValue extends Struct<RMTPropertyValue> implements Native
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTPropertyValue createSafe(long address) {
+    public static @Nullable RMTPropertyValue createSafe(long address) {
         return address == NULL ? null : new RMTPropertyValue(address, null);
     }
 
@@ -212,8 +211,7 @@ public class RMTPropertyValue extends Struct<RMTPropertyValue> implements Native
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RMTPropertyValue.Buffer createSafe(long address, int capacity) {
+    public static RMTPropertyValue.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

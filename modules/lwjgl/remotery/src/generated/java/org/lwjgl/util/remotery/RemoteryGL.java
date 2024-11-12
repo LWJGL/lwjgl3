@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.remotery;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -36,7 +36,7 @@ public class RemoteryGL {
 
     public static native void nrmt_BeginOpenGLSample(long name, long hash_cache);
 
-    public static void rmt_BeginOpenGLSample(@NativeType("rmtPStr") ByteBuffer name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginOpenGLSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
             checkSafe(hash_cache, 1);
@@ -44,7 +44,7 @@ public class RemoteryGL {
         nrmt_BeginOpenGLSample(memAddress(name), memAddressSafe(hash_cache));
     }
 
-    public static void rmt_BeginOpenGLSample(@NativeType("rmtPStr") CharSequence name, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
+    public static void rmt_BeginOpenGLSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);
         }

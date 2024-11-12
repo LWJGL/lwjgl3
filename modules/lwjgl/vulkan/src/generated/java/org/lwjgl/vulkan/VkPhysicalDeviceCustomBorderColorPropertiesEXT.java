@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -152,8 +152,7 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct<VkPhy
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceCustomBorderColorPropertiesEXT createSafe(long address) {
+    public static @Nullable VkPhysicalDeviceCustomBorderColorPropertiesEXT createSafe(long address) {
         return address == NULL ? null : new VkPhysicalDeviceCustomBorderColorPropertiesEXT(address, null);
     }
 
@@ -196,8 +195,7 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct<VkPhy
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VkPhysicalDeviceCustomBorderColorPropertiesEXT.Buffer createSafe(long address, int capacity) {
+    public static VkPhysicalDeviceCustomBorderColorPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

@@ -5,7 +5,7 @@
  */
 package org.lwjgl.odbc;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -208,8 +208,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct<SQL_SS_TIMESTAMPOFFSET
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SQL_SS_TIMESTAMPOFFSET_STRUCT createSafe(long address) {
+    public static @Nullable SQL_SS_TIMESTAMPOFFSET_STRUCT createSafe(long address) {
         return address == NULL ? null : new SQL_SS_TIMESTAMPOFFSET_STRUCT(address, null);
     }
 
@@ -252,8 +251,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct<SQL_SS_TIMESTAMPOFFSET
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer createSafe(long address, int capacity) {
+    public static SQL_SS_TIMESTAMPOFFSET_STRUCT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

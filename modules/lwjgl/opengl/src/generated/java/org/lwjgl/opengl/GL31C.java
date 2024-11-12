@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -466,7 +466,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
-    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformName) {
+    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformName) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -611,7 +611,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
-    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
+    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
         if (CHECKS) {
             checkSafe(length, 1);
         }
@@ -699,7 +699,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
-    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformName) {
+    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer uniformName) {
         long __functionAddress = GL.getICD().glGetActiveUniformName;
         if (CHECKS) {
             check(__functionAddress);
@@ -727,7 +727,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
-    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
+    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
         long __functionAddress = GL.getICD().glGetActiveUniformBlockName;
         if (CHECKS) {
             check(__functionAddress);

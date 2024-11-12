@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -444,7 +444,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
-    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformName) {
+    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformName) {
         GL31C.glGetActiveUniformName(program, uniformIndex, length, uniformName);
     }
 
@@ -564,7 +564,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
-    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
+    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
         GL31C.glGetActiveUniformBlockName(program, uniformBlockIndex, length, uniformBlockName);
     }
 
@@ -633,7 +633,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
-    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformName) {
+    public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer uniformName) {
         GL31C.glGetActiveUniformName(program, uniformIndex, length, uniformName);
     }
 
@@ -651,7 +651,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a href="https://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
-    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
+    public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
         GL31C.glGetActiveUniformBlockName(program, uniformBlockIndex, length, uniformBlockName);
     }
 

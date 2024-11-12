@@ -5,7 +5,7 @@
  */
 package org.lwjgl.nanovg;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -85,8 +85,7 @@ public class NSVGGradientStop extends Struct<NSVGGradientStop> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGGradientStop createSafe(long address) {
+    public static @Nullable NSVGGradientStop createSafe(long address) {
         return address == NULL ? null : new NSVGGradientStop(address, null);
     }
 
@@ -101,8 +100,7 @@ public class NSVGGradientStop extends Struct<NSVGGradientStop> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static NSVGGradientStop.Buffer createSafe(long address, int capacity) {
+    public static NSVGGradientStop.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

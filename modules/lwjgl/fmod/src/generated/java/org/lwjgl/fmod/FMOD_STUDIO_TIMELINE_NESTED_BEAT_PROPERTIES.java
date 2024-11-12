@@ -5,7 +5,7 @@
  */
 package org.lwjgl.fmod;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -133,8 +133,7 @@ public class FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES extends Struct<FMOD_STU
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES createSafe(long address) {
+    public static @Nullable FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES createSafe(long address) {
         return address == NULL ? null : new FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES(address, null);
     }
 
@@ -177,8 +176,7 @@ public class FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES extends Struct<FMOD_STU
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES.Buffer createSafe(long address, int capacity) {
+    public static FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

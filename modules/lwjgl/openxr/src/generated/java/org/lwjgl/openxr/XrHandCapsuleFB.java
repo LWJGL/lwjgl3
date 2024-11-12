@@ -5,7 +5,7 @@
  */
 package org.lwjgl.openxr;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import java.nio.*;
 
@@ -116,8 +116,7 @@ public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandCapsuleFB createSafe(long address) {
+    public static @Nullable XrHandCapsuleFB createSafe(long address) {
         return address == NULL ? null : new XrHandCapsuleFB(address, null);
     }
 
@@ -132,8 +131,7 @@ public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static XrHandCapsuleFB.Buffer createSafe(long address, int capacity) {
+    public static XrHandCapsuleFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 

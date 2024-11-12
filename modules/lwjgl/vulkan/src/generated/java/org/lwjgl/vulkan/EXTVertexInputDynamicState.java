@@ -5,7 +5,7 @@
  */
 package org.lwjgl.vulkan;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -162,7 +162,7 @@ public class EXTVertexInputDynamicState {
      * @param pVertexBindingDescriptions   a pointer to an array of {@link VkVertexInputBindingDescription2EXT} structures.
      * @param pVertexAttributeDescriptions a pointer to an array of {@link VkVertexInputAttributeDescription2EXT} structures.
      */
-    public static void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, @Nullable @NativeType("VkVertexInputBindingDescription2EXT const *") VkVertexInputBindingDescription2EXT.Buffer pVertexBindingDescriptions, @Nullable @NativeType("VkVertexInputAttributeDescription2EXT const *") VkVertexInputAttributeDescription2EXT.Buffer pVertexAttributeDescriptions) {
+    public static void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, @NativeType("VkVertexInputBindingDescription2EXT const *") VkVertexInputBindingDescription2EXT.@Nullable Buffer pVertexBindingDescriptions, @NativeType("VkVertexInputAttributeDescription2EXT const *") VkVertexInputAttributeDescription2EXT.@Nullable Buffer pVertexAttributeDescriptions) {
         nvkCmdSetVertexInputEXT(commandBuffer, remainingSafe(pVertexBindingDescriptions), memAddressSafe(pVertexBindingDescriptions), remainingSafe(pVertexAttributeDescriptions), memAddressSafe(pVertexAttributeDescriptions));
     }
 

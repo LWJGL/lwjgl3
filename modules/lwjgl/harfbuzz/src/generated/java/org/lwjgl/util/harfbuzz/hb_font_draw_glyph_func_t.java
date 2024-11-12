@@ -5,7 +5,7 @@
  */
 package org.lwjgl.util.harfbuzz;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -39,8 +39,7 @@ public abstract class hb_font_draw_glyph_func_t extends Callback implements hb_f
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static hb_font_draw_glyph_func_t createSafe(long functionPointer) {
+    public static @Nullable hb_font_draw_glyph_func_t createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
