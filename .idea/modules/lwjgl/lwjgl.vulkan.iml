@@ -12,7 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
-    <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="JSpecify" level="project" />
     <orderEntry type="library" name="TestNG" level="project" />
   </component>
 </module>

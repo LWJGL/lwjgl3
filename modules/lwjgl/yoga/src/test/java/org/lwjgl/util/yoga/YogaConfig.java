@@ -4,7 +4,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
 
 import static org.lwjgl.util.yoga.Yoga.*;
 
@@ -12,8 +12,7 @@ public class YogaConfig {
 
     final long handle;
 
-    @Nullable
-    private YGCloneNodeFunc cloneNodeFunc;
+    private @Nullable YGCloneNodeFunc cloneNodeFunc;
 
     public YogaConfig() {
         this.handle = YGConfigNew();

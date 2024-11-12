@@ -29,5 +29,7 @@
  * <li>{@link org.lwjgl.system.Struct Struct} and {@link org.lwjgl.system.StructBuffer StructBuffer}, the base classes for struct types and struct buffers.</li>
  * </ul>
  */
-@NonnullDefault
+@NullMarked
 package org.lwjgl.system;
+
+import org.jspecify.annotations.*;

@@ -426,7 +426,7 @@ class NativeClass internal constructor(
                     param.nativeType.isReference && param.has(nullable)
                 } || it.has<MapPointer>()
             }) {
-                println("import javax.annotation.*;\n")
+                println("import org.jspecify.annotations.*;\n")
             }
 
             val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { param -> param.nativeType.isPointerData } }

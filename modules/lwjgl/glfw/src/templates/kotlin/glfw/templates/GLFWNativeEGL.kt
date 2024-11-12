@@ -10,7 +10,7 @@ import glfw.*
 
 val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "egl", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
-        "javax.annotation.*",
+        "org.jspecify.annotations.*",
         "org.lwjgl.egl.EGL",
         "org.lwjgl.egl.EGL10",
         "org.lwjgl.opengles.GLES",

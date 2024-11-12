@@ -378,7 +378,7 @@ fun packageInfo(
             print(HEADER)
             println()
             println(processDocumentation(documentation, forcePackage = true).toJavaDoc(indentation = "", see = see, since = since))
-            println("""@org.lwjgl.system.NonnullDefault
+            println("""@org.jspecify.annotations.NullMarked
 package $packageName;
 """)
         }

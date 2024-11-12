@@ -12,6 +12,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
     <orderEntry type="module" module-name="lwjgl.vulkan" />
-    <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="JSpecify" level="project" />
   </component>
 </module>

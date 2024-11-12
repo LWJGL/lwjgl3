@@ -5,6 +5,7 @@
 package org.lwjgl.demo.util.tootle;
 
 import org.joml.*;
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.assimp.*;
 import org.lwjgl.glfw.*;
@@ -13,7 +14,6 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.nfd.*;
 import org.lwjgl.util.par.*;
 
-import javax.annotation.*;
 import java.io.*;
 import java.nio.*;
 import java.nio.file.*;
@@ -1017,8 +1017,7 @@ public final class HelloTootle {
         }
     }
 
-    @Nullable
-    private AIScene importScene(MemoryStack stack, String filePath) {
+    private @Nullable AIScene importScene(MemoryStack stack, String filePath) {
         // buffer cache (AIFileIO's OpenProc/CloseProc may be called multiple times per file)
         Map<String, ByteBuffer> dataMap = new HashMap<>();
 

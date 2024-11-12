@@ -877,7 +877,7 @@ $indentation}"""
             print(HEADER)
             println("package $packageName;\n")
 
-            println("import javax.annotation.*;\n")
+            println("import org.jspecify.annotations.*;\n")
 
             println("import java.nio.*;\n")
 
@@ -1128,8 +1128,7 @@ $indentation}"""
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static $className createSafe(long address) {
+    public static @Nullable $className createSafe(long address) {
         return address == NULL ? null : new $className(address, null);
     }
 """)
@@ -1197,8 +1196,7 @@ $indentation}"""
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static $className.Buffer createSafe(long address, int $BUFFER_CAPACITY_PARAM) {
+    public static $className.@Nullable Buffer createSafe(long address, int $BUFFER_CAPACITY_PARAM) {
         return address == NULL ? null : new Buffer(address, $BUFFER_CAPACITY_PARAM);
     }
 """)
@@ -1897,7 +1895,7 @@ ${validations.joinToString("\n")}
 
     private fun StructMember.nullable(type: String, nativeType: DataType = this.nativeType) =
         if (nativeType.isReference && isNullable && nativeType !is CArrayType<*>) {
-            "@Nullable $type"
+            type.nullable
         } else {
             type
         }
@@ -2003,7 +2001,7 @@ ${validations.joinToString("\n")}
                             }
                             printSetterJavadoc(accessMode, it, indent, "Passes the element at {@code index} of the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(int index, java.util.function.Consumer<$retType> consumer) { consumer.accept($setter(index)); return this; }")
+                            println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(int index, java.util.function.Consumer<${if (it.isNullable) retType.nullable else retType}> consumer) { consumer.accept($setter(index)); return this; }")
                         }
                     } else if (it.nativeType is CharType) {
                         printSetterJavadoc(accessMode, it, indent, "Copies the specified encoded string to the #member field.", setter)
@@ -2109,7 +2107,7 @@ ${validations.joinToString("\n")}
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
                     if (it.nativeType is FunctionType) {
-                        println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
+                        println("${t}public static ${it.nullable(it.nativeType.className)} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
                     } else if (it.getter != null) {
                         println("${t}public static ${it.nativeType.nativeMethodType} n$getter(long $STRUCT) { return ${it.getter}; }")
                     } else if (it.bits != -1) {
@@ -2138,7 +2136,7 @@ ${validations.joinToString("\n")}
                             println("${t}public static PointerBuffer n$getter(long $STRUCT) { return ${it.mem("PointerBuffer")}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("$t${it.nullable("public")} static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
+                            println("${t}public static ${it.nullable("$nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"}")} n$getter(long $STRUCT, int index) {")
                             println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $capacity) * POINTER_SIZE)${
                                 if (autoSizeIndirect == null) "" else ", n${autoSizeIndirect.name}($STRUCT)"
                             });")
@@ -2149,7 +2147,7 @@ ${validations.joinToString("\n")}
                             println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return ${it.construct(nestedStruct)}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("$t${it.nullable("public")} static $nestedStruct n$getter(long $STRUCT, int index) {")
+                            println("${t}public static ${it.nullable(nestedStruct)} n$getter(long $STRUCT, int index) {")
                             println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $capacity) * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
@@ -2186,10 +2184,10 @@ ${validations.joinToString("\n")}
                     val mapping = it.nativeType.charMapping
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
-                    println("$t${it.nullable("public")} static ByteBuffer n$getter(long $STRUCT) { return ${it.mem("ByteBufferNT${mapping.bytes}")}(memGetAddress($STRUCT + $field)); }")
+                    println("${t}public static ${it.nullable("ByteBuffer")} n$getter(long $STRUCT) { return ${it.mem("ByteBufferNT${mapping.bytes}")}(memGetAddress($STRUCT + $field)); }")
                     if (it.public)
                         println("$t/** Unsafe version of {@link #${getter}String}. */")
-                    println("$t${it.nullable("public")} static String n${getter}String(long $STRUCT) { return ${it.mem(mapping.charset)}(memGetAddress($STRUCT + $field)); }")
+                    println("${t}public static ${it.nullable("String")} n${getter}String(long $STRUCT) { return ${it.mem(mapping.charset)}(memGetAddress($STRUCT + $field)); }")
                 } else if (it.nativeType.isPointerData) {
                     val returnType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
@@ -2199,11 +2197,11 @@ ${validations.joinToString("\n")}
                             val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
 
                             if (capacity == null)
-                                "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
+                                "${t}public static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
                             else
-                                "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $capacity); }"
+                                "${t}public static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $capacity); }"
                         } else
-                            "$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
+                            "${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
                         )
                     } else {
                         val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
@@ -2211,11 +2209,11 @@ ${validations.joinToString("\n")}
                         if (capacity == null) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("$t${it.nullable("public")} static $returnType n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
+                            println("${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter() $getter}. */")
-                            println("$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $capacity); }")
+                            println("${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $capacity); }")
                         }
                     }
                 }
@@ -2224,9 +2222,6 @@ ${validations.joinToString("\n")}
     }
 
     private fun PrintWriter.generateGetterAnnotations(indent: String, member: StructMember, type: String, nativeType: NativeType = member.nativeType) {
-        if (nativeType.isReference && member.isNullable) {
-            println("$indent@Nullable")
-        }
         nativeType.annotation(type).let {
             if (it != null)
                 println("$indent$it")
@@ -2258,7 +2253,7 @@ ${validations.joinToString("\n")}
                 else {
                     printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, structType)
-                    println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
+                    println("${indent}public ${it.nullable(structType)} $getter() { return $n$getter($ADDRESS); }")
                 }
             } else {
                 // Getter
@@ -2271,7 +2266,7 @@ ${validations.joinToString("\n")}
                     }
                     printGetterJavadoc(accessMode, it, indent, "@return the value of the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, returnType)
-                    println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping.isPseudoBoolean()) " != 0" else ""}; }")
+                    println("${indent}public ${it.nullable(returnType)} $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping.isPseudoBoolean()) " != 0" else ""}; }")
                 }
 
                 // Alternative getters
@@ -2287,38 +2282,38 @@ ${validations.joinToString("\n")}
                             val retType = "$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}"
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the pointer at the specified index of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, retType)
-                            println("${indent}public $retType $getter(int index) { return $n$getter($ADDRESS, index); }")
+                            println("${indent}public ${it.nullable(retType)} $getter(int index) { return $n$getter($ADDRESS, index); }")
                         } else {
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType}.Buffer view of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, "$structType.Buffer", it.arrayType)
-                            println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
+                            println("${indent}public ${it.nullable("$structType.Buffer")} $getter() { return $n$getter($ADDRESS); }")
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the struct at the specified index of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, structType)
-                            println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
+                            println("${indent}public ${it.nullable(structType)} $getter(int index) { return $n$getter($ADDRESS, index); }")
                         }
                     } else if (it.nativeType is CharType) {
                         printGetterJavadoc(accessMode, it, indent, "@return a {@link ByteBuffer} view of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, "ByteBuffer", it.arrayType)
-                        println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
+                        println("${indent}public ${it.nullable("ByteBuffer")} $getter() { return $n$getter($ADDRESS); }")
                         printGetterJavadoc(accessMode, it, indent, "@return the null-terminated string stored in the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, "String", it.arrayType)
-                        println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
+                        println("${indent}public ${it.nullable("String")} ${getter}String() { return $n${getter}String($ADDRESS); }")
                     } else {
                         val bufferType = it.primitiveMapping.toPointer.javaMethodName
                         printGetterJavadoc(accessMode, it, indent, "@return a {@link $bufferType} view of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, bufferType, it.arrayType)
-                        println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
+                        println("${indent}public ${it.nullable(bufferType)} $getter() { return $n$getter($ADDRESS); }")
                         printGetterJavadoc(accessMode, it, indent, "@return the value at the specified index of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, it.nativeType.nativeMethodType)
-                        println("${indent}public ${it.nativeType.nativeMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
+                        println("${indent}public ${it.nullable(it.nativeType.nativeMethodType)} $getter(int index) { return $n$getter($ADDRESS, index); }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     printGetterJavadoc(accessMode, it, indent, "@return a {@link ByteBuffer} view of the null-terminated string pointed to by the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, "ByteBuffer")
-                    println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
+                    println("${indent}public ${it.nullable("ByteBuffer")} $getter() { return $n$getter($ADDRESS); }")
                     printGetterJavadoc(accessMode, it, indent, "@return the null-terminated string pointed to by the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, "String")
-                    println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
+                    println("${indent}public ${it.nullable("String")} ${getter}String() { return $n${getter}String($ADDRESS); }")
                 } else if (it.nativeType.isPointerData) {
                     val returnType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
@@ -2326,26 +2321,26 @@ ${validations.joinToString("\n")}
                             if (getReferenceMember<AutoSizeMember>(it.name) == null && !it.has<Check>()) {
                                 printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType.Buffer} view of the struct array pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                                 generateGetterAnnotations(indent, it, "$returnType.Buffer")
-                                println("${indent}public $returnType.Buffer $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
+                                println("${indent}public ${it.nullable("$returnType.Buffer")} $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                             } else {
                                 printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType.Buffer} view of the struct array pointed to by the #member field.", getter, member)
                                 generateGetterAnnotations(indent, it, "$returnType.Buffer")
-                                println("${indent}public $returnType.Buffer $getter() { return $n$getter($ADDRESS); }")
+                                println("${indent}public ${it.nullable("$returnType.Buffer")} $getter() { return $n$getter($ADDRESS); }")
                             }
                         } else {
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the struct pointed to by the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, returnType)
-                            println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
+                            println("${indent}public ${it.nullable(returnType)} $getter() { return $n$getter($ADDRESS); }")
                         }
                     } else {
                         if (getReferenceMember<AutoSizeMember>(it.name) == null && !it.has<Check>()) {
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the data pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                             generateGetterAnnotations(indent, it, returnType)
-                            println("${indent}public $returnType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
+                            println("${indent}public ${it.nullable(returnType)} $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                         } else {
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the data pointed to by the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, returnType)
-                            println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
+                            println("${indent}public ${it.nullable(returnType)} $getter() { return $n$getter($ADDRESS); }")
                         }
                     }
                 }

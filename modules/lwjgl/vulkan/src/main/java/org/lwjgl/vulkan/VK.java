@@ -4,10 +4,10 @@
  */
 package org.lwjgl.vulkan;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -45,11 +45,9 @@ import static org.lwjgl.vulkan.VK11.*;
  */
 public final class VK {
 
-    @Nullable
-    private static FunctionProvider functionProvider;
+    private static @Nullable FunctionProvider functionProvider;
 
-    @Nullable
-    private static GlobalCommands globalCommands;
+    private static @Nullable GlobalCommands globalCommands;
 
     static {
         if (!Configuration.VULKAN_EXPLICIT_INIT.get(false)) {

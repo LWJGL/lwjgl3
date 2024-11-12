@@ -114,7 +114,7 @@ class CallbackFunction internal constructor(
         print(HEADER)
         println("package $packageName;\n")
 
-        print("""import javax.annotation.*;
+        print("""import org.jspecify.annotations.*;
 
 import org.lwjgl.system.*;
 
@@ -139,8 +139,7 @@ import static org.lwjgl.system.MemoryUtil.*;
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    @Nullable
-    public static $className createSafe(long functionPointer) {
+    public static @Nullable $className createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 

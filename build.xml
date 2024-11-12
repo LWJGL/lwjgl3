@@ -414,7 +414,7 @@
             <lwjgl.javac destdir="${bin.lwjgl}/@{binding}" taskname="javac: @{binding}" if:true="${binding.@{binding}}">
                 <classpath>
                     <pathelement path="${bin.lwjgl}/core"/>
-                    <pathelement path="${lib}/java/jsr305.jar"/>
+                    <pathelement path="${lib}/java/jspecify.jar"/>
                 </classpath>
 
                 <src>
@@ -435,7 +435,7 @@
         <delete dir="${module.lwjgl}/core/src/generated/java/META-INF" quiet="true"/>
 
         <lwjgl.javac destdir="${bin.lwjgl}/core" taskname="javac: core">
-            <classpath><pathelement path="${lib}/java/jsr305.jar"/></classpath>
+            <classpath><pathelement path="${lib}/java/jspecify.jar"/></classpath>
             <src>
                 <pathelement path="${module.lwjgl}/core/src/main/java/"/>
                 <pathelement path="${module.lwjgl}/core/src/generated/java/"/>
@@ -448,7 +448,7 @@
         <lwjgl.javac11 destdir="${bin.lwjgl}/core/META-INF/versions/11" taskname="javac: Core - Java 11" if:set="jdk11">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core"/>
-                <pathelement path="${lib}/java/jsr305.jar"/>
+                <pathelement path="${lib}/java/jspecify.jar"/>
             </classpath>
             <src>
                 <pathelement path="${module.lwjgl}/core11/src/main/java"/>
@@ -636,7 +636,7 @@
                 <classpath>
                     <pathelement path="${bin.lwjgl}/core"/>
                     <pathelement path="${bin.lwjgl}/${module}"/>
-                    <pathelement path="${lib}/java/jsr305.jar"/>
+                    <pathelement path="${lib}/java/jspecify.jar"/>
                     <pathelement path="${lib}/java/testng.jar"/>
                 </classpath>
             </lwjgl.javac>
@@ -807,7 +807,7 @@
             <classpath>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
-                <pathelement path="${lib}/java/jsr305.jar"/>
+                <pathelement path="${lib}/java/jspecify.jar"/>
                 <pathelement path="${lib}/java/jmh-core.jar"/>
                 <pathelement path="${lib}/java/jmh-generator-annprocess.jar"/>
                 <pathelement path="${lib}/java/joml.jar"/>
@@ -1008,7 +1008,7 @@
             <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
 
             <classpath>
-                <pathelement path="${lib}/java/jsr305.jar"/>
+                <pathelement path="${lib}/java/jspecify.jar"/>
             </classpath>
 
             <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
@@ -1402,7 +1402,7 @@
 
                 <classpath>
                     <pathelement path="${module.classpath}"/>
-                    <pathelement path="${lib}/java/jsr305.jar"/>
+                    <pathelement path="${lib}/java/jspecify.jar"/>
                 </classpath>
 
                 <fileset dir="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" includes="**" if:set="hasMain.javadoc"/>

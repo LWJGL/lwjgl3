@@ -4,10 +4,10 @@
  */
 package org.lwjgl.opengles;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -49,13 +49,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class GLES {
 
-    @Nullable
-    private static final APIVersion MAX_VERSION;
+    private static final @Nullable APIVersion MAX_VERSION;
 
-    @Nullable
-    private static FunctionProvider functionProvider;
+    private static @Nullable FunctionProvider functionProvider;
 
-    private static final ThreadLocal<GLESCapabilities> capabilitiesTLS = new ThreadLocal<>();
+    private static final ThreadLocal<@Nullable GLESCapabilities> capabilitiesTLS = new ThreadLocal<>();
 
     private static ICD icd = new ICDStatic();
 
@@ -105,8 +103,7 @@ public final class GLES {
         create(Library.loadNative(GLES.class, "org.lwjgl.opengles", libName));
     }
 
-    @Nullable
-    private static FunctionProvider getContextProvider() {
+    private static @Nullable FunctionProvider getContextProvider() {
         FunctionProvider provider = null;
 
         String contextAPI = Configuration.OPENGLES_CONTEXT_API.get();
@@ -191,8 +188,7 @@ public final class GLES {
     }
 
     /** Returns the {@link FunctionProvider} for the OpenGL ES native library. */
-    @Nullable
-    public static FunctionProvider getFunctionProvider() {
+    public static @Nullable FunctionProvider getFunctionProvider() {
         return functionProvider;
     }
 
@@ -385,8 +381,7 @@ public final class GLES {
      */
     private static class ICDStatic implements ICD {
 
-        @Nullable
-        private static GLESCapabilities tempCaps;
+        private static @Nullable GLESCapabilities tempCaps;
 
         @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
         @Override

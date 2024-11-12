@@ -4,11 +4,11 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.jni.*;
 import org.testng.annotations.*;
 
-import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryStack.*;

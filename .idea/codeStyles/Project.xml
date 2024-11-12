@@ -3,6 +3,7 @@
     <option name="LINE_SEPARATOR" value="&#10;" />
     <option name="RIGHT_MARGIN" value="160" />
     <JavaCodeStyleSettings>
+      <option name="REPLACE_INSTANCEOF_AND_CAST" value="true" />
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
       <option name="BLANK_LINES_AROUND_INITIALIZER" value="0" />
       <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="1" />

@@ -4,11 +4,11 @@
  */
 package org.lwjgl.opengl;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.windows.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -57,23 +57,18 @@ import static org.lwjgl.system.windows.WindowsUtil.*;
  */
 public final class GL {
 
-    @Nullable
-    private static final APIVersion MAX_VERSION;
+    private static final @Nullable APIVersion MAX_VERSION;
 
-    @Nullable
-    private static FunctionProvider functionProvider;
+    private static @Nullable FunctionProvider functionProvider;
 
-    private static final ThreadLocal<GLCapabilities> capabilitiesTLS = new ThreadLocal<>();
+    private static final ThreadLocal<@Nullable GLCapabilities> capabilitiesTLS = new ThreadLocal<>();
 
     private static ICD icd = new ICDStatic();
 
-    @Nullable
-    private static WGLCapabilities capabilitiesWGL;
+    private static @Nullable WGLCapabilities capabilitiesWGL;
 
-    @Nullable
-    private static GLXCapabilities capabilitiesGLXClient;
-    @Nullable
-    private static GLXCapabilities capabilitiesGLX;
+    private static @Nullable GLXCapabilities capabilitiesGLXClient;
+    private static @Nullable GLXCapabilities capabilitiesGLX;
 
     static {
         Library.loadSystem(System::load, System::loadLibrary, GL.class, "org.lwjgl.opengl", Platform.mapLibraryNameBundled("lwjgl_opengl"));
@@ -199,8 +194,7 @@ public final class GL {
     }
 
     /** Returns the {@link FunctionProvider} for the OpenGL native library. */
-    @Nullable
-    public static FunctionProvider getFunctionProvider() {
+    public static @Nullable FunctionProvider getFunctionProvider() {
         return functionProvider;
     }
 
@@ -710,8 +704,7 @@ public final class GL {
      */
     private static class ICDStatic implements ICD {
 
-        @Nullable
-        private static GLCapabilities tempCaps;
+        private static @Nullable GLCapabilities tempCaps;
 
         @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
         @Override

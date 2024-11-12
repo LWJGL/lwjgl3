@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 
-import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -37,8 +37,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    @Nullable
-    private final ByteBuffer container;
+    private final @Nullable ByteBuffer container;
 
     private final int size;
 
@@ -171,7 +170,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     /** Stores the method that pushed a frame and checks if it is the same method when the frame is popped. */
     private static class DebugMemoryStack extends MemoryStack {
 
-        private Object[] debugFrames;
+        private @Nullable Object[] debugFrames;
 
         DebugMemoryStack(@Nullable ByteBuffer buffer, long address, int size) {
             super(buffer, address, size);
@@ -765,14 +764,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer ASCIISafe(@Nullable CharSequence text) {
+    public @Nullable ByteBuffer ASCIISafe(@Nullable CharSequence text) {
         return ASCIISafe(text, true);
     }
 
     /** Like {@link #ASCII(CharSequence, boolean) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer ASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
+    public @Nullable ByteBuffer ASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : ASCII(text, nullTerminated);
     }
 
@@ -823,14 +820,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer UTF8Safe(@Nullable CharSequence text) {
+    public @Nullable ByteBuffer UTF8Safe(@Nullable CharSequence text) {
         return UTF8Safe(text, true);
     }
 
     /** Like {@link #UTF8(CharSequence, boolean) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer UTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
+    public @Nullable ByteBuffer UTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : UTF8(text, nullTerminated);
     }
 
@@ -881,14 +876,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer UTF16Safe(@Nullable CharSequence text) {
+    public @Nullable ByteBuffer UTF16Safe(@Nullable CharSequence text) {
         return UTF16Safe(text, true);
     }
 
     /** Like {@link #UTF16(CharSequence, boolean) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public ByteBuffer UTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
+    public @Nullable ByteBuffer UTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : UTF16(text, nullTerminated);
     }
 
@@ -1107,21 +1100,21 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public static ByteBuffer stackUTF16(CharSequence text, boolean nullTerminated) { return stackGet().UTF16(text, nullTerminated); }
 
     /** Thread-local version of {@link #ASCII(CharSequence)}. */
-    @Nullable public static ByteBuffer stackASCIISafe(@Nullable CharSequence text) { return stackGet().ASCIISafe(text); }
+    public static @Nullable ByteBuffer stackASCIISafe(@Nullable CharSequence text) { return stackGet().ASCIISafe(text); }
 
     /** Thread-local version of {@link #ASCII(CharSequence, boolean)}. */
-    @Nullable public static ByteBuffer stackASCIISafe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().ASCIISafe(text, nullTerminated); }
+    public static @Nullable ByteBuffer stackASCIISafe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().ASCIISafe(text, nullTerminated); }
 
     /** Thread-local version of {@link #UTF8(CharSequence)}. */
-    @Nullable public static ByteBuffer stackUTF8Safe(@Nullable CharSequence text) { return stackGet().UTF8Safe(text); }
+    public static @Nullable ByteBuffer stackUTF8Safe(@Nullable CharSequence text) { return stackGet().UTF8Safe(text); }
 
     /** Thread-local version of {@link #UTF8(CharSequence, boolean)}. */
-    @Nullable public static ByteBuffer stackUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF8Safe(text, nullTerminated); }
+    public static @Nullable ByteBuffer stackUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF8Safe(text, nullTerminated); }
 
     /** Thread-local version of {@link #UTF16(CharSequence)}. */
-    @Nullable public static ByteBuffer stackUTF16Safe(@Nullable CharSequence text) { return stackGet().UTF16Safe(text); }
+    public static @Nullable ByteBuffer stackUTF16Safe(@Nullable CharSequence text) { return stackGet().UTF16Safe(text); }
 
     /** Thread-local version of {@link #UTF16(CharSequence, boolean)}. */
-    @Nullable public static ByteBuffer stackUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF16Safe(text, nullTerminated); }
+    public static @Nullable ByteBuffer stackUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF16Safe(text, nullTerminated); }
 
 }

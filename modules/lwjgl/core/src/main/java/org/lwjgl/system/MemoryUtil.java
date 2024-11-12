@@ -4,11 +4,11 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.*;
 import org.lwjgl.system.MemoryManage.*;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.*;
 
-import javax.annotation.*;
 import java.lang.reflect.*;
 import java.nio.*;
 import java.nio.charset.*;
@@ -714,7 +714,7 @@ public final class MemoryUtil {
          * @param threadName name of the thread that allocated the memory. May be {@code null}.
          * @param stacktrace the allocation stacktrace. May be {@code null}.
          */
-        void invoke(long address, long memory, long threadId, @Nullable String threadName, @Nullable StackTraceElement... stacktrace);
+        void invoke(long address, long memory, long threadId, @Nullable String threadName, StackTraceElement @Nullable ... stacktrace);
 
         /** Specifies how to aggregate the reported allocations. */
         enum Aggregate {
@@ -929,8 +929,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memByteBuffer(long, int) memByteBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ByteBuffer memByteBufferSafe(long address, int capacity) {
+    public static @Nullable ByteBuffer memByteBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferByte(address, capacity);
     }
 
@@ -1083,8 +1082,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memShortBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ShortBuffer memShortBufferSafe(long address, int capacity) {
+    public static @Nullable ShortBuffer memShortBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferShort(address, capacity);
     }
 
@@ -1106,8 +1104,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memCharBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static CharBuffer memCharBufferSafe(long address, int capacity) {
+    public static @Nullable CharBuffer memCharBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferChar(address, capacity);
     }
 
@@ -1129,8 +1126,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memIntBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static IntBuffer memIntBufferSafe(long address, int capacity) {
+    public static @Nullable IntBuffer memIntBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferInt(address, capacity);
     }
 
@@ -1152,8 +1148,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static LongBuffer memLongBufferSafe(long address, int capacity) {
+    public static @Nullable LongBuffer memLongBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferLong(address, capacity);
     }
 
@@ -1175,8 +1170,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memCLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static CLongBuffer memCLongBufferSafe(long address, int capacity) {
+    public static @Nullable CLongBuffer memCLongBufferSafe(long address, int capacity) {
         return address == NULL ? null : CLongBuffer.create(address, capacity);
     }
 
@@ -1198,8 +1192,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memFloatBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static FloatBuffer memFloatBufferSafe(long address, int capacity) {
+    public static @Nullable FloatBuffer memFloatBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferFloat(address, capacity);
     }
 
@@ -1221,8 +1214,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memDoubleBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static DoubleBuffer memDoubleBufferSafe(long address, int capacity) {
+    public static @Nullable DoubleBuffer memDoubleBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrapBufferDouble(address, capacity);
     }
 
@@ -1245,8 +1237,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memPointerBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static PointerBuffer memPointerBufferSafe(long address, int capacity) {
+    public static @Nullable PointerBuffer memPointerBufferSafe(long address, int capacity) {
         return address == NULL ? null : PointerBuffer.create(address, capacity);
     }
 
@@ -2025,8 +2016,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memASCII(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memASCIISafe(@Nullable CharSequence text) {
+    public static @Nullable ByteBuffer memASCIISafe(@Nullable CharSequence text) {
         return text == null ? null : memASCII(text, true);
     }
 
@@ -2051,8 +2041,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memASCII(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
+    public static @Nullable ByteBuffer memASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : memASCII(text, nullTerminated);
     }
 
@@ -2141,8 +2130,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF8(CharSequence) memUTF8}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memUTF8Safe(@Nullable CharSequence text) {
+    public static @Nullable ByteBuffer memUTF8Safe(@Nullable CharSequence text) {
         return text == null ? null : memUTF8(text, true);
     }
 
@@ -2167,8 +2155,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF8(CharSequence, boolean) memUTF8}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
+    public static @Nullable ByteBuffer memUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : memUTF8(text, nullTerminated);
     }
 
@@ -2347,8 +2334,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF16(CharSequence) memUTF16}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memUTF16Safe(@Nullable CharSequence text) {
+    public static @Nullable ByteBuffer memUTF16Safe(@Nullable CharSequence text) {
         return text == null ? null : memUTF16(text, true);
     }
 
@@ -2373,8 +2359,7 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF16(CharSequence, boolean) memUTF16}, but returns {@code null} if {@code text} is {@code null}. */
-    @Nullable
-    public static ByteBuffer memUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
+    public static @Nullable ByteBuffer memUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : memUTF16(text, nullTerminated);
     }
 
@@ -2662,14 +2647,12 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memByteBufferNT1(long) memByteBufferNT1}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ByteBuffer memByteBufferNT1Safe(long address) {
+    public static @Nullable ByteBuffer memByteBufferNT1Safe(long address) {
         return address == NULL ? null : memByteBuffer(address, memLengthNT1(address, Integer.MAX_VALUE));
     }
 
     /** Like {@link #memByteBufferNT1(long, int) memByteBufferNT1}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ByteBuffer memByteBufferNT1Safe(long address, int maxLength) {
+    public static @Nullable ByteBuffer memByteBufferNT1Safe(long address, int maxLength) {
         return address == NULL ? null : memByteBuffer(address, memLengthNT1(address, maxLength));
     }
 
@@ -2707,14 +2690,12 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memByteBufferNT2(long) memByteBufferNT2}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ByteBuffer memByteBufferNT2Safe(long address) {
+    public static @Nullable ByteBuffer memByteBufferNT2Safe(long address) {
         return address == NULL ? null : memByteBufferNT2(address, Integer.MAX_VALUE - 1);
     }
 
     /** Like {@link #memByteBufferNT2(long, int) memByteBufferNT2}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static ByteBuffer memByteBufferNT2Safe(long address, int maxLength) {
+    public static @Nullable ByteBuffer memByteBufferNT2Safe(long address, int maxLength) {
         return address == NULL ? null : memByteBufferNT2(address, maxLength);
     }
 
@@ -2762,20 +2743,17 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memASCII(long) memASCII}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memASCIISafe(long address) {
+    public static @Nullable String memASCIISafe(long address) {
         return address == NULL ? null : memASCII(address, memLengthNT1(address, Integer.MAX_VALUE));
     }
 
     /** Like {@link #memASCII(long, int) memASCII}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memASCIISafe(long address, int length) {
+    public static @Nullable String memASCIISafe(long address, int length) {
         return address == NULL ? null : memASCII(address, length);
     }
 
     /** Like {@link #memASCII(ByteBuffer) memASCII}, but returns {@code null} if {@code buffer} is {@code null}. */
-    @Nullable
-    public static String memASCIISafe(@Nullable ByteBuffer buffer) {
+    public static @Nullable String memASCIISafe(@Nullable ByteBuffer buffer) {
         return buffer == null ? null : memASCII(memAddress(buffer), buffer.remaining());
     }
 
@@ -2845,20 +2823,17 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF8(long) memUTF8}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memUTF8Safe(long address) {
+    public static @Nullable String memUTF8Safe(long address) {
         return address == NULL ? null : MultiReleaseTextDecoding.decodeUTF8(address, memLengthNT1(address, Integer.MAX_VALUE));
     }
 
     /** Like {@link #memUTF8(long, int) memUTF8}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memUTF8Safe(long address, int length) {
+    public static @Nullable String memUTF8Safe(long address, int length) {
         return address == NULL ? null : MultiReleaseTextDecoding.decodeUTF8(address, length);
     }
 
     /** Like {@link #memUTF8(ByteBuffer) memUTF8}, but returns {@code null} if {@code buffer} is {@code null}. */
-    @Nullable
-    public static String memUTF8Safe(@Nullable ByteBuffer buffer) {
+    public static @Nullable String memUTF8Safe(@Nullable ByteBuffer buffer) {
         return buffer == null ? null : MultiReleaseTextDecoding.decodeUTF8(memAddress(buffer), buffer.remaining());
     }
 
@@ -2942,20 +2917,17 @@ public final class MemoryUtil {
     }
 
     /** Like {@link #memUTF16(long) memUTF16}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memUTF16Safe(long address) {
+    public static @Nullable String memUTF16Safe(long address) {
         return address == NULL ? null : memUTF16(address, memLengthNT2(address, Integer.MAX_VALUE - 1) >> 1);
     }
 
     /** Like {@link #memUTF16(long, int) memUTF16}, but returns {@code null} if {@code address} is {@link #NULL}. */
-    @Nullable
-    public static String memUTF16Safe(long address, int length) {
+    public static @Nullable String memUTF16Safe(long address, int length) {
         return address == NULL ? null : memUTF16(address, length);
     }
 
     /** Like {@link #memUTF16(ByteBuffer) memUTF16}, but returns {@code null} if {@code buffer} is {@code null}. */
-    @Nullable
-    public static String memUTF16Safe(@Nullable ByteBuffer buffer) {
+    public static @Nullable String memUTF16Safe(@Nullable ByteBuffer buffer) {
         return buffer == null ? null : memUTF16(memAddress(buffer), buffer.remaining() >> 1);
     }
 

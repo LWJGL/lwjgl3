@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -169,8 +170,7 @@ public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffe
     private static class StructIterator<T extends Struct<T>> implements Iterator<T> {
         private long address;
 
-        @Nullable
-        private ByteBuffer container;
+        private @Nullable ByteBuffer container;
 
         private T factory;
 
@@ -226,8 +226,7 @@ public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffe
     private static class StructSpliterator<T extends Struct<T>> implements Spliterator<T> {
         private long address;
 
-        @Nullable
-        private ByteBuffer container;
+        private @Nullable ByteBuffer container;
 
         private T factory;
 
@@ -255,8 +254,7 @@ public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffe
         }
 
         @Override
-        @Nullable
-        public Spliterator<T> trySplit() {
+        public @Nullable Spliterator<T> trySplit() {
             int lo = index,
                 mid = (lo + fence) >>> 1;
 

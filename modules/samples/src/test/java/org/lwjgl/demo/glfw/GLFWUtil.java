@@ -4,10 +4,10 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 
-import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;

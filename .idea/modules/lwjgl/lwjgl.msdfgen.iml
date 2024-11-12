@@ -10,6 +10,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
-    <orderEntry type="library" name="jsr305" level="project" />
+    <orderEntry type="library" name="JSpecify" level="project" />
   </component>
 </module>

@@ -4,9 +4,8 @@
  */
 package org.lwjgl.system;
 
+import org.jspecify.annotations.*;
 import org.testng.annotations.*;
-
-import javax.annotation.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.testng.Assert.*;

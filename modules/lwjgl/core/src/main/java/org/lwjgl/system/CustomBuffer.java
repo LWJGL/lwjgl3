@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system;
 
-import javax.annotation.*;
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -12,8 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Base class of custom buffers with an API that mirrors {@code java.nio} for convenience. */
 public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Pointer.Default {
 
-    @Nullable
-    protected ByteBuffer container;
+    protected @Nullable ByteBuffer container;
 
     protected int
         mark,
