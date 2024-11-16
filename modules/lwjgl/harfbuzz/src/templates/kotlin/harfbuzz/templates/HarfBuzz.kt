@@ -2706,7 +2706,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         FT_Face("ft_face", ""),
-        hb_destroy_func_t("destroy", "")
+        nullable..hb_destroy_func_t("destroy", "")
     )
 
     IgnoreMissing..hb_font_t.p(

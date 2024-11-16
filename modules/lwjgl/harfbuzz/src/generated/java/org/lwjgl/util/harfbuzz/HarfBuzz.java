@@ -5033,8 +5033,8 @@ public class HarfBuzz {
     }
 
     @NativeType("hb_font_t *")
-    public static long hb_ft_font_create(@NativeType("FT_Face") long ft_face, @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
-        return nhb_ft_font_create(ft_face, destroy.address());
+    public static long hb_ft_font_create(@NativeType("FT_Face") long ft_face, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        return nhb_ft_font_create(ft_face, memAddressSafe(destroy));
     }
 
     // --- [ hb_ft_font_create_referenced ] ---
