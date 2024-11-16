@@ -393,7 +393,7 @@
             </classpath>
 
             <jvmarg line="${generator.bindings}"/>
-            <jvmarg line="-Dfile.encoding=UTF8 -Dline.separator=&#10;"/>
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8 -Dline.separator=&#10;"/>
 
             <arg value="${module.lwjgl}"/>
         </java>
@@ -614,6 +614,7 @@
                 <pathelement path="${lib}/native"/>
             </classpath>
 
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
             <arg line="${args}" if:set="args"/>
         </java>
@@ -889,6 +890,7 @@
             <!--<jvmarg value="-Xcheck:jni"/>--> <!-- SIMD fails with this (see -XX:+RestoreMXCSROnJNICall) -->
             <jvmarg value="-server"/>
             <jvmarg value="-ea"/>
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
             <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
             <jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
@@ -930,6 +932,7 @@
             </classpath>
 
             <jvmarg value="-server"/>
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
@@ -956,6 +959,7 @@
                 <pathelement path="${bin.lwjgl}/core"/>
                 <pathelement path="${lib}/native"/>
             </classpath>
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
         </java>
     </target>
 
@@ -1014,13 +1018,15 @@
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
             <arg line="-notimestamp"/>
             <arg value="-html5" if:set="jdk11"/>
-            <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
+            <arg line="-J-Dfile.encoding=UTF-8 -J-Dstdout.encoding=UTF-8 -J-Dstderr.encoding=UTF-8 -J-Dline.separator=&#10;"/>
             <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
         </javadoc>
         <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.javadoc}"/>
 
         <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true">
             <classpath path="${bin.generator}"/>
+
+            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
 
             <arg value="${bin.javadoc}"/>
         </java>
@@ -1408,13 +1414,15 @@
                 <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
                 <arg line="-notimestamp"/>
                 <arg value="-html5" if:set="jdk11"/>
-                <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
+                <arg line="-J-Dfile.encoding=UTF-8 -J-Dstdout.encoding=UTF-8 -J-Dstderr.encoding=UTF-8 -J-Dline.separator=&#10;"/>
                 <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
             </javadoc>
             <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
             <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true" unless:set="javadoc.skip">
                 <classpath path="${bin.generator}"/>
+
+                <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
 
                 <arg value="${release}/${module}/javadoc"/>
             </java>
