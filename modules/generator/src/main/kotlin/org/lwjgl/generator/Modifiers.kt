@@ -53,6 +53,11 @@ abstract class ModifierTarget<T : TemplateModifier> {
 
     internal fun hasModifiers() = _modifiers !== EMPTY_MODIFIERS
 
+    fun clearModifiers() {
+        @Suppress("UNCHECKED_CAST")
+        _modifiers = EMPTY_MODIFIERS as MutableMap<KClass<out T>, T>
+    }
+
     internal fun setModifiers(vararg modifiers: T) {
         if (!hasModifiers())
             this._modifiers = HashMap(modifiers.size)

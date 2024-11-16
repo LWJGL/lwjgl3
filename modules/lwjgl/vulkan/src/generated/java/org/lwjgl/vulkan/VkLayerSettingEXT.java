@@ -127,10 +127,14 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     /** the number of values used to configure the layer setting. */
     @NativeType("uint32_t")
     public int valueCount() { return nvalueCount(address()); }
-    /** a pointer to an array of {@code valueCount} values of the type indicated by {@code type} to configure the layer setting. */
+    /**
+     * @param capacity the number of elements in the returned buffer
+     *
+     * @return a pointer to an array of {@code valueCount} values of the type indicated by {@code type} to configure the layer setting.
+     */
     @Nullable
     @NativeType("void const *")
-    public ByteBuffer pValues() { return npValues(address()); }
+    public ByteBuffer pValues(int capacity) { return npValues(address(), capacity); }
 
     /** Sets the address of the specified encoded string to the {@link #pLayerName} field. */
     public VkLayerSettingEXT pLayerName(@NativeType("char const *") ByteBuffer value) { npLayerName(address(), value); return this; }
@@ -297,8 +301,8 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     public static int ntype(long struct) { return memGetInt(struct + VkLayerSettingEXT.TYPE); }
     /** Unsafe version of {@link #valueCount}. */
     public static int nvalueCount(long struct) { return memGetInt(struct + VkLayerSettingEXT.VALUECOUNT); }
-    /** Unsafe version of {@link #pValues() pValues}. */
-    @Nullable public static ByteBuffer npValues(long struct) { return memByteBufferSafe(memGetAddress(struct + VkLayerSettingEXT.PVALUES), nvalueCount(struct)); }
+    /** Unsafe version of {@link #pValues(int) pValues}. */
+    @Nullable public static ByteBuffer npValues(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + VkLayerSettingEXT.PVALUES), capacity); }
 
     /** Unsafe version of {@link #pLayerName(ByteBuffer) pLayerName}. */
     public static void npLayerName(long struct, ByteBuffer value) {
@@ -312,10 +316,10 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
     }
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + VkLayerSettingEXT.TYPE, value); }
-    /** Sets the specified value to the {@code valueCount} field of the specified {@code struct}. */
+    /** Unsafe version of {@link #valueCount(int) valueCount}. */
     public static void nvalueCount(long struct, int value) { memPutInt(struct + VkLayerSettingEXT.VALUECOUNT, value); }
     /** Unsafe version of {@link #pValues(ByteBuffer) pValues}. */
-    public static void npValues(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkLayerSettingEXT.PVALUES, memAddressSafe(value)); if (value != null) { nvalueCount(struct, value.remaining()); } }
+    public static void npValues(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkLayerSettingEXT.PVALUES, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -388,10 +392,14 @@ public class VkLayerSettingEXT extends Struct<VkLayerSettingEXT> implements Nati
         /** @return the value of the {@link VkLayerSettingEXT#valueCount} field. */
         @NativeType("uint32_t")
         public int valueCount() { return VkLayerSettingEXT.nvalueCount(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkLayerSettingEXT#pValues} field. */
+        /**
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link VkLayerSettingEXT#pValues} field.
+         *
+         * @param capacity the number of elements in the returned buffer
+         */
         @Nullable
         @NativeType("void const *")
-        public ByteBuffer pValues() { return VkLayerSettingEXT.npValues(address()); }
+        public ByteBuffer pValues(int capacity) { return VkLayerSettingEXT.npValues(address(), capacity); }
 
         /** Sets the address of the specified encoded string to the {@link VkLayerSettingEXT#pLayerName} field. */
         public VkLayerSettingEXT.Buffer pLayerName(@NativeType("char const *") ByteBuffer value) { VkLayerSettingEXT.npLayerName(address(), value); return this; }

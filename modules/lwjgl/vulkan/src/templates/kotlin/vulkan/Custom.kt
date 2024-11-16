@@ -37,6 +37,10 @@ fun templateCustomization() {
             .replace(this["pCode"])
     }
 
+    VkLayerSettingEXT.definition.apply {
+        this["valueCount"].clearModifiers()
+    }
+
     VK10.apply {
         IntConstant(
             """
