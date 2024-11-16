@@ -429,6 +429,30 @@
     </macrodef>
 
     <target name="compile" description="Compiles the Java source code" depends="generate">
+        <!--
+        The @NullMarked annotation includes MODULE as a @Target, which is not compatible
+        with JDK 8 and produces a warning multiple times when building the LWJGL modules.
+
+        Compile a copy here without the module target and update jspecify.jar with it.
+        -->
+        <lwjgl.javac
+            destdir="bin/classes/ant"
+
+            srcdir="modules/ant/src/main/java"
+            includes="org/jspecify/annotations/**"
+
+            taskname="javac: compile @NullMarked"
+        />
+        <jar
+            destfile="${lib}/java/jspecify.jar"
+            update="true"
+
+            basedir="bin/classes/ant"
+            includes="org/jspecify/annotations/NullMarked.class"
+
+            taskname="jar: update JSpecify"
+        />
+
         <mkdir dir="${bin.lwjgl}/core"/>
 
         <!-- cleanup in case there was an earlier "release" failure -->
