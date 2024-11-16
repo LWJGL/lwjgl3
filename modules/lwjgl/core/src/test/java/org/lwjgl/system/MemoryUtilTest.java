@@ -313,7 +313,7 @@ public class MemoryUtilTest {
         }
 
         DoubleBuffer db = memDoubleBuffer(memAddress(ib), Integer.MAX_VALUE);
-        assertThrows(IllegalArgumentException.class, () -> memByteBuffer(db));
+        assertThrows(IllegalStateException.class, () -> memByteBuffer(db));
 
         db.limit(Integer.MAX_VALUE >> 3);
         assertEquals(memByteBuffer(db).remaining(), (Integer.MAX_VALUE >> 3) << 3);
