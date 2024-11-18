@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."128"
+        "API_VERSION".."129"
     )
 
     ShortConstant(
@@ -924,6 +924,29 @@ RGBA16S
         "Ends a vertex layout.",
 
         bgfx_vertex_layout_t.p("_this", "the vertex layout")
+    )
+
+    uint16_t(
+        "vertex_layout_get_offset",
+        "Returns relative attribute offset from the vertex.",
+
+        bgfx_vertex_layout_t.const.p("_this", ""),
+        bgfx_attrib_t("_attrib", "",)
+    )
+
+    uint16_t(
+        "vertex_layout_get_stride",
+        "Returns vertex stride.",
+
+        bgfx_vertex_layout_t.const.p("_this", "")
+    )
+
+    uint32_t(
+        "vertex_layout_get_size",
+        "Returns size of vertex buffer for number of vertices.",
+
+        bgfx_vertex_layout_t.const.p("_this", ""),
+        uint32_t("_num", "number of vertices")
     )
 
     void(
@@ -1984,6 +2007,17 @@ RGBA16S
 
         MapToInt..uint8_t("_index", "index into palette"),
         Check(4)..float.const.p("_rgba", "RGBA floating point values")
+    )
+
+    void(
+        "set_palette_color_rgba32f",
+        "Sets palette color value.",
+
+        MapToInt..uint8_t("_index", "index into palette"),
+        float("_r", "red value"),
+        float("_g", "green value"),
+        float("_b", "blue value"),
+        float("_a", "alpha value")
     )
 
     void(

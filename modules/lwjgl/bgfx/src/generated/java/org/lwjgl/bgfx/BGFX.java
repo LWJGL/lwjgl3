@@ -38,6 +38,9 @@ public class BGFX {
             vertex_layout_has                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_has"),
             vertex_layout_skip                                   = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_skip"),
             vertex_layout_end                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_end"),
+            vertex_layout_get_offset                             = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_get_offset"),
+            vertex_layout_get_stride                             = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_get_stride"),
+            vertex_layout_get_size                               = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_get_size"),
             vertex_pack                                          = apiGetFunctionAddress(BGFX, "bgfx_vertex_pack"),
             vertex_unpack                                        = apiGetFunctionAddress(BGFX, "bgfx_vertex_unpack"),
             vertex_convert                                       = apiGetFunctionAddress(BGFX, "bgfx_vertex_convert"),
@@ -125,6 +128,7 @@ public class BGFX {
             get_result                                           = apiGetFunctionAddress(BGFX, "bgfx_get_result"),
             destroy_occlusion_query                              = apiGetFunctionAddress(BGFX, "bgfx_destroy_occlusion_query"),
             set_palette_color                                    = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color"),
+            set_palette_color_rgba32f                            = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color_rgba32f"),
             set_palette_color_rgba8                              = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color_rgba8"),
             set_view_name                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_name"),
             set_view_rect                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_rect"),
@@ -229,7 +233,7 @@ public class BGFX {
     }
 
     /** API version */
-    public static final int BGFX_API_VERSION = 128;
+    public static final int BGFX_API_VERSION = 129;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -1383,6 +1387,52 @@ public class BGFX {
      */
     public static void bgfx_vertex_layout_end(@NativeType("bgfx_vertex_layout_t *") BGFXVertexLayout _this) {
         nbgfx_vertex_layout_end(_this.address());
+    }
+
+    // --- [ bgfx_vertex_layout_get_offset ] ---
+
+    /** Unsafe version of: {@link #bgfx_vertex_layout_get_offset vertex_layout_get_offset} */
+    public static short nbgfx_vertex_layout_get_offset(long _this, int _attrib) {
+        long __functionAddress = Functions.vertex_layout_get_offset;
+        return invokePC(_this, _attrib, __functionAddress);
+    }
+
+    /** Returns relative attribute offset from the vertex. */
+    @NativeType("uint16_t")
+    public static short bgfx_vertex_layout_get_offset(@NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _this, @NativeType("bgfx_attrib_t") int _attrib) {
+        return nbgfx_vertex_layout_get_offset(_this.address(), _attrib);
+    }
+
+    // --- [ bgfx_vertex_layout_get_stride ] ---
+
+    /** Unsafe version of: {@link #bgfx_vertex_layout_get_stride vertex_layout_get_stride} */
+    public static short nbgfx_vertex_layout_get_stride(long _this) {
+        long __functionAddress = Functions.vertex_layout_get_stride;
+        return invokePC(_this, __functionAddress);
+    }
+
+    /** Returns vertex stride. */
+    @NativeType("uint16_t")
+    public static short bgfx_vertex_layout_get_stride(@NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _this) {
+        return nbgfx_vertex_layout_get_stride(_this.address());
+    }
+
+    // --- [ bgfx_vertex_layout_get_size ] ---
+
+    /** Unsafe version of: {@link #bgfx_vertex_layout_get_size vertex_layout_get_size} */
+    public static int nbgfx_vertex_layout_get_size(long _this, int _num) {
+        long __functionAddress = Functions.vertex_layout_get_size;
+        return invokePI(_this, _num, __functionAddress);
+    }
+
+    /**
+     * Returns size of vertex buffer for number of vertices.
+     *
+     * @param _num number of vertices
+     */
+    @NativeType("uint32_t")
+    public static int bgfx_vertex_layout_get_size(@NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _this, @NativeType("uint32_t") int _num) {
+        return nbgfx_vertex_layout_get_size(_this.address(), _num);
     }
 
     // --- [ bgfx_vertex_pack ] ---
@@ -3764,6 +3814,27 @@ public class BGFX {
             check(_rgba, 4);
         }
         nbgfx_set_palette_color((byte)_index, memAddress(_rgba));
+    }
+
+    // --- [ bgfx_set_palette_color_rgba32f ] ---
+
+    /** Unsafe version of: {@link #bgfx_set_palette_color_rgba32f set_palette_color_rgba32f} */
+    public static void nbgfx_set_palette_color_rgba32f(byte _index, float _r, float _g, float _b, float _a) {
+        long __functionAddress = Functions.set_palette_color_rgba32f;
+        invokeUV(_index, _r, _g, _b, _a, __functionAddress);
+    }
+
+    /**
+     * Sets palette color value.
+     *
+     * @param _index index into palette
+     * @param _r     red value
+     * @param _g     green value
+     * @param _b     blue value
+     * @param _a     alpha value
+     */
+    public static void bgfx_set_palette_color_rgba32f(@NativeType("uint8_t") int _index, float _r, float _g, float _b, float _a) {
+        nbgfx_set_palette_color_rgba32f((byte)_index, _r, _g, _b, _a);
     }
 
     // --- [ bgfx_set_palette_color_rgba8 ] ---

@@ -46,6 +46,7 @@ public final class JNI {
     public static native short invokePC(long param0, long __functionAddress);
     public static native short invokeCC(int param0, short param1, long __functionAddress);
     public static native short invokeCC(short param0, boolean param1, long __functionAddress);
+    public static native short invokePC(long param0, int param1, long __functionAddress);
     public static native short invokeJC(int param0, int param1, long param2, long __functionAddress);
     public static native short invokeCUC(short param0, byte param1, long __functionAddress);
     public static native short invokePCC(long param0, short param1, long __functionAddress);
@@ -393,6 +394,7 @@ public final class JNI {
     public static native void invokePV(int param0, int param1, long param2, int param3, int param4, long __functionAddress);
     public static native void invokePV(long param0, int param1, float param2, float param3, float param4, long __functionAddress);
     public static native void invokePV(long param0, int param1, int param2, int param3, int param4, long __functionAddress);
+    public static native void invokeUV(byte param0, float param1, float param2, float param3, float param4, long __functionAddress);
     public static native void invokePV(int param0, int param1, int param2, int param3, int param4, long param5, long __functionAddress);
     public static native void invokePV(int param0, int param1, int param2, int param3, long param4, boolean param5, long __functionAddress);
     public static native void invokePV(long param0, int param1, int param2, double param3, double param4, double param5, long __functionAddress);
