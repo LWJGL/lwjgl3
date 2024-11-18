@@ -785,6 +785,32 @@ val intel_split_work_group_barrier = EXT_FLAG.nativeClassCL("intel_split_work_gr
         such as C++ 20.
         """
 }
+val intel_subgroup_buffer_prefetch = EXT_FLAG.nativeClassCL("intel_subgroup_buffer_prefetch", INTEL) {
+    documentation =
+        """
+        The extension adds the ability to prefetch data from a buffer as a sub-group operation.
+
+        The functionality added by this extension can improve the performance of some kernels by prefetching data into a cache, so future reads of the data are
+        from a fast cache rather than slower memory.
+
+        The new block prefetch operations are supported both in the OpenCL C kernel programming language and in the SPIR-V intermediate language.
+
+        The prefetch functions are companions to the sub-group block reads described by the extensions {@code cl_intel_subgroups},
+        {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short} and {@code cl_intel_subgroups_long}.
+
+        Requires {@link CL12 OpenCL 1.2} and support for ${intel_subgroups.link} is required.
+        """
+}
+val intel_subgroup_local_block_io = EXT_FLAG.nativeClassCL("intel_subgroup_local_block_io", INTEL) {
+    documentation =
+        """
+        This extension extends the subgroup block read and write functions defined by {@code cl_intel_subgroups} (and, when supported,
+        {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short}, and {@code cl_intel_subgroups_long}) to support reading from and writing to pointers
+        to the {@code __local} memory address space in addition to pointers to the {@code __global} memory address space.
+
+        Requires {@link CL12 OpenCL 1.2} and support for ${intel_subgroups.link} is required.
+        """
+}
 val intel_subgroup_matrix_multiply_accumulate = EXT_FLAG.nativeClassCL("intel_subgroup_matrix_multiply_accumulate", INTEL) {
     documentation =
         """

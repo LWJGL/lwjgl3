@@ -708,6 +708,8 @@ public class CLCapabilities {
     public final boolean cl_ext_float_atomics;
     /** When true, {@link EXTImageFromBuffer} is supported. */
     public final boolean cl_ext_image_from_buffer;
+    /** When true, {@link EXTImageRaw10Raw12} is supported. */
+    public final boolean cl_ext_image_raw10_raw12;
     /** When true, {@link EXTImageRequirementsInfo} is supported. */
     public final boolean cl_ext_image_requirements_info;
     /** When true, {@link EXTMigrateMemobject} is supported. */
@@ -807,6 +809,28 @@ public class CLCapabilities {
      * such as C++ 20.</p>
      */
     public final boolean cl_intel_split_work_group_barrier;
+    /**
+     * The extension adds the ability to prefetch data from a buffer as a sub-group operation.
+     * 
+     * <p>The functionality added by this extension can improve the performance of some kernels by prefetching data into a cache, so future reads of the data are
+     * from a fast cache rather than slower memory.</p>
+     * 
+     * <p>The new block prefetch operations are supported both in the OpenCL C kernel programming language and in the SPIR-V intermediate language.</p>
+     * 
+     * <p>The prefetch functions are companions to the sub-group block reads described by the extensions {@code cl_intel_subgroups},
+     * {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short} and {@code cl_intel_subgroups_long}.</p>
+     * 
+     * <p>Requires {@link CL12 OpenCL 1.2} and support for {@link INTELSubgroups intel_subgroups} is required.</p>
+     */
+    public final boolean cl_intel_subgroup_buffer_prefetch;
+    /**
+     * This extension extends the subgroup block read and write functions defined by {@code cl_intel_subgroups} (and, when supported,
+     * {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short}, and {@code cl_intel_subgroups_long}) to support reading from and writing to pointers
+     * to the {@code __local} memory address space in addition to pointers to the {@code __global} memory address space.
+     * 
+     * <p>Requires {@link CL12 OpenCL 1.2} and support for {@link INTELSubgroups intel_subgroups} is required.</p>
+     */
+    public final boolean cl_intel_subgroup_local_block_io;
     /**
      * The goal of this extension is to allow programmers to access specialized hardware to compute the product of an M x K matrix with a K x N matrix and
      * then add an M x N matrix accumulation value. This is a commonly used building block to compute the product of two large matrices. When used in an
@@ -1880,6 +1904,7 @@ public class CLCapabilities {
         cl_ext_device_fission = check_ext_device_fission(ext);
         cl_ext_float_atomics = ext.contains("cl_ext_float_atomics");
         cl_ext_image_from_buffer = ext.contains("cl_ext_image_from_buffer");
+        cl_ext_image_raw10_raw12 = ext.contains("cl_ext_image_raw10_raw12");
         cl_ext_image_requirements_info = check_ext_image_requirements_info(ext);
         cl_ext_migrate_memobject = check_ext_migrate_memobject(ext);
         cl_img_cached_allocations = ext.contains("cl_img_cached_allocations");
@@ -1912,6 +1937,8 @@ public class CLCapabilities {
         cl_intel_spirv_media_block_io = ext.contains("cl_intel_spirv_media_block_io");
         cl_intel_spirv_subgroups = ext.contains("cl_intel_spirv_subgroups");
         cl_intel_split_work_group_barrier = ext.contains("cl_intel_split_work_group_barrier");
+        cl_intel_subgroup_buffer_prefetch = ext.contains("cl_intel_subgroup_buffer_prefetch");
+        cl_intel_subgroup_local_block_io = ext.contains("cl_intel_subgroup_local_block_io");
         cl_intel_subgroup_matrix_multiply_accumulate = ext.contains("cl_intel_subgroup_matrix_multiply_accumulate");
         cl_intel_subgroup_split_matrix_multiply_accumulate = ext.contains("cl_intel_subgroup_split_matrix_multiply_accumulate");
         cl_intel_subgroups = ext.contains("cl_intel_subgroups");
