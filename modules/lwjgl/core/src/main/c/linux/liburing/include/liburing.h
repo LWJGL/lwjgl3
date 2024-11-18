@@ -19,6 +19,7 @@
 #include "liburing/io_uring_version.h"
 #include "liburing/barrier.h"
 
+
 #ifndef uring_unlikely
 #define uring_unlikely(cond)	__builtin_expect(!!(cond), 0)
 #endif
@@ -173,6 +174,12 @@ unsigned io_uring_peek_batch_cqe(struct io_uring *ring,
 int io_uring_wait_cqes(struct io_uring *ring, struct io_uring_cqe **cqe_ptr,
 		       unsigned wait_nr, struct __kernel_timespec *ts,
 		       sigset_t *sigmask);
+int io_uring_wait_cqes_min_timeout(struct io_uring *ring,
+				   struct io_uring_cqe **cqe_ptr,
+				   unsigned wait_nr,
+				   struct __kernel_timespec *ts,
+				   unsigned int min_ts_usec,
+				   sigset_t *sigmask);
 int io_uring_wait_cqe_timeout(struct io_uring *ring,
 			      struct io_uring_cqe **cqe_ptr,
 			      struct __kernel_timespec *ts);
@@ -183,7 +190,14 @@ int io_uring_submit_and_wait_timeout(struct io_uring *ring,
 				     unsigned wait_nr,
 				     struct __kernel_timespec *ts,
 				     sigset_t *sigmask);
+int io_uring_submit_and_wait_min_timeout(struct io_uring *ring,
+					 struct io_uring_cqe **cqe_ptr,
+					 unsigned wait_nr,
+					 struct __kernel_timespec *ts,
+					 unsigned min_wait,
+					 sigset_t *sigmask);
 
+int io_uring_clone_buffers(struct io_uring *dst, struct io_uring *src);
 int io_uring_register_buffers(struct io_uring *ring, const struct iovec *iovecs,
 			      unsigned nr_iovecs);
 int io_uring_register_buffers_tags(struct io_uring *ring,
@@ -220,8 +234,10 @@ int io_uring_register_restrictions(struct io_uring *ring,
 				   unsigned int nr_res);
 int io_uring_enable_rings(struct io_uring *ring);
 int __io_uring_sqring_wait(struct io_uring *ring);
+#ifdef _GNU_SOURCE
 int io_uring_register_iowq_aff(struct io_uring *ring, size_t cpusz,
 				const cpu_set_t *mask);
+#endif
 int io_uring_unregister_iowq_aff(struct io_uring *ring);
 int io_uring_register_iowq_max_workers(struct io_uring *ring,
 				       unsigned int *values);
@@ -240,6 +256,9 @@ int io_uring_register_file_alloc_range(struct io_uring *ring,
 
 int io_uring_register_napi(struct io_uring *ring, struct io_uring_napi *napi);
 int io_uring_unregister_napi(struct io_uring *ring, struct io_uring_napi *napi);
+
+int io_uring_register_clock(struct io_uring *ring,
+			    struct io_uring_clock_register *arg);
 
 int io_uring_get_events(struct io_uring *ring);
 int io_uring_submit_and_get_events(struct io_uring *ring);
@@ -262,7 +281,7 @@ int io_uring_register(unsigned int fd, unsigned int opcode, const void *arg,
 struct io_uring_buf_ring *io_uring_setup_buf_ring(struct io_uring *ring,
 						  unsigned int nentries,
 						  int bgid, unsigned int flags,
-						  int *ret);
+						  int *err);
 int io_uring_free_buf_ring(struct io_uring *ring, struct io_uring_buf_ring *br,
 			   unsigned int nentries, int bgid);
 
@@ -286,15 +305,22 @@ int __io_uring_get_cqe(struct io_uring *ring,
 #define io_uring_cqe_index(ring,ptr,mask)				\
 	(((ptr) & (mask)) << io_uring_cqe_shift(ring))
 
+/*
+ * NOTE: we should just get rid of the 'head' being passed in here, it doesn't
+ * serve a purpose anymore. The below is a bit of a work-around to ensure that
+ * the compiler doesn't complain about 'head' being unused (or only written,
+ * never read), as we use a local iterator for both the head and tail tracking.
+ */
 #define io_uring_for_each_cqe(ring, head, cqe)				\
 	/*								\
 	 * io_uring_smp_load_acquire() enforces the order of tail	\
 	 * and CQE reads.						\
 	 */								\
-	for (head = *(ring)->cq.khead;					\
-	     (cqe = (head != io_uring_smp_load_acquire((ring)->cq.ktail) ? \
-		&(ring)->cq.cqes[io_uring_cqe_index(ring, head, (ring)->cq.ring_mask)] : NULL)); \
-	     head++)							\
+	for (__u32 __HEAD__ = (head) = *(ring)->cq.khead,		\
+	     __TAIL__ = io_uring_smp_load_acquire((ring)->cq.ktail);	\
+	     (cqe = ((head) != __TAIL__ ?				\
+	     &(ring)->cq.cqes[io_uring_cqe_index(ring, __HEAD__, (ring)->cq.ring_mask)] : NULL)); \
+	     (head) = ++__HEAD__)
 
 /*
  * Must be called after io_uring_for_each_cqe()
@@ -717,6 +743,20 @@ IOURINGINLINE void io_uring_prep_openat_direct(struct io_uring_sqe *sqe,
 	if (file_index == IORING_FILE_INDEX_ALLOC)
 		file_index--;
 	__io_uring_set_target_fixed_file(sqe, file_index);
+}
+
+IOURINGINLINE void io_uring_prep_open(struct io_uring_sqe *sqe,
+					const char *path, int flags, mode_t mode)
+{
+	io_uring_prep_openat(sqe, AT_FDCWD, path, flags, mode);
+}
+
+/* open directly into the fixed file table */
+IOURINGINLINE void io_uring_prep_open_direct(struct io_uring_sqe *sqe,
+							const char *path, int flags, mode_t mode,
+							unsigned file_index)
+{
+	io_uring_prep_openat_direct(sqe, AT_FDCWD, path, flags, mode, file_index);
 }
 
 IOURINGINLINE void io_uring_prep_close(struct io_uring_sqe *sqe, int fd)
@@ -1244,10 +1284,22 @@ IOURINGINLINE void io_uring_prep_fixed_fd_install(struct io_uring_sqe *sqe,
 	sqe->install_fd_flags = flags;
 }
 
+#ifdef _GNU_SOURCE
 IOURINGINLINE void io_uring_prep_ftruncate(struct io_uring_sqe *sqe,
 				       int fd, loff_t len)
 {
 	io_uring_prep_rw(IORING_OP_FTRUNCATE, sqe, fd, 0, 0, len);
+}
+#endif
+
+IOURINGINLINE void io_uring_prep_cmd_discard(struct io_uring_sqe *sqe,
+					     int fd,
+					     uint64_t offset, uint64_t nbytes)
+{
+	io_uring_prep_rw(IORING_OP_URING_CMD, sqe, fd, 0, 0, 0);
+	sqe->cmd_op = BLOCK_URING_CMD_DISCARD;
+	sqe->addr = offset;
+	sqe->addr3 = nbytes;
 }
 
 /*

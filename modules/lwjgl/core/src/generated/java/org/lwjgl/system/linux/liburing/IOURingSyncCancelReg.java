@@ -29,7 +29,9 @@ import org.lwjgl.system.linux.*;
  *     __s32 fd;
  *     __u32 flags;
  *     {@link KernelTimespec struct __kernel_timespec} timeout;
- *     __u64 pad[4];
+ *     __u8 opcode;
+ *     __u8 pad[7];
+ *     __u64 pad2[3];
  * }</code></pre>
  */
 @NativeType("struct io_uring_sync_cancel_reg")
@@ -47,7 +49,9 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         FD,
         FLAGS,
         TIMEOUT,
-        PAD;
+        OPCODE,
+        PAD,
+        PAD2;
 
     static {
         Layout layout = __struct(
@@ -55,7 +59,9 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
             __member(4),
             __member(4),
             __member(KernelTimespec.SIZEOF, KernelTimespec.ALIGNOF),
-            __array(8, 4)
+            __member(1),
+            __array(1, 7),
+            __array(8, 3)
         );
 
         SIZEOF = layout.getSize();
@@ -65,7 +71,9 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         FD = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
         TIMEOUT = layout.offsetof(3);
-        PAD = layout.offsetof(4);
+        OPCODE = layout.offsetof(4);
+        PAD = layout.offsetof(5);
+        PAD2 = layout.offsetof(6);
     }
 
     protected IOURingSyncCancelReg(long address, @Nullable ByteBuffer container) {
@@ -102,6 +110,9 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     /** @return a {@link KernelTimespec} view of the {@code timeout} field. */
     @NativeType("struct __kernel_timespec")
     public KernelTimespec timeout() { return ntimeout(address()); }
+    /** @return the value of the {@code opcode} field. */
+    @NativeType("__u8")
+    public byte opcode() { return nopcode(address()); }
 
     /** Sets the specified value to the {@code addr} field. */
     public IOURingSyncCancelReg addr(@NativeType("__u64") long value) { naddr(address(), value); return this; }
@@ -113,18 +124,22 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     public IOURingSyncCancelReg timeout(@NativeType("struct __kernel_timespec") KernelTimespec value) { ntimeout(address(), value); return this; }
     /** Passes the {@code timeout} field to the specified {@link java.util.function.Consumer Consumer}. */
     public IOURingSyncCancelReg timeout(java.util.function.Consumer<KernelTimespec> consumer) { consumer.accept(timeout()); return this; }
+    /** Sets the specified value to the {@code opcode} field. */
+    public IOURingSyncCancelReg opcode(@NativeType("__u8") byte value) { nopcode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOURingSyncCancelReg set(
         long addr,
         int fd,
         int flags,
-        KernelTimespec timeout
+        KernelTimespec timeout,
+        byte opcode
     ) {
         addr(addr);
         fd(fd);
         flags(flags);
         timeout(timeout);
+        opcode(opcode);
 
         return this;
     }
@@ -260,9 +275,15 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     public static int nflags(long struct) { return memGetInt(struct + IOURingSyncCancelReg.FLAGS); }
     /** Unsafe version of {@link #timeout}. */
     public static KernelTimespec ntimeout(long struct) { return KernelTimespec.create(struct + IOURingSyncCancelReg.TIMEOUT); }
-    public static LongBuffer npad(long struct) { return memLongBuffer(struct + IOURingSyncCancelReg.PAD, 4); }
-    public static long npad(long struct, int index) {
-        return memGetLong(struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8);
+    /** Unsafe version of {@link #opcode}. */
+    public static byte nopcode(long struct) { return memGetByte(struct + IOURingSyncCancelReg.OPCODE); }
+    public static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURingSyncCancelReg.PAD, 7); }
+    public static byte npad(long struct, int index) {
+        return memGetByte(struct + IOURingSyncCancelReg.PAD + check(index, 7) * 1);
+    }
+    public static LongBuffer npad2(long struct) { return memLongBuffer(struct + IOURingSyncCancelReg.PAD2, 3); }
+    public static long npad2(long struct, int index) {
+        return memGetLong(struct + IOURingSyncCancelReg.PAD2 + check(index, 3) * 8);
     }
 
     /** Unsafe version of {@link #addr(long) addr}. */
@@ -273,12 +294,21 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     public static void nflags(long struct, int value) { memPutInt(struct + IOURingSyncCancelReg.FLAGS, value); }
     /** Unsafe version of {@link #timeout(KernelTimespec) timeout}. */
     public static void ntimeout(long struct, KernelTimespec value) { memCopy(value.address(), struct + IOURingSyncCancelReg.TIMEOUT, KernelTimespec.SIZEOF); }
-    public static void npad(long struct, LongBuffer value) {
-        if (CHECKS) { checkGT(value, 4); }
-        memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD, value.remaining() * 8);
+    /** Unsafe version of {@link #opcode(byte) opcode}. */
+    public static void nopcode(long struct, byte value) { memPutByte(struct + IOURingSyncCancelReg.OPCODE, value); }
+    public static void npad(long struct, ByteBuffer value) {
+        if (CHECKS) { checkGT(value, 7); }
+        memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD, value.remaining() * 1);
     }
-    public static void npad(long struct, int index, long value) {
-        memPutLong(struct + IOURingSyncCancelReg.PAD + check(index, 4) * 8, value);
+    public static void npad(long struct, int index, byte value) {
+        memPutByte(struct + IOURingSyncCancelReg.PAD + check(index, 7) * 1, value);
+    }
+    public static void npad2(long struct, LongBuffer value) {
+        if (CHECKS) { checkGT(value, 3); }
+        memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD2, value.remaining() * 8);
+    }
+    public static void npad2(long struct, int index, long value) {
+        memPutLong(struct + IOURingSyncCancelReg.PAD2 + check(index, 3) * 8, value);
     }
 
     // -----------------------------------
@@ -336,6 +366,9 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         /** @return a {@link KernelTimespec} view of the {@code timeout} field. */
         @NativeType("struct __kernel_timespec")
         public KernelTimespec timeout() { return IOURingSyncCancelReg.ntimeout(address()); }
+        /** @return the value of the {@code opcode} field. */
+        @NativeType("__u8")
+        public byte opcode() { return IOURingSyncCancelReg.nopcode(address()); }
 
         /** Sets the specified value to the {@code addr} field. */
         public IOURingSyncCancelReg.Buffer addr(@NativeType("__u64") long value) { IOURingSyncCancelReg.naddr(address(), value); return this; }
@@ -347,6 +380,8 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         public IOURingSyncCancelReg.Buffer timeout(@NativeType("struct __kernel_timespec") KernelTimespec value) { IOURingSyncCancelReg.ntimeout(address(), value); return this; }
         /** Passes the {@code timeout} field to the specified {@link java.util.function.Consumer Consumer}. */
         public IOURingSyncCancelReg.Buffer timeout(java.util.function.Consumer<KernelTimespec> consumer) { consumer.accept(timeout()); return this; }
+        /** Sets the specified value to the {@code opcode} field. */
+        public IOURingSyncCancelReg.Buffer opcode(@NativeType("__u8") byte value) { IOURingSyncCancelReg.nopcode(address(), value); return this; }
 
     }
 

@@ -68,7 +68,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
         __u32("hardlink_flags", "")
         __u32("xattr_flags", "")
         __u32("msg_ring_flags", "")
-        __u32("uring_cmd_flags", "")
+        __u32("uring_cmd_flags", "top 8bits aren't available for userspace")
         __u32("waitid_flags", "")
 		__u32("futex_flags", "")
 		__u32("install_fd_flags", "")
@@ -276,6 +276,17 @@ val io_uring_restriction = struct(Module.CORE_LINUX_LIBURING, "IOURingRestrictio
     __u32("resv2", "")[3].private()
 }
 
+val io_uring_clock_register = struct(Module.CORE_LINUX_LIBURING, "IOURingClockRegister", nativeName = "struct io_uring_clock_register") {
+    __u32("clockid", "")
+    __u32("__resv", "")[3].private()
+}
+
+val io_uring_clone_buffers = struct(Module.CORE_LINUX_LIBURING, "IOURingCloneBuffers", nativeName = "struct io_uring_clone_buffers") {
+    __u32("src_fd", "")
+    __u32("flags", "")
+    __u32("pad", "")[6].private()
+};
+
 val io_uring_buf = struct(Module.CORE_LINUX_LIBURING, "IOURingBuf", nativeName = "struct io_uring_buf") {
 	__u64("addr", "")
 	__u32("len", "")
@@ -325,7 +336,7 @@ val io_uring_napi = struct(Module.CORE_LINUX_LIBURING, "IOURingNAPI", nativeName
 val io_uring_getevents_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingGeteventsArg", nativeName = "struct io_uring_getevents_arg") {
     __u64("sigmask", "")
     __u32("sigmask_sz", "")
-    __u32("pad", "")
+    __u32("min_wait_usec", "")
     __u64("ts", "")
 }
 
@@ -337,7 +348,9 @@ val io_uring_sync_cancel_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingSyncCa
     __s32("fd", "")
     __u32("flags", "")
     __kernel_timespec("timeout", "")
-    __u64("pad", "")[4].private()
+    __u8("opcode", "")
+    __u8("pad", "")[7].private()
+    __u64("pad2", "")[3].private()
 }
 
 val io_uring_file_index_range = struct(Module.CORE_LINUX_LIBURING, "IOURingFileIndexRange", nativeName = "struct io_uring_file_index_range") {

@@ -216,7 +216,7 @@ atomic_store_release(cqring->head, head);""")}
     IntConstant("", "MAX_ENTRIES".."4096")
 
     EnumConstant(
-        "{@code io_uring_sqe->flags} bits",
+        "{@code io_uring_sqe_flags_bit}",
 
         "IOSQE_FIXED_FILE_BIT".enum("", "0"),
         "IOSQE_IO_DRAIN_BIT".enum,
@@ -502,7 +502,7 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             """,
             "1 << 13"
         ),
-        "SETUP_NO_MMAP".enum("Application provides ring memory", "1 << 14"),
+        "SETUP_NO_MMAP".enum("Application provides the memory for the rings.", "1 << 14"),
         "SETUP_REGISTERED_FD_ONLY".enum(
             "Register the ring fd in itself for use with #REGISTER_USE_REGISTERED_RING; return a registered fd index rather than an fd.",
             "1 << 15"
@@ -998,9 +998,15 @@ if (flags & IORING_SQ_NEED_WAKEUP)
     )
 
     IntConstant(
-        "",
+        "Use registered buffer; pass this flag along with setting {@code sqe->buf_index}.",
 
         "URING_CMD_FIXED".."1 << 0"
+    )
+
+    IntConstant(
+        "",
+
+        "URING_CMD_MASK".."IORING_URING_CMD_FIXED"
     )
 
     EnumConstant(
@@ -1079,7 +1085,9 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             """,
             "1 << 2"
         ),
-        "ASYNC_CANCEL_FD_FIXED".enum("{@code fd} passed in is a fixed descriptor", "1 << 3")
+        "ASYNC_CANCEL_FD_FIXED".enum("{@code fd} passed in is a fixed descriptor", "1 << 3"),
+        "ASYNC_CANCEL_USERDATA".enum("Match on {@code user_data}, default for no other key", "1 << 4"),
+        "ASYNC_CANCEL_OP".enum("Match request based on {@code opcode}", "1 << 5")
     )
 
     EnumConstant(
@@ -1121,9 +1129,9 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             """
             Used with #IOSQE_BUFFER_SELECT.
 
-            If set, send wil grab as many buffers from the buffer group ID given and send them all. The completion result will be the number of buffers send,
-            with the starting buffer ID in {@code cqe->flags} as per usual for provided buffer usage. The buffers will be contigious from the starting buffer
-            ID.
+            If set, {@code send} or {@code recv} will grab as many buffers from the buffer group ID given and send them all. The completion result will be the
+            number of buffers send, with the starting buffer ID in {@code cqe->flags} as per usual for provided buffer usage. The buffers will be contiguous
+            from the starting buffer ID.
             """,
             "1 << 4"
         )
@@ -1140,7 +1148,7 @@ if (flags & IORING_SQ_NEED_WAKEUP)
     )
 
     EnumConstant(
-        "#OP_MSG_RING command types, stored in {@code sqe->addr}",
+        "{@code io_uring_msg_ring_flags}",
 
         "MSG_DATA".enum("pass {@code sqe->len} as {@code res} and {@code off} as {@code user_data}", "0"),
         "MSG_SEND_FD".enum("send a registered fd to another ring")
@@ -1171,13 +1179,23 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "CQE_F_BUFFER".enum("If set, the upper 16 bits are the buffer ID", "1 << 0"),
         "CQE_F_MORE".enum("If set, parent SQE will generate more CQE entries", "1 << 1"),
         "CQE_F_SOCK_NONEMPTY".enum("If set, more data to read after socket {@code recv}.", "1 << 2"),
-        "CQE_F_NOTIF".enum("Set for notification CQEs. Can be used to distinct them from sends.", "1 << 3")
+        "CQE_F_NOTIF".enum("Set for notification CQEs. Can be used to distinct them from sends.", "1 << 3"),
+        "CQE_F_BUF_MORE".enum(
+            """
+            If set, the buffer ID set in the completion will get more completions.
+
+            In other words, the buffer is being partially consumed, and will be used by the kernel for more completions. This is only set for buffers used via
+            the incremental buffer consumption, as provided by a ring buffer setup with {@code IOU_PBUF_RING_INC}. For any other provided buffer type, all
+            completions with a buffer passed back is automatically returned to the application.
+            """,
+            "1 << 4"
+        ),
     )
 
-    EnumConstant(
+    IntConstant(
         "",
 
-        "CQE_BUFFER_SHIFT".enum("", "16")
+        "CQE_BUFFER_SHIFT".."16"
     )
 
     LongConstant(
@@ -1254,7 +1272,8 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             {@code ring_fd} passed in is the registered ring offset rather than a normal file descriptor.
             """,
             "1 << 4"
-        )
+        ),
+        "ENTER_ABS_TIMER".enum("", "1 << 5")
     )
 
     EnumConstant(
@@ -1403,11 +1422,12 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             "1 << 12"
         ),
         "FEAT_REG_REG_RING".enum("", "1 << 13"),
-        "FEAT_RECVSEND_BUNDLE".enum("", "1 << 14")
+        "FEAT_RECVSEND_BUNDLE".enum("", "1 << 14"),
+        "FEAT_MIN_TIMEOUT".enum("", "1 << 15")
     )
 
     EnumConstant(
-        "#register() {@code opcodes} and arguments",
+        "{@code io_uring_register_op}",
 
         "REGISTER_BUFFERS".enum(
             """
@@ -1726,6 +1746,8 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         "REGISTER_PBUF_STATUS".enum("return status information for a buffer group"),
         "REGISTER_NAPI".enum("set busy poll settings"),
         "UNREGISTER_NAPI".enum("clear busy poll settings"),
+        "REGISTER_CLOCK".enum,
+        "REGISTER_CLONE_BUFFERS".enum("clone registered buffers from source ring to current ring"),
 
         "REGISTER_LAST".enum,
 
@@ -1739,7 +1761,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
     )
 
     EnumConstant(
-        "{@code io-wq} worker categories",
+        "{@code io_wq_type}",
 
         "IO_WQ_BOUND".enum("", "0"),
         "IO_WQ_UNBOUND".enum
@@ -1760,11 +1782,34 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
     EnumConstant(
         "",
 
-        "IOU_PBUF_RING_MMAP".enum("", "1")
+        "REGISTER_SRC_REGISTERED".enum("", "1")
+    )
+
+    EnumConstant(
+        "Flags for #REGISTER_PBUF_RING.",
+
+        "IOU_PBUF_RING_MMAP".enum(
+            """
+            If set, kernel will allocate the memory for the ring.
+
+            The application must not set a {@code ring_addr} in struct {@code io_uring_buf_reg}, instead it must subsequently call {@code mmap(2)} with the
+            offset set as: {@code IORING_OFF_PBUF_RING | (bgid << IORING_OFF_PBUF_SHIFT)} to get a virtual mapping for the ring.
+            """,
+            "1"
+        ),
+        "IOU_PBUF_RING_INC".enum(
+            """
+            If set, buffers consumed from this buffer ring can be consumed incrementally.
+
+            Normally one (or more) buffers are fully consumed. With incremental consumptions, it's feasible to register big ranges of buffers, and each use of
+            it will consume only as much as it needs. This requires that both the kernel and application keep track of where the current read/recv index is at.
+            """,
+            "2"
+        )
     ).noPrefix()
 
     EnumConstant(
-        "{@code io_uring_restriction->opcode} values",
+        "{@code io_uring_register_restriction_op}",
 
         "RESTRICTION_REGISTER_OP".enum("Allow an {@code io_uring_register(2)} opcode", "0"),
         "RESTRICTION_SQE_OP".enum("Allow an sqe opcode"),
@@ -1774,7 +1819,7 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
     )
 
     EnumConstant(
-        "Argument for #OP_URING_CMD when file is a socket.",
+        "{@code io_uring_socket_op}}",
 
         "SOCKET_URING_OP_SIOCINQ".enum("", "0"),
         "SOCKET_URING_OP_SIOCOUTQ".enum,

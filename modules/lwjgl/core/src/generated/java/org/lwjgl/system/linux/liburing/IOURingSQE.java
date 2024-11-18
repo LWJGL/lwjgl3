@@ -66,7 +66,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         __u32 hardlink_flags;
  *         __u32 xattr_flags;
  *         __u32 msg_ring_flags;
- *         __u32 uring_cmd_flags;
+ *         __u32 {@link #uring_cmd_flags};
  *         __u32 waitid_flags;
  *         __u32 futex_flags;
  *         __u32 install_fd_flags;
@@ -404,7 +404,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     /** @return the value of the {@code msg_ring_flags} field. */
     @NativeType("__u32")
     public int msg_ring_flags() { return nmsg_ring_flags(address()); }
-    /** @return the value of the {@code uring_cmd_flags} field. */
+    /** top 8bits aren't available for userspace */
     @NativeType("__u32")
     public int uring_cmd_flags() { return nuring_cmd_flags(address()); }
     /** @return the value of the {@code waitid_flags} field. */
@@ -534,7 +534,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public IOURingSQE xattr_flags(@NativeType("__u32") int value) { nxattr_flags(address(), value); return this; }
     /** Sets the specified value to the {@code msg_ring_flags} field. */
     public IOURingSQE msg_ring_flags(@NativeType("__u32") int value) { nmsg_ring_flags(address(), value); return this; }
-    /** Sets the specified value to the {@code uring_cmd_flags} field. */
+    /** Sets the specified value to the {@link #uring_cmd_flags} field. */
     public IOURingSQE uring_cmd_flags(@NativeType("__u32") int value) { nuring_cmd_flags(address(), value); return this; }
     /** Sets the specified value to the {@code waitid_flags} field. */
     public IOURingSQE waitid_flags(@NativeType("__u32") int value) { nwaitid_flags(address(), value); return this; }
@@ -1057,7 +1057,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         /** @return the value of the {@code msg_ring_flags} field. */
         @NativeType("__u32")
         public int msg_ring_flags() { return IOURingSQE.nmsg_ring_flags(address()); }
-        /** @return the value of the {@code uring_cmd_flags} field. */
+        /** @return the value of the {@link IOURingSQE#uring_cmd_flags} field. */
         @NativeType("__u32")
         public int uring_cmd_flags() { return IOURingSQE.nuring_cmd_flags(address()); }
         /** @return the value of the {@code waitid_flags} field. */
@@ -1183,7 +1183,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         public IOURingSQE.Buffer xattr_flags(@NativeType("__u32") int value) { IOURingSQE.nxattr_flags(address(), value); return this; }
         /** Sets the specified value to the {@code msg_ring_flags} field. */
         public IOURingSQE.Buffer msg_ring_flags(@NativeType("__u32") int value) { IOURingSQE.nmsg_ring_flags(address(), value); return this; }
-        /** Sets the specified value to the {@code uring_cmd_flags} field. */
+        /** Sets the specified value to the {@link IOURingSQE#uring_cmd_flags} field. */
         public IOURingSQE.Buffer uring_cmd_flags(@NativeType("__u32") int value) { IOURingSQE.nuring_cmd_flags(address(), value); return this; }
         /** Sets the specified value to the {@code waitid_flags} field. */
         public IOURingSQE.Buffer waitid_flags(@NativeType("__u32") int value) { IOURingSQE.nwaitid_flags(address(), value); return this; }

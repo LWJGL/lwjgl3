@@ -170,6 +170,20 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "wait_cqes_min_timeout",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_cqe.p.p("cqe_ptr", ""),
+        AutoSize("cqe_ptr")..unsigned("wait_nr", ""),
+        nullable..__kernel_timespec.p("ts", ""),
+        unsigned_int("min_ts_usec", ""),
+        nullable..sigset_t.p("sigmask", ""),
+
+        since = "version 2.8"
+    )
+
+    int(
         "wait_cqe_timeout",
         """
         Returns one IO completion from the queue belonging to the {@code ring} param, waiting for it if necessary or until the timeout {@code ts} expires.
@@ -229,6 +243,28 @@ ENABLE_WARNINGS()""")
         nullable..sigset_t.p("sigmask", "the set of signals to block. The prevailing signal mask is restored before returning."),
 
         returnDoc = "the number of submitted submission queue entries on success. On failure it returns {@code -errno}."
+    )
+
+    int(
+        "submit_and_wait_min_timeout",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_cqe.p.p("cqe_ptr", ""),
+        AutoSize("cqe_ptr")..unsigned("wait_nr", ""),
+        nullable..__kernel_timespec.p("ts", ""),
+        unsigned("min_wait", ""),
+        nullable..sigset_t.p("sigmask", "")
+    )
+
+    int(
+        "clone_buffers",
+        "",
+
+        io_uring.p("dst", ""),
+        io_uring.p("src", ""),
+
+        since = "version 2.8"
     )
 
     int(
@@ -642,6 +678,16 @@ struct io_uring_buf {
     )
 
     int(
+        "register_clock",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_clock_register.p("arg", ""),
+
+        since = "version 2.8"
+    )
+
+    int(
         "get_events",
         """
         Runs outstanding work and flushes completion events to the CQE ring.
@@ -719,7 +765,7 @@ struct io_uring_buf {
         unsigned_int("nentries", ""),
         int("bgid", ""),
         unsigned_int("flags", ""),
-        Check(1)..int.p("ret", ""),
+        Check(1)..int.p("err", ""),
 
         since = "version 2.4"
     )
@@ -1268,6 +1314,31 @@ struct io_uring_buf {
         int("flags", ""), // TODO:
         int("mode", ""), // TODO:
         unsigned_int("file_index", "")
+    )
+
+    void(
+        "prep_open",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("path", ""),
+        int("flags", ""), // TODO:
+        mode_t("mode", ""), // TODO:
+
+        since = "version 2.8"
+    )
+
+    void(
+        "prep_open_direct",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("path", ""),
+        int("flags", ""), // TODO:
+        mode_t("mode", ""), // TODO:
+        unsigned("file_index", ""),
+
+        since = "version 2.8"
     )
 
     void(
@@ -1937,6 +2008,16 @@ struct io_uring_buf {
         loff_t("len", ""),
 
         since = "version 2.6"
+    )
+
+    void(
+        "prep_cmd_discard",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        uint64_t("offset", ""),
+        uint64_t("nbytes", "")
     )
 
     unsigned_int(

@@ -7,11 +7,14 @@
 #include "int_flags.h"
 #include "liburing/compat.h"
 #include "liburing/io_uring.h"
+#include "liburing/sanitize.h"
 
 static inline int do_register(struct io_uring *ring, unsigned int opcode,
 			      const void *arg, unsigned int nr_args)
 {
 	int fd;
+
+	liburing_sanitize_address(arg);
 
 	if (ring->int_flags & INT_FLAG_REG_REG_RING) {
 		opcode |= IORING_REGISTER_USE_REGISTERED_RING;
@@ -28,6 +31,8 @@ int io_uring_register_buffers_update_tag(struct io_uring *ring, unsigned off,
 					 const __u64 *tags,
 					 unsigned nr)
 {
+	liburing_sanitize_iovecs(iovecs, nr);
+
 	struct io_uring_rsrc_update2 up = {
 		.offset	= off,
 		.data = (unsigned long)iovecs,
@@ -43,6 +48,8 @@ int io_uring_register_buffers_tags(struct io_uring *ring,
 				   const __u64 *tags,
 				   unsigned nr)
 {
+	liburing_sanitize_iovecs(iovecs, nr);
+
 	struct io_uring_rsrc_register reg = {
 		.nr = nr,
 		.data = (unsigned long)iovecs,
@@ -65,6 +72,8 @@ int io_uring_register_buffers_sparse(struct io_uring *ring, unsigned nr)
 int io_uring_register_buffers(struct io_uring *ring, const struct iovec *iovecs,
 			      unsigned nr_iovecs)
 {
+	liburing_sanitize_iovecs(iovecs, nr_iovecs);
+
 	return do_register(ring, IORING_REGISTER_BUFFERS, iovecs, nr_iovecs);
 }
 
@@ -77,6 +86,9 @@ int io_uring_register_files_update_tag(struct io_uring *ring, unsigned off,
 					const int *files, const __u64 *tags,
 					unsigned nr_files)
 {
+	liburing_sanitize_address(files);
+	liburing_sanitize_address(tags);
+
 	struct io_uring_rsrc_update2 up = {
 		.offset	= off,
 		.data = (unsigned long)files,
@@ -97,6 +109,8 @@ int io_uring_register_files_update_tag(struct io_uring *ring, unsigned off,
 int io_uring_register_files_update(struct io_uring *ring, unsigned off,
 				   const int *files, unsigned nr_files)
 {
+	liburing_sanitize_address(files);
+
 	struct io_uring_files_update up = {
 		.offset	= off,
 		.fds	= (unsigned long) files,
@@ -148,6 +162,9 @@ int io_uring_register_files_sparse(struct io_uring *ring, unsigned nr)
 int io_uring_register_files_tags(struct io_uring *ring, const int *files,
 				 const __u64 *tags, unsigned nr)
 {
+	liburing_sanitize_address(files);
+	liburing_sanitize_address(tags);
+
 	struct io_uring_rsrc_register reg = {
 		.nr = nr,
 		.data = (unsigned long)files,
@@ -174,6 +191,8 @@ int io_uring_register_files(struct io_uring *ring, const int *files,
 			    unsigned nr_files)
 {
 	int ret, did_increase = 0;
+
+	liburing_sanitize_address(files);
 
 	do {
 		ret = do_register(ring, IORING_REGISTER_FILES, files, nr_files);
@@ -316,6 +335,7 @@ int io_uring_register_buf_ring(struct io_uring *ring,
 			       struct io_uring_buf_reg *reg,
 			       unsigned int __maybe_unused flags)
 {
+	reg->flags |= flags;
 	return do_register(ring, IORING_REGISTER_PBUF_RING, reg, 1);
 }
 
@@ -328,6 +348,8 @@ int io_uring_unregister_buf_ring(struct io_uring *ring, int bgid)
 
 int io_uring_buf_ring_head(struct io_uring *ring, int buf_group, uint16_t *head)
 {
+	liburing_sanitize_address(head);
+
 	struct io_uring_buf_status buf_status = {
 		.buf_group	= buf_group,
 	};
@@ -365,4 +387,24 @@ int io_uring_register_napi(struct io_uring *ring, struct io_uring_napi *napi)
 int io_uring_unregister_napi(struct io_uring *ring, struct io_uring_napi *napi)
 {
 	return do_register(ring, IORING_UNREGISTER_NAPI, napi, 1);
+}
+
+int io_uring_register_clock(struct io_uring *ring,
+			    struct io_uring_clock_register *arg)
+{
+	return do_register(ring, IORING_REGISTER_CLOCK, arg, 0);
+}
+
+int io_uring_clone_buffers(struct io_uring *dst, struct io_uring *src)
+{
+	struct io_uring_clone_buffers buf = { .src_fd = src->ring_fd, };
+
+	if (src->int_flags & INT_FLAG_REG_REG_RING) {
+		buf.src_fd = src->enter_ring_fd;
+		buf.flags = IORING_REGISTER_SRC_REGISTERED;
+	} else {
+		buf.src_fd = src->ring_fd;
+	}
+
+	return do_register(dst, IORING_REGISTER_CLONE_BUFFERS, &buf, 1);
 }
