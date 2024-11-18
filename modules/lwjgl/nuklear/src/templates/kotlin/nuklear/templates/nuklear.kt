@@ -839,8 +839,8 @@ nk_style_pop_vec2(ctx);""")}
             "Initializes context from two buffers. One for draw commands the other for window/panel/table allocations.",
 
             ctx,
-            nk_buffer_p("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
-            nk_buffer_p("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
+            nk_buffer.p("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
+            nk_buffer.p("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
             nullable..nk_user_font.const.p("font", "must point to a previously initialized font handle")
         )
 
@@ -907,7 +907,7 @@ nk_style_pop_vec2(ctx);""")}
             "window_find",
             "Finds and returns a window from passed name.",
 
-            ctx,
+            cctx,
             charUTF8.const.p("name", "")
         )
 
@@ -918,24 +918,24 @@ nk_style_pop_vec2(ctx);""")}
         float("window_get_width", "Returns the width of the currently processed window.", cctx)
         float("window_get_height", "Returns the height of the currently processed window.", cctx)
 
-        nk_panel.p("window_get_panel", "Returns the underlying panel which contains all processing state of the current window.", ctx)
+        nk_panel.p("window_get_panel", "Returns the underlying panel which contains all processing state of the current window.", cctx)
 
-        nk_rect("window_get_content_region", "Returns the position and size of the currently visible and non-clipped space inside the currently processed window.", ctx)
-        nk_vec2("window_get_content_region_min", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
-        nk_vec2("window_get_content_region_max", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
-        nk_vec2("window_get_content_region_size", "Returns the size of the currently visible and non-clipped space inside the currently processed window.", ctx)
+        nk_rect("window_get_content_region", "Returns the position and size of the currently visible and non-clipped space inside the currently processed window.", cctx)
+        nk_vec2("window_get_content_region_min", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", cctx)
+        nk_vec2("window_get_content_region_max", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", cctx)
+        nk_vec2("window_get_content_region_size", "Returns the size of the currently visible and non-clipped space inside the currently processed window.", cctx)
 
-        nk_command_buffer.p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", ctx)
+        nk_command_buffer.p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", cctx)
 
         void(
             "window_get_scroll",
             """
             Gets the scroll offset for the current window.
-            
+
             Warning: Only call this function between calls {@code nk_begin_xxx} and #end().
             """,
 
-            ctx,
+            cctx,
             nullable..Check(1)..nk_uint.p("offset_x", "a pointer to the x offset output (or #NULL to ignore)"),
             nullable..Check(1)..nk_uint.p("offset_y", "a pointer to the y offset output (or #NULL to ignore)")
         )
@@ -946,7 +946,7 @@ nk_style_pop_vec2(ctx);""")}
             "window_is_collapsed",
             "Returns if the window with given name is currently minimized/collapsed.",
 
-            ctx,
+            cctx,
             charUTF8.const.p("name", "")
         )
 
@@ -954,7 +954,7 @@ nk_style_pop_vec2(ctx);""")}
             "window_is_closed",
             "Returns if the currently processed window was closed.",
 
-            ctx,
+            cctx,
             charUTF8.const.p("name", "")
         )
 
@@ -962,7 +962,7 @@ nk_style_pop_vec2(ctx);""")}
             "window_is_hidden",
             "Returns if the currently processed window was hidden.",
 
-            ctx,
+            cctx,
             charUTF8.const.p("name", "")
         )
 
@@ -970,15 +970,15 @@ nk_style_pop_vec2(ctx);""")}
             "window_is_active",
             "Same as #window_has_focus() for some reason.",
 
-            ctx,
+            cctx,
             charUTF8.const.p("name", "")
         )
 
-        nk_bool("window_is_hovered", "Returns if the currently processed window is currently being hovered by mouse.", ctx)
+        nk_bool("window_is_hovered", "Returns if the currently processed window is currently being hovered by mouse.", cctx)
 
-        nk_bool("window_is_any_hovered", "Return if any window currently hovered.", ctx)
+        nk_bool("window_is_any_hovered", "Return if any window currently hovered.", cctx)
 
-        nk_bool("item_is_any_active", "Returns if any window or widgets is currently hovered or active.", ctx)
+        nk_bool("item_is_any_active", "Returns if any window or widgets is currently hovered or active.", cctx)
 
         void(
             "window_set_bounds",
@@ -1109,14 +1109,14 @@ nk_style_pop_vec2(ctx);""")}
             "layout_widget_bounds",
             "Returns the width of the next row allocate by one of the layouting functions.",
 
-            ctx
+            cctx
         )
 
         float(
             "layout_ratio_from_pixel",
             "Utility function to calculate window ratio from pixel size.",
 
-            ctx,
+            cctx,
             float("pixel_width", "pixel width to convert to window ratio")
         )
 
@@ -1239,14 +1239,14 @@ nk_style_pop_vec2(ctx);""")}
             "layout_space_bounds",
             "Returns total space allocated for {@code nk_layout_space}.",
 
-            ctx
+            cctx
         )
 
         nk_vec2(
             "layout_space_to_screen",
             "Converts vector from {@code nk_layout_space} coordinate space into screen space.",
 
-            ctx,
+            cctx,
             ReturnParam..nk_vec2("ret", "position to convert from layout space into screen coordinate space")
         )
 
@@ -1254,7 +1254,7 @@ nk_style_pop_vec2(ctx);""")}
             "layout_space_to_local",
             "Converts vector from layout space into screen space.",
 
-            ctx,
+            cctx,
             ReturnParam..nk_vec2("ret", "position to convert from screen space into layout coordinate space")
         )
 
@@ -1262,7 +1262,7 @@ nk_style_pop_vec2(ctx);""")}
             "layout_space_rect_to_screen",
             "Converts rectangle from screen space into layout space.",
 
-            ctx,
+            cctx,
             ReturnParam..nk_rect("ret", "rectangle to convert from layout space into screen space")
         )
 
@@ -1270,7 +1270,7 @@ nk_style_pop_vec2(ctx);""")}
             "layout_space_rect_to_local",
             "Converts rectangle from layout space into screen space.",
 
-            ctx,
+            cctx,
             ReturnParam..nk_rect("ret", "rectangle to convert from screen space into layout space")
         )
 
@@ -2400,7 +2400,7 @@ nk_style_pop_vec2(ctx);""")}
             "popup_get_scroll",
             "",
 
-            ctx,
+            cctx,
             nullable..Check(1)..nk_uint.p("offset_x", ""),
             nullable..Check(1)..nk_uint.p("offset_y", "")
         )
@@ -2418,7 +2418,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.p("items", ""),
+            charUTF8.const.p.const.p("items", ""),
             AutoSize("items")..int("count", ""),
             int("selected", ""),
             int("item_height", ""),
@@ -2468,7 +2468,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.p("items", ""),
+            charUTF8.const.p.const.p("items", ""),
             AutoSize("items")..int("count", ""),
             Check(1)..int.p("selected", ""),
             int("item_height", ""),
@@ -2918,9 +2918,9 @@ nk_style_pop_vec2(ctx);""")}
             "Converts from the abstract draw commands list into a hardware accessable vertex format.",
 
             ctx,
-            nk_buffer_p("cmds", ""),
-            nk_buffer_p("vertices", ""),
-            nk_buffer_p("elements", ""),
+            nk_buffer.p("cmds", ""),
+            nk_buffer.p("vertices", ""),
+            nk_buffer.p("elements", ""),
             nk_convert_config.const.p("config", "")
         )
 
@@ -3026,7 +3026,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check("NK_CURSOR_COUNT")..nk_cursor.p("cursors", "")
+            Check("NK_CURSOR_COUNT")..nk_cursor.const.p("cursors", "")
         )
 
         charUTF8.const.p(
@@ -3115,22 +3115,22 @@ nk_style_pop_vec2(ctx);""")}
         nk_bool("style_pop_flags", "", ctx)
         nk_bool("style_pop_color", "", ctx)
 
-        nk_rect("widget_bounds", "", ctx)
+        nk_rect("widget_bounds", "", cctx)
 
-        nk_vec2("widget_position", "", ctx)
+        nk_vec2("widget_position", "", cctx)
 
-        nk_vec2("widget_size", "", ctx)
+        nk_vec2("widget_size", "", cctx)
 
-        float("widget_width", "", ctx)
-        float("widget_height", "", ctx)
+        float("widget_width", "", cctx)
+        float("widget_height", "", cctx)
 
-        nk_bool("widget_is_hovered", "", ctx)
+        nk_bool("widget_is_hovered", "", cctx)
 
         nk_bool(
             "widget_is_mouse_clicked",
             "",
 
-            ctx,
+            cctx,
             nk_buttons("btn", "")
         )
 
@@ -3138,7 +3138,7 @@ nk_style_pop_vec2(ctx);""")}
             "widget_has_mouse_click_down",
             "",
 
-            ctx,
+            cctx,
             nk_buttons("btn", "", Buttons),
             nk_bool("down", "")
         )
@@ -3319,7 +3319,7 @@ nk_style_pop_vec2(ctx);""")}
             "hsva_colorfv",
             "",
 
-            Check(4)..float.p("c", "")
+            Check(4)..float.const.p("c", "")
         )
 
         void(
@@ -3887,7 +3887,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p("endptr", "")
+            Check(1)..charUTF8.p.p("endptr", "")
         )
 
         float(
@@ -3895,7 +3895,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p("endptr", "")
+            Check(1)..charUTF8.p.p("endptr", "")
         )
 
         double(
@@ -3903,7 +3903,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p("endptr", "")
+            Check(1)..charUTF8.p.p("endptr", "")
         )
 
         nk_bool(
@@ -3986,7 +3986,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_init",
             "",
 
-            nk_buffer_p("buffer", ""),
+            nk_buffer.p("buffer", ""),
             nk_allocator.const.p("allocator", ""),
             nk_size("size", "")
         )
@@ -3995,7 +3995,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_init_fixed",
             "",
 
-            nk_buffer_p("buffer", ""),
+            nk_buffer.p("buffer", ""),
             void.p("memory", ""),
             AutoSize("memory")..nk_size("size", "")
         )
@@ -4005,14 +4005,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_memory_status.p("status", ""),
-            nk_buffer_p("buffer", "")
+            nk_buffer.const.p("buffer", "")
         )
 
         void(
             "buffer_push",
             "",
 
-            nk_buffer_p("buffer", ""),
+            nk_buffer.p("buffer", ""),
             nk_buffer_allocation_type("type", "", BufferAllocationTypes),
             void.const.p("memory", ""),
             AutoSize("memory")..nk_size("size", ""),
@@ -4023,7 +4023,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_mark",
             "",
 
-            nk_buffer_p("buffer", ""),
+            nk_buffer.p("buffer", ""),
             nk_buffer_allocation_type("type", "", BufferAllocationTypes)
         )
 
@@ -4031,7 +4031,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_reset",
             "",
 
-            nk_buffer_p("buffer", ""),
+            nk_buffer.p("buffer", ""),
             nk_buffer_allocation_type("type", "", BufferAllocationTypes)
         )
 
@@ -4039,21 +4039,21 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_clear",
             "",
 
-            nk_buffer_p("buffer", "")
+            nk_buffer.p("buffer", "")
         )
 
         void(
             "buffer_free",
             "",
 
-            nk_buffer_p("buffer", "")
+            nk_buffer.p("buffer", "")
         )
 
         opaque_p(
             "buffer_memory",
             "",
 
-            nk_buffer_p("buffer", "")
+            nk_buffer.p("buffer", "")
         )
 
         opaque_const_p(
@@ -4067,7 +4067,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_total",
             "",
 
-            nk_buffer_p("buffer", "")
+            nk_buffer.const.p("buffer", "")
         )
 
         void(
@@ -4326,14 +4326,14 @@ nk_style_pop_vec2(ctx);""")}
             "str_len",
             "",
 
-            nk_str.p("s", "")
+            nk_str.const.p("s", "")
         )
 
         int(
             "str_len_char",
             "",
 
-            nk_str.p("s", "")
+            nk_str.const.p("s", "")
         )
 
         nk_bool(
@@ -4567,7 +4567,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             cmd,
-            float.p("points", ""),
+            float.const.p("points", ""),
             AutoSizeShr("1", "points")..int("point_count", ""),
             float("line_thickness", ""),
             nk_color("col", "")
@@ -4578,7 +4578,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             cmd,
-            float.p("points", ""),
+            float.const.p("points", ""),
             AutoSizeShr("1", "points")..int("point_count", ""),
             float("line_thickness", ""),
             nk_color("color", "")
@@ -4647,7 +4647,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             cmd,
-            float.p("points", ""),
+            float.const.p("points", ""),
             AutoSizeShr("1", "points")..int("point_count", ""),
             nk_color("color", "")
         )
@@ -4869,9 +4869,9 @@ nk_style_pop_vec2(ctx);""")}
 
             nk_draw_list.p("canvas", ""),
             nk_convert_config.const.p("config", ""),
-            nk_buffer_p("cmds", ""),
-            nk_buffer_p("vertices", ""),
-            nk_buffer_p("elements", ""),
+            nk_buffer.p("cmds", ""),
+            nk_buffer.p("vertices", ""),
+            nk_buffer.p("elements", ""),
             nk_anti_aliasing("line_aa", ""),
             nk_anti_aliasing("shape_aa", "")
         )
@@ -5331,7 +5331,7 @@ nk_style_pop_vec2(ctx);""")}
             "font_find_glyph",
             "",
 
-            nk_font.p("font", ""),
+            nk_font.const.p("font", ""),
             nk_rune("unicode", "")
         )
 

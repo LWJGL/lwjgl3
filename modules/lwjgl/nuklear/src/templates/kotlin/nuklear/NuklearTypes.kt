@@ -220,7 +220,6 @@ val nk_buffer = struct(Module.NUKLEAR, "NkBuffer", nativeName = "struct nk_buffe
     nk_size("calls", "number of allocation calls")
     nk_size("size", "current size of the buffer")
 }
-val nk_buffer_p = nk_buffer.p
 
 // STRING
 
@@ -571,7 +570,7 @@ val nk_command_custom_callback = Module.NUKLEAR.callback {
 }*/
 
 val nk_command_buffer = struct(Module.NUKLEAR, "NkCommandBuffer", nativeName = "struct nk_command_buffer", mutable = false) {
-    nullable..nk_buffer_p("base", "")
+    nullable..nk_buffer.p("base", "")
     nk_rect("clip", "")
     int("use_clipping", "")
     nk_handle("userdata", "")
@@ -637,9 +636,9 @@ val nk_draw_list = struct(Module.NUKLEAR, "NkDrawList", nativeName = "struct nk_
     nk_vec2("circle_vtx", "")[12]
     nk_convert_config("config", "")
 
-    nullable..nk_buffer_p("buffer", "")
-    nullable..nk_buffer_p("vertices", "")
-    nullable..nk_buffer_p("elements", "")
+    nullable..nk_buffer.p("buffer", "")
+    nullable..nk_buffer.p("vertices", "")
+    nullable..nk_buffer.p("elements", "")
 
     unsigned_int("element_count", "")
     unsigned_int("vertex_count", "")
