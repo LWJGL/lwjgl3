@@ -197,6 +197,8 @@ public class HarfBuzz {
             draw_close_path                               = apiGetFunctionAddress(HARFBUZZ, "hb_draw_close_path"),
             face_count                                    = apiGetFunctionAddress(HARFBUZZ, "hb_face_count"),
             face_create                                   = apiGetFunctionAddress(HARFBUZZ, "hb_face_create"),
+            face_create_or_fail                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_or_fail"),
+            face_create_from_file_or_fail                 = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_from_file_or_fail"),
             face_create_for_tables                        = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_for_tables"),
             face_get_empty                                = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_empty"),
             face_reference                                = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference"),
@@ -316,6 +318,7 @@ public class HarfBuzz {
             ft_face_create                                = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create"),
             ft_face_create_cached                         = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_cached"),
             ft_face_create_referenced                     = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_referenced"),
+            ft_face_create_from_file_or_fail              = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_from_file_or_fail"),
             ft_font_create                                = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_create"),
             ft_font_create_referenced                     = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_create_referenced"),
             ft_font_get_face                              = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_get_face"),
@@ -1505,11 +1508,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 10;
 
-    public static final int HB_VERSION_MINOR = 0;
+    public static final int HB_VERSION_MINOR = 1;
 
-    public static final int HB_VERSION_MICRO = 1;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "10.0.1";
+    public static final String HB_VERSION_STRING = "10.1.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -3195,6 +3198,44 @@ public class HarfBuzz {
             check(blob);
         }
         return invokePP(blob, index, __functionAddress);
+    }
+
+    // --- [ hb_face_create_or_fail ] ---
+
+    @NativeType("hb_face_t *")
+    public static long hb_face_create_or_fail(@NativeType("hb_blob_t *") long blob, @NativeType("unsigned int") int index) {
+        long __functionAddress = Functions.face_create_or_fail;
+        if (CHECKS) {
+            check(blob);
+        }
+        return invokePP(blob, index, __functionAddress);
+    }
+
+    // --- [ hb_face_create_from_file_or_fail ] ---
+
+    public static long nhb_face_create_from_file_or_fail(long file_name, int index) {
+        long __functionAddress = Functions.face_create_from_file_or_fail;
+        return invokePP(file_name, index, __functionAddress);
+    }
+
+    @NativeType("hb_face_t *")
+    public static long hb_face_create_from_file_or_fail(@NativeType("char const *") ByteBuffer file_name, @NativeType("unsigned int") int index) {
+        if (CHECKS) {
+            checkNT1(file_name);
+        }
+        return nhb_face_create_from_file_or_fail(memAddress(file_name), index);
+    }
+
+    @NativeType("hb_face_t *")
+    public static long hb_face_create_from_file_or_fail(@NativeType("char const *") CharSequence file_name, @NativeType("unsigned int") int index) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file_name, true);
+            long file_nameEncoded = stack.getPointerAddress();
+            return nhb_face_create_from_file_or_fail(file_nameEncoded, index);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ hb_face_create_for_tables ] ---
@@ -5008,6 +5049,36 @@ public class HarfBuzz {
             check(ft_face);
         }
         return invokePP(ft_face, __functionAddress);
+    }
+
+    // --- [ hb_ft_face_create_from_file_or_fail ] ---
+
+    public static long nhb_ft_face_create_from_file_or_fail(long file_name, int index) {
+        long __functionAddress = Functions.ft_face_create_from_file_or_fail;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokePP(file_name, index, __functionAddress);
+    }
+
+    @NativeType("hb_face_t *")
+    public static long hb_ft_face_create_from_file_or_fail(@NativeType("char const *") ByteBuffer file_name, @NativeType("unsigned int") int index) {
+        if (CHECKS) {
+            checkNT1(file_name);
+        }
+        return nhb_ft_face_create_from_file_or_fail(memAddress(file_name), index);
+    }
+
+    @NativeType("hb_face_t *")
+    public static long hb_ft_face_create_from_file_or_fail(@NativeType("char const *") CharSequence file_name, @NativeType("unsigned int") int index) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file_name, true);
+            long file_nameEncoded = stack.getPointerAddress();
+            return nhb_ft_face_create_from_file_or_fail(file_nameEncoded, index);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ hb_ft_font_create ] ---
@@ -6966,7 +7037,7 @@ public class HarfBuzz {
         buffer_serialize_list_formats_COUNT = count;
     }
 
-    public static final hb_draw_state_t HB_DRAW_STATE_DEFAULT = hb_draw_state_t.create().set(false, 0.f, 0.f, 0.f, 0.f);
+    public static final hb_draw_state_t HB_DRAW_STATE_DEFAULT = hb_draw_state_t.create();
 
     private static final int shape_list_shapers_COUNT;
     static {

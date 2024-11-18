@@ -1436,7 +1436,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-draw.h
 
     customMethod("""
-    public static final hb_draw_state_t HB_DRAW_STATE_DEFAULT = hb_draw_state_t.create().set(false, 0.f, 0.f, 0.f, 0.f);
+    public static final hb_draw_state_t HB_DRAW_STATE_DEFAULT = hb_draw_state_t.create();
     """)
 
     void(
@@ -1624,6 +1624,22 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         hb_blob_t.p("blob", ""),
+        unsigned_int("index", "")
+    )
+
+    hb_face_t.p(
+        "face_create_or_fail",
+        "",
+
+        hb_blob_t.p("blob", ""),
+        unsigned_int("index", "")
+    )
+
+    hb_face_t.p(
+        "face_create_from_file_or_fail",
+        "",
+
+        charUTF8.const.p("file_name", ""),
         unsigned_int("index", "")
     )
 
@@ -2699,6 +2715,14 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         FT_Face("ft_face", "")
+    )
+
+    IgnoreMissing..hb_face_t.p(
+        "ft_face_create_from_file_or_fail",
+        "",
+
+        charUTF8.const.p("file_name", ""),
+        unsigned_int("index", "")
     )
 
     IgnoreMissing..hb_font_t.p(
@@ -4204,10 +4228,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("", "VERSION_MAJOR".."10")
-    IntConstant("", "VERSION_MINOR".."0")
-    IntConstant("", "VERSION_MICRO".."1")
+    IntConstant("", "VERSION_MINOR".."1")
+    IntConstant("", "VERSION_MICRO".."0")
 
-    StringConstant("", "VERSION_STRING".."10.0.1")
+    StringConstant("", "VERSION_STRING".."10.1.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {
