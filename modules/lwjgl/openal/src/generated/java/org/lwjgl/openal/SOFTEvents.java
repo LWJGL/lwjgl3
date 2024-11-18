@@ -58,6 +58,21 @@ public class SOFTEvents {
         nalEventControlSOFT(types.remaining(), memAddress(types), enable);
     }
 
+    // --- [ alEventControlDirectSOFT ] ---
+
+    public static void nalEventControlDirectSOFT(long context, int count, long types, boolean enable) {
+        long __functionAddress = AL.getICD().alEventControlDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, count, types, enable, __functionAddress);
+    }
+
+    public static void alEventControlDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALenum const *") IntBuffer types, @NativeType("ALboolean") boolean enable) {
+        nalEventControlDirectSOFT(context, types.remaining(), memAddress(types), enable);
+    }
+
     // --- [ alEventCallbackSOFT ] ---
 
     public static void nalEventCallbackSOFT(long callback, long userParam) {
@@ -68,8 +83,23 @@ public class SOFTEvents {
         invokePPV(callback, userParam, __functionAddress);
     }
 
-    public static void alEventCallbackSOFT(@NativeType("ALEVENTPROCSOFT") SOFTEventProcI callback, @NativeType("ALvoid *") @Nullable ByteBuffer userParam) {
-        nalEventCallbackSOFT(callback.address(), memAddressSafe(userParam));
+    public static void alEventCallbackSOFT(@NativeType("ALEVENTPROCSOFT") @Nullable SOFTEventProcI callback, @NativeType("ALvoid *") long userParam) {
+        nalEventCallbackSOFT(memAddressSafe(callback), userParam);
+    }
+
+    // --- [ alEventCallbackDirectSOFT ] ---
+
+    public static void nalEventCallbackDirectSOFT(long context, long callback, long userParam) {
+        long __functionAddress = AL.getICD().alEventCallbackDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPV(context, callback, userParam, __functionAddress);
+    }
+
+    public static void alEventCallbackDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALEVENTPROCSOFT") @Nullable SOFTEventProcI callback, @NativeType("ALvoid *") long userParam) {
+        nalEventCallbackDirectSOFT(context, memAddressSafe(callback), userParam);
     }
 
     // --- [ alGetPointerSOFT ] ---
@@ -81,6 +111,18 @@ public class SOFTEvents {
             check(__functionAddress);
         }
         return invokeP(pname, __functionAddress);
+    }
+
+    // --- [ alGetPointerDirectSOFT ] ---
+
+    @NativeType("ALvoid *")
+    public static long alGetPointerDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int pname) {
+        long __functionAddress = AL.getICD().alGetPointerDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePP(context, pname, __functionAddress);
     }
 
     // --- [ alGetPointervSOFT ] ---
@@ -100,6 +142,24 @@ public class SOFTEvents {
         nalGetPointervSOFT(pname, memAddress(values));
     }
 
+    // --- [ alGetPointervDirectSOFT ] ---
+
+    public static void nalGetPointervDirectSOFT(long context, int pname, long values) {
+        long __functionAddress = AL.getICD().alGetPointervDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, pname, values, __functionAddress);
+    }
+
+    public static void alGetPointervDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int pname, @NativeType("ALvoid **") PointerBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetPointervDirectSOFT(context, pname, memAddress(values));
+    }
+
     /** Array version of: {@link #alEventControlSOFT EventControlSOFT} */
     public static void alEventControlSOFT(@NativeType("ALenum const *") int[] types, @NativeType("ALboolean") boolean enable) {
         long __functionAddress = AL.getICD().alEventControlSOFT;
@@ -107,6 +167,16 @@ public class SOFTEvents {
             check(__functionAddress);
         }
         invokePV(types.length, types, enable, __functionAddress);
+    }
+
+    /** Array version of: {@link #alEventControlDirectSOFT} */
+    public static void alEventControlDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALenum const *") int[] types, @NativeType("ALboolean") boolean enable) {
+        long __functionAddress = AL.getICD().alEventControlDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, types.length, types, enable, __functionAddress);
     }
 
 }

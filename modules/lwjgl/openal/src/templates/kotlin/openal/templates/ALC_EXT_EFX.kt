@@ -747,7 +747,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("effects")..ALsizei("n", "the number of effects be to generated"),
         ReturnParam..ALuint.p("effects", "the buffer that will receive the effects")
-    )
+    ).directContext()
 
     ALvoid(
         "DeleteEffects",
@@ -755,14 +755,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("effects")..ALsizei("n", "the number of effects be to deleted"),
         SingleValue("effect")..ALuint.p("effects", "the effect to delete")
-    )
+    ).directContext()
 
     ALboolean(
         "IsEffect",
         "Verifies whether the given object name is an effect.",
 
         ALuint("effect", "a value that may be a effect name")
-    )
+    ).directContext()
 
     ALvoid(
         "Effecti",
@@ -771,7 +771,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to modify"),
         ALenum("param", "the parameter to modify"),
         ALint("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Effectiv",
@@ -780,7 +780,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALint.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Effectf",
@@ -789,7 +789,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to modify"),
         ALenum("param", "the parameter to modify"),
         ALfloat("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Effectfv",
@@ -798,7 +798,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALfloat.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetEffecti",
@@ -807,7 +807,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetEffectiv",
@@ -816,7 +816,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetEffectf",
@@ -825,7 +825,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetEffectfv",
@@ -834,7 +834,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GenFilters",
@@ -842,7 +842,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("filters")..ALsizei("n", "the number of filters be to generated"),
         ReturnParam..ALuint.p("filters", "the buffer that will receive the filters")
-    )
+    ).directContext()
 
     ALvoid(
         "DeleteFilters",
@@ -850,14 +850,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("filters")..ALsizei("n", "the number of filters be to deleted"),
         SingleValue("filter")..ALuint.p("filters", "the filter to delete")
-    )
+    ).directContext()
 
     ALboolean(
         "IsFilter",
         "Verifies whether the given object name is a filter.",
 
         ALuint("filter", "a value that may be a filter name")
-    )
+    ).directContext()
 
     ALvoid(
         "Filteri",
@@ -866,7 +866,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to modify"),
         ALenum("param", "the parameter to modify"),
         ALint("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Filteriv",
@@ -875,7 +875,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALint.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Filterf",
@@ -884,7 +884,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to modify"),
         ALenum("param", "the parameter to modify"),
         ALfloat("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Filterfv",
@@ -893,7 +893,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALfloat.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetFilteri",
@@ -902,7 +902,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetFilteriv",
@@ -911,7 +911,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the filter to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetFilterf",
@@ -920,7 +920,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetFilterfv",
@@ -929,7 +929,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("filter", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GenAuxiliaryEffectSlots",
@@ -937,7 +937,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to generated"),
         ReturnParam..ALuint.p("effectSlots", "the buffer that will receive the effect slots")
-    )
+    ).directContext()
 
     ALvoid(
         "DeleteAuxiliaryEffectSlots",
@@ -945,14 +945,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to deleted"),
         SingleValue("effectSlot")..ALuint.p("effectSlots", "the effectSlot to delete")
-    )
+    ).directContext()
 
     ALboolean(
         "IsAuxiliaryEffectSlot",
         "Verifies whether the given object name is an effect slot.",
 
         ALuint("effectSlot", "a value that may be an effect slot name")
-    )
+    ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSloti",
@@ -961,7 +961,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to modify"),
         ALenum("param", "the parameter to modify"),
         ALint("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotiv",
@@ -970,7 +970,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALint.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotf",
@@ -979,7 +979,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to modify"),
         ALenum("param", "the parameter to modify"),
         ALfloat("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotfv",
@@ -988,7 +988,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALfloat.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSloti",
@@ -997,7 +997,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotiv",
@@ -1006,7 +1006,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotf",
@@ -1015,7 +1015,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotfv",
@@ -1024,7 +1024,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         ALuint("effectSlot", "the effect to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALCBinding.addClass(this)
 }

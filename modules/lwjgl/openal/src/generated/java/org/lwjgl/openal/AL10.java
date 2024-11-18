@@ -144,6 +144,29 @@ public class AL10 {
         return invokeI(__functionAddress);
     }
 
+    // --- [ alGetErrorDirect ] ---
+
+    /**
+     * Obtains error information.
+     * 
+     * <p>Each detectable error is assigned a numeric code. When an error is detected by AL, a flag is set and the error code is recorded. Further errors, if they
+     * occur, do not affect this recorded code. When alGetError is called, the code is returned and the flag is cleared, so that a further error will again
+     * record its code. If a call to alGetError returns AL_NO_ERROR then there has been no detectable error since the last call to alGetError (or since the AL
+     * was initialized).</p>
+     * 
+     * <p>Error codes can be mapped to strings. The alGetString function returns a pointer to a constant (literal) string that is identical to the identifier used
+     * for the enumeration value, as defined in the specification.</p>
+     */
+    @NativeType("ALenum")
+    public static int alGetErrorDirect(@NativeType("ALCcontext *") long context) {
+        long __functionAddress = AL.getICD().alGetErrorDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePI(context, __functionAddress);
+    }
+
     // --- [ alEnable ] ---
 
     /**
@@ -155,6 +178,23 @@ public class AL10 {
     public static void alEnable(@NativeType("ALenum") int target) {
         long __functionAddress = AL.getICD().alEnable;
         invokeV(target, __functionAddress);
+    }
+
+    // --- [ alEnableDirect ] ---
+
+    /**
+     * Enables AL capabilities.
+     *
+     * @param target the capability to enable
+     */
+    @NativeType("ALvoid")
+    public static void alEnableDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int target) {
+        long __functionAddress = AL.getICD().alEnableDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, target, __functionAddress);
     }
 
     // --- [ alDisable ] ---
@@ -170,6 +210,23 @@ public class AL10 {
         invokeV(target, __functionAddress);
     }
 
+    // --- [ alDisableDirect ] ---
+
+    /**
+     * Disables AL capabilities.
+     *
+     * @param target the capability to disable
+     */
+    @NativeType("ALvoid")
+    public static void alDisableDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int target) {
+        long __functionAddress = AL.getICD().alDisableDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, target, __functionAddress);
+    }
+
     // --- [ alIsEnabled ] ---
 
     /**
@@ -181,6 +238,23 @@ public class AL10 {
     public static boolean alIsEnabled(@NativeType("ALenum") int target) {
         long __functionAddress = AL.getICD().alIsEnabled;
         return invokeZ(target, __functionAddress);
+    }
+
+    // --- [ alIsEnabledDirect ] ---
+
+    /**
+     * Queries whether a given capability is currently enabled or not.
+     *
+     * @param target the capability to query
+     */
+    @NativeType("ALboolean")
+    public static boolean alIsEnabledDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int target) {
+        long __functionAddress = AL.getICD().alIsEnabledDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePZ(context, target, __functionAddress);
     }
 
     // --- [ alGetBoolean ] ---
@@ -196,6 +270,23 @@ public class AL10 {
         return invokeZ(paramName, __functionAddress);
     }
 
+    // --- [ alGetBooleanDirect ] ---
+
+    /**
+     * Returns the boolean value of the specified parameter.
+     *
+     * @param paramName the parameter to query
+     */
+    @NativeType("ALboolean")
+    public static boolean alGetBooleanDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        long __functionAddress = AL.getICD().alGetBooleanDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePZ(context, paramName, __functionAddress);
+    }
+
     // --- [ alGetInteger ] ---
 
     /**
@@ -207,6 +298,23 @@ public class AL10 {
     public static int alGetInteger(@NativeType("ALenum") int paramName) {
         long __functionAddress = AL.getICD().alGetInteger;
         return invokeI(paramName, __functionAddress);
+    }
+
+    // --- [ alGetIntegerDirect ] ---
+
+    /**
+     * Returns the integer value of the specified parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_DOPPLER_FACTOR DOPPLER_FACTOR}</td><td>{@link #AL_DISTANCE_MODEL DISTANCE_MODEL}</td><td>{@link AL11#AL_SPEED_OF_SOUND SPEED_OF_SOUND}</td></tr></table>
+     */
+    @NativeType("ALint")
+    public static int alGetIntegerDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        long __functionAddress = AL.getICD().alGetIntegerDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePI(context, paramName, __functionAddress);
     }
 
     // --- [ alGetFloat ] ---
@@ -222,6 +330,23 @@ public class AL10 {
         return invokeF(paramName, __functionAddress);
     }
 
+    // --- [ alGetFloatDirect ] ---
+
+    /**
+     * Returns the float value of the specified parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_DOPPLER_FACTOR DOPPLER_FACTOR}</td><td>{@link #AL_DISTANCE_MODEL DISTANCE_MODEL}</td><td>{@link AL11#AL_SPEED_OF_SOUND SPEED_OF_SOUND}</td></tr></table>
+     */
+    @NativeType("ALfloat")
+    public static float alGetFloatDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        long __functionAddress = AL.getICD().alGetFloatDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePF(context, paramName, __functionAddress);
+    }
+
     // --- [ alGetDouble ] ---
 
     /**
@@ -233,6 +358,23 @@ public class AL10 {
     public static double alGetDouble(@NativeType("ALenum") int paramName) {
         long __functionAddress = AL.getICD().alGetDouble;
         return invokeD(paramName, __functionAddress);
+    }
+
+    // --- [ alGetDoubleDirect ] ---
+
+    /**
+     * Returns the double value of the specified parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_DOPPLER_FACTOR DOPPLER_FACTOR}</td><td>{@link #AL_DISTANCE_MODEL DISTANCE_MODEL}</td><td>{@link AL11#AL_SPEED_OF_SOUND SPEED_OF_SOUND}</td></tr></table>
+     */
+    @NativeType("ALdouble")
+    public static double alGetDoubleDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        long __functionAddress = AL.getICD().alGetDoubleDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePD(context, paramName, __functionAddress);
     }
 
     // --- [ alGetBooleanv ] ---
@@ -257,6 +399,32 @@ public class AL10 {
         nalGetBooleanv(paramName, memAddress(dest));
     }
 
+    // --- [ alGetBooleanvDirect ] ---
+
+    /** Unsafe version of: {@link #alGetBooleanvDirect} */
+    public static void nalGetBooleanvDirect(long context, int paramName, long dest) {
+        long __functionAddress = AL.getICD().alGetBooleanvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alGetBoolean GetBoolean}.
+     *
+     * @param paramName the parameter to query
+     * @param dest      a buffer that will receive the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetBooleanvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALboolean *") ByteBuffer dest) {
+        if (CHECKS) {
+            check(dest, 1);
+        }
+        nalGetBooleanvDirect(context, paramName, memAddress(dest));
+    }
+
     // --- [ alGetIntegerv ] ---
 
     /** Unsafe version of: {@link #alGetIntegerv GetIntegerv} */
@@ -277,6 +445,32 @@ public class AL10 {
             check(dest, 1);
         }
         nalGetIntegerv(paramName, memAddress(dest));
+    }
+
+    // --- [ alGetIntegervDirect ] ---
+
+    /** Unsafe version of: {@link #alGetIntegervDirect} */
+    public static void nalGetIntegervDirect(long context, int paramName, long dest) {
+        long __functionAddress = AL.getICD().alGetIntegervDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alGetInteger GetInteger}.
+     *
+     * @param paramName the parameter to query
+     * @param dest      a buffer that will receive the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetIntegervDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint *") IntBuffer dest) {
+        if (CHECKS) {
+            check(dest, 1);
+        }
+        nalGetIntegervDirect(context, paramName, memAddress(dest));
     }
 
     // --- [ alGetFloatv ] ---
@@ -301,6 +495,32 @@ public class AL10 {
         nalGetFloatv(paramName, memAddress(dest));
     }
 
+    // --- [ alGetFloatvDirect ] ---
+
+    /** Unsafe version of: {@link #alGetFloatvDirect} */
+    public static void nalGetFloatvDirect(long context, int paramName, long dest) {
+        long __functionAddress = AL.getICD().alGetFloatvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alGetFloat GetFloat}.
+     *
+     * @param paramName the parameter to query
+     * @param dest      a buffer that will receive the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetFloatvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") FloatBuffer dest) {
+        if (CHECKS) {
+            check(dest, 1);
+        }
+        nalGetFloatvDirect(context, paramName, memAddress(dest));
+    }
+
     // --- [ alGetDoublev ] ---
 
     /** Unsafe version of: {@link #alGetDoublev GetDoublev} */
@@ -323,6 +543,32 @@ public class AL10 {
         nalGetDoublev(paramName, memAddress(dest));
     }
 
+    // --- [ alGetDoublevDirect ] ---
+
+    /** Unsafe version of: {@link #alGetDoublevDirect} */
+    public static void nalGetDoublevDirect(long context, int paramName, long dest) {
+        long __functionAddress = AL.getICD().alGetDoublevDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alGetDouble GetDouble}.
+     *
+     * @param paramName the parameter to query
+     * @param dest      a buffer that will receive the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetDoublevDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALdouble *") DoubleBuffer dest) {
+        if (CHECKS) {
+            check(dest, 1);
+        }
+        nalGetDoublevDirect(context, paramName, memAddress(dest));
+    }
+
     // --- [ alGetString ] ---
 
     /** Unsafe version of: {@link #alGetString GetString} */
@@ -339,6 +585,29 @@ public class AL10 {
     @NativeType("ALchar const *")
     public static @Nullable String alGetString(@NativeType("ALenum") int paramName) {
         long __result = nalGetString(paramName);
+        return memUTF8Safe(__result);
+    }
+
+    // --- [ alGetStringDirect ] ---
+
+    /** Unsafe version of: {@link #alGetStringDirect} */
+    public static long nalGetStringDirect(long context, int paramName) {
+        long __functionAddress = AL.getICD().alGetStringDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePP(context, paramName, __functionAddress);
+    }
+
+    /**
+     * Returns the string value of the specified parameter
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_VENDOR VENDOR}</td><td>{@link #AL_VERSION VERSION}</td><td>{@link #AL_RENDERER RENDERER}</td><td>{@link #AL_EXTENSIONS EXTENSIONS}</td></tr></table>
+     */
+    @NativeType("ALchar const *")
+    public static @Nullable String alGetStringDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        long __result = nalGetStringDirect(context, paramName);
         return memUTF8Safe(__result);
     }
 
@@ -363,6 +632,33 @@ public class AL10 {
     public static void alDistanceModel(@NativeType("ALenum") int modelName) {
         long __functionAddress = AL.getICD().alDistanceModel;
         invokeV(modelName, __functionAddress);
+    }
+
+    // --- [ alDistanceModelDirect ] ---
+
+    /**
+     * Sets the distance attenuation model.
+     * 
+     * <p>Samples usually use the entire dynamic range of the chosen format/encoding, independent of their real world intensity. For example, a jet engine and a
+     * clockwork both will have samples with full amplitude. The application will then have to adjust source gain accordingly to account for relative differences.</p>
+     * 
+     * <p>Source gain is then attenuated by distance. The effective attenuation of a source depends on many factors, among which distance attenuation and source
+     * and listener gain are only some of the contributing factors. Even if the source and listener gain exceed 1.0 (amplification beyond the guaranteed
+     * dynamic range), distance and other attenuation might ultimately limit the overall gain to a value below 1.0.</p>
+     * 
+     * <p>OpenAL currently supports three modes of operation with respect to distance attenuation, including one that is similar to the IASIG I3DL2 model. The
+     * application can choose one of these models (or chooses to disable distance-dependent attenuation) on a per-context basis.</p>
+     *
+     * @param modelName the distance attenuation model to set. One of:<br><table><tr><td>{@link #AL_INVERSE_DISTANCE INVERSE_DISTANCE}</td><td>{@link #AL_INVERSE_DISTANCE_CLAMPED INVERSE_DISTANCE_CLAMPED}</td><td>{@link AL11#AL_LINEAR_DISTANCE LINEAR_DISTANCE}</td><td>{@link AL11#AL_LINEAR_DISTANCE_CLAMPED LINEAR_DISTANCE_CLAMPED}</td></tr><tr><td>{@link AL11#AL_EXPONENT_DISTANCE EXPONENT_DISTANCE}</td><td>{@link AL11#AL_EXPONENT_DISTANCE_CLAMPED EXPONENT_DISTANCE_CLAMPED}</td><td>{@link #AL_NONE NONE}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static void alDistanceModelDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int modelName) {
+        long __functionAddress = AL.getICD().alDistanceModelDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, modelName, __functionAddress);
     }
 
     // --- [ alDopplerFactor ] ---
@@ -413,6 +709,58 @@ public class AL10 {
         invokeV(dopplerFactor, __functionAddress);
     }
 
+    // --- [ alDopplerFactorDirect ] ---
+
+    /**
+     * Sets the doppler effect factor.
+     * 
+     * <p>The Doppler Effect depends on the velocities of source and listener relative to the medium, and the propagation speed of sound in that medium. The
+     * application might want to emphasize or de-emphasize the Doppler Effect as physically accurate calculation might not give the desired results. The amount
+     * of frequency shift (pitch change) is proportional to the speed of listener and source along their line of sight. The Doppler Effect as implemented by
+     * OpenAL is described by the formula below. Effects of the medium (air, water) moving with respect to listener and source are ignored.</p>
+     * 
+     * <pre><code>
+     * SS: AL_SPEED_OF_SOUND = speed of sound (default value 343.3)
+     * DF: AL_DOPPLER_FACTOR = Doppler factor (default 1.0)
+     * vls: Listener velocity scalar (scalar, projected on source-to-listener vector)
+     * vss: Source velocity scalar (scalar, projected on source-to-listener vector)
+     * f: Frequency of sample
+     * f': effective Doppler shifted frequency
+     * 
+     * 3D Mathematical representation of vls and vss:
+     * 
+     * Mag(vector) = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+     * DotProduct(v1, v2) = (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z)
+     * 
+     * SL = source to listener vector
+     * SV = Source velocity vector
+     * LV = Listener velocity vector
+     * 
+     * vls = DotProduct(SL, LV) / Mag(SL)
+     * vss = DotProduct(SL, SV) / Mag(SL)
+     * 
+     * Dopper Calculation:
+     * 
+     * vss = min(vss, SS / DF)
+     * vls = min(vls, SS / DF)
+     * 
+     * f' = f * (SS - DF * vls) / (SS - DF * vss)</code></pre>
+     * 
+     * <p>The {@code dopplerFactor} is a simple scaling of source and listener velocities to exaggerate or deemphasize the Doppler (pitch) shift resulting from
+     * the calculation.</p>
+     *
+     * @param dopplerFactor the doppler factor
+     */
+    @NativeType("ALvoid")
+    public static void alDopplerFactorDirect(@NativeType("ALCcontext *") long context, @NativeType("ALfloat") float dopplerFactor) {
+        long __functionAddress = AL.getICD().alDopplerFactorDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, dopplerFactor, __functionAddress);
+    }
+
     // --- [ alDopplerVelocity ] ---
 
     /**
@@ -453,6 +801,24 @@ public class AL10 {
         invokeV(paramName, value, __functionAddress);
     }
 
+    // --- [ alListenerfDirect ] ---
+
+    /**
+     * Sets the float value of a listener parameter.
+     *
+     * @param paramName the parameter to modify. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param value     the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alListenerfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value) {
+        long __functionAddress = AL.getICD().alListenerfDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, paramName, value, __functionAddress);
+    }
+
     // --- [ alListeneri ] ---
 
     /**
@@ -465,6 +831,24 @@ public class AL10 {
     public static void alListeneri(@NativeType("ALenum") int paramName, @NativeType("ALint") int values) {
         long __functionAddress = AL.getICD().alListeneri;
         invokeV(paramName, values, __functionAddress);
+    }
+
+    // --- [ alListeneriDirect ] ---
+
+    /**
+     * Integer version of {@link #alListenerf Listenerf}.
+     *
+     * @param paramName the parameter to modify. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param values    the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alListeneriDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint") int values) {
+        long __functionAddress = AL.getICD().alListeneriDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, paramName, values, __functionAddress);
     }
 
     // --- [ alListener3f ] ---
@@ -481,6 +865,26 @@ public class AL10 {
     public static void alListener3f(@NativeType("ALenum") int paramName, @NativeType("ALfloat") float value1, @NativeType("ALfloat") float value2, @NativeType("ALfloat") float value3) {
         long __functionAddress = AL.getICD().alListener3f;
         invokeV(paramName, value1, value2, value3, __functionAddress);
+    }
+
+    // --- [ alListener3fDirect ] ---
+
+    /**
+     * Sets the 3 dimensional float values of a listener parameter.
+     *
+     * @param paramName the parameter to modify. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param value1    the first value
+     * @param value2    the second value
+     * @param value3    the third value
+     */
+    @NativeType("ALvoid")
+    public static void alListener3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value1, @NativeType("ALfloat") float value2, @NativeType("ALfloat") float value3) {
+        long __functionAddress = AL.getICD().alListener3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, paramName, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alListenerfv ] ---
@@ -503,6 +907,32 @@ public class AL10 {
             check(values, 1);
         }
         nalListenerfv(paramName, memAddress(values));
+    }
+
+    // --- [ alListenerfvDirect ] ---
+
+    /** Unsafe version of: {@link #alListenerfvDirect} */
+    public static void nalListenerfvDirect(long context, int paramName, long values) {
+        long __functionAddress = AL.getICD().alListenerfvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, values, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alListenerf Listenerf}.
+     *
+     * @param paramName the parameter to modify
+     * @param values    the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alListenerfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") FloatBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalListenerfvDirect(context, paramName, memAddress(values));
     }
 
     // --- [ alGetListenerf ] ---
@@ -538,6 +968,49 @@ public class AL10 {
         try {
             FloatBuffer value = stack.callocFloat(1);
             nalGetListenerf(paramName, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGetListenerfDirect ] ---
+
+    /** Unsafe version of: {@link #alGetListenerfDirect} */
+    public static void nalGetListenerfDirect(long context, int paramName, long value) {
+        long __functionAddress = AL.getICD().alGetListenerfDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, value, __functionAddress);
+    }
+
+    /**
+     * Returns the float value of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param value     the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetListenerfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") FloatBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetListenerfDirect(context, paramName, memAddress(value));
+    }
+
+    /**
+     * Returns the float value of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static float alGetListenerfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            FloatBuffer value = stack.callocFloat(1);
+            nalGetListenerfDirect(context, paramName, memAddress(value));
             return value.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -583,6 +1056,49 @@ public class AL10 {
         }
     }
 
+    // --- [ alGetListeneriDirect ] ---
+
+    /** Unsafe version of: {@link #alGetListeneriDirect} */
+    public static void nalGetListeneriDirect(long context, int paramName, long value) {
+        long __functionAddress = AL.getICD().alGetListeneriDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, value, __functionAddress);
+    }
+
+    /**
+     * Returns the integer value of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param value     the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetListeneriDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint *") IntBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetListeneriDirect(context, paramName, memAddress(value));
+    }
+
+    /**
+     * Returns the integer value of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static int alGetListeneriDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer value = stack.callocInt(1);
+            nalGetListeneriDirect(context, paramName, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetListener3f ] ---
 
     /** Unsafe version of: {@link #alGetListener3f GetListener3f} */
@@ -609,6 +1125,36 @@ public class AL10 {
         nalGetListener3f(paramName, memAddress(value1), memAddress(value2), memAddress(value3));
     }
 
+    // --- [ alGetListener3fDirect ] ---
+
+    /** Unsafe version of: {@link #alGetListener3fDirect} */
+    public static void nalGetListener3fDirect(long context, int paramName, long value1, long value2, long value3) {
+        long __functionAddress = AL.getICD().alGetListener3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPPV(context, paramName, value1, value2, value3, __functionAddress);
+    }
+
+    /**
+     * Returns the 3 dimensional values of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param value1    the first parameter value
+     * @param value2    the second parameter value
+     * @param value3    the third parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetListener3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") FloatBuffer value1, @NativeType("ALfloat *") FloatBuffer value2, @NativeType("ALfloat *") FloatBuffer value3) {
+        if (CHECKS) {
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        nalGetListener3fDirect(context, paramName, memAddress(value1), memAddress(value2), memAddress(value3));
+    }
+
     // --- [ alGetListenerfv ] ---
 
     /** Unsafe version of: {@link #alGetListenerfv GetListenerfv} */
@@ -629,6 +1175,32 @@ public class AL10 {
             check(values, 1);
         }
         nalGetListenerfv(paramName, memAddress(values));
+    }
+
+    // --- [ alGetListenerfvDirect ] ---
+
+    /** Unsafe version of: {@link #alGetListenerfvDirect} */
+    public static void nalGetListenerfvDirect(long context, int paramName, long values) {
+        long __functionAddress = AL.getICD().alGetListenerfvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, paramName, values, __functionAddress);
+    }
+
+    /**
+     * Returns float values of a listener parameter.
+     *
+     * @param paramName the parameter to query. One of:<br><table><tr><td>{@link #AL_ORIENTATION ORIENTATION}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td></tr></table>
+     * @param values    the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetListenerfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") FloatBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetListenerfvDirect(context, paramName, memAddress(values));
     }
 
     // --- [ alGenSources ] ---
@@ -660,6 +1232,45 @@ public class AL10 {
         try {
             IntBuffer srcNames = stack.callocInt(1);
             nalGenSources(1, memAddress(srcNames));
+            return srcNames.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGenSourcesDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alGenSourcesDirect}
+     *
+     * @param n the number of source names to generated
+     */
+    public static void nalGenSourcesDirect(long context, int n, long srcNames) {
+        long __functionAddress = AL.getICD().alGenSourcesDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, srcNames, __functionAddress);
+    }
+
+    /**
+     * Requests a number of source names.
+     *
+     * @param srcNames the buffer that will receive the source names
+     */
+    @NativeType("ALvoid")
+    public static void alGenSourcesDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") IntBuffer srcNames) {
+        nalGenSourcesDirect(context, srcNames.remaining(), memAddress(srcNames));
+    }
+
+    /** Requests a number of source names. */
+    @NativeType("ALvoid")
+    public static int alGenSourcesDirect(@NativeType("ALCcontext *") long context) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer srcNames = stack.callocInt(1);
+            nalGenSourcesDirect(context, 1, memAddress(srcNames));
             return srcNames.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -700,6 +1311,44 @@ public class AL10 {
         }
     }
 
+    // --- [ alDeleteSourcesDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alDeleteSourcesDirect}
+     *
+     * @param n the number of sources to delete
+     */
+    public static void nalDeleteSourcesDirect(long context, int n, long sources) {
+        long __functionAddress = AL.getICD().alDeleteSourcesDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, sources, __functionAddress);
+    }
+
+    /**
+     * Requests the deletion of a number of sources.
+     *
+     * @param sources the sources to delete
+     */
+    @NativeType("ALvoid")
+    public static void alDeleteSourcesDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") IntBuffer sources) {
+        nalDeleteSourcesDirect(context, sources.remaining(), memAddress(sources));
+    }
+
+    /** Requests the deletion of a number of sources. */
+    @NativeType("ALvoid")
+    public static void alDeleteSourcesDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") int source) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer sources = stack.ints(source);
+            nalDeleteSourcesDirect(context, 1, memAddress(sources));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alIsSource ] ---
 
     /**
@@ -711,6 +1360,23 @@ public class AL10 {
     public static boolean alIsSource(@NativeType("ALuint") int sourceName) {
         long __functionAddress = AL.getICD().alIsSource;
         return invokeZ(sourceName, __functionAddress);
+    }
+
+    // --- [ alIsSourceDirect ] ---
+
+    /**
+     * Verifies whether the specified object name is a source name.
+     *
+     * @param sourceName a value that may be a source name
+     */
+    @NativeType("ALboolean")
+    public static boolean alIsSourceDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName) {
+        long __functionAddress = AL.getICD().alIsSourceDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePZ(context, sourceName, __functionAddress);
     }
 
     // --- [ alSourcef ] ---
@@ -728,6 +1394,25 @@ public class AL10 {
         invokeV(source, param, value, __functionAddress);
     }
 
+    // --- [ alSourcefDirect ] ---
+
+    /**
+     * Sets the float value of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param value  the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alSourcefDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat") float value) {
+        long __functionAddress = AL.getICD().alSourcefDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, param, value, __functionAddress);
+    }
+
     // --- [ alSource3f ] ---
 
     /**
@@ -743,6 +1428,27 @@ public class AL10 {
     public static void alSource3f(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat") float v1, @NativeType("ALfloat") float v2, @NativeType("ALfloat") float v3) {
         long __functionAddress = AL.getICD().alSource3f;
         invokeV(source, param, v1, v2, v3, __functionAddress);
+    }
+
+    // --- [ alSource3fDirect ] ---
+
+    /**
+     * Sets the 3 dimensional values of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param v1     the first parameter value
+     * @param v2     the second parameter value
+     * @param v3     the third parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alSource3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat") float v1, @NativeType("ALfloat") float v2, @NativeType("ALfloat") float v3) {
+        long __functionAddress = AL.getICD().alSource3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, param, v1, v2, v3, __functionAddress);
     }
 
     // --- [ alSourcefv ] ---
@@ -768,6 +1474,33 @@ public class AL10 {
         nalSourcefv(source, param, memAddress(values));
     }
 
+    // --- [ alSourcefvDirect ] ---
+
+    /** Unsafe version of: {@link #alSourcefvDirect} */
+    public static void nalSourcefvDirect(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alSourcefvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alSourcef Sourcef}.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alSourcefvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat const *") FloatBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalSourcefvDirect(context, source, param, memAddress(values));
+    }
+
     // --- [ alSourcei ] ---
 
     /**
@@ -781,6 +1514,25 @@ public class AL10 {
     public static void alSourcei(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint") int value) {
         long __functionAddress = AL.getICD().alSourcei;
         invokeV(source, param, value, __functionAddress);
+    }
+
+    // --- [ alSourceiDirect ] ---
+
+    /**
+     * Integer version of {@link #alSourcef Sourcef}.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value  the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alSourceiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint") int value) {
+        long __functionAddress = AL.getICD().alSourceiDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, param, value, __functionAddress);
     }
 
     // --- [ alGetSourcef ] ---
@@ -824,6 +1576,51 @@ public class AL10 {
         }
     }
 
+    // --- [ alGetSourcefDirect ] ---
+
+    /** Unsafe version of: {@link #alGetSourcefDirect} */
+    public static void nalGetSourcefDirect(long context, int source, int param, long value) {
+        long __functionAddress = AL.getICD().alGetSourcefDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
+    /**
+     * Returns the float value of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param value  the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcefDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetSourcefDirect(context, source, param, memAddress(value));
+    }
+
+    /**
+     * Returns the float value of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static float alGetSourcefDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            FloatBuffer value = stack.callocFloat(1);
+            nalGetSourcefDirect(context, source, param, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetSource3f ] ---
 
     /** Unsafe version of: {@link #alGetSource3f GetSource3f} */
@@ -851,6 +1648,37 @@ public class AL10 {
         nalGetSource3f(source, param, memAddress(v1), memAddress(v2), memAddress(v3));
     }
 
+    // --- [ alGetSource3fDirect ] ---
+
+    /** Unsafe version of: {@link #alGetSource3fDirect} */
+    public static void nalGetSource3fDirect(long context, int source, int param, long v1, long v2, long v3) {
+        long __functionAddress = AL.getICD().alGetSource3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPPV(context, source, param, v1, v2, v3, __functionAddress);
+    }
+
+    /**
+     * Returns the 3 dimensional values of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param v1     the first parameter value
+     * @param v2     the second parameter value
+     * @param v3     the third parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetSource3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer v1, @NativeType("ALfloat *") FloatBuffer v2, @NativeType("ALfloat *") FloatBuffer v3) {
+        if (CHECKS) {
+            check(v1, 1);
+            check(v2, 1);
+            check(v3, 1);
+        }
+        nalGetSource3fDirect(context, source, param, memAddress(v1), memAddress(v2), memAddress(v3));
+    }
+
     // --- [ alGetSourcefv ] ---
 
     /** Unsafe version of: {@link #alGetSourcefv GetSourcefv} */
@@ -872,6 +1700,33 @@ public class AL10 {
             check(values, 1);
         }
         nalGetSourcefv(source, param, memAddress(values));
+    }
+
+    // --- [ alGetSourcefvDirect ] ---
+
+    /** Unsafe version of: {@link #alGetSourcefvDirect} */
+    public static void nalGetSourcefvDirect(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alGetSourcefvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Returns the float values of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcefvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetSourcefvDirect(context, source, param, memAddress(values));
     }
 
     // --- [ alGetSourcei ] ---
@@ -915,6 +1770,51 @@ public class AL10 {
         }
     }
 
+    // --- [ alGetSourceiDirect ] ---
+
+    /** Unsafe version of: {@link #alGetSourceiDirect} */
+    public static void nalGetSourceiDirect(long context, int source, int param, long value) {
+        long __functionAddress = AL.getICD().alGetSourceiDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
+    /**
+     * Returns the integer value of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param value  the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourceiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetSourceiDirect(context, source, param, memAddress(value));
+    }
+
+    /**
+     * Returns the integer value of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static int alGetSourceiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer value = stack.callocInt(1);
+            nalGetSourceiDirect(context, source, param, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetSourceiv ] ---
 
     /** Unsafe version of: {@link #alGetSourceiv GetSourceiv} */
@@ -936,6 +1836,33 @@ public class AL10 {
             check(values, 1);
         }
         nalGetSourceiv(source, param, memAddress(values));
+    }
+
+    // --- [ alGetSourceivDirect ] ---
+
+    /** Unsafe version of: {@link #alGetSourceivDirect} */
+    public static void nalGetSourceivDirect(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alGetSourceivDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Returns the integer values of the specified source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query. One of:<br><table><tr><td>{@link #AL_CONE_INNER_ANGLE CONE_INNER_ANGLE}</td><td>{@link #AL_CONE_OUTER_ANGLE CONE_OUTER_ANGLE}</td><td>{@link #AL_PITCH PITCH}</td><td>{@link #AL_DIRECTION DIRECTION}</td><td>{@link #AL_LOOPING LOOPING}</td><td>{@link #AL_BUFFER BUFFER}</td><td>{@link #AL_SOURCE_STATE SOURCE_STATE}</td></tr><tr><td>{@link #AL_CONE_OUTER_GAIN CONE_OUTER_GAIN}</td><td>{@link #AL_SOURCE_TYPE SOURCE_TYPE}</td><td>{@link #AL_POSITION POSITION}</td><td>{@link #AL_VELOCITY VELOCITY}</td><td>{@link #AL_GAIN GAIN}</td><td>{@link #AL_REFERENCE_DISTANCE REFERENCE_DISTANCE}</td><td>{@link #AL_ROLLOFF_FACTOR ROLLOFF_FACTOR}</td></tr><tr><td>{@link #AL_MAX_DISTANCE MAX_DISTANCE}</td></tr></table>
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourceivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetSourceivDirect(context, source, param, memAddress(values));
     }
 
     // --- [ alSourceQueueBuffers ] ---
@@ -980,6 +1907,57 @@ public class AL10 {
         try {
             IntBuffer bufferNames = stack.ints(bufferName);
             nalSourceQueueBuffers(sourceName, 1, memAddress(bufferNames));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alSourceQueueBuffersDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourceQueueBuffersDirect}
+     *
+     * @param numBuffers the number of buffers to queue
+     */
+    public static void nalSourceQueueBuffersDirect(long context, int sourceName, int numBuffers, long bufferNames) {
+        long __functionAddress = AL.getICD().alSourceQueueBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sourceName, numBuffers, bufferNames, __functionAddress);
+    }
+
+    /**
+     * Queues up one or multiple buffer names to the specified source.
+     * 
+     * <p>The buffers will be queued in the sequence in which they appear in the array. This command is legal on a source in any playback state (to allow for
+     * streaming, queuing has to be possible on a AL_PLAYING source). All buffers in a queue must have the same format and attributes, with the exception of
+     * the {@code NULL} buffer (i.e., 0) which can always be queued.</p>
+     *
+     * @param sourceName  the target source
+     * @param bufferNames the buffer names
+     */
+    @NativeType("ALvoid")
+    public static void alSourceQueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName, @NativeType("ALuint *") IntBuffer bufferNames) {
+        nalSourceQueueBuffersDirect(context, sourceName, bufferNames.remaining(), memAddress(bufferNames));
+    }
+
+    /**
+     * Queues up one or multiple buffer names to the specified source.
+     * 
+     * <p>The buffers will be queued in the sequence in which they appear in the array. This command is legal on a source in any playback state (to allow for
+     * streaming, queuing has to be possible on a AL_PLAYING source). All buffers in a queue must have the same format and attributes, with the exception of
+     * the {@code NULL} buffer (i.e., 0) which can always be queued.</p>
+     *
+     * @param sourceName the target source
+     */
+    @NativeType("ALvoid")
+    public static void alSourceQueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName, @NativeType("ALuint *") int bufferName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer bufferNames = stack.ints(bufferName);
+            nalSourceQueueBuffersDirect(context, sourceName, 1, memAddress(bufferNames));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1035,6 +2013,60 @@ public class AL10 {
         }
     }
 
+    // --- [ alSourceUnqueueBuffersDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourceUnqueueBuffersDirect}
+     *
+     * @param numEntries the number of buffers to unqueue
+     */
+    public static void nalSourceUnqueueBuffersDirect(long context, int sourceName, int numEntries, long bufferNames) {
+        long __functionAddress = AL.getICD().alSourceUnqueueBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sourceName, numEntries, bufferNames, __functionAddress);
+    }
+
+    /**
+     * Removes a number of buffer entries that have finished processing, in the order of apperance, from the queue of the specified source.
+     * 
+     * <p>Once a queue entry for a buffer has been appended to a queue and is pending processing, it should not be changed. Removal of a given queue entry is not
+     * possible unless either the source is stopped (in which case then entire queue is considered processed), or if the queue entry has already been processed
+     * (AL_PLAYING or AL_PAUSED source). A playing source will enter the AL_STOPPED state if it completes playback of the last buffer in its queue (the same
+     * behavior as when a single buffer has been attached to a source and has finished playback).</p>
+     *
+     * @param sourceName  the target source
+     * @param bufferNames the buffer names
+     */
+    @NativeType("ALvoid")
+    public static void alSourceUnqueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName, @NativeType("ALuint *") IntBuffer bufferNames) {
+        nalSourceUnqueueBuffersDirect(context, sourceName, bufferNames.remaining(), memAddress(bufferNames));
+    }
+
+    /**
+     * Removes a number of buffer entries that have finished processing, in the order of apperance, from the queue of the specified source.
+     * 
+     * <p>Once a queue entry for a buffer has been appended to a queue and is pending processing, it should not be changed. Removal of a given queue entry is not
+     * possible unless either the source is stopped (in which case then entire queue is considered processed), or if the queue entry has already been processed
+     * (AL_PLAYING or AL_PAUSED source). A playing source will enter the AL_STOPPED state if it completes playback of the last buffer in its queue (the same
+     * behavior as when a single buffer has been attached to a source and has finished playback).</p>
+     *
+     * @param sourceName the target source
+     */
+    @NativeType("ALvoid")
+    public static int alSourceUnqueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer bufferNames = stack.callocInt(1);
+            nalSourceUnqueueBuffersDirect(context, sourceName, 1, memAddress(bufferNames));
+            return bufferNames.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alSourcePlay ] ---
 
     /**
@@ -1054,6 +2086,29 @@ public class AL10 {
         invokeV(source, __functionAddress);
     }
 
+    // --- [ alSourcePlayDirect ] ---
+
+    /**
+     * Sets the source state to AL_PLAYING.
+     * 
+     * <p>alSourcePlay applied to an AL_INITIAL source will promote the source to AL_PLAYING, thus the data found in the buffer will be fed into the processing,
+     * starting at the beginning. alSourcePlay applied to a AL_PLAYING source will restart the source from the beginning. It will not affect the configuration,
+     * and will leave the source in AL_PLAYING state, but reset the sampling offset to the beginning. alSourcePlay applied to a AL_PAUSED source will resume
+     * processing using the source state as preserved at the alSourcePause operation. alSourcePlay applied to a AL_STOPPED source will propagate it to
+     * AL_INITIAL then to AL_PLAYING immediately.</p>
+     *
+     * @param source the source to play
+     */
+    @NativeType("ALvoid")
+    public static void alSourcePlayDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source) {
+        long __functionAddress = AL.getICD().alSourcePlayDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, __functionAddress);
+    }
+
     // --- [ alSourcePause ] ---
 
     /**
@@ -1069,6 +2124,27 @@ public class AL10 {
     public static void alSourcePause(@NativeType("ALuint") int source) {
         long __functionAddress = AL.getICD().alSourcePause;
         invokeV(source, __functionAddress);
+    }
+
+    // --- [ alSourcePauseDirect ] ---
+
+    /**
+     * Sets the source state to AL_PAUSED.
+     * 
+     * <p>alSourcePause applied to an AL_INITIAL source is a legal NOP. alSourcePause applied to a AL_PLAYING source will change its state to AL_PAUSED. The
+     * source is exempt from processing, its current state is preserved. alSourcePause applied to a AL_PAUSED source is a legal NOP. alSourcePause applied to a
+     * AL_STOPPED source is a legal NOP.</p>
+     *
+     * @param source the source to pause
+     */
+    @NativeType("ALvoid")
+    public static void alSourcePauseDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source) {
+        long __functionAddress = AL.getICD().alSourcePauseDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, __functionAddress);
     }
 
     // --- [ alSourceStop ] ---
@@ -1088,6 +2164,27 @@ public class AL10 {
         invokeV(source, __functionAddress);
     }
 
+    // --- [ alSourceStopDirect ] ---
+
+    /**
+     * Sets the source state to AL_STOPPED.
+     * 
+     * <p>alSourceStop applied to an AL_INITIAL source is a legal NOP. alSourceStop applied to a AL_PLAYING source will change its state to AL_STOPPED. The source
+     * is exempt from processing, its current state is preserved. alSourceStop applied to a AL_PAUSED source will change its state to AL_STOPPED, with the same
+     * consequences as on a AL_PLAYING source. alSourceStop applied to a AL_STOPPED source is a legal NOP.</p>
+     *
+     * @param source the source to stop
+     */
+    @NativeType("ALvoid")
+    public static void alSourceStopDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source) {
+        long __functionAddress = AL.getICD().alSourceStopDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, __functionAddress);
+    }
+
     // --- [ alSourceRewind ] ---
 
     /**
@@ -1104,6 +2201,28 @@ public class AL10 {
     public static void alSourceRewind(@NativeType("ALuint") int source) {
         long __functionAddress = AL.getICD().alSourceRewind;
         invokeV(source, __functionAddress);
+    }
+
+    // --- [ alSourceRewindDirect ] ---
+
+    /**
+     * Sets the source state to AL_INITIAL.
+     * 
+     * <p>alSourceRewind applied to an AL_INITIAL source is a legal NOP. alSourceRewind applied to a AL_PLAYING source will change its state to AL_STOPPED then
+     * AL_INITIAL. The source is exempt from processing: its current state is preserved, with the exception of the sampling offset, which is reset to the
+     * beginning. alSourceRewind applied to a AL_PAUSED source will change its state to AL_INITIAL, with the same consequences as on a AL_PLAYING source.
+     * alSourceRewind applied to an AL_STOPPED source promotes the source to AL_INITIAL, resetting the sampling offset to the beginning.</p>
+     *
+     * @param source the source to rewind
+     */
+    @NativeType("ALvoid")
+    public static void alSourceRewindDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source) {
+        long __functionAddress = AL.getICD().alSourceRewindDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, __functionAddress);
     }
 
     // --- [ alSourcePlayv ] ---
@@ -1128,6 +2247,32 @@ public class AL10 {
         nalSourcePlayv(sources.remaining(), memAddress(sources));
     }
 
+    // --- [ alSourcePlayvDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourcePlayvDirect}
+     *
+     * @param n the number of sources to play
+     */
+    public static void nalSourcePlayvDirect(long context, int n, long sources) {
+        long __functionAddress = AL.getICD().alSourcePlayvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, sources, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alSourcePlay SourcePlay}.
+     *
+     * @param sources the sources to play
+     */
+    @NativeType("ALvoid")
+    public static void alSourcePlayvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer sources) {
+        nalSourcePlayvDirect(context, sources.remaining(), memAddress(sources));
+    }
+
     // --- [ alSourcePausev ] ---
 
     /**
@@ -1148,6 +2293,32 @@ public class AL10 {
     @NativeType("ALvoid")
     public static void alSourcePausev(@NativeType("ALuint const *") IntBuffer sources) {
         nalSourcePausev(sources.remaining(), memAddress(sources));
+    }
+
+    // --- [ alSourcePausevDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourcePausevDirect}
+     *
+     * @param n the number of sources to pause
+     */
+    public static void nalSourcePausevDirect(long context, int n, long sources) {
+        long __functionAddress = AL.getICD().alSourcePausevDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, sources, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alSourcePause SourcePause}.
+     *
+     * @param sources the sources to pause
+     */
+    @NativeType("ALvoid")
+    public static void alSourcePausevDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer sources) {
+        nalSourcePausevDirect(context, sources.remaining(), memAddress(sources));
     }
 
     // --- [ alSourceStopv ] ---
@@ -1172,6 +2343,32 @@ public class AL10 {
         nalSourceStopv(sources.remaining(), memAddress(sources));
     }
 
+    // --- [ alSourceStopvDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourceStopvDirect}
+     *
+     * @param n the number of sources to stop
+     */
+    public static void nalSourceStopvDirect(long context, int n, long sources) {
+        long __functionAddress = AL.getICD().alSourceStopvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, sources, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alSourceStop SourceStop}.
+     *
+     * @param sources the sources to stop
+     */
+    @NativeType("ALvoid")
+    public static void alSourceStopvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer sources) {
+        nalSourceStopvDirect(context, sources.remaining(), memAddress(sources));
+    }
+
     // --- [ alSourceRewindv ] ---
 
     /**
@@ -1192,6 +2389,32 @@ public class AL10 {
     @NativeType("ALvoid")
     public static void alSourceRewindv(@NativeType("ALuint const *") IntBuffer sources) {
         nalSourceRewindv(sources.remaining(), memAddress(sources));
+    }
+
+    // --- [ alSourceRewindvDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alSourceRewindvDirect}
+     *
+     * @param n the number of sources to rewind
+     */
+    public static void nalSourceRewindvDirect(long context, int n, long sources) {
+        long __functionAddress = AL.getICD().alSourceRewindvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, sources, __functionAddress);
+    }
+
+    /**
+     * Pointer version of {@link #alSourceRewind SourceRewind}.
+     *
+     * @param sources the sources to rewind
+     */
+    @NativeType("ALvoid")
+    public static void alSourceRewindvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer sources) {
+        nalSourceRewindvDirect(context, sources.remaining(), memAddress(sources));
     }
 
     // --- [ alGenBuffers ] ---
@@ -1223,6 +2446,45 @@ public class AL10 {
         try {
             IntBuffer bufferNames = stack.callocInt(1);
             nalGenBuffers(1, memAddress(bufferNames));
+            return bufferNames.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGenBuffersDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alGenBuffersDirect}
+     *
+     * @param n the number of buffer names to generate
+     */
+    public static void nalGenBuffersDirect(long context, int n, long bufferNames) {
+        long __functionAddress = AL.getICD().alGenBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, bufferNames, __functionAddress);
+    }
+
+    /**
+     * Requests a number of buffer names.
+     *
+     * @param bufferNames the buffer that will receive the buffer names
+     */
+    @NativeType("ALvoid")
+    public static void alGenBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") IntBuffer bufferNames) {
+        nalGenBuffersDirect(context, bufferNames.remaining(), memAddress(bufferNames));
+    }
+
+    /** Requests a number of buffer names. */
+    @NativeType("ALvoid")
+    public static int alGenBuffersDirect(@NativeType("ALCcontext *") long context) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer bufferNames = stack.callocInt(1);
+            nalGenBuffersDirect(context, 1, memAddress(bufferNames));
             return bufferNames.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -1263,6 +2525,44 @@ public class AL10 {
         }
     }
 
+    // --- [ alDeleteBuffersDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alDeleteBuffersDirect}
+     *
+     * @param n the number of buffers to delete
+     */
+    public static void nalDeleteBuffersDirect(long context, int n, long bufferNames) {
+        long __functionAddress = AL.getICD().alDeleteBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, n, bufferNames, __functionAddress);
+    }
+
+    /**
+     * Requests the deletion of a number of buffers.
+     *
+     * @param bufferNames the buffers to delete
+     */
+    @NativeType("ALvoid")
+    public static void alDeleteBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer bufferNames) {
+        nalDeleteBuffersDirect(context, bufferNames.remaining(), memAddress(bufferNames));
+    }
+
+    /** Requests the deletion of a number of buffers. */
+    @NativeType("ALvoid")
+    public static void alDeleteBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int bufferName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer bufferNames = stack.ints(bufferName);
+            nalDeleteBuffersDirect(context, 1, memAddress(bufferNames));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alIsBuffer ] ---
 
     /**
@@ -1274,6 +2574,23 @@ public class AL10 {
     public static boolean alIsBuffer(@NativeType("ALuint") int bufferName) {
         long __functionAddress = AL.getICD().alIsBuffer;
         return invokeZ(bufferName, __functionAddress);
+    }
+
+    // --- [ alIsBufferDirect ] ---
+
+    /**
+     * Verifies whether the specified object name is a buffer name.
+     *
+     * @param bufferName a value that may be a buffer name
+     */
+    @NativeType("ALboolean")
+    public static boolean alIsBufferDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName) {
+        long __functionAddress = AL.getICD().alIsBufferDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePZ(context, bufferName, __functionAddress);
     }
 
     // --- [ alGetBufferf ] ---
@@ -1317,6 +2634,51 @@ public class AL10 {
         }
     }
 
+    // --- [ alGetBufferfDirect ] ---
+
+    /** Unsafe version of: {@link #alGetBufferfDirect} */
+    public static void nalGetBufferfDirect(long context, int bufferName, int paramName, long value) {
+        long __functionAddress = AL.getICD().alGetBufferfDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, paramName, value, __functionAddress);
+    }
+
+    /**
+     * Returns the float value of the specified buffer parameter.
+     *
+     * @param bufferName the buffer to query
+     * @param paramName  the parameter to query. One of:<br><table><tr><td>{@link #AL_FREQUENCY FREQUENCY}</td><td>{@link #AL_BITS BITS}</td><td>{@link #AL_CHANNELS CHANNELS}</td><td>{@link #AL_SIZE SIZE}</td></tr></table>
+     * @param value      the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetBufferfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") FloatBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetBufferfDirect(context, bufferName, paramName, memAddress(value));
+    }
+
+    /**
+     * Returns the float value of the specified buffer parameter.
+     *
+     * @param bufferName the buffer to query
+     * @param paramName  the parameter to query. One of:<br><table><tr><td>{@link #AL_FREQUENCY FREQUENCY}</td><td>{@link #AL_BITS BITS}</td><td>{@link #AL_CHANNELS CHANNELS}</td><td>{@link #AL_SIZE SIZE}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static float alGetBufferfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            FloatBuffer value = stack.callocFloat(1);
+            nalGetBufferfDirect(context, bufferName, paramName, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetBufferi ] ---
 
     /** Unsafe version of: {@link #alGetBufferi GetBufferi} */
@@ -1352,6 +2714,51 @@ public class AL10 {
         try {
             IntBuffer value = stack.callocInt(1);
             nalGetBufferi(bufferName, paramName, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGetBufferiDirect ] ---
+
+    /** Unsafe version of: {@link #alGetBufferiDirect} */
+    public static void nalGetBufferiDirect(long context, int bufferName, int paramName, long value) {
+        long __functionAddress = AL.getICD().alGetBufferiDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, paramName, value, __functionAddress);
+    }
+
+    /**
+     * Returns the integer value of the specified buffer parameter.
+     *
+     * @param bufferName the buffer to query
+     * @param paramName  the parameter to query. One of:<br><table><tr><td>{@link #AL_FREQUENCY FREQUENCY}</td><td>{@link #AL_BITS BITS}</td><td>{@link #AL_CHANNELS CHANNELS}</td><td>{@link #AL_SIZE SIZE}</td></tr></table>
+     * @param value      the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alGetBufferiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName, @NativeType("ALint *") IntBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetBufferiDirect(context, bufferName, paramName, memAddress(value));
+    }
+
+    /**
+     * Returns the integer value of the specified buffer parameter.
+     *
+     * @param bufferName the buffer to query
+     * @param paramName  the parameter to query. One of:<br><table><tr><td>{@link #AL_FREQUENCY FREQUENCY}</td><td>{@link #AL_BITS BITS}</td><td>{@link #AL_CHANNELS CHANNELS}</td><td>{@link #AL_SIZE SIZE}</td></tr></table>
+     */
+    @NativeType("ALvoid")
+    public static int alGetBufferiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer value = stack.callocInt(1);
+            nalGetBufferiDirect(context, bufferName, paramName, memAddress(value));
             return value.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -1474,6 +2881,126 @@ public class AL10 {
         nalBufferData(bufferName, format, memAddress(data), data.remaining() << 2, frequency);
     }
 
+    // --- [ alBufferDataDirect ] ---
+
+    /**
+     * Unsafe version of: {@link #alBufferDataDirect}
+     *
+     * @param size the data buffer size, in bytes
+     */
+    public static void nalBufferDataDirect(long context, int bufferName, int format, long data, int size, int frequency) {
+        long __functionAddress = AL.getICD().alBufferDataDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, format, data, size, frequency, __functionAddress);
+    }
+
+    /**
+     * Sets the sample data of the specified buffer.
+     * 
+     * <p>The data specified is copied to an internal software, or if possible, hardware buffer. The implementation is free to apply decompression, conversion,
+     * resampling, and filtering as needed.</p>
+     * 
+     * <p>8-bit data is expressed as an unsigned value over the range 0 to 255, 128 being an audio output level of zero.</p>
+     * 
+     * <p>16-bit data is expressed as a signed value over the range -32768 to 32767, 0 being an audio output level of zero. Byte order for 16-bit values is
+     * determined by the native format of the CPU.</p>
+     * 
+     * <p>Stereo data is expressed in an interleaved format, left channel sample followed by the right channel sample.</p>
+     * 
+     * <p>Buffers containing audio data with more than one channel will be played without 3D spatialization features – these formats are normally used for
+     * background music.</p>
+     *
+     * @param bufferName the buffer to modify
+     * @param format     the data format. One of:<br><table><tr><td>{@link #AL_FORMAT_MONO8 FORMAT_MONO8}</td><td>{@link #AL_FORMAT_MONO16 FORMAT_MONO16}</td><td>{@link #AL_FORMAT_STEREO8 FORMAT_STEREO8}</td><td>{@link #AL_FORMAT_STEREO16 FORMAT_STEREO16}</td></tr></table>
+     * @param data       the sample data
+     * @param frequency  the data frequency
+     */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") ByteBuffer data, @NativeType("ALsizei") int frequency) {
+        nalBufferDataDirect(context, bufferName, format, memAddress(data), data.remaining(), frequency);
+    }
+
+    /**
+     * Sets the sample data of the specified buffer.
+     * 
+     * <p>The data specified is copied to an internal software, or if possible, hardware buffer. The implementation is free to apply decompression, conversion,
+     * resampling, and filtering as needed.</p>
+     * 
+     * <p>8-bit data is expressed as an unsigned value over the range 0 to 255, 128 being an audio output level of zero.</p>
+     * 
+     * <p>16-bit data is expressed as a signed value over the range -32768 to 32767, 0 being an audio output level of zero. Byte order for 16-bit values is
+     * determined by the native format of the CPU.</p>
+     * 
+     * <p>Stereo data is expressed in an interleaved format, left channel sample followed by the right channel sample.</p>
+     * 
+     * <p>Buffers containing audio data with more than one channel will be played without 3D spatialization features – these formats are normally used for
+     * background music.</p>
+     *
+     * @param bufferName the buffer to modify
+     * @param format     the data format. One of:<br><table><tr><td>{@link #AL_FORMAT_MONO8 FORMAT_MONO8}</td><td>{@link #AL_FORMAT_MONO16 FORMAT_MONO16}</td><td>{@link #AL_FORMAT_STEREO8 FORMAT_STEREO8}</td><td>{@link #AL_FORMAT_STEREO16 FORMAT_STEREO16}</td></tr></table>
+     * @param data       the sample data
+     * @param frequency  the data frequency
+     */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") ShortBuffer data, @NativeType("ALsizei") int frequency) {
+        nalBufferDataDirect(context, bufferName, format, memAddress(data), data.remaining() << 1, frequency);
+    }
+
+    /**
+     * Sets the sample data of the specified buffer.
+     * 
+     * <p>The data specified is copied to an internal software, or if possible, hardware buffer. The implementation is free to apply decompression, conversion,
+     * resampling, and filtering as needed.</p>
+     * 
+     * <p>8-bit data is expressed as an unsigned value over the range 0 to 255, 128 being an audio output level of zero.</p>
+     * 
+     * <p>16-bit data is expressed as a signed value over the range -32768 to 32767, 0 being an audio output level of zero. Byte order for 16-bit values is
+     * determined by the native format of the CPU.</p>
+     * 
+     * <p>Stereo data is expressed in an interleaved format, left channel sample followed by the right channel sample.</p>
+     * 
+     * <p>Buffers containing audio data with more than one channel will be played without 3D spatialization features – these formats are normally used for
+     * background music.</p>
+     *
+     * @param bufferName the buffer to modify
+     * @param format     the data format. One of:<br><table><tr><td>{@link #AL_FORMAT_MONO8 FORMAT_MONO8}</td><td>{@link #AL_FORMAT_MONO16 FORMAT_MONO16}</td><td>{@link #AL_FORMAT_STEREO8 FORMAT_STEREO8}</td><td>{@link #AL_FORMAT_STEREO16 FORMAT_STEREO16}</td></tr></table>
+     * @param data       the sample data
+     * @param frequency  the data frequency
+     */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") IntBuffer data, @NativeType("ALsizei") int frequency) {
+        nalBufferDataDirect(context, bufferName, format, memAddress(data), data.remaining() << 2, frequency);
+    }
+
+    /**
+     * Sets the sample data of the specified buffer.
+     * 
+     * <p>The data specified is copied to an internal software, or if possible, hardware buffer. The implementation is free to apply decompression, conversion,
+     * resampling, and filtering as needed.</p>
+     * 
+     * <p>8-bit data is expressed as an unsigned value over the range 0 to 255, 128 being an audio output level of zero.</p>
+     * 
+     * <p>16-bit data is expressed as a signed value over the range -32768 to 32767, 0 being an audio output level of zero. Byte order for 16-bit values is
+     * determined by the native format of the CPU.</p>
+     * 
+     * <p>Stereo data is expressed in an interleaved format, left channel sample followed by the right channel sample.</p>
+     * 
+     * <p>Buffers containing audio data with more than one channel will be played without 3D spatialization features – these formats are normally used for
+     * background music.</p>
+     *
+     * @param bufferName the buffer to modify
+     * @param format     the data format. One of:<br><table><tr><td>{@link #AL_FORMAT_MONO8 FORMAT_MONO8}</td><td>{@link #AL_FORMAT_MONO16 FORMAT_MONO16}</td><td>{@link #AL_FORMAT_STEREO8 FORMAT_STEREO8}</td><td>{@link #AL_FORMAT_STEREO16 FORMAT_STEREO16}</td></tr></table>
+     * @param data       the sample data
+     * @param frequency  the data frequency
+     */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") FloatBuffer data, @NativeType("ALsizei") int frequency) {
+        nalBufferDataDirect(context, bufferName, format, memAddress(data), data.remaining() << 2, frequency);
+    }
+
     // --- [ alGetEnumValue ] ---
 
     /** Unsafe version of: {@link #alGetEnumValue GetEnumValue} */
@@ -1487,7 +3014,7 @@ public class AL10 {
      *
      * @param enumName the enum name
      */
-    @NativeType("ALuint")
+    @NativeType("ALenum")
     public static int alGetEnumValue(@NativeType("ALchar const *") ByteBuffer enumName) {
         if (CHECKS) {
             checkNT1(enumName);
@@ -1500,13 +3027,55 @@ public class AL10 {
      *
      * @param enumName the enum name
      */
-    @NativeType("ALuint")
+    @NativeType("ALenum")
     public static int alGetEnumValue(@NativeType("ALchar const *") CharSequence enumName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(enumName, true);
             long enumNameEncoded = stack.getPointerAddress();
             return nalGetEnumValue(enumNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGetEnumValueDirect ] ---
+
+    /** Unsafe version of: {@link #alGetEnumValueDirect} */
+    public static int nalGetEnumValueDirect(long context, long enumName) {
+        long __functionAddress = AL.getICD().alGetEnumValueDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePPI(context, enumName, __functionAddress);
+    }
+
+    /**
+     * Returns the enumeration value of the specified enum.
+     *
+     * @param enumName the enum name
+     */
+    @NativeType("ALenum")
+    public static int alGetEnumValueDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") ByteBuffer enumName) {
+        if (CHECKS) {
+            checkNT1(enumName);
+        }
+        return nalGetEnumValueDirect(context, memAddress(enumName));
+    }
+
+    /**
+     * Returns the enumeration value of the specified enum.
+     *
+     * @param enumName the enum name
+     */
+    @NativeType("ALenum")
+    public static int alGetEnumValueDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") CharSequence enumName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(enumName, true);
+            long enumNameEncoded = stack.getPointerAddress();
+            return nalGetEnumValueDirect(context, enumNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1531,7 +3100,7 @@ public class AL10 {
      *
      * @param funcName the function name
      */
-    @NativeType("void *")
+    @NativeType("ALvoid *")
     public static long alGetProcAddress(@NativeType("ALchar const *") ByteBuffer funcName) {
         if (CHECKS) {
             checkNT1(funcName);
@@ -1550,13 +3119,67 @@ public class AL10 {
      *
      * @param funcName the function name
      */
-    @NativeType("void *")
+    @NativeType("ALvoid *")
     public static long alGetProcAddress(@NativeType("ALchar const *") CharSequence funcName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(funcName, true);
             long funcNameEncoded = stack.getPointerAddress();
             return nalGetProcAddress(funcNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ alGetProcAddressDirect ] ---
+
+    /** Unsafe version of: {@link #alGetProcAddressDirect} */
+    public static long nalGetProcAddressDirect(long context, long funcName) {
+        long __functionAddress = AL.getICD().alGetProcAddressDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePPP(context, funcName, __functionAddress);
+    }
+
+    /**
+     * Retrieves extension entry points.
+     * 
+     * <p>Returns {@code NULL} if no entry point with the name funcName can be found. Implementations are free to return {@code NULL} if an entry point is present, but not
+     * applicable for the current context. However the specification does not guarantee this behavior.</p>
+     * 
+     * <p>Applications can use alGetProcAddress to obtain core API entry points, not just extensions. This is the recommended way to dynamically load and unload
+     * OpenAL DLL's as sound drivers.</p>
+     *
+     * @param funcName the function name
+     */
+    @NativeType("ALvoid *")
+    public static long alGetProcAddressDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") ByteBuffer funcName) {
+        if (CHECKS) {
+            checkNT1(funcName);
+        }
+        return nalGetProcAddressDirect(context, memAddress(funcName));
+    }
+
+    /**
+     * Retrieves extension entry points.
+     * 
+     * <p>Returns {@code NULL} if no entry point with the name funcName can be found. Implementations are free to return {@code NULL} if an entry point is present, but not
+     * applicable for the current context. However the specification does not guarantee this behavior.</p>
+     * 
+     * <p>Applications can use alGetProcAddress to obtain core API entry points, not just extensions. This is the recommended way to dynamically load and unload
+     * OpenAL DLL's as sound drivers.</p>
+     *
+     * @param funcName the function name
+     */
+    @NativeType("ALvoid *")
+    public static long alGetProcAddressDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") CharSequence funcName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(funcName, true);
+            long funcNameEncoded = stack.getPointerAddress();
+            return nalGetProcAddressDirect(context, funcNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1606,6 +3229,54 @@ public class AL10 {
         }
     }
 
+    // --- [ alIsExtensionPresentDirect ] ---
+
+    /** Unsafe version of: {@link #alIsExtensionPresentDirect} */
+    public static boolean nalIsExtensionPresentDirect(long context, long extName) {
+        long __functionAddress = AL.getICD().alIsExtensionPresentDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePPZ(context, extName, __functionAddress);
+    }
+
+    /**
+     * Verifies that a given extension is available for the current context and the device it is associated with.
+     * 
+     * <p>Invalid and unsupported string tokens return ALC_FALSE. {@code extName} is not case sensitive – the implementation will convert the name to all
+     * upper-case internally (and will express extension names in upper-case).</p>
+     *
+     * @param extName the extension name
+     */
+    @NativeType("ALCboolean")
+    public static boolean alIsExtensionPresentDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") ByteBuffer extName) {
+        if (CHECKS) {
+            checkNT1(extName);
+        }
+        return nalIsExtensionPresentDirect(context, memAddress(extName));
+    }
+
+    /**
+     * Verifies that a given extension is available for the current context and the device it is associated with.
+     * 
+     * <p>Invalid and unsupported string tokens return ALC_FALSE. {@code extName} is not case sensitive – the implementation will convert the name to all
+     * upper-case internally (and will express extension names in upper-case).</p>
+     *
+     * @param extName the extension name
+     */
+    @NativeType("ALCboolean")
+    public static boolean alIsExtensionPresentDirect(@NativeType("ALCcontext *") long context, @NativeType("ALchar const *") CharSequence extName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(extName, true);
+            long extNameEncoded = stack.getPointerAddress();
+            return nalIsExtensionPresentDirect(context, extNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     /** Array version of: {@link #alGetIntegerv GetIntegerv} */
     @NativeType("ALvoid")
     public static void alGetIntegerv(@NativeType("ALenum") int paramName, @NativeType("ALint *") int[] dest) {
@@ -1614,6 +3285,18 @@ public class AL10 {
             check(dest, 1);
         }
         invokePV(paramName, dest, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetIntegervDirect} */
+    @NativeType("ALvoid")
+    public static void alGetIntegervDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint *") int[] dest) {
+        long __functionAddress = AL.getICD().alGetIntegervDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(dest, 1);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
     }
 
     /** Array version of: {@link #alGetFloatv GetFloatv} */
@@ -1626,6 +3309,18 @@ public class AL10 {
         invokePV(paramName, dest, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetFloatvDirect} */
+    @NativeType("ALvoid")
+    public static void alGetFloatvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] dest) {
+        long __functionAddress = AL.getICD().alGetFloatvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(dest, 1);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetDoublev GetDoublev} */
     @NativeType("ALvoid")
     public static void alGetDoublev(@NativeType("ALenum") int paramName, @NativeType("ALdouble *") double[] dest) {
@@ -1634,6 +3329,18 @@ public class AL10 {
             check(dest, 1);
         }
         invokePV(paramName, dest, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetDoublevDirect} */
+    @NativeType("ALvoid")
+    public static void alGetDoublevDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALdouble *") double[] dest) {
+        long __functionAddress = AL.getICD().alGetDoublevDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(dest, 1);
+        }
+        invokePPV(context, paramName, dest, __functionAddress);
     }
 
     /** Array version of: {@link #alListenerfv Listenerfv} */
@@ -1646,6 +3353,18 @@ public class AL10 {
         invokePV(paramName, values, __functionAddress);
     }
 
+    /** Array version of: {@link #alListenerfvDirect} */
+    @NativeType("ALvoid")
+    public static void alListenerfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") float[] values) {
+        long __functionAddress = AL.getICD().alListenerfvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, paramName, values, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetListenerf GetListenerf} */
     @NativeType("ALvoid")
     public static void alGetListenerf(@NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] value) {
@@ -1656,6 +3375,18 @@ public class AL10 {
         invokePV(paramName, value, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetListenerfDirect} */
+    @NativeType("ALvoid")
+    public static void alGetListenerfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] value) {
+        long __functionAddress = AL.getICD().alGetListenerfDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, paramName, value, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetListeneri GetListeneri} */
     @NativeType("ALvoid")
     public static void alGetListeneri(@NativeType("ALenum") int paramName, @NativeType("ALint *") int[] value) {
@@ -1664,6 +3395,18 @@ public class AL10 {
             check(value, 1);
         }
         invokePV(paramName, value, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetListeneriDirect} */
+    @NativeType("ALvoid")
+    public static void alGetListeneriDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint *") int[] value) {
+        long __functionAddress = AL.getICD().alGetListeneriDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, paramName, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetListener3f GetListener3f} */
@@ -1678,6 +3421,20 @@ public class AL10 {
         invokePPPV(paramName, value1, value2, value3, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetListener3fDirect} */
+    @NativeType("ALvoid")
+    public static void alGetListener3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] value1, @NativeType("ALfloat *") float[] value2, @NativeType("ALfloat *") float[] value3) {
+        long __functionAddress = AL.getICD().alGetListener3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        invokePPPPV(context, paramName, value1, value2, value3, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetListenerfv GetListenerfv} */
     @NativeType("ALvoid")
     public static void alGetListenerfv(@NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] values) {
@@ -1688,6 +3445,18 @@ public class AL10 {
         invokePV(paramName, values, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetListenerfvDirect} */
+    @NativeType("ALvoid")
+    public static void alGetListenerfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] values) {
+        long __functionAddress = AL.getICD().alGetListenerfvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, paramName, values, __functionAddress);
+    }
+
     /** Array version of: {@link #alGenSources GenSources} */
     @NativeType("ALvoid")
     public static void alGenSources(@NativeType("ALuint *") int[] srcNames) {
@@ -1695,11 +3464,33 @@ public class AL10 {
         invokePV(srcNames.length, srcNames, __functionAddress);
     }
 
+    /** Array version of: {@link #alGenSourcesDirect} */
+    @NativeType("ALvoid")
+    public static void alGenSourcesDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") int[] srcNames) {
+        long __functionAddress = AL.getICD().alGenSourcesDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, srcNames.length, srcNames, __functionAddress);
+    }
+
     /** Array version of: {@link #alDeleteSources DeleteSources} */
     @NativeType("ALvoid")
     public static void alDeleteSources(@NativeType("ALuint *") int[] sources) {
         long __functionAddress = AL.getICD().alDeleteSources;
         invokePV(sources.length, sources, __functionAddress);
+    }
+
+    /** Array version of: {@link #alDeleteSourcesDirect} */
+    @NativeType("ALvoid")
+    public static void alDeleteSourcesDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") int[] sources) {
+        long __functionAddress = AL.getICD().alDeleteSourcesDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sources.length, sources, __functionAddress);
     }
 
     /** Array version of: {@link #alSourcefv Sourcefv} */
@@ -1712,6 +3503,18 @@ public class AL10 {
         invokePV(source, param, values, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourcefvDirect} */
+    @NativeType("ALvoid")
+    public static void alSourcefvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat const *") float[] values) {
+        long __functionAddress = AL.getICD().alSourcefvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcef GetSourcef} */
     @NativeType("ALvoid")
     public static void alGetSourcef(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value) {
@@ -1720,6 +3523,18 @@ public class AL10 {
             check(value, 1);
         }
         invokePV(source, param, value, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcefDirect} */
+    @NativeType("ALvoid")
+    public static void alGetSourcefDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value) {
+        long __functionAddress = AL.getICD().alGetSourcefDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSource3f GetSource3f} */
@@ -1734,6 +3549,20 @@ public class AL10 {
         invokePPPV(source, param, v1, v2, v3, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetSource3fDirect} */
+    @NativeType("ALvoid")
+    public static void alGetSource3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] v1, @NativeType("ALfloat *") float[] v2, @NativeType("ALfloat *") float[] v3) {
+        long __functionAddress = AL.getICD().alGetSource3fDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(v1, 1);
+            check(v2, 1);
+            check(v3, 1);
+        }
+        invokePPPPV(context, source, param, v1, v2, v3, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcefv GetSourcefv} */
     @NativeType("ALvoid")
     public static void alGetSourcefv(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
@@ -1742,6 +3571,18 @@ public class AL10 {
             check(values, 1);
         }
         invokePV(source, param, values, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcefvDirect} */
+    @NativeType("ALvoid")
+    public static void alGetSourcefvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
+        long __functionAddress = AL.getICD().alGetSourcefvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSourcei GetSourcei} */
@@ -1754,6 +3595,18 @@ public class AL10 {
         invokePV(source, param, value, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetSourceiDirect} */
+    @NativeType("ALvoid")
+    public static void alGetSourceiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value) {
+        long __functionAddress = AL.getICD().alGetSourceiDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourceiv GetSourceiv} */
     @NativeType("ALvoid")
     public static void alGetSourceiv(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
@@ -1764,11 +3617,34 @@ public class AL10 {
         invokePV(source, param, values, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetSourceivDirect} */
+    @NativeType("ALvoid")
+    public static void alGetSourceivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
+        long __functionAddress = AL.getICD().alGetSourceivDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
     /** Array version of: {@link #alSourceQueueBuffers SourceQueueBuffers} */
     @NativeType("ALvoid")
     public static void alSourceQueueBuffers(@NativeType("ALuint") int sourceName, @NativeType("ALuint *") int[] bufferNames) {
         long __functionAddress = AL.getICD().alSourceQueueBuffers;
         invokePV(sourceName, bufferNames.length, bufferNames, __functionAddress);
+    }
+
+    /** Array version of: {@link #alSourceQueueBuffersDirect} */
+    @NativeType("ALvoid")
+    public static void alSourceQueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName, @NativeType("ALuint *") int[] bufferNames) {
+        long __functionAddress = AL.getICD().alSourceQueueBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sourceName, bufferNames.length, bufferNames, __functionAddress);
     }
 
     /** Array version of: {@link #alSourceUnqueueBuffers SourceUnqueueBuffers} */
@@ -1778,11 +3654,33 @@ public class AL10 {
         invokePV(sourceName, bufferNames.length, bufferNames, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourceUnqueueBuffersDirect} */
+    @NativeType("ALvoid")
+    public static void alSourceUnqueueBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int sourceName, @NativeType("ALuint *") int[] bufferNames) {
+        long __functionAddress = AL.getICD().alSourceUnqueueBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sourceName, bufferNames.length, bufferNames, __functionAddress);
+    }
+
     /** Array version of: {@link #alSourcePlayv SourcePlayv} */
     @NativeType("ALvoid")
     public static void alSourcePlayv(@NativeType("ALuint const *") int[] sources) {
         long __functionAddress = AL.getICD().alSourcePlayv;
         invokePV(sources.length, sources, __functionAddress);
+    }
+
+    /** Array version of: {@link #alSourcePlayvDirect} */
+    @NativeType("ALvoid")
+    public static void alSourcePlayvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] sources) {
+        long __functionAddress = AL.getICD().alSourcePlayvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sources.length, sources, __functionAddress);
     }
 
     /** Array version of: {@link #alSourcePausev SourcePausev} */
@@ -1792,11 +3690,33 @@ public class AL10 {
         invokePV(sources.length, sources, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourcePausevDirect} */
+    @NativeType("ALvoid")
+    public static void alSourcePausevDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] sources) {
+        long __functionAddress = AL.getICD().alSourcePausevDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sources.length, sources, __functionAddress);
+    }
+
     /** Array version of: {@link #alSourceStopv SourceStopv} */
     @NativeType("ALvoid")
     public static void alSourceStopv(@NativeType("ALuint const *") int[] sources) {
         long __functionAddress = AL.getICD().alSourceStopv;
         invokePV(sources.length, sources, __functionAddress);
+    }
+
+    /** Array version of: {@link #alSourceStopvDirect} */
+    @NativeType("ALvoid")
+    public static void alSourceStopvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] sources) {
+        long __functionAddress = AL.getICD().alSourceStopvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sources.length, sources, __functionAddress);
     }
 
     /** Array version of: {@link #alSourceRewindv SourceRewindv} */
@@ -1806,6 +3726,17 @@ public class AL10 {
         invokePV(sources.length, sources, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourceRewindvDirect} */
+    @NativeType("ALvoid")
+    public static void alSourceRewindvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] sources) {
+        long __functionAddress = AL.getICD().alSourceRewindvDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, sources.length, sources, __functionAddress);
+    }
+
     /** Array version of: {@link #alGenBuffers GenBuffers} */
     @NativeType("ALvoid")
     public static void alGenBuffers(@NativeType("ALuint *") int[] bufferNames) {
@@ -1813,11 +3744,33 @@ public class AL10 {
         invokePV(bufferNames.length, bufferNames, __functionAddress);
     }
 
+    /** Array version of: {@link #alGenBuffersDirect} */
+    @NativeType("ALvoid")
+    public static void alGenBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint *") int[] bufferNames) {
+        long __functionAddress = AL.getICD().alGenBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferNames.length, bufferNames, __functionAddress);
+    }
+
     /** Array version of: {@link #alDeleteBuffers DeleteBuffers} */
     @NativeType("ALvoid")
     public static void alDeleteBuffers(@NativeType("ALuint const *") int[] bufferNames) {
         long __functionAddress = AL.getICD().alDeleteBuffers;
         invokePV(bufferNames.length, bufferNames, __functionAddress);
+    }
+
+    /** Array version of: {@link #alDeleteBuffersDirect} */
+    @NativeType("ALvoid")
+    public static void alDeleteBuffersDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] bufferNames) {
+        long __functionAddress = AL.getICD().alDeleteBuffersDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferNames.length, bufferNames, __functionAddress);
     }
 
     /** Array version of: {@link #alGetBufferf GetBufferf} */
@@ -1830,6 +3783,18 @@ public class AL10 {
         invokePV(bufferName, paramName, value, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetBufferfDirect} */
+    @NativeType("ALvoid")
+    public static void alGetBufferfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName, @NativeType("ALfloat *") float[] value) {
+        long __functionAddress = AL.getICD().alGetBufferfDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, bufferName, paramName, value, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetBufferi GetBufferi} */
     @NativeType("ALvoid")
     public static void alGetBufferi(@NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName, @NativeType("ALint *") int[] value) {
@@ -1838,6 +3803,18 @@ public class AL10 {
             check(value, 1);
         }
         invokePV(bufferName, paramName, value, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetBufferiDirect} */
+    @NativeType("ALvoid")
+    public static void alGetBufferiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int paramName, @NativeType("ALint *") int[] value) {
+        long __functionAddress = AL.getICD().alGetBufferiDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, bufferName, paramName, value, __functionAddress);
     }
 
     /** Array version of: {@link #alBufferData BufferData} */
@@ -1859,6 +3836,39 @@ public class AL10 {
     public static void alBufferData(@NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") float[] data, @NativeType("ALsizei") int frequency) {
         long __functionAddress = AL.getICD().alBufferData;
         invokePV(bufferName, format, data, data.length << 2, frequency, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferDataDirect} */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") short[] data, @NativeType("ALsizei") int frequency) {
+        long __functionAddress = AL.getICD().alBufferDataDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, format, data, data.length << 1, frequency, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferDataDirect} */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") int[] data, @NativeType("ALsizei") int frequency) {
+        long __functionAddress = AL.getICD().alBufferDataDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, format, data, data.length << 2, frequency, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferDataDirect} */
+    @NativeType("ALvoid")
+    public static void alBufferDataDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int bufferName, @NativeType("ALenum") int format, @NativeType("ALvoid const *") float[] data, @NativeType("ALsizei") int frequency) {
+        long __functionAddress = AL.getICD().alBufferDataDirect;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, bufferName, format, data, data.length << 2, frequency, __functionAddress);
     }
 
 }

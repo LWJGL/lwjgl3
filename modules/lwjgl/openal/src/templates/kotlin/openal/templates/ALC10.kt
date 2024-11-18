@@ -170,7 +170,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         ALCcharASCII.const.p("extName", "the extension name")
     )
 
-    opaque_p(
+    "ALCvoid".opaque.p(
         "GetProcAddress",
         """
         Retrieves extension entry points.

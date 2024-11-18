@@ -33,3 +33,19 @@ val ALCcharUTF8 = CharType("ALCchar", CharMapping.UTF8)
 
 val ALCdevice = "ALCdevice".opaque
 val ALCcontext = "ALCcontext".opaque
+
+val ALCEVENTPROCTYPESOFT = Module.OPENAL.callback {
+    void(
+        "SOFTSystemEventProc",
+        "",
+
+        ALCenum("eventType", ""),
+        ALCenum("deviceType", ""),
+        nullable..ALCdevice.p("device", ""),
+        AutoSize("message")..ALCsizei("length", ""),
+        ALCcharUTF8.const.p("message", ""),
+        nullable.."ALCvoid".opaque.p("userParam", ""),
+
+        nativeType = "ALCEVENTPROCTYPESOFT"
+    )
+}

@@ -7,18 +7,18 @@ package opencl.templates
 import org.lwjgl.generator.*
 import opencl.*
 
-val KHR = "KHR"
-val EXT = "EXT"
+const val KHR = "KHR"
+const val EXT = "EXT"
 
-val ALTERA = "ALTERA"
-val AMD = "AMD"
-val APPLE = "APPLE"
-val ARM = "ARM"
-val IMG = "IMG"
-val INTEL = "INTEL"
-val NV = "NV"
-val POCL = "POCL"
-val QCOM = "QCOM"
+const val ALTERA = "ALTERA"
+const val AMD = "AMD"
+const val APPLE = "APPLE"
+const val ARM = "ARM"
+const val IMG = "IMG"
+const val INTEL = "INTEL"
+const val NV = "NV"
+const val POCL = "POCL"
+const val QCOM = "QCOM"
 
 val khr_3d_image_writes = EXT_FLAG.nativeClassCL("khr_3d_image_writes", KHR) {
     documentation =

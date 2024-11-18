@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_source_resampler = "SOFTSourceResampler".nativeClassAL("SOFT_source_resampler") {
+val AL_SOFT_source_resampler = "SOFTSourceResampler".nativeClassAL("SOFT_source_resampler", postfix = SOFT) {
     documentation = """
         Native bindings to the $specLinkOpenALSoft extension.
 
@@ -42,5 +42,5 @@ val AL_SOFT_source_resampler = "SOFTSourceResampler".nativeClassAL("SOFT_source_
 
         ALenum("pname", ""),
         ALsizei("index", "")
-    )
+    ).directContext()
 }

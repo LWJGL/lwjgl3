@@ -67,6 +67,39 @@ public class SOFTCallbackBuffer {
         nalBufferCallbackSOFT(buffer, format, freq, callback.address(), userptr);
     }
 
+    // --- [ alBufferCallbackDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alBufferCallbackDirectSOFT} */
+    public static void nalBufferCallbackDirectSOFT(long context, int buffer, int format, int freq, long callback, long userptr) {
+        long __functionAddress = AL.getICD().alBufferCallbackDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(userptr);
+        }
+        invokePPPV(context, buffer, format, freq, callback, userptr, __functionAddress);
+    }
+
+    /**
+     * Instead of storing sample data, a buffer may be given a callback function which will be invoked when the source it's attached to needs more samples to
+     * mix. To specify a callback for a buffer, use {@code alBufferCallbackSOFT}.
+     * 
+     * <p>After a successful call, any sample data that was stored in the buffer is removed.</p>
+     * 
+     * <p>A buffer with a callback cannot be queued onto a streaming source, and it can only be set on one static source at a time. Attempting to queue such a
+     * buffer on a source, or attempting to set it on a source while it's already on one, will generate an {@link AL10#AL_INVALID_OPERATION INVALID_OPERATION} error.</p>
+     * 
+     * <p>A subsequent successful call to {@link AL10#alBufferData BufferData} will remove the callback from the buffer, and make it a normal non-callback buffer.</p>
+     *
+     * @param format  the sample format that will be expected from the callback
+     * @param freq    the base sample rate the samples will play at
+     * @param userptr stored with the {@code callback} pointer. Any data it references is not copied
+     */
+    @NativeType("ALvoid")
+    public static void alBufferCallbackDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALsizei") int freq, @NativeType("ALBUFFERCALLBACKTYPESOFT") SOFTCallbackBufferTypeI callback, @NativeType("ALvoid *") long userptr) {
+        nalBufferCallbackDirectSOFT(context, buffer, format, freq, callback.address(), userptr);
+    }
+
     // --- [ alGetBufferPtrSOFT ] ---
 
     public static void nalGetBufferPtrSOFT(int buffer, int param, long ptr) {
@@ -97,6 +130,37 @@ public class SOFTCallbackBuffer {
         }
     }
 
+    // --- [ alGetBufferPtrDirectSOFT ] ---
+
+    public static void nalGetBufferPtrDirectSOFT(long context, int buffer, int param, long ptr) {
+        long __functionAddress = AL.getICD().alGetBufferPtrDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, param, ptr, __functionAddress);
+    }
+
+    @NativeType("ALvoid")
+    public static void alGetBufferPtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
+        if (CHECKS) {
+            check(ptr, 1);
+        }
+        nalGetBufferPtrDirectSOFT(context, buffer, param, memAddress(ptr));
+    }
+
+    @NativeType("ALvoid")
+    public static long alGetBufferPtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            PointerBuffer ptr = stack.callocPointer(1);
+            nalGetBufferPtrDirectSOFT(context, buffer, param, memAddress(ptr));
+            return ptr.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetBuffer3PtrSOFT ] ---
 
     public static void nalGetBuffer3PtrSOFT(int buffer, int param, long ptr0, long ptr1, long ptr2) {
@@ -117,6 +181,27 @@ public class SOFTCallbackBuffer {
         nalGetBuffer3PtrSOFT(buffer, param, memAddress(ptr0), memAddress(ptr1), memAddress(ptr2));
     }
 
+    // --- [ alGetBuffer3PtrDirectSOFT ] ---
+
+    public static void nalGetBuffer3PtrDirectSOFT(long context, int buffer, int param, long ptr0, long ptr1, long ptr2) {
+        long __functionAddress = AL.getICD().alGetBuffer3PtrDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPPV(context, buffer, param, ptr0, ptr1, ptr2, __functionAddress);
+    }
+
+    @NativeType("ALvoid")
+    public static void alGetBuffer3PtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr0, @NativeType("ALvoid **") PointerBuffer ptr1, @NativeType("ALvoid **") PointerBuffer ptr2) {
+        if (CHECKS) {
+            check(ptr0, 1);
+            check(ptr1, 1);
+            check(ptr2, 1);
+        }
+        nalGetBuffer3PtrDirectSOFT(context, buffer, param, memAddress(ptr0), memAddress(ptr1), memAddress(ptr2));
+    }
+
     // --- [ alGetBufferPtrvSOFT ] ---
 
     public static void nalGetBufferPtrvSOFT(int buffer, int param, long ptr) {
@@ -133,6 +218,25 @@ public class SOFTCallbackBuffer {
             check(ptr, 1);
         }
         nalGetBufferPtrvSOFT(buffer, param, memAddress(ptr));
+    }
+
+    // --- [ alGetBufferPtrvDirectSOFT ] ---
+
+    public static void nalGetBufferPtrvDirectSOFT(long context, int buffer, int param, long ptr) {
+        long __functionAddress = AL.getICD().alGetBufferPtrvDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, param, ptr, __functionAddress);
+    }
+
+    @NativeType("ALvoid")
+    public static void alGetBufferPtrvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
+        if (CHECKS) {
+            check(ptr, 1);
+        }
+        nalGetBufferPtrvDirectSOFT(context, buffer, param, memAddress(ptr));
     }
 
 }

@@ -36,7 +36,17 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALint("value1", "the first value"),
         ALint("value2", "the second value"),
         ALint("value3", "the third value")
-    )
+    ).directContext()
+
+    ALvoid(
+        "GetListener3i",
+        "",
+
+        ALenum("param", ""),
+        Check(1)..ALint.p("value1", ""),
+        Check(1)..ALint.p("value2", ""),
+        Check(1)..ALint.p("value3", "")
+    ).directContext()
 
     ALvoid(
         "GetListeneriv",
@@ -44,7 +54,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALenum("param", "the parameter to query"),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Source3i",
@@ -55,7 +65,18 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALint("value1", "the first value"),
         ALint("value2", "the second value"),
         ALint("value3", "the third value")
-    )
+    ).directContext()
+
+    ALvoid(
+        "GetSource3i",
+        "",
+
+        ALuint("source", ""),
+        ALenum("param", ""),
+        Check(1)..ALint.p("value1", ""),
+        Check(1)..ALint.p("value2", ""),
+        Check(1)..ALint.p("value3", "")
+    ).directContext()
 
     ALvoid(
         "Listeneriv",
@@ -63,7 +84,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALenum("listener", "the parameter to modify"),
         Check(1)..ALint.const.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourceiv",
@@ -72,7 +93,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("source", "the source to modify"),
         ALenum("paramName", "the parameter to modify"),
         Check(1)..ALint.const.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Bufferf",
@@ -81,7 +102,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to modify"),
         ALenum("paramName", "the parameter to modify"),
         ALfloat("value", "the value")
-    )
+    ).directContext()
 
     ALvoid(
         "Buffer3f",
@@ -92,7 +113,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALfloat("value1", "the first value"),
         ALfloat("value2", "the second value"),
         ALfloat("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "Bufferfv",
@@ -101,7 +122,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to modify"),
         ALenum("paramName", "the parameter to modify"),
         Check(1)..ALfloat.const.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Bufferi",
@@ -110,7 +131,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to modify"),
         ALenum("paramName", "the parameter to modify"),
         ALint("value", "the value")
-    )
+    ).directContext()
 
     ALvoid(
         "Buffer3i",
@@ -121,7 +142,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALint("value1", "the first value"),
         ALint("value2", "the second value"),
         ALint("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "Bufferiv",
@@ -130,7 +151,18 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to modify"),
         ALenum("paramName", "the parameter to modify"),
         Check(1)..ALint.const.p("value", "the parameter values")
-    )
+    ).directContext()
+
+    ALvoid(
+        "GetBuffer3i",
+        "",
+
+        ALuint("buffer", ""),
+        ALenum("param", ""),
+        Check(1)..ALint.p("value1", ""),
+        Check(1)..ALint.p("value2", ""),
+        Check(1)..ALint.p("value3", "")
+    ).directContext()
 
     ALvoid(
         "GetBufferiv",
@@ -139,7 +171,18 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
+
+    ALvoid(
+        "GetBuffer3f",
+        "",
+
+        ALuint("buffer", ""),
+        ALenum("param", ""),
+        Check(1)..ALfloat.p("value1", ""),
+        Check(1)..ALfloat.p("value2", ""),
+        Check(1)..ALfloat.p("value3", "")
+    ).directContext()
 
     ALvoid(
         "GetBufferfv",
@@ -148,12 +191,12 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         ALuint("buffer", "the buffer to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "SpeedOfSound",
         "Sets the speed of sound.",
 
         ALfloat("value", "the speed of sound")
-    )
+    ).directContext()
 }

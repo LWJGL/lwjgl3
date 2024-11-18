@@ -162,3 +162,21 @@ fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", po
 
 val NativeClass.specLinkOpenALSoft: String get() = url("https://openal-soft.org/openal-extensions/$templateName.txt", templateName)
 val NativeClass.extensionName: String get() = "{@code ${prefixTemplate}_$templateName}"
+
+private val DIRECT_CONTEXT = arrayOf(Parameter(ALCcontext.p, "context", ""))
+fun Func.directContext() {
+    val postfix = this.nativeClass.postfix
+    val name = if (postfix.isEmpty())
+        "${name}Direct"
+    else
+        "${name.substring(0, name.length - postfix.length)}Direct$postfix"
+
+    this.nativeClass.addFunction(name, DependsOn("AL_EXT_direct_context")..Func(
+        returns = this.returns,
+        simpleName = name,
+        name = name,
+        documentation = this.documentation,
+        nativeClass = this.nativeClass,
+        parameters = DIRECT_CONTEXT + this.parameters
+    ))
+}

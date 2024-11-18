@@ -54,4 +54,21 @@ public class SOFTSourceResampler {
         return memUTF8Safe(__result);
     }
 
+    // --- [ alGetStringiDirectSOFT ] ---
+
+    public static long nalGetStringiDirectSOFT(long context, int pname, int index) {
+        long __functionAddress = AL.getICD().alGetStringiDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        return invokePP(context, pname, index, __functionAddress);
+    }
+
+    @NativeType("ALchar const *")
+    public static @Nullable String alGetStringiDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int pname, @NativeType("ALsizei") int index) {
+        long __result = nalGetStringiDirectSOFT(context, pname, index);
+        return memUTF8Safe(__result);
+    }
+
 }

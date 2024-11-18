@@ -7,30 +7,30 @@ package opengl.templates
 import org.lwjgl.generator.*
 import opengl.*
 
-val ARB = "ARB"
-val EXT = "EXT"
-val KHR = "KHR"
+const val ARB = "ARB"
+const val EXT = "EXT"
+const val KHR = "KHR"
 
-val `3DFX` = "3DFX"
+const val `3DFX` = "3DFX"
 
-val AMD = "AMD"
-val ATI = "ATI"
+const val AMD = "AMD"
+const val ATI = "ATI"
 
-val GREMEDY = "GREMEDY"
+const val GREMEDY = "GREMEDY"
 
-val INTEL = "INTEL"
+const val INTEL = "INTEL"
 
-val MESA = "MESA"
+const val MESA = "MESA"
 
-val NV = "NV"
-val NVX = "NVX"
+const val NV = "NV"
+const val NVX = "NVX"
 
-val OVR = "OVR"
+const val OVR = "OVR"
 
-val S3TC = "S3TC"
+const val S3TC = "S3TC"
 
-val SGI = "SGI"
-val SGIX = "SGIX"
+const val SGI = "SGI"
+const val SGIX = "SGIX"
 
 private val NativeClass.cap: String get() = "{@link \\#$capName $templateName}"
 

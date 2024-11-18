@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferred_updates") {
+val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferred_updates", postfix = SOFT) {
     documentation =
         """
         Native bindings to the $specLinkOpenALSoft extension.
@@ -35,7 +35,7 @@ val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferre
         listener gain, or auxiliary slot gain or effect if EFX is supported, among others, will be deferred. Multiple changes can be batched so that they all
         apply at once at a later time.
         """
-    )
+    ).directContext()
 
     ALvoid(
         "ProcessUpdatesSOFT",
@@ -44,5 +44,5 @@ val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferre
 
         Once called, all pending deferred updates will be processed. Any following state changes will also apply as normal.
         """
-    )
+    ).directContext()
 }

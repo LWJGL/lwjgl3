@@ -7,20 +7,20 @@ package egl.templates
 import egl.*
 import org.lwjgl.generator.*
 
-val EXT = "EXT"
-val KHR = "KHR"
+const val EXT = "EXT"
+const val KHR = "KHR"
 
-val ANDROID = "ANDROID"
-val ANGLE = "ANGLE"
-val ARM = "ARM"
-val HI = "HI"
-val IMG = "IMG"
-val MESA = "MESA"
-val NOK = "NOK"
-val NV = "NV"
-val OVR = "OVR"
-val TIZEN = "TIZEN"
-val WL = "WL"
+const val ANDROID = "ANDROID"
+const val ANGLE = "ANGLE"
+const val ARM = "ARM"
+const val HI = "HI"
+const val IMG = "IMG"
+const val MESA = "MESA"
+const val NOK = "NOK"
+const val NV = "NV"
+const val OVR = "OVR"
+const val TIZEN = "TIZEN"
+const val WL = "WL"
 
 private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
 

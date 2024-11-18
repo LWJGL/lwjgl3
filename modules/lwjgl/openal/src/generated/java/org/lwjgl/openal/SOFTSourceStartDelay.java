@@ -46,6 +46,18 @@ public class SOFTSourceStartDelay {
         invokeJV(source, start_time, __functionAddress);
     }
 
+    // --- [ alSourcePlayAtTimeDirectSOFT ] ---
+
+    @NativeType("ALvoid")
+    public static void alSourcePlayAtTimeDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALint64SOFT") long start_time) {
+        long __functionAddress = AL.getICD().alSourcePlayAtTimeDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePJV(context, source, start_time, __functionAddress);
+    }
+
     // --- [ alSourcePlayAtTimevSOFT ] ---
 
     public static void nalSourcePlayAtTimevSOFT(int n, long sources, long start_time) {
@@ -61,6 +73,22 @@ public class SOFTSourceStartDelay {
         nalSourcePlayAtTimevSOFT(sources.remaining(), memAddress(sources), start_time);
     }
 
+    // --- [ alSourcePlayAtTimevDirectSOFT ] ---
+
+    public static void nalSourcePlayAtTimevDirectSOFT(long context, int n, long sources, long start_time) {
+        long __functionAddress = AL.getICD().alSourcePlayAtTimevDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPJV(context, n, sources, start_time, __functionAddress);
+    }
+
+    @NativeType("ALvoid")
+    public static void alSourcePlayAtTimevDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") IntBuffer sources, @NativeType("ALint64SOFT") long start_time) {
+        nalSourcePlayAtTimevDirectSOFT(context, sources.remaining(), memAddress(sources), start_time);
+    }
+
     /** Array version of: {@link #alSourcePlayAtTimevSOFT SourcePlayAtTimevSOFT} */
     @NativeType("ALvoid")
     public static void alSourcePlayAtTimevSOFT(@NativeType("ALuint const *") int[] sources, @NativeType("ALint64SOFT") long start_time) {
@@ -69,6 +97,17 @@ public class SOFTSourceStartDelay {
             check(__functionAddress);
         }
         invokePJV(sources.length, sources, start_time, __functionAddress);
+    }
+
+    /** Array version of: {@link #alSourcePlayAtTimevDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alSourcePlayAtTimevDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint const *") int[] sources, @NativeType("ALint64SOFT") long start_time) {
+        long __functionAddress = AL.getICD().alSourcePlayAtTimevDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPJV(context, sources.length, sources, start_time, __functionAddress);
     }
 
 }

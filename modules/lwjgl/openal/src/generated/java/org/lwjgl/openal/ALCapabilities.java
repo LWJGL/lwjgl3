@@ -19,117 +19,250 @@ public final class ALCapabilities {
     // AL10
     public final long
         alGetError,
+        alGetErrorDirect,
         alEnable,
+        alEnableDirect,
         alDisable,
+        alDisableDirect,
         alIsEnabled,
+        alIsEnabledDirect,
         alGetBoolean,
+        alGetBooleanDirect,
         alGetInteger,
+        alGetIntegerDirect,
         alGetFloat,
+        alGetFloatDirect,
         alGetDouble,
+        alGetDoubleDirect,
         alGetBooleanv,
+        alGetBooleanvDirect,
         alGetIntegerv,
+        alGetIntegervDirect,
         alGetFloatv,
+        alGetFloatvDirect,
         alGetDoublev,
+        alGetDoublevDirect,
         alGetString,
+        alGetStringDirect,
         alDistanceModel,
+        alDistanceModelDirect,
         alDopplerFactor,
+        alDopplerFactorDirect,
         alDopplerVelocity,
         alListenerf,
+        alListenerfDirect,
         alListeneri,
+        alListeneriDirect,
         alListener3f,
+        alListener3fDirect,
         alListenerfv,
+        alListenerfvDirect,
         alGetListenerf,
+        alGetListenerfDirect,
         alGetListeneri,
+        alGetListeneriDirect,
         alGetListener3f,
+        alGetListener3fDirect,
         alGetListenerfv,
+        alGetListenerfvDirect,
         alGenSources,
+        alGenSourcesDirect,
         alDeleteSources,
+        alDeleteSourcesDirect,
         alIsSource,
+        alIsSourceDirect,
         alSourcef,
+        alSourcefDirect,
         alSource3f,
+        alSource3fDirect,
         alSourcefv,
+        alSourcefvDirect,
         alSourcei,
+        alSourceiDirect,
         alGetSourcef,
+        alGetSourcefDirect,
         alGetSource3f,
+        alGetSource3fDirect,
         alGetSourcefv,
+        alGetSourcefvDirect,
         alGetSourcei,
+        alGetSourceiDirect,
         alGetSourceiv,
+        alGetSourceivDirect,
         alSourceQueueBuffers,
+        alSourceQueueBuffersDirect,
         alSourceUnqueueBuffers,
+        alSourceUnqueueBuffersDirect,
         alSourcePlay,
+        alSourcePlayDirect,
         alSourcePause,
+        alSourcePauseDirect,
         alSourceStop,
+        alSourceStopDirect,
         alSourceRewind,
+        alSourceRewindDirect,
         alSourcePlayv,
+        alSourcePlayvDirect,
         alSourcePausev,
+        alSourcePausevDirect,
         alSourceStopv,
+        alSourceStopvDirect,
         alSourceRewindv,
+        alSourceRewindvDirect,
         alGenBuffers,
+        alGenBuffersDirect,
         alDeleteBuffers,
+        alDeleteBuffersDirect,
         alIsBuffer,
+        alIsBufferDirect,
         alGetBufferf,
+        alGetBufferfDirect,
         alGetBufferi,
+        alGetBufferiDirect,
         alBufferData,
+        alBufferDataDirect,
         alGetEnumValue,
+        alGetEnumValueDirect,
         alGetProcAddress,
-        alIsExtensionPresent;
+        alGetProcAddressDirect,
+        alIsExtensionPresent,
+        alIsExtensionPresentDirect;
 
     // AL11
     public final long
         alListener3i,
+        alListener3iDirect,
+        alGetListener3i,
+        alGetListener3iDirect,
         alGetListeneriv,
+        alGetListenerivDirect,
         alSource3i,
+        alSource3iDirect,
+        alGetSource3i,
+        alGetSource3iDirect,
         alListeneriv,
+        alListenerivDirect,
         alSourceiv,
+        alSourceivDirect,
         alBufferf,
+        alBufferfDirect,
         alBuffer3f,
+        alBuffer3fDirect,
         alBufferfv,
+        alBufferfvDirect,
         alBufferi,
+        alBufferiDirect,
         alBuffer3i,
+        alBuffer3iDirect,
         alBufferiv,
+        alBufferivDirect,
+        alGetBuffer3i,
+        alGetBuffer3iDirect,
         alGetBufferiv,
+        alGetBufferivDirect,
+        alGetBuffer3f,
+        alGetBuffer3fDirect,
         alGetBufferfv,
-        alSpeedOfSound;
+        alGetBufferfvDirect,
+        alSpeedOfSound,
+        alSpeedOfSoundDirect;
+
+    // EXT_debug
+    public final long
+        alDebugMessageCallbackEXT,
+        alDebugMessageCallbackDirectEXT,
+        alDebugMessageInsertEXT,
+        alDebugMessageInsertDirectEXT,
+        alDebugMessageControlEXT,
+        alDebugMessageControlDirectEXT,
+        alPushDebugGroupEXT,
+        alPushDebugGroupDirectEXT,
+        alPopDebugGroupEXT,
+        alPopDebugGroupDirectEXT,
+        alGetDebugMessageLogEXT,
+        alGetDebugMessageLogDirectEXT,
+        alObjectLabelEXT,
+        alObjectLabelDirectEXT,
+        alGetObjectLabelEXT,
+        alGetObjectLabelDirectEXT,
+        alGetPointerEXT,
+        alGetPointerDirectEXT,
+        alGetPointervEXT,
+        alGetPointervDirectEXT;
 
     // EXT_EFX
     public final long
         alGenEffects,
+        alGenEffectsDirect,
         alDeleteEffects,
+        alDeleteEffectsDirect,
         alIsEffect,
+        alIsEffectDirect,
         alEffecti,
+        alEffectiDirect,
         alEffectiv,
+        alEffectivDirect,
         alEffectf,
+        alEffectfDirect,
         alEffectfv,
+        alEffectfvDirect,
         alGetEffecti,
+        alGetEffectiDirect,
         alGetEffectiv,
+        alGetEffectivDirect,
         alGetEffectf,
+        alGetEffectfDirect,
         alGetEffectfv,
+        alGetEffectfvDirect,
         alGenFilters,
+        alGenFiltersDirect,
         alDeleteFilters,
+        alDeleteFiltersDirect,
         alIsFilter,
+        alIsFilterDirect,
         alFilteri,
+        alFilteriDirect,
         alFilteriv,
+        alFilterivDirect,
         alFilterf,
+        alFilterfDirect,
         alFilterfv,
+        alFilterfvDirect,
         alGetFilteri,
+        alGetFilteriDirect,
         alGetFilteriv,
+        alGetFilterivDirect,
         alGetFilterf,
+        alGetFilterfDirect,
         alGetFilterfv,
+        alGetFilterfvDirect,
         alGenAuxiliaryEffectSlots,
+        alGenAuxiliaryEffectSlotsDirect,
         alDeleteAuxiliaryEffectSlots,
+        alDeleteAuxiliaryEffectSlotsDirect,
         alIsAuxiliaryEffectSlot,
+        alIsAuxiliaryEffectSlotDirect,
         alAuxiliaryEffectSloti,
+        alAuxiliaryEffectSlotiDirect,
         alAuxiliaryEffectSlotiv,
+        alAuxiliaryEffectSlotivDirect,
         alAuxiliaryEffectSlotf,
+        alAuxiliaryEffectSlotfDirect,
         alAuxiliaryEffectSlotfv,
+        alAuxiliaryEffectSlotfvDirect,
         alGetAuxiliaryEffectSloti,
+        alGetAuxiliaryEffectSlotiDirect,
         alGetAuxiliaryEffectSlotiv,
+        alGetAuxiliaryEffectSlotivDirect,
         alGetAuxiliaryEffectSlotf,
-        alGetAuxiliaryEffectSlotfv;
+        alGetAuxiliaryEffectSlotfDirect,
+        alGetAuxiliaryEffectSlotfv,
+        alGetAuxiliaryEffectSlotfvDirect;
 
     // EXT_STATIC_BUFFER
     public final long
-        alBufferDataStatic;
+        alBufferDataStatic,
+        alBufferDataStaticDirect;
 
     // SOFT_buffer_samples
     public final long
@@ -140,50 +273,76 @@ public final class ALCapabilities {
 
     // SOFT_buffer_sub_data
     public final long
-        alBufferSubDataSOFT;
+        alBufferSubDataSOFT,
+        alBufferSubDataDirectSOFT;
 
     // SOFT_callback_buffer
     public final long
         alBufferCallbackSOFT,
+        alBufferCallbackDirectSOFT,
         alGetBufferPtrSOFT,
+        alGetBufferPtrDirectSOFT,
         alGetBuffer3PtrSOFT,
-        alGetBufferPtrvSOFT;
+        alGetBuffer3PtrDirectSOFT,
+        alGetBufferPtrvSOFT,
+        alGetBufferPtrvDirectSOFT;
 
     // SOFT_deferred_updates
     public final long
         alDeferUpdatesSOFT,
-        alProcessUpdatesSOFT;
+        alDeferUpdatesDirectSOFT,
+        alProcessUpdatesSOFT,
+        alProcessUpdatesDirectSOFT;
 
     // SOFT_events
     public final long
         alEventControlSOFT,
+        alEventControlDirectSOFT,
         alEventCallbackSOFT,
+        alEventCallbackDirectSOFT,
         alGetPointerSOFT,
-        alGetPointervSOFT;
+        alGetPointerDirectSOFT,
+        alGetPointervSOFT,
+        alGetPointervDirectSOFT;
 
     // SOFT_source_latency
     public final long
         alSourcedSOFT,
+        alSourcedDirectSOFT,
         alSource3dSOFT,
+        alSource3dDirectSOFT,
         alSourcedvSOFT,
+        alSourcedvDirectSOFT,
         alGetSourcedSOFT,
+        alGetSourcedDirectSOFT,
         alGetSource3dSOFT,
+        alGetSource3dDirectSOFT,
         alGetSourcedvSOFT,
+        alGetSourcedvDirectSOFT,
         alSourcei64SOFT,
+        alSourcei64DirectSOFT,
         alSource3i64SOFT,
+        alSource3i64DirectSOFT,
         alSourcei64vSOFT,
+        alSourcei64vDirectSOFT,
         alGetSourcei64SOFT,
+        alGetSourcei64DirectSOFT,
         alGetSource3i64SOFT,
-        alGetSourcei64vSOFT;
+        alGetSource3i64DirectSOFT,
+        alGetSourcei64vSOFT,
+        alGetSourcei64vDirectSOFT;
 
     // SOFT_source_resampler
     public final long
-        alGetStringiSOFT;
+        alGetStringiSOFT,
+        alGetStringiDirectSOFT;
 
     // SOFT_source_start_delay
     public final long
         alSourcePlayAtTimeSOFT,
-        alSourcePlayAtTimevSOFT;
+        alSourcePlayAtTimeDirectSOFT,
+        alSourcePlayAtTimevSOFT,
+        alSourcePlayAtTimevDirectSOFT;
 
     /** When true, {@link AL10} is supported. */
     public final boolean OpenAL10;
@@ -193,6 +352,10 @@ public final class ALCapabilities {
     public final boolean AL_EXT_ALAW;
     /** When true, {@link EXTBFormat} is supported. */
     public final boolean AL_EXT_BFORMAT;
+    /** When true, {@link EXTDebug} is supported. */
+    public final boolean AL_EXT_debug;
+    /** When true, the {@link EXTDirectContext AL_EXT_direct_context} extension is supported. */
+    public final boolean AL_EXT_direct_context;
     /** When true, {@link EXTDouble} is supported. */
     public final boolean AL_EXT_DOUBLE;
     /** When true, {@link EXTEfx} is supported. */
@@ -280,12 +443,14 @@ public final class ALCapabilities {
     final PointerBuffer addresses;
 
     ALCapabilities(FunctionProvider provider, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
-        PointerBuffer caps = bufferFactory.apply(133);
+        PointerBuffer caps = bufferFactory.apply(289);
 
         OpenAL10 = check_AL10(provider, caps, ext);
         OpenAL11 = check_AL11(provider, caps, ext);
         AL_EXT_ALAW = ext.contains("AL_EXT_ALAW");
         AL_EXT_BFORMAT = ext.contains("AL_EXT_BFORMAT");
+        AL_EXT_debug = check_EXT_debug(provider, caps, ext);
+        AL_EXT_direct_context = ext.contains("AL_EXT_direct_context");
         AL_EXT_DOUBLE = ext.contains("AL_EXT_DOUBLE");
         ALC_EXT_EFX = check_EXT_EFX(provider, caps, ext);
         AL_EXT_EXPONENT_DISTANCE = ext.contains("AL_EXT_EXPONENT_DISTANCE");
@@ -329,138 +494,294 @@ public final class ALCapabilities {
         AL_SOFTX_hold_on_disconnect = ext.contains("AL_SOFTX_hold_on_disconnect");
 
         alGetError = caps.get(0);
-        alEnable = caps.get(1);
-        alDisable = caps.get(2);
-        alIsEnabled = caps.get(3);
-        alGetBoolean = caps.get(4);
-        alGetInteger = caps.get(5);
-        alGetFloat = caps.get(6);
-        alGetDouble = caps.get(7);
-        alGetBooleanv = caps.get(8);
-        alGetIntegerv = caps.get(9);
-        alGetFloatv = caps.get(10);
-        alGetDoublev = caps.get(11);
-        alGetString = caps.get(12);
-        alDistanceModel = caps.get(13);
-        alDopplerFactor = caps.get(14);
-        alDopplerVelocity = caps.get(15);
-        alListenerf = caps.get(16);
-        alListeneri = caps.get(17);
-        alListener3f = caps.get(18);
-        alListenerfv = caps.get(19);
-        alGetListenerf = caps.get(20);
-        alGetListeneri = caps.get(21);
-        alGetListener3f = caps.get(22);
-        alGetListenerfv = caps.get(23);
-        alGenSources = caps.get(24);
-        alDeleteSources = caps.get(25);
-        alIsSource = caps.get(26);
-        alSourcef = caps.get(27);
-        alSource3f = caps.get(28);
-        alSourcefv = caps.get(29);
-        alSourcei = caps.get(30);
-        alGetSourcef = caps.get(31);
-        alGetSource3f = caps.get(32);
-        alGetSourcefv = caps.get(33);
-        alGetSourcei = caps.get(34);
-        alGetSourceiv = caps.get(35);
-        alSourceQueueBuffers = caps.get(36);
-        alSourceUnqueueBuffers = caps.get(37);
-        alSourcePlay = caps.get(38);
-        alSourcePause = caps.get(39);
-        alSourceStop = caps.get(40);
-        alSourceRewind = caps.get(41);
-        alSourcePlayv = caps.get(42);
-        alSourcePausev = caps.get(43);
-        alSourceStopv = caps.get(44);
-        alSourceRewindv = caps.get(45);
-        alGenBuffers = caps.get(46);
-        alDeleteBuffers = caps.get(47);
-        alIsBuffer = caps.get(48);
-        alGetBufferf = caps.get(49);
-        alGetBufferi = caps.get(50);
-        alBufferData = caps.get(51);
-        alGetEnumValue = caps.get(52);
-        alGetProcAddress = caps.get(53);
-        alIsExtensionPresent = caps.get(54);
-        alListener3i = caps.get(55);
-        alGetListeneriv = caps.get(56);
-        alSource3i = caps.get(57);
-        alListeneriv = caps.get(58);
-        alSourceiv = caps.get(59);
-        alBufferf = caps.get(60);
-        alBuffer3f = caps.get(61);
-        alBufferfv = caps.get(62);
-        alBufferi = caps.get(63);
-        alBuffer3i = caps.get(64);
-        alBufferiv = caps.get(65);
-        alGetBufferiv = caps.get(66);
-        alGetBufferfv = caps.get(67);
-        alSpeedOfSound = caps.get(68);
-        alGenEffects = caps.get(69);
-        alDeleteEffects = caps.get(70);
-        alIsEffect = caps.get(71);
-        alEffecti = caps.get(72);
-        alEffectiv = caps.get(73);
-        alEffectf = caps.get(74);
-        alEffectfv = caps.get(75);
-        alGetEffecti = caps.get(76);
-        alGetEffectiv = caps.get(77);
-        alGetEffectf = caps.get(78);
-        alGetEffectfv = caps.get(79);
-        alGenFilters = caps.get(80);
-        alDeleteFilters = caps.get(81);
-        alIsFilter = caps.get(82);
-        alFilteri = caps.get(83);
-        alFilteriv = caps.get(84);
-        alFilterf = caps.get(85);
-        alFilterfv = caps.get(86);
-        alGetFilteri = caps.get(87);
-        alGetFilteriv = caps.get(88);
-        alGetFilterf = caps.get(89);
-        alGetFilterfv = caps.get(90);
-        alGenAuxiliaryEffectSlots = caps.get(91);
-        alDeleteAuxiliaryEffectSlots = caps.get(92);
-        alIsAuxiliaryEffectSlot = caps.get(93);
-        alAuxiliaryEffectSloti = caps.get(94);
-        alAuxiliaryEffectSlotiv = caps.get(95);
-        alAuxiliaryEffectSlotf = caps.get(96);
-        alAuxiliaryEffectSlotfv = caps.get(97);
-        alGetAuxiliaryEffectSloti = caps.get(98);
-        alGetAuxiliaryEffectSlotiv = caps.get(99);
-        alGetAuxiliaryEffectSlotf = caps.get(100);
-        alGetAuxiliaryEffectSlotfv = caps.get(101);
-        alBufferDataStatic = caps.get(102);
-        alBufferSamplesSOFT = caps.get(103);
-        alBufferSubSamplesSOFT = caps.get(104);
-        alGetBufferSamplesSOFT = caps.get(105);
-        alIsBufferFormatSupportedSOFT = caps.get(106);
-        alBufferSubDataSOFT = caps.get(107);
-        alBufferCallbackSOFT = caps.get(108);
-        alGetBufferPtrSOFT = caps.get(109);
-        alGetBuffer3PtrSOFT = caps.get(110);
-        alGetBufferPtrvSOFT = caps.get(111);
-        alDeferUpdatesSOFT = caps.get(112);
-        alProcessUpdatesSOFT = caps.get(113);
-        alEventControlSOFT = caps.get(114);
-        alEventCallbackSOFT = caps.get(115);
-        alGetPointerSOFT = caps.get(116);
-        alGetPointervSOFT = caps.get(117);
-        alSourcedSOFT = caps.get(118);
-        alSource3dSOFT = caps.get(119);
-        alSourcedvSOFT = caps.get(120);
-        alGetSourcedSOFT = caps.get(121);
-        alGetSource3dSOFT = caps.get(122);
-        alGetSourcedvSOFT = caps.get(123);
-        alSourcei64SOFT = caps.get(124);
-        alSource3i64SOFT = caps.get(125);
-        alSourcei64vSOFT = caps.get(126);
-        alGetSourcei64SOFT = caps.get(127);
-        alGetSource3i64SOFT = caps.get(128);
-        alGetSourcei64vSOFT = caps.get(129);
-        alGetStringiSOFT = caps.get(130);
-        alSourcePlayAtTimeSOFT = caps.get(131);
-        alSourcePlayAtTimevSOFT = caps.get(132);
+        alGetErrorDirect = caps.get(1);
+        alEnable = caps.get(2);
+        alEnableDirect = caps.get(3);
+        alDisable = caps.get(4);
+        alDisableDirect = caps.get(5);
+        alIsEnabled = caps.get(6);
+        alIsEnabledDirect = caps.get(7);
+        alGetBoolean = caps.get(8);
+        alGetBooleanDirect = caps.get(9);
+        alGetInteger = caps.get(10);
+        alGetIntegerDirect = caps.get(11);
+        alGetFloat = caps.get(12);
+        alGetFloatDirect = caps.get(13);
+        alGetDouble = caps.get(14);
+        alGetDoubleDirect = caps.get(15);
+        alGetBooleanv = caps.get(16);
+        alGetBooleanvDirect = caps.get(17);
+        alGetIntegerv = caps.get(18);
+        alGetIntegervDirect = caps.get(19);
+        alGetFloatv = caps.get(20);
+        alGetFloatvDirect = caps.get(21);
+        alGetDoublev = caps.get(22);
+        alGetDoublevDirect = caps.get(23);
+        alGetString = caps.get(24);
+        alGetStringDirect = caps.get(25);
+        alDistanceModel = caps.get(26);
+        alDistanceModelDirect = caps.get(27);
+        alDopplerFactor = caps.get(28);
+        alDopplerFactorDirect = caps.get(29);
+        alDopplerVelocity = caps.get(30);
+        alListenerf = caps.get(31);
+        alListenerfDirect = caps.get(32);
+        alListeneri = caps.get(33);
+        alListeneriDirect = caps.get(34);
+        alListener3f = caps.get(35);
+        alListener3fDirect = caps.get(36);
+        alListenerfv = caps.get(37);
+        alListenerfvDirect = caps.get(38);
+        alGetListenerf = caps.get(39);
+        alGetListenerfDirect = caps.get(40);
+        alGetListeneri = caps.get(41);
+        alGetListeneriDirect = caps.get(42);
+        alGetListener3f = caps.get(43);
+        alGetListener3fDirect = caps.get(44);
+        alGetListenerfv = caps.get(45);
+        alGetListenerfvDirect = caps.get(46);
+        alGenSources = caps.get(47);
+        alGenSourcesDirect = caps.get(48);
+        alDeleteSources = caps.get(49);
+        alDeleteSourcesDirect = caps.get(50);
+        alIsSource = caps.get(51);
+        alIsSourceDirect = caps.get(52);
+        alSourcef = caps.get(53);
+        alSourcefDirect = caps.get(54);
+        alSource3f = caps.get(55);
+        alSource3fDirect = caps.get(56);
+        alSourcefv = caps.get(57);
+        alSourcefvDirect = caps.get(58);
+        alSourcei = caps.get(59);
+        alSourceiDirect = caps.get(60);
+        alGetSourcef = caps.get(61);
+        alGetSourcefDirect = caps.get(62);
+        alGetSource3f = caps.get(63);
+        alGetSource3fDirect = caps.get(64);
+        alGetSourcefv = caps.get(65);
+        alGetSourcefvDirect = caps.get(66);
+        alGetSourcei = caps.get(67);
+        alGetSourceiDirect = caps.get(68);
+        alGetSourceiv = caps.get(69);
+        alGetSourceivDirect = caps.get(70);
+        alSourceQueueBuffers = caps.get(71);
+        alSourceQueueBuffersDirect = caps.get(72);
+        alSourceUnqueueBuffers = caps.get(73);
+        alSourceUnqueueBuffersDirect = caps.get(74);
+        alSourcePlay = caps.get(75);
+        alSourcePlayDirect = caps.get(76);
+        alSourcePause = caps.get(77);
+        alSourcePauseDirect = caps.get(78);
+        alSourceStop = caps.get(79);
+        alSourceStopDirect = caps.get(80);
+        alSourceRewind = caps.get(81);
+        alSourceRewindDirect = caps.get(82);
+        alSourcePlayv = caps.get(83);
+        alSourcePlayvDirect = caps.get(84);
+        alSourcePausev = caps.get(85);
+        alSourcePausevDirect = caps.get(86);
+        alSourceStopv = caps.get(87);
+        alSourceStopvDirect = caps.get(88);
+        alSourceRewindv = caps.get(89);
+        alSourceRewindvDirect = caps.get(90);
+        alGenBuffers = caps.get(91);
+        alGenBuffersDirect = caps.get(92);
+        alDeleteBuffers = caps.get(93);
+        alDeleteBuffersDirect = caps.get(94);
+        alIsBuffer = caps.get(95);
+        alIsBufferDirect = caps.get(96);
+        alGetBufferf = caps.get(97);
+        alGetBufferfDirect = caps.get(98);
+        alGetBufferi = caps.get(99);
+        alGetBufferiDirect = caps.get(100);
+        alBufferData = caps.get(101);
+        alBufferDataDirect = caps.get(102);
+        alGetEnumValue = caps.get(103);
+        alGetEnumValueDirect = caps.get(104);
+        alGetProcAddress = caps.get(105);
+        alGetProcAddressDirect = caps.get(106);
+        alIsExtensionPresent = caps.get(107);
+        alIsExtensionPresentDirect = caps.get(108);
+        alListener3i = caps.get(109);
+        alListener3iDirect = caps.get(110);
+        alGetListener3i = caps.get(111);
+        alGetListener3iDirect = caps.get(112);
+        alGetListeneriv = caps.get(113);
+        alGetListenerivDirect = caps.get(114);
+        alSource3i = caps.get(115);
+        alSource3iDirect = caps.get(116);
+        alGetSource3i = caps.get(117);
+        alGetSource3iDirect = caps.get(118);
+        alListeneriv = caps.get(119);
+        alListenerivDirect = caps.get(120);
+        alSourceiv = caps.get(121);
+        alSourceivDirect = caps.get(122);
+        alBufferf = caps.get(123);
+        alBufferfDirect = caps.get(124);
+        alBuffer3f = caps.get(125);
+        alBuffer3fDirect = caps.get(126);
+        alBufferfv = caps.get(127);
+        alBufferfvDirect = caps.get(128);
+        alBufferi = caps.get(129);
+        alBufferiDirect = caps.get(130);
+        alBuffer3i = caps.get(131);
+        alBuffer3iDirect = caps.get(132);
+        alBufferiv = caps.get(133);
+        alBufferivDirect = caps.get(134);
+        alGetBuffer3i = caps.get(135);
+        alGetBuffer3iDirect = caps.get(136);
+        alGetBufferiv = caps.get(137);
+        alGetBufferivDirect = caps.get(138);
+        alGetBuffer3f = caps.get(139);
+        alGetBuffer3fDirect = caps.get(140);
+        alGetBufferfv = caps.get(141);
+        alGetBufferfvDirect = caps.get(142);
+        alSpeedOfSound = caps.get(143);
+        alSpeedOfSoundDirect = caps.get(144);
+        alDebugMessageCallbackEXT = caps.get(145);
+        alDebugMessageCallbackDirectEXT = caps.get(146);
+        alDebugMessageInsertEXT = caps.get(147);
+        alDebugMessageInsertDirectEXT = caps.get(148);
+        alDebugMessageControlEXT = caps.get(149);
+        alDebugMessageControlDirectEXT = caps.get(150);
+        alPushDebugGroupEXT = caps.get(151);
+        alPushDebugGroupDirectEXT = caps.get(152);
+        alPopDebugGroupEXT = caps.get(153);
+        alPopDebugGroupDirectEXT = caps.get(154);
+        alGetDebugMessageLogEXT = caps.get(155);
+        alGetDebugMessageLogDirectEXT = caps.get(156);
+        alObjectLabelEXT = caps.get(157);
+        alObjectLabelDirectEXT = caps.get(158);
+        alGetObjectLabelEXT = caps.get(159);
+        alGetObjectLabelDirectEXT = caps.get(160);
+        alGetPointerEXT = caps.get(161);
+        alGetPointerDirectEXT = caps.get(162);
+        alGetPointervEXT = caps.get(163);
+        alGetPointervDirectEXT = caps.get(164);
+        alGenEffects = caps.get(165);
+        alGenEffectsDirect = caps.get(166);
+        alDeleteEffects = caps.get(167);
+        alDeleteEffectsDirect = caps.get(168);
+        alIsEffect = caps.get(169);
+        alIsEffectDirect = caps.get(170);
+        alEffecti = caps.get(171);
+        alEffectiDirect = caps.get(172);
+        alEffectiv = caps.get(173);
+        alEffectivDirect = caps.get(174);
+        alEffectf = caps.get(175);
+        alEffectfDirect = caps.get(176);
+        alEffectfv = caps.get(177);
+        alEffectfvDirect = caps.get(178);
+        alGetEffecti = caps.get(179);
+        alGetEffectiDirect = caps.get(180);
+        alGetEffectiv = caps.get(181);
+        alGetEffectivDirect = caps.get(182);
+        alGetEffectf = caps.get(183);
+        alGetEffectfDirect = caps.get(184);
+        alGetEffectfv = caps.get(185);
+        alGetEffectfvDirect = caps.get(186);
+        alGenFilters = caps.get(187);
+        alGenFiltersDirect = caps.get(188);
+        alDeleteFilters = caps.get(189);
+        alDeleteFiltersDirect = caps.get(190);
+        alIsFilter = caps.get(191);
+        alIsFilterDirect = caps.get(192);
+        alFilteri = caps.get(193);
+        alFilteriDirect = caps.get(194);
+        alFilteriv = caps.get(195);
+        alFilterivDirect = caps.get(196);
+        alFilterf = caps.get(197);
+        alFilterfDirect = caps.get(198);
+        alFilterfv = caps.get(199);
+        alFilterfvDirect = caps.get(200);
+        alGetFilteri = caps.get(201);
+        alGetFilteriDirect = caps.get(202);
+        alGetFilteriv = caps.get(203);
+        alGetFilterivDirect = caps.get(204);
+        alGetFilterf = caps.get(205);
+        alGetFilterfDirect = caps.get(206);
+        alGetFilterfv = caps.get(207);
+        alGetFilterfvDirect = caps.get(208);
+        alGenAuxiliaryEffectSlots = caps.get(209);
+        alGenAuxiliaryEffectSlotsDirect = caps.get(210);
+        alDeleteAuxiliaryEffectSlots = caps.get(211);
+        alDeleteAuxiliaryEffectSlotsDirect = caps.get(212);
+        alIsAuxiliaryEffectSlot = caps.get(213);
+        alIsAuxiliaryEffectSlotDirect = caps.get(214);
+        alAuxiliaryEffectSloti = caps.get(215);
+        alAuxiliaryEffectSlotiDirect = caps.get(216);
+        alAuxiliaryEffectSlotiv = caps.get(217);
+        alAuxiliaryEffectSlotivDirect = caps.get(218);
+        alAuxiliaryEffectSlotf = caps.get(219);
+        alAuxiliaryEffectSlotfDirect = caps.get(220);
+        alAuxiliaryEffectSlotfv = caps.get(221);
+        alAuxiliaryEffectSlotfvDirect = caps.get(222);
+        alGetAuxiliaryEffectSloti = caps.get(223);
+        alGetAuxiliaryEffectSlotiDirect = caps.get(224);
+        alGetAuxiliaryEffectSlotiv = caps.get(225);
+        alGetAuxiliaryEffectSlotivDirect = caps.get(226);
+        alGetAuxiliaryEffectSlotf = caps.get(227);
+        alGetAuxiliaryEffectSlotfDirect = caps.get(228);
+        alGetAuxiliaryEffectSlotfv = caps.get(229);
+        alGetAuxiliaryEffectSlotfvDirect = caps.get(230);
+        alBufferDataStatic = caps.get(231);
+        alBufferDataStaticDirect = caps.get(232);
+        alBufferSamplesSOFT = caps.get(233);
+        alBufferSubSamplesSOFT = caps.get(234);
+        alGetBufferSamplesSOFT = caps.get(235);
+        alIsBufferFormatSupportedSOFT = caps.get(236);
+        alBufferSubDataSOFT = caps.get(237);
+        alBufferSubDataDirectSOFT = caps.get(238);
+        alBufferCallbackSOFT = caps.get(239);
+        alBufferCallbackDirectSOFT = caps.get(240);
+        alGetBufferPtrSOFT = caps.get(241);
+        alGetBufferPtrDirectSOFT = caps.get(242);
+        alGetBuffer3PtrSOFT = caps.get(243);
+        alGetBuffer3PtrDirectSOFT = caps.get(244);
+        alGetBufferPtrvSOFT = caps.get(245);
+        alGetBufferPtrvDirectSOFT = caps.get(246);
+        alDeferUpdatesSOFT = caps.get(247);
+        alDeferUpdatesDirectSOFT = caps.get(248);
+        alProcessUpdatesSOFT = caps.get(249);
+        alProcessUpdatesDirectSOFT = caps.get(250);
+        alEventControlSOFT = caps.get(251);
+        alEventControlDirectSOFT = caps.get(252);
+        alEventCallbackSOFT = caps.get(253);
+        alEventCallbackDirectSOFT = caps.get(254);
+        alGetPointerSOFT = caps.get(255);
+        alGetPointerDirectSOFT = caps.get(256);
+        alGetPointervSOFT = caps.get(257);
+        alGetPointervDirectSOFT = caps.get(258);
+        alSourcedSOFT = caps.get(259);
+        alSourcedDirectSOFT = caps.get(260);
+        alSource3dSOFT = caps.get(261);
+        alSource3dDirectSOFT = caps.get(262);
+        alSourcedvSOFT = caps.get(263);
+        alSourcedvDirectSOFT = caps.get(264);
+        alGetSourcedSOFT = caps.get(265);
+        alGetSourcedDirectSOFT = caps.get(266);
+        alGetSource3dSOFT = caps.get(267);
+        alGetSource3dDirectSOFT = caps.get(268);
+        alGetSourcedvSOFT = caps.get(269);
+        alGetSourcedvDirectSOFT = caps.get(270);
+        alSourcei64SOFT = caps.get(271);
+        alSourcei64DirectSOFT = caps.get(272);
+        alSource3i64SOFT = caps.get(273);
+        alSource3i64DirectSOFT = caps.get(274);
+        alSourcei64vSOFT = caps.get(275);
+        alSourcei64vDirectSOFT = caps.get(276);
+        alGetSourcei64SOFT = caps.get(277);
+        alGetSourcei64DirectSOFT = caps.get(278);
+        alGetSource3i64SOFT = caps.get(279);
+        alGetSource3i64DirectSOFT = caps.get(280);
+        alGetSourcei64vSOFT = caps.get(281);
+        alGetSourcei64vDirectSOFT = caps.get(282);
+        alGetStringiSOFT = caps.get(283);
+        alGetStringiDirectSOFT = caps.get(284);
+        alSourcePlayAtTimeSOFT = caps.get(285);
+        alSourcePlayAtTimeDirectSOFT = caps.get(286);
+        alSourcePlayAtTimevSOFT = caps.get(287);
+        alSourcePlayAtTimevDirectSOFT = caps.get(288);
 
         addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
@@ -477,15 +798,24 @@ public final class ALCapabilities {
 
         return checkFunctions(provider, caps, new int[] {
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 
-            39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54
+            39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 
+            76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108
         },
-            "alGetError", "alEnable", "alDisable", "alIsEnabled", "alGetBoolean", "alGetInteger", "alGetFloat", "alGetDouble", "alGetBooleanv", "alGetIntegerv", 
-            "alGetFloatv", "alGetDoublev", "alGetString", "alDistanceModel", "alDopplerFactor", "alDopplerVelocity", "alListenerf", "alListeneri", 
-            "alListener3f", "alListenerfv", "alGetListenerf", "alGetListeneri", "alGetListener3f", "alGetListenerfv", "alGenSources", "alDeleteSources", 
-            "alIsSource", "alSourcef", "alSource3f", "alSourcefv", "alSourcei", "alGetSourcef", "alGetSource3f", "alGetSourcefv", "alGetSourcei", 
-            "alGetSourceiv", "alSourceQueueBuffers", "alSourceUnqueueBuffers", "alSourcePlay", "alSourcePause", "alSourceStop", "alSourceRewind", 
-            "alSourcePlayv", "alSourcePausev", "alSourceStopv", "alSourceRewindv", "alGenBuffers", "alDeleteBuffers", "alIsBuffer", "alGetBufferf", 
-            "alGetBufferi", "alBufferData", "alGetEnumValue", "alGetProcAddress", "alIsExtensionPresent"
+            "alGetError", "alGetErrorDirect", "alEnable", "alEnableDirect", "alDisable", "alDisableDirect", "alIsEnabled", "alIsEnabledDirect", "alGetBoolean", 
+            "alGetBooleanDirect", "alGetInteger", "alGetIntegerDirect", "alGetFloat", "alGetFloatDirect", "alGetDouble", "alGetDoubleDirect", "alGetBooleanv", 
+            "alGetBooleanvDirect", "alGetIntegerv", "alGetIntegervDirect", "alGetFloatv", "alGetFloatvDirect", "alGetDoublev", "alGetDoublevDirect", 
+            "alGetString", "alGetStringDirect", "alDistanceModel", "alDistanceModelDirect", "alDopplerFactor", "alDopplerFactorDirect", "alDopplerVelocity", 
+            "alListenerf", "alListenerfDirect", "alListeneri", "alListeneriDirect", "alListener3f", "alListener3fDirect", "alListenerfv", "alListenerfvDirect", 
+            "alGetListenerf", "alGetListenerfDirect", "alGetListeneri", "alGetListeneriDirect", "alGetListener3f", "alGetListener3fDirect", "alGetListenerfv", 
+            "alGetListenerfvDirect", "alGenSources", "alGenSourcesDirect", "alDeleteSources", "alDeleteSourcesDirect", "alIsSource", "alIsSourceDirect", 
+            "alSourcef", "alSourcefDirect", "alSource3f", "alSource3fDirect", "alSourcefv", "alSourcefvDirect", "alSourcei", "alSourceiDirect", "alGetSourcef", 
+            "alGetSourcefDirect", "alGetSource3f", "alGetSource3fDirect", "alGetSourcefv", "alGetSourcefvDirect", "alGetSourcei", "alGetSourceiDirect", 
+            "alGetSourceiv", "alGetSourceivDirect", "alSourceQueueBuffers", "alSourceQueueBuffersDirect", "alSourceUnqueueBuffers", 
+            "alSourceUnqueueBuffersDirect", "alSourcePlay", "alSourcePlayDirect", "alSourcePause", "alSourcePauseDirect", "alSourceStop", "alSourceStopDirect", 
+            "alSourceRewind", "alSourceRewindDirect", "alSourcePlayv", "alSourcePlayvDirect", "alSourcePausev", "alSourcePausevDirect", "alSourceStopv", 
+            "alSourceStopvDirect", "alSourceRewindv", "alSourceRewindvDirect", "alGenBuffers", "alGenBuffersDirect", "alDeleteBuffers", "alDeleteBuffersDirect", 
+            "alIsBuffer", "alIsBufferDirect", "alGetBufferf", "alGetBufferfDirect", "alGetBufferi", "alGetBufferiDirect", "alBufferData", "alBufferDataDirect", 
+            "alGetEnumValue", "alGetEnumValueDirect", "alGetProcAddress", "alGetProcAddressDirect", "alIsExtensionPresent", "alIsExtensionPresentDirect"
         ) || reportMissing("AL", "OpenAL10");
     }
 
@@ -495,11 +825,30 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68
+            109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 
+            138, 139, 140, 141, 142, 143, 144
         },
-            "alListener3i", "alGetListeneriv", "alSource3i", "alListeneriv", "alSourceiv", "alBufferf", "alBuffer3f", "alBufferfv", "alBufferi", "alBuffer3i", 
-            "alBufferiv", "alGetBufferiv", "alGetBufferfv", "alSpeedOfSound"
+            "alListener3i", "alListener3iDirect", "alGetListener3i", "alGetListener3iDirect", "alGetListeneriv", "alGetListenerivDirect", "alSource3i", 
+            "alSource3iDirect", "alGetSource3i", "alGetSource3iDirect", "alListeneriv", "alListenerivDirect", "alSourceiv", "alSourceivDirect", "alBufferf", 
+            "alBufferfDirect", "alBuffer3f", "alBuffer3fDirect", "alBufferfv", "alBufferfvDirect", "alBufferi", "alBufferiDirect", "alBuffer3i", 
+            "alBuffer3iDirect", "alBufferiv", "alBufferivDirect", "alGetBuffer3i", "alGetBuffer3iDirect", "alGetBufferiv", "alGetBufferivDirect", 
+            "alGetBuffer3f", "alGetBuffer3fDirect", "alGetBufferfv", "alGetBufferfvDirect", "alSpeedOfSound", "alSpeedOfSoundDirect"
         ) || reportMissing("AL", "OpenAL11");
+    }
+
+    private static boolean check_EXT_debug(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_EXT_debug")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164
+        },
+            "alDebugMessageCallbackEXT", "alDebugMessageCallbackDirectEXT", "alDebugMessageInsertEXT", "alDebugMessageInsertDirectEXT", 
+            "alDebugMessageControlEXT", "alDebugMessageControlDirectEXT", "alPushDebugGroupEXT", "alPushDebugGroupDirectEXT", "alPopDebugGroupEXT", 
+            "alPopDebugGroupDirectEXT", "alGetDebugMessageLogEXT", "alGetDebugMessageLogDirectEXT", "alObjectLabelEXT", "alObjectLabelDirectEXT", 
+            "alGetObjectLabelEXT", "alGetObjectLabelDirectEXT", "alGetPointerEXT", "alGetPointerDirectEXT", "alGetPointervEXT", "alGetPointervDirectEXT"
+        ) || reportMissing("AL", "AL_EXT_debug");
     }
 
     private static boolean check_EXT_EFX(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -508,13 +857,22 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101
+            165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 
+            194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 
+            223, 224, 225, 226, 227, 228, 229, 230
         },
-            "alGenEffects", "alDeleteEffects", "alIsEffect", "alEffecti", "alEffectiv", "alEffectf", "alEffectfv", "alGetEffecti", "alGetEffectiv", 
-            "alGetEffectf", "alGetEffectfv", "alGenFilters", "alDeleteFilters", "alIsFilter", "alFilteri", "alFilteriv", "alFilterf", "alFilterfv", 
-            "alGetFilteri", "alGetFilteriv", "alGetFilterf", "alGetFilterfv", "alGenAuxiliaryEffectSlots", "alDeleteAuxiliaryEffectSlots", 
-            "alIsAuxiliaryEffectSlot", "alAuxiliaryEffectSloti", "alAuxiliaryEffectSlotiv", "alAuxiliaryEffectSlotf", "alAuxiliaryEffectSlotfv", 
-            "alGetAuxiliaryEffectSloti", "alGetAuxiliaryEffectSlotiv", "alGetAuxiliaryEffectSlotf", "alGetAuxiliaryEffectSlotfv"
+            "alGenEffects", "alGenEffectsDirect", "alDeleteEffects", "alDeleteEffectsDirect", "alIsEffect", "alIsEffectDirect", "alEffecti", "alEffectiDirect", 
+            "alEffectiv", "alEffectivDirect", "alEffectf", "alEffectfDirect", "alEffectfv", "alEffectfvDirect", "alGetEffecti", "alGetEffectiDirect", 
+            "alGetEffectiv", "alGetEffectivDirect", "alGetEffectf", "alGetEffectfDirect", "alGetEffectfv", "alGetEffectfvDirect", "alGenFilters", 
+            "alGenFiltersDirect", "alDeleteFilters", "alDeleteFiltersDirect", "alIsFilter", "alIsFilterDirect", "alFilteri", "alFilteriDirect", "alFilteriv", 
+            "alFilterivDirect", "alFilterf", "alFilterfDirect", "alFilterfv", "alFilterfvDirect", "alGetFilteri", "alGetFilteriDirect", "alGetFilteriv", 
+            "alGetFilterivDirect", "alGetFilterf", "alGetFilterfDirect", "alGetFilterfv", "alGetFilterfvDirect", "alGenAuxiliaryEffectSlots", 
+            "alGenAuxiliaryEffectSlotsDirect", "alDeleteAuxiliaryEffectSlots", "alDeleteAuxiliaryEffectSlotsDirect", "alIsAuxiliaryEffectSlot", 
+            "alIsAuxiliaryEffectSlotDirect", "alAuxiliaryEffectSloti", "alAuxiliaryEffectSlotiDirect", "alAuxiliaryEffectSlotiv", 
+            "alAuxiliaryEffectSlotivDirect", "alAuxiliaryEffectSlotf", "alAuxiliaryEffectSlotfDirect", "alAuxiliaryEffectSlotfv", 
+            "alAuxiliaryEffectSlotfvDirect", "alGetAuxiliaryEffectSloti", "alGetAuxiliaryEffectSlotiDirect", "alGetAuxiliaryEffectSlotiv", 
+            "alGetAuxiliaryEffectSlotivDirect", "alGetAuxiliaryEffectSlotf", "alGetAuxiliaryEffectSlotfDirect", "alGetAuxiliaryEffectSlotfv", 
+            "alGetAuxiliaryEffectSlotfvDirect"
         ) || reportMissing("AL", "ALC_EXT_EFX");
     }
 
@@ -524,9 +882,9 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            102
+            231, 232
         },
-            "alBufferDataStatic"
+            "alBufferDataStatic", "alBufferDataStaticDirect"
         ) || reportMissing("AL", "AL_EXT_STATIC_BUFFER");
     }
 
@@ -536,7 +894,7 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            103, 104, 105, 106
+            233, 234, 235, 236
         },
             "alBufferSamplesSOFT", "alBufferSubSamplesSOFT", "alGetBufferSamplesSOFT", "alIsBufferFormatSupportedSOFT"
         ) || reportMissing("AL", "AL_SOFT_buffer_samples");
@@ -548,9 +906,9 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            107
+            237, 238
         },
-            "alBufferSubDataSOFT"
+            "alBufferSubDataSOFT", "alBufferSubDataDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_buffer_sub_data");
     }
 
@@ -560,9 +918,10 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            108, 109, 110, 111
+            239, 240, 241, 242, 243, 244, 245, 246
         },
-            "alBufferCallbackSOFT", "alGetBufferPtrSOFT", "alGetBuffer3PtrSOFT", "alGetBufferPtrvSOFT"
+            "alBufferCallbackSOFT", "alBufferCallbackDirectSOFT", "alGetBufferPtrSOFT", "alGetBufferPtrDirectSOFT", "alGetBuffer3PtrSOFT", 
+            "alGetBuffer3PtrDirectSOFT", "alGetBufferPtrvSOFT", "alGetBufferPtrvDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_callback_buffer");
     }
 
@@ -572,9 +931,9 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            112, 113
+            247, 248, 249, 250
         },
-            "alDeferUpdatesSOFT", "alProcessUpdatesSOFT"
+            "alDeferUpdatesSOFT", "alDeferUpdatesDirectSOFT", "alProcessUpdatesSOFT", "alProcessUpdatesDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_deferred_updates");
     }
 
@@ -584,9 +943,10 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            114, 115, 116, 117
+            251, 252, 253, 254, 255, 256, 257, 258
         },
-            "alEventControlSOFT", "alEventCallbackSOFT", "alGetPointerSOFT", "alGetPointervSOFT"
+            "alEventControlSOFT", "alEventControlDirectSOFT", "alEventCallbackSOFT", "alEventCallbackDirectSOFT", "alGetPointerSOFT", "alGetPointerDirectSOFT", 
+            "alGetPointervSOFT", "alGetPointervDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_events");
     }
 
@@ -596,10 +956,12 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129
+            259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282
         },
-            "alSourcedSOFT", "alSource3dSOFT", "alSourcedvSOFT", "alGetSourcedSOFT", "alGetSource3dSOFT", "alGetSourcedvSOFT", "alSourcei64SOFT", 
-            "alSource3i64SOFT", "alSourcei64vSOFT", "alGetSourcei64SOFT", "alGetSource3i64SOFT", "alGetSourcei64vSOFT"
+            "alSourcedSOFT", "alSourcedDirectSOFT", "alSource3dSOFT", "alSource3dDirectSOFT", "alSourcedvSOFT", "alSourcedvDirectSOFT", "alGetSourcedSOFT", 
+            "alGetSourcedDirectSOFT", "alGetSource3dSOFT", "alGetSource3dDirectSOFT", "alGetSourcedvSOFT", "alGetSourcedvDirectSOFT", "alSourcei64SOFT", 
+            "alSourcei64DirectSOFT", "alSource3i64SOFT", "alSource3i64DirectSOFT", "alSourcei64vSOFT", "alSourcei64vDirectSOFT", "alGetSourcei64SOFT", 
+            "alGetSourcei64DirectSOFT", "alGetSource3i64SOFT", "alGetSource3i64DirectSOFT", "alGetSourcei64vSOFT", "alGetSourcei64vDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_source_latency");
     }
 
@@ -609,9 +971,9 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            130
+            283, 284
         },
-            "alGetStringiSOFT"
+            "alGetStringiSOFT", "alGetStringiDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_source_resampler");
     }
 
@@ -621,9 +983,9 @@ public final class ALCapabilities {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            131, 132
+            285, 286, 287, 288
         },
-            "alSourcePlayAtTimeSOFT", "alSourcePlayAtTimevSOFT"
+            "alSourcePlayAtTimeSOFT", "alSourcePlayAtTimeDirectSOFT", "alSourcePlayAtTimevSOFT", "alSourcePlayAtTimevDirectSOFT"
         ) || reportMissing("AL", "AL_SOFT_source_start_delay");
     }
 

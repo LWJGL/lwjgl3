@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_buffer") {
+val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_buffer", postfix = SOFT) {
     documentation =
         """
         Native bindings to the $specLinkOpenALSoft extension.
@@ -46,7 +46,7 @@ val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_
         ALsizei("freq", "the base sample rate the samples will play at"),
         ALBUFFERCALLBACKTYPESOFT("callback", ""),
         "ALvoid".opaque.p("userptr", "stored with the {@code callback} pointer. Any data it references is not copied")
-    )
+    ).directContext()
 
     ALvoid(
         "GetBufferPtrSOFT",
@@ -55,7 +55,7 @@ val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_
         ALuint("buffer", ""),
         ALenum("param", ""),
         Check(1)..ReturnParam..ALvoid.p.p("ptr", "")
-    )
+    ).directContext()
 
     ALvoid(
         "GetBuffer3PtrSOFT",
@@ -66,7 +66,7 @@ val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_
         Check(1)..ALvoid.p.p("ptr0", ""),
         Check(1)..ALvoid.p.p("ptr1", ""),
         Check(1)..ALvoid.p.p("ptr2", "")
-    )
+    ).directContext()
 
     ALvoid(
         "GetBufferPtrvSOFT",
@@ -75,5 +75,5 @@ val AL_SOFT_callback_buffer = "SOFTCallbackBuffer".nativeClassAL("SOFT_callback_
         ALuint("buffer", ""),
         ALenum("param", ""),
         Check(1)..ALvoid.p.p("ptr", "")
-    )
+    ).directContext()
 }

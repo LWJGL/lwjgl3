@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_latency") {
+val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_latency", postfix = SOFT) {
     documentation = """
         Native bindings to the $specLinkOpenALSoft extension.
 
@@ -69,7 +69,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         ALdouble("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Source3dSOFT",
@@ -80,7 +80,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALdouble("value1", "the first value"),
         ALdouble("value2", "the second value"),
         ALdouble("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcedvSOFT",
@@ -89,7 +89,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALdouble.const.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcedSOFT",
@@ -98,7 +98,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
         ReturnParam..Check(1)..ALdouble.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSource3dSOFT",
@@ -109,7 +109,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         Check(1)..ALdouble.p("value1", "the first value"),
         Check(1)..ALdouble.p("value2", "the second value"),
         Check(1)..ALdouble.p("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcedvSOFT",
@@ -118,7 +118,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALdouble.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourcei64SOFT",
@@ -127,7 +127,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         ALint64SOFT("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Source3i64SOFT",
@@ -138,7 +138,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALint64SOFT("value1", "the first value"),
         ALint64SOFT("value2", "the second value"),
         ALint64SOFT("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourcei64vSOFT",
@@ -147,7 +147,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALint64SOFT.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcei64SOFT",
@@ -156,7 +156,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
         ReturnParam..Check(1)..ALint64SOFT.p("value", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSource3i64SOFT",
@@ -167,7 +167,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         Check(1)..ALint64SOFT.p("value1", "the first value"),
         Check(1)..ALint64SOFT.p("value2", "the second value"),
         Check(1)..ALint64SOFT.p("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcei64vSOFT",
@@ -176,5 +176,5 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
         Check(1)..ALint64SOFT.p("values", "the parameter values")
-    )
+    ).directContext()
 }

@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*{@link #invoke}) (
+ * ALsizei (*{@link #invoke}) (
  *     ALvoid *userptr,
  *     ALvoid *sampledata,
  *     ALsizei numbytes
@@ -65,7 +65,7 @@ public abstract class SOFTCallbackBufferType extends Callback implements SOFTCal
         }
 
         @Override
-        public long invoke(long userptr, long sampledata, int numbytes) {
+        public int invoke(long userptr, long sampledata, int numbytes) {
             return delegate.invoke(userptr, sampledata, numbytes);
         }
 

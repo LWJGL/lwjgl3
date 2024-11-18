@@ -28,5 +28,5 @@ val AL_EXT_STATIC_BUFFER = "EXTStaticBuffer".nativeClassAL("EXT_STATIC_BUFFER") 
         )..ALvoid.p("data", "the sample data"),
         AutoSize("data")..ALsizei("len", "the data buffer size, in bytes"),
         ALsizei("freq", "the data frequency")
-    )
+    ).directContext()
 }

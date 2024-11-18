@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*{@link #invoke}) (
+ * ALsizei (*{@link #invoke}) (
  *     ALvoid *userptr,
  *     ALvoid *sampledata,
  *     ALsizei numbytes
@@ -28,7 +28,7 @@ public interface SOFTCallbackBufferTypeI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
-        ffi_type_pointer,
+        ffi_type_sint32,
         ffi_type_pointer, ffi_type_pointer, ffi_type_sint32
     );
 
@@ -37,12 +37,12 @@ public interface SOFTCallbackBufferTypeI extends CallbackI {
 
     @Override
     default void callback(long ret, long args) {
-        long __result = invoke(
+        int __result = invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE)),
             memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
-        apiClosureRetP(ret, __result);
+        apiClosureRet(ret, __result);
     }
 
     /**
@@ -56,6 +56,6 @@ public interface SOFTCallbackBufferTypeI extends CallbackI {
      *         
      *         <p>If the return value is less than {@code numbytes}, it's treated as the end of the buffer and the source will play any complete samples before stopping.</p>
      */
-    @NativeType("void *") long invoke(@NativeType("ALvoid *") long userptr, @NativeType("ALvoid *") long sampledata, @NativeType("ALsizei") int numbytes);
+    @NativeType("ALsizei") int invoke(@NativeType("ALvoid *") long userptr, @NativeType("ALvoid *") long sampledata, @NativeType("ALsizei") int numbytes);
 
 }

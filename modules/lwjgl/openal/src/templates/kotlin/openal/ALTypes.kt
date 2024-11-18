@@ -30,14 +30,33 @@ val ALenum = IntegerType("ALenum", PrimitiveMapping.INT)
 val ALcharASCII = CharType("ALchar", CharMapping.ASCII)
 val ALcharUTF8 = CharType("ALchar", CharMapping.UTF8)
 
+// AL_EXT_debug
+
+val ALDEBUGPROCEXT = Module.OPENAL.callback {
+    void(
+        "EXTDebugProc",
+        "",
+
+        ALenum("source", ""),
+        ALenum("type", ""),
+        ALuint("id", ""),
+        ALenum("severity", ""),
+        AutoSize("message")..ALsizei("length", ""),
+        ALcharUTF8.const.p("message", ""),
+        nullable.."ALvoid".opaque.p("userParam", ""),
+
+        nativeType = "ALDEBUGPROCEXT"
+    )
+}
+
 // AL_SOFT_callback_buffer
 
 val ALBUFFERCALLBACKTYPESOFT = Module.OPENAL.callback {
-    void.p(
+    ALsizei(
         "SOFTCallbackBufferType",
         "",
 
-        "ALvoid".opaque.p("userptr", "the same pointer provided to #BufferCallbackSOFT()"),
+        nullable.."ALvoid".opaque.p("userptr", "the same pointer provided to #BufferCallbackSOFT()"),
         ALvoid.p("sampledata", "a pointer to the sample data buffer that should be filled in by the function"),
         AutoSize("sampledata")..ALsizei(
             "numbytes",
@@ -70,7 +89,7 @@ val ALEVENTPROCSOFT = Module.OPENAL.callback {
         ALuint("param", ""),
         AutoSize("message")..ALsizei("length", ""),
         ALcharASCII.const.p("message", ""),
-        Unsafe..nullable..ALvoid.p("userParam", ""),
+        nullable.."ALvoid".opaque.p("userParam", ""),
 
         nativeType = "ALEVENTPROCSOFT"
     )

@@ -161,56 +161,56 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         for the enumeration value, as defined in the specification.
         """,
         void()
-    )
+    ).directContext()
 
     ALvoid(
         "Enable",
         "Enables AL capabilities.",
 
         ALenum("target", "the capability to enable")
-    )
+    ).directContext()
 
     ALvoid(
         "Disable",
         "Disables AL capabilities.",
 
         ALenum("target", "the capability to disable")
-    )
+    ).directContext()
 
     ALboolean(
         "IsEnabled",
         "Queries whether a given capability is currently enabled or not.",
 
         ALenum("target", "the capability to query")
-    )
+    ).directContext()
 
     ALboolean(
         "GetBoolean",
         "Returns the boolean value of the specified parameter.",
 
         ALenum("paramName", "the parameter to query")
-    )
+    ).directContext()
 
     ALint(
         "GetInteger",
         "Returns the integer value of the specified parameter.",
 
         ALenum("paramName", "the parameter to query", NumericalQueries)
-    )
+    ).directContext()
 
     ALfloat(
         "GetFloat",
         "Returns the float value of the specified parameter.",
 
         ALenum("paramName", "the parameter to query", NumericalQueries)
-    )
+    ).directContext()
 
     ALdouble(
         "GetDouble",
         "Returns the double value of the specified parameter.",
 
         ALenum("paramName", "the parameter to query", NumericalQueries)
-    )
+    ).directContext()
 
     ALvoid(
         "GetBooleanv",
@@ -218,7 +218,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
         ALenum("paramName", "the parameter to query"),
         Check(1)..ALboolean.p("dest", "a buffer that will receive the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetIntegerv",
@@ -226,7 +226,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
         ALenum("paramName", "the parameter to query"),
         Check(1)..ALint.p("dest", "a buffer that will receive the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetFloatv",
@@ -234,7 +234,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
         ALenum("paramName", "the parameter to query"),
         Check(1)..ALfloat.p("dest", "a buffer that will receive the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetDoublev",
@@ -242,14 +242,14 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
         ALenum("paramName", "the parameter to query"),
         Check(1)..ALdouble.p("dest", "a buffer that will receive the parameter values")
-    )
+    ).directContext()
 
     ALcharUTF8.const.p(
         "GetString",
         "Returns the string value of the specified parameter",
 
         ALenum("paramName", "the parameter to query", StringQueries)
-    )
+    ).directContext()
 
     ALvoid(
         "DistanceModel",
@@ -268,7 +268,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         """,
 
         ALenum("modelName", "the distance attenuation model to set", DistanceModels)
-    )
+    ).directContext()
 
     ALvoid(
         "DopplerFactor",
@@ -311,7 +311,7 @@ f' = f * (SS - DF * vls) / (SS - DF * vss)
         """,
 
         ALfloat("dopplerFactor", "the doppler factor")
-    )
+    ).directContext()
 
     ALvoid(
         "DopplerVelocity",
@@ -340,7 +340,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to modify", ListenerAttributes),
         ALfloat("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Listeneri",
@@ -348,7 +348,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to modify", ListenerAttributes),
         ALint("values", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Listener3f",
@@ -358,7 +358,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALfloat("value1", "the first value"),
         ALfloat("value2", "the second value"),
         ALfloat("value3", "the third value")
-    )
+    ).directContext()
 
     ALvoid(
         "Listenerfv",
@@ -366,7 +366,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to modify"),
         Check(1)..ALfloat.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetListenerf",
@@ -374,7 +374,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to query", ListenerAttributes),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetListeneri",
@@ -382,7 +382,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to query", ListenerAttributes),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetListener3f",
@@ -392,7 +392,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         Check(1)..ALfloat.p("value1", "the first parameter value"),
         Check(1)..ALfloat.p("value2", "the second parameter value"),
         Check(1)..ALfloat.p("value3", "the third parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetListenerfv",
@@ -400,7 +400,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALenum("paramName", "the parameter to query", ListenerAttributes),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GenSources",
@@ -408,7 +408,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("srcNames")..ALsizei("n", "the number of source names to generated"),
         ReturnParam..ALuint.p("srcNames", "the buffer that will receive the source names")
-    )
+    ).directContext()
 
     ALvoid(
         "DeleteSources",
@@ -416,14 +416,14 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("sources")..ALsizei("n", "the number of sources to delete"),
         SingleValue("source")..ALuint.p("sources", "the sources to delete")
-    )
+    ).directContext()
 
     ALboolean(
         "IsSource",
         "Verifies whether the specified object name is a source name.",
 
         ALuint("sourceName", "a value that may be a source name")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourcef",
@@ -432,7 +432,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify", SourceAttributes),
         ALfloat("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Source3f",
@@ -443,7 +443,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALfloat("v1", "the first parameter value"),
         ALfloat("v2", "the second parameter value"),
         ALfloat("v3", "the third parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourcefv",
@@ -452,7 +452,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         Check(1)..ALfloat.const.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "Sourcei",
@@ -461,7 +461,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to modify"),
         ALenum("param", "the parameter to modify"),
         ALint("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcef",
@@ -470,7 +470,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query", SourceAttributes),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSource3f",
@@ -481,7 +481,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         Check(1)..ALfloat.p("v1", "the first parameter value"),
         Check(1)..ALfloat.p("v2", "the second parameter value"),
         Check(1)..ALfloat.p("v3", "the third parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcefv",
@@ -490,7 +490,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query", SourceAttributes),
         Check(1)..ALfloat.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourcei",
@@ -499,7 +499,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query", SourceAttributes),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetSourceiv",
@@ -508,7 +508,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query", SourceAttributes),
         Check(1)..ALint.p("values", "the parameter values")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceQueueBuffers",
@@ -523,7 +523,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("sourceName", "the target source"),
         AutoSize("bufferNames")..ALsizei("numBuffers", "the number of buffers to queue"),
         SingleValue("bufferName")..ALuint.p("bufferNames", "the buffer names")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceUnqueueBuffers",
@@ -539,7 +539,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("sourceName", "the target source"),
         AutoSize("bufferNames")..ALsizei("numEntries", "the number of buffers to unqueue"),
         ReturnParam..ALuint.p("bufferNames", "the buffer names")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcePlay",
@@ -554,7 +554,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALuint("source", "the source to play")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcePause",
@@ -567,7 +567,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALuint("source", "the source to pause")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceStop",
@@ -580,7 +580,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALuint("source", "the source to stop")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceRewind",
@@ -594,7 +594,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALuint("source", "the source to rewind")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcePlayv",
@@ -602,7 +602,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("sources")..ALsizei("n", "the number of sources to play"),
         ALuint.const.p("sources", "the sources to play")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcePausev",
@@ -610,7 +610,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("sources")..ALsizei("n", "the number of sources to pause"),
         ALuint.const.p("sources", "the sources to pause")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceStopv",
@@ -618,7 +618,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("sources")..ALsizei("n", "the number of sources to stop"),
         ALuint.const.p("sources", "the sources to stop")
-    )
+    ).directContext()
 
     ALvoid(
         "SourceRewindv",
@@ -626,7 +626,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("sources")..ALsizei("n", "the number of sources to rewind"),
         ALuint.const.p("sources", "the sources to rewind")
-    )
+    ).directContext()
 
     ALvoid(
         "GenBuffers",
@@ -634,7 +634,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("bufferNames")..ALsizei("n", "the number of buffer names to generate"),
         ReturnParam..ALuint.p("bufferNames", "the buffer that will receive the buffer names")
-    )
+    ).directContext()
 
     ALvoid(
         "DeleteBuffers",
@@ -642,14 +642,14 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         AutoSize("bufferNames")..ALsizei("n", "the number of buffers to delete"),
         SingleValue("bufferName")..ALuint.const.p("bufferNames", "the buffers to delete")
-    )
+    ).directContext()
 
     ALboolean(
         "IsBuffer",
         "Verifies whether the specified object name is a buffer name.",
 
         ALuint("bufferName", "a value that may be a buffer name")
-    )
+    ).directContext()
 
     ALvoid(
         "GetBufferf",
@@ -658,7 +658,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("bufferName", "the buffer to query"),
         ALenum("paramName", "the parameter to query", BufferAttributes),
         Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "GetBufferi",
@@ -667,7 +667,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALuint("bufferName", "the buffer to query"),
         ALenum("paramName", "the parameter to query", BufferAttributes),
         Check(1)..ReturnParam..ALint.p("value", "the parameter value")
-    )
+    ).directContext()
 
     ALvoid(
         "BufferData",
@@ -695,16 +695,16 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         )..ALvoid.const.p("data", "the sample data"),
         AutoSize("data")..ALsizei("size", "the data buffer size, in bytes"),
         ALsizei("frequency", "the data frequency")
-    )
+    ).directContext()
 
-    ALuint(
+    ALenum(
         "GetEnumValue",
         "Returns the enumeration value of the specified enum.",
 
         ALcharASCII.const.p("enumName", "the enum name")
-    )
+    ).directContext()
 
-    opaque_p(
+    "ALvoid".opaque.p(
         "GetProcAddress",
         """
         Retrieves extension entry points.
@@ -717,7 +717,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALcharASCII.const.p("funcName", "the function name")
-    )
+    ).directContext()
 
     ALCboolean(
         "IsExtensionPresent",
@@ -729,6 +729,5 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         """,
 
         ALcharASCII.const.p("extName", "the extension name")
-    )
-
+    ).directContext()
 }

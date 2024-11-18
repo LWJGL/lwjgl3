@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub_data") {
+val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub_data", postfix = SOFT) {
     documentation =
         """
         Native bindings to the $specLinkOpenALSoft extension.
@@ -33,5 +33,5 @@ val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub
         )..ALvoid.const.p("data", ""),
         ALsizei("offset", ""),
         AutoSize("data")..ALsizei("length", "")
-    )
+    ).directContext()
 }

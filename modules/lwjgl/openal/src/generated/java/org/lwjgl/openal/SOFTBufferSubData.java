@@ -55,6 +55,33 @@ public class SOFTBufferSubData {
         nalBufferSubDataSOFT(buffer, format, memAddress(data), offset, data.remaining() << 2);
     }
 
+    // --- [ alBufferSubDataDirectSOFT ] ---
+
+    public static void nalBufferSubDataDirectSOFT(long context, int buffer, int format, long data, int offset, int length) {
+        long __functionAddress = AL.getICD().alBufferSubDataDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, format, data, offset, length, __functionAddress);
+    }
+
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") ByteBuffer data, @NativeType("ALsizei") int offset) {
+        nalBufferSubDataDirectSOFT(context, buffer, format, memAddress(data), offset, data.remaining());
+    }
+
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") ShortBuffer data, @NativeType("ALsizei") int offset) {
+        nalBufferSubDataDirectSOFT(context, buffer, format, memAddress(data), offset, data.remaining() << 1);
+    }
+
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") IntBuffer data, @NativeType("ALsizei") int offset) {
+        nalBufferSubDataDirectSOFT(context, buffer, format, memAddress(data), offset, data.remaining() << 2);
+    }
+
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") FloatBuffer data, @NativeType("ALsizei") int offset) {
+        nalBufferSubDataDirectSOFT(context, buffer, format, memAddress(data), offset, data.remaining() << 2);
+    }
+
     /** Array version of: {@link #alBufferSubDataSOFT BufferSubDataSOFT} */
     public static void alBufferSubDataSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") short[] data, @NativeType("ALsizei") int offset) {
         long __functionAddress = AL.getICD().alBufferSubDataSOFT;
@@ -80,6 +107,36 @@ public class SOFTBufferSubData {
             check(__functionAddress);
         }
         invokePV(buffer, format, data, offset, data.length << 2, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferSubDataDirectSOFT} */
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") short[] data, @NativeType("ALsizei") int offset) {
+        long __functionAddress = AL.getICD().alBufferSubDataDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, format, data, offset, data.length << 1, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferSubDataDirectSOFT} */
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") int[] data, @NativeType("ALsizei") int offset) {
+        long __functionAddress = AL.getICD().alBufferSubDataDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, format, data, offset, data.length << 2, __functionAddress);
+    }
+
+    /** Array version of: {@link #alBufferSubDataDirectSOFT} */
+    public static void alBufferSubDataDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid const *") float[] data, @NativeType("ALsizei") int offset) {
+        long __functionAddress = AL.getICD().alBufferSubDataDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, buffer, format, data, offset, data.length << 2, __functionAddress);
     }
 
 }

@@ -85,6 +85,25 @@ public class SOFTSourceLatency {
         invokeV(source, param, value, __functionAddress);
     }
 
+    // --- [ alSourcedDirectSOFT ] ---
+
+    /**
+     * Sets the double value of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value  the parameter value
+     */
+    @NativeType("ALvoid")
+    public static void alSourcedDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble") double value) {
+        long __functionAddress = AL.getICD().alSourcedDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, param, value, __functionAddress);
+    }
+
     // --- [ alSource3dSOFT ] ---
 
     /**
@@ -103,6 +122,27 @@ public class SOFTSourceLatency {
             check(__functionAddress);
         }
         invokeV(source, param, value1, value2, value3, __functionAddress);
+    }
+
+    // --- [ alSource3dDirectSOFT ] ---
+
+    /**
+     * Sets the 3 dimensional double values of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value1 the first value
+     * @param value2 the second value
+     * @param value3 the third value
+     */
+    @NativeType("ALvoid")
+    public static void alSource3dDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble") double value1, @NativeType("ALdouble") double value2, @NativeType("ALdouble") double value3) {
+        long __functionAddress = AL.getICD().alSource3dDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePV(context, source, param, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alSourcedvSOFT ] ---
@@ -129,6 +169,33 @@ public class SOFTSourceLatency {
             check(value, 1);
         }
         nalSourcedvSOFT(source, param, memAddress(value));
+    }
+
+    // --- [ alSourcedvDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alSourcedvDirectSOFT} */
+    public static void nalSourcedvDirectSOFT(long context, int source, int param, long value) {
+        long __functionAddress = AL.getICD().alSourcedvDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
+    /**
+     * pointer version of {@link #alSourcedSOFT SourcedSOFT}
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value  the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alSourcedvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble const *") DoubleBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalSourcedvDirectSOFT(context, source, param, memAddress(value));
     }
 
     // --- [ alGetSourcedSOFT ] ---
@@ -175,6 +242,51 @@ public class SOFTSourceLatency {
         }
     }
 
+    // --- [ alGetSourcedDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSourcedDirectSOFT} */
+    public static void nalGetSourcedDirectSOFT(long context, int source, int param, long value) {
+        long __functionAddress = AL.getICD().alGetSourcedDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
+    /**
+     * Gets the double value of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param value  the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcedDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") DoubleBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetSourcedDirectSOFT(context, source, param, memAddress(value));
+    }
+
+    /**
+     * Gets the double value of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     */
+    @NativeType("ALvoid")
+    public static double alGetSourcedDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            DoubleBuffer value = stack.callocDouble(1);
+            nalGetSourcedDirectSOFT(context, source, param, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetSource3dSOFT ] ---
 
     /** Unsafe version of: {@link #alGetSource3dSOFT GetSource3dSOFT} */
@@ -205,6 +317,37 @@ public class SOFTSourceLatency {
         nalGetSource3dSOFT(source, param, memAddress(value1), memAddress(value2), memAddress(value3));
     }
 
+    // --- [ alGetSource3dDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSource3dDirectSOFT} */
+    public static void nalGetSource3dDirectSOFT(long context, int source, int param, long value1, long value2, long value3) {
+        long __functionAddress = AL.getICD().alGetSource3dDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
+    }
+
+    /**
+     * Gets the 3 dimensional double values of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param value1 the first value
+     * @param value2 the second value
+     * @param value3 the third value
+     */
+    @NativeType("ALvoid")
+    public static void alGetSource3dDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") DoubleBuffer value1, @NativeType("ALdouble *") DoubleBuffer value2, @NativeType("ALdouble *") DoubleBuffer value3) {
+        if (CHECKS) {
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        nalGetSource3dDirectSOFT(context, source, param, memAddress(value1), memAddress(value2), memAddress(value3));
+    }
+
     // --- [ alGetSourcedvSOFT ] ---
 
     /** Unsafe version of: {@link #alGetSourcedvSOFT GetSourcedvSOFT} */
@@ -231,6 +374,33 @@ public class SOFTSourceLatency {
         nalGetSourcedvSOFT(source, param, memAddress(values));
     }
 
+    // --- [ alGetSourcedvDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSourcedvDirectSOFT} */
+    public static void nalGetSourcedvDirectSOFT(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alGetSourcedvDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Array version of {@link #alGetSourcedSOFT GetSourcedSOFT}
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcedvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") DoubleBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetSourcedvDirectSOFT(context, source, param, memAddress(values));
+    }
+
     // --- [ alSourcei64SOFT ] ---
 
     /**
@@ -247,6 +417,25 @@ public class SOFTSourceLatency {
             check(__functionAddress);
         }
         invokeJV(source, param, value, __functionAddress);
+    }
+
+    // --- [ alSourcei64DirectSOFT ] ---
+
+    /**
+     * Sets the 64 bit integer value of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value  the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alSourcei64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT") long value) {
+        long __functionAddress = AL.getICD().alSourcei64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePJV(context, source, param, value, __functionAddress);
     }
 
     // --- [ alSource3i64SOFT ] ---
@@ -267,6 +456,27 @@ public class SOFTSourceLatency {
             check(__functionAddress);
         }
         invokeJJJV(source, param, value1, value2, value3, __functionAddress);
+    }
+
+    // --- [ alSource3i64DirectSOFT ] ---
+
+    /**
+     * Sets the 3 dimensional 64 bit integer values of a source parameter.
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param value1 the first value
+     * @param value2 the second value
+     * @param value3 the third value
+     */
+    @NativeType("ALvoid")
+    public static void alSource3i64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT") long value1, @NativeType("ALint64SOFT") long value2, @NativeType("ALint64SOFT") long value3) {
+        long __functionAddress = AL.getICD().alSource3i64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePJJJV(context, source, param, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alSourcei64vSOFT ] ---
@@ -293,6 +503,33 @@ public class SOFTSourceLatency {
             check(values, 1);
         }
         nalSourcei64vSOFT(source, param, memAddress(values));
+    }
+
+    // --- [ alSourcei64vDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alSourcei64vDirectSOFT} */
+    public static void nalSourcei64vDirectSOFT(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alSourcei64vDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Array version of {@link #alSourcei64SOFT Sourcei64SOFT}
+     *
+     * @param source the source to modify
+     * @param param  the parameter to modify
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alSourcei64vDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT const *") LongBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalSourcei64vDirectSOFT(context, source, param, memAddress(values));
     }
 
     // --- [ alGetSourcei64SOFT ] ---
@@ -339,6 +576,51 @@ public class SOFTSourceLatency {
         }
     }
 
+    // --- [ alGetSourcei64DirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSourcei64DirectSOFT} */
+    public static void nalGetSourcei64DirectSOFT(long context, int source, int param, long value) {
+        long __functionAddress = AL.getICD().alGetSourcei64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
+    /**
+     * Gets the 64 bit integer value of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param value  the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcei64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") LongBuffer value) {
+        if (CHECKS) {
+            check(value, 1);
+        }
+        nalGetSourcei64DirectSOFT(context, source, param, memAddress(value));
+    }
+
+    /**
+     * Gets the 64 bit integer value of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     */
+    @NativeType("ALvoid")
+    public static long alGetSourcei64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            LongBuffer value = stack.callocLong(1);
+            nalGetSourcei64DirectSOFT(context, source, param, memAddress(value));
+            return value.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ alGetSource3i64SOFT ] ---
 
     /** Unsafe version of: {@link #alGetSource3i64SOFT GetSource3i64SOFT} */
@@ -369,6 +651,37 @@ public class SOFTSourceLatency {
         nalGetSource3i64SOFT(source, param, memAddress(value1), memAddress(value2), memAddress(value3));
     }
 
+    // --- [ alGetSource3i64DirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSource3i64DirectSOFT} */
+    public static void nalGetSource3i64DirectSOFT(long context, int source, int param, long value1, long value2, long value3) {
+        long __functionAddress = AL.getICD().alGetSource3i64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
+    }
+
+    /**
+     * Gets the 3 dimensional 64 bit integer values of a source parameter.
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param value1 the first value
+     * @param value2 the second value
+     * @param value3 the third value
+     */
+    @NativeType("ALvoid")
+    public static void alGetSource3i64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") LongBuffer value1, @NativeType("ALint64SOFT *") LongBuffer value2, @NativeType("ALint64SOFT *") LongBuffer value3) {
+        if (CHECKS) {
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        nalGetSource3i64DirectSOFT(context, source, param, memAddress(value1), memAddress(value2), memAddress(value3));
+    }
+
     // --- [ alGetSourcei64vSOFT ] ---
 
     /** Unsafe version of: {@link #alGetSourcei64vSOFT GetSourcei64vSOFT} */
@@ -395,6 +708,33 @@ public class SOFTSourceLatency {
         nalGetSourcei64vSOFT(source, param, memAddress(values));
     }
 
+    // --- [ alGetSourcei64vDirectSOFT ] ---
+
+    /** Unsafe version of: {@link #alGetSourcei64vDirectSOFT} */
+    public static void nalGetSourcei64vDirectSOFT(long context, int source, int param, long values) {
+        long __functionAddress = AL.getICD().alGetSourcei64vDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
+    /**
+     * Array version of {@link #alGetSourcei64SOFT GetSourcei64SOFT}
+     *
+     * @param source the source to query
+     * @param param  the parameter to query
+     * @param values the parameter values
+     */
+    @NativeType("ALvoid")
+    public static void alGetSourcei64vDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") LongBuffer values) {
+        if (CHECKS) {
+            check(values, 1);
+        }
+        nalGetSourcei64vDirectSOFT(context, source, param, memAddress(values));
+    }
+
     /** Array version of: {@link #alSourcedvSOFT SourcedvSOFT} */
     @NativeType("ALvoid")
     public static void alSourcedvSOFT(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble const *") double[] value) {
@@ -406,6 +746,18 @@ public class SOFTSourceLatency {
         invokePV(source, param, value, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourcedvDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alSourcedvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble const *") double[] value) {
+        long __functionAddress = AL.getICD().alSourcedvDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcedSOFT GetSourcedSOFT} */
     @NativeType("ALvoid")
     public static void alGetSourcedSOFT(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") double[] value) {
@@ -415,6 +767,18 @@ public class SOFTSourceLatency {
             check(value, 1);
         }
         invokePV(source, param, value, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcedDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSourcedDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") double[] value) {
+        long __functionAddress = AL.getICD().alGetSourcedDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSource3dSOFT GetSource3dSOFT} */
@@ -430,6 +794,20 @@ public class SOFTSourceLatency {
         invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetSource3dDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSource3dDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") double[] value1, @NativeType("ALdouble *") double[] value2, @NativeType("ALdouble *") double[] value3) {
+        long __functionAddress = AL.getICD().alGetSource3dDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcedvSOFT GetSourcedvSOFT} */
     @NativeType("ALvoid")
     public static void alGetSourcedvSOFT(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") double[] values) {
@@ -439,6 +817,18 @@ public class SOFTSourceLatency {
             check(values, 1);
         }
         invokePV(source, param, values, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcedvDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSourcedvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALdouble *") double[] values) {
+        long __functionAddress = AL.getICD().alGetSourcedvDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alSourcei64vSOFT Sourcei64vSOFT} */
@@ -452,6 +842,18 @@ public class SOFTSourceLatency {
         invokePV(source, param, values, __functionAddress);
     }
 
+    /** Array version of: {@link #alSourcei64vDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alSourcei64vDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT const *") long[] values) {
+        long __functionAddress = AL.getICD().alSourcei64vDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcei64SOFT GetSourcei64SOFT} */
     @NativeType("ALvoid")
     public static void alGetSourcei64SOFT(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") long[] value) {
@@ -461,6 +863,18 @@ public class SOFTSourceLatency {
             check(value, 1);
         }
         invokePV(source, param, value, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcei64DirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSourcei64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") long[] value) {
+        long __functionAddress = AL.getICD().alGetSourcei64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value, 1);
+        }
+        invokePPV(context, source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSource3i64SOFT GetSource3i64SOFT} */
@@ -476,6 +890,20 @@ public class SOFTSourceLatency {
         invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
+    /** Array version of: {@link #alGetSource3i64DirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSource3i64DirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") long[] value1, @NativeType("ALint64SOFT *") long[] value2, @NativeType("ALint64SOFT *") long[] value3) {
+        long __functionAddress = AL.getICD().alGetSource3i64DirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(value1, 1);
+            check(value2, 1);
+            check(value3, 1);
+        }
+        invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
+    }
+
     /** Array version of: {@link #alGetSourcei64vSOFT GetSourcei64vSOFT} */
     @NativeType("ALvoid")
     public static void alGetSourcei64vSOFT(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") long[] values) {
@@ -485,6 +913,18 @@ public class SOFTSourceLatency {
             check(values, 1);
         }
         invokePV(source, param, values, __functionAddress);
+    }
+
+    /** Array version of: {@link #alGetSourcei64vDirectSOFT} */
+    @NativeType("ALvoid")
+    public static void alGetSourcei64vDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint64SOFT *") long[] values) {
+        long __functionAddress = AL.getICD().alGetSourcei64vDirectSOFT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            check(values, 1);
+        }
+        invokePPV(context, source, param, values, __functionAddress);
     }
 
 }

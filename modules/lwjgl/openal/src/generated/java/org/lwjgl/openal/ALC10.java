@@ -315,7 +315,7 @@ public class ALC10 {
      * @param deviceHandle the device to query
      * @param funcName     the function name
      */
-    @NativeType("void *")
+    @NativeType("ALCvoid *")
     public static long alcGetProcAddress(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALchar const *") ByteBuffer funcName) {
         if (CHECKS) {
             checkNT1(funcName);
@@ -335,7 +335,7 @@ public class ALC10 {
      * @param deviceHandle the device to query
      * @param funcName     the function name
      */
-    @NativeType("void *")
+    @NativeType("ALCvoid *")
     public static long alcGetProcAddress(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALchar const *") CharSequence funcName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {

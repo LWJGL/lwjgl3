@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_events = "SOFTEvents".nativeClassAL("SOFT_events") {
+val AL_SOFT_events = "SOFTEvents".nativeClassAL("SOFT_events", postfix = SOFT) {
     documentation =
         """
         Native bindings to the $specLinkOpenALSoft extension.
@@ -42,22 +42,22 @@ val AL_SOFT_events = "SOFTEvents".nativeClassAL("SOFT_events") {
         AutoSize("types")..ALsizei("count", ""),
         ALenum.const.p("types", ""),
         ALboolean("enable", "")
-    )
+    ).directContext()
 
     void(
         "EventCallbackSOFT",
         "",
 
-        ALEVENTPROCSOFT("callback", ""),
-        Unsafe..nullable..ALvoid.p("userParam", "")
-    )
+        nullable..ALEVENTPROCSOFT("callback", ""),
+        nullable.."ALvoid".opaque.p("userParam", "")
+    ).directContext()
 
     "ALvoid".opaque.p(
         "GetPointerSOFT",
         "",
 
         ALenum("pname", "")
-    )
+    ).directContext()
 
     void(
         "GetPointervSOFT",
@@ -65,5 +65,5 @@ val AL_SOFT_events = "SOFTEvents".nativeClassAL("SOFT_events") {
 
         ALenum("pname", ""),
         Check(1)..ALvoid.p.p("values", "")
-    )
+    ).directContext()
 }

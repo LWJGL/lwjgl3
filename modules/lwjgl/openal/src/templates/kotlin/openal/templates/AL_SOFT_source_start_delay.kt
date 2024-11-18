@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_source_start_delay = "SOFTSourceStartDelay".nativeClassAL("SOFT_source_start_delay") {
+val AL_SOFT_source_start_delay = "SOFTSourceStartDelay".nativeClassAL("SOFT_source_start_delay", postfix = SOFT) {
     documentation = """
         Native bindings to the $specLinkOpenALSoft extension.
 
@@ -31,7 +31,7 @@ val AL_SOFT_source_start_delay = "SOFTSourceStartDelay".nativeClassAL("SOFT_sour
 
         ALuint("source", ""),
         ALint64SOFT("start_time", "")
-    )
+    ).directContext()
 
     ALvoid(
         "SourcePlayAtTimevSOFT",
@@ -40,5 +40,5 @@ val AL_SOFT_source_start_delay = "SOFTSourceStartDelay".nativeClassAL("SOFT_sour
         AutoSize("sources")..ALsizei("n", ""),
         ALuint.const.p("sources", ""),
         ALint64SOFT("start_time", "")
-    )
+    ).directContext()
 }
