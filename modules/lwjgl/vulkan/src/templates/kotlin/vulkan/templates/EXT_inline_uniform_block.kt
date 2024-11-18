@@ -14,7 +14,7 @@ val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline
         This extension introduces the ability to back uniform blocks directly with descriptor sets by storing inline uniform data within descriptor pool storage. Compared to push constants this new construct allows uniform data to be reused across multiple disjoint sets of drawing or dispatching commands and <b>may</b> enable uniform data to be accessed with fewer indirections compared to uniforms backed by buffer memory.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
+        Vulkan APIs in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API names are still available as aliases of the core functionality.
 
         Vulkan 1.3 adds <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-new-features">additional functionality related to this extension</a> in the form of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxInlineUniformTotalSize">{@code maxInlineUniformTotalSize}</a> limit.
 
@@ -36,7 +36,9 @@ val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_VERSION_1_2</li>
                 <li>Interacts with VK_EXT_descriptor_indexing</li>
+                <li>Interacts with VkPhysicalDeviceVulkan12Features::descriptorIndexing</li>
             </ul></dd>
 
             <dt><b>Deprecation State</b></dt>

@@ -146,17 +146,17 @@ public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEnco
     /** indicates whether the QP values determined by rate control will be clamped to the lower bounds on the QP values specified in {@code minQp}. */
     @NativeType("VkBool32")
     public boolean useMinQp() { return nuseMinQp(address()) != 0; }
-    /** specifies the lower bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMinQp} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies the lower bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMinQp} is {@link VK10#VK_TRUE TRUE}. */
     public VkVideoEncodeH264QpKHR minQp() { return nminQp(address()); }
     /** indicates whether the QP values determined by rate control will be clamped to the upper bounds on the QP values specified in {@code maxQp}. */
     @NativeType("VkBool32")
     public boolean useMaxQp() { return nuseMaxQp(address()) != 0; }
-    /** specifies the upper bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMaxQp} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies the upper bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMaxQp} is {@link VK10#VK_TRUE TRUE}. */
     public VkVideoEncodeH264QpKHR maxQp() { return nmaxQp(address()); }
     /** indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code maxFrameSize} as the upper bounds on the encoded frame size for each picture type. */
     @NativeType("VkBool32")
     public boolean useMaxFrameSize() { return nuseMaxFrameSize(address()) != 0; }
-    /** specifies the upper bounds on the encoded frame size, for each picture type, when {@code useMaxFrameSize} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies the upper bounds on the encoded frame size, for each picture type, when {@code useMaxFrameSize} is {@link VK10#VK_TRUE TRUE}. */
     public VkVideoEncodeH264FrameSizeKHR maxFrameSize() { return nmaxFrameSize(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

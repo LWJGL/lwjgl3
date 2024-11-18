@@ -108,7 +108,7 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
         </ul>
 
         <h5>See Also</h5>
-        ##VkCooperativeMatrixPropertiesKHR
+        ##VkCooperativeMatrixFlexibleDimensionsPropertiesNV, ##VkCooperativeMatrixPropertiesKHR
         """,
 
         "COMPONENT_TYPE_FLOAT16_KHR".."0",
@@ -139,7 +139,7 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
         All enum values match the corresponding SPIR-V value.
 
         <h5>See Also</h5>
-        ##VkCooperativeMatrixPropertiesKHR
+        ##VkCooperativeMatrixFlexibleDimensionsPropertiesNV, ##VkCooperativeMatrixPropertiesKHR
         """,
 
         "SCOPE_DEVICE_KHR".."1",

@@ -23,6 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>Each entry in pPresentModes <b>must</b> be one of the {@code VkPresentModeKHR} values returned by {@code vkGetPhysicalDeviceSurfacePresentModesKHR} for the surface</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentModeFifoLatestReady">{@code presentModeFifoLatestReady}</a> feature is not enabled, pPresentModes <b>must</b> not contain {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT}</li>
  * <li>The entries in pPresentModes <b>must</b> be a subset of the present modes returned in {@link VkSurfacePresentModeCompatibilityEXT}{@code ::pPresentModes}, given {@link VkSwapchainCreateInfoKHR}{@code ::presentMode} in {@link VkSurfacePresentModeEXT}</li>
  * <li>{@link VkSwapchainCreateInfoKHR}{@code ::presentMode} <b>must</b> be included in {@code pPresentModes}</li>
  * </ul>

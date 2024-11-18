@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code vertexBindingUnit} <b>must</b> be less than the total number of vertex input bindings in use by the current graphics state.</li>
+ * <li>{@code vertexBindingUnit} <b>must</b> be less than the total number of vertex input bindings in use by the current graphics state</li>
  * </ul>
  * 
  * <h5>See Also</h5>

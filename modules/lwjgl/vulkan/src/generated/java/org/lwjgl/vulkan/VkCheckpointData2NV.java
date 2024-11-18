@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSynchronization2#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV}</li>
+ * <li>{@code sType} <b>must</b> be {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
  * 
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link KHRSynchronization2#vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV}</p>
+ * <p>{@link NVDeviceDiagnosticCheckpoints#vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -110,8 +110,8 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCheckpointData2NV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link #sType} field. */
-    public VkCheckpointData2NV sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
+    /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link #sType} field. */
+    public VkCheckpointData2NV sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCheckpointData2NV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -321,8 +321,8 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
 
         /** Sets the specified value to the {@link VkCheckpointData2NV#sType} field. */
         public VkCheckpointData2NV.Buffer sType(@NativeType("VkStructureType") int value) { VkCheckpointData2NV.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link VkCheckpointData2NV#sType} field. */
-        public VkCheckpointData2NV.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
+        /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link VkCheckpointData2NV#sType} field. */
+        public VkCheckpointData2NV.Buffer sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
         /** Sets the specified value to the {@link VkCheckpointData2NV#pNext} field. */
         public VkCheckpointData2NV.Buffer pNext(@NativeType("void *") long value) { VkCheckpointData2NV.npNext(address(), value); return this; }
 

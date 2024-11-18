@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
- * <p>Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, only the properties structure is promoted. The feature structure is not promoted and {@code texelBufferAlignment} is enabled if using a Vulkan 1.3 instance. The original type name is still available as an alias of the core functionality.</p>
+ * <p>Vulkan APIs in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. However, only the properties structure is promoted. The feature structure is not promoted and {@code texelBufferAlignment} is enabled if using a Vulkan 1.3 instance. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API name is still available as an alias of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

@@ -31,7 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTHdrMetadata#VK_STRUCTURE_TYPE_HDR_METADATA_EXT STRUCTURE_TYPE_HDR_METADATA_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkHdrVividDynamicMetadataHUAWEI}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -155,6 +156,8 @@ public class VkHdrMetadataEXT extends Struct<VkHdrMetadataEXT> implements Native
     public VkHdrMetadataEXT sType$Default() { return sType(EXTHdrMetadata.VK_STRUCTURE_TYPE_HDR_METADATA_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkHdrMetadataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkHdrVividDynamicMetadataHUAWEI} value to the {@code pNext} chain. */
+    public VkHdrMetadataEXT pNext(VkHdrVividDynamicMetadataHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Copies the specified {@link VkXYColorEXT} to the {@link #displayPrimaryRed} field. */
     public VkHdrMetadataEXT displayPrimaryRed(VkXYColorEXT value) { ndisplayPrimaryRed(address(), value); return this; }
     /** Passes the {@link #displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -463,6 +466,8 @@ public class VkHdrMetadataEXT extends Struct<VkHdrMetadataEXT> implements Native
         public VkHdrMetadataEXT.Buffer sType$Default() { return sType(EXTHdrMetadata.VK_STRUCTURE_TYPE_HDR_METADATA_EXT); }
         /** Sets the specified value to the {@link VkHdrMetadataEXT#pNext} field. */
         public VkHdrMetadataEXT.Buffer pNext(@NativeType("void const *") long value) { VkHdrMetadataEXT.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkHdrVividDynamicMetadataHUAWEI} value to the {@code pNext} chain. */
+        public VkHdrMetadataEXT.Buffer pNext(VkHdrVividDynamicMetadataHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#displayPrimaryRed} field. */
         public VkHdrMetadataEXT.Buffer displayPrimaryRed(VkXYColorEXT value) { VkHdrMetadataEXT.ndisplayPrimaryRed(address(), value); return this; }
         /** Passes the {@link VkHdrMetadataEXT#displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */

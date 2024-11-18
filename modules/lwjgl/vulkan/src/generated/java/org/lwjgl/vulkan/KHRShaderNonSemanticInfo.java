@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
- * <p>Functionality in this extension is included in core Vulkan 1.3 Because the extension has no API controlling its functionality, this results only in a change to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-extensions-table">SPIR-V Extensions table</a>.</p>
+ * <p>Functionality in this extension is included in core Vulkan 1.3. Because the extension has no API controlling its functionality, this results only in a change to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-extensions-table">SPIR-V Extensions table</a>.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

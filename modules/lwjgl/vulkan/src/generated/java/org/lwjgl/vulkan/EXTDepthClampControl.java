@@ -108,7 +108,7 @@ public class EXTDepthClampControl {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code depthClampMode} is set to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}, then {@code pDepthClampRange} must be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure.</li>
+     * <li>If {@code depthClampMode} is {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}, then {@code pDepthClampRange} must be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -142,7 +142,7 @@ public class EXTDepthClampControl {
      *
      * @param commandBuffer    the command buffer into which the command will be recorded.
      * @param depthClampMode   determines how the clamp range is determined for each viewport.
-     * @param pDepthClampRange sets the depth clamp range for all viewports if {@code depthClampMode} is set to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}.
+     * @param pDepthClampRange sets the depth clamp range for all viewports if {@code depthClampMode} is {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}.
      */
     public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDepthClampModeEXT") int depthClampMode, @NativeType("VkDepthClampRangeEXT const *") @Nullable VkDepthClampRangeEXT pDepthClampRange) {
         nvkCmdSetDepthClampRangeEXT(commandBuffer, depthClampMode, memAddressSafe(pDepthClampRange));

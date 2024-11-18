@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing the scratch space required to dispatch an execution graph.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Applications <b>can</b> use any amount of scratch memory greater than {@code minSize} for dispatching a graph, however only the values equal to {@code minSize} + an integer multiple of {@code sizeGranularity} will be used. Greater values <b>may</b> result in higher performance, up to {@code maxSize} which indicates the most memory that an implementation can use effectively.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -34,7 +38,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkExecutionGraphPipelineScratchSizeAMDX {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkDeviceSize {@link #size};
+ *     VkDeviceSize {@link #minSize};
+ *     VkDeviceSize {@link #maxSize};
+ *     VkDeviceSize {@link #sizeGranularity};
  * }</code></pre>
  */
 public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionGraphPipelineScratchSizeAMDX> implements NativeResource {
@@ -49,12 +55,16 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
     public static final int
         STYPE,
         PNEXT,
-        SIZE;
+        MINSIZE,
+        MAXSIZE,
+        SIZEGRANULARITY;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
+            __member(8),
+            __member(8),
             __member(8)
         );
 
@@ -63,7 +73,9 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        SIZE = layout.offsetof(2);
+        MINSIZE = layout.offsetof(2);
+        MAXSIZE = layout.offsetof(3);
+        SIZEGRANULARITY = layout.offsetof(4);
     }
 
     protected VkExecutionGraphPipelineScratchSizeAMDX(long address, @Nullable ByteBuffer container) {
@@ -94,9 +106,15 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the scratch space required for dispatch the queried execution graph. */
+    /** indicates the minimum scratch space required for dispatching the queried execution graph. */
     @NativeType("VkDeviceSize")
-    public long size() { return nsize(address()); }
+    public long minSize() { return nminSize(address()); }
+    /** indicates the maximum scratch space that can be used for dispatching the queried execution graph. */
+    @NativeType("VkDeviceSize")
+    public long maxSize() { return nmaxSize(address()); }
+    /** indicates the granularity at which the scratch space can be increased from {@code minSize}. */
+    @NativeType("VkDeviceSize")
+    public long sizeGranularity() { return nsizeGranularity(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExecutionGraphPipelineScratchSizeAMDX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -104,18 +122,26 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
     public VkExecutionGraphPipelineScratchSizeAMDX sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExecutionGraphPipelineScratchSizeAMDX pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
-    public VkExecutionGraphPipelineScratchSizeAMDX size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
+    /** Sets the specified value to the {@link #minSize} field. */
+    public VkExecutionGraphPipelineScratchSizeAMDX minSize(@NativeType("VkDeviceSize") long value) { nminSize(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxSize} field. */
+    public VkExecutionGraphPipelineScratchSizeAMDX maxSize(@NativeType("VkDeviceSize") long value) { nmaxSize(address(), value); return this; }
+    /** Sets the specified value to the {@link #sizeGranularity} field. */
+    public VkExecutionGraphPipelineScratchSizeAMDX sizeGranularity(@NativeType("VkDeviceSize") long value) { nsizeGranularity(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkExecutionGraphPipelineScratchSizeAMDX set(
         int sType,
         long pNext,
-        long size
+        long minSize,
+        long maxSize,
+        long sizeGranularity
     ) {
         sType(sType);
         pNext(pNext);
-        size(size);
+        minSize(minSize);
+        maxSize(maxSize);
+        sizeGranularity(sizeGranularity);
 
         return this;
     }
@@ -247,15 +273,23 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
     public static int nsType(long struct) { return memGetInt(struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExecutionGraphPipelineScratchSizeAMDX.PNEXT); }
-    /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE); }
+    /** Unsafe version of {@link #minSize}. */
+    public static long nminSize(long struct) { return memGetLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.MINSIZE); }
+    /** Unsafe version of {@link #maxSize}. */
+    public static long nmaxSize(long struct) { return memGetLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.MAXSIZE); }
+    /** Unsafe version of {@link #sizeGranularity}. */
+    public static long nsizeGranularity(long struct) { return memGetLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZEGRANULARITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkExecutionGraphPipelineScratchSizeAMDX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExecutionGraphPipelineScratchSizeAMDX.PNEXT, value); }
-    /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZE, value); }
+    /** Unsafe version of {@link #minSize(long) minSize}. */
+    public static void nminSize(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.MINSIZE, value); }
+    /** Unsafe version of {@link #maxSize(long) maxSize}. */
+    public static void nmaxSize(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.MAXSIZE, value); }
+    /** Unsafe version of {@link #sizeGranularity(long) sizeGranularity}. */
+    public static void nsizeGranularity(long struct, long value) { memPutLong(struct + VkExecutionGraphPipelineScratchSizeAMDX.SIZEGRANULARITY, value); }
 
     // -----------------------------------
 
@@ -306,9 +340,15 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
         /** @return the value of the {@link VkExecutionGraphPipelineScratchSizeAMDX#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExecutionGraphPipelineScratchSizeAMDX.npNext(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineScratchSizeAMDX#size} field. */
+        /** @return the value of the {@link VkExecutionGraphPipelineScratchSizeAMDX#minSize} field. */
         @NativeType("VkDeviceSize")
-        public long size() { return VkExecutionGraphPipelineScratchSizeAMDX.nsize(address()); }
+        public long minSize() { return VkExecutionGraphPipelineScratchSizeAMDX.nminSize(address()); }
+        /** @return the value of the {@link VkExecutionGraphPipelineScratchSizeAMDX#maxSize} field. */
+        @NativeType("VkDeviceSize")
+        public long maxSize() { return VkExecutionGraphPipelineScratchSizeAMDX.nmaxSize(address()); }
+        /** @return the value of the {@link VkExecutionGraphPipelineScratchSizeAMDX#sizeGranularity} field. */
+        @NativeType("VkDeviceSize")
+        public long sizeGranularity() { return VkExecutionGraphPipelineScratchSizeAMDX.nsizeGranularity(address()); }
 
         /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#sType} field. */
         public VkExecutionGraphPipelineScratchSizeAMDX.Buffer sType(@NativeType("VkStructureType") int value) { VkExecutionGraphPipelineScratchSizeAMDX.nsType(address(), value); return this; }
@@ -316,8 +356,12 @@ public class VkExecutionGraphPipelineScratchSizeAMDX extends Struct<VkExecutionG
         public VkExecutionGraphPipelineScratchSizeAMDX.Buffer sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX); }
         /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#pNext} field. */
         public VkExecutionGraphPipelineScratchSizeAMDX.Buffer pNext(@NativeType("void *") long value) { VkExecutionGraphPipelineScratchSizeAMDX.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#size} field. */
-        public VkExecutionGraphPipelineScratchSizeAMDX.Buffer size(@NativeType("VkDeviceSize") long value) { VkExecutionGraphPipelineScratchSizeAMDX.nsize(address(), value); return this; }
+        /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#minSize} field. */
+        public VkExecutionGraphPipelineScratchSizeAMDX.Buffer minSize(@NativeType("VkDeviceSize") long value) { VkExecutionGraphPipelineScratchSizeAMDX.nminSize(address(), value); return this; }
+        /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#maxSize} field. */
+        public VkExecutionGraphPipelineScratchSizeAMDX.Buffer maxSize(@NativeType("VkDeviceSize") long value) { VkExecutionGraphPipelineScratchSizeAMDX.nmaxSize(address(), value); return this; }
+        /** Sets the specified value to the {@link VkExecutionGraphPipelineScratchSizeAMDX#sizeGranularity} field. */
+        public VkExecutionGraphPipelineScratchSizeAMDX.Buffer sizeGranularity(@NativeType("VkDeviceSize") long value) { VkExecutionGraphPipelineScratchSizeAMDX.nsizeGranularity(address(), value); return this; }
 
     }
 

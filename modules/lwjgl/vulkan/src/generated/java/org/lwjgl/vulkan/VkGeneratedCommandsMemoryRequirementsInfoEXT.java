@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkGeneratedCommandsMemoryRequirementsInfoEXT {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkIndirectExecutionSetEXT {@link #indirectExecutionSet};
  *     VkIndirectCommandsLayoutEXT {@link #indirectCommandsLayout};
  *     uint32_t {@link #maxSequenceCount};
@@ -124,7 +124,7 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** the indirect execution set to be used for binding shaders. */
     @NativeType("VkIndirectExecutionSetEXT")
@@ -144,7 +144,7 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
     /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@link #sType} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkGeneratedCommandsPipelineInfoEXT} value to the {@code pNext} chain. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(VkGeneratedCommandsPipelineInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkGeneratedCommandsShaderInfoEXT} value to the {@code pNext} chain. */
@@ -373,7 +373,7 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nsType(address()); }
         /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#indirectExecutionSet} field. */
         @NativeType("VkIndirectExecutionSetEXT")
@@ -393,7 +393,7 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
         /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#sType} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT); }
         /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#pNext} field. */
-        public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.npNext(address(), value); return this; }
+        public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkGeneratedCommandsPipelineInfoEXT} value to the {@code pNext} chain. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(VkGeneratedCommandsPipelineInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkGeneratedCommandsShaderInfoEXT} value to the {@code pNext} chain. */

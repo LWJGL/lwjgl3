@@ -1261,7 +1261,7 @@ public class EXTOpacityMicromap {
      * <p>{@link VkCopyMemoryToMicromapInfoEXT}</p>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param pInfo         a pointer to a {@link VkCopyMicromapToMemoryInfoEXT} structure defining the copy operation.
+     * @param pInfo         a pointer to a {@link VkCopyMemoryToMicromapInfoEXT} structure defining the copy operation.
      */
     public static void vkCmdCopyMemoryToMicromapEXT(VkCommandBuffer commandBuffer, @NativeType("VkCopyMemoryToMicromapInfoEXT const *") VkCopyMemoryToMicromapInfoEXT pInfo) {
         nvkCmdCopyMemoryToMicromapEXT(commandBuffer, pInfo.address());

@@ -26,6 +26,12 @@ val AMD_mixed_attachment_samples = "AMDMixedAttachmentSamples".nativeClassVK("AM
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_KHR_dynamic_rendering</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Matthaeus G. Chajdas <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_mixed_attachment_samples]%20@anteru%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_mixed_attachment_samples%20extension*">anteru</a></li>
@@ -57,5 +63,11 @@ val AMD_mixed_attachment_samples = "AMDMixedAttachmentSamples".nativeClassVK("AM
         "The extension name.",
 
         "AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION_NAME".."VK_AMD_mixed_attachment_samples"
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD".."1000044008"
     )
 }

@@ -24,6 +24,7 @@ package org.lwjgl.vulkan;
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_3</li>
+ * <li>Interacts with VK_KHR_dynamic_rendering</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
  * </ul></dd>
  * <dt><b>SPIR-V Dependencies</b></dt>
@@ -122,6 +123,23 @@ public final class EXTFragmentDensityMap {
 
     /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT = 0x1000000L;
+
+    /**
+     * Extends {@code VkPipelineCreateFlagBits}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT}</li>
+     * <li>{@link #VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT           = 0x400000,
+        VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT = 0x400000;
+
+    /** Extends {@code VkStructureType}. */
+    public static final int VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT = 1000044007;
 
     private EXTFragmentDensityMap() {}
 

@@ -192,7 +192,7 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkAllocationCallbacks were provided when {@code pipelineBinary} was created, a compatible set of callbacks <b>must</b> be provided here.</li>
+            <li>If ##VkAllocationCallbacks were provided when {@code pipelineBinary} was created, a compatible set of callbacks <b>must</b> be provided here</li>
             <li>If no ##VkAllocationCallbacks were provided when {@code pipelineBinary} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
         </ul>
 

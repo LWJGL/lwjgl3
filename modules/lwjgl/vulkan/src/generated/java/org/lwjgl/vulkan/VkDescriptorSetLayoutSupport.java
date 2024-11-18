@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@code supported} is set to {@link VK10#VK_TRUE TRUE} if the descriptor set <b>can</b> be created, or else is set to {@link VK10#VK_FALSE FALSE}.</p>
+ * <p>{@code supported} will be {@link VK10#VK_TRUE TRUE} if the descriptor set <b>can</b> be created, or else {@link VK10#VK_FALSE FALSE}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

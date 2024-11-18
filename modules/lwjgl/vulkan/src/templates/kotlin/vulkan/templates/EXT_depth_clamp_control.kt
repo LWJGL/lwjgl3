@@ -96,7 +96,7 @@ val EXT_depth_clamp_control = "EXTDepthClampControl".nativeClassVK("EXT_depth_cl
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT, then {@code pDepthClampRange} must be a valid pointer to a valid ##VkDepthClampRangeEXT structure.</li>
+            <li>If {@code depthClampMode} is #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT, then {@code pDepthClampRange} must be a valid pointer to a valid ##VkDepthClampRangeEXT structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -127,6 +127,6 @@ val EXT_depth_clamp_control = "EXTDepthClampControl".nativeClassVK("EXT_depth_cl
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkDepthClampModeEXT("depthClampMode", "determines how the clamp range is determined for each viewport."),
-        nullable..VkDepthClampRangeEXT.const.p("pDepthClampRange", "sets the depth clamp range for all viewports if {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
+        nullable..VkDepthClampRangeEXT.const.p("pDepthClampRange", "sets the depth clamp range for all viewports if {@code depthClampMode} is #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
     )
 }

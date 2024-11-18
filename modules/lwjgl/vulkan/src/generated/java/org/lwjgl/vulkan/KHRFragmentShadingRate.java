@@ -46,6 +46,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_3</li>
+ * <li>Interacts with VK_KHR_dynamic_rendering</li>
  * <li>Interacts with VK_KHR_format_feature_flags2</li>
  * </ul></dd>
  * <dt><b>SPIR-V Dependencies</b></dt>
@@ -133,6 +134,23 @@ public class KHRFragmentShadingRate {
 
     /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000L;
+
+    /**
+     * Extends {@code VkPipelineCreateFlagBits}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
+     * <li>{@link #VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR           = 0x200000,
+        VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x200000;
+
+    /** Extends {@code VkStructureType}. */
+    public static final int VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR = 1000044006;
 
     /**
      * VkFragmentShadingRateCombinerOpKHR - Control how fragment shading rates are combined

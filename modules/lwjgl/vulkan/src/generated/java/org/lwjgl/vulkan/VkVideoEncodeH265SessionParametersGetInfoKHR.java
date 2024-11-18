@@ -23,9 +23,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>When this structure is specified in the {@code pNext} chain of the {@link VkVideoEncodeSessionParametersGetInfoKHR} structure passed to {@link KHRVideoEncodeQueue#vkGetEncodedVideoSessionParametersKHR GetEncodedVideoSessionParametersKHR}, the command will write encoded parameter data to the output buffer in the following order:</p>
  * 
  * <ul>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a> identified by {@code stdVPSId}, if {@code writeStdVPS} is set to {@link VK10#VK_TRUE TRUE}.</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId}, if {@code writeStdSPS} is set to {@link VK10#VK_TRUE TRUE}.</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId}, if {@code writeStdPPS} is set to {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a> identified by {@code stdVPSId}, if {@code writeStdVPS} is {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId}, if {@code writeStdSPS} is {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId}, if {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}.</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
@@ -138,10 +138,10 @@ public class VkVideoEncodeH265SessionParametersGetInfoKHR extends Struct<VkVideo
     /** specifies the H.265 video parameter set ID used to identify the retrieved H.265 video, sequence, and/or picture parameter set(s). */
     @NativeType("uint32_t")
     public int stdVPSId() { return nstdVPSId(address()); }
-    /** specifies the H.265 sequence parameter set ID used to identify the retrieved H.265 sequence and/or picture parameter set(s) when {@code writeStdSPS} and/or {@code writeStdPPS} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies the H.265 sequence parameter set ID used to identify the retrieved H.265 sequence and/or picture parameter set(s) when {@code writeStdSPS} and/or {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}. */
     @NativeType("uint32_t")
     public int stdSPSId() { return nstdSPSId(address()); }
-    /** specifies the H.265 picture parameter set ID used to identify the retrieved H.265 picture parameter set when {@code writeStdPPS} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies the H.265 picture parameter set ID used to identify the retrieved H.265 picture parameter set when {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}. */
     @NativeType("uint32_t")
     public int stdPPSId() { return nstdPPSId(address()); }
 

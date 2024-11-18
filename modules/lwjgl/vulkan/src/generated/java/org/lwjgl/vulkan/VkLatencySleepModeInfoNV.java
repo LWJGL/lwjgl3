@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code lowLatencyMode} is set to {@link VK10#VK_FALSE FALSE}, {@code lowLatencyBoost} will still hint to the GPU to increase its power state and {@code vkLatencySleepNV} will still enforce {@code minimumIntervalUs} between {@code vkQueuePresentKHR} calls.</p>
+ * <p>If {@code lowLatencyMode} is {@link VK10#VK_FALSE FALSE}, {@code lowLatencyBoost} will still hint to the GPU to increase its power state and {@code vkLatencySleepNV} will still enforce {@code minimumIntervalUs} between {@code vkQueuePresentKHR} calls.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

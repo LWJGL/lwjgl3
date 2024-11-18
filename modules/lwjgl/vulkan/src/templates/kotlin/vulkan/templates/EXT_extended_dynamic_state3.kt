@@ -48,6 +48,12 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
                 <li>Interacts with VK_NV_representative_fragment_test</li>
                 <li>Interacts with VK_NV_shading_rate_image</li>
                 <li>Interacts with VK_NV_viewport_swizzle</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3AlphaToOneEnable</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3DepthClampEnable</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3LogicOpEnable</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3PolygonMode</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3TessellationDomainOrigin</li>
+                <li>Interacts with VkPhysicalDeviceMeshShaderFeaturesEXT::extendedDynamicState3RasterizationStream</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -1004,7 +1010,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 ￿    VkBool32                                    depthClipEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationDepthClipStateCreateInfoEXT{@code ::depthClipEnable} value used to create the currently active pipeline, or is set to the inverse of ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable} if ##VkPipelineRasterizationDepthClipStateCreateInfoEXT is not specified.
+        This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationDepthClipStateCreateInfoEXT{@code ::depthClipEnable} value used to create the currently active pipeline, or by the inverse of ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable} if ##VkPipelineRasterizationDepthClipStateCreateInfoEXT is not specified.
 
         <h5>Valid Usage</h5>
         <ul>

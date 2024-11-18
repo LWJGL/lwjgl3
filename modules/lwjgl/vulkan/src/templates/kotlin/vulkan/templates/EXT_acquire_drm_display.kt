@@ -123,7 +123,7 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
 ￿    VkDisplayKHR*                               display);</code></pre>
 
         <h5>Description</h5>
-        If there is no {@code VkDisplayKHR} corresponding to the {@code connectorId} on the {@code physicalDevice}, the returning {@code display} <b>must</b> be set to #NULL_HANDLE. The provided {@code drmFd} <b>must</b> correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. Master permissions are not required, because the file descriptor is just used for information gathering purposes. The given {@code connectorId} <b>must</b> be a resource owned by the provided {@code drmFd}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. If any error is encountered during the identification of the display, the call <b>must</b> return the error code #ERROR_INITIALIZATION_FAILED.
+        If there is no {@code VkDisplayKHR} corresponding to the {@code connectorId} on the {@code physicalDevice}, the returning {@code display} <b>must</b> be #NULL_HANDLE. The provided {@code drmFd} <b>must</b> correspond to the one owned by the {@code physicalDevice}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. Master permissions are not required, because the file descriptor is just used for information gathering purposes. The given {@code connectorId} <b>must</b> be a resource owned by the provided {@code drmFd}. If not, the error code #ERROR_UNKNOWN <b>must</b> be returned. If any error is encountered during the identification of the display, the call <b>must</b> return the error code #ERROR_INITIALIZATION_FAILED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

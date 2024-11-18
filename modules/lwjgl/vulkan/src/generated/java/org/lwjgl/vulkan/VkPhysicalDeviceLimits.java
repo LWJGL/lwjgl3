@@ -794,7 +794,7 @@ public class VkPhysicalDeviceLimits extends Struct<VkPhysicalDeviceLimits> {
     /** the maximum number of array elements of a variable decorated with the {@code SampleMask} built-in decoration. */
     @NativeType("uint32_t")
     public int maxSampleMaskWords() { return nmaxSampleMaskWords(address()); }
-    /** specifies support for timestamps on all graphics and compute queues. If this limit is set to {@link VK10#VK_TRUE TRUE}, all queues that advertise the {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT} in the {@link VkQueueFamilyProperties}{@code ::queueFlags} support {@link VkQueueFamilyProperties}{@code ::timestampValidBits} of at least 36. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-timestamps">Timestamp Queries</a>. */
+    /** specifies support for timestamps on all graphics and compute queues. If this limit is {@link VK10#VK_TRUE TRUE}, all queues that advertise the {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT} in the {@link VkQueueFamilyProperties}{@code ::queueFlags} support {@link VkQueueFamilyProperties}{@code ::timestampValidBits} of at least 36. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-timestamps">Timestamp Queries</a>. */
     @NativeType("VkBool32")
     public boolean timestampComputeAndGraphics() { return ntimestampComputeAndGraphics(address()) != 0; }
     /** the number of nanoseconds <b>required</b> for a timestamp query to be incremented by 1. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-timestamps">Timestamp Queries</a>. */

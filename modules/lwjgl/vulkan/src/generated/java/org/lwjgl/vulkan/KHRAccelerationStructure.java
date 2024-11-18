@@ -209,6 +209,20 @@ public class KHRAccelerationStructure {
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR = 0x80000,
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR               = 0x100000;
 
+    /**
+     * Extends {@code VkCopyAccelerationStructureModeKHR}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR}</li>
+     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR   = 2,
+        VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR = 3;
+
     /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR = 0x20000000L;
 
@@ -377,6 +391,7 @@ public class KHRAccelerationStructure {
      * <ul>
      * <li>{@link #VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR} specifies that the acceleration structure’s address <b>can</b> be saved and reused on a subsequent run.</li>
      * <li>{@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} specifies that the acceleration structure <b>can</b> be used with descriptor buffers when capturing and replaying (e.g. for trace capture and replay), see {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} for more detail.</li>
+     * <li>{@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} specifies that the acceleration structure will be used with motion information, see {@link VkAccelerationStructureMotionInfoNV} for more detail.</li>
      * </ul>
      */
     public static final int VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR = 0x1;
@@ -388,7 +403,7 @@ public class KHRAccelerationStructure {
      * 
      * <ul>
      * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR} creates a direct copy of the acceleration structure specified in {@code src} into the one specified by {@code dst}. The {@code dst} acceleration structure <b>must</b> have been created with the same parameters as {@code src}. If {@code src} contains references to other acceleration structures, {@code dst} will reference the same acceleration structures.</li>
-     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR} creates a more compact version of an acceleration structure {@code src} into {@code dst}. The acceleration structure {@code dst} <b>must</b> have been created with a size at least as large as that returned by {@link #vkCmdWriteAccelerationStructuresPropertiesKHR CmdWriteAccelerationStructuresPropertiesKHR} or {@link #vkWriteAccelerationStructuresPropertiesKHR WriteAccelerationStructuresPropertiesKHR} after the build of the acceleration structure specified by {@code src}. If {@code src} contains references to other acceleration structures, {@code dst} will reference the same acceleration structures.</li>
+     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR} creates a more compact version of an acceleration structure {@code src} into {@code dst}. The acceleration structure {@code dst} <b>must</b> have been created with a size at least as large as that returned by {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} , {@link #vkCmdWriteAccelerationStructuresPropertiesKHR CmdWriteAccelerationStructuresPropertiesKHR}, or {@link #vkWriteAccelerationStructuresPropertiesKHR WriteAccelerationStructuresPropertiesKHR} after the build of the acceleration structure specified by {@code src}. If {@code src} contains references to other acceleration structures, {@code dst} will reference the same acceleration structures.</li>
      * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR} serializes the acceleration structure to a semi-opaque format which can be reloaded on a compatible implementation.</li>
      * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR} deserializes the semi-opaque serialization format in the buffer to the acceleration structure.</li>
      * </ul>
@@ -398,10 +413,8 @@ public class KHRAccelerationStructure {
      * <p>{@link VkCopyAccelerationStructureInfoKHR}, {@link VkCopyAccelerationStructureToMemoryInfoKHR}, {@link VkCopyMemoryToAccelerationStructureInfoKHR}, {@link NVRayTracing#vkCmdCopyAccelerationStructureNV CmdCopyAccelerationStructureNV}</p>
      */
     public static final int
-        VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR       = 0,
-        VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR     = 1,
-        VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR   = 2,
-        VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR = 3;
+        VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR   = 0,
+        VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR = 1;
 
     /**
      * VkAccelerationStructureCompatibilityKHR - Acceleration structure compatibility

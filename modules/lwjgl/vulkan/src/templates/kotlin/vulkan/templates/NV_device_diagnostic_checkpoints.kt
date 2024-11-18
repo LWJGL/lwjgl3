@@ -31,6 +31,12 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_KHR_synchronization2</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Nuno Subtil <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostic_checkpoints]%20@nsubtil%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_device_diagnostic_checkpoints%20extension*">nsubtil</a></li>
@@ -70,6 +76,13 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
 
         "STRUCTURE_TYPE_CHECKPOINT_DATA_NV".."1000206000",
         "STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV".."1000206001"
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV".."1000314008",
+        "STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV".."1000314009"
     )
 
     void(
@@ -150,5 +163,45 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         VkQueue("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
         AutoSize("pCheckpointData")..Check(1)..uint32_t.p("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
         nullable..VkCheckpointDataNV.p("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointDataNV structures.")
+    )
+
+    DependsOn("""ext.contains("Vulkan13") || ext.contains("VK_KHR_synchronization2")""")..void(
+        "GetQueueCheckpointData2NV",
+        """
+        Retrieve diagnostic checkpoint data.
+
+        <h5>C Specification</h5>
+        If the device encounters an error during execution, the implementation will return a #ERROR_DEVICE_LOST error to the application at some point during host execution. When this happens, the application <b>can</b> call #GetQueueCheckpointData2NV() to retrieve information on the most recent diagnostic checkpoints that were executed by the device.
+
+        <pre><code>
+￿void vkGetQueueCheckpointData2NV(
+￿    VkQueue                                     queue,
+￿    uint32_t*                                   pCheckpointDataCount,
+￿    VkCheckpointData2NV*                        pCheckpointData);</code></pre>
+
+        <h5>Description</h5>
+        If {@code pCheckpointData} is {@code NULL}, then the number of checkpoint markers available is returned in {@code pCheckpointDataCount}. Otherwise, {@code pCheckpointDataCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pCheckpointData} array, and on return the variable is overwritten with the number of structures actually written to {@code pCheckpointData}.
+
+        If {@code pCheckpointDataCount} is less than the number of checkpoint markers available, at most {@code pCheckpointDataCount} structures will be written.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The device that {@code queue} belongs to <b>must</b> be in the lost state</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+            <li>{@code pCheckpointDataCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pCheckpointDataCount} is not 0, and {@code pCheckpointData} is not {@code NULL}, {@code pCheckpointData} <b>must</b> be a valid pointer to an array of {@code pCheckpointDataCount} ##VkCheckpointData2NV structures</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkCheckpointData2NV
+        """,
+
+        VkQueue("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
+        AutoSize("pCheckpointData")..Check(1)..uint32_t.p("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
+        nullable..VkCheckpointData2NV.p("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointData2NV structures.")
     )
 }

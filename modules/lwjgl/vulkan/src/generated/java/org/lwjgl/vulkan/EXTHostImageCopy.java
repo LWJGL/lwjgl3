@@ -143,12 +143,6 @@ public class EXTHostImageCopy {
      * <p>Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation on the device.</p>
      * </div>
      * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-hostImageCopy">{@code hostImageCopy}</a> feature <b>must</b> be enabled</li>
-     * </ul>
-     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -216,12 +210,6 @@ public class EXTHostImageCopy {
      * 
      * <p>If the device has written to the image memory, it is not automatically made available to the host. Before this copy command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> including {@link VK10#VK_PIPELINE_STAGE_HOST_BIT PIPELINE_STAGE_HOST_BIT} and {@link VK10#VK_ACCESS_HOST_READ_BIT ACCESS_HOST_READ_BIT}.</p>
      * </div>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-hostImageCopy">{@code hostImageCopy}</a> feature <b>must</b> be enabled</li>
-     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -292,12 +280,6 @@ public class EXTHostImageCopy {
      * 
      * <p>Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation in {@code pCopyMemoryToImageInfo→dstImage} on the device.</p>
      * </div>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-hostImageCopy">{@code hostImageCopy}</a> feature <b>must</b> be enabled</li>
-     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

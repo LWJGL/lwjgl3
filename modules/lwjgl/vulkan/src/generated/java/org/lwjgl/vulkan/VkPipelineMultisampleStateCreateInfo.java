@@ -147,7 +147,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct<VkPipelineMulti
     /** <b>can</b> be used to enable <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>. */
     @NativeType("VkBool32")
     public boolean sampleShadingEnable() { return nsampleShadingEnable(address()) != 0; }
-    /** specifies a minimum fraction of sample shading if {@code sampleShadingEnable} is set to {@link VK10#VK_TRUE TRUE}. */
+    /** specifies a minimum fraction of sample shading if {@code sampleShadingEnable} is {@link VK10#VK_TRUE TRUE}. */
     public float minSampleShading() { return nminSampleShading(address()); }
     /**
      * @param capacity the number of elements in the returned buffer

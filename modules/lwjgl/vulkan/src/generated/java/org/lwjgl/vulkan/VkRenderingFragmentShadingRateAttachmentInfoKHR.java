@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR}</li>
+ * <li>{@code sType} <b>must</b> be {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR}</li>
  * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
  * <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
  * </ul>
@@ -134,8 +134,8 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link #sType} field. */
-    public VkRenderingFragmentShadingRateAttachmentInfoKHR sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link #sType} field. */
+    public VkRenderingFragmentShadingRateAttachmentInfoKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageView} field. */
@@ -369,8 +369,8 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
 
         /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
-        public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
+        public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
         /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#pNext} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#imageView} field. */

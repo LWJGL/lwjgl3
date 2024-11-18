@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -39,6 +40,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxExecutionGraphShaderPayloadSize};
  *     uint32_t {@link #maxExecutionGraphShaderPayloadCount};
  *     uint32_t {@link #executionGraphDispatchAddressAlignment};
+ *     uint32_t {@link #maxExecutionGraphWorkgroupCount}[3];
+ *     uint32_t {@link #maxExecutionGraphWorkgroups};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysicalDeviceShaderEnqueuePropertiesAMDX> implements NativeResource {
@@ -57,7 +60,9 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         MAXEXECUTIONGRAPHSHADEROUTPUTNODES,
         MAXEXECUTIONGRAPHSHADERPAYLOADSIZE,
         MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT,
-        EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT;
+        EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT,
+        MAXEXECUTIONGRAPHWORKGROUPCOUNT,
+        MAXEXECUTIONGRAPHWORKGROUPS;
 
     static {
         Layout layout = __struct(
@@ -67,6 +72,8 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
             __member(4),
             __member(4),
             __member(4),
+            __member(4),
+            __array(4, 3),
             __member(4)
         );
 
@@ -80,6 +87,8 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         MAXEXECUTIONGRAPHSHADERPAYLOADSIZE = layout.offsetof(4);
         MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT = layout.offsetof(5);
         EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT = layout.offsetof(6);
+        MAXEXECUTIONGRAPHWORKGROUPCOUNT = layout.offsetof(7);
+        MAXEXECUTIONGRAPHWORKGROUPS = layout.offsetof(8);
     }
 
     protected VkPhysicalDeviceShaderEnqueuePropertiesAMDX(long address, @Nullable ByteBuffer container) {
@@ -125,6 +134,15 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     /** specifies the alignment of non-scratch {@code VkDeviceAddress} arguments consumed by graph dispatch commands. */
     @NativeType("uint32_t")
     public int executionGraphDispatchAddressAlignment() { return nexecutionGraphDispatchAddressAlignment(address()); }
+    /** the maximum number of local workgroups that a shader <b>can</b> be dispatched with in X, Y, and Z dimensions, respectively. */
+    @NativeType("uint32_t[3]")
+    public IntBuffer maxExecutionGraphWorkgroupCount() { return nmaxExecutionGraphWorkgroupCount(address()); }
+    /** the maximum number of local workgroups that a shader <b>can</b> be dispatched with in X, Y, and Z dimensions, respectively. */
+    @NativeType("uint32_t")
+    public int maxExecutionGraphWorkgroupCount(int index) { return nmaxExecutionGraphWorkgroupCount(address(), index); }
+    /** the total number of local workgroups that a shader <b>can</b> be dispatched with. */
+    @NativeType("uint32_t")
+    public int maxExecutionGraphWorkgroups() { return nmaxExecutionGraphWorkgroups(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -142,6 +160,12 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphShaderPayloadCount(@NativeType("uint32_t") int value) { nmaxExecutionGraphShaderPayloadCount(address(), value); return this; }
     /** Sets the specified value to the {@link #executionGraphDispatchAddressAlignment} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX executionGraphDispatchAddressAlignment(@NativeType("uint32_t") int value) { nexecutionGraphDispatchAddressAlignment(address(), value); return this; }
+    /** Copies the specified {@link IntBuffer} to the {@link #maxExecutionGraphWorkgroupCount} field. */
+    public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroupCount(@NativeType("uint32_t[3]") IntBuffer value) { nmaxExecutionGraphWorkgroupCount(address(), value); return this; }
+    /** Sets the specified value at the specified index of the {@link #maxExecutionGraphWorkgroupCount} field. */
+    public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroupCount(int index, @NativeType("uint32_t") int value) { nmaxExecutionGraphWorkgroupCount(address(), index, value); return this; }
+    /** Sets the specified value to the {@link #maxExecutionGraphWorkgroups} field. */
+    public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroups(@NativeType("uint32_t") int value) { nmaxExecutionGraphWorkgroups(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX set(
@@ -151,7 +175,9 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         int maxExecutionGraphShaderOutputNodes,
         int maxExecutionGraphShaderPayloadSize,
         int maxExecutionGraphShaderPayloadCount,
-        int executionGraphDispatchAddressAlignment
+        int executionGraphDispatchAddressAlignment,
+        IntBuffer maxExecutionGraphWorkgroupCount,
+        int maxExecutionGraphWorkgroups
     ) {
         sType(sType);
         pNext(pNext);
@@ -160,6 +186,8 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         maxExecutionGraphShaderPayloadSize(maxExecutionGraphShaderPayloadSize);
         maxExecutionGraphShaderPayloadCount(maxExecutionGraphShaderPayloadCount);
         executionGraphDispatchAddressAlignment(executionGraphDispatchAddressAlignment);
+        maxExecutionGraphWorkgroupCount(maxExecutionGraphWorkgroupCount);
+        maxExecutionGraphWorkgroups(maxExecutionGraphWorkgroups);
 
         return this;
     }
@@ -301,6 +329,14 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     public static int nmaxExecutionGraphShaderPayloadCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT); }
     /** Unsafe version of {@link #executionGraphDispatchAddressAlignment}. */
     public static int nexecutionGraphDispatchAddressAlignment(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT); }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroupCount}. */
+    public static IntBuffer nmaxExecutionGraphWorkgroupCount(long struct) { return memIntBuffer(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPCOUNT, 3); }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroupCount(int) maxExecutionGraphWorkgroupCount}. */
+    public static int nmaxExecutionGraphWorkgroupCount(long struct, int index) {
+        return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPCOUNT + check(index, 3) * 4);
+    }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroups}. */
+    public static int nmaxExecutionGraphWorkgroups(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.STYPE, value); }
@@ -316,6 +352,17 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     public static void nmaxExecutionGraphShaderPayloadCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHSHADERPAYLOADCOUNT, value); }
     /** Unsafe version of {@link #executionGraphDispatchAddressAlignment(int) executionGraphDispatchAddressAlignment}. */
     public static void nexecutionGraphDispatchAddressAlignment(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.EXECUTIONGRAPHDISPATCHADDRESSALIGNMENT, value); }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroupCount(IntBuffer) maxExecutionGraphWorkgroupCount}. */
+    public static void nmaxExecutionGraphWorkgroupCount(long struct, IntBuffer value) {
+        if (CHECKS) { checkGT(value, 3); }
+        memCopy(memAddress(value), struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPCOUNT, value.remaining() * 4);
+    }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroupCount(int, int) maxExecutionGraphWorkgroupCount}. */
+    public static void nmaxExecutionGraphWorkgroupCount(long struct, int index, int value) {
+        memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPCOUNT + check(index, 3) * 4, value);
+    }
+    /** Unsafe version of {@link #maxExecutionGraphWorkgroups(int) maxExecutionGraphWorkgroups}. */
+    public static void nmaxExecutionGraphWorkgroups(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderEnqueuePropertiesAMDX.MAXEXECUTIONGRAPHWORKGROUPS, value); }
 
     // -----------------------------------
 
@@ -381,6 +428,15 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#executionGraphDispatchAddressAlignment} field. */
         @NativeType("uint32_t")
         public int executionGraphDispatchAddressAlignment() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nexecutionGraphDispatchAddressAlignment(address()); }
+        /** @return a {@link IntBuffer} view of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        @NativeType("uint32_t[3]")
+        public IntBuffer maxExecutionGraphWorkgroupCount() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address()); }
+        /** @return the value at the specified index of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        @NativeType("uint32_t")
+        public int maxExecutionGraphWorkgroupCount(int index) { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), index); }
+        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroups} field. */
+        @NativeType("uint32_t")
+        public int maxExecutionGraphWorkgroups() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroups(address()); }
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#sType} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nsType(address(), value); return this; }
@@ -398,6 +454,12 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphShaderPayloadCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderPayloadCount(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#executionGraphDispatchAddressAlignment} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer executionGraphDispatchAddressAlignment(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nexecutionGraphDispatchAddressAlignment(address(), value); return this; }
+        /** Copies the specified {@link IntBuffer} to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroupCount(@NativeType("uint32_t[3]") IntBuffer value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroupCount(int index, @NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), index, value); return this; }
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroups} field. */
+        public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroups(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroups(address(), value); return this; }
 
     }
 

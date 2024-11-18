@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD}</li>
+ * <li>{@code sType} <b>must</b> be {@link AMDMixedAttachmentSamples#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD}</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -116,8 +116,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAttachmentSampleCountInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@link #sType} field. */
-    public VkAttachmentSampleCountInfoAMD sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
+    /** Sets the {@link AMDMixedAttachmentSamples#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@link #sType} field. */
+    public VkAttachmentSampleCountInfoAMD sType$Default() { return sType(AMDMixedAttachmentSamples.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentSampleCountInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #colorAttachmentCount} field. */
@@ -350,8 +350,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct<VkAttachmentSampleCou
 
         /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#sType} field. */
         public VkAttachmentSampleCountInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentSampleCountInfoAMD.nsType(address(), value); return this; }
-        /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@link VkAttachmentSampleCountInfoAMD#sType} field. */
-        public VkAttachmentSampleCountInfoAMD.Buffer sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
+        /** Sets the {@link AMDMixedAttachmentSamples#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@link VkAttachmentSampleCountInfoAMD#sType} field. */
+        public VkAttachmentSampleCountInfoAMD.Buffer sType$Default() { return sType(AMDMixedAttachmentSamples.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
         /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#pNext} field. */
         public VkAttachmentSampleCountInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentSampleCountInfoAMD.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#colorAttachmentCount} field. */

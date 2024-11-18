@@ -180,7 +180,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded"),
-        VkImageView("imageView", "an image view handle specifying the invocation mask image {@code imageView} <b>may</b> be set to #NULL_HANDLE, which is equivalent to specifying a view of an image filled with ones value."),
+        VkImageView("imageView", "an image view handle specifying the invocation mask image {@code imageView} <b>may</b> be #NULL_HANDLE, which is equivalent to specifying a view of an image filled with ones value."),
         VkImageLayout("imageLayout", "the layout that the image subresources accessible from {@code imageView} will be in when the invocation mask image is accessed")
     )
 }

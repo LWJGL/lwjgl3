@@ -39,7 +39,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         </ul>
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
+        Vulkan APIs in this extension are included in core Vulkan 1.3, with the KHR suffix omitted. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         See <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples">https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples</a>
@@ -62,7 +62,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
-                <li>Interacts with VK_AMD_buffer_marker</li>
                 <li>Interacts with VK_EXT_blend_operation_advanced</li>
                 <li>Interacts with VK_EXT_conditional_rendering</li>
                 <li>Interacts with VK_EXT_device_generated_commands</li>
@@ -72,7 +71,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
                 <li>Interacts with VK_KHR_acceleration_structure</li>
                 <li>Interacts with VK_KHR_fragment_shading_rate</li>
                 <li>Interacts with VK_KHR_ray_tracing_pipeline</li>
-                <li>Interacts with VK_NV_device_diagnostic_checkpoints</li>
                 <li>Interacts with VK_NV_device_generated_commands</li>
                 <li>Interacts with VK_NV_mesh_shader</li>
                 <li>Interacts with VK_NV_ray_tracing</li>
@@ -354,13 +352,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         "PIPELINE_STAGE_2_MESH_SHADER_BIT_NV".enum(0x00100000L)
     )
 
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV".."1000314008",
-        "STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV".."1000314009"
-    )
-
     EnumConstantLong(
         "Extends {@code VkPipelineStageFlagBits2}.",
 
@@ -422,127 +413,5 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         AutoSize("pSubmits")..uint32_t("submitCount", "the number of elements in the {@code pSubmits} array."),
         nullable..VkSubmitInfo2.const.p("pSubmits", "a pointer to an array of ##VkSubmitInfo2 structures, each specifying a command buffer submission batch."),
         VkFence("fence", "an <b>optional</b> handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not #NULL_HANDLE, it defines a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-fences-signaling\">fence signal operation</a>.")
-    )
-
-    DependsOn("VK_AMD_buffer_marker")..void(
-        "CmdWriteBufferMarker2AMD",
-        """
-        Execute a pipelined write of a marker value into a buffer.
-
-        <h5>C Specification</h5>
-        To write a 32-bit marker value into a buffer as a pipelined operation, call:
-
-        <pre><code>
-￿void vkCmdWriteBufferMarker2AMD(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkPipelineStageFlags2                       stage,
-￿    VkBuffer                                    dstBuffer,
-￿    VkDeviceSize                                dstOffset,
-￿    uint32_t                                    marker);</code></pre>
-
-        <h5>Description</h5>
-        The command will write the 32-bit marker value into the buffer only after all preceding commands have finished executing up to at least the specified pipeline stage. This includes the completion of other preceding {@code vkCmdWriteBufferMarker2AMD} commands so long as their specified pipeline stages occur either at the same time or earlier than this command’s specified {@code stage}.
-
-        While consecutive buffer marker writes with the same {@code stage} parameter implicitly complete in submission order, memory and execution dependencies between buffer marker writes and other operations <b>must</b> still be explicitly ordered using synchronization commands. The access scope for buffer marker writes falls under the #ACCESS_TRANSFER_WRITE_BIT, and the pipeline stages for identifying the synchronization scope <b>must</b> include both {@code stage} and #PIPELINE_STAGE_TRANSFER_BIT.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Similar to {@code vkCmdWriteTimestamp2}, if an implementation is unable to write a marker at any specific pipeline stage, it <b>may</b> instead do so at any logically later stage.
-        </div>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Implementations <b>may</b> only support a limited number of pipelined marker write operations in flight at a given time. Thus an excessive number of marker write operations <b>may</b> degrade command execution performance.
-        </div>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-conditionalRendering">{@code conditionalRendering}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT</li>
-            <li>If neither the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shadingRateImage">{@code shadingRateImage}</a> or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> are enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</li>
-            <li>If neither the {@link NVRayTracing VK_NV_ray_tracing} extension or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTracingPipeline">{@code rayTracingPipeline} feature</a> are enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</li>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
-            <li>{@code stage} <b>must</b> include only a single pipeline stage</li>
-            <li>{@code stage} <b>must</b> include only stages that are valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
-            <li>{@code dstOffset} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus 4</li>
-            <li>{@code dstBuffer} <b>must</b> have been created with the #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
-            <li>If {@code dstBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-            <li>{@code dstOffset} <b>must</b> be a multiple of 4</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code stage} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
-            <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
-            <li>This command <b>must</b> only be called outside of a video coding scope</li>
-            <li>Both of {@code commandBuffer}, and {@code dstBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Transfer Graphics Compute</td><td>Action</td></tr></tbody>
-        </table>
-        """,
-
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkPipelineStageFlags2("stage", "specifies the pipeline stage whose completion triggers the marker write."),
-        VkBuffer("dstBuffer", "the buffer where the marker will be written."),
-        VkDeviceSize("dstOffset", "the byte offset into the buffer where the marker will be written."),
-        uint32_t("marker", "the 32-bit value of the marker.")
-    )
-
-    DependsOn("VK_NV_device_diagnostic_checkpoints")..void(
-        "GetQueueCheckpointData2NV",
-        """
-        Retrieve diagnostic checkpoint data.
-
-        <h5>C Specification</h5>
-        If the device encounters an error during execution, the implementation will return a #ERROR_DEVICE_LOST error to the application at some point during host execution. When this happens, the application <b>can</b> call #GetQueueCheckpointData2NV() to retrieve information on the most recent diagnostic checkpoints that were executed by the device.
-
-        <pre><code>
-￿void vkGetQueueCheckpointData2NV(
-￿    VkQueue                                     queue,
-￿    uint32_t*                                   pCheckpointDataCount,
-￿    VkCheckpointData2NV*                        pCheckpointData);</code></pre>
-
-        <h5>Description</h5>
-        If {@code pCheckpointData} is {@code NULL}, then the number of checkpoint markers available is returned in {@code pCheckpointDataCount}. Otherwise, {@code pCheckpointDataCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pCheckpointData} array, and on return the variable is overwritten with the number of structures actually written to {@code pCheckpointData}.
-
-        If {@code pCheckpointDataCount} is less than the number of checkpoint markers available, at most {@code pCheckpointDataCount} structures will be written.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The device that {@code queue} belongs to <b>must</b> be in the lost state</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
-            <li>{@code pCheckpointDataCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pCheckpointDataCount} is not 0, and {@code pCheckpointData} is not {@code NULL}, {@code pCheckpointData} <b>must</b> be a valid pointer to an array of {@code pCheckpointDataCount} ##VkCheckpointData2NV structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkCheckpointData2NV
-        """,
-
-        VkQueue("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
-        AutoSize("pCheckpointData")..Check(1)..uint32_t.p("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
-        nullable..VkCheckpointData2NV.p("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointData2NV structures.")
     )
 }

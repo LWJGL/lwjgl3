@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>For applications to be able to reference specific presentation events queued by a call to {@code vkQueuePresentKHR}, an identifier needs to be associated with them. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-presentId">{@code presentId}</a> feature is enabled, applications <b>can</b> include the {@link VkPresentIdKHR} structure in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure to supply identifiers.</p>
  * 
- * <p>Each {@code VkSwapchainKHR} has a presentId associated with it. This value is initially set to zero when the {@code VkSwapchainKHR} is created.</p>
+ * <p>Each {@code VkSwapchainKHR} has a presentId associated with it. This value is initially zero when the {@code VkSwapchainKHR} is created.</p>
  * 
  * <p>When a {@link VkPresentIdKHR} structure with a non-NULL {@code pPresentIds} is included in the {@code pNext} chain of a {@link VkPresentInfoKHR} structure, each {@code pSwapchains} entry has a presentId associated in the {@code pPresentIds} array at the same index as the swapchain in the {@code pSwapchains} array. If this presentId is non-zero, then the application <b>can</b> later use this value to refer to that image presentation. A value of zero indicates that this presentation has no associated presentId. A non-zero presentId <b>must</b> be greater than any non-zero presentId passed previously by the application for the same swapchain.</p>
  * 

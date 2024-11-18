@@ -237,7 +237,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkImageView("imageView", "an image view handle specifying the shading rate image. {@code imageView} <b>may</b> be set to #NULL_HANDLE, which is equivalent to specifying a view of an image filled with zero values."),
+        VkImageView("imageView", "an image view handle specifying the shading rate image. {@code imageView} <b>may</b> be #NULL_HANDLE, which is equivalent to specifying a view of an image filled with zero values."),
         VkImageLayout("imageLayout", "the layout that the image subresources accessible from {@code imageView} will be in when the shading rate image is accessed.")
     )
 

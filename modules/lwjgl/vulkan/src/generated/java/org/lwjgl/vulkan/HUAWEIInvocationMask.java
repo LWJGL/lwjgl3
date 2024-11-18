@@ -165,7 +165,7 @@ public class HUAWEIInvocationMask {
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded
-     * @param imageView     an image view handle specifying the invocation mask image {@code imageView} <b>may</b> be set to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, which is equivalent to specifying a view of an image filled with ones value.
+     * @param imageView     an image view handle specifying the invocation mask image {@code imageView} <b>may</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, which is equivalent to specifying a view of an image filled with ones value.
      * @param imageLayout   the layout that the image subresources accessible from {@code imageView} will be in when the invocation mask image is accessed
      */
     public static void vkCmdBindInvocationMaskHUAWEI(VkCommandBuffer commandBuffer, @NativeType("VkImageView") long imageView, @NativeType("VkImageLayout") int imageLayout) {

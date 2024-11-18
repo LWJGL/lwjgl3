@@ -38,6 +38,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be either {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT} or {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT}</li>
  * <li>If {@code flags} has the {@link KHRPortabilityEnumeration#VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR} bit set, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link KHRPortabilityEnumeration VK_KHR_portability_enumeration}</li>
  * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDirectDriverLoadingListLUNARG} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link LUNARGDirectDriverLoading VK_LUNARG_direct_driver_loading}</li>
+ * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkLayerSettingsCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTLayerSettings VK_EXT_layer_settings}</li>
+ * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkValidationFeaturesEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTValidationFeatures VK_EXT_validation_features}</li>
+ * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkValidationFlagsEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTValidationFlags VK_EXT_validation_flags}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

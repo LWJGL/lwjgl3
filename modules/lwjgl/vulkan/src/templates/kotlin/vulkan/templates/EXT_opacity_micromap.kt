@@ -1021,7 +1021,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCopyMemoryToMicromapInfoEXT.const.p("pInfo", "a pointer to a ##VkCopyMicromapToMemoryInfoEXT structure defining the copy operation.")
+        VkCopyMemoryToMicromapInfoEXT.const.p("pInfo", "a pointer to a ##VkCopyMemoryToMicromapInfoEXT structure defining the copy operation.")
     )
 
     void(

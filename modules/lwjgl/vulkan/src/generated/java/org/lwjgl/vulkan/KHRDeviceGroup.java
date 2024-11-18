@@ -569,7 +569,7 @@ public class KHRDeviceGroup {
      *
      * @param device       the device associated with {@code swapchain}.
      * @param pAcquireInfo a pointer to a {@link VkAcquireNextImageInfoKHR} structure containing parameters of the acquire.
-     * @param pImageIndex  a pointer to a {@code uint32_t} that is set to the index of the next image to use.
+     * @param pImageIndex  a pointer to a {@code uint32_t} value specifying the index of the next image to use.
      */
     @NativeType("VkResult")
     public static int vkAcquireNextImage2KHR(VkDevice device, @NativeType("VkAcquireNextImageInfoKHR const *") VkAcquireNextImageInfoKHR pAcquireInfo, @NativeType("uint32_t *") IntBuffer pImageIndex) {

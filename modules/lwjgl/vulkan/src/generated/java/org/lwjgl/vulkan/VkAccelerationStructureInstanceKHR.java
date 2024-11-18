@@ -132,7 +132,7 @@ public class VkAccelerationStructureInstanceKHR extends Struct<VkAccelerationStr
     @NativeType("VkGeometryInstanceFlagsKHR")
     public int flags() { return nflags(address()); }
     /**
-     * either:
+     * either :
      * 
      * <ul>
      * <li>a device address containing the value obtained from {@link KHRAccelerationStructure#vkGetAccelerationStructureDeviceAddressKHR GetAccelerationStructureDeviceAddressKHR} or {@link NVRayTracing#vkGetAccelerationStructureHandleNV GetAccelerationStructureHandleNV} (used by device operations which reference acceleration structures) or,</li>

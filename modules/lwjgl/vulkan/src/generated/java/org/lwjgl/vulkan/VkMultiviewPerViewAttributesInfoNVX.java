@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX}</li>
+ * <li>{@code sType} <b>must</b> be {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX}</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -107,8 +107,8 @@ public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerVi
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMultiviewPerViewAttributesInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link #sType} field. */
-    public VkMultiviewPerViewAttributesInfoNVX sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
+    /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link #sType} field. */
+    public VkMultiviewPerViewAttributesInfoNVX sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMultiviewPerViewAttributesInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #perViewAttributes} field. */
@@ -330,8 +330,8 @@ public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerVi
 
         /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkMultiviewPerViewAttributesInfoNVX.nsType(address(), value); return this; }
-        /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
-        public VkMultiviewPerViewAttributesInfoNVX.Buffer sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
+        /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
+        public VkMultiviewPerViewAttributesInfoNVX.Buffer sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
         /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#pNext} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkMultiviewPerViewAttributesInfoNVX.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#perViewAttributes} field. */

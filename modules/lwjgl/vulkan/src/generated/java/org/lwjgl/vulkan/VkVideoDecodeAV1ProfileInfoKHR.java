@@ -106,7 +106,7 @@ public class VkVideoDecodeAV1ProfileInfoKHR extends Struct<VkVideoDecodeAV1Profi
     /** a {@code StdVideoAV1Profile} value specifying the AV1 codec profile, as defined in section A.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
     @NativeType("StdVideoAV1Profile")
     public int stdProfile() { return nstdProfile(address()); }
-    /** specifies whether AV1 film grain, as defined in section 7.8.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>, <b>can</b> be used with the video profile. When this member is set to {@link VK10#VK_TRUE TRUE}, video session objects created against the video profile will be able to decode pictures that have <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-film-grain">film grain</a> enabled. */
+    /** specifies whether AV1 film grain, as defined in section 7.8.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>, <b>can</b> be used with the video profile. When this member is {@link VK10#VK_TRUE TRUE}, video session objects created against the video profile will be able to decode pictures that have <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-film-grain">film grain</a> enabled. */
     @NativeType("VkBool32")
     public boolean filmGrainSupport() { return nfilmGrainSupport(address()) != 0; }
 

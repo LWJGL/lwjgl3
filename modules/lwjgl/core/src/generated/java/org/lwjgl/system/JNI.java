@@ -1165,6 +1165,7 @@ public final class JNI {
     public static native void callPPPV(long param0, long param1, int param2, int param3, int param4, int param5, int param6, int param7, long param8, int param9, int param10, int param11, int param12, int param13, int param14, int param15, int param16, int param17, long __functionAddress);
     public static native void callBBBBV(byte param0, byte param1, byte param2, byte param3, long __functionAddress);
     public static native void callCCCCV(short param0, short param1, short param2, short param3, long __functionAddress);
+    public static native void callPJJJV(long param0, long param1, long param2, long param3, long __functionAddress);
     public static native void callPJJPV(long param0, long param1, long param2, long param3, long __functionAddress);
     public static native void callPJPPV(long param0, long param1, long param2, long param3, long __functionAddress);
     public static native void callPPPNV(long param0, long param1, long param2, long param3, long __functionAddress);

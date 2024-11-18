@@ -53,9 +53,9 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkAttachmentSampleCountInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@code sType} field. */
+    /** Sets the {@link AMDMixedAttachmentSamples#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@code sType} field. */
     @Override
-    public VkAttachmentSampleCountInfoNV sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
+    public VkAttachmentSampleCountInfoNV sType$Default() { return sType(AMDMixedAttachmentSamples.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkAttachmentSampleCountInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -254,9 +254,9 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkAttachmentSampleCountInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentSampleCountInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@code sType} field. */
+        /** Sets the {@link AMDMixedAttachmentSamples#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD} value to the {@code sType} field. */
         @Override
-        public VkAttachmentSampleCountInfoNV.Buffer sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
+        public VkAttachmentSampleCountInfoNV.Buffer sType$Default() { return sType(AMDMixedAttachmentSamples.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkAttachmentSampleCountInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentSampleCountInfoNV.npNext(address(), value); return this; }

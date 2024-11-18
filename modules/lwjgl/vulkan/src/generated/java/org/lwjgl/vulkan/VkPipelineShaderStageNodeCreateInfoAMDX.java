@@ -25,6 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When dispatching a node from another shader, the name is fixed at pipeline creation, but the index <b>can</b> be set dynamically. By associating multiple shaders with the same name but different indexes, applications can dynamically select different nodes to execute. Applications <b>must</b> ensure each node has a unique name and index.</p>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Shaders with the same name <b>must</b> be of the same type - e.g. a compute and graphics shader, or even two compute shaders where one is coalescing and the other is not, cannot share the same name.</p>
+ * </div>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

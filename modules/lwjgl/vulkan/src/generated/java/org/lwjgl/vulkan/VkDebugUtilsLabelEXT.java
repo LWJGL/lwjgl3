@@ -107,10 +107,10 @@ public class VkDebugUtilsLabelEXT extends Struct<VkDebugUtilsLabelEXT> implement
     /** a pointer to a null-terminated UTF-8 string containing the name of the label. */
     @NativeType("char const *")
     public String pLabelNameString() { return npLabelNameString(address()); }
-    /** an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
+    /** an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are 0.0, then it is ignored. */
     @NativeType("float[4]")
     public FloatBuffer color() { return ncolor(address()); }
-    /** an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
+    /** an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are 0.0, then it is ignored. */
     public float color(int index) { return ncolor(address(), index); }
 
     /** Sets the specified value to the {@link #sType} field. */

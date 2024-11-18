@@ -31,6 +31,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dt><b>API Interactions</b></dt>
+ * <dd><ul>
+ * <li>Interacts with VK_VERSION_1_3</li>
+ * <li>Interacts with VK_KHR_synchronization2</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Nuno Subtil <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostic_checkpoints]%20@nsubtil%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_device_diagnostic_checkpoints%20extension*">nsubtil</a></li>
@@ -73,6 +78,20 @@ public class NVDeviceDiagnosticCheckpoints {
     public static final int
         VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV                    = 1000206000,
         VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV = 1000206001;
+
+    /**
+     * Extends {@code VkStructureType}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV}</li>
+     * </ul>
+     */
+    public static final int
+        VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV = 1000314008,
+        VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV                    = 1000314009;
 
     protected NVDeviceDiagnosticCheckpoints() {
         throw new UnsupportedOperationException();
@@ -192,9 +211,84 @@ public class NVDeviceDiagnosticCheckpoints {
         nvkGetQueueCheckpointDataNV(queue, memAddress(pCheckpointDataCount), memAddressSafe(pCheckpointData));
     }
 
+    // --- [ vkGetQueueCheckpointData2NV ] ---
+
+    /**
+     * Unsafe version of: {@link #vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV}
+     *
+     * @param pCheckpointDataCount a pointer to an integer related to the number of checkpoint markers available or queried, as described below.
+     */
+    public static void nvkGetQueueCheckpointData2NV(VkQueue queue, long pCheckpointDataCount, long pCheckpointData) {
+        long __functionAddress = queue.getCapabilities().vkGetQueueCheckpointData2NV;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(queue.address(), pCheckpointDataCount, pCheckpointData, __functionAddress);
+    }
+
+    /**
+     * Retrieve diagnostic checkpoint data.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>If the device encounters an error during execution, the implementation will return a {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST} error to the application at some point during host execution. When this happens, the application <b>can</b> call {@link #vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV} to retrieve information on the most recent diagnostic checkpoints that were executed by the device.</p>
+     * 
+     * <pre><code>
+     * void vkGetQueueCheckpointData2NV(
+     *     VkQueue                                     queue,
+     *     uint32_t*                                   pCheckpointDataCount,
+     *     VkCheckpointData2NV*                        pCheckpointData);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>If {@code pCheckpointData} is {@code NULL}, then the number of checkpoint markers available is returned in {@code pCheckpointDataCount}. Otherwise, {@code pCheckpointDataCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pCheckpointData} array, and on return the variable is overwritten with the number of structures actually written to {@code pCheckpointData}.</p>
+     * 
+     * <p>If {@code pCheckpointDataCount} is less than the number of checkpoint markers available, at most {@code pCheckpointDataCount} structures will be written.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>The device that {@code queue} belongs to <b>must</b> be in the lost state</li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+     * <li>{@code pCheckpointDataCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+     * <li>If the value referenced by {@code pCheckpointDataCount} is not 0, and {@code pCheckpointData} is not {@code NULL}, {@code pCheckpointData} <b>must</b> be a valid pointer to an array of {@code pCheckpointDataCount} {@link VkCheckpointData2NV} structures</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkCheckpointData2NV}</p>
+     *
+     * @param queue                the {@code VkQueue} object the caller would like to retrieve checkpoint data for
+     * @param pCheckpointDataCount a pointer to an integer related to the number of checkpoint markers available or queried, as described below.
+     * @param pCheckpointData      either {@code NULL} or a pointer to an array of {@link VkCheckpointData2NV} structures.
+     */
+    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") IntBuffer pCheckpointDataCount, @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.@Nullable Buffer pCheckpointData) {
+        if (CHECKS) {
+            check(pCheckpointDataCount, 1);
+            checkSafe(pCheckpointData, pCheckpointDataCount.get(pCheckpointDataCount.position()));
+        }
+        nvkGetQueueCheckpointData2NV(queue, memAddress(pCheckpointDataCount), memAddressSafe(pCheckpointData));
+    }
+
     /** Array version of: {@link #vkGetQueueCheckpointDataNV GetQueueCheckpointDataNV} */
     public static void vkGetQueueCheckpointDataNV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @NativeType("VkCheckpointDataNV *") VkCheckpointDataNV.@Nullable Buffer pCheckpointData) {
         long __functionAddress = queue.getCapabilities().vkGetQueueCheckpointDataNV;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(pCheckpointDataCount, 1);
+            checkSafe(pCheckpointData, pCheckpointDataCount[0]);
+        }
+        callPPPV(queue.address(), pCheckpointDataCount, memAddressSafe(pCheckpointData), __functionAddress);
+    }
+
+    /** Array version of: {@link #vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV} */
+    public static void vkGetQueueCheckpointData2NV(VkQueue queue, @NativeType("uint32_t *") int[] pCheckpointDataCount, @NativeType("VkCheckpointData2NV *") VkCheckpointData2NV.@Nullable Buffer pCheckpointData) {
+        long __functionAddress = queue.getCapabilities().vkGetQueueCheckpointData2NV;
         if (CHECKS) {
             check(__functionAddress);
             check(pCheckpointDataCount, 1);

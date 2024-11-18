@@ -16,7 +16,7 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
         This extension also incorporates #ATTACHMENT_STORE_OP_NONE_KHR from {@link QCOMRenderPassStoreOps VK_QCOM_render_pass_store_ops}, enabling applications to avoid unnecessary synchronization when an attachment is not written during a render pass.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum, and command names are still available as aliases of the core functionality.
+        Vulkan APIs in this extension are included in core Vulkan 1.3, with the KHR suffix omitted. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -33,15 +33,6 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
-
-            <dt><b>API Interactions</b></dt>
-            <dd><ul>
-                <li>Interacts with VK_AMD_mixed_attachment_samples</li>
-                <li>Interacts with VK_EXT_fragment_density_map</li>
-                <li>Interacts with VK_KHR_fragment_shading_rate</li>
-                <li>Interacts with VK_NVX_multiview_per_view_attributes</li>
-                <li>Interacts with VK_NV_framebuffer_mixed_samples</li>
-            </ul></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
@@ -115,50 +106,6 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
         "RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR".enum(0x00000001),
         "RENDERING_SUSPENDING_BIT_KHR".enum(0x00000002),
         "RENDERING_RESUMING_BIT_KHR".enum(0x00000004)
-    )
-
-    EnumConstant(
-        "Extends {@code VkPipelineCreateFlagBits}.",
-
-        "PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000),
-        "PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000)
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR".."1000044006"
-    )
-
-    EnumConstant(
-        "Extends {@code VkPipelineCreateFlagBits}.",
-
-        "PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00400000),
-        "PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00400000)
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT".."1000044007"
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD".."1000044008"
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV".."1000044008"
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX".."1000044009"
     )
 
     void(

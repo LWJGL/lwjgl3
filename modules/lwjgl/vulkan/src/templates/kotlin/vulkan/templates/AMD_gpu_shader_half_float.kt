@@ -14,7 +14,7 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
         This extension adds support for using half float variables in shaders.
 
         <h5>Deprecation by {@code VK_KHR_shader_float16_int8}</h5>
-        Functionality in this extension was included in {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension, when ##VkPhysicalDeviceShaderFloat16Int8FeaturesKHR{@code ::shaderFloat16} is enabled.
+        Functionality in this extension is included in the {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension, when the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderFloat16">{@code shaderFloat16}</a> feature is enabled.
 
         <dl>
             <dt><b>Name String</b></dt>

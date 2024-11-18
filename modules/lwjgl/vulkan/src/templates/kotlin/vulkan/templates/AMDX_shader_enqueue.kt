@@ -11,7 +11,7 @@ import vulkan.*
 val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue", type = "device", postfix = "AMDX") {
     documentation =
         """
-        This extension adds the ability for developers to enqueue compute shader workgroups from other compute shaders.
+        This extension adds the ability for developers to enqueue mesh and compute shader workgroups from other compute shaders.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -24,10 +24,10 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <dd>135</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a> and {@link KHRPipelineLibrary VK_KHR_pipeline_library} and {@link KHRSpirv14 VK_KHR_spirv_1_4}
+            <dd>{@link KHRSynchronization2 VK_KHR_synchronization2} and {@link KHRSpirv14 VK_KHR_spirv_1_4} and {@link EXTExtendedDynamicState VK_EXT_extended_dynamic_state} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a> and {@link KHRMaintenance5 VK_KHR_maintenance5} and {@link KHRPipelineLibrary VK_KHR_pipeline_library}
 
             <ul>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
@@ -35,6 +35,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
+                <li>Interacts with VK_EXT_mesh_shader</li>
                 <li>Interacts with VK_KHR_maintenance5</li>
             </ul></dd>
 
@@ -55,7 +56,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-07-22</dd>
+            <dd>2024-07-17</dd>
 
             <dt><b>Provisional</b></dt>
             <dd><b>This extension is <em>provisional</em> and <b>should</b> not be used in production applications. The functionality <b>may</b> change in ways that break backwards compatibility between revisions, and before final release.</b></dd>
@@ -79,7 +80,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
     IntConstant(
         "The extension specification version.",
 
-        "AMDX_SHADER_ENQUEUE_SPEC_VERSION".."1"
+        "AMDX_SHADER_ENQUEUE_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -120,6 +121,12 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         "Extends {@code VkBufferUsageFlagBits2KHR}.",
 
         "BUFFER_USAGE_2_EXECUTION_GRAPH_SCRATCH_BIT_AMDX".enum(0x02000000L)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkPipelineCreateFlagBits2KHR}.",
+
+        "PIPELINE_CREATE_2_EXECUTION_GRAPH_BIT_AMDX".enum(0x100000000L)
     )
 
     VkResult(
@@ -238,7 +245,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         ##VkExecutionGraphPipelineScratchSizeAMDX
         """,
 
-        VkDevice("device", "the that {@code executionGraph} was created on."),
+        VkDevice("device", "the logical device that {@code executionGraph} was created on."),
         VkPipeline("executionGraph", "the execution graph pipeline to query the scratch space for."),
         VkExecutionGraphPipelineScratchSizeAMDX.p("pSizeInfo", "a pointer to a ##VkExecutionGraphPipelineScratchSizeAMDX structure that will contain the required scratch size.")
     )
@@ -294,7 +301,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         ##VkPipelineShaderStageNodeCreateInfoAMDX
         """,
 
-        VkDevice("device", "the that {@code executionGraph} was created on."),
+        VkDevice("device", "the logical device that {@code executionGraph} was created on."),
         VkPipeline("executionGraph", "the execution graph pipeline to query the internal node index for."),
         VkPipelineShaderStageNodeCreateInfoAMDX.const.p("pNodeInfo", "a pointer to a ##VkPipelineShaderStageNodeCreateInfoAMDX structure identifying the name and index of the node to query."),
         Check(1)..uint32_t.p("pNodeIndex", "the returned internal node index of the identified node.")
@@ -311,29 +318,33 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <pre><code>
 ￿void vkCmdInitializeGraphScratchMemoryAMDX(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    VkDeviceAddress                             scratch);</code></pre>
+￿    VkPipeline                                  executionGraph,
+￿    VkDeviceAddress                             scratch,
+￿    VkDeviceSize                                scratchSize);</code></pre>
 
         <h5>Description</h5>
         This command <b>must</b> be called before using {@code scratch} to dispatch the currently bound execution graph pipeline.
 
-        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code size}), where {@code size} is the value returned in ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline. Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code scratchSize}). Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
 
-        If any portion of {@code scratch} is modified by any command other than #CmdDispatchGraphAMDX(), #CmdDispatchGraphIndirectAMDX(), #CmdDispatchGraphIndirectCountAMDX(), or {@code vkCmdInitializeGraphScratchMemoryAMDX} with the same execution graph, it <b>must</b> be reinitialized for the execution graph again before dispatching against it.
+        If any portion of {@code scratch} is modified by any command other than #CmdDispatchGraphAMDX(), #CmdDispatchGraphIndirectAMDX(), #CmdDispatchGraphIndirectCountAMDX(), or #CmdInitializeGraphScratchMemoryAMDX() with the same execution graph, it <b>must</b> be reinitialized for the execution graph again before dispatching against it.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as the value of ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} returned by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline.</li>
+            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as {@code scratchSize}</li>
+            <li>{@code scratchSize} <b>must</b> be greater than or equal to ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::minSize} returned by #GetExecutionGraphPipelineScratchSizeAMDX() for the currently bound execution graph pipeline</li>
             <li>{@code scratch} <b>must</b> be a multiple of 64</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>{@code executionGraph} <b>must</b> be a valid {@code VkPipeline} handle</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
-            <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
+            <li>Both of {@code commandBuffer}, and {@code executionGraph} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -344,12 +355,14 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary</td><td>Outside</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
+            <tbody><tr><td>Primary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
         </table>
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkDeviceAddress("scratch", "a pointer to the scratch memory to be initialized.")
+        VkPipeline("executionGraph", "the execution graph pipeline to initialize the scratch memory for."),
+        VkDeviceAddress("scratch", "the address of scratch memory to be initialized."),
+        VkDeviceSize("scratchSize", "a range in bytes of scratch memory to be initialized.")
     )
 
     void(
@@ -364,14 +377,17 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
 ￿void vkCmdDispatchGraphAMDX(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkDeviceAddress                             scratch,
+￿    VkDeviceSize                                scratchSize,
 ￿    const VkDispatchGraphCountInfoAMDX*         pCountInfo);</code></pre>
 
         <h5>Description</h5>
-        When this command is executed, the nodes specified in {@code pCountInfo} are executed. Nodes executed as part of this command are not implicitly synchronized in any way against each other once they are dispatched.
+        When this command is executed, the nodes specified in {@code pCountInfo} are executed. Nodes executed as part of this command are not implicitly synchronized in any way against each other once they are dispatched. There are no rasterization order guarantees between separately dispatched graphics nodes, though individual primitives within a single dispatch do adhere to rasterization order. Draw calls executed before or after the execution graph also execute relative to each graphics node with respect to rasterization order.
 
         For this command, all device/host pointers in substructures are treated as host pointers and read only during host execution of this command. Once this command returns, no reference to the original pointers is retained.
 
-        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code size}), where {@code size} is the value returned in ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code scratchSize}). Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+
+        This command <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#executiongraphs-meshnodes-statecapture">captures command buffer state</a> for mesh nodes similarly to draw commands.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -412,7 +428,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code uniformBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, and any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code storageBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
@@ -446,12 +462,14 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If a descriptor with type equal to any of #DESCRIPTOR_TYPE_SAMPLE_WEIGHT_IMAGE_QCOM, #DESCRIPTOR_TYPE_BLOCK_MATCH_IMAGE_QCOM, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT is accessed as a result of this command, the image subresource identified by that descriptor <b>must</b> be in the image layout identified when the descriptor was written</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
             <li>{@code commandBuffer} <b>must</b> be a primary command buffer</li>
-            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as the value of ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} returned by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline</li>
+            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as {@code scratchSize}</li>
+            <li>{@code scratchSize} <b>must</b> be greater than or equal to ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::minSize} returned by #GetExecutionGraphPipelineScratchSizeAMDX() for the currently bound execution graph pipeline</li>
             <li>{@code scratch} <b>must</b> be a device address within a {@code VkBuffer} created with the #BUFFER_USAGE_EXECUTION_GRAPH_SCRATCH_BIT_AMDX or #BUFFER_USAGE_2_EXECUTION_GRAPH_SCRATCH_BIT_AMDX flag</li>
-            <li>Device memory in the range [{@code scratch},{@code scratch} ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size}) <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
+            <li>The device memory range [{@code scratch},{@code scratch} {@code scratchSize}] <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
             <li>Execution of this command <b>must</b> not cause a node to be dispatched with a larger number of workgroups than that specified by either a {@code MaxNumWorkgroupsAMDX} decoration in the dispatched node or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxComputeWorkGroupCount">{@code maxComputeWorkGroupCount}</a></li>
             <li>Execution of this command <b>must</b> not cause any shader to initialize more than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a> output payloads</li>
             <li>Execution of this command <b>must</b> not cause any shader that declares {@code NodeMaxPayloadsAMDX} to initialize more output payloads than specified by the max number of payloads for that decoration. This requirement applies to each {@code NodeMaxPayloadsAMDX} decoration separately</li>
+            <li>If the currently bound execution graph pipeline includes draw nodes, this command <b>must</b> be called within a render pass instance that is compatible with the graphics pipeline used to create each of those nodes</li>
             <li>{@code pCountInfo→infos} <b>must</b> be a host pointer to a memory allocation at least as large as the product of {@code count} and {@code stride}</li>
             <li>Host memory locations at indexes in the range [{@code infos}, {@code infos} + ({@code count}*{@code stride})), at a granularity of {@code stride} <b>must</b> contain valid ##VkDispatchGraphInfoAMDX structures in the first 24 bytes</li>
             <li>For each ##VkDispatchGraphInfoAMDX structure in {@code pCountInfo→infos}, {@code payloads} <b>must</b> be a host pointer to a memory allocation at least as large as the product of {@code payloadCount} and {@code payloadStride}</li>
@@ -465,7 +483,6 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>{@code pCountInfo} <b>must</b> be a valid pointer to a valid ##VkDispatchGraphCountInfoAMDX structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
-            <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
         </ul>
@@ -478,7 +495,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary</td><td>Outside</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
+            <tbody><tr><td>Primary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
         </table>
 
         <h5>See Also</h5>
@@ -486,7 +503,8 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkDeviceAddress("scratch", "a pointer to the scratch memory to be used."),
+        VkDeviceAddress("scratch", "the address of scratch memory to be used."),
+        VkDeviceSize("scratchSize", "a range in bytes of scratch memory to be used."),
         VkDispatchGraphCountInfoAMDX.const.p("pCountInfo", "a host pointer to a ##VkDispatchGraphCountInfoAMDX structure defining the nodes which will be initially executed.")
     )
 
@@ -502,14 +520,17 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
 ￿void vkCmdDispatchGraphIndirectAMDX(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkDeviceAddress                             scratch,
+￿    VkDeviceSize                                scratchSize,
 ￿    const VkDispatchGraphCountInfoAMDX*         pCountInfo);</code></pre>
 
         <h5>Description</h5>
-        When this command is executed, the nodes specified in {@code pCountInfo} are executed. Nodes executed as part of this command are not implicitly synchronized in any way against each other once they are dispatched.
+        When this command is executed, the nodes specified in {@code pCountInfo} are executed. Nodes executed as part of this command are not implicitly synchronized in any way against each other once they are dispatched. There are no rasterization order guarantees between separately dispatched graphics nodes, though individual primitives within a single dispatch do adhere to rasterization order. Draw calls executed before or after the execution graph also execute relative to each graphics node with respect to rasterization order.
 
         For this command, all device/host pointers in substructures are treated as device pointers and read during device execution of this command. The allocation and contents of these pointers only needs to be valid during device execution. All of these addresses will be read in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT access flag.
 
-        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code size}), where {@code size} is the value returned in ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline. Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code scratchSize}). Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+
+        This command <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#executiongraphs-meshnodes-statecapture">captures command buffer state</a> for mesh nodes similarly to draw commands.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -550,7 +571,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code uniformBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, and any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code storageBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
@@ -584,12 +605,14 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If a descriptor with type equal to any of #DESCRIPTOR_TYPE_SAMPLE_WEIGHT_IMAGE_QCOM, #DESCRIPTOR_TYPE_BLOCK_MATCH_IMAGE_QCOM, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT is accessed as a result of this command, the image subresource identified by that descriptor <b>must</b> be in the image layout identified when the descriptor was written</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
             <li>{@code commandBuffer} <b>must</b> be a primary command buffer</li>
-            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as the value of ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} returned by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline</li>
+            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as {@code scratchSize}</li>
+            <li>{@code scratchSize} <b>must</b> be greater than or equal to ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::minSize} returned by #GetExecutionGraphPipelineScratchSizeAMDX() for the currently bound execution graph pipeline</li>
             <li>{@code scratch} <b>must</b> be a device address within a {@code VkBuffer} created with the #BUFFER_USAGE_EXECUTION_GRAPH_SCRATCH_BIT_AMDX or #BUFFER_USAGE_2_EXECUTION_GRAPH_SCRATCH_BIT_AMDX flag</li>
-            <li>Device memory in the range [{@code scratch},{@code scratch} ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size}) <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
+            <li>The device memory range [{@code scratch},{@code scratch} {@code scratchSize}] <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
             <li>Execution of this command <b>must</b> not cause a node to be dispatched with a larger number of workgroups than that specified by either a {@code MaxNumWorkgroupsAMDX} decoration in the dispatched node or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxComputeWorkGroupCount">{@code maxComputeWorkGroupCount}</a></li>
             <li>Execution of this command <b>must</b> not cause any shader to initialize more than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a> output payloads</li>
             <li>Execution of this command <b>must</b> not cause any shader that declares {@code NodeMaxPayloadsAMDX} to initialize more output payloads than specified by the max number of payloads for that decoration. This requirement applies to each {@code NodeMaxPayloadsAMDX} decoration separately</li>
+            <li>If the currently bound execution graph pipeline includes draw nodes, this command <b>must</b> be called within a render pass instance that is compatible with the graphics pipeline used to create each of those nodes</li>
             <li>{@code pCountInfo→infos} <b>must</b> be a device pointer to a memory allocation at least as large as the product of {@code count} and {@code stride} when this command is executed on the device</li>
             <li>{@code pCountInfo→infos} <b>must</b> be a device address within a {@code VkBuffer} created with the #BUFFER_USAGE_INDIRECT_BUFFER_BIT flag</li>
             <li>{@code pCountInfo→infos} <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-executionGraphDispatchAddressAlignment">{@code executionGraphDispatchAddressAlignment}</a></li>
@@ -607,7 +630,6 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>{@code pCountInfo} <b>must</b> be a valid pointer to a valid ##VkDispatchGraphCountInfoAMDX structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
-            <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
         </ul>
@@ -620,7 +642,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary</td><td>Outside</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
+            <tbody><tr><td>Primary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
         </table>
 
         <h5>See Also</h5>
@@ -628,7 +650,8 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkDeviceAddress("scratch", "a pointer to the scratch memory to be used."),
+        VkDeviceAddress("scratch", "the address of scratch memory to be used."),
+        VkDeviceSize("scratchSize", "a range in bytes of scratch memory to be used."),
         VkDispatchGraphCountInfoAMDX.const.p("pCountInfo", "a host pointer to a ##VkDispatchGraphCountInfoAMDX structure defining the nodes which will be initially executed.")
     )
 
@@ -644,6 +667,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
 ￿void vkCmdDispatchGraphIndirectCountAMDX(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkDeviceAddress                             scratch,
+￿    VkDeviceSize                                scratchSize,
 ￿    VkDeviceAddress                             countInfo);</code></pre>
 
         <h5>Description</h5>
@@ -651,7 +675,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
 
         For this command, all pointers in substructures are treated as device pointers and read during device execution of this command. The allocation and contents of these pointers only needs to be valid during device execution. All of these addresses will be read in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT access flag.
 
-        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code size}), where {@code size} is the value returned in ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline. Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
+        Execution of this command <b>may</b> modify any memory locations in the range [{@code scratch},{@code scratch} + {@code scratchSize}). Accesses to this memory range are performed in the #PIPELINE_STAGE_2_COMPUTE_SHADER_BIT pipeline stage with the #ACCESS_2_SHADER_STORAGE_READ_BIT and #ACCESS_2_SHADER_STORAGE_WRITE_BIT access flags.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -692,7 +716,7 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command or any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled, either a valid pipeline <b>must</b> be bound to the pipeline bind point used by this command, or a valid combination of valid and #NULL_HANDLE shader objects <b>must</b> be bound to every supported shader stage corresponding to the pipeline bind point used by this command</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code uniformBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, and any {@code VkShaderEXT} bound to a stage corresponding to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
             <li>If any stage of the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, and that stage was created without enabling either #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT or #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT for {@code storageBuffers}, and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled, that stage <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
@@ -726,12 +750,14 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>If a descriptor with type equal to any of #DESCRIPTOR_TYPE_SAMPLE_WEIGHT_IMAGE_QCOM, #DESCRIPTOR_TYPE_BLOCK_MATCH_IMAGE_QCOM, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT is accessed as a result of this command, the image subresource identified by that descriptor <b>must</b> be in the image layout identified when the descriptor was written</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
             <li>{@code commandBuffer} <b>must</b> be a primary command buffer</li>
-            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as the value of ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size} returned by ##VkExecutionGraphPipelineScratchSizeAMDX for the currently bound execution graph pipeline</li>
+            <li>{@code scratch} <b>must</b> be the device address of an allocated memory range at least as large as {@code scratchSize}</li>
+            <li>{@code scratchSize} <b>must</b> be greater than or equal to ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::minSize} returned by #GetExecutionGraphPipelineScratchSizeAMDX() for the currently bound execution graph pipeline</li>
             <li>{@code scratch} <b>must</b> be a device address within a {@code VkBuffer} created with the #BUFFER_USAGE_EXECUTION_GRAPH_SCRATCH_BIT_AMDX or #BUFFER_USAGE_2_EXECUTION_GRAPH_SCRATCH_BIT_AMDX flag</li>
-            <li>Device memory in the range [{@code scratch},{@code scratch} ##VkExecutionGraphPipelineScratchSizeAMDX{@code ::size}) <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
+            <li>The device memory range [{@code scratch},{@code scratch} {@code scratchSize}] <b>must</b> have been initialized with #CmdInitializeGraphScratchMemoryAMDX() using the currently bound execution graph pipeline, and not modified after that by anything other than another execution graph dispatch command</li>
             <li>Execution of this command <b>must</b> not cause a node to be dispatched with a larger number of workgroups than that specified by either a {@code MaxNumWorkgroupsAMDX} decoration in the dispatched node or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxComputeWorkGroupCount">{@code maxComputeWorkGroupCount}</a></li>
             <li>Execution of this command <b>must</b> not cause any shader to initialize more than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a> output payloads</li>
             <li>Execution of this command <b>must</b> not cause any shader that declares {@code NodeMaxPayloadsAMDX} to initialize more output payloads than specified by the max number of payloads for that decoration. This requirement applies to each {@code NodeMaxPayloadsAMDX} decoration separately</li>
+            <li>If the currently bound execution graph pipeline includes draw nodes, this command <b>must</b> be called within a render pass instance that is compatible with the graphics pipeline used to create each of those nodes</li>
             <li>{@code countInfo} <b>must</b> be a device pointer to a memory allocation containing a valid ##VkDispatchGraphCountInfoAMDX structure when this command is executed on the device</li>
             <li>{@code countInfo} <b>must</b> be a device address within a {@code VkBuffer} created with the #BUFFER_USAGE_INDIRECT_BUFFER_BIT flag</li>
             <li>{@code countInfo} <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-executionGraphDispatchAddressAlignment">{@code executionGraphDispatchAddressAlignment}</a></li>
@@ -751,7 +777,6 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
-            <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
         </ul>
@@ -764,12 +789,13 @@ val AMDX_shader_enqueue = "AMDXShaderEnqueue".nativeClassVK("AMDX_shader_enqueue
         <h5>Command Properties</h5>
         <table class="lwjgl">
             <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
-            <tbody><tr><td>Primary</td><td>Outside</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
+            <tbody><tr><td>Primary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>Action</td></tr></tbody>
         </table>
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkDeviceAddress("scratch", "a pointer to the scratch memory to be used."),
+        VkDeviceAddress("scratch", "the address of scratch memory to be used."),
+        VkDeviceSize("scratchSize", "a range in bytes of scratch memory to be used."),
         VkDeviceAddress("countInfo", "a device address of a ##VkDispatchGraphCountInfoAMDX structure defining the nodes which will be initially executed.")
     )
 }

@@ -109,7 +109,7 @@ public class KHRCooperativeMatrix {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkCooperativeMatrixPropertiesKHR}</p>
+     * <p>{@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV}, {@link VkCooperativeMatrixPropertiesKHR}</p>
      */
     public static final int
         VK_COMPONENT_TYPE_FLOAT16_KHR = 0,
@@ -140,7 +140,7 @@ public class KHRCooperativeMatrix {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkCooperativeMatrixPropertiesKHR}</p>
+     * <p>{@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV}, {@link VkCooperativeMatrixPropertiesKHR}</p>
      */
     public static final int
         VK_SCOPE_DEVICE_KHR       = 1,

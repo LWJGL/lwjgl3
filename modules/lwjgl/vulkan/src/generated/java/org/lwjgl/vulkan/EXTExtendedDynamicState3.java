@@ -46,6 +46,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Interacts with VK_NV_representative_fragment_test</li>
  * <li>Interacts with VK_NV_shading_rate_image</li>
  * <li>Interacts with VK_NV_viewport_swizzle</li>
+ * <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3AlphaToOneEnable</li>
+ * <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3DepthClampEnable</li>
+ * <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3LogicOpEnable</li>
+ * <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3PolygonMode</li>
+ * <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3TessellationDomainOrigin</li>
+ * <li>Interacts with VkPhysicalDeviceMeshShaderFeaturesEXT::extendedDynamicState3RasterizationStream</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -1214,7 +1220,7 @@ public class EXTExtendedDynamicState3 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}{@code ::depthClipEnable} value used to create the currently active pipeline, or is set to the inverse of {@link VkPipelineRasterizationStateCreateInfo}{@code ::depthClampEnable} if {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} is not specified.</p>
+     * <p>This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT}{@code ::depthClipEnable} value used to create the currently active pipeline, or by the inverse of {@link VkPipelineRasterizationStateCreateInfo}{@code ::depthClampEnable} if {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} is not specified.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

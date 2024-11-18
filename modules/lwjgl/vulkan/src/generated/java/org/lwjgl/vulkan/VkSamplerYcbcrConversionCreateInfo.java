@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Setting {@code forceExplicitReconstruction} to {@link VK10#VK_TRUE TRUE} <b>may</b> have a performance penalty on implementations where explicit reconstruction is not the default mode of operation.</p>
  * 
- * <p>If {@code format} supports {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT} the {@code forceExplicitReconstruction} value behaves as if it was set to {@link VK10#VK_TRUE TRUE}.</p>
+ * <p>If {@code format} supports {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT} the {@code forceExplicitReconstruction} value behaves as if it were {@link VK10#VK_TRUE TRUE}.</p>
  * </div>
  * 
  * <p>If the {@code pNext} chain includes a {@link VkExternalFormatANDROID} structure with non-zero {@code externalFormat} member, the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion object represents an <em>external format conversion</em>, and {@code format} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}. Such conversions <b>must</b> only be used to sample image views with a matching <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">external format</a>. When creating an external format conversion, the value of {@code components} is ignored.</p>

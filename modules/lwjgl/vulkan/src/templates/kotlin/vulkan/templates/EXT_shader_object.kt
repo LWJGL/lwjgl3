@@ -1868,7 +1868,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿    VkBool32                                    depthClipEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationDepthClipStateCreateInfoEXT{@code ::depthClipEnable} value used to create the currently active pipeline, or is set to the inverse of ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable} if ##VkPipelineRasterizationDepthClipStateCreateInfoEXT is not specified.
+        This command sets whether depth clipping is enabled or disabled for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationDepthClipStateCreateInfoEXT{@code ::depthClipEnable} value used to create the currently active pipeline, or by the inverse of ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable} if ##VkPipelineRasterizationDepthClipStateCreateInfoEXT is not specified.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2789,7 +2789,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT, then {@code pDepthClampRange} must be a valid pointer to a valid ##VkDepthClampRangeEXT structure.</li>
+            <li>If {@code depthClampMode} is #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT, then {@code pDepthClampRange} must be a valid pointer to a valid ##VkDepthClampRangeEXT structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2820,6 +2820,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkDepthClampModeEXT("depthClampMode", "determines how the clamp range is determined for each viewport."),
-        nullable..VkDepthClampRangeEXT.const.p("pDepthClampRange", "sets the depth clamp range for all viewports if {@code depthClampMode} is set to #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
+        nullable..VkDepthClampRangeEXT.const.p("pDepthClampRange", "sets the depth clamp range for all viewports if {@code depthClampMode} is #DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT.")
     )
 }
