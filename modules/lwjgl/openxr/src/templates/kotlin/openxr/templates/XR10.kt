@@ -160,6 +160,8 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
                 <tr><td>#ERROR_SYSTEM_NOTIFICATION_INCOMPATIBLE_SKU_ML</td><td>Incompatible SKU detected.  (Added by the {@link MLSystemNotifications XR_ML_system_notifications} extension)</td></tr>
                 <tr><td>#ERROR_WORLD_MESH_DETECTOR_PERMISSION_DENIED_ML</td><td>The world mesh detector permission was not granted.  (Added by the {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension)</td></tr>
                 <tr><td>#ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML</td><td>At the time of the call the runtime was unable to locate the space and cannot fulfill your request.  (Added by the {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension)</td></tr>
+                <tr><td>#ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR</td><td>Alias for #ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED  (Added by the {@link KHRMaintenance1 XR_KHR_maintenance1} extension)</td></tr>
+                <tr><td>#ERROR_PERMISSION_INSUFFICIENT_KHR</td><td>Alias for #ERROR_PERMISSION_INSUFFICIENT  (Added by the {@link KHRMaintenance1 XR_KHR_maintenance1} extension)</td></tr>
             </tbody>
         </table>
 
@@ -720,7 +722,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         <h5>Description</h5>
         #GetInstanceProcAddr() itself is obtained in a platform- and loader- specific manner. Typically, the loader library will export this function as a function symbol, so applications <b>can</b> link against the loader library, or load it dynamically and look up the symbol using platform-specific APIs. Loaders <b>must</b> export function symbols for all core OpenXR functions. Because of this, applications that use only the core OpenXR functions have no need to use #GetInstanceProcAddr().
 
-        Because an application <b>can</b> call #GetInstanceProcAddr() before creating an instance, #GetInstanceProcAddr() returns a valid function pointer when the {@code instance} parameter is #NULL_HANDLE and the {@code name} parameter is one of the following strings:
+        Because an application <b>can</b> call #GetInstanceProcAddr() before creating an instance, #GetInstanceProcAddr() <b>must</b> return a valid function pointer when the {@code instance} parameter is #NULL_HANDLE and the {@code name} parameter is one of the following strings:
 
         <h5>No Instance Required</h5>
         <ul>
@@ -735,7 +737,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 
         If {@code name} is the name of an extension function, then the result returned by #GetInstanceProcAddr() will depend upon how the {@code instance} was created. If {@code instance} was created with the related extension’s name appearing in the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} array, then #GetInstanceProcAddr() returns a valid function pointer. If the related extension’s name did not appear in the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} array during the creation of {@code instance}, then #GetInstanceProcAddr() returns #ERROR_FUNCTION_UNSUPPORTED. Because of this, function pointers returned by #GetInstanceProcAddr() using one {@code XrInstance} may not be valid when used with objects related to a different {@code XrInstance}.
 
-        The returned function pointer is of type {@code PFN_xrVoidFunction}, and must be cast to the type of the function being queried.
+        The returned function pointer is of type {@code PFN_xrVoidFunction}, and <b>must</b> be cast by the application to the type of the function being queried.
 
         The table below defines the various use cases for #GetInstanceProcAddr() and return value (“{@code fp}” is “{@code function pointer}”) for each case.
 

@@ -21,6 +21,9 @@ val VARJO_xr4_controller_interaction = "VARJOXr4ControllerInteraction".nativeCla
             <li>pathname:/interaction_profiles/varjo/xr-4_controller</li>
         </ul>
 
+        <h5>Note</h5>
+        The interaction profile path pathname:{legacy-path} defined here does not follow current rules for interaction profile names. If this extension were introduced today, it would be called pathname:{properly-suffixed-path}, to allow for modifications when promoted to a KHR extension or the core specification.
+
         Valid for the user paths:
 
         <ul>
@@ -59,12 +62,36 @@ val VARJO_xr4_controller_interaction = "VARJOXr4ControllerInteraction".nativeCla
             <li>subpathname:/input/aim/pose</li>
             <li>subpathname:/output/haptic</li>
         </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the runtime supports {@link XR11 XR_VERSION_1_1} and use of OpenXR 1.1 is requested by the application, this interaction profile <b>must</b> also support
+
+        <ul>
+            <li>subpathname:/input/grip_surface/pose</li>
+        </ul>
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the {@link KHRMaintenance1 XR_KHR_maintenance1} extension is available and enabled, this interaction profile <b>must</b> also support
+
+        <ul>
+            <li>subpathname:/input/grip_surface/pose</li>
+        </ul>
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When the {@link EXTPalmPose XR_EXT_palm_pose} extension is available and enabled, this interaction profile <b>must</b> also support
+
+        <ul>
+            <li>subpathname:/input/palm_ext/pose</li>
+        </ul>
+        </div>
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "VARJO_xr4_controller_interaction_SPEC_VERSION".."1"
+        "VARJO_xr4_controller_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(

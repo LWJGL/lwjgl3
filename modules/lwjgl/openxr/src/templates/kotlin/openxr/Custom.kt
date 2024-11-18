@@ -84,7 +84,7 @@ fun templateCustomization() {
         LongConstant(
             "OpenXR current version number.",
 
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 41)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 42)"
         )
 
         LongConstant(

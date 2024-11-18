@@ -169,6 +169,8 @@ public class XR10 {
      * <tr><td>{@link MLSystemNotifications#XR_ERROR_SYSTEM_NOTIFICATION_INCOMPATIBLE_SKU_ML ERROR_SYSTEM_NOTIFICATION_INCOMPATIBLE_SKU_ML}</td><td>Incompatible SKU detected.  (Added by the {@link MLSystemNotifications XR_ML_system_notifications} extension)</td></tr>
      * <tr><td>{@link MLWorldMeshDetection#XR_ERROR_WORLD_MESH_DETECTOR_PERMISSION_DENIED_ML ERROR_WORLD_MESH_DETECTOR_PERMISSION_DENIED_ML}</td><td>The world mesh detector permission was not granted.  (Added by the {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension)</td></tr>
      * <tr><td>{@link MLWorldMeshDetection#XR_ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML}</td><td>At the time of the call the runtime was unable to locate the space and cannot fulfill your request.  (Added by the {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension)</td></tr>
+     * <tr><td>{@link KHRMaintenance1#XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR}</td><td>Alias for {@link XR11#XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED}  (Added by the {@link KHRMaintenance1 XR_KHR_maintenance1} extension)</td></tr>
+     * <tr><td>{@link KHRMaintenance1#XR_ERROR_PERMISSION_INSUFFICIENT_KHR ERROR_PERMISSION_INSUFFICIENT_KHR}</td><td>Alias for {@link XR11#XR_ERROR_PERMISSION_INSUFFICIENT ERROR_PERMISSION_INSUFFICIENT}  (Added by the {@link KHRMaintenance1 XR_KHR_maintenance1} extension)</td></tr>
      * </tbody>
      * </table>
      * 
@@ -772,7 +774,7 @@ public class XR10 {
         XR_OBJECT_TYPE_ACTION     = 6;
 
     /** OpenXR current version number. */
-    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 1, 41);
+    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 1, 42);
 
     /**
      * The version of the OpenXR 1.0 API.
@@ -856,7 +858,7 @@ public class XR10 {
      * 
      * <p>{@link #xrGetInstanceProcAddr GetInstanceProcAddr} itself is obtained in a platform- and loader- specific manner. Typically, the loader library will export this function as a function symbol, so applications <b>can</b> link against the loader library, or load it dynamically and look up the symbol using platform-specific APIs. Loaders <b>must</b> export function symbols for all core OpenXR functions. Because of this, applications that use only the core OpenXR functions have no need to use {@link #xrGetInstanceProcAddr GetInstanceProcAddr}.</p>
      * 
-     * <p>Because an application <b>can</b> call {@link #xrGetInstanceProcAddr GetInstanceProcAddr} before creating an instance, {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns a valid function pointer when the {@code instance} parameter is {@link #XR_NULL_HANDLE NULL_HANDLE} and the {@code name} parameter is one of the following strings:</p>
+     * <p>Because an application <b>can</b> call {@link #xrGetInstanceProcAddr GetInstanceProcAddr} before creating an instance, {@link #xrGetInstanceProcAddr GetInstanceProcAddr} <b>must</b> return a valid function pointer when the {@code instance} parameter is {@link #XR_NULL_HANDLE NULL_HANDLE} and the {@code name} parameter is one of the following strings:</p>
      * 
      * <h5>No Instance Required</h5>
      * 
@@ -872,7 +874,7 @@ public class XR10 {
      * 
      * <p>If {@code name} is the name of an extension function, then the result returned by {@link #xrGetInstanceProcAddr GetInstanceProcAddr} will depend upon how the {@code instance} was created. If {@code instance} was created with the related extension’s name appearing in the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} array, then {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns a valid function pointer. If the related extension’s name did not appear in the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} array during the creation of {@code instance}, then {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns {@link #XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}. Because of this, function pointers returned by {@link #xrGetInstanceProcAddr GetInstanceProcAddr} using one {@code XrInstance} may not be valid when used with objects related to a different {@code XrInstance}.</p>
      * 
-     * <p>The returned function pointer is of type {@code PFN_xrVoidFunction}, and must be cast to the type of the function being queried.</p>
+     * <p>The returned function pointer is of type {@code PFN_xrVoidFunction}, and <b>must</b> be cast by the application to the type of the function being queried.</p>
      * 
      * <p>The table below defines the various use cases for {@link #xrGetInstanceProcAddr GetInstanceProcAddr} and return value (“{@code fp}” is “{@code function pointer}”) for each case.</p>
      * 
@@ -954,7 +956,7 @@ public class XR10 {
      * 
      * <p>{@link #xrGetInstanceProcAddr GetInstanceProcAddr} itself is obtained in a platform- and loader- specific manner. Typically, the loader library will export this function as a function symbol, so applications <b>can</b> link against the loader library, or load it dynamically and look up the symbol using platform-specific APIs. Loaders <b>must</b> export function symbols for all core OpenXR functions. Because of this, applications that use only the core OpenXR functions have no need to use {@link #xrGetInstanceProcAddr GetInstanceProcAddr}.</p>
      * 
-     * <p>Because an application <b>can</b> call {@link #xrGetInstanceProcAddr GetInstanceProcAddr} before creating an instance, {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns a valid function pointer when the {@code instance} parameter is {@link #XR_NULL_HANDLE NULL_HANDLE} and the {@code name} parameter is one of the following strings:</p>
+     * <p>Because an application <b>can</b> call {@link #xrGetInstanceProcAddr GetInstanceProcAddr} before creating an instance, {@link #xrGetInstanceProcAddr GetInstanceProcAddr} <b>must</b> return a valid function pointer when the {@code instance} parameter is {@link #XR_NULL_HANDLE NULL_HANDLE} and the {@code name} parameter is one of the following strings:</p>
      * 
      * <h5>No Instance Required</h5>
      * 
@@ -970,7 +972,7 @@ public class XR10 {
      * 
      * <p>If {@code name} is the name of an extension function, then the result returned by {@link #xrGetInstanceProcAddr GetInstanceProcAddr} will depend upon how the {@code instance} was created. If {@code instance} was created with the related extension’s name appearing in the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} array, then {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns a valid function pointer. If the related extension’s name did not appear in the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} array during the creation of {@code instance}, then {@link #xrGetInstanceProcAddr GetInstanceProcAddr} returns {@link #XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}. Because of this, function pointers returned by {@link #xrGetInstanceProcAddr GetInstanceProcAddr} using one {@code XrInstance} may not be valid when used with objects related to a different {@code XrInstance}.</p>
      * 
-     * <p>The returned function pointer is of type {@code PFN_xrVoidFunction}, and must be cast to the type of the function being queried.</p>
+     * <p>The returned function pointer is of type {@code PFN_xrVoidFunction}, and <b>must</b> be cast by the application to the type of the function being queried.</p>
      * 
      * <p>The table below defines the various use cases for {@link #xrGetInstanceProcAddr GetInstanceProcAddr} and return value (“{@code fp}” is “{@code function pointer}”) for each case.</p>
      * 
