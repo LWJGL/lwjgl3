@@ -302,7 +302,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "MESHOPTIMIZER_VERSION".."210").noPrefix()
+    IntConstant("", "MESHOPTIMIZER_VERSION".."220").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -458,6 +458,28 @@ nmeshopt_setAllocator(
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
+    )
+
+    size_t(
+        "generateProvokingIndexBuffer",
+        """
+        Experimental: Generate index buffer that can be used for visibility buffer rendering and returns the size of the reorder table.
+
+        Each triangle's provoking vertex index is equal to primitive id; this allows passing it to the fragment shader using {@code nointerpolate} attribute.
+        This is important for performance on hardware where primitive id can't be accessed efficiently in fragment shader. The reorder table stores the
+        original vertex id for each vertex in the new index buffer, and should be used in the vertex shader to load vertex data. The provoking vertex is
+        assumed to be the first vertex in the triangle; if this is not the case (OpenGL), rotate each triangle ({@code abc -> bca}) before rendering. For
+        maximum efficiency the input index buffer should be optimized for vertex cache first.
+        """,
+
+        Check("index_count")..unsigned_int.p("destination", "must contain enough space for the resulting index buffer ({@code index_count} elements)"),
+        Check("vertex_count + index_count / 3")..unsigned_int.p(
+            "reorder",
+            "must contain enough space for the worst case reorder table ({@code vertex_count + index_count / 3} elements)"
+        ),
+        Check("index_count")..unsigned_int.const.p("indices", ""),
+        size_t("index_count", ""),
+        size_t("vertex_count", "")
     )
 
     void(
@@ -659,7 +681,8 @@ nmeshopt_setAllocator(
         Encodes vertex data into an array of bytes that is generally smaller and compresses better compared to original. Returns encoded data size on success,
         0 on error; the only error condition is if buffer doesn't have enough space. This function works for a single vertex stream; for multiple vertex
         streams, call {@code meshopt_encodeVertexBuffer} for each stream. Note that all {@code vertex_size} bytes of each vertex are encoded verbatim,
-        including padding which should be zero-initialized.
+        including padding which should be zero-initialized. For maximum efficiency the vertex buffer being encoded has to be quantized and optimized for
+        locality of reference (cache/fetch) first.
         """,
 
         unsigned_char.p("buffer", "must contain enough space for the encoded vertex buffer (use #encodeVertexBufferBound() to compute worst case size)"),
@@ -703,7 +726,7 @@ nmeshopt_setAllocator(
     void(
         "decodeFilterOct",
         """
-        Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
+        Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
 
         Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.
         """,
@@ -716,7 +739,7 @@ nmeshopt_setAllocator(
     void(
         "decodeFilterQuat",
         """
-        Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
+        Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
         component to reconstruct.
 
         Each component is stored as an 16-bit integer; stride must be equal to 8.
@@ -730,7 +753,7 @@ nmeshopt_setAllocator(
     void(
         "decodeFilterExp",
         """
-        Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
+        Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
 
         Each 32-bit component is decoded in isolation; stride must be divisible by 4.
         """,
@@ -745,13 +768,19 @@ nmeshopt_setAllocator(
 
         "EncodeExpSeparate".enum("When encoding exponents, use separate values for each component (maximum quality).", "0"),
         "EncodeExpSharedVector".enum("When encoding exponents, use shared value for all components of each vector (better compression)."),
-        "EncodeExpSharedComponent".enum("When encoding exponents, use shared value for each component of all vectors (best compression).")
+        "EncodeExpSharedComponent".enum("When encoding exponents, use shared value for each component of all vectors (best compression)."),
+        "EncodeExpClamped".enum(
+            """
+            Experimental: When encoding exponents, use separate values for each component, but clamp to 0 (good quality if very small values are not
+            important).
+            """
+        )
     )
 
     void(
         "encodeFilterOct",
         """
-        Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+        Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
 
         Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
         must contain 4 floats for every vector ({@code count*4} total).
@@ -767,7 +796,7 @@ nmeshopt_setAllocator(
     void(
         "encodeFilterQuat",
         """
-        Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+        Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
 
         Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
         ({@code count*4} total).
@@ -783,7 +812,7 @@ nmeshopt_setAllocator(
     void(
         "encodeFilterExp",
         """
-        Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+        Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
 
         Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
         contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
@@ -820,6 +849,13 @@ nmeshopt_setAllocator(
         "SimplifyErrorAbsolute".enum(
             "Treat error limit and resulting error as absolute instead of relative to mesh extents.",
             "1 << 2"
+        ),
+        "SimplifyPrune".enum(
+            """
+            Experimental: remove disconnected parts of the mesh during simplification incrementally, regardless of the topological restrictions inside
+            components.
+            """,
+            "1 << 3"
         )
     )
 
@@ -829,9 +865,9 @@ nmeshopt_setAllocator(
         Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
 
         The algorithm tries to preserve mesh topology and can stop short of the target goal based on topology constraints or target error. If not all
-        attributes from the input mesh are required, it's recommended to reindex the mesh using #generateShadowIndexBuffer() prior to simplification. Returns
-        the number of indices after simplification, with destination containing new index data. The resulting index buffer references vertices from the
-        original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using #optimizeVertexFetch() is recommended.
+        attributes from the input mesh are required, it's recommended to reindex the mesh without them prior to simplification. Returns the number of indices
+        after simplification, with destination containing new index data. The resulting index buffer references vertices from the original vertex buffer. If
+        the original vertex data isn't required, creating a compact vertex buffer using #optimizeVertexFetch() is recommended.
         """,
 
         unsigned_int.p(
@@ -860,7 +896,7 @@ nmeshopt_setAllocator(
         """
         Experimental: Mesh simplifier with attribute metric.
 
-        The algorithm ehnahces #simplify() by incorporating attribute values into the error metric used to prioritize simplification order; see #simplify() for
+        The algorithm enhances #simplify() by incorporating attribute values into the error metric used to prioritize simplification order; see #simplify() for
         details. Note that the number of attributes affects memory requirements and running time; this algorithm requires {@code ~1.5x} more memory and time
         compared to #simplify() when using 4 scalar attributes.
         """,
@@ -884,12 +920,9 @@ nmeshopt_setAllocator(
         size_t("vertex_attributes_stride", ""),
         float.const.p(
             "attribute_weights",
-            """
-            should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position. The
-            recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
-            """
+            "should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position"
         ),
-        AutoSize("attribute_weights")..size_t("attribute_count", "must be &le; 16"),
+        AutoSize("attribute_weights")..size_t("attribute_count", "must be &le; 32"),
         Check("vertex_count")..nullable..unsigned_char.const.p(
             "vertex_lock",
             "can be #NULL; when it's not #NULL, it should have a value for each vertex; 1 denotes vertices that can't be moved"
@@ -958,7 +991,7 @@ nmeshopt_setAllocator(
             "can be #NULL; when it's not #NULL, it should have {@code float3} color in the first 12 bytes of each vertex"
         ),
         size_t("vertex_colors_stride", ""),
-        float("color_weight", ""),
+        float("color_weight", "determines relative priority of color wrt position; 1.0 is a safe default"),
         size_t("target_vertex_count", "")
     )
 
@@ -1076,9 +1109,10 @@ nmeshopt_setAllocator(
         Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that refer to the
         original vertex buffer.
 
-        The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When using
-        {@code buildMeshlets}, vertex positions need to be provided to minimize the size of the resulting clusters. When using #buildMeshletsScan(), for
-        maximum efficiency the index buffer being converted has to be optimized for vertex cache first.
+        The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When targeting
+        mesh shading hardware, for maximum efficiency meshlets should be further optimized using #optimizeMeshlet(). When using {@code buildMeshlets}, vertex
+        positions need to be provided to minimize the size of the resulting clusters. When using #buildMeshletsScan(), for maximum efficiency the index buffer
+        being converted has to be optimized for vertex cache first.
         """,
 
         Unsafe..meshopt_Meshlet.p("meshlets", "must contain enough space for all meshlets, worst case size can be computed with #buildMeshletsBound()"),
@@ -1167,13 +1201,13 @@ nmeshopt_setAllocator(
         unsigned_int.const.p("indices", ""),
         AutoSize("indices")..size_t(
             "index_count",
-            "{@code index_count/3} should be less than or equal to 512 (the function assumes clusters of limited size)"
+            "{@code index_count / 3} must not exceed implementation limits (&le; 512)"
         ),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
             "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
-        size_t("vertex_count", ""),
+        size_t("vertex_count", "should specify the number of vertices in the entire mesh, not cluster or meshlet"),
         size_t("vertex_positions_stride", "")
     )
 

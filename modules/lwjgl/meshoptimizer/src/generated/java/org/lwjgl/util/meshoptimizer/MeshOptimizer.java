@@ -325,7 +325,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 210;
+    public static final int MESHOPTIMIZER_VERSION = 220;
 
     /**
      * {@code meshopt_EncodeExpMode}
@@ -336,12 +336,17 @@ public class MeshOptimizer {
      * <li>{@link #meshopt_EncodeExpSeparate EncodeExpSeparate} - When encoding exponents, use separate values for each component (maximum quality).</li>
      * <li>{@link #meshopt_EncodeExpSharedVector EncodeExpSharedVector} - When encoding exponents, use shared value for all components of each vector (better compression).</li>
      * <li>{@link #meshopt_EncodeExpSharedComponent EncodeExpSharedComponent} - When encoding exponents, use shared value for each component of all vectors (best compression).</li>
+     * <li>{@link #meshopt_EncodeExpClamped EncodeExpClamped} - 
+     * Experimental: When encoding exponents, use separate values for each component, but clamp to 0 (good quality if very small values are not
+     * important).
+     * </li>
      * </ul>
      */
     public static final int
         meshopt_EncodeExpSeparate        = 0,
         meshopt_EncodeExpSharedVector    = 1,
-        meshopt_EncodeExpSharedComponent = 2;
+        meshopt_EncodeExpSharedComponent = 2,
+        meshopt_EncodeExpClamped         = 3;
 
     /**
      * Simplification options.
@@ -360,12 +365,17 @@ public class MeshOptimizer {
      * <p>Note that error becomes relative to subset extents.</p>
      * </li>
      * <li>{@link #meshopt_SimplifyErrorAbsolute SimplifyErrorAbsolute} - Treat error limit and resulting error as absolute instead of relative to mesh extents.</li>
+     * <li>{@link #meshopt_SimplifyPrune SimplifyPrune} - 
+     * Experimental: remove disconnected parts of the mesh during simplification incrementally, regardless of the topological restrictions inside
+     * components.
+     * </li>
      * </ul>
      */
     public static final int
         meshopt_SimplifyLockBorder    = 1 << 0,
         meshopt_SimplifySparse        = 1 << 1,
-        meshopt_SimplifyErrorAbsolute = 1 << 2;
+        meshopt_SimplifyErrorAbsolute = 1 << 2,
+        meshopt_SimplifyPrune         = 1 << 3;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -570,6 +580,33 @@ public class MeshOptimizer {
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         nmeshopt_generateTessellationIndexBuffer(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride);
+    }
+
+    // --- [ meshopt_generateProvokingIndexBuffer ] ---
+
+    /** Unsafe version of: {@link #meshopt_generateProvokingIndexBuffer generateProvokingIndexBuffer} */
+    public static native long nmeshopt_generateProvokingIndexBuffer(long destination, long reorder, long indices, long index_count, long vertex_count);
+
+    /**
+     * Experimental: Generate index buffer that can be used for visibility buffer rendering and returns the size of the reorder table.
+     * 
+     * <p>Each triangle's provoking vertex index is equal to primitive id; this allows passing it to the fragment shader using {@code nointerpolate} attribute.
+     * This is important for performance on hardware where primitive id can't be accessed efficiently in fragment shader. The reorder table stores the
+     * original vertex id for each vertex in the new index buffer, and should be used in the vertex shader to load vertex data. The provoking vertex is
+     * assumed to be the first vertex in the triangle; if this is not the case (OpenGL), rotate each triangle ({@code abc -> bca}) before rendering. For
+     * maximum efficiency the input index buffer should be optimized for vertex cache first.</p>
+     *
+     * @param destination must contain enough space for the resulting index buffer ({@code index_count} elements)
+     * @param reorder     must contain enough space for the worst case reorder table ({@code vertex_count + index_count / 3} elements)
+     */
+    @NativeType("size_t")
+    public static long meshopt_generateProvokingIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int *") IntBuffer reorder, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("size_t") long vertex_count) {
+        if (CHECKS) {
+            check(destination, index_count);
+            check(reorder, vertex_count + index_count / 3);
+            check(indices, index_count);
+        }
+        return nmeshopt_generateProvokingIndexBuffer(memAddress(destination), memAddress(reorder), memAddress(indices), index_count, vertex_count);
     }
 
     // --- [ meshopt_optimizeVertexCache ] ---
@@ -807,7 +844,8 @@ public class MeshOptimizer {
      * <p>Encodes vertex data into an array of bytes that is generally smaller and compresses better compared to original. Returns encoded data size on success,
      * 0 on error; the only error condition is if buffer doesn't have enough space. This function works for a single vertex stream; for multiple vertex
      * streams, call {@code meshopt_encodeVertexBuffer} for each stream. Note that all {@code vertex_size} bytes of each vertex are encoded verbatim,
-     * including padding which should be zero-initialized.</p>
+     * including padding which should be zero-initialized. For maximum efficiency the vertex buffer being encoded has to be quantized and optimized for
+     * locality of reference (cache/fetch) first.</p>
      *
      * @param buffer must contain enough space for the encoded vertex buffer (use {@link #meshopt_encodeVertexBufferBound encodeVertexBufferBound} to compute worst case size)
      */
@@ -859,7 +897,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_decodeFilterOct(long buffer, long count, long stride);
 
     /**
-     * Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
+     * Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
      * 
      * <p>Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.</p>
      */
@@ -871,7 +909,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
+     * Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
      * 
      * <p>Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.</p>
      */
@@ -888,7 +926,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_decodeFilterQuat(long buffer, long count, long stride);
 
     /**
-     * Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
+     * Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
      * component to reconstruct.
      * 
      * <p>Each component is stored as an 16-bit integer; stride must be equal to 8.</p>
@@ -901,7 +939,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
+     * Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
      * component to reconstruct.
      * 
      * <p>Each component is stored as an 16-bit integer; stride must be equal to 8.</p>
@@ -919,7 +957,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_decodeFilterExp(long buffer, long count, long stride);
 
     /**
-     * Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
+     * Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
      * 
      * <p>Each 32-bit component is decoded in isolation; stride must be divisible by 4.</p>
      */
@@ -931,7 +969,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
+     * Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
      * 
      * <p>Each 32-bit component is decoded in isolation; stride must be divisible by 4.</p>
      */
@@ -948,7 +986,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_encodeFilterOct(long destination, long count, long stride, int bits, long data);
 
     /**
-     * Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+     * Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
      * 
      * <p>Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
      * must contain 4 floats for every vector ({@code count*4} total).</p>
@@ -962,7 +1000,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+     * Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
      * 
      * <p>Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
      * must contain 4 floats for every vector ({@code count*4} total).</p>
@@ -981,7 +1019,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_encodeFilterQuat(long destination, long count, long stride, int bits, long data);
 
     /**
-     * Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+     * Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
      * 
      * <p>Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
      * ({@code count*4} total).</p>
@@ -995,7 +1033,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+     * Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
      * 
      * <p>Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
      * ({@code count*4} total).</p>
@@ -1014,7 +1052,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_encodeFilterExp(long destination, long count, long stride, int bits, long data, int mode);
 
     /**
-     * Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+     * Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
      * 
      * <p>Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
      * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
@@ -1029,7 +1067,7 @@ public class MeshOptimizer {
     }
 
     /**
-     * Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+     * Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
      * 
      * <p>Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
      * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
@@ -1052,9 +1090,9 @@ public class MeshOptimizer {
      * Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
      * 
      * <p>The algorithm tries to preserve mesh topology and can stop short of the target goal based on topology constraints or target error. If not all
-     * attributes from the input mesh are required, it's recommended to reindex the mesh using {@link #meshopt_generateShadowIndexBuffer generateShadowIndexBuffer} prior to simplification. Returns
-     * the number of indices after simplification, with destination containing new index data. The resulting index buffer references vertices from the
-     * original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using {@link #meshopt_optimizeVertexFetch optimizeVertexFetch} is recommended.</p>
+     * attributes from the input mesh are required, it's recommended to reindex the mesh without them prior to simplification. Returns the number of indices
+     * after simplification, with destination containing new index data. The resulting index buffer references vertices from the original vertex buffer. If
+     * the original vertex data isn't required, creating a compact vertex buffer using {@link #meshopt_optimizeVertexFetch optimizeVertexFetch} is recommended.</p>
      *
      * @param destination      must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
@@ -1077,22 +1115,21 @@ public class MeshOptimizer {
     /**
      * Unsafe version of: {@link #meshopt_simplifyWithAttributes simplifyWithAttributes}
      *
-     * @param attribute_count must be &le; 16
+     * @param attribute_count must be &le; 32
      */
     public static native long nmeshopt_simplifyWithAttributes(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long vertex_lock, long target_index_count, float target_error, int options, long result_error);
 
     /**
      * Experimental: Mesh simplifier with attribute metric.
      * 
-     * <p>The algorithm ehnahces {@link #meshopt_simplify simplify} by incorporating attribute values into the error metric used to prioritize simplification order; see {@link #meshopt_simplify simplify} for
+     * <p>The algorithm enhances {@link #meshopt_simplify simplify} by incorporating attribute values into the error metric used to prioritize simplification order; see {@link #meshopt_simplify simplify} for
      * details. Note that the number of attributes affects memory requirements and running time; this algorithm requires {@code ~1.5x} more memory and time
      * compared to {@link #meshopt_simplify simplify} when using 4 scalar attributes.</p>
      *
      * @param destination       must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
      * @param vertex_positions  should have {@code float3} position in the first 12 bytes of each vertex
      * @param vertex_attributes should have {@code attribute_count} floats for each vertex
-     * @param attribute_weights should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position. The
-     *                          recommended weight range is {@code [1e-3..1e-1]}, assuming attribute data is in {@code [0..1]} range.
+     * @param attribute_weights should have {@code attribute_count} floats in total; the weights determine relative priority of attributes between each other and wrt position
      * @param vertex_lock       can be {@code NULL}; when it's not {@code NULL}, it should have a value for each vertex; 1 denotes vertices that can't be moved
      * @param target_error      represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}
      * @param options           must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default
@@ -1152,6 +1189,7 @@ public class MeshOptimizer {
      * @param destination      must contain enough space for the target index buffer ({@code target_vertex_count} elements)
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      * @param vertex_colors    can be {@code NULL}; when it's not {@code NULL}, it should have {@code float3} color in the first 12 bytes of each vertex
+     * @param color_weight     determines relative priority of color wrt position; 1.0 is a safe default
      */
     @NativeType("size_t")
     public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") @Nullable FloatBuffer vertex_colors, @NativeType("size_t") long vertex_colors_stride, float color_weight, @NativeType("size_t") long target_vertex_count) {
@@ -1291,9 +1329,10 @@ public class MeshOptimizer {
      * Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that refer to the
      * original vertex buffer.
      * 
-     * <p>The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When using
-     * {@code buildMeshlets}, vertex positions need to be provided to minimize the size of the resulting clusters. When using {@link #meshopt_buildMeshletsScan buildMeshletsScan}, for
-     * maximum efficiency the index buffer being converted has to be optimized for vertex cache first.</p>
+     * <p>The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When targeting
+     * mesh shading hardware, for maximum efficiency meshlets should be further optimized using {@link #meshopt_optimizeMeshlet optimizeMeshlet}. When using {@code buildMeshlets}, vertex
+     * positions need to be provided to minimize the size of the resulting clusters. When using {@link #meshopt_buildMeshletsScan buildMeshletsScan}, for maximum efficiency the index buffer
+     * being converted has to be optimized for vertex cache first.</p>
      *
      * @param meshlets          must contain enough space for all meshlets, worst case size can be computed with {@link #meshopt_buildMeshletsBound buildMeshletsBound}
      * @param meshlet_vertices  must contain enough space for all meshlets, worst case size is equal to {@code max_meshlets * max_vertices}
@@ -1361,7 +1400,7 @@ public class MeshOptimizer {
     /**
      * Unsafe version of: {@link #meshopt_computeClusterBounds computeClusterBounds}
      *
-     * @param index_count {@code index_count/3} should be less than or equal to 512 (the function assumes clusters of limited size)
+     * @param index_count {@code index_count / 3} must not exceed implementation limits (&le; 512)
      */
     public static native void nmeshopt_computeClusterBounds(long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long __result);
 
@@ -1382,6 +1421,7 @@ public class MeshOptimizer {
      * the formula that doesn't use the apex may be preferable (for derivation see Real-Time Rendering 4th Edition, section 19.3).</p>
      *
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
+     * @param vertex_count     should specify the number of vertices in the entire mesh, not cluster or meshlet
      */
     @NativeType("struct meshopt_Bounds")
     public static MeshoptBounds meshopt_computeClusterBounds(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("struct meshopt_Bounds") MeshoptBounds __result) {

@@ -72,6 +72,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     meshopt_generateTessellationIndexBuffer(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generateProvokingIndexBuffer(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong reorderAddress, jlong indicesAddress, jlong index_count, jlong vertex_count) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int *reorder = (unsigned int *)(uintptr_t)reorderAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_generateProvokingIndexBuffer(destination, reorder, indices, (size_t)index_count, (size_t)vertex_count);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1optimizeVertexCache(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_count) {
     unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;

@@ -46,7 +46,16 @@ val meshopt_VertexFetchStatistics = struct(Module.MESHOPTIMIZER, "MeshoptVertexF
 }
 
 val meshopt_Meshlet = struct(Module.MESHOPTIMIZER, "MeshoptMeshlet", nativeName = "struct meshopt_Meshlet", mutable = false) {
-    documentation = "Experimental: Meshlet"
+    documentation =
+        """
+        Meshlet is a small mesh cluster (subset) that consists of:
+        ${ul(
+            "triangles, an 8-bit micro triangle (index) buffer, that for each triangle specifies three local vertices to use;",
+            "vertices, a 32-bit vertex indirection buffer, that for each local vertex specifies which mesh vertex to fetch vertex attributes from."
+        )}
+
+        For efficiency, meshlet triangles and vertices are packed into two large arrays; this structure contains offsets and counts to access the data.
+        """
 
     unsigned_int("vertex_offset", "offset within {@code meshlet_vertices} array with meshlet data")
     unsigned_int("triangle_offset", "offset within {@code meshlet_triangles} array with meshlet data")

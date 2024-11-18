@@ -16,7 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Experimental: Meshlet
+ * Meshlet is a small mesh cluster (subset) that consists of:
+ * 
+ * <ul>
+ * <li>triangles, an 8-bit micro triangle (index) buffer, that for each triangle specifies three local vertices to use;</li>
+ * <li>vertices, a 32-bit vertex indirection buffer, that for each local vertex specifies which mesh vertex to fetch vertex attributes from.</li>
+ * </ul>
+ * 
+ * <p>For efficiency, meshlet triangles and vertices are packed into two large arrays; this structure contains offsets and counts to access the data.</p>
  * 
  * <h3>Layout</h3>
  * 
