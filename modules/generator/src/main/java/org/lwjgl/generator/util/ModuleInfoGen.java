@@ -20,7 +20,7 @@ public final class ModuleInfoGen implements AutoCloseable {
         MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{", Pattern.MULTILINE),
         REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(static))?(?:\\s+(transitive))?\\s+(.+)\\s*;", Pattern.MULTILINE);
 
-    private static final Path METAINF = Paths.get("META-INF", "versions", "9");
+    private static final Path METAINF = Paths.get("META-INF", "versions", "11");
 
     private final JavaCompiler compiler;
 
@@ -346,7 +346,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
         ArrayList<String> options = new ArrayList<>(6);
         options.add("--release");
-        options.add("9");
+        options.add("11");
         if (modulePath != null && !modulePath.isEmpty()) {
             options.add("--module-path");
             options.add(modulePath);
