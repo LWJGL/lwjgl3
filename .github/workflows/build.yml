@@ -239,11 +239,11 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build & Test
-        uses: cross-platform-actions/action@v0.24.0
+        uses: cross-platform-actions/action@v0.25.0
         with:
           operating_system: freebsd
           architecture: x86-64
-          version: '13.2'
+          version: '13.3'
           memory: 8G
           shell: bash
           environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
