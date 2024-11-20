@@ -6,9 +6,7 @@
 #include <inttypes.h>
 #include <stdint.h>
 #include <sys/stat.h>
-
-// LWJGL: skip <linux/time_types.h> include in io_uring.h
-#define UAPI_LINUX_IO_URING_H_SKIP_LINUX_TIME_TYPES_H
+#include <linux/ioctl.h>
 
 typedef int __kernel_rwf_t;
 
@@ -17,10 +15,17 @@ struct __kernel_timespec {
 	long long	tv_nsec;
 };
 
+/* <linux/time_types.h> is not available, so it can't be included */
+#define UAPI_LINUX_IO_URING_H_SKIP_LINUX_TIME_TYPES_H 1
+
 struct open_how {
 	uint64_t	flags;
 	uint64_t	mode;
 	uint64_t	resolve;
 };
+
+#ifndef BLOCK_URING_CMD_DISCARD
+#define BLOCK_URING_CMD_DISCARD                        _IO(0x12, 0)
+#endif
 
 #endif
