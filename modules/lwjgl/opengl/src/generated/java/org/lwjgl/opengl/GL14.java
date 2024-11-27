@@ -378,7 +378,7 @@ public class GL14 extends GL13 {
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
-     * @see <a href="https://docs.gl/gl4/glPointParameterf">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
         GL14C.glPointParameterf(pname, param);
@@ -392,7 +392,7 @@ public class GL14 extends GL13 {
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
-     * @see <a href="https://docs.gl/gl4/glPointParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param) {
         GL14C.glPointParameteri(pname, param);

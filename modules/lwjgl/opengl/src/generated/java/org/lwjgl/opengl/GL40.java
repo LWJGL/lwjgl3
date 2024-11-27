@@ -1225,7 +1225,7 @@ public class GL40 extends GL33 {
      * @param pname the name of the parameter to set. Must be:<br><table><tr><td>{@link GL40C#GL_PATCH_VERTICES PATCH_VERTICES}</td></tr></table>
      * @param value the new value for the parameter given by {@code pname}
      * 
-     * @see <a href="https://docs.gl/gl4/glPatchParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glPatchParameter">Reference Page</a>
      */
     public static void glPatchParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int value) {
         GL40C.glPatchParameteri(pname, value);

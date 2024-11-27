@@ -259,7 +259,7 @@ public class GL41 extends GL40 {
      * @param pname   the name of the parameter to modify. One of:<br><table><tr><td>{@link GL41C#GL_PROGRAM_BINARY_RETRIEVABLE_HINT PROGRAM_BINARY_RETRIEVABLE_HINT}</td><td>{@link GL41C#GL_PROGRAM_SEPARABLE PROGRAM_SEPARABLE}</td></tr></table>
      * @param value   the new value of the parameter specified by {@code pname} for {@code program}
      * 
-     * @see <a href="https://docs.gl/gl4/glProgramParameteri">Reference Page</a>
+     * @see <a href="https://docs.gl/gl4/glProgramParameter">Reference Page</a>
      */
     public static void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value) {
         GL41C.glProgramParameteri(program, pname, value);

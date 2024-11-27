@@ -66,7 +66,7 @@ val GLBinding = Generator.register(object : APIBinding(
     }
 
     private val VECTOR_SUFFIX = "^gl(\\w+?)[ILP]?(?:Matrix)?\\d+(x\\d+)?N?u?(?:[bsifd]|i64)_?v?$".toRegex()
-    private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:[bsifd]|i64)v$".toRegex()
+    private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:(?:[bsifd]|i64)v|(?<=Parameter)[bsifd])$".toRegex()
     private val NAMED = "^gl(\\w+?)?Named([A-Z]\\w*)$".toRegex()
 
     private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
@@ -78,9 +78,11 @@ val GLBinding = Generator.register(object : APIBinding(
         }.let { page ->
             VECTOR_SUFFIX2.find(page).let {
                 when {
-                    it == null                  -> page
-                    page == "glScissorIndexedv" -> "glScissorIndexed"
-                    else                        -> "gl${it.groupValues[1]}${it.groupValues[2]}"
+                    it == null                        -> page
+                    page == "glFramebufferParameteri" -> "glFramebufferParameteri"
+                    page == "glScissorIndexedv"       -> "glScissorIndexed"
+                    page == "glTextureParameteri"     -> "glTexParameter"
+                    else                              -> "gl${it.groupValues[1]}${it.groupValues[2]}"
                 }
             }
         }.let { page ->
