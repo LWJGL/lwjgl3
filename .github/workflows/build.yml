@@ -122,9 +122,9 @@ jobs:
       - name: Build GraalVM Native Image
         run: |
           source scl_source enable devtoolset-11 || true
-          mkdir jdk-graalvm-22
-          curl -L https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm-22 --strip-components 1
-          jdk-graalvm-22/bin/native-image -cp \
+          mkdir jdk-graalvm
+          curl -L https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
+          jdk-graalvm/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -136,7 +136,7 @@ jobs:
       - name: Run demo with GraalVM JIT
         run: |
           source scl_source enable devtoolset-11 || true
-          JAVA_HOME=jdk-graalvm-22 ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+          JAVA_HOME=jdk-graalvm ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
         run: ./org.lwjgl.demo.util.lz4.hellolz4
 
@@ -301,9 +301,9 @@ jobs:
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Build GraalVM Native Image
         run: |
-          mkdir jdk-graalvm-22
-          curl -L https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm-22 --strip-components 1
-          jdk-graalvm-22/Contents/Home/bin/native-image -cp \
+          mkdir jdk-graalvm
+          curl -L https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
+          jdk-graalvm/Contents/Home/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -313,7 +313,7 @@ jobs:
           config/native-image \
           org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
       - name: Run demo with GraalVM JIT
-        run: JAVA_HOME=jdk-graalvm-22/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        run: JAVA_HOME=jdk-graalvm/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
         run: ./org.lwjgl.demo.util.lz4.hellolz4
 
@@ -390,14 +390,14 @@ jobs:
         if: matrix.ARCH == 'x64'
       - name: Download GraalVM
         run: |
-          Invoke-WebRequest https://download.oracle.com/graalvm/22/latest/graalvm-jdk-22_windows-x64_bin.zip -OutFile jdk-graalvm.zip
+          Invoke-WebRequest https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_windows-x64_bin.zip -OutFile jdk-graalvm.zip
           Expand-Archive -Path jdk-graalvm.zip -DestinationPath .\
-          Get-ChildItem graalvm-jdk-22* | Rename-Item -newname jdk-graalvm-22
+          Get-ChildItem graalvm-jdk-23* | Rename-Item -newname jdk-graalvm
         shell: pwsh
         if: matrix.ARCH == 'x64'
       - name: Build GraalVM Native Image
         run: |
-          jdk-graalvm-22\bin\native-image -cp ^
+          jdk-graalvm\bin\native-image -cp ^
           bin/classes/lwjgl/core;^
           bin/classes/lwjgl/lz4;^
           bin/classes/samples;^
@@ -409,7 +409,7 @@ jobs:
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM JIT
         run: |
-          set JAVA_HOME=jdk-graalvm-22
+          set JAVA_HOME=jdk-graalvm
           ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM Native Image
