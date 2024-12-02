@@ -20,20 +20,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Only usage flags representable in {@code VkBufferUsageFlagBits} are returned in this structure’s {@code usage}. If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR} structure, all usage flags of the buffer are returned in {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage}.</p>
+ * <p>Only usage flags representable in {@code VkBufferUsageFlagBits} are returned in this structure’s {@code usage}. If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo} structure, all usage flags of the buffer are returned in {@link VkBufferUsageFlags2CreateInfo}{@code ::usage}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> not be 0</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfoKHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfo}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkBufferCreateFlagBits} values</li>
  * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
@@ -133,6 +133,8 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct<VkPhysicalDeviceE
     public VkPhysicalDeviceExternalBufferInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalBufferInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceExternalBufferInfo pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceExternalBufferInfo pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
@@ -388,6 +390,8 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct<VkPhysicalDeviceE
         public VkPhysicalDeviceExternalBufferInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#pNext} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalBufferInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceExternalBufferInfo.Buffer pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#flags} field. */

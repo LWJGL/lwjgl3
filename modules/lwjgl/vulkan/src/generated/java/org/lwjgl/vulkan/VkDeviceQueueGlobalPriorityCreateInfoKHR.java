@@ -16,56 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify a system wide priority.
- * 
- * <h5>Description</h5>
- * 
- * <p>Queues created without specifying {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} will default to {@link EXTGlobalPriority#VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR}</li>
- * <li>{@code globalPriority} <b>must</b> be a valid {@code VkQueueGlobalPriorityKHR} value</li>
- * </ul>
+ * See {@link VkDeviceQueueGlobalPriorityCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceQueueGlobalPriorityCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkQueueGlobalPriorityKHR {@link #globalPriority};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkQueueGlobalPriority globalPriority;
  * }</code></pre>
  */
-public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQueueGlobalPriorityCreateInfoKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        GLOBALPRIORITY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        GLOBALPRIORITY = layout.offsetof(2);
-    }
+public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends VkDeviceQueueGlobalPriorityCreateInfo {
 
     protected VkDeviceQueueGlobalPriorityCreateInfoKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -83,32 +45,24 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceQueueGlobalPriorityCreateInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityKHR} */
-    @NativeType("VkQueueGlobalPriorityKHR")
-    public int globalPriority() { return nglobalPriority(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceQueueGlobalPriorityCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR} value to the {@link #sType} field. */
-    public VkDeviceQueueGlobalPriorityCreateInfoKHR sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO} value to the {@code sType} field. */
+    @Override
+    public VkDeviceQueueGlobalPriorityCreateInfoKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDeviceQueueGlobalPriorityCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #globalPriority} field. */
-    public VkDeviceQueueGlobalPriorityCreateInfoKHR globalPriority(@NativeType("VkQueueGlobalPriorityKHR") int value) { nglobalPriority(address(), value); return this; }
+    /** Sets the specified value to the {@code globalPriority} field. */
+    @Override
+    public VkDeviceQueueGlobalPriorityCreateInfoKHR globalPriority(@NativeType("VkQueueGlobalPriority") int value) { nglobalPriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceQueueGlobalPriorityCreateInfoKHR set(
         int sType,
         long pNext,
@@ -244,24 +198,8 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #globalPriority}. */
-    public static int nglobalPriority(long struct) { return memGetInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #globalPriority(int) globalPriority}. */
-    public static void nglobalPriority(long struct, int value) { memPutInt(struct + VkDeviceQueueGlobalPriorityCreateInfoKHR.GLOBALPRIORITY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceQueueGlobalPriorityCreateInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceQueueGlobalPriorityCreateInfo.Buffer {
 
         private static final VkDeviceQueueGlobalPriorityCreateInfoKHR ELEMENT_FACTORY = VkDeviceQueueGlobalPriorityCreateInfoKHR.create(-1L);
 
@@ -275,7 +213,7 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -301,24 +239,18 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct<VkDeviceQue
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDeviceQueueGlobalPriorityCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDeviceQueueGlobalPriorityCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#globalPriority} field. */
-        @NativeType("VkQueueGlobalPriorityKHR")
-        public int globalPriority() { return VkDeviceQueueGlobalPriorityCreateInfoKHR.nglobalPriority(address()); }
-
-        /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceQueueGlobalPriorityCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR} value to the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#sType} field. */
-        public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO} value to the {@code sType} field. */
+        @Override
+        public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueGlobalPriorityCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoKHR#globalPriority} field. */
-        public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer globalPriority(@NativeType("VkQueueGlobalPriorityKHR") int value) { VkDeviceQueueGlobalPriorityCreateInfoKHR.nglobalPriority(address(), value); return this; }
+        /** Sets the specified value to the {@code globalPriority} field. */
+        @Override
+        public VkDeviceQueueGlobalPriorityCreateInfoKHR.Buffer globalPriority(@NativeType("VkQueueGlobalPriority") int value) { VkDeviceQueueGlobalPriorityCreateInfoKHR.nglobalPriority(address(), value); return this; }
 
     }
 

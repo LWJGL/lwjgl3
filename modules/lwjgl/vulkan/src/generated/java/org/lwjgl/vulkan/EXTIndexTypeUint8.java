@@ -25,7 +25,12 @@ package org.lwjgl.vulkan;
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension</li>
+ * <li><em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

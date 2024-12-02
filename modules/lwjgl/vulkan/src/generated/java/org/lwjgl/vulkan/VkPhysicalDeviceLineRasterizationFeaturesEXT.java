@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceLineRasterizationFeaturesKHR}.
+ * See {@link VkPhysicalDeviceLineRasterizationFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 stippledSmoothLines;
  * }</code></pre>
  */
-public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDeviceLineRasterizationFeaturesKHR {
+public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDeviceLineRasterizationFeatures {
 
     protected VkPhysicalDeviceLineRasterizationFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -56,9 +56,9 @@ public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDevi
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceLineRasterizationFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES} value to the {@code sType} field. */
     @Override
-    public VkPhysicalDeviceLineRasterizationFeaturesEXT sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR); }
+    public VkPhysicalDeviceLineRasterizationFeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceLineRasterizationFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -248,7 +248,7 @@ public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDevi
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceLineRasterizationFeaturesEXT} structs. */
-    public static class Buffer extends VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer {
+    public static class Buffer extends VkPhysicalDeviceLineRasterizationFeatures.Buffer {
 
         private static final VkPhysicalDeviceLineRasterizationFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceLineRasterizationFeaturesEXT.create(-1L);
 
@@ -291,9 +291,9 @@ public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDevi
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceLineRasterizationFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLineRasterizationFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES} value to the {@code sType} field. */
         @Override
-        public VkPhysicalDeviceLineRasterizationFeaturesEXT.Buffer sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR); }
+        public VkPhysicalDeviceLineRasterizationFeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceLineRasterizationFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLineRasterizationFeaturesEXT.npNext(address(), value); return this; }

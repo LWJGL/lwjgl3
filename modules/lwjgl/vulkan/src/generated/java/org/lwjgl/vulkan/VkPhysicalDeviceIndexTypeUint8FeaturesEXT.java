@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceIndexTypeUint8FeaturesKHR}.
+ * See {@link VkPhysicalDeviceIndexTypeUint8Features}.
  * 
  * <h3>Layout</h3>
  * 
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 indexTypeUint8;
  * }</code></pre>
  */
-public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceIndexTypeUint8FeaturesKHR {
+public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceIndexTypeUint8Features {
 
     protected VkPhysicalDeviceIndexTypeUint8FeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -51,9 +51,9 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceI
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceIndexTypeUint8FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRIndexTypeUint8#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@code sType} field. */
     @Override
-    public VkPhysicalDeviceIndexTypeUint8FeaturesEXT sType$Default() { return sType(KHRIndexTypeUint8.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR); }
+    public VkPhysicalDeviceIndexTypeUint8FeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceIndexTypeUint8FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -218,7 +218,7 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceI
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceIndexTypeUint8FeaturesEXT} structs. */
-    public static class Buffer extends VkPhysicalDeviceIndexTypeUint8FeaturesKHR.Buffer {
+    public static class Buffer extends VkPhysicalDeviceIndexTypeUint8Features.Buffer {
 
         private static final VkPhysicalDeviceIndexTypeUint8FeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceIndexTypeUint8FeaturesEXT.create(-1L);
 
@@ -261,9 +261,9 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceI
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceIndexTypeUint8FeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRIndexTypeUint8#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@code sType} field. */
         @Override
-        public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer sType$Default() { return sType(KHRIndexTypeUint8.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR); }
+        public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceIndexTypeUint8FeaturesEXT.npNext(address(), value); return this; }

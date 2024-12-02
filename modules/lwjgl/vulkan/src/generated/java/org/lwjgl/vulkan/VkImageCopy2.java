@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkCopyImageInfo2}, {@link VkCopyImageToImageInfoEXT}, {@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}</p>
+ * <p>{@link VkCopyImageInfo2}, {@link VkCopyImageToImageInfo}, {@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}</p>
  * 
  * <h3>Layout</h3>
  * 

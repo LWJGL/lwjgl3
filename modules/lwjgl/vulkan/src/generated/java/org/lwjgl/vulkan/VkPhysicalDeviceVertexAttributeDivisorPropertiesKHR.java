@@ -16,59 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing max value of vertex attribute divisor that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceVertexAttributeDivisorProperties}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxVertexAttribDivisor};
- *     VkBool32 {@link #supportsNonZeroFirstInstance};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxVertexAttribDivisor;
+ *     VkBool32 supportsNonZeroFirstInstance;
  * }</code></pre>
  */
-public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MAXVERTEXATTRIBDIVISOR,
-        SUPPORTSNONZEROFIRSTINSTANCE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MAXVERTEXATTRIBDIVISOR = layout.offsetof(2);
-        SUPPORTSNONZEROFIRSTINSTANCE = layout.offsetof(3);
-    }
+public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends VkPhysicalDeviceVertexAttributeDivisorProperties {
 
     protected VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -86,33 +46,21 @@ public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled. */
-    @NativeType("uint32_t")
-    public int maxVertexAttribDivisor() { return nmaxVertexAttribDivisor(address()); }
-    /** specifies whether a non-zero value for the {@code firstInstance} parameter of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#drawing">drawing commands</a> is supported when {@link VkVertexInputBindingDivisorDescriptionKHR}{@code ::divisor} is not 1. */
-    @NativeType("VkBool32")
-    public boolean supportsNonZeroFirstInstance() { return nsupportsNonZeroFirstInstance(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR set(
         int sType,
         long pNext
@@ -246,24 +194,8 @@ public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #maxVertexAttribDivisor}. */
-    public static int nmaxVertexAttribDivisor(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.MAXVERTEXATTRIBDIVISOR); }
-    /** Unsafe version of {@link #supportsNonZeroFirstInstance}. */
-    public static int nsupportsNonZeroFirstInstance(long struct) { return memGetInt(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.SUPPORTSNONZEROFIRSTINSTANCE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceVertexAttributeDivisorProperties.Buffer {
 
         private static final VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.create(-1L);
 
@@ -277,7 +209,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -303,24 +235,14 @@ public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#maxVertexAttribDivisor} field. */
-        @NativeType("uint32_t")
-        public int maxVertexAttribDivisor() { return VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.nmaxVertexAttribDivisor(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#supportsNonZeroFirstInstance} field. */
-        @NativeType("VkBool32")
-        public boolean supportsNonZeroFirstInstance() { return VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.nsupportsNonZeroFirstInstance(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#sType} field. */
-        public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.Buffer sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.npNext(address(), value); return this; }
 
     }

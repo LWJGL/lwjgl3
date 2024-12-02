@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineVertexInputDivisorStateCreateInfoKHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineVertexInputDivisorStateCreateInfo}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code vertexBindingDescriptionCount} is not 0, {@code pVertexBindingDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexBindingDescriptionCount} valid {@link VkVertexInputBindingDescription} structures</li>
@@ -148,6 +148,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
     public VkPipelineVertexInputStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineVertexInputStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfo} value to the {@code pNext} chain. */
+    public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoKHR} value to the {@code pNext} chain. */
@@ -433,6 +435,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
         public VkPipelineVertexInputStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#pNext} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineVertexInputStateCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfo} value to the {@code pNext} chain. */
+        public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoKHR} value to the {@code pNext} chain. */

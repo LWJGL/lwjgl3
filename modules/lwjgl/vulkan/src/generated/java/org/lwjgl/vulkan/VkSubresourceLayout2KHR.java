@@ -16,57 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subresource layout.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance5#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageCompressionPropertiesEXT} or {@link VkSubresourceHostMemcpySizeEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubresourceLayout}, {@link KHRMaintenance5#vkGetDeviceImageSubresourceLayoutKHR GetDeviceImageSubresourceLayoutKHR}, {@link EXTHostImageCopy#vkGetImageSubresourceLayout2EXT GetImageSubresourceLayout2EXT}, {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}</p>
+ * See {@link VkSubresourceLayout2}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubresourceLayout2KHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkSubresourceLayout VkSubresourceLayout} {@link #subresourceLayout};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkSubresourceLayout VkSubresourceLayout} subresourceLayout;
  * }</code></pre>
  */
-public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SUBRESOURCELAYOUT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(VkSubresourceLayout.SIZEOF, VkSubresourceLayout.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SUBRESOURCELAYOUT = layout.offsetof(2);
-    }
+public class VkSubresourceLayout2KHR extends VkSubresourceLayout2 {
 
     protected VkSubresourceLayout2KHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -84,33 +45,21 @@ public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> imp
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubresourceLayout2KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** a {@link VkSubresourceLayout} structure. */
-    public VkSubresourceLayout subresourceLayout() { return nsubresourceLayout(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkSubresourceLayout2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR} value to the {@link #sType} field. */
-    public VkSubresourceLayout2KHR sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
+    @Override
+    public VkSubresourceLayout2KHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSubresourceLayout2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
-    public VkSubresourceLayout2KHR pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkSubresourceHostMemcpySizeEXT} value to the {@code pNext} chain. */
-    public VkSubresourceLayout2KHR pNext(VkSubresourceHostMemcpySizeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSubresourceLayout2KHR set(
         int sType,
         long pNext
@@ -244,22 +193,8 @@ public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> imp
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSubresourceLayout2KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSubresourceLayout2KHR.PNEXT); }
-    /** Unsafe version of {@link #subresourceLayout}. */
-    public static VkSubresourceLayout nsubresourceLayout(long struct) { return VkSubresourceLayout.create(struct + VkSubresourceLayout2KHR.SUBRESOURCELAYOUT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSubresourceLayout2KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSubresourceLayout2KHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSubresourceLayout2KHR} structs. */
-    public static class Buffer extends StructBuffer<VkSubresourceLayout2KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSubresourceLayout2.Buffer {
 
         private static final VkSubresourceLayout2KHR ELEMENT_FACTORY = VkSubresourceLayout2KHR.create(-1L);
 
@@ -273,7 +208,7 @@ public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> imp
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -299,25 +234,15 @@ public class VkSubresourceLayout2KHR extends Struct<VkSubresourceLayout2KHR> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubresourceLayout2KHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSubresourceLayout2KHR.nsType(address()); }
-        /** @return the value of the {@link VkSubresourceLayout2KHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkSubresourceLayout2KHR.npNext(address()); }
-        /** @return a {@link VkSubresourceLayout} view of the {@link VkSubresourceLayout2KHR#subresourceLayout} field. */
-        public VkSubresourceLayout subresourceLayout() { return VkSubresourceLayout2KHR.nsubresourceLayout(address()); }
-
-        /** Sets the specified value to the {@link VkSubresourceLayout2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSubresourceLayout2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubresourceLayout2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR} value to the {@link VkSubresourceLayout2KHR#sType} field. */
-        public VkSubresourceLayout2KHR.Buffer sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR); }
-        /** Sets the specified value to the {@link VkSubresourceLayout2KHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
+        @Override
+        public VkSubresourceLayout2KHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSubresourceLayout2KHR.Buffer pNext(@NativeType("void *") long value) { VkSubresourceLayout2KHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
-        public VkSubresourceLayout2KHR.Buffer pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkSubresourceHostMemcpySizeEXT} value to the {@code pNext} chain. */
-        public VkSubresourceLayout2KHR.Buffer pNext(VkSubresourceHostMemcpySizeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

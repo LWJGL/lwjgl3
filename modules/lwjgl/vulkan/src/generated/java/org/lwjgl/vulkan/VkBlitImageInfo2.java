@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} and {@code dstImage} <b>must</b> not be block-compressed images</li>
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> be of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
  * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> not have a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
- * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} and if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-filter-cubic-weight-selection">selectableCubicWeights</a> feature is not enabled then the cubic weights <b>must</b> be {@link QCOMFilterCubicWeights#VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM}</li>
+ * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} and if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-selectableCubicWeights">selectableCubicWeights</a> feature is not enabled then the cubic weights <b>must</b> be {@link QCOMFilterCubicWeights#VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

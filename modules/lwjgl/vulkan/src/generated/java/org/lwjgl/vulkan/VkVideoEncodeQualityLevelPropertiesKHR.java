@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264QualityLevelPropertiesKHR} or {@link VkVideoEncodeH265QualityLevelPropertiesKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeAV1QualityLevelPropertiesKHR}, {@link VkVideoEncodeH264QualityLevelPropertiesKHR}, or {@link VkVideoEncodeH265QualityLevelPropertiesKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -113,6 +113,8 @@ public class VkVideoEncodeQualityLevelPropertiesKHR extends Struct<VkVideoEncode
     public VkVideoEncodeQualityLevelPropertiesKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeQualityLevelPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoEncodeAV1QualityLevelPropertiesKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeQualityLevelPropertiesKHR pNext(VkVideoEncodeAV1QualityLevelPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264QualityLevelPropertiesKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeQualityLevelPropertiesKHR pNext(VkVideoEncodeH264QualityLevelPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265QualityLevelPropertiesKHR} value to the {@code pNext} chain. */
@@ -328,6 +330,8 @@ public class VkVideoEncodeQualityLevelPropertiesKHR extends Struct<VkVideoEncode
         public VkVideoEncodeQualityLevelPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeQualityLevelPropertiesKHR#pNext} field. */
         public VkVideoEncodeQualityLevelPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeQualityLevelPropertiesKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoEncodeAV1QualityLevelPropertiesKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeQualityLevelPropertiesKHR.Buffer pNext(VkVideoEncodeAV1QualityLevelPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264QualityLevelPropertiesKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeQualityLevelPropertiesKHR.Buffer pNext(VkVideoEncodeH264QualityLevelPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265QualityLevelPropertiesKHR} value to the {@code pNext} chain. */

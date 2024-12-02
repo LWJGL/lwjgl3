@@ -17,75 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Image creation information for querying subresource layout.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
- * <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in {@code pCreateInfo}</li>
- * <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in {@code pCreateInfo}</li>
- * <li>If {@code format} of the {@code image} is a color format that is not a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, and {@code tiling} of the {@code pCreateInfo} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code format} of the {@code pCreateInfo} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}</li>
- * <li>If {@code format} of the {@code pCreateInfo} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If {@code format} of the {@code pCreateInfo} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If the {@code tiling} of the {@code pCreateInfo} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} and has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance5#VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkImageCreateInfo} structure</li>
- * <li>{@code pSubresource} <b>must</b> be a valid pointer to a valid {@link VkImageSubresource2KHR} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageCreateInfo}, {@link VkImageSubresource2KHR}, {@link KHRMaintenance5#vkGetDeviceImageSubresourceLayoutKHR GetDeviceImageSubresourceLayoutKHR}</p>
+ * See {@link VkDeviceImageSubresourceInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceImageSubresourceInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkImageCreateInfo VkImageCreateInfo} const * {@link #pCreateInfo};
- *     {@link VkImageSubresource2KHR VkImageSubresource2KHR} const * {@link #pSubresource};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkImageCreateInfo VkImageCreateInfo} const * pCreateInfo;
+ *     {@link VkImageSubresource2 VkImageSubresource2} const * pSubresource;
  * }</code></pre>
  */
-public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubresourceInfoKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PCREATEINFO,
-        PSUBRESOURCE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PCREATEINFO = layout.offsetof(2);
-        PSUBRESOURCE = layout.offsetof(3);
-    }
+public class VkDeviceImageSubresourceInfoKHR extends VkDeviceImageSubresourceInfo {
 
     protected VkDeviceImageSubresourceInfoKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -103,42 +47,32 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceImageSubresourceInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** a pointer to a {@link VkImageCreateInfo} structure containing parameters affecting creation of the image to query. */
-    @NativeType("VkImageCreateInfo const *")
-    public VkImageCreateInfo pCreateInfo() { return npCreateInfo(address()); }
-    /** pSubresource is a pointer to a {@link VkImageSubresource2KHR} structure selecting a specific image subresource for the query. */
-    @NativeType("VkImageSubresource2KHR const *")
-    public VkImageSubresource2KHR pSubresource() { return npSubresource(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceImageSubresourceInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR} value to the {@link #sType} field. */
-    public VkDeviceImageSubresourceInfoKHR sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO} value to the {@code sType} field. */
+    @Override
+    public VkDeviceImageSubresourceInfoKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDeviceImageSubresourceInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkImageCreateInfo} to the {@link #pCreateInfo} field. */
+    /** Sets the address of the specified {@link VkImageCreateInfo} to the {@code pCreateInfo} field. */
+    @Override
     public VkDeviceImageSubresourceInfoKHR pCreateInfo(@NativeType("VkImageCreateInfo const *") VkImageCreateInfo value) { npCreateInfo(address(), value); return this; }
-    /** Sets the address of the specified {@link VkImageSubresource2KHR} to the {@link #pSubresource} field. */
-    public VkDeviceImageSubresourceInfoKHR pSubresource(@NativeType("VkImageSubresource2KHR const *") VkImageSubresource2KHR value) { npSubresource(address(), value); return this; }
+    /** Sets the address of the specified {@link VkImageSubresource2} to the {@code pSubresource} field. */
+    @Override
+    public VkDeviceImageSubresourceInfoKHR pSubresource(@NativeType("VkImageSubresource2 const *") VkImageSubresource2 value) { npSubresource(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceImageSubresourceInfoKHR set(
         int sType,
         long pNext,
         VkImageCreateInfo pCreateInfo,
-        VkImageSubresource2KHR pSubresource
+        VkImageSubresource2 pSubresource
     ) {
         sType(sType);
         pNext(pNext);
@@ -271,38 +205,8 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceImageSubresourceInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDeviceImageSubresourceInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #pCreateInfo}. */
-    public static VkImageCreateInfo npCreateInfo(long struct) { return VkImageCreateInfo.create(memGetAddress(struct + VkDeviceImageSubresourceInfoKHR.PCREATEINFO)); }
-    /** Unsafe version of {@link #pSubresource}. */
-    public static VkImageSubresource2KHR npSubresource(long struct) { return VkImageSubresource2KHR.create(memGetAddress(struct + VkDeviceImageSubresourceInfoKHR.PSUBRESOURCE)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceImageSubresourceInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceImageSubresourceInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #pCreateInfo(VkImageCreateInfo) pCreateInfo}. */
-    public static void npCreateInfo(long struct, VkImageCreateInfo value) { memPutAddress(struct + VkDeviceImageSubresourceInfoKHR.PCREATEINFO, value.address()); }
-    /** Unsafe version of {@link #pSubresource(VkImageSubresource2KHR) pSubresource}. */
-    public static void npSubresource(long struct, VkImageSubresource2KHR value) { memPutAddress(struct + VkDeviceImageSubresourceInfoKHR.PSUBRESOURCE, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkDeviceImageSubresourceInfoKHR.PCREATEINFO));
-        check(memGetAddress(struct + VkDeviceImageSubresourceInfoKHR.PSUBRESOURCE));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceImageSubresourceInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceImageSubresourceInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceImageSubresourceInfo.Buffer {
 
         private static final VkDeviceImageSubresourceInfoKHR ELEMENT_FACTORY = VkDeviceImageSubresourceInfoKHR.create(-1L);
 
@@ -316,7 +220,7 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -342,29 +246,21 @@ public class VkDeviceImageSubresourceInfoKHR extends Struct<VkDeviceImageSubreso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceImageSubresourceInfoKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDeviceImageSubresourceInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkDeviceImageSubresourceInfoKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDeviceImageSubresourceInfoKHR.npNext(address()); }
-        /** @return a {@link VkImageCreateInfo} view of the struct pointed to by the {@link VkDeviceImageSubresourceInfoKHR#pCreateInfo} field. */
-        @NativeType("VkImageCreateInfo const *")
-        public VkImageCreateInfo pCreateInfo() { return VkDeviceImageSubresourceInfoKHR.npCreateInfo(address()); }
-        /** @return a {@link VkImageSubresource2KHR} view of the struct pointed to by the {@link VkDeviceImageSubresourceInfoKHR#pSubresource} field. */
-        @NativeType("VkImageSubresource2KHR const *")
-        public VkImageSubresource2KHR pSubresource() { return VkDeviceImageSubresourceInfoKHR.npSubresource(address()); }
-
-        /** Sets the specified value to the {@link VkDeviceImageSubresourceInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDeviceImageSubresourceInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceImageSubresourceInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR} value to the {@link VkDeviceImageSubresourceInfoKHR#sType} field. */
-        public VkDeviceImageSubresourceInfoKHR.Buffer sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkDeviceImageSubresourceInfoKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO} value to the {@code sType} field. */
+        @Override
+        public VkDeviceImageSubresourceInfoKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDeviceImageSubresourceInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceImageSubresourceInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkImageCreateInfo} to the {@link VkDeviceImageSubresourceInfoKHR#pCreateInfo} field. */
+        /** Sets the address of the specified {@link VkImageCreateInfo} to the {@code pCreateInfo} field. */
+        @Override
         public VkDeviceImageSubresourceInfoKHR.Buffer pCreateInfo(@NativeType("VkImageCreateInfo const *") VkImageCreateInfo value) { VkDeviceImageSubresourceInfoKHR.npCreateInfo(address(), value); return this; }
-        /** Sets the address of the specified {@link VkImageSubresource2KHR} to the {@link VkDeviceImageSubresourceInfoKHR#pSubresource} field. */
-        public VkDeviceImageSubresourceInfoKHR.Buffer pSubresource(@NativeType("VkImageSubresource2KHR const *") VkImageSubresource2KHR value) { VkDeviceImageSubresourceInfoKHR.npSubresource(address(), value); return this; }
+        /** Sets the address of the specified {@link VkImageSubresource2} to the {@code pSubresource} field. */
+        @Override
+        public VkDeviceImageSubresourceInfoKHR.Buffer pSubresource(@NativeType("VkImageSubresource2 const *") VkImageSubresource2 value) { VkDeviceImageSubresourceInfoKHR.npSubresource(address(), value); return this; }
 
     }
 

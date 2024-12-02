@@ -149,8 +149,24 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link #VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkCuModuleTexturingModeCreateInfoNVX}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
+ * </ul>
+ * 
+ * <p>There is currently no specification language written for this type. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+ * 
+ * <pre><code>
+ * typedef struct VkCuModuleTexturingModeCreateInfoNVX {
+ *     VkStructureType    sType;
+ *     const void*        pNext;
+ *     VkBool32           use64bitTexturing;
+ * } VkCuModuleTexturingModeCreateInfoNVX;</code></pre>
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link #VK_STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX}</li>
  * </ul>
  * 
  * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
@@ -238,7 +254,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>30</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_EXT_debug_report</li>
@@ -254,7 +270,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-04-09</dd>
+ * <dd>2024-11-04</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Eric Werness, NVIDIA</li>
@@ -265,7 +281,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class NVXBinaryImport {
 
     /** The extension specification version. */
-    public static final int VK_NVX_BINARY_IMPORT_SPEC_VERSION = 1;
+    public static final int VK_NVX_BINARY_IMPORT_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_NVX_BINARY_IMPORT_EXTENSION_NAME = "VK_NVX_binary_import";
@@ -279,12 +295,14 @@ public class NVXBinaryImport {
      * <li>{@link #VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX   = 1000029000,
-        VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX = 1000029001,
-        VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX          = 1000029002;
+        VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX                = 1000029000,
+        VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX              = 1000029001,
+        VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX                       = 1000029002,
+        VK_STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX = 1000029004;
 
     /**
      * Extends {@code VkObjectType}.

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineRasterizationLineStateCreateInfoKHR}.
+ * See {@link VkPipelineRasterizationLineStateCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -24,13 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPipelineRasterizationLineStateCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkLineRasterizationModeKHR lineRasterizationMode;
+ *     VkLineRasterizationMode lineRasterizationMode;
  *     VkBool32 stippledLineEnable;
  *     uint32_t lineStippleFactor;
  *     uint16_t lineStipplePattern;
  * }</code></pre>
  */
-public class VkPipelineRasterizationLineStateCreateInfoEXT extends VkPipelineRasterizationLineStateCreateInfoKHR {
+public class VkPipelineRasterizationLineStateCreateInfoEXT extends VkPipelineRasterizationLineStateCreateInfo {
 
     protected VkPipelineRasterizationLineStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -54,15 +54,15 @@ public class VkPipelineRasterizationLineStateCreateInfoEXT extends VkPipelineRas
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPipelineRasterizationLineStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO} value to the {@code sType} field. */
     @Override
-    public VkPipelineRasterizationLineStateCreateInfoEXT sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR); }
+    public VkPipelineRasterizationLineStateCreateInfoEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPipelineRasterizationLineStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code lineRasterizationMode} field. */
     @Override
-    public VkPipelineRasterizationLineStateCreateInfoEXT lineRasterizationMode(@NativeType("VkLineRasterizationModeKHR") int value) { nlineRasterizationMode(address(), value); return this; }
+    public VkPipelineRasterizationLineStateCreateInfoEXT lineRasterizationMode(@NativeType("VkLineRasterizationMode") int value) { nlineRasterizationMode(address(), value); return this; }
     /** Sets the specified value to the {@code stippledLineEnable} field. */
     @Override
     public VkPipelineRasterizationLineStateCreateInfoEXT stippledLineEnable(@NativeType("VkBool32") boolean value) { nstippledLineEnable(address(), value ? 1 : 0); return this; }
@@ -236,7 +236,7 @@ public class VkPipelineRasterizationLineStateCreateInfoEXT extends VkPipelineRas
     // -----------------------------------
 
     /** An array of {@link VkPipelineRasterizationLineStateCreateInfoEXT} structs. */
-    public static class Buffer extends VkPipelineRasterizationLineStateCreateInfoKHR.Buffer {
+    public static class Buffer extends VkPipelineRasterizationLineStateCreateInfo.Buffer {
 
         private static final VkPipelineRasterizationLineStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineRasterizationLineStateCreateInfoEXT.create(-1L);
 
@@ -279,15 +279,15 @@ public class VkPipelineRasterizationLineStateCreateInfoEXT extends VkPipelineRas
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationLineStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO} value to the {@code sType} field. */
         @Override
-        public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR); }
+        public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationLineStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code lineRasterizationMode} field. */
         @Override
-        public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer lineRasterizationMode(@NativeType("VkLineRasterizationModeKHR") int value) { VkPipelineRasterizationLineStateCreateInfoEXT.nlineRasterizationMode(address(), value); return this; }
+        public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer lineRasterizationMode(@NativeType("VkLineRasterizationMode") int value) { VkPipelineRasterizationLineStateCreateInfoEXT.nlineRasterizationMode(address(), value); return this; }
         /** Sets the specified value to the {@code stippledLineEnable} field. */
         @Override
         public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer stippledLineEnable(@NativeType("VkBool32") boolean value) { VkPipelineRasterizationLineStateCreateInfoEXT.nstippledLineEnable(address(), value ? 1 : 0); return this; }

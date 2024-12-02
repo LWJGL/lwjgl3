@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRMapMemory2 VK_KHR_map_memory2}</dd>
+ * <dd>{@link KHRMapMemory2 VK_KHR_map_memory2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.4">Version 1.4</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Faith Ekstrand <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_map_memory_placed]%20@gfxstrand%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_map_memory_placed%20extension*">gfxstrand</a></li>
@@ -76,7 +76,7 @@ public final class EXTMapMemoryPlaced {
     /** Extends {@code VkMemoryMapFlagBits}. */
     public static final int VK_MEMORY_MAP_PLACED_BIT_EXT = 0x1;
 
-    /** Extends {@code VkMemoryUnmapFlagBitsKHR}. */
+    /** Extends {@code VkMemoryUnmapFlagBits}. */
     public static final int VK_MEMORY_UNMAP_RESERVE_BIT_EXT = 0x1;
 
     private EXTMapMemoryPlaced() {}

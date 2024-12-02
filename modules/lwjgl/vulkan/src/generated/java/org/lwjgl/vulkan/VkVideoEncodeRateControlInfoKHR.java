@@ -37,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If the video session was created with the video codec operation {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, then this index specifies the H.264 temporal layer ID of the video coding layer the rate control layer is applied to.</li>
  * <li>If the video session was created with the video codec operation {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, then this index specifies the H.265 temporal ID of the video coding layer the rate control layer is applied to.</li>
+ * <li>If the video session was created with the video codec operation {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then this index specifies the AV1 temporal ID of the temporal layer the rate control layer is applied to.</li>
  * </ul>
  * 
  * <p>Additional structures providing codec-specific rate control parameters <b>can</b> be included in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} depending on the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> the bound video session was created. For further details see:</p>
@@ -45,6 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a></li>
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-rate-control">AV1 Encode Rate Control</a></li>
  * </ul>
  * 
  * <p>The new rate control configuration takes effect when the corresponding {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} is executed on the device, and only impacts video encode operations that follow in execution order.</p>
@@ -64,6 +66,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code layerCount} is not zero, then {@code initialVirtualBufferSizeInMs} <b>must</b> be less than or equal to {@code virtualBufferSizeInMs}</li>
  * <li>If the {@code videoCodecOperation} of the used video profile is {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, the {@code pNext} chain this structure is included in also includes an instance of the {@link VkVideoEncodeH264RateControlInfoKHR} structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal {@link VkVideoEncodeH264RateControlInfoKHR}{@code ::temporalLayerCount}</li>
  * <li>If the {@code videoCodecOperation} of the used video profile is {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, the {@code pNext} chain this structure is included in also includes an instance of the {@link VkVideoEncodeH265RateControlInfoKHR} structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::subLayerCount}</li>
+ * <li>If the {@code videoCodecOperation} of the used video profile is {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, the {@code pNext} chain this structure is included in also includes an instance of the {@link VkVideoEncodeAV1RateControlInfoKHR} structure, and {@code layerCount} is greater than 1, then {@code layerCount} <b>must</b> equal {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::temporalLayerCount}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

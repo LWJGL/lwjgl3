@@ -27,7 +27,12 @@ package org.lwjgl.vulkan;
  * <dd>2</dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
+ * <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -66,22 +71,7 @@ public final class EXTGlobalPriority {
     public static final int VK_ERROR_NOT_PERMITTED_EXT = -1000174001;
 
     /**
-     * VkQueueGlobalPriorityKHR - Values specifying a system-wide queue priority
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>Priority values are sorted in ascending order. A comparison operation on the enum values can be used to determine the priority order.</p>
-     * 
-     * <ul>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR QUEUE_GLOBAL_PRIORITY_LOW_KHR} is below the system default. Useful for non-interactive tasks.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR} is the system default priority.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR QUEUE_GLOBAL_PRIORITY_HIGH_KHR} is above the system default.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR QUEUE_GLOBAL_PRIORITY_REALTIME_KHR} is the highest priority. Useful for critical tasks.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkDeviceQueueGlobalPriorityCreateInfoKHR}, {@link VkQueueFamilyGlobalPriorityPropertiesKHR}</p>
+     * Extends {@code VkQueueGlobalPriority}.
      * 
      * <h5>Enum values:</h5>
      * 
@@ -93,10 +83,6 @@ public final class EXTGlobalPriority {
      * </ul>
      */
     public static final int
-        VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR      = 128,
-        VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR   = 256,
-        VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR     = 512,
-        VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR = 1024,
         VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT      = 128,
         VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT   = 256,
         VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT     = 512,

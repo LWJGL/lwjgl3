@@ -81,7 +81,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the spacing of segments on the edges of tessellated primitives</li>
  * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the output patch size</li>
  * <li>Any two elements of {@code pPushConstantRanges} <b>must</b> not include the same stage in {@code stageFlags}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and if a push constant block is declared in a shader, then an element of {@code pPushConstantRanges}{@code ::stageFlags} <b>must</b> match pname::stage</li>
+ * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and if a push constant block is declared in a shader, then an element of {@code pPushConstantRanges}{@code ::stageFlags} <b>must</b> match {@code stage}</li>
  * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and if a push constant block is declared in a shader, the block must be contained inside the element of {@code pPushConstantRanges} that matches the stage</li>
  * </ul>
  * 

@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing shader expect assume features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderExpectAssume#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceShaderExpectAssumeFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderExpectAssumeFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderExpectAssume};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderExpectAssume;
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends Struct<VkPhysicalDeviceShaderExpectAssumeFeaturesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SHADEREXPECTASSUME;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SHADEREXPECTASSUME = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends VkPhysicalDeviceShaderExpectAssumeFeatures {
 
     protected VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,32 +45,24 @@ public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends Struct<VkPhys
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** specifies whether shader modules <b>can</b> declare the {@code ExpectAssumeKHR} capability. */
-    @NativeType("VkBool32")
-    public boolean shaderExpectAssume() { return nshaderExpectAssume(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRShaderExpectAssume#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR sType$Default() { return sType(KHRShaderExpectAssume.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderExpectAssume} field. */
+    /** Sets the specified value to the {@code shaderExpectAssume} field. */
+    @Override
     public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR shaderExpectAssume(@NativeType("VkBool32") boolean value) { nshaderExpectAssume(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR set(
         int sType,
         long pNext,
@@ -243,24 +198,8 @@ public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends Struct<VkPhys
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #shaderExpectAssume}. */
-    public static int nshaderExpectAssume(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.SHADEREXPECTASSUME); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #shaderExpectAssume(boolean) shaderExpectAssume}. */
-    public static void nshaderExpectAssume(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.SHADEREXPECTASSUME, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderExpectAssumeFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceShaderExpectAssumeFeatures.Buffer {
 
         private static final VkPhysicalDeviceShaderExpectAssumeFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.create(-1L);
 
@@ -274,7 +213,7 @@ public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends Struct<VkPhys
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,23 +239,17 @@ public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#shaderExpectAssume} field. */
-        @NativeType("VkBool32")
-        public boolean shaderExpectAssume() { return VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.nshaderExpectAssume(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRShaderExpectAssume#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#sType} field. */
-        public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderExpectAssume.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderExpectAssumeFeaturesKHR#shaderExpectAssume} field. */
+        /** Sets the specified value to the {@code shaderExpectAssume} field. */
+        @Override
         public VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.Buffer shaderExpectAssume(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.nshaderExpectAssume(address(), value ? 1 : 0); return this; }
 
     }

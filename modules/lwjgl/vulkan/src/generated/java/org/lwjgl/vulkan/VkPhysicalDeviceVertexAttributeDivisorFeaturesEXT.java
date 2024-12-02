@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR}.
+ * See {@link VkPhysicalDeviceVertexAttributeDivisorFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 vertexAttributeInstanceRateZeroDivisor;
  * }</code></pre>
  */
-public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR {
+public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysicalDeviceVertexAttributeDivisorFeatures {
 
     protected VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -52,9 +52,9 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysica
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES} value to the {@code sType} field. */
     @Override
-    public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR); }
+    public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -224,7 +224,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysica
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT} structs. */
-    public static class Buffer extends VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.Buffer {
+    public static class Buffer extends VkPhysicalDeviceVertexAttributeDivisorFeatures.Buffer {
 
         private static final VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.create(-1L);
 
@@ -267,9 +267,9 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysica
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES} value to the {@code sType} field. */
         @Override
-        public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR); }
+        public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.npNext(address(), value); return this; }

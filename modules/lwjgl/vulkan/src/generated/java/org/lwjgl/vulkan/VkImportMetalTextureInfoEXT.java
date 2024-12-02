@@ -100,7 +100,7 @@ public class VkImportMetalTextureInfoEXT extends Struct<VkImportMetalTextureInfo
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates the plane of the {@code VkImage} that the {@code id&lt;MTLTexture&gt;} object should be attached to. */
+    /** specifies the plane of the {@code VkImage} that the {@code id&lt;MTLTexture&gt;} object should be attached to. */
     @NativeType("VkImageAspectFlagBits")
     public int plane() { return nplane(address()); }
     /** a the Metal {@code id&lt;MTLTexture&gt;} object that is to underlie the {@code VkImage} plane. */

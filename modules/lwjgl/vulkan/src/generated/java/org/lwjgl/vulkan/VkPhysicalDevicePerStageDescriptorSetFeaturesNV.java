@@ -101,7 +101,7 @@ public class VkPhysicalDevicePerStageDescriptorSetFeaturesNV extends Struct<VkPh
     /** indicates that the implementation allows the {@link NVPerStageDescriptorSet#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PER_STAGE_BIT_NV DESCRIPTOR_SET_LAYOUT_CREATE_PER_STAGE_BIT_NV} descriptor set layout creation flag to be used so the bindings are specified per-stage rather than across all stages. */
     @NativeType("VkBool32")
     public boolean perStageDescriptorSet() { return nperStageDescriptorSet(address()) != 0; }
-    /** indicates the implementation allows the {@code layout} member of {@link VkBindDescriptorSetsInfoKHR}, {@link VkPushConstantsInfoKHR}, {@link VkPushDescriptorSetInfoKHR}, {@link VkPushDescriptorSetWithTemplateInfoKHR}, {@link VkSetDescriptorBufferOffsetsInfoEXT} and {@link VkBindDescriptorBufferEmbeddedSamplersInfoEXT} to be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and {@link VkPipelineLayoutCreateInfo} <b>can</b> be chained off those structures' {@code pNext} instead. */
+    /** indicates the implementation allows the {@code layout} member of {@link VkBindDescriptorSetsInfo}, {@link VkPushConstantsInfo}, {@link VkPushDescriptorSetInfo}, {@link VkPushDescriptorSetWithTemplateInfo}, {@link VkSetDescriptorBufferOffsetsInfoEXT} and {@link VkBindDescriptorBufferEmbeddedSamplersInfoEXT} to be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and {@link VkPipelineLayoutCreateInfo} <b>can</b> be chained off those structures' {@code pNext} instead. */
     @NativeType("VkBool32")
     public boolean dynamicPipelineLayout() { return ndynamicPipelineLayout(address()) != 0; }
 

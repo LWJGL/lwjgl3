@@ -16,113 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of a host-side image layout transition.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code vkTransitionImageLayoutEXT} does not check whether the device memory associated with an image is currently in use before performing the layout transition. The application <b>must</b> guarantee that any previously submitted command that reads from or writes to this subresource has completed before the host performs the layout transition. The memory of {@code image} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-coherent">coherent</a>.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Image layout transitions performed on the host do not require queue family ownership transfers as the physical layout of the image will not vary between queue families for the layouts supported by this function.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If the device has written to the image memory, it is not automatically made available to the host. Before this command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> including {@link VK10#VK_PIPELINE_STAGE_HOST_BIT PIPELINE_STAGE_HOST_BIT} and {@link VK10#VK_ACCESS_HOST_READ_BIT ACCESS_HOST_READ_BIT}.</p>
- * 
- * <p>Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this layout transition on the device.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code image} <b>must</b> have been created with {@link EXTHostImageCopy#VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT IMAGE_USAGE_HOST_TRANSFER_BIT_EXT}</li>
- * </ul>
- * 
- * <ul>
- * <li>{@code subresourceRange.baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.levelCount} is not {@link VK10#VK_REMAINING_MIP_LEVELS REMAINING_MIP_LEVELS}, <code>subresourceRange.baseMipLevel + subresourceRange.levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>{@code subresourceRange.baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>subresourceRange.baseArrayLayer + subresourceRange.layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@code image} has a color format that is single-plane, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a color format and is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include at least one <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit or {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If the {@code aspectMask} member of {@code subresourceRange} includes {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If the {@code aspectMask} member of {@code subresourceRange} includes {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * <li>{@code subresourceRange.aspectMask} <b>must</b> be valid for the {@code format} the {@code image} was created with</li>
- * <li>{@code oldLayout} <b>must</b> be either {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED} or the current layout of the image subresources as specified in {@code subresourceRange}</li>
- * <li>If {@code oldLayout} is not {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED} or {@link VK10#VK_IMAGE_LAYOUT_PREINITIALIZED IMAGE_LAYOUT_PREINITIALIZED}, it <b>must</b> be one of the layouts in {@link VkPhysicalDeviceHostImageCopyPropertiesEXT}{@code ::pCopySrcLayouts}</li>
- * <li>{@code newLayout} <b>must</b> be one of the layouts in {@link VkPhysicalDeviceHostImageCopyPropertiesEXT}{@code ::pCopyDstLayouts}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code oldLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code newLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code subresourceRange} <b>must</b> be a valid {@link VkImageSubresourceRange} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageSubresourceRange}, {@link EXTHostImageCopy#vkTransitionImageLayoutEXT TransitionImageLayoutEXT}</p>
+ * See {@link VkHostImageLayoutTransitionInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkHostImageLayoutTransitionInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImage {@link #image};
- *     VkImageLayout {@link #oldLayout};
- *     VkImageLayout {@link #newLayout};
- *     {@link VkImageSubresourceRange VkImageSubresourceRange} {@link #subresourceRange};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImage image;
+ *     VkImageLayout oldLayout;
+ *     VkImageLayout newLayout;
+ *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
  * }</code></pre>
  */
-public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayoutTransitionInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        IMAGE,
-        OLDLAYOUT,
-        NEWLAYOUT,
-        SUBRESOURCERANGE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(4),
-            __member(4),
-            __member(VkImageSubresourceRange.SIZEOF, VkImageSubresourceRange.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        IMAGE = layout.offsetof(2);
-        OLDLAYOUT = layout.offsetof(3);
-        NEWLAYOUT = layout.offsetof(4);
-        SUBRESOURCERANGE = layout.offsetof(5);
-    }
+public class VkHostImageLayoutTransitionInfoEXT extends VkHostImageLayoutTransitionInfo {
 
     protected VkHostImageLayoutTransitionInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -140,48 +48,36 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkHostImageLayoutTransitionInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** a handle to the image affected by this layout transition. */
-    @NativeType("VkImage")
-    public long image() { return nimage(address()); }
-    /** the old layout in an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
-    @NativeType("VkImageLayout")
-    public int oldLayout() { return noldLayout(address()); }
-    /** the new layout in an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
-    @NativeType("VkImageLayout")
-    public int newLayout() { return nnewLayout(address()); }
-    /** describes the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views">image subresource range</a> within {@code image} that is affected by this layout transition. */
-    public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkHostImageLayoutTransitionInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT} value to the {@link #sType} field. */
-    public VkHostImageLayoutTransitionInfoEXT sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO} value to the {@code sType} field. */
+    @Override
+    public VkHostImageLayoutTransitionInfoEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@link #oldLayout} field. */
+    /** Sets the specified value to the {@code oldLayout} field. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT oldLayout(@NativeType("VkImageLayout") int value) { noldLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #newLayout} field. */
+    /** Sets the specified value to the {@code newLayout} field. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT newLayout(@NativeType("VkImageLayout") int value) { nnewLayout(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceRange} to the {@link #subresourceRange} field. */
+    /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
-    /** Passes the {@link #subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkHostImageLayoutTransitionInfoEXT set(
         int sType,
         long pNext,
@@ -323,36 +219,8 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkHostImageLayoutTransitionInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkHostImageLayoutTransitionInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return memGetLong(struct + VkHostImageLayoutTransitionInfoEXT.IMAGE); }
-    /** Unsafe version of {@link #oldLayout}. */
-    public static int noldLayout(long struct) { return memGetInt(struct + VkHostImageLayoutTransitionInfoEXT.OLDLAYOUT); }
-    /** Unsafe version of {@link #newLayout}. */
-    public static int nnewLayout(long struct) { return memGetInt(struct + VkHostImageLayoutTransitionInfoEXT.NEWLAYOUT); }
-    /** Unsafe version of {@link #subresourceRange}. */
-    public static VkImageSubresourceRange nsubresourceRange(long struct) { return VkImageSubresourceRange.create(struct + VkHostImageLayoutTransitionInfoEXT.SUBRESOURCERANGE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkHostImageLayoutTransitionInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkHostImageLayoutTransitionInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { memPutLong(struct + VkHostImageLayoutTransitionInfoEXT.IMAGE, value); }
-    /** Unsafe version of {@link #oldLayout(int) oldLayout}. */
-    public static void noldLayout(long struct, int value) { memPutInt(struct + VkHostImageLayoutTransitionInfoEXT.OLDLAYOUT, value); }
-    /** Unsafe version of {@link #newLayout(int) newLayout}. */
-    public static void nnewLayout(long struct, int value) { memPutInt(struct + VkHostImageLayoutTransitionInfoEXT.NEWLAYOUT, value); }
-    /** Unsafe version of {@link #subresourceRange(VkImageSubresourceRange) subresourceRange}. */
-    public static void nsubresourceRange(long struct, VkImageSubresourceRange value) { memCopy(value.address(), struct + VkHostImageLayoutTransitionInfoEXT.SUBRESOURCERANGE, VkImageSubresourceRange.SIZEOF); }
-
-    // -----------------------------------
-
     /** An array of {@link VkHostImageLayoutTransitionInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkHostImageLayoutTransitionInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkHostImageLayoutTransitionInfo.Buffer {
 
         private static final VkHostImageLayoutTransitionInfoEXT ELEMENT_FACTORY = VkHostImageLayoutTransitionInfoEXT.create(-1L);
 
@@ -366,7 +234,7 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -392,39 +260,29 @@ public class VkHostImageLayoutTransitionInfoEXT extends Struct<VkHostImageLayout
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkHostImageLayoutTransitionInfoEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkHostImageLayoutTransitionInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkHostImageLayoutTransitionInfoEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkHostImageLayoutTransitionInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkHostImageLayoutTransitionInfoEXT#image} field. */
-        @NativeType("VkImage")
-        public long image() { return VkHostImageLayoutTransitionInfoEXT.nimage(address()); }
-        /** @return the value of the {@link VkHostImageLayoutTransitionInfoEXT#oldLayout} field. */
-        @NativeType("VkImageLayout")
-        public int oldLayout() { return VkHostImageLayoutTransitionInfoEXT.noldLayout(address()); }
-        /** @return the value of the {@link VkHostImageLayoutTransitionInfoEXT#newLayout} field. */
-        @NativeType("VkImageLayout")
-        public int newLayout() { return VkHostImageLayoutTransitionInfoEXT.nnewLayout(address()); }
-        /** @return a {@link VkImageSubresourceRange} view of the {@link VkHostImageLayoutTransitionInfoEXT#subresourceRange} field. */
-        public VkImageSubresourceRange subresourceRange() { return VkHostImageLayoutTransitionInfoEXT.nsubresourceRange(address()); }
-
-        /** Sets the specified value to the {@link VkHostImageLayoutTransitionInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkHostImageLayoutTransitionInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT} value to the {@link VkHostImageLayoutTransitionInfoEXT#sType} field. */
-        public VkHostImageLayoutTransitionInfoEXT.Buffer sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT); }
-        /** Sets the specified value to the {@link VkHostImageLayoutTransitionInfoEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO} value to the {@code sType} field. */
+        @Override
+        public VkHostImageLayoutTransitionInfoEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkHostImageLayoutTransitionInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkHostImageLayoutTransitionInfoEXT#image} field. */
+        /** Sets the specified value to the {@code image} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer image(@NativeType("VkImage") long value) { VkHostImageLayoutTransitionInfoEXT.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkHostImageLayoutTransitionInfoEXT#oldLayout} field. */
+        /** Sets the specified value to the {@code oldLayout} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer oldLayout(@NativeType("VkImageLayout") int value) { VkHostImageLayoutTransitionInfoEXT.noldLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkHostImageLayoutTransitionInfoEXT#newLayout} field. */
+        /** Sets the specified value to the {@code newLayout} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer newLayout(@NativeType("VkImageLayout") int value) { VkHostImageLayoutTransitionInfoEXT.nnewLayout(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceRange} to the {@link VkHostImageLayoutTransitionInfoEXT#subresourceRange} field. */
+        /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer subresourceRange(VkImageSubresourceRange value) { VkHostImageLayoutTransitionInfoEXT.nsubresourceRange(address(), value); return this; }
-        /** Passes the {@link VkHostImageLayoutTransitionInfoEXT#subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkHostImageLayoutTransitionInfoEXT.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }

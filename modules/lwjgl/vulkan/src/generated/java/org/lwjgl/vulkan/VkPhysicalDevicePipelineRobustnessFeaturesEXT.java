@@ -16,60 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether an implementation supports robustness requests on a per-pipeline stage granularity.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Enabling <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> may, on some platforms, incur a minor performance cost when <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> is disabled, even for pipelines which do not make use of any robustness features. If robustness is not needed, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> should not be enabled by an application.</p>
- * </div>
- * 
- * <p>If the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDevicePipelineRobustnessFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePipelineRobustnessFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #pipelineRobustness};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 pipelineRobustness;
  * }</code></pre>
  */
-public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhysicalDevicePipelineRobustnessFeaturesEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PIPELINEROBUSTNESS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PIPELINEROBUSTNESS = layout.offsetof(2);
-    }
+public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends VkPhysicalDevicePipelineRobustnessFeatures {
 
     protected VkPhysicalDevicePipelineRobustnessFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -87,32 +45,24 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhys
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePipelineRobustnessFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates that robustness <b>can</b> be requested on a per-pipeline-stage granularity. */
-    @NativeType("VkBool32")
-    public boolean pipelineRobustness() { return npipelineRobustness(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePipelineRobustnessFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDevicePipelineRobustnessFeaturesEXT sType$Default() { return sType(EXTPipelineRobustness.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDevicePipelineRobustnessFeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDevicePipelineRobustnessFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineRobustness} field. */
+    /** Sets the specified value to the {@code pipelineRobustness} field. */
+    @Override
     public VkPhysicalDevicePipelineRobustnessFeaturesEXT pipelineRobustness(@NativeType("VkBool32") boolean value) { npipelineRobustness(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDevicePipelineRobustnessFeaturesEXT set(
         int sType,
         long pNext,
@@ -248,24 +198,8 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhys
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #pipelineRobustness}. */
-    public static int npipelineRobustness(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #pipelineRobustness(boolean) pipelineRobustness}. */
-    public static void npipelineRobustness(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineRobustnessFeaturesEXT.PIPELINEROBUSTNESS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDevicePipelineRobustnessFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDevicePipelineRobustnessFeatures.Buffer {
 
         private static final VkPhysicalDevicePipelineRobustnessFeaturesEXT ELEMENT_FACTORY = VkPhysicalDevicePipelineRobustnessFeaturesEXT.create(-1L);
 
@@ -279,7 +213,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhys
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -305,23 +239,17 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDevicePipelineRobustnessFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDevicePipelineRobustnessFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#pipelineRobustness} field. */
-        @NativeType("VkBool32")
-        public boolean pipelineRobustness() { return VkPhysicalDevicePipelineRobustnessFeaturesEXT.npipelineRobustness(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePipelineRobustnessFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT} value to the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#sType} field. */
-        public VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer sType$Default() { return sType(EXTPipelineRobustness.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineRobustnessFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#pipelineRobustness} field. */
+        /** Sets the specified value to the {@code pipelineRobustness} field. */
+        @Override
         public VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer pipelineRobustness(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineRobustnessFeaturesEXT.npipelineRobustness(address(), value ? 1 : 0); return this; }
 
     }

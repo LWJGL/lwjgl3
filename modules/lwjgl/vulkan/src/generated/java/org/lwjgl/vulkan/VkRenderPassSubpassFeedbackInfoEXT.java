@@ -82,7 +82,7 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct<VkRenderPassSubpa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkSubpassMergeStatusEXT} value specifying information about whether the subpass is merged with previous subpass and the reason why it is not merged. */
+    /** a {@code VkSubpassMergeStatusEXT} value specifying information about whether the subpass is merged with the previous subpass and the reason why it is not merged. */
     @NativeType("VkSubpassMergeStatusEXT")
     public int subpassMergeStatus() { return nsubpassMergeStatus(address()); }
     /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which provides additional details. */

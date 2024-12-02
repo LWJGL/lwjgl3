@@ -122,7 +122,7 @@ public class NVCooperativeMatrix2 {
      * 
      * <p>If {@code pProperties} is {@code NULL}, then the number of flexible dimensions properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the application to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number flexible dimensions properties available, at most {@code pPropertyCount} structures will be written, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available flexible dimensions properties were returned.</p>
      * 
-     * <p>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-cooperativeMatrixFlexibleDimensions">{@code cooperativeMatrixFlexibleDimensions}</a> is not supported, the implementation <b>must</b> advertise zero properties.</p>
+     * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-cooperativeMatrixFlexibleDimensions">{@code cooperativeMatrixFlexibleDimensions}</a> feature is not supported, the implementation <b>must</b> advertise zero properties.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

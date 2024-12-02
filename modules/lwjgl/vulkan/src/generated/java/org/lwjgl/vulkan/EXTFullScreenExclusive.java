@@ -103,10 +103,10 @@ public class EXTFullScreenExclusive {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT} indicates the implementation <b>should</b> determine the appropriate full-screen method by whatever means it deems appropriate.</li>
-     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT} indicates the implementation <b>may</b> use full-screen exclusive mechanisms when available. Such mechanisms <b>may</b> result in better performance and/or the availability of different presentation capabilities, but <b>may</b> require a more disruptive transition during swapchain initialization, first presentation and/or destruction.</li>
-     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT} indicates the implementation <b>should</b> avoid using full-screen mechanisms which rely on disruptive transitions.</li>
-     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT} indicates the application will manage full-screen exclusive mode by using the {@link #vkAcquireFullScreenExclusiveModeEXT AcquireFullScreenExclusiveModeEXT} and {@link #vkReleaseFullScreenExclusiveModeEXT ReleaseFullScreenExclusiveModeEXT} commands.</li>
+     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT} specifies that the implementation <b>should</b> determine the appropriate full-screen method by whatever means it deems appropriate.</li>
+     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT} specifies that the implementation <b>may</b> use full-screen exclusive mechanisms when available. Such mechanisms <b>may</b> result in better performance and/or the availability of different presentation capabilities, but <b>may</b> require a more disruptive transition during swapchain initialization, first presentation and/or destruction.</li>
+     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT} specifies that the implementation <b>should</b> avoid using full-screen mechanisms which rely on disruptive transitions.</li>
+     * <li>{@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT} specifies that the application will manage full-screen exclusive mode by using the {@link #vkAcquireFullScreenExclusiveModeEXT AcquireFullScreenExclusiveModeEXT} and {@link #vkReleaseFullScreenExclusiveModeEXT ReleaseFullScreenExclusiveModeEXT} commands.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

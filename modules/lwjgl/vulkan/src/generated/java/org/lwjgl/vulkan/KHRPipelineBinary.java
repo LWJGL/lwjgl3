@@ -124,7 +124,7 @@ public class KHRPipelineBinary {
         VK_PIPELINE_BINARY_MISSING_KHR = 1000483000,
         VK_ERROR_NOT_ENOUGH_SPACE_KHR  = -1000483000;
 
-    /** Extends {@code VkPipelineCreateFlagBits2KHR}. */
+    /** Extends {@code VkPipelineCreateFlagBits2}. */
     public static final long VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR = 0x80000000L;
 
     protected KHRPipelineBinary() {

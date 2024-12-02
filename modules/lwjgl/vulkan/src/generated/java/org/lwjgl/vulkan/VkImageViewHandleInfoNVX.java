@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link NVXImageViewHandle#vkGetImageViewHandleNVX GetImageViewHandleNVX}</p>
+ * <p>{@link NVXImageViewHandle#vkGetImageViewHandle64NVX GetImageViewHandle64NVX}, {@link NVXImageViewHandle#vkGetImageViewHandleNVX GetImageViewHandleNVX}</p>
  * 
  * <h3>Layout</h3>
  * 

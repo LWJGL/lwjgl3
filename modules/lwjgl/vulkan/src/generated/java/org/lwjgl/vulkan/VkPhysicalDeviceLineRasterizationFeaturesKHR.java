@@ -16,75 +16,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the line rasterization features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceLineRasterizationFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceLineRasterizationFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceLineRasterizationFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #rectangularLines};
- *     VkBool32 {@link #bresenhamLines};
- *     VkBool32 {@link #smoothLines};
- *     VkBool32 {@link #stippledRectangularLines};
- *     VkBool32 {@link #stippledBresenhamLines};
- *     VkBool32 {@link #stippledSmoothLines};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 rectangularLines;
+ *     VkBool32 bresenhamLines;
+ *     VkBool32 smoothLines;
+ *     VkBool32 stippledRectangularLines;
+ *     VkBool32 stippledBresenhamLines;
+ *     VkBool32 stippledSmoothLines;
  * }</code></pre>
  */
-public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysicalDeviceLineRasterizationFeaturesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        RECTANGULARLINES,
-        BRESENHAMLINES,
-        SMOOTHLINES,
-        STIPPLEDRECTANGULARLINES,
-        STIPPLEDBRESENHAMLINES,
-        STIPPLEDSMOOTHLINES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        RECTANGULARLINES = layout.offsetof(2);
-        BRESENHAMLINES = layout.offsetof(3);
-        SMOOTHLINES = layout.offsetof(4);
-        STIPPLEDRECTANGULARLINES = layout.offsetof(5);
-        STIPPLEDBRESENHAMLINES = layout.offsetof(6);
-        STIPPLEDSMOOTHLINES = layout.offsetof(7);
-    }
+public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends VkPhysicalDeviceLineRasterizationFeatures {
 
     protected VkPhysicalDeviceLineRasterizationFeaturesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -102,57 +50,39 @@ public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysi
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceLineRasterizationFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines">rectangular line rasterization</a>. */
-    @NativeType("VkBool32")
-    public boolean rectangularLines() { return nrectangularLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-bresenham">Bresenham-style line rasterization</a>. */
-    @NativeType("VkBool32")
-    public boolean bresenhamLines() { return nbresenhamLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-smooth">smooth line rasterization</a>. */
-    @NativeType("VkBool32")
-    public boolean smoothLines() { return nsmoothLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_KHR LINE_RASTERIZATION_MODE_RECTANGULAR_KHR} lines. */
-    @NativeType("VkBool32")
-    public boolean stippledRectangularLines() { return nstippledRectangularLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_BRESENHAM_KHR LINE_RASTERIZATION_MODE_BRESENHAM_KHR} lines. */
-    @NativeType("VkBool32")
-    public boolean stippledBresenhamLines() { return nstippledBresenhamLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR} lines. */
-    @NativeType("VkBool32")
-    public boolean stippledSmoothLines() { return nstippledSmoothLines(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceLineRasterizationFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceLineRasterizationFeaturesKHR sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceLineRasterizationFeaturesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #rectangularLines} field. */
+    /** Sets the specified value to the {@code rectangularLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR rectangularLines(@NativeType("VkBool32") boolean value) { nrectangularLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #bresenhamLines} field. */
+    /** Sets the specified value to the {@code bresenhamLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR bresenhamLines(@NativeType("VkBool32") boolean value) { nbresenhamLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #smoothLines} field. */
+    /** Sets the specified value to the {@code smoothLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR smoothLines(@NativeType("VkBool32") boolean value) { nsmoothLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledRectangularLines} field. */
+    /** Sets the specified value to the {@code stippledRectangularLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR stippledRectangularLines(@NativeType("VkBool32") boolean value) { nstippledRectangularLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledBresenhamLines} field. */
+    /** Sets the specified value to the {@code stippledBresenhamLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR stippledBresenhamLines(@NativeType("VkBool32") boolean value) { nstippledBresenhamLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledSmoothLines} field. */
+    /** Sets the specified value to the {@code stippledSmoothLines} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR stippledSmoothLines(@NativeType("VkBool32") boolean value) { nstippledSmoothLines(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceLineRasterizationFeaturesKHR set(
         int sType,
         long pNext,
@@ -298,44 +228,8 @@ public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysi
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #rectangularLines}. */
-    public static int nrectangularLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES); }
-    /** Unsafe version of {@link #bresenhamLines}. */
-    public static int nbresenhamLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES); }
-    /** Unsafe version of {@link #smoothLines}. */
-    public static int nsmoothLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES); }
-    /** Unsafe version of {@link #stippledRectangularLines}. */
-    public static int nstippledRectangularLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES); }
-    /** Unsafe version of {@link #stippledBresenhamLines}. */
-    public static int nstippledBresenhamLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES); }
-    /** Unsafe version of {@link #stippledSmoothLines}. */
-    public static int nstippledSmoothLines(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #rectangularLines(boolean) rectangularLines}. */
-    public static void nrectangularLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.RECTANGULARLINES, value); }
-    /** Unsafe version of {@link #bresenhamLines(boolean) bresenhamLines}. */
-    public static void nbresenhamLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.BRESENHAMLINES, value); }
-    /** Unsafe version of {@link #smoothLines(boolean) smoothLines}. */
-    public static void nsmoothLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.SMOOTHLINES, value); }
-    /** Unsafe version of {@link #stippledRectangularLines(boolean) stippledRectangularLines}. */
-    public static void nstippledRectangularLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDRECTANGULARLINES, value); }
-    /** Unsafe version of {@link #stippledBresenhamLines(boolean) stippledBresenhamLines}. */
-    public static void nstippledBresenhamLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDBRESENHAMLINES, value); }
-    /** Unsafe version of {@link #stippledSmoothLines(boolean) stippledSmoothLines}. */
-    public static void nstippledSmoothLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationFeaturesKHR.STIPPLEDSMOOTHLINES, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceLineRasterizationFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceLineRasterizationFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceLineRasterizationFeatures.Buffer {
 
         private static final VkPhysicalDeviceLineRasterizationFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceLineRasterizationFeaturesKHR.create(-1L);
 
@@ -349,7 +243,7 @@ public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysi
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -375,48 +269,32 @@ public class VkPhysicalDeviceLineRasterizationFeaturesKHR extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#rectangularLines} field. */
-        @NativeType("VkBool32")
-        public boolean rectangularLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nrectangularLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#bresenhamLines} field. */
-        @NativeType("VkBool32")
-        public boolean bresenhamLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nbresenhamLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#smoothLines} field. */
-        @NativeType("VkBool32")
-        public boolean smoothLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nsmoothLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledRectangularLines} field. */
-        @NativeType("VkBool32")
-        public boolean stippledRectangularLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledRectangularLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledBresenhamLines} field. */
-        @NativeType("VkBool32")
-        public boolean stippledBresenhamLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledBresenhamLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledSmoothLines} field. */
-        @NativeType("VkBool32")
-        public boolean stippledSmoothLines() { return VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledSmoothLines(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR} value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#sType} field. */
-        public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#rectangularLines} field. */
+        /** Sets the specified value to the {@code rectangularLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer rectangularLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nrectangularLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#bresenhamLines} field. */
+        /** Sets the specified value to the {@code bresenhamLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer bresenhamLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nbresenhamLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#smoothLines} field. */
+        /** Sets the specified value to the {@code smoothLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer smoothLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nsmoothLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledRectangularLines} field. */
+        /** Sets the specified value to the {@code stippledRectangularLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer stippledRectangularLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledRectangularLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledBresenhamLines} field. */
+        /** Sets the specified value to the {@code stippledBresenhamLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer stippledBresenhamLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledBresenhamLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationFeaturesKHR#stippledSmoothLines} field. */
+        /** Sets the specified value to the {@code stippledSmoothLines} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationFeaturesKHR.Buffer stippledSmoothLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLineRasterizationFeaturesKHR.nstippledSmoothLines(address(), value ? 1 : 0); return this; }
 
     }

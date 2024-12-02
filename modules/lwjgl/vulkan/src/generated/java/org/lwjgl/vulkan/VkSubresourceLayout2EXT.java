@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubresourceLayout2KHR}.
+ * See {@link VkSubresourceLayout2}.
  * 
  * <h3>Layout</h3>
  * 
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSubresourceLayout VkSubresourceLayout} subresourceLayout;
  * }</code></pre>
  */
-public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
+public class VkSubresourceLayout2EXT extends VkSubresourceLayout2 {
 
     protected VkSubresourceLayout2EXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -51,9 +51,9 @@ public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkSubresourceLayout2EXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
     @Override
-    public VkSubresourceLayout2EXT sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR); }
+    public VkSubresourceLayout2EXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkSubresourceLayout2EXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -194,7 +194,7 @@ public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
     // -----------------------------------
 
     /** An array of {@link VkSubresourceLayout2EXT} structs. */
-    public static class Buffer extends VkSubresourceLayout2KHR.Buffer {
+    public static class Buffer extends VkSubresourceLayout2.Buffer {
 
         private static final VkSubresourceLayout2EXT ELEMENT_FACTORY = VkSubresourceLayout2EXT.create(-1L);
 
@@ -237,9 +237,9 @@ public class VkSubresourceLayout2EXT extends VkSubresourceLayout2KHR {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkSubresourceLayout2EXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSubresourceLayout2EXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
         @Override
-        public VkSubresourceLayout2EXT.Buffer sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR); }
+        public VkSubresourceLayout2EXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkSubresourceLayout2EXT.Buffer pNext(@NativeType("void *") long value) { VkSubresourceLayout2EXT.npNext(address(), value); return this; }

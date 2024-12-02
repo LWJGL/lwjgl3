@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating support for local reads in dynamic render pass instances.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDynamicRenderingLocalRead#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #dynamicRenderingLocalRead};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 dynamicRenderingLocalRead;
  * }</code></pre>
  */
-public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct<VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        DYNAMICRENDERINGLOCALREAD;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        DYNAMICRENDERINGLOCALREAD = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends VkPhysicalDeviceDynamicRenderingLocalReadFeatures {
 
     protected VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,32 +45,24 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** specifies that the implementation supports local reads inside dynamic render pass instances using the {@link VK13#vkCmdBeginRendering CmdBeginRendering} command. */
-    @NativeType("VkBool32")
-    public boolean dynamicRenderingLocalRead() { return ndynamicRenderingLocalRead(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRDynamicRenderingLocalRead#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR sType$Default() { return sType(KHRDynamicRenderingLocalRead.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamicRenderingLocalRead} field. */
+    /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
+    @Override
     public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR set(
         int sType,
         long pNext,
@@ -243,24 +198,8 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #dynamicRenderingLocalRead}. */
-    public static int ndynamicRenderingLocalRead(long struct) { return memGetInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #dynamicRenderingLocalRead(boolean) dynamicRenderingLocalRead}. */
-    public static void ndynamicRenderingLocalRead(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.DYNAMICRENDERINGLOCALREAD, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceDynamicRenderingLocalReadFeatures.Buffer {
 
         private static final VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.create(-1L);
 
@@ -274,7 +213,7 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,23 +239,17 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#dynamicRenderingLocalRead} field. */
-        @NativeType("VkBool32")
-        public boolean dynamicRenderingLocalRead() { return VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.ndynamicRenderingLocalRead(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRDynamicRenderingLocalRead#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR} value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#sType} field. */
-        public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.Buffer sType$Default() { return sType(KHRDynamicRenderingLocalRead.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR#dynamicRenderingLocalRead} field. */
+        /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
+        @Override
         public VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.Buffer dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
 
     }

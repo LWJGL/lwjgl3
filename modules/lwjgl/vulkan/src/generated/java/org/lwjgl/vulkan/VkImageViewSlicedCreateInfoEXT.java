@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code image} <b>must</b> have been created with {@code imageType} equal to {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
  * <li>{@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
  * <li>The image view <b>must</b> reference exactly 1 mip level</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageSlicedViewOf3D">imageSlicedViewOf3D</a> feature <b>must</b> be enabled on the device</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageSlicedViewOf3D">imageSlicedViewOf3D</a> feature <b>must</b> be enabled</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

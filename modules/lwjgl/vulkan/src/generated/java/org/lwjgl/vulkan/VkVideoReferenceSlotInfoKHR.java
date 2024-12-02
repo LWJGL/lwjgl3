@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeAV1DpbSlotInfoKHR}, {@link VkVideoDecodeH264DpbSlotInfoKHR}, {@link VkVideoDecodeH265DpbSlotInfoKHR}, {@link VkVideoEncodeH264DpbSlotInfoKHR}, or {@link VkVideoEncodeH265DpbSlotInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeAV1DpbSlotInfoKHR}, {@link VkVideoDecodeH264DpbSlotInfoKHR}, {@link VkVideoDecodeH265DpbSlotInfoKHR}, {@link VkVideoEncodeAV1DpbSlotInfoKHR}, {@link VkVideoEncodeH264DpbSlotInfoKHR}, or {@link VkVideoEncodeH265DpbSlotInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code pPictureResource} is not {@code NULL}, {@code pPictureResource} <b>must</b> be a valid pointer to a valid {@link VkVideoPictureResourceInfoKHR} structure</li>
  * </ul>
@@ -120,6 +120,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     public VkVideoReferenceSlotInfoKHR pNext(VkVideoDecodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */
     public VkVideoReferenceSlotInfoKHR pNext(VkVideoDecodeH265DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeAV1DpbSlotInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoReferenceSlotInfoKHR pNext(VkVideoEncodeAV1DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264DpbSlotInfoKHR} value to the {@code pNext} chain. */
     public VkVideoReferenceSlotInfoKHR pNext(VkVideoEncodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */
@@ -353,6 +355,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
         public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoDecodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */
         public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoDecodeH265DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeAV1DpbSlotInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoEncodeAV1DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264DpbSlotInfoKHR} value to the {@code pNext} chain. */
         public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoEncodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */

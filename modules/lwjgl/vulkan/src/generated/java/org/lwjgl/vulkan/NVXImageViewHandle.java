@@ -21,7 +21,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>31</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Eric Werness <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_image_view_handle]%20@ewerness-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_image_view_handle%20extension*">ewerness-nv</a></li>
@@ -32,19 +32,20 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2020-04-03</dd>
+ * <dd>2024-11-04</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Eric Werness, NVIDIA</li>
  * <li>Jeff Bolz, NVIDIA</li>
  * <li>Daniel Koch, NVIDIA</li>
+ * <li>Liam Middlebrook, NVIDIA</li>
  * </ul></dd>
  * </dl>
  */
 public class NVXImageViewHandle {
 
     /** The extension specification version. */
-    public static final int VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION = 2;
+    public static final int VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME = "VK_NVX_image_view_handle";
@@ -107,6 +108,48 @@ public class NVXImageViewHandle {
     @NativeType("uint32_t")
     public static int vkGetImageViewHandleNVX(VkDevice device, @NativeType("VkImageViewHandleInfoNVX const *") VkImageViewHandleInfoNVX pInfo) {
         return nvkGetImageViewHandleNVX(device, pInfo.address());
+    }
+
+    // --- [ vkGetImageViewHandle64NVX ] ---
+
+    /** Unsafe version of: {@link #vkGetImageViewHandle64NVX GetImageViewHandle64NVX} */
+    public static long nvkGetImageViewHandle64NVX(VkDevice device, long pInfo) {
+        long __functionAddress = device.getCapabilities().vkGetImageViewHandle64NVX;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPJ(device.address(), pInfo, __functionAddress);
+    }
+
+    /**
+     * Get the 64-bit handle for an image view for a specific descriptor type.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To get the 64-bit handle for an image view, call:</p>
+     * 
+     * <pre><code>
+     * uint64_t vkGetImageViewHandle64NVX(
+     *     VkDevice                                    device,
+     *     const VkImageViewHandleInfoNVX*             pInfo);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code pInfo} <b>must</b> be a valid pointer to a valid {@link VkImageViewHandleInfoNVX} structure</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkImageViewHandleInfoNVX}</p>
+     *
+     * @param device the logical device that owns the image view.
+     * @param pInfo  describes the image view to query and type of handle.
+     */
+    @NativeType("uint64_t")
+    public static long vkGetImageViewHandle64NVX(VkDevice device, @NativeType("VkImageViewHandleInfoNVX const *") VkImageViewHandleInfoNVX pInfo) {
+        return nvkGetImageViewHandle64NVX(device, pInfo.address());
     }
 
     // --- [ vkGetImageViewAddressNVX ] ---

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A descriptor binding with type {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} has a descriptor size which is implied by the descriptor types included in the {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pDescriptorTypes} list. The descriptor size is equal to the maximum size of any descriptor type included in the {@code pDescriptorTypes} list.</p>
  * 
- * <p>As there is no way to request robust and non-robust descriptors separately, or specify robust/non-robust descriptors in the set layout, if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> is enabled then robust descriptors are always used.</p>
+ * <p>As there is no way to request robust and non-robust descriptors separately, or specify robust/non-robust descriptors in the set layout, if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled then robust descriptors are always used.</p>
  * 
  * <p>If the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
@@ -238,13 +238,13 @@ public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhys
     /** indicates the <b>required</b> alignment in bytes when setting offsets into the descriptor buffer. */
     @NativeType("VkDeviceSize")
     public long descriptorBufferOffsetAlignment() { return ndescriptorBufferOffsetAlignment(address()); }
-    /** indicates the maximum sum total number of descriptor buffers and embedded immutable sampler sets that <b>can</b> be bound. */
+    /** indicates the maximum number of descriptor buffer bindings. */
     @NativeType("uint32_t")
     public int maxDescriptorBufferBindings() { return nmaxDescriptorBufferBindings(address()); }
-    /** indicates the maximum number of resource descriptor buffers that <b>can</b> be bound. */
+    /** indicates the maximum number of descriptor buffer bindings with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT} that <b>can</b> be used. */
     @NativeType("uint32_t")
     public int maxResourceDescriptorBufferBindings() { return nmaxResourceDescriptorBufferBindings(address()); }
-    /** indicates the maximum number of sampler descriptor buffers that <b>can</b> be bound. */
+    /** indicates the maximum number of descriptor buffer bindings with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT} that <b>can</b> be used. */
     @NativeType("uint32_t")
     public int maxSamplerDescriptorBufferBindings() { return nmaxSamplerDescriptorBufferBindings(address()); }
     /** indicates the maximum number of embedded immutable sampler sets that <b>can</b> be bound. */

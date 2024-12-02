@@ -268,6 +268,8 @@ public class VKCapabilitiesInstance {
     public final boolean Vulkan12;
     /** When true, {@link VK13} is supported. */
     public final boolean Vulkan13;
+    /** When true, {@link VK14} is supported. */
+    public final boolean Vulkan14;
     /** When true, {@link EXTAcquireDrmDisplay} is supported. */
     public final boolean VK_EXT_acquire_drm_display;
     /** When true, {@link EXTAcquireXlibDisplay} is supported. */
@@ -334,6 +336,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_LUNARG_direct_driver_loading;
     /** When true, {@link MVKMacosSurface} is supported. */
     public final boolean VK_MVK_macos_surface;
+    /** When true, {@link NVDisplayStereo} is supported. */
+    public final boolean VK_NV_display_stereo;
     /** When true, {@link NVExternalMemoryCapabilities} is supported. */
     public final boolean VK_NV_external_memory_capabilities;
 
@@ -346,6 +350,7 @@ public class VKCapabilitiesInstance {
         Vulkan11 = check_VK11(provider, caps, ext);
         Vulkan12 = ext.contains("Vulkan12");
         Vulkan13 = check_VK13(provider, caps, ext);
+        Vulkan14 = ext.contains("Vulkan14");
         VK_EXT_acquire_drm_display = check_EXT_acquire_drm_display(provider, caps, ext);
         VK_EXT_acquire_xlib_display = check_EXT_acquire_xlib_display(provider, caps, ext);
         check_EXT_calibrated_timestamps(provider, caps, deviceExt);
@@ -395,6 +400,7 @@ public class VKCapabilitiesInstance {
         check_NV_cooperative_matrix(provider, caps, deviceExt);
         check_NV_cooperative_matrix2(provider, caps, deviceExt);
         check_NV_coverage_reduction_mode(provider, caps, deviceExt);
+        VK_NV_display_stereo = ext.contains("VK_NV_display_stereo");
         VK_NV_external_memory_capabilities = check_NV_external_memory_capabilities(provider, caps, ext);
         check_NV_optical_flow(provider, caps, deviceExt);
 

@@ -205,8 +205,8 @@ public final class NVRayTracingInvocationReorder {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV} indicates that the implementation is likely to not reorder at reorder calls.</li>
-     * <li>{@link #VK_RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV} indicates that the implementation is likely to reorder at reorder calls.</li>
+     * <li>{@link #VK_RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV} specifies that the implementation is likely to not reorder at reorder calls.</li>
+     * <li>{@link #VK_RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV} specifies that the implementation is likely to reorder at reorder calls.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

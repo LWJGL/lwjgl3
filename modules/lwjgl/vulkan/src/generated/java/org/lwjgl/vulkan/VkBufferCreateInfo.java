@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage} from that structure is used instead of {@code usage} from this structure.</p>
+ * <p>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo} structure, {@link VkBufferUsageFlags2CreateInfo}{@code ::usage} from that structure is used instead of {@code usage} from this structure.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfoKHR} structure, {@code usage} <b>must</b> not be 0</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
+ * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> not be 0</li>
  * <li>{@code size} <b>must</b> be greater than 0</li>
  * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
  * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
@@ -45,6 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code usage} includes {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR} or {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR}, and {@code flags} does not include {@link KHRVideoMaintenance1#VK_BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoProfileListInfoKHR} structure with {@code profileCount} greater than 0 and {@code pProfiles} including at least one {@link VkVideoProfileInfoKHR} structure with a {@code videoCodecOperation} member specifying a decode operation</li>
  * <li>If {@code usage} includes {@link KHRVideoEncodeQueue#VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR}, and {@code flags} does not include {@link KHRVideoMaintenance1#VK_BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoProfileListInfoKHR} structure with {@code profileCount} greater than 0 and {@code pProfiles} including at least one {@link VkVideoProfileInfoKHR} structure with a {@code videoCodecOperation} member specifying an encode operation</li>
  * <li>If {@code flags} includes {@link KHRVideoMaintenance1#VK_BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-videoMaintenance1">{@code videoMaintenance1}</a> <b>must</b> be enabled</li>
+ * <li>If the {@code pNext} chain includes a {@link VkVideoProfileListInfoKHR} structure and for any element of its {@code pProfiles} member {@code videoCodecOperation} is {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-videoEncodeAV1">{@code videoEncodeAV1}</a> feature <b>must</b> be enabled</li>
  * <li>{@code size} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMaintenance4Properties}{@code ::maxBufferSize}</li>
  * <li>If {@code usage} includes {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT}, creating this {@code VkBuffer} <b>must</b> not cause the total required space for all currently valid buffers using this flag on the device to exceed {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::samplerDescriptorBufferAddressSpaceSize} or {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::descriptorBufferAddressSpaceSize}</li>
  * <li>If {@code usage} includes {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT}, creating this {@code VkBuffer} <b>must</b> not cause the total required space for all currently valid buffers using this flag on the device to exceed {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::resourceDescriptorBufferAddressSpaceSize} or {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::descriptorBufferAddressSpaceSize}</li>
@@ -75,7 +76,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO STRUCTURE_TYPE_BUFFER_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferDeviceAddressCreateInfoEXT}, {@link VkBufferOpaqueCaptureAddressCreateInfo}, {@link VkBufferUsageFlags2CreateInfoKHR}, {@link VkDedicatedAllocationBufferCreateInfoNV}, {@link VkExternalMemoryBufferCreateInfo}, {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, or {@link VkVideoProfileListInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferDeviceAddressCreateInfoEXT}, {@link VkBufferOpaqueCaptureAddressCreateInfo}, {@link VkBufferUsageFlags2CreateInfo}, {@link VkDedicatedAllocationBufferCreateInfoNV}, {@link VkExternalMemoryBufferCreateInfo}, {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, or {@link VkVideoProfileListInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkBufferCreateFlagBits} values</li>
  * <li>{@code sharingMode} <b>must</b> be a valid {@code VkSharingMode} value</li>
@@ -202,6 +203,8 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
     public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} value to the {@code pNext} chain. */
     public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
     public VkBufferCreateInfo pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDedicatedAllocationBufferCreateInfoNV} value to the {@code pNext} chain. */
@@ -506,6 +509,8 @@ public class VkBufferCreateInfo extends Struct<VkBufferCreateInfo> implements Na
         public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} value to the {@code pNext} chain. */
         public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
         public VkBufferCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDedicatedAllocationBufferCreateInfoNV} value to the {@code pNext} chain. */

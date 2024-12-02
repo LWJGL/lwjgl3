@@ -16,57 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image subresource.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance5#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code imageSubresource} <b>must</b> be a valid {@link VkImageSubresource} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceImageSubresourceInfoKHR}, {@link VkImageSubresource}, {@link EXTHostImageCopy#vkGetImageSubresourceLayout2EXT GetImageSubresourceLayout2EXT}, {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}</p>
+ * See {@link VkImageSubresource2}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageSubresource2KHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkImageSubresource VkImageSubresource} {@link #imageSubresource};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkImageSubresource VkImageSubresource} imageSubresource;
  * }</code></pre>
  */
-public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        IMAGESUBRESOURCE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(VkImageSubresource.SIZEOF, VkImageSubresource.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        IMAGESUBRESOURCE = layout.offsetof(2);
-    }
+public class VkImageSubresource2KHR extends VkImageSubresource2 {
 
     protected VkImageSubresource2KHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -84,33 +45,27 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageSubresource2KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** a {@link VkImageSubresource} structure. */
-    public VkImageSubresource imageSubresource() { return nimageSubresource(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkImageSubresource2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR} value to the {@link #sType} field. */
-    public VkImageSubresource2KHR sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@code sType} field. */
+    @Override
+    public VkImageSubresource2KHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkImageSubresource2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresource} to the {@link #imageSubresource} field. */
+    /** Copies the specified {@link VkImageSubresource} to the {@code imageSubresource} field. */
+    @Override
     public VkImageSubresource2KHR imageSubresource(VkImageSubresource value) { nimageSubresource(address(), value); return this; }
-    /** Passes the {@link #imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkImageSubresource2KHR imageSubresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(imageSubresource()); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkImageSubresource2KHR set(
         int sType,
         long pNext,
@@ -246,24 +201,8 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageSubresource2KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkImageSubresource2KHR.PNEXT); }
-    /** Unsafe version of {@link #imageSubresource}. */
-    public static VkImageSubresource nimageSubresource(long struct) { return VkImageSubresource.create(struct + VkImageSubresource2KHR.IMAGESUBRESOURCE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageSubresource2KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkImageSubresource2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #imageSubresource(VkImageSubresource) imageSubresource}. */
-    public static void nimageSubresource(long struct, VkImageSubresource value) { memCopy(value.address(), struct + VkImageSubresource2KHR.IMAGESUBRESOURCE, VkImageSubresource.SIZEOF); }
-
-    // -----------------------------------
-
     /** An array of {@link VkImageSubresource2KHR} structs. */
-    public static class Buffer extends StructBuffer<VkImageSubresource2KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkImageSubresource2.Buffer {
 
         private static final VkImageSubresource2KHR ELEMENT_FACTORY = VkImageSubresource2KHR.create(-1L);
 
@@ -277,7 +216,7 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -303,24 +242,20 @@ public class VkImageSubresource2KHR extends Struct<VkImageSubresource2KHR> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageSubresource2KHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkImageSubresource2KHR.nsType(address()); }
-        /** @return the value of the {@link VkImageSubresource2KHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkImageSubresource2KHR.npNext(address()); }
-        /** @return a {@link VkImageSubresource} view of the {@link VkImageSubresource2KHR#imageSubresource} field. */
-        public VkImageSubresource imageSubresource() { return VkImageSubresource2KHR.nimageSubresource(address()); }
-
-        /** Sets the specified value to the {@link VkImageSubresource2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkImageSubresource2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageSubresource2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR} value to the {@link VkImageSubresource2KHR#sType} field. */
-        public VkImageSubresource2KHR.Buffer sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR); }
-        /** Sets the specified value to the {@link VkImageSubresource2KHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@code sType} field. */
+        @Override
+        public VkImageSubresource2KHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkImageSubresource2KHR.Buffer pNext(@NativeType("void *") long value) { VkImageSubresource2KHR.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresource} to the {@link VkImageSubresource2KHR#imageSubresource} field. */
+        /** Copies the specified {@link VkImageSubresource} to the {@code imageSubresource} field. */
+        @Override
         public VkImageSubresource2KHR.Buffer imageSubresource(VkImageSubresource value) { VkImageSubresource2KHR.nimageSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageSubresource2KHR#imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkImageSubresource2KHR.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(imageSubresource()); return this; }
 
     }

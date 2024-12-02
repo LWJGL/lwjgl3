@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation supports maintenance6 functionality.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMaintenance6FeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMaintenance6FeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceMaintenance6Features}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMaintenance6FeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #maintenance6};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 maintenance6;
  * }</code></pre>
  */
-public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDeviceMaintenance6FeaturesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MAINTENANCE6;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MAINTENANCE6 = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceMaintenance6FeaturesKHR extends VkPhysicalDeviceMaintenance6Features {
 
     protected VkPhysicalDeviceMaintenance6FeaturesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,42 +45,24 @@ public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMaintenance6FeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>{@link VK10#VK_NULL_HANDLE NULL_HANDLE} <b>can</b> be used when binding an index buffer</li>
-     * <li>{@link VkBindMemoryStatusKHR} <b>can</b> be included in the {@code pNext} chain of the {@link VkBindBufferMemoryInfo} and {@link VkBindImageMemoryInfo} structures, enabling applications to retrieve {@code VkResult} values for individual memory binding operations.</li>
-     * <li>{@link VkPhysicalDeviceMaintenance6PropertiesKHR}{@code ::blockTexelViewCompatibleMultipleLayers} property to indicate that the implementation supports creating image views with {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} where the {@code layerCount} member of {@code subresourceRange} is greater than 1.</li>
-     * <li>{@link VkPhysicalDeviceMaintenance6PropertiesKHR}{@code ::maxCombinedImageSamplerDescriptorCount} property which indicates the maximum descriptor size required for any <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation.</li>
-     * <li>A {@link VkPhysicalDeviceMaintenance6PropertiesKHR}{@code ::fragmentShadingRateClampCombinerInputs} property which indicates whether the implementation clamps the inputs to fragment shading rate combiner operations.</li>
-     * </ul>
-     */
-    @NativeType("VkBool32")
-    public boolean maintenance6() { return nmaintenance6(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance6FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceMaintenance6FeaturesKHR sType$Default() { return sType(KHRMaintenance6.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceMaintenance6FeaturesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceMaintenance6FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maintenance6} field. */
+    /** Sets the specified value to the {@code maintenance6} field. */
+    @Override
     public VkPhysicalDeviceMaintenance6FeaturesKHR maintenance6(@NativeType("VkBool32") boolean value) { nmaintenance6(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceMaintenance6FeaturesKHR set(
         int sType,
         long pNext,
@@ -253,24 +198,8 @@ public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDe
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #maintenance6}. */
-    public static int nmaintenance6(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #maintenance6(boolean) maintenance6}. */
-    public static void nmaintenance6(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6FeaturesKHR.MAINTENANCE6, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceMaintenance6FeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceMaintenance6FeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceMaintenance6Features.Buffer {
 
         private static final VkPhysicalDeviceMaintenance6FeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceMaintenance6FeaturesKHR.create(-1L);
 
@@ -284,7 +213,7 @@ public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDe
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -310,23 +239,17 @@ public class VkPhysicalDeviceMaintenance6FeaturesKHR extends Struct<VkPhysicalDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceMaintenance6FeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceMaintenance6FeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#maintenance6} field. */
-        @NativeType("VkBool32")
-        public boolean maintenance6() { return VkPhysicalDeviceMaintenance6FeaturesKHR.nmaintenance6(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceMaintenance6FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance6FeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR} value to the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#sType} field. */
-        public VkPhysicalDeviceMaintenance6FeaturesKHR.Buffer sType$Default() { return sType(KHRMaintenance6.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceMaintenance6FeaturesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceMaintenance6FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance6FeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance6FeaturesKHR#maintenance6} field. */
+        /** Sets the specified value to the {@code maintenance6} field. */
+        @Override
         public VkPhysicalDeviceMaintenance6FeaturesKHR.Buffer maintenance6(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMaintenance6FeaturesKHR.nmaintenance6(address(), value ? 1 : 0); return this; }
 
     }

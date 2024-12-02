@@ -16,72 +16,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing rendering area granularity query info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance5#VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRMaintenance5#vkGetRenderingAreaGranularityKHR GetRenderingAreaGranularityKHR}</p>
+ * See {@link VkRenderingAreaInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderingAreaInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #viewMask};
- *     uint32_t {@link #colorAttachmentCount};
- *     VkFormat const * {@link #pColorAttachmentFormats};
- *     VkFormat {@link #depthAttachmentFormat};
- *     VkFormat {@link #stencilAttachmentFormat};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t viewMask;
+ *     uint32_t colorAttachmentCount;
+ *     VkFormat const * pColorAttachmentFormats;
+ *     VkFormat depthAttachmentFormat;
+ *     VkFormat stencilAttachmentFormat;
  * }</code></pre>
  */
-public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        VIEWMASK,
-        COLORATTACHMENTCOUNT,
-        PCOLORATTACHMENTFORMATS,
-        DEPTHATTACHMENTFORMAT,
-        STENCILATTACHMENTFORMAT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        VIEWMASK = layout.offsetof(2);
-        COLORATTACHMENTCOUNT = layout.offsetof(3);
-        PCOLORATTACHMENTFORMATS = layout.offsetof(4);
-        DEPTHATTACHMENTFORMAT = layout.offsetof(5);
-        STENCILATTACHMENTFORMAT = layout.offsetof(6);
-    }
+public class VkRenderingAreaInfoKHR extends VkRenderingAreaInfo {
 
     protected VkRenderingAreaInfoKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -99,52 +49,36 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRenderingAreaInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the viewMask used for rendering. */
-    @NativeType("uint32_t")
-    public int viewMask() { return nviewMask(address()); }
-    /** the number of entries in {@code pColorAttachmentFormats} */
-    @NativeType("uint32_t")
-    public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** a pointer to an array of {@code VkFormat} values defining the format of color attachments used in the render pass instance. */
-    @NativeType("VkFormat const *")
-    public @Nullable IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
-    /** a {@code VkFormat} value defining the format of the depth attachment used in the render pass instance. */
-    @NativeType("VkFormat")
-    public int depthAttachmentFormat() { return ndepthAttachmentFormat(address()); }
-    /** a {@code VkFormat} value defining the format of the stencil attachment used in the render pass instance. */
-    @NativeType("VkFormat")
-    public int stencilAttachmentFormat() { return nstencilAttachmentFormat(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderingAreaInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR} value to the {@link #sType} field. */
-    public VkRenderingAreaInfoKHR sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_AREA_INFO STRUCTURE_TYPE_RENDERING_AREA_INFO} value to the {@code sType} field. */
+    @Override
+    public VkRenderingAreaInfoKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_RENDERING_AREA_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkRenderingAreaInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewMask} field. */
+    /** Sets the specified value to the {@code viewMask} field. */
+    @Override
     public VkRenderingAreaInfoKHR viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #colorAttachmentCount} field. */
+    /** Sets the specified value to the {@code colorAttachmentCount} field. */
+    @Override
     public VkRenderingAreaInfoKHR colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentFormats} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
+    @Override
     public VkRenderingAreaInfoKHR pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthAttachmentFormat} field. */
+    /** Sets the specified value to the {@code depthAttachmentFormat} field. */
+    @Override
     public VkRenderingAreaInfoKHR depthAttachmentFormat(@NativeType("VkFormat") int value) { ndepthAttachmentFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #stencilAttachmentFormat} field. */
+    /** Sets the specified value to the {@code stencilAttachmentFormat} field. */
+    @Override
     public VkRenderingAreaInfoKHR stencilAttachmentFormat(@NativeType("VkFormat") int value) { nstencilAttachmentFormat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkRenderingAreaInfoKHR set(
         int sType,
         long pNext,
@@ -288,40 +222,8 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkRenderingAreaInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.VIEWMASK); }
-    /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT); }
-    /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
-    public static @Nullable IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
-    /** Unsafe version of {@link #depthAttachmentFormat}. */
-    public static int ndepthAttachmentFormat(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT); }
-    /** Unsafe version of {@link #stencilAttachmentFormat}. */
-    public static int nstencilAttachmentFormat(long struct) { return memGetInt(struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingAreaInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.VIEWMASK, value); }
-    /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.COLORATTACHMENTCOUNT, value); }
-    /** Unsafe version of {@link #pColorAttachmentFormats(IntBuffer) pColorAttachmentFormats}. */
-    public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkRenderingAreaInfoKHR.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
-    /** Unsafe version of {@link #depthAttachmentFormat(int) depthAttachmentFormat}. */
-    public static void ndepthAttachmentFormat(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.DEPTHATTACHMENTFORMAT, value); }
-    /** Unsafe version of {@link #stencilAttachmentFormat(int) stencilAttachmentFormat}. */
-    public static void nstencilAttachmentFormat(long struct, int value) { memPutInt(struct + VkRenderingAreaInfoKHR.STENCILATTACHMENTFORMAT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkRenderingAreaInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkRenderingAreaInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkRenderingAreaInfo.Buffer {
 
         private static final VkRenderingAreaInfoKHR ELEMENT_FACTORY = VkRenderingAreaInfoKHR.create(-1L);
 
@@ -335,7 +237,7 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -361,43 +263,29 @@ public class VkRenderingAreaInfoKHR extends Struct<VkRenderingAreaInfoKHR> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkRenderingAreaInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkRenderingAreaInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#viewMask} field. */
-        @NativeType("uint32_t")
-        public int viewMask() { return VkRenderingAreaInfoKHR.nviewMask(address()); }
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#colorAttachmentCount} field. */
-        @NativeType("uint32_t")
-        public int colorAttachmentCount() { return VkRenderingAreaInfoKHR.ncolorAttachmentCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingAreaInfoKHR#pColorAttachmentFormats} field. */
-        @NativeType("VkFormat const *")
-        public @Nullable IntBuffer pColorAttachmentFormats() { return VkRenderingAreaInfoKHR.npColorAttachmentFormats(address()); }
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#depthAttachmentFormat} field. */
-        @NativeType("VkFormat")
-        public int depthAttachmentFormat() { return VkRenderingAreaInfoKHR.ndepthAttachmentFormat(address()); }
-        /** @return the value of the {@link VkRenderingAreaInfoKHR#stencilAttachmentFormat} field. */
-        @NativeType("VkFormat")
-        public int stencilAttachmentFormat() { return VkRenderingAreaInfoKHR.nstencilAttachmentFormat(address()); }
-
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingAreaInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance5#VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR} value to the {@link VkRenderingAreaInfoKHR#sType} field. */
-        public VkRenderingAreaInfoKHR.Buffer sType$Default() { return sType(KHRMaintenance5.VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR); }
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_AREA_INFO STRUCTURE_TYPE_RENDERING_AREA_INFO} value to the {@code sType} field. */
+        @Override
+        public VkRenderingAreaInfoKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_RENDERING_AREA_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderingAreaInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#viewMask} field. */
+        /** Sets the specified value to the {@code viewMask} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer viewMask(@NativeType("uint32_t") int value) { VkRenderingAreaInfoKHR.nviewMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#colorAttachmentCount} field. */
+        /** Sets the specified value to the {@code colorAttachmentCount} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkRenderingAreaInfoKHR.ncolorAttachmentCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkRenderingAreaInfoKHR#pColorAttachmentFormats} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkRenderingAreaInfoKHR.npColorAttachmentFormats(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#depthAttachmentFormat} field. */
+        /** Sets the specified value to the {@code depthAttachmentFormat} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer depthAttachmentFormat(@NativeType("VkFormat") int value) { VkRenderingAreaInfoKHR.ndepthAttachmentFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingAreaInfoKHR#stencilAttachmentFormat} field. */
+        /** Sets the specified value to the {@code stencilAttachmentFormat} field. */
+        @Override
         public VkRenderingAreaInfoKHR.Buffer stencilAttachmentFormat(@NativeType("VkFormat") int value) { VkRenderingAreaInfoKHR.nstencilAttachmentFormat(address(), value); return this; }
 
     }

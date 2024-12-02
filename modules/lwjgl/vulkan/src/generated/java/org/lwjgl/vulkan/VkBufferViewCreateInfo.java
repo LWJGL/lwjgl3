@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The buffer view has a <em>buffer view usage</em> identifying which descriptor types can be created from it. This usage <b>can</b> be defined by including the {@link VkBufferUsageFlags2CreateInfoKHR} structure in the {@code pNext} chain, and specifying the {@code usage} value there. If this structure is not included, it is equal to the {@link VkBufferCreateInfo}{@code ::usage} value used to create {@code buffer}.</p>
+ * <p>The buffer view has a <em>buffer view usage</em> identifying which descriptor types can be created from it. This usage <b>can</b> be defined by including the {@link VkBufferUsageFlags2CreateInfo} structure in the {@code pNext} chain, and specifying the {@code usage} value there. If this structure is not included, it is equal to the {@link VkBufferCreateInfo}{@code ::usage} value used to create {@code buffer}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -39,15 +39,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-texelBufferAlignment">{@code texelBufferAlignment}</a> feature is enabled and if {@code buffer} was created with {@code usage} containing {@link VK10#VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT}, {@code offset} <b>must</b> be a multiple of the lesser of {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::storageTexelBufferOffsetAlignmentBytes} or, if {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::storageTexelBufferOffsetSingleTexelAlignment} is {@link VK10#VK_TRUE TRUE}, the size of a texel of the requested {@code format}. If the size of a texel is a multiple of three bytes, then the size of a single component of {@code format} is used instead</li>
  * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-texelBufferAlignment">{@code texelBufferAlignment}</a> feature is enabled and if {@code buffer} was created with {@code usage} containing {@link VK10#VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT}, {@code offset} <b>must</b> be a multiple of the lesser of {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::uniformTexelBufferOffsetAlignmentBytes} or, if {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::uniformTexelBufferOffsetSingleTexelAlignment} is {@link VK10#VK_TRUE TRUE}, the size of a texel of the requested {@code format}. If the size of a texel is a multiple of three bytes, then the size of a single component of {@code format} is used instead</li>
  * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR}, its {@code usage} <b>must</b> not contain any other bit than {@link KHRMaintenance5#VK_BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR} or {@link KHRMaintenance5#VK_BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT_KHR BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT_KHR}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfoKHR}, its {@code usage} <b>must</b> be a subset of the {@link VkBufferCreateInfo}{@code ::usage} specified or {@link VkBufferUsageFlags2CreateInfoKHR}{@code ::usage} from {@link VkBufferCreateInfo}{@code ::pNext} when creating {@code buffer}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo}, its {@code usage} <b>must</b> not contain any other bit than {@link VK14#VK_BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT} or {@link VK14#VK_BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo}, its {@code usage} <b>must</b> be a subset of the {@link VkBufferCreateInfo}{@code ::usage} specified or {@link VkBufferUsageFlags2CreateInfo}{@code ::usage} from {@link VkBufferCreateInfo}{@code ::pNext} when creating {@code buffer}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfoKHR} or {@link VkExportMetalObjectCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfo} or {@link VkExportMetalObjectCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -162,6 +162,8 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
     public VkBufferViewCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+    public VkBufferViewCreateInfo pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
     public VkBufferViewCreateInfo pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
@@ -441,6 +443,8 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
         public VkBufferViewCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
         /** Sets the specified value to the {@link VkBufferViewCreateInfo#pNext} field. */
         public VkBufferViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferViewCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
+        public VkBufferViewCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBufferUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
         public VkBufferViewCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */

@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for specifying protected access on individual pipelines.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPipelineProtectedAccess#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDevicePipelineProtectedAccessFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePipelineProtectedAccessFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #pipelineProtectedAccess};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 pipelineProtectedAccess;
  * }</code></pre>
  */
-public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<VkPhysicalDevicePipelineProtectedAccessFeaturesEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PIPELINEPROTECTEDACCESS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PIPELINEPROTECTEDACCESS = layout.offsetof(2);
-    }
+public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends VkPhysicalDevicePipelineProtectedAccessFeatures {
 
     protected VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,32 +45,24 @@ public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<V
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports specifying protected access on individual pipelines. */
-    @NativeType("VkBool32")
-    public boolean pipelineProtectedAccess() { return npipelineProtectedAccess(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPipelineProtectedAccess#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT sType$Default() { return sType(EXTPipelineProtectedAccess.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineProtectedAccess} field. */
+    /** Sets the specified value to the {@code pipelineProtectedAccess} field. */
+    @Override
     public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT pipelineProtectedAccess(@NativeType("VkBool32") boolean value) { npipelineProtectedAccess(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT set(
         int sType,
         long pNext,
@@ -243,24 +198,8 @@ public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<V
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #pipelineProtectedAccess}. */
-    public static int npipelineProtectedAccess(long struct) { return memGetInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #pipelineProtectedAccess(boolean) pipelineProtectedAccess}. */
-    public static void npipelineProtectedAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.PIPELINEPROTECTEDACCESS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDevicePipelineProtectedAccessFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDevicePipelineProtectedAccessFeatures.Buffer {
 
         private static final VkPhysicalDevicePipelineProtectedAccessFeaturesEXT ELEMENT_FACTORY = VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.create(-1L);
 
@@ -274,7 +213,7 @@ public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<V
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,23 +239,17 @@ public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#pipelineProtectedAccess} field. */
-        @NativeType("VkBool32")
-        public boolean pipelineProtectedAccess() { return VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.npipelineProtectedAccess(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPipelineProtectedAccess#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT} value to the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#sType} field. */
-        public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.Buffer sType$Default() { return sType(EXTPipelineProtectedAccess.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineProtectedAccessFeaturesEXT#pipelineProtectedAccess} field. */
+        /** Sets the specified value to the {@code pipelineProtectedAccess} field. */
+        @Override
         public VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.Buffer pipelineProtectedAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.npipelineProtectedAccess(address(), value ? 1 : 0); return this; }
 
     }

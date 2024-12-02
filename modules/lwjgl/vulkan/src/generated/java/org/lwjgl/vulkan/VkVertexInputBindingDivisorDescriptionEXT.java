@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkVertexInputBindingDivisorDescriptionKHR}.
+ * See {@link VkVertexInputBindingDivisorDescription}.
  * 
  * <h3>Layout</h3>
  * 
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t divisor;
  * }</code></pre>
  */
-public class VkVertexInputBindingDivisorDescriptionEXT extends VkVertexInputBindingDivisorDescriptionKHR {
+public class VkVertexInputBindingDivisorDescriptionEXT extends VkVertexInputBindingDivisorDescription {
 
     protected VkVertexInputBindingDivisorDescriptionEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -209,7 +209,7 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends VkVertexInputBind
     // -----------------------------------
 
     /** An array of {@link VkVertexInputBindingDivisorDescriptionEXT} structs. */
-    public static class Buffer extends VkVertexInputBindingDivisorDescriptionKHR.Buffer {
+    public static class Buffer extends VkVertexInputBindingDivisorDescription.Buffer {
 
         private static final VkVertexInputBindingDivisorDescriptionEXT ELEMENT_FACTORY = VkVertexInputBindingDivisorDescriptionEXT.create(-1L);
 

@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBindImageMemoryDeviceGroupInfo}, {@link VkBindImageMemorySwapchainInfoKHR}, {@link VkBindImagePlaneMemoryInfo}, or {@link VkBindMemoryStatusKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBindImageMemoryDeviceGroupInfo}, {@link VkBindImageMemorySwapchainInfoKHR}, {@link VkBindImagePlaneMemoryInfo}, or {@link VkBindMemoryStatus}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
  * <li>Both of {@code image}, and {@code memory} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -167,6 +167,8 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
     public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBindImagePlaneMemoryInfoKHR} value to the {@code pNext} chain. */
     public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkBindMemoryStatus} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
     public VkBindImageMemoryInfo pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #image} field. */
@@ -432,6 +434,8 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
         public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBindImagePlaneMemoryInfoKHR} value to the {@code pNext} chain. */
         public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkBindMemoryStatus} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
         public VkBindImageMemoryInfo.Buffer pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkBindImageMemoryInfo#image} field. */

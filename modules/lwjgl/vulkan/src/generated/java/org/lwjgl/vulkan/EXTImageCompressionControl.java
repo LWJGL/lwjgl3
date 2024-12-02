@@ -195,14 +195,14 @@ public class EXTImageCompressionControl {
     }
 
     /**
-     * See {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}.
+     * See {@link VK14#vkGetImageSubresourceLayout2 GetImageSubresourceLayout2}.
      *
      * @param device       the logical device that owns the image.
      * @param image        the image whose layout is being queried.
-     * @param pSubresource a pointer to a {@link VkImageSubresource2KHR} structure selecting a specific image for the image subresource.
-     * @param pLayout      a pointer to a {@link VkSubresourceLayout2KHR} structure in which the layout is returned.
+     * @param pSubresource a pointer to a {@link VkImageSubresource2} structure selecting a specific image for the image subresource.
+     * @param pLayout      a pointer to a {@link VkSubresourceLayout2} structure in which the layout is returned.
      */
-    public static void vkGetImageSubresourceLayout2EXT(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource2KHR const *") VkImageSubresource2KHR pSubresource, @NativeType("VkSubresourceLayout2KHR *") VkSubresourceLayout2KHR pLayout) {
+    public static void vkGetImageSubresourceLayout2EXT(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource2 const *") VkImageSubresource2 pSubresource, @NativeType("VkSubresourceLayout2 *") VkSubresourceLayout2 pLayout) {
         nvkGetImageSubresourceLayout2EXT(device, image, pSubresource.address(), pLayout.address());
     }
 

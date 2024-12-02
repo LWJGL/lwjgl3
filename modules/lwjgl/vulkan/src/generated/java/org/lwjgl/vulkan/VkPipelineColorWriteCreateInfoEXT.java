@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When this structure is included in the {@code pNext} chain of {@link VkPipelineColorBlendStateCreateInfo}, it defines per-attachment color write state. If this structure is not included in the {@code pNext} chain, it is equivalent to specifying this structure with {@code attachmentCount} equal to the {@code attachmentCount} member of {@link VkPipelineColorBlendStateCreateInfo}, and {@code pColorWriteEnables} pointing to an array of as many {@link VK10#VK_TRUE TRUE} values.</p>
  * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-colorWriteEnable">{@code colorWriteEnable}</a> feature is not enabled on the device, all {@code VkBool32} elements in the {@code pColorWriteEnables} array <b>must</b> be {@link VK10#VK_TRUE TRUE}.</p>
+ * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-colorWriteEnable">{@code colorWriteEnable}</a> feature is not enabled, all {@code VkBool32} elements in the {@code pColorWriteEnables} array <b>must</b> be {@link VK10#VK_TRUE TRUE}.</p>
  * 
  * <p>Color Write Enable interacts with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#framebuffer-color-write-mask">Color Write Mask</a> as follows:</p>
  * 

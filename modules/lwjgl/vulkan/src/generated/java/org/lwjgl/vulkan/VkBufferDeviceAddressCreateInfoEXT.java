@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If this structure is not present, it is as if {@code deviceAddress} is zero.</p>
  * 
- * <p>Apps <b>should</b> avoid creating buffers with app-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link EXTBufferDeviceAddress#VK_ERROR_INVALID_DEVICE_ADDRESS_EXT ERROR_INVALID_DEVICE_ADDRESS_EXT} errors.</p>
+ * <p>Applications <b>should</b> avoid creating buffers with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link EXTBufferDeviceAddress#VK_ERROR_INVALID_DEVICE_ADDRESS_EXT ERROR_INVALID_DEVICE_ADDRESS_EXT} errors.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

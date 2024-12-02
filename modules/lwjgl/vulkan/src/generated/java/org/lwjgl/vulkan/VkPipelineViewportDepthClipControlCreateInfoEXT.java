@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-depthClipControl">{@code depthClipControl}</a> is not enabled, {@code negativeOneToOne} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-depthClipControl">{@code depthClipControl}</a> feature is not enabled, {@code negativeOneToOne} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

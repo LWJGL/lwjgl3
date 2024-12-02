@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugUtilsObjectNameInfoEXT}, {@link VkPipelineRobustnessCreateInfoEXT}, {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT}, {@link VkPipelineShaderStageNodeCreateInfoAMDX}, {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}, {@link VkShaderModuleCreateInfo}, or {@link VkShaderModuleValidationCacheCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugUtilsObjectNameInfoEXT}, {@link VkPipelineRobustnessCreateInfo}, {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT}, {@link VkPipelineShaderStageNodeCreateInfoAMDX}, {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}, {@link VkShaderModuleCreateInfo}, or {@link VkShaderModuleValidationCacheCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineShaderStageCreateFlagBits} values</li>
  * <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
@@ -205,6 +205,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     public VkPipelineShaderStageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineRobustnessCreateInfo} value to the {@code pNext} chain. */
+    public VkPipelineShaderStageCreateInfo pNext(VkPipelineRobustnessCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRobustnessCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} value to the {@code pNext} chain. */
@@ -519,6 +521,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
         public VkPipelineShaderStageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineRobustnessCreateInfo} value to the {@code pNext} chain. */
+        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineRobustnessCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRobustnessCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} value to the {@code pNext} chain. */

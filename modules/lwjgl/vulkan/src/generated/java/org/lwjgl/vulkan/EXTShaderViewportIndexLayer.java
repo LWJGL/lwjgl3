@@ -56,8 +56,8 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shader_viewport_layer_array.txt">{@code GL_ARB_shader_viewport_layer_array}</a>, <a href="https://registry.khronos.org/OpenGL/extensions/AMD/AMD_vertex_shader_layer.txt">{@code GL_AMD_vertex_shader_layer}</a>, <a href="https://registry.khronos.org/OpenGL/extensions/AMD/AMD_vertex_shader_viewport_index.txt">{@code GL_AMD_vertex_shader_viewport_index}</a>, and <a href="https://registry.khronos.org/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a></li>
- * <li>This extension requires the {@code multiViewport} feature.</li>
- * <li>This extension interacts with the {@code tessellationShader} feature.</li>
+ * <li>This extension requires the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-multiViewport">{@code multiViewport}</a> feature.</li>
+ * <li>This extension interacts with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

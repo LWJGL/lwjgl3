@@ -121,7 +121,7 @@ public class VkExportMetalTextureInfoEXT extends Struct<VkExportMetalTextureInfo
     /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a {@code VkBufferView}. */
     @NativeType("VkBufferView")
     public long bufferView() { return nbufferView(address()); }
-    /** indicates the plane of a multi-planar {@code VkImage} or {@code VkImageView}. */
+    /** specifies the plane of a multi-planar {@code VkImage} or {@code VkImageView}. */
     @NativeType("VkImageAspectFlagBits")
     public int plane() { return nplane(address()); }
     /** the Metal {@code id&lt;MTLTexture&gt;} object underlying the {@code VkImage}, {@code VkImageView}, or {@code VkBufferView} object in {@code image}, {@code imageView}, or {@code bufferView}, respectively, at the plane indicated in {@code aspectMask}. The implementation will return the {@code MTLTexture} in this member, or it will return {@code NULL} if no {@code MTLTexture} could be found underlying the {@code VkImage}, {@code VkImageView}, or {@code VkBufferView} object, at the plane indicated in {@code aspectMask}. */

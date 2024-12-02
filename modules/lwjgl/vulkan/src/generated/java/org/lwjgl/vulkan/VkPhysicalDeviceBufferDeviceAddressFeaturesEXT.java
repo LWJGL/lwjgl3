@@ -113,7 +113,7 @@ public class VkPhysicalDeviceBufferDeviceAddressFeaturesEXT extends Struct<VkPhy
     /** indicates that the implementation supports saving and reusing buffer addresses, e.g. for trace capture and replay. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressCaptureReplay() { return nbufferDeviceAddressCaptureReplay(address()) != 0; }
-    /** indicates that the implementation supports the {@code bufferDeviceAddress} feature for logical devices created with multiple physical devices. If this feature is not supported, buffer addresses <b>must</b> not be queried on a logical device created with more than one physical device. */
+    /** indicates that the implementation supports the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressEXT">{@code bufferDeviceAddress}</a> feature for logical devices created with multiple physical devices. If this feature is not supported, buffer addresses <b>must</b> not be queried on a logical device created with more than one physical device. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressMultiDevice() { return nbufferDeviceAddressMultiDevice(address()) != 0; }
 

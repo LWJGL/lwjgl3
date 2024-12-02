@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRMaintenance6 VK_KHR_maintenance6}</dd>
+ * <dd>{@link KHRMaintenance6 VK_KHR_maintenance6} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.4">Version 1.4</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_per_stage_descriptor_set]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_per_stage_descriptor_set%20extension*">pdaniell-nv</a></li>

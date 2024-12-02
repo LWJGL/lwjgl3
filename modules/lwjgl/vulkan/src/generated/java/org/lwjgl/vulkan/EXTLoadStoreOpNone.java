@@ -25,7 +25,12 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to {@link KHRLoadStoreOpNone VK_KHR_load_store_op_none} extension</li>
+ * <li><em>Promoted</em> to {@link KHRLoadStoreOpNone VK_KHR_load_store_op_none} extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

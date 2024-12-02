@@ -31,6 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a></li>
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
  * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-rate-control">AV1 Encode Rate Control</a></li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
@@ -44,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264RateControlLayerInfoKHR} or {@link VkVideoEncodeH265RateControlLayerInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeAV1RateControlLayerInfoKHR}, {@link VkVideoEncodeH264RateControlLayerInfoKHR}, or {@link VkVideoEncodeH265RateControlLayerInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -149,6 +150,8 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     public VkVideoEncodeRateControlLayerInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeRateControlLayerInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoEncodeAV1RateControlLayerInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeRateControlLayerInfoKHR pNext(VkVideoEncodeAV1RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264RateControlLayerInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeRateControlLayerInfoKHR pNext(VkVideoEncodeH264RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoKHR} value to the {@code pNext} chain. */
@@ -398,6 +401,8 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#pNext} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeRateControlLayerInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoEncodeAV1RateControlLayerInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(VkVideoEncodeAV1RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264RateControlLayerInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(VkVideoEncodeH264RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoKHR} value to the {@code pNext} chain. */

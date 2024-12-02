@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineVertexInputDivisorStateCreateInfoKHR}.
+ * See {@link VkPipelineVertexInputDivisorStateCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -26,10 +26,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t vertexBindingDivisorCount;
- *     {@link VkVertexInputBindingDivisorDescriptionKHR VkVertexInputBindingDivisorDescriptionKHR} const * pVertexBindingDivisors;
+ *     {@link VkVertexInputBindingDivisorDescription VkVertexInputBindingDivisorDescription} const * pVertexBindingDivisors;
  * }</code></pre>
  */
-public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends VkPipelineVertexInputDivisorStateCreateInfoKHR {
+public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends VkPipelineVertexInputDivisorStateCreateInfo {
 
     protected VkPipelineVertexInputDivisorStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -53,22 +53,22 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends VkPipelineVe
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPipelineVertexInputDivisorStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO} value to the {@code sType} field. */
     @Override
-    public VkPipelineVertexInputDivisorStateCreateInfoEXT sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR); }
+    public VkPipelineVertexInputDivisorStateCreateInfoEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPipelineVertexInputDivisorStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionKHR.Buffer} to the {@code pVertexBindingDivisors} field. */
+    /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescription.Buffer} to the {@code pVertexBindingDivisors} field. */
     @Override
-    public VkPipelineVertexInputDivisorStateCreateInfoEXT pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescriptionKHR const *") VkVertexInputBindingDivisorDescriptionKHR.Buffer value) { npVertexBindingDivisors(address(), value); return this; }
+    public VkPipelineVertexInputDivisorStateCreateInfoEXT pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescription const *") VkVertexInputBindingDivisorDescription.Buffer value) { npVertexBindingDivisors(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkPipelineVertexInputDivisorStateCreateInfoEXT set(
         int sType,
         long pNext,
-        VkVertexInputBindingDivisorDescriptionKHR.Buffer pVertexBindingDivisors
+        VkVertexInputBindingDivisorDescription.Buffer pVertexBindingDivisors
     ) {
         sType(sType);
         pNext(pNext);
@@ -220,7 +220,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends VkPipelineVe
     // -----------------------------------
 
     /** An array of {@link VkPipelineVertexInputDivisorStateCreateInfoEXT} structs. */
-    public static class Buffer extends VkPipelineVertexInputDivisorStateCreateInfoKHR.Buffer {
+    public static class Buffer extends VkPipelineVertexInputDivisorStateCreateInfo.Buffer {
 
         private static final VkPipelineVertexInputDivisorStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineVertexInputDivisorStateCreateInfoEXT.create(-1L);
 
@@ -263,15 +263,15 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends VkPipelineVe
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVertexAttributeDivisor#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO} value to the {@code sType} field. */
         @Override
-        public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer sType$Default() { return sType(KHRVertexAttributeDivisor.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR); }
+        public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionKHR.Buffer} to the {@code pVertexBindingDivisors} field. */
+        /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescription.Buffer} to the {@code pVertexBindingDivisors} field. */
         @Override
-        public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescriptionKHR const *") VkVertexInputBindingDivisorDescriptionKHR.Buffer value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.npVertexBindingDivisors(address(), value); return this; }
+        public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescription const *") VkVertexInputBindingDivisorDescription.Buffer value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.npVertexBindingDivisors(address(), value); return this; }
 
     }
 

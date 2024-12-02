@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
- * <p>This extension has been partially promoted. All dynamic state enumerants and commands in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The feature structure is not promoted. Extension interfaces that were promoted remain available as aliases of the core functionality.</p>
+ * <p>All dynamic state enumerants and commands in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The feature structure is not promoted. Extension interfaces that were promoted remain available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

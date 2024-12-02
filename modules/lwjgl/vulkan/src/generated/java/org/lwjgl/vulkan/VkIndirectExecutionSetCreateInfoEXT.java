@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectShaderObjectCount} is zero or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> is not enabled {@code type} <b>must</b> not be {@link EXTDeviceGeneratedCommands#VK_INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT}</li>
+ * <li>If {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectShaderObjectCount} is zero or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is not enabled {@code type} <b>must</b> not be {@link EXTDeviceGeneratedCommands#VK_INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

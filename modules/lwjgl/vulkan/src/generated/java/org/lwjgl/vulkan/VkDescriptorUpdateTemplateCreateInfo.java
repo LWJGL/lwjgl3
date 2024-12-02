@@ -23,9 +23,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code templateType} is {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET}, {@code descriptorSetLayout} <b>must</b> be a valid {@code VkDescriptorSetLayout} handle</li>
- * <li>If {@code templateType} is {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}, {@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
- * <li>If {@code templateType} is {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>If {@code templateType} is {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}, {@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR}</li>
+ * <li>If {@code templateType} is {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS}, {@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
+ * <li>If {@code templateType} is {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS}, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+ * <li>If {@code templateType} is {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS}, {@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with {@link VK14#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT}</li>
  * <li>If {@code templateType} is {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET}, {@code descriptorSetLayout} <b>must</b> not contain a binding with type {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
  * </ul>
  * 
@@ -148,19 +148,19 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct<VkDescriptorUpd
     /** a pointer to an array of {@link VkDescriptorUpdateTemplateEntry} structures describing the descriptors to be updated by the descriptor update template. */
     @NativeType("VkDescriptorUpdateTemplateEntry const *")
     public VkDescriptorUpdateTemplateEntry.Buffer pDescriptorUpdateEntries() { return npDescriptorUpdateEntries(address()); }
-    /** Specifies the type of the descriptor update template. If set to {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET} it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number. */
+    /** Specifies the type of the descriptor update template. If set to {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET} it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS} it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number. */
     @NativeType("VkDescriptorUpdateTemplateType")
     public int templateType() { return ntemplateType(address()); }
     /** the descriptor set layout used to build the descriptor update template. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with a layout that matches (is the same as, or defined identically to) this layout. This parameter is ignored if {@code templateType} is not {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET}. */
     @NativeType("VkDescriptorSetLayout")
     public long descriptorSetLayout() { return ndescriptorSetLayout(address()); }
-    /** a {@code VkPipelineBindPoint} indicating the type of the pipeline that will use the descriptors. This parameter is ignored if {@code templateType} is not {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
+    /** a {@code VkPipelineBindPoint} indicating the type of the pipeline that will use the descriptors. This parameter is ignored if {@code templateType} is not {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS} */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** a {@code VkPipelineLayout} object used to program the bindings. This parameter is ignored if {@code templateType} is not {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
+    /** a {@code VkPipelineLayout} object used to program the bindings. This parameter is ignored if {@code templateType} is not {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS} */
     @NativeType("VkPipelineLayout")
     public long pipelineLayout() { return npipelineLayout(address()); }
-    /** the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not {@link KHRDescriptorUpdateTemplate#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
+    /** the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS} */
     @NativeType("uint32_t")
     public int set() { return nset(address()); }
 

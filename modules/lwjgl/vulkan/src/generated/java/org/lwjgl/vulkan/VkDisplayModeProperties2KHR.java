@@ -22,7 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDisplayModeStereoPropertiesNV}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -104,6 +105,8 @@ public class VkDisplayModeProperties2KHR extends Struct<VkDisplayModeProperties2
     public VkDisplayModeProperties2KHR sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayModeProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDisplayModeStereoPropertiesNV} value to the {@code pNext} chain. */
+    public VkDisplayModeProperties2KHR pNext(VkDisplayModeStereoPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkDisplayModeProperties2KHR set(
@@ -328,6 +331,8 @@ public class VkDisplayModeProperties2KHR extends Struct<VkDisplayModeProperties2
         public VkDisplayModeProperties2KHR.Buffer sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR); }
         /** Sets the specified value to the {@link VkDisplayModeProperties2KHR#pNext} field. */
         public VkDisplayModeProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkDisplayModeProperties2KHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDisplayModeStereoPropertiesNV} value to the {@code pNext} chain. */
+        public VkDisplayModeProperties2KHR.Buffer pNext(VkDisplayModeStereoPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

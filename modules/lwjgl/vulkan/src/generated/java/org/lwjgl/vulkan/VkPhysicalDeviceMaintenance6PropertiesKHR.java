@@ -16,63 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing various implementation-defined properties introduced with VK_KHR_maintenance6.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMaintenance6PropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceMaintenance6Properties}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMaintenance6PropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #blockTexelViewCompatibleMultipleLayers};
- *     uint32_t {@link #maxCombinedImageSamplerDescriptorCount};
- *     VkBool32 {@link #fragmentShadingRateClampCombinerInputs};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 blockTexelViewCompatibleMultipleLayers;
+ *     uint32_t maxCombinedImageSamplerDescriptorCount;
+ *     VkBool32 fragmentShadingRateClampCombinerInputs;
  * }</code></pre>
  */
-public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysicalDeviceMaintenance6PropertiesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        BLOCKTEXELVIEWCOMPATIBLEMULTIPLELAYERS,
-        MAXCOMBINEDIMAGESAMPLERDESCRIPTORCOUNT,
-        FRAGMENTSHADINGRATECLAMPCOMBINERINPUTS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        BLOCKTEXELVIEWCOMPATIBLEMULTIPLELAYERS = layout.offsetof(2);
-        MAXCOMBINEDIMAGESAMPLERDESCRIPTORCOUNT = layout.offsetof(3);
-        FRAGMENTSHADINGRATECLAMPCOMBINERINPUTS = layout.offsetof(4);
-    }
+public class VkPhysicalDeviceMaintenance6PropertiesKHR extends VkPhysicalDeviceMaintenance6Properties {
 
     protected VkPhysicalDeviceMaintenance6PropertiesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -90,36 +47,21 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMaintenance6PropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** a boolean value indicating that an implementation supports creating image views with {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} where the {@code layerCount} member of {@code subresourceRange} is greater than 1. */
-    @NativeType("VkBool32")
-    public boolean blockTexelViewCompatibleMultipleLayers() { return nblockTexelViewCompatibleMultipleLayers(address()) != 0; }
-    /** the maximum number of combined image sampler descriptors that the implementation uses to access any of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation. */
-    @NativeType("uint32_t")
-    public int maxCombinedImageSamplerDescriptorCount() { return nmaxCombinedImageSamplerDescriptorCount(address()); }
-    /** a boolean value indicating that an implementation clamps the inputs to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-combining">combiner operations</a>. */
-    @NativeType("VkBool32")
-    public boolean fragmentShadingRateClampCombinerInputs() { return nfragmentShadingRateClampCombinerInputs(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance6PropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceMaintenance6PropertiesKHR sType$Default() { return sType(KHRMaintenance6.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceMaintenance6PropertiesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceMaintenance6PropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceMaintenance6PropertiesKHR set(
         int sType,
         long pNext
@@ -253,26 +195,8 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #blockTexelViewCompatibleMultipleLayers}. */
-    public static int nblockTexelViewCompatibleMultipleLayers(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.BLOCKTEXELVIEWCOMPATIBLEMULTIPLELAYERS); }
-    /** Unsafe version of {@link #maxCombinedImageSamplerDescriptorCount}. */
-    public static int nmaxCombinedImageSamplerDescriptorCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.MAXCOMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
-    /** Unsafe version of {@link #fragmentShadingRateClampCombinerInputs}. */
-    public static int nfragmentShadingRateClampCombinerInputs(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.FRAGMENTSHADINGRATECLAMPCOMBINERINPUTS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance6PropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceMaintenance6PropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceMaintenance6PropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceMaintenance6Properties.Buffer {
 
         private static final VkPhysicalDeviceMaintenance6PropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceMaintenance6PropertiesKHR.create(-1L);
 
@@ -286,7 +210,7 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -312,27 +236,14 @@ public class VkPhysicalDeviceMaintenance6PropertiesKHR extends Struct<VkPhysical
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceMaintenance6PropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceMaintenance6PropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#blockTexelViewCompatibleMultipleLayers} field. */
-        @NativeType("VkBool32")
-        public boolean blockTexelViewCompatibleMultipleLayers() { return VkPhysicalDeviceMaintenance6PropertiesKHR.nblockTexelViewCompatibleMultipleLayers(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#maxCombinedImageSamplerDescriptorCount} field. */
-        @NativeType("uint32_t")
-        public int maxCombinedImageSamplerDescriptorCount() { return VkPhysicalDeviceMaintenance6PropertiesKHR.nmaxCombinedImageSamplerDescriptorCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#fragmentShadingRateClampCombinerInputs} field. */
-        @NativeType("VkBool32")
-        public boolean fragmentShadingRateClampCombinerInputs() { return VkPhysicalDeviceMaintenance6PropertiesKHR.nfragmentShadingRateClampCombinerInputs(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceMaintenance6PropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance6PropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance6#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#sType} field. */
-        public VkPhysicalDeviceMaintenance6PropertiesKHR.Buffer sType$Default() { return sType(KHRMaintenance6.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance6PropertiesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceMaintenance6PropertiesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceMaintenance6PropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance6PropertiesKHR.npNext(address(), value); return this; }
 
     }

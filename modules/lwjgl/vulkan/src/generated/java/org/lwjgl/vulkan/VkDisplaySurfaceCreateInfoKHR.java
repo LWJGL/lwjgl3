@@ -34,13 +34,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code alphaMode} <b>must</b> be one of the bits present in the {@code supportedAlpha} member of {@link VkDisplayPlaneCapabilitiesKHR} for the display plane corresponding to {@code displayMode}</li>
  * <li>{@code transform} <b>must</b> be one of the bits present in the {@code supportedTransforms} member of {@link VkDisplayPropertiesKHR} for the display corresponding to {@code displayMode}</li>
  * <li>The {@code width} and {@code height} members of {@code imageExtent} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxImageDimension2D}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkDisplaySurfaceStereoCreateInfoNV} structure whose {@code stereoType} member is {@link NVDisplayStereo#VK_DISPLAY_SURFACE_STEREO_TYPE_HDMI_3D_NV DISPLAY_SURFACE_STEREO_TYPE_HDMI_3D_NV}, then the {@code hdmi3DSupported} member of the {@link VkDisplayModeStereoPropertiesNV} structure in the {@code pNext} chain of the {@link VkDisplayModeProperties2KHR} structure returned by {@link KHRGetDisplayProperties2#vkGetDisplayModeProperties2KHR GetDisplayModeProperties2KHR} for the display mode corresponding to {@code displayMode} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRDisplay#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDisplaySurfaceStereoCreateInfoNV}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code displayMode} <b>must</b> be a valid {@code VkDisplayModeKHR} handle</li>
  * <li>{@code transform} <b>must</b> be a valid {@code VkSurfaceTransformFlagBitsKHR} value</li>
@@ -174,6 +176,8 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreate
     public VkDisplaySurfaceCreateInfoKHR sType$Default() { return sType(KHRDisplay.VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplaySurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDisplaySurfaceStereoCreateInfoNV} value to the {@code pNext} chain. */
+    public VkDisplaySurfaceCreateInfoKHR pNext(VkDisplaySurfaceStereoCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDisplaySurfaceCreateInfoKHR flags(@NativeType("VkDisplaySurfaceCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #displayMode} field. */
@@ -482,6 +486,8 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreate
         public VkDisplaySurfaceCreateInfoKHR.Buffer sType$Default() { return sType(KHRDisplay.VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#pNext} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplaySurfaceCreateInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDisplaySurfaceStereoCreateInfoNV} value to the {@code pNext} chain. */
+        public VkDisplaySurfaceCreateInfoKHR.Buffer pNext(VkDisplaySurfaceStereoCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#flags} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer flags(@NativeType("VkDisplaySurfaceCreateFlagsKHR") int value) { VkDisplaySurfaceCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#displayMode} field. */

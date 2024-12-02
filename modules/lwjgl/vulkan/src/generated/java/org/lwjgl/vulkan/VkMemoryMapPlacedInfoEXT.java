@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkMemoryMapInfoKHR}{@code ::flags} contains {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, {@code pPlacedAddress} <b>must</b> not be {@code NULL}</li>
+ * <li>If {@link VkMemoryMapInfo}{@code ::flags} contains {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, {@code pPlacedAddress} <b>must</b> not be {@code NULL}</li>
  * <li>{@code pPlacedAddress} <b>must</b> be aligned to an integer multiple of {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT}{@code ::minPlacedMemoryMapAlignment}</li>
- * <li>The address range specified by {@code pPlacedAddress} and {@link VkMemoryMapInfoKHR}{@code ::size} <b>must</b> not overlap any existing Vulkan memory object mapping</li>
+ * <li>The address range specified by {@code pPlacedAddress} and {@link VkMemoryMapInfo}{@code ::size} <b>must</b> not overlap any existing Vulkan memory object mapping</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -98,7 +98,7 @@ public class VkMemoryMapPlacedInfoEXT extends Struct<VkMemoryMapPlacedInfoEXT> i
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the virtual address at which to place the address. If {@link VkMemoryMapInfoKHR}{@code ::flags} does not contain {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, this value is ignored. */
+    /** the virtual address at which to place the address. If {@link VkMemoryMapInfo}{@code ::flags} does not contain {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, this value is ignored. */
     @NativeType("void *")
     public long pPlacedAddress() { return npPlacedAddress(address()); }
 

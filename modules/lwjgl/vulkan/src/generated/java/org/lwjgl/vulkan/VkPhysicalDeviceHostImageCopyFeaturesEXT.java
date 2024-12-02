@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating support for copies to or from images from host memory.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceHostImageCopyFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceHostImageCopyFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceHostImageCopyFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #hostImageCopy};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 hostImageCopy;
  * }</code></pre>
  */
-public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalDeviceHostImageCopyFeaturesEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        HOSTIMAGECOPY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        HOSTIMAGECOPY = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends VkPhysicalDeviceHostImageCopyFeatures {
 
     protected VkPhysicalDeviceHostImageCopyFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,32 +45,24 @@ public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalD
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceHostImageCopyFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports copying from host memory to images using the {@link EXTHostImageCopy#vkCopyMemoryToImageEXT CopyMemoryToImageEXT} command, copying from images to host memory using the {@link EXTHostImageCopy#vkCopyImageToMemoryEXT CopyImageToMemoryEXT} command, and copying between images using the {@link EXTHostImageCopy#vkCopyImageToImageEXT CopyImageToImageEXT} command. */
-    @NativeType("VkBool32")
-    public boolean hostImageCopy() { return nhostImageCopy(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceHostImageCopyFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDeviceHostImageCopyFeaturesEXT sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceHostImageCopyFeaturesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceHostImageCopyFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #hostImageCopy} field. */
+    /** Sets the specified value to the {@code hostImageCopy} field. */
+    @Override
     public VkPhysicalDeviceHostImageCopyFeaturesEXT hostImageCopy(@NativeType("VkBool32") boolean value) { nhostImageCopy(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceHostImageCopyFeaturesEXT set(
         int sType,
         long pNext,
@@ -243,24 +198,8 @@ public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalD
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #hostImageCopy}. */
-    public static int nhostImageCopy(long struct) { return memGetInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #hostImageCopy(boolean) hostImageCopy}. */
-    public static void nhostImageCopy(long struct, int value) { memPutInt(struct + VkPhysicalDeviceHostImageCopyFeaturesEXT.HOSTIMAGECOPY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceHostImageCopyFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceHostImageCopyFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceHostImageCopyFeatures.Buffer {
 
         private static final VkPhysicalDeviceHostImageCopyFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceHostImageCopyFeaturesEXT.create(-1L);
 
@@ -274,7 +213,7 @@ public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalD
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,23 +239,17 @@ public class VkPhysicalDeviceHostImageCopyFeaturesEXT extends Struct<VkPhysicalD
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceHostImageCopyFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceHostImageCopyFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#hostImageCopy} field. */
-        @NativeType("VkBool32")
-        public boolean hostImageCopy() { return VkPhysicalDeviceHostImageCopyFeaturesEXT.nhostImageCopy(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceHostImageCopyFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostImageCopyFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT} value to the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#sType} field. */
-        public VkPhysicalDeviceHostImageCopyFeaturesEXT.Buffer sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceHostImageCopyFeaturesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceHostImageCopyFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostImageCopyFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyFeaturesEXT#hostImageCopy} field. */
+        /** Sets the specified value to the {@code hostImageCopy} field. */
+        @Override
         public VkPhysicalDeviceHostImageCopyFeaturesEXT.Buffer hostImageCopy(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceHostImageCopyFeaturesEXT.nhostImageCopy(address(), value ? 1 : 0); return this; }
 
     }

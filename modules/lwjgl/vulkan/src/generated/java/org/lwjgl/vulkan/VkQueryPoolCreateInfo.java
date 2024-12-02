@@ -35,13 +35,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoProfileInfoKHR} structure with {@code videoCodecOperation} specifying an encode operation</li>
  * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} structure</li>
  * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, and the {@code pNext} chain includes a {@link VkVideoProfileInfoKHR} structure and a {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} structure, then {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR}{@code ::encodeFeedbackFlags} <b>must</b> not contain any bits that are not set in {@link VkVideoEncodeCapabilitiesKHR}{@code ::supportedEncodeFeedbackFlags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> described by {@link VkVideoProfileInfoKHR} and its {@code pNext} chain</li>
+ * <li>If the {@code pNext} chain includes a {@link VkVideoProfileInfoKHR} structure and its {@code videoCodecOperation} member is {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-videoEncodeAV1">{@code videoEncodeAV1}</a> feature <b>must</b> be enabled</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}, {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}, {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR}, {@link VkVideoDecodeAV1ProfileInfoKHR}, {@link VkVideoDecodeH264ProfileInfoKHR}, {@link VkVideoDecodeH265ProfileInfoKHR}, {@link VkVideoDecodeUsageInfoKHR}, {@link VkVideoEncodeH264ProfileInfoKHR}, {@link VkVideoEncodeH265ProfileInfoKHR}, {@link VkVideoEncodeUsageInfoKHR}, or {@link VkVideoProfileInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}, {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}, {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR}, {@link VkVideoDecodeAV1ProfileInfoKHR}, {@link VkVideoDecodeH264ProfileInfoKHR}, {@link VkVideoDecodeH265ProfileInfoKHR}, {@link VkVideoDecodeUsageInfoKHR}, {@link VkVideoEncodeAV1ProfileInfoKHR}, {@link VkVideoEncodeH264ProfileInfoKHR}, {@link VkVideoEncodeH265ProfileInfoKHR}, {@link VkVideoEncodeUsageInfoKHR}, or {@link VkVideoProfileInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code queryType} <b>must</b> be a valid {@code VkQueryType} value</li>
@@ -164,6 +165,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoEncodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
@@ -452,6 +455,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoEncodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265ProfileInfoKHR} value to the {@code pNext} chain. */

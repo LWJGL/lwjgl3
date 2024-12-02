@@ -35,9 +35,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264PictureInfoKHR}, {@link VkVideoEncodeH265PictureInfoKHR}, or {@link VkVideoInlineQueryInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeAV1PictureInfoKHR}, {@link VkVideoEncodeH264PictureInfoKHR}, {@link VkVideoEncodeH265PictureInfoKHR}, {@link VkVideoEncodeQuantizationMapInfoKHR}, or {@link VkVideoInlineQueryInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeFlagBitsKHR} values</li>
  * <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * <li>{@code srcPictureResource} <b>must</b> be a valid {@link VkVideoPictureResourceInfoKHR} structure</li>
  * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, {@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid {@link VkVideoReferenceSlotInfoKHR} structure</li>
@@ -146,7 +146,7 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     /** a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkVideoEncodeFlagBitsKHR} indicating video encode command flags. */
     @NativeType("VkVideoEncodeFlagsKHR")
     public int flags() { return nflags(address()); }
     /** the destination video bitstream buffer to write the encoded bitstream to. */
@@ -179,10 +179,14 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     public VkVideoEncodeInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoEncodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeQuantizationMapInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeQuantizationMapInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeInfoKHR pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
@@ -493,10 +497,14 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         public VkVideoEncodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#pNext} field. */
         public VkVideoEncodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoEncodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeQuantizationMapInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeQuantizationMapInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#flags} field. */

@@ -40,7 +40,6 @@ import static org.lwjgl.vulkan.KHRVideoDecodeAV1.*;
  * <dd><ul>
  * <li>{@code flags.reserved}, {@code reserved1}, and {@code reserved2} are used only for padding purposes and are otherwise ignored;</li>
  * <li>{@code flags.apply_grain} indicates that film grain is enabled for the decoded picture, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code tg_start} and {@code tg_end} are interpreted as defined in section 6.10.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * <li>{@code OrderHint}, {@code OrderHints}, and {@code expectedFrameId} are interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * <li>the {@code StdVideoAV1TileInfo} structure pointed to by {@code pTileInfo} is interpreted as follows:
  * 

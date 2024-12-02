@@ -16,51 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory size needed to copy to or from an image on the host with VK_HOST_IMAGE_COPY_MEMCPY_EXT.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT}</li>
- * </ul>
+ * See {@link VkSubresourceHostMemcpySize}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubresourceHostMemcpySizeEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceSize {@link #size};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceSize size;
  * }</code></pre>
  */
-public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemcpySizeEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SIZE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SIZE = layout.offsetof(2);
-    }
+public class VkSubresourceHostMemcpySizeEXT extends VkSubresourceHostMemcpySize {
 
     protected VkSubresourceHostMemcpySizeEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -78,30 +45,21 @@ public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubresourceHostMemcpySizeEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** the size in bytes of the image subresource. */
-    @NativeType("VkDeviceSize")
-    public long size() { return nsize(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkSubresourceHostMemcpySizeEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT} value to the {@link #sType} field. */
-    public VkSubresourceHostMemcpySizeEXT sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@code sType} field. */
+    @Override
+    public VkSubresourceHostMemcpySizeEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSubresourceHostMemcpySizeEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSubresourceHostMemcpySizeEXT set(
         int sType,
         long pNext
@@ -235,22 +193,8 @@ public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemc
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSubresourceHostMemcpySizeEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSubresourceHostMemcpySizeEXT.PNEXT); }
-    /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkSubresourceHostMemcpySizeEXT.SIZE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSubresourceHostMemcpySizeEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSubresourceHostMemcpySizeEXT.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSubresourceHostMemcpySizeEXT} structs. */
-    public static class Buffer extends StructBuffer<VkSubresourceHostMemcpySizeEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkSubresourceHostMemcpySize.Buffer {
 
         private static final VkSubresourceHostMemcpySizeEXT ELEMENT_FACTORY = VkSubresourceHostMemcpySizeEXT.create(-1L);
 
@@ -264,7 +208,7 @@ public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemc
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -290,21 +234,14 @@ public class VkSubresourceHostMemcpySizeEXT extends Struct<VkSubresourceHostMemc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubresourceHostMemcpySizeEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSubresourceHostMemcpySizeEXT.nsType(address()); }
-        /** @return the value of the {@link VkSubresourceHostMemcpySizeEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkSubresourceHostMemcpySizeEXT.npNext(address()); }
-        /** @return the value of the {@link VkSubresourceHostMemcpySizeEXT#size} field. */
-        @NativeType("VkDeviceSize")
-        public long size() { return VkSubresourceHostMemcpySizeEXT.nsize(address()); }
-
-        /** Sets the specified value to the {@link VkSubresourceHostMemcpySizeEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSubresourceHostMemcpySizeEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSubresourceHostMemcpySizeEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT} value to the {@link VkSubresourceHostMemcpySizeEXT#sType} field. */
-        public VkSubresourceHostMemcpySizeEXT.Buffer sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT); }
-        /** Sets the specified value to the {@link VkSubresourceHostMemcpySizeEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@code sType} field. */
+        @Override
+        public VkSubresourceHostMemcpySizeEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSubresourceHostMemcpySizeEXT.Buffer pNext(@NativeType("void *") long value) { VkSubresourceHostMemcpySizeEXT.npNext(address(), value); return this; }
 
     }

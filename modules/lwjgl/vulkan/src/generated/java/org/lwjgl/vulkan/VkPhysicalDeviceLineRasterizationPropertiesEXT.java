@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceLineRasterizationPropertiesKHR}.
+ * See {@link VkPhysicalDeviceLineRasterizationProperties}.
  * 
  * <h3>Layout</h3>
  * 
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t lineSubPixelPrecisionBits;
  * }</code></pre>
  */
-public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDeviceLineRasterizationPropertiesKHR {
+public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDeviceLineRasterizationProperties {
 
     protected VkPhysicalDeviceLineRasterizationPropertiesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -51,9 +51,9 @@ public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDe
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceLineRasterizationPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES} value to the {@code sType} field. */
     @Override
-    public VkPhysicalDeviceLineRasterizationPropertiesEXT sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR); }
+    public VkPhysicalDeviceLineRasterizationPropertiesEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceLineRasterizationPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -213,7 +213,7 @@ public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDe
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceLineRasterizationPropertiesEXT} structs. */
-    public static class Buffer extends VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer {
+    public static class Buffer extends VkPhysicalDeviceLineRasterizationProperties.Buffer {
 
         private static final VkPhysicalDeviceLineRasterizationPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceLineRasterizationPropertiesEXT.create(-1L);
 
@@ -256,9 +256,9 @@ public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDe
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceLineRasterizationPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLineRasterizationPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES} value to the {@code sType} field. */
         @Override
-        public VkPhysicalDeviceLineRasterizationPropertiesEXT.Buffer sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR); }
+        public VkPhysicalDeviceLineRasterizationPropertiesEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceLineRasterizationPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLineRasterizationPropertiesEXT.npNext(address(), value); return this; }

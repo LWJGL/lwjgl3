@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} or {@link VkDeviceQueueShaderCoreControlCreateInfoARM}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceQueueGlobalPriorityCreateInfo} or {@link VkDeviceQueueShaderCoreControlCreateInfoARM}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDeviceQueueCreateFlagBits} values</li>
  * <li>{@code pQueuePriorities} <b>must</b> be a valid pointer to an array of {@code queueCount} {@code float} values</li>
@@ -142,6 +142,8 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
     public VkDeviceQueueCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceQueueCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfo} value to the {@code pNext} chain. */
+    public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoEXT} value to the {@code pNext} chain. */
     public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} value to the {@code pNext} chain. */
@@ -417,6 +419,8 @@ public class VkDeviceQueueCreateInfo extends Struct<VkDeviceQueueCreateInfo> imp
         public VkDeviceQueueCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#pNext} field. */
         public VkDeviceQueueCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfo} value to the {@code pNext} chain. */
+        public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoEXT} value to the {@code pNext} chain. */
         public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} value to the {@code pNext} chain. */

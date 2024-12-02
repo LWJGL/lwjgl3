@@ -105,7 +105,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension provides API support for <a href="https://registry.khronos.org/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">{@code GL_NV_geometry_shader_passthrough}</a></li>
- * <li>This extension requires the {@code geometryShader} feature.</li>
+ * <li>This extension requires the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

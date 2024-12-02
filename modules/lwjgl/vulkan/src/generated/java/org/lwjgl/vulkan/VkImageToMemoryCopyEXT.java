@@ -17,98 +17,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image to host memory copy operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is functionally similar to {@link VkBufferImageCopy2}, except it defines host memory as the target of copy instead of a buffer. In particular, the same data packing rules and restrictions as that structure apply here as well.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pHostPointer} <b>must</b> point to memory that is large enough to contain all memory locations that are accessed according to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#copies-buffers-images-addressing">Buffer and Image Addressing</a>, for each element of {@code pRegions}</li>
- * <li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
- * </ul>
- * 
- * <ul>
- * <li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
- * <li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>
- * <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
- * <li>{@code imageExtent.width} <b>must</b> not be 0</li>
- * <li>{@code imageExtent.height} <b>must</b> not be 0</li>
- * <li>{@code imageExtent.depth} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pHostPointer} <b>must</b> be a pointer value</li>
- * <li>{@code imageSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkCopyImageToMemoryInfoEXT}, {@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}</p>
+ * See {@link VkImageToMemoryCopy}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageToMemoryCopyEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     void * {@link #pHostPointer};
- *     uint32_t {@link #memoryRowLength};
- *     uint32_t {@link #memoryImageHeight};
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #imageSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #imageOffset};
- *     {@link VkExtent3D VkExtent3D} {@link #imageExtent};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     void * pHostPointer;
+ *     uint32_t memoryRowLength;
+ *     uint32_t memoryImageHeight;
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
+ *     {@link VkOffset3D VkOffset3D} imageOffset;
+ *     {@link VkExtent3D VkExtent3D} imageExtent;
  * }</code></pre>
  */
-public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PHOSTPOINTER,
-        MEMORYROWLENGTH,
-        MEMORYIMAGEHEIGHT,
-        IMAGESUBRESOURCE,
-        IMAGEOFFSET,
-        IMAGEEXTENT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(VkImageSubresourceLayers.SIZEOF, VkImageSubresourceLayers.ALIGNOF),
-            __member(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF),
-            __member(VkExtent3D.SIZEOF, VkExtent3D.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PHOSTPOINTER = layout.offsetof(2);
-        MEMORYROWLENGTH = layout.offsetof(3);
-        MEMORYIMAGEHEIGHT = layout.offsetof(4);
-        IMAGESUBRESOURCE = layout.offsetof(5);
-        IMAGEOFFSET = layout.offsetof(6);
-        IMAGEEXTENT = layout.offsetof(7);
-    }
+public class VkImageToMemoryCopyEXT extends VkImageToMemoryCopy {
 
     protected VkImageToMemoryCopyEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -126,60 +51,48 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageToMemoryCopyEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the host memory address which is the destination of the copy. */
-    @NativeType("void *")
-    public long pHostPointer() { return npHostPointer(address()); }
-    /** {@code memoryRowLength} and {@code memoryImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in host memory, and control the addressing calculations. If either of these values is zero, that aspect of the host memory is considered to be tightly packed according to the {@code imageExtent}. */
-    @NativeType("uint32_t")
-    public int memoryRowLength() { return nmemoryRowLength(address()); }
-    /** see {@code memoryRowLength} */
-    @NativeType("uint32_t")
-    public int memoryImageHeight() { return nmemoryImageHeight(address()); }
-    /** a {@link VkImageSubresourceLayers} used to specify the specific image subresources of the image used for the source or destination image data. */
-    public VkImageSubresourceLayers imageSubresource() { return nimageSubresource(address()); }
-    /** selects the initial {@code x}, {@code y}, {@code z} offsets in texels of the sub-region of the source image data. */
-    public VkOffset3D imageOffset() { return nimageOffset(address()); }
-    /** the size in texels of the image to copy in {@code width}, {@code height} and {@code depth}. */
-    public VkExtent3D imageExtent() { return nimageExtent(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkImageToMemoryCopyEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT} value to the {@link #sType} field. */
-    public VkImageToMemoryCopyEXT sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY} value to the {@code sType} field. */
+    @Override
+    public VkImageToMemoryCopyEXT sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkImageToMemoryCopyEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pHostPointer} field. */
+    /** Sets the specified value to the {@code pHostPointer} field. */
+    @Override
     public VkImageToMemoryCopyEXT pHostPointer(@NativeType("void *") long value) { npHostPointer(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryRowLength} field. */
+    /** Sets the specified value to the {@code memoryRowLength} field. */
+    @Override
     public VkImageToMemoryCopyEXT memoryRowLength(@NativeType("uint32_t") int value) { nmemoryRowLength(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryImageHeight} field. */
+    /** Sets the specified value to the {@code memoryImageHeight} field. */
+    @Override
     public VkImageToMemoryCopyEXT memoryImageHeight(@NativeType("uint32_t") int value) { nmemoryImageHeight(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #imageSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+    @Override
     public VkImageToMemoryCopyEXT imageSubresource(VkImageSubresourceLayers value) { nimageSubresource(address(), value); return this; }
-    /** Passes the {@link #imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkImageToMemoryCopyEXT imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@link #imageOffset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+    @Override
     public VkImageToMemoryCopyEXT imageOffset(VkOffset3D value) { nimageOffset(address(), value); return this; }
-    /** Passes the {@link #imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkImageToMemoryCopyEXT imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@link #imageExtent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+    @Override
     public VkImageToMemoryCopyEXT imageExtent(VkExtent3D value) { nimageExtent(address(), value); return this; }
-    /** Passes the {@link #imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkImageToMemoryCopyEXT imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkImageToMemoryCopyEXT set(
         int sType,
         long pNext,
@@ -325,53 +238,8 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageToMemoryCopyEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkImageToMemoryCopyEXT.PNEXT); }
-    /** Unsafe version of {@link #pHostPointer}. */
-    public static long npHostPointer(long struct) { return memGetAddress(struct + VkImageToMemoryCopyEXT.PHOSTPOINTER); }
-    /** Unsafe version of {@link #memoryRowLength}. */
-    public static int nmemoryRowLength(long struct) { return memGetInt(struct + VkImageToMemoryCopyEXT.MEMORYROWLENGTH); }
-    /** Unsafe version of {@link #memoryImageHeight}. */
-    public static int nmemoryImageHeight(long struct) { return memGetInt(struct + VkImageToMemoryCopyEXT.MEMORYIMAGEHEIGHT); }
-    /** Unsafe version of {@link #imageSubresource}. */
-    public static VkImageSubresourceLayers nimageSubresource(long struct) { return VkImageSubresourceLayers.create(struct + VkImageToMemoryCopyEXT.IMAGESUBRESOURCE); }
-    /** Unsafe version of {@link #imageOffset}. */
-    public static VkOffset3D nimageOffset(long struct) { return VkOffset3D.create(struct + VkImageToMemoryCopyEXT.IMAGEOFFSET); }
-    /** Unsafe version of {@link #imageExtent}. */
-    public static VkExtent3D nimageExtent(long struct) { return VkExtent3D.create(struct + VkImageToMemoryCopyEXT.IMAGEEXTENT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageToMemoryCopyEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkImageToMemoryCopyEXT.PNEXT, value); }
-    /** Unsafe version of {@link #pHostPointer(long) pHostPointer}. */
-    public static void npHostPointer(long struct, long value) { memPutAddress(struct + VkImageToMemoryCopyEXT.PHOSTPOINTER, check(value)); }
-    /** Unsafe version of {@link #memoryRowLength(int) memoryRowLength}. */
-    public static void nmemoryRowLength(long struct, int value) { memPutInt(struct + VkImageToMemoryCopyEXT.MEMORYROWLENGTH, value); }
-    /** Unsafe version of {@link #memoryImageHeight(int) memoryImageHeight}. */
-    public static void nmemoryImageHeight(long struct, int value) { memPutInt(struct + VkImageToMemoryCopyEXT.MEMORYIMAGEHEIGHT, value); }
-    /** Unsafe version of {@link #imageSubresource(VkImageSubresourceLayers) imageSubresource}. */
-    public static void nimageSubresource(long struct, VkImageSubresourceLayers value) { memCopy(value.address(), struct + VkImageToMemoryCopyEXT.IMAGESUBRESOURCE, VkImageSubresourceLayers.SIZEOF); }
-    /** Unsafe version of {@link #imageOffset(VkOffset3D) imageOffset}. */
-    public static void nimageOffset(long struct, VkOffset3D value) { memCopy(value.address(), struct + VkImageToMemoryCopyEXT.IMAGEOFFSET, VkOffset3D.SIZEOF); }
-    /** Unsafe version of {@link #imageExtent(VkExtent3D) imageExtent}. */
-    public static void nimageExtent(long struct, VkExtent3D value) { memCopy(value.address(), struct + VkImageToMemoryCopyEXT.IMAGEEXTENT, VkExtent3D.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkImageToMemoryCopyEXT.PHOSTPOINTER));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkImageToMemoryCopyEXT} structs. */
-    public static class Buffer extends StructBuffer<VkImageToMemoryCopyEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkImageToMemoryCopy.Buffer {
 
         private static final VkImageToMemoryCopyEXT ELEMENT_FACTORY = VkImageToMemoryCopyEXT.create(-1L);
 
@@ -385,7 +253,7 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -411,51 +279,41 @@ public class VkImageToMemoryCopyEXT extends Struct<VkImageToMemoryCopyEXT> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageToMemoryCopyEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkImageToMemoryCopyEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageToMemoryCopyEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkImageToMemoryCopyEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageToMemoryCopyEXT#pHostPointer} field. */
-        @NativeType("void *")
-        public long pHostPointer() { return VkImageToMemoryCopyEXT.npHostPointer(address()); }
-        /** @return the value of the {@link VkImageToMemoryCopyEXT#memoryRowLength} field. */
-        @NativeType("uint32_t")
-        public int memoryRowLength() { return VkImageToMemoryCopyEXT.nmemoryRowLength(address()); }
-        /** @return the value of the {@link VkImageToMemoryCopyEXT#memoryImageHeight} field. */
-        @NativeType("uint32_t")
-        public int memoryImageHeight() { return VkImageToMemoryCopyEXT.nmemoryImageHeight(address()); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkImageToMemoryCopyEXT#imageSubresource} field. */
-        public VkImageSubresourceLayers imageSubresource() { return VkImageToMemoryCopyEXT.nimageSubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@link VkImageToMemoryCopyEXT#imageOffset} field. */
-        public VkOffset3D imageOffset() { return VkImageToMemoryCopyEXT.nimageOffset(address()); }
-        /** @return a {@link VkExtent3D} view of the {@link VkImageToMemoryCopyEXT#imageExtent} field. */
-        public VkExtent3D imageExtent() { return VkImageToMemoryCopyEXT.nimageExtent(address()); }
-
-        /** Sets the specified value to the {@link VkImageToMemoryCopyEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageToMemoryCopyEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTHostImageCopy#VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT} value to the {@link VkImageToMemoryCopyEXT#sType} field. */
-        public VkImageToMemoryCopyEXT.Buffer sType$Default() { return sType(EXTHostImageCopy.VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT); }
-        /** Sets the specified value to the {@link VkImageToMemoryCopyEXT#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY} value to the {@code sType} field. */
+        @Override
+        public VkImageToMemoryCopyEXT.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageToMemoryCopyEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageToMemoryCopyEXT#pHostPointer} field. */
+        /** Sets the specified value to the {@code pHostPointer} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer pHostPointer(@NativeType("void *") long value) { VkImageToMemoryCopyEXT.npHostPointer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageToMemoryCopyEXT#memoryRowLength} field. */
+        /** Sets the specified value to the {@code memoryRowLength} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer memoryRowLength(@NativeType("uint32_t") int value) { VkImageToMemoryCopyEXT.nmemoryRowLength(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageToMemoryCopyEXT#memoryImageHeight} field. */
+        /** Sets the specified value to the {@code memoryImageHeight} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer memoryImageHeight(@NativeType("uint32_t") int value) { VkImageToMemoryCopyEXT.nmemoryImageHeight(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageToMemoryCopyEXT#imageSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageSubresource(VkImageSubresourceLayers value) { VkImageToMemoryCopyEXT.nimageSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageToMemoryCopyEXT#imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@link VkImageToMemoryCopyEXT#imageOffset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageOffset(VkOffset3D value) { VkImageToMemoryCopyEXT.nimageOffset(address(), value); return this; }
-        /** Passes the {@link VkImageToMemoryCopyEXT#imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@link VkImageToMemoryCopyEXT#imageExtent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageExtent(VkExtent3D value) { VkImageToMemoryCopyEXT.nimageExtent(address(), value); return this; }
-        /** Passes the {@link VkImageToMemoryCopyEXT#imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkImageToMemoryCopyEXT.Buffer imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     }

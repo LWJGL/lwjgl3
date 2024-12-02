@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing line rasterization properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceLineRasterizationProperties}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceLineRasterizationPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #lineSubPixelPrecisionBits};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t lineSubPixelPrecisionBits;
  * }</code></pre>
  */
-public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhysicalDeviceLineRasterizationPropertiesKHR> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        LINESUBPIXELPRECISIONBITS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        LINESUBPIXELPRECISIONBITS = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends VkPhysicalDeviceLineRasterizationProperties {
 
     protected VkPhysicalDeviceLineRasterizationPropertiesKHR(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -82,30 +45,21 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceLineRasterizationPropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a {@code VkStructureType} value identifying this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines">line segments</a>. */
-    @NativeType("uint32_t")
-    public int lineSubPixelPrecisionBits() { return nlineSubPixelPrecisionBits(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceLineRasterizationPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceLineRasterizationPropertiesKHR sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceLineRasterizationPropertiesKHR sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceLineRasterizationPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceLineRasterizationPropertiesKHR set(
         int sType,
         long pNext
@@ -239,22 +193,8 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #lineSubPixelPrecisionBits}. */
-    public static int nlineSubPixelPrecisionBits(long struct) { return memGetInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.LINESUBPIXELPRECISIONBITS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLineRasterizationPropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceLineRasterizationPropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceLineRasterizationPropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceLineRasterizationProperties.Buffer {
 
         private static final VkPhysicalDeviceLineRasterizationPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceLineRasterizationPropertiesKHR.create(-1L);
 
@@ -268,7 +208,7 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -294,21 +234,14 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceLineRasterizationPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceLineRasterizationPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#lineSubPixelPrecisionBits} field. */
-        @NativeType("uint32_t")
-        public int lineSubPixelPrecisionBits() { return VkPhysicalDeviceLineRasterizationPropertiesKHR.nlineSubPixelPrecisionBits(address()); }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLineRasterizationPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRLineRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#sType} field. */
-        public VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer sType$Default() { return sType(KHRLineRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLineRasterizationPropertiesKHR#pNext} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceLineRasterizationPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLineRasterizationPropertiesKHR.npNext(address(), value); return this; }
 
     }
