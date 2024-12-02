@@ -139,12 +139,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CODEC_OPERATION_NONE_KHR indicates no support for any video codec operations.</li>
+            <li>#VIDEO_CODEC_OPERATION_NONE_KHR specifies that no video codec operations are supported.</li>
             <li>#VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#decode-h264">H.264 decode operations</a>.</li>
             <li>#VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#decode-h265">H.265 decode operations</a>.</li>
             <li>#VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#decode-av1">AV1 decode operations</a>.</li>
             <li>#VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-h264">H.264 encode operations</a>.</li>
             <li>#VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-h265">H.265 encode operations</a>.</li>
+            <li>#VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR specifies support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-av1">AV1 encode operations</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -198,7 +199,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR indicates that video sessions support producing and consuming protected content.</li>
+            <li>#VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR specifies that video sessions support producing and consuming protected content.</li>
             <li>#VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR indicates that the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#video-picture-resources">video picture resources</a> associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#dpb-slot">DPB slots</a> of a video session <b>can</b> be backed by separate {@code VkImage} objects. If this capability flag is not present, then all DPB slots of a video session <b>must</b> be associated with video picture resources backed by the same {@code VkImage} object (e.g. using different layers of the same image).</li>
         </ul>
         """,
@@ -221,6 +222,8 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
                 </div>
             </li>
             <li>#VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR specifies that queries within video coding scopes using the created video session are <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#video-inline-queries">executed inline</a> with video coding operations.</li>
+            <li>#VIDEO_SESSION_CREATE_ALLOW_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR specifies that the video session <b>can</b> be used to encode pictures with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-delta-map">quantization delta maps</a>.</li>
+            <li>#VIDEO_SESSION_CREATE_ALLOW_ENCODE_EMPHASIS_MAP_BIT_KHR specifies that the video session <b>can</b> be used to encode pictures with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-emphasis-map">emphasis maps</a>.</li>
         </ul>
         """,
 
@@ -233,9 +236,9 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR indicates a request for the bound video session to be reset before other coding control parameters are applied.</li>
-            <li>#VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR indicates that the coding control parameters include video encode rate control parameters (see ##VkVideoEncodeRateControlInfoKHR).</li>
-            <li>#VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR indicates that the coding control parameters include video encode quality level parameters (see ##VkVideoEncodeQualityLevelInfoKHR).</li>
+            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR specifies a request for the bound video session to be reset before other coding control parameters are applied.</li>
+            <li>#VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR specifies that the coding control parameters include video encode rate control parameters (see ##VkVideoEncodeRateControlInfoKHR).</li>
+            <li>#VIDEO_CODING_CONTROL_ENCODE_QUALITY_LEVEL_BIT_KHR specifies that the coding control parameters include video encode quality level parameters (see ##VkVideoEncodeQualityLevelInfoKHR).</li>
         </ul>
         """,
 
@@ -248,10 +251,10 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         <ul>
-            <li>#QUERY_RESULT_STATUS_NOT_READY_KHR indicates that the query result is not yet available.</li>
-            <li>#QUERY_RESULT_STATUS_ERROR_KHR indicates that operations did not complete successfully.</li>
-            <li>#QUERY_RESULT_STATUS_COMPLETE_KHR indicates that operations completed successfully and the query result is available.</li>
-            <li>#QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR indicates that a video encode operation did not complete successfully due to the destination video bitstream buffer range not being sufficiently large to fit the encoded bitstream data.</li>
+            <li>#QUERY_RESULT_STATUS_NOT_READY_KHR specifies that the query result is not yet available.</li>
+            <li>#QUERY_RESULT_STATUS_ERROR_KHR specifies that operations did not complete successfully.</li>
+            <li>#QUERY_RESULT_STATUS_COMPLETE_KHR specifies that operations completed successfully and the query result is available.</li>
+            <li>#QUERY_RESULT_STATUS_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_KHR specifies that a video encode operation did not complete successfully due to the destination video bitstream buffer range not being sufficiently large to fit the encoded bitstream data.</li>
         </ul>
         """,
 
@@ -286,6 +289,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>If {@code pVideoProfile→videoCodecOperation} specifies an encode operation, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeCapabilitiesKHR structure</li>
             <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeH264CapabilitiesKHR structure</li>
             <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeH265CapabilitiesKHR structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeAV1CapabilitiesKHR structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -328,7 +332,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         Query supported video decode and encode image formats and capabilities.
 
         <h5>C Specification</h5>
-        To enumerate the supported output, input and DPB image formats and corresponding capabilities for a specific video profile, call:
+        To enumerate the supported video formats and corresponding capabilities for a specific video profile, call:
 
         <pre><code>
 ￿VkResult vkGetPhysicalDeviceVideoFormatPropertiesKHR(
@@ -354,13 +358,15 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         The {@code imageUsage} member of the ##VkPhysicalDeviceVideoFormatInfoKHR structure specifies the expected video usage flags that the returned video formats <b>must</b> support. Correspondingly, the {@code imageUsageFlags} member of each ##VkVideoFormatPropertiesKHR structure returned will contain at least the same set of image usage flags.
 
-        If the implementation supports using video input, output, or DPB images of a particular format in operations other than video decode/encode then the {@code imageUsageFlags} member of the corresponding ##VkVideoFormatPropertiesKHR structure returned will include additional image usage flags indicating that.
+        If the implementation supports using images of a particular format in operations other than video decode/encode then the {@code imageUsageFlags} member of the corresponding ##VkVideoFormatPropertiesKHR structure returned will include additional image usage flags indicating that.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         For most use cases, only decode or encode related usage flags are going to be specified. For a use case such as transcode, if the image were to be shared between decode and encode session(s), then both decode and encode related usage flags <b>can</b> be set.
         </div>
 
         Multiple ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned with the same {@code format} member with different {@code componentMapping}, {@code imageType}, or {@code imageTiling} values, as described later.
+
+        If ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsageFlags} includes #IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR or #IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR, multiple ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned with the same {@code format}, {@code componentMapping}, {@code imageType}, and {@code imageTiling} member values, but different {@code quantizationMapTexelSize} returned in the ##VkVideoFormatQuantizationMapPropertiesKHR structure, if one is included in the ##VkVideoFormatPropertiesKHR{@code ::pNext} chain, when the queried <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-map">quantization map type</a> supports multiple distinct <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-map-texel-size">quantization map texel sizes</a>.
 
         In addition, a different set of ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned depending on the {@code imageUsage} member of the ##VkPhysicalDeviceVideoFormatInfoKHR structure, even for the same set of video profiles, for example, based on whether encode input, encode DPB, decode output, and/or decode DPB usage is requested.
 
@@ -697,6 +703,22 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         This means that codec-specific parameters stored in video session parameters objects <b>can</b> only be reused across different video encode quality levels by re-specifying them, as previously created video session parameters against other quality levels <b>cannot</b> be used as template because the original codec-specific parameters (before the implementation <b>may</b> have applied <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-overrides">parameter overrides</a>) <b>may</b> no longer be available in them for the purposes of constructing the derived object.
         </div>
 
+        Video session parameters objects are only compatible with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-map">quantization maps</a> if they are created with {@code pCreateInfo→flags} including #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR.
+
+        Video session parameters objects created with #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR against a video session object that was created with #VIDEO_SESSION_CREATE_ALLOW_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR or #VIDEO_SESSION_CREATE_ALLOW_ENCODE_EMPHASIS_MAP_BIT_KHR are created with a specific compatible <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-map-texel-size">quantization map texel size</a> specified in the {@code quantizationMapTexelSize} member of the ##VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR structure included in the {@code pNext} chain of {@code pCreateInfo}.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This means that the quantization map texel size that such a video session parameters object is compatible with is fixed for the lifetime of the object. Applications have to create separate video session parameters objects to use different quantization map texel sizes with a single video session object. This is necessary because the used quantization map texel size may affect the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-overrides">parameter overrides</a> the implementation has to perform and thus the final values of the used codec-specific parameters.
+        </div>
+
+        For video session parameters objects created with #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR, the template object specified in {@code pCreateInfo→videoSessionParametersTemplate} <b>must</b> also have been created with #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR and the same compatible <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-quantization-map-texel-size">quantization map texel size</a> specified in ##VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR{@code ::quantizationMapTexelSize}.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This means that codec-specific parameters stored in video session parameters objects <b>can</b> only be reused with different quantization map texel sizes by re-specifying them, as previously created video session parameters against other quantization map texel sizes <b>cannot</b> be used as template because the original codec-specific parameters (before the implementation <b>may</b> have applied <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-overrides">parameter overrides</a>) <b>may</b> no longer be available in them for the purposes of constructing the derived object.
+        </div>
+
+        For video session parameters objects created without #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR, the template object specified in {@code pCreateInfo→videoSessionParametersTemplate} <b>must</b> also have been created without #VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR.
+
         If {@code pCreateInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the created video session parameters object will initially contain the following sets of parameter entries:
 
         <ul>
@@ -788,6 +810,8 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
                 </ul>
             </li>
         </ul>
+
+        If {@code pCreateInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR, then the created video session parameters object will contain a single <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-av1-sequence-header">AV1 sequence header</a> specified through the members of the ##VkVideoEncodeAV1SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain. As such video session parameters objects <b>can</b> only contain a single <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-av1-sequence-header">AV1 sequence header</a>, it is not possible to use a previously created object as a template or subsequently update the created video session parameters object.
 
         In case of video session parameters objects created with a video encode operation, implementations <b>may</b> return the #ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR error if any of the specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or if values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation.
 
@@ -912,6 +936,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, then the number of {@code StdVideoH265PictureParameterSet} entries already stored in it plus the value of the {@code stdPPSCount} member of the ##VkVideoEncodeH265SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoEncodeH265SessionParametersCreateInfoKHR{@code ::maxStdPPSCount} {@code videoSessionParameters} was created with</li>
             <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH265SessionParametersAddInfoKHR structure, then {@code num_tile_columns_minus1} <b>must</b> be less than ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxTiles.width}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile {@code videoSessionParameters} was created with, for each element of ##VkVideoEncodeH265SessionParametersAddInfoKHR{@code ::pStdPPSs}</li>
             <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH265SessionParametersAddInfoKHR structure, then {@code num_tile_rows_minus1} <b>must</b> be less than ##VkVideoEncodeH265CapabilitiesKHR{@code ::maxTiles.height}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile {@code videoSessionParameters} was created with, for each element of ##VkVideoEncodeH265SessionParametersAddInfoKHR{@code ::pStdPPSs}</li>
+            <li>{@code videoSessionParameters} <b>must</b> not have been created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1053,6 +1078,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>If {@code pBeginInfo→videoSession} was created with a video encode operation and the {@code pNext} chain of {@code pBeginInfo} includes an instance of the ##VkVideoEncodeRateControlInfoKHR structure, then it <b>must</b> <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-rate-control-state-matching">match</a> the rate control state configured for {@code pBeginInfo→videoSession} at the time the command is executed on the device</li>
             <li>If {@code pBeginInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR, the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-rate-control-modes">rate control mode</a> is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, and ##VkVideoEncodeH264CapabilitiesKHR{@code ::requiresGopRemainingFrames} is #TRUE, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the {@code pBeginInfo→videoSession} was created with, then the {@code pNext} chain of {@code pBeginInfo} <b>must</b> include an instance of the ##VkVideoEncodeH264GopRemainingFrameInfoKHR with its {@code useGopRemainingFrames} member set to #TRUE</li>
             <li>If {@code pBeginInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR, the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-rate-control-modes">rate control mode</a> is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, and ##VkVideoEncodeH265CapabilitiesKHR{@code ::requiresGopRemainingFrames} is #TRUE, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the {@code pBeginInfo→videoSession} was created with, then the {@code pNext} chain of {@code pBeginInfo} <b>must</b> include an instance of the ##VkVideoEncodeH265GopRemainingFrameInfoKHR with its {@code useGopRemainingFrames} member set to #TRUE</li>
+            <li>If {@code pBeginInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR, the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#encode-rate-control-modes">rate control mode</a> is not #VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR or #VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR, and ##VkVideoEncodeAV1CapabilitiesKHR{@code ::requiresGopRemainingFrames} is #TRUE, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile the {@code pBeginInfo→videoSession} was created with, then the {@code pNext} chain of {@code pBeginInfo} <b>must</b> include an instance of the ##VkVideoEncodeAV1GopRemainingFrameInfoKHR with its {@code useGopRemainingFrames} member set to #TRUE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1144,7 +1170,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         Control video coding parameters.
 
         <h5>C Specification</h5>
-        To apply dynamic controls to the currently bound video session object, call:
+        To apply dynamic controls to the bound video session object, call:
 
         <pre><code>
 ￿void vkCmdControlVideoCodingKHR(

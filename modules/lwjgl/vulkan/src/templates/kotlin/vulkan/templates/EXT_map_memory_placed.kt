@@ -27,7 +27,7 @@ val EXT_map_memory_placed = "EXTMapMemoryPlaced".nativeClassVK("EXT_map_memory_p
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRMapMemory2 VK_KHR_map_memory2}</dd>
+            <dd>{@link KHRMapMemory2 VK_KHR_map_memory2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.4">Version 1.4</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -90,7 +90,7 @@ val EXT_map_memory_placed = "EXTMapMemoryPlaced".nativeClassVK("EXT_map_memory_p
     )
 
     EnumConstant(
-        "Extends {@code VkMemoryUnmapFlagBitsKHR}.",
+        "Extends {@code VkMemoryUnmapFlagBits}.",
 
         "MEMORY_UNMAP_RESERVE_BIT_EXT".enum(0x00000001)
     )

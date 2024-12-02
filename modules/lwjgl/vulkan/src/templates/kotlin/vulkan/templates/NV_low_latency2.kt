@@ -130,8 +130,8 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
         The members of the {@code VkOutOfBandQueueTypeNV} are used to describe the queue type in ##VkOutOfBandQueueTypeInfoNV as described below:
 
         <ul>
-            <li>#OUT_OF_BAND_QUEUE_TYPE_RENDER_NV indicates that work will be submitted to this queue.</li>
-            <li>#OUT_OF_BAND_QUEUE_TYPE_PRESENT_NV indicates that this queue will be presented from.</li>
+            <li>#OUT_OF_BAND_QUEUE_TYPE_RENDER_NV specifies that work will be submitted to this queue.</li>
+            <li>#OUT_OF_BAND_QUEUE_TYPE_PRESENT_NV specifies that this queue will be presented from.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -204,7 +204,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
 ￿    const VkLatencySleepInfoNV*                 pSleepInfo);</code></pre>
 
         <h5>Description</h5>
-        {@code vkLatencySleepNV} returns immediately. Applications <b>should</b> use #WaitSemaphores() with {@code pSleepInfo→signalSemaphore} to delay host CPU work. CPU work refers to application work done before presenting which includes but is not limited to: input sampling, simulation, command buffer recording, command buffer submission, and present submission. It is recommended to call this function before input sampling. When using this function, it <b>should</b> be called exactly once between presents.
+        {@code vkLatencySleepNV} returns immediately. Applications <b>should</b> use #WaitSemaphores() with {@code pSleepInfo→signalSemaphore} to delay host CPU work. CPU work refers to application work done before presenting which includes but is not limited to: input sampling, simulation, command buffer recording, command buffer submission, and present submission. Applications <b>should</b> call this function before input sampling, and exactly once between presents.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -305,7 +305,7 @@ val NV_low_latency2 = "NVLowLatency2".nativeClassVK("NV_low_latency2", type = "d
         Notify out of band queue.
 
         <h5>C Specification</h5>
-        An application can mark a queue as Out of Band to indicate that all {@code vkQueueSubmit} calls on this queue are ignored for latency evaluation by calling:
+        To mark a queue as <em>out of band</em>, so that all {@code vkQueueSubmit} calls on the queue are ignored for latency evaluation, call:
 
         <pre><code>
 ￿void vkQueueNotifyOutOfBandNV(

@@ -134,7 +134,7 @@ val STD_vulkan_video_codec_av1 = "STDVulkanVideoCodecAV1".nativeClassVK("STD_vul
         "{@code StdVideoAV1ColorPrimaries}",
 
         "AV1_COLOR_PRIMARIES_BT_709".enum("", "1"),
-        "AV1_COLOR_PRIMARIES_BT_UNSPECIFIED".enum(""),
+        "AV1_COLOR_PRIMARIES_UNSPECIFIED".enum(""),
         "AV1_COLOR_PRIMARIES_BT_470_M".enum(""),
         "AV1_COLOR_PRIMARIES_BT_470_B_G".enum(""),
         "AV1_COLOR_PRIMARIES_BT_601".enum(""),

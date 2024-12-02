@@ -90,12 +90,12 @@ val EXT_metal_objects = "EXTMetalObjects".nativeClassVK("EXT_metal_objects", typ
 
         <h5>Description</h5>
         <ul>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT indicates a Metal {@code MTLDevice} may be exported.</li>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT indicates a Metal {@code MTLCommandQueue} may be exported.</li>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT indicates a Metal {@code MTLBuffer} may be exported.</li>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT indicates a Metal {@code MTLTexture} may be exported.</li>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_IOSURFACE_BIT_EXT indicates a Metal {@code IOSurface} may be exported.</li>
-            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT indicates a Metal {@code MTLSharedEvent} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT specifies that a Metal {@code MTLDevice} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT specifies that a Metal {@code MTLCommandQueue} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT specifies that a Metal {@code MTLBuffer} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT specifies that a Metal {@code MTLTexture} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_IOSURFACE_BIT_EXT specifies that a Metal {@code IOSurface} may be exported.</li>
+            <li>#EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT specifies that a Metal {@code MTLSharedEvent} may be exported.</li>
         </ul>
 
         <h5>See Also</h5>

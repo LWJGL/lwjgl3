@@ -13,7 +13,7 @@ val AMD_shader_early_and_late_fragment_tests = "AMDShaderEarlyAndLateFragmentTes
         """
         This extension adds support for the <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_early_and_late_fragment_tests.html">{@code SPV_AMD_shader_early_and_late_fragment_tests}</a> extension, allowing shaders to explicitly opt in to allowing both early <em>and</em> late fragment tests with the {@code EarlyAndLateFragmentTestsAMD} execution mode.
 
-        If {@link EXTShaderStencilExport VK_EXT_shader_stencil_export} is supported, additional execution modes allowing early depth tests similar to {@code DepthUnchanged}, {@code DepthLess}, and {@code DepthGreater} are provided.
+        If the {@link EXTShaderStencilExport VK_EXT_shader_stencil_export} extension is supported, additional execution modes allowing early depth tests similar to {@code DepthUnchanged}, {@code DepthLess}, and {@code DepthGreater} are provided.
 
         <dl>
             <dt><b>Name String</b></dt>

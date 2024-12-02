@@ -113,7 +113,7 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
     )
 
     EnumConstantLong(
-        "Extends {@code VkPipelineCreateFlagBits2KHR}.",
+        "Extends {@code VkPipelineCreateFlagBits2}.",
 
         "PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR".enum(0x80000000L)
     )

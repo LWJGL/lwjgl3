@@ -545,7 +545,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code device} <b>must</b> support at least one queue family with one of the #QUEUE_COMPUTE_BIT or #QUEUE_GRAPHICS_BIT capabilities</li>
             <li>If the {@code stage} member of any element of {@code pCreateInfos} is #SHADER_STAGE_COMPUTE_BIT, {@code device} <b>must</b> support at least one queue family with the #QUEUE_COMPUTE_BIT capability</li>
             <li>If the {@code stage} member of any element of {@code pCreateInfos} is #SHADER_STAGE_TASK_BIT_EXT, #SHADER_STAGE_MESH_BIT_EXT, #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT, {@code device} <b>must</b> support at least one queue family with the #QUEUE_GRAPHICS_BIT capability</li>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
@@ -908,6 +907,8 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkGraphicsPipelineCreateInfo{@code ::pVertexInputState} values used to create the currently active pipeline.
 
         If drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or if the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE dynamic state enabled, then #CmdBindVertexBuffers2() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
+
+        The vertex attribute description for any location in the range <code>[0,##VkPhysicalDeviceLimits::maxVertexInputAttributes)</code> not specified in the {@code pVertexAttributeDescriptions} array becomes undefined.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2088,7 +2089,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿    VkLineRasterizationModeEXT                  lineRasterizationMode);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::lineRasterizationMode} value used to create the currently active pipeline.
+        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfo{@code ::lineRasterizationMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2099,9 +2100,9 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
                     <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
                 </ul>
             </li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2144,7 +2145,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿    VkBool32                                    stippledLineEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::stippledLineEnable} value used to create the currently active pipeline.
+        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfo{@code ::stippledLineEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

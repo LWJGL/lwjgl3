@@ -82,20 +82,20 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
 
         <h5>Description</h5>
         <ul>
-            <li>#SUBPASS_MERGE_STATUS_MERGED_EXT specifies the subpass is merged with a previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_DISALLOWED_EXT specifies the subpass is disallowed to merge with previous subpass. If the render pass does not allow subpass merging, then all subpass statuses are set to this value. If a subpass description does not allow subpass merging, then only that subpass’s status is set to this value.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT specifies the subpass is not merged because it contains side effects.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SAMPLES_MISMATCH_EXT specifies the subpass is not merged because sample count is not compatible with previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_VIEWS_MISMATCH_EXT specifies the subpass is not merged because view masks do not match with previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_ALIASING_EXT specifies the subpass is not merged because of attachments aliasing between them.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPENDENCIES_EXT specifies the subpass is not merged because subpass dependencies do not allow merging.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT_EXT specifies the subpass is not merged because input attachment is not a color attachment from previous subpass or the formats are incompatible.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_TOO_MANY_ATTACHMENTS_EXT specifies the subpass is not merged because of too many attachments.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INSUFFICIENT_STORAGE_EXT specifies the subpass is not merged because of insufficient memory.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPTH_STENCIL_COUNT_EXT specifies the subpass is not merged because of too many depth/stencil attachments.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_RESOLVE_ATTACHMENT_REUSE_EXT specifies the subpass is not merged because a resolve attachment is reused as an input attachment in a subsequent subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SINGLE_SUBPASS_EXT specifies the subpass is not merged because the render pass has only one subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT specifies other reasons why subpass is not merged. It is also the recommended default value that should be reported when a subpass is not merged and when no other value is appropriate.</li>
+            <li>#SUBPASS_MERGE_STATUS_MERGED_EXT specifies that the subpass is merged with a previous subpass.</li>
+            <li>#SUBPASS_MERGE_STATUS_DISALLOWED_EXT specifies that the subpass is not merged because merging was disabled using ##VkRenderPassCreationControlEXT. If the render pass does not allow subpass merging, then all subpass statuses are set to this value. If a subpass description does not allow subpass merging, then only that subpass’s status is set to this value.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT specifies that the subpass is not merged because it contains side effects.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SAMPLES_MISMATCH_EXT specifies that the subpass is not merged because sample count is not compatible with the previous subpass.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_VIEWS_MISMATCH_EXT specifies that the subpass is not merged because view masks do not match with previous subpass.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_ALIASING_EXT specifies that the subpass is not merged because of attachments aliasing between them.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPENDENCIES_EXT specifies that the subpass is not merged because subpass dependencies do not allow merging.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT_EXT specifies that the subpass is not merged because input attachment is not a color attachment from previous subpass or the formats are incompatible.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_TOO_MANY_ATTACHMENTS_EXT specifies that the subpass is not merged because of too many attachments.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INSUFFICIENT_STORAGE_EXT specifies that the subpass is not merged because of insufficient memory.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPTH_STENCIL_COUNT_EXT specifies that the subpass is not merged because of too many depth/stencil attachments.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_RESOLVE_ATTACHMENT_REUSE_EXT specifies that the subpass is not merged because a resolve attachment is reused as an input attachment in a subsequent subpass.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SINGLE_SUBPASS_EXT specifies that the subpass is not merged because the render pass has only one subpass.</li>
+            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT specifies that the subpass is not merged for unspecified reasons. Implementations <b>should</b> return this value when no other {@code VkSubpassMergeStatusEXT} value is appropriate.</li>
         </ul>
 
         <h5>See Also</h5>

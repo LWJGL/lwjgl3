@@ -13,6 +13,9 @@ val KHR_vertex_attribute_divisor = "KHRVertexAttributeDivisor".nativeClassVK("KH
         """
         This extension is based on the {@link EXTVertexAttributeDivisor VK_EXT_vertex_attribute_divisor} extension. The only difference is the new property {@code supportsNonZeroFirstInstance}, which indicates support for non-zero values in {@code firstInstance}. This allows the extension to be supported on implementations that have traditionally only supported OpenGL ES.
 
+        <h5>Promotion to Vulkan 1.4</h5>
+        Functionality in this extension is included in core Vulkan 1.4 with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_vertex_attribute_divisor}</dd>
@@ -28,6 +31,11 @@ val KHR_vertex_attribute_divisor = "KHRVertexAttributeDivisor".nativeClassVK("KH
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to Vulkan 1.4</li>
+            </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

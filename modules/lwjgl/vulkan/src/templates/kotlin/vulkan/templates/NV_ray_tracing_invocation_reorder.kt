@@ -214,8 +214,8 @@ val NV_ray_tracing_invocation_reorder = "NVRayTracingInvocationReorder".nativeCl
 
         <h5>Description</h5>
         <ul>
-            <li>#RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV indicates that the implementation is likely to not reorder at reorder calls.</li>
-            <li>#RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV indicates that the implementation is likely to reorder at reorder calls.</li>
+            <li>#RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV specifies that the implementation is likely to not reorder at reorder calls.</li>
+            <li>#RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV specifies that the implementation is likely to reorder at reorder calls.</li>
         </ul>
 
         <h5>See Also</h5>

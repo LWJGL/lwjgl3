@@ -55,7 +55,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."301"
+            "HEADER_VERSION".."303"
         )
 
         LongConstant(
@@ -196,7 +196,8 @@ fun templateCustomization() {
             "SUBPASS_EXTERNAL".."(~0)",
             "MAX_DEVICE_GROUP_SIZE".."32",
             "MAX_DRIVER_NAME_SIZE".."256",
-            "MAX_DRIVER_INFO_SIZE".."256"
+            "MAX_DRIVER_INFO_SIZE".."256",
+            "MAX_GLOBAL_PRIORITY_SIZE".."16"
         )
 
         FloatConstant(
@@ -515,6 +516,129 @@ fun templateCustomization() {
         IntConstant(
             "The API version number for Vulkan 1.3.",
             "API_VERSION_1_3".."VK_MAKE_API_VERSION(0, 1, 3, 0)"
+        )
+    }
+
+    VK14.apply {
+        documentation =
+            """
+            The core Vulkan 1.4 functionality.
+
+            Vulkan Version 1.4 <em>promoted</em> a number of key extensions into the core API:
+
+            ${ul(
+                KHR_dynamic_rendering_local_read.link,
+                KHR_global_priority.link,
+                KHR_index_type_uint8.link,
+                KHR_line_rasterization.link,
+                KHR_load_store_op_none.link,
+                KHR_maintenance5.link,
+                KHR_maintenance6.link,
+                KHR_map_memory2.link,
+                KHR_push_descriptor.link,
+                KHR_shader_expect_assume.link,
+                KHR_shader_float_controls2.link,
+                KHR_shader_subgroup_rotate.link,
+                KHR_vertex_attribute_divisor.link,
+                EXT_host_image_copy.link,
+                EXT_pipeline_protected_access.link,
+                EXT_pipeline_robustness.link
+            )}
+
+            All differences in behavior between these extensions and the corresponding Vulkan 1.4 functionality are summarized below.
+
+            <h3>Differences Relative to VK_KHR_dynamic_rendering_local_read</h3>
+
+            If the {@code VK_KHR_dynamic_rendering_local_read} extension is not supported, Vulkan 1.4 implementations must support local read only for storage
+            resources and single sampled color attachments.
+
+            Support for reading depth/stencil attachments and multi-sampled attachments are respectively gated behind the new boolean
+            {@code dynamicRenderingLocalReadDepthStencilAttachments} and {@code dynamicRenderingLocalReadMultisampledAttachments} properties.
+
+            If {@code dynamicRenderingLocalReadDepthStencilAttachments} is #FALSE, implementations do not support depth/stencil attachment access within
+            dynamic rendering.
+
+            If {@code dynamicRenderingLocalReadMultisampledAttachments} is #FALSE, implementations do not support multisampled attachment access within dynamic
+            rendering.
+
+            If both properties are #TRUE, the full functionality of the extension is supported.
+
+            <h3>Differences Relative to VK_EXT_host_image_copy</h3>
+
+            If the {@code VK_EXT_host_image_copy} extension is not supported, support for it is optional in Vulkan 1.4.
+
+            An implementation that has a #QUEUE_GRAPHICS_BIT queue must support either:
+            ${ul(
+                "the {@code hostImageCopy} feature; or",
+                "an additional queue that supports #QUEUE_TRANSFER_BIT."
+            )}
+
+            <h3>Differences Relative to VK_KHR_push_descriptor</h3>
+
+            {@code VK_KHR_push_descriptor} did not include a feature bit, so a new feature bit has been added to ##VkPhysicalDeviceVulkan14Features to gate its
+            functionality: {@code pushDescriptor}. Enabling this new feature has the same effect as enabling the extension.
+
+            <h3>Differences Relative to VK_EXT_pipeline_protected_access</h3>
+
+            {@code VK_EXT_pipeline_protected_access} is only useful when the {@code protectedMemory} feature is supported. As {@code protectedMemory} is
+            optional in core Vulkan, {@code pipelineProtectedAccess} is only required when {@code protectedMemory} is supported.
+
+            <h3>Differences Relative to VK_KHR_line_rasterization</h3>
+
+            The {@code bresenhamLines} feature is required, rather than just any one of the line style features.
+
+            <h3>Differences Relative to VK_KHR_shader_subgroup_rotate</h3>
+
+            The {@code shaderSubgroupRotateClustered} feature is required in addition to {@code shaderSubgroupRotate}.
+
+            <h3>Additional Vulkan 1.4 Feature Support</h3>
+
+            In addition to the promoted extensions described above, Vulkan 1.4 added required support for:
+            ${ul(
+                "All queues supporting #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT must also advertise #QUEUE_TRANSFER_BIT.",
+                """
+                Clustered subgroup operations must be advertised in Vulkan 1.4 via setting both #SUBGROUP_FEATURE_CLUSTERED_BIT and
+                #SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT (as an interaction with the promoted {@code VK_KHR_shader_subgroup_rotate} functionality) in
+                {@code supportedOperations}.
+                """,
+                """
+                The following features that were optional in earlier versions:
+                ${ul(
+                    "{@code fullDrawIndexUint32}",
+                    "{@code imageCubeArray}",
+                    "{@code independentBlend}",
+                    "{@code sampleRateShading}",
+                    "{@code drawIndirectFirstInstance}",
+                    "{@code depthClamp}",
+                    "{@code depthBiasClamp}",
+                    "{@code samplerAnisotropy}",
+                    "{@code fragmentStoresAndAtomics}",
+                    "{@code shaderStorageImageExtendedFormats}",
+                    "{@code shaderUniformBufferArrayDynamicIndexing}",
+                    "{@code shaderSampledImageArrayDynamicIndexing}",
+                    "{@code shaderStorageBufferArrayDynamicIndexing}",
+                    "{@code shaderStorageImageArrayDynamicIndexing}",
+                    "{@code shaderImageGatherExtended}",
+                    "{@code shaderInt16}",
+                    "{@code largePoints}",
+                    "{@code samplerYcbcrConversion}",
+                    "{@code storageBuffer16BitAccess}",
+                    "{@code variablePointers}",
+                    "{@code variablePointersStorageBuffer}",
+                    "{@code samplerMirrorClampToEdge}",
+                    "{@code scalarBlockLayout}",
+                    "{@code shaderUniformTexelBufferArrayDynamicIndexing}",
+                    "{@code shaderStorageTexelBufferArrayDynamicIndexing}",
+                    "{@code shaderInt8}",
+                    "{@code storageBuffer8BitAccess}",
+                )}
+                """
+            )}
+            """
+
+        IntConstant(
+            "The API version number for Vulkan 1.4.",
+            "API_VERSION_1_4".."VK_MAKE_API_VERSION(0, 1, 4, 0)"
         )
     }
 

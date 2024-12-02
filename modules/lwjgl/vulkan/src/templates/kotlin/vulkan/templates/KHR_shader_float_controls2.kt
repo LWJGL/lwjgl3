@@ -15,6 +15,9 @@ val KHR_shader_float_controls2 = "KHRShaderFloatControls2".nativeClassVK("KHR_sh
 
         The extension also adds control over the fast-math modes to the GLSL extended instruction set, making these operations more consistent with SPIR-V and allowing their use in situations where floating-point conformance is important.
 
+        <h5>Promotion to Vulkan 1.4</h5>
+        Functionality in this extension is included in core Vulkan 1.4 with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_float_controls2}</dd>
@@ -34,6 +37,11 @@ val KHR_shader_float_controls2 = "KHRShaderFloatControls2".nativeClassVK("KHR_sh
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>
                 <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_float_controls2.html">SPV_KHR_float_controls2</a></li>
+            </ul></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to Vulkan 1.4</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

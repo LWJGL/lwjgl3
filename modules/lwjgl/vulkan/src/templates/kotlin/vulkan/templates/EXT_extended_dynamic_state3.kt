@@ -52,8 +52,8 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
                 <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3DepthClampEnable</li>
                 <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3LogicOpEnable</li>
                 <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3PolygonMode</li>
+                <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3RasterizationStream</li>
                 <li>Interacts with VkPhysicalDeviceExtendedDynamicState3FeaturesEXT::extendedDynamicState3TessellationDomainOrigin</li>
-                <li>Interacts with VkPhysicalDeviceMeshShaderFeaturesEXT::extendedDynamicState3RasterizationStream</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -1230,7 +1230,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 ￿    VkLineRasterizationModeEXT                  lineRasterizationMode);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::lineRasterizationMode} value used to create the currently active pipeline.
+        This command sets the {@code lineRasterizationMode} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfo{@code ::lineRasterizationMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1241,9 +1241,9 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
                     <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature is enabled</li>
                 </ul>
             </li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-smoothLines">{@code smoothLines}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1286,7 +1286,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 ￿    VkBool32                                    stippledLineEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoKHR{@code ::stippledLineEnable} value used to create the currently active pipeline.
+        This command sets the {@code stippledLineEnable} state for subsequent drawing commands when drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfo{@code ::stippledLineEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

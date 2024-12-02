@@ -81,7 +81,7 @@ val ARM_scheduling_controls = "ARMSchedulingControls".nativeClassVK("ARM_schedul
 
         <h5>Description</h5>
         <ul>
-            <li>#PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM indicates that a ##VkDeviceQueueShaderCoreControlCreateInfoARM structure <b>may</b> be included in the {@code pNext} chain of a ##VkDeviceQueueCreateInfo or ##VkDeviceCreateInfo structure.</li>
+            <li>#PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM specifies that a ##VkDeviceQueueShaderCoreControlCreateInfoARM structure <b>may</b> be included in the {@code pNext} chain of a ##VkDeviceQueueCreateInfo or ##VkDeviceCreateInfo structure.</li>
         </ul>
         """,
 

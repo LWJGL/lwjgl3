@@ -32,6 +32,7 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
             <dt><b>API Interactions</b></dt>
             <dd><ul>
                 <li>Interacts with VK_VERSION_1_3</li>
+                <li>Interacts with VK_VERSION_1_4</li>
                 <li>Interacts with VK_KHR_dynamic_rendering</li>
                 <li>Interacts with VK_KHR_maintenance5</li>
             </ul></dd>

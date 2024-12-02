@@ -34,7 +34,12 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRLineRasterization VK_KHR_line_rasterization} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRLineRasterization VK_KHR_line_rasterization} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>
@@ -92,34 +97,17 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
     )
 
     EnumConstant(
-        """
-        VkLineRasterizationModeKHR - Line rasterization modes
+        "Extends {@code VkLineRasterizationMode}.",
 
-        <h5>Description</h5>
-        <ul>
-            <li>#LINE_RASTERIZATION_MODE_DEFAULT_KHR is equivalent to #LINE_RASTERIZATION_MODE_RECTANGULAR_KHR if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE, otherwise lines are drawn as non-{@code strictLines} parallelograms. Both of these modes are defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#primsrast-lines-basic">Basic Line Segment Rasterization</a>.</li>
-            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_KHR specifies lines drawn as if they were rectangles extruded from the line</li>
-            <li>#LINE_RASTERIZATION_MODE_BRESENHAM_KHR specifies lines drawn by determining which pixel diamonds the line intersects and exits, as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#primsrast-lines-bresenham">Bresenham Line Segment Rasterization</a>.</li>
-            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR specifies lines drawn if they were rectangles extruded from the line, with alpha falloff, as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#primsrast-lines-smooth">Smooth Lines</a>.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkPipelineRasterizationLineStateCreateInfoKHR, #CmdSetLineRasterizationModeEXT()
-        """,
-
-        "LINE_RASTERIZATION_MODE_DEFAULT_KHR".."0",
         "LINE_RASTERIZATION_MODE_DEFAULT_EXT".."0",
-        "LINE_RASTERIZATION_MODE_RECTANGULAR_KHR".."1",
         "LINE_RASTERIZATION_MODE_RECTANGULAR_EXT".."1",
-        "LINE_RASTERIZATION_MODE_BRESENHAM_KHR".."2",
         "LINE_RASTERIZATION_MODE_BRESENHAM_EXT".."2",
-        "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_KHR".."3",
         "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT".."3"
     )
 
     void(
         "CmdSetLineStippleEXT",
-        "See #CmdSetLineStippleKHR().",
+        "See #CmdSetLineStipple().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         uint32_t("lineStippleFactor", "the repeat factor used in stippled line rasterization."),

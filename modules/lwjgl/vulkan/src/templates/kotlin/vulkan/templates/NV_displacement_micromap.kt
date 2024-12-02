@@ -108,9 +108,9 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
 
         <h5>Description</h5>
         <ul>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV indicates that the given micromap format encodes 64 micro-triangles worth of displacements in 64 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 256 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
-            <li>#DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV indicates that the given micromap format encodes 1024 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV specifies that the given micromap format encodes 64 micro-triangles worth of displacements in 64 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV specifies that the given micromap format encodes 256 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
+            <li>#DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV specifies that the given micromap format encodes 1024 micro-triangles worth of displacements in 128 bytes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

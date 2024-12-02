@@ -13,6 +13,13 @@ val KHR_load_store_op_none = "KHRLoadStoreOpNone".nativeClassVK("KHR_load_store_
         """
         This extension provides #ATTACHMENT_LOAD_OP_NONE_KHR and #ATTACHMENT_STORE_OP_NONE_KHR, which are identically promoted from the {@link EXTLoadStoreOpNone VK_EXT_load_store_op_none} extension.
 
+        <h5>Promotion to Vulkan 1.4</h5>
+        Functionality in this extension is included in core Vulkan 1.4 with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        While #ATTACHMENT_STORE_OP_NONE is part of Vulkan 1.3, this extension was not promoted to core Vulkan 1.3 either in whole or in part. This functionality was promoted from {@link KHRDynamicRendering VK_KHR_dynamic_rendering}.
+        </div>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_load_store_op_none}</dd>
@@ -25,6 +32,11 @@ val KHR_load_store_op_none = "KHRLoadStoreOpNone".nativeClassVK("KHR_load_store_
 
             <dt><b>Revision</b></dt>
             <dd>1</dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to Vulkan 1.4</li>
+            </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

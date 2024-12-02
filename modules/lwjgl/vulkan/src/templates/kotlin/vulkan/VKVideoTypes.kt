@@ -829,7 +829,7 @@ val StdVideoDecodeH265ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeH265R
     int32_t("PicOrderCntVal", "")
 }
 
-// vulkan_video_code_h265std_encode
+// vulkan_video_code_h265std_encode.h
 
 val StdVideoEncodeH265WeightTableFlags = struct(Module.VULKAN, "StdVideoEncodeH265WeightTableFlags") {
     subpackage = "video"
@@ -1220,7 +1220,7 @@ val StdVideoAV1SequenceHeader = struct(Module.VULKAN, "StdVideoAV1SequenceHeader
     StdVideoAV1TimingInfo.const.p("pTimingInfo", "")
 }
 
-// vulkan_video_code_av1std_decode
+// vulkan_video_codec_av1std_decode.h
 
 val StdVideoDecodeAV1PictureInfoFlags = struct(Module.VULKAN, "StdVideoDecodeAV1PictureInfoFlags") {
     subpackage = "video"
@@ -1304,4 +1304,131 @@ val StdVideoDecodeAV1ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeAV1Ref
     uint8_t("RefFrameSignBias", "")
     uint8_t("OrderHint", "")
     uint8_t("SavedOrderHints", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
+}
+
+// vulkan_video_codec_av1std_encode.h
+
+val StdVideoEncodeAV1DecoderModelInfo = struct(Module.VULKAN, "StdVideoEncodeAV1DecoderModelInfo") {
+    subpackage = "video"
+
+    uint8_t("buffer_delay_length_minus_1", "")
+    uint8_t("buffer_removal_time_length_minus_1", "")
+    uint8_t("frame_presentation_time_length_minus_1", "")
+    uint8_t("reserved1", "").private()
+    uint32_t("num_units_in_decoding_tick", "")
+}
+
+val StdVideoEncodeAV1ExtensionHeader = struct(Module.VULKAN, "StdVideoEncodeAV1ExtensionHeader") {
+    subpackage = "video"
+
+    uint8_t("temporal_id", "")
+    uint8_t("spatial_id", "")
+}
+
+val StdVideoEncodeAV1OperatingPointInfoFlags = struct(Module.VULKAN, "StdVideoEncodeAV1OperatingPointInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("decoder_model_present_for_this_op", "", bits = 1)
+    uint32_tb("low_delay_mode_flag", "", bits = 1)
+    uint32_tb("initial_display_delay_present_for_this_op", "", bits = 1)
+    uint32_t("reserved", "", bits = 29).private()
+}
+
+val StdVideoEncodeAV1OperatingPointInfo = struct(Module.VULKAN, "StdVideoEncodeAV1OperatingPointInfo") {
+    subpackage = "video"
+
+    StdVideoEncodeAV1OperatingPointInfoFlags("flags", "")
+    uint16_t("operating_point_idc", "")
+    uint8_t("seq_level_idx", "")
+    uint8_t("seq_tier", "")
+    uint32_t("decoder_buffer_delay", "")
+    uint32_t("encoder_buffer_delay", "")
+    uint8_t("initial_display_delay_minus_1", "")
+}
+
+val StdVideoEncodeAV1PictureInfoFlags = struct(Module.VULKAN, "StdVideoEncodeAV1PictureInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("error_resilient_mode", "", bits = 1)
+    uint32_tb("disable_cdf_update", "", bits = 1)
+    uint32_tb("use_superres", "", bits = 1)
+    uint32_tb("render_and_frame_size_different", "", bits = 1)
+    uint32_tb("allow_screen_content_tools", "", bits = 1)
+    uint32_tb("is_filter_switchable", "", bits = 1)
+    uint32_tb("force_integer_mv", "", bits = 1)
+    uint32_tb("frame_size_override_flag", "", bits = 1)
+    uint32_tb("buffer_removal_time_present_flag", "", bits = 1)
+    uint32_tb("allow_intrabc", "", bits = 1)
+    uint32_tb("frame_refs_short_signaling", "", bits = 1)
+    uint32_tb("allow_high_precision_mv", "", bits = 1)
+    uint32_tb("is_motion_mode_switchable", "", bits = 1)
+    uint32_tb("use_ref_frame_mvs", "", bits = 1)
+    uint32_tb("disable_frame_end_update_cdf", "", bits = 1)
+    uint32_tb("allow_warped_motion", "", bits = 1)
+    uint32_tb("reduced_tx_set", "", bits = 1)
+    uint32_tb("skip_mode_present", "", bits = 1)
+    uint32_tb("delta_q_present", "", bits = 1)
+    uint32_tb("delta_lf_present", "", bits = 1)
+    uint32_tb("delta_lf_multi", "", bits = 1)
+    uint32_tb("segmentation_enabled", "", bits = 1)
+    uint32_tb("segmentation_update_map", "", bits = 1)
+    uint32_tb("segmentation_temporal_update", "", bits = 1)
+    uint32_tb("segmentation_update_data", "", bits = 1)
+    uint32_tb("UsesLr", "", bits = 1)
+    uint32_tb("usesChromaLr", "", bits = 1)
+    uint32_tb("show_frame", "", bits = 1)
+    uint32_tb("showable_frame", "", bits = 1)
+    uint32_t("reserved", "", bits = 3).private()
+}
+
+val StdVideoEncodeAV1PictureInfo = struct(Module.VULKAN, "StdVideoEncodeAV1PictureInfo") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*")
+
+    StdVideoEncodeAV1PictureInfoFlags("flags", "")
+    StdVideoAV1FrameType("frame_type", "")
+    uint32_t("frame_presentation_time", "")
+    uint32_t("current_frame_id", "")
+    uint8_t("order_hint", "")
+    uint8_t("primary_ref_frame", "")
+    uint8_t("refresh_frame_flags", "")
+    uint8_t("coded_denom", "")
+    uint16_t("render_width_minus_1", "")
+    uint16_t("render_height_minus_1", "")
+    StdVideoAV1InterpolationFilter("interpolation_filter", "")
+    StdVideoAV1TxMode("TxMode", "")
+    uint8_t("delta_q_res", "")
+    uint8_t("delta_lf_res", "")
+    uint8_t("ref_order_hint", "")["STD_VIDEO_AV1_NUM_REF_FRAMES"]
+    int8_t("ref_frame_idx", "")["STD_VIDEO_AV1_REFS_PER_FRAME"]
+    uint8_t("reserved1", "")[3].private()
+    uint32_t("delta_frame_id_minus_1", "")["STD_VIDEO_AV1_REFS_PER_FRAME"]
+    StdVideoAV1TileInfo.const.p("pTileInfo", "")
+    StdVideoAV1Quantization.const.p("pQuantization", "")
+    StdVideoAV1Segmentation.const.p("pSegmentation", "")
+    StdVideoAV1LoopFilter.const.p("pLoopFilter", "")
+    StdVideoAV1CDEF.const.p("pCDEF", "")
+    StdVideoAV1LoopRestoration.const.p("pLoopRestoration", "")
+    StdVideoAV1GlobalMotion.const.p("pGlobalMotion", "")
+    StdVideoEncodeAV1ExtensionHeader.const.p("pExtensionHeader", "")
+    uint32_t.const.p("pBufferRemovalTimes", "")
+}
+
+val StdVideoEncodeAV1ReferenceInfoFlags = struct(Module.VULKAN, "StdVideoEncodeAV1ReferenceInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("disable_frame_end_update_cdf", "", bits = 1)
+    uint32_tb("segmentation_enabled", "", bits = 1)
+    uint32_t("reserved", "", bits = 30).private()
+}
+
+val StdVideoEncodeAV1ReferenceInfo = struct(Module.VULKAN, "StdVideoEncodeAV1ReferenceInfo") {
+    subpackage = "video"
+
+    StdVideoEncodeAV1ReferenceInfoFlags("flags", "")
+    uint32_t("RefFrameId", "")
+    StdVideoAV1FrameType("frame_type", "")
+    uint8_t("OrderHint", "")
+    uint8_t("reserved1", "")[3].private()
+    StdVideoEncodeAV1ExtensionHeader.const.p("pExtensionHeader", "")
 }

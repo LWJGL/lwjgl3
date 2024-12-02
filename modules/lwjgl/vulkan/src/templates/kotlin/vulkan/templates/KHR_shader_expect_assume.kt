@@ -13,6 +13,9 @@ val KHR_shader_expect_assume = "KHRShaderExpectAssume".nativeClassVK("KHR_shader
         """
         This extension allows the use of the {@code SPV_KHR_expect_assume} extension in SPIR-V shader modules which enables SPIR-V producers to provide optimization hints to the Vulkan implementation.
 
+        <h5>Promotion to Vulkan 1.4</h5>
+        Functionality in this extension is included in core Vulkan 1.4 with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_expect_assume}</dd>
@@ -32,6 +35,11 @@ val KHR_shader_expect_assume = "KHRShaderExpectAssume".nativeClassVK("KHR_shader
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>
                 <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_expect_assume.html">SPV_KHR_expect_assume</a></li>
+            </ul></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to Vulkan 1.4</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

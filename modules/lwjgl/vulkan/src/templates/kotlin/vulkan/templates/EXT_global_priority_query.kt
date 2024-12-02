@@ -31,7 +31,12 @@ val EXT_global_priority_query = "EXTGlobalPriorityQuery".nativeClassVK("EXT_glob
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

@@ -34,7 +34,12 @@ val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uin
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRIndexTypeUint8 VK_KHR_index_type_uint8} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

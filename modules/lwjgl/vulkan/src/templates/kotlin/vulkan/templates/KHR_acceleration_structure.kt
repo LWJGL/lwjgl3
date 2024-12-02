@@ -232,16 +232,16 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Description</h5>
         <ul>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR indicates that the specified acceleration structure <b>can</b> be updated with a {@code mode} of #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR in ##VkAccelerationStructureBuildGeometryInfoKHR or an {@code update} of #TRUE in #CmdBuildAccelerationStructureNV() .</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR indicates that the specified acceleration structure <b>can</b> act as the source for a copy acceleration structure command with {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR to produce a compacted acceleration structure.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR indicates that this acceleration structure <b>should</b> minimize the size of the scratch memory and the final result acceleration structure, potentially at the expense of build time or trace performance.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_UPDATE_EXT indicates that the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT indicates that the data of the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT indicates that the specified acceleration structure <b>may</b> be referenced in an instance with #GEOMETRY_INSTANCE_DISABLE_OPACITY_MICROMAPS_EXT set.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DATA_ACCESS_KHR indicates that the specified acceleration structure <b>can</b> be used when fetching the vertex positions of a hit triangle.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV indicates that the displacement micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR specifies that the specified acceleration structure <b>can</b> be updated with a {@code mode} of #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR in ##VkAccelerationStructureBuildGeometryInfoKHR or an {@code update} of #TRUE in #CmdBuildAccelerationStructureNV() .</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR specifies that the specified acceleration structure <b>can</b> act as the source for a copy acceleration structure command with {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR to produce a compacted acceleration structure.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR specifies that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR specifies that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR specifies that this acceleration structure <b>should</b> minimize the size of the scratch memory and the final result acceleration structure, potentially at the expense of build time or trace performance.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_UPDATE_EXT specifies that the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT specifies that the data of the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT specifies that the specified acceleration structure <b>may</b> be referenced in an instance with #GEOMETRY_INSTANCE_DISABLE_OPACITY_MICROMAPS_EXT set.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DATA_ACCESS_KHR specifies that the specified acceleration structure <b>can</b> be used when fetching the vertex positions of a hit triangle.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV specifies that the displacement micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -304,8 +304,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Description</h5>
         <ul>
-            <li>#GEOMETRY_OPAQUE_BIT_KHR indicates that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
-            <li>#GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR indicates that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
+            <li>#GEOMETRY_OPAQUE_BIT_KHR specifies that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
+            <li>#GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR specifies that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
         </ul>
         """,
 
@@ -340,7 +340,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <h5>Description</h5>
         <ul>
             <li>#GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR disables face culling for this instance.</li>
-            <li>#GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR indicates that the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#ray-traversal-culling-face">facing determination</a> for geometry in this instance is inverted. Because the facing is determined in object space, an instance transform does not change the winding, but a geometry transform does.</li>
+            <li>#GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR specifies that the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#ray-traversal-culling-face">facing determination</a> for geometry in this instance is inverted. Because the facing is determined in object space, an instance transform does not change the winding, but a geometry transform does.</li>
             <li>#GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR causes this instance to act as though #GEOMETRY_OPAQUE_BIT_KHR were specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the SPIR-V {@code NoOpaqueKHR} ray flag.</li>
             <li>#GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR causes this instance to act as though #GEOMETRY_OPAQUE_BIT_KHR were not specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the SPIR-V {@code OpaqueKHR} ray flag.</li>
         </ul>

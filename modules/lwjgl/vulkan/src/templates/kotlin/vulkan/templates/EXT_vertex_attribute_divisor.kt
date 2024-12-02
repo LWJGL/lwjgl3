@@ -64,7 +64,12 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRVertexAttributeDivisor VK_KHR_vertex_attribute_divisor} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRVertexAttributeDivisor VK_KHR_vertex_attribute_divisor} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

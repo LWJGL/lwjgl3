@@ -169,11 +169,11 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
 
     void(
         "GetImageSubresourceLayout2EXT",
-        "See #GetImageSubresourceLayout2KHR().",
+        "See #GetImageSubresourceLayout2().",
 
         VkDevice("device", "the logical device that owns the image."),
         VkImage("image", "the image whose layout is being queried."),
-        VkImageSubresource2KHR.const.p("pSubresource", "a pointer to a ##VkImageSubresource2KHR structure selecting a specific image for the image subresource."),
-        VkSubresourceLayout2KHR.p("pLayout", "a pointer to a ##VkSubresourceLayout2KHR structure in which the layout is returned.")
+        VkImageSubresource2.const.p("pSubresource", "a pointer to a ##VkImageSubresource2 structure selecting a specific image for the image subresource."),
+        VkSubresourceLayout2.p("pLayout", "a pointer to a ##VkSubresourceLayout2 structure in which the layout is returned.")
     )
 }

@@ -24,7 +24,7 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
             <dd>31</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -35,13 +35,14 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2020-04-03</dd>
+            <dd>2024-11-04</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Eric Werness, NVIDIA</li>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Daniel Koch, NVIDIA</li>
+                <li>Liam Middlebrook, NVIDIA</li>
             </ul></dd>
         </dl>
         """
@@ -49,7 +50,7 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
     IntConstant(
         "The extension specification version.",
 
-        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."2"
+        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -75,6 +76,33 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
 
         <pre><code>
 ￿uint32_t vkGetImageViewHandleNVX(
+￿    VkDevice                                    device,
+￿    const VkImageViewHandleInfoNVX*             pInfo);</code></pre>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkImageViewHandleInfoNVX structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkImageViewHandleInfoNVX
+        """,
+
+        VkDevice("device", "the logical device that owns the image view."),
+        VkImageViewHandleInfoNVX.const.p("pInfo", "describes the image view to query and type of handle.")
+    )
+
+    uint64_t(
+        "GetImageViewHandle64NVX",
+        """
+        Get the 64-bit handle for an image view for a specific descriptor type.
+
+        <h5>C Specification</h5>
+        To get the 64-bit handle for an image view, call:
+
+        <pre><code>
+￿uint64_t vkGetImageViewHandle64NVX(
 ￿    VkDevice                                    device,
 ￿    const VkImageViewHandleInfoNVX*             pInfo);</code></pre>
 

@@ -233,8 +233,8 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
 
         <h5>Description</h5>
         <ul>
-            <li>#BUILD_MICROMAP_PREFER_FAST_TRACE_BIT_EXT indicates that the given micromap build <b>should</b> prioritize trace performance over build time.</li>
-            <li>#BUILD_MICROMAP_PREFER_FAST_BUILD_BIT_EXT indicates that the given micromap build <b>should</b> prioritize build time over trace performance.</li>
+            <li>#BUILD_MICROMAP_PREFER_FAST_TRACE_BIT_EXT specifies that the given micromap build <b>should</b> prioritize trace performance over build time.</li>
+            <li>#BUILD_MICROMAP_PREFER_FAST_BUILD_BIT_EXT specifies that the given micromap build <b>should</b> prioritize build time over trace performance.</li>
         </ul>
         """,
 
@@ -300,8 +300,8 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
 
         <h5>Description</h5>
         <ul>
-            <li>#OPACITY_MICROMAP_FORMAT_2_STATE_EXT indicates that the given micromap format has one bit per subtriangle encoding either fully opaque or fully transparent.</li>
-            <li>#OPACITY_MICROMAP_FORMAT_4_STATE_EXT indicates that the given micromap format has two bits per subtriangle encoding four modes which can be interpreted as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#ray-opacity-micromap">ray traversal</a>.</li>
+            <li>#OPACITY_MICROMAP_FORMAT_2_STATE_EXT specifies that the given micromap format has one bit per subtriangle encoding either fully opaque or fully transparent.</li>
+            <li>#OPACITY_MICROMAP_FORMAT_4_STATE_EXT specifies that the given micromap format has two bits per subtriangle encoding four modes which can be interpreted as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#ray-opacity-micromap">ray traversal</a>.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

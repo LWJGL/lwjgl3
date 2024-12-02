@@ -137,8 +137,23 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkCuModuleTexturingModeCreateInfoNVX</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
+        </ul>
+
+        There is currently no specification language written for this type. This section acts only as placeholder and to avoid dead links in the specification and reference pages.
+
+        <pre><code>
+￿typedef struct VkCuModuleTexturingModeCreateInfoNVX {
+￿    VkStructureType    sType;
+￿    const void*        pNext;
+￿    VkBool32           use64bitTexturing;
+￿} VkCuModuleTexturingModeCreateInfoNVX;</code></pre>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX</li>
         </ul>
 
         There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.
@@ -224,7 +239,7 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
             <dd>30</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
@@ -241,7 +256,7 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-04-09</dd>
+            <dd>2024-11-04</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -254,7 +269,7 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
     IntConstant(
         "The extension specification version.",
 
-        "NVX_BINARY_IMPORT_SPEC_VERSION".."1"
+        "NVX_BINARY_IMPORT_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -268,7 +283,8 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
 
         "STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX".."1000029000",
         "STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX".."1000029001",
-        "STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX".."1000029002"
+        "STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX".."1000029002",
+        "STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX".."1000029004"
     )
 
     EnumConstant(

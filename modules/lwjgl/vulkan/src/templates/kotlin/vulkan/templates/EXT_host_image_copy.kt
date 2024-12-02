@@ -15,6 +15,18 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 
         To support initializing a new image in preparation for a host copy, it is now possible to transition a new image to #IMAGE_LAYOUT_GENERAL or other host-copyable layouts via #TransitionImageLayoutEXT(). Additionally, it is possible to perform copies that preserve the swizzling layout of the image by using the #HOST_IMAGE_COPY_MEMCPY_EXT flag. In that case, the memory size needed for copies to or from a buffer can be retrieved by chaining ##VkSubresourceHostMemcpySizeEXT to {@code pLayout} in #GetImageSubresourceLayout2EXT().
 
+        <h5>Promotion to Vulkan 1.4</h5>
+        Functionality in this extension is included in core Vulkan 1.4, with the EXT suffix omitted. However, the feature is made optional in Vulkan 1.4. The original type, enum and command names are still available as aliases of the core functionality.
+
+        A Vulkan 1.4 implementation that has a #QUEUE_GRAPHICS_BIT queue must support either:
+
+        <ul>
+            <li>the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-hostImageCopy">{@code hostImageCopy}</a> feature; or</li>
+            <li>an additional queue that supports #QUEUE_TRANSFER_BIT.</li>
+        </ul>
+
+        Additionally, all queues supporting #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT must also advertise #QUEUE_TRANSFER_BIT.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_host_image_copy}</dd>
@@ -30,6 +42,11 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRCopyCommands2 VK_KHR_copy_commands2} and {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
+
+            <dt><b>Deprecation State</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to Vulkan 1.4</li>
+            </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -98,223 +115,51 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
     )
 
     EnumConstant(
-        """
-        VkHostImageCopyFlagBitsEXT - Bitmask specifying additional copy parameters
-
-        <h5>Description</h5>
-        <ul>
-            <li>#HOST_IMAGE_COPY_MEMCPY_EXT specifies that no memory layout swizzling is to be applied during data copy. For copies between memory and images, this flag indicates that image data in host memory is swizzled in exactly the same way as the image data on the device. Using this flag indicates that the implementations <b>may</b> use a simple memory copy to transfer the data between the host memory and the device memory. The format of the swizzled data in host memory is platform dependent and is not defined in this specification.</li>
-        </ul>
-        """,
+        "Extends {@code VkHostImageCopyFlagBits}.",
 
         "HOST_IMAGE_COPY_MEMCPY_EXT".enum(0x00000001)
     )
 
     VkResult(
         "CopyMemoryToImageEXT",
-        """
-        Copy data from host memory into an image.
-
-        <h5>C Specification</h5>
-        To copy data from host memory to an image object, call:
-
-        <pre><code>
-￿VkResult vkCopyMemoryToImageEXT(
-￿    VkDevice                                    device,
-￿    const VkCopyMemoryToImageInfoEXT*           pCopyMemoryToImageInfo);</code></pre>
-
-        <h5>Description</h5>
-        This command is functionally similar to #CmdCopyBufferToImage2(), except it is executed on the host and reads from host memory instead of a buffer. The memory of {@code pCopyMemoryToImageInfo→dstImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#memory-coherent">coherent</a>.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation on the device.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCopyMemoryToImageInfo} <b>must</b> be a valid pointer to a valid ##VkCopyMemoryToImageInfoEXT structure</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_MEMORY_MAP_FAILED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkCopyMemoryToImageInfoEXT
-        """,
+        "See #CopyMemoryToImage().",
 
         VkDevice("device", "the device which owns {@code pCopyMemoryToImageInfo→dstImage}."),
-        VkCopyMemoryToImageInfoEXT.const.p("pCopyMemoryToImageInfo", "a pointer to a ##VkCopyMemoryToImageInfoEXT structure describing the copy parameters.")
+        VkCopyMemoryToImageInfo.const.p("pCopyMemoryToImageInfo", "a pointer to a ##VkCopyMemoryToImageInfo structure describing the copy parameters.")
     )
 
     VkResult(
         "CopyImageToMemoryEXT",
-        """
-        Copy image data into host memory.
-
-        <h5>C Specification</h5>
-        To copy data from an image object to host memory, call:
-
-        <pre><code>
-￿VkResult vkCopyImageToMemoryEXT(
-￿    VkDevice                                    device,
-￿    const VkCopyImageToMemoryInfoEXT*           pCopyImageToMemoryInfo);</code></pre>
-
-        <h5>Description</h5>
-        This command is functionally similar to #CmdCopyImageToBuffer2(), except it is executed on the host and writes to host memory instead of a buffer. The memory of {@code pCopyImageToMemoryInfo→srcImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#memory-coherent">coherent</a>.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        If the device has written to the image memory, it is not automatically made available to the host. Before this copy command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> including #PIPELINE_STAGE_HOST_BIT and #ACCESS_HOST_READ_BIT.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCopyImageToMemoryInfo} <b>must</b> be a valid pointer to a valid ##VkCopyImageToMemoryInfoEXT structure</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_MEMORY_MAP_FAILED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkCopyImageToMemoryInfoEXT
-        """,
+        "See #CopyImageToMemory().",
 
         VkDevice("device", "the device which owns {@code pCopyImageToMemoryInfo→srcImage}."),
-        VkCopyImageToMemoryInfoEXT.const.p("pCopyImageToMemoryInfo", "a pointer to a ##VkCopyImageToMemoryInfoEXT structure describing the copy parameters.")
+        VkCopyImageToMemoryInfo.const.p("pCopyImageToMemoryInfo", "a pointer to a ##VkCopyImageToMemoryInfo structure describing the copy parameters.")
     )
 
     VkResult(
         "CopyImageToImageEXT",
-        """
-        Copy image data using the host.
-
-        <h5>C Specification</h5>
-        To copy data from an image object to another image object using the host, call:
-
-        <pre><code>
-￿VkResult vkCopyImageToImageEXT(
-￿    VkDevice                                    device,
-￿    const VkCopyImageToImageInfoEXT*            pCopyImageToImageInfo);</code></pre>
-
-        <h5>Description</h5>
-        This command is functionally similar to #CmdCopyImage2(), except it is executed on the host. The memory of {@code pCopyImageToImageInfo→srcImage} and {@code pCopyImageToImageInfo→dstImage} is accessed by the host as if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#memory-coherent">coherent</a>.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        If the device has written to the memory of {@code pCopyImageToImageInfo→srcImage}, it is not automatically made available to the host. Before this copy command can be called, a memory barrier for this image <b>must</b> have been issued on the device with the second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> including #PIPELINE_STAGE_HOST_BIT and #ACCESS_HOST_READ_BIT.
-
-        Because queue submissions <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#synchronization-submission-host-writes">automatically make host memory visible to the device</a>, there would not be a need for a memory barrier before using the results of this copy operation in {@code pCopyMemoryToImageInfo→dstImage} on the device.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCopyImageToImageInfo} <b>must</b> be a valid pointer to a valid ##VkCopyImageToImageInfoEXT structure</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_MEMORY_MAP_FAILED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkCopyImageToImageInfoEXT
-        """,
+        "See #CopyImageToImage().",
 
         VkDevice("device", "the device which owns {@code pCopyImageToImageInfo→srcImage} and {@code pCopyImageToImageInfo→dstImage}."),
-        VkCopyImageToImageInfoEXT.const.p("pCopyImageToImageInfo", "a pointer to a ##VkCopyImageToImageInfoEXT structure describing the copy parameters.")
+        VkCopyImageToImageInfo.const.p("pCopyImageToImageInfo", "a pointer to a ##VkCopyImageToImageInfo structure describing the copy parameters.")
     )
 
     VkResult(
         "TransitionImageLayoutEXT",
-        """
-        Perform an image layout transition on the host.
-
-        <h5>C Specification</h5>
-        To perform an image layout transition on the host, call:
-
-        <pre><code>
-￿VkResult vkTransitionImageLayoutEXT(
-￿    VkDevice                                    device,
-￿    uint32_t                                    transitionCount,
-￿    const VkHostImageLayoutTransitionInfoEXT*   pTransitions);</code></pre>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pTransitions} <b>must</b> be a valid pointer to an array of {@code transitionCount} valid ##VkHostImageLayoutTransitionInfoEXT structures</li>
-            <li>{@code transitionCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_MEMORY_MAP_FAILED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkHostImageLayoutTransitionInfoEXT
-        """,
+        "See #TransitionImageLayout().",
 
         VkDevice("device", "the device which owns {@code pTransitions}[i].{@code image}."),
         AutoSize("pTransitions")..uint32_t("transitionCount", "the number of image layout transitions to perform."),
-        VkHostImageLayoutTransitionInfoEXT.const.p("pTransitions", "a pointer to an array of ##VkHostImageLayoutTransitionInfoEXT structures specifying the image and <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#resources-image-views\">subresource ranges</a> within them to transition.")
+        VkHostImageLayoutTransitionInfo.const.p("pTransitions", "a pointer to an array of ##VkHostImageLayoutTransitionInfo structures specifying the image and <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#resources-image-views\">subresource ranges</a> within them to transition.")
     )
 
     void(
         "GetImageSubresourceLayout2EXT",
-        "See #GetImageSubresourceLayout2KHR().",
+        "See #GetImageSubresourceLayout2().",
 
         VkDevice("device", "the logical device that owns the image."),
         VkImage("image", "the image whose layout is being queried."),
-        VkImageSubresource2KHR.const.p("pSubresource", "a pointer to a ##VkImageSubresource2KHR structure selecting a specific image for the image subresource."),
-        VkSubresourceLayout2KHR.p("pLayout", "a pointer to a ##VkSubresourceLayout2KHR structure in which the layout is returned.")
+        VkImageSubresource2.const.p("pSubresource", "a pointer to a ##VkImageSubresource2 structure selecting a specific image for the image subresource."),
+        VkSubresourceLayout2.p("pLayout", "a pointer to a ##VkSubresourceLayout2 structure in which the layout is returned.")
     )
 }

@@ -101,6 +101,8 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 
         If drawing using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-objects">shader objects</a>, or if the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE dynamic state enabled, then #CmdBindVertexBuffers2() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
 
+        The vertex attribute description for any location in the range <code>[0,##VkPhysicalDeviceLimits::maxVertexInputAttributes)</code> not specified in the {@code pVertexAttributeDescriptions} array becomes undefined.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>Either the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-vertexInputDynamicState">{@code vertexInputDynamicState}</a> feature or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>

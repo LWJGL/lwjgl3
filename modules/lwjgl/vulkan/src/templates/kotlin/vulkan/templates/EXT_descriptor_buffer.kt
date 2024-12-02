@@ -330,9 +330,9 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         <h5>Valid Usage</h5>
         <ul>
             <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
-            <li>There <b>must</b> be no more than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxSamplerDescriptorBufferBindings} descriptor buffers containing sampler descriptor data bound</li>
-            <li>There <b>must</b> be no more than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxResourceDescriptorBufferBindings} descriptor buffers containing resource descriptor data bound</li>
-            <li>There <b>must</b> be no more than 1 descriptor buffer bound that was created with the #BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT bit set</li>
+            <li>There <b>must</b> be no more than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxSamplerDescriptorBufferBindings} elements in {@code pBindingInfos} with ##VkDescriptorBufferBindingInfoEXT{@code ::usage} containing #BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT</li>
+            <li>There <b>must</b> be no more than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxResourceDescriptorBufferBindings} elements in {@code pBindingInfos} with ##VkDescriptorBufferBindingInfoEXT{@code ::usage} containing #BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT</li>
+            <li>There <b>must</b> be no more than 1 element in {@code pBindingInfos} with ##VkDescriptorBufferBindingInfoEXT{@code ::usage} containing #BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT</li>
             <li>{@code bufferCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxDescriptorBufferBindings}</li>
             <li>For any element of {@code pBindingInfos}, if the buffer from which {@code address} was queried is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>For any element of {@code pBindingInfos}, the buffer from which {@code address} was queried <b>must</b> have been created with the #BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT bit set if it contains sampler descriptor data</li>

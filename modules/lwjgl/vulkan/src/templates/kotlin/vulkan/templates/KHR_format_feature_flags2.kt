@@ -18,8 +18,8 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
         On top of replicating all the bits from {@code VkFormatFeatureFlagBits}, {@code VkFormatFeatureFlagBits2KHR} adds the following bits :
 
         <ul>
-            <li>#FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR indicate that an implementation supports respectively reading and writing a given {@code VkFormat} through storage operations without specifying the format in the shader.</li>
-            <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR indicates that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
+            <li>#FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR specify that an implementation supports reading and writing, respectively, a given {@code VkFormat} through storage operations without specifying the format in the shader.</li>
+            <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR specifies that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
         </ul>
 
         Prior to version 2 of this extension, implementations exposing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderStorageImageReadWithoutFormat">{@code shaderStorageImageReadWithoutFormat}</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderStorageImageWriteWithoutFormat">{@code shaderStorageImageWriteWithoutFormat}</a> features may not report #FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR in ##VkFormatProperties3KHR{@code ::bufferFeatures}. Despite this, buffer reads/writes are supported as intended by the original features.
@@ -42,6 +42,14 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+
+            <dt><b>API Interactions</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_VERSION_1_2</li>
+                <li>Interacts with VK_EXT_filter_cubic</li>
+                <li>Interacts with VK_EXT_sampler_filter_minmax</li>
+                <li>Interacts with VK_IMG_filter_cubic</li>
+            </ul></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>

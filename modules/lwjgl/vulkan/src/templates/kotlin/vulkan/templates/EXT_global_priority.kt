@@ -36,7 +36,12 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to Vulkan 1.4</li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -88,27 +93,8 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
     )
 
     EnumConstant(
-        """
-        VkQueueGlobalPriorityKHR - Values specifying a system-wide queue priority
+        "Extends {@code VkQueueGlobalPriority}.",
 
-        <h5>Description</h5>
-        Priority values are sorted in ascending order. A comparison operation on the enum values can be used to determine the priority order.
-
-        <ul>
-            <li>#QUEUE_GLOBAL_PRIORITY_LOW_KHR is below the system default. Useful for non-interactive tasks.</li>
-            <li>#QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR is the system default priority.</li>
-            <li>#QUEUE_GLOBAL_PRIORITY_HIGH_KHR is above the system default.</li>
-            <li>#QUEUE_GLOBAL_PRIORITY_REALTIME_KHR is the highest priority. Useful for critical tasks.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceQueueGlobalPriorityCreateInfoKHR, ##VkQueueFamilyGlobalPriorityPropertiesKHR
-        """,
-
-        "QUEUE_GLOBAL_PRIORITY_LOW_KHR".."128",
-        "QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR".."256",
-        "QUEUE_GLOBAL_PRIORITY_HIGH_KHR".."512",
-        "QUEUE_GLOBAL_PRIORITY_REALTIME_KHR".."1024",
         "QUEUE_GLOBAL_PRIORITY_LOW_EXT".."128",
         "QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT".."256",
         "QUEUE_GLOBAL_PRIORITY_HIGH_EXT".."512",
