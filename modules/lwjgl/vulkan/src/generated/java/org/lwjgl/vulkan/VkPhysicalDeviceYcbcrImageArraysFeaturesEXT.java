@@ -94,7 +94,7 @@ public class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends Struct<VkPhysic
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports creating images with a format that requires <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> and has multiple array layers. */
+    /** indicates that the implementation supports creating images with a format that requires <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> and has multiple array layers. */
     @NativeType("VkBool32")
     public boolean ycbcrImageArrays() { return nycbcrImageArrays(address()) != 0; }
 

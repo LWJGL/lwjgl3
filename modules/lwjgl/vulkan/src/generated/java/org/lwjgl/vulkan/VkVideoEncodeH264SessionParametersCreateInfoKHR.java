@@ -103,10 +103,10 @@ public class VkVideoEncodeH264SessionParametersCreateInfoKHR extends Struct<VkVi
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-sps">H.264 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">H.264 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
     @NativeType("uint32_t")
     public int maxStdSPSCount() { return nmaxStdSPSCount(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-pps">H.264 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">H.264 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
     @NativeType("uint32_t")
     public int maxStdPPSCount() { return nmaxStdPPSCount(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoEncodeH264SessionParametersAddInfoKHR} structure specifying H.264 parameters to add upon object creation. */

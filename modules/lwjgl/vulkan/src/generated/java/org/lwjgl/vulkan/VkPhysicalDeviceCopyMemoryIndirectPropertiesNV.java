@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-indirectCopy">{@code indirectCopy}</a> feature is supported, {@code supportedQueues} <b>must</b> return at least one supported queue.</p>
+ * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-indirectCopy">{@code indirectCopy}</a> feature is supported, {@code supportedQueues} <b>must</b> return at least one supported queue.</p>
  * 
  * <p>If the {@link VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
@@ -96,7 +96,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct<VkPhy
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkQueueFlagBits} indicating the queues on which <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#indirect-copies">indirect copy commands</a> are supported. */
+    /** a bitmask of {@code VkQueueFlagBits} indicating the queues on which <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#indirect-copies">indirect copy commands</a> are supported. */
     @NativeType("VkQueueFlags")
     public int supportedQueues() { return nsupportedQueues(address()); }
 

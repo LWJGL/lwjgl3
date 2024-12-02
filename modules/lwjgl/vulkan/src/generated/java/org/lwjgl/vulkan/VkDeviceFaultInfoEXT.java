@@ -139,7 +139,7 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** {@code NULL} or a pointer to an array of {@link VkDeviceFaultVendorInfoEXT} structures describing vendor-specific fault information. */
     @NativeType("VkDeviceFaultVendorInfoEXT *")
     public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return npVendorInfos(address()); }
-    /** {@code NULL} or a pointer to {@code vendorBinarySize} number of bytes of data, which will be populated with a vendor-specific binary crash dump, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vendor-binary-crash-dumps">Vendor Binary Crash Dumps</a>. */
+    /** {@code NULL} or a pointer to {@code vendorBinarySize} number of bytes of data, which will be populated with a vendor-specific binary crash dump, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vendor-binary-crash-dumps">Vendor Binary Crash Dumps</a>. */
     @NativeType("void *")
     public long pVendorBinaryData() { return npVendorBinaryData(address()); }
 

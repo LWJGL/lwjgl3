@@ -94,7 +94,7 @@ public class VkPhysicalDeviceYcbcrDegammaFeaturesQCOM extends Struct<VkPhysicalD
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-ycbcr-degamma">Y′C<sub>B</sub>C<sub>R</sub> degamma</a>. */
+    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-ycbcr-degamma">Y′C<sub>B</sub>C<sub>R</sub> degamma</a>. */
     @NativeType("VkBool32")
     public boolean ycbcrDegamma() { return nycbcrDegamma(address()) != 0; }
 

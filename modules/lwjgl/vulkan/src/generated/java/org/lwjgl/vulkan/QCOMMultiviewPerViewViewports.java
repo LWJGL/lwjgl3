@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * Certain use cases for multiview have a need for specifying a separate viewport and scissor for each view, without using shader-based viewport indexing as introduced with {@link EXTShaderViewportIndexLayer VK_EXT_shader_viewport_index_layer}.
  * 
- * <p>This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiviewPerViewViewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview render pass instance will use a viewport and scissor index equal to the {@code ViewIndex}.</p>
+ * <p>This extension adds a new way to control ViewportIndex with multiview. When the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-multiviewPerViewViewports">{@code multiviewPerViewViewports}</a> feature is enabled and if the last pre-rasterization shader entry point’s interface does not use the {@code ViewportIndex} built-in decoration, then each view of a multiview render pass instance will use a viewport and scissor index equal to the {@code ViewIndex}.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_multiview_per_view_viewports]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_multiview_per_view_viewports%20extension*">mnetsch</a></li>

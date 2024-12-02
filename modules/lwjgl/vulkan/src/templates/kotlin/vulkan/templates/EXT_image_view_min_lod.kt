@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_image_view_min_lod = "EXTImageViewMinLod".nativeClassVK("EXT_image_view_min_lod", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension allows applications to clamp the minimum LOD value during <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-image-level-selection">Image Level(s) Selection</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-gather">Texel Gathering</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by ##VkImageViewMinLodCreateInfoEXT{@code ::minLod}.
+        This extension allows applications to clamp the minimum LOD value during <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#textures-image-level-selection">Image Level(s) Selection</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#textures-gather">Texel Gathering</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by ##VkImageViewMinLodCreateInfoEXT{@code ::minLod}.
 
         This extension may be useful to restrict a {@code VkImageView} to only mips which have been uploaded, and the use of fractional {@code minLod} can be useful for smoothly introducing new mip levels when using linear mipmap filtering.
 
@@ -29,7 +29,7 @@ val EXT_image_view_min_lod = "EXTImageViewMinLod".nativeClassVK("EXT_image_view_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

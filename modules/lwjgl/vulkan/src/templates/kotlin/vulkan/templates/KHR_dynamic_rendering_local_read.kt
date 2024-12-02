@@ -27,7 +27,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRDynamicRendering VK_KHR_dynamic_rendering} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
+            <dd>{@link KHRDynamicRendering VK_KHR_dynamic_rendering} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -118,7 +118,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
 
         <h5>Valid Usage</h5>
         <ul>
-            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> <b>must</b> be enabled</li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> <b>must</b> be enabled</li>
             <li>{@code pLocationInfo→colorAttachmentCount} <b>must</b> be equal to the value of ##VkRenderingInfo{@code ::colorAttachmentCount} used to begin the current render pass instance</li>
             <li>The current render pass instance <b>must</b> have been started or resumed by #CmdBeginRendering() in this {@code commandBuffer}</li>
         </ul>
@@ -127,7 +127,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pLocationInfo} <b>must</b> be a valid pointer to a valid ##VkRenderingAttachmentLocationInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>This command <b>must</b> only be called inside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
@@ -141,7 +141,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Inside</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
         </table>
 
@@ -173,7 +173,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
 
         <h5>Valid Usage</h5>
         <ul>
-            <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> <b>must</b> be enabled</li>
+            <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> <b>must</b> be enabled</li>
             <li>{@code pInputAttachmentIndexInfo→colorAttachmentCount} <b>must</b> be equal to the value of ##VkRenderingInfo{@code ::colorAttachmentCount} used to begin the current render pass instance</li>
             <li>The current render pass instance <b>must</b> have been started or resumed by #CmdBeginRendering() in this {@code commandBuffer}</li>
         </ul>
@@ -182,7 +182,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pInputAttachmentIndexInfo} <b>must</b> be a valid pointer to a valid ##VkRenderingInputAttachmentIndexInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>This command <b>must</b> only be called inside of a render pass instance</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
@@ -196,7 +196,7 @@ val KHR_dynamic_rendering_local_read = "KHRDynamicRenderingLocalRead".nativeClas
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Inside</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
         </table>
 

@@ -29,7 +29,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Hans-Kristian Arntzen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_module_identifier]%20@HansKristian-Work%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_module_identifier%20extension*">HansKristian-Work</a></li>
@@ -115,12 +115,12 @@ public class EXTShaderModuleIdentifier {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The identifier returned by the implementation <b>must</b> only depend on {@code shaderIdentifierAlgorithmUUID} and information provided in the {@link VkShaderModuleCreateInfo} which created {@code shaderModule}. The implementation <b>may</b> return equal identifiers for two different {@link VkShaderModuleCreateInfo} structures if the difference does not affect pipeline compilation. Identifiers are only meaningful on different {@code VkDevice} objects if the device the identifier was queried from had the same <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-shaderModuleIdentifierAlgorithmUUID">{@code shaderModuleIdentifierAlgorithmUUID}</a> as the device consuming the identifier.</p>
+     * <p>The identifier returned by the implementation <b>must</b> only depend on {@code shaderIdentifierAlgorithmUUID} and information provided in the {@link VkShaderModuleCreateInfo} which created {@code shaderModule}. The implementation <b>may</b> return equal identifiers for two different {@link VkShaderModuleCreateInfo} structures if the difference does not affect pipeline compilation. Identifiers are only meaningful on different {@code VkDevice} objects if the device the identifier was queried from had the same <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-shaderModuleIdentifierAlgorithmUUID">{@code shaderModuleIdentifierAlgorithmUUID}</a> as the device consuming the identifier.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
+     * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -171,14 +171,14 @@ public class EXTShaderModuleIdentifier {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The identifier returned by implementation <b>must</b> only depend on {@code shaderIdentifierAlgorithmUUID} and information provided in the {@link VkShaderModuleCreateInfo}. The implementation <b>may</b> return equal identifiers for two different {@link VkShaderModuleCreateInfo} structures if the difference does not affect pipeline compilation. Identifiers are only meaningful on different {@code VkDevice} objects if the device the identifier was queried from had the same <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-shaderModuleIdentifierAlgorithmUUID">{@code shaderModuleIdentifierAlgorithmUUID}</a> as the device consuming the identifier.</p>
+     * <p>The identifier returned by implementation <b>must</b> only depend on {@code shaderIdentifierAlgorithmUUID} and information provided in the {@link VkShaderModuleCreateInfo}. The implementation <b>may</b> return equal identifiers for two different {@link VkShaderModuleCreateInfo} structures if the difference does not affect pipeline compilation. Identifiers are only meaningful on different {@code VkDevice} objects if the device the identifier was queried from had the same <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-shaderModuleIdentifierAlgorithmUUID">{@code shaderModuleIdentifierAlgorithmUUID}</a> as the device consuming the identifier.</p>
      * 
      * <p>The identifier returned by the implementation in {@link #vkGetShaderModuleCreateInfoIdentifierEXT GetShaderModuleCreateInfoIdentifierEXT} <b>must</b> be equal to the identifier returned by {@link #vkGetShaderModuleIdentifierEXT GetShaderModuleIdentifierEXT} given equivalent definitions of {@link VkShaderModuleCreateInfo} and any chained {@code pNext} structures.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
+     * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension provides a mechanism for applications to enable driver support for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-renderpass-transform">render pass transform</a>.
+ * This extension provides a mechanism for applications to enable driver support for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vertexpostproc-renderpass-transform">render pass transform</a>.
  * 
  * <p>Mobile devices can be rotated and mobile applications need to render properly when a device is held in a landscape or portrait orientation. When the current orientation differs from the device’s native orientation, a rotation is required so that the “{@code up}” direction of the rendered scene matches the current orientation.</p>
  * 

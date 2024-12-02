@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>As also noted in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>, PVRTC1 images must have dimensions that are a power of two.</p>
+ * <p>As also noted in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#data-format">Khronos Data Format Specification</a>, PVRTC1 images must have dimensions that are a power of two.</p>
  * </div>
  * 
  * <h5>Deprecation</h5>

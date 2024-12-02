@@ -169,7 +169,7 @@ public class VkApplicationInfo extends Struct<VkApplicationInfo> implements Nati
     /** an unsigned integer variable containing the developer-supplied version number of the engine used to create the application. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** <b>must</b> be the highest version of Vulkan that the application is designed to use, encoded as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. The patch version number specified in {@code apiVersion} is ignored when creating an instance object. The variant version of the instance <b>must</b> match that requested in {@code apiVersion}. */
+    /** <b>must</b> be the highest version of Vulkan that the application is designed to use, encoded as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. The patch version number specified in {@code apiVersion} is ignored when creating an instance object. The variant version of the instance <b>must</b> match that requested in {@code apiVersion}. */
     @NativeType("uint32_t")
     public int apiVersion() { return napiVersion(address()); }
 

@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The {@link VkCoarseSampleOrderCustomNV} structure is used with a coverage sample ordering type of {@link NVShadingRateImage#VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV} to specify the order of coverage samples for one combination of fragment width, fragment height, and coverage sample count.</p>
  * 
- * <p>When using a custom sample ordering, element <em>j</em> in {@code pSampleLocations} specifies a specific pixel location and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> that corresponds to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage index</a> <em>j</em> in the multi-pixel fragment.</p>
+ * <p>When using a custom sample ordering, element <em>j</em> in {@code pSampleLocations} specifies a specific pixel location and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> that corresponds to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage index</a> <em>j</em> in the multi-pixel fragment.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

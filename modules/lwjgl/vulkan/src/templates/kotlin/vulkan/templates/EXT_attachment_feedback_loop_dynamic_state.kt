@@ -27,12 +27,12 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTAttachmentFeedbackLoopLayout VK_EXT_attachment_feedback_loop_layout}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTAttachmentFeedbackLoopLayout VK_EXT_attachment_feedback_loop_layout}</dd>
 
             <dt><b>Special Uses</b></dt>
             <dd><ul>
-                <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
-                <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">D3D support</a></li>
+                <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+                <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#extendingvulkan-compatibility-specialuse">D3D support</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -93,7 +93,7 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
         Specify whether attachment feedback loops are enabled dynamically on a command buffer.
 
         <h5>C Specification</h5>
-        To <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> whether a pipeline <b>can</b> access a resource as a non-attachment while it is also used as an attachment that is written to, call:
+        To <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> whether a pipeline <b>can</b> access a resource as a non-attachment while it is also used as an attachment that is written to, call:
 
         <pre><code>
 ￿void vkCmdSetAttachmentFeedbackLoopEnableEXT(
@@ -101,20 +101,20 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
 ￿    VkImageAspectFlags                          aspectMask);</code></pre>
 
         <h5>Description</h5>
-        For attachments that are written to in a render pass, only attachments with the aspects specified in {@code aspectMask} <b>can</b> be accessed as non-attachments by subsequent <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing">drawing commands</a>.
+        For attachments that are written to in a render pass, only attachments with the aspects specified in {@code aspectMask} <b>can</b> be accessed as non-attachments by subsequent <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#drawing">drawing commands</a>.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFeedbackLoopDynamicState">{@code attachmentFeedbackLoopDynamicState}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-attachmentFeedbackLoopDynamicState">{@code attachmentFeedbackLoopDynamicState}</a> feature <b>must</b> be enabled</li>
             <li>{@code aspectMask} <b>must</b> only include #IMAGE_ASPECT_NONE, #IMAGE_ASPECT_COLOR_BIT, #IMAGE_ASPECT_DEPTH_BIT, and #IMAGE_ASPECT_STENCIL_BIT</li>
-            <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFeedbackLoopLayout">{@code attachmentFeedbackLoopLayout}</a> feature is not enabled, {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_NONE</li>
+            <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-attachmentFeedbackLoopLayout">{@code attachmentFeedbackLoopLayout}</a> feature is not enabled, {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_NONE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code aspectMask} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits} values</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>This command <b>must</b> only be called outside of a video coding scope</li>
         </ul>
@@ -127,7 +127,7 @@ val EXT_attachment_feedback_loop_dynamic_state = "EXTAttachmentFeedbackLoopDynam
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
         </table>
         """,

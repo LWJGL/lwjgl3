@@ -108,7 +108,7 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct<VkPhys
     /** specifies whether the implementation supports dynamic fragment density map image views. If this feature is not enabled, {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} <b>must</b> not be included in {@link VkImageViewCreateInfo}{@code ::flags}. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMapDynamic() { return nfragmentDensityMapDynamic(address()) != 0; }
-    /** specifies whether the implementation supports regular non-subsampled image attachments with fragment density map render passes. If this feature is not enabled, render passes with a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-fragmentdensitymapattachment">fragment density map attachment</a> <b>must</b> only have <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#samplers-subsamplesampler">subsampled attachments</a> bound. */
+    /** specifies whether the implementation supports regular non-subsampled image attachments with fragment density map render passes. If this feature is not enabled, render passes with a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-fragmentdensitymapattachment">fragment density map attachment</a> <b>must</b> only have <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-subsamplesampler">subsampled attachments</a> bound. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMapNonSubsampledImages() { return nfragmentDensityMapNonSubsampledImages(address()) != 0; }
 

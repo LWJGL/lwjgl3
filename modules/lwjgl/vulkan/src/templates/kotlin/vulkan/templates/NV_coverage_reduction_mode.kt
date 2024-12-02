@@ -36,7 +36,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -84,7 +84,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
         <h5>Description</h5>
         <ul>
             <li>#COVERAGE_REDUCTION_MODE_MERGE_NV specifies that each color sample will be associated with an implementation-dependent subset of samples in the pixel coverage. If any of those associated samples are covered, the color sample is covered.</li>
-            <li>#COVERAGE_REDUCTION_MODE_TRUNCATE_NV specifies that for color samples present in the color attachments, a color sample is covered if the pixel coverage sample with the same <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#primsrast-multisampling-coverage-mask">sample index</a> <code>i</code> is covered; other pixel coverage samples are discarded.</li>
+            <li>#COVERAGE_REDUCTION_MODE_TRUNCATE_NV specifies that for color samples present in the color attachments, a color sample is covered if the pixel coverage sample with the same <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#primsrast-multisampling-coverage-mask">sample index</a> <code>i</code> is covered; other pixel coverage samples are discarded.</li>
         </ul>
 
         <h5>See Also</h5>

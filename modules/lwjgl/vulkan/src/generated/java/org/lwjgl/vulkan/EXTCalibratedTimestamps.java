@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to {@link KHRCalibratedTimestamps VK_KHR_calibrated_timestamps} extension</li>
@@ -98,7 +98,7 @@ public class EXTCalibratedTimestamps {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TIME_DOMAIN_DEVICE_KHR TIME_DOMAIN_DEVICE_KHR} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-timestampPeriod">{@code timestampPeriod}</a> of the device.</li>
+     * <li>{@link #VK_TIME_DOMAIN_DEVICE_KHR TIME_DOMAIN_DEVICE_KHR} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-timestampPeriod">{@code timestampPeriod}</a> of the device.</li>
      * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_KHR TIME_DOMAIN_CLOCK_MONOTONIC_KHR} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
      * </ul>
      * 

@@ -20,17 +20,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@code filterCenter} specifies the origin or center of the filter kernel, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filteroperation">Weight Sampling Operation</a>. The {@code numPhases} describes the number of sub-pixel filter phases as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filterphases">Weight Sampling Phases</a>.</p>
+ * <p>The {@code filterCenter} specifies the origin or center of the filter kernel, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-weightimage-filteroperation">Weight Sampling Operation</a>. The {@code numPhases} describes the number of sub-pixel filter phases as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-weightimage-filterphases">Weight Sampling Phases</a>.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code filterSize.width} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-weightfilter-maxdimension">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterDimension.width}</a></li>
- * <li>{@code filterSize.height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-weightfilter-maxdimension">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterDimension.height}</a></li>
+ * <li>{@code filterSize.width} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-weightfilter-maxdimension">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterDimension.width}</a></li>
+ * <li>{@code filterSize.height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-weightfilter-maxdimension">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterDimension.height}</a></li>
  * <li>{@code filterCenter.x} <b>must</b> be less than or equal to <code>(filterSize.width - 1)</code></li>
  * <li>{@code filterCenter.y} <b>must</b> be less than or equal to <code>(filterSize.height - 1)</code></li>
  * <li>{@code numPhases} <b>must</b> be a power of two squared value (i.e., 1, 4, 16, 64, 256, etc.)</li>
- * <li>{@code numPhases} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-weightfilter-phases">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterPhases}</a></li>
+ * <li>{@code numPhases} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-weightfilter-phases">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterPhases}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

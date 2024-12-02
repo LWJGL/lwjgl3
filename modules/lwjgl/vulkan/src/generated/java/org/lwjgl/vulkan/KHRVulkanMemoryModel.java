@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * The {@link KHRVulkanMemoryModel VK_KHR_vulkan_memory_model} extension allows use of the features guarded by the {@code VulkanMemoryModel}, {@code VulkanMemoryModelDeviceScope}, and {@code VulkanMemoryModelAvailabilityVisibilityChains} capabilities in shader modules. The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a> formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
+ * The {@link KHRVulkanMemoryModel VK_KHR_vulkan_memory_model} extension allows use of the features guarded by the {@code VulkanMemoryModel}, {@code VulkanMemoryModelDeviceScope}, and {@code VulkanMemoryModelAvailabilityVisibilityChains} capabilities in shader modules. The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-model">Vulkan Memory Model</a> formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -27,14 +27,14 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
  * <dt><b>SPIR-V Dependencies</b></dt>
  * <dd><ul>
  * <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_vulkan_memory_model.html">SPV_KHR_vulkan_memory_model</a></li>
  * </ul></dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

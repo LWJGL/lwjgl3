@@ -94,7 +94,7 @@ public class VkPhysicalDeviceShaderObjectFeaturesEXT extends Struct<VkPhysicalDe
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>. */
+    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#shaders-objects">shader objects</a>. */
     @NativeType("VkBool32")
     public boolean shaderObject() { return nshaderObject(address()) != 0; }
 

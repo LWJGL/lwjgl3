@@ -161,7 +161,7 @@ public class VkMicromapCreateInfoEXT extends Struct<VkMicromapCreateInfoEXT> imp
     /** a {@code VkMicromapTypeEXT} value specifying the type of micromap that will be created. */
     @NativeType("VkMicromapTypeEXT")
     public int type() { return ntype(address()); }
-    /** the device address requested for the micromap if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-micromapCaptureReplay">{@code micromapCaptureReplay}</a> feature is being used. */
+    /** the device address requested for the micromap if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-micromapCaptureReplay">{@code micromapCaptureReplay}</a> feature is being used. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 

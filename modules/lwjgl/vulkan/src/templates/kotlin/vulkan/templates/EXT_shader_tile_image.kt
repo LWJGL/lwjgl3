@@ -13,7 +13,7 @@ val EXT_shader_tile_image = "EXTShaderTileImage".nativeClassVK("EXT_shader_tile_
         """
         This extension allows fragment shader invocations to read color, depth and stencil values at their pixel location in rasterization order. The functionality is only available when using dynamic render passes introduced by VK_KHR_dynamic_rendering. Example use cases are programmable blending and deferred shading.
 
-        See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-shader-tileimage-reads">fragment shader tile image reads</a> for more information.
+        See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#fragops-shader-tileimage-reads">fragment shader tile image reads</a> for more information.
 
         <h5>Examples</h5>
         Color read example.
@@ -56,7 +56,7 @@ val EXT_shader_tile_image = "EXTShaderTileImage".nativeClassVK("EXT_shader_tile_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>

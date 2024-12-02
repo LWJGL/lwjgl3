@@ -94,7 +94,7 @@ public class VkPhysicalDeviceLineRasterizationPropertiesKHR extends Struct<VkPhy
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-lines">line segments</a>. */
+    /** the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines">line segments</a>. */
     @NativeType("uint32_t")
     public int lineSubPixelPrecisionBits() { return nlineSubPixelPrecisionBits(address()); }
 

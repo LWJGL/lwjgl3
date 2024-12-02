@@ -27,7 +27,7 @@ val EXT_graphics_pipeline_library = "EXTGraphicsPipelineLibrary".nativeClassVK("
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRPipelineLibrary VK_KHR_pipeline_library}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRPipelineLibrary VK_KHR_pipeline_library}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -101,10 +101,10 @@ val EXT_graphics_pipeline_library = "EXTGraphicsPipelineLibrary".nativeClassVK("
 
         <h5>Description</h5>
         <ul>
-            <li>#GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-vertex-input">vertex input interface state</a>.</li>
-            <li>#GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>.</li>
-            <li>#GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-fragment-shader">fragment shader state</a>.</li>
-            <li>#GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-fragment-output">fragment output interface state</a>.</li>
+            <li>#GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#pipelines-graphics-subsets-vertex-input">vertex input interface state</a>.</li>
+            <li>#GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>.</li>
+            <li>#GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#pipelines-graphics-subsets-fragment-shader">fragment shader state</a>.</li>
+            <li>#GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT specifies that a pipeline will include <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#pipelines-graphics-subsets-fragment-output">fragment output interface state</a>.</li>
         </ul>
         """,
 

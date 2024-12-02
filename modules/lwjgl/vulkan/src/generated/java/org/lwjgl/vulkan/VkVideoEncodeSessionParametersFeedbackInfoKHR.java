@@ -100,7 +100,7 @@ public class VkVideoEncodeSessionParametersFeedbackInfoKHR extends Struct<VkVide
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether any of the requested parameter data were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the requested parameter data were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasOverrides() { return nhasOverrides(address()) != 0; }
 

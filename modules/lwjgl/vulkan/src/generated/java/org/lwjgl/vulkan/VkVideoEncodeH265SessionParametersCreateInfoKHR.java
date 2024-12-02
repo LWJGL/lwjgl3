@@ -107,13 +107,13 @@ public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-vps">H.265 VPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-vps">H.265 VPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
     @NativeType("uint32_t")
     public int maxStdVPSCount() { return nmaxStdVPSCount(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-sps">H.265 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-sps">H.265 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
     @NativeType("uint32_t")
     public int maxStdSPSCount() { return nmaxStdSPSCount(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-pps">H.265 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-pps">H.265 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
     @NativeType("uint32_t")
     public int maxStdPPSCount() { return nmaxStdPPSCount(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoEncodeH265SessionParametersAddInfoKHR} structure specifying H.265 parameters to add upon object creation. */

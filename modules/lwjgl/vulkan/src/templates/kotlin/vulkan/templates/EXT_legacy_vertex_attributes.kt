@@ -39,7 +39,7 @@ val EXT_legacy_vertex_attributes = "EXTLegacyVertexAttributes".nativeClassVK("EX
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
-                <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+                <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-reportAddressBinding">{@code reportAddressBinding}</a> feature is enabled and the implementation binds or unbinds a region of virtual address space associated with a Vulkan object, the implementation <b>must</b> submit a debug message with the following properties:</p>
+ * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-reportAddressBinding">{@code reportAddressBinding}</a> feature is enabled and the implementation binds or unbinds a region of virtual address space associated with a Vulkan object, the implementation <b>must</b> submit a debug message with the following properties:</p>
  * 
  * <ul>
  * <li>{@code messageSeverity} equal to {@link EXTDebugUtils#VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT}</li>
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>An implementation <b>may</b> report binding events associated with a Vulkan object via {@code VkDebugUtilsMessengerEXT} prior to the object becoming visible to an application via other Vulkan commands. For example, object creation functions <b>may</b> report binding events that occur during an objects creation. In such cases, {@link VkDeviceAddressBindingCallbackDataEXT}{@code ::flags} <b>must</b> include {@link EXTDeviceAddressBindingReport#VK_DEVICE_ADDRESS_BINDING_INTERNAL_OBJECT_BIT_EXT DEVICE_ADDRESS_BINDING_INTERNAL_OBJECT_BIT_EXT}.</p>
  * 
- * <p>Object handles reported in this manner are not <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-validusage-handles">valid object handles</a>, and <b>must</b> not be used as an input parameter to any Vulkan command.</p>
+ * <p>Object handles reported in this manner are not <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-validusage-handles">valid object handles</a>, and <b>must</b> not be used as an input parameter to any Vulkan command.</p>
  * 
  * <p>Any valid object handle returned by an object creation function <b>must</b> match the handle specified via any previously reported binding events associated with the object’s creation.</p>
  * 

@@ -137,7 +137,7 @@ public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEn
     /** indicates the preferred value to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::subLayerCount}. */
     @NativeType("uint32_t")
     public int preferredSubLayerCount() { return npreferredSubLayerCount(address()); }
-    /** indicates the preferred values to use for {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR}{@code ::constantQp} for each picture type when using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** indicates the preferred values to use for {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR}{@code ::constantQp} for each picture type when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
     public VkVideoEncodeH265QpKHR preferredConstantQp() { return npreferredConstantQp(address()); }
     /** indicates the preferred maximum number of reference pictures to use in the reference list L0. */
     @NativeType("uint32_t")

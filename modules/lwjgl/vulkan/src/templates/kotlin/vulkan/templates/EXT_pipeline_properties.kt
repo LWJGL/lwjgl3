@@ -35,7 +35,7 @@ val EXT_pipeline_properties = "EXTPipelineProperties".nativeClassVK("EXT_pipelin
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -101,7 +101,7 @@ val EXT_pipeline_properties = "EXTPipelineProperties".nativeClassVK("EXT_pipelin
         <ul>
             <li>The {@code pipeline} member of {@code pPipelineInfo} <b>must</b> have been created with {@code device}</li>
             <li>{@code pPipelineProperties} <b>must</b> be a valid pointer to a ##VkPipelinePropertiesIdentifierEXT structure</li>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelinePropertiesIdentifier">{@code pipelinePropertiesIdentifier}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-pipelinePropertiesIdentifier">{@code pipelinePropertiesIdentifier}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

@@ -94,7 +94,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct<VkPhysica
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports clamping the minimum LOD value during <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-gather">Texel Gathering</a> and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by {@link VkImageViewMinLodCreateInfoEXT}{@code ::minLod}. */
+    /** indicates whether the implementation supports clamping the minimum LOD value during <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-gather">Texel Gathering</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by {@link VkImageViewMinLodCreateInfoEXT}{@code ::minLod}. */
     @NativeType("VkBool32")
     public boolean minLod() { return nminLod(address()) != 0; }
 

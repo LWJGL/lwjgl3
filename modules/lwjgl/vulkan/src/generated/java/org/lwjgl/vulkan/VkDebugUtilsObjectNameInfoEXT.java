@@ -23,13 +23,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkSetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is either {@code NULL} or an empty string, then any previously set name is removed.</p>
  * 
- * <p>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature allows the specification of pipelines without the creation of {@code VkShaderModule} objects beforehand. In order to continue to allow naming these shaders independently, {@link VkDebugUtilsObjectNameInfoEXT} <b>can</b> be included in the {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo}, which associates a static name with that particular shader.</p>
+ * <p>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature allows the specification of pipelines without the creation of {@code VkShaderModule} objects beforehand. In order to continue to allow naming these shaders independently, {@link VkDebugUtilsObjectNameInfoEXT} <b>can</b> be included in the {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo}, which associates a static name with that particular shader.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>If {@code objectType} is {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code objectType} is not {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-object-types">{@code VkObjectType} and Vulkan Handle Relationship</a> table</li>
+ * <li>If {@code objectType} is not {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-object-types">{@code VkObjectType} and Vulkan Handle Relationship</a> table</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

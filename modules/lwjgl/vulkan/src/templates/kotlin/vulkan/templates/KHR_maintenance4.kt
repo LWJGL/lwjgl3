@@ -17,7 +17,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
 
         <ul>
             <li>Allow the application to destroy their {@code VkPipelineLayout} object immediately after it was used to create another object. It is no longer necessary to keep its handle valid while the created object is in use.</li>
-            <li>Add a new <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxBufferSize">{@code maxBufferSize}</a> implementation-defined limit for the maximum size {@code VkBuffer} that <b>can</b> be created.</li>
+            <li>Add a new <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#limits-maxBufferSize">{@code maxBufferSize}</a> implementation-defined limit for the maximum size {@code VkBuffer} that <b>can</b> be created.</li>
             <li>Add support for the SPIR-V 1.2 {@code LocalSizeId} execution mode, which can be used as an alternative to {@code LocalSize} to specify the local workgroup size with specialization constants.</li>
             <li>Add a guarantee that images created with identical creation parameters will always have the same alignment requirements.</li>
             <li>Add new #GetDeviceBufferMemoryRequirementsKHR(), #GetDeviceImageMemoryRequirementsKHR(), and #GetDeviceImageSparseMemoryRequirementsKHR() to allow the application to query the image memory requirements without having to create an image object and query it.</li>
@@ -43,11 +43,11 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

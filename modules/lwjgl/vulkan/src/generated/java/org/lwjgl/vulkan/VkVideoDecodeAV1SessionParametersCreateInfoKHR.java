@@ -101,7 +101,7 @@ public class VkVideoDecodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoAV1SequenceHeader} structure describing the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-sequence-header">AV1 sequence header</a> entry to store in the created object. */
+    /** a pointer to a {@code StdVideoAV1SequenceHeader} structure describing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-sequence-header">AV1 sequence header</a> entry to store in the created object. */
     @NativeType("StdVideoAV1SequenceHeader const *")
     public StdVideoAV1SequenceHeader pStdSequenceHeader() { return npStdSequenceHeader(address()); }
 

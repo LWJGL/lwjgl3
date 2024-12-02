@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a> and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.2">Version 1.2</a> and {@link KHRSynchronization2 VK_KHR_synchronization2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.3">Version 1.3</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_KHR_acceleration_structure</li>
@@ -209,7 +209,7 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>{@code layout} <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} flag set</li>
      * </ul>
      * 
@@ -270,12 +270,12 @@ public class EXTDescriptorBuffer {
      * 
      * <p>If any {@code binding} in {@code layout} is {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT}, that {@code binding} <b>must</b> have the largest offset of any {@code binding}.</p>
      * 
-     * <p>A descriptor {@code binding} with type {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} <b>can</b> be used. Any potential types in {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pDescriptorTypes} for {@code binding} share the same offset. If the size of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-mutable">mutable descriptor</a> is larger than the size of a concrete descriptor type being accessed, the padding area is ignored by the implementation.</p>
+     * <p>A descriptor {@code binding} with type {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} <b>can</b> be used. Any potential types in {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pDescriptorTypes} for {@code binding} share the same offset. If the size of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-mutable">mutable descriptor</a> is larger than the size of a concrete descriptor type being accessed, the padding area is ignored by the implementation.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>{@code layout} <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} flag set</li>
      * </ul>
      * 
@@ -340,7 +340,7 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>If {@code pDescriptorInfo→type} is not {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} or {@code pDescriptorInfo→data.pCombinedImageSampler} has an {@code imageView} member that was not created with a {@link VkSamplerYcbcrConversionInfo} structure in its {@code pNext} chain, {@code dataSize} <b>must</b> equal the size of a descriptor of type {@link VkDescriptorGetInfoEXT}{@code ::type} determined by the value in {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT} , or determined by {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT}{@code ::combinedImageSamplerDensityMapDescriptorSize} if {@code pDescriptorInfo} specifies a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} whose {@code VkSampler} was created with {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT} set</li>
      * <li>If {@code pDescriptorInfo→type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} and {@code pDescriptorInfo→data.pCombinedImageSampler} has an {@code imageView} member that was created with a {@link VkSamplerYcbcrConversionInfo} structure in its {@code pNext} chain, {@code dataSize} <b>must</b> equal the size of {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::combinedImageSamplerDescriptorSize} times {@link VkSamplerYcbcrConversionImageFormatProperties}{@code ::combinedImageSamplerDescriptorCount}</li>
      * <li>If {@code pDescriptorInfo→type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} and it has a {@code imageView} that is {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code dataSize} <b>must</b> be equal to the size of {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::combinedImageSamplerDescriptorSize}</li>
@@ -402,7 +402,7 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>There <b>must</b> be no more than {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::maxSamplerDescriptorBufferBindings} descriptor buffers containing sampler descriptor data bound</li>
      * <li>There <b>must</b> be no more than {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::maxResourceDescriptorBufferBindings} descriptor buffers containing resource descriptor data bound</li>
      * <li>There <b>must</b> be no more than 1 descriptor buffer bound that was created with the {@link #VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT} bit set</li>
@@ -418,7 +418,7 @@ public class EXTDescriptorBuffer {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pBindingInfos} <b>must</b> be a valid pointer to an array of {@code bufferCount} valid {@link VkDescriptorBufferBindingInfoEXT} structures</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>
      * <li>{@code bufferCount} <b>must</b> be greater than 0</li>
@@ -434,7 +434,7 @@ public class EXTDescriptorBuffer {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>State</td></tr></tbody>
      * </table>
      * 
@@ -483,7 +483,7 @@ public class EXTDescriptorBuffer {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code vkCmdSetDescriptorBufferOffsetsEXT} binds {@code setCount} pairs of descriptor buffers, specified by indices into the binding points bound using {@link #vkCmdBindDescriptorBuffersEXT CmdBindDescriptorBuffersEXT}, and buffer offsets to set numbers [{@code firstSet}..{@code firstSet}+{@code descriptorSetCount}-1] for subsequent <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-bindpoint-commands">bound pipeline commands</a> set by {@code pipelineBindPoint}. Set [{@code firstSet} + i] is bound to the descriptor buffer at binding {@code pBufferIndices}[i] at an offset of {@code pOffsets}[i]. Any bindings that were previously applied via these sets, or calls to {@link VK10#vkCmdBindDescriptorSets CmdBindDescriptorSets}, are no longer valid. Other sets will also be invalidated upon calling this command if {@code layout} differs from the pipeline layout used to bind those other sets, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.</p>
+     * <p>{@code vkCmdSetDescriptorBufferOffsetsEXT} binds {@code setCount} pairs of descriptor buffers, specified by indices into the binding points bound using {@link #vkCmdBindDescriptorBuffersEXT CmdBindDescriptorBuffersEXT}, and buffer offsets to set numbers [{@code firstSet}..{@code firstSet}+{@code descriptorSetCount}-1] for subsequent <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-bindpoint-commands">bound pipeline commands</a> set by {@code pipelineBindPoint}. Set [{@code firstSet} + i] is bound to the descriptor buffer at binding {@code pBufferIndices}[i] at an offset of {@code pOffsets}[i]. Any bindings that were previously applied via these sets, or calls to {@link VK10#vkCmdBindDescriptorSets CmdBindDescriptorSets}, are no longer valid. Other sets will also be invalidated upon calling this command if {@code layout} differs from the pipeline layout used to bind those other sets, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.</p>
      * 
      * <p>After binding descriptors, applications <b>can</b> modify descriptor memory either by performing writes on the host or with device commands. When descriptor memory is updated with device commands, visibility for the shader stage accessing a descriptor is ensured with the {@link #VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT} access flag. Implementations <b>must</b> not access resources referenced by these descriptors unless they are dynamically accessed by shaders. Descriptors bound with this call <b>can</b> be undefined if they are not dynamically accessed by shaders.</p>
      * 
@@ -496,7 +496,7 @@ public class EXTDescriptorBuffer {
      * <p>Applications can freely decide how large a variable descriptor buffer binding is, so it may not be safe to read such descriptor payloads statically. The intention of these rules is to allow implementations to speculatively prefetch descriptor payloads where feasible.</p>
      * </div>
      * 
-     * <p>Dynamically accessing a resource through descriptor data from an unbound region of a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#sparsememory-partially-resident-buffers">sparse partially-resident buffer</a> will result in invalid descriptor data being read, and therefore undefined behavior.</p>
+     * <p>Dynamically accessing a resource through descriptor data from an unbound region of a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#sparsememory-partially-resident-buffers">sparse partially-resident buffer</a> will result in invalid descriptor data being read, and therefore undefined behavior.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -519,7 +519,7 @@ public class EXTDescriptorBuffer {
      * <li>Each element of {@code pBufferIndices} <b>must</b> reference a valid descriptor buffer binding set by a previous call to {@link #vkCmdBindDescriptorBuffersEXT CmdBindDescriptorBuffersEXT} in {@code commandBuffer}</li>
      * <li>The sum of {@code firstSet} and {@code setCount} <b>must</b> be less than or equal to {@link VkPipelineLayoutCreateInfo}{@code ::setLayoutCount} provided when {@code layout} was created</li>
      * <li>The {@code VkDescriptorSetLayout} for each set from {@code firstSet} to <code>firstSet + setCount</code> when {@code layout} was created <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} bit set</li>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
      * </ul>
      * 
@@ -531,7 +531,7 @@ public class EXTDescriptorBuffer {
      * <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
      * <li>{@code pBufferIndices} <b>must</b> be a valid pointer to an array of {@code setCount} {@code uint32_t} values</li>
      * <li>{@code pOffsets} <b>must</b> be a valid pointer to an array of {@code setCount} {@code VkDeviceSize} values</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>
      * <li>{@code setCount} <b>must</b> be greater than 0</li>
@@ -548,7 +548,7 @@ public class EXTDescriptorBuffer {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>State</td></tr></tbody>
      * </table>
      *
@@ -584,14 +584,14 @@ public class EXTDescriptorBuffer {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code vkCmdBindDescriptorBufferEmbeddedSamplersEXT} binds the embedded immutable samplers in {@code set} of {@code layout} to {@code set} for the command buffer for subsequent <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-bindpoint-commands">bound pipeline commands</a> set by {@code pipelineBindPoint}. Any previous binding to this set by {@link #vkCmdSetDescriptorBufferOffsetsEXT CmdSetDescriptorBufferOffsetsEXT} or this command is overwritten. Any sets that were last bound by a call to {@link VK10#vkCmdBindDescriptorSets CmdBindDescriptorSets} are invalidated upon calling this command. Other sets will also be invalidated upon calling this command if {@code layout} differs from the pipeline layout used to bind those other sets, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.</p>
+     * <p>{@code vkCmdBindDescriptorBufferEmbeddedSamplersEXT} binds the embedded immutable samplers in {@code set} of {@code layout} to {@code set} for the command buffer for subsequent <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-bindpoint-commands">bound pipeline commands</a> set by {@code pipelineBindPoint}. Any previous binding to this set by {@link #vkCmdSetDescriptorBufferOffsetsEXT CmdSetDescriptorBufferOffsetsEXT} or this command is overwritten. Any sets that were last bound by a call to {@link VK10#vkCmdBindDescriptorSets CmdBindDescriptorSets} are invalidated upon calling this command. Other sets will also be invalidated upon calling this command if {@code layout} differs from the pipeline layout used to bind those other sets, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a>.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
      * <li>The {@code VkDescriptorSetLayout} at index {@code set} when {@code layout} was created <b>must</b> have been created with the {@link #VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT} bit set</li>
      * <li>{@code set} <b>must</b> be less than or equal to {@link VkPipelineLayoutCreateInfo}{@code ::setLayoutCount} provided when {@code layout} was created</li>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
      * </ul>
      * 
@@ -601,7 +601,7 @@ public class EXTDescriptorBuffer {
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
      * <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>
      * <li>Both of {@code commandBuffer}, and {@code layout} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -617,7 +617,7 @@ public class EXTDescriptorBuffer {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <thead><tr><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>State</td></tr></tbody>
      * </table>
      *
@@ -661,9 +661,9 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pData} <b>must</b> point to a buffer that is at least {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::bufferCaptureReplayDescriptorDataSize} bytes in size</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -731,9 +731,9 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pData} <b>must</b> point to a buffer that is at least {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::imageCaptureReplayDescriptorDataSize} bytes in size</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -801,9 +801,9 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pData} <b>must</b> point to a buffer that is at least {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::imageViewCaptureReplayDescriptorDataSize} bytes in size</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -871,9 +871,9 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pData} <b>must</b> point to a buffer that is at least {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::samplerCaptureReplayDescriptorDataSize} bytes in size</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -941,9 +941,9 @@ public class EXTDescriptorBuffer {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
      * <li>{@code pData} <b>must</b> point to a buffer that is at least {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::accelerationStructureCaptureReplayDescriptorDataSize} bytes in size</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

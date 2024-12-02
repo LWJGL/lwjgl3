@@ -94,7 +94,7 @@ public class VkPhysicalDevicePrivateDataFeatures extends Struct<VkPhysicalDevice
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports private data. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#private-data">Private Data</a>. */
+    /** indicates whether the implementation supports private data. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#private-data">Private Data</a>. */
     @NativeType("VkBool32")
     public boolean privateData() { return nprivateData(address()) != 0; }
 

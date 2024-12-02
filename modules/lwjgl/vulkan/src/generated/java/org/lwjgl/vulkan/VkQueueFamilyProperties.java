@@ -46,9 +46,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Queues supporting graphics and/or compute operations <b>must</b> report <code>(1,1,1)</code> in {@code minImageTransferGranularity}, meaning that there are no additional restrictions on the granularity of image transfer operations for these queues. Other queues supporting image transfer operations are only <b>required</b> to support whole mip level transfers, thus {@code minImageTransferGranularity} for queues belonging to such queue families <b>may</b> be <code>(0,0,0)</code>.</p>
  * 
- * <p>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-device">Device Memory</a> section describes memory properties queried from the physical device.</p>
+ * <p>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-device">Device Memory</a> section describes memory properties queried from the physical device.</p>
  * 
- * <p>For physical device feature queries see the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features">Features</a> chapter.</p>
+ * <p>For physical device feature queries see the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features">Features</a> chapter.</p>
  * 
  * <h5>See Also</h5>
  * 

@@ -31,10 +31,10 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
- * <li>all other members of {@code StdVideoEncodeH264WeightTable} are interpreted as defined in section 7.4.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoEncodeH264WeightTable} are interpreted as defined in section 7.4.3.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
  * </ul>
  * </li>
- * <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>.</li>
+ * <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>.</li>
  * </ul></dd>
  * </dl>
  * 
@@ -120,10 +120,10 @@ public class VkVideoEncodeH264NaluSliceInfoKHR extends Struct<VkVideoEncodeH264N
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the QP to use for the slice if the current <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a> configured for the video session is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** the QP to use for the slice if the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> configured for the video session is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
     @NativeType("int32_t")
     public int constantQp() { return nconstantQp(address()); }
-    /** a pointer to a {@code StdVideoEncodeH264SliceHeader} structure specifying <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-slice-header-params">H.264 slice header parameters</a> for the slice. */
+    /** a pointer to a {@code StdVideoEncodeH264SliceHeader} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-slice-header-params">H.264 slice header parameters</a> for the slice. */
     @NativeType("StdVideoEncodeH264SliceHeader const *")
     public StdVideoEncodeH264SliceHeader pStdSliceHeader() { return npStdSliceHeader(address()); }
 

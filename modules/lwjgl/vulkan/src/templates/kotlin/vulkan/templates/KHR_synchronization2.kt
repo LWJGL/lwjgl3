@@ -58,7 +58,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>
@@ -79,7 +79,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -374,7 +374,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
         VkEvent("event", "the event that will be unsignaled."),
-        VkPipelineStageFlags2("stageMask", "a {@code VkPipelineStageFlags2} mask of pipeline stages used to determine the first <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">synchronization scope</a>.")
+        VkPipelineStageFlags2("stageMask", "a {@code VkPipelineStageFlags2} mask of pipeline stages used to determine the first <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#synchronization-dependencies-scopes\">synchronization scope</a>.")
     )
 
     void(
@@ -384,7 +384,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
         AutoSize("pEvents", "pDependencyInfos")..uint32_t("eventCount", "the length of the {@code pEvents} array."),
         VkEvent.const.p("pEvents", "a pointer to an array of {@code eventCount} events to wait on."),
-        VkDependencyInfo.const.p("pDependencyInfos", "a pointer to an array of {@code eventCount} ##VkDependencyInfo structures, defining the second <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">synchronization scope</a>.")
+        VkDependencyInfo.const.p("pDependencyInfos", "a pointer to an array of {@code eventCount} ##VkDependencyInfo structures, defining the second <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#synchronization-dependencies-scopes\">synchronization scope</a>.")
     )
 
     void(
@@ -412,6 +412,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         VkQueue("queue", "the queue that the command buffers will be submitted to."),
         AutoSize("pSubmits")..uint32_t("submitCount", "the number of elements in the {@code pSubmits} array."),
         nullable..VkSubmitInfo2.const.p("pSubmits", "a pointer to an array of ##VkSubmitInfo2 structures, each specifying a command buffer submission batch."),
-        VkFence("fence", "an <b>optional</b> handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not #NULL_HANDLE, it defines a <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-fences-signaling\">fence signal operation</a>.")
+        VkFence("fence", "an <b>optional</b> handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not #NULL_HANDLE, it defines a <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#synchronization-fences-signaling\">fence signal operation</a>.")
     )
 }

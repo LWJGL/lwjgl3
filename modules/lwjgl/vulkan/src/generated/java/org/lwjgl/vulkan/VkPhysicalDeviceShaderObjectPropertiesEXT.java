@@ -23,7 +23,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The purpose and usage of the values of this structure are described in greater detail in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects-binary-compatibility">Binary Shader Compatibility</a>.</p>
+ * <p>The purpose and usage of the values of this structure are described in greater detail in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#shaders-objects-binary-compatibility">Binary Shader Compatibility</a>.</p>
  * 
  * <p>If the {@link VkPhysicalDeviceShaderObjectPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 

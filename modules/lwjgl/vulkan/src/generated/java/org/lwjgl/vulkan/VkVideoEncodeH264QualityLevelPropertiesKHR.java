@@ -141,7 +141,7 @@ public class VkVideoEncodeH264QualityLevelPropertiesKHR extends Struct<VkVideoEn
     /** indicates the preferred value to use for {@link VkVideoEncodeH264RateControlInfoKHR}{@code ::temporalLayerCount}. */
     @NativeType("uint32_t")
     public int preferredTemporalLayerCount() { return npreferredTemporalLayerCount(address()); }
-    /** indicates the preferred values to use for {@link VkVideoEncodeH264NaluSliceInfoKHR}{@code ::constantQp} for each picture type when using <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** indicates the preferred values to use for {@link VkVideoEncodeH264NaluSliceInfoKHR}{@code ::constantQp} for each picture type when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
     public VkVideoEncodeH264QpKHR preferredConstantQp() { return npreferredConstantQp(address()); }
     /** indicates the preferred maximum number of reference pictures to use in the reference list L0. */
     @NativeType("uint32_t")

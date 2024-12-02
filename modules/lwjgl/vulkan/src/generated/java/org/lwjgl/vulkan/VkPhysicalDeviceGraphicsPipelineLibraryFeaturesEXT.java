@@ -94,7 +94,7 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT extends Struct<V
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-library">graphics pipeline libraries</a>. */
+    /** indicates that the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-library">graphics pipeline libraries</a>. */
     @NativeType("VkBool32")
     public boolean graphicsPipelineLibrary() { return ngraphicsPipelineLibrary(address()) != 0; }
 

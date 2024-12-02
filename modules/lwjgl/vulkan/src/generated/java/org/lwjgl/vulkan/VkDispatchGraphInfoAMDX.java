@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code payloadCount} <b>must</b> be no greater than <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a></li>
+ * <li>{@code payloadCount} <b>must</b> be no greater than <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>

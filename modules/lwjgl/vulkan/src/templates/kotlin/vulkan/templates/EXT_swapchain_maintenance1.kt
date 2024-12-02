@@ -37,7 +37,7 @@ val EXT_swapchain_maintenance1 = "EXTSwapchainMaintenance1".nativeClassVK("EXT_s
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link EXTSurfaceMaintenance1 VK_EXT_surface_maintenance1} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link EXTSurfaceMaintenance1 VK_EXT_surface_maintenance1} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -129,7 +129,7 @@ val EXT_swapchain_maintenance1 = "EXTSwapchainMaintenance1".nativeClassVK("EXT_s
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Feature <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> <b>must</b> be enabled</li>
+            <li>Feature <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-swapchainMaintenance1">{@code swapchainMaintenance1}</a> <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

@@ -102,10 +102,10 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the implementation supports nested command buffers, which allows <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Secondary Command Buffers</a> to execute other <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Secondary Command Buffers</a>. */
+    /** indicates the implementation supports nested command buffers, which allows <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a> to execute other <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a>. */
     @NativeType("VkBool32")
     public boolean nestedCommandBuffer() { return nnestedCommandBuffer(address()) != 0; }
-    /** indicates that it is valid to call {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} inside a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Secondary Command Buffer</a> recorded with {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT}. */
+    /** indicates that it is valid to call {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} inside a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffer</a> recorded with {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT}. */
     @NativeType("VkBool32")
     public boolean nestedCommandBufferRendering() { return nnestedCommandBufferRendering(address()) != 0; }
     /** indicates that the implementation supports nested command buffers with command buffers that are recorded with {@link VK10#VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT}. */

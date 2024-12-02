@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>All members of {@code pInitialShaders} <b>must</b> have a {@code stage} supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesShaderBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
+ * <li>All members of {@code pInitialShaders} <b>must</b> have a {@code stage} supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesShaderBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
  * <li>{@code maxShaderCount} <b>must</b> not be zero</li>
  * <li>{@code maxShaderCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectShaderObjectCount}</li>
  * <li>{@code maxShaderCount} <b>must</b> be greater than or equal to {@code shaderCount}</li>

@@ -96,7 +96,7 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct<VkVideoSession
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the new <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-parameters">update sequence count</a> to set for the video session parameters object. */
+    /** the new <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-session-parameters">update sequence count</a> to set for the video session parameters object. */
     @NativeType("uint32_t")
     public int updateSequenceCount() { return nupdateSequenceCount(address()); }
 

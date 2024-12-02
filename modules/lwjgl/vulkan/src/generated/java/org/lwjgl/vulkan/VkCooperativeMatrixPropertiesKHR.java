@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>At least one entry in the list <b>must</b> have power of two values for all of {@code MSize}, {@code KSize}, and {@code NSize}.</p>
  * 
- * <p>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-cooperativeMatrixWorkgroupScope">{@code cooperativeMatrixWorkgroupScope}</a> is not supported, {@code scope} <b>must</b> be {@link KHRCooperativeMatrix#VK_SCOPE_SUBGROUP_KHR SCOPE_SUBGROUP_KHR}.</p>
+ * <p>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-cooperativeMatrixWorkgroupScope">{@code cooperativeMatrixWorkgroupScope}</a> is not supported, {@code scope} <b>must</b> be {@link KHRCooperativeMatrix#VK_SCOPE_SUBGROUP_KHR SCOPE_SUBGROUP_KHR}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -94,7 +94,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectFeaturesNV extends Struct<VkPhysi
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#indirect-copies">indirect copies</a> are supported. */
+    /** indicates whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#indirect-copies">indirect copies</a> are supported. */
     @NativeType("VkBool32")
     public boolean indirectCopy() { return nindirectCopy(address()) != 0; }
 

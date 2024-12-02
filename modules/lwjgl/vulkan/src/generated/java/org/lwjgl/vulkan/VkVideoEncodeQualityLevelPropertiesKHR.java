@@ -100,10 +100,10 @@ public class VkVideoEncodeQualityLevelPropertiesKHR extends Struct<VkVideoEncode
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value indicating the preferred <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a> to use with the video encode quality level. */
+    /** a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value indicating the preferred <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> to use with the video encode quality level. */
     @NativeType("VkVideoEncodeRateControlModeFlagBitsKHR")
     public int preferredRateControlMode() { return npreferredRateControlMode(address()); }
-    /** indicates the preferred number of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-layers">rate control layers</a> to use with the video encode quality level. */
+    /** indicates the preferred number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-layers">rate control layers</a> to use with the video encode quality level. */
     @NativeType("uint32_t")
     public int preferredRateControlLayerCount() { return npreferredRateControlLayerCount(address()); }
 

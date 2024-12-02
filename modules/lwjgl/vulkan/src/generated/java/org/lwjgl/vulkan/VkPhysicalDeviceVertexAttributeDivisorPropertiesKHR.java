@@ -101,7 +101,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends Struct<
     /** the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled. */
     @NativeType("uint32_t")
     public int maxVertexAttribDivisor() { return nmaxVertexAttribDivisor(address()); }
-    /** specifies whether a non-zero value for the {@code firstInstance} parameter of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing">drawing commands</a> is supported when {@link VkVertexInputBindingDivisorDescriptionKHR}{@code ::divisor} is not 1. */
+    /** specifies whether a non-zero value for the {@code firstInstance} parameter of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#drawing">drawing commands</a> is supported when {@link VkVertexInputBindingDivisorDescriptionKHR}{@code ::divisor} is not 1. */
     @NativeType("VkBool32")
     public boolean supportsNonZeroFirstInstance() { return nsupportsNonZeroFirstInstance(address()) != 0; }
 

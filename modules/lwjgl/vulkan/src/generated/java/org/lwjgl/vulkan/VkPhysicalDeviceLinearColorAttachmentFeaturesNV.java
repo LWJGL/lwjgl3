@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-linear-color-attachment">Linear Color Attachment</a> rendering is supported by the implementation.
+ * Structure describing whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-linear-color-attachment">Linear Color Attachment</a> rendering is supported by the implementation.
  * 
  * <h5>Description</h5>
  * 
@@ -94,7 +94,7 @@ public class VkPhysicalDeviceLinearColorAttachmentFeaturesNV extends Struct<VkPh
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports renderable <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-linear-color-attachment">Linear Color Attachment</a> */
+    /** indicates whether the implementation supports renderable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-linear-color-attachment">Linear Color Attachment</a> */
     @NativeType("VkBool32")
     public boolean linearColorAttachment() { return nlinearColorAttachment(address()) != 0; }
 

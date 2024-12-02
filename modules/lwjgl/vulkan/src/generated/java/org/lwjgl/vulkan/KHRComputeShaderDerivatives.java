@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>The SPIR-V extension provides two new execution modes, both of which allow execution models with defined workgroups to use built-ins that evaluate derivatives explicitly or implicitly. Derivatives will be computed via differencing over a 2x2 group of shader invocations. The {@code DerivativeGroupQuadsKHR} execution mode assembles shader invocations into 2x2 groups, where each group has x and y coordinates of the local invocation ID of the form (2m+{0,1}, 2n+{0,1}). The {@code DerivativeGroupLinearKHR} execution mode assembles shader invocations into 2x2 groups, where each group has local invocation index values of the form 4m+{0,1,2,3}.</p>
  * 
- * <p>The new execution modes are supported in compute shaders and optionally (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-meshAndTaskShaderDerivatives">meshAndTaskShaderDerivatives</a>) in mesh and task shaders.</p>
+ * <p>The new execution modes are supported in compute shaders and optionally (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-meshAndTaskShaderDerivatives">meshAndTaskShaderDerivatives</a>) in mesh and task shaders.</p>
  * 
  * <h5>Examples</h5>
  * 

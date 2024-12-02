@@ -13,7 +13,7 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension provides the ability to use <em>DRM format modifiers</em> with images, enabling Vulkan to better integrate with the Linux ecosystem of graphics, video, and display APIs.
  * 
- * <p>Its functionality closely overlaps with {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> and {@code EGL_MESA_image_dma_buf_export}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup>. Unlike the EGL extensions, this extension does not require the use of a specific handle type (such as a dma_buf) for external memory and provides more explicit control of image creation.</p>
+ * <p>Its functionality closely overlaps with {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> and {@code EGL_MESA_image_dma_buf_export}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup>. Unlike the EGL extensions, this extension does not require the use of a specific handle type (such as a dma_buf) for external memory and provides more explicit control of image creation.</p>
  * 
  * <h5>Introduction to DRM Format Modifiers</h5>
  * 
@@ -52,7 +52,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>Before creating the image, the application first verifies that the physical device supports the received creation parameters by querying {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} with {@link VkDrmFormatModifierPropertiesListEXT} and {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}. Then the application creates the image by chaining {@link VkImageDrmFormatModifierExplicitCreateInfoEXT} and {@link VkExternalMemoryImageCreateInfo} onto {@link VkImageCreateInfo}.</p>
  * </li>
- * <li><b>Export.</b> The application creates an image and allocates its memory. Then the application exports to <em>modifier</em>-aware consumers the image’s memory handles; its creation parameters; its <em>modifier</em>; and the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkSubresourceLayout">{@code offset}</a>, <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkSubresourceLayout">{@code size}</a>, and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkSubresourceLayout">{@code rowPitch}</a> of each <em>memory plane</em>.
+ * <li><b>Export.</b> The application creates an image and allocates its memory. Then the application exports to <em>modifier</em>-aware consumers the image’s memory handles; its creation parameters; its <em>modifier</em>; and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkSubresourceLayout">{@code offset}</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkSubresourceLayout">{@code size}</a>, and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkSubresourceLayout">{@code rowPitch}</a> of each <em>memory plane</em>.
  * In this pattern, the Vulkan device is the authority for the image; it is the allocator of the image’s memory and the decider of the image’s creation parameters. When choosing the image’s creation parameters, the application usually chooses a tuple <em>(format, drmFormatModifier)</em> from the result of the negotiation described above. The negotiation’s result often contains multiple tuples that share the same format but differ in their <em>modifier</em>. In this case, the application should defer the choice of the image’s <em>modifier</em> to the Vulkan implementation by providing all such <em>modifiers</em> to {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pDrmFormatModifiers}; and the implementation should choose from {@code pDrmFormatModifiers} the optimal <em>modifier</em> in consideration with the other image parameters.
  * 
  * <p>The application creates the image by chaining {@link VkImageDrmFormatModifierListCreateInfoEXT} and {@link VkExternalMemoryImageCreateInfo} onto {@link VkImageCreateInfo}. The protocol and APIs by which the application will share the image with external consumers will likely determine the value of {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes}. The implementation chooses for the image an optimal <em>modifier</em> from {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pDrmFormatModifiers}. The application then queries the implementation-chosen <em>modifier</em> with {@link #vkGetImageDrmFormatModifierPropertiesEXT GetImageDrmFormatModifierPropertiesEXT}, and queries the memory layout of each plane with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
@@ -65,15 +65,15 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <h5>Prior Art</h5>
  * 
- * <p>Extension {@code EGL_EXT_image_dma_buf_import}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup> introduced the ability to create an {@code EGLImage} by importing for each plane a dma_buf, offset, and row pitch.</p>
+ * <p>Extension {@code EGL_EXT_image_dma_buf_import}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup> introduced the ability to create an {@code EGLImage} by importing for each plane a dma_buf, offset, and row pitch.</p>
  * 
- * <p>Later, extension {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> introduced the ability to query which combination of formats and <em>modifiers</em> the implementation supports and to specify <em>modifiers</em> during creation of the {@code EGLImage}.</p>
+ * <p>Later, extension {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> introduced the ability to query which combination of formats and <em>modifiers</em> the implementation supports and to specify <em>modifiers</em> during creation of the {@code EGLImage}.</p>
  * 
- * <p>Extension {@code EGL_MESA_image_dma_buf_export}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup> is the inverse of {@code EGL_EXT_image_dma_buf_import_modifiers}.</p>
+ * <p>Extension {@code EGL_MESA_image_dma_buf_export}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup> is the inverse of {@code EGL_EXT_image_dma_buf_import_modifiers}.</p>
  * 
- * <p>The Linux kernel modesetting API (KMS), when configuring the display’s framebuffer with {@code struct drm_mode_fb_cmd2}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn4">4</a></sup>, allows one to specify the framebuffer’s <em>modifier</em> as well as a per-plane memory handle, offset, and row pitch.</p>
+ * <p>The Linux kernel modesetting API (KMS), when configuring the display’s framebuffer with {@code struct drm_mode_fb_cmd2}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn4">4</a></sup>, allows one to specify the framebuffer’s <em>modifier</em> as well as a per-plane memory handle, offset, and row pitch.</p>
  * 
- * <p>GBM, a graphics buffer manager for Linux, allows creation of a {@code gbm_bo} (that is, a graphics <em>buffer object</em>) by importing data similar to that in {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup>; and symmetrically allows exporting the same data from the {@code gbm_bo}. See the references to <em>modifier</em> and <em>plane</em> in {@code gbm.h}<sup><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn5">5</a></sup>.</p>
+ * <p>GBM, a graphics buffer manager for Linux, allows creation of a {@code gbm_bo} (that is, a graphics <em>buffer object</em>) by importing data similar to that in {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup>; and symmetrically allows exporting the same data from the {@code gbm_bo}. See the references to <em>modifier</em> and <em>plane</em> in {@code gbm.h}<sup><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn5">5</a></sup>.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -85,7 +85,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRImageFormatList VK_KHR_image_format_list} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.2">Version 1.2</a></dd>
+ * <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a> and {@link KHRImageFormatList VK_KHR_image_format_list} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.2">Version 1.2</a></dd>
  * <dt><b>API Interactions</b></dt>
  * <dd><ul>
  * <li>Interacts with VK_VERSION_1_3</li>
@@ -192,7 +192,7 @@ public class EXTImageDrmFormatModifier {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>If an image was created with {@link #VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then the image has a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>. To query the <em>modifier</em>, call:</p>
+     * <p>If an image was created with {@link #VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then the image has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>. To query the <em>modifier</em>, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetImageDrmFormatModifierPropertiesEXT(

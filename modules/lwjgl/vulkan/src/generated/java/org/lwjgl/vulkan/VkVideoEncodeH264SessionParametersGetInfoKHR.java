@@ -23,8 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>When this structure is specified in the {@code pNext} chain of the {@link VkVideoEncodeSessionParametersGetInfoKHR} structure passed to {@link KHRVideoEncodeQueue#vkGetEncodedVideoSessionParametersKHR GetEncodedVideoSessionParametersKHR}, the command will write encoded parameter data to the output buffer in the following order:</p>
  * 
  * <ul>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a> identified by {@code stdSPSId}, if {@code writeStdSPS} is {@link VK10#VK_TRUE TRUE}.</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId}, if {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a> identified by {@code stdSPSId}, if {@code writeStdSPS} is {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId}, if {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}.</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
@@ -117,10 +117,10 @@ public class VkVideoEncodeH264SessionParametersGetInfoKHR extends Struct<VkVideo
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a> identified by {@code stdSPSId} is requested to be retrieved. */
+    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a> identified by {@code stdSPSId} is requested to be retrieved. */
     @NativeType("VkBool32")
     public boolean writeStdSPS() { return nwriteStdSPS(address()) != 0; }
-    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId} is requested to be retrieved. */
+    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a> identified by the pair constructed from {@code stdSPSId} and {@code stdPPSId} is requested to be retrieved. */
     @NativeType("VkBool32")
     public boolean writeStdPPS() { return nwriteStdPPS(address()) != 0; }
     /** specifies the H.264 sequence parameter set ID used to identify the retrieved H.264 sequence and/or picture parameter set(s). */

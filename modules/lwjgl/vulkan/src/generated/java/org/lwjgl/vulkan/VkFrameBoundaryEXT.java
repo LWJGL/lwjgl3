@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The application <b>can</b> associate frame boundary information to a queue submission call by adding a {@link VkFrameBoundaryEXT} structure to the {@code pNext} chain of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#devsandqueues-submission">queue submission</a>, {@link VkPresentInfoKHR}, or {@link VkBindSparseInfo}.</p>
+ * <p>The application <b>can</b> associate frame boundary information to a queue submission call by adding a {@link VkFrameBoundaryEXT} structure to the {@code pNext} chain of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-submission">queue submission</a>, {@link VkPresentInfoKHR}, or {@link VkBindSparseInfo}.</p>
  * 
  * <p>The frame identifier is used to associate one or more queue submission to a frame, it is thus meant to be unique within a frame lifetime, i.e. it is possible (but not recommended) to reuse frame identifiers, as long as any two frames with any chance of having overlapping queue submissions (as in the example above) use two different frame identifiers.</p>
  * 

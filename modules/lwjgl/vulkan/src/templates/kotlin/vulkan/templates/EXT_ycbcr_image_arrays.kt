@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_image_arrays", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension allows images of a format that requires <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
+        This extension allows images of a format that requires <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -27,7 +27,7 @@ val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_imag
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -102,7 +102,7 @@ public class VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV extends Stru
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the total amount of address space available, in bytes, for sparse memory resources of all usages if the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedSparseAddressSpace">{@code extendedSparseAddressSpace}</a> feature is enabled. This <b>must</b> be greater than or equal to {@link VkPhysicalDeviceLimits}{@code ::sparseAddressSpaceSize}, and the difference in space <b>must</b> only be used with usages allowed below. This is an upper bound on the sum of the sizes of all sparse resources, regardless of whether any memory is bound to them. */
+    /** the total amount of address space available, in bytes, for sparse memory resources of all usages if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-extendedSparseAddressSpace">{@code extendedSparseAddressSpace}</a> feature is enabled. This <b>must</b> be greater than or equal to {@link VkPhysicalDeviceLimits}{@code ::sparseAddressSpaceSize}, and the difference in space <b>must</b> only be used with usages allowed below. This is an upper bound on the sum of the sizes of all sparse resources, regardless of whether any memory is bound to them. */
     @NativeType("VkDeviceSize")
     public long extendedSparseAddressSpaceSize() { return nextendedSparseAddressSpaceSize(address()); }
     /** a bitmask of {@code VkImageUsageFlagBits} of usages which <b>may</b> allow an implementation to use the full {@code extendedSparseAddressSpaceSize} space. */

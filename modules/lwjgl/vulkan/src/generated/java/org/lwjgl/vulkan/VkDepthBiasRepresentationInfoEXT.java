@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-leastRepresentableValueForceUnormRepresentation">{@code leastRepresentableValueForceUnormRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-floatRepresentation">{@code floatRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_FLOAT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthBiasExact">{@code depthBiasExact}</a> feature is not enabled, {@code depthBiasExact} <b>must</b> be {@code VK_FALSE}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-leastRepresentableValueForceUnormRepresentation">{@code leastRepresentableValueForceUnormRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-floatRepresentation">{@code floatRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_FLOAT_EXT}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-depthBiasExact">{@code depthBiasExact}</a> feature is not enabled, {@code depthBiasExact} <b>must</b> be {@code VK_FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

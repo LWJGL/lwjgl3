@@ -102,13 +102,13 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV extends St
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports functionality to generate dispatch commands and push constants for the compute pipeline on the device. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
+    /** indicates whether the implementation supports functionality to generate dispatch commands and push constants for the compute pipeline on the device. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCompute() { return ndeviceGeneratedCompute(address()) != 0; }
-    /** indicates whether the implementation supports functionality to generate commands to bind compute pipelines on the device. See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
+    /** indicates whether the implementation supports functionality to generate commands to bind compute pipelines on the device. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedComputePipelines() { return ndeviceGeneratedComputePipelines(address()) != 0; }
-    /** indicates whether the implementation supports functionality to capture compute pipeline address and reuse later for replay in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
+    /** indicates whether the implementation supports functionality to capture compute pipeline address and reuse later for replay in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedComputeCaptureReplay() { return ndeviceGeneratedComputeCaptureReplay(address()) != 0; }
 

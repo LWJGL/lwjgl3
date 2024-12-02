@@ -105,7 +105,7 @@ public class VkPhysicalDeviceCooperativeMatrix2PropertiesNV extends Struct<VkPhy
     /** the maximum number of invocations in a workgroup when the module uses {@code OpTypeCooperativeMatrixKHR} with {@code Scope} equal to {@code Workgroup}. */
     @NativeType("uint32_t")
     public int cooperativeMatrixWorkgroupScopeMaxWorkgroupSize() { return ncooperativeMatrixWorkgroupScopeMaxWorkgroupSize(address()); }
-    /** the maximum supported dimension for cooperative matrix types when <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-cooperativeMatrixFlexibleDimensions">{@code cooperativeMatrixFlexibleDimensions}</a> is enabled. */
+    /** the maximum supported dimension for cooperative matrix types when <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-cooperativeMatrixFlexibleDimensions">{@code cooperativeMatrixFlexibleDimensions}</a> is enabled. */
     @NativeType("uint32_t")
     public int cooperativeMatrixFlexibleDimensionsMaxDimension() { return ncooperativeMatrixFlexibleDimensionsMaxDimension(address()); }
     /** the number of bytes of shared memory reserved for the implementation when the module uses {@code OpTypeCooperativeMatrixKHR} with {@code Scope} equal to {@code Workgroup}. */

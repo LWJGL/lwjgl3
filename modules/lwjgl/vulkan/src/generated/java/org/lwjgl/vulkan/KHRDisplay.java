@@ -482,7 +482,7 @@ public class KHRDisplay {
      * @param physicalDevice the physical device associated with {@code display}.
      * @param display        the display to create an additional mode for.
      * @param pCreateInfo    a pointer to a {@link VkDisplayModeCreateInfoKHR} structure describing the new mode to create.
-     * @param pAllocator     the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator     the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pMode          a pointer to a {@code VkDisplayModeKHR} handle in which the mode created is returned.
      */
     @NativeType("VkResult")
@@ -615,7 +615,7 @@ public class KHRDisplay {
      *
      * @param instance    the instance corresponding to the physical device the targeted display is on.
      * @param pCreateInfo a pointer to a {@link VkDisplaySurfaceCreateInfoKHR} structure specifying which mode, plane, and other parameters to use, as described below.
-     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface is returned.
      */
     @NativeType("VkResult")

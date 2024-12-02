@@ -214,7 +214,7 @@ public class KHRSurface {
      * <p>For a traditional “{@code Linear}” or non-gamma transfer function color space use {@link EXTSwapchainColorspace#VK_COLOR_SPACE_PASS_THROUGH_EXT COLOR_SPACE_PASS_THROUGH_EXT}.</p>
      * </div>
      * 
-     * <p>The presentation engine interprets the pixel values of the R, G, and B components as having been encoded using an appropriate transfer function. Applications <b>should</b> ensure that the appropriate transfer function has been applied. <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-output-format-conversion">Textures Output Format Conversion</a> requires that all implementations implicitly apply the sRGB EOTF<sup>-1</sup> on R, G, and B components when shaders write to an sRGB pixel format image, which is useful for sRGB color spaces. For sRGB color spaces with other pixel formats, or other non-linear color spaces, applications <b>can</b> apply the transfer function explicitly in a shader. The A channel is always interpreted as linearly encoded.</p>
+     * <p>The presentation engine interprets the pixel values of the R, G, and B components as having been encoded using an appropriate transfer function. Applications <b>should</b> ensure that the appropriate transfer function has been applied. <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-output-format-conversion">Textures Output Format Conversion</a> requires that all implementations implicitly apply the sRGB EOTF<sup>-1</sup> on R, G, and B components when shaders write to an sRGB pixel format image, which is useful for sRGB color spaces. For sRGB color spaces with other pixel formats, or other non-linear color spaces, applications <b>can</b> apply the transfer function explicitly in a shader. The A channel is always interpreted as linearly encoded.</p>
      * 
      * <p>This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces:</p>
      * 
@@ -234,7 +234,7 @@ public class KHRSurface {
      * </tbody>
      * </table>
      * 
-     * <p>The transfer functions are described in the “{@code Transfer Functions}” chapter of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</p>
+     * <p>The transfer functions are described in the “{@code Transfer Functions}” chapter of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</p>
      * 
      * <p>Except Display-P3 OETF, which is:</p>
      * 
@@ -348,7 +348,7 @@ public class KHRSurface {
      *
      * @param instance   the instance used to create the surface.
      * @param surface    the surface to destroy.
-     * @param pAllocator the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      */
     public static void vkDestroySurfaceKHR(VkInstance instance, @NativeType("VkSurfaceKHR") long surface, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroySurfaceKHR(instance, surface, memAddressSafe(pAllocator));

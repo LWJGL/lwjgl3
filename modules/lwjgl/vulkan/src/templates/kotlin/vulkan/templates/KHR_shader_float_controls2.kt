@@ -29,7 +29,7 @@ val KHR_shader_float_controls2 = "KHRShaderFloatControls2".nativeClassVK("KHR_sh
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>

@@ -27,11 +27,11 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
-                <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+                <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -138,7 +138,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
             <li>The {@code pipeline} member of {@code pPipelineInfo} <b>must</b> have been created with {@code device}</li>
         </ul>
 
@@ -195,7 +195,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
             <li>The {@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@code device}</li>
             <li>The {@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with #PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR</li>
         </ul>
@@ -255,7 +255,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> feature <b>must</b> be enabled</li>
             <li>The {@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@code device}</li>
             <li>The {@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with #PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR</li>
         </ul>

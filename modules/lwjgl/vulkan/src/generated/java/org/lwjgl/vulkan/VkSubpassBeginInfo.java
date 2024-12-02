@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code contents} is {@link KHRMaintenance7#VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR}, then at least one of the following features <b>must</b> be enabled:
  * 
  * <ul>
- * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-maintenance7">{@code maintenance7}</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a></li>
+ * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a></li>
  * </ul>
  * </li>
  * </ul>

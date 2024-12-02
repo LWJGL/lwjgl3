@@ -98,10 +98,10 @@ public class VkPhysicalDeviceShaderEnqueueFeaturesAMDX extends Struct<VkPhysical
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#executiongraphs">execution graphs</a>. */
+    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#executiongraphs">execution graphs</a>. */
     @NativeType("VkBool32")
     public boolean shaderEnqueue() { return nshaderEnqueue(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#executiongraphs-meshnodes">mesh nodes in execution graphs</a>. */
+    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#executiongraphs-meshnodes">mesh nodes in execution graphs</a>. */
     @NativeType("VkBool32")
     public boolean shaderMeshEnqueue() { return nshaderMeshEnqueue(address()) != 0; }
 

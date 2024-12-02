@@ -31,7 +31,7 @@ val EXT_multisampled_render_to_single_sampled = "EXTMultisampledRenderToSingleSa
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} and {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
+            <dd>{@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} and {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

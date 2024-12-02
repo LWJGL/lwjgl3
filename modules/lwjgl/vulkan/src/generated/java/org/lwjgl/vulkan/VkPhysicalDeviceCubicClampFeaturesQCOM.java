@@ -94,7 +94,7 @@ public class VkPhysicalDeviceCubicClampFeaturesQCOM extends Struct<VkPhysicalDev
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports cubic filtering in combination with a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-texel-range-clamp">texel range clamp</a>. */
+    /** indicates that the implementation supports cubic filtering in combination with a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-texel-range-clamp">texel range clamp</a>. */
     @NativeType("VkBool32")
     public boolean cubicRangeClamp() { return ncubicRangeClamp(address()) != 0; }
 

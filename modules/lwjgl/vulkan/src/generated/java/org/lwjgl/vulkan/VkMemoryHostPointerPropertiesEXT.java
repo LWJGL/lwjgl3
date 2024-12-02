@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The value returned by {@code memoryTypeBits} <b>should</b> only include bits that identify memory types which are host visible. Implementations <b>may</b> include bits that identify memory types which are not host visible. Behavior for imported pointers of such types is defined by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#host-memory-import-non-visible-type">{@link VkImportMemoryHostPointerInfoEXT}</a>.</p>
+ * <p>The value returned by {@code memoryTypeBits} <b>should</b> only include bits that identify memory types which are host visible. Implementations <b>may</b> include bits that identify memory types which are not host visible. Behavior for imported pointers of such types is defined by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#host-memory-import-non-visible-type">{@link VkImportMemoryHostPointerInfoEXT}</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

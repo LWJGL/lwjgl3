@@ -11,7 +11,7 @@ import vulkan.*
 val NV_shader_subgroup_partitioned = "NVShaderSubgroupPartitioned".nativeClassVK("NV_shader_subgroup_partitioned", type = "device", postfix = "NV") {
     documentation =
         """
-        This extension enables support for a new class of <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-group-operations">group operations</a> on <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-scope-subgroup">subgroups</a> via the <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/nv/GL_NV_shader_subgroup_partitioned.txt">{@code GL_NV_shader_subgroup_partitioned}</a> GLSL extension and <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_subgroup_partitioned.html">{@code SPV_NV_shader_subgroup_partitioned}</a> SPIR-V extension. Support for these new operations is advertised via the #SUBGROUP_FEATURE_PARTITIONED_BIT_NV bit.
+        This extension enables support for a new class of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-group-operations">group operations</a> on <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#shaders-scope-subgroup">subgroups</a> via the <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/nv/GL_NV_shader_subgroup_partitioned.txt">{@code GL_NV_shader_subgroup_partitioned}</a> GLSL extension and <a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_subgroup_partitioned.html">{@code SPV_NV_shader_subgroup_partitioned}</a> SPIR-V extension. Support for these new operations is advertised via the #SUBGROUP_FEATURE_PARTITIONED_BIT_NV bit.
 
         This extension requires Vulkan 1.1, for general subgroup support.
 
@@ -29,7 +29,7 @@ val NV_shader_subgroup_partitioned = "NVShaderSubgroupPartitioned".nativeClassVK
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>

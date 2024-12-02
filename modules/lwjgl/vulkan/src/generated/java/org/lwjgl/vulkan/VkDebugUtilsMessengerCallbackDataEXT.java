@@ -176,13 +176,13 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     /** a count of items contained in the {@code pQueueLabels} array. */
     @NativeType("uint32_t")
     public int queueLabelCount() { return nqueueLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information. */
+    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information. */
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.@Nullable Buffer pQueueLabels() { return npQueueLabels(address()); }
     /** a count of items contained in the {@code pCmdBufLabels} array. */
     @NativeType("uint32_t")
     public int cmdBufLabelCount() { return ncmdBufLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information. */
+    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information. */
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.@Nullable Buffer pCmdBufLabels() { return npCmdBufLabels(address()); }
     /** a count of items contained in the {@code pObjects} array. */

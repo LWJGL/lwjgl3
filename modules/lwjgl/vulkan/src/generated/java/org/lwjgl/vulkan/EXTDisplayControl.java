@@ -244,7 +244,7 @@ public class EXTDisplayControl {
      *
      * @param device           a logical device on which the event <b>may</b> occur.
      * @param pDeviceEventInfo a pointer to a {@link VkDeviceEventInfoEXT} structure describing the event of interest to the application.
-     * @param pAllocator       controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator       controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pFence           a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
@@ -312,7 +312,7 @@ public class EXTDisplayControl {
      * @param device            a logical device associated with {@code display}
      * @param display           the display on which the event <b>may</b> occur.
      * @param pDisplayEventInfo a pointer to a {@link VkDisplayEventInfoEXT} structure describing the event of interest to the application.
-     * @param pAllocator        controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator        controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pFence            a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")

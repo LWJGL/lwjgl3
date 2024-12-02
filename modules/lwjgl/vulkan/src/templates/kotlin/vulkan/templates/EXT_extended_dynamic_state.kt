@@ -30,11 +30,11 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Deprecation State</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -178,7 +178,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         "See #CmdSetDepthCompareOp().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCompareOp("depthCompareOp", "a {@code VkCompareOp} value specifying the comparison operator used for the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth-comparison\">Depth Comparison</a> step of the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth\">depth test</a>.")
+        VkCompareOp("depthCompareOp", "a {@code VkCompareOp} value specifying the comparison operator used for the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#fragops-depth-comparison\">Depth Comparison</a> step of the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#fragops-depth\">depth test</a>.")
     )
 
     void(

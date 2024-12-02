@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code mode} <b>must</b> be non-zero</li>
- * <li>{@code mode} <b>must</b> be one of the bits supported in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-supportedIndirectCommandsInputModes">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsInputModes}</a></li>
+ * <li>{@code mode} <b>must</b> be one of the bits supported in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsInputModes">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsInputModes}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code binaryCount} and the order of the elements in {@code pPipelineBinaries} <b>must</b> exactly match that returned by {@link KHRPipelineBinary#vkCreatePipelineBinariesKHR CreatePipelineBinariesKHR} for the matching stext:Vk*PipelineCreateInfo structure and its {@code pNext} chain, ignoring the presence of the {@link VkPipelineBinaryInfoKHR} structure, the presence of the {@link KHRPipelineBinary#VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR} flag, and absence of any shader module identifiers or shader modules, for the same <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#global-pipeline-key">global pipeline key</a>, from either:
+ * <li>{@code binaryCount} and the order of the elements in {@code pPipelineBinaries} <b>must</b> exactly match that returned by {@link KHRPipelineBinary#vkCreatePipelineBinariesKHR CreatePipelineBinariesKHR} for the matching stext:Vk*PipelineCreateInfo structure and its {@code pNext} chain, ignoring the presence of the {@link VkPipelineBinaryInfoKHR} structure, the presence of the {@link KHRPipelineBinary#VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR} flag, and absence of any shader module identifiers or shader modules, for the same <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#global-pipeline-key">global pipeline key</a>, from either:
  * 
  * <ul>
  * <li>{@link VkPipelineBinaryCreateInfoKHR}{@code ::pPipelineCreateInfo}, or</li>

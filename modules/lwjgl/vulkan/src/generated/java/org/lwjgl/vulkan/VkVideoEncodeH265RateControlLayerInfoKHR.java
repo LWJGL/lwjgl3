@@ -23,13 +23,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>When used, the values in {@code minQp} and {@code maxQp} guarantee that the effective QP values used by the implementation will respect those lower and upper bounds, respectively. However, limiting the range of QP values that the implementation is able to use will also limit the capabilities of the implementation’s rate control algorithm to comply to other constraints. In particular, the implementation <b>may</b> not be able to comply to the following:</p>
  * 
  * <ul>
- * <li>The average and/or peak <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-bitrate">bitrate</a> values to be used for the encoded bitstream specified in the {@code averageBitrate} and {@code maxBitrate} members of the {@link VkVideoEncodeRateControlLayerInfoKHR} structure.</li>
+ * <li>The average and/or peak <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-bitrate">bitrate</a> values to be used for the encoded bitstream specified in the {@code averageBitrate} and {@code maxBitrate} members of the {@link VkVideoEncodeRateControlLayerInfoKHR} structure.</li>
  * <li>The upper bounds on the encoded frame size, for each picture type, specified in the {@code maxFrameSize} member of {@link VkVideoEncodeH265RateControlLayerInfoKHR}.</li>
  * </ul>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>In general, applications need to configure rate control parameters appropriately in order to be able to get the desired rate control behavior, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control">Video Encode Rate Control</a> section.</p>
+ * <p>In general, applications need to configure rate control parameters appropriately in order to be able to get the desired rate control behavior, as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control">Video Encode Rate Control</a> section.</p>
  * </div>
  * 
  * <p>When an instance of this structure is included in the {@code pNext} chain of a {@link VkVideoEncodeRateControlLayerInfoKHR} structure specified in one of the elements of the {@code pLayers} array member of the {@link VkVideoEncodeRateControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, and the bound video session was created with the video codec operation {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, it specifies the H.265-specific rate control parameters of the rate control layer corresponding to that element of {@code pLayers}.</p>

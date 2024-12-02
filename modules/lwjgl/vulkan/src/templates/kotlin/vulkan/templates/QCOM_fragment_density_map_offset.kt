@@ -27,7 +27,7 @@ val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClas
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTFragmentDensityMap VK_EXT_fragment_density_map}</dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTFragmentDensityMap VK_EXT_fragment_density_map}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

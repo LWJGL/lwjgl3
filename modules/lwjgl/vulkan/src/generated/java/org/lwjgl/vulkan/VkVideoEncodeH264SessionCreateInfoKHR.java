@@ -99,7 +99,7 @@ public class VkVideoEncodeH264SessionCreateInfoKHR extends Struct<VkVideoEncodeH
     /** indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is {@link VK10#VK_FALSE FALSE}, the implementation ignores the value of {@code maxLevelIdc} and uses the value of {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::maxLevelIdc}, as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile. */
     @NativeType("VkBool32")
     public boolean useMaxLevelIdc() { return nuseMaxLevelIdc(address()) != 0; }
-    /** a {@code StdVideoH264LevelIdc} value specifying the upper bound on the H.264 level for the video bitstreams produced by the created video session, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
+    /** a {@code StdVideoH264LevelIdc} value specifying the upper bound on the H.264 level for the video bitstreams produced by the created video session, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
     @NativeType("StdVideoH264LevelIdc")
     public int maxLevelIdc() { return nmaxLevelIdc(address()); }
 

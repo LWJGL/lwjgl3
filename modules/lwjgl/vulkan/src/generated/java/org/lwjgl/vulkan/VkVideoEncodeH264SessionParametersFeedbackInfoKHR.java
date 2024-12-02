@@ -94,10 +94,10 @@ public class VkVideoEncodeH264SessionParametersFeedbackInfoKHR extends Struct<Vk
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdSPS}, were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdSPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasStdSPSOverrides() { return nhasStdSPSOverrides(address()) != 0; }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdPPS}, were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdPPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasStdPPSOverrides() { return nhasStdPPSOverrides(address()) != 0; }
 

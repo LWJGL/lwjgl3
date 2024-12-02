@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code memory} <b>must</b> be currently host mapped</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-memoryUnmapReserve">{@code memoryUnmapReserve}</a> <b>must</b> be enabled</li>
+ * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryUnmapReserve">{@code memoryUnmapReserve}</a> <b>must</b> be enabled</li>
  * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT} or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}</li>
  * </ul>
  * 

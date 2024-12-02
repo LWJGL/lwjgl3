@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_formats", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
+        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -27,7 +27,7 @@ val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_form
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -26,8 +26,8 @@ import org.lwjgl.vulkan.video.*;
  * <p>This structure <b>can</b> be specified in the following places:</p>
  * 
  * <ul>
- * <li>In the {@code pParametersAddInfo} member of the {@link VkVideoDecodeH264SessionParametersCreateInfoKHR} structure specified in the {@code pNext} chain of {@link VkVideoSessionParametersCreateInfoKHR} used to create a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-parameters">video session parameters</a> object. In this case, if the video codec operation the video session parameters object is created with is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then it defines the set of initial parameters to add to the created object (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#creating-video-session-parameters">Creating Video Session Parameters</a>).</li>
- * <li>In the {@code pNext} chain of {@link VkVideoSessionParametersUpdateInfoKHR}. In this case, if the video codec operation the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-parameters">video session parameters</a> object to be updated was created with is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then it defines the set of parameters to add to it (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-parameters-update">Updating Video Session Parameters</a>).</li>
+ * <li>In the {@code pParametersAddInfo} member of the {@link VkVideoDecodeH264SessionParametersCreateInfoKHR} structure specified in the {@code pNext} chain of {@link VkVideoSessionParametersCreateInfoKHR} used to create a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-session-parameters">video session parameters</a> object. In this case, if the video codec operation the video session parameters object is created with is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then it defines the set of initial parameters to add to the created object (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#creating-video-session-parameters">Creating Video Session Parameters</a>).</li>
+ * <li>In the {@code pNext} chain of {@link VkVideoSessionParametersUpdateInfoKHR}. In this case, if the video codec operation the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-session-parameters">video session parameters</a> object to be updated was created with is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then it defines the set of parameters to add to it (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-session-parameters-update">Updating Video Session Parameters</a>).</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
@@ -130,13 +130,13 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct<VkVideo
     /** the number of elements in the {@code pStdSPSs} array. */
     @NativeType("uint32_t")
     public int stdSPSCount() { return nstdSPSCount(address()); }
-    /** a pointer to an array of {@code StdVideoH264SequenceParameterSet} structures describing the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h264-sps">H.264 SPS</a> entries to add. */
+    /** a pointer to an array of {@code StdVideoH264SequenceParameterSet} structures describing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-sps">H.264 SPS</a> entries to add. */
     @NativeType("StdVideoH264SequenceParameterSet const *")
     public StdVideoH264SequenceParameterSet.@Nullable Buffer pStdSPSs() { return npStdSPSs(address()); }
     /** the number of elements in the {@code pStdPPSs} array. */
     @NativeType("uint32_t")
     public int stdPPSCount() { return nstdPPSCount(address()); }
-    /** a pointer to an array of {@code StdVideoH264PictureParameterSet} structures describing the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h264-pps">H.264 PPS</a> entries to add. */
+    /** a pointer to an array of {@code StdVideoH264PictureParameterSet} structures describing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-pps">H.264 PPS</a> entries to add. */
     @NativeType("StdVideoH264PictureParameterSet const *")
     public StdVideoH264PictureParameterSet.@Nullable Buffer pStdPPSs() { return npStdPPSs(address()); }
 

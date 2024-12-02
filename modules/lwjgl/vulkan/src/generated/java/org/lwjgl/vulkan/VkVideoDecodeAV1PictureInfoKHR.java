@@ -25,13 +25,13 @@ import static org.lwjgl.vulkan.KHRVideoDecodeAV1.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This structure is specified in the {@code pNext} chain of the {@link VkVideoDecodeInfoKHR} structure passed to {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR} to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1">AV1 decode operation</a>.</p>
+ * <p>This structure is specified in the {@code pNext} chain of the {@link VkVideoDecodeInfoKHR} structure passed to {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR} to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1">AV1 decode operation</a>.</p>
  * 
  * <dl>
  * <dt>Decode Output Picture Information</dt>
  * <dd><ul>
- * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
- * <li>The decode output picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-picture-info">AV1 picture information</a> provided in {@code pStdPictureInfo}.</li>
+ * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
+ * <li>The decode output picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-info">AV1 picture information</a> provided in {@code pStdPictureInfo}.</li>
  * </ul></dd>
  * </dl>
  * 
@@ -39,78 +39,78 @@ import static org.lwjgl.vulkan.KHRVideoDecodeAV1.*;
  * <dt>Std Picture Information</dt>
  * <dd><ul>
  * <li>{@code flags.reserved}, {@code reserved1}, and {@code reserved2} are used only for padding purposes and are otherwise ignored;</li>
- * <li>{@code flags.apply_grain} indicates that film grain is enabled for the decoded picture, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code tg_start} and {@code tg_end} are interpreted as defined in section 6.10.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code OrderHint}, {@code OrderHints}, and {@code expectedFrameId} are interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code flags.apply_grain} indicates that film grain is enabled for the decoded picture, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code tg_start} and {@code tg_end} are interpreted as defined in section 6.10.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code OrderHint}, {@code OrderHints}, and {@code expectedFrameId} are interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * <li>the {@code StdVideoAV1TileInfo} structure pointed to by {@code pTileInfo} is interpreted as follows:
  * 
  * <ul>
  * <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
- * <li>{@code pMiColStarts} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code MiColStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code pMiRowStarts} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code MiRowStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code pWidthInSbsMinus1} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code width_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code pHeightInSbsMinus1} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code height_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>all other members of {@code StdVideoAV1TileInfo} are interpreted as defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code pMiColStarts} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code MiColStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code pMiRowStarts} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code MiRowStarts} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code pWidthInSbsMinus1} is a pointer to an array of {@code TileCols} number of unsigned integers that corresponds to {@code width_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code pHeightInSbsMinus1} is a pointer to an array of {@code TileRows} number of unsigned integers that corresponds to {@code height_in_sbs_minus_1} defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoAV1TileInfo} are interpreted as defined in section 6.8.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
  * <li>the {@code StdVideoAV1Quantization} structure pointed to by {@code pQuantization} is interpreted as follows:
  * 
  * <ul>
  * <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
- * <li>all other members of {@code StdVideoAV1Quantization} are interpreted as defined in section 6.8.11 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoAV1Quantization} are interpreted as defined in section 6.8.11 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
  * <li>if {@code flags.segmentation_enabled} is set, then the {@code StdVideoAV1Segmentation} structure pointed to by {@code pSegmentation} is interpreted as follows:
  * 
  * <ul>
- * <li>the elements of {@code FeatureEnabled} are bitmasks where bit index <code>j</code> of element <code>i</code> corresponds to {@code FeatureEnabled[i][j]} as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code FeatureData} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>the elements of {@code FeatureEnabled} are bitmasks where bit index <code>j</code> of element <code>i</code> corresponds to {@code FeatureEnabled[i][j]} as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code FeatureData} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
  * <li>the {@code StdVideoAV1LoopFilter} structure pointed to by {@code pLoopFilter} is interpreted as follows:
  * 
  * <ul>
  * <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
- * <li>{@code update_ref_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_ref_delta} corresponding to element <code>i</code> of {@code loop_filter_ref_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code update_mode_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_mode_delta} corresponding to element <code>i</code> of {@code loop_filter_mode_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>all other members of {@code StdVideoAV1LoopFilter} are interpreted as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code update_ref_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_ref_delta} corresponding to element <code>i</code> of {@code loop_filter_ref_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code update_mode_delta} is a bitmask where bit index <code>i</code> is interpreted as the value of {@code update_mode_delta} corresponding to element <code>i</code> of {@code loop_filter_mode_deltas} as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoAV1LoopFilter} are interpreted as defined in section 6.8.10 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
- * <li>if {@code flags.enable_cdef} is set in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-active-sequence-header">active sequence header</a>, then the members of the {@code StdVideoAV1CDEF} structure pointed to by {@code pCDEF} are interpreted as follows:
+ * <li>if {@code flags.enable_cdef} is set in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-active-sequence-header">active sequence header</a>, then the members of the {@code StdVideoAV1CDEF} structure pointed to by {@code pCDEF} are interpreted as follows:
  * 
  * <ul>
- * <li>{@code cdef_y_sec_strength} and {@code cdef_uv_sec_strength} are the bitstream values of the corresponding syntax elements defined in section 5.9.19 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>all other members of {@code StdVideoAV1CDEF} are interpreted as defined in section 6.10.14 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code cdef_y_sec_strength} and {@code cdef_uv_sec_strength} are the bitstream values of the corresponding syntax elements defined in section 5.9.19 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoAV1CDEF} are interpreted as defined in section 6.10.14 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
  * <li>the {@code StdVideoAV1LoopRestoration} structure pointed to by {@code pLoopRestoration} is interpreted as follows:
  * 
  * <ul>
- * <li>{@code LoopRestorationSize}[{@code plane}] is interpreted as <code>log2(size) - 5</code>, where {@code size} is the value of {@code LoopRestorationSize}[{@code plane}] as defined in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>.</li>
- * <li>all other members of {@code StdVideoAV1LoopRestoration} are defined as in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>{@code LoopRestorationSize}[{@code plane}] is interpreted as <code>log2(size) - 5</code>, where {@code size} is the value of {@code LoopRestorationSize}[{@code plane}] as defined in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>.</li>
+ * <li>all other members of {@code StdVideoAV1LoopRestoration} are defined as in section 6.10.15 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
- * <li>the members of the {@code StdVideoAV1GlobalMotion} structure provided in {@code global_motion} are interpreted as defined in section 7.10 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>if {@code flags.film_grain_params_present} is set in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-active-sequence-header">active sequence header</a>, then the {@code StdVideoAV1FilmGrain} structure pointed to by {@code pFilmGrain} is interpreted as follows:
+ * <li>the members of the {@code StdVideoAV1GlobalMotion} structure provided in {@code global_motion} are interpreted as defined in section 7.10 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>if {@code flags.film_grain_params_present} is set in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-active-sequence-header">active sequence header</a>, then the {@code StdVideoAV1FilmGrain} structure pointed to by {@code pFilmGrain} is interpreted as follows:
  * 
  * <ul>
  * <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
- * <li>all other members of {@code StdVideoAV1FilmGrain} are interpreted as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoAV1FilmGrain} are interpreted as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
  * </ul>
  * </li>
- * <li>all other members are interpreted as defined in section 6.8 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>.</li>
+ * <li>all other members are interpreted as defined in section 6.8 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>.</li>
  * </ul></dd>
  * </dl>
  * 
- * <p>When <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the {@code flags.update_grain} and {@code film_grain_params_ref_idx} values specified in {@code StdVideoAV1FilmGrain} are ignored by AV1 decode operations and the {@code load_grain_params} function, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>, is not executed. Instead, the application is responsible for specifying the effective film grain parameters for the frame in {@code StdVideoAV1FilmGrain}.</p>
+ * <p>When <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the {@code flags.update_grain} and {@code film_grain_params_ref_idx} values specified in {@code StdVideoAV1FilmGrain} are ignored by AV1 decode operations and the {@code load_grain_params} function, as defined in section 6.8.20 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>, is not executed. Instead, the application is responsible for specifying the effective film grain parameters for the frame in {@code StdVideoAV1FilmGrain}.</p>
  * 
- * <p>When <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the application is required to specify a different decode output picture resource in {@link VkVideoDecodeInfoKHR}{@code ::dstPictureResource} compared to the reconstructed picture specified in {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot→pPictureResource} even if the implementation does not report support for {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} in {@link VkVideoDecodeCapabilitiesKHR}{@code ::flags} for the video decode profile.</p>
+ * <p>When <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-film-grain">film grain is enabled</a> for the decoded frame, the application is required to specify a different decode output picture resource in {@link VkVideoDecodeInfoKHR}{@code ::dstPictureResource} compared to the reconstructed picture specified in {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot→pPictureResource} even if the implementation does not report support for {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} in {@link VkVideoDecodeCapabilitiesKHR}{@code ::flags} for the video decode profile.</p>
  * 
- * <p>Reference picture setup is controlled by the value of {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags}. If it is not zero and a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags} is zero, but a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">DPB Slot States</a> section.</p>
+ * <p>Reference picture setup is controlled by the value of {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags}. If it is not zero and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> specified in {@code pDecodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoDecodeAV1PictureInfo}{@code ::refresh_frame_flags} is zero, but a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">DPB Slot States</a> section.</p>
  * 
  * <dl>
  * <dt>Active Parameter Sets</dt>
- * <dd>The <em>active sequence header</em> is the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-sequence-header">AV1 sequence header</a> stored in the bound video session parameters object.</dd>
+ * <dd>The <em>active sequence header</em> is the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-sequence-header">AV1 sequence header</a> stored in the bound video session parameters object.</dd>
  * </dl>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -209,16 +209,16 @@ public class VkVideoDecodeAV1PictureInfoKHR extends Struct<VkVideoDecodeAV1Pictu
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoDecodeAV1PictureInfo} structure specifying <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-picture-info">AV1 picture information</a>. */
+    /** a pointer to a {@code StdVideoDecodeAV1PictureInfo} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-info">AV1 picture information</a>. */
     @NativeType("StdVideoDecodeAV1PictureInfo const *")
     public StdVideoDecodeAV1PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
-    /** an array of seven ({@link KHRVideoDecodeAV1#VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR}, which is equal to the Video Std definition {@code STD_VIDEO_AV1_REFS_PER_FRAME}) signed integer values specifying the index of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> or a negative integer value for each <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-reference-names">AV1 reference name</a> used for inter coding. In particular, the DPB slot index for the AV1 reference name {@code frame} is specified in {@code referenceNameSlotIndices}[{@code frame} - {@code STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME}]. */
+    /** an array of seven ({@link KHRVideoDecodeAV1#VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR}, which is equal to the Video Std definition {@code STD_VIDEO_AV1_REFS_PER_FRAME}) signed integer values specifying the index of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> or a negative integer value for each <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-reference-names">AV1 reference name</a> used for inter coding. In particular, the DPB slot index for the AV1 reference name {@code frame} is specified in {@code referenceNameSlotIndices}[{@code frame} - {@code STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME}]. */
     @NativeType("int32_t[VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR]")
     public IntBuffer referenceNameSlotIndices() { return nreferenceNameSlotIndices(address()); }
-    /** an array of seven ({@link KHRVideoDecodeAV1#VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR}, which is equal to the Video Std definition {@code STD_VIDEO_AV1_REFS_PER_FRAME}) signed integer values specifying the index of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> or a negative integer value for each <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-av1-reference-names">AV1 reference name</a> used for inter coding. In particular, the DPB slot index for the AV1 reference name {@code frame} is specified in {@code referenceNameSlotIndices}[{@code frame} - {@code STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME}]. */
+    /** an array of seven ({@link KHRVideoDecodeAV1#VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR}, which is equal to the Video Std definition {@code STD_VIDEO_AV1_REFS_PER_FRAME}) signed integer values specifying the index of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> or a negative integer value for each <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-reference-names">AV1 reference name</a> used for inter coding. In particular, the DPB slot index for the AV1 reference name {@code frame} is specified in {@code referenceNameSlotIndices}[{@code frame} - {@code STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME}]. */
     @NativeType("int32_t")
     public int referenceNameSlotIndices(int index) { return nreferenceNameSlotIndices(address(), index); }
-    /** the byte offset of the AV1 frame header OBU, as defined in section 5.9 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>, within the video bitstream buffer range specified in {@link VkVideoDecodeInfoKHR}. */
+    /** the byte offset of the AV1 frame header OBU, as defined in section 5.9 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>, within the video bitstream buffer range specified in {@link VkVideoDecodeInfoKHR}. */
     @NativeType("uint32_t")
     public int frameHeaderOffset() { return nframeHeaderOffset(address()); }
     /** the number of elements in {@code pTileOffsets} and {@code pTileSizes}. */

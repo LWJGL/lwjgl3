@@ -103,7 +103,7 @@ public class VkClearAttachment extends Struct<VkClearAttachment> implements Nati
     /** only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index into the currently bound color attachments. */
     @NativeType("uint32_t")
     public int colorAttachment() { return ncolorAttachment(address()); }
-    /** the color or depth/stencil value to clear the attachment to, as described in <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#clears-values">Clear Values</a> below. */
+    /** the color or depth/stencil value to clear the attachment to, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#clears-values">Clear Values</a> below. */
     public VkClearValue clearValue() { return nclearValue(address()); }
 
     /** Sets the specified value to the {@link #aspectMask} field. */

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When an instance of this structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, and {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-coding-control">Video Coding Control</a>).</p>
+ * <p>When an instance of this structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, and {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a>).</p>
  * 
  * <p>If {@code flags} includes {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR}, then the rate control state is reset to an initial state to meet HRD compliance requirements. Otherwise the new rate control state <b>may</b> be applied without a reset depending on the implementation and the specified rate control parameters.</p>
  * 
@@ -132,13 +132,13 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
     /** a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsKHR} specifying H.265 rate control flags. */
     @NativeType("VkVideoEncodeH265RateControlFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the number of frames within a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-gop">group of pictures (GOP)</a> intended to be used by the application. If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is {@code UINT32_MAX}, the GOP length is treated as infinite. */
+    /** the number of frames within a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-gop">group of pictures (GOP)</a> intended to be used by the application. If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is {@code UINT32_MAX}, the GOP length is treated as infinite. */
     @NativeType("uint32_t")
     public int gopFrameCount() { return ngopFrameCount(address()); }
-    /** the interval, in terms of number of frames, between two <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-idr-pic">IDR frames</a> (see <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-idr-period">IDR period</a>). If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent IDR period. If it is {@code UINT32_MAX}, the IDR period is treated as infinite. */
+    /** the interval, in terms of number of frames, between two <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-idr-pic">IDR frames</a> (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-idr-period">IDR period</a>). If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent IDR period. If it is {@code UINT32_MAX}, the IDR period is treated as infinite. */
     @NativeType("uint32_t")
     public int idrPeriod() { return nidrPeriod(address()); }
-    /** the number of consecutive B frames between I and/or P frames within the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-gop">GOP</a>. */
+    /** the number of consecutive B frames between I and/or P frames within the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-gop">GOP</a>. */
     @NativeType("uint32_t")
     public int consecutiveBFrameCount() { return nconsecutiveBFrameCount(address()); }
     /** specifies the number of H.265 sub-layers that the application intends to use. */

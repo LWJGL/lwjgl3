@@ -82,13 +82,13 @@ public class VkVideoEncodeH265FrameSizeKHR extends Struct<VkVideoEncodeH265Frame
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-i-pic">I frames</a>. */
+    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-i-pic">I frames</a>. */
     @NativeType("uint32_t")
     public int frameISize() { return nframeISize(address()); }
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-p-pic">P frames</a>. */
+    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-p-pic">P frames</a>. */
     @NativeType("uint32_t")
     public int framePSize() { return nframePSize(address()); }
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-b-pic">B frames</a>. */
+    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-b-pic">B frames</a>. */
     @NativeType("uint32_t")
     public int frameBSize() { return nframeBSize(address()); }
 

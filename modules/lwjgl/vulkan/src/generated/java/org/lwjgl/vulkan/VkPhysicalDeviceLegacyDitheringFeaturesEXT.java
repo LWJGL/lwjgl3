@@ -94,7 +94,7 @@ public class VkPhysicalDeviceLegacyDitheringFeaturesEXT extends Struct<VkPhysica
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-legacy-dithering">Legacy Dithering</a>. */
+    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-legacy-dithering">Legacy Dithering</a>. */
     @NativeType("VkBool32")
     public boolean legacyDithering() { return nlegacyDithering(address()) != 0; }
 

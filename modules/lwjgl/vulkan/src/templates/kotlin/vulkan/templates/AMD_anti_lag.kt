@@ -128,7 +128,7 @@ val AMD_anti_lag = "AMDAntiLag".nativeClassVK("AMD_anti_lag", type = "device", p
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-antiLag">{@code antiLag}</a> feature <b>must</b> be enabled</li>
+            <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-antiLag">{@code antiLag}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

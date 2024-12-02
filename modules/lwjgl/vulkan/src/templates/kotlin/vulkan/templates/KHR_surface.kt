@@ -207,7 +207,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         For a traditional “{@code Linear}” or non-gamma transfer function color space use #COLOR_SPACE_PASS_THROUGH_EXT.
         </div>
 
-        The presentation engine interprets the pixel values of the R, G, and B components as having been encoded using an appropriate transfer function. Applications <b>should</b> ensure that the appropriate transfer function has been applied. <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-output-format-conversion">Textures Output Format Conversion</a> requires that all implementations implicitly apply the sRGB EOTF<sup>-1</sup> on R, G, and B components when shaders write to an sRGB pixel format image, which is useful for sRGB color spaces. For sRGB color spaces with other pixel formats, or other non-linear color spaces, applications <b>can</b> apply the transfer function explicitly in a shader. The A channel is always interpreted as linearly encoded.
+        The presentation engine interprets the pixel values of the R, G, and B components as having been encoded using an appropriate transfer function. Applications <b>should</b> ensure that the appropriate transfer function has been applied. <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#textures-output-format-conversion">Textures Output Format Conversion</a> requires that all implementations implicitly apply the sRGB EOTF<sup>-1</sup> on R, G, and B components when shaders write to an sRGB pixel format image, which is useful for sRGB color spaces. For sRGB color spaces with other pixel formats, or other non-linear color spaces, applications <b>can</b> apply the transfer function explicitly in a shader. The A channel is always interpreted as linearly encoded.
 
         This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces:
 
@@ -226,7 +226,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
             </tbody>
         </table>
 
-        The transfer functions are described in the “{@code Transfer Functions}” chapter of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
+        The transfer functions are described in the “{@code Transfer Functions}” chapter of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
 
         Except Display-P3 OETF, which is:
 
@@ -315,7 +315,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         VkInstance("instance", "the instance used to create the surface."),
         VkSurfaceKHR("surface", "the surface to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
     )
 
     VkResult(

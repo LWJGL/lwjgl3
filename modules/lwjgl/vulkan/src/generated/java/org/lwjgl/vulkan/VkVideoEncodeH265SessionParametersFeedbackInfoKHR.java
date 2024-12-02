@@ -98,13 +98,13 @@ public class VkVideoEncodeH265SessionParametersFeedbackInfoKHR extends Struct<Vk
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdVPS}, were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdVPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasStdVPSOverrides() { return nhasStdVPSOverrides(address()) != 0; }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdSPS}, were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdSPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasStdSPSOverrides() { return nhasStdSPSOverrides(address()) != 0; }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdPPS}, were <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a>, if one was requested via {@link VkVideoEncodeH265SessionParametersGetInfoKHR}{@code ::writeStdPPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
     @NativeType("VkBool32")
     public boolean hasStdPPSOverrides() { return nhasStdPPSOverrides(address()) != 0; }
 

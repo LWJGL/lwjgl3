@@ -106,7 +106,7 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPh
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the minimum <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>. */
+    /** the minimum <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>. */
     public VkExtent2D minFragmentDensityTexelSize() { return nminFragmentDensityTexelSize(address()); }
     /** the maximum fragment density texel size. */
     public VkExtent2D maxFragmentDensityTexelSize() { return nmaxFragmentDensityTexelSize(address()); }

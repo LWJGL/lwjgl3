@@ -92,7 +92,7 @@ public class VkVideoDecodeAV1CapabilitiesKHR extends Struct<VkVideoDecodeAV1Capa
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code StdVideoAV1Level} value specifying the maximum AV1 level supported by the profile, as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** a {@code StdVideoAV1Level} value specifying the maximum AV1 level supported by the profile, as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
     @NativeType("StdVideoAV1Level")
     public int maxLevel() { return nmaxLevel(address()); }
 

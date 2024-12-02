@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If this structure is included in a {@code pNext} chain and {@code identifierSize} is not equal to 0, the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
+ * <li>If this structure is included in a {@code pNext} chain and {@code identifierSize} is not equal to 0, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
  * <li>If this struct is included in a {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo} and {@code identifierSize} is not equal to 0, the pipeline <b>must</b> be created with the {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT} flag set</li>
  * <li>{@code identifierSize} <b>must</b> be less-or-equal to {@link EXTShaderModuleIdentifier#VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT}</li>
  * </ul>

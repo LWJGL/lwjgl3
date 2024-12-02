@@ -29,7 +29,7 @@ val ANDROID_external_memory_android_hardware_buffer = "ANDROIDExternalMemoryAndr
             <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} or <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign}</dd>
+            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign}</dd>
 
             <dt><b>API Interactions</b></dt>
             <dd><ul>

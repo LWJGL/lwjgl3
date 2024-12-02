@@ -94,7 +94,7 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum nesting level of calls to {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} from <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Secondary Command Buffers</a>. A {@code maxCommandBufferNestingLevel} of {@code UINT32_MAX} means there is no limit to the nesting level. */
+    /** indicates the maximum nesting level of calls to {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} from <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a>. A {@code maxCommandBufferNestingLevel} of {@code UINT32_MAX} means there is no limit to the nesting level. */
     @NativeType("uint32_t")
     public int maxCommandBufferNestingLevel() { return nmaxCommandBufferNestingLevel(address()); }
 

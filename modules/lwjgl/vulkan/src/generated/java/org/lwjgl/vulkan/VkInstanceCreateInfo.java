@@ -154,7 +154,7 @@ public class VkInstanceCreateInfo extends Struct<VkInstanceCreateInfo> implement
     /** the number of global layers to enable. */
     @NativeType("uint32_t")
     public int enabledLayerCount() { return nenabledLayerCount(address()); }
-    /** a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. The layers are loaded in the order they are listed in this array, with the first array element being the closest to the application, and the last array element being the closest to the driver. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-layers">Layers</a> section for further details. */
+    /** a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. The layers are loaded in the order they are listed in this array, with the first array element being the closest to the application, and the last array element being the closest to the driver. See the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#extendingvulkan-layers">Layers</a> section for further details. */
     @NativeType("char const * const *")
     public @Nullable PointerBuffer ppEnabledLayerNames() { return nppEnabledLayerNames(address()); }
     /** the number of global extensions to enable. */

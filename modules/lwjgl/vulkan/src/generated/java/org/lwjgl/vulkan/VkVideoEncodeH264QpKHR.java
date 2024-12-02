@@ -82,13 +82,13 @@ public class VkVideoEncodeH264QpKHR extends Struct<VkVideoEncodeH264QpKHR> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-i-pic">I pictures</a>. */
+    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-i-pic">I pictures</a>. */
     @NativeType("int32_t")
     public int qpI() { return nqpI(address()); }
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-p-pic">P pictures</a>. */
+    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-p-pic">P pictures</a>. */
     @NativeType("int32_t")
     public int qpP() { return nqpP(address()); }
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h264-b-pic">B pictures</a>. */
+    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-b-pic">B pictures</a>. */
     @NativeType("int32_t")
     public int qpB() { return nqpB(address()); }
 

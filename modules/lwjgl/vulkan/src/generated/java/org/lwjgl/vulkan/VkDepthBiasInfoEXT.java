@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthBiasClamp">{@code depthBiasClamp}</a> feature is not enabled, {@code depthBiasClamp} <b>must</b> be {@code 0.0}</li>
+ * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-depthBiasClamp">{@code depthBiasClamp}</a> feature is not enabled, {@code depthBiasClamp} <b>must</b> be {@code 0.0}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

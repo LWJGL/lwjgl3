@@ -172,7 +172,7 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
 
         VkDevice("device", "the logical device that creates the pipeline binary objects."),
         VkPipelineBinaryCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkPipelineBinaryCreateInfoKHR structure that contains the data to create the pipeline binaries from."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         VkPipelineBinaryHandlesInfoKHR.p("pBinaries", "a pointer to a ##VkPipelineBinaryHandlesInfoKHR structure in which the resulting pipeline binaries are returned.")
     )
 
@@ -215,7 +215,7 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
 
         VkDevice("device", "the logical device that created the pipeline binary object."),
         VkPipelineBinaryKHR("pipelineBinary", "the handle of the pipeline binary object to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(
@@ -293,7 +293,7 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
         <h5>Description</h5>
         If {@code pPipelineBinaryData} is {@code NULL}, then the size of the data, in bytes, that is required to store the binary is returned in {@code pPipelineBinaryDataSize}. Otherwise, {@code pPipelineBinaryDataSize} <b>must</b> contain the size of the buffer, in bytes, pointed to by {@code pPipelineBinaryData}, and on return {@code pPipelineBinaryDataSize} is overwritten with the size of the data, in bytes, that is required to store the binary. If {@code pPipelineBinaryDataSize} is less than the size that is required to store the binary, nothing is written to {@code pPipelineBinaryData} and #ERROR_NOT_ENOUGH_SPACE_KHR will be returned, instead of #SUCCESS.
 
-        If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is #FALSE, implementations <b>should</b> not return compressed pipeline binary data to the application.
+        If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is #FALSE, implementations <b>should</b> not return compressed pipeline binary data to the application.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -383,6 +383,6 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
 
         VkDevice("device", "the logical device that created the pipeline object."),
         VkReleaseCapturedPipelineDataInfoKHR.const.p("pInfo", "a pointer to a ##VkReleaseCapturedPipelineDataInfoKHR structure which describes the pipeline to release the data from."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 }

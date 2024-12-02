@@ -94,10 +94,10 @@ public class VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM extends Struct<V
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the G component. */
+    /** indicates <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the G component. */
     @NativeType("VkBool32")
     public boolean enableYDegamma() { return nenableYDegamma(address()) != 0; }
-    /** indicates <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the R and B components. */
+    /** indicates <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the R and B components. */
     @NativeType("VkBool32")
     public boolean enableCbCrDegamma() { return nenableCbCrDegamma(address()) != 0; }
 

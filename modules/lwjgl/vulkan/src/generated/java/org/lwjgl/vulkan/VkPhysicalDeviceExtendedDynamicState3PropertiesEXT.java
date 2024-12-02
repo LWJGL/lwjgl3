@@ -94,7 +94,7 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation allows {@code vkCmdSetPrimitiveTopology} to use a different <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-primitive-topology-class">primitive topology class</a> to the one specified in the active graphics pipeline. */
+    /** indicates that the implementation allows {@code vkCmdSetPrimitiveTopology} to use a different <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#drawing-primitive-topology-class">primitive topology class</a> to the one specified in the active graphics pipeline. */
     @NativeType("VkBool32")
     public boolean dynamicPrimitiveTopologyUnrestricted() { return ndynamicPrimitiveTopologyUnrestricted(address()) != 0; }
 

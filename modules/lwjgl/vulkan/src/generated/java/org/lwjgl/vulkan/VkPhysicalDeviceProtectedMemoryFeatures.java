@@ -94,7 +94,7 @@ public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct<VkPhysicalDe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-protected-memory">protected memory</a> is supported. */
+    /** specifies whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-protected-memory">protected memory</a> is supported. */
     @NativeType("VkBool32")
     public boolean protectedMemory() { return nprotectedMemory(address()) != 0; }
 

@@ -33,7 +33,7 @@ val QCOM_filter_cubic_clamp = "QCOMFilterCubicClamp".nativeClassVK("QCOM_filter_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link EXTFilterCubic VK_EXT_filter_cubic} and <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a> or {@link EXTSamplerFilterMinmax VK_EXT_sampler_filter_minmax}</dd>
+            <dd>{@link EXTFilterCubic VK_EXT_filter_cubic} and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.2">Version 1.2</a> or {@link EXTSamplerFilterMinmax VK_EXT_sampler_filter_minmax}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

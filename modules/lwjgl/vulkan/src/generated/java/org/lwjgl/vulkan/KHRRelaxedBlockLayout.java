@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * The {@code VK_KHR_relaxed_block_layout} extension allows implementations to indicate they can support more variation in block {@code Offset} decorations. For example, placing a vector of three floats at an offset of <code>16×N + 4</code>.
  * 
- * <p>See <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources-layout">Offset and Stride Assignment</a> for details.</p>
+ * <p>See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources-layout">Offset and Stride Assignment</a> for details.</p>
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 
@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Deprecation State</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
+ * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

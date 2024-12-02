@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code index} <b>must</b> be less than the value of {@link VkIndirectExecutionSetPipelineInfoEXT}{@code ::maxPipelineCount} used to create the set</li>
  * <li>{@code pipeline} <b>must</b> have been created with {@link EXTDeviceGeneratedCommands#VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT}</li>
  * <li>{@code index} <b>must</b> not be referenced by submitted command buffers</li>
- * <li>The shader stages contained in {@code pipeline} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a></li>
+ * <li>The shader stages contained in {@code pipeline} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

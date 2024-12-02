@@ -14,7 +14,7 @@ val IMG_format_pvrtc = "IMGFormatPVRTC".nativeClassVK("IMG_format_pvrtc", type =
         {@code VK_IMG_format_pvrtc} provides additional texture compression functionality specific to Imagination Technologies PowerVR Texture compression format (called PVRTC).
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        As also noted in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>, PVRTC1 images must have dimensions that are a power of two.
+        As also noted in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#data-format">Khronos Data Format Specification</a>, PVRTC1 images must have dimensions that are a power of two.
         </div>
 
         <h5>Deprecation</h5>

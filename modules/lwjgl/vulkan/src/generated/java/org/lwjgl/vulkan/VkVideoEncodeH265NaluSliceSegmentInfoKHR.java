@@ -30,11 +30,11 @@ import org.lwjgl.vulkan.video.*;
  * <li>if {@code pWeightTable} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH265WeightTable} that is interpreted as follows:
  * 
  * <ul>
- * <li>{@code flags.luma_weight_l0_flag}, {@code flags.chroma_weight_l0_flag}, {@code flags.luma_weight_l1_flag}, and {@code flags.chroma_weight_l1_flag} are bitmasks where bit index <code>i</code> corresponds to {@code luma_weight_l0_flag[i]}, {@code chroma_weight_l0_flag[i]}, {@code luma_weight_l1_flag[i]}, and {@code chroma_weight_l1_flag[i]}, respectively, as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
- * <li>all other members of {@code StdVideoEncodeH265WeightTable} are interpreted as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+ * <li>{@code flags.luma_weight_l0_flag}, {@code flags.chroma_weight_l0_flag}, {@code flags.luma_weight_l1_flag}, and {@code flags.chroma_weight_l1_flag} are bitmasks where bit index <code>i</code> corresponds to {@code luma_weight_l0_flag[i]}, {@code chroma_weight_l0_flag[i]}, {@code luma_weight_l1_flag[i]}, and {@code chroma_weight_l1_flag[i]}, respectively, as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
+ * <li>all other members of {@code StdVideoEncodeH265WeightTable} are interpreted as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
  * </ul>
  * </li>
- * <li>all other members are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>.</li>
+ * <li>all other members are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>.</li>
  * </ul></dd>
  * </dl>
  * 
@@ -120,10 +120,10 @@ public class VkVideoEncodeH265NaluSliceSegmentInfoKHR extends Struct<VkVideoEnco
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the QP to use for the slice segment if the current <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-rate-control-modes">rate control mode</a> configured for the video session is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** the QP to use for the slice segment if the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> configured for the video session is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
     @NativeType("int32_t")
     public int constantQp() { return nconstantQp(address()); }
-    /** a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-h265-slice-segment-header-params">H.265 slice segment header parameters</a> for the slice segment. */
+    /** a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-slice-segment-header-params">H.265 slice segment header parameters</a> for the slice segment. */
     @NativeType("StdVideoEncodeH265SliceSegmentHeader const *")
     public StdVideoEncodeH265SliceSegmentHeader pStdSliceSegmentHeader() { return npStdSliceSegmentHeader(address()); }
 

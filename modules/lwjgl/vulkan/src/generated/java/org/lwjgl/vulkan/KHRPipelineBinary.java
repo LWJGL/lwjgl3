@@ -198,7 +198,7 @@ public class KHRPipelineBinary {
      *
      * @param device      the logical device that creates the pipeline binary objects.
      * @param pCreateInfo a pointer to a {@link VkPipelineBinaryCreateInfoKHR} structure that contains the data to create the pipeline binaries from.
-     * @param pAllocator  controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator  controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pBinaries   a pointer to a {@link VkPipelineBinaryHandlesInfoKHR} structure in which the resulting pipeline binaries are returned.
      */
     @NativeType("VkResult")
@@ -258,7 +258,7 @@ public class KHRPipelineBinary {
      *
      * @param device         the logical device that created the pipeline binary object.
      * @param pipelineBinary the handle of the pipeline binary object to destroy.
-     * @param pAllocator     controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator     controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyPipelineBinaryKHR(VkDevice device, @NativeType("VkPipelineBinaryKHR") long pipelineBinary, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyPipelineBinaryKHR(device, pipelineBinary, memAddressSafe(pAllocator));
@@ -371,7 +371,7 @@ public class KHRPipelineBinary {
      * 
      * <p>If {@code pPipelineBinaryData} is {@code NULL}, then the size of the data, in bytes, that is required to store the binary is returned in {@code pPipelineBinaryDataSize}. Otherwise, {@code pPipelineBinaryDataSize} <b>must</b> contain the size of the buffer, in bytes, pointed to by {@code pPipelineBinaryData}, and on return {@code pPipelineBinaryDataSize} is overwritten with the size of the data, in bytes, that is required to store the binary. If {@code pPipelineBinaryDataSize} is less than the size that is required to store the binary, nothing is written to {@code pPipelineBinaryData} and {@link #VK_ERROR_NOT_ENOUGH_SPACE_KHR ERROR_NOT_ENOUGH_SPACE_KHR} will be returned, instead of {@link VK10#VK_SUCCESS SUCCESS}.</p>
      * 
-     * <p>If <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is {@link VK10#VK_FALSE FALSE}, implementations <b>should</b> not return compressed pipeline binary data to the application.</p>
+     * <p>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is {@link VK10#VK_FALSE FALSE}, implementations <b>should</b> not return compressed pipeline binary data to the application.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -486,7 +486,7 @@ public class KHRPipelineBinary {
      *
      * @param device     the logical device that created the pipeline object.
      * @param pInfo      a pointer to a {@link VkReleaseCapturedPipelineDataInfoKHR} structure which describes the pipeline to release the data from.
-     * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator controls host memory allocation as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     @NativeType("VkResult")
     public static int vkReleaseCapturedPipelineDataKHR(VkDevice device, @NativeType("VkReleaseCapturedPipelineDataInfoKHR const *") VkReleaseCapturedPipelineDataInfoKHR pInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {

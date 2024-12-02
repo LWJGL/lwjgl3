@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pVideoProfile} <b>must</b> be a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profile-support">supported video profile</a></li>
+ * <li>{@code pVideoProfile} <b>must</b> be a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profile-support">supported video profile</a></li>
  * <li>{@code pVideoProfile→videoCodecOperation} <b>must</b> specify an encode operation</li>
  * <li>{@code qualityLevel} <b>must</b> be less than {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxQualityLevels}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified in {@code pVideoProfile}</li>
  * </ul>

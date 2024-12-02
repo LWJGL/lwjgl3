@@ -13,7 +13,7 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
         """
         This extension allows the use of the {@code SPV_KHR_subgroup_uniform_control_flow} SPIR-V extension in shader modules. {@code SPV_KHR_subgroup_uniform_control_flow} provides stronger guarantees that diverged subgroups will reconverge.
 
-        Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirv-spec">Khronos SPIR-V Specification</a>).
+        Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#spirv-spec">Khronos SPIR-V Specification</a>).
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -29,7 +29,7 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
+            <dd><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>SPIR-V Dependencies</b></dt>
             <dd><ul>
