@@ -56,6 +56,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrExportedLocalizationMapML, XrSession)
     generateDispatchableHandle(XrFaceTrackerFB, XrSession)
     generateDispatchableHandle(XrFaceTracker2FB, XrSession)
+    generateDispatchableHandle(XrFacialExpressionClientML, XrSession)
     generateDispatchableHandle(XrFacialTrackerHTC, XrSession)
     generateDispatchableHandle(XrFoveationProfileFB, XrSession)
     generateDispatchableHandle(XrGeometryInstanceFB, XrSession)
@@ -84,7 +85,7 @@ fun templateCustomization() {
         LongConstant(
             "OpenXR current version number.",
 
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 42)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 43)"
         )
 
         LongConstant(

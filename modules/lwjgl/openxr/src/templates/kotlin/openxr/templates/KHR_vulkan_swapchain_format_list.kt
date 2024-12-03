@@ -17,13 +17,13 @@ val KHR_vulkan_swapchain_format_list = "KHRVulkanSwapchainFormatList".nativeClas
 
         Applications using this extension to specify more than one swapchain format must create OpenXR swapchains with the #SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT bit set.
 
-        Runtimes implementing this extension <b>must</b> support the {@link KHRVulkanEnable XR_KHR_vulkan_enable} or the {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension. When {@link KHRVulkanEnable XR_KHR_vulkan_enable} is used, the runtime <b>must</b> add {@code VK_KHR_image_format_list} to the list of extensions enabled in #CreateVulkanDeviceKHR().
+        Runtimes implementing this extension <b>must</b> support the {@link KHRVulkanEnable XR_KHR_vulkan_enable} or the {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension. When an application enables and uses {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} as the graphics binding extension, the runtime <b>must</b> add {@code VK_KHR_image_format_list} to the list of extensions enabled in #CreateVulkanDeviceKHR().
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "KHR_vulkan_swapchain_format_list_SPEC_VERSION".."4"
+        "KHR_vulkan_swapchain_format_list_SPEC_VERSION".."5"
     )
 
     StringConstant(

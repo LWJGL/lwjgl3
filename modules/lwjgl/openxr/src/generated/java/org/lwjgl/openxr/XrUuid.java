@@ -25,6 +25,10 @@ import static org.lwjgl.openxr.XR10.*;
  * 
  * <p>The structure is composed of 16 octets, with the size and order of the fields defined in <a href="https://www.rfc-editor.org/rfc/rfc4122.html#section-4.1.2">RFC 4122 section 4.1.2</a>.</p>
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link XrEventDataColocationDiscoveryResultMETA}, {@link XrEventDataStartColocationAdvertisementCompleteMETA}, {@link XrShareSpacesRecipientGroupsMETA}, {@link XrSpaceGroupUuidFilterInfoMETA}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

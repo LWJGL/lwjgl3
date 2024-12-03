@@ -12,12 +12,12 @@ package org.lwjgl.openxr;
  * 
  * <p>Applications using this extension to specify more than one swapchain format must create OpenXR swapchains with the {@link XR10#XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT} bit set.</p>
  * 
- * <p>Runtimes implementing this extension <b>must</b> support the {@link KHRVulkanEnable XR_KHR_vulkan_enable} or the {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension. When {@link KHRVulkanEnable XR_KHR_vulkan_enable} is used, the runtime <b>must</b> add {@code VK_KHR_image_format_list} to the list of extensions enabled in {@link KHRVulkanEnable2#xrCreateVulkanDeviceKHR CreateVulkanDeviceKHR}.</p>
+ * <p>Runtimes implementing this extension <b>must</b> support the {@link KHRVulkanEnable XR_KHR_vulkan_enable} or the {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension. When an application enables and uses {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} as the graphics binding extension, the runtime <b>must</b> add {@code VK_KHR_image_format_list} to the list of extensions enabled in {@link KHRVulkanEnable2#xrCreateVulkanDeviceKHR CreateVulkanDeviceKHR}.</p>
  */
 public final class KHRVulkanSwapchainFormatList {
 
     /** The extension specification version. */
-    public static final int XR_KHR_vulkan_swapchain_format_list_SPEC_VERSION = 4;
+    public static final int XR_KHR_vulkan_swapchain_format_list_SPEC_VERSION = 5;
 
     /** The extension name. */
     public static final String XR_KHR_VULKAN_SWAPCHAIN_FORMAT_LIST_EXTENSION_NAME = "XR_KHR_vulkan_swapchain_format_list";

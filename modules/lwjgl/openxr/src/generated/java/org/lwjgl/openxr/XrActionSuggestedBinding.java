@@ -88,7 +88,7 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
     /** the {@code XrAction} handle for an action */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the {@code XrPath} of a binding for the action specified in {@code action}. This path is any top level user path plus input source path, for example pathname:/user/hand/right/input/trigger/click. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-suggested-bindings">suggested bindings</a> for more details. */
+    /** the {@code XrPath} of a binding for the action specified in {@code action}. This "binding path" is any top level pathname:/user path plus an applicable <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-input">input subpath</a>, for example pathname:/user/hand/right/input/trigger/click. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-suggested-bindings">input-suggested-bindings</a> for more details. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
 
