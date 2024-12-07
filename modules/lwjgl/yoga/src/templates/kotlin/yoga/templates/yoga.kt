@@ -184,6 +184,13 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
+        "YGBoxSizing",
+
+        "BoxSizingBorderBox".enum,
+        "BoxSizingContentBox".enum
+    )
+
+    EnumConstant(
         "YGDimension",
 
         "DimensionWidth".enum,
@@ -202,7 +209,8 @@ ENABLE_WARNINGS()""")
         "YGDisplay",
 
         "DisplayFlex".enum,
-        "DisplayNone".enum
+        "DisplayNone".enum,
+        "DisplayContents".enum
     )
 
     val Edges = EnumConstant(
@@ -224,7 +232,7 @@ ENABLE_WARNINGS()""")
 
         "ErrataNone".enum("", "0"),
         "ErrataStretchFlexBasis".enum("", "1"),
-        "ErrataAbsolutePositioningIncorrect".enum("", "2"),
+        "ErrataAbsolutePositionWithoutInsetsExcludesPadding".enum("", "2"),
         "ErrataAbsolutePercentAgainstInnerSize".enum("", "4"),
         "ErrataAll".enum("", "2147483647"),
         "ErrataClassic".enum("", "2147483646")
@@ -753,6 +761,14 @@ ENABLE_WARNINGS()""")
     YGPositionType("NodeStyleGetPositionType", "", YGNodeConstRef("node", ""))
 
     void(
+        "NodeStyleSetPositionAuto",
+        "",
+
+        YGNodeRef("node", ""),
+        YGEdge("edge", "")
+    )
+
+    void(
         "NodeStyleSetFlexWrap",
         "",
 
@@ -945,6 +961,21 @@ ENABLE_WARNINGS()""")
 
         YGNodeConstRef("node", ""),
         YGGutter("gutter", "", Gutters)
+    )
+
+    void(
+        "NodeStyleSetBoxSizing",
+        "",
+
+        YGNodeRef("node", ""),
+        YGBoxSizing("boxSizing", "")
+    )
+
+    YGBoxSizing(
+        "NodeStyleGetBoxSizing",
+        "",
+
+        YGNodeConstRef("node", "")
     )
 
     void(

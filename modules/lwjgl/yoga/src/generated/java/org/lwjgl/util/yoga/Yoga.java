@@ -58,6 +58,20 @@ public class Yoga {
         YGAlignSpaceEvenly  = 8;
 
     /**
+     * YGBoxSizing
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #YGBoxSizingBorderBox BoxSizingBorderBox}</li>
+     * <li>{@link #YGBoxSizingContentBox BoxSizingContentBox}</li>
+     * </ul>
+     */
+    public static final int
+        YGBoxSizingBorderBox  = 0,
+        YGBoxSizingContentBox = 1;
+
+    /**
      * YGDimension
      * 
      * <h5>Enum values:</h5>
@@ -95,11 +109,13 @@ public class Yoga {
      * <ul>
      * <li>{@link #YGDisplayFlex DisplayFlex}</li>
      * <li>{@link #YGDisplayNone DisplayNone}</li>
+     * <li>{@link #YGDisplayContents DisplayContents}</li>
      * </ul>
      */
     public static final int
-        YGDisplayFlex = 0,
-        YGDisplayNone = 1;
+        YGDisplayFlex     = 0,
+        YGDisplayNone     = 1,
+        YGDisplayContents = 2;
 
     /**
      * YGEdge
@@ -137,19 +153,19 @@ public class Yoga {
      * <ul>
      * <li>{@link #YGErrataNone ErrataNone}</li>
      * <li>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</li>
-     * <li>{@link #YGErrataAbsolutePositioningIncorrect ErrataAbsolutePositioningIncorrect}</li>
+     * <li>{@link #YGErrataAbsolutePositionWithoutInsetsExcludesPadding ErrataAbsolutePositionWithoutInsetsExcludesPadding}</li>
      * <li>{@link #YGErrataAbsolutePercentAgainstInnerSize ErrataAbsolutePercentAgainstInnerSize}</li>
      * <li>{@link #YGErrataAll ErrataAll}</li>
      * <li>{@link #YGErrataClassic ErrataClassic}</li>
      * </ul>
      */
     public static final int
-        YGErrataNone                            = 0,
-        YGErrataStretchFlexBasis                = 1,
-        YGErrataAbsolutePositioningIncorrect    = 2,
-        YGErrataAbsolutePercentAgainstInnerSize = 4,
-        YGErrataAll                             = 2147483647,
-        YGErrataClassic                         = 2147483646;
+        YGErrataNone                                         = 0,
+        YGErrataStretchFlexBasis                             = 1,
+        YGErrataAbsolutePositionWithoutInsetsExcludesPadding = 2,
+        YGErrataAbsolutePercentAgainstInnerSize              = 4,
+        YGErrataAll                                          = 2147483647,
+        YGErrataClassic                                      = 2147483646;
 
     /** YGExperimentalFeature */
     public static final int YGExperimentalFeatureWebFlexBasis = 0;
@@ -1423,6 +1439,17 @@ public class Yoga {
         return nYGNodeStyleGetPositionType(node);
     }
 
+    // --- [ YGNodeStyleSetPositionAuto ] ---
+
+    public static native void nYGNodeStyleSetPositionAuto(long node, int edge);
+
+    public static void YGNodeStyleSetPositionAuto(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
+        if (CHECKS) {
+            check(node);
+        }
+        nYGNodeStyleSetPositionAuto(node, edge);
+    }
+
     // --- [ YGNodeStyleSetFlexWrap ] ---
 
     /** Unsafe version of: {@link #YGNodeStyleSetFlexWrap NodeStyleSetFlexWrap} */
@@ -1478,7 +1505,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGNodeStyleSetDisplay NodeStyleSetDisplay} */
     public static native void nYGNodeStyleSetDisplay(long node, int display);
 
-    /** @param display one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td></tr></table> */
+    /** @param display one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td><td>{@link #YGDisplayContents DisplayContents}</td></tr></table> */
     public static void YGNodeStyleSetDisplay(@NativeType("YGNodeRef") long node, @NativeType("YGDisplay") int display) {
         if (CHECKS) {
             check(node);
@@ -1805,6 +1832,29 @@ public class Yoga {
             check(node);
         }
         return nYGNodeStyleGetGap(node, gutter);
+    }
+
+    // --- [ YGNodeStyleSetBoxSizing ] ---
+
+    public static native void nYGNodeStyleSetBoxSizing(long node, int boxSizing);
+
+    public static void YGNodeStyleSetBoxSizing(@NativeType("YGNodeRef") long node, @NativeType("YGBoxSizing") int boxSizing) {
+        if (CHECKS) {
+            check(node);
+        }
+        nYGNodeStyleSetBoxSizing(node, boxSizing);
+    }
+
+    // --- [ YGNodeStyleGetBoxSizing ] ---
+
+    public static native int nYGNodeStyleGetBoxSizing(long node);
+
+    @NativeType("YGBoxSizing")
+    public static int YGNodeStyleGetBoxSizing(@NativeType("YGNodeConstRef") long node) {
+        if (CHECKS) {
+            check(node);
+        }
+        return nYGNodeStyleGetBoxSizing(node);
     }
 
     // --- [ YGNodeStyleSetWidth ] ---
@@ -2147,7 +2197,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGDisplayToString DisplayToString} */
     public static native long nYGDisplayToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td></tr></table> */
+    /** @param value one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td><td>{@link #YGDisplayContents DisplayContents}</td></tr></table> */
     @NativeType("char const *")
     public static String YGDisplayToString(@NativeType("YGDisplay") int value) {
         long __result = nYGDisplayToString(value);
@@ -2171,7 +2221,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGErrataToString ErrataToString} */
     public static native long nYGErrataToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGErrataNone ErrataNone}</td><td>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</td><td>{@link #YGErrataAbsolutePositioningIncorrect ErrataAbsolutePositioningIncorrect}</td></tr><tr><td>{@link #YGErrataAbsolutePercentAgainstInnerSize ErrataAbsolutePercentAgainstInnerSize}</td><td>{@link #YGErrataAll ErrataAll}</td><td>{@link #YGErrataClassic ErrataClassic}</td></tr></table> */
+    /** @param value one of:<br><table><tr><td>{@link #YGErrataNone ErrataNone}</td><td>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</td><td>{@link #YGErrataAbsolutePositionWithoutInsetsExcludesPadding ErrataAbsolutePositionWithoutInsetsExcludesPadding}</td></tr><tr><td>{@link #YGErrataAbsolutePercentAgainstInnerSize ErrataAbsolutePercentAgainstInnerSize}</td><td>{@link #YGErrataAll ErrataAll}</td><td>{@link #YGErrataClassic ErrataClassic}</td></tr></table> */
     @NativeType("char const *")
     public static String YGErrataToString(@NativeType("YGErrata") int value) {
         long __result = nYGErrataToString(value);

@@ -13,6 +13,7 @@ val YGConfigRef = "YGConfigRef".handle
 val YGConfigConstRef = "YGConfigConstRef".handle
 
 val YGAlign = "YGAlign".enumType
+val YGBoxSizing = "YGBoxSizing".enumType
 val YGDimension = "YGDimension".enumType
 val YGDirection = "YGDirection".enumType
 val YGDisplay = "YGDisplay".enumType
