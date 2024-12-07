@@ -3066,7 +3066,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        float.p("pOut", "Pointer to a buffer to receive the result."),
+        ai_real.p("pOut", "Pointer to a buffer to receive the result."),
         AutoSize("pOut")..Check(1)..nullable..unsigned_int.p(
             "pMax",
             "Specifies the size of the given buffer, in float's. Receives the number of values (not bytes!) read."

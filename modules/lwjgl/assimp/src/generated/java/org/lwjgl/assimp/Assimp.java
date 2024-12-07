@@ -5456,7 +5456,7 @@ public class Assimp {
      * @return Specifies whether the key has been found. If not, the output arrays remains unmodified and {@code pMax} is set to 0.
      */
     @NativeType("aiReturn")
-    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") ByteBuffer pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("float *") FloatBuffer pOut, @NativeType("unsigned int *") @Nullable IntBuffer pMax) {
+    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") ByteBuffer pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("ai_real *") FloatBuffer pOut, @NativeType("unsigned int *") @Nullable IntBuffer pMax) {
         if (CHECKS) {
             checkNT1(pKey);
             checkSafe(pMax, 1);
@@ -5478,7 +5478,7 @@ public class Assimp {
      * @return Specifies whether the key has been found. If not, the output arrays remains unmodified and {@code pMax} is set to 0.
      */
     @NativeType("aiReturn")
-    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("float *") FloatBuffer pOut, @NativeType("unsigned int *") @Nullable IntBuffer pMax) {
+    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("ai_real *") FloatBuffer pOut, @NativeType("unsigned int *") @Nullable IntBuffer pMax) {
         if (CHECKS) {
             checkSafe(pMax, 1);
             if (pMax != null) { check(pOut, pMax.get(pMax.position())); }
@@ -5902,7 +5902,7 @@ public class Assimp {
 
     /** Array version of: {@link #aiGetMaterialFloatArray GetMaterialFloatArray} */
     @NativeType("aiReturn")
-    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") ByteBuffer pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("float *") float[] pOut, @NativeType("unsigned int *") int @Nullable [] pMax) {
+    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") ByteBuffer pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("ai_real *") float[] pOut, @NativeType("unsigned int *") int @Nullable [] pMax) {
         long __functionAddress = Functions.GetMaterialFloatArray;
         if (CHECKS) {
             checkNT1(pKey);
@@ -5915,7 +5915,7 @@ public class Assimp {
 
     /** Array version of: {@link #aiGetMaterialFloatArray GetMaterialFloatArray} */
     @NativeType("aiReturn")
-    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("float *") float[] pOut, @NativeType("unsigned int *") int @Nullable [] pMax) {
+    public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("ai_real *") float[] pOut, @NativeType("unsigned int *") int @Nullable [] pMax) {
         long __functionAddress = Functions.GetMaterialFloatArray;
         if (CHECKS) {
             checkSafe(pMax, 1);
