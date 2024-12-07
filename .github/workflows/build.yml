@@ -55,8 +55,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Upgrade git
         run: |
@@ -68,9 +66,7 @@ jobs:
           yum -y install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm
           yum -y install git
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 3
+        run: git clone --depth 3 https://github.com/${{ github.repository }}.git .
       - name: Configure yum
         run: |
           yum -y install epel-release

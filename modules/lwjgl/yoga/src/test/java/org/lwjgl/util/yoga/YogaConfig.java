@@ -52,7 +52,7 @@ public class YogaConfig {
     enum YogaErrata implements EnumWrapper {
         NONE(YGErrataNone),
         STRETCH_FLEX_BASIS(YGErrataStretchFlexBasis),
-        ABSOLUTE_POSITIONING_INCORRECT(YGErrataAbsolutePositioningIncorrect),
+        ABSOLUTE_POSITION_WITHOUT_INSETS_EXCLUDES_PADDING(YGErrataAbsolutePositionWithoutInsetsExcludesPadding),
         ABSOLUTE_PERCENT_AGAINST_INNER_SIZE(YGErrataAbsolutePercentAgainstInnerSize),
         CLASSIC(YGErrataClassic),
         ALL(YGErrataAll);
