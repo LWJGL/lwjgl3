@@ -14,6 +14,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.system.jawt.EmbeddedFrameUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -110,6 +111,7 @@ public final class EmbeddedFrameDemo {
         });
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
         Callback debugProc = GLUtil.setupDebugMessageCallback();
 

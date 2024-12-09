@@ -14,6 +14,7 @@ import java.io.*;
 import java.nio.*;
 import java.util.*;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -119,6 +120,7 @@ public class GLFWDemo {
         }
 
         glfwMakeContextCurrent(win);
+        glfwInitOpenGL();
         GLCapabilities caps      = GL.createCapabilities();
         Callback       debugProc = GLUtil.setupDebugMessageCallback();
 

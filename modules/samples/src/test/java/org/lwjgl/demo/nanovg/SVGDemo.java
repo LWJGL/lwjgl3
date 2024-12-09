@@ -13,6 +13,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -183,6 +184,7 @@ public class SVGDemo {
 
         // Create context
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 

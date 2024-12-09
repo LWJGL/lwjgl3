@@ -23,6 +23,7 @@ import java.util.regex.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.assimp.Assimp.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -157,6 +158,7 @@ public final class HelloTootle {
         }
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GLCapabilities caps = GL.createCapabilities();
         if (!caps.OpenGL31) {
             throw new IllegalStateException("OpenGL 3.1 is required to run this demo.");

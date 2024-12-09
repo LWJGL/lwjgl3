@@ -358,6 +358,7 @@ public final class TruetypeOversample {
 
         // Create context
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 

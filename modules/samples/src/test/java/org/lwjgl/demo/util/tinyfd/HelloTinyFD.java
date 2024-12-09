@@ -12,6 +12,7 @@ import org.lwjgl.system.*;
 import java.nio.*;
 import java.util.*;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
@@ -105,6 +106,7 @@ public final class HelloTinyFD {
         );
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
 
         glfwSwapInterval(1);

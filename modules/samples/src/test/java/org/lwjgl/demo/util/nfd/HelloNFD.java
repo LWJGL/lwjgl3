@@ -12,6 +12,7 @@ import org.lwjgl.util.nfd.*;
 
 import java.util.*;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeCocoa.*;
@@ -109,6 +110,7 @@ public final class HelloNFD {
         );
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
 
         glfwSwapInterval(1);

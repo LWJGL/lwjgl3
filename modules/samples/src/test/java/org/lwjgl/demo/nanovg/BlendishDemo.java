@@ -16,6 +16,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.demo.nanovg.SubType.*;
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -87,6 +88,7 @@ public final class BlendishDemo {
         });
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
         glfwSwapInterval(0);
 

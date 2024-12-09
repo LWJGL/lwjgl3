@@ -258,6 +258,7 @@ abstract class FontDemo {
 
         // Create context
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 

@@ -18,6 +18,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -269,6 +270,7 @@ public final class Vorbis implements AutoCloseable {
             @Override
             public void run() {
                 glfwMakeContextCurrent(window);
+                glfwInitOpenGL();
                 try (GraphicsRenderer graphicsRenderer = new GraphicsRenderer()) {
                     try {
                         audioLatch.await();

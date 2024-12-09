@@ -5,7 +5,9 @@
 package org.lwjgl.demo.glfw;
 
 import org.jspecify.annotations.*;
+import org.lwjgl.egl.*;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
@@ -17,6 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 public final class GLFWUtil {
 
     private GLFWUtil() {
+    }
+
+    /** OpenGL configuration on Wayland. */
+    public static void glfwInitOpenGL() {
+        if (glfwGetPlatform() == GLFW_PLATFORM_WAYLAND) {
+            Configuration.OPENGL_EXPLICIT_INIT.set(true);
+            GL.create(EGL.getFunctionProvider());
+        }
     }
 
     /**

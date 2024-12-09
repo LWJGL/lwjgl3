@@ -5,7 +5,6 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.*;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -15,6 +14,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -291,6 +291,7 @@ public final class Events {
         });
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities();
 
         glfwShowWindow(window);

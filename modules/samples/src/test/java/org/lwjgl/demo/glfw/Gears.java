@@ -5,6 +5,7 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.demo.opengl.*;
+import org.lwjgl.egl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -179,6 +180,7 @@ public class Gears {
         });
 
         glfwMakeContextCurrent(window);
+        glfwInitOpenGL();
         GL.createCapabilities(MemoryUtil::memCallocPointer);
         debugProc = GLUtil.setupDebugMessageCallback();
 
