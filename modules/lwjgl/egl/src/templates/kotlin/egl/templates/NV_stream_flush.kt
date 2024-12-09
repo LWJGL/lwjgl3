@@ -30,7 +30,7 @@ val NV_stream_flush = "NVStreamFlush".nativeClassEGL("NV_stream_flush", postfix 
         """
 
     EGLBoolean(
-        "StreamFlush",
+        "StreamFlushNV",
         "",
 
         EGLDisplay("dpy", ""),

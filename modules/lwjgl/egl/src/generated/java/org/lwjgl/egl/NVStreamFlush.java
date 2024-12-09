@@ -36,11 +36,11 @@ public class NVStreamFlush {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ eglStreamFlush ] ---
+    // --- [ eglStreamFlushNV ] ---
 
     @NativeType("EGLBoolean")
-    public static boolean eglStreamFlush(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream) {
-        long __functionAddress = EGL.getCapabilities().eglStreamFlush;
+    public static boolean eglStreamFlushNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream) {
+        long __functionAddress = EGL.getCapabilities().eglStreamFlushNV;
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);

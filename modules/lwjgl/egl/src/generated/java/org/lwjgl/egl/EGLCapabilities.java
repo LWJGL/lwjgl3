@@ -146,7 +146,7 @@ public class EGLCapabilities {
         eglStreamAcquireImageNV,
         eglStreamReleaseImageNV,
         eglStreamConsumerGLTextureExternalAttribsNV,
-        eglStreamFlush,
+        eglStreamFlushNV,
         eglQueryDisplayAttribNV,
         eglSetStreamMetadataNV,
         eglQueryStreamMetadataNV,
@@ -732,7 +732,7 @@ public class EGLCapabilities {
             provider.getFunctionAddress("eglStreamAcquireImageNV"),
             provider.getFunctionAddress("eglStreamReleaseImageNV"),
             provider.getFunctionAddress("eglStreamConsumerGLTextureExternalAttribsNV"),
-            provider.getFunctionAddress("eglStreamFlush"),
+            provider.getFunctionAddress("eglStreamFlushNV"),
             provider.getFunctionAddress("eglQueryDisplayAttribNV"),
             provider.getFunctionAddress("eglSetStreamMetadataNV"),
             provider.getFunctionAddress("eglQueryStreamMetadataNV"),
@@ -886,7 +886,7 @@ public class EGLCapabilities {
             caps.eglStreamAcquireImageNV,
             caps.eglStreamReleaseImageNV,
             caps.eglStreamConsumerGLTextureExternalAttribsNV,
-            caps.eglStreamFlush,
+            caps.eglStreamFlushNV,
             caps.eglQueryDisplayAttribNV,
             caps.eglSetStreamMetadataNV,
             caps.eglQueryStreamMetadataNV,
@@ -1039,7 +1039,7 @@ public class EGLCapabilities {
         eglStreamAcquireImageNV = functions[128];
         eglStreamReleaseImageNV = functions[129];
         eglStreamConsumerGLTextureExternalAttribsNV = functions[130];
-        eglStreamFlush = functions[131];
+        eglStreamFlushNV = functions[131];
         eglQueryDisplayAttribNV = functions[132];
         eglSetStreamMetadataNV = functions[133];
         eglQueryStreamMetadataNV = functions[134];
@@ -1534,7 +1534,7 @@ public class EGLCapabilities {
 
     private boolean check_NV_stream_flush(Set<String> ext) {
         return ext.contains("EGL_NV_stream_flush") && checkExtension("EGL_NV_stream_flush", checkFunctions(
-            eglStreamFlush
+            eglStreamFlushNV
         ));
     }
 
