@@ -1142,7 +1142,10 @@ class Func(
         printParams: PrintWriter.() -> Unit
     ) {
         val returnsObject = returns.nativeType is WrappedPointerType
-        val returnType = if (returnsObject) returns.nativeType.className else returns.nativeMethodType(nullable = false)
+        val returnType = if (returnsObject || returns.nativeType.mapping == PrimitiveMapping.BOOLEAN4)
+            returns.javaMethodType
+        else
+            returns.nativeMethodType(nullable = false)
 
         if (hasFinally)
             print(t)
