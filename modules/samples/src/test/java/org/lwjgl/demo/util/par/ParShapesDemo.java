@@ -14,7 +14,6 @@ import org.lwjgl.util.par.*;
 import java.nio.*;
 import java.util.*;
 
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -75,7 +74,6 @@ public final class ParShapesDemo {
         }
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
         debugCB = GLUtil.setupDebugMessageCallback();
         if (debugCB != null && GL.getCapabilities().OpenGL43) {

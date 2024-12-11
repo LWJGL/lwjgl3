@@ -51,22 +51,7 @@ public final class EGL {
 
     /** Loads the EGL native library, using the default library name. */
     public static void create() {
-        SharedLibrary EGL;
-        switch (Platform.get()) {
-            case FREEBSD:
-            case LINUX:
-                EGL = Library.loadNative(EGL.class, "org.lwjgl.egl", Configuration.EGL_LIBRARY_NAME, "libEGL.so.1");
-                break;
-            case MACOSX:
-                EGL = Library.loadNative(EGL.class, "org.lwjgl.egl", Configuration.EGL_LIBRARY_NAME, "EGL");
-                break;
-            case WINDOWS:
-                EGL = Library.loadNative(EGL.class, "org.lwjgl.egl", Configuration.EGL_LIBRARY_NAME, "libEGL", "EGL");
-                break;
-            default:
-                throw new IllegalStateException();
-        }
-        create(EGL);
+        create(Library.loadNative(EGL.class, "org.lwjgl.egl", Configuration.EGL_LIBRARY_NAME, Configuration.EGL_LIBRARY_NAME_DEFAULTS()));
     }
 
     /**

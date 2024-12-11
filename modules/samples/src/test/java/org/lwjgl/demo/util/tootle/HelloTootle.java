@@ -23,7 +23,6 @@ import java.util.regex.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.assimp.Assimp.*;
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -143,7 +142,7 @@ public final class HelloTootle {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -158,7 +157,6 @@ public final class HelloTootle {
         }
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GLCapabilities caps = GL.createCapabilities();
         if (!caps.OpenGL31) {
             throw new IllegalStateException("OpenGL 3.1 is required to run this demo.");
@@ -1464,7 +1462,7 @@ public final class HelloTootle {
 
             int n = 0;
             try (MemoryStack stack = stackPush()) {
-                IntBuffer available = stack.ints(1);
+                IntBuffer  available   = stack.ints(1);
                 LongBuffer timeElapsed = stack.mallocLong(1);
                 while (available.get(0) != 0 && ret <= cur) {
                     // check for results if there are any

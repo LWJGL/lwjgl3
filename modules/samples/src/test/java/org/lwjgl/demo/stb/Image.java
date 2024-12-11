@@ -192,7 +192,6 @@ public final class Image {
 
         // Create context
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 

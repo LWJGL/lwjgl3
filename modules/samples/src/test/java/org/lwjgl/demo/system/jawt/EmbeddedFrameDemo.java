@@ -14,7 +14,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.system.jawt.EmbeddedFrameUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -45,7 +44,7 @@ public final class EmbeddedFrameDemo {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
@@ -111,7 +110,6 @@ public final class EmbeddedFrameDemo {
         });
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
         Callback debugProc = GLUtil.setupDebugMessageCallback();
 

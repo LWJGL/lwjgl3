@@ -13,7 +13,6 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -134,7 +133,7 @@ public final class ExampleFBO extends Demo {
             throw new RuntimeException("Failed to init GLFW.");
         }
 
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -180,7 +179,6 @@ public final class ExampleFBO extends Demo {
         }
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
         glfwSwapInterval(0);
 

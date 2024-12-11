@@ -88,7 +88,7 @@ public final class CLGLInteropDemo {
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         } else {

@@ -44,7 +44,7 @@ public final class HelloBGFXMT implements AutoCloseable {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 

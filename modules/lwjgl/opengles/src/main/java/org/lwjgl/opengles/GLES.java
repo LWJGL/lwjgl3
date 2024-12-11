@@ -76,22 +76,7 @@ public final class GLES {
 
     /** Loads the OpenGL ES native library, using the default library name. */
     public static void create() {
-        SharedLibrary GLES;
-        switch (Platform.get()) {
-            case FREEBSD:
-            case LINUX:
-                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2.so.2");
-                break;
-            case MACOSX:
-                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "GLESv2");
-                break;
-            case WINDOWS:
-                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2", "GLESv2");
-                break;
-            default:
-                throw new IllegalStateException();
-        }
-        create(GLES);
+        create(Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, Configuration.OPENGLES_LIBRARY_NAME_DEFAULTS()));
     }
 
     /**
@@ -103,59 +88,126 @@ public final class GLES {
         create(Library.loadNative(GLES.class, "org.lwjgl.opengles", libName));
     }
 
-    private static @Nullable FunctionProvider getContextProvider() {
-        FunctionProvider provider = null;
+    private static @Nullable SharedLibrary getContextProvider() {
+        SharedLibrary GL = null;
 
         String contextAPI = Configuration.OPENGLES_CONTEXT_API.get();
-        if (contextAPI == null || "EGL".equals(contextAPI)) {
-            try {
-                provider = (FunctionProvider)Class
-                    .forName("org.lwjgl.egl.EGL")
-                    .getMethod("getFunctionProvider")
-                    .invoke(null);
-            } catch (Throwable ignored) {
-                apiLog("[GLES] Failed to initialize EGL");
+        if ("native".equals(contextAPI)) {
+            GL = loadNative();
+        } else if ("OSMesa".equals(contextAPI)) {
+            GL = loadOSMesa();
+        }
+
+        if (GL == null) {
+            GL = loadEGL();
+            if (GL == null && !"EGL".equals(contextAPI)) {
+                if (!"native".equals(contextAPI)) {
+                    GL = loadNative();
+                }
+                if (GL == null && !"OSMesa".equals(contextAPI)) {
+                    GL = loadOSMesa();
+                }
             }
         }
 
-        if (provider == null && (contextAPI == null || "native".equals(contextAPI))) {
-            try {
-                provider = (FunctionProvider)Class
-                    .forName("org.lwjgl.opengl.GL")
-                    .getMethod("getFunctionProvider")
-                    .invoke(null);
-            } catch (Throwable ignored) {
-                apiLog("[GLES] Failed to initialize OpenGL");
-            }
-        }
+        return GL == null ? null : new SharedLibrary.Delegate(GL) {
+            private final long GetProcAddress;
 
-        return provider;
+            {
+                long GetProcAddress = NULL;
+
+                switch (Platform.get()) {
+                    case FREEBSD:
+                    case LINUX:
+                        GetProcAddress = library.getFunctionAddress("glXGetProcAddress");
+                        if (GetProcAddress == NULL) {
+                            GetProcAddress = library.getFunctionAddress("glXGetProcAddressARB");
+                        }
+                        break;
+                    case WINDOWS:
+                        GetProcAddress = library.getFunctionAddress("wglGetProcAddress");
+                        break;
+                }
+                if (GetProcAddress == NULL) {
+                    GetProcAddress = library.getFunctionAddress("eglGetProcAddress");
+                }
+                if (GetProcAddress == NULL) {
+                    GetProcAddress = library.getFunctionAddress("OSMesaGetProcAddress");
+                }
+
+                this.GetProcAddress = GetProcAddress;
+            }
+
+            @Override
+            public long getFunctionAddress(ByteBuffer functionName) {
+                long address = GetProcAddress == NULL ? NULL : callPP(memAddress(functionName), GetProcAddress);
+                if (address == NULL) {
+                    address = library.getFunctionAddress(functionName);
+                }
+                return address;
+            }
+        };
+    }
+
+    private static @Nullable SharedLibrary loadEGL() {
+        try {
+            return Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.EGL_LIBRARY_NAME, Configuration.EGL_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GLES] Failed to initialize context management based on EGL");
+            return null;
+        }
+    }
+
+    private static @Nullable SharedLibrary loadNative() {
+        try {
+            return Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGL_LIBRARY_NAME, Configuration.OPENGL_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GLES] Failed to initialize context management based on native OpenGL platform API");
+            return null;
+        }
+    }
+
+    private static @Nullable SharedLibrary loadOSMesa() {
+        try {
+            return Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGL_OSMESA_LIBRARY_NAME, Configuration.OPENGL_OSMESA_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GLES] Failed to initialize context management based on OSMesa");
+            return null;
+        }
     }
 
     private static void create(SharedLibrary GLES) {
-        FunctionProvider contextProvider = getContextProvider();
+        SharedLibrary contextProvider = getContextProvider();
         if (contextProvider == null) {
             GLES.free();
             throw new IllegalStateException("There is no OpenGL ES context management API available.");
         }
 
-        try {
-            create((FunctionProvider)new SharedLibrary.Delegate(GLES) {
-                @Override
-                public long getFunctionAddress(ByteBuffer functionName) {
-                    long address = contextProvider.getFunctionAddress(functionName);
-                    if (address == NULL) {
-                        address = library.getFunctionAddress(functionName);
-                        if (address == NULL && DEBUG_FUNCTIONS) {
-                            apiLogMissing("GLES", functionName);
-                        }
+        SharedLibrary provider = new SharedLibrary.Delegate(GLES) {
+            @Override
+            public long getFunctionAddress(ByteBuffer functionName) {
+                long address = contextProvider.getFunctionAddress(functionName);
+                if (address == NULL) {
+                    address = library.getFunctionAddress(functionName);
+                    if (address == NULL && DEBUG_FUNCTIONS) {
+                        apiLogMissing("GLES", functionName);
                     }
-
-                    return address;
                 }
-            });
+
+                return address;
+            }
+
+            @Override
+            public void free() {
+                super.free();
+                contextProvider.free();
+            }
+        };
+
+        try {
+            create((FunctionProvider)provider);
         } catch (RuntimeException e) {
-            GLES.free();
+            provider.free();
             throw e;
         }
     }

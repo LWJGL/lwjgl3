@@ -12,7 +12,6 @@ import java.nio.*;
 import java.util.*;
 import java.util.concurrent.atomic.*;
 
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
@@ -44,7 +43,7 @@ public final class MultipleWindows {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
@@ -88,7 +87,6 @@ public final class MultipleWindows {
             });
 
             glfwMakeContextCurrent(handle);
-            glfwInitOpenGL();
             window.capabilities = GL.createCapabilities();
 
             glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);

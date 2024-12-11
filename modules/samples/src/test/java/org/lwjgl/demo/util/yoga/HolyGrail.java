@@ -12,7 +12,6 @@ import org.lwjgl.system.*;
 import java.nio.*;
 import java.util.*;
 
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -56,7 +55,7 @@ public final class HolyGrail {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
@@ -87,7 +86,6 @@ public final class HolyGrail {
         // ----------------------
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 

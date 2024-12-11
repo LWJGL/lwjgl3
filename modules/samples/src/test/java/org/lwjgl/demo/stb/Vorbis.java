@@ -18,7 +18,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -110,7 +109,7 @@ public final class Vorbis implements AutoCloseable {
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
         glfwWindowHint(GLFW_SAMPLES, 8);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
@@ -270,7 +269,6 @@ public final class Vorbis implements AutoCloseable {
             @Override
             public void run() {
                 glfwMakeContextCurrent(window);
-                glfwInitOpenGL();
                 try (GraphicsRenderer graphicsRenderer = new GraphicsRenderer()) {
                     try {
                         audioLatch.await();

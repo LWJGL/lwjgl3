@@ -14,7 +14,6 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -130,7 +129,7 @@ public final class Events {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
+        if (glfwGetPlatform() == GLFW_PLATFORM_COCOA) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
@@ -291,7 +290,6 @@ public final class Events {
         });
 
         glfwMakeContextCurrent(window);
-        glfwInitOpenGL();
         GL.createCapabilities();
 
         glfwShowWindow(window);

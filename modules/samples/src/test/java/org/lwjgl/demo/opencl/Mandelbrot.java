@@ -5,7 +5,6 @@
 package org.lwjgl.demo.opencl;
 
 import org.lwjgl.*;
-import org.lwjgl.egl.*;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -15,7 +14,6 @@ import java.nio.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
 import static org.lwjgl.demo.opencl.InfoUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -160,7 +158,6 @@ public class Mandelbrot {
         fbh = size.get(1);
 
         glfwMakeContextCurrent(window.handle);
-        glfwInitOpenGL();
         GLCapabilities glCaps = GL.createCapabilities();
         if (!glCaps.OpenGL30) {
             throw new RuntimeException("OpenGL 3.0 is required to run this demo.");

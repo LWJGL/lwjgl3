@@ -89,22 +89,73 @@ public final class GL {
 
     /** Loads the OpenGL native library, using the default library name. */
     public static void create() {
-        SharedLibrary GL;
+        SharedLibrary GL = null;
+
+        String contextAPI = Configuration.OPENGL_CONTEXT_API.get();
+
+        boolean tryEGL = "EGL".equals(contextAPI) || (contextAPI == null && isWayland());
+        if (tryEGL) {
+            GL = loadEGL();
+        } else if ("OSMesa".equals(contextAPI)) {
+            GL = loadOSMesa();
+        }
+
+        if (GL == null) {
+            GL = loadNative();
+            if (GL == null && !"native".equals(contextAPI)) {
+                if (!tryEGL) {
+                    GL = loadEGL();
+                }
+                if (GL == null && !"OSMesa".equals(contextAPI)) {
+                    GL = loadOSMesa();
+                }
+            }
+        }
+
+        if (GL == null) {
+            throw new IllegalStateException("There is no OpenGL context management API available.");
+        }
+
+        create(GL);
+    }
+
+    private static boolean isWayland() {
         switch (Platform.get()) {
             case FREEBSD:
             case LINUX:
-                GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "libGLX.so.0", "libGL.so.1", "libGL.so");
-                break;
-            case MACOSX:
-                GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL");
-                break;
-            case WINDOWS:
-                GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "opengl32");
-                break;
-            default:
-                throw new IllegalStateException();
+                // The following matches the test GLFW does to enable the Wayland backend.
+                if ("wayland".equals(System.getenv("XDG_SESSION_TYPE")) && System.getenv("WAYLAND_DISPLAY") != null) {
+                    return true;
+                }
         }
-        create(GL);
+        return false;
+    }
+
+    private static @Nullable SharedLibrary loadNative() {
+        try {
+            return Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, Configuration.OPENGL_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GL] Failed to initialize context management based on native OpenGL platform API");
+            return null;
+        }
+    }
+
+    private static @Nullable SharedLibrary loadEGL() {
+        try {
+            return Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.EGL_LIBRARY_NAME, Configuration.EGL_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GL] Failed to initialize context management based on EGL");
+            return null;
+        }
+    }
+
+    private static @Nullable SharedLibrary loadOSMesa() {
+        try {
+            return Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_OSMESA_LIBRARY_NAME, Configuration.OPENGL_OSMESA_LIBRARY_NAME_DEFAULTS());
+        } catch (Throwable ignored) {
+            apiLog("[GL] Failed to initialize context management based on OSMesa");
+            return null;
+        }
     }
 
     /**
@@ -135,6 +186,9 @@ public final class GL {
                         case WINDOWS:
                             GetProcAddress = library.getFunctionAddress("wglGetProcAddress");
                             break;
+                    }
+                    if (GetProcAddress == NULL) {
+                        GetProcAddress = library.getFunctionAddress("eglGetProcAddress");
                     }
                     if (GetProcAddress == NULL) {
                         GetProcAddress = library.getFunctionAddress("OSMesaGetProcAddress");
