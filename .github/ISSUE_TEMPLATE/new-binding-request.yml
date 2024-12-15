@@ -31,6 +31,8 @@ body:
         - Linux x64
         - Linux arm64
         - Linux arm32
+        - Linux ppc64le
+        - Linux riscv64
         - macOS x64
         - macOS arm64
         - Windows x64

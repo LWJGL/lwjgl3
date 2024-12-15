@@ -12,7 +12,7 @@ env:
   JAVA_HOME: jdk8
   ANT_OPTS: -Xmx1G
   LWJGL_BUILD_TYPE: nightly
-  ZULU_BUILD: 80.0.17-ca-jdk8.0.422
+  ZULU_BUILD: 82.0.21-ca-jdk8.0.432
 
 jobs:
   cache-kotlinc:
@@ -206,7 +206,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build & Test
-        uses: cross-platform-actions/action@v0.25.0
+        uses: cross-platform-actions/action@v0.26.0
         with:
           operating_system: freebsd
           architecture: x86-64
